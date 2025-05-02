@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
     subkeyword = "NODE_TO_NURBS_PATCH"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -92,6 +94,7 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
 
     @patchid.setter
     def patchid(self, value: int) -> None:
+        """Set the patchid property."""
         self._cards[0].set_value("patchid", value)
 
     @property
@@ -102,6 +105,7 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -112,6 +116,7 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
 
     @con.setter
     def con(self, value: str) -> None:
+        """Set the con property."""
         self._cards[0].set_value("con", value)
 
     @property
@@ -122,6 +127,7 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -132,6 +138,7 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -143,7 +150,8 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
 
     @dbflg.setter
     def dbflg(self, value: int) -> None:
+        """Set the dbflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""dbflg must be `None` or one of {0,1}""")
+            raise Exception("""dbflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dbflg", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
     subkeyword = "BOUNDARY_SOLID_WALL_SEGMENT_ROTATE"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -135,6 +137,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -145,6 +148,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -155,6 +159,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -165,6 +170,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -175,6 +181,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -185,6 +192,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -195,6 +203,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -205,6 +214,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -215,6 +225,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @nx.setter
     def nx(self, value: float) -> None:
+        """Set the nx property."""
         self._cards[1].set_value("nx", value)
 
     @property
@@ -225,6 +236,7 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @ny.setter
     def ny(self, value: float) -> None:
+        """Set the ny property."""
         self._cards[1].set_value("ny", value)
 
     @property
@@ -235,5 +247,6 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
 
     @nz.setter
     def nz(self, value: float) -> None:
+        """Set the nz property."""
         self._cards[1].set_value("nz", value)
 

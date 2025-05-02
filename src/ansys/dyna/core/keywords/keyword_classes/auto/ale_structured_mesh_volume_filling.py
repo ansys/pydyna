@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ALE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
     subkeyword = "STRUCTURED_MESH_VOLUME_FILLING"
 
     def __init__(self, **kwargs):
+        """Initialize the ALE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -162,6 +164,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @mshid.setter
     def mshid(self, value: int) -> None:
+        """Set the mshid property."""
         self._cards[0].set_value("mshid", value)
 
     @property
@@ -172,6 +175,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @ammgto.setter
     def ammgto(self, value: str) -> None:
+        """Set the ammgto property."""
         self._cards[0].set_value("ammgto", value)
 
     @property
@@ -183,6 +187,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @nsample.setter
     def nsample(self, value: int) -> None:
+        """Set the nsample property."""
         self._cards[0].set_value("nsample", value)
 
     @property
@@ -193,6 +198,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @unused_.setter
     def unused_(self, value: int) -> None:
+        """Set the unused_ property."""
         self._cards[0].set_value("unused-", value)
 
     @property
@@ -204,6 +210,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -215,8 +222,9 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @geom.setter
     def geom(self, value: str) -> None:
+        """Set the geom property."""
         if value not in ["ALL", "PARTSET", "PART", "SEGSET", "PLANE", "CYLINDER", "BOXCOR", "BOXCPT", "ELLIPSOID", None]:
-            raise Exception("""geom must be `None` or one of {"ALL","PARTSET","PART","SEGSET","PLANE","CYLINDER","BOXCOR","BOXCPT","ELLIPSOID"}""")
+            raise Exception("""geom must be `None` or one of {"ALL","PARTSET","PART","SEGSET","PLANE","CYLINDER","BOXCOR","BOXCPT","ELLIPSOID"}.""")
         self._cards[1].set_value("geom", value)
 
     @property
@@ -229,8 +237,9 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @in_out.setter
     def in_out(self, value: int) -> None:
+        """Set the in_out property."""
         if value not in [0, 1, None]:
-            raise Exception("""in_out must be `None` or one of {0,1}""")
+            raise Exception("""in_out must be `None` or one of {0,1}.""")
         self._cards[1].set_value("in/out", value)
 
     @property
@@ -241,6 +250,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @e1.setter
     def e1(self, value: float) -> None:
+        """Set the e1 property."""
         self._cards[1].set_value("e1", value)
 
     @property
@@ -251,6 +261,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @e2.setter
     def e2(self, value: float) -> None:
+        """Set the e2 property."""
         self._cards[1].set_value("e2", value)
 
     @property
@@ -261,6 +272,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @e3.setter
     def e3(self, value: float) -> None:
+        """Set the e3 property."""
         self._cards[1].set_value("e3", value)
 
     @property
@@ -271,6 +283,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @e4.setter
     def e4(self, value: float) -> None:
+        """Set the e4 property."""
         self._cards[1].set_value("e4", value)
 
     @property
@@ -281,5 +294,6 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @e5.setter
     def e5(self, value: float) -> None:
+        """Set the e5 property."""
         self._cards[1].set_value("e5", value)
 

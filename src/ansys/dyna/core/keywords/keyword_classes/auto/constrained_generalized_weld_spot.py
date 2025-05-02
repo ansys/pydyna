@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
     subkeyword = "GENERALIZED_WELD_SPOT"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -149,6 +151,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @wid.setter
     def wid(self, value: int) -> None:
+        """Set the wid property."""
         self._cards[0].set_value("wid", value)
 
     @property
@@ -159,6 +162,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 
     @property
@@ -169,6 +173,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -181,6 +186,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @filter.setter
     def filter(self, value: int) -> None:
+        """Set the filter property."""
         self._cards[1].set_value("filter", value)
 
     @property
@@ -192,6 +198,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @window.setter
     def window(self, value: float) -> None:
+        """Set the window property."""
         self._cards[1].set_value("window", value)
 
     @property
@@ -202,6 +209,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @npr.setter
     def npr(self, value: int) -> None:
+        """Set the npr property."""
         self._cards[1].set_value("npr", value)
 
     @property
@@ -215,8 +223,9 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @nprt.setter
     def nprt(self, value: int) -> None:
+        """Set the nprt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""nprt must be `None` or one of {0,1,2}""")
+            raise Exception("""nprt must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("nprt", value)
 
     @property
@@ -227,6 +236,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @tfail.setter
     def tfail(self, value: float) -> None:
+        """Set the tfail property."""
         self._cards[2].set_value("tfail", value)
 
     @property
@@ -237,6 +247,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @epsf.setter
     def epsf(self, value: float) -> None:
+        """Set the epsf property."""
         self._cards[2].set_value("epsf", value)
 
     @property
@@ -247,6 +258,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @sn.setter
     def sn(self, value: float) -> None:
+        """Set the sn property."""
         self._cards[2].set_value("sn", value)
 
     @property
@@ -257,6 +269,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @ss.setter
     def ss(self, value: float) -> None:
+        """Set the ss property."""
         self._cards[2].set_value("ss", value)
 
     @property
@@ -267,6 +280,7 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[2].set_value("n", value)
 
     @property
@@ -277,5 +291,6 @@ class ConstrainedGeneralizedWeldSpot(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[2].set_value("m", value)
 

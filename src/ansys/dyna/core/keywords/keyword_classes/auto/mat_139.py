@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat139(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -1082,6 +1084,7 @@ class Mat139(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -1092,6 +1095,7 @@ class Mat139(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -1102,6 +1106,7 @@ class Mat139(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -1112,6 +1117,7 @@ class Mat139(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -1122,6 +1128,7 @@ class Mat139(KeywordBase):
 
     @df.setter
     def df(self, value: float) -> None:
+        """Set the df property."""
         self._cards[0].set_value("df", value)
 
     @property
@@ -1134,8 +1141,9 @@ class Mat139(KeywordBase):
 
     @iaflc.setter
     def iaflc(self, value: int) -> None:
+        """Set the iaflc property."""
         if value not in [0, 1, None]:
-            raise Exception("""iaflc must be `None` or one of {0,1}""")
+            raise Exception("""iaflc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iaflc", value)
 
     @property
@@ -1148,8 +1156,9 @@ class Mat139(KeywordBase):
 
     @ytflag.setter
     def ytflag(self, value: float) -> None:
+        """Set the ytflag property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ytflag must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ytflag must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("ytflag", value)
 
     @property
@@ -1160,6 +1169,7 @@ class Mat139(KeywordBase):
 
     @asoft.setter
     def asoft(self, value: float) -> None:
+        """Set the asoft property."""
         self._cards[0].set_value("asoft", value)
 
     @property
@@ -1170,6 +1180,7 @@ class Mat139(KeywordBase):
 
     @m1.setter
     def m1(self, value: float) -> None:
+        """Set the m1 property."""
         self._cards[1].set_value("m1", value)
 
     @property
@@ -1180,6 +1191,7 @@ class Mat139(KeywordBase):
 
     @m2.setter
     def m2(self, value: float) -> None:
+        """Set the m2 property."""
         self._cards[1].set_value("m2", value)
 
     @property
@@ -1190,6 +1202,7 @@ class Mat139(KeywordBase):
 
     @m3.setter
     def m3(self, value: float) -> None:
+        """Set the m3 property."""
         self._cards[1].set_value("m3", value)
 
     @property
@@ -1200,6 +1213,7 @@ class Mat139(KeywordBase):
 
     @m4.setter
     def m4(self, value: float) -> None:
+        """Set the m4 property."""
         self._cards[1].set_value("m4", value)
 
     @property
@@ -1210,6 +1224,7 @@ class Mat139(KeywordBase):
 
     @m5.setter
     def m5(self, value: float) -> None:
+        """Set the m5 property."""
         self._cards[1].set_value("m5", value)
 
     @property
@@ -1220,6 +1235,7 @@ class Mat139(KeywordBase):
 
     @m6.setter
     def m6(self, value: float) -> None:
+        """Set the m6 property."""
         self._cards[1].set_value("m6", value)
 
     @property
@@ -1230,6 +1246,7 @@ class Mat139(KeywordBase):
 
     @m7.setter
     def m7(self, value: float) -> None:
+        """Set the m7 property."""
         self._cards[1].set_value("m7", value)
 
     @property
@@ -1240,6 +1257,7 @@ class Mat139(KeywordBase):
 
     @m8.setter
     def m8(self, value: float) -> None:
+        """Set the m8 property."""
         self._cards[1].set_value("m8", value)
 
     @property
@@ -1250,6 +1268,7 @@ class Mat139(KeywordBase):
 
     @lc1.setter
     def lc1(self, value: int) -> None:
+        """Set the lc1 property."""
         self._cards[2].set_value("lc1", value)
 
     @property
@@ -1260,6 +1279,7 @@ class Mat139(KeywordBase):
 
     @lc2.setter
     def lc2(self, value: int) -> None:
+        """Set the lc2 property."""
         self._cards[2].set_value("lc2", value)
 
     @property
@@ -1270,6 +1290,7 @@ class Mat139(KeywordBase):
 
     @lc3.setter
     def lc3(self, value: int) -> None:
+        """Set the lc3 property."""
         self._cards[2].set_value("lc3", value)
 
     @property
@@ -1280,6 +1301,7 @@ class Mat139(KeywordBase):
 
     @lc4.setter
     def lc4(self, value: int) -> None:
+        """Set the lc4 property."""
         self._cards[2].set_value("lc4", value)
 
     @property
@@ -1290,6 +1312,7 @@ class Mat139(KeywordBase):
 
     @lc5.setter
     def lc5(self, value: int) -> None:
+        """Set the lc5 property."""
         self._cards[2].set_value("lc5", value)
 
     @property
@@ -1300,6 +1323,7 @@ class Mat139(KeywordBase):
 
     @lc6.setter
     def lc6(self, value: int) -> None:
+        """Set the lc6 property."""
         self._cards[2].set_value("lc6", value)
 
     @property
@@ -1310,6 +1334,7 @@ class Mat139(KeywordBase):
 
     @lc7.setter
     def lc7(self, value: int) -> None:
+        """Set the lc7 property."""
         self._cards[2].set_value("lc7", value)
 
     @property
@@ -1320,6 +1345,7 @@ class Mat139(KeywordBase):
 
     @lc8.setter
     def lc8(self, value: int) -> None:
+        """Set the lc8 property."""
         self._cards[2].set_value("lc8", value)
 
     @property
@@ -1330,6 +1356,7 @@ class Mat139(KeywordBase):
 
     @lps1.setter
     def lps1(self, value: int) -> None:
+        """Set the lps1 property."""
         self._cards[3].set_value("lps1", value)
 
     @property
@@ -1340,6 +1367,7 @@ class Mat139(KeywordBase):
 
     @sfs1.setter
     def sfs1(self, value: float) -> None:
+        """Set the sfs1 property."""
         self._cards[3].set_value("sfs1", value)
 
     @property
@@ -1350,6 +1378,7 @@ class Mat139(KeywordBase):
 
     @lps2.setter
     def lps2(self, value: int) -> None:
+        """Set the lps2 property."""
         self._cards[3].set_value("lps2", value)
 
     @property
@@ -1360,6 +1389,7 @@ class Mat139(KeywordBase):
 
     @sfs2.setter
     def sfs2(self, value: float) -> None:
+        """Set the sfs2 property."""
         self._cards[3].set_value("sfs2", value)
 
     @property
@@ -1370,6 +1400,7 @@ class Mat139(KeywordBase):
 
     @yms1.setter
     def yms1(self, value: float) -> None:
+        """Set the yms1 property."""
         self._cards[3].set_value("yms1", value)
 
     @property
@@ -1380,6 +1411,7 @@ class Mat139(KeywordBase):
 
     @yms2.setter
     def yms2(self, value: float) -> None:
+        """Set the yms2 property."""
         self._cards[3].set_value("yms2", value)
 
     @property
@@ -1390,6 +1422,7 @@ class Mat139(KeywordBase):
 
     @lpt1.setter
     def lpt1(self, value: int) -> None:
+        """Set the lpt1 property."""
         self._cards[4].set_value("lpt1", value)
 
     @property
@@ -1400,6 +1433,7 @@ class Mat139(KeywordBase):
 
     @sft1.setter
     def sft1(self, value: float) -> None:
+        """Set the sft1 property."""
         self._cards[4].set_value("sft1", value)
 
     @property
@@ -1410,6 +1444,7 @@ class Mat139(KeywordBase):
 
     @lpt2.setter
     def lpt2(self, value: int) -> None:
+        """Set the lpt2 property."""
         self._cards[4].set_value("lpt2", value)
 
     @property
@@ -1420,6 +1455,7 @@ class Mat139(KeywordBase):
 
     @sft2.setter
     def sft2(self, value: float) -> None:
+        """Set the sft2 property."""
         self._cards[4].set_value("sft2", value)
 
     @property
@@ -1430,6 +1466,7 @@ class Mat139(KeywordBase):
 
     @ymt1.setter
     def ymt1(self, value: float) -> None:
+        """Set the ymt1 property."""
         self._cards[4].set_value("ymt1", value)
 
     @property
@@ -1440,6 +1477,7 @@ class Mat139(KeywordBase):
 
     @ymt2.setter
     def ymt2(self, value: float) -> None:
+        """Set the ymt2 property."""
         self._cards[4].set_value("ymt2", value)
 
     @property
@@ -1450,6 +1488,7 @@ class Mat139(KeywordBase):
 
     @lpr.setter
     def lpr(self, value: int) -> None:
+        """Set the lpr property."""
         self._cards[5].set_value("lpr", value)
 
     @property
@@ -1460,6 +1499,7 @@ class Mat139(KeywordBase):
 
     @sfr.setter
     def sfr(self, value: float) -> None:
+        """Set the sfr property."""
         self._cards[5].set_value("sfr", value)
 
     @property
@@ -1470,6 +1510,7 @@ class Mat139(KeywordBase):
 
     @ymr.setter
     def ymr(self, value: float) -> None:
+        """Set the ymr property."""
         self._cards[5].set_value("ymr", value)
 
     @property
@@ -1480,6 +1521,7 @@ class Mat139(KeywordBase):
 
     @lys1.setter
     def lys1(self, value: int) -> None:
+        """Set the lys1 property."""
         self._cards[6].set_value("lys1", value)
 
     @property
@@ -1490,6 +1532,7 @@ class Mat139(KeywordBase):
 
     @sys1.setter
     def sys1(self, value: float) -> None:
+        """Set the sys1 property."""
         self._cards[6].set_value("sys1", value)
 
     @property
@@ -1500,6 +1543,7 @@ class Mat139(KeywordBase):
 
     @lys2.setter
     def lys2(self, value: int) -> None:
+        """Set the lys2 property."""
         self._cards[6].set_value("lys2", value)
 
     @property
@@ -1510,6 +1554,7 @@ class Mat139(KeywordBase):
 
     @sys2.setter
     def sys2(self, value: float) -> None:
+        """Set the sys2 property."""
         self._cards[6].set_value("sys2", value)
 
     @property
@@ -1520,6 +1565,7 @@ class Mat139(KeywordBase):
 
     @lyt1.setter
     def lyt1(self, value: int) -> None:
+        """Set the lyt1 property."""
         self._cards[6].set_value("lyt1", value)
 
     @property
@@ -1530,6 +1576,7 @@ class Mat139(KeywordBase):
 
     @syt1.setter
     def syt1(self, value: float) -> None:
+        """Set the syt1 property."""
         self._cards[6].set_value("syt1", value)
 
     @property
@@ -1540,6 +1587,7 @@ class Mat139(KeywordBase):
 
     @lyt2.setter
     def lyt2(self, value: int) -> None:
+        """Set the lyt2 property."""
         self._cards[6].set_value("lyt2", value)
 
     @property
@@ -1550,6 +1598,7 @@ class Mat139(KeywordBase):
 
     @syt2.setter
     def syt2(self, value: float) -> None:
+        """Set the syt2 property."""
         self._cards[6].set_value("syt2", value)
 
     @property
@@ -1560,6 +1609,7 @@ class Mat139(KeywordBase):
 
     @lyr.setter
     def lyr(self, value: int) -> None:
+        """Set the lyr property."""
         self._cards[7].set_value("lyr", value)
 
     @property
@@ -1570,6 +1620,7 @@ class Mat139(KeywordBase):
 
     @syr.setter
     def syr(self, value: float) -> None:
+        """Set the syr property."""
         self._cards[7].set_value("syr", value)
 
     @property
@@ -1580,6 +1631,7 @@ class Mat139(KeywordBase):
 
     @hms1_1.setter
     def hms1_1(self, value: float) -> None:
+        """Set the hms1_1 property."""
         self._cards[8].set_value("hms1_1", value)
 
     @property
@@ -1590,6 +1642,7 @@ class Mat139(KeywordBase):
 
     @hms1_2.setter
     def hms1_2(self, value: float) -> None:
+        """Set the hms1_2 property."""
         self._cards[8].set_value("hms1_2", value)
 
     @property
@@ -1600,6 +1653,7 @@ class Mat139(KeywordBase):
 
     @hms1_3.setter
     def hms1_3(self, value: float) -> None:
+        """Set the hms1_3 property."""
         self._cards[8].set_value("hms1_3", value)
 
     @property
@@ -1610,6 +1664,7 @@ class Mat139(KeywordBase):
 
     @hms1_4.setter
     def hms1_4(self, value: float) -> None:
+        """Set the hms1_4 property."""
         self._cards[8].set_value("hms1_4", value)
 
     @property
@@ -1620,6 +1675,7 @@ class Mat139(KeywordBase):
 
     @hms1_5.setter
     def hms1_5(self, value: float) -> None:
+        """Set the hms1_5 property."""
         self._cards[8].set_value("hms1_5", value)
 
     @property
@@ -1630,6 +1686,7 @@ class Mat139(KeywordBase):
 
     @hms1_6.setter
     def hms1_6(self, value: float) -> None:
+        """Set the hms1_6 property."""
         self._cards[8].set_value("hms1_6", value)
 
     @property
@@ -1640,6 +1697,7 @@ class Mat139(KeywordBase):
 
     @hms1_7.setter
     def hms1_7(self, value: float) -> None:
+        """Set the hms1_7 property."""
         self._cards[8].set_value("hms1_7", value)
 
     @property
@@ -1650,6 +1708,7 @@ class Mat139(KeywordBase):
 
     @hms1_8.setter
     def hms1_8(self, value: float) -> None:
+        """Set the hms1_8 property."""
         self._cards[8].set_value("hms1_8", value)
 
     @property
@@ -1660,6 +1719,7 @@ class Mat139(KeywordBase):
 
     @lpms1_1.setter
     def lpms1_1(self, value: int) -> None:
+        """Set the lpms1_1 property."""
         self._cards[9].set_value("lpms1_1", value)
 
     @property
@@ -1670,6 +1730,7 @@ class Mat139(KeywordBase):
 
     @lpms1_2.setter
     def lpms1_2(self, value: int) -> None:
+        """Set the lpms1_2 property."""
         self._cards[9].set_value("lpms1_2", value)
 
     @property
@@ -1680,6 +1741,7 @@ class Mat139(KeywordBase):
 
     @lpms1_3.setter
     def lpms1_3(self, value: int) -> None:
+        """Set the lpms1_3 property."""
         self._cards[9].set_value("lpms1_3", value)
 
     @property
@@ -1690,6 +1752,7 @@ class Mat139(KeywordBase):
 
     @lpms1_4.setter
     def lpms1_4(self, value: int) -> None:
+        """Set the lpms1_4 property."""
         self._cards[9].set_value("lpms1_4", value)
 
     @property
@@ -1700,6 +1763,7 @@ class Mat139(KeywordBase):
 
     @lpms1_5.setter
     def lpms1_5(self, value: int) -> None:
+        """Set the lpms1_5 property."""
         self._cards[9].set_value("lpms1_5", value)
 
     @property
@@ -1710,6 +1774,7 @@ class Mat139(KeywordBase):
 
     @lpms1_6.setter
     def lpms1_6(self, value: int) -> None:
+        """Set the lpms1_6 property."""
         self._cards[9].set_value("lpms1_6", value)
 
     @property
@@ -1720,6 +1785,7 @@ class Mat139(KeywordBase):
 
     @lpms1_7.setter
     def lpms1_7(self, value: int) -> None:
+        """Set the lpms1_7 property."""
         self._cards[9].set_value("lpms1_7", value)
 
     @property
@@ -1730,6 +1796,7 @@ class Mat139(KeywordBase):
 
     @lpms1_8.setter
     def lpms1_8(self, value: int) -> None:
+        """Set the lpms1_8 property."""
         self._cards[9].set_value("lpms1_8", value)
 
     @property
@@ -1740,6 +1807,7 @@ class Mat139(KeywordBase):
 
     @hms2_1.setter
     def hms2_1(self, value: float) -> None:
+        """Set the hms2_1 property."""
         self._cards[10].set_value("hms2_1", value)
 
     @property
@@ -1750,6 +1818,7 @@ class Mat139(KeywordBase):
 
     @hms2_2.setter
     def hms2_2(self, value: float) -> None:
+        """Set the hms2_2 property."""
         self._cards[10].set_value("hms2_2", value)
 
     @property
@@ -1760,6 +1829,7 @@ class Mat139(KeywordBase):
 
     @hms2_3.setter
     def hms2_3(self, value: float) -> None:
+        """Set the hms2_3 property."""
         self._cards[10].set_value("hms2_3", value)
 
     @property
@@ -1770,6 +1840,7 @@ class Mat139(KeywordBase):
 
     @hms2_4.setter
     def hms2_4(self, value: float) -> None:
+        """Set the hms2_4 property."""
         self._cards[10].set_value("hms2_4", value)
 
     @property
@@ -1780,6 +1851,7 @@ class Mat139(KeywordBase):
 
     @hms2_5.setter
     def hms2_5(self, value: float) -> None:
+        """Set the hms2_5 property."""
         self._cards[10].set_value("hms2_5", value)
 
     @property
@@ -1790,6 +1862,7 @@ class Mat139(KeywordBase):
 
     @hms2_6.setter
     def hms2_6(self, value: float) -> None:
+        """Set the hms2_6 property."""
         self._cards[10].set_value("hms2_6", value)
 
     @property
@@ -1800,6 +1873,7 @@ class Mat139(KeywordBase):
 
     @hms2_7.setter
     def hms2_7(self, value: float) -> None:
+        """Set the hms2_7 property."""
         self._cards[10].set_value("hms2_7", value)
 
     @property
@@ -1810,6 +1884,7 @@ class Mat139(KeywordBase):
 
     @hms2_8.setter
     def hms2_8(self, value: float) -> None:
+        """Set the hms2_8 property."""
         self._cards[10].set_value("hms2_8", value)
 
     @property
@@ -1820,6 +1895,7 @@ class Mat139(KeywordBase):
 
     @lpms2_1.setter
     def lpms2_1(self, value: int) -> None:
+        """Set the lpms2_1 property."""
         self._cards[11].set_value("lpms2_1", value)
 
     @property
@@ -1830,6 +1906,7 @@ class Mat139(KeywordBase):
 
     @lpms2_2.setter
     def lpms2_2(self, value: int) -> None:
+        """Set the lpms2_2 property."""
         self._cards[11].set_value("lpms2_2", value)
 
     @property
@@ -1840,6 +1917,7 @@ class Mat139(KeywordBase):
 
     @lpms2_3.setter
     def lpms2_3(self, value: int) -> None:
+        """Set the lpms2_3 property."""
         self._cards[11].set_value("lpms2_3", value)
 
     @property
@@ -1850,6 +1928,7 @@ class Mat139(KeywordBase):
 
     @lpms2_4.setter
     def lpms2_4(self, value: int) -> None:
+        """Set the lpms2_4 property."""
         self._cards[11].set_value("lpms2_4", value)
 
     @property
@@ -1860,6 +1939,7 @@ class Mat139(KeywordBase):
 
     @lpms2_5.setter
     def lpms2_5(self, value: int) -> None:
+        """Set the lpms2_5 property."""
         self._cards[11].set_value("lpms2_5", value)
 
     @property
@@ -1870,6 +1950,7 @@ class Mat139(KeywordBase):
 
     @lpms2_6.setter
     def lpms2_6(self, value: int) -> None:
+        """Set the lpms2_6 property."""
         self._cards[11].set_value("lpms2_6", value)
 
     @property
@@ -1880,6 +1961,7 @@ class Mat139(KeywordBase):
 
     @lpms2_7.setter
     def lpms2_7(self, value: int) -> None:
+        """Set the lpms2_7 property."""
         self._cards[11].set_value("lpms2_7", value)
 
     @property
@@ -1890,6 +1972,7 @@ class Mat139(KeywordBase):
 
     @lpms2_8.setter
     def lpms2_8(self, value: int) -> None:
+        """Set the lpms2_8 property."""
         self._cards[11].set_value("lpms2_8", value)
 
     @property
@@ -1900,6 +1983,7 @@ class Mat139(KeywordBase):
 
     @hmt1_1.setter
     def hmt1_1(self, value: float) -> None:
+        """Set the hmt1_1 property."""
         self._cards[12].set_value("hmt1_1", value)
 
     @property
@@ -1910,6 +1994,7 @@ class Mat139(KeywordBase):
 
     @hmt1_2.setter
     def hmt1_2(self, value: float) -> None:
+        """Set the hmt1_2 property."""
         self._cards[12].set_value("hmt1_2", value)
 
     @property
@@ -1920,6 +2005,7 @@ class Mat139(KeywordBase):
 
     @hmt1_3.setter
     def hmt1_3(self, value: float) -> None:
+        """Set the hmt1_3 property."""
         self._cards[12].set_value("hmt1_3", value)
 
     @property
@@ -1930,6 +2016,7 @@ class Mat139(KeywordBase):
 
     @hmt1_4.setter
     def hmt1_4(self, value: float) -> None:
+        """Set the hmt1_4 property."""
         self._cards[12].set_value("hmt1_4", value)
 
     @property
@@ -1940,6 +2027,7 @@ class Mat139(KeywordBase):
 
     @hmt1_5.setter
     def hmt1_5(self, value: float) -> None:
+        """Set the hmt1_5 property."""
         self._cards[12].set_value("hmt1_5", value)
 
     @property
@@ -1950,6 +2038,7 @@ class Mat139(KeywordBase):
 
     @hmt1_6.setter
     def hmt1_6(self, value: float) -> None:
+        """Set the hmt1_6 property."""
         self._cards[12].set_value("hmt1_6", value)
 
     @property
@@ -1960,6 +2049,7 @@ class Mat139(KeywordBase):
 
     @hmt1_7.setter
     def hmt1_7(self, value: float) -> None:
+        """Set the hmt1_7 property."""
         self._cards[12].set_value("hmt1_7", value)
 
     @property
@@ -1970,6 +2060,7 @@ class Mat139(KeywordBase):
 
     @hmt1_8.setter
     def hmt1_8(self, value: float) -> None:
+        """Set the hmt1_8 property."""
         self._cards[12].set_value("hmt1_8", value)
 
     @property
@@ -1980,6 +2071,7 @@ class Mat139(KeywordBase):
 
     @lpmt1_1.setter
     def lpmt1_1(self, value: int) -> None:
+        """Set the lpmt1_1 property."""
         self._cards[13].set_value("lpmt1_1", value)
 
     @property
@@ -1990,6 +2082,7 @@ class Mat139(KeywordBase):
 
     @lpmt1_2.setter
     def lpmt1_2(self, value: int) -> None:
+        """Set the lpmt1_2 property."""
         self._cards[13].set_value("lpmt1_2", value)
 
     @property
@@ -2000,6 +2093,7 @@ class Mat139(KeywordBase):
 
     @lpmt1_3.setter
     def lpmt1_3(self, value: int) -> None:
+        """Set the lpmt1_3 property."""
         self._cards[13].set_value("lpmt1_3", value)
 
     @property
@@ -2010,6 +2104,7 @@ class Mat139(KeywordBase):
 
     @lpmt1_4.setter
     def lpmt1_4(self, value: int) -> None:
+        """Set the lpmt1_4 property."""
         self._cards[13].set_value("lpmt1_4", value)
 
     @property
@@ -2020,6 +2115,7 @@ class Mat139(KeywordBase):
 
     @lpmt1_5.setter
     def lpmt1_5(self, value: int) -> None:
+        """Set the lpmt1_5 property."""
         self._cards[13].set_value("lpmt1_5", value)
 
     @property
@@ -2030,6 +2126,7 @@ class Mat139(KeywordBase):
 
     @lpmt1_6.setter
     def lpmt1_6(self, value: int) -> None:
+        """Set the lpmt1_6 property."""
         self._cards[13].set_value("lpmt1_6", value)
 
     @property
@@ -2040,6 +2137,7 @@ class Mat139(KeywordBase):
 
     @lpmt1_7.setter
     def lpmt1_7(self, value: int) -> None:
+        """Set the lpmt1_7 property."""
         self._cards[13].set_value("lpmt1_7", value)
 
     @property
@@ -2050,6 +2148,7 @@ class Mat139(KeywordBase):
 
     @lpmt1_8.setter
     def lpmt1_8(self, value: int) -> None:
+        """Set the lpmt1_8 property."""
         self._cards[13].set_value("lpmt1_8", value)
 
     @property
@@ -2060,6 +2159,7 @@ class Mat139(KeywordBase):
 
     @hmt2_1.setter
     def hmt2_1(self, value: float) -> None:
+        """Set the hmt2_1 property."""
         self._cards[14].set_value("hmt2_1", value)
 
     @property
@@ -2070,6 +2170,7 @@ class Mat139(KeywordBase):
 
     @hmt2_2.setter
     def hmt2_2(self, value: float) -> None:
+        """Set the hmt2_2 property."""
         self._cards[14].set_value("hmt2_2", value)
 
     @property
@@ -2080,6 +2181,7 @@ class Mat139(KeywordBase):
 
     @hmt2_3.setter
     def hmt2_3(self, value: float) -> None:
+        """Set the hmt2_3 property."""
         self._cards[14].set_value("hmt2_3", value)
 
     @property
@@ -2090,6 +2192,7 @@ class Mat139(KeywordBase):
 
     @hmt2_4.setter
     def hmt2_4(self, value: float) -> None:
+        """Set the hmt2_4 property."""
         self._cards[14].set_value("hmt2_4", value)
 
     @property
@@ -2100,6 +2203,7 @@ class Mat139(KeywordBase):
 
     @hmt2_5.setter
     def hmt2_5(self, value: float) -> None:
+        """Set the hmt2_5 property."""
         self._cards[14].set_value("hmt2_5", value)
 
     @property
@@ -2110,6 +2214,7 @@ class Mat139(KeywordBase):
 
     @hmt2_6.setter
     def hmt2_6(self, value: float) -> None:
+        """Set the hmt2_6 property."""
         self._cards[14].set_value("hmt2_6", value)
 
     @property
@@ -2120,6 +2225,7 @@ class Mat139(KeywordBase):
 
     @hmt2_7.setter
     def hmt2_7(self, value: float) -> None:
+        """Set the hmt2_7 property."""
         self._cards[14].set_value("hmt2_7", value)
 
     @property
@@ -2130,6 +2236,7 @@ class Mat139(KeywordBase):
 
     @hmt2_8.setter
     def hmt2_8(self, value: float) -> None:
+        """Set the hmt2_8 property."""
         self._cards[14].set_value("hmt2_8", value)
 
     @property
@@ -2140,6 +2247,7 @@ class Mat139(KeywordBase):
 
     @lpmt2_1.setter
     def lpmt2_1(self, value: int) -> None:
+        """Set the lpmt2_1 property."""
         self._cards[15].set_value("lpmt2_1", value)
 
     @property
@@ -2150,6 +2258,7 @@ class Mat139(KeywordBase):
 
     @lpmt2_2.setter
     def lpmt2_2(self, value: int) -> None:
+        """Set the lpmt2_2 property."""
         self._cards[15].set_value("lpmt2_2", value)
 
     @property
@@ -2160,6 +2269,7 @@ class Mat139(KeywordBase):
 
     @lpmt2_3.setter
     def lpmt2_3(self, value: int) -> None:
+        """Set the lpmt2_3 property."""
         self._cards[15].set_value("lpmt2_3", value)
 
     @property
@@ -2170,6 +2280,7 @@ class Mat139(KeywordBase):
 
     @lpmt2_4.setter
     def lpmt2_4(self, value: int) -> None:
+        """Set the lpmt2_4 property."""
         self._cards[15].set_value("lpmt2_4", value)
 
     @property
@@ -2180,6 +2291,7 @@ class Mat139(KeywordBase):
 
     @lpmt2_5.setter
     def lpmt2_5(self, value: int) -> None:
+        """Set the lpmt2_5 property."""
         self._cards[15].set_value("lpmt2_5", value)
 
     @property
@@ -2190,6 +2302,7 @@ class Mat139(KeywordBase):
 
     @lpmt2_6.setter
     def lpmt2_6(self, value: int) -> None:
+        """Set the lpmt2_6 property."""
         self._cards[15].set_value("lpmt2_6", value)
 
     @property
@@ -2200,6 +2313,7 @@ class Mat139(KeywordBase):
 
     @lpmt2_7.setter
     def lpmt2_7(self, value: int) -> None:
+        """Set the lpmt2_7 property."""
         self._cards[15].set_value("lpmt2_7", value)
 
     @property
@@ -2210,6 +2324,7 @@ class Mat139(KeywordBase):
 
     @lpmt2_8.setter
     def lpmt2_8(self, value: int) -> None:
+        """Set the lpmt2_8 property."""
         self._cards[15].set_value("lpmt2_8", value)
 
     @property
@@ -2220,6 +2335,7 @@ class Mat139(KeywordBase):
 
     @hmr_1.setter
     def hmr_1(self, value: float) -> None:
+        """Set the hmr_1 property."""
         self._cards[16].set_value("hmr_1", value)
 
     @property
@@ -2230,6 +2346,7 @@ class Mat139(KeywordBase):
 
     @hmr_2.setter
     def hmr_2(self, value: float) -> None:
+        """Set the hmr_2 property."""
         self._cards[16].set_value("hmr_2", value)
 
     @property
@@ -2240,6 +2357,7 @@ class Mat139(KeywordBase):
 
     @hmr_3.setter
     def hmr_3(self, value: float) -> None:
+        """Set the hmr_3 property."""
         self._cards[16].set_value("hmr_3", value)
 
     @property
@@ -2250,6 +2368,7 @@ class Mat139(KeywordBase):
 
     @hmr_4.setter
     def hmr_4(self, value: float) -> None:
+        """Set the hmr_4 property."""
         self._cards[16].set_value("hmr_4", value)
 
     @property
@@ -2260,6 +2379,7 @@ class Mat139(KeywordBase):
 
     @hmr_5.setter
     def hmr_5(self, value: float) -> None:
+        """Set the hmr_5 property."""
         self._cards[16].set_value("hmr_5", value)
 
     @property
@@ -2270,6 +2390,7 @@ class Mat139(KeywordBase):
 
     @hmr_6.setter
     def hmr_6(self, value: float) -> None:
+        """Set the hmr_6 property."""
         self._cards[16].set_value("hmr_6", value)
 
     @property
@@ -2280,6 +2401,7 @@ class Mat139(KeywordBase):
 
     @hmr_7.setter
     def hmr_7(self, value: float) -> None:
+        """Set the hmr_7 property."""
         self._cards[16].set_value("hmr_7", value)
 
     @property
@@ -2290,6 +2412,7 @@ class Mat139(KeywordBase):
 
     @hmr_8.setter
     def hmr_8(self, value: float) -> None:
+        """Set the hmr_8 property."""
         self._cards[16].set_value("hmr_8", value)
 
     @property
@@ -2300,6 +2423,7 @@ class Mat139(KeywordBase):
 
     @lpmr_1.setter
     def lpmr_1(self, value: int) -> None:
+        """Set the lpmr_1 property."""
         self._cards[17].set_value("lpmr_1", value)
 
     @property
@@ -2310,6 +2434,7 @@ class Mat139(KeywordBase):
 
     @lpmr_2.setter
     def lpmr_2(self, value: int) -> None:
+        """Set the lpmr_2 property."""
         self._cards[17].set_value("lpmr_2", value)
 
     @property
@@ -2320,6 +2445,7 @@ class Mat139(KeywordBase):
 
     @lpmr_3.setter
     def lpmr_3(self, value: int) -> None:
+        """Set the lpmr_3 property."""
         self._cards[17].set_value("lpmr_3", value)
 
     @property
@@ -2330,6 +2456,7 @@ class Mat139(KeywordBase):
 
     @lpmr_4.setter
     def lpmr_4(self, value: int) -> None:
+        """Set the lpmr_4 property."""
         self._cards[17].set_value("lpmr_4", value)
 
     @property
@@ -2340,6 +2467,7 @@ class Mat139(KeywordBase):
 
     @lpmr_5.setter
     def lpmr_5(self, value: int) -> None:
+        """Set the lpmr_5 property."""
         self._cards[17].set_value("lpmr_5", value)
 
     @property
@@ -2350,6 +2478,7 @@ class Mat139(KeywordBase):
 
     @lpmr_6.setter
     def lpmr_6(self, value: int) -> None:
+        """Set the lpmr_6 property."""
         self._cards[17].set_value("lpmr_6", value)
 
     @property
@@ -2360,6 +2489,7 @@ class Mat139(KeywordBase):
 
     @lpmr_7.setter
     def lpmr_7(self, value: int) -> None:
+        """Set the lpmr_7 property."""
         self._cards[17].set_value("lpmr_7", value)
 
     @property
@@ -2370,6 +2500,7 @@ class Mat139(KeywordBase):
 
     @lpmr_8.setter
     def lpmr_8(self, value: int) -> None:
+        """Set the lpmr_8 property."""
         self._cards[17].set_value("lpmr_8", value)
 
     @property
@@ -2380,5 +2511,6 @@ class Mat139(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[18].cards[0].set_value("title", value)
 

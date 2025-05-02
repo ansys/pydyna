@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MODULE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ModulePath(KeywordBase):
     subkeyword = "PATH"
 
     def __init__(self, **kwargs):
+        """Initialize the MODULE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class ModulePath(KeywordBase):
 
     @path.setter
     def path(self, value: str) -> None:
+        """Set the path property."""
         self._cards[0].set_value("path", value)
 

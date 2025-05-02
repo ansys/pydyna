@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitTermination(KeywordBase):
     subkeyword = "IMPLICIT_TERMINATION"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -97,6 +99,7 @@ class ControlImplicitTermination(KeywordBase):
 
     @deltau.setter
     def deltau(self, value: float) -> None:
+        """Set the deltau property."""
         self._cards[0].set_value("deltau", value)
 
     @property
@@ -107,6 +110,7 @@ class ControlImplicitTermination(KeywordBase):
 
     @delta1.setter
     def delta1(self, value: float) -> None:
+        """Set the delta1 property."""
         self._cards[0].set_value("delta1", value)
 
     @property
@@ -117,6 +121,7 @@ class ControlImplicitTermination(KeywordBase):
 
     @ketol.setter
     def ketol(self, value: float) -> None:
+        """Set the ketol property."""
         self._cards[0].set_value("ketol", value)
 
     @property
@@ -127,6 +132,7 @@ class ControlImplicitTermination(KeywordBase):
 
     @ietol.setter
     def ietol(self, value: float) -> None:
+        """Set the ietol property."""
         self._cards[0].set_value("ietol", value)
 
     @property
@@ -137,6 +143,7 @@ class ControlImplicitTermination(KeywordBase):
 
     @tetol.setter
     def tetol(self, value: float) -> None:
+        """Set the tetol property."""
         self._cards[0].set_value("tetol", value)
 
     @property
@@ -147,5 +154,6 @@ class ControlImplicitTermination(KeywordBase):
 
     @nstep.setter
     def nstep(self, value: int) -> None:
+        """Set the nstep property."""
         self._cards[0].set_value("nstep", value)
 

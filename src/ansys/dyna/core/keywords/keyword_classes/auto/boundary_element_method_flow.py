@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryElementMethodFlow(KeywordBase):
     subkeyword = "ELEMENT_METHOD_FLOW"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -98,6 +100,7 @@ class BoundaryElementMethodFlow(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -108,6 +111,7 @@ class BoundaryElementMethodFlow(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -118,6 +122,7 @@ class BoundaryElementMethodFlow(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -128,6 +133,7 @@ class BoundaryElementMethodFlow(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -138,6 +144,7 @@ class BoundaryElementMethodFlow(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -148,6 +155,7 @@ class BoundaryElementMethodFlow(KeywordBase):
 
     @pstatic.setter
     def pstatic(self, value: float) -> None:
+        """Set the pstatic property."""
         self._cards[0].set_value("pstatic", value)
 
     @property
@@ -158,5 +166,6 @@ class BoundaryElementMethodFlow(KeywordBase):
 
     @mach.setter
     def mach(self, value: float) -> None:
+        """Set the mach property."""
         self._cards[0].set_value("mach", value)
 

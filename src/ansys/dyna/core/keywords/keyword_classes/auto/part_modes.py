@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the PART keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartModes(KeywordBase):
     subkeyword = "MODES"
 
     def __init__(self, **kwargs):
+        """Initialize the PART keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -204,6 +206,7 @@ class PartModes(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -215,6 +218,7 @@ class PartModes(KeywordBase):
 
     @nmfb.setter
     def nmfb(self, value: int) -> None:
+        """Set the nmfb property."""
         self._cards[0].set_value("nmfb", value)
 
     @property
@@ -227,8 +231,9 @@ class PartModes(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
+        """Set the form property."""
         if value not in [0, 1, None]:
-            raise Exception("""form must be `None` or one of {0,1}""")
+            raise Exception("""form must be `None` or one of {0,1}.""")
         self._cards[0].set_value("form", value)
 
     @property
@@ -239,6 +244,7 @@ class PartModes(KeywordBase):
 
     @ansid.setter
     def ansid(self, value: int) -> None:
+        """Set the ansid property."""
         self._cards[0].set_value("ansid", value)
 
     @property
@@ -255,8 +261,9 @@ class PartModes(KeywordBase):
 
     @format.setter
     def format(self, value: int) -> None:
+        """Set the format property."""
         if value not in [0, 2, 3, 4, 5, None]:
-            raise Exception("""format must be `None` or one of {0,2,3,4,5}""")
+            raise Exception("""format must be `None` or one of {0,2,3,4,5}.""")
         self._cards[0].set_value("format", value)
 
     @property
@@ -269,8 +276,9 @@ class PartModes(KeywordBase):
 
     @kmflag.setter
     def kmflag(self, value: int) -> None:
+        """Set the kmflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""kmflag must be `None` or one of {0,1}""")
+            raise Exception("""kmflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("kmflag", value)
 
     @property
@@ -284,8 +292,9 @@ class PartModes(KeywordBase):
 
     @nupdf.setter
     def nupdf(self, value: int) -> None:
+        """Set the nupdf property."""
         if value not in [0, 1, None]:
-            raise Exception("""nupdf must be `None` or one of {0,1}""")
+            raise Exception("""nupdf must be `None` or one of {0,1}.""")
         self._cards[0].set_value("nupdf", value)
 
     @property
@@ -298,8 +307,9 @@ class PartModes(KeywordBase):
 
     @sigrec.setter
     def sigrec(self, value: int) -> None:
+        """Set the sigrec property."""
         if value not in [0, 1, None]:
-            raise Exception("""sigrec must be `None` or one of {0,1}""")
+            raise Exception("""sigrec must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sigrec", value)
 
     @property
@@ -311,6 +321,7 @@ class PartModes(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 
     @property
@@ -321,6 +332,7 @@ class PartModes(KeywordBase):
 
     @mode1.setter
     def mode1(self, value: int) -> None:
+        """Set the mode1 property."""
         self._cards[2].set_value("mode1", value)
 
     @property
@@ -331,6 +343,7 @@ class PartModes(KeywordBase):
 
     @mode2.setter
     def mode2(self, value: int) -> None:
+        """Set the mode2 property."""
         self._cards[2].set_value("mode2", value)
 
     @property
@@ -341,6 +354,7 @@ class PartModes(KeywordBase):
 
     @mode3.setter
     def mode3(self, value: int) -> None:
+        """Set the mode3 property."""
         self._cards[2].set_value("mode3", value)
 
     @property
@@ -351,6 +365,7 @@ class PartModes(KeywordBase):
 
     @mode4.setter
     def mode4(self, value: int) -> None:
+        """Set the mode4 property."""
         self._cards[2].set_value("mode4", value)
 
     @property
@@ -361,6 +376,7 @@ class PartModes(KeywordBase):
 
     @mode5.setter
     def mode5(self, value: int) -> None:
+        """Set the mode5 property."""
         self._cards[2].set_value("mode5", value)
 
     @property
@@ -371,6 +387,7 @@ class PartModes(KeywordBase):
 
     @mode6.setter
     def mode6(self, value: int) -> None:
+        """Set the mode6 property."""
         self._cards[2].set_value("mode6", value)
 
     @property
@@ -381,6 +398,7 @@ class PartModes(KeywordBase):
 
     @mode7.setter
     def mode7(self, value: int) -> None:
+        """Set the mode7 property."""
         self._cards[2].set_value("mode7", value)
 
     @property
@@ -391,6 +409,7 @@ class PartModes(KeywordBase):
 
     @mode8.setter
     def mode8(self, value: int) -> None:
+        """Set the mode8 property."""
         self._cards[2].set_value("mode8", value)
 
     @property
@@ -401,6 +420,7 @@ class PartModes(KeywordBase):
 
     @mstart.setter
     def mstart(self, value: int) -> None:
+        """Set the mstart property."""
         self._cards[3].set_value("mstart", value)
 
     @property
@@ -411,6 +431,7 @@ class PartModes(KeywordBase):
 
     @mstop.setter
     def mstop(self, value: int) -> None:
+        """Set the mstop property."""
         self._cards[3].set_value("mstop", value)
 
     @property
@@ -421,5 +442,6 @@ class PartModes(KeywordBase):
 
     @dampf.setter
     def dampf(self, value: float) -> None:
+        """Set the dampf property."""
         self._cards[3].set_value("dampf", value)
 

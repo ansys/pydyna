@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialMomentum(KeywordBase):
     subkeyword = "MOMENTUM"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class InitialMomentum(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -96,6 +99,7 @@ class InitialMomentum(KeywordBase):
 
     @mx.setter
     def mx(self, value: float) -> None:
+        """Set the mx property."""
         self._cards[0].set_value("mx", value)
 
     @property
@@ -106,6 +110,7 @@ class InitialMomentum(KeywordBase):
 
     @my.setter
     def my(self, value: float) -> None:
+        """Set the my property."""
         self._cards[0].set_value("my", value)
 
     @property
@@ -116,6 +121,7 @@ class InitialMomentum(KeywordBase):
 
     @mz.setter
     def mz(self, value: float) -> None:
+        """Set the mz property."""
         self._cards[0].set_value("mz", value)
 
     @property
@@ -126,5 +132,6 @@ class InitialMomentum(KeywordBase):
 
     @dept.setter
     def dept(self, value: float) -> None:
+        """Set the dept property."""
         self._cards[0].set_value("dept", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedTieBreak(KeywordBase):
     subkeyword = "TIE-BREAK"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class ConstrainedTieBreak(KeywordBase):
 
     @nsid1.setter
     def nsid1(self, value: int) -> None:
+        """Set the nsid1 property."""
         self._cards[0].set_value("nsid1", value)
 
     @property
@@ -79,6 +82,7 @@ class ConstrainedTieBreak(KeywordBase):
 
     @nsid2.setter
     def nsid2(self, value: int) -> None:
+        """Set the nsid2 property."""
         self._cards[0].set_value("nsid2", value)
 
     @property
@@ -89,5 +93,6 @@ class ConstrainedTieBreak(KeywordBase):
 
     @eppf.setter
     def eppf(self, value: float) -> None:
+        """Set the eppf property."""
         self._cards[0].set_value("eppf", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryNonReflecting2D(KeywordBase):
     subkeyword = "NON_REFLECTING_2D"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -71,6 +73,7 @@ class BoundaryNonReflecting2D(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -83,6 +86,7 @@ class BoundaryNonReflecting2D(KeywordBase):
 
     @ad.setter
     def ad(self, value: int) -> None:
+        """Set the ad property."""
         self._cards[0].set_value("ad", value)
 
     @property
@@ -95,5 +99,6 @@ class BoundaryNonReflecting2D(KeywordBase):
 
     @as_.setter
     def as_(self, value: int) -> None:
+        """Set the as_ property."""
         self._cards[0].set_value("as", value)
 

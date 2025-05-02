@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdDefineHeatsource(KeywordBase):
     subkeyword = "DEFINE_HEATSOURCE"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -89,6 +91,7 @@ class IcfdDefineHeatsource(KeywordBase):
 
     @hsid.setter
     def hsid(self, value: int) -> None:
+        """Set the hsid property."""
         self._cards[0].set_value("hsid", value)
 
     @property
@@ -99,6 +102,7 @@ class IcfdDefineHeatsource(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -112,6 +116,7 @@ class IcfdDefineHeatsource(KeywordBase):
 
     @shape.setter
     def shape(self, value: int) -> None:
+        """Set the shape property."""
         self._cards[0].set_value("shape", value)
 
     @property
@@ -122,6 +127,7 @@ class IcfdDefineHeatsource(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[0].set_value("r", value)
 
     @property
@@ -132,6 +138,7 @@ class IcfdDefineHeatsource(KeywordBase):
 
     @ptid1.setter
     def ptid1(self, value: int) -> None:
+        """Set the ptid1 property."""
         self._cards[0].set_value("ptid1", value)
 
     @property
@@ -142,5 +149,6 @@ class IcfdDefineHeatsource(KeywordBase):
 
     @ptid2.setter
     def ptid2(self, value: int) -> None:
+        """Set the ptid2 property."""
         self._cards[0].set_value("ptid2", value)
 

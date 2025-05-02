@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTACT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Contact1D(KeywordBase):
     subkeyword = "1D"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTACT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -101,6 +103,7 @@ class Contact1D(KeywordBase):
 
     @nsidr.setter
     def nsidr(self, value: int) -> None:
+        """Set the nsidr property."""
         self._cards[0].set_value("nsidr", value)
 
     @property
@@ -111,6 +114,7 @@ class Contact1D(KeywordBase):
 
     @nsidc.setter
     def nsidc(self, value: int) -> None:
+        """Set the nsidc property."""
         self._cards[0].set_value("nsidc", value)
 
     @property
@@ -121,6 +125,7 @@ class Contact1D(KeywordBase):
 
     @err.setter
     def err(self, value: float) -> None:
+        """Set the err property."""
         self._cards[0].set_value("err", value)
 
     @property
@@ -131,6 +136,7 @@ class Contact1D(KeywordBase):
 
     @sigc.setter
     def sigc(self, value: float) -> None:
+        """Set the sigc property."""
         self._cards[0].set_value("sigc", value)
 
     @property
@@ -141,6 +147,7 @@ class Contact1D(KeywordBase):
 
     @gb.setter
     def gb(self, value: float) -> None:
+        """Set the gb property."""
         self._cards[0].set_value("gb", value)
 
     @property
@@ -151,6 +158,7 @@ class Contact1D(KeywordBase):
 
     @smax.setter
     def smax(self, value: float) -> None:
+        """Set the smax property."""
         self._cards[0].set_value("smax", value)
 
     @property
@@ -161,5 +169,6 @@ class Contact1D(KeywordBase):
 
     @exp.setter
     def exp(self, value: float) -> None:
+        """Set the exp property."""
         self._cards[0].set_value("exp", value)
 

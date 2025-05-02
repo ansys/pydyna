@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -300,6 +302,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -310,6 +313,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -320,6 +324,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @stiff.setter
     def stiff(self, value: float) -> None:
+        """Set the stiff property."""
         self._cards[0].set_value("stiff", value)
 
     @property
@@ -330,6 +335,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[0].set_value("fric", value)
 
     @property
@@ -340,6 +346,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[0].set_value("damp", value)
 
     @property
@@ -350,6 +357,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @dmxpz.setter
     def dmxpz(self, value: float) -> None:
+        """Set the dmxpz property."""
         self._cards[0].set_value("dmxpz", value)
 
     @property
@@ -362,6 +370,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @limpz.setter
     def limpz(self, value: float) -> None:
+        """Set the limpz property."""
         self._cards[0].set_value("limpz", value)
 
     @property
@@ -372,6 +381,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @dmxpx.setter
     def dmxpx(self, value: float) -> None:
+        """Set the dmxpx property."""
         self._cards[1].set_value("dmxpx", value)
 
     @property
@@ -382,6 +392,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @dmxnx.setter
     def dmxnx(self, value: float) -> None:
+        """Set the dmxnx property."""
         self._cards[1].set_value("dmxnx", value)
 
     @property
@@ -392,6 +403,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @dmxpy.setter
     def dmxpy(self, value: float) -> None:
+        """Set the dmxpy property."""
         self._cards[1].set_value("dmxpy", value)
 
     @property
@@ -402,6 +414,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @dmxny.setter
     def dmxny(self, value: float) -> None:
+        """Set the dmxny property."""
         self._cards[1].set_value("dmxny", value)
 
     @property
@@ -414,6 +427,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @limpx.setter
     def limpx(self, value: float) -> None:
+        """Set the limpx property."""
         self._cards[1].set_value("limpx", value)
 
     @property
@@ -426,6 +440,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @limnx.setter
     def limnx(self, value: float) -> None:
+        """Set the limnx property."""
         self._cards[1].set_value("limnx", value)
 
     @property
@@ -438,6 +453,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @limpy.setter
     def limpy(self, value: float) -> None:
+        """Set the limpy property."""
         self._cards[1].set_value("limpy", value)
 
     @property
@@ -450,6 +466,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @limny.setter
     def limny(self, value: float) -> None:
+        """Set the limny property."""
         self._cards[1].set_value("limny", value)
 
     @property
@@ -460,6 +477,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @krotx.setter
     def krotx(self, value: float) -> None:
+        """Set the krotx property."""
         self._cards[2].set_value("krotx", value)
 
     @property
@@ -470,6 +488,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @kroty.setter
     def kroty(self, value: float) -> None:
+        """Set the kroty property."""
         self._cards[2].set_value("kroty", value)
 
     @property
@@ -480,6 +499,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @krotz.setter
     def krotz(self, value: float) -> None:
+        """Set the krotz property."""
         self._cards[2].set_value("krotz", value)
 
     @property
@@ -490,6 +510,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @tkrot.setter
     def tkrot(self, value: float) -> None:
+        """Set the tkrot property."""
         self._cards[2].set_value("tkrot", value)
 
     @property
@@ -500,6 +521,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @fbondh.setter
     def fbondh(self, value: float) -> None:
+        """Set the fbondh property."""
         self._cards[2].set_value("fbondh", value)
 
     @property
@@ -510,6 +532,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @fbondt.setter
     def fbondt(self, value: float) -> None:
+        """Set the fbondt property."""
         self._cards[2].set_value("fbondt", value)
 
     @property
@@ -520,6 +543,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @dbondh.setter
     def dbondh(self, value: float) -> None:
+        """Set the dbondh property."""
         self._cards[2].set_value("dbondh", value)
 
     @property
@@ -530,6 +554,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @dbondt.setter
     def dbondt(self, value: float) -> None:
+        """Set the dbondt property."""
         self._cards[2].set_value("dbondt", value)
 
     @property
@@ -540,6 +565,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @lcz.setter
     def lcz(self, value: int) -> None:
+        """Set the lcz property."""
         self._cards[3].set_value("lcz", value)
 
     @property
@@ -550,6 +576,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @dampz.setter
     def dampz(self, value: float) -> None:
+        """Set the dampz property."""
         self._cards[3].set_value("dampz", value)
 
     @property
@@ -560,6 +587,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @stiffh.setter
     def stiffh(self, value: float) -> None:
+        """Set the stiffh property."""
         self._cards[3].set_value("stiffh", value)
 
     @property
@@ -570,6 +598,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @frmax.setter
     def frmax(self, value: float) -> None:
+        """Set the frmax property."""
         self._cards[3].set_value("frmax", value)
 
     @property
@@ -580,6 +609,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @damph.setter
     def damph(self, value: float) -> None:
+        """Set the damph property."""
         self._cards[3].set_value("damph", value)
 
     @property
@@ -590,6 +620,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @gap0.setter
     def gap0(self, value: float) -> None:
+        """Set the gap0 property."""
         self._cards[3].set_value("gap0", value)
 
     @property
@@ -600,6 +631,7 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @afac.setter
     def afac(self, value: float) -> None:
+        """Set the afac property."""
         self._cards[3].set_value("afac", value)
 
     @property
@@ -610,5 +642,6 @@ class MatDiscreteBeamPointContact(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

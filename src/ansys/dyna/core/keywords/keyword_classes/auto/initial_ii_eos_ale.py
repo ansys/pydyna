@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialIiEosAle(KeywordBase):
     subkeyword = "II_EOS_ALE"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -92,6 +94,7 @@ class InitialIiEosAle(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -105,6 +108,7 @@ class InitialIiEosAle(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         self._cards[0].set_value("type", value)
 
     @property
@@ -115,6 +119,7 @@ class InitialIiEosAle(KeywordBase):
 
     @mmg.setter
     def mmg(self, value: int) -> None:
+        """Set the mmg property."""
         self._cards[0].set_value("mmg", value)
 
     @property
@@ -125,6 +130,7 @@ class InitialIiEosAle(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[0].set_value("e0", value)
 
     @property
@@ -135,6 +141,7 @@ class InitialIiEosAle(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[0].set_value("v0", value)
 
     @property
@@ -145,5 +152,6 @@ class InitialIiEosAle(KeywordBase):
 
     @p0.setter
     def p0(self, value: float) -> None:
+        """Set the p0 property."""
         self._cards[0].set_value("p0", value)
 

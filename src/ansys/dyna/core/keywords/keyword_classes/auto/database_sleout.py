@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseSleout(KeywordBase):
     subkeyword = "SLEOUT"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class DatabaseSleout(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -92,8 +95,9 @@ class DatabaseSleout(KeywordBase):
 
     @binary.setter
     def binary(self, value: int) -> None:
+        """Set the binary property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""binary must be `None` or one of {0,1,2,3}""")
+            raise Exception("""binary must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("binary", value)
 
     @property
@@ -104,6 +108,7 @@ class DatabaseSleout(KeywordBase):
 
     @lcur.setter
     def lcur(self, value: int) -> None:
+        """Set the lcur property."""
         self._cards[0].set_value("lcur", value)
 
     @property
@@ -117,7 +122,8 @@ class DatabaseSleout(KeywordBase):
 
     @ioopt.setter
     def ioopt(self, value: int) -> None:
+        """Set the ioopt property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""ioopt must be `None` or one of {1,2,3}""")
+            raise Exception("""ioopt must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("ioopt", value)
 

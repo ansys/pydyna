@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetPeriLaminate(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -122,6 +124,7 @@ class SetPeriLaminate(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -132,6 +135,7 @@ class SetPeriLaminate(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -142,6 +146,7 @@ class SetPeriLaminate(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -152,6 +157,7 @@ class SetPeriLaminate(KeywordBase):
 
     @t1.setter
     def t1(self, value: float) -> None:
+        """Set the t1 property."""
         self._cards[1].set_value("t1", value)
 
     @property
@@ -162,6 +168,7 @@ class SetPeriLaminate(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -172,6 +179,7 @@ class SetPeriLaminate(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -182,6 +190,7 @@ class SetPeriLaminate(KeywordBase):
 
     @t2.setter
     def t2(self, value: float) -> None:
+        """Set the t2 property."""
         self._cards[1].set_value("t2", value)
 
     @property
@@ -192,5 +201,6 @@ class SetPeriLaminate(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

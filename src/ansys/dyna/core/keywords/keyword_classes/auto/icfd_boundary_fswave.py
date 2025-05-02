@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdBoundaryFswave(KeywordBase):
     subkeyword = "BOUNDARY_FSWAVE"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class IcfdBoundaryFswave(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -131,6 +134,7 @@ class IcfdBoundaryFswave(KeywordBase):
 
     @wtype.setter
     def wtype(self, value: int) -> None:
+        """Set the wtype property."""
         self._cards[0].set_value("wtype", value)
 
     @property
@@ -141,6 +145,7 @@ class IcfdBoundaryFswave(KeywordBase):
 
     @h0.setter
     def h0(self, value: float) -> None:
+        """Set the h0 property."""
         self._cards[0].set_value("h0", value)
 
     @property
@@ -151,6 +156,7 @@ class IcfdBoundaryFswave(KeywordBase):
 
     @wamp.setter
     def wamp(self, value: float) -> None:
+        """Set the wamp property."""
         self._cards[0].set_value("wamp", value)
 
     @property
@@ -161,6 +167,7 @@ class IcfdBoundaryFswave(KeywordBase):
 
     @wleng.setter
     def wleng(self, value: float) -> None:
+        """Set the wleng property."""
         self._cards[0].set_value("wleng", value)
 
     @property
@@ -171,6 +178,7 @@ class IcfdBoundaryFswave(KeywordBase):
 
     @wmax.setter
     def wmax(self, value: float) -> None:
+        """Set the wmax property."""
         self._cards[0].set_value("wmax", value)
 
     @property
@@ -181,6 +189,7 @@ class IcfdBoundaryFswave(KeywordBase):
 
     @sflcid.setter
     def sflcid(self, value: int) -> None:
+        """Set the sflcid property."""
         self._cards[0].set_value("sflcid", value)
 
     @property
@@ -191,6 +200,7 @@ class IcfdBoundaryFswave(KeywordBase):
 
     @wang.setter
     def wang(self, value: float) -> None:
+        """Set the wang property."""
         self._cards[0].set_value("wang", value)
 
     @property
@@ -201,5 +211,6 @@ class IcfdBoundaryFswave(KeywordBase):
 
     @wpeak.setter
     def wpeak(self, value: float) -> None:
+        """Set the wpeak property."""
         self._cards[1].set_value("wpeak", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTERFACE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceCompensationNewAccelerator(KeywordBase):
     subkeyword = "COMPENSATION_NEW_ACCELERATOR"
 
     def __init__(self, **kwargs):
+        """Initialize the INTERFACE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -87,6 +89,7 @@ class InterfaceCompensationNewAccelerator(KeywordBase):
 
     @isteps.setter
     def isteps(self, value: int) -> None:
+        """Set the isteps property."""
         self._cards[0].set_value("isteps", value)
 
     @property
@@ -97,6 +100,7 @@ class InterfaceCompensationNewAccelerator(KeywordBase):
 
     @tolx.setter
     def tolx(self, value: float) -> None:
+        """Set the tolx property."""
         self._cards[0].set_value("tolx", value)
 
     @property
@@ -107,6 +111,7 @@ class InterfaceCompensationNewAccelerator(KeywordBase):
 
     @toly.setter
     def toly(self, value: float) -> None:
+        """Set the toly property."""
         self._cards[0].set_value("toly", value)
 
     @property
@@ -117,6 +122,7 @@ class InterfaceCompensationNewAccelerator(KeywordBase):
 
     @tolz.setter
     def tolz(self, value: float) -> None:
+        """Set the tolz property."""
         self._cards[0].set_value("tolz", value)
 
     @property
@@ -127,5 +133,6 @@ class InterfaceCompensationNewAccelerator(KeywordBase):
 
     @option.setter
     def option(self, value: int) -> None:
+        """Set the option property."""
         self._cards[0].set_value("option", value)
 

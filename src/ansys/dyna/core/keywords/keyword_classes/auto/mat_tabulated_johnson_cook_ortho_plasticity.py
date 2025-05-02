@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -453,6 +455,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -463,6 +466,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -473,6 +477,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -483,6 +488,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -493,6 +499,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[0].set_value("cp", value)
 
     @property
@@ -503,6 +510,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @tr.setter
     def tr(self, value: float) -> None:
+        """Set the tr property."""
         self._cards[0].set_value("tr", value)
 
     @property
@@ -513,6 +521,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -524,6 +533,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @numint.setter
     def numint(self, value: float) -> None:
+        """Set the numint property."""
         self._cards[0].set_value("numint", value)
 
     @property
@@ -534,6 +544,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lct00r.setter
     def lct00r(self, value: int) -> None:
+        """Set the lct00r property."""
         self._cards[1].set_value("lct00r", value)
 
     @property
@@ -544,6 +555,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lct00t.setter
     def lct00t(self, value: int) -> None:
+        """Set the lct00t property."""
         self._cards[1].set_value("lct00t", value)
 
     @property
@@ -554,6 +566,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcf.setter
     def lcf(self, value: int) -> None:
+        """Set the lcf property."""
         self._cards[1].set_value("lcf", value)
 
     @property
@@ -564,6 +577,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcg.setter
     def lcg(self, value: int) -> None:
+        """Set the lcg property."""
         self._cards[1].set_value("lcg", value)
 
     @property
@@ -574,6 +588,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lch.setter
     def lch(self, value: int) -> None:
+        """Set the lch property."""
         self._cards[1].set_value("lch", value)
 
     @property
@@ -584,6 +599,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lci.setter
     def lci(self, value: int) -> None:
+        """Set the lci property."""
         self._cards[1].set_value("lci", value)
 
     @property
@@ -594,6 +610,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcc00r.setter
     def lcc00r(self, value: float) -> None:
+        """Set the lcc00r property."""
         self._cards[2].set_value("lcc00r", value)
 
     @property
@@ -604,6 +621,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcc00t.setter
     def lcc00t(self, value: float) -> None:
+        """Set the lcc00t property."""
         self._cards[2].set_value("lcc00t", value)
 
     @property
@@ -614,6 +632,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcs45r.setter
     def lcs45r(self, value: float) -> None:
+        """Set the lcs45r property."""
         self._cards[2].set_value("lcs45r", value)
 
     @property
@@ -624,6 +643,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcs45t.setter
     def lcs45t(self, value: float) -> None:
+        """Set the lcs45t property."""
         self._cards[2].set_value("lcs45t", value)
 
     @property
@@ -636,6 +656,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @iflag.setter
     def iflag(self, value: int) -> None:
+        """Set the iflag property."""
         self._cards[2].set_value("iflag", value)
 
     @property
@@ -646,6 +667,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @sfiepm.setter
     def sfiepm(self, value: int) -> None:
+        """Set the sfiepm property."""
         self._cards[2].set_value("sfiepm", value)
 
     @property
@@ -656,6 +678,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @niter.setter
     def niter(self, value: int) -> None:
+        """Set the niter property."""
         self._cards[2].set_value("niter", value)
 
     @property
@@ -672,6 +695,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -682,6 +706,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lct90r.setter
     def lct90r(self, value: int) -> None:
+        """Set the lct90r property."""
         self._cards[3].set_value("lct90r", value)
 
     @property
@@ -692,6 +717,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lct45r.setter
     def lct45r(self, value: int) -> None:
+        """Set the lct45r property."""
         self._cards[3].set_value("lct45r", value)
 
     @property
@@ -702,6 +728,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lctthr.setter
     def lctthr(self, value: int) -> None:
+        """Set the lctthr property."""
         self._cards[3].set_value("lctthr", value)
 
     @property
@@ -712,6 +739,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcc90r.setter
     def lcc90r(self, value: int) -> None:
+        """Set the lcc90r property."""
         self._cards[3].set_value("lcc90r", value)
 
     @property
@@ -722,6 +750,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcc45r.setter
     def lcc45r(self, value: int) -> None:
+        """Set the lcc45r property."""
         self._cards[3].set_value("lcc45r", value)
 
     @property
@@ -732,6 +761,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lccth.setter
     def lccth(self, value: int) -> None:
+        """Set the lccth property."""
         self._cards[3].set_value("lccth", value)
 
     @property
@@ -742,6 +772,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lct90t.setter
     def lct90t(self, value: int) -> None:
+        """Set the lct90t property."""
         self._cards[4].set_value("lct90t", value)
 
     @property
@@ -752,6 +783,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lct45t.setter
     def lct45t(self, value: int) -> None:
+        """Set the lct45t property."""
         self._cards[4].set_value("lct45t", value)
 
     @property
@@ -762,6 +794,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcttht.setter
     def lcttht(self, value: int) -> None:
+        """Set the lcttht property."""
         self._cards[4].set_value("lcttht", value)
 
     @property
@@ -772,6 +805,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcc90t.setter
     def lcc90t(self, value: int) -> None:
+        """Set the lcc90t property."""
         self._cards[4].set_value("lcc90t", value)
 
     @property
@@ -782,6 +816,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcc45t.setter
     def lcc45t(self, value: int) -> None:
+        """Set the lcc45t property."""
         self._cards[4].set_value("lcc45t", value)
 
     @property
@@ -792,6 +827,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @lcctht.setter
     def lcctht(self, value: int) -> None:
+        """Set the lcctht property."""
         self._cards[4].set_value("lcctht", value)
 
     @property
@@ -802,6 +838,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[5].set_value("xp", value)
 
     @property
@@ -812,6 +849,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[5].set_value("yp", value)
 
     @property
@@ -822,6 +860,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[5].set_value("zp", value)
 
     @property
@@ -832,6 +871,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[5].set_value("a1", value)
 
     @property
@@ -842,6 +882,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[5].set_value("a2", value)
 
     @property
@@ -852,6 +893,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[5].set_value("a3", value)
 
     @property
@@ -870,8 +912,9 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @macf.setter
     def macf(self, value: float) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -4, -3, -2, -1, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2,-1}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2,-1}.""")
         self._cards[5].set_value("macf", value)
 
     @property
@@ -882,6 +925,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[6].set_value("v1", value)
 
     @property
@@ -892,6 +936,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[6].set_value("v2", value)
 
     @property
@@ -902,6 +947,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[6].set_value("v3", value)
 
     @property
@@ -912,6 +958,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[6].set_value("d1", value)
 
     @property
@@ -922,6 +969,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[6].set_value("d2", value)
 
     @property
@@ -932,6 +980,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[6].set_value("d3", value)
 
     @property
@@ -942,6 +991,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[6].set_value("beta", value)
 
     @property
@@ -952,5 +1002,6 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
 

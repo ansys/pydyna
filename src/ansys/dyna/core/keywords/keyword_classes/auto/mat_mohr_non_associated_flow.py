@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -388,6 +390,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -398,6 +401,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -408,6 +412,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -418,6 +423,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -430,6 +436,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @p12.setter
     def p12(self, value: float) -> None:
+        """Set the p12 property."""
         self._cards[0].set_value("p12", value)
 
     @property
@@ -442,6 +449,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @p22.setter
     def p22(self, value: float) -> None:
+        """Set the p22 property."""
         self._cards[0].set_value("p22", value)
 
     @property
@@ -454,6 +462,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @p33.setter
     def p33(self, value: float) -> None:
+        """Set the p33 property."""
         self._cards[0].set_value("p33", value)
 
     @property
@@ -466,6 +475,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @g12.setter
     def g12(self, value: float) -> None:
+        """Set the g12 property."""
         self._cards[0].set_value("g12", value)
 
     @property
@@ -478,6 +488,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @g22.setter
     def g22(self, value: float) -> None:
+        """Set the g22 property."""
         self._cards[1].set_value("g22", value)
 
     @property
@@ -490,6 +501,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @g33.setter
     def g33(self, value: float) -> None:
+        """Set the g33 property."""
         self._cards[1].set_value("g33", value)
 
     @property
@@ -502,6 +514,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @lcids.setter
     def lcids(self, value: int) -> None:
+        """Set the lcids property."""
         self._cards[1].set_value("lcids", value)
 
     @property
@@ -522,6 +535,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @lcidv.setter
     def lcidv(self, value: int) -> None:
+        """Set the lcidv property."""
         self._cards[1].set_value("lcidv", value)
 
     @property
@@ -542,6 +556,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[1].set_value("lcidt", value)
 
     @property
@@ -552,6 +567,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @lfld.setter
     def lfld(self, value: int) -> None:
+        """Set the lfld property."""
         self._cards[1].set_value("lfld", value)
 
     @property
@@ -565,6 +581,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @lfrac.setter
     def lfrac(self, value: int) -> None:
+        """Set the lfrac property."""
         self._cards[1].set_value("lfrac", value)
 
     @property
@@ -575,6 +592,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @w0.setter
     def w0(self, value: float) -> None:
+        """Set the w0 property."""
         self._cards[1].set_value("w0", value)
 
     @property
@@ -587,6 +605,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[2].set_value("a", value)
 
     @property
@@ -599,6 +618,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @b0.setter
     def b0(self, value: float) -> None:
+        """Set the b0 property."""
         self._cards[2].set_value("b0", value)
 
     @property
@@ -611,6 +631,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[2].set_value("gamma", value)
 
     @property
@@ -623,6 +644,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[2].set_value("c", value)
 
     @property
@@ -635,6 +657,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[2].set_value("n", value)
 
     @property
@@ -656,6 +679,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @scale.setter
     def scale(self, value: float) -> None:
+        """Set the scale property."""
         self._cards[2].set_value("scale", value)
 
     @property
@@ -666,6 +690,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @size0.setter
     def size0(self, value: float) -> None:
+        """Set the size0 property."""
         self._cards[2].set_value("size0", value)
 
     @property
@@ -678,6 +703,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @tref.setter
     def tref(self, value: float) -> None:
+        """Set the tref property."""
         self._cards[3].set_value("tref", value)
 
     @property
@@ -690,6 +716,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @tmelt.setter
     def tmelt(self, value: float) -> None:
+        """Set the tmelt property."""
         self._cards[3].set_value("tmelt", value)
 
     @property
@@ -702,6 +729,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[3].set_value("m", value)
 
     @property
@@ -714,6 +742,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @eta.setter
     def eta(self, value: float) -> None:
+        """Set the eta property."""
         self._cards[3].set_value("eta", value)
 
     @property
@@ -726,6 +755,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[3].set_value("cp", value)
 
     @property
@@ -738,6 +768,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @tini.setter
     def tini(self, value: float) -> None:
+        """Set the tini property."""
         self._cards[3].set_value("tini", value)
 
     @property
@@ -750,6 +781,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @depso.setter
     def depso(self, value: float) -> None:
+        """Set the depso property."""
         self._cards[3].set_value("depso", value)
 
     @property
@@ -762,6 +794,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @depsad.setter
     def depsad(self, value: float) -> None:
+        """Set the depsad property."""
         self._cards[3].set_value("depsad", value)
 
     @property
@@ -776,6 +809,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[4].set_value("aopt", value)
 
     @property
@@ -786,6 +820,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[5].set_value("a1", value)
 
     @property
@@ -796,6 +831,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[5].set_value("a2", value)
 
     @property
@@ -806,6 +842,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[5].set_value("a3", value)
 
     @property
@@ -816,6 +853,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[6].set_value("v1", value)
 
     @property
@@ -826,6 +864,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[6].set_value("v2", value)
 
     @property
@@ -836,6 +875,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[6].set_value("v3", value)
 
     @property
@@ -846,5 +886,6 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
 

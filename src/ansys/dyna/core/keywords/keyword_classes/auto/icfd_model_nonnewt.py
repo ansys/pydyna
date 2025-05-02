@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdModelNonnewt(KeywordBase):
     subkeyword = "MODEL_NONNEWT"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class IcfdModelNonnewt(KeywordBase):
 
     @nnmoid.setter
     def nnmoid(self, value: int) -> None:
+        """Set the nnmoid property."""
         self._cards[0].set_value("nnmoid", value)
 
     @property
@@ -132,8 +135,9 @@ class IcfdModelNonnewt(KeywordBase):
 
     @nnid.setter
     def nnid(self, value: int) -> None:
+        """Set the nnid property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, None]:
-            raise Exception("""nnid must be `None` or one of {1,2,3,4,5,6,7,8}""")
+            raise Exception("""nnid must be `None` or one of {1,2,3,4,5,6,7,8}.""")
         self._cards[0].set_value("nnid", value)
 
     @property
@@ -144,6 +148,7 @@ class IcfdModelNonnewt(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[1].set_value("k", value)
 
     @property
@@ -154,6 +159,7 @@ class IcfdModelNonnewt(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[1].set_value("n", value)
 
     @property
@@ -164,6 +170,7 @@ class IcfdModelNonnewt(KeywordBase):
 
     @mumin.setter
     def mumin(self, value: float) -> None:
+        """Set the mumin property."""
         self._cards[1].set_value("mumin", value)
 
     @property
@@ -174,6 +181,7 @@ class IcfdModelNonnewt(KeywordBase):
 
     @lambda_.setter
     def lambda_(self, value: float) -> None:
+        """Set the lambda_ property."""
         self._cards[1].set_value("lambda", value)
 
     @property
@@ -184,6 +192,7 @@ class IcfdModelNonnewt(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
 
     @property
@@ -194,5 +203,6 @@ class IcfdModelNonnewt(KeywordBase):
 
     @talpha.setter
     def talpha(self, value: float) -> None:
+        """Set the talpha property."""
         self._cards[1].set_value("talpha", value)
 

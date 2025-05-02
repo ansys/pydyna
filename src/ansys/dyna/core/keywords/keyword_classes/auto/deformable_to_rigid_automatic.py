@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFORMABLE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DeformableToRigidAutomatic(KeywordBase):
     subkeyword = "TO_RIGID_AUTOMATIC"
 
     def __init__(self, **kwargs):
+        """Initialize the DEFORMABLE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -215,6 +217,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @swset.setter
     def swset(self, value: int) -> None:
+        """Set the swset property."""
         self._cards[0].set_value("swset", value)
 
     @property
@@ -231,8 +234,9 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @code.setter
     def code(self, value: int) -> None:
+        """Set the code property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""code must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""code must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("code", value)
 
     @property
@@ -243,6 +247,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @time1.setter
     def time1(self, value: float) -> None:
+        """Set the time1 property."""
         self._cards[0].set_value("time1", value)
 
     @property
@@ -254,6 +259,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @time2.setter
     def time2(self, value: float) -> None:
+        """Set the time2 property."""
         self._cards[0].set_value("time2", value)
 
     @property
@@ -264,6 +270,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @time3.setter
     def time3(self, value: float) -> None:
+        """Set the time3 property."""
         self._cards[0].set_value("time3", value)
 
     @property
@@ -274,6 +281,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @entno.setter
     def entno(self, value: int) -> None:
+        """Set the entno property."""
         self._cards[0].set_value("entno", value)
 
     @property
@@ -285,6 +293,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @relsw.setter
     def relsw(self, value: int) -> None:
+        """Set the relsw property."""
         self._cards[0].set_value("relsw", value)
 
     @property
@@ -298,8 +307,9 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @paired.setter
     def paired(self, value: int) -> None:
+        """Set the paired property."""
         if value not in [0, -1, 1, None]:
-            raise Exception("""paired must be `None` or one of {0,-1,1}""")
+            raise Exception("""paired must be `None` or one of {0,-1,1}.""")
         self._cards[0].set_value("paired", value)
 
     @property
@@ -314,8 +324,9 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @nrbf.setter
     def nrbf(self, value: int) -> None:
+        """Set the nrbf property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""nrbf must be `None` or one of {0,1,2}""")
+            raise Exception("""nrbf must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("nrbf", value)
 
     @property
@@ -330,8 +341,9 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @ncsf.setter
     def ncsf(self, value: int) -> None:
+        """Set the ncsf property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ncsf must be `None` or one of {0,1,2}""")
+            raise Exception("""ncsf must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("ncsf", value)
 
     @property
@@ -345,8 +357,9 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @rwf.setter
     def rwf(self, value: int) -> None:
+        """Set the rwf property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""rwf must be `None` or one of {0,1,2}""")
+            raise Exception("""rwf must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("rwf", value)
 
     @property
@@ -357,6 +370,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @dtmax.setter
     def dtmax(self, value: float) -> None:
+        """Set the dtmax property."""
         self._cards[1].set_value("dtmax", value)
 
     @property
@@ -368,6 +382,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @d2r.setter
     def d2r(self, value: int) -> None:
+        """Set the d2r property."""
         self._cards[1].set_value("d2r", value)
 
     @property
@@ -379,6 +394,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @r2d.setter
     def r2d(self, value: int) -> None:
+        """Set the r2d property."""
         self._cards[1].set_value("r2d", value)
 
     @property
@@ -389,6 +405,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @offset.setter
     def offset(self, value: int) -> None:
+        """Set the offset property."""
         self._cards[1].set_value("offset", value)
 
     @property
@@ -399,6 +416,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[2].set_value("pid", value)
 
     @property
@@ -409,6 +427,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @lrb.setter
     def lrb(self, value: int) -> None:
+        """Set the lrb property."""
         self._cards[2].set_value("lrb", value)
 
     @property
@@ -421,8 +440,9 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: str) -> None:
+        """Set the ptype property."""
         if value not in ["PART", "PSET", None]:
-            raise Exception("""ptype must be `None` or one of {"PART","PSET"}""")
+            raise Exception("""ptype must be `None` or one of {"PART","PSET"}.""")
         self._cards[2].set_value("ptype", value)
 
     @property
@@ -433,6 +453,7 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[3].set_value("pid", value)
 
     @property
@@ -445,7 +466,8 @@ class DeformableToRigidAutomatic(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: str) -> None:
+        """Set the ptype property."""
         if value not in ["PART", "PSET", None]:
-            raise Exception("""ptype must be `None` or one of {"PART","PSET"}""")
+            raise Exception("""ptype must be `None` or one of {"PART","PSET"}.""")
         self._cards[3].set_value("ptype", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialVehicleKinematics(KeywordBase):
     subkeyword = "VEHICLE_KINEMATICS"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -221,8 +223,9 @@ class InitialVehicleKinematics(KeywordBase):
 
     @grav.setter
     def grav(self, value: int) -> None:
+        """Set the grav property."""
         if value not in [1, -1, 2, -2, 3, -3, None]:
-            raise Exception("""grav must be `None` or one of {1,-1,2,-2,3,-3}""")
+            raise Exception("""grav must be `None` or one of {1,-1,2,-2,3,-3}.""")
         self._cards[0].set_value("grav", value)
 
     @property
@@ -233,6 +236,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -243,6 +247,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @xo.setter
     def xo(self, value: float) -> None:
+        """Set the xo property."""
         self._cards[0].set_value("xo", value)
 
     @property
@@ -253,6 +258,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @yo.setter
     def yo(self, value: float) -> None:
+        """Set the yo property."""
         self._cards[0].set_value("yo", value)
 
     @property
@@ -263,6 +269,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @zo.setter
     def zo(self, value: float) -> None:
+        """Set the zo property."""
         self._cards[0].set_value("zo", value)
 
     @property
@@ -273,6 +280,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @xf.setter
     def xf(self, value: float) -> None:
+        """Set the xf property."""
         self._cards[0].set_value("xf", value)
 
     @property
@@ -283,6 +291,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @yf.setter
     def yf(self, value: float) -> None:
+        """Set the yf property."""
         self._cards[0].set_value("yf", value)
 
     @property
@@ -293,6 +302,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @zf.setter
     def zf(self, value: float) -> None:
+        """Set the zf property."""
         self._cards[0].set_value("zf", value)
 
     @property
@@ -303,6 +313,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[1].set_value("vx", value)
 
     @property
@@ -313,6 +324,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[1].set_value("vy", value)
 
     @property
@@ -323,6 +335,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[1].set_value("vz", value)
 
     @property
@@ -336,8 +349,9 @@ class InitialVehicleKinematics(KeywordBase):
 
     @aaxis.setter
     def aaxis(self, value: int) -> None:
+        """Set the aaxis property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""aaxis must be `None` or one of {1,2,3}""")
+            raise Exception("""aaxis must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("aaxis", value)
 
     @property
@@ -351,8 +365,9 @@ class InitialVehicleKinematics(KeywordBase):
 
     @baxis.setter
     def baxis(self, value: int) -> None:
+        """Set the baxis property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""baxis must be `None` or one of {1,2,3}""")
+            raise Exception("""baxis must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("baxis", value)
 
     @property
@@ -366,8 +381,9 @@ class InitialVehicleKinematics(KeywordBase):
 
     @caxis.setter
     def caxis(self, value: int) -> None:
+        """Set the caxis property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""caxis must be `None` or one of {1,2,3}""")
+            raise Exception("""caxis must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("caxis", value)
 
     @property
@@ -378,6 +394,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @aang.setter
     def aang(self, value: float) -> None:
+        """Set the aang property."""
         self._cards[2].set_value("aang", value)
 
     @property
@@ -388,6 +405,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @bang.setter
     def bang(self, value: float) -> None:
+        """Set the bang property."""
         self._cards[2].set_value("bang", value)
 
     @property
@@ -398,6 +416,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @cang.setter
     def cang(self, value: float) -> None:
+        """Set the cang property."""
         self._cards[2].set_value("cang", value)
 
     @property
@@ -408,6 +427,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @wa.setter
     def wa(self, value: float) -> None:
+        """Set the wa property."""
         self._cards[2].set_value("wa", value)
 
     @property
@@ -418,6 +438,7 @@ class InitialVehicleKinematics(KeywordBase):
 
     @wb.setter
     def wb(self, value: float) -> None:
+        """Set the wb property."""
         self._cards[2].set_value("wb", value)
 
     @property
@@ -428,5 +449,6 @@ class InitialVehicleKinematics(KeywordBase):
 
     @wc.setter
     def wc(self, value: float) -> None:
+        """Set the wc property."""
         self._cards[2].set_value("wc", value)
 

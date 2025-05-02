@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCoordinateNodes(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -112,6 +114,7 @@ class DefineCoordinateNodes(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -122,6 +125,7 @@ class DefineCoordinateNodes(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -132,6 +136,7 @@ class DefineCoordinateNodes(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -142,6 +147,7 @@ class DefineCoordinateNodes(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -152,6 +158,7 @@ class DefineCoordinateNodes(KeywordBase):
 
     @flag.setter
     def flag(self, value: int) -> None:
+        """Set the flag property."""
         self._cards[0].set_value("flag", value)
 
     @property
@@ -162,8 +169,9 @@ class DefineCoordinateNodes(KeywordBase):
 
     @dir.setter
     def dir(self, value: str) -> None:
+        """Set the dir property."""
         if value not in ["X", "Y", "Z", None]:
-            raise Exception("""dir must be `None` or one of {"X","Y","Z"}""")
+            raise Exception("""dir must be `None` or one of {"X","Y","Z"}.""")
         self._cards[0].set_value("dir", value)
 
     @property
@@ -174,5 +182,6 @@ class DefineCoordinateNodes(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

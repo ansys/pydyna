@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
@@ -32,6 +33,7 @@ class ControlMppDecompositionTransformation(KeywordBase):
     subkeyword = "MPP_DECOMPOSITION_TRANSFORMATION"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             TableCardGroup(
@@ -115,11 +117,11 @@ class ControlMppDecompositionTransformation(KeywordBase):
 
     @property
     def transformation(self):
-        '''Gets the full table of transformation'''
+        """Gets the full table of transformation."""
         return self._cards[0].table
 
     @transformation.setter
     def transformation(self, df):
-        '''sets transformation from the dataframe df'''
+        """sets transformation from the dataframe df."""
         self._cards[0].table = df
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitLinear(KeywordBase):
     subkeyword = "IMPLICIT_LINEAR"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -184,8 +186,9 @@ class ControlImplicitLinear(KeywordBase):
 
     @lsolvr.setter
     def lsolvr(self, value: int) -> None:
+        """Set the lsolvr property."""
         if value not in [2, 22, 23, 24, 25, 26, 30, 90, 6, None]:
-            raise Exception("""lsolvr must be `None` or one of {2,22,23,24,25,26,30,90,6}""")
+            raise Exception("""lsolvr must be `None` or one of {2,22,23,24,25,26,30,90,6}.""")
         self._cards[0].set_value("lsolvr", value)
 
     @property
@@ -201,8 +204,9 @@ class ControlImplicitLinear(KeywordBase):
 
     @lprint.setter
     def lprint(self, value: int) -> None:
+        """Set the lprint property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""lprint must be `None` or one of {0,1,2,3}""")
+            raise Exception("""lprint must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("lprint", value)
 
     @property
@@ -215,8 +219,9 @@ class ControlImplicitLinear(KeywordBase):
 
     @negev.setter
     def negev(self, value: int) -> None:
+        """Set the negev property."""
         if value not in [2, 1, None]:
-            raise Exception("""negev must be `None` or one of {2,1}""")
+            raise Exception("""negev must be `None` or one of {2,1}.""")
         self._cards[0].set_value("negev", value)
 
     @property
@@ -231,8 +236,9 @@ class ControlImplicitLinear(KeywordBase):
 
     @order.setter
     def order(self, value: int) -> None:
+        """Set the order property."""
         if value not in [0, 1, 2, 4, None]:
-            raise Exception("""order must be `None` or one of {0,1,2,4}""")
+            raise Exception("""order must be `None` or one of {0,1,2,4}.""")
         self._cards[0].set_value("order", value)
 
     @property
@@ -247,8 +253,9 @@ class ControlImplicitLinear(KeywordBase):
 
     @drcm.setter
     def drcm(self, value: int) -> None:
+        """Set the drcm property."""
         if value not in [4, 1, 2, 3, None]:
-            raise Exception("""drcm must be `None` or one of {4,1,2,3}""")
+            raise Exception("""drcm must be `None` or one of {4,1,2,3}.""")
         self._cards[0].set_value("drcm", value)
 
     @property
@@ -263,6 +270,7 @@ class ControlImplicitLinear(KeywordBase):
 
     @drcprm.setter
     def drcprm(self, value: float) -> None:
+        """Set the drcprm property."""
         self._cards[0].set_value("drcprm", value)
 
     @property
@@ -276,8 +284,9 @@ class ControlImplicitLinear(KeywordBase):
 
     @autospc.setter
     def autospc(self, value: int) -> None:
+        """Set the autospc property."""
         if value not in [1, 2, None]:
-            raise Exception("""autospc must be `None` or one of {1,2}""")
+            raise Exception("""autospc must be `None` or one of {1,2}.""")
         self._cards[0].set_value("autospc", value)
 
     @property
@@ -290,6 +299,7 @@ class ControlImplicitLinear(KeywordBase):
 
     @autotol.setter
     def autotol(self, value: float) -> None:
+        """Set the autotol property."""
         self._cards[0].set_value("autotol", value)
 
     @property
@@ -302,8 +312,9 @@ class ControlImplicitLinear(KeywordBase):
 
     @lcpack.setter
     def lcpack(self, value: int) -> None:
+        """Set the lcpack property."""
         if value not in [2, 3, None]:
-            raise Exception("""lcpack must be `None` or one of {2,3}""")
+            raise Exception("""lcpack must be `None` or one of {2,3}.""")
         self._cards[1].set_value("lcpack", value)
 
     @property
@@ -326,6 +337,7 @@ class ControlImplicitLinear(KeywordBase):
 
     @mtxdmp.setter
     def mtxdmp(self, value: int) -> None:
+        """Set the mtxdmp property."""
         self._cards[1].set_value("mtxdmp", value)
 
     @property
@@ -336,6 +348,7 @@ class ControlImplicitLinear(KeywordBase):
 
     @iparm1.setter
     def iparm1(self, value: int) -> None:
+        """Set the iparm1 property."""
         self._cards[1].set_value("iparm1", value)
 
     @property
@@ -346,6 +359,7 @@ class ControlImplicitLinear(KeywordBase):
 
     @rparm1.setter
     def rparm1(self, value: float) -> None:
+        """Set the rparm1 property."""
         self._cards[1].set_value("rparm1", value)
 
     @property
@@ -356,6 +370,7 @@ class ControlImplicitLinear(KeywordBase):
 
     @rparm2.setter
     def rparm2(self, value: float) -> None:
+        """Set the rparm2 property."""
         self._cards[1].set_value("rparm2", value)
 
     @property
@@ -366,5 +381,6 @@ class ControlImplicitLinear(KeywordBase):
 
     @rparm5.setter
     def rparm5(self, value: float) -> None:
+        """Set the rparm5 property."""
         self._cards[1].set_value("rparm5", value)
 

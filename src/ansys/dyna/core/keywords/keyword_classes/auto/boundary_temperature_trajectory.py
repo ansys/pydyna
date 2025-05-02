@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     subkeyword = "TEMPERATURE_TRAJECTORY"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -251,6 +253,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -263,8 +266,9 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @pype.setter
     def pype(self, value: int) -> None:
+        """Set the pype property."""
         if value not in [1, 2, None]:
-            raise Exception("""pype must be `None` or one of {1,2}""")
+            raise Exception("""pype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("pype", value)
 
     @property
@@ -276,6 +280,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @nsid1.setter
     def nsid1(self, value: int) -> None:
+        """Set the nsid1 property."""
         self._cards[0].set_value("nsid1", value)
 
     @property
@@ -288,6 +293,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @spd1.setter
     def spd1(self, value: float) -> None:
+        """Set the spd1 property."""
         self._cards[0].set_value("spd1", value)
 
     @property
@@ -306,6 +312,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @nsid2.setter
     def nsid2(self, value: int) -> None:
+        """Set the nsid2 property."""
         self._cards[0].set_value("nsid2", value)
 
     @property
@@ -318,6 +325,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @spd2.setter
     def spd2(self, value: float) -> None:
+        """Set the spd2 property."""
         self._cards[0].set_value("spd2", value)
 
     @property
@@ -330,6 +338,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @relvel.setter
     def relvel(self, value: int) -> None:
+        """Set the relvel property."""
         self._cards[0].set_value("relvel", value)
 
     @property
@@ -342,8 +351,9 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @iform.setter
     def iform(self, value: int) -> None:
+        """Set the iform property."""
         if value not in [1, 2, None]:
-            raise Exception("""iform must be `None` or one of {1,2}""")
+            raise Exception("""iform must be `None` or one of {1,2}.""")
         self._cards[1].set_value("iform", value)
 
     @property
@@ -355,6 +365,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -365,6 +376,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @tmult.setter
     def tmult(self, value: float) -> None:
+        """Set the tmult property."""
         self._cards[1].set_value("tmult", value)
 
     @property
@@ -375,6 +387,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @lcrot.setter
     def lcrot(self, value: int) -> None:
+        """Set the lcrot property."""
         self._cards[1].set_value("lcrot", value)
 
     @property
@@ -385,6 +398,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @lcmov.setter
     def lcmov(self, value: int) -> None:
+        """Set the lcmov property."""
         self._cards[1].set_value("lcmov", value)
 
     @property
@@ -395,6 +409,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @lclat.setter
     def lclat(self, value: int) -> None:
+        """Set the lclat property."""
         self._cards[1].set_value("lclat", value)
 
     @property
@@ -406,6 +421,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[2].set_value("p1", value)
 
     @property
@@ -417,6 +433,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[2].set_value("p2", value)
 
     @property
@@ -428,6 +445,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[2].set_value("p3", value)
 
     @property
@@ -439,6 +457,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[2].set_value("p4", value)
 
     @property
@@ -450,6 +469,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[2].set_value("p5", value)
 
     @property
@@ -461,6 +481,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[2].set_value("p6", value)
 
     @property
@@ -472,6 +493,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @p7.setter
     def p7(self, value: float) -> None:
+        """Set the p7 property."""
         self._cards[2].set_value("p7", value)
 
     @property
@@ -483,6 +505,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @p8.setter
     def p8(self, value: float) -> None:
+        """Set the p8 property."""
         self._cards[2].set_value("p8", value)
 
     @property
@@ -493,6 +516,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @tx.setter
     def tx(self, value: float) -> None:
+        """Set the tx property."""
         self._cards[3].set_value("tx", value)
 
     @property
@@ -503,6 +527,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @ty.setter
     def ty(self, value: float) -> None:
+        """Set the ty property."""
         self._cards[3].set_value("ty", value)
 
     @property
@@ -513,5 +538,6 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @tz.setter
     def tz(self, value: float) -> None:
+        """Set the tz property."""
         self._cards[3].set_value("tz", value)
 

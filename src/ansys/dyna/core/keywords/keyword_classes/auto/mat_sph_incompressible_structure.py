@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSphIncompressibleStructure(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -104,6 +106,7 @@ class MatSphIncompressibleStructure(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -115,6 +118,7 @@ class MatSphIncompressibleStructure(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -125,6 +129,7 @@ class MatSphIncompressibleStructure(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -135,6 +140,7 @@ class MatSphIncompressibleStructure(KeywordBase):
 
     @rough.setter
     def rough(self, value: float) -> None:
+        """Set the rough property."""
         self._cards[0].set_value("rough", value)
 
     @property
@@ -145,6 +151,7 @@ class MatSphIncompressibleStructure(KeywordBase):
 
     @adh.setter
     def adh(self, value: float) -> None:
+        """Set the adh property."""
         self._cards[0].set_value("adh", value)
 
     @property
@@ -155,5 +162,6 @@ class MatSphIncompressibleStructure(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

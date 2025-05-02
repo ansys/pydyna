@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementBeamSource(KeywordBase):
     subkeyword = "BEAM_SOURCE"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class ElementBeamSource(KeywordBase):
 
     @bsid.setter
     def bsid(self, value: int) -> None:
+        """Set the bsid property."""
         self._cards[0].set_value("bsid", value)
 
     @property
@@ -113,6 +116,7 @@ class ElementBeamSource(KeywordBase):
 
     @bsnid.setter
     def bsnid(self, value: int) -> None:
+        """Set the bsnid property."""
         self._cards[0].set_value("bsnid", value)
 
     @property
@@ -123,6 +127,7 @@ class ElementBeamSource(KeywordBase):
 
     @bseid.setter
     def bseid(self, value: int) -> None:
+        """Set the bseid property."""
         self._cards[0].set_value("bseid", value)
 
     @property
@@ -133,6 +138,7 @@ class ElementBeamSource(KeywordBase):
 
     @nele.setter
     def nele(self, value: int) -> None:
+        """Set the nele property."""
         self._cards[0].set_value("nele", value)
 
     @property
@@ -143,6 +149,7 @@ class ElementBeamSource(KeywordBase):
 
     @lfed.setter
     def lfed(self, value: float) -> None:
+        """Set the lfed property."""
         self._cards[0].set_value("lfed", value)
 
     @property
@@ -153,6 +160,7 @@ class ElementBeamSource(KeywordBase):
 
     @fpull.setter
     def fpull(self, value: float) -> None:
+        """Set the fpull property."""
         self._cards[0].set_value("fpull", value)
 
     @property
@@ -163,5 +171,6 @@ class ElementBeamSource(KeywordBase):
 
     @lmin.setter
     def lmin(self, value: float) -> None:
+        """Set the lmin property."""
         self._cards[0].set_value("lmin", value)
 

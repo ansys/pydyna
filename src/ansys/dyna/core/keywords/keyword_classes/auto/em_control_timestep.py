@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmControlTimestep(KeywordBase):
     subkeyword = "CONTROL_TIMESTEP"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,8 +112,9 @@ class EmControlTimestep(KeywordBase):
 
     @tstype.setter
     def tstype(self, value: int) -> None:
+        """Set the tstype property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""tstype must be `None` or one of {1,2,3}""")
+            raise Exception("""tstype must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("tstype", value)
 
     @property
@@ -122,6 +125,7 @@ class EmControlTimestep(KeywordBase):
 
     @dtcons.setter
     def dtcons(self, value: float) -> None:
+        """Set the dtcons property."""
         self._cards[0].set_value("dtcons", value)
 
     @property
@@ -132,6 +136,7 @@ class EmControlTimestep(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -142,6 +147,7 @@ class EmControlTimestep(KeywordBase):
 
     @factor.setter
     def factor(self, value: float) -> None:
+        """Set the factor property."""
         self._cards[0].set_value("factor", value)
 
     @property
@@ -152,6 +158,7 @@ class EmControlTimestep(KeywordBase):
 
     @tsmin.setter
     def tsmin(self, value: float) -> None:
+        """Set the tsmin property."""
         self._cards[0].set_value("tsmin", value)
 
     @property
@@ -162,6 +169,7 @@ class EmControlTimestep(KeywordBase):
 
     @tsmas.setter
     def tsmas(self, value: float) -> None:
+        """Set the tsmas property."""
         self._cards[0].set_value("tsmas", value)
 
     @property
@@ -172,6 +180,7 @@ class EmControlTimestep(KeywordBase):
 
     @rlcsf.setter
     def rlcsf(self, value: int) -> None:
+        """Set the rlcsf property."""
         self._cards[0].set_value("rlcsf", value)
 
     @property
@@ -184,7 +193,8 @@ class EmControlTimestep(KeywordBase):
 
     @mecats.setter
     def mecats(self, value: int) -> None:
+        """Set the mecats property."""
         if value not in [0, 1, None]:
-            raise Exception("""mecats must be `None` or one of {0,1}""")
+            raise Exception("""mecats must be `None` or one of {0,1}.""")
         self._cards[0].set_value("mecats", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmSolverBem(KeywordBase):
     subkeyword = "SOLVER_BEM"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class EmSolverBem(KeywordBase):
 
     @reltol.setter
     def reltol(self, value: float) -> None:
+        """Set the reltol property."""
         self._cards[0].set_value("reltol", value)
 
     @property
@@ -105,6 +108,7 @@ class EmSolverBem(KeywordBase):
 
     @maxite.setter
     def maxite(self, value: int) -> None:
+        """Set the maxite property."""
         self._cards[0].set_value("maxite", value)
 
     @property
@@ -120,8 +124,9 @@ class EmSolverBem(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [2, 1, 3, None]:
-            raise Exception("""stype must be `None` or one of {2,1,3}""")
+            raise Exception("""stype must be `None` or one of {2,1,3}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -138,8 +143,9 @@ class EmSolverBem(KeywordBase):
 
     @precon.setter
     def precon(self, value: int) -> None:
+        """Set the precon property."""
         if value not in [2, 0, 1, 3, 4, None]:
-            raise Exception("""precon must be `None` or one of {2,0,1,3,4}""")
+            raise Exception("""precon must be `None` or one of {2,0,1,3,4}.""")
         self._cards[0].set_value("precon", value)
 
     @property
@@ -153,8 +159,9 @@ class EmSolverBem(KeywordBase):
 
     @uselast.setter
     def uselast(self, value: int) -> None:
+        """Set the uselast property."""
         if value not in [1, -1, None]:
-            raise Exception("""uselast must be `None` or one of {1,-1}""")
+            raise Exception("""uselast must be `None` or one of {1,-1}.""")
         self._cards[0].set_value("uselast", value)
 
     @property
@@ -165,5 +172,6 @@ class EmSolverBem(KeywordBase):
 
     @ncyclbem.setter
     def ncyclbem(self, value: int) -> None:
+        """Set the ncyclbem property."""
         self._cards[0].set_value("ncyclbem", value)
 

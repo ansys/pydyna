@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MESH keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class MeshInterf(KeywordBase):
     subkeyword = "INTERF"
 
     def __init__(self, **kwargs):
+        """Initialize the MESH keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class MeshInterf(KeywordBase):
 
     @volid.setter
     def volid(self, value: int) -> None:
+        """Set the volid property."""
         self._cards[0].set_value("volid", value)
 
     @property
@@ -124,6 +127,7 @@ class MeshInterf(KeywordBase):
 
     @pid1.setter
     def pid1(self, value: int) -> None:
+        """Set the pid1 property."""
         self._cards[1].set_value("pid1", value)
 
     @property
@@ -134,6 +138,7 @@ class MeshInterf(KeywordBase):
 
     @pid2.setter
     def pid2(self, value: int) -> None:
+        """Set the pid2 property."""
         self._cards[1].set_value("pid2", value)
 
     @property
@@ -144,6 +149,7 @@ class MeshInterf(KeywordBase):
 
     @pid3.setter
     def pid3(self, value: int) -> None:
+        """Set the pid3 property."""
         self._cards[1].set_value("pid3", value)
 
     @property
@@ -154,6 +160,7 @@ class MeshInterf(KeywordBase):
 
     @pid4.setter
     def pid4(self, value: int) -> None:
+        """Set the pid4 property."""
         self._cards[1].set_value("pid4", value)
 
     @property
@@ -164,6 +171,7 @@ class MeshInterf(KeywordBase):
 
     @pid5.setter
     def pid5(self, value: int) -> None:
+        """Set the pid5 property."""
         self._cards[1].set_value("pid5", value)
 
     @property
@@ -174,6 +182,7 @@ class MeshInterf(KeywordBase):
 
     @pid6.setter
     def pid6(self, value: int) -> None:
+        """Set the pid6 property."""
         self._cards[1].set_value("pid6", value)
 
     @property
@@ -184,6 +193,7 @@ class MeshInterf(KeywordBase):
 
     @pid7.setter
     def pid7(self, value: int) -> None:
+        """Set the pid7 property."""
         self._cards[1].set_value("pid7", value)
 
     @property
@@ -194,5 +204,6 @@ class MeshInterf(KeywordBase):
 
     @pid8.setter
     def pid8(self, value: int) -> None:
+        """Set the pid8 property."""
         self._cards[1].set_value("pid8", value)
 

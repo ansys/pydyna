@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTERFACE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceDeHbond(KeywordBase):
     subkeyword = "DE_HBOND"
 
     def __init__(self, **kwargs):
+        """Initialize the INTERFACE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -118,6 +120,7 @@ class InterfaceDeHbond(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -128,6 +131,7 @@ class InterfaceDeHbond(KeywordBase):
 
     @pid1.setter
     def pid1(self, value: int) -> None:
+        """Set the pid1 property."""
         self._cards[1].set_value("pid1", value)
 
     @property
@@ -146,6 +150,7 @@ class InterfaceDeHbond(KeywordBase):
 
     @pid2.setter
     def pid2(self, value: int) -> None:
+        """Set the pid2 property."""
         self._cards[1].set_value("pid2", value)
 
     @property
@@ -158,8 +163,9 @@ class InterfaceDeHbond(KeywordBase):
 
     @ptype1.setter
     def ptype1(self, value: int) -> None:
+        """Set the ptype1 property."""
         if value not in [0, 1, None]:
-            raise Exception("""ptype1 must be `None` or one of {0,1}""")
+            raise Exception("""ptype1 must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ptype1", value)
 
     @property
@@ -172,8 +178,9 @@ class InterfaceDeHbond(KeywordBase):
 
     @ptype2.setter
     def ptype2(self, value: int) -> None:
+        """Set the ptype2 property."""
         if value not in [0, 1, None]:
-            raise Exception("""ptype2 must be `None` or one of {0,1}""")
+            raise Exception("""ptype2 must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ptype2", value)
 
     @property
@@ -184,6 +191,7 @@ class InterfaceDeHbond(KeywordBase):
 
     @frmdl.setter
     def frmdl(self, value: int) -> None:
+        """Set the frmdl property."""
         self._cards[1].set_value("frmdl", value)
 
     @property
@@ -194,6 +202,7 @@ class InterfaceDeHbond(KeywordBase):
 
     @frgk.setter
     def frgk(self, value: float) -> None:
+        """Set the frgk property."""
         self._cards[1].set_value("frgk", value)
 
     @property
@@ -204,6 +213,7 @@ class InterfaceDeHbond(KeywordBase):
 
     @frgs.setter
     def frgs(self, value: float) -> None:
+        """Set the frgs property."""
         self._cards[1].set_value("frgs", value)
 
     @property
@@ -214,5 +224,6 @@ class InterfaceDeHbond(KeywordBase):
 
     @dmg.setter
     def dmg(self, value: float) -> None:
+        """Set the dmg property."""
         self._cards[1].set_value("dmg", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadErodingPartSet(KeywordBase):
     subkeyword = "ERODING_PART_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -152,6 +154,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -162,6 +165,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -172,6 +176,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -182,6 +187,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @at.setter
     def at(self, value: float) -> None:
+        """Set the at property."""
         self._cards[0].set_value("at", value)
 
     @property
@@ -192,6 +198,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -202,6 +209,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -212,6 +220,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @mem.setter
     def mem(self, value: int) -> None:
+        """Set the mem property."""
         self._cards[0].set_value("mem", value)
 
     @property
@@ -222,6 +231,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 
     @property
@@ -232,6 +242,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @iflag.setter
     def iflag(self, value: int) -> None:
+        """Set the iflag property."""
         self._cards[1].set_value("iflag", value)
 
     @property
@@ -242,6 +253,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -252,6 +264,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -262,6 +275,7 @@ class LoadErodingPartSet(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 
     @property
@@ -272,5 +286,6 @@ class LoadErodingPartSet(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[1].set_value("beta", value)
 

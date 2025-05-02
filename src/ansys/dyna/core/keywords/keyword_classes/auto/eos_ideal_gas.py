@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EOS keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EosIdealGas(KeywordBase):
     subkeyword = "IDEAL_GAS"
 
     def __init__(self, **kwargs):
+        """Initialize the EOS keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class EosIdealGas(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -124,6 +127,7 @@ class EosIdealGas(KeywordBase):
 
     @cv0.setter
     def cv0(self, value: float) -> None:
+        """Set the cv0 property."""
         self._cards[0].set_value("cv0", value)
 
     @property
@@ -134,6 +138,7 @@ class EosIdealGas(KeywordBase):
 
     @cp0.setter
     def cp0(self, value: float) -> None:
+        """Set the cp0 property."""
         self._cards[0].set_value("cp0", value)
 
     @property
@@ -144,6 +149,7 @@ class EosIdealGas(KeywordBase):
 
     @cl.setter
     def cl(self, value: float) -> None:
+        """Set the cl property."""
         self._cards[0].set_value("cl", value)
 
     @property
@@ -154,6 +160,7 @@ class EosIdealGas(KeywordBase):
 
     @cq.setter
     def cq(self, value: float) -> None:
+        """Set the cq property."""
         self._cards[0].set_value("cq", value)
 
     @property
@@ -164,6 +171,7 @@ class EosIdealGas(KeywordBase):
 
     @t0.setter
     def t0(self, value: float) -> None:
+        """Set the t0 property."""
         self._cards[0].set_value("t0", value)
 
     @property
@@ -174,6 +182,7 @@ class EosIdealGas(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[0].set_value("v0", value)
 
     @property
@@ -184,6 +193,7 @@ class EosIdealGas(KeywordBase):
 
     @vc0.setter
     def vc0(self, value: float) -> None:
+        """Set the vc0 property."""
         self._cards[0].set_value("vc0", value)
 
     @property
@@ -196,5 +206,6 @@ class EosIdealGas(KeywordBase):
 
     @adiab.setter
     def adiab(self, value: float) -> None:
+        """Set the adiab property."""
         self._cards[1].set_value("adiab", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineBoxSph(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -192,6 +194,7 @@ class DefineBoxSph(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -202,6 +205,7 @@ class DefineBoxSph(KeywordBase):
 
     @xmn.setter
     def xmn(self, value: float) -> None:
+        """Set the xmn property."""
         self._cards[0].set_value("xmn", value)
 
     @property
@@ -212,6 +216,7 @@ class DefineBoxSph(KeywordBase):
 
     @xmx.setter
     def xmx(self, value: float) -> None:
+        """Set the xmx property."""
         self._cards[0].set_value("xmx", value)
 
     @property
@@ -222,6 +227,7 @@ class DefineBoxSph(KeywordBase):
 
     @ymn.setter
     def ymn(self, value: float) -> None:
+        """Set the ymn property."""
         self._cards[0].set_value("ymn", value)
 
     @property
@@ -232,6 +238,7 @@ class DefineBoxSph(KeywordBase):
 
     @ymx.setter
     def ymx(self, value: float) -> None:
+        """Set the ymx property."""
         self._cards[0].set_value("ymx", value)
 
     @property
@@ -242,6 +249,7 @@ class DefineBoxSph(KeywordBase):
 
     @zmn.setter
     def zmn(self, value: float) -> None:
+        """Set the zmn property."""
         self._cards[0].set_value("zmn", value)
 
     @property
@@ -252,6 +260,7 @@ class DefineBoxSph(KeywordBase):
 
     @zmx.setter
     def zmx(self, value: float) -> None:
+        """Set the zmx property."""
         self._cards[0].set_value("zmx", value)
 
     @property
@@ -262,6 +271,7 @@ class DefineBoxSph(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -272,6 +282,7 @@ class DefineBoxSph(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -285,8 +296,9 @@ class DefineBoxSph(KeywordBase):
 
     @vd.setter
     def vd(self, value: int) -> None:
+        """Set the vd property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""vd must be `None` or one of {0,1,2}""")
+            raise Exception("""vd must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("vd", value)
 
     @property
@@ -297,6 +309,7 @@ class DefineBoxSph(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -309,8 +322,9 @@ class DefineBoxSph(KeywordBase):
 
     @ireact.setter
     def ireact(self, value: int) -> None:
+        """Set the ireact property."""
         if value not in [0, 1, None]:
-            raise Exception("""ireact must be `None` or one of {0,1}""")
+            raise Exception("""ireact must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ireact", value)
 
     @property
@@ -324,8 +338,9 @@ class DefineBoxSph(KeywordBase):
 
     @ibuff.setter
     def ibuff(self, value: int) -> None:
+        """Set the ibuff property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibuff must be `None` or one of {0,1}""")
+            raise Exception("""ibuff must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ibuff", value)
 
     @property
@@ -338,8 +353,9 @@ class DefineBoxSph(KeywordBase):
 
     @ishow.setter
     def ishow(self, value: int) -> None:
+        """Set the ishow property."""
         if value not in [0, 1, None]:
-            raise Exception("""ishow must be `None` or one of {0,1}""")
+            raise Exception("""ishow must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ishow", value)
 
     @property
@@ -352,6 +368,7 @@ class DefineBoxSph(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -362,5 +379,6 @@ class DefineBoxSph(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

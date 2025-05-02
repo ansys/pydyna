@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFabricAssemblies(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -125,6 +127,7 @@ class DefineFabricAssemblies(KeywordBase):
 
     @spid1.setter
     def spid1(self, value: int) -> None:
+        """Set the spid1 property."""
         self._cards[0].set_value("spid1", value)
 
     @property
@@ -135,6 +138,7 @@ class DefineFabricAssemblies(KeywordBase):
 
     @spid2.setter
     def spid2(self, value: int) -> None:
+        """Set the spid2 property."""
         self._cards[0].set_value("spid2", value)
 
     @property
@@ -145,6 +149,7 @@ class DefineFabricAssemblies(KeywordBase):
 
     @spid3.setter
     def spid3(self, value: int) -> None:
+        """Set the spid3 property."""
         self._cards[0].set_value("spid3", value)
 
     @property
@@ -155,6 +160,7 @@ class DefineFabricAssemblies(KeywordBase):
 
     @spid4.setter
     def spid4(self, value: int) -> None:
+        """Set the spid4 property."""
         self._cards[0].set_value("spid4", value)
 
     @property
@@ -165,6 +171,7 @@ class DefineFabricAssemblies(KeywordBase):
 
     @spid5.setter
     def spid5(self, value: int) -> None:
+        """Set the spid5 property."""
         self._cards[0].set_value("spid5", value)
 
     @property
@@ -175,6 +182,7 @@ class DefineFabricAssemblies(KeywordBase):
 
     @spid6.setter
     def spid6(self, value: int) -> None:
+        """Set the spid6 property."""
         self._cards[0].set_value("spid6", value)
 
     @property
@@ -185,6 +193,7 @@ class DefineFabricAssemblies(KeywordBase):
 
     @spid7.setter
     def spid7(self, value: int) -> None:
+        """Set the spid7 property."""
         self._cards[0].set_value("spid7", value)
 
     @property
@@ -195,6 +204,7 @@ class DefineFabricAssemblies(KeywordBase):
 
     @spid8.setter
     def spid8(self, value: int) -> None:
+        """Set the spid8 property."""
         self._cards[0].set_value("spid8", value)
 
     @property
@@ -205,5 +215,6 @@ class DefineFabricAssemblies(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

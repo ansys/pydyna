@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPap(KeywordBase):
     subkeyword = "PAP"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -107,6 +109,7 @@ class BoundaryPap(KeywordBase):
 
     @segid.setter
     def segid(self, value: int) -> None:
+        """Set the segid property."""
         self._cards[0].set_value("segid", value)
 
     @property
@@ -117,6 +120,7 @@ class BoundaryPap(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -127,6 +131,7 @@ class BoundaryPap(KeywordBase):
 
     @cmult.setter
     def cmult(self, value: float) -> None:
+        """Set the cmult property."""
         self._cards[0].set_value("cmult", value)
 
     @property
@@ -137,6 +142,7 @@ class BoundaryPap(KeywordBase):
 
     @cvmass.setter
     def cvmass(self, value: float) -> None:
+        """Set the cvmass property."""
         self._cards[0].set_value("cvmass", value)
 
     @property
@@ -151,8 +157,9 @@ class BoundaryPap(KeywordBase):
 
     @block.setter
     def block(self, value: float) -> None:
+        """Set the block property."""
         if value not in [0.0, -1, None]:
-            raise Exception("""block must be `None` or one of {0.0,-1}""")
+            raise Exception("""block must be `None` or one of {0.0,-1}.""")
         self._cards[0].set_value("block", value)
 
     @property
@@ -163,6 +170,7 @@ class BoundaryPap(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 
     @property
@@ -173,6 +181,7 @@ class BoundaryPap(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -183,5 +192,6 @@ class BoundaryPap(KeywordBase):
 
     @cvrper.setter
     def cvrper(self, value: float) -> None:
+        """Set the cvrper property."""
         self._cards[0].set_value("cvrper", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineStochasticVariationProperties(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -169,6 +171,7 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @id_sv.setter
     def id_sv(self, value: int) -> None:
+        """Set the id_sv property."""
         self._cards[0].set_value("id_sv", value)
 
     @property
@@ -179,6 +182,7 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -189,6 +193,7 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -203,8 +208,9 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @pid_typ.setter
     def pid_typ(self, value: int) -> None:
+        """Set the pid_typ property."""
         if value not in [0, 1, None]:
-            raise Exception("""pid_typ must be `None` or one of {0,1}""")
+            raise Exception("""pid_typ must be `None` or one of {0,1}.""")
         self._cards[0].set_value("pid_typ", value)
 
     @property
@@ -218,8 +224,9 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @irng.setter
     def irng(self, value: int) -> None:
+        """Set the irng property."""
         if value not in [0, 1, None]:
-            raise Exception("""irng must be `None` or one of {0,1}""")
+            raise Exception("""irng must be `None` or one of {0,1}.""")
         self._cards[0].set_value("irng", value)
 
     @property
@@ -230,6 +237,7 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @numv.setter
     def numv(self, value: int) -> None:
+        """Set the numv property."""
         self._cards[0].set_value("numv", value)
 
     @property
@@ -240,6 +248,7 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @num_beg.setter
     def num_beg(self, value: int) -> None:
+        """Set the num_beg property."""
         self._cards[0].set_value("num_beg", value)
 
     @property
@@ -255,8 +264,9 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @vartyp.setter
     def vartyp(self, value: int) -> None:
+        """Set the vartyp property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""vartyp must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""vartyp must be `None` or one of {0,1,2,3,4}.""")
         self._cards[1].set_value("vartyp", value)
 
     @property
@@ -267,6 +277,7 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @corlgr.setter
     def corlgr(self, value: int) -> None:
+        """Set the corlgr property."""
         self._cards[1].set_value("corlgr", value)
 
     @property
@@ -277,6 +288,7 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[1].set_value("r1", value)
 
     @property
@@ -287,6 +299,7 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[1].set_value("r2", value)
 
     @property
@@ -297,6 +310,7 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @r3.setter
     def r3(self, value: float) -> None:
+        """Set the r3 property."""
         self._cards[1].set_value("r3", value)
 
     @property
@@ -307,5 +321,6 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

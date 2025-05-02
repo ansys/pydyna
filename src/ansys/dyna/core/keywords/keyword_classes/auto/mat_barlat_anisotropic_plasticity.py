@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -296,6 +298,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -306,6 +309,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -316,6 +320,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -326,6 +331,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -336,6 +342,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -346,6 +353,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[0].set_value("e0", value)
 
     @property
@@ -356,6 +364,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -366,6 +375,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[0].set_value("m", value)
 
     @property
@@ -376,6 +386,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[1].set_value("a", value)
 
     @property
@@ -386,6 +397,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[1].set_value("b", value)
 
     @property
@@ -396,6 +408,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[1].set_value("c", value)
 
     @property
@@ -406,6 +419,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @f.setter
     def f(self, value: float) -> None:
+        """Set the f property."""
         self._cards[1].set_value("f", value)
 
     @property
@@ -416,6 +430,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[1].set_value("g", value)
 
     @property
@@ -426,6 +441,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[1].set_value("h", value)
 
     @property
@@ -436,6 +452,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -452,6 +469,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -462,6 +480,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[2].set_value("beta", value)
 
     @property
@@ -480,8 +499,9 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -4, -3, -2, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}.""")
         self._cards[2].set_value("macf", value)
 
     @property
@@ -492,6 +512,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[3].set_value("xp", value)
 
     @property
@@ -502,6 +523,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[3].set_value("yp", value)
 
     @property
@@ -512,6 +534,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[3].set_value("zp", value)
 
     @property
@@ -522,6 +545,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[3].set_value("a1", value)
 
     @property
@@ -532,6 +556,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[3].set_value("a2", value)
 
     @property
@@ -542,6 +567,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[3].set_value("a3", value)
 
     @property
@@ -552,6 +578,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[4].set_value("v1", value)
 
     @property
@@ -562,6 +589,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[4].set_value("v2", value)
 
     @property
@@ -572,6 +600,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[4].set_value("v3", value)
 
     @property
@@ -582,6 +611,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -592,6 +622,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -602,6 +633,7 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[4].set_value("d3", value)
 
     @property
@@ -612,5 +644,6 @@ class MatBarlatAnisotropicPlasticity(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EOS keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EosTabulatedCompaction(KeywordBase):
     subkeyword = "TABULATED_COMPACTION"
 
     def __init__(self, **kwargs):
+        """Initialize the EOS keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -415,6 +417,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -425,6 +428,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @gama.setter
     def gama(self, value: float) -> None:
+        """Set the gama property."""
         self._cards[0].set_value("gama", value)
 
     @property
@@ -435,6 +439,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[0].set_value("e0", value)
 
     @property
@@ -445,6 +450,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @vo.setter
     def vo(self, value: float) -> None:
+        """Set the vo property."""
         self._cards[0].set_value("vo", value)
 
     @property
@@ -457,6 +463,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @lcc.setter
     def lcc(self, value: int) -> None:
+        """Set the lcc property."""
         self._cards[0].set_value("lcc", value)
 
     @property
@@ -467,6 +474,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @lct.setter
     def lct(self, value: int) -> None:
+        """Set the lct property."""
         self._cards[0].set_value("lct", value)
 
     @property
@@ -477,6 +485,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @lck.setter
     def lck(self, value: int) -> None:
+        """Set the lck property."""
         self._cards[0].set_value("lck", value)
 
     @property
@@ -489,6 +498,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -499,6 +509,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @ev1.setter
     def ev1(self, value: float) -> None:
+        """Set the ev1 property."""
         self._cards[1].set_value("ev1", value)
 
     @property
@@ -509,6 +520,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @ev2.setter
     def ev2(self, value: float) -> None:
+        """Set the ev2 property."""
         self._cards[1].set_value("ev2", value)
 
     @property
@@ -519,6 +531,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @ev3.setter
     def ev3(self, value: float) -> None:
+        """Set the ev3 property."""
         self._cards[1].set_value("ev3", value)
 
     @property
@@ -529,6 +542,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @ev4.setter
     def ev4(self, value: float) -> None:
+        """Set the ev4 property."""
         self._cards[1].set_value("ev4", value)
 
     @property
@@ -539,6 +553,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @ev5.setter
     def ev5(self, value: float) -> None:
+        """Set the ev5 property."""
         self._cards[1].set_value("ev5", value)
 
     @property
@@ -549,6 +564,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @ev6.setter
     def ev6(self, value: float) -> None:
+        """Set the ev6 property."""
         self._cards[2].set_value("ev6", value)
 
     @property
@@ -559,6 +575,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @ev7.setter
     def ev7(self, value: float) -> None:
+        """Set the ev7 property."""
         self._cards[2].set_value("ev7", value)
 
     @property
@@ -569,6 +586,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @ev8.setter
     def ev8(self, value: float) -> None:
+        """Set the ev8 property."""
         self._cards[2].set_value("ev8", value)
 
     @property
@@ -579,6 +597,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @ev9.setter
     def ev9(self, value: float) -> None:
+        """Set the ev9 property."""
         self._cards[2].set_value("ev9", value)
 
     @property
@@ -589,6 +608,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @ev10.setter
     def ev10(self, value: float) -> None:
+        """Set the ev10 property."""
         self._cards[2].set_value("ev10", value)
 
     @property
@@ -599,6 +619,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[3].set_value("c1", value)
 
     @property
@@ -609,6 +630,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[3].set_value("c2", value)
 
     @property
@@ -619,6 +641,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[3].set_value("c3", value)
 
     @property
@@ -629,6 +652,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @c4.setter
     def c4(self, value: float) -> None:
+        """Set the c4 property."""
         self._cards[3].set_value("c4", value)
 
     @property
@@ -639,6 +663,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @c5.setter
     def c5(self, value: float) -> None:
+        """Set the c5 property."""
         self._cards[3].set_value("c5", value)
 
     @property
@@ -649,6 +674,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @c6.setter
     def c6(self, value: float) -> None:
+        """Set the c6 property."""
         self._cards[4].set_value("c6", value)
 
     @property
@@ -659,6 +685,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @c7.setter
     def c7(self, value: float) -> None:
+        """Set the c7 property."""
         self._cards[4].set_value("c7", value)
 
     @property
@@ -669,6 +696,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @c8.setter
     def c8(self, value: float) -> None:
+        """Set the c8 property."""
         self._cards[4].set_value("c8", value)
 
     @property
@@ -679,6 +707,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @c9.setter
     def c9(self, value: float) -> None:
+        """Set the c9 property."""
         self._cards[4].set_value("c9", value)
 
     @property
@@ -689,6 +718,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @c10.setter
     def c10(self, value: float) -> None:
+        """Set the c10 property."""
         self._cards[4].set_value("c10", value)
 
     @property
@@ -699,6 +729,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @t1.setter
     def t1(self, value: float) -> None:
+        """Set the t1 property."""
         self._cards[5].set_value("t1", value)
 
     @property
@@ -709,6 +740,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @t2.setter
     def t2(self, value: float) -> None:
+        """Set the t2 property."""
         self._cards[5].set_value("t2", value)
 
     @property
@@ -719,6 +751,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @t3.setter
     def t3(self, value: float) -> None:
+        """Set the t3 property."""
         self._cards[5].set_value("t3", value)
 
     @property
@@ -729,6 +762,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @t4.setter
     def t4(self, value: float) -> None:
+        """Set the t4 property."""
         self._cards[5].set_value("t4", value)
 
     @property
@@ -739,6 +773,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @t5.setter
     def t5(self, value: float) -> None:
+        """Set the t5 property."""
         self._cards[5].set_value("t5", value)
 
     @property
@@ -749,6 +784,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @t6.setter
     def t6(self, value: float) -> None:
+        """Set the t6 property."""
         self._cards[6].set_value("t6", value)
 
     @property
@@ -759,6 +795,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @t7.setter
     def t7(self, value: float) -> None:
+        """Set the t7 property."""
         self._cards[6].set_value("t7", value)
 
     @property
@@ -769,6 +806,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @t8.setter
     def t8(self, value: float) -> None:
+        """Set the t8 property."""
         self._cards[6].set_value("t8", value)
 
     @property
@@ -779,6 +817,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @t9.setter
     def t9(self, value: float) -> None:
+        """Set the t9 property."""
         self._cards[6].set_value("t9", value)
 
     @property
@@ -789,6 +828,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @t10.setter
     def t10(self, value: float) -> None:
+        """Set the t10 property."""
         self._cards[6].set_value("t10", value)
 
     @property
@@ -799,6 +839,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @k1.setter
     def k1(self, value: float) -> None:
+        """Set the k1 property."""
         self._cards[7].set_value("k1", value)
 
     @property
@@ -809,6 +850,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @k2.setter
     def k2(self, value: float) -> None:
+        """Set the k2 property."""
         self._cards[7].set_value("k2", value)
 
     @property
@@ -819,6 +861,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @k3.setter
     def k3(self, value: float) -> None:
+        """Set the k3 property."""
         self._cards[7].set_value("k3", value)
 
     @property
@@ -829,6 +872,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @k4.setter
     def k4(self, value: float) -> None:
+        """Set the k4 property."""
         self._cards[7].set_value("k4", value)
 
     @property
@@ -839,6 +883,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @k5.setter
     def k5(self, value: float) -> None:
+        """Set the k5 property."""
         self._cards[7].set_value("k5", value)
 
     @property
@@ -849,6 +894,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @k6.setter
     def k6(self, value: float) -> None:
+        """Set the k6 property."""
         self._cards[8].set_value("k6", value)
 
     @property
@@ -859,6 +905,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @k7.setter
     def k7(self, value: float) -> None:
+        """Set the k7 property."""
         self._cards[8].set_value("k7", value)
 
     @property
@@ -869,6 +916,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @k8.setter
     def k8(self, value: float) -> None:
+        """Set the k8 property."""
         self._cards[8].set_value("k8", value)
 
     @property
@@ -879,6 +927,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @k9.setter
     def k9(self, value: float) -> None:
+        """Set the k9 property."""
         self._cards[8].set_value("k9", value)
 
     @property
@@ -889,5 +938,6 @@ class EosTabulatedCompaction(KeywordBase):
 
     @k10.setter
     def k10(self, value: float) -> None:
+        """Set the k10 property."""
         self._cards[8].set_value("k10", value)
 

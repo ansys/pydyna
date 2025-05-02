@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat032(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -218,6 +220,7 @@ class Mat032(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -228,6 +231,7 @@ class Mat032(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -238,6 +242,7 @@ class Mat032(KeywordBase):
 
     @eg.setter
     def eg(self, value: float) -> None:
+        """Set the eg property."""
         self._cards[0].set_value("eg", value)
 
     @property
@@ -248,6 +253,7 @@ class Mat032(KeywordBase):
 
     @prg.setter
     def prg(self, value: float) -> None:
+        """Set the prg property."""
         self._cards[0].set_value("prg", value)
 
     @property
@@ -258,6 +264,7 @@ class Mat032(KeywordBase):
 
     @syg.setter
     def syg(self, value: float) -> None:
+        """Set the syg property."""
         self._cards[0].set_value("syg", value)
 
     @property
@@ -268,6 +275,7 @@ class Mat032(KeywordBase):
 
     @etg.setter
     def etg(self, value: float) -> None:
+        """Set the etg property."""
         self._cards[0].set_value("etg", value)
 
     @property
@@ -278,6 +286,7 @@ class Mat032(KeywordBase):
 
     @efg.setter
     def efg(self, value: float) -> None:
+        """Set the efg property."""
         self._cards[0].set_value("efg", value)
 
     @property
@@ -288,6 +297,7 @@ class Mat032(KeywordBase):
 
     @ep.setter
     def ep(self, value: float) -> None:
+        """Set the ep property."""
         self._cards[0].set_value("ep", value)
 
     @property
@@ -298,6 +308,7 @@ class Mat032(KeywordBase):
 
     @prp.setter
     def prp(self, value: float) -> None:
+        """Set the prp property."""
         self._cards[1].set_value("prp", value)
 
     @property
@@ -308,6 +319,7 @@ class Mat032(KeywordBase):
 
     @syp.setter
     def syp(self, value: float) -> None:
+        """Set the syp property."""
         self._cards[1].set_value("syp", value)
 
     @property
@@ -318,6 +330,7 @@ class Mat032(KeywordBase):
 
     @etp.setter
     def etp(self, value: float) -> None:
+        """Set the etp property."""
         self._cards[1].set_value("etp", value)
 
     @property
@@ -331,8 +344,9 @@ class Mat032(KeywordBase):
 
     @f1.setter
     def f1(self, value: float) -> None:
+        """Set the f1 property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""f1 must be `None` or one of {0.0,1.0}""")
+            raise Exception("""f1 must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("f1", value)
 
     @property
@@ -346,8 +360,9 @@ class Mat032(KeywordBase):
 
     @f2.setter
     def f2(self, value: float) -> None:
+        """Set the f2 property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""f2 must be `None` or one of {0.0,1.0}""")
+            raise Exception("""f2 must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("f2", value)
 
     @property
@@ -361,8 +376,9 @@ class Mat032(KeywordBase):
 
     @f3.setter
     def f3(self, value: float) -> None:
+        """Set the f3 property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""f3 must be `None` or one of {0.0,1.0}""")
+            raise Exception("""f3 must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("f3", value)
 
     @property
@@ -376,8 +392,9 @@ class Mat032(KeywordBase):
 
     @f4.setter
     def f4(self, value: float) -> None:
+        """Set the f4 property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""f4 must be `None` or one of {0.0,1.0}""")
+            raise Exception("""f4 must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("f4", value)
 
     @property
@@ -391,8 +408,9 @@ class Mat032(KeywordBase):
 
     @f5.setter
     def f5(self, value: float) -> None:
+        """Set the f5 property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""f5 must be `None` or one of {0.0,1.0}""")
+            raise Exception("""f5 must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("f5", value)
 
     @property
@@ -406,8 +424,9 @@ class Mat032(KeywordBase):
 
     @f6.setter
     def f6(self, value: float) -> None:
+        """Set the f6 property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""f6 must be `None` or one of {0.0,1.0}""")
+            raise Exception("""f6 must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("f6", value)
 
     @property
@@ -421,8 +440,9 @@ class Mat032(KeywordBase):
 
     @f7.setter
     def f7(self, value: float) -> None:
+        """Set the f7 property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""f7 must be `None` or one of {0.0,1.0}""")
+            raise Exception("""f7 must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("f7", value)
 
     @property
@@ -436,8 +456,9 @@ class Mat032(KeywordBase):
 
     @f8.setter
     def f8(self, value: float) -> None:
+        """Set the f8 property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""f8 must be `None` or one of {0.0,1.0}""")
+            raise Exception("""f8 must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("f8", value)
 
     @property
@@ -448,5 +469,6 @@ class Mat032(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

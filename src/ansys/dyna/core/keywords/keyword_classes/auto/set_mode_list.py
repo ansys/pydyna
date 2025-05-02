@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetModeList(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -136,6 +138,7 @@ class SetModeList(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -146,6 +149,7 @@ class SetModeList(KeywordBase):
 
     @mid1.setter
     def mid1(self, value: int) -> None:
+        """Set the mid1 property."""
         self._cards[1].set_value("mid1", value)
 
     @property
@@ -156,6 +160,7 @@ class SetModeList(KeywordBase):
 
     @mid2.setter
     def mid2(self, value: int) -> None:
+        """Set the mid2 property."""
         self._cards[1].set_value("mid2", value)
 
     @property
@@ -166,6 +171,7 @@ class SetModeList(KeywordBase):
 
     @mid3.setter
     def mid3(self, value: int) -> None:
+        """Set the mid3 property."""
         self._cards[1].set_value("mid3", value)
 
     @property
@@ -176,6 +182,7 @@ class SetModeList(KeywordBase):
 
     @mid4.setter
     def mid4(self, value: int) -> None:
+        """Set the mid4 property."""
         self._cards[1].set_value("mid4", value)
 
     @property
@@ -186,6 +193,7 @@ class SetModeList(KeywordBase):
 
     @mid5.setter
     def mid5(self, value: int) -> None:
+        """Set the mid5 property."""
         self._cards[1].set_value("mid5", value)
 
     @property
@@ -196,6 +204,7 @@ class SetModeList(KeywordBase):
 
     @mid6.setter
     def mid6(self, value: int) -> None:
+        """Set the mid6 property."""
         self._cards[1].set_value("mid6", value)
 
     @property
@@ -206,6 +215,7 @@ class SetModeList(KeywordBase):
 
     @mid7.setter
     def mid7(self, value: int) -> None:
+        """Set the mid7 property."""
         self._cards[1].set_value("mid7", value)
 
     @property
@@ -216,6 +226,7 @@ class SetModeList(KeywordBase):
 
     @mid8.setter
     def mid8(self, value: int) -> None:
+        """Set the mid8 property."""
         self._cards[1].set_value("mid8", value)
 
     @property
@@ -226,5 +237,6 @@ class SetModeList(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

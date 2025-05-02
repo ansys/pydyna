@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseReactionRateIgReduced(KeywordBase):
     subkeyword = "REACTION_RATE_IG_REDUCED"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -89,6 +91,7 @@ class DualceseReactionRateIgReduced(KeywordBase):
 
     @react_id.setter
     def react_id(self, value: int) -> None:
+        """Set the react_id property."""
         self._cards[0].set_value("react_id", value)
 
     @property
@@ -99,6 +102,7 @@ class DualceseReactionRateIgReduced(KeywordBase):
 
     @grow1.setter
     def grow1(self, value: float) -> None:
+        """Set the grow1 property."""
         self._cards[0].set_value("grow1", value)
 
     @property
@@ -109,6 +113,7 @@ class DualceseReactionRateIgReduced(KeywordBase):
 
     @cc.setter
     def cc(self, value: float) -> None:
+        """Set the cc property."""
         self._cards[0].set_value("cc", value)
 
     @property
@@ -119,6 +124,7 @@ class DualceseReactionRateIgReduced(KeywordBase):
 
     @dd.setter
     def dd(self, value: float) -> None:
+        """Set the dd property."""
         self._cards[0].set_value("dd", value)
 
     @property
@@ -129,6 +135,7 @@ class DualceseReactionRateIgReduced(KeywordBase):
 
     @yy.setter
     def yy(self, value: float) -> None:
+        """Set the yy property."""
         self._cards[0].set_value("yy", value)
 
     @property
@@ -139,5 +146,6 @@ class DualceseReactionRateIgReduced(KeywordBase):
 
     @ph10.setter
     def ph10(self, value: float) -> None:
+        """Set the ph10 property."""
         self._cards[0].set_value("ph10", value)
 

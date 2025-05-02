@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddPermeability(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -119,6 +121,7 @@ class MatAddPermeability(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -129,6 +132,7 @@ class MatAddPermeability(KeywordBase):
 
     @perm.setter
     def perm(self, value: float) -> None:
+        """Set the perm property."""
         self._cards[0].set_value("perm", value)
 
     @property
@@ -139,6 +143,7 @@ class MatAddPermeability(KeywordBase):
 
     @permy.setter
     def permy(self, value: int) -> None:
+        """Set the permy property."""
         self._cards[0].set_value("permy", value)
 
     @property
@@ -149,6 +154,7 @@ class MatAddPermeability(KeywordBase):
 
     @permz.setter
     def permz(self, value: int) -> None:
+        """Set the permz property."""
         self._cards[0].set_value("permz", value)
 
     @property
@@ -161,6 +167,7 @@ class MatAddPermeability(KeywordBase):
 
     @thexp.setter
     def thexp(self, value: float) -> None:
+        """Set the thexp property."""
         self._cards[0].set_value("thexp", value)
 
     @property
@@ -171,6 +178,7 @@ class MatAddPermeability(KeywordBase):
 
     @lckz.setter
     def lckz(self, value: int) -> None:
+        """Set the lckz property."""
         self._cards[0].set_value("lckz", value)
 
     @property
@@ -185,8 +193,9 @@ class MatAddPermeability(KeywordBase):
 
     @pmtyp.setter
     def pmtyp(self, value: int) -> None:
+        """Set the pmtyp property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""pmtyp must be `None` or one of {0,1,2,3}""")
+            raise Exception("""pmtyp must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("pmtyp", value)
 
     @property
@@ -197,5 +206,6 @@ class MatAddPermeability(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

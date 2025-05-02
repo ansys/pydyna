@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat193(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -198,6 +200,7 @@ class Mat193(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -208,6 +211,7 @@ class Mat193(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -218,6 +222,7 @@ class Mat193(KeywordBase):
 
     @gmod.setter
     def gmod(self, value: float) -> None:
+        """Set the gmod property."""
         self._cards[0].set_value("gmod", value)
 
     @property
@@ -228,6 +233,7 @@ class Mat193(KeywordBase):
 
     @rnu.setter
     def rnu(self, value: float) -> None:
+        """Set the rnu property."""
         self._cards[0].set_value("rnu", value)
 
     @property
@@ -239,6 +245,7 @@ class Mat193(KeywordBase):
 
     @rkf.setter
     def rkf(self, value: float) -> None:
+        """Set the rkf property."""
         self._cards[0].set_value("rkf", value)
 
     @property
@@ -249,6 +256,7 @@ class Mat193(KeywordBase):
 
     @phi.setter
     def phi(self, value: float) -> None:
+        """Set the phi property."""
         self._cards[0].set_value("phi", value)
 
     @property
@@ -259,6 +267,7 @@ class Mat193(KeywordBase):
 
     @cval.setter
     def cval(self, value: float) -> None:
+        """Set the cval property."""
         self._cards[0].set_value("cval", value)
 
     @property
@@ -270,6 +279,7 @@ class Mat193(KeywordBase):
 
     @psi.setter
     def psi(self, value: float) -> None:
+        """Set the psi property."""
         self._cards[0].set_value("psi", value)
 
     @property
@@ -281,6 +291,7 @@ class Mat193(KeywordBase):
 
     @str_lim.setter
     def str_lim(self, value: float) -> None:
+        """Set the str_lim property."""
         self._cards[1].set_value("str_lim", value)
 
     @property
@@ -291,6 +302,7 @@ class Mat193(KeywordBase):
 
     @gmoddp.setter
     def gmoddp(self, value: float) -> None:
+        """Set the gmoddp property."""
         self._cards[2].set_value("gmoddp", value)
 
     @property
@@ -301,6 +313,7 @@ class Mat193(KeywordBase):
 
     @phidp.setter
     def phidp(self, value: float) -> None:
+        """Set the phidp property."""
         self._cards[2].set_value("phidp", value)
 
     @property
@@ -311,6 +324,7 @@ class Mat193(KeywordBase):
 
     @cvaldp.setter
     def cvaldp(self, value: float) -> None:
+        """Set the cvaldp property."""
         self._cards[2].set_value("cvaldp", value)
 
     @property
@@ -321,6 +335,7 @@ class Mat193(KeywordBase):
 
     @psidp.setter
     def psidp(self, value: float) -> None:
+        """Set the psidp property."""
         self._cards[2].set_value("psidp", value)
 
     @property
@@ -331,6 +346,7 @@ class Mat193(KeywordBase):
 
     @gmodgr.setter
     def gmodgr(self, value: float) -> None:
+        """Set the gmodgr property."""
         self._cards[2].set_value("gmodgr", value)
 
     @property
@@ -341,6 +357,7 @@ class Mat193(KeywordBase):
 
     @phigr.setter
     def phigr(self, value: float) -> None:
+        """Set the phigr property."""
         self._cards[2].set_value("phigr", value)
 
     @property
@@ -351,6 +368,7 @@ class Mat193(KeywordBase):
 
     @cvalgr.setter
     def cvalgr(self, value: float) -> None:
+        """Set the cvalgr property."""
         self._cards[2].set_value("cvalgr", value)
 
     @property
@@ -361,6 +379,7 @@ class Mat193(KeywordBase):
 
     @psigr.setter
     def psigr(self, value: float) -> None:
+        """Set the psigr property."""
         self._cards[2].set_value("psigr", value)
 
     @property
@@ -371,5 +390,6 @@ class Mat193(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

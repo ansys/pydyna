@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveFunction(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -136,6 +138,7 @@ class DefineCurveFunction(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -149,8 +152,9 @@ class DefineCurveFunction(KeywordBase):
 
     @sidr.setter
     def sidr(self, value: int) -> None:
+        """Set the sidr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sidr must be `None` or one of {0,1,2}""")
+            raise Exception("""sidr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sidr", value)
 
     @property
@@ -162,6 +166,7 @@ class DefineCurveFunction(KeywordBase):
 
     @sfa.setter
     def sfa(self, value: float) -> None:
+        """Set the sfa property."""
         self._cards[0].set_value("sfa", value)
 
     @property
@@ -173,6 +178,7 @@ class DefineCurveFunction(KeywordBase):
 
     @sfo.setter
     def sfo(self, value: float) -> None:
+        """Set the sfo property."""
         self._cards[0].set_value("sfo", value)
 
     @property
@@ -183,6 +189,7 @@ class DefineCurveFunction(KeywordBase):
 
     @offa.setter
     def offa(self, value: float) -> None:
+        """Set the offa property."""
         self._cards[0].set_value("offa", value)
 
     @property
@@ -193,6 +200,7 @@ class DefineCurveFunction(KeywordBase):
 
     @offo.setter
     def offo(self, value: float) -> None:
+        """Set the offo property."""
         self._cards[0].set_value("offo", value)
 
     @property
@@ -203,8 +211,9 @@ class DefineCurveFunction(KeywordBase):
 
     @dattyp.setter
     def dattyp(self, value: int) -> None:
+        """Set the dattyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""dattyp must be `None` or one of {0,1}""")
+            raise Exception("""dattyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dattyp", value)
 
     @property
@@ -215,6 +224,7 @@ class DefineCurveFunction(KeywordBase):
 
     @function.setter
     def function(self, value: str) -> None:
+        """Set the function property."""
         self._cards[1].set_value("function", value)
 
     @property
@@ -225,5 +235,6 @@ class DefineCurveFunction(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

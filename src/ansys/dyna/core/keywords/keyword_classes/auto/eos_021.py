@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EOS keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Eos021(KeywordBase):
     subkeyword = "021"
 
     def __init__(self, **kwargs):
+        """Initialize the EOS keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -163,6 +165,7 @@ class Eos021(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -173,6 +176,7 @@ class Eos021(KeywordBase):
 
     @eost.setter
     def eost(self, value: int) -> None:
+        """Set the eost property."""
         self._cards[0].set_value("eost", value)
 
     @property
@@ -183,6 +187,7 @@ class Eos021(KeywordBase):
 
     @lmc.setter
     def lmc(self, value: int) -> None:
+        """Set the lmc property."""
         self._cards[0].set_value("lmc", value)
 
     @property
@@ -193,6 +198,7 @@ class Eos021(KeywordBase):
 
     @nhv.setter
     def nhv(self, value: int) -> None:
+        """Set the nhv property."""
         self._cards[0].set_value("nhv", value)
 
     @property
@@ -203,6 +209,7 @@ class Eos021(KeywordBase):
 
     @ivect.setter
     def ivect(self, value: int) -> None:
+        """Set the ivect property."""
         self._cards[0].set_value("ivect", value)
 
     @property
@@ -213,6 +220,7 @@ class Eos021(KeywordBase):
 
     @eo.setter
     def eo(self, value: float) -> None:
+        """Set the eo property."""
         self._cards[0].set_value("eo", value)
 
     @property
@@ -223,6 +231,7 @@ class Eos021(KeywordBase):
 
     @vo.setter
     def vo(self, value: float) -> None:
+        """Set the vo property."""
         self._cards[0].set_value("vo", value)
 
     @property
@@ -233,6 +242,7 @@ class Eos021(KeywordBase):
 
     @bulk.setter
     def bulk(self, value: float) -> None:
+        """Set the bulk property."""
         self._cards[0].set_value("bulk", value)
 
     @property
@@ -243,6 +253,7 @@ class Eos021(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[1].set_value("p1", value)
 
     @property
@@ -253,6 +264,7 @@ class Eos021(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[1].set_value("p2", value)
 
     @property
@@ -263,6 +275,7 @@ class Eos021(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[1].set_value("p3", value)
 
     @property
@@ -273,6 +286,7 @@ class Eos021(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[1].set_value("p4", value)
 
     @property
@@ -283,6 +297,7 @@ class Eos021(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[1].set_value("p5", value)
 
     @property
@@ -293,6 +308,7 @@ class Eos021(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[1].set_value("p6", value)
 
     @property
@@ -303,6 +319,7 @@ class Eos021(KeywordBase):
 
     @p7.setter
     def p7(self, value: float) -> None:
+        """Set the p7 property."""
         self._cards[1].set_value("p7", value)
 
     @property
@@ -313,5 +330,6 @@ class Eos021(KeywordBase):
 
     @p8.setter
     def p8(self, value: float) -> None:
+        """Set the p8 property."""
         self._cards[1].set_value("p8", value)
 

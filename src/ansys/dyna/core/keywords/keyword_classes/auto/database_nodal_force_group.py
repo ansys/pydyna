@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseNodalForceGroup(KeywordBase):
     subkeyword = "NODAL_FORCE_GROUP"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class DatabaseNodalForceGroup(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -71,5 +74,6 @@ class DatabaseNodalForceGroup(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 

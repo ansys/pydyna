@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlMesh(KeywordBase):
     subkeyword = "CONTROL_MESH"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -98,6 +100,7 @@ class IcfdControlMesh(KeywordBase):
 
     @mgsf.setter
     def mgsf(self, value: float) -> None:
+        """Set the mgsf property."""
         self._cards[0].set_value("mgsf", value)
 
     @property
@@ -110,8 +113,9 @@ class IcfdControlMesh(KeywordBase):
 
     @mstrat.setter
     def mstrat(self, value: int) -> None:
+        """Set the mstrat property."""
         if value not in [0, 1, None]:
-            raise Exception("""mstrat must be `None` or one of {0,1}""")
+            raise Exception("""mstrat must be `None` or one of {0,1}.""")
         self._cards[0].set_value("mstrat", value)
 
     @property
@@ -123,8 +127,9 @@ class IcfdControlMesh(KeywordBase):
 
     @_2dstruc.setter
     def _2dstruc(self, value: int) -> None:
+        """Set the _2dstruc property."""
         if value not in [0, 1, None]:
-            raise Exception("""_2dstruc must be `None` or one of {0,1}""")
+            raise Exception("""_2dstruc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("2dstruc", value)
 
     @property
@@ -137,8 +142,9 @@ class IcfdControlMesh(KeywordBase):
 
     @nrmsh.setter
     def nrmsh(self, value: int) -> None:
+        """Set the nrmsh property."""
         if value not in [0, 1, None]:
-            raise Exception("""nrmsh must be `None` or one of {0,1}""")
+            raise Exception("""nrmsh must be `None` or one of {0,1}.""")
         self._cards[0].set_value("nrmsh", value)
 
     @property
@@ -151,5 +157,6 @@ class IcfdControlMesh(KeywordBase):
 
     @aver.setter
     def aver(self, value: int) -> None:
+        """Set the aver property."""
         self._cards[1].set_value("aver", value)
 

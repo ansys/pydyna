@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlImposedMove(KeywordBase):
     subkeyword = "CONTROL_IMPOSED_MOVE"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -225,6 +227,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -235,6 +238,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @lcvx.setter
     def lcvx(self, value: int) -> None:
+        """Set the lcvx property."""
         self._cards[0].set_value("lcvx", value)
 
     @property
@@ -245,6 +249,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @lcvy.setter
     def lcvy(self, value: int) -> None:
+        """Set the lcvy property."""
         self._cards[0].set_value("lcvy", value)
 
     @property
@@ -255,6 +260,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @lcvz.setter
     def lcvz(self, value: int) -> None:
+        """Set the lcvz property."""
         self._cards[0].set_value("lcvz", value)
 
     @property
@@ -267,6 +273,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @vadt.setter
     def vadt(self, value: int) -> None:
+        """Set the vadt property."""
         self._cards[0].set_value("vadt", value)
 
     @property
@@ -277,6 +284,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @alphal.setter
     def alphal(self, value: int) -> None:
+        """Set the alphal property."""
         self._cards[1].set_value("alphal", value)
 
     @property
@@ -287,6 +295,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @betal.setter
     def betal(self, value: int) -> None:
+        """Set the betal property."""
         self._cards[1].set_value("betal", value)
 
     @property
@@ -297,6 +306,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @gammal.setter
     def gammal(self, value: int) -> None:
+        """Set the gammal property."""
         self._cards[1].set_value("gammal", value)
 
     @property
@@ -307,6 +317,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @alphag.setter
     def alphag(self, value: int) -> None:
+        """Set the alphag property."""
         self._cards[1].set_value("alphag", value)
 
     @property
@@ -317,6 +328,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @betag.setter
     def betag(self, value: int) -> None:
+        """Set the betag property."""
         self._cards[1].set_value("betag", value)
 
     @property
@@ -327,6 +339,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @gammag.setter
     def gammag(self, value: int) -> None:
+        """Set the gammag property."""
         self._cards[1].set_value("gammag", value)
 
     @property
@@ -339,6 +352,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @vadr.setter
     def vadr(self, value: int) -> None:
+        """Set the vadr property."""
         self._cards[1].set_value("vadr", value)
 
     @property
@@ -349,6 +363,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @ptid.setter
     def ptid(self, value: int) -> None:
+        """Set the ptid property."""
         self._cards[2].set_value("ptid", value)
 
     @property
@@ -359,6 +374,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[2].set_value("x1", value)
 
     @property
@@ -369,6 +385,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[2].set_value("y1", value)
 
     @property
@@ -379,6 +396,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[2].set_value("z1", value)
 
     @property
@@ -389,6 +407,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[2].set_value("x2", value)
 
     @property
@@ -399,6 +418,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[2].set_value("y2", value)
 
     @property
@@ -409,6 +429,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[2].set_value("z2", value)
 
     @property
@@ -419,6 +440,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @ptido.setter
     def ptido(self, value: int) -> None:
+        """Set the ptido property."""
         self._cards[3].set_value("ptido", value)
 
     @property
@@ -429,6 +451,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @axe.setter
     def axe(self, value: int) -> None:
+        """Set the axe property."""
         self._cards[3].set_value("axe", value)
 
     @property
@@ -439,5 +462,6 @@ class IcfdControlImposedMove(KeywordBase):
 
     @ptidv.setter
     def ptidv(self, value: int) -> None:
+        """Set the ptidv property."""
         self._cards[3].set_value("ptidv", value)
 

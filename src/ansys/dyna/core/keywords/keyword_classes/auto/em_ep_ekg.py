@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEpEkg(KeywordBase):
     subkeyword = "EP_EKG"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class EmEpEkg(KeywordBase):
 
     @ekgid.setter
     def ekgid(self, value: int) -> None:
+        """Set the ekgid property."""
         self._cards[0].set_value("ekgid", value)
 
     @property
@@ -71,5 +74,6 @@ class EmEpEkg(KeywordBase):
 
     @psid.setter
     def psid(self, value: float) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 

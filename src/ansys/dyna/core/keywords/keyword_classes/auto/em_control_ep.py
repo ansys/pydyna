@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmControlEp(KeywordBase):
     subkeyword = "CONTROL_EP"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class EmControlEp(KeywordBase):
 
     @solvetype.setter
     def solvetype(self, value: int) -> None:
+        """Set the solvetype property."""
         self._cards[0].set_value("solvetype", value)
 
     @property
@@ -78,6 +81,7 @@ class EmControlEp(KeywordBase):
 
     @numspliti.setter
     def numspliti(self, value: int) -> None:
+        """Set the numspliti property."""
         self._cards[0].set_value("numspliti", value)
 
     @property
@@ -88,5 +92,6 @@ class EmControlEp(KeywordBase):
 
     @actusigma.setter
     def actusigma(self, value: int) -> None:
+        """Set the actusigma property."""
         self._cards[0].set_value("actusigma", value)
 

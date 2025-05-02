@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
     subkeyword = "FORMING_PRE_BENDING_LOCAL"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
 
     @pset.setter
     def pset(self, value: int) -> None:
+        """Set the pset property."""
         self._cards[0].set_value("pset", value)
 
     @property
@@ -127,6 +130,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[0].set_value("radius", value)
 
     @property
@@ -137,6 +141,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -147,6 +152,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -157,6 +163,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -167,6 +174,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -177,6 +185,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -187,6 +196,7 @@ class ControlFormingPreBendingLocal(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 
     @property
@@ -197,5 +207,6 @@ class ControlFormingPreBendingLocal(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 

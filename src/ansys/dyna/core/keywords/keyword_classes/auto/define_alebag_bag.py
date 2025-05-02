@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineAlebagBag(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -225,6 +227,7 @@ class DefineAlebagBag(KeywordBase):
 
     @bagid.setter
     def bagid(self, value: int) -> None:
+        """Set the bagid property."""
         self._cards[0].set_value("bagid", value)
 
     @property
@@ -235,6 +238,7 @@ class DefineAlebagBag(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -247,8 +251,9 @@ class DefineAlebagBag(KeywordBase):
 
     @sidtype.setter
     def sidtype(self, value: int) -> None:
+        """Set the sidtype property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtype must be `None` or one of {0,1}""")
+            raise Exception("""sidtype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sidtype", value)
 
     @property
@@ -260,8 +265,9 @@ class DefineAlebagBag(KeywordBase):
 
     @cvbag.setter
     def cvbag(self, value: int) -> None:
+        """Set the cvbag property."""
         if value not in [1, 0, None]:
-            raise Exception("""cvbag must be `None` or one of {1,0}""")
+            raise Exception("""cvbag must be `None` or one of {1,0}.""")
         self._cards[0].set_value("cvbag", value)
 
     @property
@@ -272,8 +278,9 @@ class DefineAlebagBag(KeywordBase):
 
     @iblock.setter
     def iblock(self, value: int) -> None:
+        """Set the iblock property."""
         if value not in [0, 1, None]:
-            raise Exception("""iblock must be `None` or one of {0,1}""")
+            raise Exception("""iblock must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iblock", value)
 
     @property
@@ -284,6 +291,7 @@ class DefineAlebagBag(KeywordBase):
 
     @vcof.setter
     def vcof(self, value: float) -> None:
+        """Set the vcof property."""
         self._cards[0].set_value("vcof", value)
 
     @property
@@ -294,6 +302,7 @@ class DefineAlebagBag(KeywordBase):
 
     @vset.setter
     def vset(self, value: int) -> None:
+        """Set the vset property."""
         self._cards[0].set_value("vset", value)
 
     @property
@@ -307,8 +316,9 @@ class DefineAlebagBag(KeywordBase):
 
     @vtype.setter
     def vtype(self, value: int) -> None:
+        """Set the vtype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""vtype must be `None` or one of {0,1,2}""")
+            raise Exception("""vtype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("vtype", value)
 
     @property
@@ -322,6 +332,7 @@ class DefineAlebagBag(KeywordBase):
 
     @nquad.setter
     def nquad(self, value: int) -> None:
+        """Set the nquad property."""
         self._cards[1].set_value("nquad", value)
 
     @property
@@ -338,8 +349,9 @@ class DefineAlebagBag(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         if value not in [2, 1, 3, 4, 5, 6, None]:
-            raise Exception("""ctype must be `None` or one of {2,1,3,4,5,6}""")
+            raise Exception("""ctype must be `None` or one of {2,1,3,4,5,6}.""")
         self._cards[1].set_value("ctype", value)
 
     @property
@@ -350,6 +362,7 @@ class DefineAlebagBag(KeywordBase):
 
     @pfac.setter
     def pfac(self, value: float) -> None:
+        """Set the pfac property."""
         self._cards[1].set_value("pfac", value)
 
     @property
@@ -360,6 +373,7 @@ class DefineAlebagBag(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[1].set_value("fric", value)
 
     @property
@@ -370,6 +384,7 @@ class DefineAlebagBag(KeywordBase):
 
     @frcmin.setter
     def frcmin(self, value: float) -> None:
+        """Set the frcmin property."""
         self._cards[1].set_value("frcmin", value)
 
     @property
@@ -382,6 +397,7 @@ class DefineAlebagBag(KeywordBase):
 
     @normtyp.setter
     def normtyp(self, value: int) -> None:
+        """Set the normtyp property."""
         self._cards[1].set_value("normtyp", value)
 
     @property
@@ -395,8 +411,9 @@ class DefineAlebagBag(KeywordBase):
 
     @ileak.setter
     def ileak(self, value: int) -> None:
+        """Set the ileak property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ileak must be `None` or one of {0,1,2}""")
+            raise Exception("""ileak must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("ileak", value)
 
     @property
@@ -407,6 +424,7 @@ class DefineAlebagBag(KeywordBase):
 
     @pleak.setter
     def pleak(self, value: float) -> None:
+        """Set the pleak property."""
         self._cards[1].set_value("pleak", value)
 
     @property
@@ -419,6 +437,7 @@ class DefineAlebagBag(KeywordBase):
 
     @norm.setter
     def norm(self, value: int) -> None:
+        """Set the norm property."""
         self._cards[2].set_value("norm", value)
 
     @property
@@ -429,6 +448,7 @@ class DefineAlebagBag(KeywordBase):
 
     @start.setter
     def start(self, value: float) -> None:
+        """Set the start property."""
         self._cards[2].set_value("start", value)
 
     @property
@@ -439,6 +459,7 @@ class DefineAlebagBag(KeywordBase):
 
     @end.setter
     def end(self, value: float) -> None:
+        """Set the end property."""
         self._cards[2].set_value("end", value)
 
     @property
@@ -449,5 +470,6 @@ class DefineAlebagBag(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

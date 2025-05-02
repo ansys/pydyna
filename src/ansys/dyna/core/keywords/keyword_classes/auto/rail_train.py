@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the RAIL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RailTrain(KeywordBase):
     subkeyword = "TRAIN"
 
     def __init__(self, **kwargs):
+        """Initialize the RAIL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -174,6 +176,7 @@ class RailTrain(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -184,6 +187,7 @@ class RailTrain(KeywordBase):
 
     @nsetid.setter
     def nsetid(self, value: int) -> None:
+        """Set the nsetid property."""
         self._cards[0].set_value("nsetid", value)
 
     @property
@@ -194,6 +198,7 @@ class RailTrain(KeywordBase):
 
     @finit.setter
     def finit(self, value: float) -> None:
+        """Set the finit property."""
         self._cards[0].set_value("finit", value)
 
     @property
@@ -204,6 +209,7 @@ class RailTrain(KeywordBase):
 
     @trid.setter
     def trid(self, value: int) -> None:
+        """Set the trid property."""
         self._cards[0].set_value("trid", value)
 
     @property
@@ -214,6 +220,7 @@ class RailTrain(KeywordBase):
 
     @lcur.setter
     def lcur(self, value: int) -> None:
+        """Set the lcur property."""
         self._cards[0].set_value("lcur", value)
 
     @property
@@ -224,6 +231,7 @@ class RailTrain(KeywordBase):
 
     @offs.setter
     def offs(self, value: float) -> None:
+        """Set the offs property."""
         self._cards[0].set_value("offs", value)
 
     @property
@@ -234,6 +242,7 @@ class RailTrain(KeywordBase):
 
     @vertstf.setter
     def vertstf(self, value: float) -> None:
+        """Set the vertstf property."""
         self._cards[1].set_value("vertstf", value)
 
     @property
@@ -244,6 +253,7 @@ class RailTrain(KeywordBase):
 
     @latstf.setter
     def latstf(self, value: float) -> None:
+        """Set the latstf property."""
         self._cards[1].set_value("latstf", value)
 
     @property
@@ -254,6 +264,7 @@ class RailTrain(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[1].set_value("v2", value)
 
     @property
@@ -264,6 +275,7 @@ class RailTrain(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[1].set_value("v3", value)
 
     @property
@@ -274,6 +286,7 @@ class RailTrain(KeywordBase):
 
     @l2.setter
     def l2(self, value: float) -> None:
+        """Set the l2 property."""
         self._cards[1].set_value("l2", value)
 
     @property
@@ -284,6 +297,7 @@ class RailTrain(KeywordBase):
 
     @l3.setter
     def l3(self, value: float) -> None:
+        """Set the l3 property."""
         self._cards[1].set_value("l3", value)
 
     @property
@@ -297,6 +311,7 @@ class RailTrain(KeywordBase):
 
     @latdir.setter
     def latdir(self, value: float) -> None:
+        """Set the latdir property."""
         self._cards[1].set_value("latdir", value)
 
     @property
@@ -307,5 +322,6 @@ class RailTrain(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[1].set_value("fric", value)
 

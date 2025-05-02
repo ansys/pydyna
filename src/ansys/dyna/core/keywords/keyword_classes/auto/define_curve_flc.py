@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveFlc(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -92,6 +94,7 @@ class DefineCurveFlc(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -102,6 +105,7 @@ class DefineCurveFlc(KeywordBase):
 
     @th.setter
     def th(self, value: float) -> None:
+        """Set the th property."""
         self._cards[0].set_value("th", value)
 
     @property
@@ -112,6 +116,7 @@ class DefineCurveFlc(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -122,5 +127,6 @@ class DefineCurveFlc(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

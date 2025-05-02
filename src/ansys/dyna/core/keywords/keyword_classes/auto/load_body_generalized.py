@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBodyGeneralized(KeywordBase):
     subkeyword = "BODY_GENERALIZED"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -168,6 +170,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -178,6 +181,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -188,6 +192,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -198,6 +203,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @drlcid.setter
     def drlcid(self, value: int) -> None:
+        """Set the drlcid property."""
         self._cards[0].set_value("drlcid", value)
 
     @property
@@ -208,6 +214,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -218,6 +225,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -228,6 +236,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 
     @property
@@ -238,6 +247,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @ax.setter
     def ax(self, value: float) -> None:
+        """Set the ax property."""
         self._cards[1].set_value("ax", value)
 
     @property
@@ -248,6 +258,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @ay.setter
     def ay(self, value: float) -> None:
+        """Set the ay property."""
         self._cards[1].set_value("ay", value)
 
     @property
@@ -258,6 +269,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @az.setter
     def az(self, value: float) -> None:
+        """Set the az property."""
         self._cards[1].set_value("az", value)
 
     @property
@@ -268,6 +280,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @omx.setter
     def omx(self, value: float) -> None:
+        """Set the omx property."""
         self._cards[1].set_value("omx", value)
 
     @property
@@ -278,6 +291,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @omy.setter
     def omy(self, value: float) -> None:
+        """Set the omy property."""
         self._cards[1].set_value("omy", value)
 
     @property
@@ -288,6 +302,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @omz.setter
     def omz(self, value: float) -> None:
+        """Set the omz property."""
         self._cards[1].set_value("omz", value)
 
     @property
@@ -298,6 +313,7 @@ class LoadBodyGeneralized(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -311,7 +327,8 @@ class LoadBodyGeneralized(KeywordBase):
 
     @angtyp.setter
     def angtyp(self, value: str) -> None:
+        """Set the angtyp property."""
         if value not in ["CENT", "CORI", "ROTA", None]:
-            raise Exception("""angtyp must be `None` or one of {"CENT","CORI","ROTA"}""")
+            raise Exception("""angtyp must be `None` or one of {"CENT","CORI","ROTA"}.""")
         self._cards[1].set_value("angtyp", value)
 

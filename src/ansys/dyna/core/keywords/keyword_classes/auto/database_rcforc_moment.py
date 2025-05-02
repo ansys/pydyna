@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseRcforcMoment(KeywordBase):
     subkeyword = "RCFORC_MOMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class DatabaseRcforcMoment(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -78,6 +81,7 @@ class DatabaseRcforcMoment(KeywordBase):
 
     @nodes.setter
     def nodes(self, value: int) -> None:
+        """Set the nodes property."""
         self._cards[0].set_value("nodes", value)
 
     @property
@@ -88,5 +92,6 @@ class DatabaseRcforcMoment(KeywordBase):
 
     @nodem.setter
     def nodem(self, value: int) -> None:
+        """Set the nodem property."""
         self._cards[0].set_value("nodem", value)
 

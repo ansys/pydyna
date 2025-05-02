@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryAcousticMapping(KeywordBase):
     subkeyword = "ACOUSTIC_MAPPING"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -62,6 +64,7 @@ class BoundaryAcousticMapping(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -75,7 +78,8 @@ class BoundaryAcousticMapping(KeywordBase):
 
     @styp.setter
     def styp(self, value: int) -> None:
+        """Set the styp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""styp must be `None` or one of {0,1,2}""")
+            raise Exception("""styp must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("styp", value)
 

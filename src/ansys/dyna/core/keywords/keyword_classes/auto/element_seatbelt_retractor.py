@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementSeatbeltRetractor(KeywordBase):
     subkeyword = "SEATBELT_RETRACTOR"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -144,6 +146,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @sbrid.setter
     def sbrid(self, value: int) -> None:
+        """Set the sbrid property."""
         self._cards[0].set_value("sbrid", value)
 
     @property
@@ -154,6 +157,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @sbrnid.setter
     def sbrnid(self, value: int) -> None:
+        """Set the sbrnid property."""
         self._cards[0].set_value("sbrnid", value)
 
     @property
@@ -164,6 +168,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @sbid.setter
     def sbid(self, value: int) -> None:
+        """Set the sbid property."""
         self._cards[0].set_value("sbid", value)
 
     @property
@@ -174,6 +179,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @sid1.setter
     def sid1(self, value: int) -> None:
+        """Set the sid1 property."""
         self._cards[0].set_value("sid1", value)
 
     @property
@@ -184,6 +190,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @sid2.setter
     def sid2(self, value: int) -> None:
+        """Set the sid2 property."""
         self._cards[0].set_value("sid2", value)
 
     @property
@@ -194,6 +201,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @sid3.setter
     def sid3(self, value: int) -> None:
+        """Set the sid3 property."""
         self._cards[0].set_value("sid3", value)
 
     @property
@@ -204,6 +212,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @sid4.setter
     def sid4(self, value: int) -> None:
+        """Set the sid4 property."""
         self._cards[0].set_value("sid4", value)
 
     @property
@@ -214,6 +223,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @tdel.setter
     def tdel(self, value: float) -> None:
+        """Set the tdel property."""
         self._cards[1].set_value("tdel", value)
 
     @property
@@ -224,6 +234,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @pull.setter
     def pull(self, value: float) -> None:
+        """Set the pull property."""
         self._cards[1].set_value("pull", value)
 
     @property
@@ -234,6 +245,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @llcid.setter
     def llcid(self, value: int) -> None:
+        """Set the llcid property."""
         self._cards[1].set_value("llcid", value)
 
     @property
@@ -244,6 +256,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @ulcid.setter
     def ulcid(self, value: int) -> None:
+        """Set the ulcid property."""
         self._cards[1].set_value("ulcid", value)
 
     @property
@@ -254,5 +267,6 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @lfed.setter
     def lfed(self, value: float) -> None:
+        """Set the lfed property."""
         self._cards[1].set_value("lfed", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat146(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -145,6 +147,7 @@ class Mat146(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -155,6 +158,7 @@ class Mat146(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -165,6 +169,7 @@ class Mat146(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -175,6 +180,7 @@ class Mat146(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -185,6 +191,7 @@ class Mat146(KeywordBase):
 
     @scln1.setter
     def scln1(self, value: float) -> None:
+        """Set the scln1 property."""
         self._cards[0].set_value("scln1", value)
 
     @property
@@ -195,6 +202,7 @@ class Mat146(KeywordBase):
 
     @scln2.setter
     def scln2(self, value: float) -> None:
+        """Set the scln2 property."""
         self._cards[0].set_value("scln2", value)
 
     @property
@@ -205,6 +213,7 @@ class Mat146(KeywordBase):
 
     @dofn1.setter
     def dofn1(self, value: int) -> None:
+        """Set the dofn1 property."""
         self._cards[0].set_value("dofn1", value)
 
     @property
@@ -215,6 +224,7 @@ class Mat146(KeywordBase):
 
     @dofn2.setter
     def dofn2(self, value: int) -> None:
+        """Set the dofn2 property."""
         self._cards[0].set_value("dofn2", value)
 
     @property
@@ -225,6 +235,7 @@ class Mat146(KeywordBase):
 
     @cid1.setter
     def cid1(self, value: int) -> None:
+        """Set the cid1 property."""
         self._cards[1].set_value("cid1", value)
 
     @property
@@ -235,6 +246,7 @@ class Mat146(KeywordBase):
 
     @cid2.setter
     def cid2(self, value: int) -> None:
+        """Set the cid2 property."""
         self._cards[1].set_value("cid2", value)
 
     @property
@@ -245,5 +257,6 @@ class Mat146(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

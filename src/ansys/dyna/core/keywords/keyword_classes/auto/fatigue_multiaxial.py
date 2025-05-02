@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the FATIGUE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FatigueMultiaxial(KeywordBase):
     subkeyword = "MULTIAXIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the FATIGUE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -66,8 +68,9 @@ class FatigueMultiaxial(KeywordBase):
 
     @maxial.setter
     def maxial(self, value: int) -> None:
+        """Set the maxial property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""maxial must be `None` or one of {0,1,2}""")
+            raise Exception("""maxial must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("maxial", value)
 
     @property
@@ -78,5 +81,6 @@ class FatigueMultiaxial(KeywordBase):
 
     @nplane.setter
     def nplane(self, value: int) -> None:
+        """Set the nplane property."""
         self._cards[0].set_value("nplane", value)
 

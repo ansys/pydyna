@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementInertiaOffset(KeywordBase):
     subkeyword = "INERTIA_OFFSET"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -156,6 +158,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -166,6 +169,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -178,6 +182,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @csid.setter
     def csid(self, value: int) -> None:
+        """Set the csid property."""
         self._cards[0].set_value("csid", value)
 
     @property
@@ -188,6 +193,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @ixx.setter
     def ixx(self, value: float) -> None:
+        """Set the ixx property."""
         self._cards[1].set_value("ixx", value)
 
     @property
@@ -198,6 +204,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @ixy.setter
     def ixy(self, value: float) -> None:
+        """Set the ixy property."""
         self._cards[1].set_value("ixy", value)
 
     @property
@@ -208,6 +215,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @ixz.setter
     def ixz(self, value: float) -> None:
+        """Set the ixz property."""
         self._cards[1].set_value("ixz", value)
 
     @property
@@ -218,6 +226,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @iyy.setter
     def iyy(self, value: float) -> None:
+        """Set the iyy property."""
         self._cards[1].set_value("iyy", value)
 
     @property
@@ -228,6 +237,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @iyz.setter
     def iyz(self, value: float) -> None:
+        """Set the iyz property."""
         self._cards[1].set_value("iyz", value)
 
     @property
@@ -238,6 +248,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @izz.setter
     def izz(self, value: float) -> None:
+        """Set the izz property."""
         self._cards[1].set_value("izz", value)
 
     @property
@@ -248,6 +259,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @mass.setter
     def mass(self, value: float) -> None:
+        """Set the mass property."""
         self._cards[1].set_value("mass", value)
 
     @property
@@ -258,6 +270,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @x_off.setter
     def x_off(self, value: float) -> None:
+        """Set the x_off property."""
         self._cards[2].set_value("x-off", value)
 
     @property
@@ -268,6 +281,7 @@ class ElementInertiaOffset(KeywordBase):
 
     @y_off.setter
     def y_off(self, value: float) -> None:
+        """Set the y_off property."""
         self._cards[2].set_value("y_off", value)
 
     @property
@@ -278,5 +292,6 @@ class ElementInertiaOffset(KeywordBase):
 
     @z_off.setter
     def z_off(self, value: float) -> None:
+        """Set the z_off property."""
         self._cards[2].set_value("z_off", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BATTERY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BatteryEchemMatCathode(KeywordBase):
     subkeyword = "ECHEM_MAT_CATHODE"
 
     def __init__(self, **kwargs):
+        """Initialize the BATTERY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -167,6 +169,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -184,6 +187,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @iocpa.setter
     def iocpa(self, value: int) -> None:
+        """Set the iocpa property."""
         self._cards[0].set_value("iocpa", value)
 
     @property
@@ -194,6 +198,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @capta.setter
     def capta(self, value: float) -> None:
+        """Set the capta property."""
         self._cards[0].set_value("capta", value)
 
     @property
@@ -204,6 +209,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @s_yc.setter
     def s_yc(self, value: float) -> None:
+        """Set the s_yc property."""
         self._cards[0].set_value("s_yc", value)
 
     @property
@@ -214,6 +220,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @s_rad.setter
     def s_rad(self, value: float) -> None:
+        """Set the s_rad property."""
         self._cards[0].set_value("s_rad", value)
 
     @property
@@ -224,6 +231,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @ratec.setter
     def ratec(self, value: float) -> None:
+        """Set the ratec property."""
         self._cards[0].set_value("ratec", value)
 
     @property
@@ -234,6 +242,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @rcath.setter
     def rcath(self, value: float) -> None:
+        """Set the rcath property."""
         self._cards[0].set_value("rcath", value)
 
     @property
@@ -244,6 +253,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @rhoec.setter
     def rhoec(self, value: float) -> None:
+        """Set the rhoec property."""
         self._cards[1].set_value("rhoec", value)
 
     @property
@@ -254,6 +264,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @rhofc.setter
     def rhofc(self, value: float) -> None:
+        """Set the rhofc property."""
         self._cards[1].set_value("rhofc", value)
 
     @property
@@ -264,6 +275,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @rhoccc.setter
     def rhoccc(self, value: float) -> None:
+        """Set the rhoccc property."""
         self._cards[1].set_value("rhoccc", value)
 
     @property
@@ -274,6 +286,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @diffc.setter
     def diffc(self, value: float) -> None:
+        """Set the diffc property."""
         self._cards[1].set_value("diffc", value)
 
     @property
@@ -284,6 +297,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @condc.setter
     def condc(self, value: float) -> None:
+        """Set the condc property."""
         self._cards[1].set_value("condc", value)
 
     @property
@@ -294,6 +308,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @vfec.setter
     def vfec(self, value: float) -> None:
+        """Set the vfec property."""
         self._cards[2].set_value("vfec", value)
 
     @property
@@ -304,6 +319,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @vfpc.setter
     def vfpc(self, value: float) -> None:
+        """Set the vfpc property."""
         self._cards[2].set_value("vfpc", value)
 
     @property
@@ -314,6 +330,7 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @vffc.setter
     def vffc(self, value: float) -> None:
+        """Set the vffc property."""
         self._cards[2].set_value("vffc", value)
 
     @property
@@ -324,5 +341,6 @@ class BatteryEchemMatCathode(KeywordBase):
 
     @vfgc.setter
     def vfgc(self, value: float) -> None:
+        """Set the vfgc property."""
         self._cards[2].set_value("vfgc", value)
 

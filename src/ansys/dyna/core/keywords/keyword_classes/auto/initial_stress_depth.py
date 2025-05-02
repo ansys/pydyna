@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialStressDepth(KeywordBase):
     subkeyword = "STRESS_DEPTH"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -97,6 +99,7 @@ class InitialStressDepth(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -107,6 +110,7 @@ class InitialStressDepth(KeywordBase):
 
     @ro_g.setter
     def ro_g(self, value: float) -> None:
+        """Set the ro_g property."""
         self._cards[0].set_value("ro_g", value)
 
     @property
@@ -117,6 +121,7 @@ class InitialStressDepth(KeywordBase):
 
     @zdatum.setter
     def zdatum(self, value: float) -> None:
+        """Set the zdatum property."""
         self._cards[0].set_value("zdatum", value)
 
     @property
@@ -127,6 +132,7 @@ class InitialStressDepth(KeywordBase):
 
     @kfact.setter
     def kfact(self, value: float) -> None:
+        """Set the kfact property."""
         self._cards[0].set_value("kfact", value)
 
     @property
@@ -137,6 +143,7 @@ class InitialStressDepth(KeywordBase):
 
     @lc.setter
     def lc(self, value: int) -> None:
+        """Set the lc property."""
         self._cards[0].set_value("lc", value)
 
     @property
@@ -147,6 +154,7 @@ class InitialStressDepth(KeywordBase):
 
     @lch.setter
     def lch(self, value: int) -> None:
+        """Set the lch property."""
         self._cards[0].set_value("lch", value)
 
     @property
@@ -157,5 +165,6 @@ class InitialStressDepth(KeywordBase):
 
     @lck0.setter
     def lck0(self, value: int) -> None:
+        """Set the lck0 property."""
         self._cards[0].set_value("lck0", value)
 

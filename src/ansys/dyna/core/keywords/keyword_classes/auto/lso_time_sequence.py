@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LSO keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LsoTimeSequence(KeywordBase):
     subkeyword = "TIME_SEQUENCE"
 
     def __init__(self, **kwargs):
+        """Initialize the LSO keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -178,8 +180,9 @@ class LsoTimeSequence(KeywordBase):
 
     @solver_name.setter
     def solver_name(self, value: str) -> None:
+        """Set the solver_name property."""
         if value not in ["MECH", "EM", "CESE", "ICFD", None]:
-            raise Exception("""solver_name must be `None` or one of {"MECH","EM","CESE","ICFD"}""")
+            raise Exception("""solver_name must be `None` or one of {"MECH","EM","CESE","ICFD"}.""")
         self._cards[0].set_value("solver_name", value)
 
     @property
@@ -190,6 +193,7 @@ class LsoTimeSequence(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -200,6 +204,7 @@ class LsoTimeSequence(KeywordBase):
 
     @lcdt.setter
     def lcdt(self, value: int) -> None:
+        """Set the lcdt property."""
         self._cards[1].set_value("lcdt", value)
 
     @property
@@ -213,8 +218,9 @@ class LsoTimeSequence(KeywordBase):
 
     @lcopt.setter
     def lcopt(self, value: int) -> None:
+        """Set the lcopt property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""lcopt must be `None` or one of {1,2,3}""")
+            raise Exception("""lcopt must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("lcopt", value)
 
     @property
@@ -225,6 +231,7 @@ class LsoTimeSequence(KeywordBase):
 
     @npltc.setter
     def npltc(self, value: int) -> None:
+        """Set the npltc property."""
         self._cards[1].set_value("npltc", value)
 
     @property
@@ -235,6 +242,7 @@ class LsoTimeSequence(KeywordBase):
 
     @tbeg.setter
     def tbeg(self, value: float) -> None:
+        """Set the tbeg property."""
         self._cards[1].set_value("tbeg", value)
 
     @property
@@ -245,6 +253,7 @@ class LsoTimeSequence(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[1].set_value("tend", value)
 
     @property
@@ -257,6 +266,7 @@ class LsoTimeSequence(KeywordBase):
 
     @domid1.setter
     def domid1(self, value: int) -> None:
+        """Set the domid1 property."""
         self._cards[2].set_value("domid1", value)
 
     @property
@@ -269,6 +279,7 @@ class LsoTimeSequence(KeywordBase):
 
     @domid2.setter
     def domid2(self, value: int) -> None:
+        """Set the domid2 property."""
         self._cards[2].set_value("domid2", value)
 
     @property
@@ -281,6 +292,7 @@ class LsoTimeSequence(KeywordBase):
 
     @domid3.setter
     def domid3(self, value: int) -> None:
+        """Set the domid3 property."""
         self._cards[2].set_value("domid3", value)
 
     @property
@@ -293,6 +305,7 @@ class LsoTimeSequence(KeywordBase):
 
     @domid4.setter
     def domid4(self, value: int) -> None:
+        """Set the domid4 property."""
         self._cards[2].set_value("domid4", value)
 
     @property
@@ -305,6 +318,7 @@ class LsoTimeSequence(KeywordBase):
 
     @domid5.setter
     def domid5(self, value: int) -> None:
+        """Set the domid5 property."""
         self._cards[2].set_value("domid5", value)
 
     @property
@@ -317,6 +331,7 @@ class LsoTimeSequence(KeywordBase):
 
     @domid6.setter
     def domid6(self, value: int) -> None:
+        """Set the domid6 property."""
         self._cards[2].set_value("domid6", value)
 
     @property
@@ -329,6 +344,7 @@ class LsoTimeSequence(KeywordBase):
 
     @domid7.setter
     def domid7(self, value: int) -> None:
+        """Set the domid7 property."""
         self._cards[2].set_value("domid7", value)
 
     @property
@@ -341,6 +357,7 @@ class LsoTimeSequence(KeywordBase):
 
     @domid8.setter
     def domid8(self, value: int) -> None:
+        """Set the domid8 property."""
         self._cards[2].set_value("domid8", value)
 
     @property
@@ -358,5 +375,6 @@ class LsoTimeSequence(KeywordBase):
 
     @global_var.setter
     def global_var(self, value: str) -> None:
+        """Set the global_var property."""
         self._cards[3].set_value("global_var", value)
 

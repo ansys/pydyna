@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseControlLimiter(KeywordBase):
     subkeyword = "CONTROL_LIMITER"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -81,8 +83,9 @@ class CeseControlLimiter(KeywordBase):
 
     @idlmt.setter
     def idlmt(self, value: int) -> None:
+        """Set the idlmt property."""
         if value not in [0, 1, None]:
-            raise Exception("""idlmt must be `None` or one of {0,1}""")
+            raise Exception("""idlmt must be `None` or one of {0,1}.""")
         self._cards[0].set_value("idlmt", value)
 
     @property
@@ -93,6 +96,7 @@ class CeseControlLimiter(KeywordBase):
 
     @alfa.setter
     def alfa(self, value: float) -> None:
+        """Set the alfa property."""
         self._cards[0].set_value("alfa", value)
 
     @property
@@ -103,6 +107,7 @@ class CeseControlLimiter(KeywordBase):
 
     @beta_.setter
     def beta_(self, value: float) -> None:
+        """Set the beta_ property."""
         self._cards[0].set_value("beta ", value)
 
     @property
@@ -113,5 +118,6 @@ class CeseControlLimiter(KeywordBase):
 
     @epsr.setter
     def epsr(self, value: float) -> None:
+        """Set the epsr property."""
         self._cards[0].set_value("epsr", value)
 

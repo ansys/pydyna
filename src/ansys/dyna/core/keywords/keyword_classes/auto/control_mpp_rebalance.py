@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppRebalance(KeywordBase):
     subkeyword = "MPP_REBALANCE"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -78,6 +80,7 @@ class ControlMppRebalance(KeywordBase):
 
     @ncycle.setter
     def ncycle(self, value: int) -> None:
+        """Set the ncycle property."""
         self._cards[0].set_value("ncycle", value)
 
     @property
@@ -90,6 +93,7 @@ class ControlMppRebalance(KeywordBase):
 
     @icoor.setter
     def icoor(self, value: int) -> None:
+        """Set the icoor property."""
         self._cards[0].set_value("icoor", value)
 
     @property
@@ -102,8 +106,9 @@ class ControlMppRebalance(KeywordBase):
 
     @icost.setter
     def icost(self, value: int) -> None:
+        """Set the icost property."""
         if value not in [0, 1, None]:
-            raise Exception("""icost must be `None` or one of {0,1}""")
+            raise Exception("""icost must be `None` or one of {0,1}.""")
         self._cards[0].set_value("icost", value)
 
     @property
@@ -114,5 +119,6 @@ class ControlMppRebalance(KeywordBase):
 
     @thres.setter
     def thres(self, value: float) -> None:
+        """Set the thres property."""
         self._cards[0].set_value("thres", value)
 

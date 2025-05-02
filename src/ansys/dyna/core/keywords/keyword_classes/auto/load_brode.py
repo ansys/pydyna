@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBrode(KeywordBase):
     subkeyword = "BRODE"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -139,6 +141,7 @@ class LoadBrode(KeywordBase):
 
     @yld.setter
     def yld(self, value: float) -> None:
+        """Set the yld property."""
         self._cards[0].set_value("yld", value)
 
     @property
@@ -149,6 +152,7 @@ class LoadBrode(KeywordBase):
 
     @bht.setter
     def bht(self, value: float) -> None:
+        """Set the bht property."""
         self._cards[0].set_value("bht", value)
 
     @property
@@ -159,6 +163,7 @@ class LoadBrode(KeywordBase):
 
     @xbo.setter
     def xbo(self, value: float) -> None:
+        """Set the xbo property."""
         self._cards[0].set_value("xbo", value)
 
     @property
@@ -169,6 +174,7 @@ class LoadBrode(KeywordBase):
 
     @ybo.setter
     def ybo(self, value: float) -> None:
+        """Set the ybo property."""
         self._cards[0].set_value("ybo", value)
 
     @property
@@ -179,6 +185,7 @@ class LoadBrode(KeywordBase):
 
     @zbo.setter
     def zbo(self, value: float) -> None:
+        """Set the zbo property."""
         self._cards[0].set_value("zbo", value)
 
     @property
@@ -189,6 +196,7 @@ class LoadBrode(KeywordBase):
 
     @tbo.setter
     def tbo(self, value: float) -> None:
+        """Set the tbo property."""
         self._cards[0].set_value("tbo", value)
 
     @property
@@ -199,6 +207,7 @@ class LoadBrode(KeywordBase):
 
     @talc.setter
     def talc(self, value: int) -> None:
+        """Set the talc property."""
         self._cards[0].set_value("talc", value)
 
     @property
@@ -209,6 +218,7 @@ class LoadBrode(KeywordBase):
 
     @sflc.setter
     def sflc(self, value: int) -> None:
+        """Set the sflc property."""
         self._cards[0].set_value("sflc", value)
 
     @property
@@ -219,6 +229,7 @@ class LoadBrode(KeywordBase):
 
     @cfl.setter
     def cfl(self, value: float) -> None:
+        """Set the cfl property."""
         self._cards[1].set_value("cfl", value)
 
     @property
@@ -229,6 +240,7 @@ class LoadBrode(KeywordBase):
 
     @cft.setter
     def cft(self, value: float) -> None:
+        """Set the cft property."""
         self._cards[1].set_value("cft", value)
 
     @property
@@ -239,5 +251,6 @@ class LoadBrode(KeywordBase):
 
     @cfp.setter
     def cfp(self, value: float) -> None:
+        """Set the cfp property."""
         self._cards[1].set_value("cfp", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the FREQUENCY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainAcousticSoundSpeed(KeywordBase):
     subkeyword = "DOMAIN_ACOUSTIC_SOUND_SPEED"
 
     def __init__(self, **kwargs):
+        """Initialize the FREQUENCY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -72,6 +74,7 @@ class FrequencyDomainAcousticSoundSpeed(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -82,6 +85,7 @@ class FrequencyDomainAcousticSoundSpeed(KeywordBase):
 
     @lcid1.setter
     def lcid1(self, value: int) -> None:
+        """Set the lcid1 property."""
         self._cards[1].set_value("lcid1", value)
 
     @property
@@ -92,5 +96,6 @@ class FrequencyDomainAcousticSoundSpeed(KeywordBase):
 
     @lcid2.setter
     def lcid2(self, value: int) -> None:
+        """Set the lcid2 property."""
         self._cards[1].set_value("lcid2", value)
 

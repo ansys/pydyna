@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
     subkeyword = "BEAM_THICKNESS_ORIENTATION"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -189,6 +191,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -199,6 +202,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -209,6 +213,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -219,6 +224,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -229,6 +235,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -248,8 +255,9 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @rt1.setter
     def rt1(self, value: int) -> None:
+        """Set the rt1 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rt1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rt1 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rt1", value)
 
     @property
@@ -269,8 +277,9 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @rr1.setter
     def rr1(self, value: int) -> None:
+        """Set the rr1 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rr1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rr1 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rr1", value)
 
     @property
@@ -290,8 +299,9 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @rt2.setter
     def rt2(self, value: int) -> None:
+        """Set the rt2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rt2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rt2 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rt2", value)
 
     @property
@@ -311,8 +321,9 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @rr2.setter
     def rr2(self, value: int) -> None:
+        """Set the rr2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rr2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rr2 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rr2", value)
 
     @property
@@ -325,8 +336,9 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
+        """Set the local property."""
         if value not in [2, 1, None]:
-            raise Exception("""local must be `None` or one of {2,1}""")
+            raise Exception("""local must be `None` or one of {2,1}.""")
         self._cards[0].set_value("local", value)
 
     @property
@@ -346,6 +358,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @parm1.setter
     def parm1(self, value: float) -> None:
+        """Set the parm1 property."""
         self._cards[1].set_value("parm1", value)
 
     @property
@@ -366,6 +379,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @parm2.setter
     def parm2(self, value: float) -> None:
+        """Set the parm2 property."""
         self._cards[1].set_value("parm2", value)
 
     @property
@@ -385,6 +399,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @parm3.setter
     def parm3(self, value: float) -> None:
+        """Set the parm3 property."""
         self._cards[1].set_value("parm3", value)
 
     @property
@@ -404,6 +419,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @parm4.setter
     def parm4(self, value: float) -> None:
+        """Set the parm4 property."""
         self._cards[1].set_value("parm4", value)
 
     @property
@@ -423,6 +439,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @parm5.setter
     def parm5(self, value: float) -> None:
+        """Set the parm5 property."""
         self._cards[1].set_value("parm5", value)
 
     @property
@@ -435,6 +452,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[2].set_value("vx", value)
 
     @property
@@ -447,6 +465,7 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[2].set_value("vy", value)
 
     @property
@@ -459,5 +478,6 @@ class ElementBeamThicknessOrientation(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[2].set_value("vz", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSpotweldUniaxial(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -185,6 +187,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -195,6 +198,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -205,6 +209,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -215,6 +220,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -226,6 +232,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -236,6 +243,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @eh.setter
     def eh(self, value: float) -> None:
+        """Set the eh property."""
         self._cards[0].set_value("eh", value)
 
     @property
@@ -246,6 +254,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -256,6 +265,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @tfail.setter
     def tfail(self, value: float) -> None:
+        """Set the tfail property."""
         self._cards[0].set_value("tfail", value)
 
     @property
@@ -266,6 +276,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @efail.setter
     def efail(self, value: float) -> None:
+        """Set the efail property."""
         self._cards[1].set_value("efail", value)
 
     @property
@@ -277,6 +288,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @nrr.setter
     def nrr(self, value: float) -> None:
+        """Set the nrr property."""
         self._cards[1].set_value("nrr", value)
 
     @property
@@ -288,6 +300,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @nrs.setter
     def nrs(self, value: float) -> None:
+        """Set the nrs property."""
         self._cards[1].set_value("nrs", value)
 
     @property
@@ -299,6 +312,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @nrt.setter
     def nrt(self, value: float) -> None:
+        """Set the nrt property."""
         self._cards[1].set_value("nrt", value)
 
     @property
@@ -310,6 +324,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @mrr.setter
     def mrr(self, value: float) -> None:
+        """Set the mrr property."""
         self._cards[1].set_value("mrr", value)
 
     @property
@@ -321,6 +336,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @mss.setter
     def mss(self, value: float) -> None:
+        """Set the mss property."""
         self._cards[1].set_value("mss", value)
 
     @property
@@ -332,6 +348,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @mtt.setter
     def mtt(self, value: float) -> None:
+        """Set the mtt property."""
         self._cards[1].set_value("mtt", value)
 
     @property
@@ -342,6 +359,7 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @nf.setter
     def nf(self, value: float) -> None:
+        """Set the nf property."""
         self._cards[1].set_value("nf", value)
 
     @property
@@ -352,5 +370,6 @@ class MatSpotweldUniaxial(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

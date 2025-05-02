@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatCohesivePaper(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -225,6 +227,7 @@ class MatCohesivePaper(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -235,6 +238,7 @@ class MatCohesivePaper(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -247,8 +251,9 @@ class MatCohesivePaper(KeywordBase):
 
     @roflg.setter
     def roflg(self, value: int) -> None:
+        """Set the roflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""roflg must be `None` or one of {0,1}""")
+            raise Exception("""roflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("roflg", value)
 
     @property
@@ -262,6 +267,7 @@ class MatCohesivePaper(KeywordBase):
 
     @intfail.setter
     def intfail(self, value: float) -> None:
+        """Set the intfail property."""
         self._cards[0].set_value("intfail", value)
 
     @property
@@ -273,6 +279,7 @@ class MatCohesivePaper(KeywordBase):
 
     @en0.setter
     def en0(self, value: float) -> None:
+        """Set the en0 property."""
         self._cards[0].set_value("en0", value)
 
     @property
@@ -284,6 +291,7 @@ class MatCohesivePaper(KeywordBase):
 
     @et0.setter
     def et0(self, value: float) -> None:
+        """Set the et0 property."""
         self._cards[0].set_value("et0", value)
 
     @property
@@ -295,6 +303,7 @@ class MatCohesivePaper(KeywordBase):
 
     @en1.setter
     def en1(self, value: float) -> None:
+        """Set the en1 property."""
         self._cards[0].set_value("en1", value)
 
     @property
@@ -306,6 +315,7 @@ class MatCohesivePaper(KeywordBase):
 
     @et1.setter
     def et1(self, value: float) -> None:
+        """Set the et1 property."""
         self._cards[0].set_value("et1", value)
 
     @property
@@ -316,6 +326,7 @@ class MatCohesivePaper(KeywordBase):
 
     @t0n.setter
     def t0n(self, value: float) -> None:
+        """Set the t0n property."""
         self._cards[1].set_value("t0n", value)
 
     @property
@@ -326,6 +337,7 @@ class MatCohesivePaper(KeywordBase):
 
     @dn.setter
     def dn(self, value: float) -> None:
+        """Set the dn property."""
         self._cards[1].set_value("dn", value)
 
     @property
@@ -336,6 +348,7 @@ class MatCohesivePaper(KeywordBase):
 
     @t1n.setter
     def t1n(self, value: float) -> None:
+        """Set the t1n property."""
         self._cards[1].set_value("t1n", value)
 
     @property
@@ -347,6 +360,7 @@ class MatCohesivePaper(KeywordBase):
 
     @t0t.setter
     def t0t(self, value: float) -> None:
+        """Set the t0t property."""
         self._cards[1].set_value("t0t", value)
 
     @property
@@ -358,6 +372,7 @@ class MatCohesivePaper(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -369,6 +384,7 @@ class MatCohesivePaper(KeywordBase):
 
     @t1t.setter
     def t1t(self, value: float) -> None:
+        """Set the t1t property."""
         self._cards[1].set_value("t1t", value)
 
     @property
@@ -379,6 +395,7 @@ class MatCohesivePaper(KeywordBase):
 
     @e3c.setter
     def e3c(self, value: float) -> None:
+        """Set the e3c property."""
         self._cards[1].set_value("e3c", value)
 
     @property
@@ -389,6 +406,7 @@ class MatCohesivePaper(KeywordBase):
 
     @cc.setter
     def cc(self, value: float) -> None:
+        """Set the cc property."""
         self._cards[1].set_value("cc", value)
 
     @property
@@ -399,6 +417,7 @@ class MatCohesivePaper(KeywordBase):
 
     @asig.setter
     def asig(self, value: float) -> None:
+        """Set the asig property."""
         self._cards[2].set_value("asig", value)
 
     @property
@@ -409,6 +428,7 @@ class MatCohesivePaper(KeywordBase):
 
     @bsig.setter
     def bsig(self, value: float) -> None:
+        """Set the bsig property."""
         self._cards[2].set_value("bsig", value)
 
     @property
@@ -419,6 +439,7 @@ class MatCohesivePaper(KeywordBase):
 
     @csig.setter
     def csig(self, value: float) -> None:
+        """Set the csig property."""
         self._cards[2].set_value("csig", value)
 
     @property
@@ -430,6 +451,7 @@ class MatCohesivePaper(KeywordBase):
 
     @failn.setter
     def failn(self, value: float) -> None:
+        """Set the failn property."""
         self._cards[2].set_value("failn", value)
 
     @property
@@ -441,6 +463,7 @@ class MatCohesivePaper(KeywordBase):
 
     @failt.setter
     def failt(self, value: float) -> None:
+        """Set the failt property."""
         self._cards[2].set_value("failt", value)
 
     @property
@@ -451,5 +474,6 @@ class MatCohesivePaper(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

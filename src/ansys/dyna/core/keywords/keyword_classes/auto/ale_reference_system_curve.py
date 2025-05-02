@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ALE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleReferenceSystemCurve(KeywordBase):
     subkeyword = "REFERENCE_SYSTEM_CURVE"
 
     def __init__(self, **kwargs):
+        """Initialize the ALE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -146,6 +148,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -156,6 +159,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc1.setter
     def lc1(self, value: int) -> None:
+        """Set the lc1 property."""
         self._cards[1].set_value("lc1", value)
 
     @property
@@ -166,6 +170,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc2.setter
     def lc2(self, value: int) -> None:
+        """Set the lc2 property."""
         self._cards[1].set_value("lc2", value)
 
     @property
@@ -176,6 +181,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc3.setter
     def lc3(self, value: int) -> None:
+        """Set the lc3 property."""
         self._cards[1].set_value("lc3", value)
 
     @property
@@ -186,6 +192,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc4.setter
     def lc4(self, value: int) -> None:
+        """Set the lc4 property."""
         self._cards[1].set_value("lc4", value)
 
     @property
@@ -196,6 +203,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc5.setter
     def lc5(self, value: int) -> None:
+        """Set the lc5 property."""
         self._cards[1].set_value("lc5", value)
 
     @property
@@ -206,6 +214,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc6.setter
     def lc6(self, value: int) -> None:
+        """Set the lc6 property."""
         self._cards[1].set_value("lc6", value)
 
     @property
@@ -216,6 +225,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc7.setter
     def lc7(self, value: int) -> None:
+        """Set the lc7 property."""
         self._cards[1].set_value("lc7", value)
 
     @property
@@ -226,6 +236,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc8.setter
     def lc8(self, value: int) -> None:
+        """Set the lc8 property."""
         self._cards[1].set_value("lc8", value)
 
     @property
@@ -236,6 +247,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc9.setter
     def lc9(self, value: int) -> None:
+        """Set the lc9 property."""
         self._cards[2].set_value("lc9", value)
 
     @property
@@ -246,6 +258,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc10.setter
     def lc10(self, value: int) -> None:
+        """Set the lc10 property."""
         self._cards[2].set_value("lc10", value)
 
     @property
@@ -256,6 +269,7 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc11.setter
     def lc11(self, value: int) -> None:
+        """Set the lc11 property."""
         self._cards[2].set_value("lc11", value)
 
     @property
@@ -266,5 +280,6 @@ class AleReferenceSystemCurve(KeywordBase):
 
     @lc12.setter
     def lc12(self, value: int) -> None:
+        """Set the lc12 property."""
         self._cards[2].set_value("lc12", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the IGA keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IgaTiedEdgeToEdge(KeywordBase):
     subkeyword = "TIED_EDGE_TO_EDGE"
 
     def __init__(self, **kwargs):
+        """Initialize the IGA keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -94,6 +96,7 @@ class IgaTiedEdgeToEdge(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -105,6 +108,7 @@ class IgaTiedEdgeToEdge(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         self._cards[0].set_value("type", value)
 
     @property
@@ -116,6 +120,7 @@ class IgaTiedEdgeToEdge(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
+        """Set the form property."""
         self._cards[0].set_value("form", value)
 
     @property
@@ -126,6 +131,7 @@ class IgaTiedEdgeToEdge(KeywordBase):
 
     @sfd.setter
     def sfd(self, value: float) -> None:
+        """Set the sfd property."""
         self._cards[0].set_value("sfd", value)
 
     @property
@@ -136,6 +142,7 @@ class IgaTiedEdgeToEdge(KeywordBase):
 
     @sfr.setter
     def sfr(self, value: float) -> None:
+        """Set the sfr property."""
         self._cards[0].set_value("sfr", value)
 
     @property
@@ -146,5 +153,6 @@ class IgaTiedEdgeToEdge(KeywordBase):
 
     @sft.setter
     def sft(self, value: float) -> None:
+        """Set the sft property."""
         self._cards[0].set_value("sft", value)
 

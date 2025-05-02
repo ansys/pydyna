@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -36,6 +37,7 @@ class SetPartAdd(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -124,6 +126,7 @@ class SetPartAdd(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -134,6 +137,7 @@ class SetPartAdd(KeywordBase):
 
     @da1.setter
     def da1(self, value: float) -> None:
+        """Set the da1 property."""
         self._cards[0].set_value("da1", value)
 
     @property
@@ -144,6 +148,7 @@ class SetPartAdd(KeywordBase):
 
     @da2.setter
     def da2(self, value: float) -> None:
+        """Set the da2 property."""
         self._cards[0].set_value("da2", value)
 
     @property
@@ -154,6 +159,7 @@ class SetPartAdd(KeywordBase):
 
     @da3.setter
     def da3(self, value: float) -> None:
+        """Set the da3 property."""
         self._cards[0].set_value("da3", value)
 
     @property
@@ -164,6 +170,7 @@ class SetPartAdd(KeywordBase):
 
     @da4.setter
     def da4(self, value: float) -> None:
+        """Set the da4 property."""
         self._cards[0].set_value("da4", value)
 
     @property
@@ -176,13 +183,14 @@ class SetPartAdd(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
     def parts(self) -> SeriesCard:
-        """dynamic array of part set ids."""
+        """dynamic array of part set ids.."""
         return self._cards[1]
 
     @parts.setter
@@ -197,5 +205,6 @@ class SetPartAdd(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialVelocityGenerationStartTime(KeywordBase):
     subkeyword = "VELOCITY_GENERATION_START_TIME"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -55,5 +57,6 @@ class InitialVelocityGenerationStartTime(KeywordBase):
 
     @stime.setter
     def stime(self, value: float) -> None:
+        """Set the stime property."""
         self._cards[0].set_value("stime", value)
 

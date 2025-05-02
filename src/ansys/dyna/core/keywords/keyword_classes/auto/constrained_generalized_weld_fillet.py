@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
     subkeyword = "GENERALIZED_WELD_FILLET"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -163,6 +165,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @wid.setter
     def wid(self, value: int) -> None:
+        """Set the wid property."""
         self._cards[0].set_value("wid", value)
 
     @property
@@ -173,6 +176,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 
     @property
@@ -183,6 +187,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -195,6 +200,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @filter.setter
     def filter(self, value: int) -> None:
+        """Set the filter property."""
         self._cards[1].set_value("filter", value)
 
     @property
@@ -206,6 +212,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @window.setter
     def window(self, value: float) -> None:
+        """Set the window property."""
         self._cards[1].set_value("window", value)
 
     @property
@@ -216,6 +223,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @npr.setter
     def npr(self, value: int) -> None:
+        """Set the npr property."""
         self._cards[1].set_value("npr", value)
 
     @property
@@ -229,8 +237,9 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @nprt.setter
     def nprt(self, value: int) -> None:
+        """Set the nprt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""nprt must be `None` or one of {0,1,2}""")
+            raise Exception("""nprt must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("nprt", value)
 
     @property
@@ -241,6 +250,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @tfail.setter
     def tfail(self, value: float) -> None:
+        """Set the tfail property."""
         self._cards[2].set_value("tfail", value)
 
     @property
@@ -251,6 +261,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @epsf.setter
     def epsf(self, value: float) -> None:
+        """Set the epsf property."""
         self._cards[2].set_value("epsf", value)
 
     @property
@@ -261,6 +272,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[2].set_value("sigy", value)
 
     @property
@@ -271,6 +283,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[2].set_value("beta", value)
 
     @property
@@ -281,6 +294,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @l.setter
     def l(self, value: float) -> None:
+        """Set the l property."""
         self._cards[2].set_value("l", value)
 
     @property
@@ -291,6 +305,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[2].set_value("w", value)
 
     @property
@@ -301,6 +316,7 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[2].set_value("a", value)
 
     @property
@@ -311,5 +327,6 @@ class ConstrainedGeneralizedWeldFillet(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[2].set_value("alpha", value)
 

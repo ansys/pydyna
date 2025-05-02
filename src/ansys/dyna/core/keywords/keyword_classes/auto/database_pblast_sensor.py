@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabasePblastSensor(KeywordBase):
     subkeyword = "PBLAST_SENSOR"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -99,6 +101,7 @@ class DatabasePblastSensor(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -110,6 +113,7 @@ class DatabasePblastSensor(KeywordBase):
 
     @binary.setter
     def binary(self, value: int) -> None:
+        """Set the binary property."""
         self._cards[0].set_value("binary", value)
 
     @property
@@ -120,6 +124,7 @@ class DatabasePblastSensor(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[1].set_value("id", value)
 
     @property
@@ -131,8 +136,9 @@ class DatabasePblastSensor(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [0, 1, None]:
-            raise Exception("""itype must be `None` or one of {0,1}""")
+            raise Exception("""itype must be `None` or one of {0,1}.""")
         self._cards[1].set_value("itype", value)
 
     @property
@@ -143,6 +149,7 @@ class DatabasePblastSensor(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[1].set_value("offset", value)
 
     @property
@@ -153,5 +160,6 @@ class DatabasePblastSensor(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[1].set_value("radius", value)
 

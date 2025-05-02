@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadGravityPart(KeywordBase):
     subkeyword = "GRAVITY_PART"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -99,6 +101,7 @@ class LoadGravityPart(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -109,6 +112,7 @@ class LoadGravityPart(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         self._cards[0].set_value("dof", value)
 
     @property
@@ -119,6 +123,7 @@ class LoadGravityPart(KeywordBase):
 
     @lc.setter
     def lc(self, value: int) -> None:
+        """Set the lc property."""
         self._cards[0].set_value("lc", value)
 
     @property
@@ -129,6 +134,7 @@ class LoadGravityPart(KeywordBase):
 
     @accel.setter
     def accel(self, value: float) -> None:
+        """Set the accel property."""
         self._cards[0].set_value("accel", value)
 
     @property
@@ -139,6 +145,7 @@ class LoadGravityPart(KeywordBase):
 
     @lcdr.setter
     def lcdr(self, value: int) -> None:
+        """Set the lcdr property."""
         self._cards[0].set_value("lcdr", value)
 
     @property
@@ -149,6 +156,7 @@ class LoadGravityPart(KeywordBase):
 
     @stga.setter
     def stga(self, value: int) -> None:
+        """Set the stga property."""
         self._cards[0].set_value("stga", value)
 
     @property
@@ -159,5 +167,6 @@ class LoadGravityPart(KeywordBase):
 
     @stgr.setter
     def stgr(self, value: int) -> None:
+        """Set the stgr property."""
         self._cards[0].set_value("stgr", value)
 

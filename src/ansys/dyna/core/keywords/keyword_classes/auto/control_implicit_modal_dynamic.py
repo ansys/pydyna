@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitModalDynamic(KeywordBase):
     subkeyword = "IMPLICIT_MODAL_DYNAMIC"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -116,8 +118,9 @@ class ControlImplicitModalDynamic(KeywordBase):
 
     @mdflag.setter
     def mdflag(self, value: int) -> None:
+        """Set the mdflag property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""mdflag must be `None` or one of {0,1,2}""")
+            raise Exception("""mdflag must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("mdflag", value)
 
     @property
@@ -128,6 +131,7 @@ class ControlImplicitModalDynamic(KeywordBase):
 
     @zeta.setter
     def zeta(self, value: float) -> None:
+        """Set the zeta property."""
         self._cards[0].set_value("zeta", value)
 
     @property
@@ -138,6 +142,7 @@ class ControlImplicitModalDynamic(KeywordBase):
 
     @md_strs.setter
     def md_strs(self, value: int) -> None:
+        """Set the md_strs property."""
         self._cards[0].set_value("md_strs", value)
 
     @property
@@ -148,6 +153,7 @@ class ControlImplicitModalDynamic(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -161,8 +167,9 @@ class ControlImplicitModalDynamic(KeywordBase):
 
     @integ.setter
     def integ(self, value: int) -> None:
+        """Set the integ property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""integ must be `None` or one of {0,1,2}""")
+            raise Exception("""integ must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("integ", value)
 
     @property
@@ -173,6 +180,7 @@ class ControlImplicitModalDynamic(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -184,6 +192,7 @@ class ControlImplicitModalDynamic(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 
     @property
@@ -195,5 +204,6 @@ class ControlImplicitModalDynamic(KeywordBase):
 
     @filename2.setter
     def filename2(self, value: str) -> None:
+        """Set the filename2 property."""
         self._cards[2].set_value("filename2", value)
 

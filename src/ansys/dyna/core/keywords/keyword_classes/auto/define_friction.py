@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFriction(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -181,6 +183,7 @@ class DefineFriction(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -191,6 +194,7 @@ class DefineFriction(KeywordBase):
 
     @fs_d.setter
     def fs_d(self, value: float) -> None:
+        """Set the fs_d property."""
         self._cards[0].set_value("fs_d", value)
 
     @property
@@ -201,6 +205,7 @@ class DefineFriction(KeywordBase):
 
     @fd_d.setter
     def fd_d(self, value: float) -> None:
+        """Set the fd_d property."""
         self._cards[0].set_value("fd_d", value)
 
     @property
@@ -211,6 +216,7 @@ class DefineFriction(KeywordBase):
 
     @dc_d.setter
     def dc_d(self, value: float) -> None:
+        """Set the dc_d property."""
         self._cards[0].set_value("dc_d", value)
 
     @property
@@ -221,6 +227,7 @@ class DefineFriction(KeywordBase):
 
     @vc_d.setter
     def vc_d(self, value: float) -> None:
+        """Set the vc_d property."""
         self._cards[0].set_value("vc_d", value)
 
     @property
@@ -233,8 +240,9 @@ class DefineFriction(KeywordBase):
 
     @icnep.setter
     def icnep(self, value: int) -> None:
+        """Set the icnep property."""
         if value not in [0, 1, None]:
-            raise Exception("""icnep must be `None` or one of {0,1}""")
+            raise Exception("""icnep must be `None` or one of {0,1}.""")
         self._cards[0].set_value("icnep", value)
 
     @property
@@ -245,6 +253,7 @@ class DefineFriction(KeywordBase):
 
     @pid_i.setter
     def pid_i(self, value: int) -> None:
+        """Set the pid_i property."""
         self._cards[1].set_value("pid_i", value)
 
     @property
@@ -255,6 +264,7 @@ class DefineFriction(KeywordBase):
 
     @pid_j.setter
     def pid_j(self, value: int) -> None:
+        """Set the pid_j property."""
         self._cards[1].set_value("pid_j", value)
 
     @property
@@ -265,6 +275,7 @@ class DefineFriction(KeywordBase):
 
     @fs_ij.setter
     def fs_ij(self, value: float) -> None:
+        """Set the fs_ij property."""
         self._cards[1].set_value("fs_ij", value)
 
     @property
@@ -275,6 +286,7 @@ class DefineFriction(KeywordBase):
 
     @fd_ij.setter
     def fd_ij(self, value: float) -> None:
+        """Set the fd_ij property."""
         self._cards[1].set_value("fd_ij", value)
 
     @property
@@ -285,6 +297,7 @@ class DefineFriction(KeywordBase):
 
     @dc_ij.setter
     def dc_ij(self, value: float) -> None:
+        """Set the dc_ij property."""
         self._cards[1].set_value("dc_ij", value)
 
     @property
@@ -295,6 +308,7 @@ class DefineFriction(KeywordBase):
 
     @vc_ij.setter
     def vc_ij(self, value: float) -> None:
+        """Set the vc_ij property."""
         self._cards[1].set_value("vc_ij", value)
 
     @property
@@ -305,6 +319,7 @@ class DefineFriction(KeywordBase):
 
     @ptypei.setter
     def ptypei(self, value: str) -> None:
+        """Set the ptypei property."""
         self._cards[1].set_value("ptypei", value)
 
     @property
@@ -315,6 +330,7 @@ class DefineFriction(KeywordBase):
 
     @ptypej.setter
     def ptypej(self, value: str) -> None:
+        """Set the ptypej property."""
         self._cards[1].set_value("ptypej", value)
 
     @property
@@ -325,5 +341,6 @@ class DefineFriction(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

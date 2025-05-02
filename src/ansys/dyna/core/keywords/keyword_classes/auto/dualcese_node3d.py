@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseNode3D(KeywordBase):
     subkeyword = "NODE3D"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -78,6 +80,7 @@ class DualceseNode3D(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -88,6 +91,7 @@ class DualceseNode3D(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -98,6 +102,7 @@ class DualceseNode3D(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -108,5 +113,6 @@ class DualceseNode3D(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 

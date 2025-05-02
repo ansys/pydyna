@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundarySolidWallMsurfRotate(KeywordBase):
     subkeyword = "BOUNDARY_SOLID_WALL_MSURF_ROTATE"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,6 +112,7 @@ class CeseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @surfprt.setter
     def surfprt(self, value: int) -> None:
+        """Set the surfprt property."""
         self._cards[0].set_value("surfprt", value)
 
     @property
@@ -120,6 +123,7 @@ class CeseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -130,6 +134,7 @@ class CeseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -140,6 +145,7 @@ class CeseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -150,6 +156,7 @@ class CeseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -160,6 +167,7 @@ class CeseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @nx.setter
     def nx(self, value: float) -> None:
+        """Set the nx property."""
         self._cards[0].set_value("nx", value)
 
     @property
@@ -170,6 +178,7 @@ class CeseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @ny.setter
     def ny(self, value: float) -> None:
+        """Set the ny property."""
         self._cards[0].set_value("ny", value)
 
     @property
@@ -180,5 +189,6 @@ class CeseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @nz.setter
     def nz(self, value: float) -> None:
+        """Set the nz property."""
         self._cards[0].set_value("nz", value)
 

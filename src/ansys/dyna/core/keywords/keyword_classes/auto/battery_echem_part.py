@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BATTERY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BatteryEchemPart(KeywordBase):
     subkeyword = "ECHEM_PART"
 
     def __init__(self, **kwargs):
+        """Initialize the BATTERY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class BatteryEchemPart(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -78,6 +81,7 @@ class BatteryEchemPart(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -88,5 +92,6 @@ class BatteryEchemPart(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 

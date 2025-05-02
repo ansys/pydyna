@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CHEMISTRY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryModel(KeywordBase):
     subkeyword = "MODEL"
 
     def __init__(self, **kwargs):
+        """Initialize the CHEMISTRY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class ChemistryModel(KeywordBase):
 
     @modelid.setter
     def modelid(self, value: int) -> None:
+        """Set the modelid property."""
         self._cards[0].set_value("modelid", value)
 
     @property
@@ -115,8 +118,9 @@ class ChemistryModel(KeywordBase):
 
     @jacsel.setter
     def jacsel(self, value: int) -> None:
+        """Set the jacsel property."""
         if value not in [1, 2, None]:
-            raise Exception("""jacsel must be `None` or one of {1,2}""")
+            raise Exception("""jacsel must be `None` or one of {1,2}.""")
         self._cards[0].set_value("jacsel", value)
 
     @property
@@ -127,6 +131,7 @@ class ChemistryModel(KeywordBase):
 
     @errlim.setter
     def errlim(self, value: float) -> None:
+        """Set the errlim property."""
         self._cards[0].set_value("errlim", value)
 
     @property
@@ -137,6 +142,7 @@ class ChemistryModel(KeywordBase):
 
     @file1.setter
     def file1(self, value: str) -> None:
+        """Set the file1 property."""
         self._cards[1].set_value("file1", value)
 
     @property
@@ -147,6 +153,7 @@ class ChemistryModel(KeywordBase):
 
     @file2.setter
     def file2(self, value: str) -> None:
+        """Set the file2 property."""
         self._cards[2].set_value("file2", value)
 
     @property
@@ -157,5 +164,6 @@ class ChemistryModel(KeywordBase):
 
     @file3.setter
     def file3(self, value: str) -> None:
+        """Set the file3 property."""
         self._cards[3].set_value("file3", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseBoundarySolidWallSegmentSet(KeywordBase):
     subkeyword = "BOUNDARY_SOLID_WALL_SEGMENT_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class DualceseBoundarySolidWallSegmentSet(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -92,6 +95,7 @@ class DualceseBoundarySolidWallSegmentSet(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -104,6 +108,7 @@ class DualceseBoundarySolidWallSegmentSet(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -116,6 +121,7 @@ class DualceseBoundarySolidWallSegmentSet(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -128,5 +134,6 @@ class DualceseBoundarySolidWallSegmentSet(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSegmentSetAngle(KeywordBase):
     subkeyword = "SEGMENT_SET_ANGLE"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -124,6 +126,7 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -134,6 +137,7 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -144,6 +148,7 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -154,6 +159,7 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -164,8 +170,9 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @ioptp.setter
     def ioptp(self, value: int) -> None:
+        """Set the ioptp property."""
         if value not in [0, 1, None]:
-            raise Exception("""ioptp must be `None` or one of {0,1}""")
+            raise Exception("""ioptp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ioptp", value)
 
     @property
@@ -176,8 +183,9 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @ioptd.setter
     def ioptd(self, value: int) -> None:
+        """Set the ioptd property."""
         if value not in [0, 1, None]:
-            raise Exception("""ioptd must be `None` or one of {0,1}""")
+            raise Exception("""ioptd must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ioptd", value)
 
     @property
@@ -188,6 +196,7 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[1].set_value("n1", value)
 
     @property
@@ -198,6 +207,7 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[1].set_value("n2", value)
 
     @property
@@ -208,6 +218,7 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @na.setter
     def na(self, value: int) -> None:
+        """Set the na property."""
         self._cards[1].set_value("na", value)
 
     @property
@@ -218,5 +229,6 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @ni.setter
     def ni(self, value: int) -> None:
+        """Set the ni property."""
         self._cards[1].set_value("ni", value)
 

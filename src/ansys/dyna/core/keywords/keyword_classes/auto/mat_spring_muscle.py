@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSpringMuscle(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -154,6 +156,7 @@ class MatSpringMuscle(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -164,6 +167,7 @@ class MatSpringMuscle(KeywordBase):
 
     @lo.setter
     def lo(self, value: float) -> None:
+        """Set the lo property."""
         self._cards[0].set_value("lo", value)
 
     @property
@@ -174,6 +178,7 @@ class MatSpringMuscle(KeywordBase):
 
     @vmax.setter
     def vmax(self, value: float) -> None:
+        """Set the vmax property."""
         self._cards[0].set_value("vmax", value)
 
     @property
@@ -186,6 +191,7 @@ class MatSpringMuscle(KeywordBase):
 
     @sv.setter
     def sv(self, value: float) -> None:
+        """Set the sv property."""
         self._cards[0].set_value("sv", value)
 
     @property
@@ -198,6 +204,7 @@ class MatSpringMuscle(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -208,6 +215,7 @@ class MatSpringMuscle(KeywordBase):
 
     @fmax.setter
     def fmax(self, value: float) -> None:
+        """Set the fmax property."""
         self._cards[0].set_value("fmax", value)
 
     @property
@@ -220,6 +228,7 @@ class MatSpringMuscle(KeywordBase):
 
     @tl.setter
     def tl(self, value: float) -> None:
+        """Set the tl property."""
         self._cards[0].set_value("tl", value)
 
     @property
@@ -232,6 +241,7 @@ class MatSpringMuscle(KeywordBase):
 
     @tv.setter
     def tv(self, value: float) -> None:
+        """Set the tv property."""
         self._cards[0].set_value("tv", value)
 
     @property
@@ -245,6 +255,7 @@ class MatSpringMuscle(KeywordBase):
 
     @fpe.setter
     def fpe(self, value: float) -> None:
+        """Set the fpe property."""
         self._cards[1].set_value("fpe", value)
 
     @property
@@ -255,6 +266,7 @@ class MatSpringMuscle(KeywordBase):
 
     @lmax.setter
     def lmax(self, value: float) -> None:
+        """Set the lmax property."""
         self._cards[1].set_value("lmax", value)
 
     @property
@@ -265,6 +277,7 @@ class MatSpringMuscle(KeywordBase):
 
     @ksh.setter
     def ksh(self, value: float) -> None:
+        """Set the ksh property."""
         self._cards[1].set_value("ksh", value)
 
     @property
@@ -275,5 +288,6 @@ class MatSpringMuscle(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmSolverFembem(KeywordBase):
     subkeyword = "SOLVER_FEMBEM"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -71,6 +73,7 @@ class EmSolverFembem(KeywordBase):
 
     @reltol.setter
     def reltol(self, value: float) -> None:
+        """Set the reltol property."""
         self._cards[0].set_value("reltol", value)
 
     @property
@@ -81,6 +84,7 @@ class EmSolverFembem(KeywordBase):
 
     @maxite.setter
     def maxite(self, value: int) -> None:
+        """Set the maxite property."""
         self._cards[0].set_value("maxite", value)
 
     @property
@@ -93,7 +97,8 @@ class EmSolverFembem(KeywordBase):
 
     @forcon.setter
     def forcon(self, value: int) -> None:
+        """Set the forcon property."""
         if value not in [0, 1, None]:
-            raise Exception("""forcon must be `None` or one of {0,1}""")
+            raise Exception("""forcon must be `None` or one of {0,1}.""")
         self._cards[0].set_value("forcon", value)
 

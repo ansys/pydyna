@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
     subkeyword = "BOUNDARY_PRESCRIBED_MOVEMESH"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -78,6 +80,7 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -91,8 +94,9 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
 
     @dofx.setter
     def dofx(self, value: int) -> None:
+        """Set the dofx property."""
         if value not in [1, 0, None]:
-            raise Exception("""dofx must be `None` or one of {1,0}""")
+            raise Exception("""dofx must be `None` or one of {1,0}.""")
         self._cards[0].set_value("dofx", value)
 
     @property
@@ -106,8 +110,9 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
 
     @dofy.setter
     def dofy(self, value: int) -> None:
+        """Set the dofy property."""
         if value not in [1, 0, None]:
-            raise Exception("""dofy must be `None` or one of {1,0}""")
+            raise Exception("""dofy must be `None` or one of {1,0}.""")
         self._cards[0].set_value("dofy", value)
 
     @property
@@ -121,7 +126,8 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
 
     @dofz.setter
     def dofz(self, value: int) -> None:
+        """Set the dofz property."""
         if value not in [1, 0, None]:
-            raise Exception("""dofz must be `None` or one of {1,0}""")
+            raise Exception("""dofz must be `None` or one of {1,0}.""")
         self._cards[0].set_value("dofz", value)
 

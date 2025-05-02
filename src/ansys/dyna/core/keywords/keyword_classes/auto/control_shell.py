@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlShell(KeywordBase):
     subkeyword = "SHELL"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -315,6 +317,7 @@ class ControlShell(KeywordBase):
 
     @wrpang.setter
     def wrpang(self, value: float) -> None:
+        """Set the wrpang property."""
         self._cards[0].set_value("wrpang", value)
 
     @property
@@ -328,8 +331,9 @@ class ControlShell(KeywordBase):
 
     @esort.setter
     def esort(self, value: int) -> None:
+        """Set the esort property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""esort must be `None` or one of {0,1,2}""")
+            raise Exception("""esort must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("esort", value)
 
     @property
@@ -345,6 +349,7 @@ class ControlShell(KeywordBase):
 
     @irnxx.setter
     def irnxx(self, value: int) -> None:
+        """Set the irnxx property."""
         self._cards[0].set_value("irnxx", value)
 
     @property
@@ -360,8 +365,9 @@ class ControlShell(KeywordBase):
 
     @istupd.setter
     def istupd(self, value: int) -> None:
+        """Set the istupd property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""istupd must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""istupd must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("istupd", value)
 
     @property
@@ -392,8 +398,9 @@ class ControlShell(KeywordBase):
 
     @theory.setter
     def theory(self, value: int) -> None:
+        """Set the theory property."""
         if value not in [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, None]:
-            raise Exception("""theory must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20}""")
+            raise Exception("""theory must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20}.""")
         self._cards[0].set_value("theory", value)
 
     @property
@@ -406,8 +413,9 @@ class ControlShell(KeywordBase):
 
     @bwc.setter
     def bwc(self, value: int) -> None:
+        """Set the bwc property."""
         if value not in [2, 1, None]:
-            raise Exception("""bwc must be `None` or one of {2,1}""")
+            raise Exception("""bwc must be `None` or one of {2,1}.""")
         self._cards[0].set_value("bwc", value)
 
     @property
@@ -421,8 +429,9 @@ class ControlShell(KeywordBase):
 
     @miter.setter
     def miter(self, value: int) -> None:
+        """Set the miter property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""miter must be `None` or one of {1,2,3}""")
+            raise Exception("""miter must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("miter", value)
 
     @property
@@ -435,8 +444,9 @@ class ControlShell(KeywordBase):
 
     @proj.setter
     def proj(self, value: int) -> None:
+        """Set the proj property."""
         if value not in [0, 1, None]:
-            raise Exception("""proj must be `None` or one of {0,1}""")
+            raise Exception("""proj must be `None` or one of {0,1}.""")
         self._cards[0].set_value("proj", value)
 
     @property
@@ -447,6 +457,7 @@ class ControlShell(KeywordBase):
 
     @rotascl.setter
     def rotascl(self, value: float) -> None:
+        """Set the rotascl property."""
         self._cards[1].set_value("rotascl", value)
 
     @property
@@ -459,6 +470,7 @@ class ControlShell(KeywordBase):
 
     @intgrd.setter
     def intgrd(self, value: int) -> None:
+        """Set the intgrd property."""
         self._cards[1].set_value("intgrd", value)
 
     @property
@@ -474,6 +486,7 @@ class ControlShell(KeywordBase):
 
     @lamsht.setter
     def lamsht(self, value: int) -> None:
+        """Set the lamsht property."""
         self._cards[1].set_value("lamsht", value)
 
     @property
@@ -486,6 +499,7 @@ class ControlShell(KeywordBase):
 
     @cstyp6.setter
     def cstyp6(self, value: int) -> None:
+        """Set the cstyp6 property."""
         self._cards[1].set_value("cstyp6", value)
 
     @property
@@ -496,6 +510,7 @@ class ControlShell(KeywordBase):
 
     @thshel.setter
     def thshel(self, value: int) -> None:
+        """Set the thshel property."""
         self._cards[1].set_value("thshel", value)
 
     @property
@@ -509,6 +524,7 @@ class ControlShell(KeywordBase):
 
     @psstupd.setter
     def psstupd(self, value: int) -> None:
+        """Set the psstupd property."""
         self._cards[2].set_value("psstupd", value)
 
     @property
@@ -519,6 +535,7 @@ class ControlShell(KeywordBase):
 
     @sidt4tu.setter
     def sidt4tu(self, value: int) -> None:
+        """Set the sidt4tu property."""
         self._cards[2].set_value("sidt4tu", value)
 
     @property
@@ -532,8 +549,9 @@ class ControlShell(KeywordBase):
 
     @cntco.setter
     def cntco(self, value: int) -> None:
+        """Set the cntco property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""cntco must be `None` or one of {0,1,2}""")
+            raise Exception("""cntco must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("cntco", value)
 
     @property
@@ -546,8 +564,9 @@ class ControlShell(KeywordBase):
 
     @itsflg.setter
     def itsflg(self, value: int) -> None:
+        """Set the itsflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""itsflg must be `None` or one of {0,1}""")
+            raise Exception("""itsflg must be `None` or one of {0,1}.""")
         self._cards[2].set_value("itsflg", value)
 
     @property
@@ -560,8 +579,9 @@ class ControlShell(KeywordBase):
 
     @irquad.setter
     def irquad(self, value: int) -> None:
+        """Set the irquad property."""
         if value not in [3, 2, None]:
-            raise Exception("""irquad must be `None` or one of {3,2}""")
+            raise Exception("""irquad must be `None` or one of {3,2}.""")
         self._cards[2].set_value("irquad", value)
 
     @property
@@ -572,6 +592,7 @@ class ControlShell(KeywordBase):
 
     @w_mode.setter
     def w_mode(self, value: float) -> None:
+        """Set the w_mode property."""
         self._cards[2].set_value("w-mode", value)
 
     @property
@@ -582,6 +603,7 @@ class ControlShell(KeywordBase):
 
     @stretch.setter
     def stretch(self, value: float) -> None:
+        """Set the stretch property."""
         self._cards[2].set_value("stretch", value)
 
     @property
@@ -594,6 +616,7 @@ class ControlShell(KeywordBase):
 
     @icrq.setter
     def icrq(self, value: int) -> None:
+        """Set the icrq property."""
         self._cards[2].set_value("icrq", value)
 
     @property
@@ -617,6 +640,7 @@ class ControlShell(KeywordBase):
 
     @nfail1.setter
     def nfail1(self, value: int) -> None:
+        """Set the nfail1 property."""
         self._cards[3].set_value("nfail1", value)
 
     @property
@@ -641,6 +665,7 @@ class ControlShell(KeywordBase):
 
     @nfail4.setter
     def nfail4(self, value: int) -> None:
+        """Set the nfail4 property."""
         self._cards[3].set_value("nfail4", value)
 
     @property
@@ -651,6 +676,7 @@ class ControlShell(KeywordBase):
 
     @psnfail.setter
     def psnfail(self, value: int) -> None:
+        """Set the psnfail property."""
         self._cards[3].set_value("psnfail", value)
 
     @property
@@ -666,8 +692,9 @@ class ControlShell(KeywordBase):
 
     @keepcs.setter
     def keepcs(self, value: int) -> None:
+        """Set the keepcs property."""
         if value not in [0, 1, None]:
-            raise Exception("""keepcs must be `None` or one of {0,1}""")
+            raise Exception("""keepcs must be `None` or one of {0,1}.""")
         self._cards[3].set_value("keepcs", value)
 
     @property
@@ -682,8 +709,9 @@ class ControlShell(KeywordBase):
 
     @delfr.setter
     def delfr(self, value: int) -> None:
+        """Set the delfr property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""delfr must be `None` or one of {0,1,2,3}""")
+            raise Exception("""delfr must be `None` or one of {0,1,2,3}.""")
         self._cards[3].set_value("delfr", value)
 
     @property
@@ -694,6 +722,7 @@ class ControlShell(KeywordBase):
 
     @drcpsid.setter
     def drcpsid(self, value: int) -> None:
+        """Set the drcpsid property."""
         self._cards[3].set_value("drcpsid", value)
 
     @property
@@ -704,6 +733,7 @@ class ControlShell(KeywordBase):
 
     @drcprm.setter
     def drcprm(self, value: float) -> None:
+        """Set the drcprm property."""
         self._cards[3].set_value("drcprm", value)
 
     @property
@@ -717,8 +747,9 @@ class ControlShell(KeywordBase):
 
     @intperr.setter
     def intperr(self, value: int) -> None:
+        """Set the intperr property."""
         if value not in [0, 1, None]:
-            raise Exception("""intperr must be `None` or one of {0,1}""")
+            raise Exception("""intperr must be `None` or one of {0,1}.""")
         self._cards[3].set_value("intperr", value)
 
     @property
@@ -733,8 +764,9 @@ class ControlShell(KeywordBase):
 
     @drcmth.setter
     def drcmth(self, value: int) -> None:
+        """Set the drcmth property."""
         if value not in [0, 1, None]:
-            raise Exception("""drcmth must be `None` or one of {0,1}""")
+            raise Exception("""drcmth must be `None` or one of {0,1}.""")
         self._cards[4].set_value("drcmth", value)
 
     @property
@@ -746,6 +778,7 @@ class ControlShell(KeywordBase):
 
     @lispsid.setter
     def lispsid(self, value: int) -> None:
+        """Set the lispsid property."""
         self._cards[4].set_value("lispsid", value)
 
     @property
@@ -758,7 +791,8 @@ class ControlShell(KeywordBase):
 
     @nlocdt.setter
     def nlocdt(self, value: int) -> None:
+        """Set the nlocdt property."""
         if value not in [0, 1, None]:
-            raise Exception("""nlocdt must be `None` or one of {0,1}""")
+            raise Exception("""nlocdt must be `None` or one of {0,1}.""")
         self._cards[4].set_value("nlocdt", value)
 

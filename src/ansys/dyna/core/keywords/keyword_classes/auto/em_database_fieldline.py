@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmDatabaseFieldline(KeywordBase):
     subkeyword = "DATABASE_FIELDLINE"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -140,6 +142,7 @@ class EmDatabaseFieldline(KeywordBase):
 
     @flid.setter
     def flid(self, value: int) -> None:
+        """Set the flid property."""
         self._cards[0].set_value("flid", value)
 
     @property
@@ -151,6 +154,7 @@ class EmDatabaseFieldline(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -161,6 +165,7 @@ class EmDatabaseFieldline(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -171,6 +176,7 @@ class EmDatabaseFieldline(KeywordBase):
 
     @npoint.setter
     def npoint(self, value: int) -> None:
+        """Set the npoint property."""
         self._cards[0].set_value("npoint", value)
 
     @property
@@ -183,8 +189,9 @@ class EmDatabaseFieldline(KeywordBase):
 
     @integ.setter
     def integ(self, value: int) -> None:
+        """Set the integ property."""
         if value not in [2, 1, None]:
-            raise Exception("""integ must be `None` or one of {2,1}""")
+            raise Exception("""integ must be `None` or one of {2,1}.""")
         self._cards[1].set_value("integ", value)
 
     @property
@@ -197,6 +204,7 @@ class EmDatabaseFieldline(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[1].set_value("h", value)
 
     @property
@@ -207,6 +215,7 @@ class EmDatabaseFieldline(KeywordBase):
 
     @hmin.setter
     def hmin(self, value: float) -> None:
+        """Set the hmin property."""
         self._cards[1].set_value("hmin", value)
 
     @property
@@ -217,6 +226,7 @@ class EmDatabaseFieldline(KeywordBase):
 
     @hmax.setter
     def hmax(self, value: float) -> None:
+        """Set the hmax property."""
         self._cards[1].set_value("hmax", value)
 
     @property
@@ -227,6 +237,7 @@ class EmDatabaseFieldline(KeywordBase):
 
     @tolabs.setter
     def tolabs(self, value: float) -> None:
+        """Set the tolabs property."""
         self._cards[1].set_value("tolabs", value)
 
     @property
@@ -237,6 +248,7 @@ class EmDatabaseFieldline(KeywordBase):
 
     @tolrel.setter
     def tolrel(self, value: float) -> None:
+        """Set the tolrel property."""
         self._cards[1].set_value("tolrel", value)
 
     @property
@@ -250,7 +262,8 @@ class EmDatabaseFieldline(KeywordBase):
 
     @btype.setter
     def btype(self, value: int) -> None:
+        """Set the btype property."""
         if value not in [2, 1, 3, None]:
-            raise Exception("""btype must be `None` or one of {2,1,3}""")
+            raise Exception("""btype must be `None` or one of {2,1,3}.""")
         self._cards[2].set_value("btype", value)
 

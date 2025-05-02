@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the IGA keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IgaVolumeXyz(KeywordBase):
     subkeyword = "VOLUME_XYZ"
 
     def __init__(self, **kwargs):
+        """Initialize the IGA keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -142,6 +144,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -152,6 +155,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -162,6 +166,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -172,6 +177,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @esid.setter
     def esid(self, value: int) -> None:
+        """Set the esid property."""
         self._cards[0].set_value("esid", value)
 
     @property
@@ -182,6 +188,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @fsid.setter
     def fsid(self, value: int) -> None:
+        """Set the fsid property."""
         self._cards[0].set_value("fsid", value)
 
     @property
@@ -192,6 +199,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @brid1.setter
     def brid1(self, value: int) -> None:
+        """Set the brid1 property."""
         self._cards[1].set_value("brid1", value)
 
     @property
@@ -202,6 +210,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @brid2.setter
     def brid2(self, value: int) -> None:
+        """Set the brid2 property."""
         self._cards[1].set_value("brid2", value)
 
     @property
@@ -212,6 +221,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @brid3.setter
     def brid3(self, value: int) -> None:
+        """Set the brid3 property."""
         self._cards[1].set_value("brid3", value)
 
     @property
@@ -222,6 +232,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @brid4.setter
     def brid4(self, value: int) -> None:
+        """Set the brid4 property."""
         self._cards[1].set_value("brid4", value)
 
     @property
@@ -232,6 +243,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @brid5.setter
     def brid5(self, value: int) -> None:
+        """Set the brid5 property."""
         self._cards[1].set_value("brid5", value)
 
     @property
@@ -242,6 +254,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @brid6.setter
     def brid6(self, value: int) -> None:
+        """Set the brid6 property."""
         self._cards[1].set_value("brid6", value)
 
     @property
@@ -252,6 +265,7 @@ class IgaVolumeXyz(KeywordBase):
 
     @brid7.setter
     def brid7(self, value: int) -> None:
+        """Set the brid7 property."""
         self._cards[1].set_value("brid7", value)
 
     @property
@@ -262,5 +276,6 @@ class IgaVolumeXyz(KeywordBase):
 
     @brid8.setter
     def brid8(self, value: int) -> None:
+        """Set the brid8 property."""
         self._cards[1].set_value("brid8", value)
 

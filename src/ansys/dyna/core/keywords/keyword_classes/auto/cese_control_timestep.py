@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseControlTimestep(KeywordBase):
     subkeyword = "CONTROL_TIMESTEP"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -73,6 +75,7 @@ class CeseControlTimestep(KeywordBase):
 
     @iddt.setter
     def iddt(self, value: int) -> None:
+        """Set the iddt property."""
         self._cards[0].set_value("iddt", value)
 
     @property
@@ -85,6 +88,7 @@ class CeseControlTimestep(KeywordBase):
 
     @cfl.setter
     def cfl(self, value: float) -> None:
+        """Set the cfl property."""
         self._cards[0].set_value("cfl", value)
 
     @property
@@ -95,5 +99,6 @@ class CeseControlTimestep(KeywordBase):
 
     @dtint.setter
     def dtint(self, value: float) -> None:
+        """Set the dtint property."""
         self._cards[0].set_value("dtint", value)
 

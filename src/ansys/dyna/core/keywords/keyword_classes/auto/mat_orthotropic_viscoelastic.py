@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -295,6 +297,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -305,6 +308,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -315,6 +319,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @ea.setter
     def ea(self, value: float) -> None:
+        """Set the ea property."""
         self._cards[0].set_value("ea", value)
 
     @property
@@ -325,6 +330,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @eb.setter
     def eb(self, value: float) -> None:
+        """Set the eb property."""
         self._cards[0].set_value("eb", value)
 
     @property
@@ -335,6 +341,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @ec.setter
     def ec(self, value: float) -> None:
+        """Set the ec property."""
         self._cards[0].set_value("ec", value)
 
     @property
@@ -345,6 +352,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @vf.setter
     def vf(self, value: float) -> None:
+        """Set the vf property."""
         self._cards[0].set_value("vf", value)
 
     @property
@@ -355,6 +363,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -365,6 +374,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @g0.setter
     def g0(self, value: float) -> None:
+        """Set the g0 property."""
         self._cards[1].set_value("g0", value)
 
     @property
@@ -375,6 +385,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @ginf.setter
     def ginf(self, value: float) -> None:
+        """Set the ginf property."""
         self._cards[1].set_value("ginf", value)
 
     @property
@@ -385,6 +396,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[1].set_value("beta", value)
 
     @property
@@ -395,6 +407,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @prba.setter
     def prba(self, value: float) -> None:
+        """Set the prba property."""
         self._cards[1].set_value("prba", value)
 
     @property
@@ -405,6 +418,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @prca.setter
     def prca(self, value: float) -> None:
+        """Set the prca property."""
         self._cards[1].set_value("prca", value)
 
     @property
@@ -415,6 +429,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @prcb.setter
     def prcb(self, value: float) -> None:
+        """Set the prcb property."""
         self._cards[1].set_value("prcb", value)
 
     @property
@@ -425,6 +440,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @gab.setter
     def gab(self, value: float) -> None:
+        """Set the gab property."""
         self._cards[2].set_value("gab", value)
 
     @property
@@ -435,6 +451,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @gbc.setter
     def gbc(self, value: float) -> None:
+        """Set the gbc property."""
         self._cards[2].set_value("gbc", value)
 
     @property
@@ -445,6 +462,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @gca.setter
     def gca(self, value: float) -> None:
+        """Set the gca property."""
         self._cards[2].set_value("gca", value)
 
     @property
@@ -462,6 +480,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -472,6 +491,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @mangle.setter
     def mangle(self, value: float) -> None:
+        """Set the mangle property."""
         self._cards[2].set_value("mangle", value)
 
     @property
@@ -482,6 +502,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[3].set_value("a1", value)
 
     @property
@@ -492,6 +513,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[3].set_value("a2", value)
 
     @property
@@ -502,6 +524,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[3].set_value("a3", value)
 
     @property
@@ -512,6 +535,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[4].set_value("v1", value)
 
     @property
@@ -522,6 +546,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[4].set_value("v2", value)
 
     @property
@@ -532,6 +557,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[4].set_value("v3", value)
 
     @property
@@ -542,6 +568,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -552,6 +579,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -562,6 +590,7 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[4].set_value("d3", value)
 
     @property
@@ -572,5 +601,6 @@ class MatOrthotropicViscoelastic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

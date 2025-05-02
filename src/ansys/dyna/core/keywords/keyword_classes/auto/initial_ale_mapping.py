@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialAleMapping(KeywordBase):
     subkeyword = "ALE_MAPPING"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -127,6 +129,7 @@ class InitialAleMapping(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -140,8 +143,9 @@ class InitialAleMapping(KeywordBase):
 
     @typ.setter
     def typ(self, value: int) -> None:
+        """Set the typ property."""
         if value not in [0, 1, None]:
-            raise Exception("""typ must be `None` or one of {0,1}""")
+            raise Exception("""typ must be `None` or one of {0,1}.""")
         self._cards[0].set_value("typ", value)
 
     @property
@@ -152,6 +156,7 @@ class InitialAleMapping(KeywordBase):
 
     @ammsid.setter
     def ammsid(self, value: int) -> None:
+        """Set the ammsid property."""
         self._cards[0].set_value("ammsid", value)
 
     @property
@@ -162,6 +167,7 @@ class InitialAleMapping(KeywordBase):
 
     @xo.setter
     def xo(self, value: float) -> None:
+        """Set the xo property."""
         self._cards[1].set_value("xo", value)
 
     @property
@@ -172,6 +178,7 @@ class InitialAleMapping(KeywordBase):
 
     @yo.setter
     def yo(self, value: float) -> None:
+        """Set the yo property."""
         self._cards[1].set_value("yo", value)
 
     @property
@@ -182,6 +189,7 @@ class InitialAleMapping(KeywordBase):
 
     @zo.setter
     def zo(self, value: float) -> None:
+        """Set the zo property."""
         self._cards[1].set_value("zo", value)
 
     @property
@@ -192,6 +200,7 @@ class InitialAleMapping(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[1].set_value("vecid", value)
 
     @property
@@ -202,6 +211,7 @@ class InitialAleMapping(KeywordBase):
 
     @angle.setter
     def angle(self, value: float) -> None:
+        """Set the angle property."""
         self._cards[1].set_value("angle", value)
 
     @property
@@ -225,8 +235,9 @@ class InitialAleMapping(KeywordBase):
 
     @sym.setter
     def sym(self, value: int) -> None:
+        """Set the sym property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""sym must be `None` or one of {0,1,2,3}""")
+            raise Exception("""sym must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("sym", value)
 
     @property
@@ -237,5 +248,6 @@ class InitialAleMapping(KeywordBase):
 
     @tbeg.setter
     def tbeg(self, value: float) -> None:
+        """Set the tbeg property."""
         self._cards[1].set_value("tbeg", value)
 

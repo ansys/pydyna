@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedCoordinate(KeywordBase):
     subkeyword = "COORDINATE"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -90,6 +92,7 @@ class ConstrainedCoordinate(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -100,6 +103,7 @@ class ConstrainedCoordinate(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -113,8 +117,9 @@ class ConstrainedCoordinate(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
+        """Set the idir property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""idir must be `None` or one of {1,2,3}""")
+            raise Exception("""idir must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("idir", value)
 
     @property
@@ -125,6 +130,7 @@ class ConstrainedCoordinate(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -135,6 +141,7 @@ class ConstrainedCoordinate(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -145,5 +152,6 @@ class ConstrainedCoordinate(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
     subkeyword = "PRESCRIBED_ORIENTATION_RIGID_ANGLES"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -142,6 +144,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @pidb.setter
     def pidb(self, value: int) -> None:
+        """Set the pidb property."""
         self._cards[0].set_value("pidb", value)
 
     @property
@@ -152,6 +155,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @pida.setter
     def pida(self, value: int) -> None:
+        """Set the pida property."""
         self._cards[0].set_value("pida", value)
 
     @property
@@ -163,6 +167,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @intrp.setter
     def intrp(self, value: int) -> None:
+        """Set the intrp property."""
         self._cards[0].set_value("intrp", value)
 
     @property
@@ -173,6 +178,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -183,6 +189,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -196,8 +203,9 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @toffset.setter
     def toffset(self, value: int) -> None:
+        """Set the toffset property."""
         if value not in [0, 1, None]:
-            raise Exception("""toffset must be `None` or one of {0,1}""")
+            raise Exception("""toffset must be `None` or one of {0,1}.""")
         self._cards[0].set_value("toffset", value)
 
     @property
@@ -208,6 +216,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @lcidq1.setter
     def lcidq1(self, value: int) -> None:
+        """Set the lcidq1 property."""
         self._cards[1].set_value("lcidq1", value)
 
     @property
@@ -218,6 +227,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @lcidq2.setter
     def lcidq2(self, value: int) -> None:
+        """Set the lcidq2 property."""
         self._cards[1].set_value("lcidq2", value)
 
     @property
@@ -228,6 +238,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @lcidq3.setter
     def lcidq3(self, value: int) -> None:
+        """Set the lcidq3 property."""
         self._cards[1].set_value("lcidq3", value)
 
     @property
@@ -252,8 +263,9 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @iseq.setter
     def iseq(self, value: int) -> None:
+        """Set the iseq property."""
         if value not in [123, 231, 312, 132, 213, 321, 121, 131, 212, 232, 313, 323, None]:
-            raise Exception("""iseq must be `None` or one of {123,231,312,132,213,321,121,131,212,232,313,323}""")
+            raise Exception("""iseq must be `None` or one of {123,231,312,132,213,321,121,131,212,232,313,323}.""")
         self._cards[1].set_value("iseq", value)
 
     @property
@@ -266,8 +278,9 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @ishft.setter
     def ishft(self, value: int) -> None:
+        """Set the ishft property."""
         if value not in [1, 2, None]:
-            raise Exception("""ishft must be `None` or one of {1,2}""")
+            raise Exception("""ishft must be `None` or one of {1,2}.""")
         self._cards[1].set_value("ishft", value)
 
     @property
@@ -280,7 +293,8 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @body.setter
     def body(self, value: int) -> None:
+        """Set the body property."""
         if value not in [0, 1, None]:
-            raise Exception("""body must be `None` or one of {0,1}""")
+            raise Exception("""body must be `None` or one of {0,1}.""")
         self._cards[1].set_value("body", value)
 

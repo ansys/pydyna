@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryThermalBulkflowSet(KeywordBase):
     subkeyword = "THERMAL_BULKFLOW_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class BoundaryThermalBulkflowSet(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -78,6 +81,7 @@ class BoundaryThermalBulkflowSet(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -88,5 +92,6 @@ class BoundaryThermalBulkflowSet(KeywordBase):
 
     @mdot.setter
     def mdot(self, value: float) -> None:
+        """Set the mdot property."""
         self._cards[0].set_value("mdot", value)
 

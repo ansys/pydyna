@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat018(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -151,6 +153,7 @@ class Mat018(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -161,6 +164,7 @@ class Mat018(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -171,6 +175,7 @@ class Mat018(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -181,6 +186,7 @@ class Mat018(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -191,6 +197,7 @@ class Mat018(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -201,6 +208,7 @@ class Mat018(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -212,6 +220,7 @@ class Mat018(KeywordBase):
 
     @src.setter
     def src(self, value: float) -> None:
+        """Set the src property."""
         self._cards[0].set_value("src", value)
 
     @property
@@ -223,6 +232,7 @@ class Mat018(KeywordBase):
 
     @srp.setter
     def srp(self, value: float) -> None:
+        """Set the srp property."""
         self._cards[0].set_value("srp", value)
 
     @property
@@ -235,6 +245,7 @@ class Mat018(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[1].set_value("sigy", value)
 
     @property
@@ -247,8 +258,9 @@ class Mat018(KeywordBase):
 
     @vp.setter
     def vp(self, value: float) -> None:
+        """Set the vp property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""vp must be `None` or one of {0.0,1.0}""")
+            raise Exception("""vp must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("vp", value)
 
     @property
@@ -259,6 +271,7 @@ class Mat018(KeywordBase):
 
     @epsf.setter
     def epsf(self, value: float) -> None:
+        """Set the epsf property."""
         self._cards[1].set_value("epsf", value)
 
     @property
@@ -269,5 +282,6 @@ class Mat018(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

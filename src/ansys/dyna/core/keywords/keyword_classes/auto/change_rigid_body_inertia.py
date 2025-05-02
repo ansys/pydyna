@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CHANGE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChangeRigidBodyInertia(KeywordBase):
     subkeyword = "RIGID_BODY_INERTIA"
 
     def __init__(self, **kwargs):
+        """Initialize the CHANGE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -121,6 +123,7 @@ class ChangeRigidBodyInertia(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -131,6 +134,7 @@ class ChangeRigidBodyInertia(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -141,6 +145,7 @@ class ChangeRigidBodyInertia(KeywordBase):
 
     @tm.setter
     def tm(self, value: float) -> None:
+        """Set the tm property."""
         self._cards[0].set_value("tm", value)
 
     @property
@@ -151,6 +156,7 @@ class ChangeRigidBodyInertia(KeywordBase):
 
     @ixx.setter
     def ixx(self, value: float) -> None:
+        """Set the ixx property."""
         self._cards[1].set_value("ixx", value)
 
     @property
@@ -161,6 +167,7 @@ class ChangeRigidBodyInertia(KeywordBase):
 
     @ixy.setter
     def ixy(self, value: float) -> None:
+        """Set the ixy property."""
         self._cards[1].set_value("ixy", value)
 
     @property
@@ -171,6 +178,7 @@ class ChangeRigidBodyInertia(KeywordBase):
 
     @ixz.setter
     def ixz(self, value: float) -> None:
+        """Set the ixz property."""
         self._cards[1].set_value("ixz", value)
 
     @property
@@ -181,6 +189,7 @@ class ChangeRigidBodyInertia(KeywordBase):
 
     @iyy.setter
     def iyy(self, value: float) -> None:
+        """Set the iyy property."""
         self._cards[1].set_value("iyy", value)
 
     @property
@@ -191,6 +200,7 @@ class ChangeRigidBodyInertia(KeywordBase):
 
     @iyz.setter
     def iyz(self, value: float) -> None:
+        """Set the iyz property."""
         self._cards[1].set_value("iyz", value)
 
     @property
@@ -201,5 +211,6 @@ class ChangeRigidBodyInertia(KeywordBase):
 
     @izz.setter
     def izz(self, value: float) -> None:
+        """Set the izz property."""
         self._cards[1].set_value("izz", value)
 

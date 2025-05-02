@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ALE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleCouplingNodalDragId(KeywordBase):
     subkeyword = "COUPLING_NODAL_DRAG_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the ALE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -160,6 +162,7 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @coupid.setter
     def coupid(self, value: int) -> None:
+        """Set the coupid property."""
         self._cards[0].set_value("coupid", value)
 
     @property
@@ -170,6 +173,7 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -180,6 +184,7 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @strsid.setter
     def strsid(self, value: int) -> None:
+        """Set the strsid property."""
         self._cards[1].set_value("strsid", value)
 
     @property
@@ -190,6 +195,7 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @alesid.setter
     def alesid(self, value: int) -> None:
+        """Set the alesid property."""
         self._cards[1].set_value("alesid", value)
 
     @property
@@ -204,8 +210,9 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @strsty.setter
     def strsty(self, value: int) -> None:
+        """Set the strsty property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""strsty must be `None` or one of {0,1,2,3}""")
+            raise Exception("""strsty must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("strsty", value)
 
     @property
@@ -218,8 +225,9 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @alesty.setter
     def alesty(self, value: int) -> None:
+        """Set the alesty property."""
         if value not in [0, 1, None]:
-            raise Exception("""alesty must be `None` or one of {0,1}""")
+            raise Exception("""alesty must be `None` or one of {0,1}.""")
         self._cards[1].set_value("alesty", value)
 
     @property
@@ -230,6 +238,7 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @start.setter
     def start(self, value: float) -> None:
+        """Set the start property."""
         self._cards[2].set_value("start", value)
 
     @property
@@ -240,6 +249,7 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @end.setter
     def end(self, value: float) -> None:
+        """Set the end property."""
         self._cards[2].set_value("end", value)
 
     @property
@@ -252,6 +262,7 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @fcoef.setter
     def fcoef(self, value: int) -> None:
+        """Set the fcoef property."""
         self._cards[2].set_value("fcoef", value)
 
     @property
@@ -265,8 +276,9 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @direcg.setter
     def direcg(self, value: int) -> None:
+        """Set the direcg property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""direcg must be `None` or one of {1,2,3}""")
+            raise Exception("""direcg must be `None` or one of {1,2,3}.""")
         self._cards[2].set_value("direcg", value)
 
     @property
@@ -277,5 +289,6 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @grav.setter
     def grav(self, value: float) -> None:
+        """Set the grav property."""
         self._cards[2].set_value("grav", value)
 

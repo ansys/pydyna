@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmContactResistance(KeywordBase):
     subkeyword = "CONTACT_RESISTANCE"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class EmContactResistance(KeywordBase):
 
     @crid.setter
     def crid(self, value: int) -> None:
+        """Set the crid property."""
         self._cards[0].set_value("crid", value)
 
     @property
@@ -105,6 +108,7 @@ class EmContactResistance(KeywordBase):
 
     @contid.setter
     def contid(self, value: int) -> None:
+        """Set the contid property."""
         self._cards[0].set_value("contid", value)
 
     @property
@@ -120,8 +124,9 @@ class EmContactResistance(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""ctype must be `None` or one of {1,2,3,4,5}""")
+            raise Exception("""ctype must be `None` or one of {1,2,3,4,5}.""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -134,8 +139,9 @@ class EmContactResistance(KeywordBase):
 
     @jhrtype.setter
     def jhrtype(self, value: int) -> None:
+        """Set the jhrtype property."""
         if value not in [0, 1, None]:
-            raise Exception("""jhrtype must be `None` or one of {0,1}""")
+            raise Exception("""jhrtype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("jhrtype", value)
 
     @property
@@ -146,5 +152,6 @@ class EmContactResistance(KeywordBase):
 
     @dfid.setter
     def dfid(self, value: int) -> None:
+        """Set the dfid property."""
         self._cards[1].set_value("dfid", value)
 

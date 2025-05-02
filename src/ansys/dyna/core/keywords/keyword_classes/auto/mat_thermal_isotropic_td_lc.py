@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -150,6 +152,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @tmid.setter
     def tmid(self, value: int) -> None:
+        """Set the tmid property."""
         self._cards[0].set_value("tmid", value)
 
     @property
@@ -161,6 +164,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @tro.setter
     def tro(self, value: float) -> None:
+        """Set the tro property."""
         self._cards[0].set_value("tro", value)
 
     @property
@@ -174,6 +178,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @tgrlc.setter
     def tgrlc(self, value: int) -> None:
+        """Set the tgrlc property."""
         self._cards[0].set_value("tgrlc", value)
 
     @property
@@ -185,6 +190,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @tgmult.setter
     def tgmult(self, value: float) -> None:
+        """Set the tgmult property."""
         self._cards[0].set_value("tgmult", value)
 
     @property
@@ -195,6 +201,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @tlat.setter
     def tlat(self, value: float) -> None:
+        """Set the tlat property."""
         self._cards[0].set_value("tlat", value)
 
     @property
@@ -205,6 +212,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @hlat.setter
     def hlat(self, value: float) -> None:
+        """Set the hlat property."""
         self._cards[0].set_value("hlat", value)
 
     @property
@@ -217,6 +225,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @hclc.setter
     def hclc(self, value: int) -> None:
+        """Set the hclc property."""
         self._cards[1].set_value("hclc", value)
 
     @property
@@ -229,6 +238,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @tclc.setter
     def tclc(self, value: int) -> None:
+        """Set the tclc property."""
         self._cards[1].set_value("tclc", value)
 
     @property
@@ -241,6 +251,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @hchsv.setter
     def hchsv(self, value: float) -> None:
+        """Set the hchsv property."""
         self._cards[1].set_value("hchsv", value)
 
     @property
@@ -253,6 +264,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @tchsv.setter
     def tchsv(self, value: float) -> None:
+        """Set the tchsv property."""
         self._cards[1].set_value("tchsv", value)
 
     @property
@@ -265,6 +277,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @tghsv.setter
     def tghsv(self, value: float) -> None:
+        """Set the tghsv property."""
         self._cards[1].set_value("tghsv", value)
 
     @property
@@ -275,5 +288,6 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

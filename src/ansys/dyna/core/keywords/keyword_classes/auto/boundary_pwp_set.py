@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPwpSet(KeywordBase):
     subkeyword = "PWP_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -148,6 +150,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -158,6 +161,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @lc.setter
     def lc(self, value: int) -> None:
+        """Set the lc property."""
         self._cards[0].set_value("lc", value)
 
     @property
@@ -168,6 +172,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @cmult.setter
     def cmult(self, value: float) -> None:
+        """Set the cmult property."""
         self._cards[0].set_value("cmult", value)
 
     @property
@@ -178,6 +183,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @lcdr.setter
     def lcdr(self, value: int) -> None:
+        """Set the lcdr property."""
         self._cards[0].set_value("lcdr", value)
 
     @property
@@ -188,6 +194,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 
     @property
@@ -198,6 +205,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -208,6 +216,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @iphre.setter
     def iphre(self, value: int) -> None:
+        """Set the iphre property."""
         self._cards[1].set_value("iphre", value)
 
     @property
@@ -222,8 +231,9 @@ class BoundaryPwpSet(KeywordBase):
 
     @itotex.setter
     def itotex(self, value: int) -> None:
+        """Set the itotex property."""
         if value not in [0, 1, 2, 4, None]:
-            raise Exception("""itotex must be `None` or one of {0,1,2,4}""")
+            raise Exception("""itotex must be `None` or one of {0,1,2,4}.""")
         self._cards[1].set_value("itotex", value)
 
     @property
@@ -237,8 +247,9 @@ class BoundaryPwpSet(KeywordBase):
 
     @idrflag.setter
     def idrflag(self, value: int) -> None:
+        """Set the idrflag property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""idrflag must be `None` or one of {0,1,2}""")
+            raise Exception("""idrflag must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("idrflag", value)
 
     @property
@@ -249,6 +260,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @lcleak.setter
     def lcleak(self, value: int) -> None:
+        """Set the lcleak property."""
         self._cards[1].set_value("lcleak", value)
 
     @property
@@ -259,6 +271,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @cleak.setter
     def cleak(self, value: float) -> None:
+        """Set the cleak property."""
         self._cards[1].set_value("cleak", value)
 
     @property
@@ -269,5 +282,6 @@ class BoundaryPwpSet(KeywordBase):
 
     @lcpum.setter
     def lcpum(self, value: int) -> None:
+        """Set the lcpum property."""
         self._cards[1].set_value("lcpum", value)
 

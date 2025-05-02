@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the PARTICLE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ParticleBlast(KeywordBase):
     subkeyword = "BLAST"
 
     def __init__(self, **kwargs):
+        """Initialize the PARTICLE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -347,6 +349,7 @@ class ParticleBlast(KeywordBase):
 
     @lagsid.setter
     def lagsid(self, value: int) -> None:
+        """Set the lagsid property."""
         self._cards[0].set_value("lagsid", value)
 
     @property
@@ -359,8 +362,9 @@ class ParticleBlast(KeywordBase):
 
     @lagstype.setter
     def lagstype(self, value: int) -> None:
+        """Set the lagstype property."""
         if value not in [0, 1, None]:
-            raise Exception("""lagstype must be `None` or one of {0,1}""")
+            raise Exception("""lagstype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("lagstype", value)
 
     @property
@@ -371,6 +375,7 @@ class ParticleBlast(KeywordBase):
 
     @dodid.setter
     def dodid(self, value: int) -> None:
+        """Set the dodid property."""
         self._cards[0].set_value("dodid", value)
 
     @property
@@ -383,8 +388,9 @@ class ParticleBlast(KeywordBase):
 
     @dodtype.setter
     def dodtype(self, value: int) -> None:
+        """Set the dodtype property."""
         if value not in [0, 1, None]:
-            raise Exception("""dodtype must be `None` or one of {0,1}""")
+            raise Exception("""dodtype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dodtype", value)
 
     @property
@@ -395,6 +401,7 @@ class ParticleBlast(KeywordBase):
 
     @hecid.setter
     def hecid(self, value: int) -> None:
+        """Set the hecid property."""
         self._cards[0].set_value("hecid", value)
 
     @property
@@ -408,8 +415,9 @@ class ParticleBlast(KeywordBase):
 
     @hectype.setter
     def hectype(self, value: int) -> None:
+        """Set the hectype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""hectype must be `None` or one of {0,1,2}""")
+            raise Exception("""hectype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("hectype", value)
 
     @property
@@ -422,6 +430,7 @@ class ParticleBlast(KeywordBase):
 
     @aircid.setter
     def aircid(self, value: int) -> None:
+        """Set the aircid property."""
         self._cards[0].set_value("aircid", value)
 
     @property
@@ -432,6 +441,7 @@ class ParticleBlast(KeywordBase):
 
     @nphe.setter
     def nphe(self, value: int) -> None:
+        """Set the nphe property."""
         self._cards[1].set_value("nphe", value)
 
     @property
@@ -442,6 +452,7 @@ class ParticleBlast(KeywordBase):
 
     @npair.setter
     def npair(self, value: int) -> None:
+        """Set the npair property."""
         self._cards[1].set_value("npair", value)
 
     @property
@@ -456,8 +467,9 @@ class ParticleBlast(KeywordBase):
 
     @iunit.setter
     def iunit(self, value: int) -> None:
+        """Set the iunit property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""iunit must be `None` or one of {0,1,2,3}""")
+            raise Exception("""iunit must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("iunit", value)
 
     @property
@@ -471,8 +483,9 @@ class ParticleBlast(KeywordBase):
 
     @ihetype.setter
     def ihetype(self, value: int) -> None:
+        """Set the ihetype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ihetype must be `None` or one of {0,1,2}""")
+            raise Exception("""ihetype must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("ihetype", value)
 
     @property
@@ -483,6 +496,7 @@ class ParticleBlast(KeywordBase):
 
     @densit.setter
     def densit(self, value: float) -> None:
+        """Set the densit property."""
         self._cards[2].set_value("densit", value)
 
     @property
@@ -493,6 +507,7 @@ class ParticleBlast(KeywordBase):
 
     @energy.setter
     def energy(self, value: float) -> None:
+        """Set the energy property."""
         self._cards[2].set_value("energy", value)
 
     @property
@@ -503,6 +518,7 @@ class ParticleBlast(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[2].set_value("gamma", value)
 
     @property
@@ -513,6 +529,7 @@ class ParticleBlast(KeywordBase):
 
     @covol.setter
     def covol(self, value: float) -> None:
+        """Set the covol property."""
         self._cards[2].set_value("covol", value)
 
     @property
@@ -523,6 +540,7 @@ class ParticleBlast(KeywordBase):
 
     @deto_v.setter
     def deto_v(self, value: float) -> None:
+        """Set the deto_v property."""
         self._cards[2].set_value("deto_v", value)
 
     @property
@@ -533,6 +551,7 @@ class ParticleBlast(KeywordBase):
 
     @detx.setter
     def detx(self, value: float) -> None:
+        """Set the detx property."""
         self._cards[3].set_value("detx", value)
 
     @property
@@ -543,6 +562,7 @@ class ParticleBlast(KeywordBase):
 
     @dety.setter
     def dety(self, value: float) -> None:
+        """Set the dety property."""
         self._cards[3].set_value("dety", value)
 
     @property
@@ -553,6 +573,7 @@ class ParticleBlast(KeywordBase):
 
     @detz.setter
     def detz(self, value: float) -> None:
+        """Set the detz property."""
         self._cards[3].set_value("detz", value)
 
     @property
@@ -563,6 +584,7 @@ class ParticleBlast(KeywordBase):
 
     @tdet.setter
     def tdet(self, value: float) -> None:
+        """Set the tdet property."""
         self._cards[3].set_value("tdet", value)
 
     @property
@@ -573,6 +595,7 @@ class ParticleBlast(KeywordBase):
 
     @btend.setter
     def btend(self, value: float) -> None:
+        """Set the btend property."""
         self._cards[3].set_value("btend", value)
 
     @property
@@ -583,6 +606,7 @@ class ParticleBlast(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[3].set_value("nid", value)
 
     @property
@@ -593,6 +617,7 @@ class ParticleBlast(KeywordBase):
 
     @bcxo.setter
     def bcxo(self, value: float) -> None:
+        """Set the bcxo property."""
         self._cards[4].set_value("bcxo", value)
 
     @property
@@ -603,6 +628,7 @@ class ParticleBlast(KeywordBase):
 
     @bcx1.setter
     def bcx1(self, value: float) -> None:
+        """Set the bcx1 property."""
         self._cards[4].set_value("bcx1", value)
 
     @property
@@ -613,6 +639,7 @@ class ParticleBlast(KeywordBase):
 
     @bcy0.setter
     def bcy0(self, value: float) -> None:
+        """Set the bcy0 property."""
         self._cards[4].set_value("bcy0", value)
 
     @property
@@ -623,6 +650,7 @@ class ParticleBlast(KeywordBase):
 
     @bcy1.setter
     def bcy1(self, value: float) -> None:
+        """Set the bcy1 property."""
         self._cards[4].set_value("bcy1", value)
 
     @property
@@ -633,6 +661,7 @@ class ParticleBlast(KeywordBase):
 
     @bcz0.setter
     def bcz0(self, value: float) -> None:
+        """Set the bcz0 property."""
         self._cards[4].set_value("bcz0", value)
 
     @property
@@ -643,6 +672,7 @@ class ParticleBlast(KeywordBase):
 
     @bcz1.setter
     def bcz1(self, value: float) -> None:
+        """Set the bcz1 property."""
         self._cards[4].set_value("bcz1", value)
 
     @property
@@ -655,8 +685,9 @@ class ParticleBlast(KeywordBase):
 
     @ibcx0.setter
     def ibcx0(self, value: int) -> None:
+        """Set the ibcx0 property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibcx0 must be `None` or one of {0,1}""")
+            raise Exception("""ibcx0 must be `None` or one of {0,1}.""")
         self._cards[5].set_value("ibcx0", value)
 
     @property
@@ -669,8 +700,9 @@ class ParticleBlast(KeywordBase):
 
     @ibcx1.setter
     def ibcx1(self, value: int) -> None:
+        """Set the ibcx1 property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibcx1 must be `None` or one of {0,1}""")
+            raise Exception("""ibcx1 must be `None` or one of {0,1}.""")
         self._cards[5].set_value("ibcx1", value)
 
     @property
@@ -683,8 +715,9 @@ class ParticleBlast(KeywordBase):
 
     @ibcy0.setter
     def ibcy0(self, value: int) -> None:
+        """Set the ibcy0 property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibcy0 must be `None` or one of {0,1}""")
+            raise Exception("""ibcy0 must be `None` or one of {0,1}.""")
         self._cards[5].set_value("ibcy0", value)
 
     @property
@@ -697,8 +730,9 @@ class ParticleBlast(KeywordBase):
 
     @ibcy1.setter
     def ibcy1(self, value: int) -> None:
+        """Set the ibcy1 property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibcy1 must be `None` or one of {0,1}""")
+            raise Exception("""ibcy1 must be `None` or one of {0,1}.""")
         self._cards[5].set_value("ibcy1", value)
 
     @property
@@ -711,8 +745,9 @@ class ParticleBlast(KeywordBase):
 
     @ibcz0.setter
     def ibcz0(self, value: int) -> None:
+        """Set the ibcz0 property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibcz0 must be `None` or one of {0,1}""")
+            raise Exception("""ibcz0 must be `None` or one of {0,1}.""")
         self._cards[5].set_value("ibcz0", value)
 
     @property
@@ -725,8 +760,9 @@ class ParticleBlast(KeywordBase):
 
     @ibcz1.setter
     def ibcz1(self, value: int) -> None:
+        """Set the ibcz1 property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibcz1 must be `None` or one of {0,1}""")
+            raise Exception("""ibcz1 must be `None` or one of {0,1}.""")
         self._cards[5].set_value("ibcz1", value)
 
     @property
@@ -739,7 +775,8 @@ class ParticleBlast(KeywordBase):
 
     @bc_p.setter
     def bc_p(self, value: int) -> None:
+        """Set the bc_p property."""
         if value not in [0, 1, None]:
-            raise Exception("""bc_p must be `None` or one of {0,1}""")
+            raise Exception("""bc_p must be `None` or one of {0,1}.""")
         self._cards[5].set_value("bc_p", value)
 

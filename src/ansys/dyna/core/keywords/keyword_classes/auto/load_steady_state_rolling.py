@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSteadyStateRolling(KeywordBase):
     subkeyword = "STEADY_STATE_ROLLING"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -157,6 +159,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -167,6 +170,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -177,6 +181,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[1].set_value("n1", value)
 
     @property
@@ -187,6 +192,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[1].set_value("n2", value)
 
     @property
@@ -197,6 +203,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @lcd1.setter
     def lcd1(self, value: int) -> None:
+        """Set the lcd1 property."""
         self._cards[1].set_value("lcd1", value)
 
     @property
@@ -207,6 +214,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @lcd1r.setter
     def lcd1r(self, value: int) -> None:
+        """Set the lcd1r property."""
         self._cards[1].set_value("lcd1r", value)
 
     @property
@@ -217,6 +225,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[2].set_value("n3", value)
 
     @property
@@ -227,6 +236,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[2].set_value("n4", value)
 
     @property
@@ -237,6 +247,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @lcd2.setter
     def lcd2(self, value: int) -> None:
+        """Set the lcd2 property."""
         self._cards[2].set_value("lcd2", value)
 
     @property
@@ -247,6 +258,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @lcd2r.setter
     def lcd2r(self, value: int) -> None:
+        """Set the lcd2r property."""
         self._cards[2].set_value("lcd2r", value)
 
     @property
@@ -257,6 +269,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @n5.setter
     def n5(self, value: int) -> None:
+        """Set the n5 property."""
         self._cards[3].set_value("n5", value)
 
     @property
@@ -267,6 +280,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @n6.setter
     def n6(self, value: int) -> None:
+        """Set the n6 property."""
         self._cards[3].set_value("n6", value)
 
     @property
@@ -277,6 +291,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @lcd3.setter
     def lcd3(self, value: int) -> None:
+        """Set the lcd3 property."""
         self._cards[3].set_value("lcd3", value)
 
     @property
@@ -287,5 +302,6 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @lcd3r.setter
     def lcd3r(self, value: int) -> None:
+        """Set the lcd3r property."""
         self._cards[3].set_value("lcd3r", value)
 

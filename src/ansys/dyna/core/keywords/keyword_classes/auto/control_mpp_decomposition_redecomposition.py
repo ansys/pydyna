@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
     subkeyword = "MPP_DECOMPOSITION_REDECOMPOSITION"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
 
     @freq.setter
     def freq(self, value: float) -> None:
+        """Set the freq property."""
         self._cards[0].set_value("freq", value)
 
     @property
@@ -107,8 +110,9 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
 
     @defgeo.setter
     def defgeo(self, value: int) -> None:
+        """Set the defgeo property."""
         if value not in [1, 2, None]:
-            raise Exception("""defgeo must be `None` or one of {1,2}""")
+            raise Exception("""defgeo must be `None` or one of {1,2}.""")
         self._cards[0].set_value("defgeo", value)
 
     @property
@@ -121,6 +125,7 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
 
     @weight.setter
     def weight(self, value: float) -> None:
+        """Set the weight property."""
         self._cards[0].set_value("weight", value)
 
     @property
@@ -133,8 +138,9 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
 
     @remsph.setter
     def remsph(self, value: int) -> None:
+        """Set the remsph property."""
         if value not in [0, 1, None]:
-            raise Exception("""remsph must be `None` or one of {0,1}""")
+            raise Exception("""remsph must be `None` or one of {0,1}.""")
         self._cards[0].set_value("remsph", value)
 
     @property
@@ -145,6 +151,7 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
 
     @stime.setter
     def stime(self, value: float) -> None:
+        """Set the stime property."""
         self._cards[0].set_value("stime", value)
 
     @property
@@ -155,5 +162,6 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
 
     @sampt_.setter
     def sampt_(self, value: float) -> None:
+        """Set the sampt_ property."""
         self._cards[0].set_value("sampt ", value)
 

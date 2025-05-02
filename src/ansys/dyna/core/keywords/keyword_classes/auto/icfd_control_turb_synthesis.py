@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlTurbSynthesis(KeywordBase):
     subkeyword = "CONTROL_TURB_SYNTHESIS"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class IcfdControlTurbSynthesis(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -96,6 +99,7 @@ class IcfdControlTurbSynthesis(KeywordBase):
 
     @iu.setter
     def iu(self, value: float) -> None:
+        """Set the iu property."""
         self._cards[0].set_value("iu", value)
 
     @property
@@ -106,6 +110,7 @@ class IcfdControlTurbSynthesis(KeywordBase):
 
     @iv.setter
     def iv(self, value: float) -> None:
+        """Set the iv property."""
         self._cards[0].set_value("iv", value)
 
     @property
@@ -116,6 +121,7 @@ class IcfdControlTurbSynthesis(KeywordBase):
 
     @iw.setter
     def iw(self, value: float) -> None:
+        """Set the iw property."""
         self._cards[0].set_value("iw", value)
 
     @property
@@ -126,5 +132,6 @@ class IcfdControlTurbSynthesis(KeywordBase):
 
     @ls.setter
     def ls(self, value: float) -> None:
+        """Set the ls property."""
         self._cards[0].set_value("ls", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseEosIdealGas(KeywordBase):
     subkeyword = "EOS_IDEAL_GAS"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -70,6 +72,7 @@ class CeseEosIdealGas(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -80,6 +83,7 @@ class CeseEosIdealGas(KeywordBase):
 
     @cv.setter
     def cv(self, value: float) -> None:
+        """Set the cv property."""
         self._cards[0].set_value("cv", value)
 
     @property
@@ -90,5 +94,6 @@ class CeseEosIdealGas(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[0].set_value("cp", value)
 

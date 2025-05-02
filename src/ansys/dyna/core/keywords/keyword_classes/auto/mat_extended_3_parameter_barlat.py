@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -292,6 +294,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -302,6 +305,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -312,6 +316,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -322,6 +327,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -334,6 +340,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @lch00.setter
     def lch00(self, value: int) -> None:
+        """Set the lch00 property."""
         self._cards[1].set_value("lch00", value)
 
     @property
@@ -346,6 +353,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @lch45.setter
     def lch45(self, value: int) -> None:
+        """Set the lch45 property."""
         self._cards[1].set_value("lch45", value)
 
     @property
@@ -358,6 +366,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @lch90.setter
     def lch90(self, value: int) -> None:
+        """Set the lch90 property."""
         self._cards[1].set_value("lch90", value)
 
     @property
@@ -370,6 +379,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @lchbi.setter
     def lchbi(self, value: int) -> None:
+        """Set the lchbi property."""
         self._cards[1].set_value("lchbi", value)
 
     @property
@@ -382,6 +392,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @lchsh.setter
     def lchsh(self, value: int) -> None:
+        """Set the lchsh property."""
         self._cards[1].set_value("lchsh", value)
 
     @property
@@ -395,6 +406,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @lcr00.setter
     def lcr00(self, value: int) -> None:
+        """Set the lcr00 property."""
         self._cards[2].set_value("lcr00", value)
 
     @property
@@ -408,6 +420,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @lcr45.setter
     def lcr45(self, value: int) -> None:
+        """Set the lcr45 property."""
         self._cards[2].set_value("lcr45", value)
 
     @property
@@ -421,6 +434,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @lcr90.setter
     def lcr90(self, value: int) -> None:
+        """Set the lcr90 property."""
         self._cards[2].set_value("lcr90", value)
 
     @property
@@ -433,6 +447,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @lcrbi.setter
     def lcrbi(self, value: int) -> None:
+        """Set the lcrbi property."""
         self._cards[2].set_value("lcrbi", value)
 
     @property
@@ -445,6 +460,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @lcrsh.setter
     def lcrsh(self, value: int) -> None:
+        """Set the lcrsh property."""
         self._cards[2].set_value("lcrsh", value)
 
     @property
@@ -455,6 +471,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[2].set_value("m", value)
 
     @property
@@ -472,6 +489,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[3].set_value("aopt", value)
 
     @property
@@ -482,6 +500,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[4].set_value("a1", value)
 
     @property
@@ -492,6 +511,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[4].set_value("a2", value)
 
     @property
@@ -502,6 +522,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[4].set_value("a3", value)
 
     @property
@@ -512,6 +533,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[5].set_value("v1", value)
 
     @property
@@ -522,6 +544,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[5].set_value("v2", value)
 
     @property
@@ -532,6 +555,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[5].set_value("v3", value)
 
     @property
@@ -542,6 +566,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[5].set_value("d1", value)
 
     @property
@@ -552,6 +577,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[5].set_value("d2", value)
 
     @property
@@ -562,6 +588,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[5].set_value("d3", value)
 
     @property
@@ -572,6 +599,7 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[5].set_value("beta", value)
 
     @property
@@ -582,5 +610,6 @@ class MatExtended3ParameterBarlat(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 

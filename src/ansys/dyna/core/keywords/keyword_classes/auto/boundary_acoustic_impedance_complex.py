@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryAcousticImpedanceComplex(KeywordBase):
     subkeyword = "ACOUSTIC_IMPEDANCE_COMPLEX"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class BoundaryAcousticImpedanceComplex(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -96,6 +99,7 @@ class BoundaryAcousticImpedanceComplex(KeywordBase):
 
     @zr.setter
     def zr(self, value: float) -> None:
+        """Set the zr property."""
         self._cards[0].set_value("zr", value)
 
     @property
@@ -106,6 +110,7 @@ class BoundaryAcousticImpedanceComplex(KeywordBase):
 
     @zi.setter
     def zi(self, value: float) -> None:
+        """Set the zi property."""
         self._cards[0].set_value("zi", value)
 
     @property
@@ -116,6 +121,7 @@ class BoundaryAcousticImpedanceComplex(KeywordBase):
 
     @lcidr.setter
     def lcidr(self, value: int) -> None:
+        """Set the lcidr property."""
         self._cards[0].set_value("lcidr", value)
 
     @property
@@ -126,5 +132,6 @@ class BoundaryAcousticImpedanceComplex(KeywordBase):
 
     @lcidi.setter
     def lcidi(self, value: int) -> None:
+        """Set the lcidi property."""
         self._cards[0].set_value("lcidi", value)
 

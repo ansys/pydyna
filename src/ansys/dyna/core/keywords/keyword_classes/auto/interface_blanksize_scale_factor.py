@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTERFACE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceBlanksizeScaleFactor(KeywordBase):
     subkeyword = "BLANKSIZE_SCALE_FACTOR"
 
     def __init__(self, **kwargs):
+        """Initialize the INTERFACE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -87,6 +89,7 @@ class InterfaceBlanksizeScaleFactor(KeywordBase):
 
     @idcrv.setter
     def idcrv(self, value: int) -> None:
+        """Set the idcrv property."""
         self._cards[0].set_value("idcrv", value)
 
     @property
@@ -101,6 +104,7 @@ class InterfaceBlanksizeScaleFactor(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -112,6 +116,7 @@ class InterfaceBlanksizeScaleFactor(KeywordBase):
 
     @offx.setter
     def offx(self, value: float) -> None:
+        """Set the offx property."""
         self._cards[0].set_value("offx", value)
 
     @property
@@ -123,6 +128,7 @@ class InterfaceBlanksizeScaleFactor(KeywordBase):
 
     @offy.setter
     def offy(self, value: float) -> None:
+        """Set the offy property."""
         self._cards[0].set_value("offy", value)
 
     @property
@@ -134,5 +140,6 @@ class InterfaceBlanksizeScaleFactor(KeywordBase):
 
     @offz.setter
     def offz(self, value: float) -> None:
+        """Set the offz property."""
         self._cards[0].set_value("offz", value)
 

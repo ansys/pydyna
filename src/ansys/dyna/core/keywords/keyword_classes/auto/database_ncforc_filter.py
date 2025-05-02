@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseNcforcFilter(KeywordBase):
     subkeyword = "NCFORC_FILTER"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -113,6 +115,7 @@ class DatabaseNcforcFilter(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -126,8 +129,9 @@ class DatabaseNcforcFilter(KeywordBase):
 
     @binary.setter
     def binary(self, value: int) -> None:
+        """Set the binary property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""binary must be `None` or one of {0,1,2,3}""")
+            raise Exception("""binary must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("binary", value)
 
     @property
@@ -138,6 +142,7 @@ class DatabaseNcforcFilter(KeywordBase):
 
     @lcur.setter
     def lcur(self, value: int) -> None:
+        """Set the lcur property."""
         self._cards[0].set_value("lcur", value)
 
     @property
@@ -151,8 +156,9 @@ class DatabaseNcforcFilter(KeywordBase):
 
     @ioopt.setter
     def ioopt(self, value: int) -> None:
+        """Set the ioopt property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""ioopt must be `None` or one of {1,2,3}""")
+            raise Exception("""ioopt must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("ioopt", value)
 
     @property
@@ -163,6 +169,7 @@ class DatabaseNcforcFilter(KeywordBase):
 
     @rate.setter
     def rate(self, value: float) -> None:
+        """Set the rate property."""
         self._cards[1].set_value("rate", value)
 
     @property
@@ -173,6 +180,7 @@ class DatabaseNcforcFilter(KeywordBase):
 
     @cutoff.setter
     def cutoff(self, value: float) -> None:
+        """Set the cutoff property."""
         self._cards[1].set_value("cutoff", value)
 
     @property
@@ -190,6 +198,7 @@ class DatabaseNcforcFilter(KeywordBase):
 
     @window.setter
     def window(self, value: float) -> None:
+        """Set the window property."""
         self._cards[1].set_value("window", value)
 
     @property
@@ -207,7 +216,8 @@ class DatabaseNcforcFilter(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""type must be `None` or one of {0,1,2}""")
+            raise Exception("""type must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("type", value)
 

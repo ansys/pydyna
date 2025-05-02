@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseDatabaseFsidrag(KeywordBase):
     subkeyword = "DATABASE_FSIDRAG"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -57,5 +59,6 @@ class CeseDatabaseFsidrag(KeywordBase):
 
     @outlv.setter
     def outlv(self, value: int) -> None:
+        """Set the outlv property."""
         self._cards[0].set_value("outlv", value)
 

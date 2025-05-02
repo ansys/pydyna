@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlEosUserLibrary(KeywordBase):
     subkeyword = "EOS_USER_LIBRARY"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -90,6 +92,7 @@ class ControlEosUserLibrary(KeywordBase):
 
     @path.setter
     def path(self, value: str) -> None:
+        """Set the path property."""
         self._cards[0].set_value("path", value)
 
     @property
@@ -100,6 +103,7 @@ class ControlEosUserLibrary(KeywordBase):
 
     @conm.setter
     def conm(self, value: float) -> None:
+        """Set the conm property."""
         self._cards[1].set_value("conm", value)
 
     @property
@@ -110,6 +114,7 @@ class ControlEosUserLibrary(KeywordBase):
 
     @conl.setter
     def conl(self, value: float) -> None:
+        """Set the conl property."""
         self._cards[1].set_value("conl", value)
 
     @property
@@ -120,6 +125,7 @@ class ControlEosUserLibrary(KeywordBase):
 
     @cont.setter
     def cont(self, value: float) -> None:
+        """Set the cont property."""
         self._cards[1].set_value("cont", value)
 
     @property
@@ -130,5 +136,6 @@ class ControlEosUserLibrary(KeywordBase):
 
     @conp.setter
     def conp(self, value: float) -> None:
+        """Set the conp property."""
         self._cards[1].set_value("conp", value)
 

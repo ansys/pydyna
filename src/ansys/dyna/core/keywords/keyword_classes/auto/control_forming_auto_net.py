@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingAutoNet(KeywordBase):
     subkeyword = "FORMING_AUTO_NET"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -129,6 +131,7 @@ class ControlFormingAutoNet(KeywordBase):
 
     @idnet.setter
     def idnet(self, value: int) -> None:
+        """Set the idnet property."""
         self._cards[0].set_value("idnet", value)
 
     @property
@@ -139,6 +142,7 @@ class ControlFormingAutoNet(KeywordBase):
 
     @itype.setter
     def itype(self, value: str) -> None:
+        """Set the itype property."""
         self._cards[0].set_value("itype", value)
 
     @property
@@ -149,6 +153,7 @@ class ControlFormingAutoNet(KeywordBase):
 
     @idv.setter
     def idv(self, value: int) -> None:
+        """Set the idv property."""
         self._cards[0].set_value("idv", value)
 
     @property
@@ -159,6 +164,7 @@ class ControlFormingAutoNet(KeywordBase):
 
     @idp.setter
     def idp(self, value: int) -> None:
+        """Set the idp property."""
         self._cards[0].set_value("idp", value)
 
     @property
@@ -169,6 +175,7 @@ class ControlFormingAutoNet(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -179,6 +186,7 @@ class ControlFormingAutoNet(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -189,6 +197,7 @@ class ControlFormingAutoNet(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 
     @property
@@ -199,6 +208,7 @@ class ControlFormingAutoNet(KeywordBase):
 
     @sx.setter
     def sx(self, value: float) -> None:
+        """Set the sx property."""
         self._cards[1].set_value("sx", value)
 
     @property
@@ -209,6 +219,7 @@ class ControlFormingAutoNet(KeywordBase):
 
     @sy.setter
     def sy(self, value: float) -> None:
+        """Set the sy property."""
         self._cards[1].set_value("sy", value)
 
     @property
@@ -221,5 +232,6 @@ class ControlFormingAutoNet(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[1].set_value("offset", value)
 

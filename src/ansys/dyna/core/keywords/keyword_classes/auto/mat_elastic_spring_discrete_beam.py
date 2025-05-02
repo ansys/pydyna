@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -165,6 +167,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -175,6 +178,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -185,6 +189,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -195,6 +200,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @f0.setter
     def f0(self, value: float) -> None:
+        """Set the f0 property."""
         self._cards[0].set_value("f0", value)
 
     @property
@@ -205,6 +211,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[0].set_value("d", value)
 
     @property
@@ -216,6 +223,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @cdf.setter
     def cdf(self, value: float) -> None:
+        """Set the cdf property."""
         self._cards[0].set_value("cdf", value)
 
     @property
@@ -226,6 +234,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @tdf.setter
     def tdf(self, value: float) -> None:
+        """Set the tdf property."""
         self._cards[0].set_value("tdf", value)
 
     @property
@@ -236,6 +245,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @flcid.setter
     def flcid(self, value: int) -> None:
+        """Set the flcid property."""
         self._cards[1].set_value("flcid", value)
 
     @property
@@ -247,6 +257,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @hlcid.setter
     def hlcid(self, value: int) -> None:
+        """Set the hlcid property."""
         self._cards[1].set_value("hlcid", value)
 
     @property
@@ -257,6 +268,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[1].set_value("c1", value)
 
     @property
@@ -267,6 +279,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[1].set_value("c2", value)
 
     @property
@@ -278,6 +291,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @dle.setter
     def dle(self, value: float) -> None:
+        """Set the dle property."""
         self._cards[1].set_value("dle", value)
 
     @property
@@ -288,6 +302,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @glcid.setter
     def glcid(self, value: int) -> None:
+        """Set the glcid property."""
         self._cards[1].set_value("glcid", value)
 
     @property
@@ -298,5 +313,6 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

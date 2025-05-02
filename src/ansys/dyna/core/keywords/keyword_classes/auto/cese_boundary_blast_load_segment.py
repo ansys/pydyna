@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundaryBlastLoadSegment(KeywordBase):
     subkeyword = "BOUNDARY_BLAST_LOAD_SEGMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class CeseBoundaryBlastLoadSegment(KeywordBase):
 
     @bid.setter
     def bid(self, value: int) -> None:
+        """Set the bid property."""
         self._cards[0].set_value("bid", value)
 
     @property
@@ -92,6 +95,7 @@ class CeseBoundaryBlastLoadSegment(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -102,6 +106,7 @@ class CeseBoundaryBlastLoadSegment(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -112,6 +117,7 @@ class CeseBoundaryBlastLoadSegment(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -122,5 +128,6 @@ class CeseBoundaryBlastLoadSegment(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[0].set_value("n4", value)
 

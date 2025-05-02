@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSpringElastoplastic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -97,6 +99,7 @@ class MatSpringElastoplastic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -107,6 +110,7 @@ class MatSpringElastoplastic(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -117,6 +121,7 @@ class MatSpringElastoplastic(KeywordBase):
 
     @kt.setter
     def kt(self, value: float) -> None:
+        """Set the kt property."""
         self._cards[0].set_value("kt", value)
 
     @property
@@ -127,6 +132,7 @@ class MatSpringElastoplastic(KeywordBase):
 
     @fy.setter
     def fy(self, value: float) -> None:
+        """Set the fy property."""
         self._cards[0].set_value("fy", value)
 
     @property
@@ -137,5 +143,6 @@ class MatSpringElastoplastic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

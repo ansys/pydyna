@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatNonQuadraticFailure(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -242,6 +244,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -252,6 +255,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -262,6 +266,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -272,6 +277,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -282,6 +288,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -292,6 +299,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -302,6 +310,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @ksi.setter
     def ksi(self, value: float) -> None:
+        """Set the ksi property."""
         self._cards[0].set_value("ksi", value)
 
     @property
@@ -312,6 +321,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @theta1.setter
     def theta1(self, value: float) -> None:
+        """Set the theta1 property."""
         self._cards[1].set_value("theta1", value)
 
     @property
@@ -322,6 +332,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @q1.setter
     def q1(self, value: float) -> None:
+        """Set the q1 property."""
         self._cards[1].set_value("q1", value)
 
     @property
@@ -332,6 +343,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @theta2.setter
     def theta2(self, value: float) -> None:
+        """Set the theta2 property."""
         self._cards[1].set_value("theta2", value)
 
     @property
@@ -342,6 +354,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @q2.setter
     def q2(self, value: float) -> None:
+        """Set the q2 property."""
         self._cards[1].set_value("q2", value)
 
     @property
@@ -352,6 +365,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @theta3.setter
     def theta3(self, value: float) -> None:
+        """Set the theta3 property."""
         self._cards[1].set_value("theta3", value)
 
     @property
@@ -362,6 +376,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @q3.setter
     def q3(self, value: float) -> None:
+        """Set the q3 property."""
         self._cards[1].set_value("q3", value)
 
     @property
@@ -372,6 +387,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @cs.setter
     def cs(self, value: float) -> None:
+        """Set the cs property."""
         self._cards[2].set_value("cs", value)
 
     @property
@@ -382,6 +398,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @pdots.setter
     def pdots(self, value: float) -> None:
+        """Set the pdots property."""
         self._cards[2].set_value("pdots", value)
 
     @property
@@ -392,6 +409,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @dcrit.setter
     def dcrit(self, value: float) -> None:
+        """Set the dcrit property."""
         self._cards[3].set_value("dcrit", value)
 
     @property
@@ -402,6 +420,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @wcb.setter
     def wcb(self, value: float) -> None:
+        """Set the wcb property."""
         self._cards[3].set_value("wcb", value)
 
     @property
@@ -412,6 +431,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @wcl.setter
     def wcl(self, value: float) -> None:
+        """Set the wcl property."""
         self._cards[3].set_value("wcl", value)
 
     @property
@@ -422,6 +442,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @wcs.setter
     def wcs(self, value: float) -> None:
+        """Set the wcs property."""
         self._cards[3].set_value("wcs", value)
 
     @property
@@ -432,6 +453,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @cc.setter
     def cc(self, value: float) -> None:
+        """Set the cc property."""
         self._cards[3].set_value("cc", value)
 
     @property
@@ -442,6 +464,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @phi.setter
     def phi(self, value: float) -> None:
+        """Set the phi property."""
         self._cards[3].set_value("phi", value)
 
     @property
@@ -452,6 +475,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[3].set_value("gamma", value)
 
     @property
@@ -462,6 +486,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[3].set_value("thick", value)
 
     @property
@@ -472,5 +497,6 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

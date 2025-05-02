@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetPorousLagrangian(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -272,6 +274,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @eidbeg.setter
     def eidbeg(self, value: int) -> None:
+        """Set the eidbeg property."""
         self._cards[0].set_value("eidbeg", value)
 
     @property
@@ -282,6 +285,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @eidend.setter
     def eidend(self, value: int) -> None:
+        """Set the eidend property."""
         self._cards[0].set_value("eidend", value)
 
     @property
@@ -296,8 +300,9 @@ class SetPorousLagrangian(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
+        """Set the local property."""
         if value not in [0, 1, None]:
-            raise Exception("""local must be `None` or one of {0,1}""")
+            raise Exception("""local must be `None` or one of {0,1}.""")
         self._cards[0].set_value("local", value)
 
     @property
@@ -310,6 +315,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @veccid1.setter
     def veccid1(self, value: int) -> None:
+        """Set the veccid1 property."""
         self._cards[0].set_value("veccid1", value)
 
     @property
@@ -322,6 +328,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @veccid2.setter
     def veccid2(self, value: int) -> None:
+        """Set the veccid2 property."""
         self._cards[0].set_value("veccid2", value)
 
     @property
@@ -332,6 +339,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @userdef.setter
     def userdef(self, value: int) -> None:
+        """Set the userdef property."""
         self._cards[0].set_value("userdef", value)
 
     @property
@@ -342,6 +350,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @axx.setter
     def axx(self, value: float) -> None:
+        """Set the axx property."""
         self._cards[1].set_value("axx", value)
 
     @property
@@ -352,6 +361,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @axy.setter
     def axy(self, value: float) -> None:
+        """Set the axy property."""
         self._cards[1].set_value("axy", value)
 
     @property
@@ -362,6 +372,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @axz.setter
     def axz(self, value: float) -> None:
+        """Set the axz property."""
         self._cards[1].set_value("axz", value)
 
     @property
@@ -372,6 +383,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @bxx.setter
     def bxx(self, value: float) -> None:
+        """Set the bxx property."""
         self._cards[1].set_value("bxx", value)
 
     @property
@@ -382,6 +394,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @bxy.setter
     def bxy(self, value: float) -> None:
+        """Set the bxy property."""
         self._cards[1].set_value("bxy", value)
 
     @property
@@ -392,6 +405,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @bxz.setter
     def bxz(self, value: float) -> None:
+        """Set the bxz property."""
         self._cards[1].set_value("bxz", value)
 
     @property
@@ -402,6 +416,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @ayx.setter
     def ayx(self, value: float) -> None:
+        """Set the ayx property."""
         self._cards[2].set_value("ayx", value)
 
     @property
@@ -412,6 +427,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @ayy.setter
     def ayy(self, value: float) -> None:
+        """Set the ayy property."""
         self._cards[2].set_value("ayy", value)
 
     @property
@@ -422,6 +438,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @ayz.setter
     def ayz(self, value: float) -> None:
+        """Set the ayz property."""
         self._cards[2].set_value("ayz", value)
 
     @property
@@ -432,6 +449,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @byx.setter
     def byx(self, value: float) -> None:
+        """Set the byx property."""
         self._cards[2].set_value("byx", value)
 
     @property
@@ -442,6 +460,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @byy.setter
     def byy(self, value: float) -> None:
+        """Set the byy property."""
         self._cards[2].set_value("byy", value)
 
     @property
@@ -452,6 +471,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @byz.setter
     def byz(self, value: float) -> None:
+        """Set the byz property."""
         self._cards[2].set_value("byz", value)
 
     @property
@@ -462,6 +482,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @azx.setter
     def azx(self, value: float) -> None:
+        """Set the azx property."""
         self._cards[3].set_value("azx", value)
 
     @property
@@ -472,6 +493,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @azy.setter
     def azy(self, value: float) -> None:
+        """Set the azy property."""
         self._cards[3].set_value("azy", value)
 
     @property
@@ -482,6 +504,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @azz.setter
     def azz(self, value: float) -> None:
+        """Set the azz property."""
         self._cards[3].set_value("azz", value)
 
     @property
@@ -492,6 +515,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @bzx.setter
     def bzx(self, value: float) -> None:
+        """Set the bzx property."""
         self._cards[3].set_value("bzx", value)
 
     @property
@@ -502,6 +526,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @bzy.setter
     def bzy(self, value: float) -> None:
+        """Set the bzy property."""
         self._cards[3].set_value("bzy", value)
 
     @property
@@ -512,6 +537,7 @@ class SetPorousLagrangian(KeywordBase):
 
     @bzz.setter
     def bzz(self, value: float) -> None:
+        """Set the bzz property."""
         self._cards[3].set_value("bzz", value)
 
     @property
@@ -522,5 +548,6 @@ class SetPorousLagrangian(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabasePowerSpectralDensity(KeywordBase):
     subkeyword = "POWER_SPECTRAL_DENSITY"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class DatabasePowerSpectralDensity(KeywordBase):
 
     @fbeg.setter
     def fbeg(self, value: float) -> None:
+        """Set the fbeg property."""
         self._cards[0].set_value("fbeg", value)
 
     @property
@@ -89,6 +92,7 @@ class DatabasePowerSpectralDensity(KeywordBase):
 
     @fend.setter
     def fend(self, value: float) -> None:
+        """Set the fend property."""
         self._cards[0].set_value("fend", value)
 
     @property
@@ -99,6 +103,7 @@ class DatabasePowerSpectralDensity(KeywordBase):
 
     @fintval.setter
     def fintval(self, value: float) -> None:
+        """Set the fintval property."""
         self._cards[0].set_value("fintval", value)
 
     @property
@@ -109,5 +114,6 @@ class DatabasePowerSpectralDensity(KeywordBase):
 
     @ftrunk.setter
     def ftrunk(self, value: float) -> None:
+        """Set the ftrunk property."""
         self._cards[0].set_value("ftrunk", value)
 

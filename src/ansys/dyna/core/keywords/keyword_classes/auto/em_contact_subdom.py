@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmContactSubdom(KeywordBase):
     subkeyword = "CONTACT_SUBDOM"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -141,8 +143,9 @@ class EmContactSubdom(KeywordBase):
 
     @sdtype.setter
     def sdtype(self, value: int) -> None:
+        """Set the sdtype property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""sdtype must be `None` or one of {1,2,3}""")
+            raise Exception("""sdtype must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("sdtype", value)
 
     @property
@@ -157,8 +160,9 @@ class EmContactSubdom(KeywordBase):
 
     @mvtype.setter
     def mvtype(self, value: int) -> None:
+        """Set the mvtype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""mvtype must be `None` or one of {0,1,2}""")
+            raise Exception("""mvtype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("mvtype", value)
 
     @property
@@ -170,6 +174,7 @@ class EmContactSubdom(KeywordBase):
 
     @lcidx_nid.setter
     def lcidx_nid(self, value: int) -> None:
+        """Set the lcidx_nid property."""
         self._cards[0].set_value("lcidx/nid", value)
 
     @property
@@ -181,6 +186,7 @@ class EmContactSubdom(KeywordBase):
 
     @lcidy.setter
     def lcidy(self, value: int) -> None:
+        """Set the lcidy property."""
         self._cards[0].set_value("lcidy", value)
 
     @property
@@ -192,6 +198,7 @@ class EmContactSubdom(KeywordBase):
 
     @lcidz.setter
     def lcidz(self, value: int) -> None:
+        """Set the lcidz property."""
         self._cards[0].set_value("lcidz", value)
 
     @property
@@ -203,6 +210,7 @@ class EmContactSubdom(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[1].set_value("r", value)
 
     @property
@@ -214,6 +222,7 @@ class EmContactSubdom(KeywordBase):
 
     @pminx.setter
     def pminx(self, value: float) -> None:
+        """Set the pminx property."""
         self._cards[1].set_value("pminx", value)
 
     @property
@@ -225,6 +234,7 @@ class EmContactSubdom(KeywordBase):
 
     @pminy.setter
     def pminy(self, value: float) -> None:
+        """Set the pminy property."""
         self._cards[1].set_value("pminy", value)
 
     @property
@@ -236,6 +246,7 @@ class EmContactSubdom(KeywordBase):
 
     @pminz.setter
     def pminz(self, value: float) -> None:
+        """Set the pminz property."""
         self._cards[1].set_value("pminz", value)
 
     @property
@@ -247,6 +258,7 @@ class EmContactSubdom(KeywordBase):
 
     @pmaxx.setter
     def pmaxx(self, value: float) -> None:
+        """Set the pmaxx property."""
         self._cards[1].set_value("pmaxx", value)
 
     @property
@@ -258,6 +270,7 @@ class EmContactSubdom(KeywordBase):
 
     @pmaxy.setter
     def pmaxy(self, value: float) -> None:
+        """Set the pmaxy property."""
         self._cards[1].set_value("pmaxy", value)
 
     @property
@@ -269,5 +282,6 @@ class EmContactSubdom(KeywordBase):
 
     @pmaxz.setter
     def pmaxz(self, value: float) -> None:
+        """Set the pmaxz property."""
         self._cards[1].set_value("pmaxz", value)
 

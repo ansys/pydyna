@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundarySaleMeshFace(KeywordBase):
     subkeyword = "SALE_MESH_FACE"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,8 +116,9 @@ class BoundarySaleMeshFace(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
+        """Set the option property."""
         if value not in ["FIXED", "NOEFLOW", "SYMM", "NONREFL", None]:
-            raise Exception("""option must be `None` or one of {"FIXED","NOEFLOW","SYMM","NONREFL"}""")
+            raise Exception("""option must be `None` or one of {"FIXED","NOEFLOW","SYMM","NONREFL"}.""")
         self._cards[0].set_value("option", value)
 
     @property
@@ -126,6 +129,7 @@ class BoundarySaleMeshFace(KeywordBase):
 
     @mshid.setter
     def mshid(self, value: int) -> None:
+        """Set the mshid property."""
         self._cards[0].set_value("mshid", value)
 
     @property
@@ -138,6 +142,7 @@ class BoundarySaleMeshFace(KeywordBase):
 
     @_x.setter
     def _x(self, value: int) -> None:
+        """Set the _x property."""
         self._cards[0].set_value("-x", value)
 
     @property
@@ -150,6 +155,7 @@ class BoundarySaleMeshFace(KeywordBase):
 
     @_x.setter
     def _x(self, value: int) -> None:
+        """Set the _x property."""
         self._cards[0].set_value("+x", value)
 
     @property
@@ -162,6 +168,7 @@ class BoundarySaleMeshFace(KeywordBase):
 
     @_y.setter
     def _y(self, value: int) -> None:
+        """Set the _y property."""
         self._cards[0].set_value("-y", value)
 
     @property
@@ -174,6 +181,7 @@ class BoundarySaleMeshFace(KeywordBase):
 
     @_y.setter
     def _y(self, value: int) -> None:
+        """Set the _y property."""
         self._cards[0].set_value("+y", value)
 
     @property
@@ -186,6 +194,7 @@ class BoundarySaleMeshFace(KeywordBase):
 
     @_z.setter
     def _z(self, value: int) -> None:
+        """Set the _z property."""
         self._cards[0].set_value("-z", value)
 
     @property
@@ -198,5 +207,6 @@ class BoundarySaleMeshFace(KeywordBase):
 
     @_z.setter
     def _z(self, value: int) -> None:
+        """Set the _z property."""
         self._cards[0].set_value("-z", value)
 

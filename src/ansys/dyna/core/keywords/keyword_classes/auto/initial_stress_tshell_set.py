@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialStressTshellSet(KeywordBase):
     subkeyword = "STRESS_TSHELL_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -150,6 +152,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -160,6 +163,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @nplane.setter
     def nplane(self, value: int) -> None:
+        """Set the nplane property."""
         self._cards[0].set_value("nplane", value)
 
     @property
@@ -170,6 +174,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @nthick.setter
     def nthick(self, value: int) -> None:
+        """Set the nthick property."""
         self._cards[0].set_value("nthick", value)
 
     @property
@@ -180,6 +185,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @nhisv.setter
     def nhisv(self, value: int) -> None:
+        """Set the nhisv property."""
         self._cards[0].set_value("nhisv", value)
 
     @property
@@ -190,8 +196,9 @@ class InitialStressTshellSet(KeywordBase):
 
     @large.setter
     def large(self, value: int) -> None:
+        """Set the large property."""
         if value not in [0, 1, None]:
-            raise Exception("""large must be `None` or one of {0,1}""")
+            raise Exception("""large must be `None` or one of {0,1}.""")
         self._cards[0].set_value("large", value)
 
     @property
@@ -202,6 +209,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 
     @property
@@ -212,6 +220,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @sigxx.setter
     def sigxx(self, value: float) -> None:
+        """Set the sigxx property."""
         self._cards[1].set_value("sigxx", value)
 
     @property
@@ -222,6 +231,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @sigyy.setter
     def sigyy(self, value: float) -> None:
+        """Set the sigyy property."""
         self._cards[1].set_value("sigyy", value)
 
     @property
@@ -232,6 +242,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @sigzz.setter
     def sigzz(self, value: float) -> None:
+        """Set the sigzz property."""
         self._cards[1].set_value("sigzz", value)
 
     @property
@@ -242,6 +253,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @sigxy.setter
     def sigxy(self, value: float) -> None:
+        """Set the sigxy property."""
         self._cards[1].set_value("sigxy", value)
 
     @property
@@ -252,6 +264,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @sigyz.setter
     def sigyz(self, value: float) -> None:
+        """Set the sigyz property."""
         self._cards[1].set_value("sigyz", value)
 
     @property
@@ -262,6 +275,7 @@ class InitialStressTshellSet(KeywordBase):
 
     @sigzx.setter
     def sigzx(self, value: float) -> None:
+        """Set the sigzx property."""
         self._cards[1].set_value("sigzx", value)
 
     @property
@@ -272,5 +286,6 @@ class InitialStressTshellSet(KeywordBase):
 
     @eps.setter
     def eps(self, value: float) -> None:
+        """Set the eps property."""
         self._cards[1].set_value("eps", value)
 

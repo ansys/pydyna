@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingOnestepOrtho(KeywordBase):
     subkeyword = "FORMING_ONESTEP_ORTHO"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class ControlFormingOnestepOrtho(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -78,6 +81,7 @@ class ControlFormingOnestepOrtho(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[0].set_value("node1", value)
 
     @property
@@ -88,5 +92,6 @@ class ControlFormingOnestepOrtho(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[0].set_value("node2", value)
 

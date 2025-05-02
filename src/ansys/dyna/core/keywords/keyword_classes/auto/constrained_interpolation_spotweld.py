@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
     subkeyword = "INTERPOLATION_SPOTWELD"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -245,6 +247,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @pid1.setter
     def pid1(self, value: int) -> None:
+        """Set the pid1 property."""
         self._cards[0].set_value("pid1", value)
 
     @property
@@ -257,6 +260,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @pid2.setter
     def pid2(self, value: int) -> None:
+        """Set the pid2 property."""
         self._cards[0].set_value("pid2", value)
 
     @property
@@ -267,6 +271,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -277,6 +282,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[0].set_value("thick", value)
 
     @property
@@ -287,6 +293,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[0].set_value("r", value)
 
     @property
@@ -297,6 +304,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @stiff.setter
     def stiff(self, value: float) -> None:
+        """Set the stiff property."""
         self._cards[0].set_value("stiff", value)
 
     @property
@@ -307,6 +315,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @alpha1.setter
     def alpha1(self, value: float) -> None:
+        """Set the alpha1 property."""
         self._cards[0].set_value("alpha1", value)
 
     @property
@@ -323,8 +332,9 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @model.setter
     def model(self, value: int) -> None:
+        """Set the model property."""
         if value not in [1, 2, 11, 12, 21, 22, None]:
-            raise Exception("""model must be `None` or one of {1,2,11,12,21,22}""")
+            raise Exception("""model must be `None` or one of {1,2,11,12,21,22}.""")
         self._cards[0].set_value("model", value)
 
     @property
@@ -337,6 +347,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @rn.setter
     def rn(self, value: float) -> None:
+        """Set the rn property."""
         self._cards[1].set_value("rn", value)
 
     @property
@@ -347,6 +358,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @rs.setter
     def rs(self, value: float) -> None:
+        """Set the rs property."""
         self._cards[1].set_value("rs", value)
 
     @property
@@ -357,6 +369,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[1].set_value("beta", value)
 
     @property
@@ -367,6 +380,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @lcf.setter
     def lcf(self, value: int) -> None:
+        """Set the lcf property."""
         self._cards[1].set_value("lcf", value)
 
     @property
@@ -377,6 +391,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @lcupf.setter
     def lcupf(self, value: int) -> None:
+        """Set the lcupf property."""
         self._cards[1].set_value("lcupf", value)
 
     @property
@@ -387,6 +402,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @lcupr.setter
     def lcupr(self, value: int) -> None:
+        """Set the lcupr property."""
         self._cards[1].set_value("lcupr", value)
 
     @property
@@ -397,6 +413,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @dens.setter
     def dens(self, value: float) -> None:
+        """Set the dens property."""
         self._cards[1].set_value("dens", value)
 
     @property
@@ -410,8 +427,9 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @intp.setter
     def intp(self, value: int) -> None:
+        """Set the intp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""intp must be `None` or one of {0,1,2}""")
+            raise Exception("""intp must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("intp", value)
 
     @property
@@ -422,6 +440,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @upfn.setter
     def upfn(self, value: float) -> None:
+        """Set the upfn property."""
         self._cards[2].set_value("upfn", value)
 
     @property
@@ -432,6 +451,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @upfs.setter
     def upfs(self, value: float) -> None:
+        """Set the upfs property."""
         self._cards[2].set_value("upfs", value)
 
     @property
@@ -442,6 +462,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @alpha2.setter
     def alpha2(self, value: float) -> None:
+        """Set the alpha2 property."""
         self._cards[2].set_value("alpha2", value)
 
     @property
@@ -452,6 +473,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @beta2.setter
     def beta2(self, value: float) -> None:
+        """Set the beta2 property."""
         self._cards[2].set_value("beta2", value)
 
     @property
@@ -462,6 +484,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @uprn.setter
     def uprn(self, value: float) -> None:
+        """Set the uprn property."""
         self._cards[2].set_value("uprn", value)
 
     @property
@@ -472,6 +495,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @uprs.setter
     def uprs(self, value: float) -> None:
+        """Set the uprs property."""
         self._cards[2].set_value("uprs", value)
 
     @property
@@ -482,6 +506,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @alpha3.setter
     def alpha3(self, value: float) -> None:
+        """Set the alpha3 property."""
         self._cards[2].set_value("alpha3", value)
 
     @property
@@ -492,6 +517,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @beta3.setter
     def beta3(self, value: float) -> None:
+        """Set the beta3 property."""
         self._cards[2].set_value("beta3", value)
 
     @property
@@ -502,6 +528,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @mrn.setter
     def mrn(self, value: float) -> None:
+        """Set the mrn property."""
         self._cards[3].set_value("mrn", value)
 
     @property
@@ -512,5 +539,6 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
 
     @mrs.setter
     def mrs(self, value: float) -> None:
+        """Set the mrs property."""
         self._cards[3].set_value("mrs", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatIsotropicElasticPlastic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -111,6 +113,7 @@ class MatIsotropicElasticPlastic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -121,6 +124,7 @@ class MatIsotropicElasticPlastic(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -131,6 +135,7 @@ class MatIsotropicElasticPlastic(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -141,6 +146,7 @@ class MatIsotropicElasticPlastic(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -151,6 +157,7 @@ class MatIsotropicElasticPlastic(KeywordBase):
 
     @etan.setter
     def etan(self, value: float) -> None:
+        """Set the etan property."""
         self._cards[0].set_value("etan", value)
 
     @property
@@ -161,6 +168,7 @@ class MatIsotropicElasticPlastic(KeywordBase):
 
     @bulk.setter
     def bulk(self, value: float) -> None:
+        """Set the bulk property."""
         self._cards[0].set_value("bulk", value)
 
     @property
@@ -171,5 +179,6 @@ class MatIsotropicElasticPlastic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

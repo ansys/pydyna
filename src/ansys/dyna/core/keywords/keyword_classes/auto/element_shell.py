@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -32,6 +33,7 @@ class ElementShell(KeywordBase):
     subkeyword = "SHELL"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(
@@ -55,11 +57,11 @@ class ElementShell(KeywordBase):
 
     @property
     def elements(self):
-        '''Gets the table of elements'''
+        """Get the table of elements."""
         return self._cards[0].table
 
     @elements.setter
     def elements(self, df):
-        '''sets elements from the dataframe df'''
+        """Set elements from the dataframe df"""
         self._cards[0].table = df
 

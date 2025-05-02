@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTACT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -43,6 +44,7 @@ class ContactDrawbead(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the CONTACT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -876,6 +878,7 @@ class ContactDrawbead(KeywordBase):
 
     @surfa.setter
     def surfa(self, value: int) -> None:
+        """Set the surfa property."""
         self._cards[0].set_value("surfa", value)
 
     @property
@@ -887,6 +890,7 @@ class ContactDrawbead(KeywordBase):
 
     @surfb.setter
     def surfb(self, value: int) -> None:
+        """Set the surfb property."""
         self._cards[0].set_value("surfb", value)
 
     @property
@@ -905,8 +909,9 @@ class ContactDrawbead(KeywordBase):
 
     @surfatyp.setter
     def surfatyp(self, value: int) -> None:
+        """Set the surfatyp property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("surfatyp", value)
 
     @property
@@ -924,8 +929,9 @@ class ContactDrawbead(KeywordBase):
 
     @surfbtyp.setter
     def surfbtyp(self, value: int) -> None:
+        """Set the surfbtyp property."""
         if value not in [0, 1, 2, 3, 5, 6, 7, None]:
-            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}""")
+            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}.""")
         self._cards[0].set_value("surfbtyp", value)
 
     @property
@@ -936,6 +942,7 @@ class ContactDrawbead(KeywordBase):
 
     @saboxid.setter
     def saboxid(self, value: int) -> None:
+        """Set the saboxid property."""
         self._cards[0].set_value("saboxid", value)
 
     @property
@@ -946,6 +953,7 @@ class ContactDrawbead(KeywordBase):
 
     @sbboxid.setter
     def sbboxid(self, value: int) -> None:
+        """Set the sbboxid property."""
         self._cards[0].set_value("sbboxid", value)
 
     @property
@@ -959,8 +967,9 @@ class ContactDrawbead(KeywordBase):
 
     @sapr.setter
     def sapr(self, value: int) -> None:
+        """Set the sapr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sapr must be `None` or one of {0,1,2}""")
+            raise Exception("""sapr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sapr", value)
 
     @property
@@ -974,8 +983,9 @@ class ContactDrawbead(KeywordBase):
 
     @sbpr.setter
     def sbpr(self, value: int) -> None:
+        """Set the sbpr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sbpr must be `None` or one of {0,1,2}""")
+            raise Exception("""sbpr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sbpr", value)
 
     @property
@@ -989,6 +999,7 @@ class ContactDrawbead(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[1].set_value("fs", value)
 
     @property
@@ -1000,6 +1011,7 @@ class ContactDrawbead(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[1].set_value("fd", value)
 
     @property
@@ -1010,6 +1022,7 @@ class ContactDrawbead(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[1].set_value("dc", value)
 
     @property
@@ -1020,6 +1033,7 @@ class ContactDrawbead(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[1].set_value("vc", value)
 
     @property
@@ -1030,6 +1044,7 @@ class ContactDrawbead(KeywordBase):
 
     @vdc.setter
     def vdc(self, value: float) -> None:
+        """Set the vdc property."""
         self._cards[1].set_value("vdc", value)
 
     @property
@@ -1040,6 +1055,7 @@ class ContactDrawbead(KeywordBase):
 
     @penchk.setter
     def penchk(self, value: int) -> None:
+        """Set the penchk property."""
         self._cards[1].set_value("penchk", value)
 
     @property
@@ -1050,6 +1066,7 @@ class ContactDrawbead(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[1].set_value("bt", value)
 
     @property
@@ -1060,6 +1077,7 @@ class ContactDrawbead(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -1070,6 +1088,7 @@ class ContactDrawbead(KeywordBase):
 
     @sfsa.setter
     def sfsa(self, value: float) -> None:
+        """Set the sfsa property."""
         self._cards[2].set_value("sfsa", value)
 
     @property
@@ -1080,6 +1099,7 @@ class ContactDrawbead(KeywordBase):
 
     @sfsb.setter
     def sfsb(self, value: float) -> None:
+        """Set the sfsb property."""
         self._cards[2].set_value("sfsb", value)
 
     @property
@@ -1090,6 +1110,7 @@ class ContactDrawbead(KeywordBase):
 
     @sast.setter
     def sast(self, value: float) -> None:
+        """Set the sast property."""
         self._cards[2].set_value("sast", value)
 
     @property
@@ -1100,6 +1121,7 @@ class ContactDrawbead(KeywordBase):
 
     @sbst.setter
     def sbst(self, value: float) -> None:
+        """Set the sbst property."""
         self._cards[2].set_value("sbst", value)
 
     @property
@@ -1112,6 +1134,7 @@ class ContactDrawbead(KeywordBase):
 
     @sfsat.setter
     def sfsat(self, value: float) -> None:
+        """Set the sfsat property."""
         self._cards[2].set_value("sfsat", value)
 
     @property
@@ -1124,6 +1147,7 @@ class ContactDrawbead(KeywordBase):
 
     @sfsbt.setter
     def sfsbt(self, value: float) -> None:
+        """Set the sfsbt property."""
         self._cards[2].set_value("sfsbt", value)
 
     @property
@@ -1134,6 +1158,7 @@ class ContactDrawbead(KeywordBase):
 
     @fsf.setter
     def fsf(self, value: float) -> None:
+        """Set the fsf property."""
         self._cards[2].set_value("fsf", value)
 
     @property
@@ -1144,6 +1169,7 @@ class ContactDrawbead(KeywordBase):
 
     @vsf.setter
     def vsf(self, value: float) -> None:
+        """Set the vsf property."""
         self._cards[2].set_value("vsf", value)
 
     @property
@@ -1155,6 +1181,7 @@ class ContactDrawbead(KeywordBase):
 
     @lcidrf.setter
     def lcidrf(self, value: int) -> None:
+        """Set the lcidrf property."""
         self._cards[3].set_value("lcidrf", value)
 
     @property
@@ -1165,6 +1192,7 @@ class ContactDrawbead(KeywordBase):
 
     @lcidnf.setter
     def lcidnf(self, value: int) -> None:
+        """Set the lcidnf property."""
         self._cards[3].set_value("lcidnf", value)
 
     @property
@@ -1175,6 +1203,7 @@ class ContactDrawbead(KeywordBase):
 
     @dbdth.setter
     def dbdth(self, value: float) -> None:
+        """Set the dbdth property."""
         self._cards[3].set_value("dbdth", value)
 
     @property
@@ -1185,6 +1214,7 @@ class ContactDrawbead(KeywordBase):
 
     @dfscl.setter
     def dfscl(self, value: float) -> None:
+        """Set the dfscl property."""
         self._cards[3].set_value("dfscl", value)
 
     @property
@@ -1197,6 +1227,7 @@ class ContactDrawbead(KeywordBase):
 
     @numint.setter
     def numint(self, value: int) -> None:
+        """Set the numint property."""
         self._cards[3].set_value("numint", value)
 
     @property
@@ -1207,6 +1238,7 @@ class ContactDrawbead(KeywordBase):
 
     @dbpid.setter
     def dbpid(self, value: int) -> None:
+        """Set the dbpid property."""
         self._cards[3].set_value("dbpid", value)
 
     @property
@@ -1217,6 +1249,7 @@ class ContactDrawbead(KeywordBase):
 
     @eloff.setter
     def eloff(self, value: int) -> None:
+        """Set the eloff property."""
         self._cards[3].set_value("eloff", value)
 
     @property
@@ -1227,6 +1260,7 @@ class ContactDrawbead(KeywordBase):
 
     @nbead.setter
     def nbead(self, value: int) -> None:
+        """Set the nbead property."""
         self._cards[3].set_value("nbead", value)
 
     @property
@@ -1237,6 +1271,7 @@ class ContactDrawbead(KeywordBase):
 
     @point1.setter
     def point1(self, value: int) -> None:
+        """Set the point1 property."""
         self._cards[4].set_value("point1", value)
 
     @property
@@ -1247,6 +1282,7 @@ class ContactDrawbead(KeywordBase):
 
     @point2.setter
     def point2(self, value: int) -> None:
+        """Set the point2 property."""
         self._cards[4].set_value("point2", value)
 
     @property
@@ -1257,6 +1293,7 @@ class ContactDrawbead(KeywordBase):
 
     @width.setter
     def width(self, value: float) -> None:
+        """Set the width property."""
         self._cards[4].set_value("width", value)
 
     @property
@@ -1267,6 +1304,7 @@ class ContactDrawbead(KeywordBase):
 
     @effhgt.setter
     def effhgt(self, value: float) -> None:
+        """Set the effhgt property."""
         self._cards[4].set_value("effhgt", value)
 
     @property
@@ -1277,6 +1315,7 @@ class ContactDrawbead(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[5].cards[0].set_value("cid", value)
 
     @property
@@ -1287,6 +1326,7 @@ class ContactDrawbead(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[5].cards[0].set_value("heading", value)
 
     @property
@@ -1297,6 +1337,7 @@ class ContactDrawbead(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[6].cards[0].set_value("ignore", value)
 
     @property
@@ -1307,6 +1348,7 @@ class ContactDrawbead(KeywordBase):
 
     @bckt.setter
     def bckt(self, value: int) -> None:
+        """Set the bckt property."""
         self._cards[6].cards[0].set_value("bckt", value)
 
     @property
@@ -1317,6 +1359,7 @@ class ContactDrawbead(KeywordBase):
 
     @lcbckt.setter
     def lcbckt(self, value: int) -> None:
+        """Set the lcbckt property."""
         self._cards[6].cards[0].set_value("lcbckt", value)
 
     @property
@@ -1327,6 +1370,7 @@ class ContactDrawbead(KeywordBase):
 
     @ns2trk.setter
     def ns2trk(self, value: int) -> None:
+        """Set the ns2trk property."""
         self._cards[6].cards[0].set_value("ns2trk", value)
 
     @property
@@ -1337,6 +1381,7 @@ class ContactDrawbead(KeywordBase):
 
     @inititr.setter
     def inititr(self, value: int) -> None:
+        """Set the inititr property."""
         self._cards[6].cards[0].set_value("inititr", value)
 
     @property
@@ -1347,6 +1392,7 @@ class ContactDrawbead(KeywordBase):
 
     @parmax.setter
     def parmax(self, value: float) -> None:
+        """Set the parmax property."""
         self._cards[6].cards[0].set_value("parmax", value)
 
     @property
@@ -1366,6 +1412,7 @@ class ContactDrawbead(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
+        """Set the cparm8 property."""
         if value not in [0, 1, 2, 10, 11, 12]:
             raise Exception("""cparm8 must be one of {0,1,2,10,11,12}""")
         self._cards[6].cards[0].set_value("cparm8", value)
@@ -1378,6 +1425,7 @@ class ContactDrawbead(KeywordBase):
 
     @mpp2.setter
     def mpp2(self, value: bool) -> None:
+        """Set the mpp2 property."""
         self._cards[6].cards[1].set_value("mpp2", value)
 
     @property
@@ -1388,6 +1436,7 @@ class ContactDrawbead(KeywordBase):
 
     @chksegs.setter
     def chksegs(self, value: int) -> None:
+        """Set the chksegs property."""
         self._cards[6].cards[1].set_value("chksegs", value)
 
     @property
@@ -1398,6 +1447,7 @@ class ContactDrawbead(KeywordBase):
 
     @pensf.setter
     def pensf(self, value: float) -> None:
+        """Set the pensf property."""
         self._cards[6].cards[1].set_value("pensf", value)
 
     @property
@@ -1408,6 +1458,7 @@ class ContactDrawbead(KeywordBase):
 
     @grpable.setter
     def grpable(self, value: int) -> None:
+        """Set the grpable property."""
         self._cards[6].cards[1].set_value("grpable", value)
 
     @property
@@ -1423,6 +1474,7 @@ class ContactDrawbead(KeywordBase):
 
     @soft.setter
     def soft(self, value: int) -> None:
+        """Set the soft property."""
         if value not in [0, 1, 2, 4, 6]:
             raise Exception("""soft must be one of {0,1,2,4,6}""")
         self._cards[7].cards[0].set_value("soft", value)
@@ -1435,6 +1487,7 @@ class ContactDrawbead(KeywordBase):
 
     @sofscl.setter
     def sofscl(self, value: float) -> None:
+        """Set the sofscl property."""
         self._cards[7].cards[0].set_value("sofscl", value)
 
     @property
@@ -1445,6 +1498,7 @@ class ContactDrawbead(KeywordBase):
 
     @lcidab.setter
     def lcidab(self, value: int) -> None:
+        """Set the lcidab property."""
         self._cards[7].cards[0].set_value("lcidab", value)
 
     @property
@@ -1455,6 +1509,7 @@ class ContactDrawbead(KeywordBase):
 
     @maxpar.setter
     def maxpar(self, value: float) -> None:
+        """Set the maxpar property."""
         self._cards[7].cards[0].set_value("maxpar", value)
 
     @property
@@ -1471,6 +1526,7 @@ class ContactDrawbead(KeywordBase):
 
     @sbopt.setter
     def sbopt(self, value: int) -> None:
+        """Set the sbopt property."""
         if value not in [2, 0, 1, 3, 4, 5]:
             raise Exception("""sbopt must be one of {2,0,1,3,4,5}""")
         self._cards[7].cards[0].set_value("sbopt", value)
@@ -1484,6 +1540,7 @@ class ContactDrawbead(KeywordBase):
 
     @depth.setter
     def depth(self, value: int) -> None:
+        """Set the depth property."""
         self._cards[7].cards[0].set_value("depth", value)
 
     @property
@@ -1495,6 +1552,7 @@ class ContactDrawbead(KeywordBase):
 
     @bsort.setter
     def bsort(self, value: int) -> None:
+        """Set the bsort property."""
         self._cards[7].cards[0].set_value("bsort", value)
 
     @property
@@ -1506,6 +1564,7 @@ class ContactDrawbead(KeywordBase):
 
     @frcfrq.setter
     def frcfrq(self, value: int) -> None:
+        """Set the frcfrq property."""
         self._cards[7].cards[0].set_value("frcfrq", value)
 
     @property
@@ -1519,6 +1578,7 @@ class ContactDrawbead(KeywordBase):
 
     @penmax.setter
     def penmax(self, value: float) -> None:
+        """Set the penmax property."""
         self._cards[8].cards[0].set_value("penmax", value)
 
     @property
@@ -1532,6 +1592,7 @@ class ContactDrawbead(KeywordBase):
 
     @thkopt.setter
     def thkopt(self, value: int) -> None:
+        """Set the thkopt property."""
         if value not in [0, 1, 2]:
             raise Exception("""thkopt must be one of {0,1,2}""")
         self._cards[8].cards[0].set_value("thkopt", value)
@@ -1547,6 +1608,7 @@ class ContactDrawbead(KeywordBase):
 
     @shlthk.setter
     def shlthk(self, value: int) -> None:
+        """Set the shlthk property."""
         if value not in [0, 1, 2]:
             raise Exception("""shlthk must be one of {0,1,2}""")
         self._cards[8].cards[0].set_value("shlthk", value)
@@ -1561,6 +1623,7 @@ class ContactDrawbead(KeywordBase):
 
     @snlog.setter
     def snlog(self, value: int) -> None:
+        """Set the snlog property."""
         if value not in [0, 1]:
             raise Exception("""snlog must be one of {0,1}""")
         self._cards[8].cards[0].set_value("snlog", value)
@@ -1576,6 +1639,7 @@ class ContactDrawbead(KeywordBase):
 
     @isym.setter
     def isym(self, value: int) -> None:
+        """Set the isym property."""
         if value not in [0, 1]:
             raise Exception("""isym must be one of {0,1}""")
         self._cards[8].cards[0].set_value("isym", value)
@@ -1590,6 +1654,7 @@ class ContactDrawbead(KeywordBase):
 
     @i2d3d.setter
     def i2d3d(self, value: int) -> None:
+        """Set the i2d3d property."""
         if value not in [0, 1]:
             raise Exception("""i2d3d must be one of {0,1}""")
         self._cards[8].cards[0].set_value("i2d3d", value)
@@ -1602,6 +1667,7 @@ class ContactDrawbead(KeywordBase):
 
     @sldthk.setter
     def sldthk(self, value: float) -> None:
+        """Set the sldthk property."""
         self._cards[8].cards[0].set_value("sldthk", value)
 
     @property
@@ -1612,6 +1678,7 @@ class ContactDrawbead(KeywordBase):
 
     @sldstf.setter
     def sldstf(self, value: float) -> None:
+        """Set the sldstf property."""
         self._cards[8].cards[0].set_value("sldstf", value)
 
     @property
@@ -1630,6 +1697,7 @@ class ContactDrawbead(KeywordBase):
 
     @igap.setter
     def igap(self, value: int) -> None:
+        """Set the igap property."""
         self._cards[9].cards[0].set_value("igap", value)
 
     @property
@@ -1646,6 +1714,7 @@ class ContactDrawbead(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[9].cards[0].set_value("ignore", value)
 
     @property
@@ -1660,6 +1729,7 @@ class ContactDrawbead(KeywordBase):
 
     @dprfac.setter
     def dprfac(self, value: float) -> None:
+        """Set the dprfac property."""
         self._cards[9].cards[0].set_value("dprfac", value)
 
     @property
@@ -1675,6 +1745,7 @@ class ContactDrawbead(KeywordBase):
 
     @dtstif.setter
     def dtstif(self, value: float) -> None:
+        """Set the dtstif property."""
         self._cards[9].cards[0].set_value("dtstif", value)
 
     @property
@@ -1687,6 +1758,7 @@ class ContactDrawbead(KeywordBase):
 
     @edgek.setter
     def edgek(self, value: float) -> None:
+        """Set the edgek property."""
         self._cards[9].cards[0].set_value("edgek", value)
 
     @property
@@ -1699,6 +1771,7 @@ class ContactDrawbead(KeywordBase):
 
     @flangl.setter
     def flangl(self, value: float) -> None:
+        """Set the flangl property."""
         self._cards[9].cards[0].set_value("flangl", value)
 
     @property
@@ -1709,6 +1782,7 @@ class ContactDrawbead(KeywordBase):
 
     @cid_rcf.setter
     def cid_rcf(self, value: int) -> None:
+        """Set the cid_rcf property."""
         self._cards[9].cards[0].set_value("cid_rcf", value)
 
     @property
@@ -1724,6 +1798,7 @@ class ContactDrawbead(KeywordBase):
 
     @q2tri.setter
     def q2tri(self, value: int) -> None:
+        """Set the q2tri property."""
         if value not in [0, 1, 2, 3, 4]:
             raise Exception("""q2tri must be one of {0,1,2,3,4}""")
         self._cards[10].cards[0].set_value("q2tri", value)
@@ -1739,6 +1814,7 @@ class ContactDrawbead(KeywordBase):
 
     @dtpchk.setter
     def dtpchk(self, value: float) -> None:
+        """Set the dtpchk property."""
         self._cards[10].cards[0].set_value("dtpchk", value)
 
     @property
@@ -1751,6 +1827,7 @@ class ContactDrawbead(KeywordBase):
 
     @sfnbr.setter
     def sfnbr(self, value: float) -> None:
+        """Set the sfnbr property."""
         self._cards[10].cards[0].set_value("sfnbr", value)
 
     @property
@@ -1761,6 +1838,7 @@ class ContactDrawbead(KeywordBase):
 
     @fnlscl.setter
     def fnlscl(self, value: float) -> None:
+        """Set the fnlscl property."""
         self._cards[10].cards[0].set_value("fnlscl", value)
 
     @property
@@ -1771,6 +1849,7 @@ class ContactDrawbead(KeywordBase):
 
     @dnlscl.setter
     def dnlscl(self, value: float) -> None:
+        """Set the dnlscl property."""
         self._cards[10].cards[0].set_value("dnlscl", value)
 
     @property
@@ -1784,6 +1863,7 @@ class ContactDrawbead(KeywordBase):
 
     @tcso.setter
     def tcso(self, value: int) -> None:
+        """Set the tcso property."""
         if value not in [0, 1]:
             raise Exception("""tcso must be one of {0,1}""")
         self._cards[10].cards[0].set_value("tcso", value)
@@ -1797,6 +1877,7 @@ class ContactDrawbead(KeywordBase):
 
     @tiedid.setter
     def tiedid(self, value: int) -> None:
+        """Set the tiedid property."""
         if value not in [0, 1]:
             raise Exception("""tiedid must be one of {0,1}""")
         self._cards[10].cards[0].set_value("tiedid", value)
@@ -1812,6 +1893,7 @@ class ContactDrawbead(KeywordBase):
 
     @shledg.setter
     def shledg(self, value: int) -> None:
+        """Set the shledg property."""
         if value not in [0, 1, 2]:
             raise Exception("""shledg must be one of {0,1,2}""")
         self._cards[10].cards[0].set_value("shledg", value)
@@ -1826,6 +1908,7 @@ class ContactDrawbead(KeywordBase):
 
     @sharec.setter
     def sharec(self, value: int) -> None:
+        """Set the sharec property."""
         if value not in [0, 1]:
             raise Exception("""sharec must be one of {0,1}""")
         self._cards[11].cards[0].set_value("sharec", value)
@@ -1840,6 +1923,7 @@ class ContactDrawbead(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
+        """Set the cparm8 property."""
         if value not in [0, 2]:
             raise Exception("""cparm8 must be one of {0,2}""")
         self._cards[11].cards[0].set_value("cparm8", value)
@@ -1853,6 +1937,7 @@ class ContactDrawbead(KeywordBase):
 
     @ipback.setter
     def ipback(self, value: int) -> None:
+        """Set the ipback property."""
         self._cards[11].cards[0].set_value("ipback", value)
 
     @property
@@ -1865,6 +1950,7 @@ class ContactDrawbead(KeywordBase):
 
     @srnde.setter
     def srnde(self, value: int) -> None:
+        """Set the srnde property."""
         self._cards[11].cards[0].set_value("srnde", value)
 
     @property
@@ -1875,6 +1961,7 @@ class ContactDrawbead(KeywordBase):
 
     @fricsf.setter
     def fricsf(self, value: float) -> None:
+        """Set the fricsf property."""
         self._cards[11].cards[0].set_value("fricsf", value)
 
     @property
@@ -1888,6 +1975,7 @@ class ContactDrawbead(KeywordBase):
 
     @icor.setter
     def icor(self, value: int) -> None:
+        """Set the icor property."""
         self._cards[11].cards[0].set_value("icor", value)
 
     @property
@@ -1900,6 +1988,7 @@ class ContactDrawbead(KeywordBase):
 
     @ftorq.setter
     def ftorq(self, value: int) -> None:
+        """Set the ftorq property."""
         self._cards[11].cards[0].set_value("ftorq", value)
 
     @property
@@ -1911,6 +2000,7 @@ class ContactDrawbead(KeywordBase):
 
     @region.setter
     def region(self, value: int) -> None:
+        """Set the region property."""
         self._cards[11].cards[0].set_value("region", value)
 
     @property
@@ -1924,6 +2014,7 @@ class ContactDrawbead(KeywordBase):
 
     @pstiff.setter
     def pstiff(self, value: int) -> None:
+        """Set the pstiff property."""
         if value not in [0, 1, 2]:
             raise Exception("""pstiff must be one of {0,1,2}""")
         self._cards[12].cards[0].set_value("pstiff", value)
@@ -1941,6 +2032,7 @@ class ContactDrawbead(KeywordBase):
 
     @ignroff.setter
     def ignroff(self, value: int) -> None:
+        """Set the ignroff property."""
         if value not in [0, 1, 2, 3]:
             raise Exception("""ignroff must be one of {0,1,2,3}""")
         self._cards[12].cards[0].set_value("ignroff", value)
@@ -1953,6 +2045,7 @@ class ContactDrawbead(KeywordBase):
 
     @fstol.setter
     def fstol(self, value: float) -> None:
+        """Set the fstol property."""
         self._cards[12].cards[0].set_value("fstol", value)
 
     @property
@@ -1965,6 +2058,7 @@ class ContactDrawbead(KeywordBase):
 
     @_2dbinr.setter
     def _2dbinr(self, value: int) -> None:
+        """Set the _2dbinr property."""
         if value not in [0, 1]:
             raise Exception("""_2dbinr must be one of {0,1}""")
         self._cards[12].cards[0].set_value("2dbinr", value)
@@ -1979,6 +2073,7 @@ class ContactDrawbead(KeywordBase):
 
     @ssftyp.setter
     def ssftyp(self, value: int) -> None:
+        """Set the ssftyp property."""
         if value not in [0, 1]:
             raise Exception("""ssftyp must be one of {0,1}""")
         self._cards[12].cards[0].set_value("ssftyp", value)
@@ -1993,6 +2088,7 @@ class ContactDrawbead(KeywordBase):
 
     @swtpr.setter
     def swtpr(self, value: int) -> None:
+        """Set the swtpr property."""
         if value not in [0, 1]:
             raise Exception("""swtpr must be one of {0,1}""")
         self._cards[12].cards[0].set_value("swtpr", value)
@@ -2005,6 +2101,7 @@ class ContactDrawbead(KeywordBase):
 
     @tetfac.setter
     def tetfac(self, value: float) -> None:
+        """Set the tetfac property."""
         self._cards[12].cards[0].set_value("tetfac", value)
 
     @property
@@ -2017,5 +2114,6 @@ class ContactDrawbead(KeywordBase):
 
     @shloff.setter
     def shloff(self, value: float) -> None:
+        """Set the shloff property."""
         self._cards[13].cards[0].set_value("shloff", value)
 

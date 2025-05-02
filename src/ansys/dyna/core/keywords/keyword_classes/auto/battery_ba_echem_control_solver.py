@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BATTERY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
     subkeyword = "BA_ECHEM_CONTROL_SOLVER"
 
     def __init__(self, **kwargs):
+        """Initialize the BATTERY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -151,6 +153,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @imodel.setter
     def imodel(self, value: int) -> None:
+        """Set the imodel property."""
         self._cards[0].set_value("imodel", value)
 
     @property
@@ -165,6 +168,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @igeom.setter
     def igeom(self, value: int) -> None:
+        """Set the igeom property."""
         self._cards[0].set_value("igeom", value)
 
     @property
@@ -175,6 +179,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @ncycle.setter
     def ncycle(self, value: int) -> None:
+        """Set the ncycle property."""
         self._cards[0].set_value("ncycle", value)
 
     @property
@@ -185,6 +190,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @aging.setter
     def aging(self, value: int) -> None:
+        """Set the aging property."""
         self._cards[0].set_value("aging", value)
 
     @property
@@ -195,6 +201,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @tra.setter
     def tra(self, value: int) -> None:
+        """Set the tra property."""
         self._cards[0].set_value("tra", value)
 
     @property
@@ -205,6 +212,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @gas.setter
     def gas(self, value: int) -> None:
+        """Set the gas property."""
         self._cards[0].set_value("gas", value)
 
     @property
@@ -217,6 +225,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @esolid.setter
     def esolid(self, value: int) -> None:
+        """Set the esolid property."""
         self._cards[0].set_value("esolid", value)
 
     @property
@@ -229,6 +238,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @irun.setter
     def irun(self, value: int) -> None:
+        """Set the irun property."""
         self._cards[1].set_value("irun", value)
 
     @property
@@ -241,6 +251,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @lcur.setter
     def lcur(self, value: int) -> None:
+        """Set the lcur property."""
         self._cards[1].set_value("lcur", value)
 
     @property
@@ -251,6 +262,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @curv.setter
     def curv(self, value: float) -> None:
+        """Set the curv property."""
         self._cards[1].set_value("curv", value)
 
     @property
@@ -261,6 +273,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @ctime.setter
     def ctime(self, value: float) -> None:
+        """Set the ctime property."""
         self._cards[1].set_value("ctime", value)
 
     @property
@@ -271,5 +284,6 @@ class BatteryBaEchemControlSolver(KeywordBase):
 
     @vcut.setter
     def vcut(self, value: float) -> None:
+        """Set the vcut property."""
         self._cards[1].set_value("vcut", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the RIGIDWALL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
     subkeyword = "PLANAR_ORTHO_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the RIGIDWALL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -284,6 +286,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -294,6 +297,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -305,6 +309,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 
     @property
@@ -315,6 +320,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @nsidex.setter
     def nsidex(self, value: int) -> None:
+        """Set the nsidex property."""
         self._cards[1].set_value("nsidex", value)
 
     @property
@@ -325,6 +331,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[1].set_value("boxid", value)
 
     @property
@@ -335,6 +342,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[1].set_value("offset", value)
 
     @property
@@ -345,6 +353,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -355,6 +364,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -365,6 +375,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @rwksf.setter
     def rwksf(self, value: float) -> None:
+        """Set the rwksf property."""
         self._cards[1].set_value("rwksf", value)
 
     @property
@@ -375,6 +386,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @xt.setter
     def xt(self, value: float) -> None:
+        """Set the xt property."""
         self._cards[2].set_value("xt", value)
 
     @property
@@ -385,6 +397,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @yt.setter
     def yt(self, value: float) -> None:
+        """Set the yt property."""
         self._cards[2].set_value("yt", value)
 
     @property
@@ -395,6 +408,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @zt.setter
     def zt(self, value: float) -> None:
+        """Set the zt property."""
         self._cards[2].set_value("zt", value)
 
     @property
@@ -405,6 +419,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @xh.setter
     def xh(self, value: float) -> None:
+        """Set the xh property."""
         self._cards[2].set_value("xh", value)
 
     @property
@@ -415,6 +430,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @yh.setter
     def yh(self, value: float) -> None:
+        """Set the yh property."""
         self._cards[2].set_value("yh", value)
 
     @property
@@ -425,6 +441,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @zh.setter
     def zh(self, value: float) -> None:
+        """Set the zh property."""
         self._cards[2].set_value("zh", value)
 
     @property
@@ -439,6 +456,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[2].set_value("fric", value)
 
     @property
@@ -449,6 +467,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @wvel.setter
     def wvel(self, value: float) -> None:
+        """Set the wvel property."""
         self._cards[2].set_value("wvel", value)
 
     @property
@@ -459,6 +478,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @sfrica.setter
     def sfrica(self, value: float) -> None:
+        """Set the sfrica property."""
         self._cards[3].set_value("sfrica", value)
 
     @property
@@ -469,6 +489,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @sfricb.setter
     def sfricb(self, value: float) -> None:
+        """Set the sfricb property."""
         self._cards[3].set_value("sfricb", value)
 
     @property
@@ -479,6 +500,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @dfrica.setter
     def dfrica(self, value: float) -> None:
+        """Set the dfrica property."""
         self._cards[3].set_value("dfrica", value)
 
     @property
@@ -489,6 +511,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @dfricb.setter
     def dfricb(self, value: float) -> None:
+        """Set the dfricb property."""
         self._cards[3].set_value("dfricb", value)
 
     @property
@@ -499,6 +522,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @decaya.setter
     def decaya(self, value: float) -> None:
+        """Set the decaya property."""
         self._cards[3].set_value("decaya", value)
 
     @property
@@ -509,6 +533,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @decayb.setter
     def decayb(self, value: float) -> None:
+        """Set the decayb property."""
         self._cards[3].set_value("decayb", value)
 
     @property
@@ -519,6 +544,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[4].set_value("node1", value)
 
     @property
@@ -529,6 +555,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[4].set_value("node2", value)
 
     @property
@@ -539,6 +566,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -549,6 +577,7 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -559,5 +588,6 @@ class RigidwallPlanarOrthoId(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[4].set_value("d3", value)
 

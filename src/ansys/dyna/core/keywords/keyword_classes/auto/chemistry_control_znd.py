@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CHEMISTRY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryControlZnd(KeywordBase):
     subkeyword = "CONTROL_ZND"
 
     def __init__(self, **kwargs):
+        """Initialize the CHEMISTRY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -100,6 +102,7 @@ class ChemistryControlZnd(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -110,6 +113,7 @@ class ChemistryControlZnd(KeywordBase):
 
     @f.setter
     def f(self, value: float) -> None:
+        """Set the f property."""
         self._cards[1].set_value("f", value)
 
     @property
@@ -120,6 +124,7 @@ class ChemistryControlZnd(KeywordBase):
 
     @eplus.setter
     def eplus(self, value: float) -> None:
+        """Set the eplus property."""
         self._cards[1].set_value("eplus", value)
 
     @property
@@ -130,6 +135,7 @@ class ChemistryControlZnd(KeywordBase):
 
     @q0.setter
     def q0(self, value: float) -> None:
+        """Set the q0 property."""
         self._cards[1].set_value("q0", value)
 
     @property
@@ -140,6 +146,7 @@ class ChemistryControlZnd(KeywordBase):
 
     @gam.setter
     def gam(self, value: float) -> None:
+        """Set the gam property."""
         self._cards[1].set_value("gam", value)
 
     @property
@@ -150,6 +157,7 @@ class ChemistryControlZnd(KeywordBase):
 
     @xyzd.setter
     def xyzd(self, value: float) -> None:
+        """Set the xyzd property."""
         self._cards[1].set_value("xyzd", value)
 
     @property
@@ -160,5 +168,6 @@ class ChemistryControlZnd(KeywordBase):
 
     @detdir.setter
     def detdir(self, value: int) -> None:
+        """Set the detdir property."""
         self._cards[1].set_value("detdir", value)
 

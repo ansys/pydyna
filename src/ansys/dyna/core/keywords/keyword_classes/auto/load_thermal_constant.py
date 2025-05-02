@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadThermalConstant(KeywordBase):
     subkeyword = "THERMAL_CONSTANT"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -91,6 +93,7 @@ class LoadThermalConstant(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -101,6 +104,7 @@ class LoadThermalConstant(KeywordBase):
 
     @nsidex.setter
     def nsidex(self, value: int) -> None:
+        """Set the nsidex property."""
         self._cards[0].set_value("nsidex", value)
 
     @property
@@ -111,6 +115,7 @@ class LoadThermalConstant(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -121,6 +126,7 @@ class LoadThermalConstant(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 
     @property
@@ -131,5 +137,6 @@ class LoadThermalConstant(KeywordBase):
 
     @te.setter
     def te(self, value: float) -> None:
+        """Set the te property."""
         self._cards[1].set_value("te", value)
 

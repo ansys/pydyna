@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmIsopotentialRogo(KeywordBase):
     subkeyword = "ISOPOTENTIAL_ROGO"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class EmIsopotentialRogo(KeywordBase):
 
     @isoid.setter
     def isoid(self, value: int) -> None:
+        """Set the isoid property."""
         self._cards[0].set_value("isoid", value)
 
     @property
@@ -80,6 +83,7 @@ class EmIsopotentialRogo(KeywordBase):
 
     @settype.setter
     def settype(self, value: int) -> None:
+        """Set the settype property."""
         self._cards[0].set_value("settype", value)
 
     @property
@@ -90,5 +94,6 @@ class EmIsopotentialRogo(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 

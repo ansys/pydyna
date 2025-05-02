@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
     subkeyword = "PRESCRIBED_ACCELEROMETER_RIGID"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -93,6 +95,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -103,6 +106,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -113,6 +117,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -123,6 +128,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
 
     @lcidx.setter
     def lcidx(self, value: int) -> None:
+        """Set the lcidx property."""
         self._cards[1].set_value("lcidx", value)
 
     @property
@@ -133,6 +139,7 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
 
     @lcidy.setter
     def lcidy(self, value: int) -> None:
+        """Set the lcidy property."""
         self._cards[1].set_value("lcidy", value)
 
     @property
@@ -143,5 +150,6 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
 
     @lcidz.setter
     def lcidz(self, value: int) -> None:
+        """Set the lcidz property."""
         self._cards[1].set_value("lcidz", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
     subkeyword = "FORMING_ONESTEP_AUTO_CONSTRAINT"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -75,6 +77,7 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
 
     @icon.setter
     def icon(self, value: int) -> None:
+        """Set the icon property."""
         self._cards[0].set_value("icon", value)
 
     @property
@@ -85,6 +88,7 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[0].set_value("node1", value)
 
     @property
@@ -95,6 +99,7 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[0].set_value("node2", value)
 
     @property
@@ -105,5 +110,6 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
 
     @node3.setter
     def node3(self, value: int) -> None:
+        """Set the node3 property."""
         self._cards[0].set_value("node3", value)
 

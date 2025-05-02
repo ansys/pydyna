@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatFhwaSoilNebraska(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -97,6 +99,7 @@ class MatFhwaSoilNebraska(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -107,6 +110,7 @@ class MatFhwaSoilNebraska(KeywordBase):
 
     @fctim.setter
     def fctim(self, value: float) -> None:
+        """Set the fctim property."""
         self._cards[0].set_value("fctim", value)
 
     @property
@@ -117,6 +121,7 @@ class MatFhwaSoilNebraska(KeywordBase):
 
     @fctmas.setter
     def fctmas(self, value: float) -> None:
+        """Set the fctmas property."""
         self._cards[0].set_value("fctmas", value)
 
     @property
@@ -127,6 +132,7 @@ class MatFhwaSoilNebraska(KeywordBase):
 
     @fctlen.setter
     def fctlen(self, value: float) -> None:
+        """Set the fctlen property."""
         self._cards[0].set_value("fctlen", value)
 
     @property
@@ -137,5 +143,6 @@ class MatFhwaSoilNebraska(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

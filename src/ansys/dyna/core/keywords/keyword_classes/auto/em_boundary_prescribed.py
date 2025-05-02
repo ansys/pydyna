@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmBoundaryPrescribed(KeywordBase):
     subkeyword = "BOUNDARY_PRESCRIBED"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -113,6 +115,7 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @bpid.setter
     def bpid(self, value: int) -> None:
+        """Set the bpid property."""
         self._cards[0].set_value("bpid", value)
 
     @property
@@ -127,8 +130,9 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @bptype.setter
     def bptype(self, value: int) -> None:
+        """Set the bptype property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""bptype must be `None` or one of {1,2,3,4}""")
+            raise Exception("""bptype must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("bptype", value)
 
     @property
@@ -142,8 +146,9 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @settype.setter
     def settype(self, value: int) -> None:
+        """Set the settype property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""settype must be `None` or one of {1,2,3}""")
+            raise Exception("""settype must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("settype", value)
 
     @property
@@ -155,6 +160,7 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 
     @property
@@ -166,6 +172,7 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @val.setter
     def val(self, value: float) -> None:
+        """Set the val property."""
         self._cards[0].set_value("val", value)
 
     @property
@@ -177,6 +184,7 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -188,6 +196,7 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @birtht.setter
     def birtht(self, value: float) -> None:
+        """Set the birtht property."""
         self._cards[1].set_value("birtht", value)
 
     @property
@@ -199,5 +208,6 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @deatht.setter
     def deatht(self, value: float) -> None:
+        """Set the deatht property."""
         self._cards[1].set_value("deatht", value)
 

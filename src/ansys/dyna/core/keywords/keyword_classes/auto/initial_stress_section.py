@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialStressSection(KeywordBase):
     subkeyword = "STRESS_SECTION"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -98,6 +100,7 @@ class InitialStressSection(KeywordBase):
 
     @issid.setter
     def issid(self, value: int) -> None:
+        """Set the issid property."""
         self._cards[0].set_value("issid", value)
 
     @property
@@ -108,6 +111,7 @@ class InitialStressSection(KeywordBase):
 
     @csid.setter
     def csid(self, value: int) -> None:
+        """Set the csid property."""
         self._cards[0].set_value("csid", value)
 
     @property
@@ -118,6 +122,7 @@ class InitialStressSection(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -128,6 +133,7 @@ class InitialStressSection(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -138,6 +144,7 @@ class InitialStressSection(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -155,8 +162,9 @@ class InitialStressSection(KeywordBase):
 
     @izshear.setter
     def izshear(self, value: int) -> None:
+        """Set the izshear property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""izshear must be `None` or one of {0,1,2}""")
+            raise Exception("""izshear must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("izshear", value)
 
     @property
@@ -174,5 +182,6 @@ class InitialStressSection(KeywordBase):
 
     @istiff.setter
     def istiff(self, value: int) -> None:
+        """Set the istiff property."""
         self._cards[0].set_value("istiff", value)
 

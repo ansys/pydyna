@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingUnflanging(KeywordBase):
     subkeyword = "FORMING_UNFLANGING"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -145,6 +147,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @noption.setter
     def noption(self, value: int) -> None:
+        """Set the noption property."""
         self._cards[0].set_value("noption", value)
 
     @property
@@ -155,6 +158,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @dvid.setter
     def dvid(self, value: int) -> None:
+        """Set the dvid property."""
         self._cards[0].set_value("dvid", value)
 
     @property
@@ -165,6 +169,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @nunbend.setter
     def nunbend(self, value: int) -> None:
+        """Set the nunbend property."""
         self._cards[0].set_value("nunbend", value)
 
     @property
@@ -175,6 +180,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @stfbend.setter
     def stfbend(self, value: float) -> None:
+        """Set the stfbend property."""
         self._cards[0].set_value("stfbend", value)
 
     @property
@@ -185,6 +191,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @stfcnt.setter
     def stfcnt(self, value: float) -> None:
+        """Set the stfcnt property."""
         self._cards[0].set_value("stfcnt", value)
 
     @property
@@ -195,6 +202,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @iflimit.setter
     def iflimit(self, value: int) -> None:
+        """Set the iflimit property."""
         self._cards[0].set_value("iflimit", value)
 
     @property
@@ -205,6 +213,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @dist.setter
     def dist(self, value: float) -> None:
+        """Set the dist property."""
         self._cards[0].set_value("dist", value)
 
     @property
@@ -218,8 +227,9 @@ class ControlFormingUnflanging(KeywordBase):
 
     @ilinear.setter
     def ilinear(self, value: int) -> None:
+        """Set the ilinear property."""
         if value not in [2, 0, 1, None]:
-            raise Exception("""ilinear must be `None` or one of {2,0,1}""")
+            raise Exception("""ilinear must be `None` or one of {2,0,1}.""")
         self._cards[0].set_value("ilinear", value)
 
     @property
@@ -230,6 +240,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @nb1.setter
     def nb1(self, value: int) -> None:
+        """Set the nb1 property."""
         self._cards[1].set_value("nb1", value)
 
     @property
@@ -240,6 +251,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @nb2.setter
     def nb2(self, value: int) -> None:
+        """Set the nb2 property."""
         self._cards[1].set_value("nb2", value)
 
     @property
@@ -250,6 +262,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @nb3.setter
     def nb3(self, value: int) -> None:
+        """Set the nb3 property."""
         self._cards[1].set_value("nb3", value)
 
     @property
@@ -260,6 +273,7 @@ class ControlFormingUnflanging(KeywordBase):
 
     @charlen.setter
     def charlen(self, value: float) -> None:
+        """Set the charlen property."""
         self._cards[1].set_value("charlen", value)
 
     @property
@@ -270,5 +284,6 @@ class ControlFormingUnflanging(KeywordBase):
 
     @ndouter.setter
     def ndouter(self, value: int) -> None:
+        """Set the ndouter property."""
         self._cards[1].set_value("ndouter", value)
 

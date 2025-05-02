@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineBox(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -125,6 +127,7 @@ class DefineBox(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -135,6 +138,7 @@ class DefineBox(KeywordBase):
 
     @xmn.setter
     def xmn(self, value: float) -> None:
+        """Set the xmn property."""
         self._cards[0].set_value("xmn", value)
 
     @property
@@ -145,6 +149,7 @@ class DefineBox(KeywordBase):
 
     @xmx.setter
     def xmx(self, value: float) -> None:
+        """Set the xmx property."""
         self._cards[0].set_value("xmx", value)
 
     @property
@@ -155,6 +160,7 @@ class DefineBox(KeywordBase):
 
     @ymn.setter
     def ymn(self, value: float) -> None:
+        """Set the ymn property."""
         self._cards[0].set_value("ymn", value)
 
     @property
@@ -165,6 +171,7 @@ class DefineBox(KeywordBase):
 
     @ymx.setter
     def ymx(self, value: float) -> None:
+        """Set the ymx property."""
         self._cards[0].set_value("ymx", value)
 
     @property
@@ -175,6 +182,7 @@ class DefineBox(KeywordBase):
 
     @zmn.setter
     def zmn(self, value: float) -> None:
+        """Set the zmn property."""
         self._cards[0].set_value("zmn", value)
 
     @property
@@ -185,6 +193,7 @@ class DefineBox(KeywordBase):
 
     @zmx.setter
     def zmx(self, value: float) -> None:
+        """Set the zmx property."""
         self._cards[0].set_value("zmx", value)
 
     @property
@@ -195,5 +204,6 @@ class DefineBox(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

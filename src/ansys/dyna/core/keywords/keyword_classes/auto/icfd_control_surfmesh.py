@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlSurfmesh(KeywordBase):
     subkeyword = "CONTROL_SURFMESH"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -67,8 +69,9 @@ class IcfdControlSurfmesh(KeywordBase):
 
     @rsrf.setter
     def rsrf(self, value: int) -> None:
+        """Set the rsrf property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""rsrf must be `None` or one of {0,1,2}""")
+            raise Exception("""rsrf must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("rsrf", value)
 
     @property
@@ -82,7 +85,8 @@ class IcfdControlSurfmesh(KeywordBase):
 
     @sadapt.setter
     def sadapt(self, value: int) -> None:
+        """Set the sadapt property."""
         if value not in [0, 1, None]:
-            raise Exception("""sadapt must be `None` or one of {0,1}""")
+            raise Exception("""sadapt must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sadapt", value)
 

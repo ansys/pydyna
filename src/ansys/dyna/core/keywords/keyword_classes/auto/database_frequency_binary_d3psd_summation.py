@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseFrequencyBinaryD3PsdSummation(KeywordBase):
     subkeyword = "FREQUENCY_BINARY_D3PSD_SUMMATION"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class DatabaseFrequencyBinaryD3PsdSummation(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 

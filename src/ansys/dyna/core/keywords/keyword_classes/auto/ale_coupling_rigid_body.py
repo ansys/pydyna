@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ALE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleCouplingRigidBody(KeywordBase):
     subkeyword = "COUPLING_RIGID_BODY"
 
     def __init__(self, **kwargs):
+        """Initialize the ALE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class AleCouplingRigidBody(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -105,6 +108,7 @@ class AleCouplingRigidBody(KeywordBase):
 
     @esid.setter
     def esid(self, value: int) -> None:
+        """Set the esid property."""
         self._cards[0].set_value("esid", value)
 
     @property
@@ -115,6 +119,7 @@ class AleCouplingRigidBody(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[1].set_value("id", value)
 
     @property
@@ -128,8 +133,9 @@ class AleCouplingRigidBody(KeywordBase):
 
     @idtype.setter
     def idtype(self, value: int) -> None:
+        """Set the idtype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""idtype must be `None` or one of {0,1,2}""")
+            raise Exception("""idtype must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("idtype", value)
 
     @property
@@ -141,8 +147,9 @@ class AleCouplingRigidBody(KeywordBase):
 
     @ictype.setter
     def ictype(self, value: int) -> None:
+        """Set the ictype property."""
         if value not in [1, 2, None]:
-            raise Exception("""ictype must be `None` or one of {1,2}""")
+            raise Exception("""ictype must be `None` or one of {1,2}.""")
         self._cards[1].set_value("ictype", value)
 
     @property
@@ -153,5 +160,6 @@ class AleCouplingRigidBody(KeywordBase):
 
     @iexcle.setter
     def iexcle(self, value: int) -> None:
+        """Set the iexcle property."""
         self._cards[1].set_value("iexcle", value)
 

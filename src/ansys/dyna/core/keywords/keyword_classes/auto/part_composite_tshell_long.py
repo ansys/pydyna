@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the PART keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartCompositeTshellLong(KeywordBase):
     subkeyword = "COMPOSITE_TSHELL_LONG"
 
     def __init__(self, **kwargs):
+        """Initialize the PART keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -178,6 +180,7 @@ class PartCompositeTshellLong(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -188,6 +191,7 @@ class PartCompositeTshellLong(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -202,8 +206,9 @@ class PartCompositeTshellLong(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [1, 2, 3, 5, None]:
-            raise Exception("""elform must be `None` or one of {1,2,3,5}""")
+            raise Exception("""elform must be `None` or one of {1,2,3,5}.""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -214,6 +219,7 @@ class PartCompositeTshellLong(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[1].set_value("shrf", value)
 
     @property
@@ -225,6 +231,7 @@ class PartCompositeTshellLong(KeywordBase):
 
     @hgid.setter
     def hgid(self, value: int) -> None:
+        """Set the hgid property."""
         self._cards[1].set_value("hgid", value)
 
     @property
@@ -237,8 +244,9 @@ class PartCompositeTshellLong(KeywordBase):
 
     @tshear.setter
     def tshear(self, value: int) -> None:
+        """Set the tshear property."""
         if value not in [0, 1, None]:
-            raise Exception("""tshear must be `None` or one of {0,1}""")
+            raise Exception("""tshear must be `None` or one of {0,1}.""")
         self._cards[1].set_value("tshear", value)
 
     @property
@@ -249,6 +257,7 @@ class PartCompositeTshellLong(KeywordBase):
 
     @mid1.setter
     def mid1(self, value: int) -> None:
+        """Set the mid1 property."""
         self._cards[2].set_value("mid1", value)
 
     @property
@@ -259,6 +268,7 @@ class PartCompositeTshellLong(KeywordBase):
 
     @thick1.setter
     def thick1(self, value: float) -> None:
+        """Set the thick1 property."""
         self._cards[2].set_value("thick1", value)
 
     @property
@@ -269,6 +279,7 @@ class PartCompositeTshellLong(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[2].set_value("b1", value)
 
     @property
@@ -279,6 +290,7 @@ class PartCompositeTshellLong(KeywordBase):
 
     @tmid1.setter
     def tmid1(self, value: int) -> None:
+        """Set the tmid1 property."""
         self._cards[2].set_value("tmid1", value)
 
     @property
@@ -289,6 +301,7 @@ class PartCompositeTshellLong(KeywordBase):
 
     @plyid.setter
     def plyid(self, value: int) -> None:
+        """Set the plyid property."""
         self._cards[2].set_value("plyid", value)
 
     @property
@@ -299,5 +312,6 @@ class PartCompositeTshellLong(KeywordBase):
 
     @shrfac.setter
     def shrfac(self, value: float) -> None:
+        """Set the shrfac property."""
         self._cards[2].set_value("shrfac", value)
 

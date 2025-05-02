@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedSpr2(KeywordBase):
     subkeyword = "SPR2"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -223,6 +225,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @upid.setter
     def upid(self, value: int) -> None:
+        """Set the upid property."""
         self._cards[0].set_value("upid", value)
 
     @property
@@ -233,6 +236,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @lpid.setter
     def lpid(self, value: int) -> None:
+        """Set the lpid property."""
         self._cards[0].set_value("lpid", value)
 
     @property
@@ -243,6 +247,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -253,6 +258,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[0].set_value("thick", value)
 
     @property
@@ -263,6 +269,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[0].set_value("d", value)
 
     @property
@@ -275,6 +282,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @fn.setter
     def fn(self, value: float) -> None:
+        """Set the fn property."""
         self._cards[0].set_value("fn", value)
 
     @property
@@ -285,6 +293,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @ft.setter
     def ft(self, value: float) -> None:
+        """Set the ft property."""
         self._cards[0].set_value("ft", value)
 
     @property
@@ -295,6 +304,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @dn.setter
     def dn(self, value: float) -> None:
+        """Set the dn property."""
         self._cards[0].set_value("dn", value)
 
     @property
@@ -305,6 +315,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -315,6 +326,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @xin.setter
     def xin(self, value: float) -> None:
+        """Set the xin property."""
         self._cards[1].set_value("xin", value)
 
     @property
@@ -325,6 +337,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @xit.setter
     def xit(self, value: float) -> None:
+        """Set the xit property."""
         self._cards[1].set_value("xit", value)
 
     @property
@@ -335,6 +348,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @alpha1.setter
     def alpha1(self, value: float) -> None:
+        """Set the alpha1 property."""
         self._cards[1].set_value("alpha1", value)
 
     @property
@@ -345,6 +359,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @alpha2.setter
     def alpha2(self, value: float) -> None:
+        """Set the alpha2 property."""
         self._cards[1].set_value("alpha2", value)
 
     @property
@@ -357,6 +372,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @alpha3.setter
     def alpha3(self, value: float) -> None:
+        """Set the alpha3 property."""
         self._cards[1].set_value("alpha3", value)
 
     @property
@@ -367,6 +383,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @dens.setter
     def dens(self, value: float) -> None:
+        """Set the dens property."""
         self._cards[1].set_value("dens", value)
 
     @property
@@ -380,8 +397,9 @@ class ConstrainedSpr2(KeywordBase):
 
     @intp.setter
     def intp(self, value: int) -> None:
+        """Set the intp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""intp must be `None` or one of {0,1,2}""")
+            raise Exception("""intp must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("intp", value)
 
     @property
@@ -392,6 +410,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @expn.setter
     def expn(self, value: float) -> None:
+        """Set the expn property."""
         self._cards[2].set_value("expn", value)
 
     @property
@@ -402,6 +421,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @expt.setter
     def expt(self, value: float) -> None:
+        """Set the expt property."""
         self._cards[2].set_value("expt", value)
 
     @property
@@ -414,6 +434,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @pidvb.setter
     def pidvb(self, value: int) -> None:
+        """Set the pidvb property."""
         self._cards[2].set_value("pidvb", value)
 
     @property
@@ -424,6 +445,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @xpid1.setter
     def xpid1(self, value: int) -> None:
+        """Set the xpid1 property."""
         self._cards[3].set_value("xpid1", value)
 
     @property
@@ -434,6 +456,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @xpid2.setter
     def xpid2(self, value: int) -> None:
+        """Set the xpid2 property."""
         self._cards[3].set_value("xpid2", value)
 
     @property
@@ -444,6 +467,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @xpid3.setter
     def xpid3(self, value: int) -> None:
+        """Set the xpid3 property."""
         self._cards[3].set_value("xpid3", value)
 
     @property
@@ -454,5 +478,6 @@ class ConstrainedSpr2(KeywordBase):
 
     @xpid4.setter
     def xpid4(self, value: int) -> None:
+        """Set the xpid4 property."""
         self._cards[3].set_value("xpid4", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTERFACE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceCompensation3DMultiSteps(KeywordBase):
     subkeyword = "COMPENSATION_3D_MULTI_STEPS"
 
     def __init__(self, **kwargs):
+        """Initialize the INTERFACE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class InterfaceCompensation3DMultiSteps(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         self._cards[0].set_value("method", value)
 
     @property
@@ -121,6 +124,7 @@ class InterfaceCompensation3DMultiSteps(KeywordBase):
 
     @sl.setter
     def sl(self, value: float) -> None:
+        """Set the sl property."""
         self._cards[0].set_value("sl", value)
 
     @property
@@ -153,6 +157,7 @@ class InterfaceCompensation3DMultiSteps(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -165,8 +170,9 @@ class InterfaceCompensation3DMultiSteps(KeywordBase):
 
     @elref.setter
     def elref(self, value: int) -> None:
+        """Set the elref property."""
         if value not in [1, 2, None]:
-            raise Exception("""elref must be `None` or one of {1,2}""")
+            raise Exception("""elref must be `None` or one of {1,2}.""")
         self._cards[0].set_value("elref", value)
 
     @property
@@ -178,6 +184,7 @@ class InterfaceCompensation3DMultiSteps(KeywordBase):
 
     @psidp.setter
     def psidp(self, value: float) -> None:
+        """Set the psidp property."""
         self._cards[0].set_value("psidp", value)
 
     @property
@@ -190,6 +197,7 @@ class InterfaceCompensation3DMultiSteps(KeywordBase):
 
     @undct.setter
     def undct(self, value: float) -> None:
+        """Set the undct property."""
         self._cards[0].set_value("undct", value)
 
     @property
@@ -200,6 +208,7 @@ class InterfaceCompensation3DMultiSteps(KeywordBase):
 
     @angle.setter
     def angle(self, value: float) -> None:
+        """Set the angle property."""
         self._cards[0].set_value("angle", value)
 
     @property
@@ -210,5 +219,6 @@ class InterfaceCompensation3DMultiSteps(KeywordBase):
 
     @nlinear.setter
     def nlinear(self, value: int) -> None:
+        """Set the nlinear property."""
         self._cards[0].set_value("nlinear", value)
 

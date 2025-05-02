@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseElementset(KeywordBase):
     subkeyword = "ELEMENTSET"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class DualceseElementset(KeywordBase):
 
     @esid.setter
     def esid(self, value: int) -> None:
+        """Set the esid property."""
         self._cards[0].set_value("esid", value)
 
     @property
@@ -124,6 +127,7 @@ class DualceseElementset(KeywordBase):
 
     @eid1.setter
     def eid1(self, value: int) -> None:
+        """Set the eid1 property."""
         self._cards[1].set_value("eid1", value)
 
     @property
@@ -134,6 +138,7 @@ class DualceseElementset(KeywordBase):
 
     @eid2.setter
     def eid2(self, value: int) -> None:
+        """Set the eid2 property."""
         self._cards[1].set_value("eid2", value)
 
     @property
@@ -144,6 +149,7 @@ class DualceseElementset(KeywordBase):
 
     @eid3.setter
     def eid3(self, value: int) -> None:
+        """Set the eid3 property."""
         self._cards[1].set_value("eid3", value)
 
     @property
@@ -154,6 +160,7 @@ class DualceseElementset(KeywordBase):
 
     @eid4.setter
     def eid4(self, value: int) -> None:
+        """Set the eid4 property."""
         self._cards[1].set_value("eid4", value)
 
     @property
@@ -164,6 +171,7 @@ class DualceseElementset(KeywordBase):
 
     @eid5.setter
     def eid5(self, value: int) -> None:
+        """Set the eid5 property."""
         self._cards[1].set_value("eid5", value)
 
     @property
@@ -174,6 +182,7 @@ class DualceseElementset(KeywordBase):
 
     @eid6.setter
     def eid6(self, value: int) -> None:
+        """Set the eid6 property."""
         self._cards[1].set_value("eid6", value)
 
     @property
@@ -184,6 +193,7 @@ class DualceseElementset(KeywordBase):
 
     @eid7.setter
     def eid7(self, value: int) -> None:
+        """Set the eid7 property."""
         self._cards[1].set_value("eid7", value)
 
     @property
@@ -194,5 +204,6 @@ class DualceseElementset(KeywordBase):
 
     @eid8.setter
     def eid8(self, value: int) -> None:
+        """Set the eid8 property."""
         self._cards[1].set_value("eid8", value)
 

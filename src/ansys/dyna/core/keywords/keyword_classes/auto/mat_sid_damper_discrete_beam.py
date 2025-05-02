@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -220,6 +222,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -230,6 +233,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -240,6 +244,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @st.setter
     def st(self, value: float) -> None:
+        """Set the st property."""
         self._cards[0].set_value("st", value)
 
     @property
@@ -250,6 +255,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[0].set_value("d", value)
 
     @property
@@ -260,6 +266,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[0].set_value("r", value)
 
     @property
@@ -270,6 +277,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[0].set_value("h", value)
 
     @property
@@ -281,6 +289,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -291,6 +300,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -301,6 +311,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[1].set_value("c3", value)
 
     @property
@@ -311,6 +322,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @stf.setter
     def stf(self, value: float) -> None:
+        """Set the stf property."""
         self._cards[1].set_value("stf", value)
 
     @property
@@ -321,6 +333,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @rhof.setter
     def rhof(self, value: float) -> None:
+        """Set the rhof property."""
         self._cards[1].set_value("rhof", value)
 
     @property
@@ -331,6 +344,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[1].set_value("c1", value)
 
     @property
@@ -341,6 +355,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[1].set_value("c2", value)
 
     @property
@@ -351,6 +366,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @lcidf.setter
     def lcidf(self, value: float) -> None:
+        """Set the lcidf property."""
         self._cards[1].set_value("lcidf", value)
 
     @property
@@ -361,6 +377,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @lcidd.setter
     def lcidd(self, value: float) -> None:
+        """Set the lcidd property."""
         self._cards[1].set_value("lcidd", value)
 
     @property
@@ -371,6 +388,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @s0.setter
     def s0(self, value: float) -> None:
+        """Set the s0 property."""
         self._cards[1].set_value("s0", value)
 
     @property
@@ -381,6 +399,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @orfloc.setter
     def orfloc(self, value: float) -> None:
+        """Set the orfloc property."""
         self._cards[2].set_value("orfloc", value)
 
     @property
@@ -391,6 +410,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @orfrad.setter
     def orfrad(self, value: float) -> None:
+        """Set the orfrad property."""
         self._cards[2].set_value("orfrad", value)
 
     @property
@@ -401,6 +421,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[2].set_value("sf", value)
 
     @property
@@ -411,6 +432,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[2].set_value("dc", value)
 
     @property
@@ -421,5 +443,6 @@ class MatSidDamperDiscreteBeam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

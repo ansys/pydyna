@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
     subkeyword = "RADIATION_ENCLOSURE"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -234,6 +236,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @brencid.setter
     def brencid(self, value: int) -> None:
+        """Set the brencid property."""
         self._cards[0].set_value("brencid", value)
 
     @property
@@ -244,6 +247,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @encname.setter
     def encname(self, value: str) -> None:
+        """Set the encname property."""
         self._cards[0].set_value("encname", value)
 
     @property
@@ -255,6 +259,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @calopt.setter
     def calopt(self, value: int) -> None:
+        """Set the calopt property."""
         self._cards[1].set_value("calopt", value)
 
     @property
@@ -267,8 +272,9 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @outopt.setter
     def outopt(self, value: int) -> None:
+        """Set the outopt property."""
         if value not in [0, 1, None]:
-            raise Exception("""outopt must be `None` or one of {0,1}""")
+            raise Exception("""outopt must be `None` or one of {0,1}.""")
         self._cards[1].set_value("outopt", value)
 
     @property
@@ -280,6 +286,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @conopt.setter
     def conopt(self, value: int) -> None:
+        """Set the conopt property."""
         self._cards[1].set_value("conopt", value)
 
     @property
@@ -290,6 +297,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @encname.setter
     def encname(self, value: str) -> None:
+        """Set the encname property."""
         self._cards[2].set_value("encname", value)
 
     @property
@@ -302,8 +310,9 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @smflag.setter
     def smflag(self, value: int) -> None:
+        """Set the smflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""smflag must be `None` or one of {0,1}""")
+            raise Exception("""smflag must be `None` or one of {0,1}.""")
         self._cards[3].set_value("smflag", value)
 
     @property
@@ -314,6 +323,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @smmaxi.setter
     def smmaxi(self, value: int) -> None:
+        """Set the smmaxi property."""
         self._cards[3].set_value("smmaxi", value)
 
     @property
@@ -324,6 +334,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @smabst.setter
     def smabst(self, value: float) -> None:
+        """Set the smabst property."""
         self._cards[3].set_value("smabst", value)
 
     @property
@@ -334,6 +345,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @smrelt.setter
     def smrelt(self, value: float) -> None:
+        """Set the smrelt property."""
         self._cards[3].set_value("smrelt", value)
 
     @property
@@ -345,6 +357,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         self._cards[4].set_value("stype", value)
 
     @property
@@ -355,6 +368,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @slmaxi.setter
     def slmaxi(self, value: int) -> None:
+        """Set the slmaxi property."""
         self._cards[4].set_value("slmaxi", value)
 
     @property
@@ -365,6 +379,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @slabst.setter
     def slabst(self, value: float) -> None:
+        """Set the slabst property."""
         self._cards[4].set_value("slabst", value)
 
     @property
@@ -375,6 +390,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @slrelt.setter
     def slrelt(self, value: float) -> None:
+        """Set the slrelt property."""
         self._cards[4].set_value("slrelt", value)
 
     @property
@@ -389,8 +405,9 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @slmlev.setter
     def slmlev(self, value: int) -> None:
+        """Set the slmlev property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""slmlev must be `None` or one of {0,1,2,3}""")
+            raise Exception("""slmlev must be `None` or one of {0,1,2,3}.""")
         self._cards[4].set_value("slmlev", value)
 
     @property
@@ -401,6 +418,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[5].set_value("ssid", value)
 
     @property
@@ -412,6 +430,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @nint.setter
     def nint(self, value: int) -> None:
+        """Set the nint property."""
         self._cards[6].set_value("nint", value)
 
     @property
@@ -424,6 +443,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @block.setter
     def block(self, value: int) -> None:
+        """Set the block property."""
         self._cards[6].set_value("block", value)
 
     @property
@@ -437,6 +457,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @selcid.setter
     def selcid(self, value: int) -> None:
+        """Set the selcid property."""
         self._cards[6].set_value("selcid", value)
 
     @property
@@ -447,6 +468,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @semult.setter
     def semult(self, value: float) -> None:
+        """Set the semult property."""
         self._cards[6].set_value("semult", value)
 
     @property
@@ -460,5 +482,6 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @loc.setter
     def loc(self, value: int) -> None:
+        """Set the loc property."""
         self._cards[6].set_value("loc", value)
 

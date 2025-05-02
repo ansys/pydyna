@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DAMPING keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DampingGlobal(KeywordBase):
     subkeyword = "GLOBAL"
 
     def __init__(self, **kwargs):
+        """Initialize the DAMPING keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -113,6 +115,7 @@ class DampingGlobal(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -123,6 +126,7 @@ class DampingGlobal(KeywordBase):
 
     @valdmp.setter
     def valdmp(self, value: float) -> None:
+        """Set the valdmp property."""
         self._cards[0].set_value("valdmp", value)
 
     @property
@@ -133,6 +137,7 @@ class DampingGlobal(KeywordBase):
 
     @stx.setter
     def stx(self, value: float) -> None:
+        """Set the stx property."""
         self._cards[0].set_value("stx", value)
 
     @property
@@ -143,6 +148,7 @@ class DampingGlobal(KeywordBase):
 
     @sty.setter
     def sty(self, value: float) -> None:
+        """Set the sty property."""
         self._cards[0].set_value("sty", value)
 
     @property
@@ -153,6 +159,7 @@ class DampingGlobal(KeywordBase):
 
     @stz.setter
     def stz(self, value: float) -> None:
+        """Set the stz property."""
         self._cards[0].set_value("stz", value)
 
     @property
@@ -163,6 +170,7 @@ class DampingGlobal(KeywordBase):
 
     @srx.setter
     def srx(self, value: float) -> None:
+        """Set the srx property."""
         self._cards[0].set_value("srx", value)
 
     @property
@@ -173,6 +181,7 @@ class DampingGlobal(KeywordBase):
 
     @sry.setter
     def sry(self, value: float) -> None:
+        """Set the sry property."""
         self._cards[0].set_value("sry", value)
 
     @property
@@ -183,5 +192,6 @@ class DampingGlobal(KeywordBase):
 
     @srz.setter
     def srz(self, value: float) -> None:
+        """Set the srz property."""
         self._cards[0].set_value("srz", value)
 

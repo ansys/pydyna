@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetNodeListSmoothCollect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -191,6 +193,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -201,6 +204,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @da1.setter
     def da1(self, value: float) -> None:
+        """Set the da1 property."""
         self._cards[0].set_value("da1", value)
 
     @property
@@ -211,6 +215,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @da2.setter
     def da2(self, value: float) -> None:
+        """Set the da2 property."""
         self._cards[0].set_value("da2", value)
 
     @property
@@ -221,6 +226,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @da3.setter
     def da3(self, value: float) -> None:
+        """Set the da3 property."""
         self._cards[0].set_value("da3", value)
 
     @property
@@ -231,6 +237,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @da4.setter
     def da4(self, value: float) -> None:
+        """Set the da4 property."""
         self._cards[0].set_value("da4", value)
 
     @property
@@ -243,8 +250,9 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -257,8 +265,9 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @its.setter
     def its(self, value: str) -> None:
+        """Set the its property."""
         if value not in ["1", "2", None]:
-            raise Exception("""its must be `None` or one of {"1","2"}""")
+            raise Exception("""its must be `None` or one of {"1","2"}.""")
         self._cards[0].set_value("its", value)
 
     @property
@@ -269,6 +278,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @nid1.setter
     def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
         self._cards[1].set_value("nid1", value)
 
     @property
@@ -279,6 +289,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[1].set_value("nid2", value)
 
     @property
@@ -289,6 +300,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @nid3.setter
     def nid3(self, value: int) -> None:
+        """Set the nid3 property."""
         self._cards[1].set_value("nid3", value)
 
     @property
@@ -299,6 +311,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @nid4.setter
     def nid4(self, value: int) -> None:
+        """Set the nid4 property."""
         self._cards[1].set_value("nid4", value)
 
     @property
@@ -309,6 +322,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @nid5.setter
     def nid5(self, value: int) -> None:
+        """Set the nid5 property."""
         self._cards[1].set_value("nid5", value)
 
     @property
@@ -319,6 +333,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @nid6.setter
     def nid6(self, value: int) -> None:
+        """Set the nid6 property."""
         self._cards[1].set_value("nid6", value)
 
     @property
@@ -329,6 +344,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @nid7.setter
     def nid7(self, value: int) -> None:
+        """Set the nid7 property."""
         self._cards[1].set_value("nid7", value)
 
     @property
@@ -339,6 +355,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @nid8.setter
     def nid8(self, value: int) -> None:
+        """Set the nid8 property."""
         self._cards[1].set_value("nid8", value)
 
     @property
@@ -349,5 +366,6 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

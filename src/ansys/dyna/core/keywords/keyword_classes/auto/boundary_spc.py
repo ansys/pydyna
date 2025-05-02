@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundarySpc(KeywordBase):
     subkeyword = "SPC"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,6 +112,7 @@ class BoundarySpc(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -120,6 +123,7 @@ class BoundarySpc(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -131,8 +135,9 @@ class BoundarySpc(KeywordBase):
 
     @dofx.setter
     def dofx(self, value: int) -> None:
+        """Set the dofx property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofx must be `None` or one of {0,1}""")
+            raise Exception("""dofx must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofx", value)
 
     @property
@@ -144,8 +149,9 @@ class BoundarySpc(KeywordBase):
 
     @dofy.setter
     def dofy(self, value: int) -> None:
+        """Set the dofy property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofy must be `None` or one of {0,1}""")
+            raise Exception("""dofy must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofy", value)
 
     @property
@@ -157,8 +163,9 @@ class BoundarySpc(KeywordBase):
 
     @dofz.setter
     def dofz(self, value: int) -> None:
+        """Set the dofz property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofz must be `None` or one of {0,1}""")
+            raise Exception("""dofz must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofz", value)
 
     @property
@@ -170,8 +177,9 @@ class BoundarySpc(KeywordBase):
 
     @dofrx.setter
     def dofrx(self, value: int) -> None:
+        """Set the dofrx property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofrx must be `None` or one of {0,1}""")
+            raise Exception("""dofrx must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofrx", value)
 
     @property
@@ -183,8 +191,9 @@ class BoundarySpc(KeywordBase):
 
     @dofry.setter
     def dofry(self, value: int) -> None:
+        """Set the dofry property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofry must be `None` or one of {0,1}""")
+            raise Exception("""dofry must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofry", value)
 
     @property
@@ -196,7 +205,8 @@ class BoundarySpc(KeywordBase):
 
     @dofrz.setter
     def dofrz(self, value: int) -> None:
+        """Set the dofrz property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofrz must be `None` or one of {0,1}""")
+            raise Exception("""dofrz must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofrz", value)
 

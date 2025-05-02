@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MODULE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ModuleUse(KeywordBase):
     subkeyword = "USE"
 
     def __init__(self, **kwargs):
+        """Initialize the MODULE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class ModuleUse(KeywordBase):
 
     @mdlid.setter
     def mdlid(self, value: int) -> None:
+        """Set the mdlid property."""
         self._cards[0].set_value("mdlid", value)
 
     @property
@@ -89,6 +92,7 @@ class ModuleUse(KeywordBase):
 
     @type.setter
     def type(self, value: str) -> None:
+        """Set the type property."""
         self._cards[1].set_value("type", value)
 
     @property
@@ -99,6 +103,7 @@ class ModuleUse(KeywordBase):
 
     @param1.setter
     def param1(self, value: str) -> None:
+        """Set the param1 property."""
         self._cards[1].set_value("param1", value)
 
     @property
@@ -109,5 +114,6 @@ class ModuleUse(KeywordBase):
 
     @param2.setter
     def param2(self, value: str) -> None:
+        """Set the param2 property."""
         self._cards[1].set_value("param2", value)
 

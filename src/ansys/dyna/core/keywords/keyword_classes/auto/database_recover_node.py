@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseRecoverNode(KeywordBase):
     subkeyword = "RECOVER_NODE"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,6 +112,7 @@ class DatabaseRecoverNode(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -136,8 +139,9 @@ class DatabaseRecoverNode(KeywordBase):
 
     @iax.setter
     def iax(self, value: str) -> None:
+        """Set the iax property."""
         if value not in ["SMNPD", "SMNPR", "SMXPD", "SMXPR", "SMXSH", "SPR", "SXX", "SYY", "SZZ", "SXY", "SYZ", "SZX", "SVM", None]:
-            raise Exception("""iax must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}""")
+            raise Exception("""iax must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}.""")
         self._cards[0].set_value("iax", value)
 
     @property
@@ -164,8 +168,9 @@ class DatabaseRecoverNode(KeywordBase):
 
     @iay.setter
     def iay(self, value: str) -> None:
+        """Set the iay property."""
         if value not in ["SMNPD", "SMNPR", "SMXPD", "SMXPR", "SMXSH", "SPR", "SXX", "SYY", "SZZ", "SXY", "SYZ", "SZX", "SVM", None]:
-            raise Exception("""iay must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}""")
+            raise Exception("""iay must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}.""")
         self._cards[0].set_value("iay", value)
 
     @property
@@ -192,8 +197,9 @@ class DatabaseRecoverNode(KeywordBase):
 
     @iaz.setter
     def iaz(self, value: str) -> None:
+        """Set the iaz property."""
         if value not in ["SMNPD", "SMNPR", "SMXPD", "SMXPR", "SMXSH", "SPR", "SXX", "SYY", "SZZ", "SXY", "SYZ", "SZX", "SVM", None]:
-            raise Exception("""iaz must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}""")
+            raise Exception("""iaz must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}.""")
         self._cards[0].set_value("iaz", value)
 
     @property
@@ -206,8 +212,9 @@ class DatabaseRecoverNode(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         if value not in [0, 1, None]:
-            raise Exception("""method must be `None` or one of {0,1}""")
+            raise Exception("""method must be `None` or one of {0,1}.""")
         self._cards[0].set_value("method", value)
 
     @property
@@ -234,8 +241,9 @@ class DatabaseRecoverNode(KeywordBase):
 
     @ivx.setter
     def ivx(self, value: str) -> None:
+        """Set the ivx property."""
         if value not in ["SMNPD", "SMNPR", "SMXPD", "SMXPR", "SMXSH", "SPR", "SXX", "SYY", "SZZ", "SXY", "SYZ", "SZX", "SVM", None]:
-            raise Exception("""ivx must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}""")
+            raise Exception("""ivx must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}.""")
         self._cards[0].set_value("ivx", value)
 
     @property
@@ -262,8 +270,9 @@ class DatabaseRecoverNode(KeywordBase):
 
     @ivy.setter
     def ivy(self, value: str) -> None:
+        """Set the ivy property."""
         if value not in ["SMNPD", "SMNPR", "SMXPD", "SMXPR", "SMXSH", "SPR", "SXX", "SYY", "SZZ", "SXY", "SYZ", "SZX", "SVM", None]:
-            raise Exception("""ivy must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}""")
+            raise Exception("""ivy must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}.""")
         self._cards[0].set_value("ivy", value)
 
     @property
@@ -290,7 +299,8 @@ class DatabaseRecoverNode(KeywordBase):
 
     @ivz.setter
     def ivz(self, value: str) -> None:
+        """Set the ivz property."""
         if value not in ["SMNPD", "SMNPR", "SMXPD", "SMXPR", "SMXSH", "SPR", "SXX", "SYY", "SZZ", "SXY", "SYZ", "SZX", "SVM", None]:
-            raise Exception("""ivz must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}""")
+            raise Exception("""ivz must be `None` or one of {"SMNPD","SMNPR","SMXPD","SMXPR","SMXSH","SPR","SXX","SYY","SZZ","SXY","SYZ","SZX","SVM"}.""")
         self._cards[0].set_value("ivz", value)
 

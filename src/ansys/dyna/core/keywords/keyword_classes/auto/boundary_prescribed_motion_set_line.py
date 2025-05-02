@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
     subkeyword = "PRESCRIBED_MOTION_SET_LINE"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -171,6 +173,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @typeid.setter
     def typeid(self, value: int) -> None:
+        """Set the typeid property."""
         self._cards[0].set_value("typeid", value)
 
     @property
@@ -199,8 +202,9 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [0, 1, 2, 3, 4, -4, 5, 6, 7, 8, -8, 9, -9, 10, -10, 11, -11, 12, None]:
-            raise Exception("""dof must be `None` or one of {0,1,2,3,4,-4,5,6,7,8,-8,9,-9,10,-10,11,-11,12}""")
+            raise Exception("""dof must be `None` or one of {0,1,2,3,4,-4,5,6,7,8,-8,9,-9,10,-10,11,-11,12}.""")
         self._cards[0].set_value("dof", value)
 
     @property
@@ -216,8 +220,9 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
+        """Set the vad property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""vad must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""vad must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("vad", value)
 
     @property
@@ -228,6 +233,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -238,6 +244,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -248,6 +255,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -258,6 +266,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -268,6 +277,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -278,6 +288,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @offset1.setter
     def offset1(self, value: float) -> None:
+        """Set the offset1 property."""
         self._cards[1].set_value("offset1", value)
 
     @property
@@ -288,6 +299,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @offset2.setter
     def offset2(self, value: float) -> None:
+        """Set the offset2 property."""
         self._cards[1].set_value("offset2", value)
 
     @property
@@ -298,6 +310,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @lrb.setter
     def lrb(self, value: int) -> None:
+        """Set the lrb property."""
         self._cards[1].set_value("lrb", value)
 
     @property
@@ -308,6 +321,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[1].set_value("node1", value)
 
     @property
@@ -318,6 +332,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[1].set_value("node2", value)
 
     @property
@@ -328,6 +343,7 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @nbeg.setter
     def nbeg(self, value: int) -> None:
+        """Set the nbeg property."""
         self._cards[2].set_value("nbeg", value)
 
     @property
@@ -341,5 +357,6 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
 
     @nend.setter
     def nend(self, value: int) -> None:
+        """Set the nend property."""
         self._cards[2].set_value("nend", value)
 

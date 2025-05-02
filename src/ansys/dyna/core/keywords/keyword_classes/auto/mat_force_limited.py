@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatForceLimited(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -384,6 +386,7 @@ class MatForceLimited(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -394,6 +397,7 @@ class MatForceLimited(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -404,6 +408,7 @@ class MatForceLimited(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -414,6 +419,7 @@ class MatForceLimited(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -424,6 +430,7 @@ class MatForceLimited(KeywordBase):
 
     @df.setter
     def df(self, value: float) -> None:
+        """Set the df property."""
         self._cards[0].set_value("df", value)
 
     @property
@@ -436,8 +443,9 @@ class MatForceLimited(KeywordBase):
 
     @iaflc.setter
     def iaflc(self, value: int) -> None:
+        """Set the iaflc property."""
         if value not in [0, 1, None]:
-            raise Exception("""iaflc must be `None` or one of {0,1}""")
+            raise Exception("""iaflc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iaflc", value)
 
     @property
@@ -450,8 +458,9 @@ class MatForceLimited(KeywordBase):
 
     @ytflag.setter
     def ytflag(self, value: float) -> None:
+        """Set the ytflag property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ytflag must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ytflag must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("ytflag", value)
 
     @property
@@ -463,6 +472,7 @@ class MatForceLimited(KeywordBase):
 
     @asoft.setter
     def asoft(self, value: float) -> None:
+        """Set the asoft property."""
         self._cards[0].set_value("asoft", value)
 
     @property
@@ -473,6 +483,7 @@ class MatForceLimited(KeywordBase):
 
     @m1.setter
     def m1(self, value: float) -> None:
+        """Set the m1 property."""
         self._cards[1].set_value("m1", value)
 
     @property
@@ -483,6 +494,7 @@ class MatForceLimited(KeywordBase):
 
     @m2.setter
     def m2(self, value: float) -> None:
+        """Set the m2 property."""
         self._cards[1].set_value("m2", value)
 
     @property
@@ -493,6 +505,7 @@ class MatForceLimited(KeywordBase):
 
     @m3.setter
     def m3(self, value: float) -> None:
+        """Set the m3 property."""
         self._cards[1].set_value("m3", value)
 
     @property
@@ -503,6 +516,7 @@ class MatForceLimited(KeywordBase):
 
     @m4.setter
     def m4(self, value: float) -> None:
+        """Set the m4 property."""
         self._cards[1].set_value("m4", value)
 
     @property
@@ -513,6 +527,7 @@ class MatForceLimited(KeywordBase):
 
     @m5.setter
     def m5(self, value: float) -> None:
+        """Set the m5 property."""
         self._cards[1].set_value("m5", value)
 
     @property
@@ -523,6 +538,7 @@ class MatForceLimited(KeywordBase):
 
     @m6.setter
     def m6(self, value: float) -> None:
+        """Set the m6 property."""
         self._cards[1].set_value("m6", value)
 
     @property
@@ -533,6 +549,7 @@ class MatForceLimited(KeywordBase):
 
     @m7.setter
     def m7(self, value: float) -> None:
+        """Set the m7 property."""
         self._cards[1].set_value("m7", value)
 
     @property
@@ -543,6 +560,7 @@ class MatForceLimited(KeywordBase):
 
     @m8.setter
     def m8(self, value: float) -> None:
+        """Set the m8 property."""
         self._cards[1].set_value("m8", value)
 
     @property
@@ -553,6 +571,7 @@ class MatForceLimited(KeywordBase):
 
     @lc1.setter
     def lc1(self, value: int) -> None:
+        """Set the lc1 property."""
         self._cards[2].set_value("lc1", value)
 
     @property
@@ -563,6 +582,7 @@ class MatForceLimited(KeywordBase):
 
     @lc2.setter
     def lc2(self, value: int) -> None:
+        """Set the lc2 property."""
         self._cards[2].set_value("lc2", value)
 
     @property
@@ -573,6 +593,7 @@ class MatForceLimited(KeywordBase):
 
     @lc3.setter
     def lc3(self, value: int) -> None:
+        """Set the lc3 property."""
         self._cards[2].set_value("lc3", value)
 
     @property
@@ -583,6 +604,7 @@ class MatForceLimited(KeywordBase):
 
     @lc4.setter
     def lc4(self, value: int) -> None:
+        """Set the lc4 property."""
         self._cards[2].set_value("lc4", value)
 
     @property
@@ -593,6 +615,7 @@ class MatForceLimited(KeywordBase):
 
     @lc5.setter
     def lc5(self, value: int) -> None:
+        """Set the lc5 property."""
         self._cards[2].set_value("lc5", value)
 
     @property
@@ -603,6 +626,7 @@ class MatForceLimited(KeywordBase):
 
     @lc6.setter
     def lc6(self, value: int) -> None:
+        """Set the lc6 property."""
         self._cards[2].set_value("lc6", value)
 
     @property
@@ -613,6 +637,7 @@ class MatForceLimited(KeywordBase):
 
     @lc7.setter
     def lc7(self, value: int) -> None:
+        """Set the lc7 property."""
         self._cards[2].set_value("lc7", value)
 
     @property
@@ -623,6 +648,7 @@ class MatForceLimited(KeywordBase):
 
     @lc8.setter
     def lc8(self, value: int) -> None:
+        """Set the lc8 property."""
         self._cards[2].set_value("lc8", value)
 
     @property
@@ -633,6 +659,7 @@ class MatForceLimited(KeywordBase):
 
     @lps1.setter
     def lps1(self, value: int) -> None:
+        """Set the lps1 property."""
         self._cards[3].set_value("lps1", value)
 
     @property
@@ -643,6 +670,7 @@ class MatForceLimited(KeywordBase):
 
     @sfs1.setter
     def sfs1(self, value: float) -> None:
+        """Set the sfs1 property."""
         self._cards[3].set_value("sfs1", value)
 
     @property
@@ -653,6 +681,7 @@ class MatForceLimited(KeywordBase):
 
     @lps2.setter
     def lps2(self, value: int) -> None:
+        """Set the lps2 property."""
         self._cards[3].set_value("lps2", value)
 
     @property
@@ -663,6 +692,7 @@ class MatForceLimited(KeywordBase):
 
     @sfs2.setter
     def sfs2(self, value: float) -> None:
+        """Set the sfs2 property."""
         self._cards[3].set_value("sfs2", value)
 
     @property
@@ -673,6 +703,7 @@ class MatForceLimited(KeywordBase):
 
     @yms1.setter
     def yms1(self, value: float) -> None:
+        """Set the yms1 property."""
         self._cards[3].set_value("yms1", value)
 
     @property
@@ -683,6 +714,7 @@ class MatForceLimited(KeywordBase):
 
     @yms2.setter
     def yms2(self, value: float) -> None:
+        """Set the yms2 property."""
         self._cards[3].set_value("yms2", value)
 
     @property
@@ -693,6 +725,7 @@ class MatForceLimited(KeywordBase):
 
     @lpt1.setter
     def lpt1(self, value: int) -> None:
+        """Set the lpt1 property."""
         self._cards[4].set_value("lpt1", value)
 
     @property
@@ -703,6 +736,7 @@ class MatForceLimited(KeywordBase):
 
     @sft1.setter
     def sft1(self, value: float) -> None:
+        """Set the sft1 property."""
         self._cards[4].set_value("sft1", value)
 
     @property
@@ -713,6 +747,7 @@ class MatForceLimited(KeywordBase):
 
     @lpt2.setter
     def lpt2(self, value: int) -> None:
+        """Set the lpt2 property."""
         self._cards[4].set_value("lpt2", value)
 
     @property
@@ -723,6 +758,7 @@ class MatForceLimited(KeywordBase):
 
     @sft2.setter
     def sft2(self, value: float) -> None:
+        """Set the sft2 property."""
         self._cards[4].set_value("sft2", value)
 
     @property
@@ -733,6 +769,7 @@ class MatForceLimited(KeywordBase):
 
     @ymt1.setter
     def ymt1(self, value: float) -> None:
+        """Set the ymt1 property."""
         self._cards[4].set_value("ymt1", value)
 
     @property
@@ -743,6 +780,7 @@ class MatForceLimited(KeywordBase):
 
     @ymt2.setter
     def ymt2(self, value: float) -> None:
+        """Set the ymt2 property."""
         self._cards[4].set_value("ymt2", value)
 
     @property
@@ -753,6 +791,7 @@ class MatForceLimited(KeywordBase):
 
     @lpr.setter
     def lpr(self, value: int) -> None:
+        """Set the lpr property."""
         self._cards[5].set_value("lpr", value)
 
     @property
@@ -763,6 +802,7 @@ class MatForceLimited(KeywordBase):
 
     @sfr.setter
     def sfr(self, value: float) -> None:
+        """Set the sfr property."""
         self._cards[5].set_value("sfr", value)
 
     @property
@@ -773,6 +813,7 @@ class MatForceLimited(KeywordBase):
 
     @ymr.setter
     def ymr(self, value: float) -> None:
+        """Set the ymr property."""
         self._cards[5].set_value("ymr", value)
 
     @property
@@ -783,5 +824,6 @@ class MatForceLimited(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 

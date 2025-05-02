@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadShellElement(KeywordBase):
     subkeyword = "SHELL_ELEMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class LoadShellElement(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -105,6 +108,7 @@ class LoadShellElement(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -115,6 +119,7 @@ class LoadShellElement(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[1].set_value("eid", value)
 
     @property
@@ -125,6 +130,7 @@ class LoadShellElement(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -135,6 +141,7 @@ class LoadShellElement(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[1].set_value("sf", value)
 
     @property
@@ -145,5 +152,6 @@ class LoadShellElement(KeywordBase):
 
     @at.setter
     def at(self, value: float) -> None:
+        """Set the at property."""
         self._cards[1].set_value("at", value)
 

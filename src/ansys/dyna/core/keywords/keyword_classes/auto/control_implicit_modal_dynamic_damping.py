@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitModalDynamicDamping(KeywordBase):
     subkeyword = "IMPLICIT_MODAL_DYNAMIC_DAMPING"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class ControlImplicitModalDynamicDamping(KeywordBase):
 
     @zeta1.setter
     def zeta1(self, value: float) -> None:
+        """Set the zeta1 property."""
         self._cards[0].set_value("zeta1", value)
 

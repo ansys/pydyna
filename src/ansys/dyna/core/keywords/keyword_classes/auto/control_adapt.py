@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlAdapt(KeywordBase):
     subkeyword = "ADAPT"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -178,6 +180,7 @@ class ControlAdapt(KeywordBase):
 
     @adpfreq.setter
     def adpfreq(self, value: float) -> None:
+        """Set the adpfreq property."""
         self._cards[0].set_value("adpfreq", value)
 
     @property
@@ -188,6 +191,7 @@ class ControlAdapt(KeywordBase):
 
     @adptol.setter
     def adptol(self, value: float) -> None:
+        """Set the adptol property."""
         self._cards[0].set_value("adptol", value)
 
     @property
@@ -209,8 +213,9 @@ class ControlAdapt(KeywordBase):
 
     @adptyp.setter
     def adptyp(self, value: int) -> None:
+        """Set the adptyp property."""
         if value not in [1, 2, 4, 7, 8, -8, None]:
-            raise Exception("""adptyp must be `None` or one of {1,2,4,7,8,-8}""")
+            raise Exception("""adptyp must be `None` or one of {1,2,4,7,8,-8}.""")
         self._cards[0].set_value("adptyp", value)
 
     @property
@@ -221,6 +226,7 @@ class ControlAdapt(KeywordBase):
 
     @maxlvl.setter
     def maxlvl(self, value: int) -> None:
+        """Set the maxlvl property."""
         self._cards[0].set_value("maxlvl", value)
 
     @property
@@ -231,6 +237,7 @@ class ControlAdapt(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 
     @property
@@ -241,6 +248,7 @@ class ControlAdapt(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -252,6 +260,7 @@ class ControlAdapt(KeywordBase):
 
     @lcadp.setter
     def lcadp(self, value: int) -> None:
+        """Set the lcadp property."""
         self._cards[0].set_value("lcadp", value)
 
     @property
@@ -264,8 +273,9 @@ class ControlAdapt(KeywordBase):
 
     @ioflag.setter
     def ioflag(self, value: int) -> None:
+        """Set the ioflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""ioflag must be `None` or one of {0,1}""")
+            raise Exception("""ioflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ioflag", value)
 
     @property
@@ -276,6 +286,7 @@ class ControlAdapt(KeywordBase):
 
     @adpsize.setter
     def adpsize(self, value: float) -> None:
+        """Set the adpsize property."""
         self._cards[1].set_value("adpsize", value)
 
     @property
@@ -288,8 +299,9 @@ class ControlAdapt(KeywordBase):
 
     @adpass.setter
     def adpass(self, value: int) -> None:
+        """Set the adpass property."""
         if value not in [0, 1, None]:
-            raise Exception("""adpass must be `None` or one of {0,1}""")
+            raise Exception("""adpass must be `None` or one of {0,1}.""")
         self._cards[1].set_value("adpass", value)
 
     @property
@@ -300,6 +312,7 @@ class ControlAdapt(KeywordBase):
 
     @ireflg.setter
     def ireflg(self, value: int) -> None:
+        """Set the ireflg property."""
         self._cards[1].set_value("ireflg", value)
 
     @property
@@ -310,6 +323,7 @@ class ControlAdapt(KeywordBase):
 
     @adpene.setter
     def adpene(self, value: float) -> None:
+        """Set the adpene property."""
         self._cards[1].set_value("adpene", value)
 
     @property
@@ -322,6 +336,7 @@ class ControlAdapt(KeywordBase):
 
     @adpth.setter
     def adpth(self, value: float) -> None:
+        """Set the adpth property."""
         self._cards[1].set_value("adpth", value)
 
     @property
@@ -333,6 +348,7 @@ class ControlAdapt(KeywordBase):
 
     @memory.setter
     def memory(self, value: int) -> None:
+        """Set the memory property."""
         self._cards[1].set_value("memory", value)
 
     @property
@@ -345,8 +361,9 @@ class ControlAdapt(KeywordBase):
 
     @orient.setter
     def orient(self, value: int) -> None:
+        """Set the orient property."""
         if value not in [0, 1, None]:
-            raise Exception("""orient must be `None` or one of {0,1}""")
+            raise Exception("""orient must be `None` or one of {0,1}.""")
         self._cards[1].set_value("orient", value)
 
     @property
@@ -358,5 +375,6 @@ class ControlAdapt(KeywordBase):
 
     @maxel.setter
     def maxel(self, value: int) -> None:
+        """Set the maxel property."""
         self._cards[1].set_value("maxel", value)
 

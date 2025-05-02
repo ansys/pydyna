@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatMccormick(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -182,6 +184,7 @@ class MatMccormick(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -192,6 +195,7 @@ class MatMccormick(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -202,6 +206,7 @@ class MatMccormick(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -212,6 +217,7 @@ class MatMccormick(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -222,6 +228,7 @@ class MatMccormick(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -232,6 +239,7 @@ class MatMccormick(KeywordBase):
 
     @q1.setter
     def q1(self, value: float) -> None:
+        """Set the q1 property."""
         self._cards[1].set_value("q1", value)
 
     @property
@@ -242,6 +250,7 @@ class MatMccormick(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[1].set_value("c1", value)
 
     @property
@@ -252,6 +261,7 @@ class MatMccormick(KeywordBase):
 
     @q2.setter
     def q2(self, value: float) -> None:
+        """Set the q2 property."""
         self._cards[1].set_value("q2", value)
 
     @property
@@ -262,6 +272,7 @@ class MatMccormick(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[1].set_value("c2", value)
 
     @property
@@ -272,6 +283,7 @@ class MatMccormick(KeywordBase):
 
     @s.setter
     def s(self, value: float) -> None:
+        """Set the s property."""
         self._cards[2].set_value("s", value)
 
     @property
@@ -282,6 +294,7 @@ class MatMccormick(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[2].set_value("h", value)
 
     @property
@@ -292,6 +305,7 @@ class MatMccormick(KeywordBase):
 
     @omega.setter
     def omega(self, value: float) -> None:
+        """Set the omega property."""
         self._cards[2].set_value("omega", value)
 
     @property
@@ -302,6 +316,7 @@ class MatMccormick(KeywordBase):
 
     @td.setter
     def td(self, value: float) -> None:
+        """Set the td property."""
         self._cards[2].set_value("td", value)
 
     @property
@@ -312,6 +327,7 @@ class MatMccormick(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[2].set_value("alpha", value)
 
     @property
@@ -322,6 +338,7 @@ class MatMccormick(KeywordBase):
 
     @eps0.setter
     def eps0(self, value: float) -> None:
+        """Set the eps0 property."""
         self._cards[2].set_value("eps0", value)
 
     @property
@@ -332,5 +349,6 @@ class MatMccormick(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

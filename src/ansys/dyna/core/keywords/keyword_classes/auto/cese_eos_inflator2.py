@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseEosInflator2(KeywordBase):
     subkeyword = "EOS_INFLATOR2"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -230,6 +232,7 @@ class CeseEosInflator2(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -240,6 +243,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cp1_0.setter
     def cp1_0(self, value: float) -> None:
+        """Set the cp1_0 property."""
         self._cards[1].set_value("cp1_0", value)
 
     @property
@@ -250,6 +254,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cp1_1.setter
     def cp1_1(self, value: float) -> None:
+        """Set the cp1_1 property."""
         self._cards[1].set_value("cp1_1", value)
 
     @property
@@ -260,6 +265,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cp1_2.setter
     def cp1_2(self, value: float) -> None:
+        """Set the cp1_2 property."""
         self._cards[1].set_value("cp1_2", value)
 
     @property
@@ -270,6 +276,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cp1_3.setter
     def cp1_3(self, value: float) -> None:
+        """Set the cp1_3 property."""
         self._cards[1].set_value("cp1_3", value)
 
     @property
@@ -280,6 +287,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cp1_4.setter
     def cp1_4(self, value: float) -> None:
+        """Set the cp1_4 property."""
         self._cards[1].set_value("cp1_4", value)
 
     @property
@@ -290,6 +298,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cp2_0.setter
     def cp2_0(self, value: float) -> None:
+        """Set the cp2_0 property."""
         self._cards[2].set_value("cp2_0", value)
 
     @property
@@ -300,6 +309,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cp2_1.setter
     def cp2_1(self, value: float) -> None:
+        """Set the cp2_1 property."""
         self._cards[2].set_value("cp2_1", value)
 
     @property
@@ -310,6 +320,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cp2_2.setter
     def cp2_2(self, value: float) -> None:
+        """Set the cp2_2 property."""
         self._cards[2].set_value("cp2_2", value)
 
     @property
@@ -320,6 +331,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cp2_3.setter
     def cp2_3(self, value: float) -> None:
+        """Set the cp2_3 property."""
         self._cards[2].set_value("cp2_3", value)
 
     @property
@@ -330,6 +342,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cp2_4.setter
     def cp2_4(self, value: float) -> None:
+        """Set the cp2_4 property."""
         self._cards[2].set_value("cp2_4", value)
 
     @property
@@ -340,6 +353,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cv1_0.setter
     def cv1_0(self, value: float) -> None:
+        """Set the cv1_0 property."""
         self._cards[3].set_value("cv1_0", value)
 
     @property
@@ -350,6 +364,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cv1_1.setter
     def cv1_1(self, value: float) -> None:
+        """Set the cv1_1 property."""
         self._cards[3].set_value("cv1_1", value)
 
     @property
@@ -360,6 +375,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cv1_2.setter
     def cv1_2(self, value: float) -> None:
+        """Set the cv1_2 property."""
         self._cards[3].set_value("cv1_2", value)
 
     @property
@@ -370,6 +386,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cv1_3.setter
     def cv1_3(self, value: float) -> None:
+        """Set the cv1_3 property."""
         self._cards[3].set_value("cv1_3", value)
 
     @property
@@ -380,6 +397,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cv1_4.setter
     def cv1_4(self, value: float) -> None:
+        """Set the cv1_4 property."""
         self._cards[3].set_value("cv1_4", value)
 
     @property
@@ -390,6 +408,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cv2_0.setter
     def cv2_0(self, value: float) -> None:
+        """Set the cv2_0 property."""
         self._cards[4].set_value("cv2_0", value)
 
     @property
@@ -400,6 +419,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cv2_1.setter
     def cv2_1(self, value: float) -> None:
+        """Set the cv2_1 property."""
         self._cards[4].set_value("cv2_1", value)
 
     @property
@@ -410,6 +430,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cv2_2.setter
     def cv2_2(self, value: float) -> None:
+        """Set the cv2_2 property."""
         self._cards[4].set_value("cv2_2", value)
 
     @property
@@ -420,6 +441,7 @@ class CeseEosInflator2(KeywordBase):
 
     @cv2_3.setter
     def cv2_3(self, value: float) -> None:
+        """Set the cv2_3 property."""
         self._cards[4].set_value("cv2_3", value)
 
     @property
@@ -430,5 +452,6 @@ class CeseEosInflator2(KeywordBase):
 
     @cv2_4.setter
     def cv2_4(self, value: float) -> None:
+        """Set the cv2_4 property."""
         self._cards[4].set_value("cv2_4", value)
 

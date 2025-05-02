@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSuperplasticForming(KeywordBase):
     subkeyword = "SUPERPLASTIC_FORMING"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -122,6 +124,7 @@ class LoadSuperplasticForming(KeywordBase):
 
     @lcp1.setter
     def lcp1(self, value: int) -> None:
+        """Set the lcp1 property."""
         self._cards[0].set_value("lcp1", value)
 
     @property
@@ -132,6 +135,7 @@ class LoadSuperplasticForming(KeywordBase):
 
     @csp1.setter
     def csp1(self, value: int) -> None:
+        """Set the csp1 property."""
         self._cards[0].set_value("csp1", value)
 
     @property
@@ -142,6 +146,7 @@ class LoadSuperplasticForming(KeywordBase):
 
     @ncp1.setter
     def ncp1(self, value: float) -> None:
+        """Set the ncp1 property."""
         self._cards[0].set_value("ncp1", value)
 
     @property
@@ -152,6 +157,7 @@ class LoadSuperplasticForming(KeywordBase):
 
     @lcp2.setter
     def lcp2(self, value: int) -> None:
+        """Set the lcp2 property."""
         self._cards[0].set_value("lcp2", value)
 
     @property
@@ -162,6 +168,7 @@ class LoadSuperplasticForming(KeywordBase):
 
     @csp2.setter
     def csp2(self, value: int) -> None:
+        """Set the csp2 property."""
         self._cards[0].set_value("csp2", value)
 
     @property
@@ -172,6 +179,7 @@ class LoadSuperplasticForming(KeywordBase):
 
     @ncp2.setter
     def ncp2(self, value: float) -> None:
+        """Set the ncp2 property."""
         self._cards[0].set_value("ncp2", value)
 
     @property
@@ -182,6 +190,7 @@ class LoadSuperplasticForming(KeywordBase):
 
     @erate.setter
     def erate(self, value: float) -> None:
+        """Set the erate property."""
         self._cards[1].set_value("erate", value)
 
     @property
@@ -192,6 +201,7 @@ class LoadSuperplasticForming(KeywordBase):
 
     @scmin.setter
     def scmin(self, value: float) -> None:
+        """Set the scmin property."""
         self._cards[1].set_value("scmin", value)
 
     @property
@@ -202,6 +212,7 @@ class LoadSuperplasticForming(KeywordBase):
 
     @scmax.setter
     def scmax(self, value: float) -> None:
+        """Set the scmax property."""
         self._cards[1].set_value("scmax", value)
 
     @property
@@ -212,5 +223,6 @@ class LoadSuperplasticForming(KeywordBase):
 
     @ncyl.setter
     def ncyl(self, value: int) -> None:
+        """Set the ncyl property."""
         self._cards[1].set_value("ncyl", value)
 

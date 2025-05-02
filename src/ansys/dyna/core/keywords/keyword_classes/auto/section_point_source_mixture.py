@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SECTION keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionPointSourceMixture(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SECTION keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -221,6 +223,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -231,6 +234,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[0].set_value("lcidt", value)
 
     @property
@@ -241,6 +245,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @notused.setter
     def notused(self, value: int) -> None:
+        """Set the notused property."""
         self._cards[0].set_value("notused", value)
 
     @property
@@ -251,6 +256,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @lcidvel.setter
     def lcidvel(self, value: int) -> None:
+        """Set the lcidvel property."""
         self._cards[0].set_value("lcidvel", value)
 
     @property
@@ -261,6 +267,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @nidlc001.setter
     def nidlc001(self, value: int) -> None:
+        """Set the nidlc001 property."""
         self._cards[0].set_value("nidlc001", value)
 
     @property
@@ -271,6 +278,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @nidlc002.setter
     def nidlc002(self, value: int) -> None:
+        """Set the nidlc002 property."""
         self._cards[0].set_value("nidlc002", value)
 
     @property
@@ -281,6 +289,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @nidlc003.setter
     def nidlc003(self, value: int) -> None:
+        """Set the nidlc003 property."""
         self._cards[0].set_value("nidlc003", value)
 
     @property
@@ -291,6 +300,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
+        """Set the idir property."""
         self._cards[0].set_value("idir", value)
 
     @property
@@ -301,6 +311,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @lcmdot1.setter
     def lcmdot1(self, value: int) -> None:
+        """Set the lcmdot1 property."""
         self._cards[1].set_value("lcmdot1", value)
 
     @property
@@ -311,6 +322,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @lcmdot2.setter
     def lcmdot2(self, value: int) -> None:
+        """Set the lcmdot2 property."""
         self._cards[1].set_value("lcmdot2", value)
 
     @property
@@ -321,6 +333,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @lcmdot3.setter
     def lcmdot3(self, value: int) -> None:
+        """Set the lcmdot3 property."""
         self._cards[1].set_value("lcmdot3", value)
 
     @property
@@ -331,6 +344,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @lcmdot4.setter
     def lcmdot4(self, value: int) -> None:
+        """Set the lcmdot4 property."""
         self._cards[1].set_value("lcmdot4", value)
 
     @property
@@ -341,6 +355,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @lcmdot5.setter
     def lcmdot5(self, value: int) -> None:
+        """Set the lcmdot5 property."""
         self._cards[1].set_value("lcmdot5", value)
 
     @property
@@ -351,6 +366,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @lcmdot6.setter
     def lcmdot6(self, value: int) -> None:
+        """Set the lcmdot6 property."""
         self._cards[1].set_value("lcmdot6", value)
 
     @property
@@ -361,6 +377,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @lcmdot7.setter
     def lcmdot7(self, value: int) -> None:
+        """Set the lcmdot7 property."""
         self._cards[1].set_value("lcmdot7", value)
 
     @property
@@ -371,6 +388,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @lcmdot8.setter
     def lcmdot8(self, value: int) -> None:
+        """Set the lcmdot8 property."""
         self._cards[1].set_value("lcmdot8", value)
 
     @property
@@ -381,6 +399,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @nodeid.setter
     def nodeid(self, value: int) -> None:
+        """Set the nodeid property."""
         self._cards[2].set_value("nodeid", value)
 
     @property
@@ -391,6 +410,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[2].set_value("vecid", value)
 
     @property
@@ -401,6 +421,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     @orifarea.setter
     def orifarea(self, value: float) -> None:
+        """Set the orifarea property."""
         self._cards[2].set_value("orifarea", value)
 
     @property
@@ -411,5 +432,6 @@ class SectionPointSourceMixture(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

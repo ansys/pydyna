@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSphMeshSurface(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -121,6 +123,7 @@ class DefineSphMeshSurface(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -133,8 +136,9 @@ class DefineSphMeshSurface(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, None]:
-            raise Exception("""type must be `None` or one of {0,1}""")
+            raise Exception("""type must be `None` or one of {0,1}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -145,6 +149,7 @@ class DefineSphMeshSurface(KeywordBase):
 
     @sphpid.setter
     def sphpid(self, value: int) -> None:
+        """Set the sphpid property."""
         self._cards[0].set_value("sphpid", value)
 
     @property
@@ -155,6 +160,7 @@ class DefineSphMeshSurface(KeywordBase):
 
     @sphxid.setter
     def sphxid(self, value: int) -> None:
+        """Set the sphxid property."""
         self._cards[0].set_value("sphxid", value)
 
     @property
@@ -165,6 +171,7 @@ class DefineSphMeshSurface(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -175,6 +182,7 @@ class DefineSphMeshSurface(KeywordBase):
 
     @space.setter
     def space(self, value: float) -> None:
+        """Set the space property."""
         self._cards[0].set_value("space", value)
 
     @property
@@ -187,8 +195,9 @@ class DefineSphMeshSurface(KeywordBase):
 
     @iout.setter
     def iout(self, value: int) -> None:
+        """Set the iout property."""
         if value not in [0, 1, None]:
-            raise Exception("""iout must be `None` or one of {0,1}""")
+            raise Exception("""iout must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iout", value)
 
     @property
@@ -199,5 +208,6 @@ class DefineSphMeshSurface(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

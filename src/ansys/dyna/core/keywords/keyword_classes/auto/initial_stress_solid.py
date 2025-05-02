@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialStressSolid(KeywordBase):
     subkeyword = "STRESS_SOLID"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -208,6 +210,7 @@ class InitialStressSolid(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -218,6 +221,7 @@ class InitialStressSolid(KeywordBase):
 
     @nint.setter
     def nint(self, value: int) -> None:
+        """Set the nint property."""
         self._cards[0].set_value("nint", value)
 
     @property
@@ -228,6 +232,7 @@ class InitialStressSolid(KeywordBase):
 
     @nhisv.setter
     def nhisv(self, value: int) -> None:
+        """Set the nhisv property."""
         self._cards[0].set_value("nhisv", value)
 
     @property
@@ -238,6 +243,7 @@ class InitialStressSolid(KeywordBase):
 
     @large.setter
     def large(self, value: int) -> None:
+        """Set the large property."""
         self._cards[0].set_value("large", value)
 
     @property
@@ -255,8 +261,9 @@ class InitialStressSolid(KeywordBase):
 
     @iveflg.setter
     def iveflg(self, value: int) -> None:
+        """Set the iveflg property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""iveflg must be `None` or one of {0,1,2}""")
+            raise Exception("""iveflg must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("iveflg", value)
 
     @property
@@ -273,6 +280,7 @@ class InitialStressSolid(KeywordBase):
 
     @ialegp.setter
     def ialegp(self, value: int) -> None:
+        """Set the ialegp property."""
         self._cards[0].set_value("ialegp", value)
 
     @property
@@ -283,6 +291,7 @@ class InitialStressSolid(KeywordBase):
 
     @nthint.setter
     def nthint(self, value: int) -> None:
+        """Set the nthint property."""
         self._cards[0].set_value("nthint", value)
 
     @property
@@ -293,6 +302,7 @@ class InitialStressSolid(KeywordBase):
 
     @nthhsv.setter
     def nthhsv(self, value: int) -> None:
+        """Set the nthhsv property."""
         self._cards[0].set_value("nthhsv", value)
 
     @property
@@ -303,6 +313,7 @@ class InitialStressSolid(KeywordBase):
 
     @sigxx.setter
     def sigxx(self, value: float) -> None:
+        """Set the sigxx property."""
         self._cards[1].set_value("sigxx", value)
 
     @property
@@ -313,6 +324,7 @@ class InitialStressSolid(KeywordBase):
 
     @sigyy.setter
     def sigyy(self, value: float) -> None:
+        """Set the sigyy property."""
         self._cards[1].set_value("sigyy", value)
 
     @property
@@ -323,6 +335,7 @@ class InitialStressSolid(KeywordBase):
 
     @sigzz.setter
     def sigzz(self, value: float) -> None:
+        """Set the sigzz property."""
         self._cards[1].set_value("sigzz", value)
 
     @property
@@ -333,6 +346,7 @@ class InitialStressSolid(KeywordBase):
 
     @sigxy.setter
     def sigxy(self, value: float) -> None:
+        """Set the sigxy property."""
         self._cards[1].set_value("sigxy", value)
 
     @property
@@ -343,6 +357,7 @@ class InitialStressSolid(KeywordBase):
 
     @sigyz.setter
     def sigyz(self, value: float) -> None:
+        """Set the sigyz property."""
         self._cards[1].set_value("sigyz", value)
 
     @property
@@ -353,6 +368,7 @@ class InitialStressSolid(KeywordBase):
 
     @sigzx.setter
     def sigzx(self, value: float) -> None:
+        """Set the sigzx property."""
         self._cards[1].set_value("sigzx", value)
 
     @property
@@ -363,6 +379,7 @@ class InitialStressSolid(KeywordBase):
 
     @eps.setter
     def eps(self, value: float) -> None:
+        """Set the eps property."""
         self._cards[1].set_value("eps", value)
 
     @property
@@ -373,6 +390,7 @@ class InitialStressSolid(KeywordBase):
 
     @sigxx.setter
     def sigxx(self, value: float) -> None:
+        """Set the sigxx property."""
         self._cards[2].set_value("sigxx", value)
 
     @property
@@ -383,6 +401,7 @@ class InitialStressSolid(KeywordBase):
 
     @sigyy.setter
     def sigyy(self, value: float) -> None:
+        """Set the sigyy property."""
         self._cards[2].set_value("sigyy", value)
 
     @property
@@ -393,6 +412,7 @@ class InitialStressSolid(KeywordBase):
 
     @sigzz.setter
     def sigzz(self, value: float) -> None:
+        """Set the sigzz property."""
         self._cards[2].set_value("sigzz", value)
 
     @property
@@ -403,6 +423,7 @@ class InitialStressSolid(KeywordBase):
 
     @sigxy.setter
     def sigxy(self, value: float) -> None:
+        """Set the sigxy property."""
         self._cards[2].set_value("sigxy", value)
 
     @property
@@ -413,5 +434,6 @@ class InitialStressSolid(KeywordBase):
 
     @sigyz.setter
     def sigyz(self, value: float) -> None:
+        """Set the sigyz property."""
         self._cards[2].set_value("sigyz", value)
 

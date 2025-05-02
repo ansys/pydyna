@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the IGA keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IgaSolid(KeywordBase):
     subkeyword = "SOLID"
 
     def __init__(self, **kwargs):
+        """Initialize the IGA keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -85,6 +87,7 @@ class IgaSolid(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -95,6 +98,7 @@ class IgaSolid(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -109,6 +113,7 @@ class IgaSolid(KeywordBase):
 
     @nisr.setter
     def nisr(self, value: float) -> None:
+        """Set the nisr property."""
         self._cards[0].set_value("nisr", value)
 
     @property
@@ -124,6 +129,7 @@ class IgaSolid(KeywordBase):
 
     @niss.setter
     def niss(self, value: float) -> None:
+        """Set the niss property."""
         self._cards[0].set_value("niss", value)
 
     @property
@@ -139,5 +145,6 @@ class IgaSolid(KeywordBase):
 
     @nist.setter
     def nist(self, value: float) -> None:
+        """Set the nist property."""
         self._cards[0].set_value("nist", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitJoints(KeywordBase):
     subkeyword = "IMPLICIT_JOINTS"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -73,8 +75,9 @@ class ControlImplicitJoints(KeywordBase):
 
     @ispher.setter
     def ispher(self, value: int) -> None:
+        """Set the ispher property."""
         if value not in [1, 2, None]:
-            raise Exception("""ispher must be `None` or one of {1,2}""")
+            raise Exception("""ispher must be `None` or one of {1,2}.""")
         self._cards[0].set_value("ispher", value)
 
     @property
@@ -87,8 +90,9 @@ class ControlImplicitJoints(KeywordBase):
 
     @irevol.setter
     def irevol(self, value: int) -> None:
+        """Set the irevol property."""
         if value not in [1, 2, None]:
-            raise Exception("""irevol must be `None` or one of {1,2}""")
+            raise Exception("""irevol must be `None` or one of {1,2}.""")
         self._cards[0].set_value("irevol", value)
 
     @property
@@ -101,7 +105,8 @@ class ControlImplicitJoints(KeywordBase):
 
     @icylin.setter
     def icylin(self, value: int) -> None:
+        """Set the icylin property."""
         if value not in [1, 2, None]:
-            raise Exception("""icylin must be `None` or one of {1,2}""")
+            raise Exception("""icylin must be `None` or one of {1,2}.""")
         self._cards[0].set_value("icylin", value)
 

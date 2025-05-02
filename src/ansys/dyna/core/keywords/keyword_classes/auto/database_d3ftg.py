@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseD3Ftg(KeywordBase):
     subkeyword = "D3FTG"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,8 +67,9 @@ class DatabaseD3Ftg(KeywordBase):
 
     @binary.setter
     def binary(self, value: int) -> None:
+        """Set the binary property."""
         if value not in [0, 1, None]:
-            raise Exception("""binary must be `None` or one of {0,1}""")
+            raise Exception("""binary must be `None` or one of {0,1}.""")
         self._cards[0].set_value("binary", value)
 
     @property
@@ -78,5 +81,6 @@ class DatabaseD3Ftg(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 

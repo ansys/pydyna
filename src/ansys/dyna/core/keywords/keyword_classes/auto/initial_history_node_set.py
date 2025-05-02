@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialHistoryNodeSet(KeywordBase):
     subkeyword = "HISTORY_NODE_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -80,6 +82,7 @@ class InitialHistoryNodeSet(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -90,6 +93,7 @@ class InitialHistoryNodeSet(KeywordBase):
 
     @nhisv.setter
     def nhisv(self, value: int) -> None:
+        """Set the nhisv property."""
         self._cards[0].set_value("nhisv", value)
 
     @property
@@ -100,6 +104,7 @@ class InitialHistoryNodeSet(KeywordBase):
 
     @hindex.setter
     def hindex(self, value: int) -> None:
+        """Set the hindex property."""
         self._cards[1].set_value("hindex", value)
 
     @property
@@ -110,5 +115,6 @@ class InitialHistoryNodeSet(KeywordBase):
 
     @val.setter
     def val(self, value: float) -> None:
+        """Set the val property."""
         self._cards[1].set_value("val", value)
 

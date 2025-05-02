@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeInjection(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -196,6 +198,7 @@ class DefineDeInjection(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -206,6 +209,7 @@ class DefineDeInjection(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -216,6 +220,7 @@ class DefineDeInjection(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -226,6 +231,7 @@ class DefineDeInjection(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -236,6 +242,7 @@ class DefineDeInjection(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 
     @property
@@ -246,6 +253,7 @@ class DefineDeInjection(KeywordBase):
 
     @xl.setter
     def xl(self, value: float) -> None:
+        """Set the xl property."""
         self._cards[0].set_value("xl", value)
 
     @property
@@ -256,6 +264,7 @@ class DefineDeInjection(KeywordBase):
 
     @yl.setter
     def yl(self, value: float) -> None:
+        """Set the yl property."""
         self._cards[0].set_value("yl", value)
 
     @property
@@ -266,6 +275,7 @@ class DefineDeInjection(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -276,6 +286,7 @@ class DefineDeInjection(KeywordBase):
 
     @rmass.setter
     def rmass(self, value: float) -> None:
+        """Set the rmass property."""
         self._cards[1].set_value("rmass", value)
 
     @property
@@ -286,6 +297,7 @@ class DefineDeInjection(KeywordBase):
 
     @rmin.setter
     def rmin(self, value: float) -> None:
+        """Set the rmin property."""
         self._cards[1].set_value("rmin", value)
 
     @property
@@ -296,6 +308,7 @@ class DefineDeInjection(KeywordBase):
 
     @rmax.setter
     def rmax(self, value: float) -> None:
+        """Set the rmax property."""
         self._cards[1].set_value("rmax", value)
 
     @property
@@ -306,6 +319,7 @@ class DefineDeInjection(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[1].set_value("vx", value)
 
     @property
@@ -316,6 +330,7 @@ class DefineDeInjection(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[1].set_value("vy", value)
 
     @property
@@ -326,6 +341,7 @@ class DefineDeInjection(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[1].set_value("vz", value)
 
     @property
@@ -336,6 +352,7 @@ class DefineDeInjection(KeywordBase):
 
     @tbeg.setter
     def tbeg(self, value: float) -> None:
+        """Set the tbeg property."""
         self._cards[1].set_value("tbeg", value)
 
     @property
@@ -346,6 +363,7 @@ class DefineDeInjection(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[1].set_value("tend", value)
 
     @property
@@ -356,5 +374,6 @@ class DefineDeInjection(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

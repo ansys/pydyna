@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ALE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AlePrescribedMotion(KeywordBase):
     subkeyword = "PRESCRIBED_MOTION"
 
     def __init__(self, **kwargs):
+        """Initialize the ALE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -145,6 +147,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @mmsid.setter
     def mmsid(self, value: int) -> None:
+        """Set the mmsid property."""
         self._cards[0].set_value("mmsid", value)
 
     @property
@@ -158,8 +161,9 @@ class AlePrescribedMotion(KeywordBase):
 
     @inside.setter
     def inside(self, value: int) -> None:
+        """Set the inside property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""inside must be `None` or one of {0,1,2}""")
+            raise Exception("""inside must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("inside", value)
 
     @property
@@ -173,8 +177,9 @@ class AlePrescribedMotion(KeywordBase):
 
     @sidr.setter
     def sidr(self, value: int) -> None:
+        """Set the sidr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sidr must be `None` or one of {0,1,2}""")
+            raise Exception("""sidr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sidr", value)
 
     @property
@@ -185,6 +190,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @lcvtx.setter
     def lcvtx(self, value: int) -> None:
+        """Set the lcvtx property."""
         self._cards[1].set_value("lcvtx", value)
 
     @property
@@ -195,6 +201,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @lcvty.setter
     def lcvty(self, value: int) -> None:
+        """Set the lcvty property."""
         self._cards[1].set_value("lcvty", value)
 
     @property
@@ -205,6 +212,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @lcvtz.setter
     def lcvtz(self, value: int) -> None:
+        """Set the lcvtz property."""
         self._cards[1].set_value("lcvtz", value)
 
     @property
@@ -215,6 +223,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @lcvrx.setter
     def lcvrx(self, value: int) -> None:
+        """Set the lcvrx property."""
         self._cards[2].set_value("lcvrx", value)
 
     @property
@@ -225,6 +234,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @lcvry.setter
     def lcvry(self, value: int) -> None:
+        """Set the lcvry property."""
         self._cards[2].set_value("lcvry", value)
 
     @property
@@ -235,6 +245,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @lcvrz.setter
     def lcvrz(self, value: int) -> None:
+        """Set the lcvrz property."""
         self._cards[2].set_value("lcvrz", value)
 
     @property
@@ -245,6 +256,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @xg.setter
     def xg(self, value: float) -> None:
+        """Set the xg property."""
         self._cards[3].set_value("xg", value)
 
     @property
@@ -255,6 +267,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @yg.setter
     def yg(self, value: float) -> None:
+        """Set the yg property."""
         self._cards[3].set_value("yg", value)
 
     @property
@@ -265,5 +278,6 @@ class AlePrescribedMotion(KeywordBase):
 
     @zg.setter
     def zg(self, value: float) -> None:
+        """Set the zg property."""
         self._cards[3].set_value("zg", value)
 

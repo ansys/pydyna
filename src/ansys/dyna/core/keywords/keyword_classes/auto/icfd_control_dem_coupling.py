@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlDemCoupling(KeywordBase):
     subkeyword = "CONTROL_DEM_COUPLING"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -96,8 +98,9 @@ class IcfdControlDemCoupling(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ctype must be `None` or one of {0,1,2}""")
+            raise Exception("""ctype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -108,6 +111,7 @@ class IcfdControlDemCoupling(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[0].set_value("bt", value)
 
     @property
@@ -118,6 +122,7 @@ class IcfdControlDemCoupling(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -128,6 +133,7 @@ class IcfdControlDemCoupling(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -138,6 +144,7 @@ class IcfdControlDemCoupling(KeywordBase):
 
     @maxvel.setter
     def maxvel(self, value: float) -> None:
+        """Set the maxvel property."""
         self._cards[0].set_value("maxvel", value)
 
     @property
@@ -150,5 +157,6 @@ class IcfdControlDemCoupling(KeywordBase):
 
     @dtype.setter
     def dtype(self, value: int) -> None:
+        """Set the dtype property."""
         self._cards[0].set_value("dtype", value)
 

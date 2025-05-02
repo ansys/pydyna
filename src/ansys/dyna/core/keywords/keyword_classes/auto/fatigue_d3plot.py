@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the FATIGUE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FatigueD3Plot(KeywordBase):
     subkeyword = "D3PLOT"
 
     def __init__(self, **kwargs):
+        """Initialize the FATIGUE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -100,8 +102,9 @@ class FatigueD3Plot(KeywordBase):
 
     @strsn.setter
     def strsn(self, value: int) -> None:
+        """Set the strsn property."""
         if value not in [0, 1, None]:
-            raise Exception("""strsn must be `None` or one of {0,1}""")
+            raise Exception("""strsn must be `None` or one of {0,1}.""")
         self._cards[0].set_value("strsn", value)
 
     @property
@@ -115,8 +118,9 @@ class FatigueD3Plot(KeywordBase):
 
     @index.setter
     def index(self, value: int) -> None:
+        """Set the index property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""index must be `None` or one of {0,1,2}""")
+            raise Exception("""index must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("index", value)
 
     @property
@@ -131,8 +135,9 @@ class FatigueD3Plot(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
+        """Set the restrt property."""
         if value not in [0, 1, None]:
-            raise Exception("""restrt must be `None` or one of {0,1}""")
+            raise Exception("""restrt must be `None` or one of {0,1}.""")
         self._cards[0].set_value("restrt", value)
 
     @property
@@ -143,6 +148,7 @@ class FatigueD3Plot(KeywordBase):
 
     @texpos.setter
     def texpos(self, value: float) -> None:
+        """Set the texpos property."""
         self._cards[0].set_value("texpos", value)
 
     @property
@@ -156,6 +162,7 @@ class FatigueD3Plot(KeywordBase):
 
     @dmgmin.setter
     def dmgmin(self, value: float) -> None:
+        """Set the dmgmin property."""
         self._cards[0].set_value("dmgmin", value)
 
     @property
@@ -166,5 +173,6 @@ class FatigueD3Plot(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 

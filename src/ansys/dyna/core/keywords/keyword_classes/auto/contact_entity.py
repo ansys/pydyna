@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTACT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ContactEntity(KeywordBase):
     subkeyword = "ENTITY"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTACT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -309,6 +311,7 @@ class ContactEntity(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -330,8 +333,9 @@ class ContactEntity(KeywordBase):
 
     @geotyp.setter
     def geotyp(self, value: int) -> None:
+        """Set the geotyp property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, None]:
-            raise Exception("""geotyp must be `None` or one of {1,2,3,4,5,6,7,8,9,10,11}""")
+            raise Exception("""geotyp must be `None` or one of {1,2,3,4,5,6,7,8,9,10,11}.""")
         self._cards[0].set_value("geotyp", value)
 
     @property
@@ -342,6 +346,7 @@ class ContactEntity(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -355,8 +360,9 @@ class ContactEntity(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
+        """Set the sstyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sstyp must be `None` or one of {0,1,2}""")
+            raise Exception("""sstyp must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sstyp", value)
 
     @property
@@ -367,6 +373,7 @@ class ContactEntity(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -380,6 +387,7 @@ class ContactEntity(KeywordBase):
 
     @df.setter
     def df(self, value: float) -> None:
+        """Set the df property."""
         self._cards[0].set_value("df", value)
 
     @property
@@ -390,6 +398,7 @@ class ContactEntity(KeywordBase):
 
     @cf.setter
     def cf(self, value: float) -> None:
+        """Set the cf property."""
         self._cards[0].set_value("cf", value)
 
     @property
@@ -407,8 +416,9 @@ class ContactEntity(KeywordBase):
 
     @intord.setter
     def intord(self, value: int) -> None:
+        """Set the intord property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""intord must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""intord must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("intord", value)
 
     @property
@@ -419,6 +429,7 @@ class ContactEntity(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[1].set_value("bt", value)
 
     @property
@@ -429,6 +440,7 @@ class ContactEntity(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -442,6 +454,7 @@ class ContactEntity(KeywordBase):
 
     @so.setter
     def so(self, value: int) -> None:
+        """Set the so property."""
         self._cards[1].set_value("so", value)
 
     @property
@@ -454,8 +467,9 @@ class ContactEntity(KeywordBase):
 
     @go.setter
     def go(self, value: int) -> None:
+        """Set the go property."""
         if value not in [0, 1, None]:
-            raise Exception("""go must be `None` or one of {0,1}""")
+            raise Exception("""go must be `None` or one of {0,1}.""")
         self._cards[1].set_value("go", value)
 
     @property
@@ -469,8 +483,9 @@ class ContactEntity(KeywordBase):
 
     @ithk.setter
     def ithk(self, value: int) -> None:
+        """Set the ithk property."""
         if value not in [0, 1, None]:
-            raise Exception("""ithk must be `None` or one of {0,1}""")
+            raise Exception("""ithk must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ithk", value)
 
     @property
@@ -483,6 +498,7 @@ class ContactEntity(KeywordBase):
 
     @spr.setter
     def spr(self, value: int) -> None:
+        """Set the spr property."""
         self._cards[1].set_value("spr", value)
 
     @property
@@ -494,6 +510,7 @@ class ContactEntity(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[2].set_value("xc", value)
 
     @property
@@ -505,6 +522,7 @@ class ContactEntity(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[2].set_value("yc", value)
 
     @property
@@ -516,6 +534,7 @@ class ContactEntity(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[2].set_value("zc", value)
 
     @property
@@ -527,6 +546,7 @@ class ContactEntity(KeywordBase):
 
     @ax.setter
     def ax(self, value: float) -> None:
+        """Set the ax property."""
         self._cards[2].set_value("ax", value)
 
     @property
@@ -538,6 +558,7 @@ class ContactEntity(KeywordBase):
 
     @ay.setter
     def ay(self, value: float) -> None:
+        """Set the ay property."""
         self._cards[2].set_value("ay", value)
 
     @property
@@ -549,6 +570,7 @@ class ContactEntity(KeywordBase):
 
     @az.setter
     def az(self, value: float) -> None:
+        """Set the az property."""
         self._cards[2].set_value("az", value)
 
     @property
@@ -560,6 +582,7 @@ class ContactEntity(KeywordBase):
 
     @bx.setter
     def bx(self, value: float) -> None:
+        """Set the bx property."""
         self._cards[3].set_value("bx", value)
 
     @property
@@ -571,6 +594,7 @@ class ContactEntity(KeywordBase):
 
     @by.setter
     def by(self, value: float) -> None:
+        """Set the by property."""
         self._cards[3].set_value("by", value)
 
     @property
@@ -582,6 +606,7 @@ class ContactEntity(KeywordBase):
 
     @bz.setter
     def bz(self, value: float) -> None:
+        """Set the bz property."""
         self._cards[3].set_value("bz", value)
 
     @property
@@ -594,8 +619,9 @@ class ContactEntity(KeywordBase):
 
     @inout.setter
     def inout(self, value: int) -> None:
+        """Set the inout property."""
         if value not in [0, 1, None]:
-            raise Exception("""inout must be `None` or one of {0,1}""")
+            raise Exception("""inout must be `None` or one of {0,1}.""")
         self._cards[4].set_value("inout", value)
 
     @property
@@ -607,6 +633,7 @@ class ContactEntity(KeywordBase):
 
     @g1.setter
     def g1(self, value: float) -> None:
+        """Set the g1 property."""
         self._cards[4].set_value("g1", value)
 
     @property
@@ -618,6 +645,7 @@ class ContactEntity(KeywordBase):
 
     @g2.setter
     def g2(self, value: float) -> None:
+        """Set the g2 property."""
         self._cards[4].set_value("g2", value)
 
     @property
@@ -629,6 +657,7 @@ class ContactEntity(KeywordBase):
 
     @g3.setter
     def g3(self, value: float) -> None:
+        """Set the g3 property."""
         self._cards[4].set_value("g3", value)
 
     @property
@@ -640,6 +669,7 @@ class ContactEntity(KeywordBase):
 
     @g4.setter
     def g4(self, value: float) -> None:
+        """Set the g4 property."""
         self._cards[4].set_value("g4", value)
 
     @property
@@ -651,6 +681,7 @@ class ContactEntity(KeywordBase):
 
     @g5.setter
     def g5(self, value: float) -> None:
+        """Set the g5 property."""
         self._cards[4].set_value("g5", value)
 
     @property
@@ -662,6 +693,7 @@ class ContactEntity(KeywordBase):
 
     @g6.setter
     def g6(self, value: float) -> None:
+        """Set the g6 property."""
         self._cards[4].set_value("g6", value)
 
     @property
@@ -673,5 +705,6 @@ class ContactEntity(KeywordBase):
 
     @g7.setter
     def g7(self, value: float) -> None:
+        """Set the g7 property."""
         self._cards[4].set_value("g7", value)
 

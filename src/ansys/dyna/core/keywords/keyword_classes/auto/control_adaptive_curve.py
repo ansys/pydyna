@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlAdaptiveCurve(KeywordBase):
     subkeyword = "ADAPTIVE_CURVE"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -84,6 +86,7 @@ class ControlAdaptiveCurve(KeywordBase):
 
     @idset.setter
     def idset(self, value: int) -> None:
+        """Set the idset property."""
         self._cards[0].set_value("idset", value)
 
     @property
@@ -95,8 +98,9 @@ class ControlAdaptiveCurve(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [1, 2, None]:
-            raise Exception("""itype must be `None` or one of {1,2}""")
+            raise Exception("""itype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -109,6 +113,7 @@ class ControlAdaptiveCurve(KeywordBase):
 
     @n.setter
     def n(self, value: int) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -119,6 +124,7 @@ class ControlAdaptiveCurve(KeywordBase):
 
     @smin.setter
     def smin(self, value: float) -> None:
+        """Set the smin property."""
         self._cards[0].set_value("smin", value)
 
     @property
@@ -131,7 +137,8 @@ class ControlAdaptiveCurve(KeywordBase):
 
     @itriop.setter
     def itriop(self, value: int) -> None:
+        """Set the itriop property."""
         if value not in [0, 1, None]:
-            raise Exception("""itriop must be `None` or one of {0,1}""")
+            raise Exception("""itriop must be `None` or one of {0,1}.""")
         self._cards[0].set_value("itriop", value)
 

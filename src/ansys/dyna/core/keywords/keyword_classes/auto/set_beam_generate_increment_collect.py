@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetBeamGenerateIncrementCollect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -101,6 +103,7 @@ class SetBeamGenerateIncrementCollect(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -111,6 +114,7 @@ class SetBeamGenerateIncrementCollect(KeywordBase):
 
     @bbeg.setter
     def bbeg(self, value: int) -> None:
+        """Set the bbeg property."""
         self._cards[1].set_value("bbeg", value)
 
     @property
@@ -121,6 +125,7 @@ class SetBeamGenerateIncrementCollect(KeywordBase):
 
     @bend.setter
     def bend(self, value: int) -> None:
+        """Set the bend property."""
         self._cards[1].set_value("bend", value)
 
     @property
@@ -131,6 +136,7 @@ class SetBeamGenerateIncrementCollect(KeywordBase):
 
     @incr.setter
     def incr(self, value: int) -> None:
+        """Set the incr property."""
         self._cards[1].set_value("incr", value)
 
     @property
@@ -141,5 +147,6 @@ class SetBeamGenerateIncrementCollect(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

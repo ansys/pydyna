@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTACT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -43,6 +44,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the CONTACT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -812,6 +814,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @surfa.setter
     def surfa(self, value: int) -> None:
+        """Set the surfa property."""
         self._cards[0].set_value("surfa", value)
 
     @property
@@ -823,6 +826,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @surfb.setter
     def surfb(self, value: int) -> None:
+        """Set the surfb property."""
         self._cards[0].set_value("surfb", value)
 
     @property
@@ -841,8 +845,9 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @surfatyp.setter
     def surfatyp(self, value: int) -> None:
+        """Set the surfatyp property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("surfatyp", value)
 
     @property
@@ -860,8 +865,9 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @surfbtyp.setter
     def surfbtyp(self, value: int) -> None:
+        """Set the surfbtyp property."""
         if value not in [0, 1, 2, 3, 5, 6, 7, None]:
-            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}""")
+            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}.""")
         self._cards[0].set_value("surfbtyp", value)
 
     @property
@@ -872,6 +878,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @saboxid.setter
     def saboxid(self, value: int) -> None:
+        """Set the saboxid property."""
         self._cards[0].set_value("saboxid", value)
 
     @property
@@ -882,6 +889,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sbboxid.setter
     def sbboxid(self, value: int) -> None:
+        """Set the sbboxid property."""
         self._cards[0].set_value("sbboxid", value)
 
     @property
@@ -895,8 +903,9 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sapr.setter
     def sapr(self, value: int) -> None:
+        """Set the sapr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sapr must be `None` or one of {0,1,2}""")
+            raise Exception("""sapr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sapr", value)
 
     @property
@@ -910,8 +919,9 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sbpr.setter
     def sbpr(self, value: int) -> None:
+        """Set the sbpr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sbpr must be `None` or one of {0,1,2}""")
+            raise Exception("""sbpr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sbpr", value)
 
     @property
@@ -925,6 +935,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[1].set_value("fs", value)
 
     @property
@@ -936,6 +947,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[1].set_value("fd", value)
 
     @property
@@ -946,6 +958,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[1].set_value("dc", value)
 
     @property
@@ -956,6 +969,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[1].set_value("vc", value)
 
     @property
@@ -966,6 +980,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @vdc.setter
     def vdc(self, value: float) -> None:
+        """Set the vdc property."""
         self._cards[1].set_value("vdc", value)
 
     @property
@@ -976,6 +991,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @penchk.setter
     def penchk(self, value: int) -> None:
+        """Set the penchk property."""
         self._cards[1].set_value("penchk", value)
 
     @property
@@ -986,6 +1002,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[1].set_value("bt", value)
 
     @property
@@ -996,6 +1013,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -1006,6 +1024,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sfsa.setter
     def sfsa(self, value: float) -> None:
+        """Set the sfsa property."""
         self._cards[2].set_value("sfsa", value)
 
     @property
@@ -1016,6 +1035,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sfsb.setter
     def sfsb(self, value: float) -> None:
+        """Set the sfsb property."""
         self._cards[2].set_value("sfsb", value)
 
     @property
@@ -1026,6 +1046,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sast.setter
     def sast(self, value: float) -> None:
+        """Set the sast property."""
         self._cards[2].set_value("sast", value)
 
     @property
@@ -1036,6 +1057,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sbst.setter
     def sbst(self, value: float) -> None:
+        """Set the sbst property."""
         self._cards[2].set_value("sbst", value)
 
     @property
@@ -1048,6 +1070,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sfsat.setter
     def sfsat(self, value: float) -> None:
+        """Set the sfsat property."""
         self._cards[2].set_value("sfsat", value)
 
     @property
@@ -1060,6 +1083,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sfsbt.setter
     def sfsbt(self, value: float) -> None:
+        """Set the sfsbt property."""
         self._cards[2].set_value("sfsbt", value)
 
     @property
@@ -1070,6 +1094,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @fsf.setter
     def fsf(self, value: float) -> None:
+        """Set the fsf property."""
         self._cards[2].set_value("fsf", value)
 
     @property
@@ -1080,6 +1105,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @vsf.setter
     def vsf(self, value: float) -> None:
+        """Set the vsf property."""
         self._cards[2].set_value("vsf", value)
 
     @property
@@ -1090,6 +1116,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @nflf.setter
     def nflf(self, value: float) -> None:
+        """Set the nflf property."""
         self._cards[3].set_value("nflf", value)
 
     @property
@@ -1100,6 +1127,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sflf.setter
     def sflf(self, value: float) -> None:
+        """Set the sflf property."""
         self._cards[3].set_value("sflf", value)
 
     @property
@@ -1110,6 +1138,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @nen.setter
     def nen(self, value: float) -> None:
+        """Set the nen property."""
         self._cards[3].set_value("nen", value)
 
     @property
@@ -1120,6 +1149,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @mes.setter
     def mes(self, value: float) -> None:
+        """Set the mes property."""
         self._cards[3].set_value("mes", value)
 
     @property
@@ -1130,6 +1160,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[4].cards[0].set_value("cid", value)
 
     @property
@@ -1140,6 +1171,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[4].cards[0].set_value("heading", value)
 
     @property
@@ -1150,6 +1182,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[5].cards[0].set_value("ignore", value)
 
     @property
@@ -1160,6 +1193,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @bckt.setter
     def bckt(self, value: int) -> None:
+        """Set the bckt property."""
         self._cards[5].cards[0].set_value("bckt", value)
 
     @property
@@ -1170,6 +1204,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @lcbckt.setter
     def lcbckt(self, value: int) -> None:
+        """Set the lcbckt property."""
         self._cards[5].cards[0].set_value("lcbckt", value)
 
     @property
@@ -1180,6 +1215,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @ns2trk.setter
     def ns2trk(self, value: int) -> None:
+        """Set the ns2trk property."""
         self._cards[5].cards[0].set_value("ns2trk", value)
 
     @property
@@ -1190,6 +1226,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @inititr.setter
     def inititr(self, value: int) -> None:
+        """Set the inititr property."""
         self._cards[5].cards[0].set_value("inititr", value)
 
     @property
@@ -1200,6 +1237,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @parmax.setter
     def parmax(self, value: float) -> None:
+        """Set the parmax property."""
         self._cards[5].cards[0].set_value("parmax", value)
 
     @property
@@ -1219,6 +1257,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
+        """Set the cparm8 property."""
         if value not in [0, 1, 2, 10, 11, 12]:
             raise Exception("""cparm8 must be one of {0,1,2,10,11,12}""")
         self._cards[5].cards[0].set_value("cparm8", value)
@@ -1231,6 +1270,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @mpp2.setter
     def mpp2(self, value: bool) -> None:
+        """Set the mpp2 property."""
         self._cards[5].cards[1].set_value("mpp2", value)
 
     @property
@@ -1241,6 +1281,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @chksegs.setter
     def chksegs(self, value: int) -> None:
+        """Set the chksegs property."""
         self._cards[5].cards[1].set_value("chksegs", value)
 
     @property
@@ -1251,6 +1292,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @pensf.setter
     def pensf(self, value: float) -> None:
+        """Set the pensf property."""
         self._cards[5].cards[1].set_value("pensf", value)
 
     @property
@@ -1261,6 +1303,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @grpable.setter
     def grpable(self, value: int) -> None:
+        """Set the grpable property."""
         self._cards[5].cards[1].set_value("grpable", value)
 
     @property
@@ -1276,6 +1319,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @soft.setter
     def soft(self, value: int) -> None:
+        """Set the soft property."""
         if value not in [0, 1, 2, 4, 6]:
             raise Exception("""soft must be one of {0,1,2,4,6}""")
         self._cards[6].cards[0].set_value("soft", value)
@@ -1288,6 +1332,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sofscl.setter
     def sofscl(self, value: float) -> None:
+        """Set the sofscl property."""
         self._cards[6].cards[0].set_value("sofscl", value)
 
     @property
@@ -1298,6 +1343,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @lcidab.setter
     def lcidab(self, value: int) -> None:
+        """Set the lcidab property."""
         self._cards[6].cards[0].set_value("lcidab", value)
 
     @property
@@ -1308,6 +1354,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @maxpar.setter
     def maxpar(self, value: float) -> None:
+        """Set the maxpar property."""
         self._cards[6].cards[0].set_value("maxpar", value)
 
     @property
@@ -1324,6 +1371,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sbopt.setter
     def sbopt(self, value: int) -> None:
+        """Set the sbopt property."""
         if value not in [2, 0, 1, 3, 4, 5]:
             raise Exception("""sbopt must be one of {2,0,1,3,4,5}""")
         self._cards[6].cards[0].set_value("sbopt", value)
@@ -1337,6 +1385,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @depth.setter
     def depth(self, value: int) -> None:
+        """Set the depth property."""
         self._cards[6].cards[0].set_value("depth", value)
 
     @property
@@ -1348,6 +1397,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @bsort.setter
     def bsort(self, value: int) -> None:
+        """Set the bsort property."""
         self._cards[6].cards[0].set_value("bsort", value)
 
     @property
@@ -1359,6 +1409,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @frcfrq.setter
     def frcfrq(self, value: int) -> None:
+        """Set the frcfrq property."""
         self._cards[6].cards[0].set_value("frcfrq", value)
 
     @property
@@ -1372,6 +1423,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @penmax.setter
     def penmax(self, value: float) -> None:
+        """Set the penmax property."""
         self._cards[7].cards[0].set_value("penmax", value)
 
     @property
@@ -1385,6 +1437,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @thkopt.setter
     def thkopt(self, value: int) -> None:
+        """Set the thkopt property."""
         if value not in [0, 1, 2]:
             raise Exception("""thkopt must be one of {0,1,2}""")
         self._cards[7].cards[0].set_value("thkopt", value)
@@ -1400,6 +1453,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @shlthk.setter
     def shlthk(self, value: int) -> None:
+        """Set the shlthk property."""
         if value not in [0, 1, 2]:
             raise Exception("""shlthk must be one of {0,1,2}""")
         self._cards[7].cards[0].set_value("shlthk", value)
@@ -1414,6 +1468,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @snlog.setter
     def snlog(self, value: int) -> None:
+        """Set the snlog property."""
         if value not in [0, 1]:
             raise Exception("""snlog must be one of {0,1}""")
         self._cards[7].cards[0].set_value("snlog", value)
@@ -1429,6 +1484,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @isym.setter
     def isym(self, value: int) -> None:
+        """Set the isym property."""
         if value not in [0, 1]:
             raise Exception("""isym must be one of {0,1}""")
         self._cards[7].cards[0].set_value("isym", value)
@@ -1443,6 +1499,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @i2d3d.setter
     def i2d3d(self, value: int) -> None:
+        """Set the i2d3d property."""
         if value not in [0, 1]:
             raise Exception("""i2d3d must be one of {0,1}""")
         self._cards[7].cards[0].set_value("i2d3d", value)
@@ -1455,6 +1512,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sldthk.setter
     def sldthk(self, value: float) -> None:
+        """Set the sldthk property."""
         self._cards[7].cards[0].set_value("sldthk", value)
 
     @property
@@ -1465,6 +1523,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sldstf.setter
     def sldstf(self, value: float) -> None:
+        """Set the sldstf property."""
         self._cards[7].cards[0].set_value("sldstf", value)
 
     @property
@@ -1483,6 +1542,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @igap.setter
     def igap(self, value: int) -> None:
+        """Set the igap property."""
         self._cards[8].cards[0].set_value("igap", value)
 
     @property
@@ -1499,6 +1559,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[8].cards[0].set_value("ignore", value)
 
     @property
@@ -1513,6 +1574,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @dprfac.setter
     def dprfac(self, value: float) -> None:
+        """Set the dprfac property."""
         self._cards[8].cards[0].set_value("dprfac", value)
 
     @property
@@ -1528,6 +1590,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @dtstif.setter
     def dtstif(self, value: float) -> None:
+        """Set the dtstif property."""
         self._cards[8].cards[0].set_value("dtstif", value)
 
     @property
@@ -1540,6 +1603,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @edgek.setter
     def edgek(self, value: float) -> None:
+        """Set the edgek property."""
         self._cards[8].cards[0].set_value("edgek", value)
 
     @property
@@ -1552,6 +1616,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @flangl.setter
     def flangl(self, value: float) -> None:
+        """Set the flangl property."""
         self._cards[8].cards[0].set_value("flangl", value)
 
     @property
@@ -1562,6 +1627,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @cid_rcf.setter
     def cid_rcf(self, value: int) -> None:
+        """Set the cid_rcf property."""
         self._cards[8].cards[0].set_value("cid_rcf", value)
 
     @property
@@ -1577,6 +1643,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @q2tri.setter
     def q2tri(self, value: int) -> None:
+        """Set the q2tri property."""
         if value not in [0, 1, 2, 3, 4]:
             raise Exception("""q2tri must be one of {0,1,2,3,4}""")
         self._cards[9].cards[0].set_value("q2tri", value)
@@ -1592,6 +1659,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @dtpchk.setter
     def dtpchk(self, value: float) -> None:
+        """Set the dtpchk property."""
         self._cards[9].cards[0].set_value("dtpchk", value)
 
     @property
@@ -1604,6 +1672,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sfnbr.setter
     def sfnbr(self, value: float) -> None:
+        """Set the sfnbr property."""
         self._cards[9].cards[0].set_value("sfnbr", value)
 
     @property
@@ -1614,6 +1683,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @fnlscl.setter
     def fnlscl(self, value: float) -> None:
+        """Set the fnlscl property."""
         self._cards[9].cards[0].set_value("fnlscl", value)
 
     @property
@@ -1624,6 +1694,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @dnlscl.setter
     def dnlscl(self, value: float) -> None:
+        """Set the dnlscl property."""
         self._cards[9].cards[0].set_value("dnlscl", value)
 
     @property
@@ -1637,6 +1708,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @tcso.setter
     def tcso(self, value: int) -> None:
+        """Set the tcso property."""
         if value not in [0, 1]:
             raise Exception("""tcso must be one of {0,1}""")
         self._cards[9].cards[0].set_value("tcso", value)
@@ -1650,6 +1722,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @tiedid.setter
     def tiedid(self, value: int) -> None:
+        """Set the tiedid property."""
         if value not in [0, 1]:
             raise Exception("""tiedid must be one of {0,1}""")
         self._cards[9].cards[0].set_value("tiedid", value)
@@ -1665,6 +1738,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @shledg.setter
     def shledg(self, value: int) -> None:
+        """Set the shledg property."""
         if value not in [0, 1, 2]:
             raise Exception("""shledg must be one of {0,1,2}""")
         self._cards[9].cards[0].set_value("shledg", value)
@@ -1679,6 +1753,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @sharec.setter
     def sharec(self, value: int) -> None:
+        """Set the sharec property."""
         if value not in [0, 1]:
             raise Exception("""sharec must be one of {0,1}""")
         self._cards[10].cards[0].set_value("sharec", value)
@@ -1693,6 +1768,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
+        """Set the cparm8 property."""
         if value not in [0, 2]:
             raise Exception("""cparm8 must be one of {0,2}""")
         self._cards[10].cards[0].set_value("cparm8", value)
@@ -1706,6 +1782,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @ipback.setter
     def ipback(self, value: int) -> None:
+        """Set the ipback property."""
         self._cards[10].cards[0].set_value("ipback", value)
 
     @property
@@ -1718,6 +1795,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @srnde.setter
     def srnde(self, value: int) -> None:
+        """Set the srnde property."""
         self._cards[10].cards[0].set_value("srnde", value)
 
     @property
@@ -1728,6 +1806,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @fricsf.setter
     def fricsf(self, value: float) -> None:
+        """Set the fricsf property."""
         self._cards[10].cards[0].set_value("fricsf", value)
 
     @property
@@ -1741,6 +1820,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @icor.setter
     def icor(self, value: int) -> None:
+        """Set the icor property."""
         self._cards[10].cards[0].set_value("icor", value)
 
     @property
@@ -1753,6 +1833,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @ftorq.setter
     def ftorq(self, value: int) -> None:
+        """Set the ftorq property."""
         self._cards[10].cards[0].set_value("ftorq", value)
 
     @property
@@ -1764,6 +1845,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @region.setter
     def region(self, value: int) -> None:
+        """Set the region property."""
         self._cards[10].cards[0].set_value("region", value)
 
     @property
@@ -1777,6 +1859,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @pstiff.setter
     def pstiff(self, value: int) -> None:
+        """Set the pstiff property."""
         if value not in [0, 1, 2]:
             raise Exception("""pstiff must be one of {0,1,2}""")
         self._cards[11].cards[0].set_value("pstiff", value)
@@ -1794,6 +1877,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @ignroff.setter
     def ignroff(self, value: int) -> None:
+        """Set the ignroff property."""
         if value not in [0, 1, 2, 3]:
             raise Exception("""ignroff must be one of {0,1,2,3}""")
         self._cards[11].cards[0].set_value("ignroff", value)
@@ -1806,6 +1890,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @fstol.setter
     def fstol(self, value: float) -> None:
+        """Set the fstol property."""
         self._cards[11].cards[0].set_value("fstol", value)
 
     @property
@@ -1818,6 +1903,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @_2dbinr.setter
     def _2dbinr(self, value: int) -> None:
+        """Set the _2dbinr property."""
         if value not in [0, 1]:
             raise Exception("""_2dbinr must be one of {0,1}""")
         self._cards[11].cards[0].set_value("2dbinr", value)
@@ -1832,6 +1918,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @ssftyp.setter
     def ssftyp(self, value: int) -> None:
+        """Set the ssftyp property."""
         if value not in [0, 1]:
             raise Exception("""ssftyp must be one of {0,1}""")
         self._cards[11].cards[0].set_value("ssftyp", value)
@@ -1846,6 +1933,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @swtpr.setter
     def swtpr(self, value: int) -> None:
+        """Set the swtpr property."""
         if value not in [0, 1]:
             raise Exception("""swtpr must be one of {0,1}""")
         self._cards[11].cards[0].set_value("swtpr", value)
@@ -1858,6 +1946,7 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @tetfac.setter
     def tetfac(self, value: float) -> None:
+        """Set the tetfac property."""
         self._cards[11].cards[0].set_value("tetfac", value)
 
     @property
@@ -1870,5 +1959,6 @@ class ContactTiebreakNodesOnly(KeywordBase):
 
     @shloff.setter
     def shloff(self, value: float) -> None:
+        """Set the shloff property."""
         self._cards[12].cards[0].set_value("shloff", value)
 

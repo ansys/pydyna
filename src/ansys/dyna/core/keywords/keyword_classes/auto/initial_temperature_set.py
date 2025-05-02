@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -32,6 +33,7 @@ class InitialTemperatureSet(KeywordBase):
     subkeyword = "TEMPERATURE_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(
@@ -48,11 +50,11 @@ class InitialTemperatureSet(KeywordBase):
 
     @property
     def sets(self):
-        '''Gets the table of sets'''
+        """Get the table of sets."""
         return self._cards[0].table
 
     @sets.setter
     def sets(self, df):
-        '''sets sets from the dataframe df'''
+        """Set sets from the dataframe df"""
         self._cards[0].table = df
 

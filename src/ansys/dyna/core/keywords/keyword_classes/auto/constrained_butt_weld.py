@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedButtWeld(KeywordBase):
     subkeyword = "BUTT_WELD"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -85,6 +87,7 @@ class ConstrainedButtWeld(KeywordBase):
 
     @nsid1.setter
     def nsid1(self, value: int) -> None:
+        """Set the nsid1 property."""
         self._cards[0].set_value("nsid1", value)
 
     @property
@@ -95,6 +98,7 @@ class ConstrainedButtWeld(KeywordBase):
 
     @nsid2.setter
     def nsid2(self, value: int) -> None:
+        """Set the nsid2 property."""
         self._cards[0].set_value("nsid2", value)
 
     @property
@@ -105,6 +109,7 @@ class ConstrainedButtWeld(KeywordBase):
 
     @eppf.setter
     def eppf(self, value: float) -> None:
+        """Set the eppf property."""
         self._cards[0].set_value("eppf", value)
 
     @property
@@ -115,6 +120,7 @@ class ConstrainedButtWeld(KeywordBase):
 
     @sigf.setter
     def sigf(self, value: float) -> None:
+        """Set the sigf property."""
         self._cards[0].set_value("sigf", value)
 
     @property
@@ -125,5 +131,6 @@ class ConstrainedButtWeld(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 

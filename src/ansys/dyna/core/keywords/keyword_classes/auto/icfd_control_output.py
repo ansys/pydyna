@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlOutput(KeywordBase):
     subkeyword = "CONTROL_OUTPUT"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,8 +111,9 @@ class IcfdControlOutput(KeywordBase):
 
     @msgl.setter
     def msgl(self, value: int) -> None:
+        """Set the msgl property."""
         if value not in [0, 1, 2, 4, None]:
-            raise Exception("""msgl must be `None` or one of {0,1,2,4}""")
+            raise Exception("""msgl must be `None` or one of {0,1,2,4}.""")
         self._cards[0].set_value("msgl", value)
 
     @property
@@ -125,8 +128,9 @@ class IcfdControlOutput(KeywordBase):
 
     @outl.setter
     def outl(self, value: int) -> None:
+        """Set the outl property."""
         if value not in [0, 2, 6, 7, None]:
-            raise Exception("""outl must be `None` or one of {0,2,6,7}""")
+            raise Exception("""outl must be `None` or one of {0,2,6,7}.""")
         self._cards[0].set_value("outl", value)
 
     @property
@@ -137,6 +141,7 @@ class IcfdControlOutput(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -148,8 +153,9 @@ class IcfdControlOutput(KeywordBase):
 
     @lsppout.setter
     def lsppout(self, value: int) -> None:
+        """Set the lsppout property."""
         if value not in [1, 3, None]:
-            raise Exception("""lsppout must be `None` or one of {1,3}""")
+            raise Exception("""lsppout must be `None` or one of {1,3}.""")
         self._cards[0].set_value("lsppout", value)
 
     @property
@@ -160,6 +166,7 @@ class IcfdControlOutput(KeywordBase):
 
     @itout.setter
     def itout(self, value: int) -> None:
+        """Set the itout property."""
         self._cards[0].set_value("itout", value)
 
     @property
@@ -170,5 +177,6 @@ class IcfdControlOutput(KeywordBase):
 
     @pitout.setter
     def pitout(self, value: int) -> None:
+        """Set the pitout property."""
         self._cards[1].set_value("pitout", value)
 

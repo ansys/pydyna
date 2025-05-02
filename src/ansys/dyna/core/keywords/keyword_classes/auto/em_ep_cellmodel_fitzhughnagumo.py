@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
     subkeyword = "EP_CELLMODEL_FITZHUGHNAGUMO"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -119,6 +121,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
 
     @matid.setter
     def matid(self, value: int) -> None:
+        """Set the matid property."""
         self._cards[0].set_value("matid", value)
 
     @property
@@ -129,6 +132,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
 
     @property
@@ -139,6 +143,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[1].set_value("beta", value)
 
     @property
@@ -149,6 +154,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[1].set_value("gamma", value)
 
     @property
@@ -159,6 +165,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[1].set_value("c", value)
 
     @property
@@ -169,6 +176,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
 
     @mu1.setter
     def mu1(self, value: float) -> None:
+        """Set the mu1 property."""
         self._cards[1].set_value("mu1", value)
 
     @property
@@ -179,6 +187,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
 
     @mu2.setter
     def mu2(self, value: float) -> None:
+        """Set the mu2 property."""
         self._cards[1].set_value("mu2", value)
 
     @property
@@ -189,6 +198,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
 
     @v.setter
     def v(self, value: float) -> None:
+        """Set the v property."""
         self._cards[2].set_value("v", value)
 
     @property
@@ -199,5 +209,6 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[2].set_value("r", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
     subkeyword = "PRESCRIBED_ORIENTATION_RIGID_DIRCOS"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -164,6 +166,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @pidb.setter
     def pidb(self, value: int) -> None:
+        """Set the pidb property."""
         self._cards[0].set_value("pidb", value)
 
     @property
@@ -174,6 +177,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @pida.setter
     def pida(self, value: int) -> None:
+        """Set the pida property."""
         self._cards[0].set_value("pida", value)
 
     @property
@@ -185,6 +189,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @intrp.setter
     def intrp(self, value: int) -> None:
+        """Set the intrp property."""
         self._cards[0].set_value("intrp", value)
 
     @property
@@ -195,6 +200,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -205,6 +211,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -218,8 +225,9 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @toffset.setter
     def toffset(self, value: int) -> None:
+        """Set the toffset property."""
         if value not in [0, 1, None]:
-            raise Exception("""toffset must be `None` or one of {0,1}""")
+            raise Exception("""toffset must be `None` or one of {0,1}.""")
         self._cards[0].set_value("toffset", value)
 
     @property
@@ -230,6 +238,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @lcidc11.setter
     def lcidc11(self, value: int) -> None:
+        """Set the lcidc11 property."""
         self._cards[1].set_value("lcidc11", value)
 
     @property
@@ -240,6 +249,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @lcidc12.setter
     def lcidc12(self, value: int) -> None:
+        """Set the lcidc12 property."""
         self._cards[1].set_value("lcidc12", value)
 
     @property
@@ -250,6 +260,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @lcidc13.setter
     def lcidc13(self, value: int) -> None:
+        """Set the lcidc13 property."""
         self._cards[1].set_value("lcidc13", value)
 
     @property
@@ -260,6 +271,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @lcidc21.setter
     def lcidc21(self, value: int) -> None:
+        """Set the lcidc21 property."""
         self._cards[1].set_value("lcidc21", value)
 
     @property
@@ -270,6 +282,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @lcidc22.setter
     def lcidc22(self, value: int) -> None:
+        """Set the lcidc22 property."""
         self._cards[1].set_value("lcidc22", value)
 
     @property
@@ -280,6 +293,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @lcidc23.setter
     def lcidc23(self, value: int) -> None:
+        """Set the lcidc23 property."""
         self._cards[1].set_value("lcidc23", value)
 
     @property
@@ -290,6 +304,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @lcidc31.setter
     def lcidc31(self, value: int) -> None:
+        """Set the lcidc31 property."""
         self._cards[1].set_value("lcidc31", value)
 
     @property
@@ -300,6 +315,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @lcidc32.setter
     def lcidc32(self, value: int) -> None:
+        """Set the lcidc32 property."""
         self._cards[1].set_value("lcidc32", value)
 
     @property
@@ -310,5 +326,6 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @lcidc33.setter
     def lcidc33(self, value: int) -> None:
+        """Set the lcidc33 property."""
         self._cards[2].set_value("lcidc33", value)
 

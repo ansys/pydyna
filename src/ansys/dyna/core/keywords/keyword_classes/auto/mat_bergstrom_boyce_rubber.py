@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatBergstromBoyceRubber(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -150,6 +152,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -160,6 +163,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -170,6 +174,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -180,6 +185,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -190,6 +196,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @gv.setter
     def gv(self, value: float) -> None:
+        """Set the gv property."""
         self._cards[0].set_value("gv", value)
 
     @property
@@ -200,6 +207,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -210,6 +218,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @nv.setter
     def nv(self, value: float) -> None:
+        """Set the nv property."""
         self._cards[0].set_value("nv", value)
 
     @property
@@ -220,6 +229,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[1].set_value("c", value)
 
     @property
@@ -230,6 +240,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[1].set_value("m", value)
 
     @property
@@ -240,6 +251,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @gam0.setter
     def gam0(self, value: float) -> None:
+        """Set the gam0 property."""
         self._cards[1].set_value("gam0", value)
 
     @property
@@ -250,6 +262,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @tauh.setter
     def tauh(self, value: float) -> None:
+        """Set the tauh property."""
         self._cards[1].set_value("tauh", value)
 
     @property
@@ -260,5 +273,6 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

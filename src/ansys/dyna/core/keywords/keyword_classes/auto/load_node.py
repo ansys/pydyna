@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadNode(KeywordBase):
     subkeyword = "NODE"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class LoadNode(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -128,8 +131,9 @@ class LoadNode(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, None]:
-            raise Exception("""dof must be `None` or one of {0,1,2,3,4,5,6,7,8}""")
+            raise Exception("""dof must be `None` or one of {0,1,2,3,4,5,6,7,8}.""")
         self._cards[0].set_value("dof", value)
 
     @property
@@ -140,6 +144,7 @@ class LoadNode(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -150,6 +155,7 @@ class LoadNode(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -160,6 +166,7 @@ class LoadNode(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -170,6 +177,7 @@ class LoadNode(KeywordBase):
 
     @m1.setter
     def m1(self, value: int) -> None:
+        """Set the m1 property."""
         self._cards[0].set_value("m1", value)
 
     @property
@@ -180,6 +188,7 @@ class LoadNode(KeywordBase):
 
     @m2.setter
     def m2(self, value: int) -> None:
+        """Set the m2 property."""
         self._cards[0].set_value("m2", value)
 
     @property
@@ -190,5 +199,6 @@ class LoadNode(KeywordBase):
 
     @m3.setter
     def m3(self, value: int) -> None:
+        """Set the m3 property."""
         self._cards[0].set_value("m3", value)
 

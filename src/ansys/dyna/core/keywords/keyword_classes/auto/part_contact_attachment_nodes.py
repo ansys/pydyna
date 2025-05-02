@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the PART keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartContactAttachmentNodes(KeywordBase):
     subkeyword = "CONTACT_ATTACHMENT_NODES"
 
     def __init__(self, **kwargs):
+        """Initialize the PART keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -190,6 +192,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -200,6 +203,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -210,6 +214,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[1].set_value("secid", value)
 
     @property
@@ -220,6 +225,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[1].set_value("mid", value)
 
     @property
@@ -230,6 +236,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[1].set_value("eosid", value)
 
     @property
@@ -241,6 +248,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @hgid.setter
     def hgid(self, value: int) -> None:
+        """Set the hgid property."""
         self._cards[1].set_value("hgid", value)
 
     @property
@@ -253,8 +261,9 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @grav.setter
     def grav(self, value: int) -> None:
+        """Set the grav property."""
         if value not in [0, 1, None]:
-            raise Exception("""grav must be `None` or one of {0,1}""")
+            raise Exception("""grav must be `None` or one of {0,1}.""")
         self._cards[1].set_value("grav", value)
 
     @property
@@ -271,6 +280,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @adpopt.setter
     def adpopt(self, value: int) -> None:
+        """Set the adpopt property."""
         self._cards[1].set_value("adpopt", value)
 
     @property
@@ -282,6 +292,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @tmid.setter
     def tmid(self, value: int) -> None:
+        """Set the tmid property."""
         self._cards[1].set_value("tmid", value)
 
     @property
@@ -292,6 +303,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[2].set_value("fs", value)
 
     @property
@@ -302,6 +314,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[2].set_value("fd", value)
 
     @property
@@ -312,6 +325,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[2].set_value("dc", value)
 
     @property
@@ -322,6 +336,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[2].set_value("vc", value)
 
     @property
@@ -332,6 +347,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @optt.setter
     def optt(self, value: float) -> None:
+        """Set the optt property."""
         self._cards[2].set_value("optt", value)
 
     @property
@@ -342,6 +358,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @sft.setter
     def sft(self, value: float) -> None:
+        """Set the sft property."""
         self._cards[2].set_value("sft", value)
 
     @property
@@ -352,6 +369,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @ssf.setter
     def ssf(self, value: float) -> None:
+        """Set the ssf property."""
         self._cards[2].set_value("ssf", value)
 
     @property
@@ -365,6 +383,7 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: float) -> None:
+        """Set the cparm8 property."""
         self._cards[2].set_value("cparm8", value)
 
     @property
@@ -376,5 +395,6 @@ class PartContactAttachmentNodes(KeywordBase):
 
     @ansid.setter
     def ansid(self, value: int) -> None:
+        """Set the ansid property."""
         self._cards[3].set_value("ansid", value)
 

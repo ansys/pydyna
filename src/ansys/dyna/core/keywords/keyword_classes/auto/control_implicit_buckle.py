@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitBuckle(KeywordBase):
     subkeyword = "IMPLICIT_BUCKLE"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -66,6 +68,7 @@ class ControlImplicitBuckle(KeywordBase):
 
     @nmode.setter
     def nmode(self, value: int) -> None:
+        """Set the nmode property."""
         self._cards[0].set_value("nmode", value)
 
     @property
@@ -80,7 +83,8 @@ class ControlImplicitBuckle(KeywordBase):
 
     @bckmth.setter
     def bckmth(self, value: int) -> None:
+        """Set the bckmth property."""
         if value not in [1, 2, None]:
-            raise Exception("""bckmth must be `None` or one of {1,2}""")
+            raise Exception("""bckmth must be `None` or one of {1,2}.""")
         self._cards[0].set_value("bckmth", value)
 

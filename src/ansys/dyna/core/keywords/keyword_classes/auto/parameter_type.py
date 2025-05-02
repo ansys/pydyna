@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the PARAMETER keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ParameterType(KeywordBase):
     subkeyword = "TYPE"
 
     def __init__(self, **kwargs):
+        """Initialize the PARAMETER keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class ParameterType(KeywordBase):
 
     @prmr.setter
     def prmr(self, value: str) -> None:
+        """Set the prmr property."""
         self._cards[0].set_value("prmr", value)
 
     @property
@@ -79,6 +82,7 @@ class ParameterType(KeywordBase):
 
     @val.setter
     def val(self, value: int) -> None:
+        """Set the val property."""
         self._cards[0].set_value("val", value)
 
     @property
@@ -89,7 +93,8 @@ class ParameterType(KeywordBase):
 
     @prtyp.setter
     def prtyp(self, value: str) -> None:
+        """Set the prtyp property."""
         if value not in ["   ", "SSID", "PSID", "PID", "NSID", "NID", "BEAMID", "SHELLID", "SOLIDID", "TSHELLID", "MID", "BEAMSID", "SHELLSID", "SOLIDSID", "TSHELLSID", "EOSID", "CURVEID", None]:
-            raise Exception("""prtyp must be `None` or one of {"   ","SSID","PSID","PID","NSID","NID","BEAMID","SHELLID","SOLIDID","TSHELLID","MID","BEAMSID","SHELLSID","SOLIDSID","TSHELLSID","EOSID","CURVEID"}""")
+            raise Exception("""prtyp must be `None` or one of {"   ","SSID","PSID","PID","NSID","NID","BEAMID","SHELLID","SOLIDID","TSHELLID","MID","BEAMSID","SHELLSID","SOLIDSID","TSHELLSID","EOSID","CURVEID"}.""")
         self._cards[0].set_value("prtyp", value)
 

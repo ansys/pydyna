@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdDatabaseHtc(KeywordBase):
     subkeyword = "DATABASE_HTC"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -111,8 +113,9 @@ class IcfdDatabaseHtc(KeywordBase):
 
     @out.setter
     def out(self, value: int) -> None:
+        """Set the out property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""out must be `None` or one of {0,1,2,3}""")
+            raise Exception("""out must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("out", value)
 
     @property
@@ -125,8 +128,9 @@ class IcfdDatabaseHtc(KeywordBase):
 
     @htc.setter
     def htc(self, value: int) -> None:
+        """Set the htc property."""
         if value not in [0, 1, None]:
-            raise Exception("""htc must be `None` or one of {0,1}""")
+            raise Exception("""htc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("htc", value)
 
     @property
@@ -137,6 +141,7 @@ class IcfdDatabaseHtc(KeywordBase):
 
     @tb.setter
     def tb(self, value: float) -> None:
+        """Set the tb property."""
         self._cards[0].set_value("tb", value)
 
     @property
@@ -147,5 +152,6 @@ class IcfdDatabaseHtc(KeywordBase):
 
     @outdt.setter
     def outdt(self, value: float) -> None:
+        """Set the outdt property."""
         self._cards[0].set_value("outdt", value)
 

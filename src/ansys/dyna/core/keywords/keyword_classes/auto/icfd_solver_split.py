@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdSolverSplit(KeywordBase):
     subkeyword = "SOLVER_SPLIT"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -63,6 +65,7 @@ class IcfdSolverSplit(KeywordBase):
 
     @nit.setter
     def nit(self, value: int) -> None:
+        """Set the nit property."""
         self._cards[0].set_value("nit", value)
 
     @property
@@ -73,5 +76,6 @@ class IcfdSolverSplit(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[0].set_value("tol", value)
 

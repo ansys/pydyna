@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlEnergy(KeywordBase):
     subkeyword = "ENERGY"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -113,8 +115,9 @@ class ControlEnergy(KeywordBase):
 
     @hgen.setter
     def hgen(self, value: int) -> None:
+        """Set the hgen property."""
         if value not in [1, 2, None]:
-            raise Exception("""hgen must be `None` or one of {1,2}""")
+            raise Exception("""hgen must be `None` or one of {1,2}.""")
         self._cards[0].set_value("hgen", value)
 
     @property
@@ -127,8 +130,9 @@ class ControlEnergy(KeywordBase):
 
     @rwen.setter
     def rwen(self, value: int) -> None:
+        """Set the rwen property."""
         if value not in [2, 1, None]:
-            raise Exception("""rwen must be `None` or one of {2,1}""")
+            raise Exception("""rwen must be `None` or one of {2,1}.""")
         self._cards[0].set_value("rwen", value)
 
     @property
@@ -141,8 +145,9 @@ class ControlEnergy(KeywordBase):
 
     @slnten.setter
     def slnten(self, value: int) -> None:
+        """Set the slnten property."""
         if value not in [1, 2, None]:
-            raise Exception("""slnten must be `None` or one of {1,2}""")
+            raise Exception("""slnten must be `None` or one of {1,2}.""")
         self._cards[0].set_value("slnten", value)
 
     @property
@@ -155,8 +160,9 @@ class ControlEnergy(KeywordBase):
 
     @rylen.setter
     def rylen(self, value: int) -> None:
+        """Set the rylen property."""
         if value not in [1, 2, None]:
-            raise Exception("""rylen must be `None` or one of {1,2}""")
+            raise Exception("""rylen must be `None` or one of {1,2}.""")
         self._cards[0].set_value("rylen", value)
 
     @property
@@ -169,8 +175,9 @@ class ControlEnergy(KeywordBase):
 
     @irgen.setter
     def irgen(self, value: int) -> None:
+        """Set the irgen property."""
         if value not in [2, 1, None]:
-            raise Exception("""irgen must be `None` or one of {2,1}""")
+            raise Exception("""irgen must be `None` or one of {2,1}.""")
         self._cards[0].set_value("irgen", value)
 
     @property
@@ -183,8 +190,9 @@ class ControlEnergy(KeywordBase):
 
     @maten.setter
     def maten(self, value: int) -> None:
+        """Set the maten property."""
         if value not in [1, 2, None]:
-            raise Exception("""maten must be `None` or one of {1,2}""")
+            raise Exception("""maten must be `None` or one of {1,2}.""")
         self._cards[0].set_value("maten", value)
 
     @property
@@ -197,8 +205,9 @@ class ControlEnergy(KeywordBase):
 
     @drlen.setter
     def drlen(self, value: int) -> None:
+        """Set the drlen property."""
         if value not in [1, 2, None]:
-            raise Exception("""drlen must be `None` or one of {1,2}""")
+            raise Exception("""drlen must be `None` or one of {1,2}.""")
         self._cards[0].set_value("drlen", value)
 
     @property
@@ -211,7 +220,8 @@ class ControlEnergy(KeywordBase):
 
     @disen.setter
     def disen(self, value: int) -> None:
+        """Set the disen property."""
         if value not in [1, 2, None]:
-            raise Exception("""disen must be `None` or one of {1,2}""")
+            raise Exception("""disen must be `None` or one of {1,2}.""")
         self._cards[0].set_value("disen", value)
 

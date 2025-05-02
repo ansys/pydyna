@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Set2DSegmentSetCollect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -119,6 +121,7 @@ class Set2DSegmentSetCollect(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -129,6 +132,7 @@ class Set2DSegmentSetCollect(KeywordBase):
 
     @da1.setter
     def da1(self, value: float) -> None:
+        """Set the da1 property."""
         self._cards[0].set_value("da1", value)
 
     @property
@@ -139,6 +143,7 @@ class Set2DSegmentSetCollect(KeywordBase):
 
     @da2.setter
     def da2(self, value: float) -> None:
+        """Set the da2 property."""
         self._cards[0].set_value("da2", value)
 
     @property
@@ -149,6 +154,7 @@ class Set2DSegmentSetCollect(KeywordBase):
 
     @da3.setter
     def da3(self, value: float) -> None:
+        """Set the da3 property."""
         self._cards[0].set_value("da3", value)
 
     @property
@@ -159,6 +165,7 @@ class Set2DSegmentSetCollect(KeywordBase):
 
     @da4.setter
     def da4(self, value: float) -> None:
+        """Set the da4 property."""
         self._cards[0].set_value("da4", value)
 
     @property
@@ -169,6 +176,7 @@ class Set2DSegmentSetCollect(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[1].set_value("psid", value)
 
     @property
@@ -179,5 +187,6 @@ class Set2DSegmentSetCollect(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlThermalEigenvalue(KeywordBase):
     subkeyword = "THERMAL_EIGENVALUE"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -57,5 +59,6 @@ class ControlThermalEigenvalue(KeywordBase):
 
     @neig.setter
     def neig(self, value: int) -> None:
+        """Set the neig property."""
         self._cards[0].set_value("neig", value)
 

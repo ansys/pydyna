@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the NODE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class NodeThicknessSetGenerate(KeywordBase):
     subkeyword = "THICKNESS_SET_GENERATE"
 
     def __init__(self, **kwargs):
+        """Initialize the NODE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -75,6 +77,7 @@ class NodeThicknessSetGenerate(KeywordBase):
 
     @id1.setter
     def id1(self, value: int) -> None:
+        """Set the id1 property."""
         self._cards[0].set_value("id1", value)
 
     @property
@@ -85,6 +88,7 @@ class NodeThicknessSetGenerate(KeywordBase):
 
     @thk.setter
     def thk(self, value: float) -> None:
+        """Set the thk property."""
         self._cards[0].set_value("thk", value)
 
     @property
@@ -95,6 +99,7 @@ class NodeThicknessSetGenerate(KeywordBase):
 
     @id2.setter
     def id2(self, value: int) -> None:
+        """Set the id2 property."""
         self._cards[0].set_value("id2", value)
 
     @property
@@ -105,5 +110,6 @@ class NodeThicknessSetGenerate(KeywordBase):
 
     @inc.setter
     def inc(self, value: int) -> None:
+        """Set the inc property."""
         self._cards[0].set_value("inc", value)
 

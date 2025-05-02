@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlPoreAir(KeywordBase):
     subkeyword = "PORE_AIR"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -76,6 +78,7 @@ class ControlPoreAir(KeywordBase):
 
     @pa_rho.setter
     def pa_rho(self, value: float) -> None:
+        """Set the pa_rho property."""
         self._cards[0].set_value("pa_rho", value)
 
     @property
@@ -86,6 +89,7 @@ class ControlPoreAir(KeywordBase):
 
     @air_p.setter
     def air_p(self, value: float) -> None:
+        """Set the air_p property."""
         self._cards[0].set_value("air_p", value)
 
     @property
@@ -96,6 +100,7 @@ class ControlPoreAir(KeywordBase):
 
     @eterm.setter
     def eterm(self, value: float) -> None:
+        """Set the eterm property."""
         self._cards[0].set_value("eterm", value)
 
     @property
@@ -109,7 +114,8 @@ class ControlPoreAir(KeywordBase):
 
     @anamsg.setter
     def anamsg(self, value: int) -> None:
+        """Set the anamsg property."""
         if value not in [0, 1, None]:
-            raise Exception("""anamsg must be `None` or one of {0,1}""")
+            raise Exception("""anamsg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("anamsg", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTERFACE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceEnsight(KeywordBase):
     subkeyword = "ENSIGHT"
 
     def __init__(self, **kwargs):
+        """Initialize the INTERFACE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class InterfaceEnsight(KeywordBase):
 
     @nset.setter
     def nset(self, value: int) -> None:
+        """Set the nset property."""
         self._cards[0].set_value("nset", value)
 
     @property
@@ -89,6 +92,7 @@ class InterfaceEnsight(KeywordBase):
 
     @nlfile.setter
     def nlfile(self, value: int) -> None:
+        """Set the nlfile property."""
         self._cards[0].set_value("nlfile", value)
 
     @property
@@ -99,5 +103,6 @@ class InterfaceEnsight(KeywordBase):
 
     @gfile.setter
     def gfile(self, value: str) -> None:
+        """Set the gfile property."""
         self._cards[1].set_value("gfile", value)
 

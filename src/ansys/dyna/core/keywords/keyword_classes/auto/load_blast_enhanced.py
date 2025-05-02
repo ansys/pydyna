@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBlastEnhanced(KeywordBase):
     subkeyword = "BLAST_ENHANCED"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -169,6 +171,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @bid.setter
     def bid(self, value: int) -> None:
+        """Set the bid property."""
         self._cards[0].set_value("bid", value)
 
     @property
@@ -179,6 +182,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[0].set_value("m", value)
 
     @property
@@ -189,6 +193,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @xbo.setter
     def xbo(self, value: float) -> None:
+        """Set the xbo property."""
         self._cards[0].set_value("xbo", value)
 
     @property
@@ -199,6 +204,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @ybo.setter
     def ybo(self, value: float) -> None:
+        """Set the ybo property."""
         self._cards[0].set_value("ybo", value)
 
     @property
@@ -209,6 +215,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @zbo.setter
     def zbo(self, value: float) -> None:
+        """Set the zbo property."""
         self._cards[0].set_value("zbo", value)
 
     @property
@@ -219,6 +226,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @tbo.setter
     def tbo(self, value: float) -> None:
+        """Set the tbo property."""
         self._cards[0].set_value("tbo", value)
 
     @property
@@ -229,8 +237,9 @@ class LoadBlastEnhanced(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
+        """Set the unit property."""
         if value not in [2, 1, 3, 4, 5, 6, 7, 8, None]:
-            raise Exception("""unit must be `None` or one of {2,1,3,4,5,6,7,8}""")
+            raise Exception("""unit must be `None` or one of {2,1,3,4,5,6,7,8}.""")
         self._cards[0].set_value("unit", value)
 
     @property
@@ -241,8 +250,9 @@ class LoadBlastEnhanced(KeywordBase):
 
     @blast.setter
     def blast(self, value: int) -> None:
+        """Set the blast property."""
         if value not in [2, 1, 3, 4, None]:
-            raise Exception("""blast must be `None` or one of {2,1,3,4}""")
+            raise Exception("""blast must be `None` or one of {2,1,3,4}.""")
         self._cards[0].set_value("blast", value)
 
     @property
@@ -253,6 +263,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @cfm.setter
     def cfm(self, value: float) -> None:
+        """Set the cfm property."""
         self._cards[1].set_value("cfm", value)
 
     @property
@@ -263,6 +274,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @cfl.setter
     def cfl(self, value: float) -> None:
+        """Set the cfl property."""
         self._cards[1].set_value("cfl", value)
 
     @property
@@ -273,6 +285,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @cft.setter
     def cft(self, value: float) -> None:
+        """Set the cft property."""
         self._cards[1].set_value("cft", value)
 
     @property
@@ -283,6 +296,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @cfp.setter
     def cfp(self, value: float) -> None:
+        """Set the cfp property."""
         self._cards[1].set_value("cfp", value)
 
     @property
@@ -293,6 +307,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @nidbo.setter
     def nidbo(self, value: int) -> None:
+        """Set the nidbo property."""
         self._cards[1].set_value("nidbo", value)
 
     @property
@@ -303,6 +318,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -315,7 +331,8 @@ class LoadBlastEnhanced(KeywordBase):
 
     @negphs.setter
     def negphs(self, value: int) -> None:
+        """Set the negphs property."""
         if value not in [0, 1, None]:
-            raise Exception("""negphs must be `None` or one of {0,1}""")
+            raise Exception("""negphs must be `None` or one of {0,1}.""")
         self._cards[1].set_value("negphs", value)
 

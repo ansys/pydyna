@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmCircuitSource(KeywordBase):
     subkeyword = "CIRCUIT_SOURCE"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -137,6 +139,7 @@ class EmCircuitSource(KeywordBase):
 
     @circid.setter
     def circid(self, value: int) -> None:
+        """Set the circid property."""
         self._cards[0].set_value("circid", value)
 
     @property
@@ -154,8 +157,9 @@ class EmCircuitSource(KeywordBase):
 
     @circtyp.setter
     def circtyp(self, value: int) -> None:
+        """Set the circtyp property."""
         if value not in [1, 2, 3, 11, 12, 21, 22, None]:
-            raise Exception("""circtyp must be `None` or one of {1,2,3,11,12,21,22}""")
+            raise Exception("""circtyp must be `None` or one of {1,2,3,11,12,21,22}.""")
         self._cards[0].set_value("circtyp", value)
 
     @property
@@ -166,6 +170,7 @@ class EmCircuitSource(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -177,6 +182,7 @@ class EmCircuitSource(KeywordBase):
 
     @r_f.setter
     def r_f(self, value: float) -> None:
+        """Set the r_f property."""
         self._cards[0].set_value("r/f", value)
 
     @property
@@ -189,6 +195,7 @@ class EmCircuitSource(KeywordBase):
 
     @l_a.setter
     def l_a(self, value: float) -> None:
+        """Set the l_a property."""
         self._cards[0].set_value("l/a", value)
 
     @property
@@ -201,6 +208,7 @@ class EmCircuitSource(KeywordBase):
 
     @c_t0.setter
     def c_t0(self, value: float) -> None:
+        """Set the c_t0 property."""
         self._cards[0].set_value("c/t0", value)
 
     @property
@@ -211,6 +219,7 @@ class EmCircuitSource(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[0].set_value("v0", value)
 
     @property
@@ -221,6 +230,7 @@ class EmCircuitSource(KeywordBase):
 
     @t0.setter
     def t0(self, value: float) -> None:
+        """Set the t0 property."""
         self._cards[0].set_value("t0", value)
 
     @property
@@ -235,6 +245,7 @@ class EmCircuitSource(KeywordBase):
 
     @sidcurr.setter
     def sidcurr(self, value: int) -> None:
+        """Set the sidcurr property."""
         self._cards[1].set_value("sidcurr", value)
 
     @property
@@ -245,6 +256,7 @@ class EmCircuitSource(KeywordBase):
 
     @sidvin.setter
     def sidvin(self, value: int) -> None:
+        """Set the sidvin property."""
         self._cards[1].set_value("sidvin", value)
 
     @property
@@ -255,6 +267,7 @@ class EmCircuitSource(KeywordBase):
 
     @sidvout.setter
     def sidvout(self, value: int) -> None:
+        """Set the sidvout property."""
         self._cards[1].set_value("sidvout", value)
 
     @property
@@ -265,5 +278,6 @@ class EmCircuitSource(KeywordBase):
 
     @partid.setter
     def partid(self, value: int) -> None:
+        """Set the partid property."""
         self._cards[1].set_value("partid", value)
 

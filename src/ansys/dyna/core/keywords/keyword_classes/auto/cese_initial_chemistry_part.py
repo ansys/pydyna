@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseInitialChemistryPart(KeywordBase):
     subkeyword = "INITIAL_CHEMISTRY_PART"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -121,6 +123,7 @@ class CeseInitialChemistryPart(KeywordBase):
 
     @partid.setter
     def partid(self, value: int) -> None:
+        """Set the partid property."""
         self._cards[0].set_value("partid", value)
 
     @property
@@ -131,6 +134,7 @@ class CeseInitialChemistryPart(KeywordBase):
 
     @chemid.setter
     def chemid(self, value: int) -> None:
+        """Set the chemid property."""
         self._cards[0].set_value("chemid", value)
 
     @property
@@ -141,6 +145,7 @@ class CeseInitialChemistryPart(KeywordBase):
 
     @compid.setter
     def compid(self, value: int) -> None:
+        """Set the compid property."""
         self._cards[0].set_value("compid", value)
 
     @property
@@ -151,6 +156,7 @@ class CeseInitialChemistryPart(KeywordBase):
 
     @uic.setter
     def uic(self, value: float) -> None:
+        """Set the uic property."""
         self._cards[1].set_value("uic", value)
 
     @property
@@ -161,6 +167,7 @@ class CeseInitialChemistryPart(KeywordBase):
 
     @vic.setter
     def vic(self, value: float) -> None:
+        """Set the vic property."""
         self._cards[1].set_value("vic", value)
 
     @property
@@ -171,6 +178,7 @@ class CeseInitialChemistryPart(KeywordBase):
 
     @wic.setter
     def wic(self, value: float) -> None:
+        """Set the wic property."""
         self._cards[1].set_value("wic", value)
 
     @property
@@ -181,6 +189,7 @@ class CeseInitialChemistryPart(KeywordBase):
 
     @rhoic.setter
     def rhoic(self, value: float) -> None:
+        """Set the rhoic property."""
         self._cards[1].set_value("rhoic", value)
 
     @property
@@ -191,6 +200,7 @@ class CeseInitialChemistryPart(KeywordBase):
 
     @pic.setter
     def pic(self, value: float) -> None:
+        """Set the pic property."""
         self._cards[1].set_value("pic", value)
 
     @property
@@ -201,6 +211,7 @@ class CeseInitialChemistryPart(KeywordBase):
 
     @tic.setter
     def tic(self, value: float) -> None:
+        """Set the tic property."""
         self._cards[1].set_value("tic", value)
 
     @property
@@ -211,5 +222,6 @@ class CeseInitialChemistryPart(KeywordBase):
 
     @hic.setter
     def hic(self, value: float) -> None:
+        """Set the hic property."""
         self._cards[1].set_value("hic", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the IGA keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IgaIncludeBezier(KeywordBase):
     subkeyword = "INCLUDE_BEZIER"
 
     def __init__(self, **kwargs):
+        """Initialize the IGA keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class IgaIncludeBezier(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -89,6 +92,7 @@ class IgaIncludeBezier(KeywordBase):
 
     @filetype.setter
     def filetype(self, value: int) -> None:
+        """Set the filetype property."""
         self._cards[1].set_value("filetype", value)
 
     @property
@@ -99,6 +103,7 @@ class IgaIncludeBezier(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -111,5 +116,6 @@ class IgaIncludeBezier(KeywordBase):
 
     @dim.setter
     def dim(self, value: int) -> None:
+        """Set the dim property."""
         self._cards[1].set_value("dim", value)
 

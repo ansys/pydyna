@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ALE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleFailSwitchMmg(KeywordBase):
     subkeyword = "FAIL_SWITCH_MMG"
 
     def __init__(self, **kwargs):
+        """Initialize the ALE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class AleFailSwitchMmg(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -89,6 +92,7 @@ class AleFailSwitchMmg(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -99,6 +103,7 @@ class AleFailSwitchMmg(KeywordBase):
 
     @fr_mmg.setter
     def fr_mmg(self, value: int) -> None:
+        """Set the fr_mmg property."""
         self._cards[1].set_value("fr_mmg", value)
 
     @property
@@ -109,5 +114,6 @@ class AleFailSwitchMmg(KeywordBase):
 
     @to_mmg.setter
     def to_mmg(self, value: int) -> None:
+        """Set the to_mmg property."""
         self._cards[1].set_value("to_mmg", value)
 

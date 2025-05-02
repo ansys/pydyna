@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdDefineSource(KeywordBase):
     subkeyword = "DEFINE_SOURCE"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -90,6 +92,7 @@ class IcfdDefineSource(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -100,6 +103,7 @@ class IcfdDefineSource(KeywordBase):
 
     @lcidk.setter
     def lcidk(self, value: int) -> None:
+        """Set the lcidk property."""
         self._cards[0].set_value("lcidk", value)
 
     @property
@@ -113,8 +117,9 @@ class IcfdDefineSource(KeywordBase):
 
     @shape.setter
     def shape(self, value: int) -> None:
+        """Set the shape property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""shape must be `None` or one of {1,2,3}""")
+            raise Exception("""shape must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("shape", value)
 
     @property
@@ -125,6 +130,7 @@ class IcfdDefineSource(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[0].set_value("r", value)
 
     @property
@@ -135,6 +141,7 @@ class IcfdDefineSource(KeywordBase):
 
     @pid1.setter
     def pid1(self, value: int) -> None:
+        """Set the pid1 property."""
         self._cards[0].set_value("pid1", value)
 
     @property
@@ -145,5 +152,6 @@ class IcfdDefineSource(KeywordBase):
 
     @pid2.setter
     def pid2(self, value: int) -> None:
+        """Set the pid2 property."""
         self._cards[0].set_value("pid2", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlAccuracy(KeywordBase):
     subkeyword = "ACCURACY"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,8 +88,9 @@ class ControlAccuracy(KeywordBase):
 
     @osu.setter
     def osu(self, value: int) -> None:
+        """Set the osu property."""
         if value not in [0, 1, None]:
-            raise Exception("""osu must be `None` or one of {0,1}""")
+            raise Exception("""osu must be `None` or one of {0,1}.""")
         self._cards[0].set_value("osu", value)
 
     @property
@@ -104,8 +107,9 @@ class ControlAccuracy(KeywordBase):
 
     @inn.setter
     def inn(self, value: int) -> None:
+        """Set the inn property."""
         if value not in [1, 2, 3, 4, -2, -4, None]:
-            raise Exception("""inn must be `None` or one of {1,2,3,4,-2,-4}""")
+            raise Exception("""inn must be `None` or one of {1,2,3,4,-2,-4}.""")
         self._cards[0].set_value("inn", value)
 
     @property
@@ -116,6 +120,7 @@ class ControlAccuracy(KeywordBase):
 
     @pidosu.setter
     def pidosu(self, value: int) -> None:
+        """Set the pidosu property."""
         self._cards[0].set_value("pidosu", value)
 
     @property
@@ -129,6 +134,7 @@ class ControlAccuracy(KeywordBase):
 
     @iacc.setter
     def iacc(self, value: int) -> None:
+        """Set the iacc property."""
         self._cards[0].set_value("iacc", value)
 
     @property
@@ -141,5 +147,6 @@ class ControlAccuracy(KeywordBase):
 
     @exacc.setter
     def exacc(self, value: float) -> None:
+        """Set the exacc property."""
         self._cards[0].set_value("exacc", value)
 

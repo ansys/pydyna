@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
     subkeyword = "SEGMENT_SET_NONUNIFORM"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -142,6 +144,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -152,6 +155,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -162,6 +166,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[1].set_value("ssid", value)
 
     @property
@@ -172,6 +177,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -182,6 +188,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[1].set_value("sf", value)
 
     @property
@@ -192,6 +199,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @at.setter
     def at(self, value: float) -> None:
+        """Set the at property."""
         self._cards[1].set_value("at", value)
 
     @property
@@ -202,6 +210,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -216,6 +225,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @eltype.setter
     def eltype(self, value: str) -> None:
+        """Set the eltype property."""
         self._cards[1].set_value("eltype", value)
 
     @property
@@ -226,6 +236,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[2].set_value("cid", value)
 
     @property
@@ -236,6 +247,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[2].set_value("v1", value)
 
     @property
@@ -246,6 +258,7 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[2].set_value("v2", value)
 
     @property
@@ -256,5 +269,6 @@ class LoadSegmentSetNonuniform(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[2].set_value("v3", value)
 

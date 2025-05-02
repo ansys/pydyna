@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlTime(KeywordBase):
     subkeyword = "CONTROL_TIME"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -130,6 +132,7 @@ class IcfdControlTime(KeywordBase):
 
     @ttm.setter
     def ttm(self, value: float) -> None:
+        """Set the ttm property."""
         self._cards[0].set_value("ttm", value)
 
     @property
@@ -140,6 +143,7 @@ class IcfdControlTime(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -150,6 +154,7 @@ class IcfdControlTime(KeywordBase):
 
     @cfl.setter
     def cfl(self, value: float) -> None:
+        """Set the cfl property."""
         self._cards[0].set_value("cfl", value)
 
     @property
@@ -160,6 +165,7 @@ class IcfdControlTime(KeywordBase):
 
     @lcidsf.setter
     def lcidsf(self, value: int) -> None:
+        """Set the lcidsf property."""
         self._cards[0].set_value("lcidsf", value)
 
     @property
@@ -170,6 +176,7 @@ class IcfdControlTime(KeywordBase):
 
     @dtmin.setter
     def dtmin(self, value: float) -> None:
+        """Set the dtmin property."""
         self._cards[0].set_value("dtmin", value)
 
     @property
@@ -180,6 +187,7 @@ class IcfdControlTime(KeywordBase):
 
     @dtmax.setter
     def dtmax(self, value: float) -> None:
+        """Set the dtmax property."""
         self._cards[0].set_value("dtmax", value)
 
     @property
@@ -190,6 +198,7 @@ class IcfdControlTime(KeywordBase):
 
     @dtinit.setter
     def dtinit(self, value: float) -> None:
+        """Set the dtinit property."""
         self._cards[0].set_value("dtinit", value)
 
     @property
@@ -200,6 +209,7 @@ class IcfdControlTime(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -210,6 +220,7 @@ class IcfdControlTime(KeywordBase):
 
     @dtt.setter
     def dtt(self, value: float) -> None:
+        """Set the dtt property."""
         self._cards[1].set_value("dtt", value)
 
     @property
@@ -222,7 +233,8 @@ class IcfdControlTime(KeywordBase):
 
     @btbl.setter
     def btbl(self, value: int) -> None:
+        """Set the btbl property."""
         if value not in [0, 1, None]:
-            raise Exception("""btbl must be `None` or one of {0,1}""")
+            raise Exception("""btbl must be `None` or one of {0,1}.""")
         self._cards[2].set_value("btbl", value)
 

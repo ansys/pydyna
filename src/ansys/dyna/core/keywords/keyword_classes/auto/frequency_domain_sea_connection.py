@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the FREQUENCY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
     subkeyword = "DOMAIN_SEA_CONNECTION"
 
     def __init__(self, **kwargs):
+        """Initialize the FREQUENCY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -229,6 +231,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @conid.setter
     def conid(self, value: int) -> None:
+        """Set the conid property."""
         self._cards[0].set_value("conid", value)
 
     @property
@@ -244,8 +247,9 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""ctype must be `None` or one of {1,2,3,4}""")
+            raise Exception("""ctype must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -256,6 +260,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @nsub.setter
     def nsub(self, value: int) -> None:
+        """Set the nsub property."""
         self._cards[0].set_value("nsub", value)
 
     @property
@@ -268,8 +273,9 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ibeam.setter
     def ibeam(self, value: int) -> None:
+        """Set the ibeam property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibeam must be `None` or one of {0,1}""")
+            raise Exception("""ibeam must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ibeam", value)
 
     @property
@@ -280,6 +286,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @sub1.setter
     def sub1(self, value: int) -> None:
+        """Set the sub1 property."""
         self._cards[1].set_value("sub1", value)
 
     @property
@@ -290,6 +297,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @sub2.setter
     def sub2(self, value: int) -> None:
+        """Set the sub2 property."""
         self._cards[1].set_value("sub2", value)
 
     @property
@@ -300,6 +308,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @sub3.setter
     def sub3(self, value: int) -> None:
+        """Set the sub3 property."""
         self._cards[1].set_value("sub3", value)
 
     @property
@@ -310,6 +319,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @sub4.setter
     def sub4(self, value: int) -> None:
+        """Set the sub4 property."""
         self._cards[1].set_value("sub4", value)
 
     @property
@@ -320,6 +330,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @sub5.setter
     def sub5(self, value: int) -> None:
+        """Set the sub5 property."""
         self._cards[1].set_value("sub5", value)
 
     @property
@@ -330,6 +341,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @sub6.setter
     def sub6(self, value: int) -> None:
+        """Set the sub6 property."""
         self._cards[1].set_value("sub6", value)
 
     @property
@@ -340,6 +352,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @sub7.setter
     def sub7(self, value: int) -> None:
+        """Set the sub7 property."""
         self._cards[1].set_value("sub7", value)
 
     @property
@@ -350,6 +363,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @sub8.setter
     def sub8(self, value: int) -> None:
+        """Set the sub8 property."""
         self._cards[1].set_value("sub8", value)
 
     @property
@@ -360,6 +374,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ang1.setter
     def ang1(self, value: float) -> None:
+        """Set the ang1 property."""
         self._cards[2].set_value("ang1", value)
 
     @property
@@ -370,6 +385,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ang2.setter
     def ang2(self, value: float) -> None:
+        """Set the ang2 property."""
         self._cards[2].set_value("ang2", value)
 
     @property
@@ -380,6 +396,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ang3.setter
     def ang3(self, value: float) -> None:
+        """Set the ang3 property."""
         self._cards[2].set_value("ang3", value)
 
     @property
@@ -390,6 +407,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ang4.setter
     def ang4(self, value: float) -> None:
+        """Set the ang4 property."""
         self._cards[2].set_value("ang4", value)
 
     @property
@@ -400,6 +418,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ang5.setter
     def ang5(self, value: float) -> None:
+        """Set the ang5 property."""
         self._cards[2].set_value("ang5", value)
 
     @property
@@ -410,6 +429,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ang6.setter
     def ang6(self, value: float) -> None:
+        """Set the ang6 property."""
         self._cards[2].set_value("ang6", value)
 
     @property
@@ -420,6 +440,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ang7.setter
     def ang7(self, value: float) -> None:
+        """Set the ang7 property."""
         self._cards[2].set_value("ang7", value)
 
     @property
@@ -430,6 +451,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @ang8.setter
     def ang8(self, value: float) -> None:
+        """Set the ang8 property."""
         self._cards[2].set_value("ang8", value)
 
     @property
@@ -440,6 +462,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @length.setter
     def length(self, value: float) -> None:
+        """Set the length property."""
         self._cards[3].set_value("length", value)
 
     @property
@@ -450,6 +473,7 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @absorb.setter
     def absorb(self, value: float) -> None:
+        """Set the absorb property."""
         self._cards[4].set_value("absorb", value)
 
     @property
@@ -460,5 +484,6 @@ class FrequencyDomainSeaConnection(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[4].set_value("thick", value)
 

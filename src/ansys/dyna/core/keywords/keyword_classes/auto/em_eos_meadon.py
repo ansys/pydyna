@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEosMeadon(KeywordBase):
     subkeyword = "EOS_MEADON"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -130,6 +132,7 @@ class EmEosMeadon(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -140,6 +143,7 @@ class EmEosMeadon(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[0].set_value("c1", value)
 
     @property
@@ -150,6 +154,7 @@ class EmEosMeadon(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[0].set_value("c2", value)
 
     @property
@@ -160,6 +165,7 @@ class EmEosMeadon(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[0].set_value("c3", value)
 
     @property
@@ -173,8 +179,9 @@ class EmEosMeadon(KeywordBase):
 
     @temuni.setter
     def temuni(self, value: int) -> None:
+        """Set the temuni property."""
         if value not in [1, 2, None]:
-            raise Exception("""temuni must be `None` or one of {1,2}""")
+            raise Exception("""temuni must be `None` or one of {1,2}.""")
         self._cards[0].set_value("temuni", value)
 
     @property
@@ -185,6 +192,7 @@ class EmEosMeadon(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[0].set_value("v0", value)
 
     @property
@@ -195,6 +203,7 @@ class EmEosMeadon(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[0].set_value("gamma", value)
 
     @property
@@ -205,6 +214,7 @@ class EmEosMeadon(KeywordBase):
 
     @expon.setter
     def expon(self, value: int) -> None:
+        """Set the expon property."""
         self._cards[0].set_value("expon", value)
 
     @property
@@ -215,6 +225,7 @@ class EmEosMeadon(KeywordBase):
 
     @lgtunit.setter
     def lgtunit(self, value: float) -> None:
+        """Set the lgtunit property."""
         self._cards[1].set_value("lgtunit", value)
 
     @property
@@ -225,6 +236,7 @@ class EmEosMeadon(KeywordBase):
 
     @timunit.setter
     def timunit(self, value: float) -> None:
+        """Set the timunit property."""
         self._cards[1].set_value("timunit", value)
 
     @property
@@ -238,7 +250,8 @@ class EmEosMeadon(KeywordBase):
 
     @adjust.setter
     def adjust(self, value: int) -> None:
+        """Set the adjust property."""
         if value not in [0, 1, None]:
-            raise Exception("""adjust must be `None` or one of {0,1}""")
+            raise Exception("""adjust must be `None` or one of {0,1}.""")
         self._cards[1].set_value("adjust", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlExplicitThermalProperties(KeywordBase):
     subkeyword = "EXPLICIT_THERMAL_PROPERTIES"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -249,6 +251,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @partset.setter
     def partset(self, value: int) -> None:
+        """Set the partset property."""
         self._cards[0].set_value("partset", value)
 
     @property
@@ -259,6 +262,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[0].set_value("cp", value)
 
     @property
@@ -271,8 +275,9 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @cptyp.setter
     def cptyp(self, value: int) -> None:
+        """Set the cptyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""cptyp must be `None` or one of {0,1}""")
+            raise Exception("""cptyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("cptyp", value)
 
     @property
@@ -287,6 +292,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @vecid1.setter
     def vecid1(self, value: int) -> None:
+        """Set the vecid1 property."""
         self._cards[0].set_value("vecid1", value)
 
     @property
@@ -301,6 +307,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @vecid2.setter
     def vecid2(self, value: int) -> None:
+        """Set the vecid2 property."""
         self._cards[0].set_value("vecid2", value)
 
     @property
@@ -316,8 +323,9 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
+        """Set the local property."""
         if value not in [0, 1, None]:
-            raise Exception("""local must be `None` or one of {0,1}""")
+            raise Exception("""local must be `None` or one of {0,1}.""")
         self._cards[0].set_value("local", value)
 
     @property
@@ -328,6 +336,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kxx.setter
     def kxx(self, value: float) -> None:
+        """Set the kxx property."""
         self._cards[1].set_value("kxx", value)
 
     @property
@@ -338,6 +347,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kxy.setter
     def kxy(self, value: float) -> None:
+        """Set the kxy property."""
         self._cards[1].set_value("kxy", value)
 
     @property
@@ -348,6 +358,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kxz.setter
     def kxz(self, value: float) -> None:
+        """Set the kxz property."""
         self._cards[1].set_value("kxz", value)
 
     @property
@@ -360,8 +371,9 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kxxtyp.setter
     def kxxtyp(self, value: int) -> None:
+        """Set the kxxtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""kxxtyp must be `None` or one of {0,1}""")
+            raise Exception("""kxxtyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("kxxtyp", value)
 
     @property
@@ -374,8 +386,9 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kxytyp.setter
     def kxytyp(self, value: int) -> None:
+        """Set the kxytyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""kxytyp must be `None` or one of {0,1}""")
+            raise Exception("""kxytyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("kxytyp", value)
 
     @property
@@ -388,8 +401,9 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kxztyp.setter
     def kxztyp(self, value: int) -> None:
+        """Set the kxztyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""kxztyp must be `None` or one of {0,1}""")
+            raise Exception("""kxztyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("kxztyp", value)
 
     @property
@@ -400,6 +414,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kyx.setter
     def kyx(self, value: float) -> None:
+        """Set the kyx property."""
         self._cards[2].set_value("kyx", value)
 
     @property
@@ -410,6 +425,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kyy.setter
     def kyy(self, value: float) -> None:
+        """Set the kyy property."""
         self._cards[2].set_value("kyy", value)
 
     @property
@@ -420,6 +436,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kyz.setter
     def kyz(self, value: float) -> None:
+        """Set the kyz property."""
         self._cards[2].set_value("kyz", value)
 
     @property
@@ -432,8 +449,9 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kyxtyp.setter
     def kyxtyp(self, value: int) -> None:
+        """Set the kyxtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""kyxtyp must be `None` or one of {0,1}""")
+            raise Exception("""kyxtyp must be `None` or one of {0,1}.""")
         self._cards[2].set_value("kyxtyp", value)
 
     @property
@@ -446,8 +464,9 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kyytyp.setter
     def kyytyp(self, value: int) -> None:
+        """Set the kyytyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""kyytyp must be `None` or one of {0,1}""")
+            raise Exception("""kyytyp must be `None` or one of {0,1}.""")
         self._cards[2].set_value("kyytyp", value)
 
     @property
@@ -460,8 +479,9 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kyztyp.setter
     def kyztyp(self, value: int) -> None:
+        """Set the kyztyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""kyztyp must be `None` or one of {0,1}""")
+            raise Exception("""kyztyp must be `None` or one of {0,1}.""")
         self._cards[2].set_value("kyztyp", value)
 
     @property
@@ -472,6 +492,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kzx.setter
     def kzx(self, value: float) -> None:
+        """Set the kzx property."""
         self._cards[3].set_value("kzx", value)
 
     @property
@@ -482,6 +503,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kzy.setter
     def kzy(self, value: float) -> None:
+        """Set the kzy property."""
         self._cards[3].set_value("kzy", value)
 
     @property
@@ -492,6 +514,7 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kzz.setter
     def kzz(self, value: float) -> None:
+        """Set the kzz property."""
         self._cards[3].set_value("kzz", value)
 
     @property
@@ -504,8 +527,9 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kzxtyp.setter
     def kzxtyp(self, value: int) -> None:
+        """Set the kzxtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""kzxtyp must be `None` or one of {0,1}""")
+            raise Exception("""kzxtyp must be `None` or one of {0,1}.""")
         self._cards[3].set_value("kzxtyp", value)
 
     @property
@@ -518,8 +542,9 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kzytyp.setter
     def kzytyp(self, value: int) -> None:
+        """Set the kzytyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""kzytyp must be `None` or one of {0,1}""")
+            raise Exception("""kzytyp must be `None` or one of {0,1}.""")
         self._cards[3].set_value("kzytyp", value)
 
     @property
@@ -532,7 +557,8 @@ class ControlExplicitThermalProperties(KeywordBase):
 
     @kzztyp.setter
     def kzztyp(self, value: int) -> None:
+        """Set the kzztyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""kzztyp must be `None` or one of {0,1}""")
+            raise Exception("""kzztyp must be `None` or one of {0,1}.""")
         self._cards[3].set_value("kzztyp", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
     subkeyword = "MPP_DECOMPOSITION_PARTS_DISTRIBUTE"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -163,6 +165,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id1.setter
     def id1(self, value: int) -> None:
+        """Set the id1 property."""
         self._cards[0].set_value("id1", value)
 
     @property
@@ -173,6 +176,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id2.setter
     def id2(self, value: int) -> None:
+        """Set the id2 property."""
         self._cards[0].set_value("id2", value)
 
     @property
@@ -183,6 +187,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id3.setter
     def id3(self, value: int) -> None:
+        """Set the id3 property."""
         self._cards[0].set_value("id3", value)
 
     @property
@@ -193,6 +198,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id4.setter
     def id4(self, value: int) -> None:
+        """Set the id4 property."""
         self._cards[0].set_value("id4", value)
 
     @property
@@ -203,6 +209,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id5.setter
     def id5(self, value: int) -> None:
+        """Set the id5 property."""
         self._cards[0].set_value("id5", value)
 
     @property
@@ -213,6 +220,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id6.setter
     def id6(self, value: int) -> None:
+        """Set the id6 property."""
         self._cards[0].set_value("id6", value)
 
     @property
@@ -223,6 +231,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id7.setter
     def id7(self, value: int) -> None:
+        """Set the id7 property."""
         self._cards[0].set_value("id7", value)
 
     @property
@@ -233,6 +242,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id8.setter
     def id8(self, value: int) -> None:
+        """Set the id8 property."""
         self._cards[0].set_value("id8", value)
 
     @property
@@ -243,6 +253,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id9.setter
     def id9(self, value: int) -> None:
+        """Set the id9 property."""
         self._cards[1].set_value("id9", value)
 
     @property
@@ -253,6 +264,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id10.setter
     def id10(self, value: int) -> None:
+        """Set the id10 property."""
         self._cards[1].set_value("id10", value)
 
     @property
@@ -263,6 +275,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id11.setter
     def id11(self, value: int) -> None:
+        """Set the id11 property."""
         self._cards[1].set_value("id11", value)
 
     @property
@@ -273,6 +286,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id12.setter
     def id12(self, value: int) -> None:
+        """Set the id12 property."""
         self._cards[1].set_value("id12", value)
 
     @property
@@ -283,6 +297,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id13.setter
     def id13(self, value: int) -> None:
+        """Set the id13 property."""
         self._cards[1].set_value("id13", value)
 
     @property
@@ -293,6 +308,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id14.setter
     def id14(self, value: int) -> None:
+        """Set the id14 property."""
         self._cards[1].set_value("id14", value)
 
     @property
@@ -303,6 +319,7 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id15.setter
     def id15(self, value: int) -> None:
+        """Set the id15 property."""
         self._cards[1].set_value("id15", value)
 
     @property
@@ -313,5 +330,6 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
 
     @id16.setter
     def id16(self, value: int) -> None:
+        """Set the id16 property."""
         self._cards[1].set_value("id16", value)
 

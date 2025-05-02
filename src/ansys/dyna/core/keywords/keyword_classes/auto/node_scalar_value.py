@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the NODE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class NodeScalarValue(KeywordBase):
     subkeyword = "SCALAR_VALUE"
 
     def __init__(self, **kwargs):
+        """Initialize the NODE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class NodeScalarValue(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -96,6 +99,7 @@ class NodeScalarValue(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[0].set_value("x1", value)
 
     @property
@@ -106,6 +110,7 @@ class NodeScalarValue(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[0].set_value("x2", value)
 
     @property
@@ -116,6 +121,7 @@ class NodeScalarValue(KeywordBase):
 
     @x3.setter
     def x3(self, value: float) -> None:
+        """Set the x3 property."""
         self._cards[0].set_value("x3", value)
 
     @property
@@ -130,7 +136,8 @@ class NodeScalarValue(KeywordBase):
 
     @ndof.setter
     def ndof(self, value: int) -> None:
+        """Set the ndof property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""ndof must be `None` or one of {0,1,2,3}""")
+            raise Exception("""ndof must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("ndof", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
     subkeyword = "GENERALIZED_WELD_COMBINED"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -102,6 +104,7 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
 
     @wid.setter
     def wid(self, value: int) -> None:
+        """Set the wid property."""
         self._cards[0].set_value("wid", value)
 
     @property
@@ -112,6 +115,7 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 
     @property
@@ -122,6 +126,7 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -134,6 +139,7 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
 
     @filter.setter
     def filter(self, value: int) -> None:
+        """Set the filter property."""
         self._cards[1].set_value("filter", value)
 
     @property
@@ -145,6 +151,7 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
 
     @window.setter
     def window(self, value: float) -> None:
+        """Set the window property."""
         self._cards[1].set_value("window", value)
 
     @property
@@ -155,6 +162,7 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
 
     @npr.setter
     def npr(self, value: int) -> None:
+        """Set the npr property."""
         self._cards[1].set_value("npr", value)
 
     @property
@@ -168,7 +176,8 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
 
     @nprt.setter
     def nprt(self, value: int) -> None:
+        """Set the nprt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""nprt must be `None` or one of {0,1,2}""")
+            raise Exception("""nprt must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("nprt", value)
 

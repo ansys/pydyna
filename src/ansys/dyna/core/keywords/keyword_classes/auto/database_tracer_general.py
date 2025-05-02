@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseTracerGeneral(KeywordBase):
     subkeyword = "TRACER_GENERAL"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -151,6 +153,7 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @node.setter
     def node(self, value: int) -> None:
+        """Set the node property."""
         self._cards[0].set_value("node", value)
 
     @property
@@ -163,6 +166,7 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @elem.setter
     def elem(self, value: int) -> None:
+        """Set the elem property."""
         self._cards[0].set_value("elem", value)
 
     @property
@@ -177,8 +181,9 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @typm.setter
     def typm(self, value: int) -> None:
+        """Set the typm property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""typm must be `None` or one of {1,2,3,4}""")
+            raise Exception("""typm must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("typm", value)
 
     @property
@@ -192,8 +197,9 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @move.setter
     def move(self, value: int) -> None:
+        """Set the move property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""move must be `None` or one of {0,1,2}""")
+            raise Exception("""move must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("move", value)
 
     @property
@@ -204,6 +210,7 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @set.setter
     def set(self, value: int) -> None:
+        """Set the set property."""
         self._cards[0].set_value("set", value)
 
     @property
@@ -219,8 +226,9 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @typs.setter
     def typs(self, value: int) -> None:
+        """Set the typs property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""typs must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""typs must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("typs", value)
 
     @property
@@ -231,6 +239,7 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -241,6 +250,7 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @tbeg.setter
     def tbeg(self, value: float) -> None:
+        """Set the tbeg property."""
         self._cards[1].set_value("tbeg", value)
 
     @property
@@ -251,6 +261,7 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[1].set_value("tend", value)
 
     @property
@@ -261,6 +272,7 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @fid.setter
     def fid(self, value: int) -> None:
+        """Set the fid property."""
         self._cards[1].set_value("fid", value)
 
     @property
@@ -284,6 +296,7 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @varloc.setter
     def varloc(self, value: int) -> None:
+        """Set the varloc property."""
         self._cards[2].set_value("varloc", value)
 
     @property
@@ -301,7 +314,8 @@ class DatabaseTracerGeneral(KeywordBase):
 
     @varepl.setter
     def varepl(self, value: int) -> None:
+        """Set the varepl property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""varepl must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""varepl must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[2].set_value("varepl", value)
 

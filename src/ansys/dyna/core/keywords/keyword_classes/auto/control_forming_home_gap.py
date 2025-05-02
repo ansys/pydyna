@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingHomeGap(KeywordBase):
     subkeyword = "FORMING_HOME_GAP"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -83,6 +85,7 @@ class ControlFormingHomeGap(KeywordBase):
 
     @psidu.setter
     def psidu(self, value: int) -> None:
+        """Set the psidu property."""
         self._cards[0].set_value("psidu", value)
 
     @property
@@ -93,6 +96,7 @@ class ControlFormingHomeGap(KeywordBase):
 
     @psidl.setter
     def psidl(self, value: int) -> None:
+        """Set the psidl property."""
         self._cards[0].set_value("psidl", value)
 
     @property
@@ -103,6 +107,7 @@ class ControlFormingHomeGap(KeywordBase):
 
     @gap.setter
     def gap(self, value: float) -> None:
+        """Set the gap property."""
         self._cards[0].set_value("gap", value)
 
     @property
@@ -113,6 +118,7 @@ class ControlFormingHomeGap(KeywordBase):
 
     @mvinc.setter
     def mvinc(self, value: float) -> None:
+        """Set the mvinc property."""
         self._cards[0].set_value("mvinc", value)
 
     @property
@@ -125,7 +131,8 @@ class ControlFormingHomeGap(KeywordBase):
 
     @istop.setter
     def istop(self, value: int) -> None:
+        """Set the istop property."""
         if value not in [0, 1, None]:
-            raise Exception("""istop must be `None` or one of {0,1}""")
+            raise Exception("""istop must be `None` or one of {0,1}.""")
         self._cards[0].set_value("istop", value)
 

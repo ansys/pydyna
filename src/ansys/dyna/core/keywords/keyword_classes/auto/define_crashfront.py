@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCrashfront(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -84,6 +86,7 @@ class DefineCrashfront(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -99,8 +102,9 @@ class DefineCrashfront(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""type must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""type must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -111,5 +115,6 @@ class DefineCrashfront(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

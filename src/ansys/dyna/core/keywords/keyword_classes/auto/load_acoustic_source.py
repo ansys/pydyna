@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadAcousticSource(KeywordBase):
     subkeyword = "ACOUSTIC_SOURCE"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,6 +112,7 @@ class LoadAcousticSource(KeywordBase):
 
     @nid_ssid.setter
     def nid_ssid(self, value: int) -> None:
+        """Set the nid_ssid property."""
         self._cards[0].set_value("nid/ssid", value)
 
     @property
@@ -128,8 +131,9 @@ class LoadAcousticSource(KeywordBase):
 
     @srctyp.setter
     def srctyp(self, value: int) -> None:
+        """Set the srctyp property."""
         if value not in [1, 5, 11, 12, None]:
-            raise Exception("""srctyp must be `None` or one of {1,5,11,12}""")
+            raise Exception("""srctyp must be `None` or one of {1,5,11,12}.""")
         self._cards[0].set_value("srctyp", value)
 
     @property
@@ -140,6 +144,7 @@ class LoadAcousticSource(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -153,6 +158,7 @@ class LoadAcousticSource(KeywordBase):
 
     @data1.setter
     def data1(self, value: float) -> None:
+        """Set the data1 property."""
         self._cards[0].set_value("data1", value)
 
     @property
@@ -165,6 +171,7 @@ class LoadAcousticSource(KeywordBase):
 
     @data2.setter
     def data2(self, value: float) -> None:
+        """Set the data2 property."""
         self._cards[0].set_value("data2", value)
 
     @property
@@ -176,6 +183,7 @@ class LoadAcousticSource(KeywordBase):
 
     @data3.setter
     def data3(self, value: float) -> None:
+        """Set the data3 property."""
         self._cards[0].set_value("data3", value)
 
     @property
@@ -187,6 +195,7 @@ class LoadAcousticSource(KeywordBase):
 
     @data4.setter
     def data4(self, value: float) -> None:
+        """Set the data4 property."""
         self._cards[0].set_value("data4", value)
 
     @property
@@ -197,5 +206,6 @@ class LoadAcousticSource(KeywordBase):
 
     @data5.setter
     def data5(self, value: float) -> None:
+        """Set the data5 property."""
         self._cards[0].set_value("data5", value)
 

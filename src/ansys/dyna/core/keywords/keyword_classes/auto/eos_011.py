@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EOS keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Eos011(KeywordBase):
     subkeyword = "011"
 
     def __init__(self, **kwargs):
+        """Initialize the EOS keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -100,6 +102,7 @@ class Eos011(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -110,6 +113,7 @@ class Eos011(KeywordBase):
 
     @nld.setter
     def nld(self, value: int) -> None:
+        """Set the nld property."""
         self._cards[0].set_value("nld", value)
 
     @property
@@ -120,6 +124,7 @@ class Eos011(KeywordBase):
 
     @ncr.setter
     def ncr(self, value: int) -> None:
+        """Set the ncr property."""
         self._cards[0].set_value("ncr", value)
 
     @property
@@ -130,6 +135,7 @@ class Eos011(KeywordBase):
 
     @mu1.setter
     def mu1(self, value: float) -> None:
+        """Set the mu1 property."""
         self._cards[0].set_value("mu1", value)
 
     @property
@@ -140,6 +146,7 @@ class Eos011(KeywordBase):
 
     @mu2.setter
     def mu2(self, value: float) -> None:
+        """Set the mu2 property."""
         self._cards[0].set_value("mu2", value)
 
     @property
@@ -150,6 +157,7 @@ class Eos011(KeywordBase):
 
     @ie0.setter
     def ie0(self, value: float) -> None:
+        """Set the ie0 property."""
         self._cards[0].set_value("ie0", value)
 
     @property
@@ -160,5 +168,6 @@ class Eos011(KeywordBase):
 
     @ec0.setter
     def ec0(self, value: float) -> None:
+        """Set the ec0 property."""
         self._cards[0].set_value("ec0", value)
 

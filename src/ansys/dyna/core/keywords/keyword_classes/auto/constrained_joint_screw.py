@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedJointScrew(KeywordBase):
     subkeyword = "JOINT_SCREW"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -139,6 +141,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -149,6 +152,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -159,6 +163,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -169,6 +174,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[0].set_value("n4", value)
 
     @property
@@ -179,6 +185,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @n5.setter
     def n5(self, value: int) -> None:
+        """Set the n5 property."""
         self._cards[0].set_value("n5", value)
 
     @property
@@ -189,6 +196,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @n6.setter
     def n6(self, value: int) -> None:
+        """Set the n6 property."""
         self._cards[0].set_value("n6", value)
 
     @property
@@ -199,6 +207,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @rps.setter
     def rps(self, value: float) -> None:
+        """Set the rps property."""
         self._cards[0].set_value("rps", value)
 
     @property
@@ -209,6 +218,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[0].set_value("damp", value)
 
     @property
@@ -219,6 +229,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @parm.setter
     def parm(self, value: float) -> None:
+        """Set the parm property."""
         self._cards[1].set_value("parm", value)
 
     @property
@@ -229,6 +240,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -239,6 +251,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         self._cards[1].set_value("type", value)
 
     @property
@@ -249,5 +262,6 @@ class ConstrainedJointScrew(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[1].set_value("r1", value)
 

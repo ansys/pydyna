@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Case(KeywordBase):
     subkeyword = "CASE"
 
     def __init__(self, **kwargs):
+        """Initialize the CASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -132,6 +134,7 @@ class Case(KeywordBase):
 
     @caseid.setter
     def caseid(self, value: int) -> None:
+        """Set the caseid property."""
         self._cards[0].set_value("caseid", value)
 
     @property
@@ -143,6 +146,7 @@ class Case(KeywordBase):
 
     @jobid.setter
     def jobid(self, value: str) -> None:
+        """Set the jobid property."""
         self._cards[0].set_value("jobid", value)
 
     @property
@@ -153,6 +157,7 @@ class Case(KeywordBase):
 
     @commands.setter
     def commands(self, value: str) -> None:
+        """Set the commands property."""
         self._cards[1].set_value("commands", value)
 
     @property
@@ -163,6 +168,7 @@ class Case(KeywordBase):
 
     @scid1.setter
     def scid1(self, value: int) -> None:
+        """Set the scid1 property."""
         self._cards[2].set_value("scid1", value)
 
     @property
@@ -173,6 +179,7 @@ class Case(KeywordBase):
 
     @scid2.setter
     def scid2(self, value: int) -> None:
+        """Set the scid2 property."""
         self._cards[2].set_value("scid2", value)
 
     @property
@@ -183,6 +190,7 @@ class Case(KeywordBase):
 
     @scid3.setter
     def scid3(self, value: int) -> None:
+        """Set the scid3 property."""
         self._cards[2].set_value("scid3", value)
 
     @property
@@ -193,6 +201,7 @@ class Case(KeywordBase):
 
     @scid4.setter
     def scid4(self, value: int) -> None:
+        """Set the scid4 property."""
         self._cards[2].set_value("scid4", value)
 
     @property
@@ -203,6 +212,7 @@ class Case(KeywordBase):
 
     @scid5.setter
     def scid5(self, value: int) -> None:
+        """Set the scid5 property."""
         self._cards[2].set_value("scid5", value)
 
     @property
@@ -213,6 +223,7 @@ class Case(KeywordBase):
 
     @scid6.setter
     def scid6(self, value: int) -> None:
+        """Set the scid6 property."""
         self._cards[2].set_value("scid6", value)
 
     @property
@@ -223,6 +234,7 @@ class Case(KeywordBase):
 
     @scid7.setter
     def scid7(self, value: int) -> None:
+        """Set the scid7 property."""
         self._cards[2].set_value("scid7", value)
 
     @property
@@ -233,5 +245,6 @@ class Case(KeywordBase):
 
     @scid8.setter
     def scid8(self, value: int) -> None:
+        """Set the scid8 property."""
         self._cards[2].set_value("scid8", value)
 

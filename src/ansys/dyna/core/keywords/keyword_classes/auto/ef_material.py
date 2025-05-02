@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EF keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EfMaterial(KeywordBase):
     subkeyword = "MATERIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the EF keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -141,6 +143,7 @@ class EfMaterial(KeywordBase):
 
     @nmat.setter
     def nmat(self, value: int) -> None:
+        """Set the nmat property."""
         self._cards[0].set_value("nmat", value)
 
     @property
@@ -151,6 +154,7 @@ class EfMaterial(KeywordBase):
 
     @name.setter
     def name(self, value: str) -> None:
+        """Set the name property."""
         self._cards[0].set_value("name", value)
 
     @property
@@ -166,6 +170,7 @@ class EfMaterial(KeywordBase):
 
     @mtyp.setter
     def mtyp(self, value: int) -> None:
+        """Set the mtyp property."""
         self._cards[1].set_value("mtyp", value)
 
     @property
@@ -176,6 +181,7 @@ class EfMaterial(KeywordBase):
 
     @exe.setter
     def exe(self, value: float) -> None:
+        """Set the exe property."""
         self._cards[1].set_value("exe", value)
 
     @property
@@ -186,6 +192,7 @@ class EfMaterial(KeywordBase):
 
     @eye.setter
     def eye(self, value: float) -> None:
+        """Set the eye property."""
         self._cards[1].set_value("eye", value)
 
     @property
@@ -196,6 +203,7 @@ class EfMaterial(KeywordBase):
 
     @eze.setter
     def eze(self, value: float) -> None:
+        """Set the eze property."""
         self._cards[1].set_value("eze", value)
 
     @property
@@ -206,6 +214,7 @@ class EfMaterial(KeywordBase):
 
     @rhos.setter
     def rhos(self, value: float) -> None:
+        """Set the rhos property."""
         self._cards[2].set_value("rhos", value)
 
     @property
@@ -216,6 +225,7 @@ class EfMaterial(KeywordBase):
 
     @rhod.setter
     def rhod(self, value: float) -> None:
+        """Set the rhod property."""
         self._cards[2].set_value("rhod", value)
 
     @property
@@ -226,6 +236,7 @@ class EfMaterial(KeywordBase):
 
     @taus.setter
     def taus(self, value: float) -> None:
+        """Set the taus property."""
         self._cards[2].set_value("taus", value)
 
     @property
@@ -236,6 +247,7 @@ class EfMaterial(KeywordBase):
 
     @taud.setter
     def taud(self, value: float) -> None:
+        """Set the taud property."""
         self._cards[2].set_value("taud", value)
 
     @property
@@ -246,6 +258,7 @@ class EfMaterial(KeywordBase):
 
     @rdiffr.setter
     def rdiffr(self, value: float) -> None:
+        """Set the rdiffr property."""
         self._cards[2].set_value("rdiffr", value)
 
     @property
@@ -256,5 +269,6 @@ class EfMaterial(KeywordBase):
 
     @rdifft.setter
     def rdifft(self, value: float) -> None:
+        """Set the rdifft property."""
         self._cards[2].set_value("rdifft", value)
 

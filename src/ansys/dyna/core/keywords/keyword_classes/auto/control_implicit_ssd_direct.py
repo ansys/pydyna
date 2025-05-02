@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitSsdDirect(KeywordBase):
     subkeyword = "IMPLICIT_SSD_DIRECT"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,8 +105,9 @@ class ControlImplicitSsdDirect(KeywordBase):
 
     @issflg.setter
     def issflg(self, value: int) -> None:
+        """Set the issflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""issflg must be `None` or one of {0,1}""")
+            raise Exception("""issflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("issflg", value)
 
     @property
@@ -115,6 +118,7 @@ class ControlImplicitSsdDirect(KeywordBase):
 
     @fmin.setter
     def fmin(self, value: float) -> None:
+        """Set the fmin property."""
         self._cards[0].set_value("fmin", value)
 
     @property
@@ -125,6 +129,7 @@ class ControlImplicitSsdDirect(KeywordBase):
 
     @fmax.setter
     def fmax(self, value: float) -> None:
+        """Set the fmax property."""
         self._cards[0].set_value("fmax", value)
 
     @property
@@ -135,6 +140,7 @@ class ControlImplicitSsdDirect(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
+        """Set the nfreq property."""
         self._cards[0].set_value("nfreq", value)
 
     @property
@@ -145,6 +151,7 @@ class ControlImplicitSsdDirect(KeywordBase):
 
     @loss.setter
     def loss(self, value: float) -> None:
+        """Set the loss property."""
         self._cards[0].set_value("loss", value)
 
     @property
@@ -161,6 +168,7 @@ class ControlImplicitSsdDirect(KeywordBase):
 
     @fspace.setter
     def fspace(self, value: float) -> None:
+        """Set the fspace property."""
         self._cards[0].set_value("fspace", value)
 
     @property
@@ -171,5 +179,6 @@ class ControlImplicitSsdDirect(KeywordBase):
 
     @fractn.setter
     def fractn(self, value: int) -> None:
+        """Set the fractn property."""
         self._cards[0].set_value("fractn", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTERFACE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceCompensation3DRefineRigid(KeywordBase):
     subkeyword = "COMPENSATION_3D_REFINE_RIGID"
 
     def __init__(self, **kwargs):
+        """Initialize the INTERFACE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,6 +67,7 @@ class InterfaceCompensation3DRefineRigid(KeywordBase):
 
     @filename1.setter
     def filename1(self, value: str) -> None:
+        """Set the filename1 property."""
         self._cards[0].set_value("filename1", value)
 
     @property
@@ -75,5 +78,6 @@ class InterfaceCompensation3DRefineRigid(KeywordBase):
 
     @filename2.setter
     def filename2(self, value: str) -> None:
+        """Set the filename2 property."""
         self._cards[1].set_value("filename2", value)
 

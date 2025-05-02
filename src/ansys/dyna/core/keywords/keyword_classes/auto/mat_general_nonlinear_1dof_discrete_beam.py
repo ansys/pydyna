@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -168,6 +170,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -178,6 +181,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -188,6 +192,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -202,6 +207,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @iunld.setter
     def iunld(self, value: int) -> None:
+        """Set the iunld property."""
         self._cards[0].set_value("iunld", value)
 
     @property
@@ -212,6 +218,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[0].set_value("offset", value)
 
     @property
@@ -222,6 +229,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @dampf.setter
     def dampf(self, value: float) -> None:
+        """Set the dampf property."""
         self._cards[0].set_value("dampf", value)
 
     @property
@@ -232,6 +240,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[1].set_value("lcidt", value)
 
     @property
@@ -242,6 +251,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @lcidtu.setter
     def lcidtu(self, value: int) -> None:
+        """Set the lcidtu property."""
         self._cards[1].set_value("lcidtu", value)
 
     @property
@@ -252,6 +262,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @lcidtd.setter
     def lcidtd(self, value: int) -> None:
+        """Set the lcidtd property."""
         self._cards[1].set_value("lcidtd", value)
 
     @property
@@ -262,6 +273,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @lcidte.setter
     def lcidte(self, value: int) -> None:
+        """Set the lcidte property."""
         self._cards[1].set_value("lcidte", value)
 
     @property
@@ -272,6 +284,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @utfail.setter
     def utfail(self, value: float) -> None:
+        """Set the utfail property."""
         self._cards[2].set_value("utfail", value)
 
     @property
@@ -282,6 +295,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @ucfail.setter
     def ucfail(self, value: float) -> None:
+        """Set the ucfail property."""
         self._cards[2].set_value("ucfail", value)
 
     @property
@@ -292,6 +306,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @iu.setter
     def iu(self, value: float) -> None:
+        """Set the iu property."""
         self._cards[2].set_value("iu", value)
 
     @property
@@ -302,5 +317,6 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

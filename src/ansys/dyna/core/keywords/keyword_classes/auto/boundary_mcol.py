@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryMcol(KeywordBase):
     subkeyword = "MCOL"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -104,6 +106,7 @@ class BoundaryMcol(KeywordBase):
 
     @nmcol.setter
     def nmcol(self, value: int) -> None:
+        """Set the nmcol property."""
         self._cards[0].set_value("nmcol", value)
 
     @property
@@ -114,6 +117,7 @@ class BoundaryMcol(KeywordBase):
 
     @mxstep.setter
     def mxstep(self, value: int) -> None:
+        """Set the mxstep property."""
         self._cards[0].set_value("mxstep", value)
 
     @property
@@ -124,6 +128,7 @@ class BoundaryMcol(KeywordBase):
 
     @endtmcol.setter
     def endtmcol(self, value: float) -> None:
+        """Set the endtmcol property."""
         self._cards[0].set_value("endtmcol", value)
 
     @property
@@ -135,6 +140,7 @@ class BoundaryMcol(KeywordBase):
 
     @tsubc.setter
     def tsubc(self, value: float) -> None:
+        """Set the tsubc property."""
         self._cards[0].set_value("tsubc", value)
 
     @property
@@ -145,6 +151,7 @@ class BoundaryMcol(KeywordBase):
 
     @prtmcol.setter
     def prtmcol(self, value: float) -> None:
+        """Set the prtmcol property."""
         self._cards[0].set_value("prtmcol", value)
 
     @property
@@ -155,6 +162,7 @@ class BoundaryMcol(KeywordBase):
 
     @rbmcol.setter
     def rbmcol(self, value: int) -> None:
+        """Set the rbmcol property."""
         self._cards[1].set_value("rbmcol", value)
 
     @property
@@ -165,5 +173,6 @@ class BoundaryMcol(KeywordBase):
 
     @mcolfile.setter
     def mcolfile(self, value: str) -> None:
+        """Set the mcolfile property."""
         self._cards[1].set_value("mcolfile", value)
 

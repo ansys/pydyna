@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatTransverselyAnisotropicElasticPlastic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -126,6 +128,7 @@ class MatTransverselyAnisotropicElasticPlastic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -136,6 +139,7 @@ class MatTransverselyAnisotropicElasticPlastic(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -146,6 +150,7 @@ class MatTransverselyAnisotropicElasticPlastic(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -156,6 +161,7 @@ class MatTransverselyAnisotropicElasticPlastic(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -166,6 +172,7 @@ class MatTransverselyAnisotropicElasticPlastic(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -176,6 +183,7 @@ class MatTransverselyAnisotropicElasticPlastic(KeywordBase):
 
     @etan.setter
     def etan(self, value: float) -> None:
+        """Set the etan property."""
         self._cards[0].set_value("etan", value)
 
     @property
@@ -186,6 +194,7 @@ class MatTransverselyAnisotropicElasticPlastic(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[0].set_value("r", value)
 
     @property
@@ -196,6 +205,7 @@ class MatTransverselyAnisotropicElasticPlastic(KeywordBase):
 
     @hlcid.setter
     def hlcid(self, value: int) -> None:
+        """Set the hlcid property."""
         self._cards[0].set_value("hlcid", value)
 
     @property
@@ -206,5 +216,6 @@ class MatTransverselyAnisotropicElasticPlastic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

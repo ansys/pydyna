@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -237,6 +239,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @con_id.setter
     def con_id(self, value: int) -> None:
+        """Set the con_id property."""
         self._cards[0].set_value("con_id", value)
 
     @property
@@ -247,6 +250,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @proprul.setter
     def proprul(self, value: int) -> None:
+        """Set the proprul property."""
         self._cards[0].set_value("proprul", value)
 
     @property
@@ -260,8 +264,9 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @areaeq.setter
     def areaeq(self, value: int) -> None:
+        """Set the areaeq property."""
         if value not in [0, 1, -1, None]:
-            raise Exception("""areaeq must be `None` or one of {0,1,-1}""")
+            raise Exception("""areaeq must be `None` or one of {0,1,-1}.""")
         self._cards[0].set_value("areaeq", value)
 
     @property
@@ -276,8 +281,9 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @dg_typ.setter
     def dg_typ(self, value: int) -> None:
+        """Set the dg_typ property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""dg_typ must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""dg_typ must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("dg_typ", value)
 
     @property
@@ -290,8 +296,9 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @moarfl.setter
     def moarfl(self, value: int) -> None:
+        """Set the moarfl property."""
         if value not in [0, 1, None]:
-            raise Exception("""moarfl must be `None` or one of {0,1}""")
+            raise Exception("""moarfl must be `None` or one of {0,1}.""")
         self._cards[0].set_value("moarfl", value)
 
     @property
@@ -302,6 +309,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[1].set_value("mid", value)
 
     @property
@@ -312,6 +320,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @sgiy.setter
     def sgiy(self, value: float) -> None:
+        """Set the sgiy property."""
         self._cards[1].set_value("sgiy", value)
 
     @property
@@ -322,6 +331,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @etan.setter
     def etan(self, value: float) -> None:
+        """Set the etan property."""
         self._cards[1].set_value("etan", value)
 
     @property
@@ -332,6 +342,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @dgpr.setter
     def dgpr(self, value: float) -> None:
+        """Set the dgpr property."""
         self._cards[1].set_value("dgpr", value)
 
     @property
@@ -342,6 +353,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @rank.setter
     def rank(self, value: float) -> None:
+        """Set the rank property."""
         self._cards[1].set_value("rank", value)
 
     @property
@@ -352,6 +364,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @sn.setter
     def sn(self, value: float) -> None:
+        """Set the sn property."""
         self._cards[1].set_value("sn", value)
 
     @property
@@ -362,6 +375,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @sb.setter
     def sb(self, value: float) -> None:
+        """Set the sb property."""
         self._cards[1].set_value("sb", value)
 
     @property
@@ -372,6 +386,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @ss.setter
     def ss(self, value: float) -> None:
+        """Set the ss property."""
         self._cards[1].set_value("ss", value)
 
     @property
@@ -382,6 +397,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @exsn.setter
     def exsn(self, value: float) -> None:
+        """Set the exsn property."""
         self._cards[2].set_value("exsn", value)
 
     @property
@@ -392,6 +408,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @exsb.setter
     def exsb(self, value: float) -> None:
+        """Set the exsb property."""
         self._cards[2].set_value("exsb", value)
 
     @property
@@ -402,6 +419,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @exss.setter
     def exss(self, value: float) -> None:
+        """Set the exss property."""
         self._cards[2].set_value("exss", value)
 
     @property
@@ -412,6 +430,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @lcsn.setter
     def lcsn(self, value: int) -> None:
+        """Set the lcsn property."""
         self._cards[2].set_value("lcsn", value)
 
     @property
@@ -422,6 +441,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @lcsb.setter
     def lcsb(self, value: int) -> None:
+        """Set the lcsb property."""
         self._cards[2].set_value("lcsb", value)
 
     @property
@@ -432,6 +452,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: int) -> None:
+        """Set the lcss property."""
         self._cards[2].set_value("lcss", value)
 
     @property
@@ -442,6 +463,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @gfad.setter
     def gfad(self, value: int) -> None:
+        """Set the gfad property."""
         self._cards[2].set_value("gfad", value)
 
     @property
@@ -452,6 +474,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @sclmrr.setter
     def sclmrr(self, value: float) -> None:
+        """Set the sclmrr property."""
         self._cards[2].set_value("sclmrr", value)
 
     @property
@@ -462,5 +485,6 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

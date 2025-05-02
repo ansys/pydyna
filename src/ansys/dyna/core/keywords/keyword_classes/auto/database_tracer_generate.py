@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseTracerGenerate(KeywordBase):
     subkeyword = "TRACER_GENERATE"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -134,6 +136,7 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -146,6 +149,7 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @valow.setter
     def valow(self, value: float) -> None:
+        """Set the valow property."""
         self._cards[0].set_value("valow", value)
 
     @property
@@ -158,6 +162,7 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @valup.setter
     def valup(self, value: float) -> None:
+        """Set the valup property."""
         self._cards[0].set_value("valup", value)
 
     @property
@@ -168,6 +173,7 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @valtype1.setter
     def valtype1(self, value: int) -> None:
+        """Set the valtype1 property."""
         self._cards[0].set_value("valtype1", value)
 
     @property
@@ -178,6 +184,7 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @set.setter
     def set(self, value: int) -> None:
+        """Set the set property."""
         self._cards[0].set_value("set", value)
 
     @property
@@ -191,8 +198,9 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @setype.setter
     def setype(self, value: int) -> None:
+        """Set the setype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""setype must be `None` or one of {0,1,2}""")
+            raise Exception("""setype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("setype", value)
 
     @property
@@ -203,6 +211,7 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @mmgset.setter
     def mmgset(self, value: int) -> None:
+        """Set the mmgset property."""
         self._cards[0].set_value("mmgset", value)
 
     @property
@@ -213,6 +222,7 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @updt.setter
     def updt(self, value: float) -> None:
+        """Set the updt property."""
         self._cards[0].set_value("updt", value)
 
     @property
@@ -235,6 +245,7 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @varloc.setter
     def varloc(self, value: int) -> None:
+        """Set the varloc property."""
         self._cards[1].set_value("varloc", value)
 
     @property
@@ -275,6 +286,7 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @valtype2.setter
     def valtype2(self, value: int) -> None:
+        """Set the valtype2 property."""
         self._cards[1].set_value("valtype2", value)
 
     @property
@@ -285,5 +297,6 @@ class DatabaseTracerGenerate(KeywordBase):
 
     @mmgset.setter
     def mmgset(self, value: int) -> None:
+        """Set the mmgset property."""
         self._cards[1].set_value("mmgset", value)
 

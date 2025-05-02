@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingMaxid(KeywordBase):
     subkeyword = "FORMING_MAXID"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class ControlFormingMaxid(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -92,6 +95,7 @@ class ControlFormingMaxid(KeywordBase):
 
     @maxidn.setter
     def maxidn(self, value: int) -> None:
+        """Set the maxidn property."""
         self._cards[0].set_value("maxidn", value)
 
     @property
@@ -102,6 +106,7 @@ class ControlFormingMaxid(KeywordBase):
 
     @maxide.setter
     def maxide(self, value: int) -> None:
+        """Set the maxide property."""
         self._cards[0].set_value("maxide", value)
 
     @property
@@ -112,5 +117,6 @@ class ControlFormingMaxid(KeywordBase):
 
     @i2dynain.setter
     def i2dynain(self, value: int) -> None:
+        """Set the i2dynain property."""
         self._cards[0].set_value("i2dynain", value)
 

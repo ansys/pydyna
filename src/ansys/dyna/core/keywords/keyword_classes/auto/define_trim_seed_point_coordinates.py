@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -125,6 +127,7 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
 
     @nseed.setter
     def nseed(self, value: int) -> None:
+        """Set the nseed property."""
         self._cards[0].set_value("nseed", value)
 
     @property
@@ -135,6 +138,7 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[0].set_value("x1", value)
 
     @property
@@ -145,6 +149,7 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[0].set_value("y1", value)
 
     @property
@@ -155,6 +160,7 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[0].set_value("z1", value)
 
     @property
@@ -165,6 +171,7 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[0].set_value("x2", value)
 
     @property
@@ -175,6 +182,7 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[0].set_value("y2", value)
 
     @property
@@ -185,6 +193,7 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[0].set_value("z2", value)
 
     @property
@@ -195,5 +204,6 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

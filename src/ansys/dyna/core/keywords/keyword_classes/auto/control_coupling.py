@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlCoupling(KeywordBase):
     subkeyword = "COUPLING"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -111,6 +113,7 @@ class ControlCoupling(KeywordBase):
 
     @unleng.setter
     def unleng(self, value: float) -> None:
+        """Set the unleng property."""
         self._cards[0].set_value("unleng", value)
 
     @property
@@ -121,6 +124,7 @@ class ControlCoupling(KeywordBase):
 
     @untime.setter
     def untime(self, value: float) -> None:
+        """Set the untime property."""
         self._cards[0].set_value("untime", value)
 
     @property
@@ -131,6 +135,7 @@ class ControlCoupling(KeywordBase):
 
     @unforc.setter
     def unforc(self, value: float) -> None:
+        """Set the unforc property."""
         self._cards[0].set_value("unforc", value)
 
     @property
@@ -141,6 +146,7 @@ class ControlCoupling(KeywordBase):
 
     @timidl.setter
     def timidl(self, value: float) -> None:
+        """Set the timidl property."""
         self._cards[0].set_value("timidl", value)
 
     @property
@@ -153,8 +159,9 @@ class ControlCoupling(KeywordBase):
 
     @flipx.setter
     def flipx(self, value: int) -> None:
+        """Set the flipx property."""
         if value not in [0, 1, None]:
-            raise Exception("""flipx must be `None` or one of {0,1}""")
+            raise Exception("""flipx must be `None` or one of {0,1}.""")
         self._cards[0].set_value("flipx", value)
 
     @property
@@ -167,8 +174,9 @@ class ControlCoupling(KeywordBase):
 
     @flipy.setter
     def flipy(self, value: int) -> None:
+        """Set the flipy property."""
         if value not in [0, 1, None]:
-            raise Exception("""flipy must be `None` or one of {0,1}""")
+            raise Exception("""flipy must be `None` or one of {0,1}.""")
         self._cards[0].set_value("flipy", value)
 
     @property
@@ -181,8 +189,9 @@ class ControlCoupling(KeywordBase):
 
     @flipz.setter
     def flipz(self, value: int) -> None:
+        """Set the flipz property."""
         if value not in [0, 1, None]:
-            raise Exception("""flipz must be `None` or one of {0,1}""")
+            raise Exception("""flipz must be `None` or one of {0,1}.""")
         self._cards[0].set_value("flipz", value)
 
     @property
@@ -194,5 +203,6 @@ class ControlCoupling(KeywordBase):
 
     @subcyl.setter
     def subcyl(self, value: int) -> None:
+        """Set the subcyl property."""
         self._cards[0].set_value("subcyl", value)
 

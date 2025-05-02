@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialPwpNodalData(KeywordBase):
     subkeyword = "PWP_NODAL_DATA"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class InitialPwpNodalData(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -119,6 +122,7 @@ class InitialPwpNodalData(KeywordBase):
 
     @nhisv.setter
     def nhisv(self, value: int) -> None:
+        """Set the nhisv property."""
         self._cards[0].set_value("nhisv", value)
 
     @property
@@ -129,6 +133,7 @@ class InitialPwpNodalData(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -139,6 +144,7 @@ class InitialPwpNodalData(KeywordBase):
 
     @hisv1.setter
     def hisv1(self, value: float) -> None:
+        """Set the hisv1 property."""
         self._cards[1].set_value("hisv1", value)
 
     @property
@@ -149,6 +155,7 @@ class InitialPwpNodalData(KeywordBase):
 
     @hisv2.setter
     def hisv2(self, value: float) -> None:
+        """Set the hisv2 property."""
         self._cards[1].set_value("hisv2", value)
 
     @property
@@ -159,6 +166,7 @@ class InitialPwpNodalData(KeywordBase):
 
     @hisv3.setter
     def hisv3(self, value: float) -> None:
+        """Set the hisv3 property."""
         self._cards[1].set_value("hisv3", value)
 
     @property
@@ -169,6 +177,7 @@ class InitialPwpNodalData(KeywordBase):
 
     @hisv4.setter
     def hisv4(self, value: float) -> None:
+        """Set the hisv4 property."""
         self._cards[1].set_value("hisv4", value)
 
     @property
@@ -179,5 +188,6 @@ class InitialPwpNodalData(KeywordBase):
 
     @hisv5.setter
     def hisv5(self, value: float) -> None:
+        """Set the hisv5 property."""
         self._cards[1].set_value("hisv5", value)
 

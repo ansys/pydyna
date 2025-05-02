@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ALE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleMeshInterface(KeywordBase):
     subkeyword = "MESH_INTERFACE"
 
     def __init__(self, **kwargs):
+        """Initialize the ALE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -99,6 +101,7 @@ class AleMeshInterface(KeywordBase):
 
     @mmgset.setter
     def mmgset(self, value: int) -> None:
+        """Set the mmgset property."""
         self._cards[0].set_value("mmgset", value)
 
     @property
@@ -115,6 +118,7 @@ class AleMeshInterface(KeywordBase):
 
     @nowrt.setter
     def nowrt(self, value: int) -> None:
+        """Set the nowrt property."""
         self._cards[0].set_value("nowrt", value)
 
     @property
@@ -125,6 +129,7 @@ class AleMeshInterface(KeywordBase):
 
     @volrat.setter
     def volrat(self, value: float) -> None:
+        """Set the volrat property."""
         self._cards[0].set_value("volrat", value)
 
     @property
@@ -137,8 +142,9 @@ class AleMeshInterface(KeywordBase):
 
     @interp.setter
     def interp(self, value: int) -> None:
+        """Set the interp property."""
         if value not in [0, 1, None]:
-            raise Exception("""interp must be `None` or one of {0,1}""")
+            raise Exception("""interp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("interp", value)
 
     @property
@@ -149,6 +155,7 @@ class AleMeshInterface(KeywordBase):
 
     @edgmin.setter
     def edgmin(self, value: float) -> None:
+        """Set the edgmin property."""
         self._cards[1].set_value("edgmin", value)
 
     @property
@@ -159,5 +166,6 @@ class AleMeshInterface(KeywordBase):
 
     @edgmax.setter
     def edgmax(self, value: float) -> None:
+        """Set the edgmax property."""
         self._cards[1].set_value("edgmax", value)
 

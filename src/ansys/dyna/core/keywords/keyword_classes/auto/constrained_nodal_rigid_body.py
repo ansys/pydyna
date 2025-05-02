@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
@@ -36,6 +37,7 @@ class ConstrainedNodalRigidBody(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -114,12 +116,12 @@ class ConstrainedNodalRigidBody(KeywordBase):
 
     @property
     def constrained_nodal_rigid_bodies(self):
-        '''Gets the full table of constrained_nodal_rigid_bodies'''
+        """Gets the full table of constrained_nodal_rigid_bodies."""
         return self._cards[0].table
 
     @constrained_nodal_rigid_bodies.setter
     def constrained_nodal_rigid_bodies(self, df):
-        '''sets constrained_nodal_rigid_bodies from the dataframe df'''
+        """sets constrained_nodal_rigid_bodies from the dataframe df."""
         self._cards[0].table = df
 
     @property
@@ -130,5 +132,6 @@ class ConstrainedNodalRigidBody(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

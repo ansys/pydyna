@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -365,6 +367,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -375,6 +378,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -385,6 +389,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -395,6 +400,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -405,6 +411,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -415,6 +422,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 
     @property
@@ -426,6 +434,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: int) -> None:
+        """Set the lcss property."""
         self._cards[0].set_value("lcss", value)
 
     @property
@@ -436,6 +445,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @fail.setter
     def fail(self, value: float) -> None:
+        """Set the fail property."""
         self._cards[0].set_value("fail", value)
 
     @property
@@ -446,6 +456,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @qr1.setter
     def qr1(self, value: float) -> None:
+        """Set the qr1 property."""
         self._cards[1].set_value("qr1", value)
 
     @property
@@ -456,6 +467,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @cr1.setter
     def cr1(self, value: float) -> None:
+        """Set the cr1 property."""
         self._cards[1].set_value("cr1", value)
 
     @property
@@ -466,6 +478,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @qr2.setter
     def qr2(self, value: float) -> None:
+        """Set the qr2 property."""
         self._cards[1].set_value("qr2", value)
 
     @property
@@ -476,6 +489,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @cr2.setter
     def cr2(self, value: float) -> None:
+        """Set the cr2 property."""
         self._cards[1].set_value("cr2", value)
 
     @property
@@ -486,6 +500,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @qx1.setter
     def qx1(self, value: float) -> None:
+        """Set the qx1 property."""
         self._cards[1].set_value("qx1", value)
 
     @property
@@ -496,6 +511,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @cx1.setter
     def cx1(self, value: float) -> None:
+        """Set the cx1 property."""
         self._cards[1].set_value("cx1", value)
 
     @property
@@ -506,6 +522,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @qx2.setter
     def qx2(self, value: float) -> None:
+        """Set the qx2 property."""
         self._cards[1].set_value("qx2", value)
 
     @property
@@ -516,6 +533,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @cx2.setter
     def cx2(self, value: float) -> None:
+        """Set the cx2 property."""
         self._cards[1].set_value("cx2", value)
 
     @property
@@ -526,6 +544,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[2].set_value("c", value)
 
     @property
@@ -536,6 +555,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[2].set_value("p", value)
 
     @property
@@ -547,6 +567,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @lce.setter
     def lce(self, value: float) -> None:
+        """Set the lce property."""
         self._cards[2].set_value("lce", value)
 
     @property
@@ -558,6 +579,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @lcpr.setter
     def lcpr(self, value: float) -> None:
+        """Set the lcpr property."""
         self._cards[2].set_value("lcpr", value)
 
     @property
@@ -569,6 +591,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @lcsigy.setter
     def lcsigy(self, value: float) -> None:
+        """Set the lcsigy property."""
         self._cards[2].set_value("lcsigy", value)
 
     @property
@@ -579,6 +602,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @lcr.setter
     def lcr(self, value: float) -> None:
+        """Set the lcr property."""
         self._cards[2].set_value("lcr", value)
 
     @property
@@ -589,6 +613,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @lcx.setter
     def lcx(self, value: float) -> None:
+        """Set the lcx property."""
         self._cards[2].set_value("lcx", value)
 
     @property
@@ -600,6 +625,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @lcalph.setter
     def lcalph(self, value: float) -> None:
+        """Set the lcalph property."""
         self._cards[2].set_value("lcalph", value)
 
     @property
@@ -610,6 +636,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @lcc.setter
     def lcc(self, value: int) -> None:
+        """Set the lcc property."""
         self._cards[3].set_value("lcc", value)
 
     @property
@@ -620,6 +647,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @lcp.setter
     def lcp(self, value: int) -> None:
+        """Set the lcp property."""
         self._cards[3].set_value("lcp", value)
 
     @property
@@ -630,6 +658,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @tref.setter
     def tref(self, value: float) -> None:
+        """Set the tref property."""
         self._cards[3].set_value("tref", value)
 
     @property
@@ -640,6 +669,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @lcfail.setter
     def lcfail(self, value: float) -> None:
+        """Set the lcfail property."""
         self._cards[3].set_value("lcfail", value)
 
     @property
@@ -650,6 +680,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @nuhis.setter
     def nuhis(self, value: int) -> None:
+        """Set the nuhis property."""
         self._cards[3].set_value("nuhis", value)
 
     @property
@@ -660,6 +691,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @t1phas.setter
     def t1phas(self, value: float) -> None:
+        """Set the t1phas property."""
         self._cards[3].set_value("t1phas", value)
 
     @property
@@ -670,6 +702,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @t2phas.setter
     def t2phas(self, value: float) -> None:
+        """Set the t2phas property."""
         self._cards[3].set_value("t2phas", value)
 
     @property
@@ -680,6 +713,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[3].set_value("tol", value)
 
     @property
@@ -690,6 +724,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @fushi1.setter
     def fushi1(self, value: int) -> None:
+        """Set the fushi1 property."""
         self._cards[4].set_value("fushi1", value)
 
     @property
@@ -700,6 +735,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @fushi2.setter
     def fushi2(self, value: int) -> None:
+        """Set the fushi2 property."""
         self._cards[4].set_value("fushi2", value)
 
     @property
@@ -710,6 +746,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @fushi3.setter
     def fushi3(self, value: int) -> None:
+        """Set the fushi3 property."""
         self._cards[4].set_value("fushi3", value)
 
     @property
@@ -720,6 +757,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @fushi4.setter
     def fushi4(self, value: int) -> None:
+        """Set the fushi4 property."""
         self._cards[4].set_value("fushi4", value)
 
     @property
@@ -730,6 +768,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @fushi5.setter
     def fushi5(self, value: int) -> None:
+        """Set the fushi5 property."""
         self._cards[4].set_value("fushi5", value)
 
     @property
@@ -740,6 +779,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @fushi6.setter
     def fushi6(self, value: int) -> None:
+        """Set the fushi6 property."""
         self._cards[4].set_value("fushi6", value)
 
     @property
@@ -750,6 +790,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @fushi7.setter
     def fushi7(self, value: int) -> None:
+        """Set the fushi7 property."""
         self._cards[4].set_value("fushi7", value)
 
     @property
@@ -760,6 +801,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @fushi8.setter
     def fushi8(self, value: int) -> None:
+        """Set the fushi8 property."""
         self._cards[4].set_value("fushi8", value)
 
     @property
@@ -770,5 +812,6 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadRemovePart(KeywordBase):
     subkeyword = "REMOVE_PART"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -75,6 +77,7 @@ class LoadRemovePart(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -85,6 +88,7 @@ class LoadRemovePart(KeywordBase):
 
     @time0.setter
     def time0(self, value: float) -> None:
+        """Set the time0 property."""
         self._cards[0].set_value("time0", value)
 
     @property
@@ -95,6 +99,7 @@ class LoadRemovePart(KeywordBase):
 
     @time1.setter
     def time1(self, value: float) -> None:
+        """Set the time1 property."""
         self._cards[0].set_value("time1", value)
 
     @property
@@ -105,5 +110,6 @@ class LoadRemovePart(KeywordBase):
 
     @stgr.setter
     def stgr(self, value: int) -> None:
+        """Set the stgr property."""
         self._cards[0].set_value("stgr", value)
 

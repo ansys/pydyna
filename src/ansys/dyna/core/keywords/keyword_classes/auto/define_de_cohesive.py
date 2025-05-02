@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeCohesive(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -121,6 +123,7 @@ class DefineDeCohesive(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -134,8 +137,9 @@ class DefineDeCohesive(KeywordBase):
 
     @styp.setter
     def styp(self, value: int) -> None:
+        """Set the styp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""styp must be `None` or one of {0,1,2}""")
+            raise Exception("""styp must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("styp", value)
 
     @property
@@ -146,6 +150,7 @@ class DefineDeCohesive(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[1].set_value("gamma", value)
 
     @property
@@ -156,6 +161,7 @@ class DefineDeCohesive(KeywordBase):
 
     @vol.setter
     def vol(self, value: float) -> None:
+        """Set the vol property."""
         self._cards[1].set_value("vol", value)
 
     @property
@@ -166,6 +172,7 @@ class DefineDeCohesive(KeywordBase):
 
     @ang.setter
     def ang(self, value: float) -> None:
+        """Set the ang property."""
         self._cards[1].set_value("ang", value)
 
     @property
@@ -178,6 +185,7 @@ class DefineDeCohesive(KeywordBase):
 
     @gap.setter
     def gap(self, value: float) -> None:
+        """Set the gap property."""
         self._cards[1].set_value("gap", value)
 
     @property
@@ -188,5 +196,6 @@ class DefineDeCohesive(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

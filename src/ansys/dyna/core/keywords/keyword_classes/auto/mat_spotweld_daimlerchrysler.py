@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -238,6 +240,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -248,6 +251,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -259,6 +263,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -269,6 +274,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -279,6 +285,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -289,6 +296,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @tfail.setter
     def tfail(self, value: float) -> None:
+        """Set the tfail property."""
         self._cards[0].set_value("tfail", value)
 
     @property
@@ -299,6 +307,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @efail.setter
     def efail(self, value: float) -> None:
+        """Set the efail property."""
         self._cards[1].set_value("efail", value)
 
     @property
@@ -309,6 +318,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @nf.setter
     def nf(self, value: float) -> None:
+        """Set the nf property."""
         self._cards[1].set_value("nf", value)
 
     @property
@@ -319,6 +329,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @rs.setter
     def rs(self, value: float) -> None:
+        """Set the rs property."""
         self._cards[2].set_value("rs", value)
 
     @property
@@ -331,6 +342,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @asff.setter
     def asff(self, value: int) -> None:
+        """Set the asff property."""
         self._cards[2].set_value("asff", value)
 
     @property
@@ -341,6 +353,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @true_t.setter
     def true_t(self, value: float) -> None:
+        """Set the true_t property."""
         self._cards[2].set_value("true_t", value)
 
     @property
@@ -351,6 +364,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @con_id.setter
     def con_id(self, value: int) -> None:
+        """Set the con_id property."""
         self._cards[2].set_value("con_id", value)
 
     @property
@@ -361,6 +375,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @rfiltf.setter
     def rfiltf(self, value: float) -> None:
+        """Set the rfiltf property."""
         self._cards[2].set_value("rfiltf", value)
 
     @property
@@ -371,6 +386,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @jtol.setter
     def jtol(self, value: float) -> None:
+        """Set the jtol property."""
         self._cards[2].set_value("jtol", value)
 
     @property
@@ -381,5 +397,6 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

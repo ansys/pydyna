@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlDiscreteElement(KeywordBase):
     subkeyword = "DISCRETE_ELEMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -316,6 +318,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @ndamp.setter
     def ndamp(self, value: float) -> None:
+        """Set the ndamp property."""
         self._cards[0].set_value("ndamp", value)
 
     @property
@@ -326,6 +329,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @tdamp.setter
     def tdamp(self, value: float) -> None:
+        """Set the tdamp property."""
         self._cards[0].set_value("tdamp", value)
 
     @property
@@ -338,6 +342,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @frics.setter
     def frics(self, value: float) -> None:
+        """Set the frics property."""
         self._cards[0].set_value("frics", value)
 
     @property
@@ -348,6 +353,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @fricr.setter
     def fricr(self, value: float) -> None:
+        """Set the fricr property."""
         self._cards[0].set_value("fricr", value)
 
     @property
@@ -358,6 +364,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @normk.setter
     def normk(self, value: float) -> None:
+        """Set the normk property."""
         self._cards[0].set_value("normk", value)
 
     @property
@@ -368,6 +375,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @sheark.setter
     def sheark(self, value: float) -> None:
+        """Set the sheark property."""
         self._cards[0].set_value("sheark", value)
 
     @property
@@ -380,6 +388,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @cap.setter
     def cap(self, value: int) -> None:
+        """Set the cap property."""
         self._cards[0].set_value("cap", value)
 
     @property
@@ -390,6 +399,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @vtk.setter
     def vtk(self, value: int) -> None:
+        """Set the vtk property."""
         self._cards[0].set_value("vtk", value)
 
     @property
@@ -400,6 +410,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[1].set_value("gamma", value)
 
     @property
@@ -410,6 +421,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @vol.setter
     def vol(self, value: float) -> None:
+        """Set the vol property."""
         self._cards[1].set_value("vol", value)
 
     @property
@@ -420,6 +432,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @ang.setter
     def ang(self, value: float) -> None:
+        """Set the ang property."""
         self._cards[1].set_value("ang", value)
 
     @property
@@ -432,6 +445,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @gap.setter
     def gap(self, value: float) -> None:
+        """Set the gap property."""
         self._cards[1].set_value("gap", value)
 
     @property
@@ -444,6 +458,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[1].set_value("ignore", value)
 
     @property
@@ -455,6 +470,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @nbuf.setter
     def nbuf(self, value: int) -> None:
+        """Set the nbuf property."""
         self._cards[1].set_value("nbuf", value)
 
     @property
@@ -467,8 +483,9 @@ class ControlDiscreteElement(KeywordBase):
 
     @parallel.setter
     def parallel(self, value: int) -> None:
+        """Set the parallel property."""
         if value not in [0, 1, None]:
-            raise Exception("""parallel must be `None` or one of {0,1}""")
+            raise Exception("""parallel must be `None` or one of {0,1}.""")
         self._cards[1].set_value("parallel", value)
 
     @property
@@ -479,6 +496,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @lnorm.setter
     def lnorm(self, value: int) -> None:
+        """Set the lnorm property."""
         self._cards[2].set_value("lnorm", value)
 
     @property
@@ -489,6 +507,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @lshear.setter
     def lshear(self, value: int) -> None:
+        """Set the lshear property."""
         self._cards[2].set_value("lshear", value)
 
     @property
@@ -499,6 +518,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @fricd.setter
     def fricd(self, value: float) -> None:
+        """Set the fricd property."""
         self._cards[2].set_value("fricd", value)
 
     @property
@@ -509,6 +529,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[2].set_value("dc", value)
 
     @property
@@ -520,6 +541,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @ncrb.setter
     def ncrb(self, value: int) -> None:
+        """Set the ncrb property."""
         self._cards[2].set_value("ncrb", value)
 
     @property
@@ -530,6 +552,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[2].set_value("bt", value)
 
     @property
@@ -540,6 +563,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[2].set_value("dt", value)
 
     @property
@@ -550,6 +574,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[3].set_value("cp", value)
 
     @property
@@ -560,6 +585,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @tc.setter
     def tc(self, value: float) -> None:
+        """Set the tc property."""
         self._cards[3].set_value("tc", value)
 
     @property
@@ -570,6 +596,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @tfac.setter
     def tfac(self, value: float) -> None:
+        """Set the tfac property."""
         self._cards[3].set_value("tfac", value)
 
     @property
@@ -582,6 +609,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @idesoft.setter
     def idesoft(self, value: int) -> None:
+        """Set the idesoft property."""
         self._cards[4].set_value("idesoft", value)
 
     @property
@@ -592,6 +620,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @sofscl.setter
     def sofscl(self, value: float) -> None:
+        """Set the sofscl property."""
         self._cards[4].set_value("sofscl", value)
 
     @property
@@ -605,6 +634,7 @@ class ControlDiscreteElement(KeywordBase):
 
     @iskip.setter
     def iskip(self, value: int) -> None:
+        """Set the iskip property."""
         self._cards[4].set_value("iskip", value)
 
     @property
@@ -616,5 +646,6 @@ class ControlDiscreteElement(KeywordBase):
 
     @maxnei.setter
     def maxnei(self, value: int) -> None:
+        """Set the maxnei property."""
         self._cards[4].set_value("maxnei", value)
 

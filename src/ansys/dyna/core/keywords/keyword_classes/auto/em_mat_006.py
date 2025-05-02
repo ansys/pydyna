@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmMat006(KeywordBase):
     subkeyword = "MAT_006"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -98,6 +100,7 @@ class EmMat006(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -111,8 +114,9 @@ class EmMat006(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         if value not in [0, 1, 5, None]:
-            raise Exception("""mtype must be `None` or one of {0,1,5}""")
+            raise Exception("""mtype must be `None` or one of {0,1,5}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -123,6 +127,7 @@ class EmMat006(KeywordBase):
 
     @sigp.setter
     def sigp(self, value: float) -> None:
+        """Set the sigp property."""
         self._cards[0].set_value("sigp", value)
 
     @property
@@ -133,6 +138,7 @@ class EmMat006(KeywordBase):
 
     @eosp.setter
     def eosp(self, value: int) -> None:
+        """Set the eosp property."""
         self._cards[0].set_value("eosp", value)
 
     @property
@@ -143,6 +149,7 @@ class EmMat006(KeywordBase):
 
     @sign.setter
     def sign(self, value: float) -> None:
+        """Set the sign property."""
         self._cards[0].set_value("sign", value)
 
     @property
@@ -153,6 +160,7 @@ class EmMat006(KeywordBase):
 
     @eosn.setter
     def eosn(self, value: int) -> None:
+        """Set the eosn property."""
         self._cards[0].set_value("eosn", value)
 
     @property
@@ -163,5 +171,6 @@ class EmMat006(KeywordBase):
 
     @deatht.setter
     def deatht(self, value: float) -> None:
+        """Set the deatht property."""
         self._cards[0].set_value("deatht", value)
 

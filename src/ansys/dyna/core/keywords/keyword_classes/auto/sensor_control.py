@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SENSOR keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorControl(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SENSOR keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -176,6 +178,7 @@ class SensorControl(KeywordBase):
 
     @cntlid.setter
     def cntlid(self, value: int) -> None:
+        """Set the cntlid property."""
         self._cards[0].set_value("cntlid", value)
 
     @property
@@ -211,8 +214,9 @@ class SensorControl(KeywordBase):
 
     @type.setter
     def type(self, value: str) -> None:
+        """Set the type property."""
         if value not in ["AIRBAG", "BAGVENTPOP", "BELTPRET", "BELTRETRA", "BELTSLIP", "CONTACT", "CONTACT2D", "CONSTRL", "CNRB", "CPM", "DEF2RIG", "ELESET", "EM", "FUNCTION", "JOINT", "JOINTSTIF", "MPRESSURE", "POREAIR", "PRESC-MOT", "PRESC-ORI", "PRESSURE", "PZBC", "RWALL", "SPC", "SPOTWELD", "BPWPN", None]:
-            raise Exception("""type must be `None` or one of {"AIRBAG","BAGVENTPOP","BELTPRET","BELTRETRA","BELTSLIP","CONTACT","CONTACT2D","CONSTRL","CNRB","CPM","DEF2RIG","ELESET","EM","FUNCTION","JOINT","JOINTSTIF","MPRESSURE","POREAIR","PRESC-MOT","PRESC-ORI","PRESSURE","PZBC","RWALL","SPC","SPOTWELD","BPWPN"}""")
+            raise Exception("""type must be `None` or one of {"AIRBAG","BAGVENTPOP","BELTPRET","BELTRETRA","BELTSLIP","CONTACT","CONTACT2D","CONSTRL","CNRB","CPM","DEF2RIG","ELESET","EM","FUNCTION","JOINT","JOINTSTIF","MPRESSURE","POREAIR","PRESC-MOT","PRESC-ORI","PRESSURE","PZBC","RWALL","SPC","SPOTWELD","BPWPN"}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -223,6 +227,7 @@ class SensorControl(KeywordBase):
 
     @typeid.setter
     def typeid(self, value: int) -> None:
+        """Set the typeid property."""
         self._cards[0].set_value("typeid", value)
 
     @property
@@ -237,8 +242,9 @@ class SensorControl(KeywordBase):
 
     @timeoff.setter
     def timeoff(self, value: int) -> None:
+        """Set the timeoff property."""
         if value not in [0, 1, None]:
-            raise Exception("""timeoff must be `None` or one of {0,1}""")
+            raise Exception("""timeoff must be `None` or one of {0,1}.""")
         self._cards[0].set_value("timeoff", value)
 
     @property
@@ -250,6 +256,7 @@ class SensorControl(KeywordBase):
 
     @nrep.setter
     def nrep(self, value: int) -> None:
+        """Set the nrep property."""
         self._cards[0].set_value("nrep", value)
 
     @property
@@ -268,8 +275,9 @@ class SensorControl(KeywordBase):
 
     @estyp.setter
     def estyp(self, value: str) -> None:
+        """Set the estyp property."""
         if value not in ["BEAM", "DISC", "SHELL", "SOLID", "TSHELL", None]:
-            raise Exception("""estyp must be `None` or one of {"BEAM","DISC","SHELL","SOLID","TSHELL"}""")
+            raise Exception("""estyp must be `None` or one of {"BEAM","DISC","SHELL","SOLID","TSHELL"}.""")
         self._cards[0].set_value("estyp", value)
 
     @property
@@ -282,8 +290,9 @@ class SensorControl(KeywordBase):
 
     @initstt.setter
     def initstt(self, value: str) -> None:
+        """Set the initstt property."""
         if value not in ["ON", "OFF", None]:
-            raise Exception("""initstt must be `None` or one of {"ON","OFF"}""")
+            raise Exception("""initstt must be `None` or one of {"ON","OFF"}.""")
         self._cards[1].set_value("initstt", value)
 
     @property
@@ -294,6 +303,7 @@ class SensorControl(KeywordBase):
 
     @swit1.setter
     def swit1(self, value: int) -> None:
+        """Set the swit1 property."""
         self._cards[1].set_value("swit1", value)
 
     @property
@@ -304,6 +314,7 @@ class SensorControl(KeywordBase):
 
     @swit2.setter
     def swit2(self, value: int) -> None:
+        """Set the swit2 property."""
         self._cards[1].set_value("swit2", value)
 
     @property
@@ -314,6 +325,7 @@ class SensorControl(KeywordBase):
 
     @swit3.setter
     def swit3(self, value: int) -> None:
+        """Set the swit3 property."""
         self._cards[1].set_value("swit3", value)
 
     @property
@@ -324,6 +336,7 @@ class SensorControl(KeywordBase):
 
     @swit4.setter
     def swit4(self, value: int) -> None:
+        """Set the swit4 property."""
         self._cards[1].set_value("swit4", value)
 
     @property
@@ -334,6 +347,7 @@ class SensorControl(KeywordBase):
 
     @swit5.setter
     def swit5(self, value: int) -> None:
+        """Set the swit5 property."""
         self._cards[1].set_value("swit5", value)
 
     @property
@@ -344,6 +358,7 @@ class SensorControl(KeywordBase):
 
     @swit6.setter
     def swit6(self, value: int) -> None:
+        """Set the swit6 property."""
         self._cards[1].set_value("swit6", value)
 
     @property
@@ -354,6 +369,7 @@ class SensorControl(KeywordBase):
 
     @swit7.setter
     def swit7(self, value: int) -> None:
+        """Set the swit7 property."""
         self._cards[1].set_value("swit7", value)
 
     @property
@@ -364,5 +380,6 @@ class SensorControl(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

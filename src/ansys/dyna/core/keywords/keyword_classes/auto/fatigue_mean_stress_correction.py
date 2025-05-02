@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the FATIGUE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FatigueMeanStressCorrection(KeywordBase):
     subkeyword = "MEAN_STRESS_CORRECTION"
 
     def __init__(self, **kwargs):
+        """Initialize the FATIGUE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -80,8 +82,9 @@ class FatigueMeanStressCorrection(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         if value not in [0, 1, 2, 3, 4, 11, 12, None]:
-            raise Exception("""method must be `None` or one of {0,1,2,3,4,11,12}""")
+            raise Exception("""method must be `None` or one of {0,1,2,3,4,11,12}.""")
         self._cards[0].set_value("method", value)
 
     @property
@@ -92,6 +95,7 @@ class FatigueMeanStressCorrection(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[1].set_value("mid", value)
 
     @property
@@ -104,5 +108,6 @@ class FatigueMeanStressCorrection(KeywordBase):
 
     @sigma.setter
     def sigma(self, value: float) -> None:
+        """Set the sigma property."""
         self._cards[1].set_value("sigma", value)
 

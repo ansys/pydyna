@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseEosCochranChan(KeywordBase):
     subkeyword = "EOS_COCHRAN_CHAN"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class DualceseEosCochranChan(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -124,6 +127,7 @@ class DualceseEosCochranChan(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -134,6 +138,7 @@ class DualceseEosCochranChan(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[0].set_value("b", value)
 
     @property
@@ -144,6 +149,7 @@ class DualceseEosCochranChan(KeywordBase):
 
     @eps1.setter
     def eps1(self, value: float) -> None:
+        """Set the eps1 property."""
         self._cards[0].set_value("eps1", value)
 
     @property
@@ -154,6 +160,7 @@ class DualceseEosCochranChan(KeywordBase):
 
     @eps2.setter
     def eps2(self, value: float) -> None:
+        """Set the eps2 property."""
         self._cards[0].set_value("eps2", value)
 
     @property
@@ -164,6 +171,7 @@ class DualceseEosCochranChan(KeywordBase):
 
     @gammao.setter
     def gammao(self, value: float) -> None:
+        """Set the gammao property."""
         self._cards[0].set_value("gammao", value)
 
     @property
@@ -174,6 +182,7 @@ class DualceseEosCochranChan(KeywordBase):
 
     @rhoo.setter
     def rhoo(self, value: float) -> None:
+        """Set the rhoo property."""
         self._cards[0].set_value("rhoo", value)
 
     @property
@@ -184,6 +193,7 @@ class DualceseEosCochranChan(KeywordBase):
 
     @eo.setter
     def eo(self, value: float) -> None:
+        """Set the eo property."""
         self._cards[0].set_value("eo", value)
 
     @property
@@ -194,5 +204,6 @@ class DualceseEosCochranChan(KeywordBase):
 
     @cv.setter
     def cv(self, value: float) -> None:
+        """Set the cv property."""
         self._cards[1].set_value("cv", value)
 

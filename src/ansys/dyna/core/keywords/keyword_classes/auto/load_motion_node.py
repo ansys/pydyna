@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadMotionNode(KeywordBase):
     subkeyword = "MOTION_NODE"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class LoadMotionNode(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[0].set_value("node1", value)
 
     @property
@@ -126,8 +129,9 @@ class LoadMotionNode(KeywordBase):
 
     @dof1.setter
     def dof1(self, value: int) -> None:
+        """Set the dof1 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""dof1 must be `None` or one of {0,1,2,3,4,5,6}""")
+            raise Exception("""dof1 must be `None` or one of {0,1,2,3,4,5,6}.""")
         self._cards[0].set_value("dof1", value)
 
     @property
@@ -138,6 +142,7 @@ class LoadMotionNode(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -148,6 +153,7 @@ class LoadMotionNode(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -158,6 +164,7 @@ class LoadMotionNode(KeywordBase):
 
     @cid1.setter
     def cid1(self, value: int) -> None:
+        """Set the cid1 property."""
         self._cards[0].set_value("cid1", value)
 
     @property
@@ -168,6 +175,7 @@ class LoadMotionNode(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[0].set_value("node2", value)
 
     @property
@@ -193,8 +201,9 @@ class LoadMotionNode(KeywordBase):
 
     @dof2.setter
     def dof2(self, value: int) -> None:
+        """Set the dof2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, None]:
-            raise Exception("""dof2 must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}""")
+            raise Exception("""dof2 must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}.""")
         self._cards[0].set_value("dof2", value)
 
     @property
@@ -205,5 +214,6 @@ class LoadMotionNode(KeywordBase):
 
     @cid2.setter
     def cid2(self, value: int) -> None:
+        """Set the cid2 property."""
         self._cards[0].set_value("cid2", value)
 

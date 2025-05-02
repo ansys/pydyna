@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -32,6 +33,7 @@ class IcfdBoundaryPrescribedPre(KeywordBase):
     subkeyword = "BOUNDARY_PRESCRIBED_PRE"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(
@@ -50,11 +52,11 @@ class IcfdBoundaryPrescribedPre(KeywordBase):
 
     @property
     def boundaries(self):
-        '''Gets the table of boundaries'''
+        """Get the table of boundaries."""
         return self._cards[0].table
 
     @boundaries.setter
     def boundaries(self, df):
-        '''sets boundaries from the dataframe df'''
+        """Set boundaries from the dataframe df"""
         self._cards[0].table = df
 

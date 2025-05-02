@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmDatabaseNodout(KeywordBase):
     subkeyword = "DATABASE_NODOUT"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -76,8 +78,9 @@ class EmDatabaseNodout(KeywordBase):
 
     @outlv.setter
     def outlv(self, value: int) -> None:
+        """Set the outlv property."""
         if value not in [0, 1, None]:
-            raise Exception("""outlv must be `None` or one of {0,1}""")
+            raise Exception("""outlv must be `None` or one of {0,1}.""")
         self._cards[0].set_value("outlv", value)
 
     @property
@@ -88,6 +91,7 @@ class EmDatabaseNodout(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -98,5 +102,6 @@ class EmDatabaseNodout(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 

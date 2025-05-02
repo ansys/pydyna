@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialFatigueDamageRatio(KeywordBase):
     subkeyword = "FATIGUE_DAMAGE_RATIO"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class InitialFatigueDamageRatio(KeywordBase):
 
     @pid_sid.setter
     def pid_sid(self, value: int) -> None:
+        """Set the pid_sid property."""
         self._cards[0].set_value("pid/sid", value)
 
     @property
@@ -81,8 +84,9 @@ class InitialFatigueDamageRatio(KeywordBase):
 
     @ptyp.setter
     def ptyp(self, value: int) -> None:
+        """Set the ptyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""ptyp must be `None` or one of {0,1}""")
+            raise Exception("""ptyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ptyp", value)
 
     @property
@@ -93,5 +97,6 @@ class InitialFatigueDamageRatio(KeywordBase):
 
     @dratio.setter
     def dratio(self, value: float) -> None:
+        """Set the dratio property."""
         self._cards[0].set_value("dratio", value)
 

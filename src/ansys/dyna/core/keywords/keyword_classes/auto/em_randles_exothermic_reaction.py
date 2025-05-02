@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmRandlesExothermicReaction(KeywordBase):
     subkeyword = "RANDLES_EXOTHERMIC_REACTION"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,8 +67,9 @@ class EmRandlesExothermicReaction(KeywordBase):
 
     @areatype.setter
     def areatype(self, value: int) -> None:
+        """Set the areatype property."""
         if value not in [2, 1, 3, None]:
-            raise Exception("""areatype must be `None` or one of {2,1,3}""")
+            raise Exception("""areatype must be `None` or one of {2,1,3}.""")
         self._cards[0].set_value("areatype", value)
 
     @property
@@ -77,5 +80,6 @@ class EmRandlesExothermicReaction(KeywordBase):
 
     @funcid.setter
     def funcid(self, value: int) -> None:
+        """Set the funcid property."""
         self._cards[0].set_value("funcid", value)
 

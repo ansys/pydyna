@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmSolverFembemMonolithic(KeywordBase):
     subkeyword = "SOLVER_FEMBEM_MONOLITHIC"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -88,6 +90,7 @@ class EmSolverFembemMonolithic(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -100,8 +103,9 @@ class EmSolverFembemMonolithic(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, None]:
-            raise Exception("""stype must be `None` or one of {0,1}""")
+            raise Exception("""stype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -112,6 +116,7 @@ class EmSolverFembemMonolithic(KeywordBase):
 
     @abstol.setter
     def abstol(self, value: float) -> None:
+        """Set the abstol property."""
         self._cards[0].set_value("abstol", value)
 
     @property
@@ -122,6 +127,7 @@ class EmSolverFembemMonolithic(KeywordBase):
 
     @reltol.setter
     def reltol(self, value: float) -> None:
+        """Set the reltol property."""
         self._cards[0].set_value("reltol", value)
 
     @property
@@ -132,5 +138,6 @@ class EmSolverFembemMonolithic(KeywordBase):
 
     @maxit.setter
     def maxit(self, value: int) -> None:
+        """Set the maxit property."""
         self._cards[0].set_value("maxit", value)
 

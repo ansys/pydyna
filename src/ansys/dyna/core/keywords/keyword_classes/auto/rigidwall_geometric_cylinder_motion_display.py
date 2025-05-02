@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the RIGIDWALL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
     subkeyword = "GEOMETRIC_CYLINDER_MOTION_DISPLAY"
 
     def __init__(self, **kwargs):
+        """Initialize the RIGIDWALL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -282,6 +284,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -292,6 +295,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -303,6 +307,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 
     @property
@@ -313,6 +318,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @nsidex.setter
     def nsidex(self, value: int) -> None:
+        """Set the nsidex property."""
         self._cards[1].set_value("nsidex", value)
 
     @property
@@ -323,6 +329,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[1].set_value("boxid", value)
 
     @property
@@ -333,6 +340,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -343,6 +351,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -353,6 +362,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @xt.setter
     def xt(self, value: float) -> None:
+        """Set the xt property."""
         self._cards[2].set_value("xt", value)
 
     @property
@@ -363,6 +373,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @yt.setter
     def yt(self, value: float) -> None:
+        """Set the yt property."""
         self._cards[2].set_value("yt", value)
 
     @property
@@ -373,6 +384,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @zt.setter
     def zt(self, value: float) -> None:
+        """Set the zt property."""
         self._cards[2].set_value("zt", value)
 
     @property
@@ -383,6 +395,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @xh.setter
     def xh(self, value: float) -> None:
+        """Set the xh property."""
         self._cards[2].set_value("xh", value)
 
     @property
@@ -393,6 +406,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @yh.setter
     def yh(self, value: float) -> None:
+        """Set the yh property."""
         self._cards[2].set_value("yh", value)
 
     @property
@@ -403,6 +417,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @zh.setter
     def zh(self, value: float) -> None:
+        """Set the zh property."""
         self._cards[2].set_value("zh", value)
 
     @property
@@ -415,6 +430,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[2].set_value("fric", value)
 
     @property
@@ -425,6 +441,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @radcyl.setter
     def radcyl(self, value: float) -> None:
+        """Set the radcyl property."""
         self._cards[3].set_value("radcyl", value)
 
     @property
@@ -435,6 +452,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @lencyl.setter
     def lencyl(self, value: float) -> None:
+        """Set the lencyl property."""
         self._cards[3].set_value("lencyl", value)
 
     @property
@@ -445,6 +463,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @nsegs.setter
     def nsegs(self, value: int) -> None:
+        """Set the nsegs property."""
         self._cards[3].set_value("nsegs", value)
 
     @property
@@ -455,6 +474,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @vl.setter
     def vl(self, value: float) -> None:
+        """Set the vl property."""
         self._cards[4].set_value("vl", value)
 
     @property
@@ -465,6 +485,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @height.setter
     def height(self, value: float) -> None:
+        """Set the height property."""
         self._cards[4].set_value("height", value)
 
     @property
@@ -475,6 +496,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[5].set_value("lcid", value)
 
     @property
@@ -487,8 +509,9 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @opt.setter
     def opt(self, value: int) -> None:
+        """Set the opt property."""
         if value not in [0, 1, None]:
-            raise Exception("""opt must be `None` or one of {0,1}""")
+            raise Exception("""opt must be `None` or one of {0,1}.""")
         self._cards[5].set_value("opt", value)
 
     @property
@@ -499,6 +522,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[5].set_value("vx", value)
 
     @property
@@ -509,6 +533,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[5].set_value("vy", value)
 
     @property
@@ -519,6 +544,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[5].set_value("vz", value)
 
     @property
@@ -529,6 +555,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[6].set_value("pid", value)
 
     @property
@@ -539,6 +566,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[6].set_value("ro", value)
 
     @property
@@ -549,6 +577,7 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[6].set_value("e", value)
 
     @property
@@ -559,5 +588,6 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[6].set_value("pr", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementBeamThicknessScalar(KeywordBase):
     subkeyword = "BEAM_THICKNESS_SCALAR"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -202,6 +204,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -212,6 +215,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -222,6 +226,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -232,6 +237,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -242,6 +248,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -261,8 +268,9 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @rt1.setter
     def rt1(self, value: int) -> None:
+        """Set the rt1 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rt1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rt1 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rt1", value)
 
     @property
@@ -282,8 +290,9 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @rr1.setter
     def rr1(self, value: int) -> None:
+        """Set the rr1 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rr1 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rr1 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rr1", value)
 
     @property
@@ -303,8 +312,9 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @rt2.setter
     def rt2(self, value: int) -> None:
+        """Set the rt2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rt2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rt2 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rt2", value)
 
     @property
@@ -324,8 +334,9 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @rr2.setter
     def rr2(self, value: int) -> None:
+        """Set the rr2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rr2 must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rr2 must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rr2", value)
 
     @property
@@ -338,8 +349,9 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
+        """Set the local property."""
         if value not in [2, 1, None]:
-            raise Exception("""local must be `None` or one of {2,1}""")
+            raise Exception("""local must be `None` or one of {2,1}.""")
         self._cards[0].set_value("local", value)
 
     @property
@@ -359,6 +371,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @parm1.setter
     def parm1(self, value: float) -> None:
+        """Set the parm1 property."""
         self._cards[1].set_value("parm1", value)
 
     @property
@@ -379,6 +392,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @parm2.setter
     def parm2(self, value: float) -> None:
+        """Set the parm2 property."""
         self._cards[1].set_value("parm2", value)
 
     @property
@@ -398,6 +412,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @parm3.setter
     def parm3(self, value: float) -> None:
+        """Set the parm3 property."""
         self._cards[1].set_value("parm3", value)
 
     @property
@@ -417,6 +432,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @parm4.setter
     def parm4(self, value: float) -> None:
+        """Set the parm4 property."""
         self._cards[1].set_value("parm4", value)
 
     @property
@@ -436,6 +452,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @parm5.setter
     def parm5(self, value: float) -> None:
+        """Set the parm5 property."""
         self._cards[1].set_value("parm5", value)
 
     @property
@@ -446,6 +463,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @vol.setter
     def vol(self, value: float) -> None:
+        """Set the vol property."""
         self._cards[2].set_value("vol", value)
 
     @property
@@ -456,6 +474,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @iner.setter
     def iner(self, value: float) -> None:
+        """Set the iner property."""
         self._cards[2].set_value("iner", value)
 
     @property
@@ -466,6 +485,7 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[2].set_value("cid", value)
 
     @property
@@ -476,8 +496,9 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @dofn1.setter
     def dofn1(self, value: float) -> None:
+        """Set the dofn1 property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""dofn1 must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""dofn1 must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[2].set_value("dofn1", value)
 
     @property
@@ -488,7 +509,8 @@ class ElementBeamThicknessScalar(KeywordBase):
 
     @dofn2.setter
     def dofn2(self, value: float) -> None:
+        """Set the dofn2 property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""dofn2 must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""dofn2 must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[2].set_value("dofn2", value)
 

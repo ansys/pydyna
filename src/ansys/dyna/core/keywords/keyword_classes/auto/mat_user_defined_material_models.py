@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -431,6 +433,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -441,6 +444,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -455,6 +459,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @mt.setter
     def mt(self, value: int) -> None:
+        """Set the mt property."""
         self._cards[0].set_value("mt", value)
 
     @property
@@ -465,6 +470,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @lmc.setter
     def lmc(self, value: int) -> None:
+        """Set the lmc property."""
         self._cards[0].set_value("lmc", value)
 
     @property
@@ -475,6 +481,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @nhv.setter
     def nhv(self, value: int) -> None:
+        """Set the nhv property."""
         self._cards[0].set_value("nhv", value)
 
     @property
@@ -489,8 +496,9 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @iortho.setter
     def iortho(self, value: int) -> None:
+        """Set the iortho property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""iortho must be `None` or one of {0,1,2,3}""")
+            raise Exception("""iortho must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("iortho", value)
 
     @property
@@ -501,6 +509,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @ibulk.setter
     def ibulk(self, value: int) -> None:
+        """Set the ibulk property."""
         self._cards[0].set_value("ibulk", value)
 
     @property
@@ -511,6 +520,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @ig.setter
     def ig(self, value: int) -> None:
+        """Set the ig property."""
         self._cards[0].set_value("ig", value)
 
     @property
@@ -523,8 +533,9 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @ivect.setter
     def ivect(self, value: int) -> None:
+        """Set the ivect property."""
         if value not in [0, 1, None]:
-            raise Exception("""ivect must be `None` or one of {0,1}""")
+            raise Exception("""ivect must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ivect", value)
 
     @property
@@ -538,6 +549,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @ifail.setter
     def ifail(self, value: int) -> None:
+        """Set the ifail property."""
         self._cards[1].set_value("ifail", value)
 
     @property
@@ -548,8 +560,9 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @itherm.setter
     def itherm(self, value: int) -> None:
+        """Set the itherm property."""
         if value not in [0, 1, None]:
-            raise Exception("""itherm must be `None` or one of {0,1}""")
+            raise Exception("""itherm must be `None` or one of {0,1}.""")
         self._cards[1].set_value("itherm", value)
 
     @property
@@ -560,8 +573,9 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @ihyper.setter
     def ihyper(self, value: int) -> None:
+        """Set the ihyper property."""
         if value not in [0, 1, -1, -2, None]:
-            raise Exception("""ihyper must be `None` or one of {0,1,-1,-2}""")
+            raise Exception("""ihyper must be `None` or one of {0,1,-1,-2}.""")
         self._cards[1].set_value("ihyper", value)
 
     @property
@@ -572,8 +586,9 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @ieos.setter
     def ieos(self, value: int) -> None:
+        """Set the ieos property."""
         if value not in [0, 1, None]:
-            raise Exception("""ieos must be `None` or one of {0,1}""")
+            raise Exception("""ieos must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ieos", value)
 
     @property
@@ -584,6 +599,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @lmca.setter
     def lmca(self, value: int) -> None:
+        """Set the lmca property."""
         self._cards[1].set_value("lmca", value)
 
     @property
@@ -605,6 +621,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -617,8 +634,9 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3}""")
+            raise Exception("""macf must be `None` or one of {1,2,3}.""")
         self._cards[2].set_value("macf", value)
 
     @property
@@ -629,6 +647,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[2].set_value("xp", value)
 
     @property
@@ -639,6 +658,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[2].set_value("yp", value)
 
     @property
@@ -649,6 +669,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[2].set_value("zp", value)
 
     @property
@@ -659,6 +680,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[2].set_value("a1", value)
 
     @property
@@ -669,6 +691,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[2].set_value("a2", value)
 
     @property
@@ -679,6 +702,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[2].set_value("a3", value)
 
     @property
@@ -689,6 +713,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[3].set_value("v1", value)
 
     @property
@@ -699,6 +724,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[3].set_value("v2", value)
 
     @property
@@ -709,6 +735,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[3].set_value("v3", value)
 
     @property
@@ -719,6 +746,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[3].set_value("d1", value)
 
     @property
@@ -729,6 +757,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[3].set_value("d2", value)
 
     @property
@@ -739,6 +768,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[3].set_value("d3", value)
 
     @property
@@ -749,6 +779,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[3].set_value("beta", value)
 
     @property
@@ -759,6 +790,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @ievts.setter
     def ievts(self, value: int) -> None:
+        """Set the ievts property."""
         self._cards[3].set_value("ievts", value)
 
     @property
@@ -769,6 +801,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[4].set_value("p1", value)
 
     @property
@@ -779,6 +812,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[4].set_value("p2", value)
 
     @property
@@ -789,6 +823,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[4].set_value("p3", value)
 
     @property
@@ -799,6 +834,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[4].set_value("p4", value)
 
     @property
@@ -809,6 +845,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[4].set_value("p5", value)
 
     @property
@@ -819,6 +856,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[4].set_value("p6", value)
 
     @property
@@ -829,6 +867,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p7.setter
     def p7(self, value: float) -> None:
+        """Set the p7 property."""
         self._cards[4].set_value("p7", value)
 
     @property
@@ -839,6 +878,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p8.setter
     def p8(self, value: float) -> None:
+        """Set the p8 property."""
         self._cards[4].set_value("p8", value)
 
     @property
@@ -849,6 +889,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[5].set_value("p1", value)
 
     @property
@@ -859,6 +900,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[5].set_value("p2", value)
 
     @property
@@ -869,6 +911,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[5].set_value("p3", value)
 
     @property
@@ -879,6 +922,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[5].set_value("p4", value)
 
     @property
@@ -889,6 +933,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[5].set_value("p5", value)
 
     @property
@@ -899,6 +944,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[5].set_value("p6", value)
 
     @property
@@ -909,6 +955,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p7.setter
     def p7(self, value: float) -> None:
+        """Set the p7 property."""
         self._cards[5].set_value("p7", value)
 
     @property
@@ -919,6 +966,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @p8.setter
     def p8(self, value: float) -> None:
+        """Set the p8 property."""
         self._cards[5].set_value("p8", value)
 
     @property
@@ -929,5 +977,6 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 

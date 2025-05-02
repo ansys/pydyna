@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the COMPONENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ComponentHybridiii(KeywordBase):
     subkeyword = "HYBRIDIII"
 
     def __init__(self, **kwargs):
+        """Initialize the COMPONENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -154,6 +156,7 @@ class ComponentHybridiii(KeywordBase):
 
     @did.setter
     def did(self, value: int) -> None:
+        """Set the did property."""
         self._cards[0].set_value("did", value)
 
     @property
@@ -167,8 +170,9 @@ class ComponentHybridiii(KeywordBase):
 
     @size.setter
     def size(self, value: int) -> None:
+        """Set the size property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""size must be `None` or one of {1,2,3}""")
+            raise Exception("""size must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("size", value)
 
     @property
@@ -184,8 +188,9 @@ class ComponentHybridiii(KeywordBase):
 
     @units.setter
     def units(self, value: int) -> None:
+        """Set the units property."""
         if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""units must be `None` or one of {1,2,3,4,5}""")
+            raise Exception("""units must be `None` or one of {1,2,3,4,5}.""")
         self._cards[0].set_value("units", value)
 
     @property
@@ -204,8 +209,9 @@ class ComponentHybridiii(KeywordBase):
 
     @defrm.setter
     def defrm(self, value: int) -> None:
+        """Set the defrm property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, None]:
-            raise Exception("""defrm must be `None` or one of {1,2,3,4,5,6,7,8}""")
+            raise Exception("""defrm must be `None` or one of {1,2,3,4,5,6,7,8}.""")
         self._cards[0].set_value("defrm", value)
 
     @property
@@ -216,6 +222,7 @@ class ComponentHybridiii(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -226,6 +233,7 @@ class ComponentHybridiii(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -236,6 +244,7 @@ class ComponentHybridiii(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -246,6 +255,7 @@ class ComponentHybridiii(KeywordBase):
 
     @hx.setter
     def hx(self, value: float) -> None:
+        """Set the hx property."""
         self._cards[1].set_value("hx", value)
 
     @property
@@ -256,6 +266,7 @@ class ComponentHybridiii(KeywordBase):
 
     @hy.setter
     def hy(self, value: float) -> None:
+        """Set the hy property."""
         self._cards[1].set_value("hy", value)
 
     @property
@@ -266,6 +277,7 @@ class ComponentHybridiii(KeywordBase):
 
     @hz.setter
     def hz(self, value: float) -> None:
+        """Set the hz property."""
         self._cards[1].set_value("hz", value)
 
     @property
@@ -276,6 +288,7 @@ class ComponentHybridiii(KeywordBase):
 
     @rx.setter
     def rx(self, value: float) -> None:
+        """Set the rx property."""
         self._cards[1].set_value("rx", value)
 
     @property
@@ -286,6 +299,7 @@ class ComponentHybridiii(KeywordBase):
 
     @ry.setter
     def ry(self, value: float) -> None:
+        """Set the ry property."""
         self._cards[1].set_value("ry", value)
 
     @property
@@ -296,5 +310,6 @@ class ComponentHybridiii(KeywordBase):
 
     @rz.setter
     def rz(self, value: float) -> None:
+        """Set the rz property."""
         self._cards[1].set_value("rz", value)
 

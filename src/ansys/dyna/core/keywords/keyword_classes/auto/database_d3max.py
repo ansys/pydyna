@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseD3Max(KeywordBase):
     subkeyword = "D3MAX"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -102,6 +104,7 @@ class DatabaseD3Max(KeywordBase):
 
     @dtcheck.setter
     def dtcheck(self, value: float) -> None:
+        """Set the dtcheck property."""
         self._cards[0].set_value("dtcheck", value)
 
     @property
@@ -114,8 +117,9 @@ class DatabaseD3Max(KeywordBase):
 
     @me.setter
     def me(self, value: int) -> None:
+        """Set the me property."""
         if value not in [1, 2, None]:
-            raise Exception("""me must be `None` or one of {1,2}""")
+            raise Exception("""me must be `None` or one of {1,2}.""")
         self._cards[0].set_value("me", value)
 
     @property
@@ -128,6 +132,7 @@ class DatabaseD3Max(KeywordBase):
 
     @pstrs.setter
     def pstrs(self, value: int) -> None:
+        """Set the pstrs property."""
         self._cards[0].set_value("pstrs", value)
 
     @property
@@ -140,6 +145,7 @@ class DatabaseD3Max(KeywordBase):
 
     @pstrn.setter
     def pstrn(self, value: int) -> None:
+        """Set the pstrn property."""
         self._cards[0].set_value("pstrn", value)
 
     @property
@@ -152,6 +158,7 @@ class DatabaseD3Max(KeywordBase):
 
     @ifilt.setter
     def ifilt(self, value: int) -> None:
+        """Set the ifilt property."""
         self._cards[0].set_value("ifilt", value)
 
     @property
@@ -165,6 +172,7 @@ class DatabaseD3Max(KeywordBase):
 
     @output.setter
     def output(self, value: int) -> None:
+        """Set the output property."""
         self._cards[0].set_value("output", value)
 
     @property
@@ -175,5 +183,6 @@ class DatabaseD3Max(KeywordBase):
 
     @fcutout.setter
     def fcutout(self, value: float) -> None:
+        """Set the fcutout property."""
         self._cards[0].set_value("fcutout", value)
 

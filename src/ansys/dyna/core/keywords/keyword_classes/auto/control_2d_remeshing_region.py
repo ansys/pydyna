@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Control2DRemeshingRegion(KeywordBase):
     subkeyword = "2D_REMESHING_REGION"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -117,6 +119,7 @@ class Control2DRemeshingRegion(KeywordBase):
 
     @ltyp.setter
     def ltyp(self, value: int) -> None:
+        """Set the ltyp property."""
         self._cards[0].set_value("ltyp", value)
 
     @property
@@ -127,6 +130,7 @@ class Control2DRemeshingRegion(KeywordBase):
 
     @par1.setter
     def par1(self, value: float) -> None:
+        """Set the par1 property."""
         self._cards[0].set_value("par1", value)
 
     @property
@@ -137,6 +141,7 @@ class Control2DRemeshingRegion(KeywordBase):
 
     @par2.setter
     def par2(self, value: float) -> None:
+        """Set the par2 property."""
         self._cards[0].set_value("par2", value)
 
     @property
@@ -147,6 +152,7 @@ class Control2DRemeshingRegion(KeywordBase):
 
     @par3.setter
     def par3(self, value: float) -> None:
+        """Set the par3 property."""
         self._cards[0].set_value("par3", value)
 
     @property
@@ -157,6 +163,7 @@ class Control2DRemeshingRegion(KeywordBase):
 
     @par4.setter
     def par4(self, value: float) -> None:
+        """Set the par4 property."""
         self._cards[0].set_value("par4", value)
 
     @property
@@ -167,6 +174,7 @@ class Control2DRemeshingRegion(KeywordBase):
 
     @par5.setter
     def par5(self, value: float) -> None:
+        """Set the par5 property."""
         self._cards[0].set_value("par5", value)
 
     @property
@@ -177,6 +185,7 @@ class Control2DRemeshingRegion(KeywordBase):
 
     @par6.setter
     def par6(self, value: float) -> None:
+        """Set the par6 property."""
         self._cards[0].set_value("par6", value)
 
     @property
@@ -187,5 +196,6 @@ class Control2DRemeshingRegion(KeywordBase):
 
     @par7.setter
     def par7(self, value: float) -> None:
+        """Set the par7 property."""
         self._cards[0].set_value("par7", value)
 

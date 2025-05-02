@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ALE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleSmoothing(KeywordBase):
     subkeyword = "SMOOTHING"
 
     def __init__(self, **kwargs):
+        """Initialize the ALE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class AleSmoothing(KeywordBase):
 
     @dnid.setter
     def dnid(self, value: int) -> None:
+        """Set the dnid property."""
         self._cards[0].set_value("dnid", value)
 
     @property
@@ -116,6 +119,7 @@ class AleSmoothing(KeywordBase):
 
     @nid1.setter
     def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
         self._cards[0].set_value("nid1", value)
 
     @property
@@ -130,6 +134,7 @@ class AleSmoothing(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[0].set_value("nid2", value)
 
     @property
@@ -141,8 +146,9 @@ class AleSmoothing(KeywordBase):
 
     @ipre.setter
     def ipre(self, value: int) -> None:
+        """Set the ipre property."""
         if value not in [0, 1, None]:
-            raise Exception("""ipre must be `None` or one of {0,1}""")
+            raise Exception("""ipre must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ipre", value)
 
     @property
@@ -153,6 +159,7 @@ class AleSmoothing(KeywordBase):
 
     @xco.setter
     def xco(self, value: float) -> None:
+        """Set the xco property."""
         self._cards[0].set_value("xco", value)
 
     @property
@@ -163,6 +170,7 @@ class AleSmoothing(KeywordBase):
 
     @yco.setter
     def yco(self, value: float) -> None:
+        """Set the yco property."""
         self._cards[0].set_value("yco", value)
 
     @property
@@ -173,5 +181,6 @@ class AleSmoothing(KeywordBase):
 
     @zco.setter
     def zco(self, value: float) -> None:
+        """Set the zco property."""
         self._cards[0].set_value("zco", value)
 

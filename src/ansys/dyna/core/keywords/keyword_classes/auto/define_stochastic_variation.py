@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineStochasticVariation(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -195,6 +197,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @id_sv.setter
     def id_sv(self, value: int) -> None:
+        """Set the id_sv property."""
         self._cards[0].set_value("id_sv", value)
 
     @property
@@ -205,6 +208,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -219,8 +223,9 @@ class DefineStochasticVariation(KeywordBase):
 
     @pid_typ.setter
     def pid_typ(self, value: int) -> None:
+        """Set the pid_typ property."""
         if value not in [0, 1, None]:
-            raise Exception("""pid_typ must be `None` or one of {0,1}""")
+            raise Exception("""pid_typ must be `None` or one of {0,1}.""")
         self._cards[0].set_value("pid_typ", value)
 
     @property
@@ -233,8 +238,9 @@ class DefineStochasticVariation(KeywordBase):
 
     @icor.setter
     def icor(self, value: int) -> None:
+        """Set the icor property."""
         if value not in [0, 1, None]:
-            raise Exception("""icor must be `None` or one of {0,1}""")
+            raise Exception("""icor must be `None` or one of {0,1}.""")
         self._cards[0].set_value("icor", value)
 
     @property
@@ -250,8 +256,9 @@ class DefineStochasticVariation(KeywordBase):
 
     @var_s.setter
     def var_s(self, value: int) -> None:
+        """Set the var_s property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""var_s must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""var_s must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("var_s", value)
 
     @property
@@ -267,8 +274,9 @@ class DefineStochasticVariation(KeywordBase):
 
     @var_f.setter
     def var_f(self, value: int) -> None:
+        """Set the var_f property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""var_f must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""var_f must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("var_f", value)
 
     @property
@@ -281,8 +289,9 @@ class DefineStochasticVariation(KeywordBase):
 
     @irng.setter
     def irng(self, value: int) -> None:
+        """Set the irng property."""
         if value not in [0, 1, None]:
-            raise Exception("""irng must be `None` or one of {0,1}""")
+            raise Exception("""irng must be `None` or one of {0,1}.""")
         self._cards[0].set_value("irng", value)
 
     @property
@@ -293,6 +302,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[1].set_value("r1", value)
 
     @property
@@ -303,6 +313,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[1].set_value("r2", value)
 
     @property
@@ -313,6 +324,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @r3.setter
     def r3(self, value: float) -> None:
+        """Set the r3 property."""
         self._cards[1].set_value("r3", value)
 
     @property
@@ -323,6 +335,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[2].set_value("lcid", value)
 
     @property
@@ -333,6 +346,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[3].set_value("r1", value)
 
     @property
@@ -343,6 +357,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[3].set_value("r2", value)
 
     @property
@@ -353,6 +368,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @r3.setter
     def r3(self, value: float) -> None:
+        """Set the r3 property."""
         self._cards[3].set_value("r3", value)
 
     @property
@@ -363,6 +379,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[4].set_value("lcid", value)
 
     @property
@@ -373,5 +390,6 @@ class DefineStochasticVariation(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

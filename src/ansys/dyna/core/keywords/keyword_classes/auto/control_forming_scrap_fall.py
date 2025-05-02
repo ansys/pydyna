@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingScrapFall(KeywordBase):
     subkeyword = "FORMING_SCRAP_FALL"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -174,6 +176,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -184,6 +187,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @vectid.setter
     def vectid(self, value: int) -> None:
+        """Set the vectid property."""
         self._cards[0].set_value("vectid", value)
 
     @property
@@ -194,6 +198,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @ndset.setter
     def ndset(self, value: int) -> None:
+        """Set the ndset property."""
         self._cards[0].set_value("ndset", value)
 
     @property
@@ -207,6 +212,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -217,6 +223,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @depth.setter
     def depth(self, value: float) -> None:
+        """Set the depth property."""
         self._cards[0].set_value("depth", value)
 
     @property
@@ -227,6 +234,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @dist.setter
     def dist(self, value: float) -> None:
+        """Set the dist property."""
         self._cards[0].set_value("dist", value)
 
     @property
@@ -237,6 +245,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @idrgd.setter
     def idrgd(self, value: int) -> None:
+        """Set the idrgd property."""
         self._cards[0].set_value("idrgd", value)
 
     @property
@@ -250,6 +259,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @ifseed.setter
     def ifseed(self, value: int) -> None:
+        """Set the ifseed property."""
         self._cards[0].set_value("ifseed", value)
 
     @property
@@ -260,6 +270,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @nobead.setter
     def nobead(self, value: int) -> None:
+        """Set the nobead property."""
         self._cards[1].set_value("nobead", value)
 
     @property
@@ -270,6 +281,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @seedx.setter
     def seedx(self, value: float) -> None:
+        """Set the seedx property."""
         self._cards[1].set_value("seedx", value)
 
     @property
@@ -280,6 +292,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @seedy.setter
     def seedy(self, value: float) -> None:
+        """Set the seedy property."""
         self._cards[1].set_value("seedy", value)
 
     @property
@@ -290,6 +303,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @seedz.setter
     def seedz(self, value: float) -> None:
+        """Set the seedz property."""
         self._cards[1].set_value("seedz", value)
 
     @property
@@ -300,6 +314,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @effset.setter
     def effset(self, value: float) -> None:
+        """Set the effset property."""
         self._cards[1].set_value("effset", value)
 
     @property
@@ -310,6 +325,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @gap.setter
     def gap(self, value: float) -> None:
+        """Set the gap property."""
         self._cards[1].set_value("gap", value)
 
     @property
@@ -320,6 +336,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @ipset.setter
     def ipset(self, value: int) -> None:
+        """Set the ipset property."""
         self._cards[1].set_value("ipset", value)
 
     @property
@@ -330,6 +347,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @extend.setter
     def extend(self, value: int) -> None:
+        """Set the extend property."""
         self._cards[1].set_value("extend", value)
 
     @property
@@ -340,5 +358,6 @@ class ControlFormingScrapFall(KeywordBase):
 
     @newid.setter
     def newid(self, value: int) -> None:
+        """Set the newid property."""
         self._cards[2].set_value("newid", value)
 

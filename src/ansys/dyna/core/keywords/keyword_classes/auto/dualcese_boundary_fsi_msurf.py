@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseBoundaryFsiMsurf(KeywordBase):
     subkeyword = "BOUNDARY_FSI_MSURF"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -62,6 +64,7 @@ class DualceseBoundaryFsiMsurf(KeywordBase):
 
     @mspid.setter
     def mspid(self, value: int) -> None:
+        """Set the mspid property."""
         self._cards[0].set_value("mspid", value)
 
     @property
@@ -72,5 +75,6 @@ class DualceseBoundaryFsiMsurf(KeywordBase):
 
     @ref_p.setter
     def ref_p(self, value: float) -> None:
+        """Set the ref_p property."""
         self._cards[0].set_value("ref_p", value)
 

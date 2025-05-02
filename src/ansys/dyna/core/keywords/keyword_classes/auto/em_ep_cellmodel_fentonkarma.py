@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
     subkeyword = "EP_CELLMODEL_FENTONKARMA"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -165,6 +167,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @matid.setter
     def matid(self, value: int) -> None:
+        """Set the matid property."""
         self._cards[0].set_value("matid", value)
 
     @property
@@ -175,6 +178,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @taud.setter
     def taud(self, value: float) -> None:
+        """Set the taud property."""
         self._cards[1].set_value("taud", value)
 
     @property
@@ -185,6 +189,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @taur.setter
     def taur(self, value: float) -> None:
+        """Set the taur property."""
         self._cards[1].set_value("taur", value)
 
     @property
@@ -195,6 +200,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @tausi.setter
     def tausi(self, value: float) -> None:
+        """Set the tausi property."""
         self._cards[1].set_value("tausi", value)
 
     @property
@@ -205,6 +211,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @tauo.setter
     def tauo(self, value: float) -> None:
+        """Set the tauo property."""
         self._cards[1].set_value("tauo", value)
 
     @property
@@ -215,6 +222,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @tauvp.setter
     def tauvp(self, value: float) -> None:
+        """Set the tauvp property."""
         self._cards[1].set_value("tauvp", value)
 
     @property
@@ -225,6 +233,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @tauvm.setter
     def tauvm(self, value: float) -> None:
+        """Set the tauvm property."""
         self._cards[1].set_value("tauvm", value)
 
     @property
@@ -235,6 +244,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @tauwp.setter
     def tauwp(self, value: float) -> None:
+        """Set the tauwp property."""
         self._cards[1].set_value("tauwp", value)
 
     @property
@@ -245,6 +255,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @tauwm.setter
     def tauwm(self, value: float) -> None:
+        """Set the tauwm property."""
         self._cards[1].set_value("tauwm", value)
 
     @property
@@ -255,6 +266,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @uc.setter
     def uc(self, value: float) -> None:
+        """Set the uc property."""
         self._cards[2].set_value("uc", value)
 
     @property
@@ -265,6 +277,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @ucsi.setter
     def ucsi(self, value: float) -> None:
+        """Set the ucsi property."""
         self._cards[2].set_value("ucsi", value)
 
     @property
@@ -275,6 +288,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[2].set_value("k", value)
 
     @property
@@ -285,6 +299,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @u0.setter
     def u0(self, value: float) -> None:
+        """Set the u0 property."""
         self._cards[3].set_value("u0", value)
 
     @property
@@ -295,6 +310,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[3].set_value("v0", value)
 
     @property
@@ -305,5 +321,6 @@ class EmEpCellmodelFentonkarma(KeywordBase):
 
     @w0.setter
     def w0(self, value: float) -> None:
+        """Set the w0 property."""
         self._cards[3].set_value("w0", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseControlMeshMov(KeywordBase):
     subkeyword = "CONTROL_MESH_MOV"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class DualceseControlMeshMov(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -97,6 +100,7 @@ class DualceseControlMeshMov(KeywordBase):
 
     @ialg.setter
     def ialg(self, value: int) -> None:
+        """Set the ialg property."""
         self._cards[0].set_value("ialg", value)
 
     @property
@@ -107,6 +111,7 @@ class DualceseControlMeshMov(KeywordBase):
 
     @ninter.setter
     def ninter(self, value: int) -> None:
+        """Set the ninter property."""
         self._cards[0].set_value("ninter", value)
 
     @property
@@ -117,6 +122,7 @@ class DualceseControlMeshMov(KeywordBase):
 
     @relerr.setter
     def relerr(self, value: float) -> None:
+        """Set the relerr property."""
         self._cards[0].set_value("relerr", value)
 
     @property
@@ -127,5 +133,6 @@ class DualceseControlMeshMov(KeywordBase):
 
     @mxdispr.setter
     def mxdispr(self, value: float) -> None:
+        """Set the mxdispr property."""
         self._cards[0].set_value("mxdispr", value)
 

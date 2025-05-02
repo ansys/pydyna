@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat143Pine(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -282,6 +284,7 @@ class Mat143Pine(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -292,6 +295,7 @@ class Mat143Pine(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -304,8 +308,9 @@ class Mat143Pine(KeywordBase):
 
     @nplot.setter
     def nplot(self, value: int) -> None:
+        """Set the nplot property."""
         if value not in [1, 2, None]:
-            raise Exception("""nplot must be `None` or one of {1,2}""")
+            raise Exception("""nplot must be `None` or one of {1,2}.""")
         self._cards[0].set_value("nplot", value)
 
     @property
@@ -318,6 +323,7 @@ class Mat143Pine(KeywordBase):
 
     @iters.setter
     def iters(self, value: int) -> None:
+        """Set the iters property."""
         self._cards[0].set_value("iters", value)
 
     @property
@@ -331,8 +337,9 @@ class Mat143Pine(KeywordBase):
 
     @irate.setter
     def irate(self, value: int) -> None:
+        """Set the irate property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""irate must be `None` or one of {0,1,2}""")
+            raise Exception("""irate must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("irate", value)
 
     @property
@@ -343,6 +350,7 @@ class Mat143Pine(KeywordBase):
 
     @ghard.setter
     def ghard(self, value: float) -> None:
+        """Set the ghard property."""
         self._cards[0].set_value("ghard", value)
 
     @property
@@ -355,8 +363,9 @@ class Mat143Pine(KeywordBase):
 
     @ifail.setter
     def ifail(self, value: int) -> None:
+        """Set the ifail property."""
         if value not in [0, 1, None]:
-            raise Exception("""ifail must be `None` or one of {0,1}""")
+            raise Exception("""ifail must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ifail", value)
 
     @property
@@ -369,8 +378,9 @@ class Mat143Pine(KeywordBase):
 
     @ivol.setter
     def ivol(self, value: int) -> None:
+        """Set the ivol property."""
         if value not in [0, 1, None]:
-            raise Exception("""ivol must be `None` or one of {0,1}""")
+            raise Exception("""ivol must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ivol", value)
 
     @property
@@ -381,6 +391,7 @@ class Mat143Pine(KeywordBase):
 
     @mois.setter
     def mois(self, value: float) -> None:
+        """Set the mois property."""
         self._cards[1].set_value("mois", value)
 
     @property
@@ -391,6 +402,7 @@ class Mat143Pine(KeywordBase):
 
     @temp.setter
     def temp(self, value: float) -> None:
+        """Set the temp property."""
         self._cards[1].set_value("temp", value)
 
     @property
@@ -416,6 +428,7 @@ class Mat143Pine(KeywordBase):
 
     @qual_t.setter
     def qual_t(self, value: float) -> None:
+        """Set the qual_t property."""
         self._cards[1].set_value("qual_t", value)
 
     @property
@@ -426,6 +439,7 @@ class Mat143Pine(KeywordBase):
 
     @qual_c.setter
     def qual_c(self, value: float) -> None:
+        """Set the qual_c property."""
         self._cards[1].set_value("qual_c", value)
 
     @property
@@ -440,8 +454,9 @@ class Mat143Pine(KeywordBase):
 
     @units.setter
     def units(self, value: int) -> None:
+        """Set the units property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""units must be `None` or one of {0,1,2,3}""")
+            raise Exception("""units must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("units", value)
 
     @property
@@ -454,8 +469,9 @@ class Mat143Pine(KeywordBase):
 
     @iqual.setter
     def iqual(self, value: int) -> None:
+        """Set the iqual property."""
         if value not in [0, 1, None]:
-            raise Exception("""iqual must be `None` or one of {0,1}""")
+            raise Exception("""iqual must be `None` or one of {0,1}.""")
         self._cards[1].set_value("iqual", value)
 
     @property
@@ -472,6 +488,7 @@ class Mat143Pine(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -482,6 +499,7 @@ class Mat143Pine(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[3].set_value("xp", value)
 
     @property
@@ -492,6 +510,7 @@ class Mat143Pine(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[3].set_value("yp", value)
 
     @property
@@ -502,6 +521,7 @@ class Mat143Pine(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[3].set_value("zp", value)
 
     @property
@@ -512,6 +532,7 @@ class Mat143Pine(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[3].set_value("a1", value)
 
     @property
@@ -522,6 +543,7 @@ class Mat143Pine(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[3].set_value("a2", value)
 
     @property
@@ -532,6 +554,7 @@ class Mat143Pine(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[3].set_value("a3", value)
 
     @property
@@ -542,6 +565,7 @@ class Mat143Pine(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -552,6 +576,7 @@ class Mat143Pine(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -562,6 +587,7 @@ class Mat143Pine(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[4].set_value("d3", value)
 
     @property
@@ -572,6 +598,7 @@ class Mat143Pine(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[4].set_value("v1", value)
 
     @property
@@ -582,6 +609,7 @@ class Mat143Pine(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[4].set_value("v2", value)
 
     @property
@@ -592,6 +620,7 @@ class Mat143Pine(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[4].set_value("v3", value)
 
     @property
@@ -602,5 +631,6 @@ class Mat143Pine(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

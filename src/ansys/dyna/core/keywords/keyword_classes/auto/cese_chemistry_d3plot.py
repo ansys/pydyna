@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseChemistryD3Plot(KeywordBase):
     subkeyword = "CHEMISTRY_D3PLOT"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,6 +67,7 @@ class CeseChemistryD3Plot(KeywordBase):
 
     @modelid.setter
     def modelid(self, value: int) -> None:
+        """Set the modelid property."""
         self._cards[0].set_value("modelid", value)
 
     @property
@@ -75,5 +78,6 @@ class CeseChemistryD3Plot(KeywordBase):
 
     @species.setter
     def species(self, value: str) -> None:
+        """Set the species property."""
         self._cards[1].set_value("species", value)
 

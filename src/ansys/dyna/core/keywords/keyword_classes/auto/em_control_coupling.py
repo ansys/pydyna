@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmControlCoupling(KeywordBase):
     subkeyword = "CONTROL_COUPLING"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -144,8 +146,9 @@ class EmControlCoupling(KeywordBase):
 
     @thcoupl.setter
     def thcoupl(self, value: int) -> None:
+        """Set the thcoupl property."""
         if value not in [0, 1, None]:
-            raise Exception("""thcoupl must be `None` or one of {0,1}""")
+            raise Exception("""thcoupl must be `None` or one of {0,1}.""")
         self._cards[0].set_value("thcoupl", value)
 
     @property
@@ -160,8 +163,9 @@ class EmControlCoupling(KeywordBase):
 
     @smcoupl.setter
     def smcoupl(self, value: int) -> None:
+        """Set the smcoupl property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""smcoupl must be `None` or one of {0,1,2,3}""")
+            raise Exception("""smcoupl must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("smcoupl", value)
 
     @property
@@ -173,6 +177,7 @@ class EmControlCoupling(KeywordBase):
 
     @thlcid.setter
     def thlcid(self, value: int) -> None:
+        """Set the thlcid property."""
         self._cards[0].set_value("thlcid", value)
 
     @property
@@ -184,6 +189,7 @@ class EmControlCoupling(KeywordBase):
 
     @smlcid.setter
     def smlcid(self, value: int) -> None:
+        """Set the smlcid property."""
         self._cards[0].set_value("smlcid", value)
 
     @property
@@ -194,6 +200,7 @@ class EmControlCoupling(KeywordBase):
 
     @thcplfl.setter
     def thcplfl(self, value: int) -> None:
+        """Set the thcplfl property."""
         self._cards[0].set_value("thcplfl", value)
 
     @property
@@ -206,8 +213,9 @@ class EmControlCoupling(KeywordBase):
 
     @smcplfl.setter
     def smcplfl(self, value: int) -> None:
+        """Set the smcplfl property."""
         if value not in [0, 1, None]:
-            raise Exception("""smcplfl must be `None` or one of {0,1}""")
+            raise Exception("""smcplfl must be `None` or one of {0,1}.""")
         self._cards[0].set_value("smcplfl", value)
 
     @property
@@ -218,6 +226,7 @@ class EmControlCoupling(KeywordBase):
 
     @cflag.setter
     def cflag(self, value: int) -> None:
+        """Set the cflag property."""
         self._cards[0].set_value("cflag", value)
 
     @property
@@ -228,6 +237,7 @@ class EmControlCoupling(KeywordBase):
 
     @nflag.setter
     def nflag(self, value: int) -> None:
+        """Set the nflag property."""
         self._cards[0].set_value("nflag", value)
 
     @property
@@ -241,8 +251,9 @@ class EmControlCoupling(KeywordBase):
 
     @smmod.setter
     def smmod(self, value: int) -> None:
+        """Set the smmod property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""smmod must be `None` or one of {0,1,2}""")
+            raise Exception("""smmod must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("smmod", value)
 
     @property
@@ -253,6 +264,7 @@ class EmControlCoupling(KeywordBase):
 
     @dfx.setter
     def dfx(self, value: int) -> None:
+        """Set the dfx property."""
         self._cards[1].set_value("dfx", value)
 
     @property
@@ -263,6 +275,7 @@ class EmControlCoupling(KeywordBase):
 
     @dfy.setter
     def dfy(self, value: int) -> None:
+        """Set the dfy property."""
         self._cards[1].set_value("dfy", value)
 
     @property
@@ -273,5 +286,6 @@ class EmControlCoupling(KeywordBase):
 
     @dfz.setter
     def dfz(self, value: int) -> None:
+        """Set the dfz property."""
         self._cards[1].set_value("dfz", value)
 

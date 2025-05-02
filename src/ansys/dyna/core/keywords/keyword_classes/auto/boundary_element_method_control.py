@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryElementMethodControl(KeywordBase):
     subkeyword = "ELEMENT_METHOD_CONTROL"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class BoundaryElementMethodControl(KeywordBase):
 
     @lwake.setter
     def lwake(self, value: int) -> None:
+        """Set the lwake property."""
         self._cards[0].set_value("lwake", value)
 
     @property
@@ -89,6 +92,7 @@ class BoundaryElementMethodControl(KeywordBase):
 
     @dtbem.setter
     def dtbem(self, value: float) -> None:
+        """Set the dtbem property."""
         self._cards[0].set_value("dtbem", value)
 
     @property
@@ -99,6 +103,7 @@ class BoundaryElementMethodControl(KeywordBase):
 
     @iupbem.setter
     def iupbem(self, value: int) -> None:
+        """Set the iupbem property."""
         self._cards[0].set_value("iupbem", value)
 
     @property
@@ -109,5 +114,6 @@ class BoundaryElementMethodControl(KeywordBase):
 
     @farbem.setter
     def farbem(self, value: float) -> None:
+        """Set the farbem property."""
         self._cards[0].set_value("farbem", value)
 

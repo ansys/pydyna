@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat060C(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -159,6 +161,7 @@ class Mat060C(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -169,6 +172,7 @@ class Mat060C(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -179,6 +183,7 @@ class Mat060C(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[0].set_value("v0", value)
 
     @property
@@ -189,6 +194,7 @@ class Mat060C(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -199,6 +205,7 @@ class Mat060C(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[0].set_value("b", value)
 
     @property
@@ -209,6 +216,7 @@ class Mat060C(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -219,6 +227,7 @@ class Mat060C(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: float) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -229,6 +238,7 @@ class Mat060C(KeywordBase):
 
     @pr_lc.setter
     def pr_lc(self, value: int) -> None:
+        """Set the pr_lc property."""
         self._cards[1].set_value("pr_lc", value)
 
     @property
@@ -239,6 +249,7 @@ class Mat060C(KeywordBase):
 
     @ym_lc.setter
     def ym_lc(self, value: int) -> None:
+        """Set the ym_lc property."""
         self._cards[1].set_value("ym_lc", value)
 
     @property
@@ -249,6 +260,7 @@ class Mat060C(KeywordBase):
 
     @a_lc.setter
     def a_lc(self, value: int) -> None:
+        """Set the a_lc property."""
         self._cards[1].set_value("a_lc", value)
 
     @property
@@ -259,6 +271,7 @@ class Mat060C(KeywordBase):
 
     @v_lc.setter
     def v_lc(self, value: int) -> None:
+        """Set the v_lc property."""
         self._cards[1].set_value("v_lc", value)
 
     @property
@@ -269,8 +282,9 @@ class Mat060C(KeywordBase):
 
     @v_log.setter
     def v_log(self, value: float) -> None:
+        """Set the v_log property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""v_log must be `None` or one of {0.0,1.0}""")
+            raise Exception("""v_log must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("v_log", value)
 
     @property
@@ -281,5 +295,6 @@ class Mat060C(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

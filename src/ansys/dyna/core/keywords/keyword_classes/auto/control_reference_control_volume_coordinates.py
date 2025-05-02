@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlReferenceControlVolumeCoordinates(KeywordBase):
     subkeyword = "REFERENCE_CONTROL_VOLUME_COORDINATES"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -73,6 +75,7 @@ class ControlReferenceControlVolumeCoordinates(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -85,8 +88,9 @@ class ControlReferenceControlVolumeCoordinates(KeywordBase):
 
     @opt.setter
     def opt(self, value: int) -> None:
+        """Set the opt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""opt must be `None` or one of {0,1,2}""")
+            raise Exception("""opt must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("opt", value)
 
     @property
@@ -97,5 +101,6 @@ class ControlReferenceControlVolumeCoordinates(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[1].set_value("psid", value)
 

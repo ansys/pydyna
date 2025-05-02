@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the AIRBAG keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagHybridChemkinId(KeywordBase):
     subkeyword = "HYBRID_CHEMKIN_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the AIRBAG keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -429,6 +431,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -439,6 +442,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -449,6 +453,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -461,8 +466,9 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("sidtyp", value)
 
     @property
@@ -476,6 +482,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @rbid.setter
     def rbid(self, value: int) -> None:
+        """Set the rbid property."""
         self._cards[1].set_value("rbid", value)
 
     @property
@@ -486,6 +493,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @vsca.setter
     def vsca(self, value: float) -> None:
+        """Set the vsca property."""
         self._cards[1].set_value("vsca", value)
 
     @property
@@ -496,6 +504,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @psca.setter
     def psca(self, value: float) -> None:
+        """Set the psca property."""
         self._cards[1].set_value("psca", value)
 
     @property
@@ -506,6 +515,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @vini.setter
     def vini(self, value: float) -> None:
+        """Set the vini property."""
         self._cards[1].set_value("vini", value)
 
     @property
@@ -516,6 +526,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @mwd.setter
     def mwd(self, value: float) -> None:
+        """Set the mwd property."""
         self._cards[1].set_value("mwd", value)
 
     @property
@@ -526,6 +537,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @spsf.setter
     def spsf(self, value: float) -> None:
+        """Set the spsf property."""
         self._cards[1].set_value("spsf", value)
 
     @property
@@ -538,6 +550,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @lcidm.setter
     def lcidm(self, value: int) -> None:
+        """Set the lcidm property."""
         self._cards[2].set_value("lcidm", value)
 
     @property
@@ -550,6 +563,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[2].set_value("lcidt", value)
 
     @property
@@ -560,6 +574,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @ngas.setter
     def ngas(self, value: int) -> None:
+        """Set the ngas property."""
         self._cards[2].set_value("ngas", value)
 
     @property
@@ -573,8 +588,9 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @data.setter
     def data(self, value: int) -> None:
+        """Set the data property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""data must be `None` or one of {0,1,2,3}""")
+            raise Exception("""data must be `None` or one of {0,1,2,3}.""")
         self._cards[2].set_value("data", value)
 
     @property
@@ -585,6 +601,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @atmt.setter
     def atmt(self, value: float) -> None:
+        """Set the atmt property."""
         self._cards[2].set_value("atmt", value)
 
     @property
@@ -595,6 +612,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @atmp.setter
     def atmp(self, value: float) -> None:
+        """Set the atmp property."""
         self._cards[2].set_value("atmp", value)
 
     @property
@@ -605,6 +623,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @rg.setter
     def rg(self, value: float) -> None:
+        """Set the rg property."""
         self._cards[2].set_value("rg", value)
 
     @property
@@ -615,6 +634,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @hconv.setter
     def hconv(self, value: float) -> None:
+        """Set the hconv property."""
         self._cards[3].set_value("hconv", value)
 
     @property
@@ -625,6 +645,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @c23.setter
     def c23(self, value: float) -> None:
+        """Set the c23 property."""
         self._cards[4].set_value("c23", value)
 
     @property
@@ -635,6 +656,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @a23.setter
     def a23(self, value: float) -> None:
+        """Set the a23 property."""
         self._cards[4].set_value("a23", value)
 
     @property
@@ -646,6 +668,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @chname.setter
     def chname(self, value: str) -> None:
+        """Set the chname property."""
         self._cards[5].set_value("chname", value)
 
     @property
@@ -656,6 +679,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @mw.setter
     def mw(self, value: float) -> None:
+        """Set the mw property."""
         self._cards[5].set_value("mw", value)
 
     @property
@@ -666,6 +690,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @lcidn.setter
     def lcidn(self, value: int) -> None:
+        """Set the lcidn property."""
         self._cards[5].set_value("lcidn", value)
 
     @property
@@ -676,6 +701,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @fmole.setter
     def fmole(self, value: float) -> None:
+        """Set the fmole property."""
         self._cards[5].set_value("fmole", value)
 
     @property
@@ -686,6 +712,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @fmolet.setter
     def fmolet(self, value: float) -> None:
+        """Set the fmolet property."""
         self._cards[5].set_value("fmolet", value)
 
     @property
@@ -696,6 +723,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @tlow.setter
     def tlow(self, value: float) -> None:
+        """Set the tlow property."""
         self._cards[6].set_value("tlow", value)
 
     @property
@@ -706,6 +734,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @tmid.setter
     def tmid(self, value: float) -> None:
+        """Set the tmid property."""
         self._cards[6].set_value("tmid", value)
 
     @property
@@ -716,6 +745,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @thigh.setter
     def thigh(self, value: float) -> None:
+        """Set the thigh property."""
         self._cards[6].set_value("thigh", value)
 
     @property
@@ -726,6 +756,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @alow.setter
     def alow(self, value: float) -> None:
+        """Set the alow property."""
         self._cards[7].set_value("alow", value)
 
     @property
@@ -736,6 +767,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @blow.setter
     def blow(self, value: float) -> None:
+        """Set the blow property."""
         self._cards[7].set_value("blow", value)
 
     @property
@@ -746,6 +778,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @clow.setter
     def clow(self, value: float) -> None:
+        """Set the clow property."""
         self._cards[7].set_value("clow", value)
 
     @property
@@ -756,6 +789,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @dlow.setter
     def dlow(self, value: float) -> None:
+        """Set the dlow property."""
         self._cards[7].set_value("dlow", value)
 
     @property
@@ -766,6 +800,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @elow.setter
     def elow(self, value: float) -> None:
+        """Set the elow property."""
         self._cards[7].set_value("elow", value)
 
     @property
@@ -776,6 +811,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @flow.setter
     def flow(self, value: float) -> None:
+        """Set the flow property."""
         self._cards[7].set_value("flow", value)
 
     @property
@@ -786,6 +822,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @glow.setter
     def glow(self, value: float) -> None:
+        """Set the glow property."""
         self._cards[7].set_value("glow", value)
 
     @property
@@ -796,6 +833,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @ahigh.setter
     def ahigh(self, value: float) -> None:
+        """Set the ahigh property."""
         self._cards[8].set_value("ahigh", value)
 
     @property
@@ -806,6 +844,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @bhigh.setter
     def bhigh(self, value: float) -> None:
+        """Set the bhigh property."""
         self._cards[8].set_value("bhigh", value)
 
     @property
@@ -816,6 +855,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @chigh.setter
     def chigh(self, value: float) -> None:
+        """Set the chigh property."""
         self._cards[8].set_value("chigh", value)
 
     @property
@@ -826,6 +866,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @dhigh.setter
     def dhigh(self, value: float) -> None:
+        """Set the dhigh property."""
         self._cards[8].set_value("dhigh", value)
 
     @property
@@ -836,6 +877,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @ehigh.setter
     def ehigh(self, value: float) -> None:
+        """Set the ehigh property."""
         self._cards[8].set_value("ehigh", value)
 
     @property
@@ -846,6 +888,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @fhigh.setter
     def fhigh(self, value: float) -> None:
+        """Set the fhigh property."""
         self._cards[8].set_value("fhigh", value)
 
     @property
@@ -856,6 +899,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @ghigh.setter
     def ghigh(self, value: float) -> None:
+        """Set the ghigh property."""
         self._cards[8].set_value("ghigh", value)
 
     @property
@@ -867,6 +911,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[9].set_value("a", value)
 
     @property
@@ -878,6 +923,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[9].set_value("b", value)
 
     @property
@@ -889,6 +935,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[9].set_value("c", value)
 
     @property
@@ -900,6 +947,7 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[9].set_value("d", value)
 
     @property
@@ -911,5 +959,6 @@ class AirbagHybridChemkinId(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[9].set_value("e", value)
 

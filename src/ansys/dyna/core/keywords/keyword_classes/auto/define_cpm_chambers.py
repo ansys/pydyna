@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCpmChambers(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -145,6 +147,7 @@ class DefineCpmChambers(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -155,6 +158,7 @@ class DefineCpmChambers(KeywordBase):
 
     @nchm.setter
     def nchm(self, value: int) -> None:
+        """Set the nchm property."""
         self._cards[0].set_value("nchm", value)
 
     @property
@@ -165,6 +169,7 @@ class DefineCpmChambers(KeywordBase):
 
     @sid1.setter
     def sid1(self, value: int) -> None:
+        """Set the sid1 property."""
         self._cards[1].set_value("sid1", value)
 
     @property
@@ -175,6 +180,7 @@ class DefineCpmChambers(KeywordBase):
 
     @sid2.setter
     def sid2(self, value: int) -> None:
+        """Set the sid2 property."""
         self._cards[1].set_value("sid2", value)
 
     @property
@@ -185,6 +191,7 @@ class DefineCpmChambers(KeywordBase):
 
     @ninter.setter
     def ninter(self, value: int) -> None:
+        """Set the ninter property."""
         self._cards[1].set_value("ninter", value)
 
     @property
@@ -195,6 +202,7 @@ class DefineCpmChambers(KeywordBase):
 
     @chm_id.setter
     def chm_id(self, value: int) -> None:
+        """Set the chm_id property."""
         self._cards[1].set_value("chm_id", value)
 
     @property
@@ -205,6 +213,7 @@ class DefineCpmChambers(KeywordBase):
 
     @sid3.setter
     def sid3(self, value: int) -> None:
+        """Set the sid3 property."""
         self._cards[2].set_value("sid3", value)
 
     @property
@@ -216,8 +225,9 @@ class DefineCpmChambers(KeywordBase):
 
     @itype3.setter
     def itype3(self, value: int) -> None:
+        """Set the itype3 property."""
         if value not in [0, 1, None]:
-            raise Exception("""itype3 must be `None` or one of {0,1}""")
+            raise Exception("""itype3 must be `None` or one of {0,1}.""")
         self._cards[2].set_value("itype3", value)
 
     @property
@@ -228,6 +238,7 @@ class DefineCpmChambers(KeywordBase):
 
     @tochm.setter
     def tochm(self, value: int) -> None:
+        """Set the tochm property."""
         self._cards[2].set_value("tochm", value)
 
     @property
@@ -238,5 +249,6 @@ class DefineCpmChambers(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseReactionRateIg(KeywordBase):
     subkeyword = "REACTION_RATE_IG"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -163,6 +165,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @react_id.setter
     def react_id(self, value: int) -> None:
+        """Set the react_id property."""
         self._cards[0].set_value("react_id", value)
 
     @property
@@ -173,6 +176,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @ign.setter
     def ign(self, value: float) -> None:
+        """Set the ign property."""
         self._cards[0].set_value("ign", value)
 
     @property
@@ -183,6 +187,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @aa.setter
     def aa(self, value: float) -> None:
+        """Set the aa property."""
         self._cards[0].set_value("aa", value)
 
     @property
@@ -193,6 +198,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @bb.setter
     def bb(self, value: float) -> None:
+        """Set the bb property."""
         self._cards[0].set_value("bb", value)
 
     @property
@@ -203,6 +209,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @xx.setter
     def xx(self, value: float) -> None:
+        """Set the xx property."""
         self._cards[0].set_value("xx", value)
 
     @property
@@ -213,6 +220,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @grow1.setter
     def grow1(self, value: float) -> None:
+        """Set the grow1 property."""
         self._cards[0].set_value("grow1", value)
 
     @property
@@ -223,6 +231,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @cc.setter
     def cc(self, value: float) -> None:
+        """Set the cc property."""
         self._cards[0].set_value("cc", value)
 
     @property
@@ -233,6 +242,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @dd.setter
     def dd(self, value: float) -> None:
+        """Set the dd property."""
         self._cards[0].set_value("dd", value)
 
     @property
@@ -243,6 +253,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @yy.setter
     def yy(self, value: float) -> None:
+        """Set the yy property."""
         self._cards[1].set_value("yy", value)
 
     @property
@@ -253,6 +264,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @grow2.setter
     def grow2(self, value: float) -> None:
+        """Set the grow2 property."""
         self._cards[1].set_value("grow2", value)
 
     @property
@@ -263,6 +275,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @ee.setter
     def ee(self, value: float) -> None:
+        """Set the ee property."""
         self._cards[1].set_value("ee", value)
 
     @property
@@ -273,6 +286,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @gg.setter
     def gg(self, value: float) -> None:
+        """Set the gg property."""
         self._cards[1].set_value("gg", value)
 
     @property
@@ -283,6 +297,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @zz.setter
     def zz(self, value: float) -> None:
+        """Set the zz property."""
         self._cards[1].set_value("zz", value)
 
     @property
@@ -293,6 +308,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @igmax.setter
     def igmax(self, value: float) -> None:
+        """Set the igmax property."""
         self._cards[1].set_value("igmax", value)
 
     @property
@@ -303,6 +319,7 @@ class DualceseReactionRateIg(KeywordBase):
 
     @g1max.setter
     def g1max(self, value: float) -> None:
+        """Set the g1max property."""
         self._cards[1].set_value("g1max", value)
 
     @property
@@ -313,5 +330,6 @@ class DualceseReactionRateIg(KeywordBase):
 
     @g2max.setter
     def g2max(self, value: float) -> None:
+        """Set the g2max property."""
         self._cards[1].set_value("g2max", value)
 

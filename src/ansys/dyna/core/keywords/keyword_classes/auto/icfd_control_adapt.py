@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlAdapt(KeywordBase):
     subkeyword = "CONTROL_ADAPT"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -108,6 +110,7 @@ class IcfdControlAdapt(KeywordBase):
 
     @minh.setter
     def minh(self, value: float) -> None:
+        """Set the minh property."""
         self._cards[0].set_value("minh", value)
 
     @property
@@ -118,6 +121,7 @@ class IcfdControlAdapt(KeywordBase):
 
     @maxh.setter
     def maxh(self, value: float) -> None:
+        """Set the maxh property."""
         self._cards[0].set_value("maxh", value)
 
     @property
@@ -128,6 +132,7 @@ class IcfdControlAdapt(KeywordBase):
 
     @err.setter
     def err(self, value: float) -> None:
+        """Set the err property."""
         self._cards[0].set_value("err", value)
 
     @property
@@ -138,8 +143,9 @@ class IcfdControlAdapt(KeywordBase):
 
     @mth.setter
     def mth(self, value: int) -> None:
+        """Set the mth property."""
         if value not in [0, 1, None]:
-            raise Exception("""mth must be `None` or one of {0,1}""")
+            raise Exception("""mth must be `None` or one of {0,1}.""")
         self._cards[0].set_value("mth", value)
 
     @property
@@ -153,6 +159,7 @@ class IcfdControlAdapt(KeywordBase):
 
     @nit.setter
     def nit(self, value: int) -> None:
+        """Set the nit property."""
         self._cards[0].set_value("nit", value)
 
     @property
@@ -167,8 +174,9 @@ class IcfdControlAdapt(KeywordBase):
 
     @var.setter
     def var(self, value: int) -> None:
+        """Set the var property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""var must be `None` or one of {0,1,2,3}""")
+            raise Exception("""var must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("var", value)
 
     @property
@@ -181,7 +189,8 @@ class IcfdControlAdapt(KeywordBase):
 
     @kis.setter
     def kis(self, value: int) -> None:
+        """Set the kis property."""
         if value not in [0, 1, None]:
-            raise Exception("""kis must be `None` or one of {0,1}""")
+            raise Exception("""kis must be `None` or one of {0,1}.""")
         self._cards[0].set_value("kis", value)
 

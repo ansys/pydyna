@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingStoning(KeywordBase):
     subkeyword = "FORMING_STONING"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -132,6 +134,7 @@ class ControlFormingStoning(KeywordBase):
 
     @istone.setter
     def istone(self, value: int) -> None:
+        """Set the istone property."""
         self._cards[0].set_value("istone", value)
 
     @property
@@ -142,6 +145,7 @@ class ControlFormingStoning(KeywordBase):
 
     @length.setter
     def length(self, value: float) -> None:
+        """Set the length property."""
         self._cards[0].set_value("length", value)
 
     @property
@@ -152,6 +156,7 @@ class ControlFormingStoning(KeywordBase):
 
     @width.setter
     def width(self, value: int) -> None:
+        """Set the width property."""
         self._cards[0].set_value("width", value)
 
     @property
@@ -162,6 +167,7 @@ class ControlFormingStoning(KeywordBase):
 
     @step.setter
     def step(self, value: float) -> None:
+        """Set the step property."""
         self._cards[0].set_value("step", value)
 
     @property
@@ -172,6 +178,7 @@ class ControlFormingStoning(KeywordBase):
 
     @direction.setter
     def direction(self, value: int) -> None:
+        """Set the direction property."""
         self._cards[0].set_value("direction", value)
 
     @property
@@ -184,8 +191,9 @@ class ControlFormingStoning(KeywordBase):
 
     @reverse.setter
     def reverse(self, value: int) -> None:
+        """Set the reverse property."""
         if value not in [0, 1, None]:
-            raise Exception("""reverse must be `None` or one of {0,1}""")
+            raise Exception("""reverse must be `None` or one of {0,1}.""")
         self._cards[0].set_value("reverse", value)
 
     @property
@@ -197,6 +205,7 @@ class ControlFormingStoning(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         self._cards[0].set_value("method", value)
 
     @property
@@ -207,6 +216,7 @@ class ControlFormingStoning(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[1].set_value("node1", value)
 
     @property
@@ -217,6 +227,7 @@ class ControlFormingStoning(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[1].set_value("node2", value)
 
     @property
@@ -227,6 +238,7 @@ class ControlFormingStoning(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[1].set_value("setid", value)
 
     @property
@@ -237,7 +249,8 @@ class ControlFormingStoning(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [1, 2, None]:
-            raise Exception("""itype must be `None` or one of {1,2}""")
+            raise Exception("""itype must be `None` or one of {1,2}.""")
         self._cards[1].set_value("itype", value)
 

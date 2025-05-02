@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlPartition(KeywordBase):
     subkeyword = "CONTROL_PARTITION"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,7 +63,8 @@ class IcfdControlPartition(KeywordBase):
 
     @ptech.setter
     def ptech(self, value: int) -> None:
+        """Set the ptech property."""
         if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""ptech must be `None` or one of {1,2,3,4,5}""")
+            raise Exception("""ptech must be `None` or one of {1,2,3,4,5}.""")
         self._cards[0].set_value("ptech", value)
 

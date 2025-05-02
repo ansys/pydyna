@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the PART keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartDuplicateNullOverlay(KeywordBase):
     subkeyword = "DUPLICATE_NULL_OVERLAY"
 
     def __init__(self, **kwargs):
+        """Initialize the PART keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -102,8 +104,9 @@ class PartDuplicateNullOverlay(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: str) -> None:
+        """Set the ptype property."""
         if value not in ["PART", "PSET", None]:
-            raise Exception("""ptype must be `None` or one of {"PART","PSET"}""")
+            raise Exception("""ptype must be `None` or one of {"PART","PSET"}.""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -114,6 +117,7 @@ class PartDuplicateNullOverlay(KeywordBase):
 
     @typeid.setter
     def typeid(self, value: int) -> None:
+        """Set the typeid property."""
         self._cards[0].set_value("typeid", value)
 
     @property
@@ -124,6 +128,7 @@ class PartDuplicateNullOverlay(KeywordBase):
 
     @idpoff.setter
     def idpoff(self, value: int) -> None:
+        """Set the idpoff property."""
         self._cards[0].set_value("idpoff", value)
 
     @property
@@ -134,6 +139,7 @@ class PartDuplicateNullOverlay(KeywordBase):
 
     @ideoff.setter
     def ideoff(self, value: int) -> None:
+        """Set the ideoff property."""
         self._cards[0].set_value("ideoff", value)
 
     @property
@@ -144,6 +150,7 @@ class PartDuplicateNullOverlay(KeywordBase):
 
     @density.setter
     def density(self, value: float) -> None:
+        """Set the density property."""
         self._cards[0].set_value("density", value)
 
     @property
@@ -154,6 +161,7 @@ class PartDuplicateNullOverlay(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -164,5 +172,6 @@ class PartDuplicateNullOverlay(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 

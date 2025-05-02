@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmVoltageDrop(KeywordBase):
     subkeyword = "VOLTAGE_DROP"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class EmVoltageDrop(KeywordBase):
 
     @vdid.setter
     def vdid(self, value: int) -> None:
+        """Set the vdid property."""
         self._cards[0].set_value("vdid", value)
 
     @property
@@ -92,6 +95,7 @@ class EmVoltageDrop(KeywordBase):
 
     @vdtype.setter
     def vdtype(self, value: int) -> None:
+        """Set the vdtype property."""
         self._cards[0].set_value("vdtype", value)
 
     @property
@@ -102,6 +106,7 @@ class EmVoltageDrop(KeywordBase):
 
     @ssid1.setter
     def ssid1(self, value: int) -> None:
+        """Set the ssid1 property."""
         self._cards[0].set_value("ssid1", value)
 
     @property
@@ -112,6 +117,7 @@ class EmVoltageDrop(KeywordBase):
 
     @ssid2_.setter
     def ssid2_(self, value: int) -> None:
+        """Set the ssid2_ property."""
         self._cards[0].set_value("ssid2 ", value)
 
     @property
@@ -122,5 +128,6 @@ class EmVoltageDrop(KeywordBase):
 
     @volt_.setter
     def volt_(self, value: float) -> None:
+        """Set the volt_ property."""
         self._cards[0].set_value("volt ", value)
 

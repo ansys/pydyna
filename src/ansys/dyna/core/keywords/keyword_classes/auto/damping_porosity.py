@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DAMPING keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DampingPorosity(KeywordBase):
     subkeyword = "POROSITY"
 
     def __init__(self, **kwargs):
+        """Initialize the DAMPING keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -131,6 +133,7 @@ class DampingPorosity(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -141,6 +144,7 @@ class DampingPorosity(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -151,6 +155,7 @@ class DampingPorosity(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -161,8 +166,9 @@ class DampingPorosity(KeywordBase):
 
     @flag.setter
     def flag(self, value: int) -> None:
+        """Set the flag property."""
         if value not in [0, 1, None]:
-            raise Exception("""flag must be `None` or one of {0,1}""")
+            raise Exception("""flag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("flag", value)
 
     @property
@@ -173,6 +179,7 @@ class DampingPorosity(KeywordBase):
 
     @stx.setter
     def stx(self, value: float) -> None:
+        """Set the stx property."""
         self._cards[1].set_value("stx", value)
 
     @property
@@ -183,6 +190,7 @@ class DampingPorosity(KeywordBase):
 
     @sty.setter
     def sty(self, value: float) -> None:
+        """Set the sty property."""
         self._cards[1].set_value("sty", value)
 
     @property
@@ -193,6 +201,7 @@ class DampingPorosity(KeywordBase):
 
     @stz.setter
     def stz(self, value: float) -> None:
+        """Set the stz property."""
         self._cards[1].set_value("stz", value)
 
     @property
@@ -203,6 +212,7 @@ class DampingPorosity(KeywordBase):
 
     @srx.setter
     def srx(self, value: float) -> None:
+        """Set the srx property."""
         self._cards[1].set_value("srx", value)
 
     @property
@@ -213,6 +223,7 @@ class DampingPorosity(KeywordBase):
 
     @sry.setter
     def sry(self, value: float) -> None:
+        """Set the sry property."""
         self._cards[1].set_value("sry", value)
 
     @property
@@ -223,5 +234,6 @@ class DampingPorosity(KeywordBase):
 
     @srz.setter
     def srz(self, value: float) -> None:
+        """Set the srz property."""
         self._cards[1].set_value("srz", value)
 

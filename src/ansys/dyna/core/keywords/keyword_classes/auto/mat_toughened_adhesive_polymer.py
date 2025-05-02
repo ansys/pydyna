@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -300,6 +302,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -310,6 +313,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -320,6 +324,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -330,6 +335,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -342,8 +348,9 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @flg.setter
     def flg(self, value: int) -> None:
+        """Set the flg property."""
         if value not in [0.0, 2.0, None]:
-            raise Exception("""flg must be `None` or one of {0.0,2.0}""")
+            raise Exception("""flg must be `None` or one of {0.0,2.0}.""")
         self._cards[0].set_value("flg", value)
 
     @property
@@ -356,8 +363,9 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @jcfl.setter
     def jcfl(self, value: int) -> None:
+        """Set the jcfl property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""jcfl must be `None` or one of {0.0,1.0}""")
+            raise Exception("""jcfl must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("jcfl", value)
 
     @property
@@ -370,6 +378,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @dopt.setter
     def dopt(self, value: int) -> None:
+        """Set the dopt property."""
         self._cards[0].set_value("dopt", value)
 
     @property
@@ -380,6 +389,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: int) -> None:
+        """Set the lcss property."""
         self._cards[1].set_value("lcss", value)
 
     @property
@@ -390,6 +400,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @tau0.setter
     def tau0(self, value: float) -> None:
+        """Set the tau0 property."""
         self._cards[1].set_value("tau0", value)
 
     @property
@@ -400,6 +411,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[1].set_value("q", value)
 
     @property
@@ -410,6 +422,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[1].set_value("b", value)
 
     @property
@@ -420,6 +433,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[1].set_value("h", value)
 
     @property
@@ -430,6 +444,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[1].set_value("c", value)
 
     @property
@@ -440,6 +455,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @gam0.setter
     def gam0(self, value: float) -> None:
+        """Set the gam0 property."""
         self._cards[1].set_value("gam0", value)
 
     @property
@@ -450,6 +466,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @gamm.setter
     def gamm(self, value: float) -> None:
+        """Set the gamm property."""
         self._cards[1].set_value("gamm", value)
 
     @property
@@ -460,6 +477,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @a10.setter
     def a10(self, value: float) -> None:
+        """Set the a10 property."""
         self._cards[2].set_value("a10", value)
 
     @property
@@ -470,6 +488,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @a20.setter
     def a20(self, value: float) -> None:
+        """Set the a20 property."""
         self._cards[2].set_value("a20", value)
 
     @property
@@ -480,6 +499,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @a1h.setter
     def a1h(self, value: float) -> None:
+        """Set the a1h property."""
         self._cards[2].set_value("a1h", value)
 
     @property
@@ -490,6 +510,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @a2h.setter
     def a2h(self, value: float) -> None:
+        """Set the a2h property."""
         self._cards[2].set_value("a2h", value)
 
     @property
@@ -500,6 +521,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @a2s.setter
     def a2s(self, value: float) -> None:
+        """Set the a2s property."""
         self._cards[2].set_value("a2s", value)
 
     @property
@@ -510,6 +532,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @pow.setter
     def pow(self, value: float) -> None:
+        """Set the pow property."""
         self._cards[2].set_value("pow", value)
 
     @property
@@ -520,6 +543,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @srfilt.setter
     def srfilt(self, value: float) -> None:
+        """Set the srfilt property."""
         self._cards[2].set_value("srfilt", value)
 
     @property
@@ -530,6 +554,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[3].set_value("d1", value)
 
     @property
@@ -540,6 +565,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[3].set_value("d2", value)
 
     @property
@@ -550,6 +576,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[3].set_value("d3", value)
 
     @property
@@ -560,6 +587,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @d4.setter
     def d4(self, value: float) -> None:
+        """Set the d4 property."""
         self._cards[3].set_value("d4", value)
 
     @property
@@ -570,6 +598,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @d1c.setter
     def d1c(self, value: float) -> None:
+        """Set the d1c property."""
         self._cards[3].set_value("d1c", value)
 
     @property
@@ -580,6 +609,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @d2c.setter
     def d2c(self, value: float) -> None:
+        """Set the d2c property."""
         self._cards[3].set_value("d2c", value)
 
     @property
@@ -590,5 +620,6 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

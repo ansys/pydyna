@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -450,6 +452,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -460,6 +463,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -470,6 +474,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -480,6 +485,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a0.setter
     def a0(self, value: float) -> None:
+        """Set the a0 property."""
         self._cards[1].set_value("a0", value)
 
     @property
@@ -490,6 +496,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b0.setter
     def b0(self, value: float) -> None:
+        """Set the b0 property."""
         self._cards[1].set_value("b0", value)
 
     @property
@@ -500,6 +507,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -510,6 +518,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[1].set_value("b1", value)
 
     @property
@@ -520,6 +529,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[1].set_value("m", value)
 
     @property
@@ -530,6 +540,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapas.setter
     def kapas(self, value: float) -> None:
+        """Set the kapas property."""
         self._cards[1].set_value("kapas", value)
 
     @property
@@ -540,6 +551,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapa0.setter
     def kapa0(self, value: float) -> None:
+        """Set the kapa0 property."""
         self._cards[1].set_value("kapa0", value)
 
     @property
@@ -550,6 +562,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @shear.setter
     def shear(self, value: float) -> None:
+        """Set the shear property."""
         self._cards[1].set_value("shear", value)
 
     @property
@@ -560,6 +573,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a0.setter
     def a0(self, value: float) -> None:
+        """Set the a0 property."""
         self._cards[2].set_value("a0", value)
 
     @property
@@ -570,6 +584,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b0.setter
     def b0(self, value: float) -> None:
+        """Set the b0 property."""
         self._cards[2].set_value("b0", value)
 
     @property
@@ -580,6 +595,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[2].set_value("a1", value)
 
     @property
@@ -590,6 +606,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[2].set_value("b1", value)
 
     @property
@@ -600,6 +617,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[2].set_value("m", value)
 
     @property
@@ -610,6 +628,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapas.setter
     def kapas(self, value: float) -> None:
+        """Set the kapas property."""
         self._cards[2].set_value("kapas", value)
 
     @property
@@ -620,6 +639,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapa0.setter
     def kapa0(self, value: float) -> None:
+        """Set the kapa0 property."""
         self._cards[2].set_value("kapa0", value)
 
     @property
@@ -630,6 +650,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @shear.setter
     def shear(self, value: float) -> None:
+        """Set the shear property."""
         self._cards[2].set_value("shear", value)
 
     @property
@@ -640,6 +661,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a0.setter
     def a0(self, value: float) -> None:
+        """Set the a0 property."""
         self._cards[3].set_value("a0", value)
 
     @property
@@ -650,6 +672,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b0.setter
     def b0(self, value: float) -> None:
+        """Set the b0 property."""
         self._cards[3].set_value("b0", value)
 
     @property
@@ -660,6 +683,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[3].set_value("a1", value)
 
     @property
@@ -670,6 +694,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[3].set_value("b1", value)
 
     @property
@@ -680,6 +705,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[3].set_value("m", value)
 
     @property
@@ -690,6 +716,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapas.setter
     def kapas(self, value: float) -> None:
+        """Set the kapas property."""
         self._cards[3].set_value("kapas", value)
 
     @property
@@ -700,6 +727,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapa0.setter
     def kapa0(self, value: float) -> None:
+        """Set the kapa0 property."""
         self._cards[3].set_value("kapa0", value)
 
     @property
@@ -710,6 +738,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @shear.setter
     def shear(self, value: float) -> None:
+        """Set the shear property."""
         self._cards[3].set_value("shear", value)
 
     @property
@@ -720,6 +749,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a0.setter
     def a0(self, value: float) -> None:
+        """Set the a0 property."""
         self._cards[4].set_value("a0", value)
 
     @property
@@ -730,6 +760,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b0.setter
     def b0(self, value: float) -> None:
+        """Set the b0 property."""
         self._cards[4].set_value("b0", value)
 
     @property
@@ -740,6 +771,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[4].set_value("a1", value)
 
     @property
@@ -750,6 +782,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[4].set_value("b1", value)
 
     @property
@@ -760,6 +793,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[4].set_value("m", value)
 
     @property
@@ -770,6 +804,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapas.setter
     def kapas(self, value: float) -> None:
+        """Set the kapas property."""
         self._cards[4].set_value("kapas", value)
 
     @property
@@ -780,6 +815,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapa0.setter
     def kapa0(self, value: float) -> None:
+        """Set the kapa0 property."""
         self._cards[4].set_value("kapa0", value)
 
     @property
@@ -790,6 +826,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @shear.setter
     def shear(self, value: float) -> None:
+        """Set the shear property."""
         self._cards[4].set_value("shear", value)
 
     @property
@@ -800,6 +837,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a0.setter
     def a0(self, value: float) -> None:
+        """Set the a0 property."""
         self._cards[5].set_value("a0", value)
 
     @property
@@ -810,6 +848,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b0.setter
     def b0(self, value: float) -> None:
+        """Set the b0 property."""
         self._cards[5].set_value("b0", value)
 
     @property
@@ -820,6 +859,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[5].set_value("a1", value)
 
     @property
@@ -830,6 +870,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[5].set_value("b1", value)
 
     @property
@@ -840,6 +881,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[5].set_value("m", value)
 
     @property
@@ -850,6 +892,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapas.setter
     def kapas(self, value: float) -> None:
+        """Set the kapas property."""
         self._cards[5].set_value("kapas", value)
 
     @property
@@ -860,6 +903,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapa0.setter
     def kapa0(self, value: float) -> None:
+        """Set the kapa0 property."""
         self._cards[5].set_value("kapa0", value)
 
     @property
@@ -870,6 +914,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @shear.setter
     def shear(self, value: float) -> None:
+        """Set the shear property."""
         self._cards[5].set_value("shear", value)
 
     @property
@@ -880,6 +925,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a0.setter
     def a0(self, value: float) -> None:
+        """Set the a0 property."""
         self._cards[6].set_value("a0", value)
 
     @property
@@ -890,6 +936,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b0.setter
     def b0(self, value: float) -> None:
+        """Set the b0 property."""
         self._cards[6].set_value("b0", value)
 
     @property
@@ -900,6 +947,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[6].set_value("a1", value)
 
     @property
@@ -910,6 +958,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[6].set_value("b1", value)
 
     @property
@@ -920,6 +969,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[6].set_value("m", value)
 
     @property
@@ -930,6 +980,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapas.setter
     def kapas(self, value: float) -> None:
+        """Set the kapas property."""
         self._cards[6].set_value("kapas", value)
 
     @property
@@ -940,6 +991,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @kapa0.setter
     def kapa0(self, value: float) -> None:
+        """Set the kapa0 property."""
         self._cards[6].set_value("kapa0", value)
 
     @property
@@ -950,6 +1002,7 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @shear.setter
     def shear(self, value: float) -> None:
+        """Set the shear property."""
         self._cards[6].set_value("shear", value)
 
     @property
@@ -960,5 +1013,6 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
 

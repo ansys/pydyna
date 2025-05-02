@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAleMixingLength(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -238,6 +240,7 @@ class MatAleMixingLength(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -248,6 +251,7 @@ class MatAleMixingLength(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -258,6 +262,7 @@ class MatAleMixingLength(KeywordBase):
 
     @pc.setter
     def pc(self, value: float) -> None:
+        """Set the pc property."""
         self._cards[0].set_value("pc", value)
 
     @property
@@ -271,6 +276,7 @@ class MatAleMixingLength(KeywordBase):
 
     @mulo.setter
     def mulo(self, value: float) -> None:
+        """Set the mulo property."""
         self._cards[0].set_value("mulo", value)
 
     @property
@@ -281,6 +287,7 @@ class MatAleMixingLength(KeywordBase):
 
     @muhi.setter
     def muhi(self, value: float) -> None:
+        """Set the muhi property."""
         self._cards[0].set_value("muhi", value)
 
     @property
@@ -291,6 +298,7 @@ class MatAleMixingLength(KeywordBase):
 
     @rk.setter
     def rk(self, value: float) -> None:
+        """Set the rk property."""
         self._cards[0].set_value("rk", value)
 
     @property
@@ -301,6 +309,7 @@ class MatAleMixingLength(KeywordBase):
 
     @rn.setter
     def rn(self, value: float) -> None:
+        """Set the rn property."""
         self._cards[0].set_value("rn", value)
 
     @property
@@ -311,6 +320,7 @@ class MatAleMixingLength(KeywordBase):
 
     @lci.setter
     def lci(self, value: float) -> None:
+        """Set the lci property."""
         self._cards[1].set_value("lci", value)
 
     @property
@@ -321,6 +331,7 @@ class MatAleMixingLength(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[1].set_value("c1", value)
 
     @property
@@ -331,6 +342,7 @@ class MatAleMixingLength(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[1].set_value("c2", value)
 
     @property
@@ -341,6 +353,7 @@ class MatAleMixingLength(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[1].set_value("c3", value)
 
     @property
@@ -351,6 +364,7 @@ class MatAleMixingLength(KeywordBase):
 
     @c4.setter
     def c4(self, value: float) -> None:
+        """Set the c4 property."""
         self._cards[1].set_value("c4", value)
 
     @property
@@ -361,6 +375,7 @@ class MatAleMixingLength(KeywordBase):
 
     @c5.setter
     def c5(self, value: float) -> None:
+        """Set the c5 property."""
         self._cards[1].set_value("c5", value)
 
     @property
@@ -371,6 +386,7 @@ class MatAleMixingLength(KeywordBase):
 
     @c6.setter
     def c6(self, value: float) -> None:
+        """Set the c6 property."""
         self._cards[1].set_value("c6", value)
 
     @property
@@ -381,6 +397,7 @@ class MatAleMixingLength(KeywordBase):
 
     @c7.setter
     def c7(self, value: float) -> None:
+        """Set the c7 property."""
         self._cards[1].set_value("c7", value)
 
     @property
@@ -391,6 +408,7 @@ class MatAleMixingLength(KeywordBase):
 
     @lcx.setter
     def lcx(self, value: float) -> None:
+        """Set the lcx property."""
         self._cards[2].set_value("lcx", value)
 
     @property
@@ -401,6 +419,7 @@ class MatAleMixingLength(KeywordBase):
 
     @d0.setter
     def d0(self, value: float) -> None:
+        """Set the d0 property."""
         self._cards[2].set_value("d0", value)
 
     @property
@@ -411,6 +430,7 @@ class MatAleMixingLength(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[2].set_value("d1", value)
 
     @property
@@ -421,6 +441,7 @@ class MatAleMixingLength(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[2].set_value("d2", value)
 
     @property
@@ -431,6 +452,7 @@ class MatAleMixingLength(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[2].set_value("e0", value)
 
     @property
@@ -441,6 +463,7 @@ class MatAleMixingLength(KeywordBase):
 
     @e1.setter
     def e1(self, value: float) -> None:
+        """Set the e1 property."""
         self._cards[2].set_value("e1", value)
 
     @property
@@ -451,6 +474,7 @@ class MatAleMixingLength(KeywordBase):
 
     @e2.setter
     def e2(self, value: float) -> None:
+        """Set the e2 property."""
         self._cards[2].set_value("e2", value)
 
     @property
@@ -461,5 +485,6 @@ class MatAleMixingLength(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

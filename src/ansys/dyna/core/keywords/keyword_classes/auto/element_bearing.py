@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementBearing(KeywordBase):
     subkeyword = "BEARING"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -265,6 +267,7 @@ class ElementBearing(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -277,8 +280,9 @@ class ElementBearing(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""itype must be `None` or one of {0,1,2}""")
+            raise Exception("""itype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -289,6 +293,7 @@ class ElementBearing(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -299,6 +304,7 @@ class ElementBearing(KeywordBase):
 
     @cid1.setter
     def cid1(self, value: int) -> None:
+        """Set the cid1 property."""
         self._cards[0].set_value("cid1", value)
 
     @property
@@ -309,6 +315,7 @@ class ElementBearing(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -319,6 +326,7 @@ class ElementBearing(KeywordBase):
 
     @ci2.setter
     def ci2(self, value: int) -> None:
+        """Set the ci2 property."""
         self._cards[0].set_value("ci2", value)
 
     @property
@@ -329,6 +337,7 @@ class ElementBearing(KeywordBase):
 
     @nb.setter
     def nb(self, value: int) -> None:
+        """Set the nb property."""
         self._cards[0].set_value("nb", value)
 
     @property
@@ -339,6 +348,7 @@ class ElementBearing(KeywordBase):
 
     @eball.setter
     def eball(self, value: float) -> None:
+        """Set the eball property."""
         self._cards[1].set_value("eball", value)
 
     @property
@@ -349,6 +359,7 @@ class ElementBearing(KeywordBase):
 
     @prball.setter
     def prball(self, value: float) -> None:
+        """Set the prball property."""
         self._cards[1].set_value("prball", value)
 
     @property
@@ -359,6 +370,7 @@ class ElementBearing(KeywordBase):
 
     @erace.setter
     def erace(self, value: float) -> None:
+        """Set the erace property."""
         self._cards[1].set_value("erace", value)
 
     @property
@@ -369,6 +381,7 @@ class ElementBearing(KeywordBase):
 
     @prrace.setter
     def prrace(self, value: float) -> None:
+        """Set the prrace property."""
         self._cards[1].set_value("prrace", value)
 
     @property
@@ -379,6 +392,7 @@ class ElementBearing(KeywordBase):
 
     @stresl.setter
     def stresl(self, value: float) -> None:
+        """Set the stresl property."""
         self._cards[1].set_value("stresl", value)
 
     @property
@@ -389,6 +403,7 @@ class ElementBearing(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[2].set_value("d", value)
 
     @property
@@ -399,6 +414,7 @@ class ElementBearing(KeywordBase):
 
     @di.setter
     def di(self, value: float) -> None:
+        """Set the di property."""
         self._cards[2].set_value("di", value)
 
     @property
@@ -409,6 +425,7 @@ class ElementBearing(KeywordBase):
 
     @do.setter
     def do(self, value: float) -> None:
+        """Set the do property."""
         self._cards[2].set_value("do", value)
 
     @property
@@ -419,6 +436,7 @@ class ElementBearing(KeywordBase):
 
     @dm.setter
     def dm(self, value: float) -> None:
+        """Set the dm property."""
         self._cards[2].set_value("dm", value)
 
     @property
@@ -429,6 +447,7 @@ class ElementBearing(KeywordBase):
 
     @ao.setter
     def ao(self, value: float) -> None:
+        """Set the ao property."""
         self._cards[3].set_value("ao", value)
 
     @property
@@ -439,6 +458,7 @@ class ElementBearing(KeywordBase):
 
     @ai.setter
     def ai(self, value: float) -> None:
+        """Set the ai property."""
         self._cards[3].set_value("ai", value)
 
     @property
@@ -449,6 +469,7 @@ class ElementBearing(KeywordBase):
 
     @bo.setter
     def bo(self, value: float) -> None:
+        """Set the bo property."""
         self._cards[3].set_value("bo", value)
 
     @property
@@ -459,6 +480,7 @@ class ElementBearing(KeywordBase):
 
     @pd.setter
     def pd(self, value: float) -> None:
+        """Set the pd property."""
         self._cards[3].set_value("pd", value)
 
     @property
@@ -472,8 +494,9 @@ class ElementBearing(KeywordBase):
 
     @ipflag.setter
     def ipflag(self, value: int) -> None:
+        """Set the ipflag property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ipflag must be `None` or one of {0,1,2}""")
+            raise Exception("""ipflag must be `None` or one of {0,1,2}.""")
         self._cards[4].set_value("ipflag", value)
 
     @property
@@ -484,6 +507,7 @@ class ElementBearing(KeywordBase):
 
     @xtran.setter
     def xtran(self, value: float) -> None:
+        """Set the xtran property."""
         self._cards[4].set_value("xtran", value)
 
     @property
@@ -494,6 +518,7 @@ class ElementBearing(KeywordBase):
 
     @ytran.setter
     def ytran(self, value: float) -> None:
+        """Set the ytran property."""
         self._cards[4].set_value("ytran", value)
 
     @property
@@ -504,6 +529,7 @@ class ElementBearing(KeywordBase):
 
     @ztran.setter
     def ztran(self, value: float) -> None:
+        """Set the ztran property."""
         self._cards[4].set_value("ztran", value)
 
     @property
@@ -514,6 +540,7 @@ class ElementBearing(KeywordBase):
 
     @xrot.setter
     def xrot(self, value: float) -> None:
+        """Set the xrot property."""
         self._cards[4].set_value("xrot", value)
 
     @property
@@ -524,5 +551,6 @@ class ElementBearing(KeywordBase):
 
     @yrot.setter
     def yrot(self, value: float) -> None:
+        """Set the yrot property."""
         self._cards[4].set_value("yrot", value)
 

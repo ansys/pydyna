@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SENSOR keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorSwitchShellToVent(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SENSOR keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -126,6 +128,7 @@ class SensorSwitchShellToVent(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -137,8 +140,9 @@ class SensorSwitchShellToVent(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, None]:
-            raise Exception("""type must be `None` or one of {0,1}""")
+            raise Exception("""type must be `None` or one of {0,1}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -151,6 +155,7 @@ class SensorSwitchShellToVent(KeywordBase):
 
     @c23.setter
     def c23(self, value: float) -> None:
+        """Set the c23 property."""
         self._cards[0].set_value("c23", value)
 
     @property
@@ -161,6 +166,7 @@ class SensorSwitchShellToVent(KeywordBase):
 
     @amax.setter
     def amax(self, value: float) -> None:
+        """Set the amax property."""
         self._cards[0].set_value("amax", value)
 
     @property
@@ -171,6 +177,7 @@ class SensorSwitchShellToVent(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[1].set_value("ssid", value)
 
     @property
@@ -181,6 +188,7 @@ class SensorSwitchShellToVent(KeywordBase):
 
     @ftime.setter
     def ftime(self, value: float) -> None:
+        """Set the ftime property."""
         self._cards[1].set_value("ftime", value)
 
     @property
@@ -193,6 +201,7 @@ class SensorSwitchShellToVent(KeywordBase):
 
     @c23v.setter
     def c23v(self, value: float) -> None:
+        """Set the c23v property."""
         self._cards[1].set_value("c23v", value)
 
     @property
@@ -203,5 +212,6 @@ class SensorSwitchShellToVent(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedSpotweld(KeywordBase):
     subkeyword = "SPOTWELD"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -116,6 +118,7 @@ class ConstrainedSpotweld(KeywordBase):
 
     @wid.setter
     def wid(self, value: int) -> None:
+        """Set the wid property."""
         self._cards[0].set_value("wid", value)
 
     @property
@@ -126,6 +129,7 @@ class ConstrainedSpotweld(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[1].set_value("n1", value)
 
     @property
@@ -136,6 +140,7 @@ class ConstrainedSpotweld(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[1].set_value("n2", value)
 
     @property
@@ -149,6 +154,7 @@ class ConstrainedSpotweld(KeywordBase):
 
     @sn.setter
     def sn(self, value: float) -> None:
+        """Set the sn property."""
         self._cards[1].set_value("sn", value)
 
     @property
@@ -162,6 +168,7 @@ class ConstrainedSpotweld(KeywordBase):
 
     @ss.setter
     def ss(self, value: float) -> None:
+        """Set the ss property."""
         self._cards[1].set_value("ss", value)
 
     @property
@@ -172,6 +179,7 @@ class ConstrainedSpotweld(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[1].set_value("n", value)
 
     @property
@@ -182,6 +190,7 @@ class ConstrainedSpotweld(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[1].set_value("m", value)
 
     @property
@@ -192,6 +201,7 @@ class ConstrainedSpotweld(KeywordBase):
 
     @tf.setter
     def tf(self, value: float) -> None:
+        """Set the tf property."""
         self._cards[1].set_value("tf", value)
 
     @property
@@ -202,5 +212,6 @@ class ConstrainedSpotweld(KeywordBase):
 
     @ep.setter
     def ep(self, value: float) -> None:
+        """Set the ep property."""
         self._cards[1].set_value("ep", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmSolverBemmat(KeywordBase):
     subkeyword = "SOLVER_BEMMAT"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -108,8 +110,9 @@ class EmSolverBemmat(KeywordBase):
 
     @matid.setter
     def matid(self, value: int) -> None:
+        """Set the matid property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""matid must be `None` or one of {1,2,3}""")
+            raise Exception("""matid must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("matid", value)
 
     @property
@@ -120,5 +123,6 @@ class EmSolverBemmat(KeywordBase):
 
     @reltol.setter
     def reltol(self, value: float) -> None:
+        """Set the reltol property."""
         self._cards[0].set_value("reltol", value)
 

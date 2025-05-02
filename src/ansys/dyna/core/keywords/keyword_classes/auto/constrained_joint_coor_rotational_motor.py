@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
     subkeyword = "JOINT_COOR_ROTATIONAL_MOTOR"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -274,6 +276,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @rbid_a.setter
     def rbid_a(self, value: int) -> None:
+        """Set the rbid_a property."""
         self._cards[0].set_value("rbid_a", value)
 
     @property
@@ -284,6 +287,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @rbid_b.setter
     def rbid_b(self, value: int) -> None:
+        """Set the rbid_b property."""
         self._cards[0].set_value("rbid_b", value)
 
     @property
@@ -294,6 +298,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @rps.setter
     def rps(self, value: float) -> None:
+        """Set the rps property."""
         self._cards[0].set_value("rps", value)
 
     @property
@@ -306,6 +311,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[0].set_value("damp", value)
 
     @property
@@ -316,6 +322,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @tmass.setter
     def tmass(self, value: float) -> None:
+        """Set the tmass property."""
         self._cards[0].set_value("tmass", value)
 
     @property
@@ -326,6 +333,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @rmass.setter
     def rmass(self, value: float) -> None:
+        """Set the rmass property."""
         self._cards[0].set_value("rmass", value)
 
     @property
@@ -336,6 +344,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[1].set_value("x1", value)
 
     @property
@@ -346,6 +355,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[1].set_value("y1", value)
 
     @property
@@ -356,6 +366,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[1].set_value("z1", value)
 
     @property
@@ -366,6 +377,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[2].set_value("x2", value)
 
     @property
@@ -376,6 +388,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[2].set_value("y2", value)
 
     @property
@@ -386,6 +399,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[2].set_value("z2", value)
 
     @property
@@ -396,6 +410,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @x3.setter
     def x3(self, value: float) -> None:
+        """Set the x3 property."""
         self._cards[3].set_value("x3", value)
 
     @property
@@ -406,6 +421,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @y3.setter
     def y3(self, value: float) -> None:
+        """Set the y3 property."""
         self._cards[3].set_value("y3", value)
 
     @property
@@ -416,6 +432,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @z3.setter
     def z3(self, value: float) -> None:
+        """Set the z3 property."""
         self._cards[3].set_value("z3", value)
 
     @property
@@ -426,6 +443,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @x4.setter
     def x4(self, value: float) -> None:
+        """Set the x4 property."""
         self._cards[4].set_value("x4", value)
 
     @property
@@ -436,6 +454,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @y4.setter
     def y4(self, value: float) -> None:
+        """Set the y4 property."""
         self._cards[4].set_value("y4", value)
 
     @property
@@ -446,6 +465,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @z4.setter
     def z4(self, value: float) -> None:
+        """Set the z4 property."""
         self._cards[4].set_value("z4", value)
 
     @property
@@ -456,6 +476,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @x5.setter
     def x5(self, value: float) -> None:
+        """Set the x5 property."""
         self._cards[5].set_value("x5", value)
 
     @property
@@ -466,6 +487,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @y5.setter
     def y5(self, value: float) -> None:
+        """Set the y5 property."""
         self._cards[5].set_value("y5", value)
 
     @property
@@ -476,6 +498,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @z5.setter
     def z5(self, value: float) -> None:
+        """Set the z5 property."""
         self._cards[5].set_value("z5", value)
 
     @property
@@ -486,6 +509,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @x6.setter
     def x6(self, value: float) -> None:
+        """Set the x6 property."""
         self._cards[6].set_value("x6", value)
 
     @property
@@ -496,6 +520,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @y6.setter
     def y6(self, value: float) -> None:
+        """Set the y6 property."""
         self._cards[6].set_value("y6", value)
 
     @property
@@ -506,6 +531,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @z6.setter
     def z6(self, value: float) -> None:
+        """Set the z6 property."""
         self._cards[6].set_value("z6", value)
 
     @property
@@ -516,6 +542,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @parm.setter
     def parm(self, value: float) -> None:
+        """Set the parm property."""
         self._cards[7].set_value("parm", value)
 
     @property
@@ -526,6 +553,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[7].set_value("lcid", value)
 
     @property
@@ -539,6 +567,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         self._cards[7].set_value("type", value)
 
     @property
@@ -549,5 +578,6 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[7].set_value("r1", value)
 

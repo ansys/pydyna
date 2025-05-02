@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadThermalLoadCurve(KeywordBase):
     subkeyword = "THERMAL_LOAD_CURVE"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -62,6 +64,7 @@ class LoadThermalLoadCurve(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -72,5 +75,6 @@ class LoadThermalLoadCurve(KeywordBase):
 
     @lciddr.setter
     def lciddr(self, value: int) -> None:
+        """Set the lciddr property."""
         self._cards[0].set_value("lciddr", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEpCreatefiberorientation(KeywordBase):
     subkeyword = "EP_CREATEFIBERORIENTATION"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -96,6 +98,7 @@ class EmEpCreatefiberorientation(KeywordBase):
 
     @parstld.setter
     def parstld(self, value: int) -> None:
+        """Set the parstld property."""
         self._cards[0].set_value("parstld", value)
 
     @property
@@ -106,6 +109,7 @@ class EmEpCreatefiberorientation(KeywordBase):
 
     @solvelde.setter
     def solvelde(self, value: int) -> None:
+        """Set the solvelde property."""
         self._cards[0].set_value("solvelde", value)
 
     @property
@@ -116,6 +120,7 @@ class EmEpCreatefiberorientation(KeywordBase):
 
     @solvelde.setter
     def solvelde(self, value: int) -> None:
+        """Set the solvelde property."""
         self._cards[0].set_value("solvelde", value)
 
     @property
@@ -126,6 +131,7 @@ class EmEpCreatefiberorientation(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: int) -> None:
+        """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 
     @property
@@ -136,6 +142,7 @@ class EmEpCreatefiberorientation(KeywordBase):
 
     @beta.setter
     def beta(self, value: int) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -148,6 +155,7 @@ class EmEpCreatefiberorientation(KeywordBase):
 
     @w_file.setter
     def w_file(self, value: int) -> None:
+        """Set the w_file property."""
         self._cards[0].set_value("w_file", value)
 
     @property
@@ -160,5 +168,6 @@ class EmEpCreatefiberorientation(KeywordBase):
 
     @prerun.setter
     def prerun(self, value: int) -> None:
+        """Set the prerun property."""
         self._cards[0].set_value("prerun", value)
 

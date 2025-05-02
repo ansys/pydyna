@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdInitialTurbulence(KeywordBase):
     subkeyword = "INITIAL_TURBULENCE"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class IcfdInitialTurbulence(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -92,6 +95,7 @@ class IcfdInitialTurbulence(KeywordBase):
 
     @i.setter
     def i(self, value: float) -> None:
+        """Set the i property."""
         self._cards[0].set_value("i", value)
 
     @property
@@ -102,6 +106,7 @@ class IcfdInitialTurbulence(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[0].set_value("r", value)
 
     @property
@@ -112,6 +117,7 @@ class IcfdInitialTurbulence(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -122,5 +128,6 @@ class IcfdInitialTurbulence(KeywordBase):
 
     @ew.setter
     def ew(self, value: float) -> None:
+        """Set the ew property."""
         self._cards[0].set_value("ew", value)
 

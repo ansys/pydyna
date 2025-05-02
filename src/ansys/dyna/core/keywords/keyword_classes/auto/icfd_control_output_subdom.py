@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlOutputSubdom(KeywordBase):
     subkeyword = "CONTROL_OUTPUT_SUBDOM"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -186,8 +188,9 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @sname.setter
     def sname(self, value: str) -> None:
+        """Set the sname property."""
         if value not in ["BOX", "CYLINDER", "SPHERE", None]:
-            raise Exception("""sname must be `None` or one of {"BOX","CYLINDER","SPHERE"}""")
+            raise Exception("""sname must be `None` or one of {"BOX","CYLINDER","SPHERE"}.""")
         self._cards[0].set_value("sname", value)
 
     @property
@@ -198,6 +201,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pminx.setter
     def pminx(self, value: float) -> None:
+        """Set the pminx property."""
         self._cards[1].set_value("pminx", value)
 
     @property
@@ -208,6 +212,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pminy.setter
     def pminy(self, value: float) -> None:
+        """Set the pminy property."""
         self._cards[1].set_value("pminy", value)
 
     @property
@@ -218,6 +223,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pminz.setter
     def pminz(self, value: float) -> None:
+        """Set the pminz property."""
         self._cards[1].set_value("pminz", value)
 
     @property
@@ -228,6 +234,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pmaxx.setter
     def pmaxx(self, value: float) -> None:
+        """Set the pmaxx property."""
         self._cards[1].set_value("pmaxx", value)
 
     @property
@@ -238,6 +245,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pmaxy.setter
     def pmaxy(self, value: float) -> None:
+        """Set the pmaxy property."""
         self._cards[1].set_value("pmaxy", value)
 
     @property
@@ -248,6 +256,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pmaxz.setter
     def pmaxz(self, value: float) -> None:
+        """Set the pmaxz property."""
         self._cards[1].set_value("pmaxz", value)
 
     @property
@@ -258,6 +267,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[2].set_value("radius", value)
 
     @property
@@ -268,6 +278,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @centerx.setter
     def centerx(self, value: float) -> None:
+        """Set the centerx property."""
         self._cards[2].set_value("centerx", value)
 
     @property
@@ -278,6 +289,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @centery.setter
     def centery(self, value: float) -> None:
+        """Set the centery property."""
         self._cards[2].set_value("centery", value)
 
     @property
@@ -288,6 +300,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @centerz.setter
     def centerz(self, value: float) -> None:
+        """Set the centerz property."""
         self._cards[2].set_value("centerz", value)
 
     @property
@@ -298,6 +311,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[3].set_value("radius", value)
 
     @property
@@ -308,6 +322,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pminx.setter
     def pminx(self, value: float) -> None:
+        """Set the pminx property."""
         self._cards[3].set_value("pminx", value)
 
     @property
@@ -318,6 +333,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pminy.setter
     def pminy(self, value: float) -> None:
+        """Set the pminy property."""
         self._cards[3].set_value("pminy", value)
 
     @property
@@ -328,6 +344,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pminz.setter
     def pminz(self, value: float) -> None:
+        """Set the pminz property."""
         self._cards[3].set_value("pminz", value)
 
     @property
@@ -338,6 +355,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pmaxx.setter
     def pmaxx(self, value: float) -> None:
+        """Set the pmaxx property."""
         self._cards[3].set_value("pmaxx", value)
 
     @property
@@ -348,6 +366,7 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pmaxy.setter
     def pmaxy(self, value: float) -> None:
+        """Set the pmaxy property."""
         self._cards[3].set_value("pmaxy", value)
 
     @property
@@ -358,5 +377,6 @@ class IcfdControlOutputSubdom(KeywordBase):
 
     @pmaxz.setter
     def pmaxz(self, value: float) -> None:
+        """Set the pmaxz property."""
         self._cards[3].set_value("pmaxz", value)
 

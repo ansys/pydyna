@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseEosVanDerWaalsGeneralized(KeywordBase):
     subkeyword = "EOS_VAN_DER_WAALS_GENERALIZED"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class DualceseEosVanDerWaalsGeneralized(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -92,6 +95,7 @@ class DualceseEosVanDerWaalsGeneralized(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -102,6 +106,7 @@ class DualceseEosVanDerWaalsGeneralized(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[0].set_value("b", value)
 
     @property
@@ -112,6 +117,7 @@ class DualceseEosVanDerWaalsGeneralized(KeywordBase):
 
     @ga.setter
     def ga(self, value: float) -> None:
+        """Set the ga property."""
         self._cards[0].set_value("ga", value)
 
     @property
@@ -122,5 +128,6 @@ class DualceseEosVanDerWaalsGeneralized(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[0].set_value("bt", value)
 

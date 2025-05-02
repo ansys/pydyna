@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlAdaptSize(KeywordBase):
     subkeyword = "CONTROL_ADAPT_SIZE"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -64,8 +66,9 @@ class IcfdControlAdaptSize(KeywordBase):
 
     @asize.setter
     def asize(self, value: int) -> None:
+        """Set the asize property."""
         if value not in [0, 1, None]:
-            raise Exception("""asize must be `None` or one of {0,1}""")
+            raise Exception("""asize must be `None` or one of {0,1}.""")
         self._cards[0].set_value("asize", value)
 
     @property
@@ -76,5 +79,6 @@ class IcfdControlAdaptSize(KeywordBase):
 
     @nit.setter
     def nit(self, value: int) -> None:
+        """Set the nit property."""
         self._cards[0].set_value("nit", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTERFACE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceSpringbackExclude(KeywordBase):
     subkeyword = "SPRINGBACK_EXCLUDE"
 
     def __init__(self, **kwargs):
+        """Initialize the INTERFACE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class InterfaceSpringbackExclude(KeywordBase):
 
     @kwdname.setter
     def kwdname(self, value: str) -> None:
+        """Set the kwdname property."""
         self._cards[0].set_value("kwdname", value)
 

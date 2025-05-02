@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
     subkeyword = "PRESCRIBED_ORIENTATION_RIGID_EULERP"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -125,6 +127,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @pidb.setter
     def pidb(self, value: int) -> None:
+        """Set the pidb property."""
         self._cards[0].set_value("pidb", value)
 
     @property
@@ -135,6 +138,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @pida.setter
     def pida(self, value: int) -> None:
+        """Set the pida property."""
         self._cards[0].set_value("pida", value)
 
     @property
@@ -146,6 +150,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @intrp.setter
     def intrp(self, value: int) -> None:
+        """Set the intrp property."""
         self._cards[0].set_value("intrp", value)
 
     @property
@@ -156,6 +161,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -166,6 +172,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -179,8 +186,9 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @toffset.setter
     def toffset(self, value: int) -> None:
+        """Set the toffset property."""
         if value not in [0, 1, None]:
-            raise Exception("""toffset must be `None` or one of {0,1}""")
+            raise Exception("""toffset must be `None` or one of {0,1}.""")
         self._cards[0].set_value("toffset", value)
 
     @property
@@ -191,6 +199,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @lcide1.setter
     def lcide1(self, value: int) -> None:
+        """Set the lcide1 property."""
         self._cards[1].set_value("lcide1", value)
 
     @property
@@ -201,6 +210,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @lcide2.setter
     def lcide2(self, value: int) -> None:
+        """Set the lcide2 property."""
         self._cards[1].set_value("lcide2", value)
 
     @property
@@ -211,6 +221,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @lcide3.setter
     def lcide3(self, value: int) -> None:
+        """Set the lcide3 property."""
         self._cards[1].set_value("lcide3", value)
 
     @property
@@ -221,5 +232,6 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @lcide4.setter
     def lcide4(self, value: int) -> None:
+        """Set the lcide4 property."""
         self._cards[1].set_value("lcide4", value)
 

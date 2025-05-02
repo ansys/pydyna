@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialStrainShellSet(KeywordBase):
     subkeyword = "STRAIN_SHELL_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -225,6 +227,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -237,8 +240,9 @@ class InitialStrainShellSet(KeywordBase):
 
     @large.setter
     def large(self, value: int) -> None:
+        """Set the large property."""
         if value not in [0, 1, None]:
-            raise Exception("""large must be `None` or one of {0,1}""")
+            raise Exception("""large must be `None` or one of {0,1}.""")
         self._cards[0].set_value("large", value)
 
     @property
@@ -251,8 +255,9 @@ class InitialStrainShellSet(KeywordBase):
 
     @ilocal.setter
     def ilocal(self, value: int) -> None:
+        """Set the ilocal property."""
         if value not in [0, 1, None]:
-            raise Exception("""ilocal must be `None` or one of {0,1}""")
+            raise Exception("""ilocal must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ilocal", value)
 
     @property
@@ -263,6 +268,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epsxx.setter
     def epsxx(self, value: float) -> None:
+        """Set the epsxx property."""
         self._cards[1].set_value("epsxx", value)
 
     @property
@@ -273,6 +279,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epsyy.setter
     def epsyy(self, value: float) -> None:
+        """Set the epsyy property."""
         self._cards[1].set_value("epsyy", value)
 
     @property
@@ -283,6 +290,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epszz.setter
     def epszz(self, value: float) -> None:
+        """Set the epszz property."""
         self._cards[1].set_value("epszz", value)
 
     @property
@@ -293,6 +301,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epsxy.setter
     def epsxy(self, value: float) -> None:
+        """Set the epsxy property."""
         self._cards[1].set_value("epsxy", value)
 
     @property
@@ -303,6 +312,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epsyz.setter
     def epsyz(self, value: float) -> None:
+        """Set the epsyz property."""
         self._cards[1].set_value("epsyz", value)
 
     @property
@@ -313,6 +323,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epszx.setter
     def epszx(self, value: float) -> None:
+        """Set the epszx property."""
         self._cards[1].set_value("epszx", value)
 
     @property
@@ -323,6 +334,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 
     @property
@@ -333,6 +345,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epsxx.setter
     def epsxx(self, value: float) -> None:
+        """Set the epsxx property."""
         self._cards[2].set_value("epsxx", value)
 
     @property
@@ -343,6 +356,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epsyy.setter
     def epsyy(self, value: float) -> None:
+        """Set the epsyy property."""
         self._cards[2].set_value("epsyy", value)
 
     @property
@@ -353,6 +367,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epszz.setter
     def epszz(self, value: float) -> None:
+        """Set the epszz property."""
         self._cards[2].set_value("epszz", value)
 
     @property
@@ -363,6 +378,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epsxy.setter
     def epsxy(self, value: float) -> None:
+        """Set the epsxy property."""
         self._cards[2].set_value("epsxy", value)
 
     @property
@@ -373,6 +389,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epsyz.setter
     def epsyz(self, value: float) -> None:
+        """Set the epsyz property."""
         self._cards[2].set_value("epsyz", value)
 
     @property
@@ -383,6 +400,7 @@ class InitialStrainShellSet(KeywordBase):
 
     @epszx.setter
     def epszx(self, value: float) -> None:
+        """Set the epszx property."""
         self._cards[2].set_value("epszx", value)
 
     @property
@@ -393,5 +411,6 @@ class InitialStrainShellSet(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[2].set_value("t", value)
 

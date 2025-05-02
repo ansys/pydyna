@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFormingClamp(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -114,6 +116,7 @@ class DefineFormingClamp(KeywordBase):
 
     @clp1.setter
     def clp1(self, value: int) -> None:
+        """Set the clp1 property."""
         self._cards[0].set_value("clp1", value)
 
     @property
@@ -124,6 +127,7 @@ class DefineFormingClamp(KeywordBase):
 
     @clp2.setter
     def clp2(self, value: int) -> None:
+        """Set the clp2 property."""
         self._cards[0].set_value("clp2", value)
 
     @property
@@ -136,6 +140,7 @@ class DefineFormingClamp(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -146,6 +151,7 @@ class DefineFormingClamp(KeywordBase):
 
     @gap.setter
     def gap(self, value: float) -> None:
+        """Set the gap property."""
         self._cards[0].set_value("gap", value)
 
     @property
@@ -156,6 +162,7 @@ class DefineFormingClamp(KeywordBase):
 
     @at.setter
     def at(self, value: float) -> None:
+        """Set the at property."""
         self._cards[0].set_value("at", value)
 
     @property
@@ -166,6 +173,7 @@ class DefineFormingClamp(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -176,5 +184,6 @@ class DefineFormingClamp(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the PART keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartCompositeLongContact(KeywordBase):
     subkeyword = "COMPOSITE_LONG_CONTACT"
 
     def __init__(self, **kwargs):
+        """Initialize the PART keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -240,6 +242,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -250,6 +253,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -272,8 +276,9 @@ class PartCompositeLongContact(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16, -16, None]:
-            raise Exception("""elform must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,16,-16}""")
+            raise Exception("""elform must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,16,-16}.""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -284,6 +289,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[1].set_value("shrf", value)
 
     @property
@@ -297,6 +303,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @nloc.setter
     def nloc(self, value: float) -> None:
+        """Set the nloc property."""
         self._cards[1].set_value("nloc", value)
 
     @property
@@ -307,6 +314,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @marea.setter
     def marea(self, value: float) -> None:
+        """Set the marea property."""
         self._cards[1].set_value("marea", value)
 
     @property
@@ -318,6 +326,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @hgid.setter
     def hgid(self, value: int) -> None:
+        """Set the hgid property."""
         self._cards[1].set_value("hgid", value)
 
     @property
@@ -331,8 +340,9 @@ class PartCompositeLongContact(KeywordBase):
 
     @adpopt.setter
     def adpopt(self, value: int) -> None:
+        """Set the adpopt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""adpopt must be `None` or one of {0,1,2}""")
+            raise Exception("""adpopt must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("adpopt", value)
 
     @property
@@ -345,8 +355,9 @@ class PartCompositeLongContact(KeywordBase):
 
     @thshel.setter
     def thshel(self, value: int) -> None:
+        """Set the thshel property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""thshel must be `None` or one of {0,1,2}""")
+            raise Exception("""thshel must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("thshel", value)
 
     @property
@@ -357,6 +368,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[2].set_value("fs", value)
 
     @property
@@ -367,6 +379,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[2].set_value("fd", value)
 
     @property
@@ -377,6 +390,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[2].set_value("dc", value)
 
     @property
@@ -387,6 +401,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[2].set_value("vc", value)
 
     @property
@@ -397,6 +412,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @optt.setter
     def optt(self, value: float) -> None:
+        """Set the optt property."""
         self._cards[2].set_value("optt", value)
 
     @property
@@ -407,6 +423,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @sft.setter
     def sft(self, value: float) -> None:
+        """Set the sft property."""
         self._cards[2].set_value("sft", value)
 
     @property
@@ -417,6 +434,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @ssf.setter
     def ssf(self, value: float) -> None:
+        """Set the ssf property."""
         self._cards[2].set_value("ssf", value)
 
     @property
@@ -430,6 +448,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: float) -> None:
+        """Set the cparm8 property."""
         self._cards[2].set_value("cparm8", value)
 
     @property
@@ -440,6 +459,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @mid1.setter
     def mid1(self, value: int) -> None:
+        """Set the mid1 property."""
         self._cards[3].set_value("mid1", value)
 
     @property
@@ -450,6 +470,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @thick1.setter
     def thick1(self, value: float) -> None:
+        """Set the thick1 property."""
         self._cards[3].set_value("thick1", value)
 
     @property
@@ -460,6 +481,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[3].set_value("b1", value)
 
     @property
@@ -470,6 +492,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @tmid1.setter
     def tmid1(self, value: int) -> None:
+        """Set the tmid1 property."""
         self._cards[3].set_value("tmid1", value)
 
     @property
@@ -480,6 +503,7 @@ class PartCompositeLongContact(KeywordBase):
 
     @plyid.setter
     def plyid(self, value: int) -> None:
+        """Set the plyid property."""
         self._cards[3].set_value("plyid", value)
 
     @property
@@ -490,5 +514,6 @@ class PartCompositeLongContact(KeywordBase):
 
     @shrfac.setter
     def shrfac(self, value: float) -> None:
+        """Set the shrfac property."""
         self._cards[3].set_value("shrfac", value)
 

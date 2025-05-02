@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the FATIGUE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FatigueLoadstep(KeywordBase):
     subkeyword = "LOADSTEP"
 
     def __init__(self, **kwargs):
+        """Initialize the FATIGUE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class FatigueLoadstep(KeywordBase):
 
     @tstart.setter
     def tstart(self, value: float) -> None:
+        """Set the tstart property."""
         self._cards[0].set_value("tstart", value)
 
     @property
@@ -79,6 +82,7 @@ class FatigueLoadstep(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[0].set_value("tend", value)
 
     @property
@@ -90,5 +94,6 @@ class FatigueLoadstep(KeywordBase):
 
     @texpos.setter
     def texpos(self, value: float) -> None:
+        """Set the texpos property."""
         self._cards[0].set_value("texpos", value)
 

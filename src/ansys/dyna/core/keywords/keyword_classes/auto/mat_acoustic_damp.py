@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAcousticDamp(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -160,6 +162,7 @@ class MatAcousticDamp(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -170,6 +173,7 @@ class MatAcousticDamp(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -180,6 +184,7 @@ class MatAcousticDamp(KeywordBase):
 
     @cee.setter
     def cee(self, value: float) -> None:
+        """Set the cee property."""
         self._cards[0].set_value("cee", value)
 
     @property
@@ -190,6 +195,7 @@ class MatAcousticDamp(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -200,6 +206,7 @@ class MatAcousticDamp(KeywordBase):
 
     @vdc.setter
     def vdc(self, value: float) -> None:
+        """Set the vdc property."""
         self._cards[1].set_value("vdc", value)
 
     @property
@@ -210,6 +217,7 @@ class MatAcousticDamp(KeywordBase):
 
     @beta2.setter
     def beta2(self, value: float) -> None:
+        """Set the beta2 property."""
         self._cards[1].set_value("beta2", value)
 
     @property
@@ -220,5 +228,6 @@ class MatAcousticDamp(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

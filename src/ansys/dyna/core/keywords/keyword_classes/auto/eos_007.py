@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EOS keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Eos007(KeywordBase):
     subkeyword = "007"
 
     def __init__(self, **kwargs):
+        """Initialize the EOS keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -269,6 +271,7 @@ class Eos007(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -279,6 +282,7 @@ class Eos007(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -289,6 +293,7 @@ class Eos007(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[0].set_value("b", value)
 
     @property
@@ -299,6 +304,7 @@ class Eos007(KeywordBase):
 
     @xp1.setter
     def xp1(self, value: float) -> None:
+        """Set the xp1 property."""
         self._cards[0].set_value("xp1", value)
 
     @property
@@ -309,6 +315,7 @@ class Eos007(KeywordBase):
 
     @xp2.setter
     def xp2(self, value: float) -> None:
+        """Set the xp2 property."""
         self._cards[0].set_value("xp2", value)
 
     @property
@@ -319,6 +326,7 @@ class Eos007(KeywordBase):
 
     @frer.setter
     def frer(self, value: float) -> None:
+        """Set the frer property."""
         self._cards[0].set_value("frer", value)
 
     @property
@@ -329,6 +337,7 @@ class Eos007(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -339,6 +348,7 @@ class Eos007(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[0].set_value("r1", value)
 
     @property
@@ -349,6 +359,7 @@ class Eos007(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[1].set_value("r2", value)
 
     @property
@@ -359,6 +370,7 @@ class Eos007(KeywordBase):
 
     @r3.setter
     def r3(self, value: float) -> None:
+        """Set the r3 property."""
         self._cards[1].set_value("r3", value)
 
     @property
@@ -369,6 +381,7 @@ class Eos007(KeywordBase):
 
     @r5.setter
     def r5(self, value: float) -> None:
+        """Set the r5 property."""
         self._cards[1].set_value("r5", value)
 
     @property
@@ -379,6 +392,7 @@ class Eos007(KeywordBase):
 
     @r6.setter
     def r6(self, value: float) -> None:
+        """Set the r6 property."""
         self._cards[1].set_value("r6", value)
 
     @property
@@ -389,6 +403,7 @@ class Eos007(KeywordBase):
 
     @fmxig.setter
     def fmxig(self, value: float) -> None:
+        """Set the fmxig property."""
         self._cards[1].set_value("fmxig", value)
 
     @property
@@ -399,6 +414,7 @@ class Eos007(KeywordBase):
 
     @freq.setter
     def freq(self, value: float) -> None:
+        """Set the freq property."""
         self._cards[1].set_value("freq", value)
 
     @property
@@ -409,6 +425,7 @@ class Eos007(KeywordBase):
 
     @grow1.setter
     def grow1(self, value: float) -> None:
+        """Set the grow1 property."""
         self._cards[1].set_value("grow1", value)
 
     @property
@@ -419,6 +436,7 @@ class Eos007(KeywordBase):
 
     @em.setter
     def em(self, value: float) -> None:
+        """Set the em property."""
         self._cards[1].set_value("em", value)
 
     @property
@@ -429,6 +447,7 @@ class Eos007(KeywordBase):
 
     @ar1.setter
     def ar1(self, value: float) -> None:
+        """Set the ar1 property."""
         self._cards[2].set_value("ar1", value)
 
     @property
@@ -439,6 +458,7 @@ class Eos007(KeywordBase):
 
     @es1.setter
     def es1(self, value: float) -> None:
+        """Set the es1 property."""
         self._cards[2].set_value("es1", value)
 
     @property
@@ -449,6 +469,7 @@ class Eos007(KeywordBase):
 
     @cvp.setter
     def cvp(self, value: float) -> None:
+        """Set the cvp property."""
         self._cards[2].set_value("cvp", value)
 
     @property
@@ -459,6 +480,7 @@ class Eos007(KeywordBase):
 
     @cvr.setter
     def cvr(self, value: float) -> None:
+        """Set the cvr property."""
         self._cards[2].set_value("cvr", value)
 
     @property
@@ -469,6 +491,7 @@ class Eos007(KeywordBase):
 
     @eetal.setter
     def eetal(self, value: float) -> None:
+        """Set the eetal property."""
         self._cards[2].set_value("eetal", value)
 
     @property
@@ -479,6 +502,7 @@ class Eos007(KeywordBase):
 
     @ccrit.setter
     def ccrit(self, value: float) -> None:
+        """Set the ccrit property."""
         self._cards[2].set_value("ccrit", value)
 
     @property
@@ -489,6 +513,7 @@ class Eos007(KeywordBase):
 
     @enq.setter
     def enq(self, value: float) -> None:
+        """Set the enq property."""
         self._cards[2].set_value("enq", value)
 
     @property
@@ -499,6 +524,7 @@ class Eos007(KeywordBase):
 
     @tmp0.setter
     def tmp0(self, value: float) -> None:
+        """Set the tmp0 property."""
         self._cards[2].set_value("tmp0", value)
 
     @property
@@ -509,6 +535,7 @@ class Eos007(KeywordBase):
 
     @grow2.setter
     def grow2(self, value: float) -> None:
+        """Set the grow2 property."""
         self._cards[3].set_value("grow2", value)
 
     @property
@@ -519,6 +546,7 @@ class Eos007(KeywordBase):
 
     @ar2.setter
     def ar2(self, value: float) -> None:
+        """Set the ar2 property."""
         self._cards[3].set_value("ar2", value)
 
     @property
@@ -529,6 +557,7 @@ class Eos007(KeywordBase):
 
     @es2.setter
     def es2(self, value: float) -> None:
+        """Set the es2 property."""
         self._cards[3].set_value("es2", value)
 
     @property
@@ -539,6 +568,7 @@ class Eos007(KeywordBase):
 
     @en.setter
     def en(self, value: float) -> None:
+        """Set the en property."""
         self._cards[3].set_value("en", value)
 
     @property
@@ -549,6 +579,7 @@ class Eos007(KeywordBase):
 
     @fmxgr.setter
     def fmxgr(self, value: float) -> None:
+        """Set the fmxgr property."""
         self._cards[3].set_value("fmxgr", value)
 
     @property
@@ -559,5 +590,6 @@ class Eos007(KeywordBase):
 
     @fmngr.setter
     def fmngr(self, value: float) -> None:
+        """Set the fmngr property."""
         self._cards[3].set_value("fmngr", value)
 

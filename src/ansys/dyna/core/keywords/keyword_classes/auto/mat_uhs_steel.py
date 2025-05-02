@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatUhsSteel(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -766,6 +768,7 @@ class MatUhsSteel(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -776,6 +779,7 @@ class MatUhsSteel(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -788,6 +792,7 @@ class MatUhsSteel(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -798,6 +803,7 @@ class MatUhsSteel(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -808,6 +814,7 @@ class MatUhsSteel(KeywordBase):
 
     @tunit.setter
     def tunit(self, value: float) -> None:
+        """Set the tunit property."""
         self._cards[0].set_value("tunit", value)
 
     @property
@@ -820,8 +827,9 @@ class MatUhsSteel(KeywordBase):
 
     @crsh.setter
     def crsh(self, value: int) -> None:
+        """Set the crsh property."""
         if value not in [0, 1, None]:
-            raise Exception("""crsh must be `None` or one of {0,1}""")
+            raise Exception("""crsh must be `None` or one of {0,1}.""")
         self._cards[0].set_value("crsh", value)
 
     @property
@@ -838,8 +846,9 @@ class MatUhsSteel(KeywordBase):
 
     @phase.setter
     def phase(self, value: int) -> None:
+        """Set the phase property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""phase must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""phase must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("phase", value)
 
     @property
@@ -856,6 +865,7 @@ class MatUhsSteel(KeywordBase):
 
     @heat.setter
     def heat(self, value: int) -> None:
+        """Set the heat property."""
         self._cards[0].set_value("heat", value)
 
     @property
@@ -871,6 +881,7 @@ class MatUhsSteel(KeywordBase):
 
     @lcy1.setter
     def lcy1(self, value: int) -> None:
+        """Set the lcy1 property."""
         self._cards[1].set_value("lcy1", value)
 
     @property
@@ -881,6 +892,7 @@ class MatUhsSteel(KeywordBase):
 
     @lcy2.setter
     def lcy2(self, value: int) -> None:
+        """Set the lcy2 property."""
         self._cards[1].set_value("lcy2", value)
 
     @property
@@ -891,6 +903,7 @@ class MatUhsSteel(KeywordBase):
 
     @lcy3.setter
     def lcy3(self, value: int) -> None:
+        """Set the lcy3 property."""
         self._cards[1].set_value("lcy3", value)
 
     @property
@@ -901,6 +914,7 @@ class MatUhsSteel(KeywordBase):
 
     @lcy4.setter
     def lcy4(self, value: int) -> None:
+        """Set the lcy4 property."""
         self._cards[1].set_value("lcy4", value)
 
     @property
@@ -911,6 +925,7 @@ class MatUhsSteel(KeywordBase):
 
     @lcy5.setter
     def lcy5(self, value: int) -> None:
+        """Set the lcy5 property."""
         self._cards[1].set_value("lcy5", value)
 
     @property
@@ -921,6 +936,7 @@ class MatUhsSteel(KeywordBase):
 
     @kfer.setter
     def kfer(self, value: float) -> None:
+        """Set the kfer property."""
         self._cards[1].set_value("kfer", value)
 
     @property
@@ -931,6 +947,7 @@ class MatUhsSteel(KeywordBase):
 
     @kper.setter
     def kper(self, value: float) -> None:
+        """Set the kper property."""
         self._cards[1].set_value("kper", value)
 
     @property
@@ -941,6 +958,7 @@ class MatUhsSteel(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[1].set_value("b", value)
 
     @property
@@ -951,6 +969,7 @@ class MatUhsSteel(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[2].set_value("c", value)
 
     @property
@@ -961,6 +980,7 @@ class MatUhsSteel(KeywordBase):
 
     @co.setter
     def co(self, value: float) -> None:
+        """Set the co property."""
         self._cards[2].set_value("co", value)
 
     @property
@@ -971,6 +991,7 @@ class MatUhsSteel(KeywordBase):
 
     @mo.setter
     def mo(self, value: float) -> None:
+        """Set the mo property."""
         self._cards[2].set_value("mo", value)
 
     @property
@@ -981,6 +1002,7 @@ class MatUhsSteel(KeywordBase):
 
     @cr.setter
     def cr(self, value: float) -> None:
+        """Set the cr property."""
         self._cards[2].set_value("cr", value)
 
     @property
@@ -991,6 +1013,7 @@ class MatUhsSteel(KeywordBase):
 
     @ni.setter
     def ni(self, value: float) -> None:
+        """Set the ni property."""
         self._cards[2].set_value("ni", value)
 
     @property
@@ -1001,6 +1024,7 @@ class MatUhsSteel(KeywordBase):
 
     @mn.setter
     def mn(self, value: float) -> None:
+        """Set the mn property."""
         self._cards[2].set_value("mn", value)
 
     @property
@@ -1011,6 +1035,7 @@ class MatUhsSteel(KeywordBase):
 
     @si.setter
     def si(self, value: float) -> None:
+        """Set the si property."""
         self._cards[2].set_value("si", value)
 
     @property
@@ -1021,6 +1046,7 @@ class MatUhsSteel(KeywordBase):
 
     @v.setter
     def v(self, value: float) -> None:
+        """Set the v property."""
         self._cards[2].set_value("v", value)
 
     @property
@@ -1031,6 +1057,7 @@ class MatUhsSteel(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[3].set_value("w", value)
 
     @property
@@ -1041,6 +1068,7 @@ class MatUhsSteel(KeywordBase):
 
     @cu.setter
     def cu(self, value: float) -> None:
+        """Set the cu property."""
         self._cards[3].set_value("cu", value)
 
     @property
@@ -1051,6 +1079,7 @@ class MatUhsSteel(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[3].set_value("p", value)
 
     @property
@@ -1061,6 +1090,7 @@ class MatUhsSteel(KeywordBase):
 
     @al.setter
     def al(self, value: float) -> None:
+        """Set the al property."""
         self._cards[3].set_value("al", value)
 
     @property
@@ -1071,6 +1101,7 @@ class MatUhsSteel(KeywordBase):
 
     @as_.setter
     def as_(self, value: float) -> None:
+        """Set the as_ property."""
         self._cards[3].set_value("as", value)
 
     @property
@@ -1081,6 +1112,7 @@ class MatUhsSteel(KeywordBase):
 
     @ti.setter
     def ti(self, value: float) -> None:
+        """Set the ti property."""
         self._cards[3].set_value("ti", value)
 
     @property
@@ -1093,8 +1125,9 @@ class MatUhsSteel(KeywordBase):
 
     @cwm.setter
     def cwm(self, value: int) -> None:
+        """Set the cwm property."""
         if value not in [0, 1, None]:
-            raise Exception("""cwm must be `None` or one of {0,1}""")
+            raise Exception("""cwm must be `None` or one of {0,1}.""")
         self._cards[3].set_value("cwm", value)
 
     @property
@@ -1105,6 +1138,7 @@ class MatUhsSteel(KeywordBase):
 
     @lctre.setter
     def lctre(self, value: int) -> None:
+        """Set the lctre property."""
         self._cards[3].set_value("lctre", value)
 
     @property
@@ -1115,6 +1149,7 @@ class MatUhsSteel(KeywordBase):
 
     @thexp1.setter
     def thexp1(self, value: float) -> None:
+        """Set the thexp1 property."""
         self._cards[4].set_value("thexp1", value)
 
     @property
@@ -1125,6 +1160,7 @@ class MatUhsSteel(KeywordBase):
 
     @thexp5.setter
     def thexp5(self, value: float) -> None:
+        """Set the thexp5 property."""
         self._cards[4].set_value("thexp5", value)
 
     @property
@@ -1137,6 +1173,7 @@ class MatUhsSteel(KeywordBase):
 
     @lcth1.setter
     def lcth1(self, value: int) -> None:
+        """Set the lcth1 property."""
         self._cards[4].set_value("lcth1", value)
 
     @property
@@ -1149,6 +1186,7 @@ class MatUhsSteel(KeywordBase):
 
     @lcth5.setter
     def lcth5(self, value: int) -> None:
+        """Set the lcth5 property."""
         self._cards[4].set_value("lcth5", value)
 
     @property
@@ -1159,6 +1197,7 @@ class MatUhsSteel(KeywordBase):
 
     @tref.setter
     def tref(self, value: float) -> None:
+        """Set the tref property."""
         self._cards[4].set_value("tref", value)
 
     @property
@@ -1169,6 +1208,7 @@ class MatUhsSteel(KeywordBase):
 
     @lat1.setter
     def lat1(self, value: float) -> None:
+        """Set the lat1 property."""
         self._cards[4].set_value("lat1", value)
 
     @property
@@ -1179,6 +1219,7 @@ class MatUhsSteel(KeywordBase):
 
     @lat5.setter
     def lat5(self, value: float) -> None:
+        """Set the lat5 property."""
         self._cards[4].set_value("lat5", value)
 
     @property
@@ -1192,6 +1233,7 @@ class MatUhsSteel(KeywordBase):
 
     @tabth.setter
     def tabth(self, value: int) -> None:
+        """Set the tabth property."""
         self._cards[4].set_value("tabth", value)
 
     @property
@@ -1202,6 +1244,7 @@ class MatUhsSteel(KeywordBase):
 
     @qr2.setter
     def qr2(self, value: float) -> None:
+        """Set the qr2 property."""
         self._cards[5].set_value("qr2", value)
 
     @property
@@ -1212,6 +1255,7 @@ class MatUhsSteel(KeywordBase):
 
     @qr3.setter
     def qr3(self, value: float) -> None:
+        """Set the qr3 property."""
         self._cards[5].set_value("qr3", value)
 
     @property
@@ -1222,6 +1266,7 @@ class MatUhsSteel(KeywordBase):
 
     @qr4.setter
     def qr4(self, value: float) -> None:
+        """Set the qr4 property."""
         self._cards[5].set_value("qr4", value)
 
     @property
@@ -1232,6 +1277,7 @@ class MatUhsSteel(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[5].set_value("alpha", value)
 
     @property
@@ -1242,6 +1288,7 @@ class MatUhsSteel(KeywordBase):
 
     @grain.setter
     def grain(self, value: float) -> None:
+        """Set the grain property."""
         self._cards[5].set_value("grain", value)
 
     @property
@@ -1252,6 +1299,7 @@ class MatUhsSteel(KeywordBase):
 
     @toffe.setter
     def toffe(self, value: float) -> None:
+        """Set the toffe property."""
         self._cards[5].set_value("toffe", value)
 
     @property
@@ -1262,6 +1310,7 @@ class MatUhsSteel(KeywordBase):
 
     @tofpe.setter
     def tofpe(self, value: float) -> None:
+        """Set the tofpe property."""
         self._cards[5].set_value("tofpe", value)
 
     @property
@@ -1272,6 +1321,7 @@ class MatUhsSteel(KeywordBase):
 
     @tofba.setter
     def tofba(self, value: float) -> None:
+        """Set the tofba property."""
         self._cards[5].set_value("tofba", value)
 
     @property
@@ -1282,6 +1332,7 @@ class MatUhsSteel(KeywordBase):
 
     @plmem2.setter
     def plmem2(self, value: float) -> None:
+        """Set the plmem2 property."""
         self._cards[6].set_value("plmem2", value)
 
     @property
@@ -1292,6 +1343,7 @@ class MatUhsSteel(KeywordBase):
 
     @plmem3.setter
     def plmem3(self, value: float) -> None:
+        """Set the plmem3 property."""
         self._cards[6].set_value("plmem3", value)
 
     @property
@@ -1302,6 +1354,7 @@ class MatUhsSteel(KeywordBase):
 
     @plmem4.setter
     def plmem4(self, value: float) -> None:
+        """Set the plmem4 property."""
         self._cards[6].set_value("plmem4", value)
 
     @property
@@ -1312,6 +1365,7 @@ class MatUhsSteel(KeywordBase):
 
     @plmem5.setter
     def plmem5(self, value: float) -> None:
+        """Set the plmem5 property."""
         self._cards[6].set_value("plmem5", value)
 
     @property
@@ -1325,6 +1379,7 @@ class MatUhsSteel(KeywordBase):
 
     @strc.setter
     def strc(self, value: float) -> None:
+        """Set the strc property."""
         self._cards[6].set_value("strc", value)
 
     @property
@@ -1338,6 +1393,7 @@ class MatUhsSteel(KeywordBase):
 
     @strp.setter
     def strp(self, value: float) -> None:
+        """Set the strp property."""
         self._cards[6].set_value("strp", value)
 
     @property
@@ -1351,8 +1407,9 @@ class MatUhsSteel(KeywordBase):
 
     @react.setter
     def react(self, value: int) -> None:
+        """Set the react property."""
         if value not in [0, 1, None]:
-            raise Exception("""react must be `None` or one of {0,1}""")
+            raise Exception("""react must be `None` or one of {0,1}.""")
         self._cards[6].set_value("react", value)
 
     @property
@@ -1365,8 +1422,9 @@ class MatUhsSteel(KeywordBase):
 
     @temper.setter
     def temper(self, value: int) -> None:
+        """Set the temper property."""
         if value not in [0, 1, None]:
-            raise Exception("""temper must be `None` or one of {0,1}""")
+            raise Exception("""temper must be `None` or one of {0,1}.""")
         self._cards[6].set_value("temper", value)
 
     @property
@@ -1380,6 +1438,7 @@ class MatUhsSteel(KeywordBase):
 
     @aust.setter
     def aust(self, value: float) -> None:
+        """Set the aust property."""
         self._cards[7].set_value("aust", value)
 
     @property
@@ -1390,6 +1449,7 @@ class MatUhsSteel(KeywordBase):
 
     @ferr.setter
     def ferr(self, value: float) -> None:
+        """Set the ferr property."""
         self._cards[7].set_value("ferr", value)
 
     @property
@@ -1400,6 +1460,7 @@ class MatUhsSteel(KeywordBase):
 
     @pear.setter
     def pear(self, value: float) -> None:
+        """Set the pear property."""
         self._cards[7].set_value("pear", value)
 
     @property
@@ -1410,6 +1471,7 @@ class MatUhsSteel(KeywordBase):
 
     @bain.setter
     def bain(self, value: float) -> None:
+        """Set the bain property."""
         self._cards[7].set_value("bain", value)
 
     @property
@@ -1420,6 +1482,7 @@ class MatUhsSteel(KeywordBase):
 
     @mart.setter
     def mart(self, value: float) -> None:
+        """Set the mart property."""
         self._cards[7].set_value("mart", value)
 
     @property
@@ -1430,6 +1493,7 @@ class MatUhsSteel(KeywordBase):
 
     @grk.setter
     def grk(self, value: float) -> None:
+        """Set the grk property."""
         self._cards[7].set_value("grk", value)
 
     @property
@@ -1441,6 +1505,7 @@ class MatUhsSteel(KeywordBase):
 
     @grqr.setter
     def grqr(self, value: float) -> None:
+        """Set the grqr property."""
         self._cards[7].set_value("grqr", value)
 
     @property
@@ -1451,6 +1516,7 @@ class MatUhsSteel(KeywordBase):
 
     @tau1.setter
     def tau1(self, value: float) -> None:
+        """Set the tau1 property."""
         self._cards[7].set_value("tau1", value)
 
     @property
@@ -1461,6 +1527,7 @@ class MatUhsSteel(KeywordBase):
 
     @gra.setter
     def gra(self, value: float) -> None:
+        """Set the gra property."""
         self._cards[8].set_value("gra", value)
 
     @property
@@ -1472,6 +1539,7 @@ class MatUhsSteel(KeywordBase):
 
     @grb.setter
     def grb(self, value: float) -> None:
+        """Set the grb property."""
         self._cards[8].set_value("grb", value)
 
     @property
@@ -1482,6 +1550,7 @@ class MatUhsSteel(KeywordBase):
 
     @expa.setter
     def expa(self, value: float) -> None:
+        """Set the expa property."""
         self._cards[8].set_value("expa", value)
 
     @property
@@ -1492,6 +1561,7 @@ class MatUhsSteel(KeywordBase):
 
     @expb.setter
     def expb(self, value: float) -> None:
+        """Set the expb property."""
         self._cards[8].set_value("expb", value)
 
     @property
@@ -1502,6 +1572,7 @@ class MatUhsSteel(KeywordBase):
 
     @grcc.setter
     def grcc(self, value: float) -> None:
+        """Set the grcc property."""
         self._cards[8].set_value("grcc", value)
 
     @property
@@ -1512,6 +1583,7 @@ class MatUhsSteel(KeywordBase):
 
     @grcm.setter
     def grcm(self, value: float) -> None:
+        """Set the grcm property."""
         self._cards[8].set_value("grcm", value)
 
     @property
@@ -1522,6 +1594,7 @@ class MatUhsSteel(KeywordBase):
 
     @heatn.setter
     def heatn(self, value: float) -> None:
+        """Set the heatn property."""
         self._cards[8].set_value("heatn", value)
 
     @property
@@ -1532,6 +1605,7 @@ class MatUhsSteel(KeywordBase):
 
     @tau2.setter
     def tau2(self, value: float) -> None:
+        """Set the tau2 property."""
         self._cards[8].set_value("tau2", value)
 
     @property
@@ -1545,6 +1619,7 @@ class MatUhsSteel(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[9].set_value("fs", value)
 
     @property
@@ -1555,6 +1630,7 @@ class MatUhsSteel(KeywordBase):
 
     @ps.setter
     def ps(self, value: float) -> None:
+        """Set the ps property."""
         self._cards[9].set_value("ps", value)
 
     @property
@@ -1565,6 +1641,7 @@ class MatUhsSteel(KeywordBase):
 
     @bs.setter
     def bs(self, value: float) -> None:
+        """Set the bs property."""
         self._cards[9].set_value("bs", value)
 
     @property
@@ -1575,6 +1652,7 @@ class MatUhsSteel(KeywordBase):
 
     @ms.setter
     def ms(self, value: float) -> None:
+        """Set the ms property."""
         self._cards[9].set_value("ms", value)
 
     @property
@@ -1587,6 +1665,7 @@ class MatUhsSteel(KeywordBase):
 
     @msig.setter
     def msig(self, value: float) -> None:
+        """Set the msig property."""
         self._cards[9].set_value("msig", value)
 
     @property
@@ -1599,6 +1678,7 @@ class MatUhsSteel(KeywordBase):
 
     @lceps23.setter
     def lceps23(self, value: int) -> None:
+        """Set the lceps23 property."""
         self._cards[9].set_value("lceps23", value)
 
     @property
@@ -1609,6 +1689,7 @@ class MatUhsSteel(KeywordBase):
 
     @lceps4.setter
     def lceps4(self, value: int) -> None:
+        """Set the lceps4 property."""
         self._cards[9].set_value("lceps4", value)
 
     @property
@@ -1621,6 +1702,7 @@ class MatUhsSteel(KeywordBase):
 
     @lceps5.setter
     def lceps5(self, value: int) -> None:
+        """Set the lceps5 property."""
         self._cards[9].set_value("lceps5", value)
 
     @property
@@ -1631,6 +1713,7 @@ class MatUhsSteel(KeywordBase):
 
     @lch4.setter
     def lch4(self, value: int) -> None:
+        """Set the lch4 property."""
         self._cards[10].set_value("lch4", value)
 
     @property
@@ -1641,6 +1724,7 @@ class MatUhsSteel(KeywordBase):
 
     @lch5.setter
     def lch5(self, value: int) -> None:
+        """Set the lch5 property."""
         self._cards[10].set_value("lch5", value)
 
     @property
@@ -1651,6 +1735,7 @@ class MatUhsSteel(KeywordBase):
 
     @dtcrit.setter
     def dtcrit(self, value: float) -> None:
+        """Set the dtcrit property."""
         self._cards[10].set_value("dtcrit", value)
 
     @property
@@ -1661,6 +1746,7 @@ class MatUhsSteel(KeywordBase):
 
     @tsamp.setter
     def tsamp(self, value: float) -> None:
+        """Set the tsamp property."""
         self._cards[10].set_value("tsamp", value)
 
     @property
@@ -1671,6 +1757,7 @@ class MatUhsSteel(KeywordBase):
 
     @tastart.setter
     def tastart(self, value: float) -> None:
+        """Set the tastart property."""
         self._cards[11].set_value("tastart", value)
 
     @property
@@ -1681,6 +1768,7 @@ class MatUhsSteel(KeywordBase):
 
     @taend.setter
     def taend(self, value: float) -> None:
+        """Set the taend property."""
         self._cards[11].set_value("taend", value)
 
     @property
@@ -1691,6 +1779,7 @@ class MatUhsSteel(KeywordBase):
 
     @tlstart.setter
     def tlstart(self, value: float) -> None:
+        """Set the tlstart property."""
         self._cards[11].set_value("tlstart", value)
 
     @property
@@ -1701,6 +1790,7 @@ class MatUhsSteel(KeywordBase):
 
     @tlend.setter
     def tlend(self, value: float) -> None:
+        """Set the tlend property."""
         self._cards[11].set_value("tlend", value)
 
     @property
@@ -1711,6 +1801,7 @@ class MatUhsSteel(KeywordBase):
 
     @eghost.setter
     def eghost(self, value: float) -> None:
+        """Set the eghost property."""
         self._cards[11].set_value("eghost", value)
 
     @property
@@ -1721,6 +1812,7 @@ class MatUhsSteel(KeywordBase):
 
     @pghost.setter
     def pghost(self, value: float) -> None:
+        """Set the pghost property."""
         self._cards[11].set_value("pghost", value)
 
     @property
@@ -1731,6 +1823,7 @@ class MatUhsSteel(KeywordBase):
 
     @aghost.setter
     def aghost(self, value: float) -> None:
+        """Set the aghost property."""
         self._cards[11].set_value("aghost", value)
 
     @property
@@ -1741,5 +1834,6 @@ class MatUhsSteel(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[12].cards[0].set_value("title", value)
 

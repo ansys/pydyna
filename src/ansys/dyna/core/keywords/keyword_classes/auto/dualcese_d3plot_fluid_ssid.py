@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseD3PlotFluidSsid(KeywordBase):
     subkeyword = "D3PLOT_FLUID_SSID"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,6 +67,7 @@ class DualceseD3PlotFluidSsid(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -89,5 +92,6 @@ class DualceseD3PlotFluidSsid(KeywordBase):
 
     @flow_var.setter
     def flow_var(self, value: str) -> None:
+        """Set the flow_var property."""
         self._cards[1].set_value("flow_var", value)
 

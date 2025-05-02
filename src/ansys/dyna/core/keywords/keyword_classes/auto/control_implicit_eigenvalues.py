@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitEigenvalues(KeywordBase):
     subkeyword = "IMPLICIT_EIGENVALUES"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -171,6 +173,7 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @neig.setter
     def neig(self, value: int) -> None:
+        """Set the neig property."""
         self._cards[0].set_value("neig", value)
 
     @property
@@ -181,6 +184,7 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @center.setter
     def center(self, value: float) -> None:
+        """Set the center property."""
         self._cards[0].set_value("center", value)
 
     @property
@@ -193,8 +197,9 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @lflag.setter
     def lflag(self, value: int) -> None:
+        """Set the lflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""lflag must be `None` or one of {0,1}""")
+            raise Exception("""lflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("lflag", value)
 
     @property
@@ -205,6 +210,7 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @lftend.setter
     def lftend(self, value: float) -> None:
+        """Set the lftend property."""
         self._cards[0].set_value("lftend", value)
 
     @property
@@ -217,8 +223,9 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @rflag.setter
     def rflag(self, value: int) -> None:
+        """Set the rflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""rflag must be `None` or one of {0,1}""")
+            raise Exception("""rflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("rflag", value)
 
     @property
@@ -229,6 +236,7 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @rhtend.setter
     def rhtend(self, value: float) -> None:
+        """Set the rhtend property."""
         self._cards[0].set_value("rhtend", value)
 
     @property
@@ -246,8 +254,9 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @eigmth.setter
     def eigmth(self, value: int) -> None:
+        """Set the eigmth property."""
         if value not in [2, 3, 5, 6, 101, 102, 111, None]:
-            raise Exception("""eigmth must be `None` or one of {2,3,5,6,101,102,111}""")
+            raise Exception("""eigmth must be `None` or one of {2,3,5,6,101,102,111}.""")
         self._cards[0].set_value("eigmth", value)
 
     @property
@@ -258,6 +267,7 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @shfscl.setter
     def shfscl(self, value: float) -> None:
+        """Set the shfscl property."""
         self._cards[0].set_value("shfscl", value)
 
     @property
@@ -268,6 +278,7 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @isolid.setter
     def isolid(self, value: int) -> None:
+        """Set the isolid property."""
         self._cards[1].set_value("isolid", value)
 
     @property
@@ -278,6 +289,7 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @ibeam.setter
     def ibeam(self, value: int) -> None:
+        """Set the ibeam property."""
         self._cards[1].set_value("ibeam", value)
 
     @property
@@ -288,6 +300,7 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @ishell.setter
     def ishell(self, value: int) -> None:
+        """Set the ishell property."""
         self._cards[1].set_value("ishell", value)
 
     @property
@@ -298,6 +311,7 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @itshell.setter
     def itshell(self, value: int) -> None:
+        """Set the itshell property."""
         self._cards[1].set_value("itshell", value)
 
     @property
@@ -310,8 +324,9 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @mstres.setter
     def mstres(self, value: int) -> None:
+        """Set the mstres property."""
         if value not in [0, 1, None]:
-            raise Exception("""mstres must be `None` or one of {0,1}""")
+            raise Exception("""mstres must be `None` or one of {0,1}.""")
         self._cards[1].set_value("mstres", value)
 
     @property
@@ -325,6 +340,7 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @evdump.setter
     def evdump(self, value: int) -> None:
+        """Set the evdump property."""
         self._cards[1].set_value("evdump", value)
 
     @property
@@ -335,5 +351,6 @@ class ControlImplicitEigenvalues(KeywordBase):
 
     @mstrscl.setter
     def mstrscl(self, value: float) -> None:
+        """Set the mstrscl property."""
         self._cards[1].set_value("mstrscl", value)
 

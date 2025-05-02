@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialStressBeam(KeywordBase):
     subkeyword = "STRESS_BEAM"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -549,6 +551,7 @@ class InitialStressBeam(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -564,8 +567,9 @@ class InitialStressBeam(KeywordBase):
 
     @rule.setter
     def rule(self, value: int) -> None:
+        """Set the rule property."""
         if value not in [2, 1, 3, 4, 5, None]:
-            raise Exception("""rule must be `None` or one of {2,1,3,4,5}""")
+            raise Exception("""rule must be `None` or one of {2,1,3,4,5}.""")
         self._cards[0].set_value("rule", value)
 
     @property
@@ -576,6 +580,7 @@ class InitialStressBeam(KeywordBase):
 
     @npts.setter
     def npts(self, value: int) -> None:
+        """Set the npts property."""
         self._cards[0].set_value("npts", value)
 
     @property
@@ -588,8 +593,9 @@ class InitialStressBeam(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
+        """Set the local property."""
         if value not in [0, 1, None]:
-            raise Exception("""local must be `None` or one of {0,1}""")
+            raise Exception("""local must be `None` or one of {0,1}.""")
         self._cards[0].set_value("local", value)
 
     @property
@@ -602,8 +608,9 @@ class InitialStressBeam(KeywordBase):
 
     @large.setter
     def large(self, value: int) -> None:
+        """Set the large property."""
         if value not in [0, 1, None]:
-            raise Exception("""large must be `None` or one of {0,1}""")
+            raise Exception("""large must be `None` or one of {0,1}.""")
         self._cards[0].set_value("large", value)
 
     @property
@@ -614,6 +621,7 @@ class InitialStressBeam(KeywordBase):
 
     @nhisv.setter
     def nhisv(self, value: int) -> None:
+        """Set the nhisv property."""
         self._cards[0].set_value("nhisv", value)
 
     @property
@@ -624,8 +632,9 @@ class InitialStressBeam(KeywordBase):
 
     @naxes.setter
     def naxes(self, value: int) -> None:
+        """Set the naxes property."""
         if value not in [0, 12, None]:
-            raise Exception("""naxes must be `None` or one of {0,12}""")
+            raise Exception("""naxes must be `None` or one of {0,12}.""")
         self._cards[0].set_value("naxes", value)
 
     @property
@@ -636,6 +645,7 @@ class InitialStressBeam(KeywordBase):
 
     @f11.setter
     def f11(self, value: float) -> None:
+        """Set the f11 property."""
         self._cards[1].set_value("f11", value)
 
     @property
@@ -646,6 +656,7 @@ class InitialStressBeam(KeywordBase):
 
     @t11.setter
     def t11(self, value: float) -> None:
+        """Set the t11 property."""
         self._cards[1].set_value("t11", value)
 
     @property
@@ -656,6 +667,7 @@ class InitialStressBeam(KeywordBase):
 
     @m12.setter
     def m12(self, value: float) -> None:
+        """Set the m12 property."""
         self._cards[1].set_value("m12", value)
 
     @property
@@ -666,6 +678,7 @@ class InitialStressBeam(KeywordBase):
 
     @m13.setter
     def m13(self, value: float) -> None:
+        """Set the m13 property."""
         self._cards[1].set_value("m13", value)
 
     @property
@@ -676,6 +689,7 @@ class InitialStressBeam(KeywordBase):
 
     @m22.setter
     def m22(self, value: float) -> None:
+        """Set the m22 property."""
         self._cards[1].set_value("m22", value)
 
     @property
@@ -686,6 +700,7 @@ class InitialStressBeam(KeywordBase):
 
     @m23.setter
     def m23(self, value: float) -> None:
+        """Set the m23 property."""
         self._cards[1].set_value("m23", value)
 
     @property
@@ -696,6 +711,7 @@ class InitialStressBeam(KeywordBase):
 
     @parm.setter
     def parm(self, value: float) -> None:
+        """Set the parm property."""
         self._cards[1].set_value("parm", value)
 
     @property
@@ -706,6 +722,7 @@ class InitialStressBeam(KeywordBase):
 
     @f11.setter
     def f11(self, value: float) -> None:
+        """Set the f11 property."""
         self._cards[2].set_value("f11", value)
 
     @property
@@ -716,6 +733,7 @@ class InitialStressBeam(KeywordBase):
 
     @t11.setter
     def t11(self, value: float) -> None:
+        """Set the t11 property."""
         self._cards[2].set_value("t11", value)
 
     @property
@@ -726,6 +744,7 @@ class InitialStressBeam(KeywordBase):
 
     @m12.setter
     def m12(self, value: float) -> None:
+        """Set the m12 property."""
         self._cards[2].set_value("m12", value)
 
     @property
@@ -736,6 +755,7 @@ class InitialStressBeam(KeywordBase):
 
     @m13.setter
     def m13(self, value: float) -> None:
+        """Set the m13 property."""
         self._cards[2].set_value("m13", value)
 
     @property
@@ -746,6 +766,7 @@ class InitialStressBeam(KeywordBase):
 
     @m22.setter
     def m22(self, value: float) -> None:
+        """Set the m22 property."""
         self._cards[2].set_value("m22", value)
 
     @property
@@ -756,6 +777,7 @@ class InitialStressBeam(KeywordBase):
 
     @m23.setter
     def m23(self, value: float) -> None:
+        """Set the m23 property."""
         self._cards[3].set_value("m23", value)
 
     @property
@@ -766,6 +788,7 @@ class InitialStressBeam(KeywordBase):
 
     @parm.setter
     def parm(self, value: float) -> None:
+        """Set the parm property."""
         self._cards[3].set_value("parm", value)
 
     @property
@@ -776,6 +799,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv1.setter
     def hisv1(self, value: float) -> None:
+        """Set the hisv1 property."""
         self._cards[3].set_value("hisv1", value)
 
     @property
@@ -786,6 +810,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv2.setter
     def hisv2(self, value: float) -> None:
+        """Set the hisv2 property."""
         self._cards[3].set_value("hisv2", value)
 
     @property
@@ -796,6 +821,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv3.setter
     def hisv3(self, value: float) -> None:
+        """Set the hisv3 property."""
         self._cards[3].set_value("hisv3", value)
 
     @property
@@ -806,6 +832,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig11.setter
     def sig11(self, value: float) -> None:
+        """Set the sig11 property."""
         self._cards[4].set_value("sig11", value)
 
     @property
@@ -816,6 +843,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig22.setter
     def sig22(self, value: float) -> None:
+        """Set the sig22 property."""
         self._cards[4].set_value("sig22", value)
 
     @property
@@ -826,6 +854,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig33.setter
     def sig33(self, value: float) -> None:
+        """Set the sig33 property."""
         self._cards[4].set_value("sig33", value)
 
     @property
@@ -836,6 +865,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig12.setter
     def sig12(self, value: float) -> None:
+        """Set the sig12 property."""
         self._cards[4].set_value("sig12", value)
 
     @property
@@ -846,6 +876,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig23.setter
     def sig23(self, value: float) -> None:
+        """Set the sig23 property."""
         self._cards[4].set_value("sig23", value)
 
     @property
@@ -856,6 +887,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig31.setter
     def sig31(self, value: float) -> None:
+        """Set the sig31 property."""
         self._cards[4].set_value("sig31", value)
 
     @property
@@ -866,6 +898,7 @@ class InitialStressBeam(KeywordBase):
 
     @eps.setter
     def eps(self, value: float) -> None:
+        """Set the eps property."""
         self._cards[4].set_value("eps", value)
 
     @property
@@ -876,6 +909,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig11.setter
     def sig11(self, value: float) -> None:
+        """Set the sig11 property."""
         self._cards[5].set_value("sig11", value)
 
     @property
@@ -886,6 +920,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig22.setter
     def sig22(self, value: float) -> None:
+        """Set the sig22 property."""
         self._cards[5].set_value("sig22", value)
 
     @property
@@ -896,6 +931,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig33.setter
     def sig33(self, value: float) -> None:
+        """Set the sig33 property."""
         self._cards[5].set_value("sig33", value)
 
     @property
@@ -906,6 +942,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig12.setter
     def sig12(self, value: float) -> None:
+        """Set the sig12 property."""
         self._cards[5].set_value("sig12", value)
 
     @property
@@ -916,6 +953,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig23.setter
     def sig23(self, value: float) -> None:
+        """Set the sig23 property."""
         self._cards[5].set_value("sig23", value)
 
     @property
@@ -926,6 +964,7 @@ class InitialStressBeam(KeywordBase):
 
     @sig31.setter
     def sig31(self, value: float) -> None:
+        """Set the sig31 property."""
         self._cards[6].set_value("sig31", value)
 
     @property
@@ -936,6 +975,7 @@ class InitialStressBeam(KeywordBase):
 
     @eps.setter
     def eps(self, value: float) -> None:
+        """Set the eps property."""
         self._cards[6].set_value("eps", value)
 
     @property
@@ -946,6 +986,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv1.setter
     def hisv1(self, value: float) -> None:
+        """Set the hisv1 property."""
         self._cards[6].set_value("hisv1", value)
 
     @property
@@ -956,6 +997,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv2.setter
     def hisv2(self, value: float) -> None:
+        """Set the hisv2 property."""
         self._cards[6].set_value("hisv2", value)
 
     @property
@@ -966,6 +1008,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv3.setter
     def hisv3(self, value: float) -> None:
+        """Set the hisv3 property."""
         self._cards[6].set_value("hisv3", value)
 
     @property
@@ -976,6 +1019,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv4.setter
     def hisv4(self, value: float) -> None:
+        """Set the hisv4 property."""
         self._cards[7].set_value("hisv4", value)
 
     @property
@@ -986,6 +1030,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv5.setter
     def hisv5(self, value: float) -> None:
+        """Set the hisv5 property."""
         self._cards[7].set_value("hisv5", value)
 
     @property
@@ -996,6 +1041,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv6.setter
     def hisv6(self, value: float) -> None:
+        """Set the hisv6 property."""
         self._cards[7].set_value("hisv6", value)
 
     @property
@@ -1006,6 +1052,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv7.setter
     def hisv7(self, value: float) -> None:
+        """Set the hisv7 property."""
         self._cards[7].set_value("hisv7", value)
 
     @property
@@ -1016,6 +1063,7 @@ class InitialStressBeam(KeywordBase):
 
     @hisv8.setter
     def hisv8(self, value: float) -> None:
+        """Set the hisv8 property."""
         self._cards[7].set_value("hisv8", value)
 
     @property
@@ -1026,6 +1074,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax1.setter
     def ax1(self, value: float) -> None:
+        """Set the ax1 property."""
         self._cards[8].set_value("ax1", value)
 
     @property
@@ -1036,6 +1085,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax2.setter
     def ax2(self, value: float) -> None:
+        """Set the ax2 property."""
         self._cards[8].set_value("ax2", value)
 
     @property
@@ -1046,6 +1096,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax3.setter
     def ax3(self, value: float) -> None:
+        """Set the ax3 property."""
         self._cards[8].set_value("ax3", value)
 
     @property
@@ -1056,6 +1107,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax4.setter
     def ax4(self, value: float) -> None:
+        """Set the ax4 property."""
         self._cards[8].set_value("ax4", value)
 
     @property
@@ -1066,6 +1118,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax5.setter
     def ax5(self, value: float) -> None:
+        """Set the ax5 property."""
         self._cards[8].set_value("ax5", value)
 
     @property
@@ -1076,6 +1129,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax6.setter
     def ax6(self, value: float) -> None:
+        """Set the ax6 property."""
         self._cards[9].set_value("ax6", value)
 
     @property
@@ -1086,6 +1140,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax7.setter
     def ax7(self, value: float) -> None:
+        """Set the ax7 property."""
         self._cards[9].set_value("ax7", value)
 
     @property
@@ -1096,6 +1151,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax8.setter
     def ax8(self, value: float) -> None:
+        """Set the ax8 property."""
         self._cards[9].set_value("ax8", value)
 
     @property
@@ -1106,6 +1162,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax9.setter
     def ax9(self, value: float) -> None:
+        """Set the ax9 property."""
         self._cards[9].set_value("ax9", value)
 
     @property
@@ -1116,6 +1173,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax10.setter
     def ax10(self, value: float) -> None:
+        """Set the ax10 property."""
         self._cards[9].set_value("ax10", value)
 
     @property
@@ -1126,6 +1184,7 @@ class InitialStressBeam(KeywordBase):
 
     @ax11.setter
     def ax11(self, value: float) -> None:
+        """Set the ax11 property."""
         self._cards[10].set_value("ax11", value)
 
     @property
@@ -1136,5 +1195,6 @@ class InitialStressBeam(KeywordBase):
 
     @ax12.setter
     def ax12(self, value: float) -> None:
+        """Set the ax12 property."""
         self._cards[10].set_value("ax12", value)
 

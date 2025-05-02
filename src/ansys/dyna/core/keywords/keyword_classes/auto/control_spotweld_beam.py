@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlSpotweldBeam(KeywordBase):
     subkeyword = "SPOTWELD_BEAM"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,6 +112,7 @@ class ControlSpotweldBeam(KeywordBase):
 
     @lct.setter
     def lct(self, value: int) -> None:
+        """Set the lct property."""
         self._cards[0].set_value("lct", value)
 
     @property
@@ -120,6 +123,7 @@ class ControlSpotweldBeam(KeywordBase):
 
     @lcs.setter
     def lcs(self, value: int) -> None:
+        """Set the lcs property."""
         self._cards[0].set_value("lcs", value)
 
     @property
@@ -130,6 +134,7 @@ class ControlSpotweldBeam(KeywordBase):
 
     @t_ort.setter
     def t_ort(self, value: int) -> None:
+        """Set the t_ort property."""
         self._cards[0].set_value("t_ort", value)
 
     @property
@@ -140,6 +145,7 @@ class ControlSpotweldBeam(KeywordBase):
 
     @prtflg.setter
     def prtflg(self, value: int) -> None:
+        """Set the prtflg property."""
         self._cards[0].set_value("prtflg", value)
 
     @property
@@ -150,6 +156,7 @@ class ControlSpotweldBeam(KeywordBase):
 
     @t_ors.setter
     def t_ors(self, value: int) -> None:
+        """Set the t_ors property."""
         self._cards[0].set_value("t_ors", value)
 
     @property
@@ -160,6 +167,7 @@ class ControlSpotweldBeam(KeywordBase):
 
     @rpbhx.setter
     def rpbhx(self, value: int) -> None:
+        """Set the rpbhx property."""
         self._cards[0].set_value("rpbhx", value)
 
     @property
@@ -170,6 +178,7 @@ class ControlSpotweldBeam(KeywordBase):
 
     @bmsid.setter
     def bmsid(self, value: int) -> None:
+        """Set the bmsid property."""
         self._cards[0].set_value("bmsid", value)
 
     @property
@@ -180,5 +189,6 @@ class ControlSpotweldBeam(KeywordBase):
 
     @id_off.setter
     def id_off(self, value: int) -> None:
+        """Set the id_off property."""
         self._cards[0].set_value("id_off", value)
 

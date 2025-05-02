@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmExternalField(KeywordBase):
     subkeyword = "EXTERNAL_FIELD"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -91,6 +93,7 @@ class EmExternalField(KeywordBase):
 
     @fieldid.setter
     def fieldid(self, value: int) -> None:
+        """Set the fieldid property."""
         self._cards[0].set_value("fieldid", value)
 
     @property
@@ -104,8 +107,9 @@ class EmExternalField(KeywordBase):
 
     @ftype.setter
     def ftype(self, value: int) -> None:
+        """Set the ftype property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""ftype must be `None` or one of {1,2,3}""")
+            raise Exception("""ftype must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("ftype", value)
 
     @property
@@ -118,8 +122,9 @@ class EmExternalField(KeywordBase):
 
     @fdef.setter
     def fdef(self, value: int) -> None:
+        """Set the fdef property."""
         if value not in [1, 2, None]:
-            raise Exception("""fdef must be `None` or one of {1,2}""")
+            raise Exception("""fdef must be `None` or one of {1,2}.""")
         self._cards[0].set_value("fdef", value)
 
     @property
@@ -130,6 +135,7 @@ class EmExternalField(KeywordBase):
 
     @lcidx.setter
     def lcidx(self, value: int) -> None:
+        """Set the lcidx property."""
         self._cards[0].set_value("lcidx", value)
 
     @property
@@ -140,6 +146,7 @@ class EmExternalField(KeywordBase):
 
     @lcidy.setter
     def lcidy(self, value: int) -> None:
+        """Set the lcidy property."""
         self._cards[0].set_value("lcidy", value)
 
     @property
@@ -150,5 +157,6 @@ class EmExternalField(KeywordBase):
 
     @lcidz.setter
     def lcidz(self, value: int) -> None:
+        """Set the lcidz property."""
         self._cards[0].set_value("lcidz", value)
 

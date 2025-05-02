@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlStagedConstruction(KeywordBase):
     subkeyword = "STAGED_CONSTRUCTION"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -137,6 +139,7 @@ class ControlStagedConstruction(KeywordBase):
 
     @tstart.setter
     def tstart(self, value: float) -> None:
+        """Set the tstart property."""
         self._cards[0].set_value("tstart", value)
 
     @property
@@ -147,6 +150,7 @@ class ControlStagedConstruction(KeywordBase):
 
     @stgs.setter
     def stgs(self, value: int) -> None:
+        """Set the stgs property."""
         self._cards[0].set_value("stgs", value)
 
     @property
@@ -157,6 +161,7 @@ class ControlStagedConstruction(KeywordBase):
 
     @stge.setter
     def stge(self, value: int) -> None:
+        """Set the stge property."""
         self._cards[0].set_value("stge", value)
 
     @property
@@ -167,6 +172,7 @@ class ControlStagedConstruction(KeywordBase):
 
     @accel.setter
     def accel(self, value: float) -> None:
+        """Set the accel property."""
         self._cards[0].set_value("accel", value)
 
     @property
@@ -177,6 +183,7 @@ class ControlStagedConstruction(KeywordBase):
 
     @fact.setter
     def fact(self, value: float) -> None:
+        """Set the fact property."""
         self._cards[0].set_value("fact", value)
 
     @property
@@ -189,8 +196,9 @@ class ControlStagedConstruction(KeywordBase):
 
     @dordel.setter
     def dordel(self, value: int) -> None:
+        """Set the dordel property."""
         if value not in [0, 1, None]:
-            raise Exception("""dordel must be `None` or one of {0,1}""")
+            raise Exception("""dordel must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dordel", value)
 
     @property
@@ -203,8 +211,9 @@ class ControlStagedConstruction(KeywordBase):
 
     @nopdel.setter
     def nopdel(self, value: int) -> None:
+        """Set the nopdel property."""
         if value not in [0, 1, None]:
-            raise Exception("""nopdel must be `None` or one of {0,1}""")
+            raise Exception("""nopdel must be `None` or one of {0,1}.""")
         self._cards[0].set_value("nopdel", value)
 
     @property
@@ -217,8 +226,9 @@ class ControlStagedConstruction(KeywordBase):
 
     @itime.setter
     def itime(self, value: int) -> None:
+        """Set the itime property."""
         if value not in [0, 1, None]:
-            raise Exception("""itime must be `None` or one of {0,1}""")
+            raise Exception("""itime must be `None` or one of {0,1}.""")
         self._cards[1].set_value("itime", value)
 
     @property
@@ -231,7 +241,8 @@ class ControlStagedConstruction(KeywordBase):
 
     @idynain.setter
     def idynain(self, value: int) -> None:
+        """Set the idynain property."""
         if value not in [0, 1, None]:
-            raise Exception("""idynain must be `None` or one of {0,1}""")
+            raise Exception("""idynain must be `None` or one of {0,1}.""")
         self._cards[1].set_value("idynain", value)
 

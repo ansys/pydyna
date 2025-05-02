@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetModeListGenerate(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -136,6 +138,7 @@ class SetModeListGenerate(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -146,6 +149,7 @@ class SetModeListGenerate(KeywordBase):
 
     @m1beg.setter
     def m1beg(self, value: int) -> None:
+        """Set the m1beg property."""
         self._cards[1].set_value("m1beg", value)
 
     @property
@@ -156,6 +160,7 @@ class SetModeListGenerate(KeywordBase):
 
     @m1end.setter
     def m1end(self, value: int) -> None:
+        """Set the m1end property."""
         self._cards[1].set_value("m1end", value)
 
     @property
@@ -166,6 +171,7 @@ class SetModeListGenerate(KeywordBase):
 
     @m2beg.setter
     def m2beg(self, value: int) -> None:
+        """Set the m2beg property."""
         self._cards[1].set_value("m2beg", value)
 
     @property
@@ -176,6 +182,7 @@ class SetModeListGenerate(KeywordBase):
 
     @m2end.setter
     def m2end(self, value: int) -> None:
+        """Set the m2end property."""
         self._cards[1].set_value("m2end", value)
 
     @property
@@ -186,6 +193,7 @@ class SetModeListGenerate(KeywordBase):
 
     @m3beg.setter
     def m3beg(self, value: int) -> None:
+        """Set the m3beg property."""
         self._cards[1].set_value("m3beg", value)
 
     @property
@@ -196,6 +204,7 @@ class SetModeListGenerate(KeywordBase):
 
     @m3end.setter
     def m3end(self, value: int) -> None:
+        """Set the m3end property."""
         self._cards[1].set_value("m3end", value)
 
     @property
@@ -206,6 +215,7 @@ class SetModeListGenerate(KeywordBase):
 
     @m4beg.setter
     def m4beg(self, value: int) -> None:
+        """Set the m4beg property."""
         self._cards[1].set_value("m4beg", value)
 
     @property
@@ -216,6 +226,7 @@ class SetModeListGenerate(KeywordBase):
 
     @m4end.setter
     def m4end(self, value: int) -> None:
+        """Set the m4end property."""
         self._cards[1].set_value("m4end", value)
 
     @property
@@ -226,5 +237,6 @@ class SetModeListGenerate(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

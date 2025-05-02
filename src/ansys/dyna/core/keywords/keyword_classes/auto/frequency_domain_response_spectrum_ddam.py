@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the FREQUENCY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
     subkeyword = "DOMAIN_RESPONSE_SPECTRUM_DDAM"
 
     def __init__(self, **kwargs):
+        """Initialize the FREQUENCY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -307,6 +309,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mdmin.setter
     def mdmin(self, value: int) -> None:
+        """Set the mdmin property."""
         self._cards[0].set_value("mdmin", value)
 
     @property
@@ -317,6 +320,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mdmax.setter
     def mdmax(self, value: int) -> None:
+        """Set the mdmax property."""
         self._cards[0].set_value("mdmax", value)
 
     @property
@@ -327,6 +331,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @fnmin.setter
     def fnmin(self, value: float) -> None:
+        """Set the fnmin property."""
         self._cards[0].set_value("fnmin", value)
 
     @property
@@ -337,6 +342,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @fnmax.setter
     def fnmax(self, value: float) -> None:
+        """Set the fnmax property."""
         self._cards[0].set_value("fnmax", value)
 
     @property
@@ -349,8 +355,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
+        """Set the restrt property."""
         if value not in [0, 1, None]:
-            raise Exception("""restrt must be `None` or one of {0,1}""")
+            raise Exception("""restrt must be `None` or one of {0,1}.""")
         self._cards[0].set_value("restrt", value)
 
     @property
@@ -373,6 +380,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mcomb.setter
     def mcomb(self, value: int) -> None:
+        """Set the mcomb property."""
         self._cards[0].set_value("mcomb", value)
 
     @property
@@ -383,8 +391,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @relatv.setter
     def relatv(self, value: int) -> None:
+        """Set the relatv property."""
         if value not in [0, 1, None]:
-            raise Exception("""relatv must be `None` or one of {0,1}""")
+            raise Exception("""relatv must be `None` or one of {0,1}.""")
         self._cards[0].set_value("relatv", value)
 
     @property
@@ -398,8 +407,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mprs.setter
     def mprs(self, value: int) -> None:
+        """Set the mprs property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""mprs must be `None` or one of {0,1,2}""")
+            raise Exception("""mprs must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("mprs", value)
 
     @property
@@ -410,6 +420,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mcomb1.setter
     def mcomb1(self, value: int) -> None:
+        """Set the mcomb1 property."""
         self._cards[1].set_value("mcomb1", value)
 
     @property
@@ -420,6 +431,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mcomb2.setter
     def mcomb2(self, value: int) -> None:
+        """Set the mcomb2 property."""
         self._cards[1].set_value("mcomb2", value)
 
     @property
@@ -430,6 +442,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @w1.setter
     def w1(self, value: float) -> None:
+        """Set the w1 property."""
         self._cards[2].set_value("w1", value)
 
     @property
@@ -440,6 +453,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @w1.setter
     def w1(self, value: float) -> None:
+        """Set the w1 property."""
         self._cards[2].set_value("w1", value)
 
     @property
@@ -450,6 +464,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @r40.setter
     def r40(self, value: float) -> None:
+        """Set the r40 property."""
         self._cards[3].set_value("r40", value)
 
     @property
@@ -460,6 +475,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @dampf.setter
     def dampf(self, value: float) -> None:
+        """Set the dampf property."""
         self._cards[4].set_value("dampf", value)
 
     @property
@@ -470,6 +486,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @lcdamp.setter
     def lcdamp(self, value: int) -> None:
+        """Set the lcdamp property."""
         self._cards[4].set_value("lcdamp", value)
 
     @property
@@ -482,8 +499,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @ldtyp.setter
     def ldtyp(self, value: int) -> None:
+        """Set the ldtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""ldtyp must be `None` or one of {0,1}""")
+            raise Exception("""ldtyp must be `None` or one of {0,1}.""")
         self._cards[4].set_value("ldtyp", value)
 
     @property
@@ -494,6 +512,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @dmpmas.setter
     def dmpmas(self, value: float) -> None:
+        """Set the dmpmas property."""
         self._cards[4].set_value("dmpmas", value)
 
     @property
@@ -504,6 +523,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @dmpstf.setter
     def dmpstf(self, value: float) -> None:
+        """Set the dmpstf property."""
         self._cards[4].set_value("dmpstf", value)
 
     @property
@@ -516,8 +536,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @std.setter
     def std(self, value: int) -> None:
+        """Set the std property."""
         if value not in [1, -1, None]:
-            raise Exception("""std must be `None` or one of {1,-1}""")
+            raise Exception("""std must be `None` or one of {1,-1}.""")
         self._cards[5].set_value("std", value)
 
     @property
@@ -534,8 +555,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
+        """Set the unit property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""unit must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""unit must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[5].set_value("unit", value)
 
     @property
@@ -546,6 +568,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @amin.setter
     def amin(self, value: float) -> None:
+        """Set the amin property."""
         self._cards[5].set_value("amin", value)
 
     @property
@@ -560,6 +583,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[5].set_value("vid", value)
 
     @property
@@ -570,6 +594,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[5].set_value("xc", value)
 
     @property
@@ -580,6 +605,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[5].set_value("yc", value)
 
     @property
@@ -590,6 +616,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[5].set_value("zc", value)
 
     @property
@@ -600,6 +627,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @effmas.setter
     def effmas(self, value: float) -> None:
+        """Set the effmas property."""
         self._cards[5].set_value("effmas", value)
 
     @property
@@ -612,8 +640,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @shptyp.setter
     def shptyp(self, value: int) -> None:
+        """Set the shptyp property."""
         if value not in [1, 2, None]:
-            raise Exception("""shptyp must be `None` or one of {1,2}""")
+            raise Exception("""shptyp must be `None` or one of {1,2}.""")
         self._cards[6].set_value("shptyp", value)
 
     @property
@@ -627,8 +656,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mount.setter
     def mount(self, value: int) -> None:
+        """Set the mount property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""mount must be `None` or one of {1,2,3}""")
+            raise Exception("""mount must be `None` or one of {1,2,3}.""")
         self._cards[6].set_value("mount", value)
 
     @property
@@ -642,8 +672,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @movemt.setter
     def movemt(self, value: int) -> None:
+        """Set the movemt property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""movemt must be `None` or one of {1,2,3}""")
+            raise Exception("""movemt must be `None` or one of {1,2,3}.""")
         self._cards[6].set_value("movemt", value)
 
     @property
@@ -656,7 +687,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @mattyp.setter
     def mattyp(self, value: int) -> None:
+        """Set the mattyp property."""
         if value not in [1, 2, None]:
-            raise Exception("""mattyp must be `None` or one of {1,2}""")
+            raise Exception("""mattyp must be `None` or one of {1,2}.""")
         self._cards[6].set_value("mattyp", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -159,6 +161,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -169,6 +172,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @dsn.setter
     def dsn(self, value: float) -> None:
+        """Set the dsn property."""
         self._cards[0].set_value("dsn", value)
 
     @property
@@ -179,6 +183,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @dss.setter
     def dss(self, value: float) -> None:
+        """Set the dss property."""
         self._cards[0].set_value("dss", value)
 
     @property
@@ -189,6 +194,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @dlcidsn.setter
     def dlcidsn(self, value: int) -> None:
+        """Set the dlcidsn property."""
         self._cards[0].set_value("dlcidsn", value)
 
     @property
@@ -199,6 +205,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @dlcidss.setter
     def dlcidss(self, value: int) -> None:
+        """Set the dlcidss property."""
         self._cards[0].set_value("dlcidss", value)
 
     @property
@@ -209,6 +216,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @pid_i.setter
     def pid_i(self, value: int) -> None:
+        """Set the pid_i property."""
         self._cards[1].set_value("pid_i", value)
 
     @property
@@ -219,6 +227,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @pid_j.setter
     def pid_j(self, value: int) -> None:
+        """Set the pid_j property."""
         self._cards[1].set_value("pid_j", value)
 
     @property
@@ -229,6 +238,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @snij.setter
     def snij(self, value: float) -> None:
+        """Set the snij property."""
         self._cards[1].set_value("snij", value)
 
     @property
@@ -239,6 +249,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @ssij.setter
     def ssij(self, value: float) -> None:
+        """Set the ssij property."""
         self._cards[1].set_value("ssij", value)
 
     @property
@@ -249,6 +260,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @lcidsnij.setter
     def lcidsnij(self, value: int) -> None:
+        """Set the lcidsnij property."""
         self._cards[1].set_value("lcidsnij", value)
 
     @property
@@ -259,6 +271,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @lcidssij.setter
     def lcidssij(self, value: int) -> None:
+        """Set the lcidssij property."""
         self._cards[1].set_value("lcidssij", value)
 
     @property
@@ -269,5 +282,6 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

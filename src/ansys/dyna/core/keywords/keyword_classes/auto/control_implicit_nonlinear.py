@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitNonlinear(KeywordBase):
     subkeyword = "IMPLICIT_NONLINEAR"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -365,8 +367,9 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @nsolvr.setter
     def nsolvr(self, value: int) -> None:
+        """Set the nsolvr property."""
         if value not in [12, -1, 1, 6, 7, 8, 9, None]:
-            raise Exception("""nsolvr must be `None` or one of {12,-1,1,6,7,8,9}""")
+            raise Exception("""nsolvr must be `None` or one of {12,-1,1,6,7,8,9}.""")
         self._cards[0].set_value("nsolvr", value)
 
     @property
@@ -378,6 +381,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @ilimit.setter
     def ilimit(self, value: int) -> None:
+        """Set the ilimit property."""
         self._cards[0].set_value("ilimit", value)
 
     @property
@@ -389,6 +393,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @maxref.setter
     def maxref(self, value: int) -> None:
+        """Set the maxref property."""
         self._cards[0].set_value("maxref", value)
 
     @property
@@ -400,6 +405,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @dctol.setter
     def dctol(self, value: float) -> None:
+        """Set the dctol property."""
         self._cards[0].set_value("dctol", value)
 
     @property
@@ -411,6 +417,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @ectol.setter
     def ectol(self, value: float) -> None:
+        """Set the ectol property."""
         self._cards[0].set_value("ectol", value)
 
     @property
@@ -422,6 +429,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @rctol.setter
     def rctol(self, value: float) -> None:
+        """Set the rctol property."""
         self._cards[0].set_value("rctol", value)
 
     @property
@@ -434,6 +442,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @lstol.setter
     def lstol(self, value: float) -> None:
+        """Set the lstol property."""
         self._cards[0].set_value("lstol", value)
 
     @property
@@ -445,6 +454,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @abstol.setter
     def abstol(self, value: float) -> None:
+        """Set the abstol property."""
         self._cards[0].set_value("abstol", value)
 
     @property
@@ -458,6 +468,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @dnorm.setter
     def dnorm(self, value: int) -> None:
+        """Set the dnorm property."""
         self._cards[1].set_value("dnorm", value)
 
     @property
@@ -470,8 +481,9 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @diverg.setter
     def diverg(self, value: int) -> None:
+        """Set the diverg property."""
         if value not in [1, 2, None]:
-            raise Exception("""diverg must be `None` or one of {1,2}""")
+            raise Exception("""diverg must be `None` or one of {1,2}.""")
         self._cards[1].set_value("diverg", value)
 
     @property
@@ -484,6 +496,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @istif.setter
     def istif(self, value: int) -> None:
+        """Set the istif property."""
         self._cards[1].set_value("istif", value)
 
     @property
@@ -499,8 +512,9 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @nlprint.setter
     def nlprint(self, value: int) -> None:
+        """Set the nlprint property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""nlprint must be `None` or one of {0,1,2,3}""")
+            raise Exception("""nlprint must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("nlprint", value)
 
     @property
@@ -515,6 +529,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @nlnorm.setter
     def nlnorm(self, value: float) -> None:
+        """Set the nlnorm property."""
         self._cards[1].set_value("nlnorm", value)
 
     @property
@@ -525,6 +540,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @d3itctl.setter
     def d3itctl(self, value: int) -> None:
+        """Set the d3itctl property."""
         self._cards[1].set_value("d3itctl", value)
 
     @property
@@ -539,8 +555,9 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @cpchk.setter
     def cpchk(self, value: int) -> None:
+        """Set the cpchk property."""
         if value not in [0, 1, None]:
-            raise Exception("""cpchk must be `None` or one of {0,1}""")
+            raise Exception("""cpchk must be `None` or one of {0,1}.""")
         self._cards[1].set_value("cpchk", value)
 
     @property
@@ -551,6 +568,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @dmtol.setter
     def dmtol(self, value: float) -> None:
+        """Set the dmtol property."""
         self._cards[2].set_value("dmtol", value)
 
     @property
@@ -561,6 +579,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @emtol.setter
     def emtol(self, value: float) -> None:
+        """Set the emtol property."""
         self._cards[2].set_value("emtol", value)
 
     @property
@@ -571,6 +590,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @rmtol.setter
     def rmtol(self, value: float) -> None:
+        """Set the rmtol property."""
         self._cards[2].set_value("rmtol", value)
 
     @property
@@ -581,6 +601,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @nttol.setter
     def nttol(self, value: float) -> None:
+        """Set the nttol property."""
         self._cards[2].set_value("nttol", value)
 
     @property
@@ -591,6 +612,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @nrtol.setter
     def nrtol(self, value: float) -> None:
+        """Set the nrtol property."""
         self._cards[2].set_value("nrtol", value)
 
     @property
@@ -601,6 +623,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @rttol.setter
     def rttol(self, value: float) -> None:
+        """Set the rttol property."""
         self._cards[2].set_value("rttol", value)
 
     @property
@@ -611,6 +634,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @rrtol.setter
     def rrtol(self, value: float) -> None:
+        """Set the rrtol property."""
         self._cards[2].set_value("rrtol", value)
 
     @property
@@ -622,6 +646,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @arcctl.setter
     def arcctl(self, value: int) -> None:
+        """Set the arcctl property."""
         self._cards[3].set_value("arcctl", value)
 
     @property
@@ -635,8 +660,9 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @arcdir.setter
     def arcdir(self, value: int) -> None:
+        """Set the arcdir property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""arcdir must be `None` or one of {0,1,2,3}""")
+            raise Exception("""arcdir must be `None` or one of {0,1,2,3}.""")
         self._cards[3].set_value("arcdir", value)
 
     @property
@@ -649,6 +675,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @arclen.setter
     def arclen(self, value: float) -> None:
+        """Set the arclen property."""
         self._cards[3].set_value("arclen", value)
 
     @property
@@ -662,8 +689,9 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @arcmth.setter
     def arcmth(self, value: int) -> None:
+        """Set the arcmth property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""arcmth must be `None` or one of {1,2,3}""")
+            raise Exception("""arcmth must be `None` or one of {1,2,3}.""")
         self._cards[3].set_value("arcmth", value)
 
     @property
@@ -676,8 +704,9 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @arcdmp.setter
     def arcdmp(self, value: int) -> None:
+        """Set the arcdmp property."""
         if value not in [2, 1, None]:
-            raise Exception("""arcdmp must be `None` or one of {2,1}""")
+            raise Exception("""arcdmp must be `None` or one of {2,1}.""")
         self._cards[3].set_value("arcdmp", value)
 
     @property
@@ -690,6 +719,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @arcpsi.setter
     def arcpsi(self, value: float) -> None:
+        """Set the arcpsi property."""
         self._cards[3].set_value("arcpsi", value)
 
     @property
@@ -702,6 +732,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @arcalf.setter
     def arcalf(self, value: float) -> None:
+        """Set the arcalf property."""
         self._cards[3].set_value("arcalf", value)
 
     @property
@@ -712,6 +743,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @arctim.setter
     def arctim(self, value: float) -> None:
+        """Set the arctim property."""
         self._cards[3].set_value("arctim", value)
 
     @property
@@ -727,8 +759,9 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @lsmtd.setter
     def lsmtd(self, value: int) -> None:
+        """Set the lsmtd property."""
         if value not in [4, 1, 2, 3, 5, 6, None]:
-            raise Exception("""lsmtd must be `None` or one of {4,1,2,3,5,6}""")
+            raise Exception("""lsmtd must be `None` or one of {4,1,2,3,5,6}.""")
         self._cards[4].set_value("lsmtd", value)
 
     @property
@@ -743,8 +776,9 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @lsdir.setter
     def lsdir(self, value: int) -> None:
+        """Set the lsdir property."""
         if value not in [2, 1, 3, 4, None]:
-            raise Exception("""lsdir must be `None` or one of {2,1,3,4}""")
+            raise Exception("""lsdir must be `None` or one of {2,1,3,4}.""")
         self._cards[4].set_value("lsdir", value)
 
     @property
@@ -755,6 +789,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @irad.setter
     def irad(self, value: float) -> None:
+        """Set the irad property."""
         self._cards[4].set_value("irad", value)
 
     @property
@@ -765,6 +800,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @srad.setter
     def srad(self, value: float) -> None:
+        """Set the srad property."""
         self._cards[4].set_value("srad", value)
 
     @property
@@ -775,6 +811,7 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @awgt.setter
     def awgt(self, value: float) -> None:
+        """Set the awgt property."""
         self._cards[4].set_value("awgt", value)
 
     @property
@@ -785,5 +822,6 @@ class ControlImplicitNonlinear(KeywordBase):
 
     @sred.setter
     def sred(self, value: float) -> None:
+        """Set the sred property."""
         self._cards[4].set_value("sred", value)
 

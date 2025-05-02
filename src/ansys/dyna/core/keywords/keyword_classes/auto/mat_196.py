@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
@@ -36,6 +37,7 @@ class Mat196(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -215,6 +217,7 @@ class Mat196(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -225,6 +228,7 @@ class Mat196(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -237,18 +241,19 @@ class Mat196(KeywordBase):
 
     @dospot.setter
     def dospot(self, value: int) -> None:
+        """Set the dospot property."""
         if value not in [0, 1, None]:
-            raise Exception("""dospot must be `None` or one of {0,1}""")
+            raise Exception("""dospot must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dospot", value)
 
     @property
     def springs(self):
-        '''Gets the full table of springs'''
+        """Gets the full table of springs."""
         return self._cards[1].table
 
     @springs.setter
     def springs(self, df):
-        '''sets springs from the dataframe df'''
+        """sets springs from the dataframe df."""
         self._cards[1].table = df
 
     @property
@@ -259,8 +264,10 @@ class Mat196(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 
 
 class MatGeneralSpringDiscreteBeam(Mat196):
+    """Alias for MAT keyword."""
     subkeyword = "GENERAL_SPRING_DISCRETE_BEAM"

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadPze(KeywordBase):
     subkeyword = "PZE"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class LoadPze(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 
     @property
@@ -87,6 +90,7 @@ class LoadPze(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -97,6 +101,7 @@ class LoadPze(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -109,7 +114,8 @@ class LoadPze(KeywordBase):
 
     @setyp.setter
     def setyp(self, value: str) -> None:
+        """Set the setyp property."""
         if value not in ["NSET", "SEGSET", None]:
-            raise Exception("""setyp must be `None` or one of {"NSET","SEGSET"}""")
+            raise Exception("""setyp must be `None` or one of {"NSET","SEGSET"}.""")
         self._cards[0].set_value("setyp", value)
 

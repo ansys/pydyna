@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the AIRBAG keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
     subkeyword = "SIMPLE_AIRBAG_MODEL_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the AIRBAG keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -240,6 +242,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -250,6 +253,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -260,6 +264,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -272,8 +277,9 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("sidtyp", value)
 
     @property
@@ -287,6 +293,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @rbid.setter
     def rbid(self, value: int) -> None:
+        """Set the rbid property."""
         self._cards[1].set_value("rbid", value)
 
     @property
@@ -297,6 +304,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @vsca.setter
     def vsca(self, value: float) -> None:
+        """Set the vsca property."""
         self._cards[1].set_value("vsca", value)
 
     @property
@@ -307,6 +315,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @psca.setter
     def psca(self, value: float) -> None:
+        """Set the psca property."""
         self._cards[1].set_value("psca", value)
 
     @property
@@ -317,6 +326,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @vini.setter
     def vini(self, value: float) -> None:
+        """Set the vini property."""
         self._cards[1].set_value("vini", value)
 
     @property
@@ -327,6 +337,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @mwd.setter
     def mwd(self, value: float) -> None:
+        """Set the mwd property."""
         self._cards[1].set_value("mwd", value)
 
     @property
@@ -337,6 +348,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @spsf.setter
     def spsf(self, value: float) -> None:
+        """Set the spsf property."""
         self._cards[1].set_value("spsf", value)
 
     @property
@@ -347,6 +359,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @cv.setter
     def cv(self, value: float) -> None:
+        """Set the cv property."""
         self._cards[2].set_value("cv", value)
 
     @property
@@ -357,6 +370,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[2].set_value("cp", value)
 
     @property
@@ -367,6 +381,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[2].set_value("t", value)
 
     @property
@@ -377,6 +392,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[2].set_value("lcid", value)
 
     @property
@@ -388,6 +404,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @mu.setter
     def mu(self, value: float) -> None:
+        """Set the mu property."""
         self._cards[2].set_value("mu", value)
 
     @property
@@ -400,6 +417,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @area.setter
     def area(self, value: float) -> None:
+        """Set the area property."""
         self._cards[2].set_value("area", value)
 
     @property
@@ -410,6 +428,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @pe.setter
     def pe(self, value: float) -> None:
+        """Set the pe property."""
         self._cards[2].set_value("pe", value)
 
     @property
@@ -420,6 +439,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[2].set_value("ro", value)
 
     @property
@@ -430,6 +450,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @lou.setter
     def lou(self, value: int) -> None:
+        """Set the lou property."""
         self._cards[3].set_value("lou", value)
 
     @property
@@ -440,6 +461,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @text.setter
     def text(self, value: float) -> None:
+        """Set the text property."""
         self._cards[3].set_value("text", value)
 
     @property
@@ -450,6 +472,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[3].set_value("a", value)
 
     @property
@@ -460,6 +483,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[3].set_value("b", value)
 
     @property
@@ -470,6 +494,7 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @mw.setter
     def mw(self, value: float) -> None:
+        """Set the mw property."""
         self._cards[3].set_value("mw", value)
 
     @property
@@ -480,5 +505,6 @@ class AirbagSimpleAirbagModelId(KeywordBase):
 
     @gasc.setter
     def gasc(self, value: float) -> None:
+        """Set the gasc property."""
         self._cards[3].set_value("gasc", value)
 

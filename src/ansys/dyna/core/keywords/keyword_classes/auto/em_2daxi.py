@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Em2Daxi(KeywordBase):
     subkeyword = "2DAXI"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -96,6 +98,7 @@ class Em2Daxi(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -106,6 +109,7 @@ class Em2Daxi(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -116,6 +120,7 @@ class Em2Daxi(KeywordBase):
 
     @starssid.setter
     def starssid(self, value: int) -> None:
+        """Set the starssid property."""
         self._cards[0].set_value("starssid", value)
 
     @property
@@ -126,6 +131,7 @@ class Em2Daxi(KeywordBase):
 
     @endssid.setter
     def endssid(self, value: int) -> None:
+        """Set the endssid property."""
         self._cards[0].set_value("endssid", value)
 
     @property
@@ -136,5 +142,6 @@ class Em2Daxi(KeywordBase):
 
     @numsec.setter
     def numsec(self, value: int) -> None:
+        """Set the numsec property."""
         self._cards[0].set_value("numsec", value)
 

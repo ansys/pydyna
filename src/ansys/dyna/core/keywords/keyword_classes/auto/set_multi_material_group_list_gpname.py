@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -137,6 +139,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
 
     @ammsid.setter
     def ammsid(self, value: int) -> None:
+        """Set the ammsid property."""
         self._cards[0].set_value("ammsid", value)
 
     @property
@@ -147,6 +150,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
 
     @ammgid1.setter
     def ammgid1(self, value: str) -> None:
+        """Set the ammgid1 property."""
         self._cards[1].set_value("ammgid1", value)
 
     @property
@@ -157,6 +161,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
 
     @ammgid2.setter
     def ammgid2(self, value: str) -> None:
+        """Set the ammgid2 property."""
         self._cards[1].set_value("ammgid2", value)
 
     @property
@@ -167,6 +172,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
 
     @ammgid3.setter
     def ammgid3(self, value: str) -> None:
+        """Set the ammgid3 property."""
         self._cards[1].set_value("ammgid3", value)
 
     @property
@@ -177,6 +183,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
 
     @ammgid4.setter
     def ammgid4(self, value: str) -> None:
+        """Set the ammgid4 property."""
         self._cards[1].set_value("ammgid4", value)
 
     @property
@@ -187,6 +194,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
 
     @ammgid5.setter
     def ammgid5(self, value: str) -> None:
+        """Set the ammgid5 property."""
         self._cards[1].set_value("ammgid5", value)
 
     @property
@@ -197,6 +205,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
 
     @ammgid6.setter
     def ammgid6(self, value: str) -> None:
+        """Set the ammgid6 property."""
         self._cards[1].set_value("ammgid6", value)
 
     @property
@@ -207,6 +216,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
 
     @ammgid7.setter
     def ammgid7(self, value: str) -> None:
+        """Set the ammgid7 property."""
         self._cards[1].set_value("ammgid7", value)
 
     @property
@@ -217,6 +227,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
 
     @ammgid8.setter
     def ammgid8(self, value: str) -> None:
+        """Set the ammgid8 property."""
         self._cards[1].set_value("ammgid8", value)
 
     @property
@@ -227,5 +238,6 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

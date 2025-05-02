@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineTable3D(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -111,6 +113,7 @@ class DefineTable3D(KeywordBase):
 
     @tbid.setter
     def tbid(self, value: int) -> None:
+        """Set the tbid property."""
         self._cards[0].set_value("tbid", value)
 
     @property
@@ -121,6 +124,7 @@ class DefineTable3D(KeywordBase):
 
     @sfa.setter
     def sfa(self, value: float) -> None:
+        """Set the sfa property."""
         self._cards[0].set_value("sfa", value)
 
     @property
@@ -131,6 +135,7 @@ class DefineTable3D(KeywordBase):
 
     @offa.setter
     def offa(self, value: float) -> None:
+        """Set the offa property."""
         self._cards[0].set_value("offa", value)
 
     @property
@@ -141,6 +146,7 @@ class DefineTable3D(KeywordBase):
 
     @value.setter
     def value(self, value: float) -> None:
+        """Set the value property."""
         self._cards[1].set_value("value", value)
 
     @property
@@ -151,6 +157,7 @@ class DefineTable3D(KeywordBase):
 
     @tbid.setter
     def tbid(self, value: int) -> None:
+        """Set the tbid property."""
         self._cards[1].set_value("tbid", value)
 
     @property
@@ -161,5 +168,6 @@ class DefineTable3D(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

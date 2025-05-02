@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingUser(KeywordBase):
     subkeyword = "FORMING_USER"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -240,6 +242,7 @@ class ControlFormingUser(KeywordBase):
 
     @blank.setter
     def blank(self, value: int) -> None:
+        """Set the blank property."""
         self._cards[0].set_value("blank", value)
 
     @property
@@ -251,8 +254,9 @@ class ControlFormingUser(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, None]:
-            raise Exception("""type must be `None` or one of {0,1}""")
+            raise Exception("""type must be `None` or one of {0,1}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -263,6 +267,7 @@ class ControlFormingUser(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[0].set_value("thick", value)
 
     @property
@@ -273,6 +278,7 @@ class ControlFormingUser(KeywordBase):
 
     @r00.setter
     def r00(self, value: float) -> None:
+        """Set the r00 property."""
         self._cards[0].set_value("r00", value)
 
     @property
@@ -283,6 +289,7 @@ class ControlFormingUser(KeywordBase):
 
     @r45.setter
     def r45(self, value: float) -> None:
+        """Set the r45 property."""
         self._cards[0].set_value("r45", value)
 
     @property
@@ -293,6 +300,7 @@ class ControlFormingUser(KeywordBase):
 
     @r90.setter
     def r90(self, value: float) -> None:
+        """Set the r90 property."""
         self._cards[0].set_value("r90", value)
 
     @property
@@ -305,8 +313,9 @@ class ControlFormingUser(KeywordBase):
 
     @al_fe.setter
     def al_fe(self, value: str) -> None:
+        """Set the al_fe property."""
         if value not in ["F", "A", None]:
-            raise Exception("""al_fe must be `None` or one of {"F","A"}""")
+            raise Exception("""al_fe must be `None` or one of {"F","A"}.""")
         self._cards[0].set_value("al/fe", value)
 
     @property
@@ -317,6 +326,7 @@ class ControlFormingUser(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
+        """Set the unit property."""
         self._cards[0].set_value("unit", value)
 
     @property
@@ -327,6 +337,7 @@ class ControlFormingUser(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: int) -> None:
+        """Set the lcss property."""
         self._cards[1].set_value("lcss", value)
 
     @property
@@ -337,6 +348,7 @@ class ControlFormingUser(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[1].set_value("k", value)
 
     @property
@@ -347,6 +359,7 @@ class ControlFormingUser(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[1].set_value("n", value)
 
     @property
@@ -357,6 +370,7 @@ class ControlFormingUser(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[1].set_value("e", value)
 
     @property
@@ -367,6 +381,7 @@ class ControlFormingUser(KeywordBase):
 
     @density.setter
     def density(self, value: float) -> None:
+        """Set the density property."""
         self._cards[1].set_value("density", value)
 
     @property
@@ -377,6 +392,7 @@ class ControlFormingUser(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[1].set_value("pr", value)
 
     @property
@@ -387,6 +403,7 @@ class ControlFormingUser(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[1].set_value("fs", value)
 
     @property
@@ -397,6 +414,7 @@ class ControlFormingUser(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         self._cards[1].set_value("mtype", value)
 
     @property
@@ -409,6 +427,7 @@ class ControlFormingUser(KeywordBase):
 
     @patern.setter
     def patern(self, value: int) -> None:
+        """Set the patern property."""
         self._cards[2].set_value("patern", value)
 
     @property
@@ -419,6 +438,7 @@ class ControlFormingUser(KeywordBase):
 
     @vmax.setter
     def vmax(self, value: float) -> None:
+        """Set the vmax property."""
         self._cards[2].set_value("vmax", value)
 
     @property
@@ -429,6 +449,7 @@ class ControlFormingUser(KeywordBase):
 
     @amax.setter
     def amax(self, value: float) -> None:
+        """Set the amax property."""
         self._cards[2].set_value("amax", value)
 
     @property
@@ -439,6 +460,7 @@ class ControlFormingUser(KeywordBase):
 
     @lvlada.setter
     def lvlada(self, value: int) -> None:
+        """Set the lvlada property."""
         self._cards[2].set_value("lvlada", value)
 
     @property
@@ -449,6 +471,7 @@ class ControlFormingUser(KeywordBase):
 
     @sizeada.setter
     def sizeada(self, value: float) -> None:
+        """Set the sizeada property."""
         self._cards[2].set_value("sizeada", value)
 
     @property
@@ -459,6 +482,7 @@ class ControlFormingUser(KeywordBase):
 
     @adatims.setter
     def adatims(self, value: int) -> None:
+        """Set the adatims property."""
         self._cards[2].set_value("adatims", value)
 
     @property
@@ -469,6 +493,7 @@ class ControlFormingUser(KeywordBase):
 
     @d3plot.setter
     def d3plot(self, value: int) -> None:
+        """Set the d3plot property."""
         self._cards[2].set_value("d3plot", value)
 
     @property
@@ -479,5 +504,6 @@ class ControlFormingUser(KeywordBase):
 
     @gap.setter
     def gap(self, value: float) -> None:
+        """Set the gap property."""
         self._cards[2].set_value("gap", value)
 

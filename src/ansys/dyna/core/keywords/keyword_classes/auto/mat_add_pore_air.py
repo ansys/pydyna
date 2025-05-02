@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddPoreAir(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -169,6 +171,7 @@ class MatAddPoreAir(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -179,6 +182,7 @@ class MatAddPoreAir(KeywordBase):
 
     @pa_rho.setter
     def pa_rho(self, value: float) -> None:
+        """Set the pa_rho property."""
         self._cards[0].set_value("pa_rho", value)
 
     @property
@@ -189,6 +193,7 @@ class MatAddPoreAir(KeywordBase):
 
     @pa_pre.setter
     def pa_pre(self, value: float) -> None:
+        """Set the pa_pre property."""
         self._cards[0].set_value("pa_pre", value)
 
     @property
@@ -199,6 +204,7 @@ class MatAddPoreAir(KeywordBase):
 
     @pore.setter
     def pore(self, value: float) -> None:
+        """Set the pore property."""
         self._cards[0].set_value("pore", value)
 
     @property
@@ -209,6 +215,7 @@ class MatAddPoreAir(KeywordBase):
 
     @dvimin.setter
     def dvimin(self, value: float) -> None:
+        """Set the dvimin property."""
         self._cards[0].set_value("dvimin", value)
 
     @property
@@ -219,6 +226,7 @@ class MatAddPoreAir(KeywordBase):
 
     @perm1.setter
     def perm1(self, value: float) -> None:
+        """Set the perm1 property."""
         self._cards[1].set_value("perm1", value)
 
     @property
@@ -229,6 +237,7 @@ class MatAddPoreAir(KeywordBase):
 
     @perm2.setter
     def perm2(self, value: float) -> None:
+        """Set the perm2 property."""
         self._cards[1].set_value("perm2", value)
 
     @property
@@ -239,6 +248,7 @@ class MatAddPoreAir(KeywordBase):
 
     @perm3.setter
     def perm3(self, value: float) -> None:
+        """Set the perm3 property."""
         self._cards[1].set_value("perm3", value)
 
     @property
@@ -249,6 +259,7 @@ class MatAddPoreAir(KeywordBase):
 
     @cdarcy.setter
     def cdarcy(self, value: float) -> None:
+        """Set the cdarcy property."""
         self._cards[1].set_value("cdarcy", value)
 
     @property
@@ -259,6 +270,7 @@ class MatAddPoreAir(KeywordBase):
 
     @cdf.setter
     def cdf(self, value: float) -> None:
+        """Set the cdf property."""
         self._cards[1].set_value("cdf", value)
 
     @property
@@ -269,6 +281,7 @@ class MatAddPoreAir(KeywordBase):
 
     @lcpgd1.setter
     def lcpgd1(self, value: int) -> None:
+        """Set the lcpgd1 property."""
         self._cards[1].set_value("lcpgd1", value)
 
     @property
@@ -279,6 +292,7 @@ class MatAddPoreAir(KeywordBase):
 
     @lcpgd2.setter
     def lcpgd2(self, value: int) -> None:
+        """Set the lcpgd2 property."""
         self._cards[1].set_value("lcpgd2", value)
 
     @property
@@ -289,6 +303,7 @@ class MatAddPoreAir(KeywordBase):
 
     @lcpgd3.setter
     def lcpgd3(self, value: int) -> None:
+        """Set the lcpgd3 property."""
         self._cards[1].set_value("lcpgd3", value)
 
     @property
@@ -299,5 +314,6 @@ class MatAddPoreAir(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

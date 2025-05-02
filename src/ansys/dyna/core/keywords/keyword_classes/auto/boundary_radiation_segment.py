@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryRadiationSegment(KeywordBase):
     subkeyword = "RADIATION_SEGMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -127,6 +129,7 @@ class BoundaryRadiationSegment(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -137,6 +140,7 @@ class BoundaryRadiationSegment(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -147,6 +151,7 @@ class BoundaryRadiationSegment(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -157,6 +162,7 @@ class BoundaryRadiationSegment(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[0].set_value("n4", value)
 
     @property
@@ -168,6 +174,7 @@ class BoundaryRadiationSegment(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         self._cards[0].set_value("type", value)
 
     @property
@@ -181,6 +188,7 @@ class BoundaryRadiationSegment(KeywordBase):
 
     @rflcid.setter
     def rflcid(self, value: int) -> None:
+        """Set the rflcid property."""
         self._cards[1].set_value("rflcid", value)
 
     @property
@@ -191,6 +199,7 @@ class BoundaryRadiationSegment(KeywordBase):
 
     @rfmult.setter
     def rfmult(self, value: float) -> None:
+        """Set the rfmult property."""
         self._cards[1].set_value("rfmult", value)
 
     @property
@@ -202,6 +211,7 @@ class BoundaryRadiationSegment(KeywordBase):
 
     @tilcid.setter
     def tilcid(self, value: int) -> None:
+        """Set the tilcid property."""
         self._cards[1].set_value("tilcid", value)
 
     @property
@@ -212,6 +222,7 @@ class BoundaryRadiationSegment(KeywordBase):
 
     @timult.setter
     def timult(self, value: float) -> None:
+        """Set the timult property."""
         self._cards[1].set_value("timult", value)
 
     @property
@@ -224,7 +235,8 @@ class BoundaryRadiationSegment(KeywordBase):
 
     @loc.setter
     def loc(self, value: int) -> None:
+        """Set the loc property."""
         if value not in [0, -1, 1, None]:
-            raise Exception("""loc must be `None` or one of {0,-1,1}""")
+            raise Exception("""loc must be `None` or one of {0,-1,1}.""")
         self._cards[1].set_value("loc", value)
 

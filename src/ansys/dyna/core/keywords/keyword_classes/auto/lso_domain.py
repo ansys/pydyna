@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LSO keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LsoDomain(KeywordBase):
     subkeyword = "DOMAIN"
 
     def __init__(self, **kwargs):
+        """Initialize the LSO keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -143,8 +145,9 @@ class LsoDomain(KeywordBase):
 
     @domain_type.setter
     def domain_type(self, value: str) -> None:
+        """Set the domain_type property."""
         if value not in ["ROGO", "CIRCUIT", "THIST_POINT", "TRACER_POINT", "NODE", "PART", "SEGMENT", "SURF_NODE", "SURF_ELEMENT", "VOLUME_ELEMENT", "SURFACE_PART", "VOLUME_PART", None]:
-            raise Exception("""domain_type must be `None` or one of {"ROGO","CIRCUIT","THIST_POINT","TRACER_POINT","NODE","PART","SEGMENT","SURF_NODE","SURF_ELEMENT","VOLUME_ELEMENT","SURFACE_PART","VOLUME_PART"}""")
+            raise Exception("""domain_type must be `None` or one of {"ROGO","CIRCUIT","THIST_POINT","TRACER_POINT","NODE","PART","SEGMENT","SURF_NODE","SURF_ELEMENT","VOLUME_ELEMENT","SURFACE_PART","VOLUME_PART"}.""")
         self._cards[0].set_value("domain_type", value)
 
     @property
@@ -156,8 +159,9 @@ class LsoDomain(KeywordBase):
 
     @solver_name.setter
     def solver_name(self, value: str) -> None:
+        """Set the solver_name property."""
         if value not in ["MECH", "EM", "CESE", "ICFD", None]:
-            raise Exception("""solver_name must be `None` or one of {"MECH","EM","CESE","ICFD"}""")
+            raise Exception("""solver_name must be `None` or one of {"MECH","EM","CESE","ICFD"}.""")
         self._cards[1].set_value("solver_name", value)
 
     @property
@@ -168,6 +172,7 @@ class LsoDomain(KeywordBase):
 
     @outid.setter
     def outid(self, value: int) -> None:
+        """Set the outid property."""
         self._cards[2].set_value("outid", value)
 
     @property
@@ -178,6 +183,7 @@ class LsoDomain(KeywordBase):
 
     @refid.setter
     def refid(self, value: int) -> None:
+        """Set the refid property."""
         self._cards[2].set_value("refid", value)
 
     @property
@@ -202,6 +208,7 @@ class LsoDomain(KeywordBase):
 
     @reduct.setter
     def reduct(self, value: int) -> None:
+        """Set the reduct property."""
         self._cards[2].set_value("reduct", value)
 
     @property
@@ -212,6 +219,7 @@ class LsoDomain(KeywordBase):
 
     @outid.setter
     def outid(self, value: int) -> None:
+        """Set the outid property."""
         self._cards[3].set_value("outid", value)
 
     @property
@@ -222,6 +230,7 @@ class LsoDomain(KeywordBase):
 
     @refid.setter
     def refid(self, value: int) -> None:
+        """Set the refid property."""
         self._cards[3].set_value("refid", value)
 
     @property
@@ -236,8 +245,9 @@ class LsoDomain(KeywordBase):
 
     @override.setter
     def override(self, value: int) -> None:
+        """Set the override property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""override must be `None` or one of {1,2,3,4}""")
+            raise Exception("""override must be `None` or one of {1,2,3,4}.""")
         self._cards[3].set_value("override", value)
 
     @property
@@ -262,6 +272,7 @@ class LsoDomain(KeywordBase):
 
     @reduct.setter
     def reduct(self, value: int) -> None:
+        """Set the reduct property."""
         self._cards[3].set_value("reduct", value)
 
     @property
@@ -272,5 +283,6 @@ class LsoDomain(KeywordBase):
 
     @variable_name.setter
     def variable_name(self, value: str) -> None:
+        """Set the variable_name property."""
         self._cards[4].set_value("variable_name", value)
 

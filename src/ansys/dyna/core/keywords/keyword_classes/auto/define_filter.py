@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFilter(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -144,6 +146,7 @@ class DefineFilter(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -159,6 +162,7 @@ class DefineFilter(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -169,6 +173,7 @@ class DefineFilter(KeywordBase):
 
     @type.setter
     def type(self, value: str) -> None:
+        """Set the type property."""
         self._cards[1].set_value("type", value)
 
     @property
@@ -179,6 +184,7 @@ class DefineFilter(KeywordBase):
 
     @data1.setter
     def data1(self, value: str) -> None:
+        """Set the data1 property."""
         self._cards[1].set_value("data1", value)
 
     @property
@@ -189,6 +195,7 @@ class DefineFilter(KeywordBase):
 
     @data2.setter
     def data2(self, value: str) -> None:
+        """Set the data2 property."""
         self._cards[1].set_value("data2", value)
 
     @property
@@ -199,6 +206,7 @@ class DefineFilter(KeywordBase):
 
     @data3.setter
     def data3(self, value: str) -> None:
+        """Set the data3 property."""
         self._cards[1].set_value("data3", value)
 
     @property
@@ -209,6 +217,7 @@ class DefineFilter(KeywordBase):
 
     @data4.setter
     def data4(self, value: str) -> None:
+        """Set the data4 property."""
         self._cards[1].set_value("data4", value)
 
     @property
@@ -219,6 +228,7 @@ class DefineFilter(KeywordBase):
 
     @data5.setter
     def data5(self, value: str) -> None:
+        """Set the data5 property."""
         self._cards[1].set_value("data5", value)
 
     @property
@@ -229,6 +239,7 @@ class DefineFilter(KeywordBase):
 
     @data6.setter
     def data6(self, value: str) -> None:
+        """Set the data6 property."""
         self._cards[1].set_value("data6", value)
 
     @property
@@ -239,6 +250,7 @@ class DefineFilter(KeywordBase):
 
     @data7.setter
     def data7(self, value: str) -> None:
+        """Set the data7 property."""
         self._cards[1].set_value("data7", value)
 
     @property
@@ -249,5 +261,6 @@ class DefineFilter(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

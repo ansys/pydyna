@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
     subkeyword = "BINARY_D3PLOT"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -132,6 +134,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -142,6 +145,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @lcdt.setter
     def lcdt(self, value: int) -> None:
+        """Set the lcdt property."""
         self._cards[0].set_value("lcdt", value)
 
     @property
@@ -158,6 +162,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @beam.setter
     def beam(self, value: int) -> None:
+        """Set the beam property."""
         self._cards[0].set_value("beam", value)
 
     @property
@@ -168,6 +173,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @npltc.setter
     def npltc(self, value: int) -> None:
+        """Set the npltc property."""
         self._cards[0].set_value("npltc", value)
 
     @property
@@ -178,6 +184,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @psetid.setter
     def psetid(self, value: int) -> None:
+        """Set the psetid property."""
         self._cards[0].set_value("psetid", value)
 
     @property
@@ -191,8 +198,9 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @ioopt.setter
     def ioopt(self, value: int) -> None:
+        """Set the ioopt property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""ioopt must be `None` or one of {0,1,2,3}""")
+            raise Exception("""ioopt must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("ioopt", value)
 
     @property
@@ -203,6 +211,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @rate.setter
     def rate(self, value: float) -> None:
+        """Set the rate property."""
         self._cards[1].set_value("rate", value)
 
     @property
@@ -213,6 +222,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @cutoff.setter
     def cutoff(self, value: float) -> None:
+        """Set the cutoff property."""
         self._cards[1].set_value("cutoff", value)
 
     @property
@@ -226,6 +236,7 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @window.setter
     def window(self, value: float) -> None:
+        """Set the window property."""
         self._cards[1].set_value("window", value)
 
     @property
@@ -240,8 +251,9 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""type must be `None` or one of {0,1,2}""")
+            raise Exception("""type must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("type", value)
 
     @property
@@ -254,5 +266,6 @@ class DatabaseBinaryD3Plot(KeywordBase):
 
     @pset.setter
     def pset(self, value: int) -> None:
+        """Set the pset property."""
         self._cards[1].set_value("pset", value)
 

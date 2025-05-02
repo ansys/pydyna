@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTERFACE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
     subkeyword = "BLANKSIZE_SYMMETRIC_PLANE"
 
     def __init__(self, **kwargs):
+        """Initialize the INTERFACE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[0].set_value("x0", value)
 
     @property
@@ -105,6 +108,7 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[0].set_value("y0", value)
 
     @property
@@ -115,6 +119,7 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[0].set_value("z0", value)
 
     @property
@@ -125,6 +130,7 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[0].set_value("v1", value)
 
     @property
@@ -135,6 +141,7 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[0].set_value("v2", value)
 
     @property
@@ -145,5 +152,6 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[0].set_value("v3", value)
 

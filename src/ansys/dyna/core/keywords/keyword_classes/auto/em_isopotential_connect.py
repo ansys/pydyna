@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmIsopotentialConnect(KeywordBase):
     subkeyword = "ISOPOTENTIAL_CONNECT"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -123,6 +125,7 @@ class EmIsopotentialConnect(KeywordBase):
 
     @conid.setter
     def conid(self, value: int) -> None:
+        """Set the conid property."""
         self._cards[0].set_value("conid", value)
 
     @property
@@ -139,8 +142,9 @@ class EmIsopotentialConnect(KeywordBase):
 
     @contype.setter
     def contype(self, value: int) -> None:
+        """Set the contype property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""contype must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""contype must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[0].set_value("contype", value)
 
     @property
@@ -151,6 +155,7 @@ class EmIsopotentialConnect(KeywordBase):
 
     @isoid1.setter
     def isoid1(self, value: int) -> None:
+        """Set the isoid1 property."""
         self._cards[0].set_value("isoid1", value)
 
     @property
@@ -161,6 +166,7 @@ class EmIsopotentialConnect(KeywordBase):
 
     @isoid2.setter
     def isoid2(self, value: int) -> None:
+        """Set the isoid2 property."""
         self._cards[0].set_value("isoid2", value)
 
     @property
@@ -171,6 +177,7 @@ class EmIsopotentialConnect(KeywordBase):
 
     @val.setter
     def val(self, value: float) -> None:
+        """Set the val property."""
         self._cards[0].set_value("val", value)
 
     @property
@@ -182,6 +189,7 @@ class EmIsopotentialConnect(KeywordBase):
 
     @lcid_rdlid.setter
     def lcid_rdlid(self, value: int) -> None:
+        """Set the lcid_rdlid property."""
         self._cards[0].set_value("lcid/rdlid", value)
 
     @property
@@ -192,6 +200,7 @@ class EmIsopotentialConnect(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -202,6 +211,7 @@ class EmIsopotentialConnect(KeywordBase):
 
     @l.setter
     def l(self, value: float) -> None:
+        """Set the l property."""
         self._cards[1].set_value("l", value)
 
     @property
@@ -212,6 +222,7 @@ class EmIsopotentialConnect(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[1].set_value("c", value)
 
     @property
@@ -222,5 +233,6 @@ class EmIsopotentialConnect(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[1].set_value("v0", value)
 

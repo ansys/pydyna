@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
     subkeyword = "SEATBELT_PRETENSIONER"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -131,6 +133,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @sbprid.setter
     def sbprid(self, value: int) -> None:
+        """Set the sbprid property."""
         self._cards[0].set_value("sbprid", value)
 
     @property
@@ -150,8 +153,9 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @sbprty.setter
     def sbprty(self, value: int) -> None:
+        """Set the sbprty property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, None]:
-            raise Exception("""sbprty must be `None` or one of {1,2,3,4,5,6,7,8,9}""")
+            raise Exception("""sbprty must be `None` or one of {1,2,3,4,5,6,7,8,9}.""")
         self._cards[0].set_value("sbprty", value)
 
     @property
@@ -162,6 +166,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @sbsid1.setter
     def sbsid1(self, value: int) -> None:
+        """Set the sbsid1 property."""
         self._cards[0].set_value("sbsid1", value)
 
     @property
@@ -172,6 +177,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @sbsid2.setter
     def sbsid2(self, value: int) -> None:
+        """Set the sbsid2 property."""
         self._cards[0].set_value("sbsid2", value)
 
     @property
@@ -182,6 +188,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @sbsid3.setter
     def sbsid3(self, value: int) -> None:
+        """Set the sbsid3 property."""
         self._cards[0].set_value("sbsid3", value)
 
     @property
@@ -192,6 +199,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @sbsid4.setter
     def sbsid4(self, value: int) -> None:
+        """Set the sbsid4 property."""
         self._cards[0].set_value("sbsid4", value)
 
     @property
@@ -202,6 +210,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @sbrid.setter
     def sbrid(self, value: int) -> None:
+        """Set the sbrid property."""
         self._cards[1].set_value("sbrid", value)
 
     @property
@@ -212,6 +221,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @time.setter
     def time(self, value: float) -> None:
+        """Set the time property."""
         self._cards[1].set_value("time", value)
 
     @property
@@ -222,6 +232,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @ptlcid.setter
     def ptlcid(self, value: int) -> None:
+        """Set the ptlcid property."""
         self._cards[1].set_value("ptlcid", value)
 
     @property
@@ -232,5 +243,6 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @lmtfrc.setter
     def lmtfrc(self, value: float) -> None:
+        """Set the lmtfrc property."""
         self._cards[1].set_value("lmtfrc", value)
 

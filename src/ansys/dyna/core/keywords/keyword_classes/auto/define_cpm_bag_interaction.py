@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCpmBagInteraction(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -90,6 +92,7 @@ class DefineCpmBagInteraction(KeywordBase):
 
     @bagid1.setter
     def bagid1(self, value: int) -> None:
+        """Set the bagid1 property."""
         self._cards[0].set_value("bagid1", value)
 
     @property
@@ -100,6 +103,7 @@ class DefineCpmBagInteraction(KeywordBase):
 
     @bagid2.setter
     def bagid2(self, value: int) -> None:
+        """Set the bagid2 property."""
         self._cards[0].set_value("bagid2", value)
 
     @property
@@ -110,6 +114,7 @@ class DefineCpmBagInteraction(KeywordBase):
 
     @nspec.setter
     def nspec(self, value: int) -> None:
+        """Set the nspec property."""
         self._cards[0].set_value("nspec", value)
 
     @property
@@ -120,5 +125,6 @@ class DefineCpmBagInteraction(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppDecompositionElcost(KeywordBase):
     subkeyword = "MPP_DECOMPOSITION_ELCOST"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -59,7 +61,8 @@ class ControlMppDecompositionElcost(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""itype must be `None` or one of {1,2,3,4}""")
+            raise Exception("""itype must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("itype", value)
 

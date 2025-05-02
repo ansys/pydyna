@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppContactGroupable(KeywordBase):
     subkeyword = "MPP_CONTACT_GROUPABLE"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -59,7 +61,8 @@ class ControlMppContactGroupable(KeywordBase):
 
     @grp.setter
     def grp(self, value: int) -> None:
+        """Set the grp property."""
         if value not in [1, 2, 4, 8, None]:
-            raise Exception("""grp must be `None` or one of {1,2,4,8}""")
+            raise Exception("""grp must be `None` or one of {1,2,4,8}.""")
         self._cards[0].set_value("grp", value)
 

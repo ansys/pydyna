@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedLinearGlobal(KeywordBase):
     subkeyword = "LINEAR_GLOBAL"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -81,6 +83,7 @@ class ConstrainedLinearGlobal(KeywordBase):
 
     @licd.setter
     def licd(self, value: int) -> None:
+        """Set the licd property."""
         self._cards[0].set_value("licd", value)
 
     @property
@@ -91,6 +94,7 @@ class ConstrainedLinearGlobal(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -109,8 +113,9 @@ class ConstrainedLinearGlobal(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""dof must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""dof must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("dof", value)
 
     @property
@@ -121,5 +126,6 @@ class ConstrainedLinearGlobal(KeywordBase):
 
     @coef.setter
     def coef(self, value: float) -> None:
+        """Set the coef property."""
         self._cards[1].set_value("coef", value)
 

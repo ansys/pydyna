@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SECTION keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionSpringDamper(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SECTION keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -134,6 +136,7 @@ class SectionSpringDamper(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -146,8 +149,9 @@ class SectionSpringDamper(KeywordBase):
 
     @dro.setter
     def dro(self, value: int) -> None:
+        """Set the dro property."""
         if value not in [0, 1, None]:
-            raise Exception("""dro must be `None` or one of {0,1}""")
+            raise Exception("""dro must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dro", value)
 
     @property
@@ -158,6 +162,7 @@ class SectionSpringDamper(KeywordBase):
 
     @kd.setter
     def kd(self, value: float) -> None:
+        """Set the kd property."""
         self._cards[0].set_value("kd", value)
 
     @property
@@ -168,6 +173,7 @@ class SectionSpringDamper(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[0].set_value("v0", value)
 
     @property
@@ -178,6 +184,7 @@ class SectionSpringDamper(KeywordBase):
 
     @cl.setter
     def cl(self, value: float) -> None:
+        """Set the cl property."""
         self._cards[0].set_value("cl", value)
 
     @property
@@ -188,6 +195,7 @@ class SectionSpringDamper(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[0].set_value("fd", value)
 
     @property
@@ -198,6 +206,7 @@ class SectionSpringDamper(KeywordBase):
 
     @cdl.setter
     def cdl(self, value: int) -> None:
+        """Set the cdl property."""
         self._cards[1].set_value("cdl", value)
 
     @property
@@ -208,6 +217,7 @@ class SectionSpringDamper(KeywordBase):
 
     @tdl.setter
     def tdl(self, value: int) -> None:
+        """Set the tdl property."""
         self._cards[1].set_value("tdl", value)
 
     @property
@@ -218,5 +228,6 @@ class SectionSpringDamper(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

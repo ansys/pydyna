@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseExtentSsstat(KeywordBase):
     subkeyword = "EXTENT_SSSTAT"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class DatabaseExtentSsstat(KeywordBase):
 
     @psid1.setter
     def psid1(self, value: int) -> None:
+        """Set the psid1 property."""
         self._cards[0].set_value("psid1", value)
 
     @property
@@ -113,6 +116,7 @@ class DatabaseExtentSsstat(KeywordBase):
 
     @psid2.setter
     def psid2(self, value: int) -> None:
+        """Set the psid2 property."""
         self._cards[0].set_value("psid2", value)
 
     @property
@@ -123,6 +127,7 @@ class DatabaseExtentSsstat(KeywordBase):
 
     @psid3.setter
     def psid3(self, value: int) -> None:
+        """Set the psid3 property."""
         self._cards[0].set_value("psid3", value)
 
     @property
@@ -133,6 +138,7 @@ class DatabaseExtentSsstat(KeywordBase):
 
     @psid4.setter
     def psid4(self, value: int) -> None:
+        """Set the psid4 property."""
         self._cards[0].set_value("psid4", value)
 
     @property
@@ -143,6 +149,7 @@ class DatabaseExtentSsstat(KeywordBase):
 
     @psid5.setter
     def psid5(self, value: int) -> None:
+        """Set the psid5 property."""
         self._cards[0].set_value("psid5", value)
 
     @property
@@ -153,6 +160,7 @@ class DatabaseExtentSsstat(KeywordBase):
 
     @psid6.setter
     def psid6(self, value: int) -> None:
+        """Set the psid6 property."""
         self._cards[0].set_value("psid6", value)
 
     @property
@@ -163,6 +171,7 @@ class DatabaseExtentSsstat(KeywordBase):
 
     @psid7.setter
     def psid7(self, value: int) -> None:
+        """Set the psid7 property."""
         self._cards[0].set_value("psid7", value)
 
     @property
@@ -173,5 +182,6 @@ class DatabaseExtentSsstat(KeywordBase):
 
     @psid8.setter
     def psid8(self, value: int) -> None:
+        """Set the psid8 property."""
         self._cards[0].set_value("psid8", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INCLUDE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IncludeStampedSet(KeywordBase):
     subkeyword = "STAMPED_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the INCLUDE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -308,6 +310,7 @@ class IncludeStampedSet(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -318,6 +321,7 @@ class IncludeStampedSet(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[1].set_value("psid", value)
 
     @property
@@ -331,8 +335,9 @@ class IncludeStampedSet(KeywordBase):
 
     @thick.setter
     def thick(self, value: int) -> None:
+        """Set the thick property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""thick must be `None` or one of {0,1,2}""")
+            raise Exception("""thick must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("thick", value)
 
     @property
@@ -346,8 +351,9 @@ class IncludeStampedSet(KeywordBase):
 
     @pstrn.setter
     def pstrn(self, value: int) -> None:
+        """Set the pstrn property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""pstrn must be `None` or one of {0,1,2}""")
+            raise Exception("""pstrn must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("pstrn", value)
 
     @property
@@ -360,8 +366,9 @@ class IncludeStampedSet(KeywordBase):
 
     @strain.setter
     def strain(self, value: int) -> None:
+        """Set the strain property."""
         if value not in [0, 1, None]:
-            raise Exception("""strain must be `None` or one of {0,1}""")
+            raise Exception("""strain must be `None` or one of {0,1}.""")
         self._cards[1].set_value("strain", value)
 
     @property
@@ -377,8 +384,9 @@ class IncludeStampedSet(KeywordBase):
 
     @stress.setter
     def stress(self, value: int) -> None:
+        """Set the stress property."""
         if value not in [0, 1, 2, -1, -3, None]:
-            raise Exception("""stress must be `None` or one of {0,1,2,-1,-3}""")
+            raise Exception("""stress must be `None` or one of {0,1,2,-1,-3}.""")
         self._cards[1].set_value("stress", value)
 
     @property
@@ -392,8 +400,9 @@ class IncludeStampedSet(KeywordBase):
 
     @incout.setter
     def incout(self, value: int) -> None:
+        """Set the incout property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""incout must be `None` or one of {0,1,2,3}""")
+            raise Exception("""incout must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("incout", value)
 
     @property
@@ -404,6 +413,7 @@ class IncludeStampedSet(KeywordBase):
 
     @rmax.setter
     def rmax(self, value: float) -> None:
+        """Set the rmax property."""
         self._cards[1].set_value("rmax", value)
 
     @property
@@ -414,6 +424,7 @@ class IncludeStampedSet(KeywordBase):
 
     @n1s.setter
     def n1s(self, value: int) -> None:
+        """Set the n1s property."""
         self._cards[2].set_value("n1s", value)
 
     @property
@@ -424,6 +435,7 @@ class IncludeStampedSet(KeywordBase):
 
     @n2s.setter
     def n2s(self, value: int) -> None:
+        """Set the n2s property."""
         self._cards[2].set_value("n2s", value)
 
     @property
@@ -434,6 +446,7 @@ class IncludeStampedSet(KeywordBase):
 
     @n3s.setter
     def n3s(self, value: int) -> None:
+        """Set the n3s property."""
         self._cards[2].set_value("n3s", value)
 
     @property
@@ -444,6 +457,7 @@ class IncludeStampedSet(KeywordBase):
 
     @n1c.setter
     def n1c(self, value: int) -> None:
+        """Set the n1c property."""
         self._cards[2].set_value("n1c", value)
 
     @property
@@ -454,6 +468,7 @@ class IncludeStampedSet(KeywordBase):
 
     @n2c.setter
     def n2c(self, value: int) -> None:
+        """Set the n2c property."""
         self._cards[2].set_value("n2c", value)
 
     @property
@@ -464,6 +479,7 @@ class IncludeStampedSet(KeywordBase):
 
     @n3c.setter
     def n3c(self, value: int) -> None:
+        """Set the n3c property."""
         self._cards[2].set_value("n3c", value)
 
     @property
@@ -476,8 +492,9 @@ class IncludeStampedSet(KeywordBase):
 
     @tensor.setter
     def tensor(self, value: int) -> None:
+        """Set the tensor property."""
         if value not in [0, 1, None]:
-            raise Exception("""tensor must be `None` or one of {0,1}""")
+            raise Exception("""tensor must be `None` or one of {0,1}.""")
         self._cards[2].set_value("tensor", value)
 
     @property
@@ -488,6 +505,7 @@ class IncludeStampedSet(KeywordBase):
 
     @thkscl.setter
     def thkscl(self, value: float) -> None:
+        """Set the thkscl property."""
         self._cards[2].set_value("thkscl", value)
 
     @property
@@ -503,8 +521,9 @@ class IncludeStampedSet(KeywordBase):
 
     @isym.setter
     def isym(self, value: int) -> None:
+        """Set the isym property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""isym must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""isym must be `None` or one of {0,1,2,3,4}.""")
         self._cards[3].set_value("isym", value)
 
     @property
@@ -517,8 +536,9 @@ class IncludeStampedSet(KeywordBase):
 
     @iafter.setter
     def iafter(self, value: int) -> None:
+        """Set the iafter property."""
         if value not in [0, 1, None]:
-            raise Exception("""iafter must be `None` or one of {0,1}""")
+            raise Exception("""iafter must be `None` or one of {0,1}.""")
         self._cards[3].set_value("iafter", value)
 
     @property
@@ -529,6 +549,7 @@ class IncludeStampedSet(KeywordBase):
 
     @percele.setter
     def percele(self, value: float) -> None:
+        """Set the percele property."""
         self._cards[3].set_value("percele", value)
 
     @property
@@ -539,6 +560,7 @@ class IncludeStampedSet(KeywordBase):
 
     @iortho.setter
     def iortho(self, value: int) -> None:
+        """Set the iortho property."""
         self._cards[3].set_value("iortho", value)
 
     @property
@@ -551,6 +573,7 @@ class IncludeStampedSet(KeywordBase):
 
     @isrocut.setter
     def isrocut(self, value: int) -> None:
+        """Set the isrocut property."""
         self._cards[3].set_value("isrocut", value)
 
     @property
@@ -561,6 +584,7 @@ class IncludeStampedSet(KeywordBase):
 
     @x01.setter
     def x01(self, value: float) -> None:
+        """Set the x01 property."""
         self._cards[4].set_value("x01", value)
 
     @property
@@ -571,6 +595,7 @@ class IncludeStampedSet(KeywordBase):
 
     @y01.setter
     def y01(self, value: float) -> None:
+        """Set the y01 property."""
         self._cards[4].set_value("y01", value)
 
     @property
@@ -581,6 +606,7 @@ class IncludeStampedSet(KeywordBase):
 
     @z01.setter
     def z01(self, value: float) -> None:
+        """Set the z01 property."""
         self._cards[4].set_value("z01", value)
 
     @property
@@ -591,6 +617,7 @@ class IncludeStampedSet(KeywordBase):
 
     @x02.setter
     def x02(self, value: float) -> None:
+        """Set the x02 property."""
         self._cards[5].set_value("x02", value)
 
     @property
@@ -601,6 +628,7 @@ class IncludeStampedSet(KeywordBase):
 
     @y02.setter
     def y02(self, value: float) -> None:
+        """Set the y02 property."""
         self._cards[5].set_value("y02", value)
 
     @property
@@ -611,6 +639,7 @@ class IncludeStampedSet(KeywordBase):
 
     @z02.setter
     def z02(self, value: float) -> None:
+        """Set the z02 property."""
         self._cards[5].set_value("z02", value)
 
     @property
@@ -621,6 +650,7 @@ class IncludeStampedSet(KeywordBase):
 
     @x03.setter
     def x03(self, value: float) -> None:
+        """Set the x03 property."""
         self._cards[5].set_value("x03", value)
 
     @property
@@ -631,6 +661,7 @@ class IncludeStampedSet(KeywordBase):
 
     @y03.setter
     def y03(self, value: float) -> None:
+        """Set the y03 property."""
         self._cards[5].set_value("y03", value)
 
     @property
@@ -641,5 +672,6 @@ class IncludeStampedSet(KeywordBase):
 
     @z03.setter
     def z03(self, value: float) -> None:
+        """Set the z03 property."""
         self._cards[5].set_value("z03", value)
 

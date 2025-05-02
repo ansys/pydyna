@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EOS keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EosGruneisen(KeywordBase):
     subkeyword = "GRUNEISEN"
 
     def __init__(self, **kwargs):
+        """Initialize the EOS keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -128,6 +130,7 @@ class EosGruneisen(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -138,6 +141,7 @@ class EosGruneisen(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -148,6 +152,7 @@ class EosGruneisen(KeywordBase):
 
     @s1.setter
     def s1(self, value: float) -> None:
+        """Set the s1 property."""
         self._cards[0].set_value("s1", value)
 
     @property
@@ -158,6 +163,7 @@ class EosGruneisen(KeywordBase):
 
     @s2.setter
     def s2(self, value: float) -> None:
+        """Set the s2 property."""
         self._cards[0].set_value("s2", value)
 
     @property
@@ -168,6 +174,7 @@ class EosGruneisen(KeywordBase):
 
     @s3.setter
     def s3(self, value: float) -> None:
+        """Set the s3 property."""
         self._cards[0].set_value("s3", value)
 
     @property
@@ -178,6 +185,7 @@ class EosGruneisen(KeywordBase):
 
     @gamao.setter
     def gamao(self, value: float) -> None:
+        """Set the gamao property."""
         self._cards[0].set_value("gamao", value)
 
     @property
@@ -188,6 +196,7 @@ class EosGruneisen(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -198,6 +207,7 @@ class EosGruneisen(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[0].set_value("e0", value)
 
     @property
@@ -208,6 +218,7 @@ class EosGruneisen(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[1].set_value("v0", value)
 
     @property
@@ -222,5 +233,6 @@ class EosGruneisen(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 

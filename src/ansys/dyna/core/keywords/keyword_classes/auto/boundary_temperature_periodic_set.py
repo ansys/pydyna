@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
     subkeyword = "TEMPERATURE_PERIODIC_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -96,6 +98,7 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
 
     @ssid1.setter
     def ssid1(self, value: int) -> None:
+        """Set the ssid1 property."""
         self._cards[0].set_value("ssid1", value)
 
     @property
@@ -109,6 +112,7 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
+        """Set the ptype property."""
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -119,6 +123,7 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
 
     @ssid2.setter
     def ssid2(self, value: int) -> None:
+        """Set the ssid2 property."""
         self._cards[0].set_value("ssid2", value)
 
     @property
@@ -130,6 +135,7 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
 
     @tdlcid.setter
     def tdlcid(self, value: int) -> None:
+        """Set the tdlcid property."""
         self._cards[0].set_value("tdlcid", value)
 
     @property
@@ -143,6 +149,7 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
 
     @axe.setter
     def axe(self, value: int) -> None:
+        """Set the axe property."""
         self._cards[0].set_value("axe", value)
 
     @property
@@ -153,6 +160,7 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -164,5 +172,6 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
 
     @angle.setter
     def angle(self, value: float) -> None:
+        """Set the angle property."""
         self._cards[0].set_value("angle", value)
 

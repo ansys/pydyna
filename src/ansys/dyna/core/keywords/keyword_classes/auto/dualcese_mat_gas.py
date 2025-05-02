@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseMatGas(KeywordBase):
     subkeyword = "MAT_GAS"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -78,6 +80,7 @@ class DualceseMatGas(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -88,6 +91,7 @@ class DualceseMatGas(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[0].set_value("c1", value)
 
     @property
@@ -98,6 +102,7 @@ class DualceseMatGas(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[0].set_value("c2", value)
 
     @property
@@ -108,5 +113,6 @@ class DualceseMatGas(KeywordBase):
 
     @prnd.setter
     def prnd(self, value: float) -> None:
+        """Set the prnd property."""
         self._cards[0].set_value("prnd", value)
 

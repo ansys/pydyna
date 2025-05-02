@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -212,6 +214,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -222,6 +225,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @xmn.setter
     def xmn(self, value: float) -> None:
+        """Set the xmn property."""
         self._cards[0].set_value("xmn", value)
 
     @property
@@ -232,6 +236,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @xmx.setter
     def xmx(self, value: float) -> None:
+        """Set the xmx property."""
         self._cards[0].set_value("xmx", value)
 
     @property
@@ -242,6 +247,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @ymn.setter
     def ymn(self, value: float) -> None:
+        """Set the ymn property."""
         self._cards[0].set_value("ymn", value)
 
     @property
@@ -252,6 +258,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @ymx.setter
     def ymx(self, value: float) -> None:
+        """Set the ymx property."""
         self._cards[0].set_value("ymx", value)
 
     @property
@@ -262,6 +269,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @zmn.setter
     def zmn(self, value: float) -> None:
+        """Set the zmn property."""
         self._cards[0].set_value("zmn", value)
 
     @property
@@ -272,6 +280,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @zmx.setter
     def zmx(self, value: float) -> None:
+        """Set the zmx property."""
         self._cards[0].set_value("zmx", value)
 
     @property
@@ -284,8 +293,9 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @iflag.setter
     def iflag(self, value: int) -> None:
+        """Set the iflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""iflag must be `None` or one of {0,1}""")
+            raise Exception("""iflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iflag", value)
 
     @property
@@ -296,6 +306,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @xx.setter
     def xx(self, value: float) -> None:
+        """Set the xx property."""
         self._cards[1].set_value("xx", value)
 
     @property
@@ -306,6 +317,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @yx.setter
     def yx(self, value: float) -> None:
+        """Set the yx property."""
         self._cards[1].set_value("yx", value)
 
     @property
@@ -316,6 +328,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @zx.setter
     def zx(self, value: float) -> None:
+        """Set the zx property."""
         self._cards[1].set_value("zx", value)
 
     @property
@@ -326,6 +339,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @xv.setter
     def xv(self, value: float) -> None:
+        """Set the xv property."""
         self._cards[1].set_value("xv", value)
 
     @property
@@ -336,6 +350,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @yv.setter
     def yv(self, value: float) -> None:
+        """Set the yv property."""
         self._cards[1].set_value("yv", value)
 
     @property
@@ -346,6 +361,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @zv.setter
     def zv(self, value: float) -> None:
+        """Set the zv property."""
         self._cards[1].set_value("zv", value)
 
     @property
@@ -356,6 +372,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @cx.setter
     def cx(self, value: float) -> None:
+        """Set the cx property."""
         self._cards[2].set_value("cx", value)
 
     @property
@@ -366,6 +383,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @cy.setter
     def cy(self, value: float) -> None:
+        """Set the cy property."""
         self._cards[2].set_value("cy", value)
 
     @property
@@ -376,6 +394,7 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @cz.setter
     def cz(self, value: float) -> None:
+        """Set the cz property."""
         self._cards[2].set_value("cz", value)
 
     @property
@@ -386,5 +405,6 @@ class DefineBoxCoarsenLocal(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

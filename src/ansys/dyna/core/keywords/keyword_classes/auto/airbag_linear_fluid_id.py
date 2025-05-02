@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the AIRBAG keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagLinearFluidId(KeywordBase):
     subkeyword = "LINEAR_FLUID_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the AIRBAG keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -213,6 +215,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -223,6 +226,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -233,6 +237,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -245,8 +250,9 @@ class AirbagLinearFluidId(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("sidtyp", value)
 
     @property
@@ -260,6 +266,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @rbid.setter
     def rbid(self, value: int) -> None:
+        """Set the rbid property."""
         self._cards[1].set_value("rbid", value)
 
     @property
@@ -270,6 +277,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @vsca.setter
     def vsca(self, value: float) -> None:
+        """Set the vsca property."""
         self._cards[1].set_value("vsca", value)
 
     @property
@@ -280,6 +288,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @psca.setter
     def psca(self, value: float) -> None:
+        """Set the psca property."""
         self._cards[1].set_value("psca", value)
 
     @property
@@ -290,6 +299,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @vini.setter
     def vini(self, value: float) -> None:
+        """Set the vini property."""
         self._cards[1].set_value("vini", value)
 
     @property
@@ -300,6 +310,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @mwd.setter
     def mwd(self, value: float) -> None:
+        """Set the mwd property."""
         self._cards[1].set_value("mwd", value)
 
     @property
@@ -310,6 +321,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @spsf.setter
     def spsf(self, value: float) -> None:
+        """Set the spsf property."""
         self._cards[1].set_value("spsf", value)
 
     @property
@@ -320,6 +332,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @bulk.setter
     def bulk(self, value: float) -> None:
+        """Set the bulk property."""
         self._cards[2].set_value("bulk", value)
 
     @property
@@ -330,6 +343,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[2].set_value("ro", value)
 
     @property
@@ -340,6 +354,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @lcint.setter
     def lcint(self, value: int) -> None:
+        """Set the lcint property."""
         self._cards[2].set_value("lcint", value)
 
     @property
@@ -350,6 +365,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @lcoutt.setter
     def lcoutt(self, value: int) -> None:
+        """Set the lcoutt property."""
         self._cards[2].set_value("lcoutt", value)
 
     @property
@@ -360,6 +376,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @lcoutp.setter
     def lcoutp(self, value: int) -> None:
+        """Set the lcoutp property."""
         self._cards[2].set_value("lcoutp", value)
 
     @property
@@ -370,6 +387,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @lcfit.setter
     def lcfit(self, value: int) -> None:
+        """Set the lcfit property."""
         self._cards[2].set_value("lcfit", value)
 
     @property
@@ -380,6 +398,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @lcbulk.setter
     def lcbulk(self, value: int) -> None:
+        """Set the lcbulk property."""
         self._cards[2].set_value("lcbulk", value)
 
     @property
@@ -390,6 +409,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[2].set_value("lcid", value)
 
     @property
@@ -400,6 +420,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @p_limit.setter
     def p_limit(self, value: float) -> None:
+        """Set the p_limit property."""
         self._cards[3].set_value("p_limit", value)
 
     @property
@@ -411,6 +432,7 @@ class AirbagLinearFluidId(KeywordBase):
 
     @p_limlc.setter
     def p_limlc(self, value: int) -> None:
+        """Set the p_limlc property."""
         self._cards[3].set_value("p_limlc", value)
 
     @property
@@ -426,5 +448,6 @@ class AirbagLinearFluidId(KeywordBase):
 
     @nonull.setter
     def nonull(self, value: int) -> None:
+        """Set the nonull property."""
         self._cards[3].set_value("nonull", value)
 

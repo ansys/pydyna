@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat326(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -160,6 +162,7 @@ class Mat326(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -170,6 +173,7 @@ class Mat326(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -182,8 +186,9 @@ class Mat326(KeywordBase):
 
     @roflg.setter
     def roflg(self, value: int) -> None:
+        """Set the roflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""roflg must be `None` or one of {0,1}""")
+            raise Exception("""roflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("roflg", value)
 
     @property
@@ -196,6 +201,7 @@ class Mat326(KeywordBase):
 
     @intfail.setter
     def intfail(self, value: int) -> None:
+        """Set the intfail property."""
         self._cards[0].set_value("intfail", value)
 
     @property
@@ -206,6 +212,7 @@ class Mat326(KeywordBase):
 
     @lc.setter
     def lc(self, value: int) -> None:
+        """Set the lc property."""
         self._cards[1].set_value("lc", value)
 
     @property
@@ -216,6 +223,7 @@ class Mat326(KeywordBase):
 
     @uc.setter
     def uc(self, value: int) -> None:
+        """Set the uc property."""
         self._cards[1].set_value("uc", value)
 
     @property
@@ -226,6 +234,7 @@ class Mat326(KeywordBase):
 
     @eten.setter
     def eten(self, value: float) -> None:
+        """Set the eten property."""
         self._cards[1].set_value("eten", value)
 
     @property
@@ -236,6 +245,7 @@ class Mat326(KeywordBase):
 
     @etsr.setter
     def etsr(self, value: float) -> None:
+        """Set the etsr property."""
         self._cards[2].set_value("etsr", value)
 
     @property
@@ -246,6 +256,7 @@ class Mat326(KeywordBase):
 
     @emem.setter
     def emem(self, value: float) -> None:
+        """Set the emem property."""
         self._cards[3].set_value("emem", value)
 
     @property
@@ -256,6 +267,7 @@ class Mat326(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[3].set_value("pr", value)
 
     @property
@@ -268,8 +280,9 @@ class Mat326(KeywordBase):
 
     @ps.setter
     def ps(self, value: int) -> None:
+        """Set the ps property."""
         if value not in [0, 1, None]:
-            raise Exception("""ps must be `None` or one of {0,1}""")
+            raise Exception("""ps must be `None` or one of {0,1}.""")
         self._cards[3].set_value("ps", value)
 
     @property
@@ -280,5 +293,6 @@ class Mat326(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

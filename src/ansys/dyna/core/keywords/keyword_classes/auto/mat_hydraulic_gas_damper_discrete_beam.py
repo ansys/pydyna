@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -158,6 +160,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -168,6 +171,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -178,6 +182,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @co.setter
     def co(self, value: float) -> None:
+        """Set the co property."""
         self._cards[0].set_value("co", value)
 
     @property
@@ -188,6 +193,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -198,6 +204,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @p0.setter
     def p0(self, value: float) -> None:
+        """Set the p0 property."""
         self._cards[0].set_value("p0", value)
 
     @property
@@ -208,6 +215,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @pa.setter
     def pa(self, value: float) -> None:
+        """Set the pa property."""
         self._cards[0].set_value("pa", value)
 
     @property
@@ -218,6 +226,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @ap.setter
     def ap(self, value: float) -> None:
+        """Set the ap property."""
         self._cards[0].set_value("ap", value)
 
     @property
@@ -228,6 +237,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @kh.setter
     def kh(self, value: float) -> None:
+        """Set the kh property."""
         self._cards[0].set_value("kh", value)
 
     @property
@@ -238,6 +248,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -248,6 +259,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @fr.setter
     def fr(self, value: float) -> None:
+        """Set the fr property."""
         self._cards[1].set_value("fr", value)
 
     @property
@@ -258,6 +270,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @sclf.setter
     def sclf(self, value: float) -> None:
+        """Set the sclf property."""
         self._cards[1].set_value("sclf", value)
 
     @property
@@ -268,6 +281,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @clear.setter
     def clear(self, value: float) -> None:
+        """Set the clear property."""
         self._cards[1].set_value("clear", value)
 
     @property
@@ -278,5 +292,6 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

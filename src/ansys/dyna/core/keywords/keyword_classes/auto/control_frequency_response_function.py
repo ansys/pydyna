@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
     subkeyword = "FREQUENCY_RESPONSE_FUNCTION"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -238,6 +240,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -251,8 +254,9 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @n1typ.setter
     def n1typ(self, value: int) -> None:
+        """Set the n1typ property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""n1typ must be `None` or one of {0,1,2}""")
+            raise Exception("""n1typ must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("n1typ", value)
 
     @property
@@ -268,8 +272,9 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @dof1.setter
     def dof1(self, value: int) -> None:
+        """Set the dof1 property."""
         if value not in [-4, -3, -2, -1, 1, 2, 3, 4, None]:
-            raise Exception("""dof1 must be `None` or one of {-4,-3,-2,-1,1,2,3,4}""")
+            raise Exception("""dof1 must be `None` or one of {-4,-3,-2,-1,1,2,3,4}.""")
         self._cards[0].set_value("dof1", value)
 
     @property
@@ -285,8 +290,9 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @vad1.setter
     def vad1(self, value: int) -> None:
+        """Set the vad1 property."""
         if value not in [3, 0, 1, 2, 4, None]:
-            raise Exception("""vad1 must be `None` or one of {3,0,1,2,4}""")
+            raise Exception("""vad1 must be `None` or one of {3,0,1,2,4}.""")
         self._cards[0].set_value("vad1", value)
 
     @property
@@ -297,6 +303,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -307,6 +314,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @fnmax.setter
     def fnmax(self, value: float) -> None:
+        """Set the fnmax property."""
         self._cards[0].set_value("fnmax", value)
 
     @property
@@ -317,6 +325,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @mdmin.setter
     def mdmin(self, value: int) -> None:
+        """Set the mdmin property."""
         self._cards[0].set_value("mdmin", value)
 
     @property
@@ -327,6 +336,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @mdmax.setter
     def mdmax(self, value: int) -> None:
+        """Set the mdmax property."""
         self._cards[0].set_value("mdmax", value)
 
     @property
@@ -337,6 +347,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @dampf.setter
     def dampf(self, value: float) -> None:
+        """Set the dampf property."""
         self._cards[1].set_value("dampf", value)
 
     @property
@@ -347,6 +358,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @lcdam.setter
     def lcdam(self, value: int) -> None:
+        """Set the lcdam property."""
         self._cards[1].set_value("lcdam", value)
 
     @property
@@ -359,6 +371,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @lctyp.setter
     def lctyp(self, value: int) -> None:
+        """Set the lctyp property."""
         self._cards[1].set_value("lctyp", value)
 
     @property
@@ -369,6 +382,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @dmpmas.setter
     def dmpmas(self, value: float) -> None:
+        """Set the dmpmas property."""
         self._cards[1].set_value("dmpmas", value)
 
     @property
@@ -379,6 +393,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @dmpstf.setter
     def dmpstf(self, value: float) -> None:
+        """Set the dmpstf property."""
         self._cards[1].set_value("dmpstf", value)
 
     @property
@@ -389,6 +404,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[2].set_value("n2", value)
 
     @property
@@ -402,8 +418,9 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @n2typ.setter
     def n2typ(self, value: int) -> None:
+        """Set the n2typ property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""n2typ must be `None` or one of {0,1,2}""")
+            raise Exception("""n2typ must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("n2typ", value)
 
     @property
@@ -417,8 +434,9 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @dof2.setter
     def dof2(self, value: int) -> None:
+        """Set the dof2 property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""dof2 must be `None` or one of {1,2,3}""")
+            raise Exception("""dof2 must be `None` or one of {1,2,3}.""")
         self._cards[2].set_value("dof2", value)
 
     @property
@@ -433,8 +451,9 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @vad2.setter
     def vad2(self, value: int) -> None:
+        """Set the vad2 property."""
         if value not in [2, 0, 1, 3, 4, None]:
-            raise Exception("""vad2 must be `None` or one of {2,0,1,3,4}""")
+            raise Exception("""vad2 must be `None` or one of {2,0,1,3,4}.""")
         self._cards[2].set_value("vad2", value)
 
     @property
@@ -445,6 +464,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @fmin.setter
     def fmin(self, value: float) -> None:
+        """Set the fmin property."""
         self._cards[3].set_value("fmin", value)
 
     @property
@@ -455,6 +475,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @fmax.setter
     def fmax(self, value: float) -> None:
+        """Set the fmax property."""
         self._cards[3].set_value("fmax", value)
 
     @property
@@ -465,6 +486,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
+        """Set the nfreq property."""
         self._cards[3].set_value("nfreq", value)
 
     @property
@@ -478,8 +500,9 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @fspace.setter
     def fspace(self, value: int) -> None:
+        """Set the fspace property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""fspace must be `None` or one of {0,1,2}""")
+            raise Exception("""fspace must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("fspace", value)
 
     @property
@@ -490,6 +513,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @lcfreq.setter
     def lcfreq(self, value: int) -> None:
+        """Set the lcfreq property."""
         self._cards[3].set_value("lcfreq", value)
 
     @property
@@ -503,7 +527,8 @@ class ControlFrequencyResponseFunction(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
+        """Set the restrt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""restrt must be `None` or one of {0,1,2}""")
+            raise Exception("""restrt must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("restrt", value)
 

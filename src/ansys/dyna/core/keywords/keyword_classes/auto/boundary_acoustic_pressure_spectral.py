@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryAcousticPressureSpectral(KeywordBase):
     subkeyword = "ACOUSTIC_PRESSURE_SPECTRAL"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class BoundaryAcousticPressureSpectral(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -87,6 +90,7 @@ class BoundaryAcousticPressureSpectral(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -97,6 +101,7 @@ class BoundaryAcousticPressureSpectral(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -107,5 +112,6 @@ class BoundaryAcousticPressureSpectral(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 

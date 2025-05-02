@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadStiffenPartSet(KeywordBase):
     subkeyword = "STIFFEN_PART_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class LoadStiffenPartSet(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -92,6 +95,7 @@ class LoadStiffenPartSet(KeywordBase):
 
     @lc.setter
     def lc(self, value: int) -> None:
+        """Set the lc property."""
         self._cards[0].set_value("lc", value)
 
     @property
@@ -102,6 +106,7 @@ class LoadStiffenPartSet(KeywordBase):
 
     @stga.setter
     def stga(self, value: int) -> None:
+        """Set the stga property."""
         self._cards[0].set_value("stga", value)
 
     @property
@@ -112,5 +117,6 @@ class LoadStiffenPartSet(KeywordBase):
 
     @stgr.setter
     def stgr(self, value: int) -> None:
+        """Set the stgr property."""
         self._cards[0].set_value("stgr", value)
 

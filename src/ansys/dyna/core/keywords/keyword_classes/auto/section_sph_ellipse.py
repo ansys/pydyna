@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SECTION keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionSphEllipse(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SECTION keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -178,6 +180,7 @@ class SectionSphEllipse(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -190,6 +193,7 @@ class SectionSphEllipse(KeywordBase):
 
     @cslh.setter
     def cslh(self, value: float) -> None:
+        """Set the cslh property."""
         self._cards[0].set_value("cslh", value)
 
     @property
@@ -200,6 +204,7 @@ class SectionSphEllipse(KeywordBase):
 
     @hmin.setter
     def hmin(self, value: float) -> None:
+        """Set the hmin property."""
         self._cards[0].set_value("hmin", value)
 
     @property
@@ -210,6 +215,7 @@ class SectionSphEllipse(KeywordBase):
 
     @hmax.setter
     def hmax(self, value: float) -> None:
+        """Set the hmax property."""
         self._cards[0].set_value("hmax", value)
 
     @property
@@ -220,6 +226,7 @@ class SectionSphEllipse(KeywordBase):
 
     @sphini.setter
     def sphini(self, value: float) -> None:
+        """Set the sphini property."""
         self._cards[0].set_value("sphini", value)
 
     @property
@@ -230,6 +237,7 @@ class SectionSphEllipse(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -240,6 +248,7 @@ class SectionSphEllipse(KeywordBase):
 
     @start.setter
     def start(self, value: float) -> None:
+        """Set the start property."""
         self._cards[0].set_value("start", value)
 
     @property
@@ -253,8 +262,9 @@ class SectionSphEllipse(KeywordBase):
 
     @sphkern.setter
     def sphkern(self, value: int) -> None:
+        """Set the sphkern property."""
         if value not in [0, 1, None]:
-            raise Exception("""sphkern must be `None` or one of {0,1}""")
+            raise Exception("""sphkern must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sphkern", value)
 
     @property
@@ -265,6 +275,7 @@ class SectionSphEllipse(KeywordBase):
 
     @hxcslh.setter
     def hxcslh(self, value: float) -> None:
+        """Set the hxcslh property."""
         self._cards[1].set_value("hxcslh", value)
 
     @property
@@ -275,6 +286,7 @@ class SectionSphEllipse(KeywordBase):
 
     @hycslh.setter
     def hycslh(self, value: float) -> None:
+        """Set the hycslh property."""
         self._cards[1].set_value("hycslh", value)
 
     @property
@@ -285,6 +297,7 @@ class SectionSphEllipse(KeywordBase):
 
     @hzcslh.setter
     def hzcslh(self, value: float) -> None:
+        """Set the hzcslh property."""
         self._cards[1].set_value("hzcslh", value)
 
     @property
@@ -295,6 +308,7 @@ class SectionSphEllipse(KeywordBase):
 
     @hxini.setter
     def hxini(self, value: float) -> None:
+        """Set the hxini property."""
         self._cards[1].set_value("hxini", value)
 
     @property
@@ -305,6 +319,7 @@ class SectionSphEllipse(KeywordBase):
 
     @hyini.setter
     def hyini(self, value: float) -> None:
+        """Set the hyini property."""
         self._cards[1].set_value("hyini", value)
 
     @property
@@ -315,6 +330,7 @@ class SectionSphEllipse(KeywordBase):
 
     @hzini.setter
     def hzini(self, value: float) -> None:
+        """Set the hzini property."""
         self._cards[1].set_value("hzini", value)
 
     @property
@@ -325,5 +341,6 @@ class SectionSphEllipse(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

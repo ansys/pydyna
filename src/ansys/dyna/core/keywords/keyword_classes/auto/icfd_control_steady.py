@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlSteady(KeywordBase):
     subkeyword = "CONTROL_STEADY"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -111,6 +113,7 @@ class IcfdControlSteady(KeywordBase):
 
     @its.setter
     def its(self, value: int) -> None:
+        """Set the its property."""
         self._cards[0].set_value("its", value)
 
     @property
@@ -121,6 +124,7 @@ class IcfdControlSteady(KeywordBase):
 
     @tol1.setter
     def tol1(self, value: float) -> None:
+        """Set the tol1 property."""
         self._cards[0].set_value("tol1", value)
 
     @property
@@ -131,6 +135,7 @@ class IcfdControlSteady(KeywordBase):
 
     @tol2.setter
     def tol2(self, value: float) -> None:
+        """Set the tol2 property."""
         self._cards[0].set_value("tol2", value)
 
     @property
@@ -141,6 +146,7 @@ class IcfdControlSteady(KeywordBase):
 
     @tol3.setter
     def tol3(self, value: float) -> None:
+        """Set the tol3 property."""
         self._cards[0].set_value("tol3", value)
 
     @property
@@ -151,6 +157,7 @@ class IcfdControlSteady(KeywordBase):
 
     @rel1.setter
     def rel1(self, value: float) -> None:
+        """Set the rel1 property."""
         self._cards[0].set_value("rel1", value)
 
     @property
@@ -161,6 +168,7 @@ class IcfdControlSteady(KeywordBase):
 
     @rel2.setter
     def rel2(self, value: float) -> None:
+        """Set the rel2 property."""
         self._cards[0].set_value("rel2", value)
 
     @property
@@ -171,6 +179,7 @@ class IcfdControlSteady(KeywordBase):
 
     @urel.setter
     def urel(self, value: float) -> None:
+        """Set the urel property."""
         self._cards[0].set_value("urel", value)
 
     @property
@@ -183,7 +192,8 @@ class IcfdControlSteady(KeywordBase):
 
     @order.setter
     def order(self, value: int) -> None:
+        """Set the order property."""
         if value not in [0, 1, None]:
-            raise Exception("""order must be `None` or one of {0,1}""")
+            raise Exception("""order must be `None` or one of {0,1}.""")
         self._cards[0].set_value("order", value)
 

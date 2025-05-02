@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat249Udfiber(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -320,6 +322,7 @@ class Mat249Udfiber(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -330,6 +333,7 @@ class Mat249Udfiber(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -340,6 +344,7 @@ class Mat249Udfiber(KeywordBase):
 
     @em.setter
     def em(self, value: float) -> None:
+        """Set the em property."""
         self._cards[0].set_value("em", value)
 
     @property
@@ -350,6 +355,7 @@ class Mat249Udfiber(KeywordBase):
 
     @prm.setter
     def prm(self, value: float) -> None:
+        """Set the prm property."""
         self._cards[0].set_value("prm", value)
 
     @property
@@ -360,6 +366,7 @@ class Mat249Udfiber(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -370,6 +377,7 @@ class Mat249Udfiber(KeywordBase):
 
     @ezdef.setter
     def ezdef(self, value: float) -> None:
+        """Set the ezdef property."""
         self._cards[0].set_value("ezdef", value)
 
     @property
@@ -380,6 +388,7 @@ class Mat249Udfiber(KeywordBase):
 
     @nfib.setter
     def nfib(self, value: int) -> None:
+        """Set the nfib property."""
         self._cards[1].set_value("nfib", value)
 
     @property
@@ -397,6 +406,7 @@ class Mat249Udfiber(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[1].set_value("aopt", value)
 
     @property
@@ -407,6 +417,7 @@ class Mat249Udfiber(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[1].set_value("xp", value)
 
     @property
@@ -417,6 +428,7 @@ class Mat249Udfiber(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[1].set_value("yp", value)
 
     @property
@@ -427,6 +439,7 @@ class Mat249Udfiber(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[1].set_value("zp", value)
 
     @property
@@ -437,6 +450,7 @@ class Mat249Udfiber(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -447,6 +461,7 @@ class Mat249Udfiber(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -457,6 +472,7 @@ class Mat249Udfiber(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[1].set_value("a3", value)
 
     @property
@@ -467,6 +483,7 @@ class Mat249Udfiber(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[2].set_value("v1", value)
 
     @property
@@ -477,6 +494,7 @@ class Mat249Udfiber(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[2].set_value("v2", value)
 
     @property
@@ -487,6 +505,7 @@ class Mat249Udfiber(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[2].set_value("v3", value)
 
     @property
@@ -497,6 +516,7 @@ class Mat249Udfiber(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[2].set_value("d1", value)
 
     @property
@@ -507,6 +527,7 @@ class Mat249Udfiber(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[2].set_value("d2", value)
 
     @property
@@ -517,6 +538,7 @@ class Mat249Udfiber(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[2].set_value("d3", value)
 
     @property
@@ -527,6 +549,7 @@ class Mat249Udfiber(KeywordBase):
 
     @mangl.setter
     def mangl(self, value: float) -> None:
+        """Set the mangl property."""
         self._cards[2].set_value("mangl", value)
 
     @property
@@ -537,6 +560,7 @@ class Mat249Udfiber(KeywordBase):
 
     @idf1.setter
     def idf1(self, value: int) -> None:
+        """Set the idf1 property."""
         self._cards[3].set_value("idf1", value)
 
     @property
@@ -547,6 +571,7 @@ class Mat249Udfiber(KeywordBase):
 
     @alph1.setter
     def alph1(self, value: float) -> None:
+        """Set the alph1 property."""
         self._cards[3].set_value("alph1", value)
 
     @property
@@ -557,6 +582,7 @@ class Mat249Udfiber(KeywordBase):
 
     @ef1.setter
     def ef1(self, value: float) -> None:
+        """Set the ef1 property."""
         self._cards[3].set_value("ef1", value)
 
     @property
@@ -567,6 +593,7 @@ class Mat249Udfiber(KeywordBase):
 
     @kap1.setter
     def kap1(self, value: float) -> None:
+        """Set the kap1 property."""
         self._cards[3].set_value("kap1", value)
 
     @property
@@ -577,6 +604,7 @@ class Mat249Udfiber(KeywordBase):
 
     @idf2.setter
     def idf2(self, value: int) -> None:
+        """Set the idf2 property."""
         self._cards[4].set_value("idf2", value)
 
     @property
@@ -587,6 +615,7 @@ class Mat249Udfiber(KeywordBase):
 
     @alph2.setter
     def alph2(self, value: float) -> None:
+        """Set the alph2 property."""
         self._cards[4].set_value("alph2", value)
 
     @property
@@ -597,6 +626,7 @@ class Mat249Udfiber(KeywordBase):
 
     @ef2.setter
     def ef2(self, value: float) -> None:
+        """Set the ef2 property."""
         self._cards[4].set_value("ef2", value)
 
     @property
@@ -607,6 +637,7 @@ class Mat249Udfiber(KeywordBase):
 
     @kap2.setter
     def kap2(self, value: float) -> None:
+        """Set the kap2 property."""
         self._cards[4].set_value("kap2", value)
 
     @property
@@ -617,6 +648,7 @@ class Mat249Udfiber(KeywordBase):
 
     @idf3.setter
     def idf3(self, value: int) -> None:
+        """Set the idf3 property."""
         self._cards[5].set_value("idf3", value)
 
     @property
@@ -627,6 +659,7 @@ class Mat249Udfiber(KeywordBase):
 
     @alph3.setter
     def alph3(self, value: float) -> None:
+        """Set the alph3 property."""
         self._cards[5].set_value("alph3", value)
 
     @property
@@ -637,6 +670,7 @@ class Mat249Udfiber(KeywordBase):
 
     @ef3.setter
     def ef3(self, value: float) -> None:
+        """Set the ef3 property."""
         self._cards[5].set_value("ef3", value)
 
     @property
@@ -647,6 +681,7 @@ class Mat249Udfiber(KeywordBase):
 
     @kap3.setter
     def kap3(self, value: float) -> None:
+        """Set the kap3 property."""
         self._cards[5].set_value("kap3", value)
 
     @property
@@ -657,5 +692,6 @@ class Mat249Udfiber(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 

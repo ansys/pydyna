@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSpotweldFailure(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -201,6 +203,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -215,8 +218,9 @@ class DefineSpotweldFailure(KeywordBase):
 
     @tflag.setter
     def tflag(self, value: int) -> None:
+        """Set the tflag property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""tflag must be `None` or one of {0,1,2,3}""")
+            raise Exception("""tflag must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("tflag", value)
 
     @property
@@ -227,6 +231,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @dc1.setter
     def dc1(self, value: float) -> None:
+        """Set the dc1 property."""
         self._cards[0].set_value("dc1", value)
 
     @property
@@ -237,6 +242,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @dc2.setter
     def dc2(self, value: float) -> None:
+        """Set the dc2 property."""
         self._cards[0].set_value("dc2", value)
 
     @property
@@ -247,6 +253,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @dc3.setter
     def dc3(self, value: float) -> None:
+        """Set the dc3 property."""
         self._cards[0].set_value("dc3", value)
 
     @property
@@ -257,6 +264,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @dc4.setter
     def dc4(self, value: float) -> None:
+        """Set the dc4 property."""
         self._cards[0].set_value("dc4", value)
 
     @property
@@ -267,6 +275,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @exn.setter
     def exn(self, value: float) -> None:
+        """Set the exn property."""
         self._cards[0].set_value("exn", value)
 
     @property
@@ -277,6 +286,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @exs.setter
     def exs(self, value: float) -> None:
+        """Set the exs property."""
         self._cards[0].set_value("exs", value)
 
     @property
@@ -287,6 +297,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @navg.setter
     def navg(self, value: int) -> None:
+        """Set the navg property."""
         self._cards[1].set_value("navg", value)
 
     @property
@@ -297,6 +308,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @d_sn.setter
     def d_sn(self, value: float) -> None:
+        """Set the d_sn property."""
         self._cards[1].set_value("d_sn", value)
 
     @property
@@ -307,6 +319,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @d_ss.setter
     def d_ss(self, value: float) -> None:
+        """Set the d_ss property."""
         self._cards[1].set_value("d_ss", value)
 
     @property
@@ -317,6 +330,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @r_sult.setter
     def r_sult(self, value: float) -> None:
+        """Set the r_sult property."""
         self._cards[1].set_value("r_sult", value)
 
     @property
@@ -327,6 +341,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @tscale.setter
     def tscale(self, value: float) -> None:
+        """Set the tscale property."""
         self._cards[1].set_value("tscale", value)
 
     @property
@@ -337,6 +352,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[2].set_value("mid", value)
 
     @property
@@ -347,6 +363,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @sn.setter
     def sn(self, value: float) -> None:
+        """Set the sn property."""
         self._cards[2].set_value("sn", value)
 
     @property
@@ -357,6 +374,7 @@ class DefineSpotweldFailure(KeywordBase):
 
     @ss.setter
     def ss(self, value: float) -> None:
+        """Set the ss property."""
         self._cards[2].set_value("ss", value)
 
     @property
@@ -367,5 +385,6 @@ class DefineSpotweldFailure(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

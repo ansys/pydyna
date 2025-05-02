@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryConvectionSegment(KeywordBase):
     subkeyword = "CONVECTION_SEGMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -117,6 +119,7 @@ class BoundaryConvectionSegment(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -127,6 +130,7 @@ class BoundaryConvectionSegment(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -137,6 +141,7 @@ class BoundaryConvectionSegment(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -147,6 +152,7 @@ class BoundaryConvectionSegment(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[0].set_value("n4", value)
 
     @property
@@ -160,6 +166,7 @@ class BoundaryConvectionSegment(KeywordBase):
 
     @hlcid.setter
     def hlcid(self, value: int) -> None:
+        """Set the hlcid property."""
         self._cards[1].set_value("hlcid", value)
 
     @property
@@ -170,6 +177,7 @@ class BoundaryConvectionSegment(KeywordBase):
 
     @hmult.setter
     def hmult(self, value: float) -> None:
+        """Set the hmult property."""
         self._cards[1].set_value("hmult", value)
 
     @property
@@ -181,6 +189,7 @@ class BoundaryConvectionSegment(KeywordBase):
 
     @tlcid.setter
     def tlcid(self, value: int) -> None:
+        """Set the tlcid property."""
         self._cards[1].set_value("tlcid", value)
 
     @property
@@ -191,6 +200,7 @@ class BoundaryConvectionSegment(KeywordBase):
 
     @tmult.setter
     def tmult(self, value: float) -> None:
+        """Set the tmult property."""
         self._cards[1].set_value("tmult", value)
 
     @property
@@ -203,7 +213,8 @@ class BoundaryConvectionSegment(KeywordBase):
 
     @loc.setter
     def loc(self, value: int) -> None:
+        """Set the loc property."""
         if value not in [0, -1, 1, None]:
-            raise Exception("""loc must be `None` or one of {0,-1,1}""")
+            raise Exception("""loc must be `None` or one of {0,-1,1}.""")
         self._cards[1].set_value("loc", value)
 

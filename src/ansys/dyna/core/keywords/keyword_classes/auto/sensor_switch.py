@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SENSOR keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorSwitch(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SENSOR keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -127,6 +129,7 @@ class SensorSwitch(KeywordBase):
 
     @switid.setter
     def switid(self, value: int) -> None:
+        """Set the switid property."""
         self._cards[0].set_value("switid", value)
 
     @property
@@ -139,8 +142,9 @@ class SensorSwitch(KeywordBase):
 
     @type.setter
     def type(self, value: str) -> None:
+        """Set the type property."""
         if value not in ["SENSOR", "TIME", None]:
-            raise Exception("""type must be `None` or one of {"SENSOR","TIME"}""")
+            raise Exception("""type must be `None` or one of {"SENSOR","TIME"}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -151,6 +155,7 @@ class SensorSwitch(KeywordBase):
 
     @sensid.setter
     def sensid(self, value: int) -> None:
+        """Set the sensid property."""
         self._cards[0].set_value("sensid", value)
 
     @property
@@ -163,8 +168,9 @@ class SensorSwitch(KeywordBase):
 
     @logic.setter
     def logic(self, value: str) -> None:
+        """Set the logic property."""
         if value not in ["LT", "GT", None]:
-            raise Exception("""logic must be `None` or one of {"LT","GT"}""")
+            raise Exception("""logic must be `None` or one of {"LT","GT"}.""")
         self._cards[0].set_value("logic", value)
 
     @property
@@ -175,6 +181,7 @@ class SensorSwitch(KeywordBase):
 
     @value.setter
     def value(self, value: float) -> None:
+        """Set the value property."""
         self._cards[0].set_value("value", value)
 
     @property
@@ -185,6 +192,7 @@ class SensorSwitch(KeywordBase):
 
     @filtrid.setter
     def filtrid(self, value: int) -> None:
+        """Set the filtrid property."""
         self._cards[0].set_value("filtrid", value)
 
     @property
@@ -195,6 +203,7 @@ class SensorSwitch(KeywordBase):
 
     @timwin.setter
     def timwin(self, value: float) -> None:
+        """Set the timwin property."""
         self._cards[0].set_value("timwin", value)
 
     @property
@@ -207,6 +216,7 @@ class SensorSwitch(KeywordBase):
 
     @tdelay.setter
     def tdelay(self, value: float) -> None:
+        """Set the tdelay property."""
         self._cards[0].set_value("tdelay", value)
 
     @property
@@ -217,5 +227,6 @@ class SensorSwitch(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

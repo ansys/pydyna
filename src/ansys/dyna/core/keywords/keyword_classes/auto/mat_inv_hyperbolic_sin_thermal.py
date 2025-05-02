@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -150,6 +152,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -160,6 +163,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -170,6 +174,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 
     @property
@@ -180,6 +185,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -190,6 +196,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -200,6 +207,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[0].set_value("q", value)
 
     @property
@@ -210,6 +218,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -220,6 +229,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @epso.setter
     def epso(self, value: float) -> None:
+        """Set the epso property."""
         self._cards[0].set_value("epso", value)
 
     @property
@@ -230,6 +240,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @lce.setter
     def lce(self, value: float) -> None:
+        """Set the lce property."""
         self._cards[1].set_value("lce", value)
 
     @property
@@ -240,6 +251,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @lcpr.setter
     def lcpr(self, value: float) -> None:
+        """Set the lcpr property."""
         self._cards[1].set_value("lcpr", value)
 
     @property
@@ -250,6 +262,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @lccte.setter
     def lccte(self, value: float) -> None:
+        """Set the lccte property."""
         self._cards[1].set_value("lccte", value)
 
     @property
@@ -260,5 +273,6 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

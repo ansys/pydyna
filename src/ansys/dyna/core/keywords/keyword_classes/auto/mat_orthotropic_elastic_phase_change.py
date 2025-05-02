@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -494,6 +496,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -504,6 +507,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -514,6 +518,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @ea1.setter
     def ea1(self, value: float) -> None:
+        """Set the ea1 property."""
         self._cards[0].set_value("ea1", value)
 
     @property
@@ -524,6 +529,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @eb1.setter
     def eb1(self, value: float) -> None:
+        """Set the eb1 property."""
         self._cards[0].set_value("eb1", value)
 
     @property
@@ -534,6 +540,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @ec1.setter
     def ec1(self, value: float) -> None:
+        """Set the ec1 property."""
         self._cards[0].set_value("ec1", value)
 
     @property
@@ -544,6 +551,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @prba1.setter
     def prba1(self, value: float) -> None:
+        """Set the prba1 property."""
         self._cards[0].set_value("prba1", value)
 
     @property
@@ -554,6 +562,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @prca1.setter
     def prca1(self, value: float) -> None:
+        """Set the prca1 property."""
         self._cards[0].set_value("prca1", value)
 
     @property
@@ -564,6 +573,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @prcb1.setter
     def prcb1(self, value: float) -> None:
+        """Set the prcb1 property."""
         self._cards[0].set_value("prcb1", value)
 
     @property
@@ -574,6 +584,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @gab1.setter
     def gab1(self, value: float) -> None:
+        """Set the gab1 property."""
         self._cards[1].set_value("gab1", value)
 
     @property
@@ -584,6 +595,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @gbc1.setter
     def gbc1(self, value: float) -> None:
+        """Set the gbc1 property."""
         self._cards[1].set_value("gbc1", value)
 
     @property
@@ -594,6 +606,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @gca1.setter
     def gca1(self, value: float) -> None:
+        """Set the gca1 property."""
         self._cards[1].set_value("gca1", value)
 
     @property
@@ -619,6 +632,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @aopt1.setter
     def aopt1(self, value: float) -> None:
+        """Set the aopt1 property."""
         self._cards[1].set_value("aopt1", value)
 
     @property
@@ -629,6 +643,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @a11.setter
     def a11(self, value: float) -> None:
+        """Set the a11 property."""
         self._cards[2].set_value("a11", value)
 
     @property
@@ -639,6 +654,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @a21.setter
     def a21(self, value: float) -> None:
+        """Set the a21 property."""
         self._cards[2].set_value("a21", value)
 
     @property
@@ -649,6 +665,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @a31.setter
     def a31(self, value: float) -> None:
+        """Set the a31 property."""
         self._cards[2].set_value("a31", value)
 
     @property
@@ -659,6 +676,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @v11.setter
     def v11(self, value: float) -> None:
+        """Set the v11 property."""
         self._cards[3].set_value("v11", value)
 
     @property
@@ -669,6 +687,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @v21.setter
     def v21(self, value: float) -> None:
+        """Set the v21 property."""
         self._cards[3].set_value("v21", value)
 
     @property
@@ -679,6 +698,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @v31.setter
     def v31(self, value: float) -> None:
+        """Set the v31 property."""
         self._cards[3].set_value("v31", value)
 
     @property
@@ -689,6 +709,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @d11.setter
     def d11(self, value: float) -> None:
+        """Set the d11 property."""
         self._cards[3].set_value("d11", value)
 
     @property
@@ -699,6 +720,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @d21.setter
     def d21(self, value: float) -> None:
+        """Set the d21 property."""
         self._cards[3].set_value("d21", value)
 
     @property
@@ -709,6 +731,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @d31.setter
     def d31(self, value: float) -> None:
+        """Set the d31 property."""
         self._cards[3].set_value("d31", value)
 
     @property
@@ -720,6 +743,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @beta1.setter
     def beta1(self, value: float) -> None:
+        """Set the beta1 property."""
         self._cards[3].set_value("beta1", value)
 
     @property
@@ -730,6 +754,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @r02.setter
     def r02(self, value: float) -> None:
+        """Set the r02 property."""
         self._cards[4].set_value("r02", value)
 
     @property
@@ -740,6 +765,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @ea2.setter
     def ea2(self, value: float) -> None:
+        """Set the ea2 property."""
         self._cards[4].set_value("ea2", value)
 
     @property
@@ -750,6 +776,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @eb2.setter
     def eb2(self, value: float) -> None:
+        """Set the eb2 property."""
         self._cards[4].set_value("eb2", value)
 
     @property
@@ -760,6 +787,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @ec2.setter
     def ec2(self, value: float) -> None:
+        """Set the ec2 property."""
         self._cards[4].set_value("ec2", value)
 
     @property
@@ -770,6 +798,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @prba2.setter
     def prba2(self, value: float) -> None:
+        """Set the prba2 property."""
         self._cards[4].set_value("prba2", value)
 
     @property
@@ -780,6 +809,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @prca2.setter
     def prca2(self, value: float) -> None:
+        """Set the prca2 property."""
         self._cards[4].set_value("prca2", value)
 
     @property
@@ -790,6 +820,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @prcb2.setter
     def prcb2(self, value: float) -> None:
+        """Set the prcb2 property."""
         self._cards[4].set_value("prcb2", value)
 
     @property
@@ -800,6 +831,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @gab2.setter
     def gab2(self, value: float) -> None:
+        """Set the gab2 property."""
         self._cards[5].set_value("gab2", value)
 
     @property
@@ -810,6 +842,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @gbc2.setter
     def gbc2(self, value: float) -> None:
+        """Set the gbc2 property."""
         self._cards[5].set_value("gbc2", value)
 
     @property
@@ -820,6 +853,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @gca2.setter
     def gca2(self, value: float) -> None:
+        """Set the gca2 property."""
         self._cards[5].set_value("gca2", value)
 
     @property
@@ -830,6 +864,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @a12.setter
     def a12(self, value: float) -> None:
+        """Set the a12 property."""
         self._cards[6].set_value("a12", value)
 
     @property
@@ -840,6 +875,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @a22.setter
     def a22(self, value: float) -> None:
+        """Set the a22 property."""
         self._cards[6].set_value("a22", value)
 
     @property
@@ -850,6 +886,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @a32.setter
     def a32(self, value: float) -> None:
+        """Set the a32 property."""
         self._cards[6].set_value("a32", value)
 
     @property
@@ -860,6 +897,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @v12.setter
     def v12(self, value: float) -> None:
+        """Set the v12 property."""
         self._cards[7].set_value("v12", value)
 
     @property
@@ -870,6 +908,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @v22.setter
     def v22(self, value: float) -> None:
+        """Set the v22 property."""
         self._cards[7].set_value("v22", value)
 
     @property
@@ -880,6 +919,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @v32.setter
     def v32(self, value: float) -> None:
+        """Set the v32 property."""
         self._cards[7].set_value("v32", value)
 
     @property
@@ -890,6 +930,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @d12.setter
     def d12(self, value: float) -> None:
+        """Set the d12 property."""
         self._cards[7].set_value("d12", value)
 
     @property
@@ -900,6 +941,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @d22.setter
     def d22(self, value: float) -> None:
+        """Set the d22 property."""
         self._cards[7].set_value("d22", value)
 
     @property
@@ -910,6 +952,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @d32.setter
     def d32(self, value: float) -> None:
+        """Set the d32 property."""
         self._cards[7].set_value("d32", value)
 
     @property
@@ -921,6 +964,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @beta2.setter
     def beta2(self, value: float) -> None:
+        """Set the beta2 property."""
         self._cards[7].set_value("beta2", value)
 
     @property
@@ -931,6 +975,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[8].set_value("x1", value)
 
     @property
@@ -941,6 +986,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[8].set_value("y1", value)
 
     @property
@@ -951,6 +997,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[8].set_value("z1", value)
 
     @property
@@ -961,6 +1008,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[8].set_value("x2", value)
 
     @property
@@ -971,6 +1019,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[8].set_value("y2", value)
 
     @property
@@ -981,6 +1030,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[8].set_value("z2", value)
 
     @property
@@ -991,6 +1041,7 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @thkfac.setter
     def thkfac(self, value: float) -> None:
+        """Set the thkfac property."""
         self._cards[8].set_value("thkfac", value)
 
     @property
@@ -1001,5 +1052,6 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[9].cards[0].set_value("title", value)
 

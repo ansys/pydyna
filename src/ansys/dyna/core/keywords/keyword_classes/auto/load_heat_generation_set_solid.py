@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
     subkeyword = "HEAT_GENERATION_SET_SOLID"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -90,6 +92,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -103,6 +106,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -113,6 +117,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
 
     @cmult.setter
     def cmult(self, value: float) -> None:
+        """Set the cmult property."""
         self._cards[0].set_value("cmult", value)
 
     @property
@@ -123,6 +128,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
 
     @wblcid.setter
     def wblcid(self, value: int) -> None:
+        """Set the wblcid property."""
         self._cards[0].set_value("wblcid", value)
 
     @property
@@ -133,6 +139,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
 
     @cblcid.setter
     def cblcid(self, value: int) -> None:
+        """Set the cblcid property."""
         self._cards[0].set_value("cblcid", value)
 
     @property
@@ -143,5 +150,6 @@ class LoadHeatGenerationSetSolid(KeywordBase):
 
     @tblcid.setter
     def tblcid(self, value: int) -> None:
+        """Set the tblcid property."""
         self._cards[0].set_value("tblcid", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SECTION keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionSolidMisc(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SECTION keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -327,6 +329,7 @@ class SectionSolidMisc(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -387,8 +390,9 @@ class SectionSolidMisc(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [1, -1, -2, -18, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 42, 43, 45, 47, 60, 62, 98, 99, 101, 102, 103, 104, 105, 115, 201, 1000, None]:
-            raise Exception("""elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}""")
+            raise Exception("""elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}.""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -404,8 +408,9 @@ class SectionSolidMisc(KeywordBase):
 
     @aet.setter
     def aet(self, value: int) -> None:
+        """Set the aet property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""aet must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""aet must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("aet", value)
 
     @property
@@ -416,6 +421,7 @@ class SectionSolidMisc(KeywordBase):
 
     @cohoff.setter
     def cohoff(self, value: float) -> None:
+        """Set the cohoff property."""
         self._cards[0].set_value("cohoff", value)
 
     @property
@@ -426,6 +432,7 @@ class SectionSolidMisc(KeywordBase):
 
     @gaskeit.setter
     def gaskeit(self, value: float) -> None:
+        """Set the gaskeit property."""
         self._cards[0].set_value("gaskeit", value)
 
     @property
@@ -436,6 +443,7 @@ class SectionSolidMisc(KeywordBase):
 
     @cohthk.setter
     def cohthk(self, value: float) -> None:
+        """Set the cohthk property."""
         self._cards[1].set_value("cohthk", value)
 
     @property
@@ -446,6 +454,7 @@ class SectionSolidMisc(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[2].set_value("nip", value)
 
     @property
@@ -456,6 +465,7 @@ class SectionSolidMisc(KeywordBase):
 
     @nxdof.setter
     def nxdof(self, value: int) -> None:
+        """Set the nxdof property."""
         self._cards[2].set_value("nxdof", value)
 
     @property
@@ -466,8 +476,9 @@ class SectionSolidMisc(KeywordBase):
 
     @ihgf.setter
     def ihgf(self, value: int) -> None:
+        """Set the ihgf property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""ihgf must be `None` or one of {0,1,2,3}""")
+            raise Exception("""ihgf must be `None` or one of {0,1,2,3}.""")
         self._cards[2].set_value("ihgf", value)
 
     @property
@@ -478,8 +489,9 @@ class SectionSolidMisc(KeywordBase):
 
     @itaj.setter
     def itaj(self, value: int) -> None:
+        """Set the itaj property."""
         if value not in [0, 1, None]:
-            raise Exception("""itaj must be `None` or one of {0,1}""")
+            raise Exception("""itaj must be `None` or one of {0,1}.""")
         self._cards[2].set_value("itaj", value)
 
     @property
@@ -490,6 +502,7 @@ class SectionSolidMisc(KeywordBase):
 
     @lmc.setter
     def lmc(self, value: int) -> None:
+        """Set the lmc property."""
         self._cards[2].set_value("lmc", value)
 
     @property
@@ -500,6 +513,7 @@ class SectionSolidMisc(KeywordBase):
 
     @nhsv.setter
     def nhsv(self, value: int) -> None:
+        """Set the nhsv property."""
         self._cards[2].set_value("nhsv", value)
 
     @property
@@ -510,6 +524,7 @@ class SectionSolidMisc(KeywordBase):
 
     @xi.setter
     def xi(self, value: float) -> None:
+        """Set the xi property."""
         self._cards[3].set_value("xi", value)
 
     @property
@@ -520,6 +535,7 @@ class SectionSolidMisc(KeywordBase):
 
     @eta.setter
     def eta(self, value: float) -> None:
+        """Set the eta property."""
         self._cards[3].set_value("eta", value)
 
     @property
@@ -530,6 +546,7 @@ class SectionSolidMisc(KeywordBase):
 
     @zeta.setter
     def zeta(self, value: float) -> None:
+        """Set the zeta property."""
         self._cards[3].set_value("zeta", value)
 
     @property
@@ -540,6 +557,7 @@ class SectionSolidMisc(KeywordBase):
 
     @wgt.setter
     def wgt(self, value: float) -> None:
+        """Set the wgt property."""
         self._cards[3].set_value("wgt", value)
 
     @property
@@ -550,6 +568,7 @@ class SectionSolidMisc(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[4].set_value("p1", value)
 
     @property
@@ -560,6 +579,7 @@ class SectionSolidMisc(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[4].set_value("p2", value)
 
     @property
@@ -570,6 +590,7 @@ class SectionSolidMisc(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[4].set_value("p3", value)
 
     @property
@@ -580,6 +601,7 @@ class SectionSolidMisc(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[4].set_value("p4", value)
 
     @property
@@ -590,6 +612,7 @@ class SectionSolidMisc(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[4].set_value("p5", value)
 
     @property
@@ -600,6 +623,7 @@ class SectionSolidMisc(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[4].set_value("p6", value)
 
     @property
@@ -610,6 +634,7 @@ class SectionSolidMisc(KeywordBase):
 
     @p7.setter
     def p7(self, value: float) -> None:
+        """Set the p7 property."""
         self._cards[4].set_value("p7", value)
 
     @property
@@ -620,6 +645,7 @@ class SectionSolidMisc(KeywordBase):
 
     @p8.setter
     def p8(self, value: float) -> None:
+        """Set the p8 property."""
         self._cards[4].set_value("p8", value)
 
     @property
@@ -630,5 +656,6 @@ class SectionSolidMisc(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

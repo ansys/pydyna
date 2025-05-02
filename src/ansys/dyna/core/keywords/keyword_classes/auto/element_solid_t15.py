@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementSolidT15(KeywordBase):
     subkeyword = "SOLID_T15"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -174,6 +176,7 @@ class ElementSolidT15(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -184,6 +187,7 @@ class ElementSolidT15(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -194,6 +198,7 @@ class ElementSolidT15(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[1].set_value("n1", value)
 
     @property
@@ -204,6 +209,7 @@ class ElementSolidT15(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[1].set_value("n2", value)
 
     @property
@@ -214,6 +220,7 @@ class ElementSolidT15(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[1].set_value("n3", value)
 
     @property
@@ -224,6 +231,7 @@ class ElementSolidT15(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[1].set_value("n4", value)
 
     @property
@@ -234,6 +242,7 @@ class ElementSolidT15(KeywordBase):
 
     @n5.setter
     def n5(self, value: int) -> None:
+        """Set the n5 property."""
         self._cards[1].set_value("n5", value)
 
     @property
@@ -244,6 +253,7 @@ class ElementSolidT15(KeywordBase):
 
     @n6.setter
     def n6(self, value: int) -> None:
+        """Set the n6 property."""
         self._cards[1].set_value("n6", value)
 
     @property
@@ -254,6 +264,7 @@ class ElementSolidT15(KeywordBase):
 
     @n7.setter
     def n7(self, value: int) -> None:
+        """Set the n7 property."""
         self._cards[1].set_value("n7", value)
 
     @property
@@ -264,6 +275,7 @@ class ElementSolidT15(KeywordBase):
 
     @n8.setter
     def n8(self, value: int) -> None:
+        """Set the n8 property."""
         self._cards[1].set_value("n8", value)
 
     @property
@@ -274,6 +286,7 @@ class ElementSolidT15(KeywordBase):
 
     @n9.setter
     def n9(self, value: int) -> None:
+        """Set the n9 property."""
         self._cards[1].set_value("n9", value)
 
     @property
@@ -284,6 +297,7 @@ class ElementSolidT15(KeywordBase):
 
     @n10.setter
     def n10(self, value: int) -> None:
+        """Set the n10 property."""
         self._cards[1].set_value("n10", value)
 
     @property
@@ -294,6 +308,7 @@ class ElementSolidT15(KeywordBase):
 
     @n11.setter
     def n11(self, value: int) -> None:
+        """Set the n11 property."""
         self._cards[2].set_value("n11", value)
 
     @property
@@ -304,6 +319,7 @@ class ElementSolidT15(KeywordBase):
 
     @n12.setter
     def n12(self, value: int) -> None:
+        """Set the n12 property."""
         self._cards[2].set_value("n12", value)
 
     @property
@@ -314,6 +330,7 @@ class ElementSolidT15(KeywordBase):
 
     @n13.setter
     def n13(self, value: int) -> None:
+        """Set the n13 property."""
         self._cards[2].set_value("n13", value)
 
     @property
@@ -324,6 +341,7 @@ class ElementSolidT15(KeywordBase):
 
     @n14.setter
     def n14(self, value: int) -> None:
+        """Set the n14 property."""
         self._cards[2].set_value("n14", value)
 
     @property
@@ -334,5 +352,6 @@ class ElementSolidT15(KeywordBase):
 
     @n15.setter
     def n15(self, value: int) -> None:
+        """Set the n15 property."""
         self._cards[2].set_value("n15", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlExplicitThermalInitial(KeywordBase):
     subkeyword = "EXPLICIT_THERMAL_INITIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -72,6 +74,7 @@ class ControlExplicitThermalInitial(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -86,8 +89,9 @@ class ControlExplicitThermalInitial(KeywordBase):
 
     @idtyp.setter
     def idtyp(self, value: int) -> None:
+        """Set the idtyp property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""idtyp must be `None` or one of {1,2,3,4}""")
+            raise Exception("""idtyp must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("idtyp", value)
 
     @property
@@ -98,5 +102,6 @@ class ControlExplicitThermalInitial(KeywordBase):
 
     @tempini.setter
     def tempini(self, value: float) -> None:
+        """Set the tempini property."""
         self._cards[0].set_value("tempini", value)
 

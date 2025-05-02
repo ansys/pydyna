@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseBoundaryCyclicSegmentSet(KeywordBase):
     subkeyword = "BOUNDARY_CYCLIC_SEGMENT_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class DualceseBoundaryCyclicSegmentSet(KeywordBase):
 
     @ssid1.setter
     def ssid1(self, value: int) -> None:
+        """Set the ssid1 property."""
         self._cards[0].set_value("ssid1", value)
 
     @property
@@ -79,6 +82,7 @@ class DualceseBoundaryCyclicSegmentSet(KeywordBase):
 
     @ssid2.setter
     def ssid2(self, value: int) -> None:
+        """Set the ssid2 property."""
         self._cards[0].set_value("ssid2", value)
 
     @property
@@ -92,7 +96,8 @@ class DualceseBoundaryCyclicSegmentSet(KeywordBase):
 
     @cyctyp.setter
     def cyctyp(self, value: int) -> None:
+        """Set the cyctyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""cyctyp must be `None` or one of {0,1,2}""")
+            raise Exception("""cyctyp must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("cyctyp", value)
 

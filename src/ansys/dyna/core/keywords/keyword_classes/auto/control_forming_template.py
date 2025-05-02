@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingTemplate(KeywordBase):
     subkeyword = "FORMING_TEMPLATE"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -318,8 +320,9 @@ class ControlFormingTemplate(KeywordBase):
 
     @idtemp.setter
     def idtemp(self, value: int) -> None:
+        """Set the idtemp property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""idtemp must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""idtemp must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("idtemp", value)
 
     @property
@@ -330,6 +333,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @blkid.setter
     def blkid(self, value: int) -> None:
+        """Set the blkid property."""
         self._cards[0].set_value("blkid", value)
 
     @property
@@ -340,6 +344,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @dieid.setter
     def dieid(self, value: int) -> None:
+        """Set the dieid property."""
         self._cards[0].set_value("dieid", value)
 
     @property
@@ -350,6 +355,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @pnch.setter
     def pnch(self, value: int) -> None:
+        """Set the pnch property."""
         self._cards[0].set_value("pnch", value)
 
     @property
@@ -360,6 +366,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @bndu.setter
     def bndu(self, value: int) -> None:
+        """Set the bndu property."""
         self._cards[0].set_value("bndu", value)
 
     @property
@@ -370,6 +377,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @bndl.setter
     def bndl(self, value: int) -> None:
+        """Set the bndl property."""
         self._cards[0].set_value("bndl", value)
 
     @property
@@ -381,8 +389,9 @@ class ControlFormingTemplate(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, None]:
-            raise Exception("""type must be `None` or one of {0,1}""")
+            raise Exception("""type must be `None` or one of {0,1}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -393,6 +402,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @prebd.setter
     def prebd(self, value: float) -> None:
+        """Set the prebd property."""
         self._cards[0].set_value("prebd", value)
 
     @property
@@ -403,6 +413,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: int) -> None:
+        """Set the lcss property."""
         self._cards[1].set_value("lcss", value)
 
     @property
@@ -415,8 +426,9 @@ class ControlFormingTemplate(KeywordBase):
 
     @al_fe.setter
     def al_fe(self, value: str) -> None:
+        """Set the al_fe property."""
         if value not in ["F", "A", None]:
-            raise Exception("""al_fe must be `None` or one of {"F","A"}""")
+            raise Exception("""al_fe must be `None` or one of {"F","A"}.""")
         self._cards[1].set_value("al/fe", value)
 
     @property
@@ -427,6 +439,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @r00.setter
     def r00(self, value: float) -> None:
+        """Set the r00 property."""
         self._cards[1].set_value("r00", value)
 
     @property
@@ -437,6 +450,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @r45.setter
     def r45(self, value: float) -> None:
+        """Set the r45 property."""
         self._cards[1].set_value("r45", value)
 
     @property
@@ -447,6 +461,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @r90.setter
     def r90(self, value: float) -> None:
+        """Set the r90 property."""
         self._cards[1].set_value("r90", value)
 
     @property
@@ -457,6 +472,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[1].set_value("e", value)
 
     @property
@@ -467,6 +483,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @density.setter
     def density(self, value: float) -> None:
+        """Set the density property."""
         self._cards[1].set_value("density", value)
 
     @property
@@ -477,6 +494,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[2].set_value("k", value)
 
     @property
@@ -487,6 +505,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[2].set_value("n", value)
 
     @property
@@ -497,6 +516,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         self._cards[2].set_value("mtype", value)
 
     @property
@@ -507,6 +527,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
+        """Set the unit property."""
         self._cards[2].set_value("unit", value)
 
     @property
@@ -517,6 +538,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[2].set_value("thick", value)
 
     @property
@@ -527,6 +549,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @gap.setter
     def gap(self, value: float) -> None:
+        """Set the gap property."""
         self._cards[2].set_value("gap", value)
 
     @property
@@ -537,6 +560,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[2].set_value("fs", value)
 
     @property
@@ -549,8 +573,9 @@ class ControlFormingTemplate(KeywordBase):
 
     @patern.setter
     def patern(self, value: int) -> None:
+        """Set the patern property."""
         if value not in [1, 2, None]:
-            raise Exception("""patern must be `None` or one of {1,2}""")
+            raise Exception("""patern must be `None` or one of {1,2}.""")
         self._cards[3].set_value("patern", value)
 
     @property
@@ -561,6 +586,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @vmax.setter
     def vmax(self, value: float) -> None:
+        """Set the vmax property."""
         self._cards[3].set_value("vmax", value)
 
     @property
@@ -571,6 +597,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[3].set_value("vx", value)
 
     @property
@@ -581,6 +608,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[3].set_value("vy", value)
 
     @property
@@ -591,6 +619,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[3].set_value("vz", value)
 
     @property
@@ -601,6 +630,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[3].set_value("vid", value)
 
     @property
@@ -611,6 +641,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @amax.setter
     def amax(self, value: float) -> None:
+        """Set the amax property."""
         self._cards[3].set_value("amax", value)
 
     @property
@@ -621,6 +652,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @lvlada.setter
     def lvlada(self, value: int) -> None:
+        """Set the lvlada property."""
         self._cards[4].set_value("lvlada", value)
 
     @property
@@ -631,6 +663,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @sizeada.setter
     def sizeada(self, value: float) -> None:
+        """Set the sizeada property."""
         self._cards[4].set_value("sizeada", value)
 
     @property
@@ -641,6 +674,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @timsada.setter
     def timsada(self, value: int) -> None:
+        """Set the timsada property."""
         self._cards[4].set_value("timsada", value)
 
     @property
@@ -651,5 +685,6 @@ class ControlFormingTemplate(KeywordBase):
 
     @d3plt.setter
     def d3plt(self, value: int) -> None:
+        """Set the d3plt property."""
         self._cards[4].set_value("d3plt", value)
 

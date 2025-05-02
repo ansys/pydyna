@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the IGA keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IgaEdgeXyz(KeywordBase):
     subkeyword = "EDGE_XYZ"
 
     def __init__(self, **kwargs):
+        """Initialize the IGA keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -90,6 +92,7 @@ class IgaEdgeXyz(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -100,6 +103,7 @@ class IgaEdgeXyz(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -112,8 +116,9 @@ class IgaEdgeXyz(KeywordBase):
 
     @ori.setter
     def ori(self, value: int) -> None:
+        """Set the ori property."""
         if value not in [0, 1, None]:
-            raise Exception("""ori must be `None` or one of {0,1}""")
+            raise Exception("""ori must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ori", value)
 
     @property
@@ -126,6 +131,7 @@ class IgaEdgeXyz(KeywordBase):
 
     @pidstart.setter
     def pidstart(self, value: int) -> None:
+        """Set the pidstart property."""
         self._cards[0].set_value("pidstart", value)
 
     @property
@@ -138,6 +144,7 @@ class IgaEdgeXyz(KeywordBase):
 
     @pidend.setter
     def pidend(self, value: int) -> None:
+        """Set the pidend property."""
         self._cards[0].set_value("pidend", value)
 
     @property
@@ -149,5 +156,6 @@ class IgaEdgeXyz(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 

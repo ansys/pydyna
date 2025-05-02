@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialStressSph(KeywordBase):
     subkeyword = "STRESS_SPH"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,6 +112,7 @@ class InitialStressSph(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -120,6 +123,7 @@ class InitialStressSph(KeywordBase):
 
     @sigxx.setter
     def sigxx(self, value: float) -> None:
+        """Set the sigxx property."""
         self._cards[0].set_value("sigxx", value)
 
     @property
@@ -130,6 +134,7 @@ class InitialStressSph(KeywordBase):
 
     @sigyy.setter
     def sigyy(self, value: float) -> None:
+        """Set the sigyy property."""
         self._cards[0].set_value("sigyy", value)
 
     @property
@@ -140,6 +145,7 @@ class InitialStressSph(KeywordBase):
 
     @sigzz.setter
     def sigzz(self, value: float) -> None:
+        """Set the sigzz property."""
         self._cards[0].set_value("sigzz", value)
 
     @property
@@ -150,6 +156,7 @@ class InitialStressSph(KeywordBase):
 
     @sigxy.setter
     def sigxy(self, value: float) -> None:
+        """Set the sigxy property."""
         self._cards[0].set_value("sigxy", value)
 
     @property
@@ -160,6 +167,7 @@ class InitialStressSph(KeywordBase):
 
     @sigyz.setter
     def sigyz(self, value: float) -> None:
+        """Set the sigyz property."""
         self._cards[0].set_value("sigyz", value)
 
     @property
@@ -170,6 +178,7 @@ class InitialStressSph(KeywordBase):
 
     @sigzx.setter
     def sigzx(self, value: float) -> None:
+        """Set the sigzx property."""
         self._cards[0].set_value("sigzx", value)
 
     @property
@@ -180,5 +189,6 @@ class InitialStressSph(KeywordBase):
 
     @eps.setter
     def eps(self, value: float) -> None:
+        """Set the eps property."""
         self._cards[0].set_value("eps", value)
 

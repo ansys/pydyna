@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat174(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -252,6 +254,7 @@ class Mat174(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -262,6 +265,7 @@ class Mat174(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -272,6 +276,7 @@ class Mat174(KeywordBase):
 
     @eunl.setter
     def eunl(self, value: float) -> None:
+        """Set the eunl property."""
         self._cards[0].set_value("eunl", value)
 
     @property
@@ -282,6 +287,7 @@ class Mat174(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -292,6 +298,7 @@ class Mat174(KeywordBase):
 
     @fc.setter
     def fc(self, value: float) -> None:
+        """Set the fc property."""
         self._cards[0].set_value("fc", value)
 
     @property
@@ -302,6 +309,7 @@ class Mat174(KeywordBase):
 
     @ec1.setter
     def ec1(self, value: float) -> None:
+        """Set the ec1 property."""
         self._cards[0].set_value("ec1", value)
 
     @property
@@ -312,6 +320,7 @@ class Mat174(KeywordBase):
 
     @ec50.setter
     def ec50(self, value: float) -> None:
+        """Set the ec50 property."""
         self._cards[0].set_value("ec50", value)
 
     @property
@@ -322,6 +331,7 @@ class Mat174(KeywordBase):
 
     @resid.setter
     def resid(self, value: float) -> None:
+        """Set the resid property."""
         self._cards[0].set_value("resid", value)
 
     @property
@@ -332,6 +342,7 @@ class Mat174(KeywordBase):
 
     @ft.setter
     def ft(self, value: float) -> None:
+        """Set the ft property."""
         self._cards[1].set_value("ft", value)
 
     @property
@@ -342,6 +353,7 @@ class Mat174(KeywordBase):
 
     @unitc.setter
     def unitc(self, value: float) -> None:
+        """Set the unitc property."""
         self._cards[1].set_value("unitc", value)
 
     @property
@@ -352,6 +364,7 @@ class Mat174(KeywordBase):
 
     @esoft.setter
     def esoft(self, value: float) -> None:
+        """Set the esoft property."""
         self._cards[1].set_value("esoft", value)
 
     @property
@@ -362,6 +375,7 @@ class Mat174(KeywordBase):
 
     @lchar.setter
     def lchar(self, value: float) -> None:
+        """Set the lchar property."""
         self._cards[1].set_value("lchar", value)
 
     @property
@@ -375,8 +389,9 @@ class Mat174(KeywordBase):
 
     @output.setter
     def output(self, value: float) -> None:
+        """Set the output property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""output must be `None` or one of {0.0,1.0}""")
+            raise Exception("""output must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("output", value)
 
     @property
@@ -387,6 +402,7 @@ class Mat174(KeywordBase):
 
     @fracr.setter
     def fracr(self, value: float) -> None:
+        """Set the fracr property."""
         self._cards[2].set_value("fracr", value)
 
     @property
@@ -397,6 +413,7 @@ class Mat174(KeywordBase):
 
     @ymreinf.setter
     def ymreinf(self, value: float) -> None:
+        """Set the ymreinf property."""
         self._cards[2].set_value("ymreinf", value)
 
     @property
@@ -407,6 +424,7 @@ class Mat174(KeywordBase):
 
     @prreinf.setter
     def prreinf(self, value: float) -> None:
+        """Set the prreinf property."""
         self._cards[2].set_value("prreinf", value)
 
     @property
@@ -417,6 +435,7 @@ class Mat174(KeywordBase):
 
     @syreinf.setter
     def syreinf(self, value: float) -> None:
+        """Set the syreinf property."""
         self._cards[2].set_value("syreinf", value)
 
     @property
@@ -427,6 +446,7 @@ class Mat174(KeywordBase):
 
     @sureinf.setter
     def sureinf(self, value: float) -> None:
+        """Set the sureinf property."""
         self._cards[2].set_value("sureinf", value)
 
     @property
@@ -437,6 +457,7 @@ class Mat174(KeywordBase):
 
     @eshr.setter
     def eshr(self, value: float) -> None:
+        """Set the eshr property."""
         self._cards[2].set_value("eshr", value)
 
     @property
@@ -447,6 +468,7 @@ class Mat174(KeywordBase):
 
     @eur.setter
     def eur(self, value: float) -> None:
+        """Set the eur property."""
         self._cards[2].set_value("eur", value)
 
     @property
@@ -457,6 +479,7 @@ class Mat174(KeywordBase):
 
     @rreinf.setter
     def rreinf(self, value: float) -> None:
+        """Set the rreinf property."""
         self._cards[2].set_value("rreinf", value)
 
     @property
@@ -467,5 +490,6 @@ class Mat174(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

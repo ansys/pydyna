@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the RIGID keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RigidDeformableD2R(KeywordBase):
     subkeyword = "DEFORMABLE_D2R"
 
     def __init__(self, **kwargs):
+        """Initialize the RIGID keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -62,6 +64,7 @@ class RigidDeformableD2R(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -73,5 +76,6 @@ class RigidDeformableD2R(KeywordBase):
 
     @lrb.setter
     def lrb(self, value: int) -> None:
+        """Set the lrb property."""
         self._cards[0].set_value("lrb", value)
 

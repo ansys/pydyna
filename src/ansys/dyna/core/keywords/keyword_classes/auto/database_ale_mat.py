@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseAleMat(KeywordBase):
     subkeyword = "ALE_MAT"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -75,6 +77,7 @@ class DatabaseAleMat(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -88,6 +91,7 @@ class DatabaseAleMat(KeywordBase):
 
     @boxlow.setter
     def boxlow(self, value: int) -> None:
+        """Set the boxlow property."""
         self._cards[0].set_value("boxlow", value)
 
     @property
@@ -101,6 +105,7 @@ class DatabaseAleMat(KeywordBase):
 
     @boxup.setter
     def boxup(self, value: int) -> None:
+        """Set the boxup property."""
         self._cards[0].set_value("boxup", value)
 
     @property
@@ -111,5 +116,6 @@ class DatabaseAleMat(KeywordBase):
 
     @dtxy.setter
     def dtxy(self, value: float) -> None:
+        """Set the dtxy property."""
         self._cards[0].set_value("dtxy", value)
 

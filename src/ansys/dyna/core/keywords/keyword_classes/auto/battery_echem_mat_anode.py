@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BATTERY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BatteryEchemMatAnode(KeywordBase):
     subkeyword = "ECHEM_MAT_ANODE"
 
     def __init__(self, **kwargs):
+        """Initialize the BATTERY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -167,6 +169,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -182,6 +185,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @iocpa.setter
     def iocpa(self, value: int) -> None:
+        """Set the iocpa property."""
         self._cards[0].set_value("iocpa", value)
 
     @property
@@ -192,6 +196,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @capta.setter
     def capta(self, value: float) -> None:
+        """Set the capta property."""
         self._cards[0].set_value("capta", value)
 
     @property
@@ -202,6 +207,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @s_xa.setter
     def s_xa(self, value: float) -> None:
+        """Set the s_xa property."""
         self._cards[0].set_value("s_xa", value)
 
     @property
@@ -212,6 +218,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @rada.setter
     def rada(self, value: float) -> None:
+        """Set the rada property."""
         self._cards[0].set_value("rada", value)
 
     @property
@@ -222,6 +229,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @ratea.setter
     def ratea(self, value: float) -> None:
+        """Set the ratea property."""
         self._cards[0].set_value("ratea", value)
 
     @property
@@ -232,6 +240,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @ranode.setter
     def ranode(self, value: float) -> None:
+        """Set the ranode property."""
         self._cards[0].set_value("ranode", value)
 
     @property
@@ -242,6 +251,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @rhoea.setter
     def rhoea(self, value: float) -> None:
+        """Set the rhoea property."""
         self._cards[1].set_value("rhoea", value)
 
     @property
@@ -252,6 +262,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @rhofa.setter
     def rhofa(self, value: float) -> None:
+        """Set the rhofa property."""
         self._cards[1].set_value("rhofa", value)
 
     @property
@@ -262,6 +273,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @rhocca.setter
     def rhocca(self, value: float) -> None:
+        """Set the rhocca property."""
         self._cards[1].set_value("rhocca", value)
 
     @property
@@ -272,6 +284,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @diffa.setter
     def diffa(self, value: float) -> None:
+        """Set the diffa property."""
         self._cards[1].set_value("diffa", value)
 
     @property
@@ -282,6 +295,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @conda.setter
     def conda(self, value: float) -> None:
+        """Set the conda property."""
         self._cards[1].set_value("conda", value)
 
     @property
@@ -292,6 +306,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @vfea.setter
     def vfea(self, value: float) -> None:
+        """Set the vfea property."""
         self._cards[2].set_value("vfea", value)
 
     @property
@@ -302,6 +317,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @vfpa.setter
     def vfpa(self, value: float) -> None:
+        """Set the vfpa property."""
         self._cards[2].set_value("vfpa", value)
 
     @property
@@ -312,6 +328,7 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @vffa.setter
     def vffa(self, value: float) -> None:
+        """Set the vffa property."""
         self._cards[2].set_value("vffa", value)
 
     @property
@@ -322,5 +339,6 @@ class BatteryEchemMatAnode(KeywordBase):
 
     @vfga.setter
     def vfga(self, value: float) -> None:
+        """Set the vfga property."""
         self._cards[2].set_value("vfga", value)
 

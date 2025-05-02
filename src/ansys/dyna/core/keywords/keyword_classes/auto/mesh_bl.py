@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MESH keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class MeshBl(KeywordBase):
     subkeyword = "BL"
 
     def __init__(self, **kwargs):
+        """Initialize the MESH keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -85,6 +87,7 @@ class MeshBl(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -95,6 +98,7 @@ class MeshBl(KeywordBase):
 
     @nelth.setter
     def nelth(self, value: int) -> None:
+        """Set the nelth property."""
         self._cards[0].set_value("nelth", value)
 
     @property
@@ -105,6 +109,7 @@ class MeshBl(KeywordBase):
 
     @blth.setter
     def blth(self, value: float) -> None:
+        """Set the blth property."""
         self._cards[0].set_value("blth", value)
 
     @property
@@ -115,6 +120,7 @@ class MeshBl(KeywordBase):
 
     @blfe.setter
     def blfe(self, value: float) -> None:
+        """Set the blfe property."""
         self._cards[0].set_value("blfe", value)
 
     @property
@@ -129,7 +135,8 @@ class MeshBl(KeywordBase):
 
     @blst.setter
     def blst(self, value: int) -> None:
+        """Set the blst property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""blst must be `None` or one of {0,1,2,3}""")
+            raise Exception("""blst must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("blst", value)
 

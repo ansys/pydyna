@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
     subkeyword = "LAGRANGE_IN_SOLID_EDGES"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -320,6 +322,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @coupid.setter
     def coupid(self, value: int) -> None:
+        """Set the coupid property."""
         self._cards[0].set_value("coupid", value)
 
     @property
@@ -330,6 +333,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -340,6 +344,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @slave.setter
     def slave(self, value: int) -> None:
+        """Set the slave property."""
         self._cards[1].set_value("slave", value)
 
     @property
@@ -350,6 +355,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @master.setter
     def master(self, value: int) -> None:
+        """Set the master property."""
         self._cards[1].set_value("master", value)
 
     @property
@@ -363,8 +369,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
+        """Set the sstyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sstyp must be `None` or one of {0,1,2}""")
+            raise Exception("""sstyp must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("sstyp", value)
 
     @property
@@ -377,8 +384,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @mstyp.setter
     def mstyp(self, value: int) -> None:
+        """Set the mstyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""mstyp must be `None` or one of {0,1}""")
+            raise Exception("""mstyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("mstyp", value)
 
     @property
@@ -392,6 +400,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @nquad.setter
     def nquad(self, value: int) -> None:
+        """Set the nquad property."""
         self._cards[1].set_value("nquad", value)
 
     @property
@@ -408,8 +417,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         if value not in [2, 1, 3, 4, 5, 6, 11, 12, None]:
-            raise Exception("""ctype must be `None` or one of {2,1,3,4,5,6,11,12}""")
+            raise Exception("""ctype must be `None` or one of {2,1,3,4,5,6,11,12}.""")
         self._cards[1].set_value("ctype", value)
 
     @property
@@ -423,8 +433,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @direc.setter
     def direc(self, value: int) -> None:
+        """Set the direc property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""direc must be `None` or one of {1,2,3}""")
+            raise Exception("""direc must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("direc", value)
 
     @property
@@ -437,6 +448,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @mcoup.setter
     def mcoup(self, value: int) -> None:
+        """Set the mcoup property."""
         self._cards[1].set_value("mcoup", value)
 
     @property
@@ -447,6 +459,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @start.setter
     def start(self, value: float) -> None:
+        """Set the start property."""
         self._cards[2].set_value("start", value)
 
     @property
@@ -457,6 +470,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @end.setter
     def end(self, value: float) -> None:
+        """Set the end property."""
         self._cards[2].set_value("end", value)
 
     @property
@@ -467,6 +481,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @pfac.setter
     def pfac(self, value: float) -> None:
+        """Set the pfac property."""
         self._cards[2].set_value("pfac", value)
 
     @property
@@ -477,6 +492,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[2].set_value("fric", value)
 
     @property
@@ -487,6 +503,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @frcmin.setter
     def frcmin(self, value: float) -> None:
+        """Set the frcmin property."""
         self._cards[2].set_value("frcmin", value)
 
     @property
@@ -499,6 +516,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @norm.setter
     def norm(self, value: int) -> None:
+        """Set the norm property."""
         self._cards[2].set_value("norm", value)
 
     @property
@@ -511,6 +529,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @normtyp.setter
     def normtyp(self, value: int) -> None:
+        """Set the normtyp property."""
         self._cards[2].set_value("normtyp", value)
 
     @property
@@ -522,6 +541,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[2].set_value("damp", value)
 
     @property
@@ -532,6 +552,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @cq.setter
     def cq(self, value: float) -> None:
+        """Set the cq property."""
         self._cards[3].set_value("cq", value)
 
     @property
@@ -542,6 +563,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @hmin.setter
     def hmin(self, value: float) -> None:
+        """Set the hmin property."""
         self._cards[3].set_value("hmin", value)
 
     @property
@@ -552,6 +574,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @hmax.setter
     def hmax(self, value: float) -> None:
+        """Set the hmax property."""
         self._cards[3].set_value("hmax", value)
 
     @property
@@ -565,8 +588,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @ileak.setter
     def ileak(self, value: int) -> None:
+        """Set the ileak property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ileak must be `None` or one of {0,1,2}""")
+            raise Exception("""ileak must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("ileak", value)
 
     @property
@@ -577,6 +601,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @pleak.setter
     def pleak(self, value: float) -> None:
+        """Set the pleak property."""
         self._cards[3].set_value("pleak", value)
 
     @property
@@ -587,6 +612,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @lcidpor.setter
     def lcidpor(self, value: int) -> None:
+        """Set the lcidpor property."""
         self._cards[3].set_value("lcidpor", value)
 
     @property
@@ -597,6 +623,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @nvent.setter
     def nvent(self, value: int) -> None:
+        """Set the nvent property."""
         self._cards[3].set_value("nvent", value)
 
     @property
@@ -609,8 +636,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @blockage.setter
     def blockage(self, value: int) -> None:
+        """Set the blockage property."""
         if value not in [0, 1, None]:
-            raise Exception("""blockage must be `None` or one of {0,1}""")
+            raise Exception("""blockage must be `None` or one of {0,1}.""")
         self._cards[3].set_value("blockage", value)
 
     @property
@@ -621,6 +649,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @iboxid.setter
     def iboxid(self, value: int) -> None:
+        """Set the iboxid property."""
         self._cards[4].set_value("iboxid", value)
 
     @property
@@ -631,8 +660,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @ipenchk.setter
     def ipenchk(self, value: int) -> None:
+        """Set the ipenchk property."""
         if value not in [0, 1, None]:
-            raise Exception("""ipenchk must be `None` or one of {0,1}""")
+            raise Exception("""ipenchk must be `None` or one of {0,1}.""")
         self._cards[4].set_value("ipenchk", value)
 
     @property
@@ -643,8 +673,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @intforc.setter
     def intforc(self, value: int) -> None:
+        """Set the intforc property."""
         if value not in [0, 1, None]:
-            raise Exception("""intforc must be `None` or one of {0,1}""")
+            raise Exception("""intforc must be `None` or one of {0,1}.""")
         self._cards[4].set_value("intforc", value)
 
     @property
@@ -655,8 +686,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @ialesof.setter
     def ialesof(self, value: int) -> None:
+        """Set the ialesof property."""
         if value not in [0, 1, None]:
-            raise Exception("""ialesof must be `None` or one of {0,1}""")
+            raise Exception("""ialesof must be `None` or one of {0,1}.""")
         self._cards[4].set_value("ialesof", value)
 
     @property
@@ -667,6 +699,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @lagmul.setter
     def lagmul(self, value: float) -> None:
+        """Set the lagmul property."""
         self._cards[4].set_value("lagmul", value)
 
     @property
@@ -677,8 +710,9 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @pfacmm.setter
     def pfacmm(self, value: int) -> None:
+        """Set the pfacmm property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""pfacmm must be `None` or one of {0,1,2,3}""")
+            raise Exception("""pfacmm must be `None` or one of {0,1,2,3}.""")
         self._cards[4].set_value("pfacmm", value)
 
     @property
@@ -689,5 +723,6 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
 
     @thkf.setter
     def thkf(self, value: float) -> None:
+        """Set the thkf property."""
         self._cards[4].set_value("thkf", value)
 

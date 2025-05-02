@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the COMPONENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ComponentGebodJointRightHip(KeywordBase):
     subkeyword = "GEBOD_JOINT_RIGHT_HIP"
 
     def __init__(self, **kwargs):
+        """Initialize the COMPONENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -234,6 +236,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @did.setter
     def did(self, value: int) -> None:
+        """Set the did property."""
         self._cards[0].set_value("did", value)
 
     @property
@@ -244,6 +247,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @lc1.setter
     def lc1(self, value: int) -> None:
+        """Set the lc1 property."""
         self._cards[0].set_value("lc1", value)
 
     @property
@@ -254,6 +258,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @lc2.setter
     def lc2(self, value: int) -> None:
+        """Set the lc2 property."""
         self._cards[0].set_value("lc2", value)
 
     @property
@@ -264,6 +269,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @lc3.setter
     def lc3(self, value: int) -> None:
+        """Set the lc3 property."""
         self._cards[0].set_value("lc3", value)
 
     @property
@@ -274,6 +280,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @scf1.setter
     def scf1(self, value: float) -> None:
+        """Set the scf1 property."""
         self._cards[0].set_value("scf1", value)
 
     @property
@@ -284,6 +291,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @scf2.setter
     def scf2(self, value: float) -> None:
+        """Set the scf2 property."""
         self._cards[0].set_value("scf2", value)
 
     @property
@@ -294,6 +302,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @scf3.setter
     def scf3(self, value: float) -> None:
+        """Set the scf3 property."""
         self._cards[0].set_value("scf3", value)
 
     @property
@@ -304,6 +313,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[1].set_value("c1", value)
 
     @property
@@ -314,6 +324,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[1].set_value("c2", value)
 
     @property
@@ -324,6 +335,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[1].set_value("c3", value)
 
     @property
@@ -334,6 +346,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @neut1.setter
     def neut1(self, value: float) -> None:
+        """Set the neut1 property."""
         self._cards[1].set_value("neut1", value)
 
     @property
@@ -344,6 +357,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @neut2.setter
     def neut2(self, value: float) -> None:
+        """Set the neut2 property."""
         self._cards[1].set_value("neut2", value)
 
     @property
@@ -354,6 +368,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @neut3.setter
     def neut3(self, value: float) -> None:
+        """Set the neut3 property."""
         self._cards[1].set_value("neut3", value)
 
     @property
@@ -364,6 +379,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @losa1.setter
     def losa1(self, value: float) -> None:
+        """Set the losa1 property."""
         self._cards[2].set_value("losa1", value)
 
     @property
@@ -374,6 +390,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @hisa1.setter
     def hisa1(self, value: float) -> None:
+        """Set the hisa1 property."""
         self._cards[2].set_value("hisa1", value)
 
     @property
@@ -384,6 +401,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @losa2.setter
     def losa2(self, value: float) -> None:
+        """Set the losa2 property."""
         self._cards[2].set_value("losa2", value)
 
     @property
@@ -394,6 +412,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @hisa2.setter
     def hisa2(self, value: float) -> None:
+        """Set the hisa2 property."""
         self._cards[2].set_value("hisa2", value)
 
     @property
@@ -404,6 +423,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @losa3.setter
     def losa3(self, value: float) -> None:
+        """Set the losa3 property."""
         self._cards[2].set_value("losa3", value)
 
     @property
@@ -414,6 +434,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @hisa3.setter
     def hisa3(self, value: float) -> None:
+        """Set the hisa3 property."""
         self._cards[2].set_value("hisa3", value)
 
     @property
@@ -424,6 +445,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @unk1.setter
     def unk1(self, value: float) -> None:
+        """Set the unk1 property."""
         self._cards[3].set_value("unk1", value)
 
     @property
@@ -434,6 +456,7 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @unk2.setter
     def unk2(self, value: float) -> None:
+        """Set the unk2 property."""
         self._cards[3].set_value("unk2", value)
 
     @property
@@ -444,5 +467,6 @@ class ComponentGebodJointRightHip(KeywordBase):
 
     @unk3.setter
     def unk3(self, value: float) -> None:
+        """Set the unk3 property."""
         self._cards[3].set_value("unk3", value)
 

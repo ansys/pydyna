@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
     subkeyword = "SOIL_PILE_CONSTANTS"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -368,6 +370,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @pbsid.setter
     def pbsid(self, value: int) -> None:
+        """Set the pbsid property."""
         self._cards[0].set_value("pbsid", value)
 
     @property
@@ -378,6 +381,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @diam.setter
     def diam(self, value: float) -> None:
+        """Set the diam property."""
         self._cards[0].set_value("diam", value)
 
     @property
@@ -389,6 +393,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @pidns.setter
     def pidns(self, value: int) -> None:
+        """Set the pidns property."""
         self._cards[0].set_value("pidns", value)
 
     @property
@@ -400,6 +405,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @pidnb.setter
     def pidnb(self, value: int) -> None:
+        """Set the pidnb property."""
         self._cards[0].set_value("pidnb", value)
 
     @property
@@ -412,8 +418,9 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @error.setter
     def error(self, value: int) -> None:
+        """Set the error property."""
         if value not in [0, 1, None]:
-            raise Exception("""error must be `None` or one of {0,1}""")
+            raise Exception("""error must be `None` or one of {0,1}.""")
         self._cards[0].set_value("error", value)
 
     @property
@@ -426,6 +433,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @nring.setter
     def nring(self, value: int) -> None:
+        """Set the nring property."""
         self._cards[0].set_value("nring", value)
 
     @property
@@ -436,6 +444,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @nringb.setter
     def nringb(self, value: int) -> None:
+        """Set the nringb property."""
         self._cards[0].set_value("nringb", value)
 
     @property
@@ -446,6 +455,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[1].set_value("damp", value)
 
     @property
@@ -458,8 +468,9 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
+        """Set the local property."""
         if value not in [1, 2, None]:
-            raise Exception("""local must be `None` or one of {1,2}""")
+            raise Exception("""local must be `None` or one of {1,2}.""")
         self._cards[1].set_value("local", value)
 
     @property
@@ -470,6 +481,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[2].set_value("pid", value)
 
     @property
@@ -480,6 +492,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @acu.setter
     def acu(self, value: float) -> None:
+        """Set the acu property."""
         self._cards[2].set_value("acu", value)
 
     @property
@@ -490,6 +503,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @bcu.setter
     def bcu(self, value: float) -> None:
+        """Set the bcu property."""
         self._cards[2].set_value("bcu", value)
 
     @property
@@ -500,6 +514,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @lccu.setter
     def lccu(self, value: int) -> None:
+        """Set the lccu property."""
         self._cards[2].set_value("lccu", value)
 
     @property
@@ -510,6 +525,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @astiffs.setter
     def astiffs(self, value: float) -> None:
+        """Set the astiffs property."""
         self._cards[2].set_value("astiffs", value)
 
     @property
@@ -520,6 +536,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @bstiffs.setter
     def bstiffs(self, value: float) -> None:
+        """Set the bstiffs property."""
         self._cards[2].set_value("bstiffs", value)
 
     @property
@@ -530,6 +547,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @astiffb.setter
     def astiffb(self, value: float) -> None:
+        """Set the astiffb property."""
         self._cards[2].set_value("astiffb", value)
 
     @property
@@ -540,6 +558,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @zref.setter
     def zref(self, value: float) -> None:
+        """Set the zref property."""
         self._cards[2].set_value("zref", value)
 
     @property
@@ -550,6 +569,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @kbcon.setter
     def kbcon(self, value: float) -> None:
+        """Set the kbcon property."""
         self._cards[3].set_value("kbcon", value)
 
     @property
@@ -560,6 +580,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @kbcu.setter
     def kbcu(self, value: float) -> None:
+        """Set the kbcu property."""
         self._cards[3].set_value("kbcu", value)
 
     @property
@@ -570,6 +591,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @kbsx.setter
     def kbsx(self, value: float) -> None:
+        """Set the kbsx property."""
         self._cards[3].set_value("kbsx", value)
 
     @property
@@ -580,6 +602,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @kbsy.setter
     def kbsy(self, value: float) -> None:
+        """Set the kbsy property."""
         self._cards[3].set_value("kbsy", value)
 
     @property
@@ -590,6 +613,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @kbsz.setter
     def kbsz(self, value: float) -> None:
+        """Set the kbsz property."""
         self._cards[3].set_value("kbsz", value)
 
     @property
@@ -600,6 +624,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @bstfac.setter
     def bstfac(self, value: float) -> None:
+        """Set the bstfac property."""
         self._cards[3].set_value("bstfac", value)
 
     @property
@@ -610,6 +635,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @bhyper.setter
     def bhyper(self, value: float) -> None:
+        """Set the bhyper property."""
         self._cards[3].set_value("bhyper", value)
 
     @property
@@ -620,6 +646,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @blc.setter
     def blc(self, value: int) -> None:
+        """Set the blc property."""
         self._cards[3].set_value("blc", value)
 
     @property
@@ -630,6 +657,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @kvcon.setter
     def kvcon(self, value: float) -> None:
+        """Set the kvcon property."""
         self._cards[4].set_value("kvcon", value)
 
     @property
@@ -640,6 +668,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @kvcu.setter
     def kvcu(self, value: float) -> None:
+        """Set the kvcu property."""
         self._cards[4].set_value("kvcu", value)
 
     @property
@@ -650,6 +679,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @kvsx.setter
     def kvsx(self, value: float) -> None:
+        """Set the kvsx property."""
         self._cards[4].set_value("kvsx", value)
 
     @property
@@ -660,6 +690,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @kvsy.setter
     def kvsy(self, value: float) -> None:
+        """Set the kvsy property."""
         self._cards[4].set_value("kvsy", value)
 
     @property
@@ -670,6 +701,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @kvsz.setter
     def kvsz(self, value: float) -> None:
+        """Set the kvsz property."""
         self._cards[4].set_value("kvsz", value)
 
     @property
@@ -680,6 +712,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @vstfac.setter
     def vstfac(self, value: float) -> None:
+        """Set the vstfac property."""
         self._cards[4].set_value("vstfac", value)
 
     @property
@@ -690,6 +723,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @vhyper.setter
     def vhyper(self, value: float) -> None:
+        """Set the vhyper property."""
         self._cards[4].set_value("vhyper", value)
 
     @property
@@ -700,6 +734,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @vlc.setter
     def vlc(self, value: int) -> None:
+        """Set the vlc property."""
         self._cards[4].set_value("vlc", value)
 
     @property
@@ -710,6 +745,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @khcon.setter
     def khcon(self, value: float) -> None:
+        """Set the khcon property."""
         self._cards[5].set_value("khcon", value)
 
     @property
@@ -720,6 +756,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @khcu.setter
     def khcu(self, value: float) -> None:
+        """Set the khcu property."""
         self._cards[5].set_value("khcu", value)
 
     @property
@@ -730,6 +767,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @khsx.setter
     def khsx(self, value: float) -> None:
+        """Set the khsx property."""
         self._cards[5].set_value("khsx", value)
 
     @property
@@ -740,6 +778,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @khsy.setter
     def khsy(self, value: float) -> None:
+        """Set the khsy property."""
         self._cards[5].set_value("khsy", value)
 
     @property
@@ -750,6 +789,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @khsz.setter
     def khsz(self, value: float) -> None:
+        """Set the khsz property."""
         self._cards[5].set_value("khsz", value)
 
     @property
@@ -760,6 +800,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @hstfac.setter
     def hstfac(self, value: float) -> None:
+        """Set the hstfac property."""
         self._cards[5].set_value("hstfac", value)
 
     @property
@@ -770,6 +811,7 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @hhyper.setter
     def hhyper(self, value: float) -> None:
+        """Set the hhyper property."""
         self._cards[5].set_value("hhyper", value)
 
     @property
@@ -780,5 +822,6 @@ class ConstrainedSoilPileConstants(KeywordBase):
 
     @hlc.setter
     def hlc(self, value: int) -> None:
+        """Set the hlc property."""
         self._cards[5].set_value("hlc", value)
 

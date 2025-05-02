@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
     subkeyword = "IMPLICIT_MODAL_DYNAMIC_MODE_GENERATE"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
 
     @m1beg.setter
     def m1beg(self, value: int) -> None:
+        """Set the m1beg property."""
         self._cards[0].set_value("m1beg", value)
 
     @property
@@ -113,6 +116,7 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
 
     @m1end.setter
     def m1end(self, value: int) -> None:
+        """Set the m1end property."""
         self._cards[0].set_value("m1end", value)
 
     @property
@@ -123,6 +127,7 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
 
     @m2beg.setter
     def m2beg(self, value: int) -> None:
+        """Set the m2beg property."""
         self._cards[0].set_value("m2beg", value)
 
     @property
@@ -133,6 +138,7 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
 
     @m2end.setter
     def m2end(self, value: int) -> None:
+        """Set the m2end property."""
         self._cards[0].set_value("m2end", value)
 
     @property
@@ -143,6 +149,7 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
 
     @m3beg.setter
     def m3beg(self, value: int) -> None:
+        """Set the m3beg property."""
         self._cards[0].set_value("m3beg", value)
 
     @property
@@ -153,6 +160,7 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
 
     @m3end.setter
     def m3end(self, value: int) -> None:
+        """Set the m3end property."""
         self._cards[0].set_value("m3end", value)
 
     @property
@@ -163,6 +171,7 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
 
     @m4beg.setter
     def m4beg(self, value: int) -> None:
+        """Set the m4beg property."""
         self._cards[0].set_value("m4beg", value)
 
     @property
@@ -173,5 +182,6 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
 
     @m4end.setter
     def m4end(self, value: int) -> None:
+        """Set the m4end property."""
         self._cards[0].set_value("m4end", value)
 

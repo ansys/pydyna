@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseInitialHybridSet(KeywordBase):
     subkeyword = "INITIAL_HYBRID_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -139,6 +141,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @esid.setter
     def esid(self, value: int) -> None:
+        """Set the esid property."""
         self._cards[0].set_value("esid", value)
 
     @property
@@ -151,6 +154,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @ifunc.setter
     def ifunc(self, value: int) -> None:
+        """Set the ifunc property."""
         self._cards[0].set_value("ifunc", value)
 
     @property
@@ -161,6 +165,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[1].set_value("z1", value)
 
     @property
@@ -171,6 +176,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @ra.setter
     def ra(self, value: float) -> None:
+        """Set the ra property."""
         self._cards[1].set_value("ra", value)
 
     @property
@@ -181,6 +187,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @uic.setter
     def uic(self, value: float) -> None:
+        """Set the uic property."""
         self._cards[1].set_value("uic", value)
 
     @property
@@ -191,6 +198,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @vic.setter
     def vic(self, value: float) -> None:
+        """Set the vic property."""
         self._cards[1].set_value("vic", value)
 
     @property
@@ -201,6 +209,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @wic.setter
     def wic(self, value: float) -> None:
+        """Set the wic property."""
         self._cards[1].set_value("wic", value)
 
     @property
@@ -211,6 +220,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @rho1.setter
     def rho1(self, value: float) -> None:
+        """Set the rho1 property."""
         self._cards[1].set_value("rho1", value)
 
     @property
@@ -221,6 +231,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @rho_a.setter
     def rho_a(self, value: float) -> None:
+        """Set the rho_a property."""
         self._cards[1].set_value("rho_a", value)
 
     @property
@@ -231,6 +242,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @rho_b.setter
     def rho_b(self, value: float) -> None:
+        """Set the rho_b property."""
         self._cards[1].set_value("rho_b", value)
 
     @property
@@ -241,6 +253,7 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @pic.setter
     def pic(self, value: float) -> None:
+        """Set the pic property."""
         self._cards[2].set_value("pic", value)
 
     @property
@@ -251,5 +264,6 @@ class DualceseInitialHybridSet(KeywordBase):
 
     @tic.setter
     def tic(self, value: float) -> None:
+        """Set the tic property."""
         self._cards[2].set_value("tic", value)
 

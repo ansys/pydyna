@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseMassout(KeywordBase):
     subkeyword = "MASSOUT"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -73,6 +75,7 @@ class DatabaseMassout(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 
     @property
@@ -87,8 +90,9 @@ class DatabaseMassout(KeywordBase):
 
     @ndflg.setter
     def ndflg(self, value: int) -> None:
+        """Set the ndflg property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""ndflg must be `None` or one of {1,2,3,4}""")
+            raise Exception("""ndflg must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("ndflg", value)
 
     @property
@@ -101,7 +105,8 @@ class DatabaseMassout(KeywordBase):
 
     @rbflg.setter
     def rbflg(self, value: int) -> None:
+        """Set the rbflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""rbflg must be `None` or one of {0,1}""")
+            raise Exception("""rbflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("rbflg", value)
 

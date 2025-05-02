@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseHistoryNodeLocalId(KeywordBase):
     subkeyword = "HISTORY_NODE_LOCAL_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -80,6 +82,7 @@ class DatabaseHistoryNodeLocalId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -90,6 +93,7 @@ class DatabaseHistoryNodeLocalId(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -103,8 +107,9 @@ class DatabaseHistoryNodeLocalId(KeywordBase):
 
     @ref.setter
     def ref(self, value: int) -> None:
+        """Set the ref property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ref must be `None` or one of {0,1,2}""")
+            raise Exception("""ref must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("ref", value)
 
     @property
@@ -115,5 +120,6 @@ class DatabaseHistoryNodeLocalId(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[1].set_value("heading", value)
 

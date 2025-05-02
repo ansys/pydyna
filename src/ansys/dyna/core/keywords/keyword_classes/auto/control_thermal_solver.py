@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlThermalSolver(KeywordBase):
     subkeyword = "THERMAL_SOLVER"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -221,8 +223,9 @@ class ControlThermalSolver(KeywordBase):
 
     @atype.setter
     def atype(self, value: int) -> None:
+        """Set the atype property."""
         if value not in [0, 1, None]:
-            raise Exception("""atype must be `None` or one of {0,1}""")
+            raise Exception("""atype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("atype", value)
 
     @property
@@ -236,8 +239,9 @@ class ControlThermalSolver(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
+        """Set the ptype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ptype must be `None` or one of {0,1,2}""")
+            raise Exception("""ptype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -258,8 +262,9 @@ class ControlThermalSolver(KeywordBase):
 
     @solver.setter
     def solver(self, value: int) -> None:
+        """Set the solver property."""
         if value not in [11, 12, 13, 14, 15, 16, 17, 18, 19, 30, None]:
-            raise Exception("""solver must be `None` or one of {11,12,13,14,15,16,17,18,19,30}""")
+            raise Exception("""solver must be `None` or one of {11,12,13,14,15,16,17,18,19,30}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -272,6 +277,7 @@ class ControlThermalSolver(KeywordBase):
 
     @gpt.setter
     def gpt(self, value: int) -> None:
+        """Set the gpt property."""
         self._cards[0].set_value("gpt", value)
 
     @property
@@ -282,6 +288,7 @@ class ControlThermalSolver(KeywordBase):
 
     @eqheat.setter
     def eqheat(self, value: float) -> None:
+        """Set the eqheat property."""
         self._cards[0].set_value("eqheat", value)
 
     @property
@@ -292,6 +299,7 @@ class ControlThermalSolver(KeywordBase):
 
     @fwork.setter
     def fwork(self, value: float) -> None:
+        """Set the fwork property."""
         self._cards[0].set_value("fwork", value)
 
     @property
@@ -302,6 +310,7 @@ class ControlThermalSolver(KeywordBase):
 
     @sbc.setter
     def sbc(self, value: float) -> None:
+        """Set the sbc property."""
         self._cards[0].set_value("sbc", value)
 
     @property
@@ -315,8 +324,9 @@ class ControlThermalSolver(KeywordBase):
 
     @msglvl.setter
     def msglvl(self, value: int) -> None:
+        """Set the msglvl property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""msglvl must be `None` or one of {0,1,2}""")
+            raise Exception("""msglvl must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("msglvl", value)
 
     @property
@@ -328,6 +338,7 @@ class ControlThermalSolver(KeywordBase):
 
     @maxitr.setter
     def maxitr(self, value: int) -> None:
+        """Set the maxitr property."""
         self._cards[1].set_value("maxitr", value)
 
     @property
@@ -339,6 +350,7 @@ class ControlThermalSolver(KeywordBase):
 
     @abstol.setter
     def abstol(self, value: float) -> None:
+        """Set the abstol property."""
         self._cards[1].set_value("abstol", value)
 
     @property
@@ -350,6 +362,7 @@ class ControlThermalSolver(KeywordBase):
 
     @reltol.setter
     def reltol(self, value: float) -> None:
+        """Set the reltol property."""
         self._cards[1].set_value("reltol", value)
 
     @property
@@ -361,6 +374,7 @@ class ControlThermalSolver(KeywordBase):
 
     @omega.setter
     def omega(self, value: float) -> None:
+        """Set the omega property."""
         self._cards[1].set_value("omega", value)
 
     @property
@@ -374,6 +388,7 @@ class ControlThermalSolver(KeywordBase):
 
     @tsf.setter
     def tsf(self, value: float) -> None:
+        """Set the tsf property."""
         self._cards[1].set_value("tsf", value)
 
     @property
@@ -387,6 +402,7 @@ class ControlThermalSolver(KeywordBase):
 
     @mxdmp.setter
     def mxdmp(self, value: int) -> None:
+        """Set the mxdmp property."""
         self._cards[2].set_value("mxdmp", value)
 
     @property
@@ -397,6 +413,7 @@ class ControlThermalSolver(KeywordBase):
 
     @dtvf.setter
     def dtvf(self, value: float) -> None:
+        """Set the dtvf property."""
         self._cards[2].set_value("dtvf", value)
 
     @property
@@ -410,8 +427,9 @@ class ControlThermalSolver(KeywordBase):
 
     @varden.setter
     def varden(self, value: int) -> None:
+        """Set the varden property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""varden must be `None` or one of {0,1,2}""")
+            raise Exception("""varden must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("varden", value)
 
     @property
@@ -422,5 +440,6 @@ class ControlThermalSolver(KeywordBase):
 
     @ncycl.setter
     def ncycl(self, value: int) -> None:
+        """Set the ncycl property."""
         self._cards[2].set_value("ncycl", value)
 

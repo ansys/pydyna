@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatShapeMemoryAlloy(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -583,6 +585,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -593,6 +596,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @rho.setter
     def rho(self, value: float) -> None:
+        """Set the rho property."""
         self._cards[0].set_value("rho", value)
 
     @property
@@ -603,6 +607,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @em.setter
     def em(self, value: float) -> None:
+        """Set the em property."""
         self._cards[0].set_value("em", value)
 
     @property
@@ -613,6 +618,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @ea.setter
     def ea(self, value: float) -> None:
+        """Set the ea property."""
         self._cards[0].set_value("ea", value)
 
     @property
@@ -623,6 +629,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @prm.setter
     def prm(self, value: float) -> None:
+        """Set the prm property."""
         self._cards[0].set_value("prm", value)
 
     @property
@@ -633,6 +640,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @pra.setter
     def pra(self, value: float) -> None:
+        """Set the pra property."""
         self._cards[0].set_value("pra", value)
 
     @property
@@ -649,6 +657,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: int) -> None:
+        """Set the aopt property."""
         self._cards[0].set_value("aopt", value)
 
     @property
@@ -661,8 +670,9 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, None]:
-            raise Exception("""stype must be `None` or one of {0,1}""")
+            raise Exception("""stype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -673,6 +683,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @cpm.setter
     def cpm(self, value: float) -> None:
+        """Set the cpm property."""
         self._cards[1].set_value("cpm", value)
 
     @property
@@ -683,6 +694,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @cpa.setter
     def cpa(self, value: float) -> None:
+        """Set the cpa property."""
         self._cards[1].set_value("cpa", value)
 
     @property
@@ -693,6 +705,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @lh.setter
     def lh(self, value: float) -> None:
+        """Set the lh property."""
         self._cards[1].set_value("lh", value)
 
     @property
@@ -703,6 +716,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @tc.setter
     def tc(self, value: float) -> None:
+        """Set the tc property."""
         self._cards[1].set_value("tc", value)
 
     @property
@@ -713,6 +727,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @tmf.setter
     def tmf(self, value: float) -> None:
+        """Set the tmf property."""
         self._cards[1].set_value("tmf", value)
 
     @property
@@ -723,6 +738,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @tms.setter
     def tms(self, value: float) -> None:
+        """Set the tms property."""
         self._cards[1].set_value("tms", value)
 
     @property
@@ -733,6 +749,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @tas.setter
     def tas(self, value: float) -> None:
+        """Set the tas property."""
         self._cards[1].set_value("tas", value)
 
     @property
@@ -743,6 +760,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @taf.setter
     def taf(self, value: float) -> None:
+        """Set the taf property."""
         self._cards[1].set_value("taf", value)
 
     @property
@@ -753,6 +771,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @a1i.setter
     def a1i(self, value: float) -> None:
+        """Set the a1i property."""
         self._cards[2].set_value("a1i", value)
 
     @property
@@ -763,6 +782,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @a2i.setter
     def a2i(self, value: float) -> None:
+        """Set the a2i property."""
         self._cards[2].set_value("a2i", value)
 
     @property
@@ -773,6 +793,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[2].set_value("bi", value)
 
     @property
@@ -783,6 +804,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @ci.setter
     def ci(self, value: float) -> None:
+        """Set the ci property."""
         self._cards[2].set_value("ci", value)
 
     @property
@@ -793,6 +815,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @ki.setter
     def ki(self, value: float) -> None:
+        """Set the ki property."""
         self._cards[2].set_value("ki", value)
 
     @property
@@ -803,6 +826,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @mi.setter
     def mi(self, value: float) -> None:
+        """Set the mi property."""
         self._cards[2].set_value("mi", value)
 
     @property
@@ -813,6 +837,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @kl.setter
     def kl(self, value: float) -> None:
+        """Set the kl property."""
         self._cards[2].set_value("kl", value)
 
     @property
@@ -823,6 +848,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @ml.setter
     def ml(self, value: float) -> None:
+        """Set the ml property."""
         self._cards[2].set_value("ml", value)
 
     @property
@@ -833,6 +859,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @a1s.setter
     def a1s(self, value: float) -> None:
+        """Set the a1s property."""
         self._cards[3].set_value("a1s", value)
 
     @property
@@ -843,6 +870,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @a2s.setter
     def a2s(self, value: float) -> None:
+        """Set the a2s property."""
         self._cards[3].set_value("a2s", value)
 
     @property
@@ -853,6 +881,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @bs.setter
     def bs(self, value: float) -> None:
+        """Set the bs property."""
         self._cards[3].set_value("bs", value)
 
     @property
@@ -863,6 +892,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @cs.setter
     def cs(self, value: float) -> None:
+        """Set the cs property."""
         self._cards[3].set_value("cs", value)
 
     @property
@@ -873,6 +903,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @ks.setter
     def ks(self, value: float) -> None:
+        """Set the ks property."""
         self._cards[3].set_value("ks", value)
 
     @property
@@ -883,6 +914,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @ms.setter
     def ms(self, value: float) -> None:
+        """Set the ms property."""
         self._cards[3].set_value("ms", value)
 
     @property
@@ -893,6 +925,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @d0l.setter
     def d0l(self, value: float) -> None:
+        """Set the d0l property."""
         self._cards[4].set_value("d0l", value)
 
     @property
@@ -903,6 +936,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @d0m.setter
     def d0m(self, value: float) -> None:
+        """Set the d0m property."""
         self._cards[4].set_value("d0m", value)
 
     @property
@@ -913,6 +947,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[5].set_value("xp", value)
 
     @property
@@ -923,6 +958,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[5].set_value("yp", value)
 
     @property
@@ -933,6 +969,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[5].set_value("zp", value)
 
     @property
@@ -943,6 +980,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[5].set_value("a1", value)
 
     @property
@@ -953,6 +991,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[5].set_value("a2", value)
 
     @property
@@ -963,6 +1002,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[5].set_value("a3", value)
 
     @property
@@ -981,8 +1021,9 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -2, -3, -4, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-2,-3,-4}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-2,-3,-4}.""")
         self._cards[5].set_value("macf", value)
 
     @property
@@ -993,6 +1034,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[6].set_value("v1", value)
 
     @property
@@ -1003,6 +1045,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[6].set_value("v2", value)
 
     @property
@@ -1013,6 +1056,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[6].set_value("v3", value)
 
     @property
@@ -1023,6 +1067,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[6].set_value("d1", value)
 
     @property
@@ -1033,6 +1078,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[6].set_value("d2", value)
 
     @property
@@ -1043,6 +1089,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[6].set_value("d3", value)
 
     @property
@@ -1053,6 +1100,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[6].set_value("beta", value)
 
     @property
@@ -1065,6 +1113,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
+        """Set the ref property."""
         self._cards[6].set_value("ref", value)
 
     @property
@@ -1075,6 +1124,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n11.setter
     def n11(self, value: float) -> None:
+        """Set the n11 property."""
         self._cards[7].set_value("n11", value)
 
     @property
@@ -1085,6 +1135,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n22.setter
     def n22(self, value: float) -> None:
+        """Set the n22 property."""
         self._cards[7].set_value("n22", value)
 
     @property
@@ -1095,6 +1146,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n33.setter
     def n33(self, value: float) -> None:
+        """Set the n33 property."""
         self._cards[7].set_value("n33", value)
 
     @property
@@ -1105,6 +1157,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n44.setter
     def n44(self, value: float) -> None:
+        """Set the n44 property."""
         self._cards[7].set_value("n44", value)
 
     @property
@@ -1115,6 +1168,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n55.setter
     def n55(self, value: float) -> None:
+        """Set the n55 property."""
         self._cards[7].set_value("n55", value)
 
     @property
@@ -1125,6 +1179,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n66.setter
     def n66(self, value: float) -> None:
+        """Set the n66 property."""
         self._cards[7].set_value("n66", value)
 
     @property
@@ -1135,6 +1190,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n12.setter
     def n12(self, value: float) -> None:
+        """Set the n12 property."""
         self._cards[7].set_value("n12", value)
 
     @property
@@ -1145,6 +1201,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n23.setter
     def n23(self, value: float) -> None:
+        """Set the n23 property."""
         self._cards[7].set_value("n23", value)
 
     @property
@@ -1155,6 +1212,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n34.setter
     def n34(self, value: float) -> None:
+        """Set the n34 property."""
         self._cards[8].set_value("n34", value)
 
     @property
@@ -1165,6 +1223,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n45.setter
     def n45(self, value: float) -> None:
+        """Set the n45 property."""
         self._cards[8].set_value("n45", value)
 
     @property
@@ -1175,6 +1234,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n56.setter
     def n56(self, value: float) -> None:
+        """Set the n56 property."""
         self._cards[8].set_value("n56", value)
 
     @property
@@ -1185,6 +1245,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n13.setter
     def n13(self, value: float) -> None:
+        """Set the n13 property."""
         self._cards[8].set_value("n13", value)
 
     @property
@@ -1195,6 +1256,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n24.setter
     def n24(self, value: float) -> None:
+        """Set the n24 property."""
         self._cards[8].set_value("n24", value)
 
     @property
@@ -1205,6 +1267,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n35.setter
     def n35(self, value: float) -> None:
+        """Set the n35 property."""
         self._cards[8].set_value("n35", value)
 
     @property
@@ -1215,6 +1278,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n46.setter
     def n46(self, value: float) -> None:
+        """Set the n46 property."""
         self._cards[8].set_value("n46", value)
 
     @property
@@ -1225,6 +1289,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n14.setter
     def n14(self, value: float) -> None:
+        """Set the n14 property."""
         self._cards[8].set_value("n14", value)
 
     @property
@@ -1235,6 +1300,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n25.setter
     def n25(self, value: float) -> None:
+        """Set the n25 property."""
         self._cards[9].set_value("n25", value)
 
     @property
@@ -1245,6 +1311,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n36.setter
     def n36(self, value: float) -> None:
+        """Set the n36 property."""
         self._cards[9].set_value("n36", value)
 
     @property
@@ -1255,6 +1322,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n15.setter
     def n15(self, value: float) -> None:
+        """Set the n15 property."""
         self._cards[9].set_value("n15", value)
 
     @property
@@ -1265,6 +1333,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n26.setter
     def n26(self, value: float) -> None:
+        """Set the n26 property."""
         self._cards[9].set_value("n26", value)
 
     @property
@@ -1275,6 +1344,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @n16.setter
     def n16(self, value: float) -> None:
+        """Set the n16 property."""
         self._cards[9].set_value("n16", value)
 
     @property
@@ -1285,5 +1355,6 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[10].cards[0].set_value("title", value)
 

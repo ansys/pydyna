@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
     subkeyword = "VOLUME_FRACTION_GEOMETRY"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -503,6 +505,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @fmsid.setter
     def fmsid(self, value: int) -> None:
+        """Set the fmsid property."""
         self._cards[0].set_value("fmsid", value)
 
     @property
@@ -515,8 +518,9 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @fmidtyp.setter
     def fmidtyp(self, value: int) -> None:
+        """Set the fmidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""fmidtyp must be `None` or one of {0,1}""")
+            raise Exception("""fmidtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("fmidtyp", value)
 
     @property
@@ -527,6 +531,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @bammg.setter
     def bammg(self, value: int) -> None:
+        """Set the bammg property."""
         self._cards[0].set_value("bammg", value)
 
     @property
@@ -537,6 +542,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @ntrace.setter
     def ntrace(self, value: int) -> None:
+        """Set the ntrace property."""
         self._cards[0].set_value("ntrace", value)
 
     @property
@@ -556,8 +562,9 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @conttyp.setter
     def conttyp(self, value: int) -> None:
+        """Set the conttyp property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""conttyp must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""conttyp must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("conttyp", value)
 
     @property
@@ -570,8 +577,9 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @fillopt.setter
     def fillopt(self, value: int) -> None:
+        """Set the fillopt property."""
         if value not in [0, 1, None]:
-            raise Exception("""fillopt must be `None` or one of {0,1}""")
+            raise Exception("""fillopt must be `None` or one of {0,1}.""")
         self._cards[1].set_value("fillopt", value)
 
     @property
@@ -583,6 +591,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @fammg.setter
     def fammg(self, value: int) -> None:
+        """Set the fammg property."""
         self._cards[1].set_value("fammg", value)
 
     @property
@@ -593,6 +602,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[1].set_value("vx", value)
 
     @property
@@ -603,6 +613,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[1].set_value("vy", value)
 
     @property
@@ -613,6 +624,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[1].set_value("vz", value)
 
     @property
@@ -623,6 +635,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[2].set_value("sid", value)
 
     @property
@@ -635,8 +648,9 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, None]:
-            raise Exception("""stype must be `None` or one of {0,1}""")
+            raise Exception("""stype must be `None` or one of {0,1}.""")
         self._cards[2].set_value("stype", value)
 
     @property
@@ -647,6 +661,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @normdir.setter
     def normdir(self, value: int) -> None:
+        """Set the normdir property."""
         self._cards[2].set_value("normdir", value)
 
     @property
@@ -660,6 +675,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @xoffset.setter
     def xoffset(self, value: float) -> None:
+        """Set the xoffset property."""
         self._cards[2].set_value("xoffset", value)
 
     @property
@@ -670,6 +686,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @sgsid_.setter
     def sgsid_(self, value: int) -> None:
+        """Set the sgsid_ property."""
         self._cards[3].set_value("sgsid ", value)
 
     @property
@@ -680,6 +697,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @normdir.setter
     def normdir(self, value: int) -> None:
+        """Set the normdir property."""
         self._cards[3].set_value("normdir", value)
 
     @property
@@ -693,6 +711,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @xoffset.setter
     def xoffset(self, value: float) -> None:
+        """Set the xoffset property."""
         self._cards[3].set_value("xoffset", value)
 
     @property
@@ -703,6 +722,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[4].set_value("x0", value)
 
     @property
@@ -713,6 +733,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[4].set_value("y0", value)
 
     @property
@@ -723,6 +744,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[4].set_value("z0", value)
 
     @property
@@ -733,6 +755,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @xcos.setter
     def xcos(self, value: float) -> None:
+        """Set the xcos property."""
         self._cards[4].set_value("xcos", value)
 
     @property
@@ -743,6 +766,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @ycos.setter
     def ycos(self, value: float) -> None:
+        """Set the ycos property."""
         self._cards[4].set_value("ycos", value)
 
     @property
@@ -753,6 +777,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @zcos.setter
     def zcos(self, value: float) -> None:
+        """Set the zcos property."""
         self._cards[4].set_value("zcos", value)
 
     @property
@@ -763,6 +788,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[5].set_value("x0", value)
 
     @property
@@ -773,6 +799,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[5].set_value("y0", value)
 
     @property
@@ -783,6 +810,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[5].set_value("z0", value)
 
     @property
@@ -793,6 +821,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[5].set_value("x1", value)
 
     @property
@@ -803,6 +832,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[5].set_value("y1", value)
 
     @property
@@ -813,6 +843,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[5].set_value("z1", value)
 
     @property
@@ -823,6 +854,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[5].set_value("r1", value)
 
     @property
@@ -833,6 +865,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[5].set_value("r2", value)
 
     @property
@@ -843,6 +876,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[6].set_value("x0", value)
 
     @property
@@ -853,6 +887,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[6].set_value("y0", value)
 
     @property
@@ -863,6 +898,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[6].set_value("z0", value)
 
     @property
@@ -873,6 +909,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[6].set_value("x1", value)
 
     @property
@@ -883,6 +920,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[6].set_value("y1", value)
 
     @property
@@ -893,6 +931,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[6].set_value("z1", value)
 
     @property
@@ -905,6 +944,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @lcsid.setter
     def lcsid(self, value: int) -> None:
+        """Set the lcsid property."""
         self._cards[6].set_value("lcsid", value)
 
     @property
@@ -915,6 +955,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[7].set_value("x0", value)
 
     @property
@@ -925,6 +966,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[7].set_value("y0", value)
 
     @property
@@ -935,6 +977,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[7].set_value("z0", value)
 
     @property
@@ -945,5 +988,6 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @r0.setter
     def r0(self, value: float) -> None:
+        """Set the r0 property."""
         self._cards[7].set_value("r0", value)
 

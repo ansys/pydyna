@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementSeatbelt(KeywordBase):
     subkeyword = "SEATBELT"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -104,6 +106,7 @@ class ElementSeatbelt(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -114,6 +117,7 @@ class ElementSeatbelt(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -124,6 +128,7 @@ class ElementSeatbelt(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -134,6 +139,7 @@ class ElementSeatbelt(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -144,6 +150,7 @@ class ElementSeatbelt(KeywordBase):
 
     @sbrid.setter
     def sbrid(self, value: int) -> None:
+        """Set the sbrid property."""
         self._cards[0].set_value("sbrid", value)
 
     @property
@@ -154,6 +161,7 @@ class ElementSeatbelt(KeywordBase):
 
     @slen.setter
     def slen(self, value: float) -> None:
+        """Set the slen property."""
         self._cards[0].set_value("slen", value)
 
     @property
@@ -164,6 +172,7 @@ class ElementSeatbelt(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -174,5 +183,6 @@ class ElementSeatbelt(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[0].set_value("n4", value)
 

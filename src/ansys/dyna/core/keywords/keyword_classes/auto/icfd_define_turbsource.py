@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdDefineTurbsource(KeywordBase):
     subkeyword = "DEFINE_TURBSOURCE"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -104,6 +106,7 @@ class IcfdDefineTurbsource(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -114,6 +117,7 @@ class IcfdDefineTurbsource(KeywordBase):
 
     @lcidx.setter
     def lcidx(self, value: int) -> None:
+        """Set the lcidx property."""
         self._cards[0].set_value("lcidx", value)
 
     @property
@@ -124,6 +128,7 @@ class IcfdDefineTurbsource(KeywordBase):
 
     @lcidy.setter
     def lcidy(self, value: int) -> None:
+        """Set the lcidy property."""
         self._cards[0].set_value("lcidy", value)
 
     @property
@@ -134,6 +139,7 @@ class IcfdDefineTurbsource(KeywordBase):
 
     @lcidz.setter
     def lcidz(self, value: int) -> None:
+        """Set the lcidz property."""
         self._cards[0].set_value("lcidz", value)
 
     @property
@@ -147,8 +153,9 @@ class IcfdDefineTurbsource(KeywordBase):
 
     @shape.setter
     def shape(self, value: int) -> None:
+        """Set the shape property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""shape must be `None` or one of {1,2,3}""")
+            raise Exception("""shape must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("shape", value)
 
     @property
@@ -159,6 +166,7 @@ class IcfdDefineTurbsource(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[0].set_value("r", value)
 
     @property
@@ -169,6 +177,7 @@ class IcfdDefineTurbsource(KeywordBase):
 
     @ptid1.setter
     def ptid1(self, value: int) -> None:
+        """Set the ptid1 property."""
         self._cards[0].set_value("ptid1", value)
 
     @property
@@ -179,5 +188,6 @@ class IcfdDefineTurbsource(KeywordBase):
 
     @ptid2.setter
     def ptid2(self, value: int) -> None:
+        """Set the ptid2 property."""
         self._cards[0].set_value("ptid2", value)
 

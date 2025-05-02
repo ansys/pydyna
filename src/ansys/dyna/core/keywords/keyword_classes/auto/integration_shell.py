@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTEGRATION keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IntegrationShell(KeywordBase):
     subkeyword = "SHELL"
 
     def __init__(self, **kwargs):
+        """Initialize the INTEGRATION keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -102,6 +104,7 @@ class IntegrationShell(KeywordBase):
 
     @irid.setter
     def irid(self, value: int) -> None:
+        """Set the irid property."""
         self._cards[0].set_value("irid", value)
 
     @property
@@ -112,6 +115,7 @@ class IntegrationShell(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[0].set_value("nip", value)
 
     @property
@@ -124,8 +128,9 @@ class IntegrationShell(KeywordBase):
 
     @esop.setter
     def esop(self, value: int) -> None:
+        """Set the esop property."""
         if value not in [0, 1, None]:
-            raise Exception("""esop must be `None` or one of {0,1}""")
+            raise Exception("""esop must be `None` or one of {0,1}.""")
         self._cards[0].set_value("esop", value)
 
     @property
@@ -138,8 +143,9 @@ class IntegrationShell(KeywordBase):
 
     @failopt.setter
     def failopt(self, value: int) -> None:
+        """Set the failopt property."""
         if value not in [0, 1, None]:
-            raise Exception("""failopt must be `None` or one of {0,1}""")
+            raise Exception("""failopt must be `None` or one of {0,1}.""")
         self._cards[0].set_value("failopt", value)
 
     @property
@@ -150,6 +156,7 @@ class IntegrationShell(KeywordBase):
 
     @s.setter
     def s(self, value: float) -> None:
+        """Set the s property."""
         self._cards[1].set_value("s", value)
 
     @property
@@ -160,6 +167,7 @@ class IntegrationShell(KeywordBase):
 
     @wf.setter
     def wf(self, value: float) -> None:
+        """Set the wf property."""
         self._cards[1].set_value("wf", value)
 
     @property
@@ -170,5 +178,6 @@ class IntegrationShell(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 

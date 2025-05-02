@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat185(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -180,6 +182,7 @@ class Mat185(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -190,6 +193,7 @@ class Mat185(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -202,8 +206,9 @@ class Mat185(KeywordBase):
 
     @roflg.setter
     def roflg(self, value: float) -> None:
+        """Set the roflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""roflg must be `None` or one of {0,1}""")
+            raise Exception("""roflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("roflg", value)
 
     @property
@@ -217,6 +222,7 @@ class Mat185(KeywordBase):
 
     @intfail.setter
     def intfail(self, value: float) -> None:
+        """Set the intfail property."""
         self._cards[0].set_value("intfail", value)
 
     @property
@@ -227,6 +233,7 @@ class Mat185(KeywordBase):
 
     @sigmax.setter
     def sigmax(self, value: float) -> None:
+        """Set the sigmax property."""
         self._cards[0].set_value("sigmax", value)
 
     @property
@@ -237,6 +244,7 @@ class Mat185(KeywordBase):
 
     @nls.setter
     def nls(self, value: float) -> None:
+        """Set the nls property."""
         self._cards[0].set_value("nls", value)
 
     @property
@@ -247,6 +255,7 @@ class Mat185(KeywordBase):
 
     @tls.setter
     def tls(self, value: float) -> None:
+        """Set the tls property."""
         self._cards[0].set_value("tls", value)
 
     @property
@@ -257,6 +266,7 @@ class Mat185(KeywordBase):
 
     @tls2.setter
     def tls2(self, value: float) -> None:
+        """Set the tls2 property."""
         self._cards[0].set_value("tls2", value)
 
     @property
@@ -267,6 +277,7 @@ class Mat185(KeywordBase):
 
     @lamda1.setter
     def lamda1(self, value: float) -> None:
+        """Set the lamda1 property."""
         self._cards[1].set_value("lamda1", value)
 
     @property
@@ -277,6 +288,7 @@ class Mat185(KeywordBase):
 
     @lamda2.setter
     def lamda2(self, value: float) -> None:
+        """Set the lamda2 property."""
         self._cards[1].set_value("lamda2", value)
 
     @property
@@ -287,6 +299,7 @@ class Mat185(KeywordBase):
 
     @lamdaf.setter
     def lamdaf(self, value: float) -> None:
+        """Set the lamdaf property."""
         self._cards[1].set_value("lamdaf", value)
 
     @property
@@ -297,6 +310,7 @@ class Mat185(KeywordBase):
 
     @stfsf.setter
     def stfsf(self, value: float) -> None:
+        """Set the stfsf property."""
         self._cards[1].set_value("stfsf", value)
 
     @property
@@ -308,8 +322,9 @@ class Mat185(KeywordBase):
 
     @isw.setter
     def isw(self, value: int) -> None:
+        """Set the isw property."""
         if value not in [-1, -2, None]:
-            raise Exception("""isw must be `None` or one of {-1,-2}""")
+            raise Exception("""isw must be `None` or one of {-1,-2}.""")
         self._cards[1].set_value("isw", value)
 
     @property
@@ -320,6 +335,7 @@ class Mat185(KeywordBase):
 
     @alpha1.setter
     def alpha1(self, value: float) -> None:
+        """Set the alpha1 property."""
         self._cards[1].set_value("alpha1", value)
 
     @property
@@ -330,6 +346,7 @@ class Mat185(KeywordBase):
 
     @alpha2.setter
     def alpha2(self, value: float) -> None:
+        """Set the alpha2 property."""
         self._cards[1].set_value("alpha2", value)
 
     @property
@@ -340,5 +357,6 @@ class Mat185(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

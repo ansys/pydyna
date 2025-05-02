@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EOS keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EosUserLibrary(KeywordBase):
     subkeyword = "USER_LIBRARY"
 
     def __init__(self, **kwargs):
+        """Initialize the EOS keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class EosUserLibrary(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -89,6 +92,7 @@ class EosUserLibrary(KeywordBase):
 
     @sesmid.setter
     def sesmid(self, value: int) -> None:
+        """Set the sesmid property."""
         self._cards[0].set_value("sesmid", value)
 
     @property
@@ -99,6 +103,7 @@ class EosUserLibrary(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[1].set_value("e0", value)
 
     @property
@@ -109,5 +114,6 @@ class EosUserLibrary(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[1].set_value("v0", value)
 

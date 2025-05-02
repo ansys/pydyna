@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryTemperatureSet(KeywordBase):
     subkeyword = "TEMPERATURE_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -94,6 +96,7 @@ class BoundaryTemperatureSet(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -105,6 +108,7 @@ class BoundaryTemperatureSet(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -115,6 +119,7 @@ class BoundaryTemperatureSet(KeywordBase):
 
     @cmult.setter
     def cmult(self, value: float) -> None:
+        """Set the cmult property."""
         self._cards[0].set_value("cmult", value)
 
     @property
@@ -127,8 +132,9 @@ class BoundaryTemperatureSet(KeywordBase):
 
     @loc.setter
     def loc(self, value: int) -> None:
+        """Set the loc property."""
         if value not in [0, -1, 1, None]:
-            raise Exception("""loc must be `None` or one of {0,-1,1}""")
+            raise Exception("""loc must be `None` or one of {0,-1,1}.""")
         self._cards[0].set_value("loc", value)
 
     @property
@@ -139,6 +145,7 @@ class BoundaryTemperatureSet(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -149,5 +156,6 @@ class BoundaryTemperatureSet(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 

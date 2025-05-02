@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
     subkeyword = "RIGID_BODY_INSERT"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -129,6 +131,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -139,6 +142,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @pidl.setter
     def pidl(self, value: int) -> None:
+        """Set the pidl property."""
         self._cards[0].set_value("pidl", value)
 
     @property
@@ -149,6 +153,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @pidc.setter
     def pidc(self, value: int) -> None:
+        """Set the pidc property."""
         self._cards[0].set_value("pidc", value)
 
     @property
@@ -159,6 +164,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @coordid.setter
     def coordid(self, value: int) -> None:
+        """Set the coordid property."""
         self._cards[0].set_value("coordid", value)
 
     @property
@@ -172,8 +178,9 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
+        """Set the idir property."""
         if value not in [3, 0, 1, 2, None]:
-            raise Exception("""idir must be `None` or one of {3,0,1,2}""")
+            raise Exception("""idir must be `None` or one of {3,0,1,2}.""")
         self._cards[0].set_value("idir", value)
 
     @property
@@ -188,8 +195,9 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @mflag.setter
     def mflag(self, value: int) -> None:
+        """Set the mflag property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""mflag must be `None` or one of {0,1,2,3}""")
+            raise Exception("""mflag must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("mflag", value)
 
     @property
@@ -200,6 +208,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @mcid.setter
     def mcid(self, value: int) -> None:
+        """Set the mcid property."""
         self._cards[1].set_value("mcid", value)
 
     @property
@@ -210,6 +219,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @deathm.setter
     def deathm(self, value: float) -> None:
+        """Set the deathm property."""
         self._cards[1].set_value("deathm", value)
 
     @property
@@ -220,6 +230,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @partb.setter
     def partb(self, value: int) -> None:
+        """Set the partb property."""
         self._cards[2].set_value("partb", value)
 
     @property
@@ -230,5 +241,6 @@ class ConstrainedRigidBodyInsert(KeywordBase):
 
     @deathb.setter
     def deathb(self, value: float) -> None:
+        """Set the deathb property."""
         self._cards[2].set_value("deathb", value)
 

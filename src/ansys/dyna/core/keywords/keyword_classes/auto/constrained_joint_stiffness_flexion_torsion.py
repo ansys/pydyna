@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
     subkeyword = "JOINT_STIFFNESS_FLEXION-TORSION"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -206,6 +208,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @jsid.setter
     def jsid(self, value: int) -> None:
+        """Set the jsid property."""
         self._cards[0].set_value("jsid", value)
 
     @property
@@ -216,6 +219,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @pida.setter
     def pida(self, value: int) -> None:
+        """Set the pida property."""
         self._cards[0].set_value("pida", value)
 
     @property
@@ -226,6 +230,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @pidb.setter
     def pidb(self, value: int) -> None:
+        """Set the pidb property."""
         self._cards[0].set_value("pidb", value)
 
     @property
@@ -236,6 +241,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @cida.setter
     def cida(self, value: int) -> None:
+        """Set the cida property."""
         self._cards[0].set_value("cida", value)
 
     @property
@@ -247,6 +253,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @cidb.setter
     def cidb(self, value: int) -> None:
+        """Set the cidb property."""
         self._cards[0].set_value("cidb", value)
 
     @property
@@ -257,6 +264,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @jid.setter
     def jid(self, value: int) -> None:
+        """Set the jid property."""
         self._cards[0].set_value("jid", value)
 
     @property
@@ -268,6 +276,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @lcidal.setter
     def lcidal(self, value: int) -> None:
+        """Set the lcidal property."""
         self._cards[1].set_value("lcidal", value)
 
     @property
@@ -279,6 +288,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @lcidg.setter
     def lcidg(self, value: int) -> None:
+        """Set the lcidg property."""
         self._cards[1].set_value("lcidg", value)
 
     @property
@@ -290,6 +300,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @lcidbt.setter
     def lcidbt(self, value: int) -> None:
+        """Set the lcidbt property."""
         self._cards[1].set_value("lcidbt", value)
 
     @property
@@ -301,6 +312,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @dlcidal.setter
     def dlcidal(self, value: int) -> None:
+        """Set the dlcidal property."""
         self._cards[1].set_value("dlcidal", value)
 
     @property
@@ -312,6 +324,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @dlcidg.setter
     def dlcidg(self, value: int) -> None:
+        """Set the dlcidg property."""
         self._cards[1].set_value("dlcidg", value)
 
     @property
@@ -323,6 +336,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @dlcidbt.setter
     def dlcidbt(self, value: int) -> None:
+        """Set the dlcidbt property."""
         self._cards[1].set_value("dlcidbt", value)
 
     @property
@@ -334,6 +348,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @esal.setter
     def esal(self, value: float) -> None:
+        """Set the esal property."""
         self._cards[2].set_value("esal", value)
 
     @property
@@ -344,6 +359,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @fmal.setter
     def fmal(self, value: float) -> None:
+        """Set the fmal property."""
         self._cards[2].set_value("fmal", value)
 
     @property
@@ -355,6 +371,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @esbt.setter
     def esbt(self, value: float) -> None:
+        """Set the esbt property."""
         self._cards[2].set_value("esbt", value)
 
     @property
@@ -365,6 +382,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @fmbt.setter
     def fmbt(self, value: float) -> None:
+        """Set the fmbt property."""
         self._cards[2].set_value("fmbt", value)
 
     @property
@@ -376,6 +394,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @saal.setter
     def saal(self, value: float) -> None:
+        """Set the saal property."""
         self._cards[3].set_value("saal", value)
 
     @property
@@ -387,6 +406,7 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @nsabt.setter
     def nsabt(self, value: float) -> None:
+        """Set the nsabt property."""
         self._cards[3].set_value("nsabt", value)
 
     @property
@@ -398,5 +418,6 @@ class ConstrainedJointStiffnessFlexionTorsion(KeywordBase):
 
     @psabt.setter
     def psabt(self, value: float) -> None:
+        """Set the psabt property."""
         self._cards[3].set_value("psabt", value)
 

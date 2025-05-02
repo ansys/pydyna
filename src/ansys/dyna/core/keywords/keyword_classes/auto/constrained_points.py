@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedPoints(KeywordBase):
     subkeyword = "POINTS"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -160,6 +162,7 @@ class ConstrainedPoints(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -170,6 +173,7 @@ class ConstrainedPoints(KeywordBase):
 
     @eid1.setter
     def eid1(self, value: int) -> None:
+        """Set the eid1 property."""
         self._cards[1].set_value("eid1", value)
 
     @property
@@ -180,6 +184,7 @@ class ConstrainedPoints(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[1].set_value("x1", value)
 
     @property
@@ -190,6 +195,7 @@ class ConstrainedPoints(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[1].set_value("y1", value)
 
     @property
@@ -200,6 +206,7 @@ class ConstrainedPoints(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[1].set_value("z1", value)
 
     @property
@@ -210,6 +217,7 @@ class ConstrainedPoints(KeywordBase):
 
     @eid2.setter
     def eid2(self, value: int) -> None:
+        """Set the eid2 property."""
         self._cards[2].set_value("eid2", value)
 
     @property
@@ -220,6 +228,7 @@ class ConstrainedPoints(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[2].set_value("x2", value)
 
     @property
@@ -230,6 +239,7 @@ class ConstrainedPoints(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[2].set_value("y2", value)
 
     @property
@@ -240,6 +250,7 @@ class ConstrainedPoints(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[2].set_value("z2", value)
 
     @property
@@ -250,6 +261,7 @@ class ConstrainedPoints(KeywordBase):
 
     @psf.setter
     def psf(self, value: float) -> None:
+        """Set the psf property."""
         self._cards[3].set_value("psf", value)
 
     @property
@@ -260,6 +272,7 @@ class ConstrainedPoints(KeywordBase):
 
     @faila.setter
     def faila(self, value: float) -> None:
+        """Set the faila property."""
         self._cards[3].set_value("faila", value)
 
     @property
@@ -270,6 +283,7 @@ class ConstrainedPoints(KeywordBase):
 
     @fails.setter
     def fails(self, value: float) -> None:
+        """Set the fails property."""
         self._cards[3].set_value("fails", value)
 
     @property
@@ -280,5 +294,6 @@ class ConstrainedPoints(KeywordBase):
 
     @failm.setter
     def failm(self, value: float) -> None:
+        """Set the failm property."""
         self._cards[3].set_value("failm", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -147,6 +149,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
 
     @fp.setter
     def fp(self, value: int) -> None:
+        """Set the fp property."""
         self._cards[0].set_value("fp", value)
 
     @property
@@ -157,6 +160,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
 
     @surf.setter
     def surf(self, value: int) -> None:
+        """Set the surf property."""
         self._cards[0].set_value("surf", value)
 
     @property
@@ -169,8 +173,9 @@ class DefineFpToSurfaceCoupling(KeywordBase):
 
     @fptype.setter
     def fptype(self, value: int) -> None:
+        """Set the fptype property."""
         if value not in [0, 1, None]:
-            raise Exception("""fptype must be `None` or one of {0,1}""")
+            raise Exception("""fptype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("fptype", value)
 
     @property
@@ -182,6 +187,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
 
     @surftype.setter
     def surftype(self, value: int) -> None:
+        """Set the surftype property."""
         self._cards[0].set_value("surftype", value)
 
     @property
@@ -194,6 +200,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
 
     @sbc.setter
     def sbc(self, value: int) -> None:
+        """Set the sbc property."""
         self._cards[1].set_value("sbc", value)
 
     @property
@@ -204,6 +211,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
 
     @sca.setter
     def sca(self, value: int) -> None:
+        """Set the sca property."""
         self._cards[1].set_value("sca", value)
 
     @property
@@ -214,6 +222,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
 
     @sfp.setter
     def sfp(self, value: int) -> None:
+        """Set the sfp property."""
         self._cards[1].set_value("sfp", value)
 
     @property
@@ -224,5 +233,6 @@ class DefineFpToSurfaceCoupling(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

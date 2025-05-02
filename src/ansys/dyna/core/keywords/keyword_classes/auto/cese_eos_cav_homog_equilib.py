@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseEosCavHomogEquilib(KeywordBase):
     subkeyword = "EOS_CAV_HOMOG_EQUILIB"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,6 +112,7 @@ class CeseEosCavHomogEquilib(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -120,6 +123,7 @@ class CeseEosCavHomogEquilib(KeywordBase):
 
     @p_vap.setter
     def p_vap(self, value: float) -> None:
+        """Set the p_vap property."""
         self._cards[0].set_value("p_vap", value)
 
     @property
@@ -130,6 +134,7 @@ class CeseEosCavHomogEquilib(KeywordBase):
 
     @p_liq.setter
     def p_liq(self, value: float) -> None:
+        """Set the p_liq property."""
         self._cards[0].set_value("p_liq", value)
 
     @property
@@ -140,6 +145,7 @@ class CeseEosCavHomogEquilib(KeywordBase):
 
     @a_vap.setter
     def a_vap(self, value: float) -> None:
+        """Set the a_vap property."""
         self._cards[0].set_value("a_vap", value)
 
     @property
@@ -150,6 +156,7 @@ class CeseEosCavHomogEquilib(KeywordBase):
 
     @a_liq.setter
     def a_liq(self, value: float) -> None:
+        """Set the a_liq property."""
         self._cards[0].set_value("a_liq", value)
 
     @property
@@ -160,6 +167,7 @@ class CeseEosCavHomogEquilib(KeywordBase):
 
     @u_vap.setter
     def u_vap(self, value: float) -> None:
+        """Set the u_vap property."""
         self._cards[0].set_value("u_vap", value)
 
     @property
@@ -170,6 +178,7 @@ class CeseEosCavHomogEquilib(KeywordBase):
 
     @u_liq.setter
     def u_liq(self, value: float) -> None:
+        """Set the u_liq property."""
         self._cards[0].set_value("u_liq", value)
 
     @property
@@ -180,5 +189,6 @@ class CeseEosCavHomogEquilib(KeywordBase):
 
     @p_sat_vap.setter
     def p_sat_vap(self, value: float) -> None:
+        """Set the p_sat_vap property."""
         self._cards[0].set_value("p_sat_vap", value)
 

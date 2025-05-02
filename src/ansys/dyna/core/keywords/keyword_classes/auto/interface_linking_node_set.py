@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTERFACE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceLinkingNodeSet(KeywordBase):
     subkeyword = "LINKING_NODE_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the INTERFACE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class InterfaceLinkingNodeSet(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -92,6 +95,7 @@ class InterfaceLinkingNodeSet(KeywordBase):
 
     @ifid.setter
     def ifid(self, value: int) -> None:
+        """Set the ifid property."""
         self._cards[0].set_value("ifid", value)
 
     @property
@@ -102,6 +106,7 @@ class InterfaceLinkingNodeSet(KeywordBase):
 
     @fx.setter
     def fx(self, value: int) -> None:
+        """Set the fx property."""
         self._cards[0].set_value("fx", value)
 
     @property
@@ -112,6 +117,7 @@ class InterfaceLinkingNodeSet(KeywordBase):
 
     @fy.setter
     def fy(self, value: int) -> None:
+        """Set the fy property."""
         self._cards[0].set_value("fy", value)
 
     @property
@@ -122,5 +128,6 @@ class InterfaceLinkingNodeSet(KeywordBase):
 
     @fz.setter
     def fz(self, value: int) -> None:
+        """Set the fz property."""
         self._cards[0].set_value("fz", value)
 

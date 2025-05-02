@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat292A(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -182,6 +184,7 @@ class Mat292A(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -192,6 +195,7 @@ class Mat292A(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -202,6 +206,7 @@ class Mat292A(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -212,6 +217,7 @@ class Mat292A(KeywordBase):
 
     @em.setter
     def em(self, value: float) -> None:
+        """Set the em property."""
         self._cards[0].set_value("em", value)
 
     @property
@@ -222,6 +228,7 @@ class Mat292A(KeywordBase):
 
     @vfm.setter
     def vfm(self, value: float) -> None:
+        """Set the vfm property."""
         self._cards[0].set_value("vfm", value)
 
     @property
@@ -232,6 +239,7 @@ class Mat292A(KeywordBase):
 
     @gfm.setter
     def gfm(self, value: float) -> None:
+        """Set the gfm property."""
         self._cards[0].set_value("gfm", value)
 
     @property
@@ -242,6 +250,7 @@ class Mat292A(KeywordBase):
 
     @fopt.setter
     def fopt(self, value: float) -> None:
+        """Set the fopt property."""
         self._cards[1].set_value("fopt", value)
 
     @property
@@ -252,6 +261,7 @@ class Mat292A(KeywordBase):
 
     @fcf.setter
     def fcf(self, value: float) -> None:
+        """Set the fcf property."""
         self._cards[1].set_value("fcf", value)
 
     @property
@@ -262,6 +272,7 @@ class Mat292A(KeywordBase):
 
     @fcm.setter
     def fcm(self, value: float) -> None:
+        """Set the fcm property."""
         self._cards[1].set_value("fcm", value)
 
     @property
@@ -272,6 +283,7 @@ class Mat292A(KeywordBase):
 
     @fcfc.setter
     def fcfc(self, value: float) -> None:
+        """Set the fcfc property."""
         self._cards[1].set_value("fcfc", value)
 
     @property
@@ -282,6 +294,7 @@ class Mat292A(KeywordBase):
 
     @fcmc.setter
     def fcmc(self, value: float) -> None:
+        """Set the fcmc property."""
         self._cards[1].set_value("fcmc", value)
 
     @property
@@ -292,6 +305,7 @@ class Mat292A(KeywordBase):
 
     @fcd.setter
     def fcd(self, value: float) -> None:
+        """Set the fcd property."""
         self._cards[1].set_value("fcd", value)
 
     @property
@@ -302,6 +316,7 @@ class Mat292A(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[2].set_value("v1", value)
 
     @property
@@ -312,6 +327,7 @@ class Mat292A(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[2].set_value("v2", value)
 
     @property
@@ -322,6 +338,7 @@ class Mat292A(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[2].set_value("v3", value)
 
     @property
@@ -332,5 +349,6 @@ class Mat292A(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

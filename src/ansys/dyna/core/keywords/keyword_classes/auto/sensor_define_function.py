@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SENSOR keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorDefineFunction(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SENSOR keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -185,6 +187,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sensid.setter
     def sensid(self, value: int) -> None:
+        """Set the sensid property."""
         self._cards[0].set_value("sensid", value)
 
     @property
@@ -195,6 +198,7 @@ class SensorDefineFunction(KeywordBase):
 
     @func.setter
     def func(self, value: int) -> None:
+        """Set the func property."""
         self._cards[0].set_value("func", value)
 
     @property
@@ -208,6 +212,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sens1.setter
     def sens1(self, value: int) -> None:
+        """Set the sens1 property."""
         self._cards[0].set_value("sens1", value)
 
     @property
@@ -218,6 +223,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sens2.setter
     def sens2(self, value: int) -> None:
+        """Set the sens2 property."""
         self._cards[0].set_value("sens2", value)
 
     @property
@@ -228,6 +234,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sens3.setter
     def sens3(self, value: int) -> None:
+        """Set the sens3 property."""
         self._cards[0].set_value("sens3", value)
 
     @property
@@ -238,6 +245,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sens4.setter
     def sens4(self, value: int) -> None:
+        """Set the sens4 property."""
         self._cards[0].set_value("sens4", value)
 
     @property
@@ -248,6 +256,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sens5.setter
     def sens5(self, value: int) -> None:
+        """Set the sens5 property."""
         self._cards[0].set_value("sens5", value)
 
     @property
@@ -258,6 +267,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sens6.setter
     def sens6(self, value: int) -> None:
+        """Set the sens6 property."""
         self._cards[0].set_value("sens6", value)
 
     @property
@@ -268,6 +278,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sensi.setter
     def sensi(self, value: int) -> None:
+        """Set the sensi property."""
         self._cards[1].set_value("sensi", value)
 
     @property
@@ -278,6 +289,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sensi_1.setter
     def sensi_1(self, value: int) -> None:
+        """Set the sensi_1 property."""
         self._cards[1].set_value("sensi+1", value)
 
     @property
@@ -288,6 +300,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sensi_2.setter
     def sensi_2(self, value: int) -> None:
+        """Set the sensi_2 property."""
         self._cards[1].set_value("sensi+2", value)
 
     @property
@@ -298,6 +311,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sensi_3.setter
     def sensi_3(self, value: int) -> None:
+        """Set the sensi_3 property."""
         self._cards[1].set_value("sensi+3", value)
 
     @property
@@ -308,6 +322,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sensi_4.setter
     def sensi_4(self, value: int) -> None:
+        """Set the sensi_4 property."""
         self._cards[1].set_value("sensi+4", value)
 
     @property
@@ -318,6 +333,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sensi_5.setter
     def sensi_5(self, value: int) -> None:
+        """Set the sensi_5 property."""
         self._cards[1].set_value("sensi+5", value)
 
     @property
@@ -328,6 +344,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sensi_6.setter
     def sensi_6(self, value: int) -> None:
+        """Set the sensi_6 property."""
         self._cards[1].set_value("sensi+6", value)
 
     @property
@@ -338,6 +355,7 @@ class SensorDefineFunction(KeywordBase):
 
     @sensi_7.setter
     def sensi_7(self, value: int) -> None:
+        """Set the sensi_7 property."""
         self._cards[1].set_value("sensi+7", value)
 
     @property
@@ -348,5 +366,6 @@ class SensorDefineFunction(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

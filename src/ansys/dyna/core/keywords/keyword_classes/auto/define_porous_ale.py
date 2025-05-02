@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefinePorousAle(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -277,6 +279,7 @@ class DefinePorousAle(KeywordBase):
 
     @eidbeg.setter
     def eidbeg(self, value: int) -> None:
+        """Set the eidbeg property."""
         self._cards[0].set_value("eidbeg", value)
 
     @property
@@ -292,6 +295,7 @@ class DefinePorousAle(KeywordBase):
 
     @eidend.setter
     def eidend(self, value: int) -> None:
+        """Set the eidend property."""
         self._cards[0].set_value("eidend", value)
 
     @property
@@ -310,8 +314,9 @@ class DefinePorousAle(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
+        """Set the local property."""
         if value not in [0, 1, None]:
-            raise Exception("""local must be `None` or one of {0,1}""")
+            raise Exception("""local must be `None` or one of {0,1}.""")
         self._cards[0].set_value("local", value)
 
     @property
@@ -327,6 +332,7 @@ class DefinePorousAle(KeywordBase):
 
     @vecid1.setter
     def vecid1(self, value: int) -> None:
+        """Set the vecid1 property."""
         self._cards[0].set_value("vecid1", value)
 
     @property
@@ -342,6 +348,7 @@ class DefinePorousAle(KeywordBase):
 
     @vecid2.setter
     def vecid2(self, value: int) -> None:
+        """Set the vecid2 property."""
         self._cards[0].set_value("vecid2", value)
 
     @property
@@ -353,6 +360,7 @@ class DefinePorousAle(KeywordBase):
 
     @userdef.setter
     def userdef(self, value: int) -> None:
+        """Set the userdef property."""
         self._cards[0].set_value("userdef", value)
 
     @property
@@ -363,6 +371,7 @@ class DefinePorousAle(KeywordBase):
 
     @axx.setter
     def axx(self, value: float) -> None:
+        """Set the axx property."""
         self._cards[1].set_value("axx", value)
 
     @property
@@ -373,6 +382,7 @@ class DefinePorousAle(KeywordBase):
 
     @axy.setter
     def axy(self, value: float) -> None:
+        """Set the axy property."""
         self._cards[1].set_value("axy", value)
 
     @property
@@ -383,6 +393,7 @@ class DefinePorousAle(KeywordBase):
 
     @axz.setter
     def axz(self, value: float) -> None:
+        """Set the axz property."""
         self._cards[1].set_value("axz", value)
 
     @property
@@ -393,6 +404,7 @@ class DefinePorousAle(KeywordBase):
 
     @bxx.setter
     def bxx(self, value: float) -> None:
+        """Set the bxx property."""
         self._cards[1].set_value("bxx", value)
 
     @property
@@ -403,6 +415,7 @@ class DefinePorousAle(KeywordBase):
 
     @bxy.setter
     def bxy(self, value: float) -> None:
+        """Set the bxy property."""
         self._cards[1].set_value("bxy", value)
 
     @property
@@ -413,6 +426,7 @@ class DefinePorousAle(KeywordBase):
 
     @bxz.setter
     def bxz(self, value: float) -> None:
+        """Set the bxz property."""
         self._cards[1].set_value("bxz", value)
 
     @property
@@ -423,6 +437,7 @@ class DefinePorousAle(KeywordBase):
 
     @ayx.setter
     def ayx(self, value: float) -> None:
+        """Set the ayx property."""
         self._cards[2].set_value("ayx", value)
 
     @property
@@ -433,6 +448,7 @@ class DefinePorousAle(KeywordBase):
 
     @ayy.setter
     def ayy(self, value: float) -> None:
+        """Set the ayy property."""
         self._cards[2].set_value("ayy", value)
 
     @property
@@ -443,6 +459,7 @@ class DefinePorousAle(KeywordBase):
 
     @ayz.setter
     def ayz(self, value: float) -> None:
+        """Set the ayz property."""
         self._cards[2].set_value("ayz", value)
 
     @property
@@ -453,6 +470,7 @@ class DefinePorousAle(KeywordBase):
 
     @byx.setter
     def byx(self, value: float) -> None:
+        """Set the byx property."""
         self._cards[2].set_value("byx", value)
 
     @property
@@ -463,6 +481,7 @@ class DefinePorousAle(KeywordBase):
 
     @byy.setter
     def byy(self, value: float) -> None:
+        """Set the byy property."""
         self._cards[2].set_value("byy", value)
 
     @property
@@ -473,6 +492,7 @@ class DefinePorousAle(KeywordBase):
 
     @byz.setter
     def byz(self, value: float) -> None:
+        """Set the byz property."""
         self._cards[2].set_value("byz", value)
 
     @property
@@ -483,6 +503,7 @@ class DefinePorousAle(KeywordBase):
 
     @azx.setter
     def azx(self, value: float) -> None:
+        """Set the azx property."""
         self._cards[3].set_value("azx", value)
 
     @property
@@ -493,6 +514,7 @@ class DefinePorousAle(KeywordBase):
 
     @azy.setter
     def azy(self, value: float) -> None:
+        """Set the azy property."""
         self._cards[3].set_value("azy", value)
 
     @property
@@ -503,6 +525,7 @@ class DefinePorousAle(KeywordBase):
 
     @azz.setter
     def azz(self, value: float) -> None:
+        """Set the azz property."""
         self._cards[3].set_value("azz", value)
 
     @property
@@ -513,6 +536,7 @@ class DefinePorousAle(KeywordBase):
 
     @bzx.setter
     def bzx(self, value: float) -> None:
+        """Set the bzx property."""
         self._cards[3].set_value("bzx", value)
 
     @property
@@ -523,6 +547,7 @@ class DefinePorousAle(KeywordBase):
 
     @bzy.setter
     def bzy(self, value: float) -> None:
+        """Set the bzy property."""
         self._cards[3].set_value("bzy", value)
 
     @property
@@ -533,6 +558,7 @@ class DefinePorousAle(KeywordBase):
 
     @bzz.setter
     def bzz(self, value: float) -> None:
+        """Set the bzz property."""
         self._cards[3].set_value("bzz", value)
 
     @property
@@ -543,5 +569,6 @@ class DefinePorousAle(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

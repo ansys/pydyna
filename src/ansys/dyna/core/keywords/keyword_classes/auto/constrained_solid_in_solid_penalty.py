@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
     subkeyword = "SOLID_IN_SOLID_PENALTY"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -144,6 +146,7 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @coupid.setter
     def coupid(self, value: int) -> None:
+        """Set the coupid property."""
         self._cards[0].set_value("coupid", value)
 
     @property
@@ -154,6 +157,7 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -164,6 +168,7 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @ssidb.setter
     def ssidb(self, value: int) -> None:
+        """Set the ssidb property."""
         self._cards[1].set_value("ssidb", value)
 
     @property
@@ -174,6 +179,7 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @ssida.setter
     def ssida(self, value: int) -> None:
+        """Set the ssida property."""
         self._cards[1].set_value("ssida", value)
 
     @property
@@ -186,8 +192,9 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @bstypb.setter
     def bstypb(self, value: int) -> None:
+        """Set the bstypb property."""
         if value not in [0, 1, None]:
-            raise Exception("""bstypb must be `None` or one of {0,1}""")
+            raise Exception("""bstypb must be `None` or one of {0,1}.""")
         self._cards[1].set_value("bstypb", value)
 
     @property
@@ -200,8 +207,9 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @sstypa.setter
     def sstypa(self, value: int) -> None:
+        """Set the sstypa property."""
         if value not in [0, 1, None]:
-            raise Exception("""sstypa must be `None` or one of {0,1}""")
+            raise Exception("""sstypa must be `None` or one of {0,1}.""")
         self._cards[1].set_value("sstypa", value)
 
     @property
@@ -214,6 +222,7 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @start.setter
     def start(self, value: float) -> None:
+        """Set the start property."""
         self._cards[2].set_value("start", value)
 
     @property
@@ -226,6 +235,7 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @end.setter
     def end(self, value: float) -> None:
+        """Set the end property."""
         self._cards[2].set_value("end", value)
 
     @property
@@ -236,5 +246,6 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
 
     @pssf.setter
     def pssf(self, value: float) -> None:
+        """Set the pssf property."""
         self._cards[2].set_value("pssf", value)
 

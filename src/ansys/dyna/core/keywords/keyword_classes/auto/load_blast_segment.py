@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBlastSegment(KeywordBase):
     subkeyword = "BLAST_SEGMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -105,6 +107,7 @@ class LoadBlastSegment(KeywordBase):
 
     @bid.setter
     def bid(self, value: int) -> None:
+        """Set the bid property."""
         self._cards[0].set_value("bid", value)
 
     @property
@@ -115,6 +118,7 @@ class LoadBlastSegment(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -125,6 +129,7 @@ class LoadBlastSegment(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -135,6 +140,7 @@ class LoadBlastSegment(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -145,6 +151,7 @@ class LoadBlastSegment(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[0].set_value("n4", value)
 
     @property
@@ -155,6 +162,7 @@ class LoadBlastSegment(KeywordBase):
 
     @alepid.setter
     def alepid(self, value: int) -> None:
+        """Set the alepid property."""
         self._cards[0].set_value("alepid", value)
 
     @property
@@ -168,6 +176,7 @@ class LoadBlastSegment(KeywordBase):
 
     @sfnrb.setter
     def sfnrb(self, value: float) -> None:
+        """Set the sfnrb property."""
         self._cards[0].set_value("sfnrb", value)
 
     @property
@@ -178,5 +187,6 @@ class LoadBlastSegment(KeywordBase):
 
     @scalep.setter
     def scalep(self, value: float) -> None:
+        """Set the scalep property."""
         self._cards[0].set_value("scalep", value)
 

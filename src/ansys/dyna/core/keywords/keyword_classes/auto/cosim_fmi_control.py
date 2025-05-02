@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the COSIM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CosimFmiControl(KeywordBase):
     subkeyword = "FMI_CONTROL"
 
     def __init__(self, **kwargs):
+        """Initialize the COSIM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -89,6 +91,7 @@ class CosimFmiControl(KeywordBase):
 
     @appid.setter
     def appid(self, value: str) -> None:
+        """Set the appid property."""
         self._cards[0].set_value("appid", value)
 
     @property
@@ -101,8 +104,9 @@ class CosimFmiControl(KeywordBase):
 
     @opt.setter
     def opt(self, value: str) -> None:
+        """Set the opt property."""
         if value not in ["G", "C", None]:
-            raise Exception("""opt must be `None` or one of {"G","C"}""")
+            raise Exception("""opt must be `None` or one of {"G","C"}.""")
         self._cards[0].set_value("opt", value)
 
     @property
@@ -115,8 +119,9 @@ class CosimFmiControl(KeywordBase):
 
     @mode.setter
     def mode(self, value: str) -> None:
+        """Set the mode property."""
         if value not in ["P", "S", None]:
-            raise Exception("""mode must be `None` or one of {"P","S"}""")
+            raise Exception("""mode must be `None` or one of {"P","S"}.""")
         self._cards[0].set_value("mode", value)
 
     @property
@@ -129,6 +134,7 @@ class CosimFmiControl(KeywordBase):
 
     @fmi.setter
     def fmi(self, value: int) -> None:
+        """Set the fmi property."""
         self._cards[0].set_value("fmi", value)
 
     @property
@@ -139,5 +145,6 @@ class CosimFmiControl(KeywordBase):
 
     @setting.setter
     def setting(self, value: str) -> None:
+        """Set the setting property."""
         self._cards[1].set_value("setting", value)
 

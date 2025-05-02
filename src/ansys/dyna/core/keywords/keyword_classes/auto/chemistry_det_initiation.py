@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CHEMISTRY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryDetInitiation(KeywordBase):
     subkeyword = "DET_INITIATION"
 
     def __init__(self, **kwargs):
+        """Initialize the CHEMISTRY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class ChemistryDetInitiation(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -124,6 +127,7 @@ class ChemistryDetInitiation(KeywordBase):
 
     @compid.setter
     def compid(self, value: int) -> None:
+        """Set the compid property."""
         self._cards[0].set_value("compid", value)
 
     @property
@@ -134,6 +138,7 @@ class ChemistryDetInitiation(KeywordBase):
 
     @nmesh.setter
     def nmesh(self, value: int) -> None:
+        """Set the nmesh property."""
         self._cards[0].set_value("nmesh", value)
 
     @property
@@ -144,6 +149,7 @@ class ChemistryDetInitiation(KeywordBase):
 
     @dlen.setter
     def dlen(self, value: float) -> None:
+        """Set the dlen property."""
         self._cards[0].set_value("dlen", value)
 
     @property
@@ -154,6 +160,7 @@ class ChemistryDetInitiation(KeywordBase):
 
     @cfl.setter
     def cfl(self, value: float) -> None:
+        """Set the cfl property."""
         self._cards[0].set_value("cfl", value)
 
     @property
@@ -164,6 +171,7 @@ class ChemistryDetInitiation(KeywordBase):
 
     @tlimit.setter
     def tlimit(self, value: float) -> None:
+        """Set the tlimit property."""
         self._cards[0].set_value("tlimit", value)
 
     @property
@@ -174,6 +182,7 @@ class ChemistryDetInitiation(KeywordBase):
 
     @xyzd.setter
     def xyzd(self, value: float) -> None:
+        """Set the xyzd property."""
         self._cards[0].set_value("xyzd", value)
 
     @property
@@ -184,6 +193,7 @@ class ChemistryDetInitiation(KeywordBase):
 
     @detdir.setter
     def detdir(self, value: int) -> None:
+        """Set the detdir property."""
         self._cards[0].set_value("detdir", value)
 
     @property
@@ -194,5 +204,6 @@ class ChemistryDetInitiation(KeywordBase):
 
     @file.setter
     def file(self, value: str) -> None:
+        """Set the file property."""
         self._cards[1].set_value("file", value)
 

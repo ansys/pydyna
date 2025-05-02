@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
     subkeyword = "EP_CELLMODEL_TENTUSSCHER"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -579,6 +581,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -589,6 +592,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gas_constant.setter
     def gas_constant(self, value: float) -> None:
+        """Set the gas_constant property."""
         self._cards[1].set_value("r", value)
 
     @property
@@ -599,6 +603,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 
     @property
@@ -609,6 +614,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @faraday_constant.setter
     def faraday_constant(self, value: float) -> None:
+        """Set the faraday_constant property."""
         self._cards[1].set_value("f", value)
 
     @property
@@ -619,6 +625,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @cm.setter
     def cm(self, value: float) -> None:
+        """Set the cm property."""
         self._cards[1].set_value("cm", value)
 
     @property
@@ -629,6 +636,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[1].set_value("vc", value)
 
     @property
@@ -639,6 +647,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @vsr.setter
     def vsr(self, value: float) -> None:
+        """Set the vsr property."""
         self._cards[1].set_value("vsr", value)
 
     @property
@@ -649,6 +658,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @vss.setter
     def vss(self, value: float) -> None:
+        """Set the vss property."""
         self._cards[1].set_value("vss", value)
 
     @property
@@ -659,6 +669,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @pkna.setter
     def pkna(self, value: float) -> None:
+        """Set the pkna property."""
         self._cards[1].set_value("pkna", value)
 
     @property
@@ -669,6 +680,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @ko.setter
     def ko(self, value: float) -> None:
+        """Set the ko property."""
         self._cards[2].set_value("ko", value)
 
     @property
@@ -679,6 +691,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @nao.setter
     def nao(self, value: float) -> None:
+        """Set the nao property."""
         self._cards[2].set_value("nao", value)
 
     @property
@@ -689,6 +702,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @cao.setter
     def cao(self, value: float) -> None:
+        """Set the cao property."""
         self._cards[2].set_value("cao", value)
 
     @property
@@ -699,6 +713,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gk1.setter
     def gk1(self, value: float) -> None:
+        """Set the gk1 property."""
         self._cards[3].set_value("gk1", value)
 
     @property
@@ -709,6 +724,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gkr.setter
     def gkr(self, value: float) -> None:
+        """Set the gkr property."""
         self._cards[3].set_value("gkr", value)
 
     @property
@@ -719,6 +735,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gks.setter
     def gks(self, value: float) -> None:
+        """Set the gks property."""
         self._cards[3].set_value("gks", value)
 
     @property
@@ -729,6 +746,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gna.setter
     def gna(self, value: float) -> None:
+        """Set the gna property."""
         self._cards[3].set_value("gna", value)
 
     @property
@@ -739,6 +757,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gbna.setter
     def gbna(self, value: float) -> None:
+        """Set the gbna property."""
         self._cards[3].set_value("gbna", value)
 
     @property
@@ -749,6 +768,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gcal.setter
     def gcal(self, value: float) -> None:
+        """Set the gcal property."""
         self._cards[3].set_value("gcal", value)
 
     @property
@@ -759,6 +779,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gbca.setter
     def gbca(self, value: float) -> None:
+        """Set the gbca property."""
         self._cards[3].set_value("gbca", value)
 
     @property
@@ -769,6 +790,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gto.setter
     def gto(self, value: float) -> None:
+        """Set the gto property."""
         self._cards[3].set_value("gto", value)
 
     @property
@@ -779,6 +801,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gpca.setter
     def gpca(self, value: float) -> None:
+        """Set the gpca property."""
         self._cards[4].set_value("gpca", value)
 
     @property
@@ -789,6 +812,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gpk.setter
     def gpk(self, value: float) -> None:
+        """Set the gpk property."""
         self._cards[4].set_value("gpk", value)
 
     @property
@@ -799,6 +823,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @pnak.setter
     def pnak(self, value: float) -> None:
+        """Set the pnak property."""
         self._cards[5].set_value("pnak", value)
 
     @property
@@ -809,6 +834,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @km.setter
     def km(self, value: float) -> None:
+        """Set the km property."""
         self._cards[5].set_value("km", value)
 
     @property
@@ -819,6 +845,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @kmna.setter
     def kmna(self, value: float) -> None:
+        """Set the kmna property."""
         self._cards[5].set_value("kmna", value)
 
     @property
@@ -829,6 +856,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @knaca.setter
     def knaca(self, value: float) -> None:
+        """Set the knaca property."""
         self._cards[5].set_value("knaca", value)
 
     @property
@@ -839,6 +867,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @ksat.setter
     def ksat(self, value: float) -> None:
+        """Set the ksat property."""
         self._cards[5].set_value("ksat", value)
 
     @property
@@ -849,6 +878,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[5].set_value("alpha", value)
 
     @property
@@ -859,6 +889,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[5].set_value("gamma", value)
 
     @property
@@ -869,6 +900,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @kmca.setter
     def kmca(self, value: float) -> None:
+        """Set the kmca property."""
         self._cards[5].set_value("kmca", value)
 
     @property
@@ -879,6 +911,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @kmnai.setter
     def kmnai(self, value: float) -> None:
+        """Set the kmnai property."""
         self._cards[6].set_value("kmnai", value)
 
     @property
@@ -889,6 +922,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @kpca.setter
     def kpca(self, value: float) -> None:
+        """Set the kpca property."""
         self._cards[6].set_value("kpca", value)
 
     @property
@@ -899,6 +933,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @k1.setter
     def k1(self, value: float) -> None:
+        """Set the k1 property."""
         self._cards[7].set_value("k1", value)
 
     @property
@@ -909,6 +944,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @k2.setter
     def k2(self, value: float) -> None:
+        """Set the k2 property."""
         self._cards[7].set_value("k2", value)
 
     @property
@@ -919,6 +955,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @k3.setter
     def k3(self, value: float) -> None:
+        """Set the k3 property."""
         self._cards[7].set_value("k3", value)
 
     @property
@@ -929,6 +966,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @k4.setter
     def k4(self, value: float) -> None:
+        """Set the k4 property."""
         self._cards[7].set_value("k4", value)
 
     @property
@@ -939,6 +977,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @ec.setter
     def ec(self, value: float) -> None:
+        """Set the ec property."""
         self._cards[7].set_value("ec", value)
 
     @property
@@ -949,6 +988,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @maxsr.setter
     def maxsr(self, value: float) -> None:
+        """Set the maxsr property."""
         self._cards[7].set_value("maxsr", value)
 
     @property
@@ -959,6 +999,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @minsr.setter
     def minsr(self, value: float) -> None:
+        """Set the minsr property."""
         self._cards[7].set_value("minsr", value)
 
     @property
@@ -969,6 +1010,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @vrel.setter
     def vrel(self, value: float) -> None:
+        """Set the vrel property."""
         self._cards[8].set_value("vrel", value)
 
     @property
@@ -979,6 +1021,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @vleak.setter
     def vleak(self, value: float) -> None:
+        """Set the vleak property."""
         self._cards[8].set_value("vleak", value)
 
     @property
@@ -989,6 +1032,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @vxfer.setter
     def vxfer(self, value: float) -> None:
+        """Set the vxfer property."""
         self._cards[8].set_value("vxfer", value)
 
     @property
@@ -999,6 +1043,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @vmaxup.setter
     def vmaxup(self, value: float) -> None:
+        """Set the vmaxup property."""
         self._cards[8].set_value("vmaxup", value)
 
     @property
@@ -1009,6 +1054,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @kup.setter
     def kup(self, value: float) -> None:
+        """Set the kup property."""
         self._cards[8].set_value("kup", value)
 
     @property
@@ -1019,6 +1065,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @bufc.setter
     def bufc(self, value: float) -> None:
+        """Set the bufc property."""
         self._cards[9].set_value("bufc", value)
 
     @property
@@ -1029,6 +1076,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @kbufc.setter
     def kbufc(self, value: float) -> None:
+        """Set the kbufc property."""
         self._cards[9].set_value("kbufc", value)
 
     @property
@@ -1039,6 +1087,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @bufsr.setter
     def bufsr(self, value: float) -> None:
+        """Set the bufsr property."""
         self._cards[9].set_value("bufsr", value)
 
     @property
@@ -1049,6 +1098,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @kbufsf.setter
     def kbufsf(self, value: float) -> None:
+        """Set the kbufsf property."""
         self._cards[9].set_value("kbufsf", value)
 
     @property
@@ -1059,6 +1109,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @bufss.setter
     def bufss(self, value: float) -> None:
+        """Set the bufss property."""
         self._cards[9].set_value("bufss", value)
 
     @property
@@ -1069,6 +1120,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @kbufss.setter
     def kbufss(self, value: float) -> None:
+        """Set the kbufss property."""
         self._cards[9].set_value("kbufss", value)
 
     @property
@@ -1079,6 +1131,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @v.setter
     def v(self, value: float) -> None:
+        """Set the v property."""
         self._cards[10].set_value("v", value)
 
     @property
@@ -1089,6 +1142,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @ki.setter
     def ki(self, value: float) -> None:
+        """Set the ki property."""
         self._cards[10].set_value("ki", value)
 
     @property
@@ -1099,6 +1153,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @nai.setter
     def nai(self, value: float) -> None:
+        """Set the nai property."""
         self._cards[10].set_value("nai", value)
 
     @property
@@ -1109,6 +1164,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @cai.setter
     def cai(self, value: float) -> None:
+        """Set the cai property."""
         self._cards[10].set_value("cai", value)
 
     @property
@@ -1119,6 +1175,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @cass.setter
     def cass(self, value: float) -> None:
+        """Set the cass property."""
         self._cards[10].set_value("cass", value)
 
     @property
@@ -1129,6 +1186,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @casr.setter
     def casr(self, value: float) -> None:
+        """Set the casr property."""
         self._cards[10].set_value("casr", value)
 
     @property
@@ -1139,6 +1197,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @rpri.setter
     def rpri(self, value: float) -> None:
+        """Set the rpri property."""
         self._cards[10].set_value("rpri", value)
 
     @property
@@ -1149,6 +1208,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @xr1.setter
     def xr1(self, value: float) -> None:
+        """Set the xr1 property."""
         self._cards[11].set_value("xr1", value)
 
     @property
@@ -1159,6 +1219,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @xr2.setter
     def xr2(self, value: float) -> None:
+        """Set the xr2 property."""
         self._cards[11].set_value("xr2", value)
 
     @property
@@ -1169,6 +1230,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @xs.setter
     def xs(self, value: float) -> None:
+        """Set the xs property."""
         self._cards[11].set_value("xs", value)
 
     @property
@@ -1179,6 +1241,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[11].set_value("m", value)
 
     @property
@@ -1189,6 +1252,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[11].set_value("h", value)
 
     @property
@@ -1199,6 +1263,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @j.setter
     def j(self, value: float) -> None:
+        """Set the j property."""
         self._cards[11].set_value("j", value)
 
     @property
@@ -1209,6 +1274,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[11].set_value("d", value)
 
     @property
@@ -1219,6 +1285,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @f.setter
     def f(self, value: float) -> None:
+        """Set the f property."""
         self._cards[11].set_value("f", value)
 
     @property
@@ -1229,6 +1296,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @f2.setter
     def f2(self, value: float) -> None:
+        """Set the f2 property."""
         self._cards[12].set_value("f2", value)
 
     @property
@@ -1239,6 +1307,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @fcass.setter
     def fcass(self, value: float) -> None:
+        """Set the fcass property."""
         self._cards[12].set_value("fcass", value)
 
     @property
@@ -1249,6 +1318,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @s.setter
     def s(self, value: float) -> None:
+        """Set the s property."""
         self._cards[12].set_value("s", value)
 
     @property
@@ -1259,5 +1329,6 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[12].set_value("r", value)
 

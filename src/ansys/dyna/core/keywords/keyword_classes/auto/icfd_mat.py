@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdMat(KeywordBase):
     subkeyword = "MAT"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -169,6 +171,7 @@ class IcfdMat(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -181,6 +184,7 @@ class IcfdMat(KeywordBase):
 
     @flg.setter
     def flg(self, value: int) -> None:
+        """Set the flg property."""
         self._cards[0].set_value("flg", value)
 
     @property
@@ -191,6 +195,7 @@ class IcfdMat(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -201,6 +206,7 @@ class IcfdMat(KeywordBase):
 
     @vis.setter
     def vis(self, value: float) -> None:
+        """Set the vis property."""
         self._cards[0].set_value("vis", value)
 
     @property
@@ -211,6 +217,7 @@ class IcfdMat(KeywordBase):
 
     @st.setter
     def st(self, value: float) -> None:
+        """Set the st property."""
         self._cards[0].set_value("st", value)
 
     @property
@@ -221,6 +228,7 @@ class IcfdMat(KeywordBase):
 
     @stsflcid.setter
     def stsflcid(self, value: int) -> None:
+        """Set the stsflcid property."""
         self._cards[0].set_value("stsflcid", value)
 
     @property
@@ -231,6 +239,7 @@ class IcfdMat(KeywordBase):
 
     @ca.setter
     def ca(self, value: float) -> None:
+        """Set the ca property."""
         self._cards[0].set_value("ca", value)
 
     @property
@@ -241,6 +250,7 @@ class IcfdMat(KeywordBase):
 
     @hc.setter
     def hc(self, value: float) -> None:
+        """Set the hc property."""
         self._cards[1].set_value("hc", value)
 
     @property
@@ -251,6 +261,7 @@ class IcfdMat(KeywordBase):
 
     @tc.setter
     def tc(self, value: float) -> None:
+        """Set the tc property."""
         self._cards[1].set_value("tc", value)
 
     @property
@@ -261,6 +272,7 @@ class IcfdMat(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[1].set_value("beta", value)
 
     @property
@@ -271,6 +283,7 @@ class IcfdMat(KeywordBase):
 
     @prt.setter
     def prt(self, value: float) -> None:
+        """Set the prt property."""
         self._cards[1].set_value("prt", value)
 
     @property
@@ -281,6 +294,7 @@ class IcfdMat(KeywordBase):
 
     @hcsflcid.setter
     def hcsflcid(self, value: int) -> None:
+        """Set the hcsflcid property."""
         self._cards[1].set_value("hcsflcid", value)
 
     @property
@@ -291,6 +305,7 @@ class IcfdMat(KeywordBase):
 
     @tcsflcid.setter
     def tcsflcid(self, value: int) -> None:
+        """Set the tcsflcid property."""
         self._cards[1].set_value("tcsflcid", value)
 
     @property
@@ -301,6 +316,7 @@ class IcfdMat(KeywordBase):
 
     @nnmoid.setter
     def nnmoid(self, value: int) -> None:
+        """Set the nnmoid property."""
         self._cards[2].set_value("nnmoid", value)
 
     @property
@@ -311,5 +327,6 @@ class IcfdMat(KeywordBase):
 
     @pmmoid.setter
     def pmmoid(self, value: int) -> None:
+        """Set the pmmoid property."""
         self._cards[2].set_value("pmmoid", value)
 

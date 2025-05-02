@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitGeneralSpr(KeywordBase):
     subkeyword = "IMPLICIT_GENERAL_SPR"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -117,6 +119,7 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @imflag.setter
     def imflag(self, value: int) -> None:
+        """Set the imflag property."""
         self._cards[0].set_value("imflag", value)
 
     @property
@@ -128,6 +131,7 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @dt0.setter
     def dt0(self, value: float) -> None:
+        """Set the dt0 property."""
         self._cards[0].set_value("dt0", value)
 
     @property
@@ -140,8 +144,9 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @imform.setter
     def imform(self, value: int) -> None:
+        """Set the imform property."""
         if value not in [2, 1, None]:
-            raise Exception("""imform must be `None` or one of {2,1}""")
+            raise Exception("""imform must be `None` or one of {2,1}.""")
         self._cards[0].set_value("imform", value)
 
     @property
@@ -152,6 +157,7 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @nsbs.setter
     def nsbs(self, value: int) -> None:
+        """Set the nsbs property."""
         self._cards[0].set_value("nsbs", value)
 
     @property
@@ -165,8 +171,9 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @igs.setter
     def igs(self, value: int) -> None:
+        """Set the igs property."""
         if value not in [2, 1, None]:
-            raise Exception("""igs must be `None` or one of {2,1}""")
+            raise Exception("""igs must be `None` or one of {2,1}.""")
         self._cards[0].set_value("igs", value)
 
     @property
@@ -179,8 +186,9 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @cnstn.setter
     def cnstn(self, value: int) -> None:
+        """Set the cnstn property."""
         if value not in [0, 1, None]:
-            raise Exception("""cnstn must be `None` or one of {0,1}""")
+            raise Exception("""cnstn must be `None` or one of {0,1}.""")
         self._cards[0].set_value("cnstn", value)
 
     @property
@@ -193,8 +201,9 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
+        """Set the form property."""
         if value not in [0, 1, None]:
-            raise Exception("""form must be `None` or one of {0,1}""")
+            raise Exception("""form must be `None` or one of {0,1}.""")
         self._cards[0].set_value("form", value)
 
     @property
@@ -207,7 +216,8 @@ class ControlImplicitGeneralSpr(KeywordBase):
 
     @zero_v.setter
     def zero_v(self, value: int) -> None:
+        """Set the zero_v property."""
         if value not in [0, 1, None]:
-            raise Exception("""zero_v must be `None` or one of {0,1}""")
+            raise Exception("""zero_v must be `None` or one of {0,1}.""")
         self._cards[0].set_value("zero_v", value)
 

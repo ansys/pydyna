@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CHANGE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChangeThermalParameters(KeywordBase):
     subkeyword = "THERMAL_PARAMETERS"
 
     def __init__(self, **kwargs):
+        """Initialize the CHANGE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -118,8 +120,9 @@ class ChangeThermalParameters(KeywordBase):
 
     @ts.setter
     def ts(self, value: int) -> None:
+        """Set the ts property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ts must be `None` or one of {0,1,2}""")
+            raise Exception("""ts must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("ts", value)
 
     @property
@@ -131,6 +134,7 @@ class ChangeThermalParameters(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -142,6 +146,7 @@ class ChangeThermalParameters(KeywordBase):
 
     @tmin.setter
     def tmin(self, value: float) -> None:
+        """Set the tmin property."""
         self._cards[0].set_value("tmin", value)
 
     @property
@@ -153,6 +158,7 @@ class ChangeThermalParameters(KeywordBase):
 
     @tmax.setter
     def tmax(self, value: float) -> None:
+        """Set the tmax property."""
         self._cards[0].set_value("tmax", value)
 
     @property
@@ -164,6 +170,7 @@ class ChangeThermalParameters(KeywordBase):
 
     @dtemp.setter
     def dtemp(self, value: float) -> None:
+        """Set the dtemp property."""
         self._cards[0].set_value("dtemp", value)
 
     @property
@@ -175,6 +182,7 @@ class ChangeThermalParameters(KeywordBase):
 
     @tscp.setter
     def tscp(self, value: float) -> None:
+        """Set the tscp property."""
         self._cards[0].set_value("tscp", value)
 
     @property
@@ -186,6 +194,7 @@ class ChangeThermalParameters(KeywordBase):
 
     @refmax.setter
     def refmax(self, value: int) -> None:
+        """Set the refmax property."""
         self._cards[1].set_value("refmax", value)
 
     @property
@@ -197,5 +206,6 @@ class ChangeThermalParameters(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[1].set_value("tol", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the NODE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,6 +33,7 @@ class NodeTransform(KeywordBase):
     subkeyword = "TRANSFORM"
 
     def __init__(self, **kwargs):
+        """Initialize the NODE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -70,6 +72,7 @@ class NodeTransform(KeywordBase):
 
     @trsid.setter
     def trsid(self, value: int) -> None:
+        """Set the trsid property."""
         self._cards[0].set_value("trsid", value)
 
     @property
@@ -80,6 +83,7 @@ class NodeTransform(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -92,12 +96,14 @@ class NodeTransform(KeywordBase):
 
     @immed.setter
     def immed(self, value: int) -> None:
+        """Set the immed property."""
         if value not in [0, 1, None]:
-            raise Exception("""immed must be `None` or one of {0,1}""")
+            raise Exception("""immed must be `None` or one of {0,1}.""")
         self._cards[0].set_value("immed", value)
 
     @property
     def trsid_link(self) -> DefineTransformation:
+        """Get the DefineTransformation object for trsid."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TRANSFORMATION"):
@@ -107,5 +113,6 @@ class NodeTransform(KeywordBase):
 
     @trsid_link.setter
     def trsid_link(self, value: DefineTransformation) -> None:
+        """Set the DefineTransformation object for trsid."""
         self.trsid = value.tranid
 

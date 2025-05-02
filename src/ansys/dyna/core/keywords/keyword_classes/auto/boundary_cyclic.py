@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryCyclic(KeywordBase):
     subkeyword = "CYCLIC"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -98,6 +100,7 @@ class BoundaryCyclic(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -108,6 +111,7 @@ class BoundaryCyclic(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -118,6 +122,7 @@ class BoundaryCyclic(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 
     @property
@@ -128,6 +133,7 @@ class BoundaryCyclic(KeywordBase):
 
     @nsid1.setter
     def nsid1(self, value: int) -> None:
+        """Set the nsid1 property."""
         self._cards[0].set_value("nsid1", value)
 
     @property
@@ -138,6 +144,7 @@ class BoundaryCyclic(KeywordBase):
 
     @nsid2.setter
     def nsid2(self, value: int) -> None:
+        """Set the nsid2 property."""
         self._cards[0].set_value("nsid2", value)
 
     @property
@@ -152,8 +159,9 @@ class BoundaryCyclic(KeywordBase):
 
     @iglobal.setter
     def iglobal(self, value: int) -> None:
+        """Set the iglobal property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""iglobal must be `None` or one of {0,1,2,3}""")
+            raise Exception("""iglobal must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("iglobal", value)
 
     @property
@@ -166,7 +174,8 @@ class BoundaryCyclic(KeywordBase):
 
     @isort.setter
     def isort(self, value: int) -> None:
+        """Set the isort property."""
         if value not in [0, 1, None]:
-            raise Exception("""isort must be `None` or one of {0,1}""")
+            raise Exception("""isort must be `None` or one of {0,1}.""")
         self._cards[0].set_value("isort", value)
 

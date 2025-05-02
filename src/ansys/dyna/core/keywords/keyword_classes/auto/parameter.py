@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the PARAMETER keyword."""
 import dataclasses
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
@@ -34,10 +35,12 @@ class Parameter(KeywordBase):
 
     @dataclasses.dataclass
     class Parameter:
+        """Dataclass for Parameter."""
         name: str = None
         val: str = None
 
     def __init__(self, **kwargs):
+        """Initialize the PARAMETER keyword."""
         super().__init__(**kwargs)
         self._cards = [
             SeriesCard(
@@ -51,7 +54,7 @@ class Parameter(KeywordBase):
 
     @property
     def parameters(self) -> SeriesCard:
-        """Parameters."""
+        """Parameters.."""
         return self._cards[0]
 
     @parameters.setter

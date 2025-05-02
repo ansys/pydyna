@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBodyRx(KeywordBase):
     subkeyword = "BODY_RX"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -102,6 +104,7 @@ class LoadBodyRx(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -112,6 +115,7 @@ class LoadBodyRx(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -122,6 +126,7 @@ class LoadBodyRx(KeywordBase):
 
     @lciddr.setter
     def lciddr(self, value: int) -> None:
+        """Set the lciddr property."""
         self._cards[0].set_value("lciddr", value)
 
     @property
@@ -132,6 +137,7 @@ class LoadBodyRx(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -142,6 +148,7 @@ class LoadBodyRx(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -152,6 +159,7 @@ class LoadBodyRx(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 
     @property
@@ -162,5 +170,6 @@ class LoadBodyRx(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppDecompositionRcblog(KeywordBase):
     subkeyword = "MPP_DECOMPOSITION_RCBLOG"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class ControlMppDecompositionRcblog(KeywordBase):
 
     @name.setter
     def name(self, value: str) -> None:
+        """Set the name property."""
         self._cards[0].set_value("name", value)
 

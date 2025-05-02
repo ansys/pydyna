@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveFeedback(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -140,6 +142,7 @@ class DefineCurveFeedback(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -150,6 +153,7 @@ class DefineCurveFeedback(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -160,6 +164,7 @@ class DefineCurveFeedback(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -170,6 +175,7 @@ class DefineCurveFeedback(KeywordBase):
 
     @fldid.setter
     def fldid(self, value: int) -> None:
+        """Set the fldid property."""
         self._cards[0].set_value("fldid", value)
 
     @property
@@ -180,6 +186,7 @@ class DefineCurveFeedback(KeywordBase):
 
     @fsl.setter
     def fsl(self, value: float) -> None:
+        """Set the fsl property."""
         self._cards[1].set_value("fsl", value)
 
     @property
@@ -190,6 +197,7 @@ class DefineCurveFeedback(KeywordBase):
 
     @tsl.setter
     def tsl(self, value: float) -> None:
+        """Set the tsl property."""
         self._cards[1].set_value("tsl", value)
 
     @property
@@ -200,6 +208,7 @@ class DefineCurveFeedback(KeywordBase):
 
     @sff.setter
     def sff(self, value: float) -> None:
+        """Set the sff property."""
         self._cards[1].set_value("sff", value)
 
     @property
@@ -210,6 +219,7 @@ class DefineCurveFeedback(KeywordBase):
 
     @sft.setter
     def sft(self, value: float) -> None:
+        """Set the sft property."""
         self._cards[1].set_value("sft", value)
 
     @property
@@ -220,6 +230,7 @@ class DefineCurveFeedback(KeywordBase):
 
     @bias.setter
     def bias(self, value: float) -> None:
+        """Set the bias property."""
         self._cards[1].set_value("bias", value)
 
     @property
@@ -230,5 +241,6 @@ class DefineCurveFeedback(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SENSOR keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorDefineNodeUpdate(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SENSOR keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -137,6 +139,7 @@ class SensorDefineNodeUpdate(KeywordBase):
 
     @sensid.setter
     def sensid(self, value: int) -> None:
+        """Set the sensid property."""
         self._cards[0].set_value("sensid", value)
 
     @property
@@ -149,6 +152,7 @@ class SensorDefineNodeUpdate(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[0].set_value("node1", value)
 
     @property
@@ -161,6 +165,7 @@ class SensorDefineNodeUpdate(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[0].set_value("node2", value)
 
     @property
@@ -171,6 +176,7 @@ class SensorDefineNodeUpdate(KeywordBase):
 
     @vid.setter
     def vid(self, value: str) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -185,8 +191,9 @@ class SensorDefineNodeUpdate(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: str) -> None:
+        """Set the ctype property."""
         if value not in ["ACC", "VEL", "COORD", "TEMP", None]:
-            raise Exception("""ctype must be `None` or one of {"ACC","VEL","COORD","TEMP"}""")
+            raise Exception("""ctype must be `None` or one of {"ACC","VEL","COORD","TEMP"}.""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -197,6 +204,7 @@ class SensorDefineNodeUpdate(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -207,6 +215,7 @@ class SensorDefineNodeUpdate(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -217,6 +226,7 @@ class SensorDefineNodeUpdate(KeywordBase):
 
     @dtupd.setter
     def dtupd(self, value: float) -> None:
+        """Set the dtupd property."""
         self._cards[1].set_value("dtupd", value)
 
     @property
@@ -227,5 +237,6 @@ class SensorDefineNodeUpdate(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

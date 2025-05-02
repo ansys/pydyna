@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatArupAdhesive(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -374,6 +376,7 @@ class MatArupAdhesive(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -384,6 +387,7 @@ class MatArupAdhesive(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -394,6 +398,7 @@ class MatArupAdhesive(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -404,6 +409,7 @@ class MatArupAdhesive(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -416,6 +422,7 @@ class MatArupAdhesive(KeywordBase):
 
     @tenmax.setter
     def tenmax(self, value: float) -> None:
+        """Set the tenmax property."""
         self._cards[0].set_value("tenmax", value)
 
     @property
@@ -428,6 +435,7 @@ class MatArupAdhesive(KeywordBase):
 
     @gcten.setter
     def gcten(self, value: float) -> None:
+        """Set the gcten property."""
         self._cards[0].set_value("gcten", value)
 
     @property
@@ -440,6 +448,7 @@ class MatArupAdhesive(KeywordBase):
 
     @shrmax.setter
     def shrmax(self, value: float) -> None:
+        """Set the shrmax property."""
         self._cards[0].set_value("shrmax", value)
 
     @property
@@ -452,6 +461,7 @@ class MatArupAdhesive(KeywordBase):
 
     @gcshr.setter
     def gcshr(self, value: float) -> None:
+        """Set the gcshr property."""
         self._cards[0].set_value("gcshr", value)
 
     @property
@@ -462,6 +472,7 @@ class MatArupAdhesive(KeywordBase):
 
     @pwrt.setter
     def pwrt(self, value: float) -> None:
+        """Set the pwrt property."""
         self._cards[1].set_value("pwrt", value)
 
     @property
@@ -472,6 +483,7 @@ class MatArupAdhesive(KeywordBase):
 
     @pwrs.setter
     def pwrs(self, value: float) -> None:
+        """Set the pwrs property."""
         self._cards[1].set_value("pwrs", value)
 
     @property
@@ -484,6 +496,7 @@ class MatArupAdhesive(KeywordBase):
 
     @shrp.setter
     def shrp(self, value: float) -> None:
+        """Set the shrp property."""
         self._cards[1].set_value("shrp", value)
 
     @property
@@ -494,6 +507,7 @@ class MatArupAdhesive(KeywordBase):
 
     @sht_sl.setter
     def sht_sl(self, value: float) -> None:
+        """Set the sht_sl property."""
         self._cards[1].set_value("sht_sl", value)
 
     @property
@@ -504,6 +518,7 @@ class MatArupAdhesive(KeywordBase):
 
     @edot0.setter
     def edot0(self, value: float) -> None:
+        """Set the edot0 property."""
         self._cards[1].set_value("edot0", value)
 
     @property
@@ -514,6 +529,7 @@ class MatArupAdhesive(KeywordBase):
 
     @edot2.setter
     def edot2(self, value: float) -> None:
+        """Set the edot2 property."""
         self._cards[1].set_value("edot2", value)
 
     @property
@@ -527,8 +543,9 @@ class MatArupAdhesive(KeywordBase):
 
     @thkdir.setter
     def thkdir(self, value: float) -> None:
+        """Set the thkdir property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""thkdir must be `None` or one of {0.0,1.0}""")
+            raise Exception("""thkdir must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("thkdir", value)
 
     @property
@@ -542,6 +559,7 @@ class MatArupAdhesive(KeywordBase):
 
     @extra.setter
     def extra(self, value: float) -> None:
+        """Set the extra property."""
         self._cards[1].set_value("extra", value)
 
     @property
@@ -552,6 +570,7 @@ class MatArupAdhesive(KeywordBase):
 
     @tmaxe.setter
     def tmaxe(self, value: float) -> None:
+        """Set the tmaxe property."""
         self._cards[2].set_value("tmaxe", value)
 
     @property
@@ -562,6 +581,7 @@ class MatArupAdhesive(KeywordBase):
 
     @gcte.setter
     def gcte(self, value: float) -> None:
+        """Set the gcte property."""
         self._cards[2].set_value("gcte", value)
 
     @property
@@ -572,6 +592,7 @@ class MatArupAdhesive(KeywordBase):
 
     @smaxe.setter
     def smaxe(self, value: float) -> None:
+        """Set the smaxe property."""
         self._cards[2].set_value("smaxe", value)
 
     @property
@@ -582,6 +603,7 @@ class MatArupAdhesive(KeywordBase):
 
     @gcse.setter
     def gcse(self, value: float) -> None:
+        """Set the gcse property."""
         self._cards[2].set_value("gcse", value)
 
     @property
@@ -592,6 +614,7 @@ class MatArupAdhesive(KeywordBase):
 
     @pwrte.setter
     def pwrte(self, value: float) -> None:
+        """Set the pwrte property."""
         self._cards[2].set_value("pwrte", value)
 
     @property
@@ -602,6 +625,7 @@ class MatArupAdhesive(KeywordBase):
 
     @pwrse.setter
     def pwrse(self, value: float) -> None:
+        """Set the pwrse property."""
         self._cards[2].set_value("pwrse", value)
 
     @property
@@ -612,6 +636,7 @@ class MatArupAdhesive(KeywordBase):
 
     @facet.setter
     def facet(self, value: float) -> None:
+        """Set the facet property."""
         self._cards[3].set_value("facet", value)
 
     @property
@@ -622,6 +647,7 @@ class MatArupAdhesive(KeywordBase):
 
     @facct.setter
     def facct(self, value: float) -> None:
+        """Set the facct property."""
         self._cards[3].set_value("facct", value)
 
     @property
@@ -632,6 +658,7 @@ class MatArupAdhesive(KeywordBase):
 
     @faces.setter
     def faces(self, value: float) -> None:
+        """Set the faces property."""
         self._cards[3].set_value("faces", value)
 
     @property
@@ -642,6 +669,7 @@ class MatArupAdhesive(KeywordBase):
 
     @faccs.setter
     def faccs(self, value: float) -> None:
+        """Set the faccs property."""
         self._cards[3].set_value("faccs", value)
 
     @property
@@ -652,6 +680,7 @@ class MatArupAdhesive(KeywordBase):
 
     @softt.setter
     def softt(self, value: float) -> None:
+        """Set the softt property."""
         self._cards[3].set_value("softt", value)
 
     @property
@@ -662,6 +691,7 @@ class MatArupAdhesive(KeywordBase):
 
     @softs.setter
     def softs(self, value: float) -> None:
+        """Set the softs property."""
         self._cards[3].set_value("softs", value)
 
     @property
@@ -674,6 +704,7 @@ class MatArupAdhesive(KeywordBase):
 
     @sdfac.setter
     def sdfac(self, value: float) -> None:
+        """Set the sdfac property."""
         self._cards[4].set_value("sdfac", value)
 
     @property
@@ -686,6 +717,7 @@ class MatArupAdhesive(KeywordBase):
 
     @sgfac.setter
     def sgfac(self, value: float) -> None:
+        """Set the sgfac property."""
         self._cards[4].set_value("sgfac", value)
 
     @property
@@ -696,6 +728,7 @@ class MatArupAdhesive(KeywordBase):
 
     @sdefac.setter
     def sdefac(self, value: float) -> None:
+        """Set the sdefac property."""
         self._cards[4].set_value("sdefac", value)
 
     @property
@@ -706,6 +739,7 @@ class MatArupAdhesive(KeywordBase):
 
     @sgefac.setter
     def sgefac(self, value: float) -> None:
+        """Set the sgefac property."""
         self._cards[4].set_value("sgefac", value)
 
     @property
@@ -717,6 +751,7 @@ class MatArupAdhesive(KeywordBase):
 
     @bthk.setter
     def bthk(self, value: float) -> None:
+        """Set the bthk property."""
         self._cards[5].set_value("bthk", value)
 
     @property
@@ -729,8 +764,9 @@ class MatArupAdhesive(KeywordBase):
 
     @outfail.setter
     def outfail(self, value: float) -> None:
+        """Set the outfail property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""outfail must be `None` or one of {0.0,1.0}""")
+            raise Exception("""outfail must be `None` or one of {0.0,1.0}.""")
         self._cards[5].set_value("outfail", value)
 
     @property
@@ -743,6 +779,7 @@ class MatArupAdhesive(KeywordBase):
 
     @fsip.setter
     def fsip(self, value: float) -> None:
+        """Set the fsip property."""
         self._cards[5].set_value("fsip", value)
 
     @property
@@ -753,6 +790,7 @@ class MatArupAdhesive(KeywordBase):
 
     @fbr713.setter
     def fbr713(self, value: float) -> None:
+        """Set the fbr713 property."""
         self._cards[5].set_value("fbr713", value)
 
     @property
@@ -765,8 +803,9 @@ class MatArupAdhesive(KeywordBase):
 
     @ele2ns.setter
     def ele2ns(self, value: float) -> None:
+        """Set the ele2ns property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ele2ns must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ele2ns must be `None` or one of {0.0,1.0}.""")
         self._cards[5].set_value("ele2ns", value)
 
     @property
@@ -777,5 +816,6 @@ class MatArupAdhesive(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 

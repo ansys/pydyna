@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -36,6 +37,7 @@ class DefineCurve(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -142,6 +144,7 @@ class DefineCurve(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -155,8 +158,9 @@ class DefineCurve(KeywordBase):
 
     @sidr.setter
     def sidr(self, value: int) -> None:
+        """Set the sidr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sidr must be `None` or one of {0,1,2}""")
+            raise Exception("""sidr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sidr", value)
 
     @property
@@ -168,6 +172,7 @@ class DefineCurve(KeywordBase):
 
     @sfa.setter
     def sfa(self, value: float) -> None:
+        """Set the sfa property."""
         self._cards[0].set_value("sfa", value)
 
     @property
@@ -179,6 +184,7 @@ class DefineCurve(KeywordBase):
 
     @sfo.setter
     def sfo(self, value: float) -> None:
+        """Set the sfo property."""
         self._cards[0].set_value("sfo", value)
 
     @property
@@ -189,6 +195,7 @@ class DefineCurve(KeywordBase):
 
     @offa.setter
     def offa(self, value: float) -> None:
+        """Set the offa property."""
         self._cards[0].set_value("offa", value)
 
     @property
@@ -199,6 +206,7 @@ class DefineCurve(KeywordBase):
 
     @offo.setter
     def offo(self, value: float) -> None:
+        """Set the offo property."""
         self._cards[0].set_value("offo", value)
 
     @property
@@ -214,8 +222,9 @@ class DefineCurve(KeywordBase):
 
     @dattyp.setter
     def dattyp(self, value: int) -> None:
+        """Set the dattyp property."""
         if value not in [0, 1, -2, 6, -100, None]:
-            raise Exception("""dattyp must be `None` or one of {0,1,-2,6,-100}""")
+            raise Exception("""dattyp must be `None` or one of {0,1,-2,6,-100}.""")
         self._cards[0].set_value("dattyp", value)
 
     @property
@@ -226,16 +235,17 @@ class DefineCurve(KeywordBase):
 
     @lcint.setter
     def lcint(self, value: int) -> None:
+        """Set the lcint property."""
         self._cards[0].set_value("lcint", value)
 
     @property
     def curves(self):
-        '''Gets the table of curves'''
+        """Get the table of curves."""
         return self._cards[1].table
 
     @curves.setter
     def curves(self, df):
-        '''sets curves from the dataframe df'''
+        """Set curves from the dataframe df"""
         self._cards[1].table = df
 
     @property
@@ -246,5 +256,6 @@ class DefineCurve(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

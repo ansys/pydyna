@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDePatternOutput(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -213,6 +215,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -224,8 +227,9 @@ class DefineDePatternOutput(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
+        """Set the ptype property."""
         if value not in [0, 1, None]:
-            raise Exception("""ptype must be `None` or one of {0,1}""")
+            raise Exception("""ptype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -236,6 +240,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @xo.setter
     def xo(self, value: float) -> None:
+        """Set the xo property."""
         self._cards[0].set_value("xo", value)
 
     @property
@@ -246,6 +251,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @yo.setter
     def yo(self, value: float) -> None:
+        """Set the yo property."""
         self._cards[0].set_value("yo", value)
 
     @property
@@ -256,6 +262,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @zo.setter
     def zo(self, value: float) -> None:
+        """Set the zo property."""
         self._cards[0].set_value("zo", value)
 
     @property
@@ -266,6 +273,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @xh.setter
     def xh(self, value: float) -> None:
+        """Set the xh property."""
         self._cards[0].set_value("xh", value)
 
     @property
@@ -276,6 +284,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @yh.setter
     def yh(self, value: float) -> None:
+        """Set the yh property."""
         self._cards[0].set_value("yh", value)
 
     @property
@@ -286,6 +295,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @zh.setter
     def zh(self, value: float) -> None:
+        """Set the zh property."""
         self._cards[0].set_value("zh", value)
 
     @property
@@ -296,6 +306,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @nset.setter
     def nset(self, value: int) -> None:
+        """Set the nset property."""
         self._cards[1].set_value("nset", value)
 
     @property
@@ -306,6 +317,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @dist1.setter
     def dist1(self, value: float) -> None:
+        """Set the dist1 property."""
         self._cards[2].set_value("dist1", value)
 
     @property
@@ -316,6 +328,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @dist2.setter
     def dist2(self, value: float) -> None:
+        """Set the dist2 property."""
         self._cards[2].set_value("dist2", value)
 
     @property
@@ -326,6 +339,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @dist3.setter
     def dist3(self, value: float) -> None:
+        """Set the dist3 property."""
         self._cards[2].set_value("dist3", value)
 
     @property
@@ -336,6 +350,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @dist4.setter
     def dist4(self, value: float) -> None:
+        """Set the dist4 property."""
         self._cards[2].set_value("dist4", value)
 
     @property
@@ -346,6 +361,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @dist5.setter
     def dist5(self, value: float) -> None:
+        """Set the dist5 property."""
         self._cards[2].set_value("dist5", value)
 
     @property
@@ -356,6 +372,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @dist6.setter
     def dist6(self, value: float) -> None:
+        """Set the dist6 property."""
         self._cards[2].set_value("dist6", value)
 
     @property
@@ -366,6 +383,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @dist7.setter
     def dist7(self, value: float) -> None:
+        """Set the dist7 property."""
         self._cards[2].set_value("dist7", value)
 
     @property
@@ -376,6 +394,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @dist8.setter
     def dist8(self, value: float) -> None:
+        """Set the dist8 property."""
         self._cards[2].set_value("dist8", value)
 
     @property
@@ -386,5 +405,6 @@ class DefineDePatternOutput(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

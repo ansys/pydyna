@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CHEMISTRY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryControlCsp(KeywordBase):
     subkeyword = "CONTROL_CSP"
 
     def __init__(self, **kwargs):
+        """Initialize the CHEMISTRY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class ChemistryControlCsp(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -91,6 +94,7 @@ class ChemistryControlCsp(KeywordBase):
 
     @ierropt.setter
     def ierropt(self, value: int) -> None:
+        """Set the ierropt property."""
         self._cards[0].set_value("ierropt", value)
 
     @property
@@ -101,6 +105,7 @@ class ChemistryControlCsp(KeywordBase):
 
     @ampl.setter
     def ampl(self, value: float) -> None:
+        """Set the ampl property."""
         self._cards[1].set_value("ampl", value)
 
     @property
@@ -111,5 +116,6 @@ class ChemistryControlCsp(KeywordBase):
 
     @ycut.setter
     def ycut(self, value: float) -> None:
+        """Set the ycut property."""
         self._cards[1].set_value("ycut", value)
 

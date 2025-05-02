@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialAirbagParticlePosition(KeywordBase):
     subkeyword = "AIRBAG_PARTICLE_POSITION"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class InitialAirbagParticlePosition(KeywordBase):
 
     @bag_id.setter
     def bag_id(self, value: int) -> None:
+        """Set the bag_id property."""
         self._cards[0].set_value("bag_id", value)
 
     @property
@@ -96,6 +99,7 @@ class InitialAirbagParticlePosition(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -106,6 +110,7 @@ class InitialAirbagParticlePosition(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -116,5 +121,6 @@ class InitialAirbagParticlePosition(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 

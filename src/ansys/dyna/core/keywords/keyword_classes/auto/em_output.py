@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmOutput(KeywordBase):
     subkeyword = "OUTPUT"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -108,8 +110,9 @@ class EmOutput(KeywordBase):
 
     @mats.setter
     def mats(self, value: int) -> None:
+        """Set the mats property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""mats must be `None` or one of {0,1,2,3}""")
+            raise Exception("""mats must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("mats", value)
 
     @property
@@ -125,8 +128,9 @@ class EmOutput(KeywordBase):
 
     @matf.setter
     def matf(self, value: int) -> None:
+        """Set the matf property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""matf must be `None` or one of {0,1,2,3}""")
+            raise Exception("""matf must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("matf", value)
 
     @property
@@ -141,8 +145,9 @@ class EmOutput(KeywordBase):
 
     @sols.setter
     def sols(self, value: int) -> None:
+        """Set the sols property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sols must be `None` or one of {0,1,2}""")
+            raise Exception("""sols must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sols", value)
 
     @property
@@ -157,8 +162,9 @@ class EmOutput(KeywordBase):
 
     @solf.setter
     def solf(self, value: int) -> None:
+        """Set the solf property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""solf must be `None` or one of {0,1,2}""")
+            raise Exception("""solf must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("solf", value)
 
     @property
@@ -172,8 +178,9 @@ class EmOutput(KeywordBase):
 
     @mesh.setter
     def mesh(self, value: int) -> None:
+        """Set the mesh property."""
         if value not in [0, 1, None]:
-            raise Exception("""mesh must be `None` or one of {0,1}""")
+            raise Exception("""mesh must be `None` or one of {0,1}.""")
         self._cards[0].set_value("mesh", value)
 
     @property
@@ -187,8 +194,9 @@ class EmOutput(KeywordBase):
 
     @mem.setter
     def mem(self, value: int) -> None:
+        """Set the mem property."""
         if value not in [0, 1, None]:
-            raise Exception("""mem must be `None` or one of {0,1}""")
+            raise Exception("""mem must be `None` or one of {0,1}.""")
         self._cards[0].set_value("mem", value)
 
     @property
@@ -202,7 +210,8 @@ class EmOutput(KeywordBase):
 
     @timing.setter
     def timing(self, value: int) -> None:
+        """Set the timing property."""
         if value not in [0, 1, None]:
-            raise Exception("""timing must be `None` or one of {0,1}""")
+            raise Exception("""timing must be `None` or one of {0,1}.""")
         self._cards[0].set_value("timing", value)
 

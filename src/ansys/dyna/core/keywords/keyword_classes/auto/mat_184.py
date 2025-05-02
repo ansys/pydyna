@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat184(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -126,6 +128,7 @@ class Mat184(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -136,6 +139,7 @@ class Mat184(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -148,8 +152,9 @@ class Mat184(KeywordBase):
 
     @roflg.setter
     def roflg(self, value: int) -> None:
+        """Set the roflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""roflg must be `None` or one of {0,1}""")
+            raise Exception("""roflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("roflg", value)
 
     @property
@@ -163,6 +168,7 @@ class Mat184(KeywordBase):
 
     @intfail.setter
     def intfail(self, value: float) -> None:
+        """Set the intfail property."""
         self._cards[0].set_value("intfail", value)
 
     @property
@@ -173,6 +179,7 @@ class Mat184(KeywordBase):
 
     @et.setter
     def et(self, value: float) -> None:
+        """Set the et property."""
         self._cards[0].set_value("et", value)
 
     @property
@@ -183,6 +190,7 @@ class Mat184(KeywordBase):
 
     @en.setter
     def en(self, value: float) -> None:
+        """Set the en property."""
         self._cards[0].set_value("en", value)
 
     @property
@@ -193,6 +201,7 @@ class Mat184(KeywordBase):
 
     @fn_fail.setter
     def fn_fail(self, value: float) -> None:
+        """Set the fn_fail property."""
         self._cards[0].set_value("fn_fail", value)
 
     @property
@@ -203,6 +212,7 @@ class Mat184(KeywordBase):
 
     @ft_fail.setter
     def ft_fail(self, value: float) -> None:
+        """Set the ft_fail property."""
         self._cards[0].set_value("ft_fail", value)
 
     @property
@@ -213,5 +223,6 @@ class Mat184(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

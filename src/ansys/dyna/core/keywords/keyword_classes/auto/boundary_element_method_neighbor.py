@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryElementMethodNeighbor(KeywordBase):
     subkeyword = "ELEMENT_METHOD_NEIGHBOR"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class BoundaryElementMethodNeighbor(KeywordBase):
 
     @nelem.setter
     def nelem(self, value: int) -> None:
+        """Set the nelem property."""
         self._cards[0].set_value("nelem", value)
 
     @property
@@ -92,6 +95,7 @@ class BoundaryElementMethodNeighbor(KeywordBase):
 
     @nabor1.setter
     def nabor1(self, value: int) -> None:
+        """Set the nabor1 property."""
         self._cards[0].set_value("nabor1", value)
 
     @property
@@ -102,6 +106,7 @@ class BoundaryElementMethodNeighbor(KeywordBase):
 
     @nabor2.setter
     def nabor2(self, value: int) -> None:
+        """Set the nabor2 property."""
         self._cards[0].set_value("nabor2", value)
 
     @property
@@ -112,6 +117,7 @@ class BoundaryElementMethodNeighbor(KeywordBase):
 
     @nabor3.setter
     def nabor3(self, value: int) -> None:
+        """Set the nabor3 property."""
         self._cards[0].set_value("nabor3", value)
 
     @property
@@ -122,5 +128,6 @@ class BoundaryElementMethodNeighbor(KeywordBase):
 
     @nabor4.setter
     def nabor4(self, value: int) -> None:
+        """Set the nabor4 property."""
         self._cards[0].set_value("nabor4", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmControlMagent(KeywordBase):
     subkeyword = "CONTROL_MAGENT"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -57,7 +59,8 @@ class EmControlMagent(KeywordBase):
 
     @mcomp.setter
     def mcomp(self, value: int) -> None:
+        """Set the mcomp property."""
         if value not in [0, 1, None]:
-            raise Exception("""mcomp must be `None` or one of {0,1}""")
+            raise Exception("""mcomp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("mcomp", value)
 

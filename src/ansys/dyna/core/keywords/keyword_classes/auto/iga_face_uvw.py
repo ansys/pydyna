@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the IGA keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IgaFaceUvw(KeywordBase):
     subkeyword = "FACE_UVW"
 
     def __init__(self, **kwargs):
+        """Initialize the IGA keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -136,6 +138,7 @@ class IgaFaceUvw(KeywordBase):
 
     @fid.setter
     def fid(self, value: int) -> None:
+        """Set the fid property."""
         self._cards[0].set_value("fid", value)
 
     @property
@@ -146,6 +149,7 @@ class IgaFaceUvw(KeywordBase):
 
     @fxyzid.setter
     def fxyzid(self, value: int) -> None:
+        """Set the fxyzid property."""
         self._cards[0].set_value("fxyzid", value)
 
     @property
@@ -156,6 +160,7 @@ class IgaFaceUvw(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -168,8 +173,9 @@ class IgaFaceUvw(KeywordBase):
 
     @sense.setter
     def sense(self, value: int) -> None:
+        """Set the sense property."""
         if value not in [0, 1, None]:
-            raise Exception("""sense must be `None` or one of {0,1}""")
+            raise Exception("""sense must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sense", value)
 
     @property
@@ -180,6 +186,7 @@ class IgaFaceUvw(KeywordBase):
 
     @brid1.setter
     def brid1(self, value: int) -> None:
+        """Set the brid1 property."""
         self._cards[1].set_value("brid1", value)
 
     @property
@@ -190,6 +197,7 @@ class IgaFaceUvw(KeywordBase):
 
     @brid2.setter
     def brid2(self, value: int) -> None:
+        """Set the brid2 property."""
         self._cards[1].set_value("brid2", value)
 
     @property
@@ -200,6 +208,7 @@ class IgaFaceUvw(KeywordBase):
 
     @brid3.setter
     def brid3(self, value: int) -> None:
+        """Set the brid3 property."""
         self._cards[1].set_value("brid3", value)
 
     @property
@@ -210,6 +219,7 @@ class IgaFaceUvw(KeywordBase):
 
     @brid4.setter
     def brid4(self, value: int) -> None:
+        """Set the brid4 property."""
         self._cards[1].set_value("brid4", value)
 
     @property
@@ -220,6 +230,7 @@ class IgaFaceUvw(KeywordBase):
 
     @brid5.setter
     def brid5(self, value: int) -> None:
+        """Set the brid5 property."""
         self._cards[1].set_value("brid5", value)
 
     @property
@@ -230,6 +241,7 @@ class IgaFaceUvw(KeywordBase):
 
     @brid6.setter
     def brid6(self, value: int) -> None:
+        """Set the brid6 property."""
         self._cards[1].set_value("brid6", value)
 
     @property
@@ -240,6 +252,7 @@ class IgaFaceUvw(KeywordBase):
 
     @brid7.setter
     def brid7(self, value: int) -> None:
+        """Set the brid7 property."""
         self._cards[1].set_value("brid7", value)
 
     @property
@@ -250,5 +263,6 @@ class IgaFaceUvw(KeywordBase):
 
     @brid8.setter
     def brid8(self, value: int) -> None:
+        """Set the brid8 property."""
         self._cards[1].set_value("brid8", value)
 

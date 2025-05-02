@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFORMABLE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DeformableToRigid(KeywordBase):
     subkeyword = "TO_RIGID"
 
     def __init__(self, **kwargs):
+        """Initialize the DEFORMABLE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -70,6 +72,7 @@ class DeformableToRigid(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -81,6 +84,7 @@ class DeformableToRigid(KeywordBase):
 
     @lrb.setter
     def lrb(self, value: int) -> None:
+        """Set the lrb property."""
         self._cards[0].set_value("lrb", value)
 
     @property
@@ -93,7 +97,8 @@ class DeformableToRigid(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: str) -> None:
+        """Set the ptype property."""
         if value not in ["PART", "PSET", None]:
-            raise Exception("""ptype must be `None` or one of {"PART","PSET"}""")
+            raise Exception("""ptype must be `None` or one of {"PART","PSET"}.""")
         self._cards[0].set_value("ptype", value)
 

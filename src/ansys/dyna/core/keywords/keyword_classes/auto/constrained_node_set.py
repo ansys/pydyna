@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedNodeSet(KeywordBase):
     subkeyword = "NODE_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -81,6 +83,7 @@ class ConstrainedNodeSet(KeywordBase):
 
     @cnsid.setter
     def cnsid(self, value: int) -> None:
+        """Set the cnsid property."""
         self._cards[0].set_value("cnsid", value)
 
     @property
@@ -91,6 +94,7 @@ class ConstrainedNodeSet(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 
     @property
@@ -109,8 +113,9 @@ class ConstrainedNodeSet(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, None]:
-            raise Exception("""dof must be `None` or one of {1,2,3,4,5,6,7,8}""")
+            raise Exception("""dof must be `None` or one of {1,2,3,4,5,6,7,8}.""")
         self._cards[1].set_value("dof", value)
 
     @property
@@ -121,5 +126,6 @@ class ConstrainedNodeSet(KeywordBase):
 
     @tf.setter
     def tf(self, value: float) -> None:
+        """Set the tf property."""
         self._cards[1].set_value("tf", value)
 

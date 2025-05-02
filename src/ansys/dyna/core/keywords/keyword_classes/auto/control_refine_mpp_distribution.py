@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlRefineMppDistribution(KeywordBase):
     subkeyword = "REFINE_MPP_DISTRIBUTION"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class ControlRefineMppDistribution(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -113,6 +116,7 @@ class ControlRefineMppDistribution(KeywordBase):
 
     @dx.setter
     def dx(self, value: float) -> None:
+        """Set the dx property."""
         self._cards[0].set_value("dx", value)
 
     @property
@@ -123,6 +127,7 @@ class ControlRefineMppDistribution(KeywordBase):
 
     @dy.setter
     def dy(self, value: float) -> None:
+        """Set the dy property."""
         self._cards[0].set_value("dy", value)
 
     @property
@@ -133,6 +138,7 @@ class ControlRefineMppDistribution(KeywordBase):
 
     @dz.setter
     def dz(self, value: float) -> None:
+        """Set the dz property."""
         self._cards[0].set_value("dz", value)
 
     @property
@@ -143,6 +149,7 @@ class ControlRefineMppDistribution(KeywordBase):
 
     @ex.setter
     def ex(self, value: float) -> None:
+        """Set the ex property."""
         self._cards[0].set_value("ex", value)
 
     @property
@@ -153,6 +160,7 @@ class ControlRefineMppDistribution(KeywordBase):
 
     @ey.setter
     def ey(self, value: float) -> None:
+        """Set the ey property."""
         self._cards[0].set_value("ey", value)
 
     @property
@@ -163,5 +171,6 @@ class ControlRefineMppDistribution(KeywordBase):
 
     @ez.setter
     def ez(self, value: float) -> None:
+        """Set the ez property."""
         self._cards[0].set_value("ez", value)
 

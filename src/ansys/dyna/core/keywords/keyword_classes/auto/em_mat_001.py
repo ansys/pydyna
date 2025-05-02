@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmMat001(KeywordBase):
     subkeyword = "MAT_001"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -106,6 +108,7 @@ class EmMat001(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -121,8 +124,9 @@ class EmMat001(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""mtype must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""mtype must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -133,6 +137,7 @@ class EmMat001(KeywordBase):
 
     @sigma.setter
     def sigma(self, value: float) -> None:
+        """Set the sigma property."""
         self._cards[0].set_value("sigma", value)
 
     @property
@@ -143,6 +148,7 @@ class EmMat001(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -153,6 +159,7 @@ class EmMat001(KeywordBase):
 
     @deatht.setter
     def deatht(self, value: float) -> None:
+        """Set the deatht property."""
         self._cards[0].set_value("deatht", value)
 
     @property
@@ -169,7 +176,8 @@ class EmMat001(KeywordBase):
 
     @rdltype.setter
     def rdltype(self, value: int) -> None:
+        """Set the rdltype property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""rdltype must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""rdltype must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("rdltype", value)
 

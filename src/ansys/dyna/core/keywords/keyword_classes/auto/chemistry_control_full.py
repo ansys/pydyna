@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CHEMISTRY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryControlFull(KeywordBase):
     subkeyword = "CONTROL_FULL"
 
     def __init__(self, **kwargs):
+        """Initialize the CHEMISTRY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -75,6 +77,7 @@ class ChemistryControlFull(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -85,6 +88,7 @@ class ChemistryControlFull(KeywordBase):
 
     @errlim.setter
     def errlim(self, value: float) -> None:
+        """Set the errlim property."""
         self._cards[0].set_value("errlim", value)
 
     @property
@@ -95,6 +99,7 @@ class ChemistryControlFull(KeywordBase):
 
     @rhomin.setter
     def rhomin(self, value: float) -> None:
+        """Set the rhomin property."""
         self._cards[0].set_value("rhomin", value)
 
     @property
@@ -105,5 +110,6 @@ class ChemistryControlFull(KeywordBase):
 
     @tmin.setter
     def tmin(self, value: float) -> None:
+        """Set the tmin property."""
         self._cards[0].set_value("tmin", value)
 

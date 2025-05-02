@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialFieldSolid(KeywordBase):
     subkeyword = "FIELD_SOLID"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -128,6 +130,7 @@ class InitialFieldSolid(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -138,6 +141,7 @@ class InitialFieldSolid(KeywordBase):
 
     @nint.setter
     def nint(self, value: int) -> None:
+        """Set the nint property."""
         self._cards[0].set_value("nint", value)
 
     @property
@@ -150,6 +154,7 @@ class InitialFieldSolid(KeywordBase):
 
     @nhisv.setter
     def nhisv(self, value: int) -> None:
+        """Set the nhisv property."""
         self._cards[0].set_value("nhisv", value)
 
     @property
@@ -160,6 +165,7 @@ class InitialFieldSolid(KeywordBase):
 
     @fld1.setter
     def fld1(self, value: int) -> None:
+        """Set the fld1 property."""
         self._cards[1].set_value("fld1", value)
 
     @property
@@ -170,6 +176,7 @@ class InitialFieldSolid(KeywordBase):
 
     @fld2.setter
     def fld2(self, value: int) -> None:
+        """Set the fld2 property."""
         self._cards[1].set_value("fld2", value)
 
     @property
@@ -180,6 +187,7 @@ class InitialFieldSolid(KeywordBase):
 
     @fld3.setter
     def fld3(self, value: int) -> None:
+        """Set the fld3 property."""
         self._cards[1].set_value("fld3", value)
 
     @property
@@ -190,6 +198,7 @@ class InitialFieldSolid(KeywordBase):
 
     @fld4.setter
     def fld4(self, value: int) -> None:
+        """Set the fld4 property."""
         self._cards[1].set_value("fld4", value)
 
     @property
@@ -200,6 +209,7 @@ class InitialFieldSolid(KeywordBase):
 
     @fld5.setter
     def fld5(self, value: int) -> None:
+        """Set the fld5 property."""
         self._cards[1].set_value("fld5", value)
 
     @property
@@ -210,6 +220,7 @@ class InitialFieldSolid(KeywordBase):
 
     @fld6.setter
     def fld6(self, value: int) -> None:
+        """Set the fld6 property."""
         self._cards[1].set_value("fld6", value)
 
     @property
@@ -220,6 +231,7 @@ class InitialFieldSolid(KeywordBase):
 
     @fld7.setter
     def fld7(self, value: int) -> None:
+        """Set the fld7 property."""
         self._cards[1].set_value("fld7", value)
 
     @property
@@ -230,5 +242,6 @@ class InitialFieldSolid(KeywordBase):
 
     @fld8.setter
     def fld8(self, value: int) -> None:
+        """Set the fld8 property."""
         self._cards[1].set_value("fld8", value)
 

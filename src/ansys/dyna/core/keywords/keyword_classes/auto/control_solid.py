@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlSolid(KeywordBase):
     subkeyword = "SOLID"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -201,8 +203,9 @@ class ControlSolid(KeywordBase):
 
     @esort.setter
     def esort(self, value: int) -> None:
+        """Set the esort property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""esort must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""esort must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("esort", value)
 
     @property
@@ -215,6 +218,7 @@ class ControlSolid(KeywordBase):
 
     @fmatrix.setter
     def fmatrix(self, value: int) -> None:
+        """Set the fmatrix property."""
         self._cards[0].set_value("fmatrix", value)
 
     @property
@@ -225,6 +229,7 @@ class ControlSolid(KeywordBase):
 
     @niptets.setter
     def niptets(self, value: int) -> None:
+        """Set the niptets property."""
         self._cards[0].set_value("niptets", value)
 
     @property
@@ -237,8 +242,9 @@ class ControlSolid(KeywordBase):
 
     @swlocl.setter
     def swlocl(self, value: int) -> None:
+        """Set the swlocl property."""
         if value not in [1, 2, None]:
-            raise Exception("""swlocl must be `None` or one of {1,2}""")
+            raise Exception("""swlocl must be `None` or one of {1,2}.""")
         self._cards[0].set_value("swlocl", value)
 
     @property
@@ -249,6 +255,7 @@ class ControlSolid(KeywordBase):
 
     @psfail.setter
     def psfail(self, value: int) -> None:
+        """Set the psfail property."""
         self._cards[0].set_value("psfail", value)
 
     @property
@@ -259,6 +266,7 @@ class ControlSolid(KeywordBase):
 
     @t10jtol.setter
     def t10jtol(self, value: float) -> None:
+        """Set the t10jtol property."""
         self._cards[0].set_value("t10jtol", value)
 
     @property
@@ -276,6 +284,7 @@ class ControlSolid(KeywordBase):
 
     @icoh.setter
     def icoh(self, value: int) -> None:
+        """Set the icoh property."""
         self._cards[0].set_value("icoh", value)
 
     @property
@@ -286,8 +295,9 @@ class ControlSolid(KeywordBase):
 
     @tet13k.setter
     def tet13k(self, value: int) -> None:
+        """Set the tet13k property."""
         if value not in [0, 1, None]:
-            raise Exception("""tet13k must be `None` or one of {0,1}""")
+            raise Exception("""tet13k must be `None` or one of {0,1}.""")
         self._cards[0].set_value("tet13k", value)
 
     @property
@@ -298,6 +308,7 @@ class ControlSolid(KeywordBase):
 
     @pm1.setter
     def pm1(self, value: int) -> None:
+        """Set the pm1 property."""
         self._cards[1].set_value("pm1", value)
 
     @property
@@ -308,6 +319,7 @@ class ControlSolid(KeywordBase):
 
     @pm2.setter
     def pm2(self, value: int) -> None:
+        """Set the pm2 property."""
         self._cards[1].set_value("pm2", value)
 
     @property
@@ -318,6 +330,7 @@ class ControlSolid(KeywordBase):
 
     @pm3.setter
     def pm3(self, value: int) -> None:
+        """Set the pm3 property."""
         self._cards[1].set_value("pm3", value)
 
     @property
@@ -328,6 +341,7 @@ class ControlSolid(KeywordBase):
 
     @pm4.setter
     def pm4(self, value: int) -> None:
+        """Set the pm4 property."""
         self._cards[1].set_value("pm4", value)
 
     @property
@@ -338,6 +352,7 @@ class ControlSolid(KeywordBase):
 
     @pm5.setter
     def pm5(self, value: int) -> None:
+        """Set the pm5 property."""
         self._cards[1].set_value("pm5", value)
 
     @property
@@ -348,6 +363,7 @@ class ControlSolid(KeywordBase):
 
     @pm6.setter
     def pm6(self, value: int) -> None:
+        """Set the pm6 property."""
         self._cards[1].set_value("pm6", value)
 
     @property
@@ -358,6 +374,7 @@ class ControlSolid(KeywordBase):
 
     @pm7.setter
     def pm7(self, value: int) -> None:
+        """Set the pm7 property."""
         self._cards[1].set_value("pm7", value)
 
     @property
@@ -368,6 +385,7 @@ class ControlSolid(KeywordBase):
 
     @pm8.setter
     def pm8(self, value: int) -> None:
+        """Set the pm8 property."""
         self._cards[1].set_value("pm8", value)
 
     @property
@@ -378,6 +396,7 @@ class ControlSolid(KeywordBase):
 
     @pm9.setter
     def pm9(self, value: int) -> None:
+        """Set the pm9 property."""
         self._cards[1].set_value("pm9", value)
 
     @property
@@ -388,6 +407,7 @@ class ControlSolid(KeywordBase):
 
     @pm10.setter
     def pm10(self, value: int) -> None:
+        """Set the pm10 property."""
         self._cards[1].set_value("pm10", value)
 
     @property
@@ -400,5 +420,6 @@ class ControlSolid(KeywordBase):
 
     @tet13v.setter
     def tet13v(self, value: int) -> None:
+        """Set the tet13v property."""
         self._cards[2].set_value("tet13v", value)
 

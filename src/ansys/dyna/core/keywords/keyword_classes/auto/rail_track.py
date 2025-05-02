@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the RAIL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RailTrack(KeywordBase):
     subkeyword = "TRACK"
 
     def __init__(self, **kwargs):
+        """Initialize the RAIL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -163,6 +165,7 @@ class RailTrack(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -173,6 +176,7 @@ class RailTrack(KeywordBase):
 
     @bsetid1.setter
     def bsetid1(self, value: int) -> None:
+        """Set the bsetid1 property."""
         self._cards[0].set_value("bsetid1", value)
 
     @property
@@ -183,6 +187,7 @@ class RailTrack(KeywordBase):
 
     @norgn1.setter
     def norgn1(self, value: int) -> None:
+        """Set the norgn1 property."""
         self._cards[0].set_value("norgn1", value)
 
     @property
@@ -193,6 +198,7 @@ class RailTrack(KeywordBase):
 
     @lcur1.setter
     def lcur1(self, value: int) -> None:
+        """Set the lcur1 property."""
         self._cards[0].set_value("lcur1", value)
 
     @property
@@ -203,6 +209,7 @@ class RailTrack(KeywordBase):
 
     @oset1.setter
     def oset1(self, value: float) -> None:
+        """Set the oset1 property."""
         self._cards[0].set_value("oset1", value)
 
     @property
@@ -213,6 +220,7 @@ class RailTrack(KeywordBase):
 
     @sf1.setter
     def sf1(self, value: float) -> None:
+        """Set the sf1 property."""
         self._cards[0].set_value("sf1", value)
 
     @property
@@ -223,6 +231,7 @@ class RailTrack(KeywordBase):
 
     @ga1.setter
     def ga1(self, value: float) -> None:
+        """Set the ga1 property."""
         self._cards[0].set_value("ga1", value)
 
     @property
@@ -236,8 +245,9 @@ class RailTrack(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
+        """Set the idir property."""
         if value not in [0, 1, -1, None]:
-            raise Exception("""idir must be `None` or one of {0,1,-1}""")
+            raise Exception("""idir must be `None` or one of {0,1,-1}.""")
         self._cards[0].set_value("idir", value)
 
     @property
@@ -248,6 +258,7 @@ class RailTrack(KeywordBase):
 
     @bsetid2.setter
     def bsetid2(self, value: int) -> None:
+        """Set the bsetid2 property."""
         self._cards[1].set_value("bsetid2", value)
 
     @property
@@ -258,6 +269,7 @@ class RailTrack(KeywordBase):
 
     @norgn2.setter
     def norgn2(self, value: int) -> None:
+        """Set the norgn2 property."""
         self._cards[1].set_value("norgn2", value)
 
     @property
@@ -268,6 +280,7 @@ class RailTrack(KeywordBase):
 
     @lcur2.setter
     def lcur2(self, value: int) -> None:
+        """Set the lcur2 property."""
         self._cards[1].set_value("lcur2", value)
 
     @property
@@ -278,6 +291,7 @@ class RailTrack(KeywordBase):
 
     @oset2.setter
     def oset2(self, value: float) -> None:
+        """Set the oset2 property."""
         self._cards[1].set_value("oset2", value)
 
     @property
@@ -288,6 +302,7 @@ class RailTrack(KeywordBase):
 
     @sf2.setter
     def sf2(self, value: float) -> None:
+        """Set the sf2 property."""
         self._cards[1].set_value("sf2", value)
 
     @property
@@ -298,5 +313,6 @@ class RailTrack(KeywordBase):
 
     @ga2.setter
     def ga2(self, value: float) -> None:
+        """Set the ga2 property."""
         self._cards[1].set_value("ga2", value)
 

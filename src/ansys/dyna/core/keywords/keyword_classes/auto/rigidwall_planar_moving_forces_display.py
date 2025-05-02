@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the RIGIDWALL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
     subkeyword = "PLANAR_MOVING_FORCES_DISPLAY"
 
     def __init__(self, **kwargs):
+        """Initialize the RIGIDWALL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -242,6 +244,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -252,6 +255,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @nsidex.setter
     def nsidex(self, value: int) -> None:
+        """Set the nsidex property."""
         self._cards[0].set_value("nsidex", value)
 
     @property
@@ -262,6 +266,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -272,6 +277,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[0].set_value("offset", value)
 
     @property
@@ -282,6 +288,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -292,6 +299,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -302,6 +310,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @rwksf.setter
     def rwksf(self, value: float) -> None:
+        """Set the rwksf property."""
         self._cards[0].set_value("rwksf", value)
 
     @property
@@ -312,6 +321,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @xt.setter
     def xt(self, value: float) -> None:
+        """Set the xt property."""
         self._cards[1].set_value("xt", value)
 
     @property
@@ -322,6 +332,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @yt.setter
     def yt(self, value: float) -> None:
+        """Set the yt property."""
         self._cards[1].set_value("yt", value)
 
     @property
@@ -332,6 +343,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @zt.setter
     def zt(self, value: float) -> None:
+        """Set the zt property."""
         self._cards[1].set_value("zt", value)
 
     @property
@@ -342,6 +354,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @xh.setter
     def xh(self, value: float) -> None:
+        """Set the xh property."""
         self._cards[1].set_value("xh", value)
 
     @property
@@ -352,6 +365,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @yh.setter
     def yh(self, value: float) -> None:
+        """Set the yh property."""
         self._cards[1].set_value("yh", value)
 
     @property
@@ -362,6 +376,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @zh.setter
     def zh(self, value: float) -> None:
+        """Set the zh property."""
         self._cards[1].set_value("zh", value)
 
     @property
@@ -376,6 +391,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[1].set_value("fric", value)
 
     @property
@@ -386,6 +402,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @wvel.setter
     def wvel(self, value: float) -> None:
+        """Set the wvel property."""
         self._cards[1].set_value("wvel", value)
 
     @property
@@ -396,6 +413,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @mass.setter
     def mass(self, value: float) -> None:
+        """Set the mass property."""
         self._cards[2].set_value("mass", value)
 
     @property
@@ -406,6 +424,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[2].set_value("v0", value)
 
     @property
@@ -416,6 +435,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @soft.setter
     def soft(self, value: int) -> None:
+        """Set the soft property."""
         self._cards[3].set_value("soft", value)
 
     @property
@@ -426,6 +446,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[3].set_value("ssid", value)
 
     @property
@@ -436,6 +457,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[3].set_value("n1", value)
 
     @property
@@ -446,6 +468,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[3].set_value("n2", value)
 
     @property
@@ -456,6 +479,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[3].set_value("n3", value)
 
     @property
@@ -466,5 +490,6 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[3].set_value("n4", value)
 

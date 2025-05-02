@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the FREQUENCY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
     subkeyword = "DOMAIN_SEA_SUBSYSTEM"
 
     def __init__(self, **kwargs):
+        """Initialize the FREQUENCY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -520,6 +522,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @fmin.setter
     def fmin(self, value: float) -> None:
+        """Set the fmin property."""
         self._cards[0].set_value("fmin", value)
 
     @property
@@ -530,6 +533,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @fmax.setter
     def fmax(self, value: float) -> None:
+        """Set the fmax property."""
         self._cards[0].set_value("fmax", value)
 
     @property
@@ -540,6 +544,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
+        """Set the nfreq property."""
         self._cards[0].set_value("nfreq", value)
 
     @property
@@ -553,8 +558,9 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @nfspace.setter
     def nfspace(self, value: int) -> None:
+        """Set the nfspace property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""nfspace must be `None` or one of {0,1,2}""")
+            raise Exception("""nfspace must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("nfspace", value)
 
     @property
@@ -565,6 +571,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @lcfreq.setter
     def lcfreq(self, value: int) -> None:
+        """Set the lcfreq property."""
         self._cards[0].set_value("lcfreq", value)
 
     @property
@@ -577,8 +584,9 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @iread.setter
     def iread(self, value: int) -> None:
+        """Set the iread property."""
         if value not in [0, 1, None]:
-            raise Exception("""iread must be `None` or one of {0,1}""")
+            raise Exception("""iread must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iread", value)
 
     @property
@@ -589,6 +597,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @subid.setter
     def subid(self, value: int) -> None:
+        """Set the subid property."""
         self._cards[1].set_value("subid", value)
 
     @property
@@ -602,8 +611,9 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @subtyp.setter
     def subtyp(self, value: int) -> None:
+        """Set the subtyp property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""subtyp must be `None` or one of {1,2,3}""")
+            raise Exception("""subtyp must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("subtyp", value)
 
     @property
@@ -614,6 +624,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @density.setter
     def density(self, value: float) -> None:
+        """Set the density property."""
         self._cards[1].set_value("density", value)
 
     @property
@@ -624,6 +635,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[1].set_value("e", value)
 
     @property
@@ -634,6 +646,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[1].set_value("pr", value)
 
     @property
@@ -646,8 +659,9 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @output.setter
     def output(self, value: int) -> None:
+        """Set the output property."""
         if value not in [0, 1, None]:
-            raise Exception("""output must be `None` or one of {0,1}""")
+            raise Exception("""output must be `None` or one of {0,1}.""")
         self._cards[1].set_value("output", value)
 
     @property
@@ -658,6 +672,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[2].set_value("a", value)
 
     @property
@@ -668,6 +683,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @perim.setter
     def perim(self, value: float) -> None:
+        """Set the perim property."""
         self._cards[2].set_value("perim", value)
 
     @property
@@ -678,6 +694,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[2].set_value("thick", value)
 
     @property
@@ -688,6 +705,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @width.setter
     def width(self, value: float) -> None:
+        """Set the width property."""
         self._cards[2].set_value("width", value)
 
     @property
@@ -698,6 +716,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @length.setter
     def length(self, value: float) -> None:
+        """Set the length property."""
         self._cards[2].set_value("length", value)
 
     @property
@@ -708,6 +727,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @dampb.setter
     def dampb(self, value: float) -> None:
+        """Set the dampb property."""
         self._cards[3].set_value("dampb", value)
 
     @property
@@ -718,6 +738,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @dampl.setter
     def dampl(self, value: float) -> None:
+        """Set the dampl property."""
         self._cards[3].set_value("dampl", value)
 
     @property
@@ -728,6 +749,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @damps.setter
     def damps(self, value: float) -> None:
+        """Set the damps property."""
         self._cards[3].set_value("damps", value)
 
     @property
@@ -738,6 +760,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @lc1.setter
     def lc1(self, value: int) -> None:
+        """Set the lc1 property."""
         self._cards[3].set_value("lc1", value)
 
     @property
@@ -748,6 +771,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @lc2.setter
     def lc2(self, value: int) -> None:
+        """Set the lc2 property."""
         self._cards[3].set_value("lc2", value)
 
     @property
@@ -758,6 +782,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @lc3.setter
     def lc3(self, value: int) -> None:
+        """Set the lc3 property."""
         self._cards[3].set_value("lc3", value)
 
     @property
@@ -768,6 +793,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[4].set_value("a", value)
 
     @property
@@ -778,6 +804,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @perim.setter
     def perim(self, value: float) -> None:
+        """Set the perim property."""
         self._cards[4].set_value("perim", value)
 
     @property
@@ -788,6 +815,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @volume.setter
     def volume(self, value: float) -> None:
+        """Set the volume property."""
         self._cards[4].set_value("volume", value)
 
     @property
@@ -798,6 +826,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @width.setter
     def width(self, value: float) -> None:
+        """Set the width property."""
         self._cards[4].set_value("width", value)
 
     @property
@@ -808,6 +837,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @length.setter
     def length(self, value: float) -> None:
+        """Set the length property."""
         self._cards[4].set_value("length", value)
 
     @property
@@ -818,6 +848,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @height.setter
     def height(self, value: int) -> None:
+        """Set the height property."""
         self._cards[4].set_value("height", value)
 
     @property
@@ -828,6 +859,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @dampb.setter
     def dampb(self, value: float) -> None:
+        """Set the dampb property."""
         self._cards[5].set_value("dampb", value)
 
     @property
@@ -838,6 +870,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @lc1.setter
     def lc1(self, value: int) -> None:
+        """Set the lc1 property."""
         self._cards[5].set_value("lc1", value)
 
     @property
@@ -848,6 +881,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[6].set_value("a", value)
 
     @property
@@ -858,6 +892,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @iss.setter
     def iss(self, value: float) -> None:
+        """Set the iss property."""
         self._cards[6].set_value("iss", value)
 
     @property
@@ -868,6 +903,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @itt.setter
     def itt(self, value: float) -> None:
+        """Set the itt property."""
         self._cards[6].set_value("itt", value)
 
     @property
@@ -878,6 +914,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @j.setter
     def j(self, value: float) -> None:
+        """Set the j property."""
         self._cards[6].set_value("j", value)
 
     @property
@@ -888,6 +925,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @length.setter
     def length(self, value: float) -> None:
+        """Set the length property."""
         self._cards[6].set_value("length", value)
 
     @property
@@ -898,6 +936,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @dampb.setter
     def dampb(self, value: float) -> None:
+        """Set the dampb property."""
         self._cards[7].set_value("dampb", value)
 
     @property
@@ -908,6 +947,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @dampl.setter
     def dampl(self, value: float) -> None:
+        """Set the dampl property."""
         self._cards[7].set_value("dampl", value)
 
     @property
@@ -918,6 +958,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @damps.setter
     def damps(self, value: float) -> None:
+        """Set the damps property."""
         self._cards[7].set_value("damps", value)
 
     @property
@@ -928,6 +969,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @dampt.setter
     def dampt(self, value: float) -> None:
+        """Set the dampt property."""
         self._cards[7].set_value("dampt", value)
 
     @property
@@ -938,6 +980,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @lc1.setter
     def lc1(self, value: int) -> None:
+        """Set the lc1 property."""
         self._cards[7].set_value("lc1", value)
 
     @property
@@ -948,6 +991,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @lc2.setter
     def lc2(self, value: int) -> None:
+        """Set the lc2 property."""
         self._cards[7].set_value("lc2", value)
 
     @property
@@ -958,6 +1002,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @lc3.setter
     def lc3(self, value: int) -> None:
+        """Set the lc3 property."""
         self._cards[7].set_value("lc3", value)
 
     @property
@@ -968,5 +1013,6 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
 
     @lc4.setter
     def lc4(self, value: int) -> None:
+        """Set the lc4 property."""
         self._cards[7].set_value("lc4", value)
 

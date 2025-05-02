@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatThermalOrthotropic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -222,6 +224,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @tmid.setter
     def tmid(self, value: int) -> None:
+        """Set the tmid property."""
         self._cards[0].set_value("tmid", value)
 
     @property
@@ -233,6 +236,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @tro.setter
     def tro(self, value: float) -> None:
+        """Set the tro property."""
         self._cards[0].set_value("tro", value)
 
     @property
@@ -246,6 +250,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @tgrlc.setter
     def tgrlc(self, value: int) -> None:
+        """Set the tgrlc property."""
         self._cards[0].set_value("tgrlc", value)
 
     @property
@@ -257,6 +262,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @tgmult.setter
     def tgmult(self, value: float) -> None:
+        """Set the tgmult property."""
         self._cards[0].set_value("tgmult", value)
 
     @property
@@ -272,8 +278,9 @@ class MatThermalOrthotropic(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         if value not in [0.0, 1.0, 2.0, 3.0, 4.0, None]:
-            raise Exception("""aopt must be `None` or one of {0.0,1.0,2.0,3.0,4.0}""")
+            raise Exception("""aopt must be `None` or one of {0.0,1.0,2.0,3.0,4.0}.""")
         self._cards[0].set_value("aopt", value)
 
     @property
@@ -284,6 +291,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @tlat.setter
     def tlat(self, value: float) -> None:
+        """Set the tlat property."""
         self._cards[0].set_value("tlat", value)
 
     @property
@@ -294,6 +302,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @hlat.setter
     def hlat(self, value: float) -> None:
+        """Set the hlat property."""
         self._cards[0].set_value("hlat", value)
 
     @property
@@ -304,6 +313,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @hc.setter
     def hc(self, value: float) -> None:
+        """Set the hc property."""
         self._cards[1].set_value("hc", value)
 
     @property
@@ -314,6 +324,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @k1.setter
     def k1(self, value: float) -> None:
+        """Set the k1 property."""
         self._cards[1].set_value("k1", value)
 
     @property
@@ -324,6 +335,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @k2.setter
     def k2(self, value: float) -> None:
+        """Set the k2 property."""
         self._cards[1].set_value("k2", value)
 
     @property
@@ -334,6 +346,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @k3.setter
     def k3(self, value: float) -> None:
+        """Set the k3 property."""
         self._cards[1].set_value("k3", value)
 
     @property
@@ -344,6 +357,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[2].set_value("xp", value)
 
     @property
@@ -354,6 +368,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[2].set_value("yp", value)
 
     @property
@@ -364,6 +379,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[2].set_value("zp", value)
 
     @property
@@ -374,6 +390,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[2].set_value("a1", value)
 
     @property
@@ -384,6 +401,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[2].set_value("a2", value)
 
     @property
@@ -394,6 +412,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[2].set_value("a3", value)
 
     @property
@@ -404,6 +423,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[3].set_value("d1", value)
 
     @property
@@ -414,6 +434,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[3].set_value("d2", value)
 
     @property
@@ -424,6 +445,7 @@ class MatThermalOrthotropic(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[3].set_value("d3", value)
 
     @property
@@ -434,5 +456,6 @@ class MatThermalOrthotropic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

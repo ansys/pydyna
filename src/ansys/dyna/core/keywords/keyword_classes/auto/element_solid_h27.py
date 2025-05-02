@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementSolidH27(KeywordBase):
     subkeyword = "SOLID_H27"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -262,6 +264,7 @@ class ElementSolidH27(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -272,6 +275,7 @@ class ElementSolidH27(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -282,6 +286,7 @@ class ElementSolidH27(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[1].set_value("n1", value)
 
     @property
@@ -292,6 +297,7 @@ class ElementSolidH27(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[1].set_value("n2", value)
 
     @property
@@ -302,6 +308,7 @@ class ElementSolidH27(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[1].set_value("n3", value)
 
     @property
@@ -312,6 +319,7 @@ class ElementSolidH27(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[1].set_value("n4", value)
 
     @property
@@ -322,6 +330,7 @@ class ElementSolidH27(KeywordBase):
 
     @n5.setter
     def n5(self, value: int) -> None:
+        """Set the n5 property."""
         self._cards[1].set_value("n5", value)
 
     @property
@@ -332,6 +341,7 @@ class ElementSolidH27(KeywordBase):
 
     @n6.setter
     def n6(self, value: int) -> None:
+        """Set the n6 property."""
         self._cards[1].set_value("n6", value)
 
     @property
@@ -342,6 +352,7 @@ class ElementSolidH27(KeywordBase):
 
     @n7.setter
     def n7(self, value: int) -> None:
+        """Set the n7 property."""
         self._cards[1].set_value("n7", value)
 
     @property
@@ -352,6 +363,7 @@ class ElementSolidH27(KeywordBase):
 
     @n8.setter
     def n8(self, value: int) -> None:
+        """Set the n8 property."""
         self._cards[1].set_value("n8", value)
 
     @property
@@ -362,6 +374,7 @@ class ElementSolidH27(KeywordBase):
 
     @n9.setter
     def n9(self, value: int) -> None:
+        """Set the n9 property."""
         self._cards[1].set_value("n9", value)
 
     @property
@@ -372,6 +385,7 @@ class ElementSolidH27(KeywordBase):
 
     @n10.setter
     def n10(self, value: int) -> None:
+        """Set the n10 property."""
         self._cards[1].set_value("n10", value)
 
     @property
@@ -382,6 +396,7 @@ class ElementSolidH27(KeywordBase):
 
     @n11.setter
     def n11(self, value: int) -> None:
+        """Set the n11 property."""
         self._cards[2].set_value("n11", value)
 
     @property
@@ -392,6 +407,7 @@ class ElementSolidH27(KeywordBase):
 
     @n12.setter
     def n12(self, value: int) -> None:
+        """Set the n12 property."""
         self._cards[2].set_value("n12", value)
 
     @property
@@ -402,6 +418,7 @@ class ElementSolidH27(KeywordBase):
 
     @n13.setter
     def n13(self, value: int) -> None:
+        """Set the n13 property."""
         self._cards[2].set_value("n13", value)
 
     @property
@@ -412,6 +429,7 @@ class ElementSolidH27(KeywordBase):
 
     @n14.setter
     def n14(self, value: int) -> None:
+        """Set the n14 property."""
         self._cards[2].set_value("n14", value)
 
     @property
@@ -422,6 +440,7 @@ class ElementSolidH27(KeywordBase):
 
     @n15.setter
     def n15(self, value: int) -> None:
+        """Set the n15 property."""
         self._cards[2].set_value("n15", value)
 
     @property
@@ -432,6 +451,7 @@ class ElementSolidH27(KeywordBase):
 
     @n16.setter
     def n16(self, value: int) -> None:
+        """Set the n16 property."""
         self._cards[2].set_value("n16", value)
 
     @property
@@ -442,6 +462,7 @@ class ElementSolidH27(KeywordBase):
 
     @n17.setter
     def n17(self, value: int) -> None:
+        """Set the n17 property."""
         self._cards[2].set_value("n17", value)
 
     @property
@@ -452,6 +473,7 @@ class ElementSolidH27(KeywordBase):
 
     @n18.setter
     def n18(self, value: int) -> None:
+        """Set the n18 property."""
         self._cards[2].set_value("n18", value)
 
     @property
@@ -462,6 +484,7 @@ class ElementSolidH27(KeywordBase):
 
     @n19.setter
     def n19(self, value: int) -> None:
+        """Set the n19 property."""
         self._cards[2].set_value("n19", value)
 
     @property
@@ -472,6 +495,7 @@ class ElementSolidH27(KeywordBase):
 
     @n20.setter
     def n20(self, value: int) -> None:
+        """Set the n20 property."""
         self._cards[2].set_value("n20", value)
 
     @property
@@ -482,6 +506,7 @@ class ElementSolidH27(KeywordBase):
 
     @n21.setter
     def n21(self, value: int) -> None:
+        """Set the n21 property."""
         self._cards[3].set_value("n21", value)
 
     @property
@@ -492,6 +517,7 @@ class ElementSolidH27(KeywordBase):
 
     @n22.setter
     def n22(self, value: int) -> None:
+        """Set the n22 property."""
         self._cards[3].set_value("n22", value)
 
     @property
@@ -502,6 +528,7 @@ class ElementSolidH27(KeywordBase):
 
     @n23.setter
     def n23(self, value: int) -> None:
+        """Set the n23 property."""
         self._cards[3].set_value("n23", value)
 
     @property
@@ -512,6 +539,7 @@ class ElementSolidH27(KeywordBase):
 
     @n24.setter
     def n24(self, value: int) -> None:
+        """Set the n24 property."""
         self._cards[3].set_value("n24", value)
 
     @property
@@ -522,6 +550,7 @@ class ElementSolidH27(KeywordBase):
 
     @n25.setter
     def n25(self, value: int) -> None:
+        """Set the n25 property."""
         self._cards[3].set_value("n25", value)
 
     @property
@@ -532,6 +561,7 @@ class ElementSolidH27(KeywordBase):
 
     @n26.setter
     def n26(self, value: int) -> None:
+        """Set the n26 property."""
         self._cards[3].set_value("n26", value)
 
     @property
@@ -542,5 +572,6 @@ class ElementSolidH27(KeywordBase):
 
     @n27.setter
     def n27(self, value: int) -> None:
+        """Set the n27 property."""
         self._cards[3].set_value("n27", value)
 

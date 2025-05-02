@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the AIRBAG keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
     subkeyword = "SHELL_REFERENCE_GEOMETRY_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the AIRBAG keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -128,6 +130,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -138,6 +141,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @sx.setter
     def sx(self, value: float) -> None:
+        """Set the sx property."""
         self._cards[0].set_value("sx", value)
 
     @property
@@ -148,6 +152,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @sy.setter
     def sy(self, value: float) -> None:
+        """Set the sy property."""
         self._cards[0].set_value("sy", value)
 
     @property
@@ -158,6 +163,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @sz.setter
     def sz(self, value: float) -> None:
+        """Set the sz property."""
         self._cards[0].set_value("sz", value)
 
     @property
@@ -168,6 +174,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -178,6 +185,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[1].set_value("eid", value)
 
     @property
@@ -188,6 +196,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -198,6 +207,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[1].set_value("n1", value)
 
     @property
@@ -208,6 +218,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[1].set_value("n2", value)
 
     @property
@@ -218,6 +229,7 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[1].set_value("n3", value)
 
     @property
@@ -228,5 +240,6 @@ class AirbagShellReferenceGeometryId(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[1].set_value("n4", value)
 

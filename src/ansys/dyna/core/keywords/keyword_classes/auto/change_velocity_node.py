@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CHANGE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChangeVelocityNode(KeywordBase):
     subkeyword = "VELOCITY_NODE"
 
     def __init__(self, **kwargs):
+        """Initialize the CHANGE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -102,6 +104,7 @@ class ChangeVelocityNode(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -112,6 +115,7 @@ class ChangeVelocityNode(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -122,6 +126,7 @@ class ChangeVelocityNode(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -132,6 +137,7 @@ class ChangeVelocityNode(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -142,6 +148,7 @@ class ChangeVelocityNode(KeywordBase):
 
     @vxr.setter
     def vxr(self, value: float) -> None:
+        """Set the vxr property."""
         self._cards[0].set_value("vxr", value)
 
     @property
@@ -152,6 +159,7 @@ class ChangeVelocityNode(KeywordBase):
 
     @vyr.setter
     def vyr(self, value: float) -> None:
+        """Set the vyr property."""
         self._cards[0].set_value("vyr", value)
 
     @property
@@ -162,5 +170,6 @@ class ChangeVelocityNode(KeywordBase):
 
     @vzr.setter
     def vzr(self, value: float) -> None:
+        """Set the vzr property."""
         self._cards[0].set_value("vzr", value)
 

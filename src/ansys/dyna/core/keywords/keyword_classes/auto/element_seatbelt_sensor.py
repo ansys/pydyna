@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementSeatbeltSensor(KeywordBase):
     subkeyword = "SEATBELT_SENSOR"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -211,6 +213,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @sbsid.setter
     def sbsid(self, value: int) -> None:
+        """Set the sbsid property."""
         self._cards[0].set_value("sbsid", value)
 
     @property
@@ -226,8 +229,9 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @sbstyp.setter
     def sbstyp(self, value: int) -> None:
+        """Set the sbstyp property."""
         if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""sbstyp must be `None` or one of {1,2,3,4,5}""")
+            raise Exception("""sbstyp must be `None` or one of {1,2,3,4,5}.""")
         self._cards[0].set_value("sbstyp", value)
 
     @property
@@ -240,8 +244,9 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @sbsfl.setter
     def sbsfl(self, value: int) -> None:
+        """Set the sbsfl property."""
         if value not in [0, 1, None]:
-            raise Exception("""sbsfl must be `None` or one of {0,1}""")
+            raise Exception("""sbsfl must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sbsfl", value)
 
     @property
@@ -252,6 +257,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -265,8 +271,9 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""dof must be `None` or one of {1,2,3}""")
+            raise Exception("""dof must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("dof", value)
 
     @property
@@ -277,6 +284,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @acc.setter
     def acc(self, value: float) -> None:
+        """Set the acc property."""
         self._cards[1].set_value("acc", value)
 
     @property
@@ -287,6 +295,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @atime.setter
     def atime(self, value: float) -> None:
+        """Set the atime property."""
         self._cards[1].set_value("atime", value)
 
     @property
@@ -297,6 +306,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @sbrid.setter
     def sbrid(self, value: int) -> None:
+        """Set the sbrid property."""
         self._cards[2].set_value("sbrid", value)
 
     @property
@@ -307,6 +317,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @pulrat.setter
     def pulrat(self, value: float) -> None:
+        """Set the pulrat property."""
         self._cards[2].set_value("pulrat", value)
 
     @property
@@ -317,6 +328,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @pultim.setter
     def pultim(self, value: float) -> None:
+        """Set the pultim property."""
         self._cards[2].set_value("pultim", value)
 
     @property
@@ -327,6 +339,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @time.setter
     def time(self, value: float) -> None:
+        """Set the time property."""
         self._cards[3].set_value("time", value)
 
     @property
@@ -337,6 +350,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @nid1.setter
     def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
         self._cards[4].set_value("nid1", value)
 
     @property
@@ -347,6 +361,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[4].set_value("nid2", value)
 
     @property
@@ -357,6 +372,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @dmx.setter
     def dmx(self, value: float) -> None:
+        """Set the dmx property."""
         self._cards[4].set_value("dmx", value)
 
     @property
@@ -367,6 +383,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @dmn.setter
     def dmn(self, value: float) -> None:
+        """Set the dmn property."""
         self._cards[4].set_value("dmn", value)
 
     @property
@@ -377,6 +394,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @sbrid.setter
     def sbrid(self, value: int) -> None:
+        """Set the sbrid property."""
         self._cards[5].set_value("sbrid", value)
 
     @property
@@ -387,6 +405,7 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @pulmx.setter
     def pulmx(self, value: float) -> None:
+        """Set the pulmx property."""
         self._cards[5].set_value("pulmx", value)
 
     @property
@@ -397,5 +416,6 @@ class ElementSeatbeltSensor(KeywordBase):
 
     @pulmn.setter
     def pulmn(self, value: float) -> None:
+        """Set the pulmn property."""
         self._cards[5].set_value("pulmn", value)
 

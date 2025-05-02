@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the FATIGUE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FatigueFailure(KeywordBase):
     subkeyword = "FAILURE"
 
     def __init__(self, **kwargs):
+        """Initialize the FATIGUE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,8 +67,9 @@ class FatigueFailure(KeywordBase):
 
     @ifailure.setter
     def ifailure(self, value: int) -> None:
+        """Set the ifailure property."""
         if value not in [0, 1, None]:
-            raise Exception("""ifailure must be `None` or one of {0,1}""")
+            raise Exception("""ifailure must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ifailure", value)
 
     @property
@@ -77,5 +80,6 @@ class FatigueFailure(KeywordBase):
 
     @dratio.setter
     def dratio(self, value: float) -> None:
+        """Set the dratio property."""
         self._cards[0].set_value("dratio", value)
 

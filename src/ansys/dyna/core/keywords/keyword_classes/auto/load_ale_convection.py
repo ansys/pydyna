@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadAleConvection(KeywordBase):
     subkeyword = "ALE_CONVECTION"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -100,6 +102,7 @@ class LoadAleConvection(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -110,6 +113,7 @@ class LoadAleConvection(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -120,6 +124,7 @@ class LoadAleConvection(KeywordBase):
 
     @lagpid.setter
     def lagpid(self, value: int) -> None:
+        """Set the lagpid property."""
         self._cards[1].set_value("lagpid", value)
 
     @property
@@ -130,6 +135,7 @@ class LoadAleConvection(KeywordBase):
 
     @lagt.setter
     def lagt(self, value: float) -> None:
+        """Set the lagt property."""
         self._cards[1].set_value("lagt", value)
 
     @property
@@ -140,6 +146,7 @@ class LoadAleConvection(KeywordBase):
 
     @lagcp.setter
     def lagcp(self, value: float) -> None:
+        """Set the lagcp property."""
         self._cards[1].set_value("lagcp", value)
 
     @property
@@ -150,6 +157,7 @@ class LoadAleConvection(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[1].set_value("h", value)
 
     @property
@@ -160,5 +168,6 @@ class LoadAleConvection(KeywordBase):
 
     @lagmas.setter
     def lagmas(self, value: float) -> None:
+        """Set the lagmas property."""
         self._cards[1].set_value("lagmas", value)
 

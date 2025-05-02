@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialContactWear(KeywordBase):
     subkeyword = "CONTACT_WEAR"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class InitialContactWear(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -113,6 +116,7 @@ class InitialContactWear(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -123,6 +127,7 @@ class InitialContactWear(KeywordBase):
 
     @wdepth.setter
     def wdepth(self, value: float) -> None:
+        """Set the wdepth property."""
         self._cards[0].set_value("wdepth", value)
 
     @property
@@ -133,6 +138,7 @@ class InitialContactWear(KeywordBase):
 
     @nx.setter
     def nx(self, value: float) -> None:
+        """Set the nx property."""
         self._cards[0].set_value("nx", value)
 
     @property
@@ -143,6 +149,7 @@ class InitialContactWear(KeywordBase):
 
     @ny.setter
     def ny(self, value: float) -> None:
+        """Set the ny property."""
         self._cards[0].set_value("ny", value)
 
     @property
@@ -153,6 +160,7 @@ class InitialContactWear(KeywordBase):
 
     @nz.setter
     def nz(self, value: float) -> None:
+        """Set the nz property."""
         self._cards[0].set_value("nz", value)
 
     @property
@@ -163,6 +171,7 @@ class InitialContactWear(KeywordBase):
 
     @iseq.setter
     def iseq(self, value: int) -> None:
+        """Set the iseq property."""
         self._cards[0].set_value("iseq", value)
 
     @property
@@ -173,5 +182,6 @@ class InitialContactWear(KeywordBase):
 
     @ncyc.setter
     def ncyc(self, value: int) -> None:
+        """Set the ncyc property."""
         self._cards[0].set_value("ncyc", value)
 

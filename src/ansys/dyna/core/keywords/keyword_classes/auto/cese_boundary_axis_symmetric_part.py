@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundaryAxisSymmetricPart(KeywordBase):
     subkeyword = "BOUNDARY_AXIS_SYMMETRIC_PART"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class CeseBoundaryAxisSymmetricPart(KeywordBase):
 
     @msurfid.setter
     def msurfid(self, value: int) -> None:
+        """Set the msurfid property."""
         self._cards[0].set_value("msurfid", value)
 

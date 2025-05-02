@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdDatabaseSsout(KeywordBase):
     subkeyword = "DATABASE_SSOUT"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -108,8 +110,9 @@ class IcfdDatabaseSsout(KeywordBase):
 
     @out.setter
     def out(self, value: int) -> None:
+        """Set the out property."""
         if value not in [0, 1, None]:
-            raise Exception("""out must be `None` or one of {0,1}""")
+            raise Exception("""out must be `None` or one of {0,1}.""")
         self._cards[0].set_value("out", value)
 
     @property
@@ -120,6 +123,7 @@ class IcfdDatabaseSsout(KeywordBase):
 
     @outdt.setter
     def outdt(self, value: int) -> None:
+        """Set the outdt property."""
         self._cards[0].set_value("outdt", value)
 
     @property
@@ -130,6 +134,7 @@ class IcfdDatabaseSsout(KeywordBase):
 
     @lcidsf.setter
     def lcidsf(self, value: int) -> None:
+        """Set the lcidsf property."""
         self._cards[0].set_value("lcidsf", value)
 
     @property
@@ -140,5 +145,6 @@ class IcfdDatabaseSsout(KeywordBase):
 
     @poff.setter
     def poff(self, value: float) -> None:
+        """Set the poff property."""
         self._cards[0].set_value("poff", value)
 

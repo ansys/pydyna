@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat192(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -189,6 +191,7 @@ class Mat192(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -199,6 +202,7 @@ class Mat192(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -209,6 +213,7 @@ class Mat192(KeywordBase):
 
     @rlamda.setter
     def rlamda(self, value: float) -> None:
+        """Set the rlamda property."""
         self._cards[0].set_value("rlamda", value)
 
     @property
@@ -219,6 +224,7 @@ class Mat192(KeywordBase):
 
     @rkappa.setter
     def rkappa(self, value: float) -> None:
+        """Set the rkappa property."""
         self._cards[0].set_value("rkappa", value)
 
     @property
@@ -229,6 +235,7 @@ class Mat192(KeywordBase):
 
     @riota.setter
     def riota(self, value: float) -> None:
+        """Set the riota property."""
         self._cards[0].set_value("riota", value)
 
     @property
@@ -239,6 +246,7 @@ class Mat192(KeywordBase):
 
     @rbeta1.setter
     def rbeta1(self, value: float) -> None:
+        """Set the rbeta1 property."""
         self._cards[0].set_value("rbeta1", value)
 
     @property
@@ -249,6 +257,7 @@ class Mat192(KeywordBase):
 
     @rbeta2.setter
     def rbeta2(self, value: float) -> None:
+        """Set the rbeta2 property."""
         self._cards[0].set_value("rbeta2", value)
 
     @property
@@ -260,6 +269,7 @@ class Mat192(KeywordBase):
 
     @rmu.setter
     def rmu(self, value: float) -> None:
+        """Set the rmu property."""
         self._cards[0].set_value("rmu", value)
 
     @property
@@ -270,6 +280,7 @@ class Mat192(KeywordBase):
 
     @rnu.setter
     def rnu(self, value: float) -> None:
+        """Set the rnu property."""
         self._cards[1].set_value("rnu", value)
 
     @property
@@ -280,6 +291,7 @@ class Mat192(KeywordBase):
 
     @rlcid.setter
     def rlcid(self, value: float) -> None:
+        """Set the rlcid property."""
         self._cards[1].set_value("rlcid", value)
 
     @property
@@ -291,6 +303,7 @@ class Mat192(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[1].set_value("tol", value)
 
     @property
@@ -301,6 +314,7 @@ class Mat192(KeywordBase):
 
     @pgcl.setter
     def pgcl(self, value: float) -> None:
+        """Set the pgcl property."""
         self._cards[1].set_value("pgcl", value)
 
     @property
@@ -312,6 +326,7 @@ class Mat192(KeywordBase):
 
     @sub_inc.setter
     def sub_inc(self, value: float) -> None:
+        """Set the sub_inc property."""
         self._cards[1].set_value("sub-inc", value)
 
     @property
@@ -322,6 +337,7 @@ class Mat192(KeywordBase):
 
     @blk.setter
     def blk(self, value: float) -> None:
+        """Set the blk property."""
         self._cards[1].set_value("blk", value)
 
     @property
@@ -333,6 +349,7 @@ class Mat192(KeywordBase):
 
     @grav.setter
     def grav(self, value: float) -> None:
+        """Set the grav property."""
         self._cards[1].set_value("grav", value)
 
     @property
@@ -350,8 +367,9 @@ class Mat192(KeywordBase):
 
     @theory.setter
     def theory(self, value: int) -> None:
+        """Set the theory property."""
         if value not in [0, 4, 7, 104, 107, 204, 304, None]:
-            raise Exception("""theory must be `None` or one of {0,4,7,104,107,204,304}""")
+            raise Exception("""theory must be `None` or one of {0,4,7,104,107,204,304}.""")
         self._cards[1].set_value("theory", value)
 
     @property
@@ -362,5 +380,6 @@ class Mat192(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

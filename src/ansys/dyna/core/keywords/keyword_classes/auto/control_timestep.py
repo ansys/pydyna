@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlTimestep(KeywordBase):
     subkeyword = "TIMESTEP"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -194,6 +196,7 @@ class ControlTimestep(KeywordBase):
 
     @dtinit.setter
     def dtinit(self, value: float) -> None:
+        """Set the dtinit property."""
         self._cards[0].set_value("dtinit", value)
 
     @property
@@ -205,6 +208,7 @@ class ControlTimestep(KeywordBase):
 
     @tssfac.setter
     def tssfac(self, value: float) -> None:
+        """Set the tssfac property."""
         self._cards[0].set_value("tssfac", value)
 
     @property
@@ -218,6 +222,7 @@ class ControlTimestep(KeywordBase):
 
     @isdo.setter
     def isdo(self, value: int) -> None:
+        """Set the isdo property."""
         self._cards[0].set_value("isdo", value)
 
     @property
@@ -228,6 +233,7 @@ class ControlTimestep(KeywordBase):
 
     @tslimt.setter
     def tslimt(self, value: float) -> None:
+        """Set the tslimt property."""
         self._cards[0].set_value("tslimt", value)
 
     @property
@@ -238,6 +244,7 @@ class ControlTimestep(KeywordBase):
 
     @dt2ms.setter
     def dt2ms(self, value: float) -> None:
+        """Set the dt2ms property."""
         self._cards[0].set_value("dt2ms", value)
 
     @property
@@ -248,6 +255,7 @@ class ControlTimestep(KeywordBase):
 
     @lctm.setter
     def lctm(self, value: int) -> None:
+        """Set the lctm property."""
         self._cards[0].set_value("lctm", value)
 
     @property
@@ -266,8 +274,9 @@ class ControlTimestep(KeywordBase):
 
     @erode.setter
     def erode(self, value: int) -> None:
+        """Set the erode property."""
         if value not in [0, 1, 10, 11, 100, 101, 110, 111, None]:
-            raise Exception("""erode must be `None` or one of {0,1,10,11,100,101,110,111}""")
+            raise Exception("""erode must be `None` or one of {0,1,10,11,100,101,110,111}.""")
         self._cards[0].set_value("erode", value)
 
     @property
@@ -280,8 +289,9 @@ class ControlTimestep(KeywordBase):
 
     @ms1st.setter
     def ms1st(self, value: int) -> None:
+        """Set the ms1st property."""
         if value not in [0, 1, None]:
-            raise Exception("""ms1st must be `None` or one of {0,1}""")
+            raise Exception("""ms1st must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ms1st", value)
 
     @property
@@ -292,6 +302,7 @@ class ControlTimestep(KeywordBase):
 
     @dt2msf.setter
     def dt2msf(self, value: float) -> None:
+        """Set the dt2msf property."""
         self._cards[1].set_value("dt2msf", value)
 
     @property
@@ -302,6 +313,7 @@ class ControlTimestep(KeywordBase):
 
     @dt2mslc.setter
     def dt2mslc(self, value: int) -> None:
+        """Set the dt2mslc property."""
         self._cards[1].set_value("dt2mslc", value)
 
     @property
@@ -315,6 +327,7 @@ class ControlTimestep(KeywordBase):
 
     @imscl.setter
     def imscl(self, value: int) -> None:
+        """Set the imscl property."""
         self._cards[1].set_value("imscl", value)
 
     @property
@@ -327,6 +340,7 @@ class ControlTimestep(KeywordBase):
 
     @rmscl.setter
     def rmscl(self, value: float) -> None:
+        """Set the rmscl property."""
         self._cards[1].set_value("rmscl", value)
 
     @property
@@ -337,6 +351,7 @@ class ControlTimestep(KeywordBase):
 
     @emscl.setter
     def emscl(self, value: float) -> None:
+        """Set the emscl property."""
         self._cards[1].set_value("emscl", value)
 
     @property
@@ -349,8 +364,9 @@ class ControlTimestep(KeywordBase):
 
     @ihdo.setter
     def ihdo(self, value: int) -> None:
+        """Set the ihdo property."""
         if value not in [0, 1, None]:
-            raise Exception("""ihdo must be `None` or one of {0,1}""")
+            raise Exception("""ihdo must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ihdo", value)
 
     @property
@@ -363,7 +379,8 @@ class ControlTimestep(KeywordBase):
 
     @igado.setter
     def igado(self, value: int) -> None:
+        """Set the igado property."""
         if value not in [0, 1, None]:
-            raise Exception("""igado must be `None` or one of {0,1}""")
+            raise Exception("""igado must be `None` or one of {0,1}.""")
         self._cards[2].set_value("igado", value)
 

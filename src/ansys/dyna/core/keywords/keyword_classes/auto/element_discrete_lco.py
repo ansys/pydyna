@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementDiscreteLco(KeywordBase):
     subkeyword = "DISCRETE_LCO"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -125,6 +127,7 @@ class ElementDiscreteLco(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -135,6 +138,7 @@ class ElementDiscreteLco(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -145,6 +149,7 @@ class ElementDiscreteLco(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -155,6 +160,7 @@ class ElementDiscreteLco(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -167,6 +173,7 @@ class ElementDiscreteLco(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -177,6 +184,7 @@ class ElementDiscreteLco(KeywordBase):
 
     @s.setter
     def s(self, value: float) -> None:
+        """Set the s property."""
         self._cards[0].set_value("s", value)
 
     @property
@@ -189,6 +197,7 @@ class ElementDiscreteLco(KeywordBase):
 
     @pf.setter
     def pf(self, value: int) -> None:
+        """Set the pf property."""
         self._cards[0].set_value("pf", value)
 
     @property
@@ -199,6 +208,7 @@ class ElementDiscreteLco(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[0].set_value("offset", value)
 
     @property
@@ -209,6 +219,7 @@ class ElementDiscreteLco(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -219,5 +230,6 @@ class ElementDiscreteLco(KeywordBase):
 
     @lciddr.setter
     def lciddr(self, value: int) -> None:
+        """Set the lciddr property."""
         self._cards[1].set_value("lciddr", value)
 

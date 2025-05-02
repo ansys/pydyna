@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat270(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -178,6 +180,7 @@ class Mat270(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -188,6 +191,7 @@ class Mat270(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -198,6 +202,7 @@ class Mat270(KeywordBase):
 
     @lcem.setter
     def lcem(self, value: int) -> None:
+        """Set the lcem property."""
         self._cards[0].set_value("lcem", value)
 
     @property
@@ -208,6 +213,7 @@ class Mat270(KeywordBase):
 
     @lcpr.setter
     def lcpr(self, value: int) -> None:
+        """Set the lcpr property."""
         self._cards[0].set_value("lcpr", value)
 
     @property
@@ -218,6 +224,7 @@ class Mat270(KeywordBase):
 
     @lcsy.setter
     def lcsy(self, value: int) -> None:
+        """Set the lcsy property."""
         self._cards[0].set_value("lcsy", value)
 
     @property
@@ -228,6 +235,7 @@ class Mat270(KeywordBase):
 
     @lchr.setter
     def lchr(self, value: int) -> None:
+        """Set the lchr property."""
         self._cards[0].set_value("lchr", value)
 
     @property
@@ -238,6 +246,7 @@ class Mat270(KeywordBase):
 
     @lcat.setter
     def lcat(self, value: int) -> None:
+        """Set the lcat property."""
         self._cards[0].set_value("lcat", value)
 
     @property
@@ -250,6 +259,7 @@ class Mat270(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -260,6 +270,7 @@ class Mat270(KeywordBase):
 
     @tastart.setter
     def tastart(self, value: float) -> None:
+        """Set the tastart property."""
         self._cards[1].set_value("tastart", value)
 
     @property
@@ -270,6 +281,7 @@ class Mat270(KeywordBase):
 
     @taend.setter
     def taend(self, value: float) -> None:
+        """Set the taend property."""
         self._cards[1].set_value("taend", value)
 
     @property
@@ -280,6 +292,7 @@ class Mat270(KeywordBase):
 
     @tlstart.setter
     def tlstart(self, value: float) -> None:
+        """Set the tlstart property."""
         self._cards[1].set_value("tlstart", value)
 
     @property
@@ -290,6 +303,7 @@ class Mat270(KeywordBase):
 
     @tlend.setter
     def tlend(self, value: float) -> None:
+        """Set the tlend property."""
         self._cards[1].set_value("tlend", value)
 
     @property
@@ -300,6 +314,7 @@ class Mat270(KeywordBase):
 
     @eghost.setter
     def eghost(self, value: float) -> None:
+        """Set the eghost property."""
         self._cards[1].set_value("eghost", value)
 
     @property
@@ -310,6 +325,7 @@ class Mat270(KeywordBase):
 
     @pghost.setter
     def pghost(self, value: float) -> None:
+        """Set the pghost property."""
         self._cards[1].set_value("pghost", value)
 
     @property
@@ -320,6 +336,7 @@ class Mat270(KeywordBase):
 
     @aghost.setter
     def aghost(self, value: float) -> None:
+        """Set the aghost property."""
         self._cards[1].set_value("aghost", value)
 
     @property
@@ -330,5 +347,6 @@ class Mat270(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

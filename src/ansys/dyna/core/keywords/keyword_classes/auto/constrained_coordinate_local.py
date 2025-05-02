@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedCoordinateLocal(KeywordBase):
     subkeyword = "COORDINATE_LOCAL"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -97,6 +99,7 @@ class ConstrainedCoordinateLocal(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -107,6 +110,7 @@ class ConstrainedCoordinateLocal(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -120,8 +124,9 @@ class ConstrainedCoordinateLocal(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
+        """Set the idir property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""idir must be `None` or one of {1,2,3}""")
+            raise Exception("""idir must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("idir", value)
 
     @property
@@ -132,6 +137,7 @@ class ConstrainedCoordinateLocal(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -142,6 +148,7 @@ class ConstrainedCoordinateLocal(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -152,6 +159,7 @@ class ConstrainedCoordinateLocal(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 
     @property
@@ -162,5 +170,6 @@ class ConstrainedCoordinateLocal(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 

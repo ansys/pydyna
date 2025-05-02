@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialHydrostaticAle(KeywordBase):
     subkeyword = "HYDROSTATIC_ALE"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class InitialHydrostaticAle(KeywordBase):
 
     @alesid.setter
     def alesid(self, value: int) -> None:
+        """Set the alesid property."""
         self._cards[0].set_value("alesid", value)
 
     @property
@@ -120,8 +123,9 @@ class InitialHydrostaticAle(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2}""")
+            raise Exception("""stype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -132,6 +136,7 @@ class InitialHydrostaticAle(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[0].set_value("vecid", value)
 
     @property
@@ -142,6 +147,7 @@ class InitialHydrostaticAle(KeywordBase):
 
     @grav.setter
     def grav(self, value: float) -> None:
+        """Set the grav property."""
         self._cards[0].set_value("grav", value)
 
     @property
@@ -152,6 +158,7 @@ class InitialHydrostaticAle(KeywordBase):
 
     @pbase.setter
     def pbase(self, value: float) -> None:
+        """Set the pbase property."""
         self._cards[0].set_value("pbase", value)
 
     @property
@@ -162,6 +169,7 @@ class InitialHydrostaticAle(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -172,5 +180,6 @@ class InitialHydrostaticAle(KeywordBase):
 
     @mmgblo.setter
     def mmgblo(self, value: int) -> None:
+        """Set the mmgblo property."""
         self._cards[1].set_value("mmgblo", value)
 

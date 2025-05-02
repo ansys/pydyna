@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetSegmentCollect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -194,6 +196,7 @@ class SetSegmentCollect(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -204,6 +207,7 @@ class SetSegmentCollect(KeywordBase):
 
     @da1.setter
     def da1(self, value: float) -> None:
+        """Set the da1 property."""
         self._cards[0].set_value("da1", value)
 
     @property
@@ -214,6 +218,7 @@ class SetSegmentCollect(KeywordBase):
 
     @da2.setter
     def da2(self, value: float) -> None:
+        """Set the da2 property."""
         self._cards[0].set_value("da2", value)
 
     @property
@@ -224,6 +229,7 @@ class SetSegmentCollect(KeywordBase):
 
     @da3.setter
     def da3(self, value: float) -> None:
+        """Set the da3 property."""
         self._cards[0].set_value("da3", value)
 
     @property
@@ -234,6 +240,7 @@ class SetSegmentCollect(KeywordBase):
 
     @da4.setter
     def da4(self, value: float) -> None:
+        """Set the da4 property."""
         self._cards[0].set_value("da4", value)
 
     @property
@@ -246,8 +253,9 @@ class SetSegmentCollect(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -260,6 +268,7 @@ class SetSegmentCollect(KeywordBase):
 
     @its.setter
     def its(self, value: int) -> None:
+        """Set the its property."""
         self._cards[0].set_value("its", value)
 
     @property
@@ -270,6 +279,7 @@ class SetSegmentCollect(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[1].set_value("n1", value)
 
     @property
@@ -280,6 +290,7 @@ class SetSegmentCollect(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[1].set_value("n2", value)
 
     @property
@@ -290,6 +301,7 @@ class SetSegmentCollect(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[1].set_value("n3", value)
 
     @property
@@ -300,6 +312,7 @@ class SetSegmentCollect(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[1].set_value("n4", value)
 
     @property
@@ -310,6 +323,7 @@ class SetSegmentCollect(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -320,6 +334,7 @@ class SetSegmentCollect(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -330,6 +345,7 @@ class SetSegmentCollect(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[1].set_value("a3", value)
 
     @property
@@ -340,6 +356,7 @@ class SetSegmentCollect(KeywordBase):
 
     @a4.setter
     def a4(self, value: float) -> None:
+        """Set the a4 property."""
         self._cards[1].set_value("a4", value)
 
     @property
@@ -350,5 +367,6 @@ class SetSegmentCollect(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

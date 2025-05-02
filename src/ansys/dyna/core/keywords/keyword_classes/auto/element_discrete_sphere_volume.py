@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementDiscreteSphereVolume(KeywordBase):
     subkeyword = "DISCRETE_SPHERE_VOLUME"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -106,6 +108,7 @@ class ElementDiscreteSphereVolume(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -116,6 +119,7 @@ class ElementDiscreteSphereVolume(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -126,6 +130,7 @@ class ElementDiscreteSphereVolume(KeywordBase):
 
     @volume.setter
     def volume(self, value: float) -> None:
+        """Set the volume property."""
         self._cards[0].set_value("volume", value)
 
     @property
@@ -136,6 +141,7 @@ class ElementDiscreteSphereVolume(KeywordBase):
 
     @inertia.setter
     def inertia(self, value: float) -> None:
+        """Set the inertia property."""
         self._cards[0].set_value("inertia", value)
 
     @property
@@ -146,6 +152,7 @@ class ElementDiscreteSphereVolume(KeywordBase):
 
     @radii.setter
     def radii(self, value: float) -> None:
+        """Set the radii property."""
         self._cards[0].set_value("radii", value)
 
     @property
@@ -156,5 +163,6 @@ class ElementDiscreteSphereVolume(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[0].set_value("nid2", value)
 

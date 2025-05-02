@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSph02(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -111,6 +113,7 @@ class MatSph02(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -121,6 +124,7 @@ class MatSph02(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -131,6 +135,7 @@ class MatSph02(KeywordBase):
 
     @mu.setter
     def mu(self, value: float) -> None:
+        """Set the mu property."""
         self._cards[0].set_value("mu", value)
 
     @property
@@ -141,6 +146,7 @@ class MatSph02(KeywordBase):
 
     @gamma1.setter
     def gamma1(self, value: float) -> None:
+        """Set the gamma1 property."""
         self._cards[0].set_value("gamma1", value)
 
     @property
@@ -151,6 +157,7 @@ class MatSph02(KeywordBase):
 
     @gamma2.setter
     def gamma2(self, value: float) -> None:
+        """Set the gamma2 property."""
         self._cards[0].set_value("gamma2", value)
 
     @property
@@ -161,6 +168,7 @@ class MatSph02(KeywordBase):
 
     @stens.setter
     def stens(self, value: float) -> None:
+        """Set the stens property."""
         self._cards[0].set_value("stens", value)
 
     @property
@@ -171,5 +179,6 @@ class MatSph02(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

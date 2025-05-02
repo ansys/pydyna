@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -36,6 +37,7 @@ class IcfdPart(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -70,12 +72,12 @@ class IcfdPart(KeywordBase):
 
     @property
     def nodes(self):
-        '''Gets the table of nodes'''
+        """Get the table of nodes."""
         return self._cards[0].table
 
     @nodes.setter
     def nodes(self, df):
-        '''sets nodes from the dataframe df'''
+        """Set nodes from the dataframe df"""
         self._cards[0].table = df
 
     @property
@@ -86,5 +88,6 @@ class IcfdPart(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

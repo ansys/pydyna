@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DELETE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DeletePart(KeywordBase):
     subkeyword = "PART"
 
     def __init__(self, **kwargs):
+        """Initialize the DELETE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class DeletePart(KeywordBase):
 
     @id1.setter
     def id1(self, value: int) -> None:
+        """Set the id1 property."""
         self._cards[0].set_value("id1", value)
 
     @property
@@ -113,6 +116,7 @@ class DeletePart(KeywordBase):
 
     @id2.setter
     def id2(self, value: int) -> None:
+        """Set the id2 property."""
         self._cards[0].set_value("id2", value)
 
     @property
@@ -123,6 +127,7 @@ class DeletePart(KeywordBase):
 
     @id3.setter
     def id3(self, value: int) -> None:
+        """Set the id3 property."""
         self._cards[0].set_value("id3", value)
 
     @property
@@ -133,6 +138,7 @@ class DeletePart(KeywordBase):
 
     @id4.setter
     def id4(self, value: int) -> None:
+        """Set the id4 property."""
         self._cards[0].set_value("id4", value)
 
     @property
@@ -143,6 +149,7 @@ class DeletePart(KeywordBase):
 
     @id5.setter
     def id5(self, value: int) -> None:
+        """Set the id5 property."""
         self._cards[0].set_value("id5", value)
 
     @property
@@ -153,6 +160,7 @@ class DeletePart(KeywordBase):
 
     @id6.setter
     def id6(self, value: int) -> None:
+        """Set the id6 property."""
         self._cards[0].set_value("id6", value)
 
     @property
@@ -163,6 +171,7 @@ class DeletePart(KeywordBase):
 
     @id7.setter
     def id7(self, value: int) -> None:
+        """Set the id7 property."""
         self._cards[0].set_value("id7", value)
 
     @property
@@ -173,5 +182,6 @@ class DeletePart(KeywordBase):
 
     @id8.setter
     def id8(self, value: int) -> None:
+        """Set the id8 property."""
         self._cards[0].set_value("id8", value)
 

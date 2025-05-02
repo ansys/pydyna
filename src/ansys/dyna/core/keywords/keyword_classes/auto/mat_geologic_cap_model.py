@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatGeologicCapModel(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -206,6 +208,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -216,6 +219,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -226,6 +230,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @bulk.setter
     def bulk(self, value: float) -> None:
+        """Set the bulk property."""
         self._cards[0].set_value("bulk", value)
 
     @property
@@ -236,6 +241,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -246,6 +252,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 
     @property
@@ -256,6 +263,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @theta.setter
     def theta(self, value: float) -> None:
+        """Set the theta property."""
         self._cards[0].set_value("theta", value)
 
     @property
@@ -266,6 +274,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[0].set_value("gamma", value)
 
     @property
@@ -276,6 +285,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -286,6 +296,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[1].set_value("r", value)
 
     @property
@@ -296,6 +307,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[1].set_value("d", value)
 
     @property
@@ -306,6 +318,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[1].set_value("w", value)
 
     @property
@@ -316,6 +329,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[1].set_value("x0", value)
 
     @property
@@ -326,6 +340,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[1].set_value("c", value)
 
     @property
@@ -336,6 +351,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[1].set_value("n", value)
 
     @property
@@ -355,8 +371,9 @@ class MatGeologicCapModel(KeywordBase):
 
     @plot.setter
     def plot(self, value: float) -> None:
+        """Set the plot property."""
         if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, None]:
-            raise Exception("""plot must be `None` or one of {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0}""")
+            raise Exception("""plot must be `None` or one of {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0}.""")
         self._cards[2].set_value("plot", value)
 
     @property
@@ -369,8 +386,9 @@ class MatGeologicCapModel(KeywordBase):
 
     @ftype.setter
     def ftype(self, value: float) -> None:
+        """Set the ftype property."""
         if value not in [1.0, 2.0, None]:
-            raise Exception("""ftype must be `None` or one of {1.0,2.0}""")
+            raise Exception("""ftype must be `None` or one of {1.0,2.0}.""")
         self._cards[2].set_value("ftype", value)
 
     @property
@@ -384,8 +402,9 @@ class MatGeologicCapModel(KeywordBase):
 
     @vec.setter
     def vec(self, value: float) -> None:
+        """Set the vec property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""vec must be `None` or one of {0.0,1.0}""")
+            raise Exception("""vec must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("vec", value)
 
     @property
@@ -396,6 +415,7 @@ class MatGeologicCapModel(KeywordBase):
 
     @toff.setter
     def toff(self, value: float) -> None:
+        """Set the toff property."""
         self._cards[2].set_value("toff", value)
 
     @property
@@ -406,5 +426,6 @@ class MatGeologicCapModel(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

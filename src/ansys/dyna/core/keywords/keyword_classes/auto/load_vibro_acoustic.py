@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadVibroAcoustic(KeywordBase):
     subkeyword = "VIBRO_ACOUSTIC"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -137,6 +139,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @nmode.setter
     def nmode(self, value: float) -> None:
+        """Set the nmode property."""
         self._cards[0].set_value("nmode", value)
 
     @property
@@ -147,6 +150,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @texpos.setter
     def texpos(self, value: float) -> None:
+        """Set the texpos property."""
         self._cards[0].set_value("texpos", value)
 
     @property
@@ -157,6 +161,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @tscale.setter
     def tscale(self, value: float) -> None:
+        """Set the tscale property."""
         self._cards[0].set_value("tscale", value)
 
     @property
@@ -167,6 +172,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @temper.setter
     def temper(self, value: float) -> None:
+        """Set the temper property."""
         self._cards[0].set_value("temper", value)
 
     @property
@@ -177,6 +183,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @dampro.setter
     def dampro(self, value: float) -> None:
+        """Set the dampro property."""
         self._cards[0].set_value("dampro", value)
 
     @property
@@ -187,6 +194,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @damptype.setter
     def damptype(self, value: float) -> None:
+        """Set the damptype property."""
         self._cards[0].set_value("damptype", value)
 
     @property
@@ -197,6 +205,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @spltype.setter
     def spltype(self, value: float) -> None:
+        """Set the spltype property."""
         self._cards[0].set_value("spltype", value)
 
     @property
@@ -207,6 +216,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @lddamp.setter
     def lddamp(self, value: int) -> None:
+        """Set the lddamp property."""
         self._cards[1].set_value("lddamp", value)
 
     @property
@@ -217,6 +227,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @ldspl.setter
     def ldspl(self, value: int) -> None:
+        """Set the ldspl property."""
         self._cards[1].set_value("ldspl", value)
 
     @property
@@ -227,6 +238,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @ldvel.setter
     def ldvel(self, value: int) -> None:
+        """Set the ldvel property."""
         self._cards[1].set_value("ldvel", value)
 
     @property
@@ -237,6 +249,7 @@ class LoadVibroAcoustic(KeywordBase):
 
     @ldflw.setter
     def ldflw(self, value: int) -> None:
+        """Set the ldflw property."""
         self._cards[1].set_value("ldflw", value)
 
     @property
@@ -247,5 +260,6 @@ class LoadVibroAcoustic(KeywordBase):
 
     @ldspn.setter
     def ldspn(self, value: int) -> None:
+        """Set the ldspn property."""
         self._cards[1].set_value("ldspn", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
     subkeyword = "IMPLICIT_ROTATIONAL_DYNAMICS"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -159,6 +161,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -171,8 +174,9 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, None]:
-            raise Exception("""stype must be `None` or one of {0,1}""")
+            raise Exception("""stype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -184,6 +188,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @omega.setter
     def omega(self, value: float) -> None:
+        """Set the omega property."""
         self._cards[0].set_value("omega", value)
 
     @property
@@ -194,6 +199,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -204,6 +210,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @nomeg.setter
     def nomeg(self, value: int) -> None:
+        """Set the nomeg property."""
         self._cards[0].set_value("nomeg", value)
 
     @property
@@ -217,8 +224,9 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @iref.setter
     def iref(self, value: int) -> None:
+        """Set the iref property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""iref must be `None` or one of {0,1,2}""")
+            raise Exception("""iref must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("iref", value)
 
     @property
@@ -231,6 +239,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @omegadr.setter
     def omegadr(self, value: float) -> None:
+        """Set the omegadr property."""
         self._cards[0].set_value("omegadr", value)
 
     @property
@@ -241,6 +250,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @omeg1.setter
     def omeg1(self, value: float) -> None:
+        """Set the omeg1 property."""
         self._cards[1].set_value("omeg1", value)
 
     @property
@@ -251,6 +261,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @omeg2.setter
     def omeg2(self, value: float) -> None:
+        """Set the omeg2 property."""
         self._cards[1].set_value("omeg2", value)
 
     @property
@@ -261,6 +272,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @omeg3.setter
     def omeg3(self, value: float) -> None:
+        """Set the omeg3 property."""
         self._cards[1].set_value("omeg3", value)
 
     @property
@@ -271,6 +283,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @omeg4.setter
     def omeg4(self, value: float) -> None:
+        """Set the omeg4 property."""
         self._cards[1].set_value("omeg4", value)
 
     @property
@@ -281,6 +294,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @omeg5.setter
     def omeg5(self, value: float) -> None:
+        """Set the omeg5 property."""
         self._cards[1].set_value("omeg5", value)
 
     @property
@@ -291,6 +305,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @omeg6.setter
     def omeg6(self, value: float) -> None:
+        """Set the omeg6 property."""
         self._cards[1].set_value("omeg6", value)
 
     @property
@@ -301,6 +316,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @omeg7.setter
     def omeg7(self, value: float) -> None:
+        """Set the omeg7 property."""
         self._cards[1].set_value("omeg7", value)
 
     @property
@@ -311,5 +327,6 @@ class ControlImplicitRotationalDynamics(KeywordBase):
 
     @omeg8.setter
     def omeg8(self, value: float) -> None:
+        """Set the omeg8 property."""
         self._cards[1].set_value("omeg8", value)
 

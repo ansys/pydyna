@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmRandlesMeshless(KeywordBase):
     subkeyword = "RANDLES_MESHLESS"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -266,6 +268,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @rdlid.setter
     def rdlid(self, value: int) -> None:
+        """Set the rdlid property."""
         self._cards[0].set_value("rdlid", value)
 
     @property
@@ -280,8 +283,9 @@ class EmRandlesMeshless(KeywordBase):
 
     @rdltype.setter
     def rdltype(self, value: int) -> None:
+        """Set the rdltype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""rdltype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""rdltype must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("rdltype", value)
 
     @property
@@ -292,6 +296,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[1].set_value("q", value)
 
     @property
@@ -302,6 +307,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @cq.setter
     def cq(self, value: float) -> None:
+        """Set the cq property."""
         self._cards[1].set_value("cq", value)
 
     @property
@@ -312,6 +318,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @socinit.setter
     def socinit(self, value: float) -> None:
+        """Set the socinit property."""
         self._cards[1].set_value("socinit", value)
 
     @property
@@ -322,6 +329,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @soctou.setter
     def soctou(self, value: float) -> None:
+        """Set the soctou property."""
         self._cards[1].set_value("soctou", value)
 
     @property
@@ -332,6 +340,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @r0cha.setter
     def r0cha(self, value: float) -> None:
+        """Set the r0cha property."""
         self._cards[2].set_value("r0cha", value)
 
     @property
@@ -342,6 +351,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @r0dis.setter
     def r0dis(self, value: float) -> None:
+        """Set the r0dis property."""
         self._cards[2].set_value("r0dis", value)
 
     @property
@@ -352,6 +362,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @r10cha.setter
     def r10cha(self, value: float) -> None:
+        """Set the r10cha property."""
         self._cards[2].set_value("r10cha", value)
 
     @property
@@ -362,6 +373,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @r10dis.setter
     def r10dis(self, value: float) -> None:
+        """Set the r10dis property."""
         self._cards[2].set_value("r10dis", value)
 
     @property
@@ -372,6 +384,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @c10cha.setter
     def c10cha(self, value: float) -> None:
+        """Set the c10cha property."""
         self._cards[2].set_value("c10cha", value)
 
     @property
@@ -382,6 +395,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @c10dis.setter
     def c10dis(self, value: float) -> None:
+        """Set the c10dis property."""
         self._cards[2].set_value("c10dis", value)
 
     @property
@@ -394,6 +408,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @r20cha.setter
     def r20cha(self, value: float) -> None:
+        """Set the r20cha property."""
         self._cards[3].set_value("r20cha", value)
 
     @property
@@ -406,6 +421,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @r20dis.setter
     def r20dis(self, value: float) -> None:
+        """Set the r20dis property."""
         self._cards[3].set_value("r20dis", value)
 
     @property
@@ -418,6 +434,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @c20cha.setter
     def c20cha(self, value: float) -> None:
+        """Set the c20cha property."""
         self._cards[3].set_value("c20cha", value)
 
     @property
@@ -430,6 +447,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @c20dis.setter
     def c20dis(self, value: float) -> None:
+        """Set the c20dis property."""
         self._cards[3].set_value("c20dis", value)
 
     @property
@@ -442,6 +460,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @r30cha.setter
     def r30cha(self, value: float) -> None:
+        """Set the r30cha property."""
         self._cards[3].set_value("r30cha", value)
 
     @property
@@ -454,6 +473,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @r30dis.setter
     def r30dis(self, value: float) -> None:
+        """Set the r30dis property."""
         self._cards[3].set_value("r30dis", value)
 
     @property
@@ -466,6 +486,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @c30cha.setter
     def c30cha(self, value: float) -> None:
+        """Set the c30cha property."""
         self._cards[3].set_value("c30cha", value)
 
     @property
@@ -478,6 +499,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @c30dis.setter
     def c30dis(self, value: float) -> None:
+        """Set the c30dis property."""
         self._cards[3].set_value("c30dis", value)
 
     @property
@@ -488,6 +510,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @temp.setter
     def temp(self, value: float) -> None:
+        """Set the temp property."""
         self._cards[4].set_value("temp", value)
 
     @property
@@ -498,6 +521,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @dudt.setter
     def dudt(self, value: float) -> None:
+        """Set the dudt property."""
         self._cards[4].set_value("dudt", value)
 
     @property
@@ -510,8 +534,9 @@ class EmRandlesMeshless(KeywordBase):
 
     @tempu.setter
     def tempu(self, value: int) -> None:
+        """Set the tempu property."""
         if value not in [0, 1, None]:
-            raise Exception("""tempu must be `None` or one of {0,1}""")
+            raise Exception("""tempu must be `None` or one of {0,1}.""")
         self._cards[4].set_value("tempu", value)
 
     @property
@@ -524,8 +549,9 @@ class EmRandlesMeshless(KeywordBase):
 
     @usesocs.setter
     def usesocs(self, value: int) -> None:
+        """Set the usesocs property."""
         if value not in [0, 1, None]:
-            raise Exception("""usesocs must be `None` or one of {0,1}""")
+            raise Exception("""usesocs must be `None` or one of {0,1}.""")
         self._cards[5].set_value("usesocs", value)
 
     @property
@@ -536,6 +562,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @tau.setter
     def tau(self, value: float) -> None:
+        """Set the tau property."""
         self._cards[5].set_value("tau", value)
 
     @property
@@ -546,5 +573,6 @@ class EmRandlesMeshless(KeywordBase):
 
     @flcid.setter
     def flcid(self, value: int) -> None:
+        """Set the flcid property."""
         self._cards[5].set_value("flcid", value)
 

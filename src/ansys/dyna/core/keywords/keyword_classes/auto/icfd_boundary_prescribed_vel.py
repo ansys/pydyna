@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
     subkeyword = "BOUNDARY_PRESCRIBED_VEL"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -108,6 +110,7 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -122,8 +125,9 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""dof must be `None` or one of {1,2,3,4}""")
+            raise Exception("""dof must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("dof", value)
 
     @property
@@ -138,8 +142,9 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
+        """Set the vad property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""vad must be `None` or one of {1,2,3,4}""")
+            raise Exception("""vad must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("vad", value)
 
     @property
@@ -150,6 +155,7 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -160,6 +166,7 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -170,6 +177,7 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -180,6 +188,7 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -190,5 +199,6 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 

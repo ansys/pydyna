@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppDecompositionAdaptive(KeywordBase):
     subkeyword = "MPP_DECOMPOSITION_ADAPTIVE"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -87,6 +89,7 @@ class ControlMppDecompositionAdaptive(KeywordBase):
 
     @freq.setter
     def freq(self, value: float) -> None:
+        """Set the freq property."""
         self._cards[0].set_value("freq", value)
 
     @property
@@ -99,8 +102,9 @@ class ControlMppDecompositionAdaptive(KeywordBase):
 
     @defgeo.setter
     def defgeo(self, value: int) -> None:
+        """Set the defgeo property."""
         if value not in [1, 2, None]:
-            raise Exception("""defgeo must be `None` or one of {1,2}""")
+            raise Exception("""defgeo must be `None` or one of {1,2}.""")
         self._cards[0].set_value("defgeo", value)
 
     @property
@@ -111,6 +115,7 @@ class ControlMppDecompositionAdaptive(KeywordBase):
 
     @cweight.setter
     def cweight(self, value: float) -> None:
+        """Set the cweight property."""
         self._cards[0].set_value("cweight", value)
 
     @property
@@ -121,5 +126,6 @@ class ControlMppDecompositionAdaptive(KeywordBase):
 
     @stime.setter
     def stime(self, value: float) -> None:
+        """Set the stime property."""
         self._cards[0].set_value("stime", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INTERFACE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceCompensation(KeywordBase):
     subkeyword = "COMPENSATION"
 
     def __init__(self, **kwargs):
+        """Initialize the INTERFACE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -112,8 +114,9 @@ class InterfaceCompensation(KeywordBase):
 
     @stage.setter
     def stage(self, value: int) -> None:
+        """Set the stage property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""stage must be `None` or one of {1,2,3}""")
+            raise Exception("""stage must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("stage", value)
 
     @property
@@ -124,6 +127,7 @@ class InterfaceCompensation(KeywordBase):
 
     @psidt.setter
     def psidt(self, value: int) -> None:
+        """Set the psidt property."""
         self._cards[0].set_value("psidt", value)
 
     @property
@@ -134,6 +138,7 @@ class InterfaceCompensation(KeywordBase):
 
     @psidb.setter
     def psidb(self, value: int) -> None:
+        """Set the psidb property."""
         self._cards[0].set_value("psidb", value)
 
     @property
@@ -149,8 +154,9 @@ class InterfaceCompensation(KeywordBase):
 
     @smooth.setter
     def smooth(self, value: int) -> None:
+        """Set the smooth property."""
         if value not in [3, 1, 2, 4, 5, None]:
-            raise Exception("""smooth must be `None` or one of {3,1,2,4,5}""")
+            raise Exception("""smooth must be `None` or one of {3,1,2,4,5}.""")
         self._cards[0].set_value("smooth", value)
 
     @property
@@ -161,6 +167,7 @@ class InterfaceCompensation(KeywordBase):
 
     @scale.setter
     def scale(self, value: float) -> None:
+        """Set the scale property."""
         self._cards[0].set_value("scale", value)
 
     @property
@@ -171,6 +178,7 @@ class InterfaceCompensation(KeywordBase):
 
     @dbname.setter
     def dbname(self, value: str) -> None:
+        """Set the dbname property."""
         self._cards[1].set_value("dbname", value)
 
     @property
@@ -181,5 +189,6 @@ class InterfaceCompensation(KeywordBase):
 
     @outname.setter
     def outname(self, value: str) -> None:
+        """Set the outname property."""
         self._cards[2].set_value("outname", value)
 

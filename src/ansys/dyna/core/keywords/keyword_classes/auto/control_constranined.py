@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlConstranined(KeywordBase):
     subkeyword = "CONSTRANINED"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -58,7 +60,8 @@ class ControlConstranined(KeywordBase):
 
     @sprchk.setter
     def sprchk(self, value: int) -> None:
+        """Set the sprchk property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sprchk must be `None` or one of {0,1,2}""")
+            raise Exception("""sprchk must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sprchk", value)
 

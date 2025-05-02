@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementSeatbeltSlipring(KeywordBase):
     subkeyword = "SEATBELT_SLIPRING"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -165,6 +167,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @sbsrid.setter
     def sbsrid(self, value: int) -> None:
+        """Set the sbsrid property."""
         self._cards[0].set_value("sbsrid", value)
 
     @property
@@ -175,6 +178,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @sbid1.setter
     def sbid1(self, value: int) -> None:
+        """Set the sbid1 property."""
         self._cards[0].set_value("sbid1", value)
 
     @property
@@ -185,6 +189,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @sbid2.setter
     def sbid2(self, value: int) -> None:
+        """Set the sbid2 property."""
         self._cards[0].set_value("sbid2", value)
 
     @property
@@ -195,6 +200,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @fc.setter
     def fc(self, value: float) -> None:
+        """Set the fc property."""
         self._cards[0].set_value("fc", value)
 
     @property
@@ -205,6 +211,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @sbrnid.setter
     def sbrnid(self, value: int) -> None:
+        """Set the sbrnid property."""
         self._cards[0].set_value("sbrnid", value)
 
     @property
@@ -215,6 +222,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @ltime.setter
     def ltime(self, value: float) -> None:
+        """Set the ltime property."""
         self._cards[0].set_value("ltime", value)
 
     @property
@@ -225,6 +233,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @fcs.setter
     def fcs(self, value: float) -> None:
+        """Set the fcs property."""
         self._cards[0].set_value("fcs", value)
 
     @property
@@ -235,6 +244,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @onid.setter
     def onid(self, value: int) -> None:
+        """Set the onid property."""
         self._cards[0].set_value("onid", value)
 
     @property
@@ -245,6 +255,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[1].set_value("k", value)
 
     @property
@@ -255,6 +266,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @funcid_.setter
     def funcid_(self, value: int) -> None:
+        """Set the funcid_ property."""
         self._cards[1].set_value("funcid ", value)
 
     @property
@@ -267,6 +279,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @direct.setter
     def direct(self, value: int) -> None:
+        """Set the direct property."""
         self._cards[1].set_value("direct", value)
 
     @property
@@ -277,6 +290,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[1].set_value("dc", value)
 
     @property
@@ -290,6 +304,7 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @lcnffd.setter
     def lcnffd(self, value: int) -> None:
+        """Set the lcnffd property."""
         self._cards[1].set_value("lcnffd", value)
 
     @property
@@ -303,5 +318,6 @@ class ElementSeatbeltSlipring(KeywordBase):
 
     @lcnffs.setter
     def lcnffs(self, value: int) -> None:
+        """Set the lcnffs property."""
         self._cards[1].set_value("lcnffs", value)
 

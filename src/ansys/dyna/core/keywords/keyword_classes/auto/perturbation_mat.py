@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the PERTURBATION keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PerturbationMat(KeywordBase):
     subkeyword = "MAT"
 
     def __init__(self, **kwargs):
+        """Initialize the PERTURBATION keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -273,8 +275,9 @@ class PerturbationMat(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""type must be `None` or one of {1,2,3,4}""")
+            raise Exception("""type must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -285,6 +288,7 @@ class PerturbationMat(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -295,6 +299,7 @@ class PerturbationMat(KeywordBase):
 
     @scl.setter
     def scl(self, value: float) -> None:
+        """Set the scl property."""
         self._cards[0].set_value("scl", value)
 
     @property
@@ -305,6 +310,7 @@ class PerturbationMat(KeywordBase):
 
     @cmp.setter
     def cmp(self, value: int) -> None:
+        """Set the cmp property."""
         self._cards[0].set_value("cmp", value)
 
     @property
@@ -321,8 +327,9 @@ class PerturbationMat(KeywordBase):
 
     @icoord.setter
     def icoord(self, value: int) -> None:
+        """Set the icoord property."""
         if value not in [0, 1, 2, 3, -2, -3, None]:
-            raise Exception("""icoord must be `None` or one of {0,1,2,3,-2,-3}""")
+            raise Exception("""icoord must be `None` or one of {0,1,2,3,-2,-3}.""")
         self._cards[0].set_value("icoord", value)
 
     @property
@@ -333,6 +340,7 @@ class PerturbationMat(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -343,6 +351,7 @@ class PerturbationMat(KeywordBase):
 
     @ampl.setter
     def ampl(self, value: float) -> None:
+        """Set the ampl property."""
         self._cards[1].set_value("ampl", value)
 
     @property
@@ -353,6 +362,7 @@ class PerturbationMat(KeywordBase):
 
     @xwl.setter
     def xwl(self, value: float) -> None:
+        """Set the xwl property."""
         self._cards[1].set_value("xwl", value)
 
     @property
@@ -363,6 +373,7 @@ class PerturbationMat(KeywordBase):
 
     @xoff.setter
     def xoff(self, value: float) -> None:
+        """Set the xoff property."""
         self._cards[1].set_value("xoff", value)
 
     @property
@@ -373,6 +384,7 @@ class PerturbationMat(KeywordBase):
 
     @ywl.setter
     def ywl(self, value: float) -> None:
+        """Set the ywl property."""
         self._cards[1].set_value("ywl", value)
 
     @property
@@ -383,6 +395,7 @@ class PerturbationMat(KeywordBase):
 
     @yoff.setter
     def yoff(self, value: float) -> None:
+        """Set the yoff property."""
         self._cards[1].set_value("yoff", value)
 
     @property
@@ -393,6 +406,7 @@ class PerturbationMat(KeywordBase):
 
     @zwl.setter
     def zwl(self, value: float) -> None:
+        """Set the zwl property."""
         self._cards[1].set_value("zwl", value)
 
     @property
@@ -403,6 +417,7 @@ class PerturbationMat(KeywordBase):
 
     @zoff.setter
     def zoff(self, value: float) -> None:
+        """Set the zoff property."""
         self._cards[1].set_value("zoff", value)
 
     @property
@@ -413,6 +428,7 @@ class PerturbationMat(KeywordBase):
 
     @fade.setter
     def fade(self, value: float) -> None:
+        """Set the fade property."""
         self._cards[2].set_value("fade", value)
 
     @property
@@ -423,6 +439,7 @@ class PerturbationMat(KeywordBase):
 
     @fname.setter
     def fname(self, value: str) -> None:
+        """Set the fname property."""
         self._cards[3].set_value("fname", value)
 
     @property
@@ -442,8 +459,9 @@ class PerturbationMat(KeywordBase):
 
     @cstype.setter
     def cstype(self, value: int) -> None:
+        """Set the cstype property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, None]:
-            raise Exception("""cstype must be `None` or one of {1,2,3,4,5,6,7,8,9}""")
+            raise Exception("""cstype must be `None` or one of {1,2,3,4,5,6,7,8,9}.""")
         self._cards[4].set_value("cstype", value)
 
     @property
@@ -454,6 +472,7 @@ class PerturbationMat(KeywordBase):
 
     @ellip1.setter
     def ellip1(self, value: float) -> None:
+        """Set the ellip1 property."""
         self._cards[4].set_value("ellip1", value)
 
     @property
@@ -464,6 +483,7 @@ class PerturbationMat(KeywordBase):
 
     @ellip2.setter
     def ellip2(self, value: float) -> None:
+        """Set the ellip2 property."""
         self._cards[4].set_value("ellip2", value)
 
     @property
@@ -476,6 +496,7 @@ class PerturbationMat(KeywordBase):
 
     @rnd.setter
     def rnd(self, value: int) -> None:
+        """Set the rnd property."""
         self._cards[4].set_value("rnd", value)
 
     @property
@@ -491,8 +512,9 @@ class PerturbationMat(KeywordBase):
 
     @cftype.setter
     def cftype(self, value: int) -> None:
+        """Set the cftype property."""
         if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""cftype must be `None` or one of {1,2,3,4,5}""")
+            raise Exception("""cftype must be `None` or one of {1,2,3,4,5}.""")
         self._cards[5].set_value("cftype", value)
 
     @property
@@ -503,6 +525,7 @@ class PerturbationMat(KeywordBase):
 
     @cfc1.setter
     def cfc1(self, value: float) -> None:
+        """Set the cfc1 property."""
         self._cards[5].set_value("cfc1", value)
 
     @property
@@ -513,6 +536,7 @@ class PerturbationMat(KeywordBase):
 
     @cfc2.setter
     def cfc2(self, value: float) -> None:
+        """Set the cfc2 property."""
         self._cards[5].set_value("cfc2", value)
 
     @property
@@ -523,6 +547,7 @@ class PerturbationMat(KeywordBase):
 
     @cfc3.setter
     def cfc3(self, value: float) -> None:
+        """Set the cfc3 property."""
         self._cards[5].set_value("cfc3", value)
 
     @property
@@ -533,6 +558,7 @@ class PerturbationMat(KeywordBase):
 
     @ampl.setter
     def ampl(self, value: int) -> None:
+        """Set the ampl property."""
         self._cards[6].set_value("ampl", value)
 
     @property
@@ -545,5 +571,6 @@ class PerturbationMat(KeywordBase):
 
     @dtype.setter
     def dtype(self, value: float) -> None:
+        """Set the dtype property."""
         self._cards[6].set_value("dtype", value)
 

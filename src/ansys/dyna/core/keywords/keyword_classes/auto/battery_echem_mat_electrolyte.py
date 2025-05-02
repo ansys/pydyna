@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BATTERY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BatteryEchemMatElectrolyte(KeywordBase):
     subkeyword = "ECHEM_MAT_ELECTROLYTE"
 
     def __init__(self, **kwargs):
+        """Initialize the BATTERY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -121,6 +123,7 @@ class BatteryEchemMatElectrolyte(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -138,6 +141,7 @@ class BatteryEchemMatElectrolyte(KeywordBase):
 
     @ielyte.setter
     def ielyte(self, value: int) -> None:
+        """Set the ielyte property."""
         self._cards[0].set_value("ielyte", value)
 
     @property
@@ -150,6 +154,7 @@ class BatteryEchemMatElectrolyte(KeywordBase):
 
     @etype.setter
     def etype(self, value: int) -> None:
+        """Set the etype property."""
         self._cards[0].set_value("etype", value)
 
     @property
@@ -160,6 +165,7 @@ class BatteryEchemMatElectrolyte(KeywordBase):
 
     @rhoe.setter
     def rhoe(self, value: float) -> None:
+        """Set the rhoe property."""
         self._cards[0].set_value("rhoe", value)
 
     @property
@@ -170,6 +176,7 @@ class BatteryEchemMatElectrolyte(KeywordBase):
 
     @rhop.setter
     def rhop(self, value: float) -> None:
+        """Set the rhop property."""
         self._cards[0].set_value("rhop", value)
 
     @property
@@ -180,6 +187,7 @@ class BatteryEchemMatElectrolyte(KeywordBase):
 
     @rhos.setter
     def rhos(self, value: float) -> None:
+        """Set the rhos property."""
         self._cards[0].set_value("rhos", value)
 
     @property
@@ -190,6 +198,7 @@ class BatteryEchemMatElectrolyte(KeywordBase):
 
     @calmax.setter
     def calmax(self, value: float) -> None:
+        """Set the calmax property."""
         self._cards[0].set_value("calmax", value)
 
     @property
@@ -200,6 +209,7 @@ class BatteryEchemMatElectrolyte(KeywordBase):
 
     @vfes.setter
     def vfes(self, value: float) -> None:
+        """Set the vfes property."""
         self._cards[1].set_value("vfes", value)
 
     @property
@@ -210,6 +220,7 @@ class BatteryEchemMatElectrolyte(KeywordBase):
 
     @vfps.setter
     def vfps(self, value: float) -> None:
+        """Set the vfps property."""
         self._cards[1].set_value("vfps", value)
 
     @property
@@ -220,5 +231,6 @@ class BatteryEchemMatElectrolyte(KeywordBase):
 
     @vfgs.setter
     def vfgs(self, value: float) -> None:
+        """Set the vfgs property."""
         self._cards[1].set_value("vfgs", value)
 

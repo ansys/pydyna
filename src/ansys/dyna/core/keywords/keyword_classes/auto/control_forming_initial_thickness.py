@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingInitialThickness(KeywordBase):
     subkeyword = "FORMING_INITIAL_THICKNESS"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class ControlFormingInitialThickness(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -113,6 +116,7 @@ class ControlFormingInitialThickness(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -123,6 +127,7 @@ class ControlFormingInitialThickness(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[0].set_value("x0", value)
 
     @property
@@ -133,6 +138,7 @@ class ControlFormingInitialThickness(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[0].set_value("y0", value)
 
     @property
@@ -143,6 +149,7 @@ class ControlFormingInitialThickness(KeywordBase):
 
     @z0x.setter
     def z0x(self, value: float) -> None:
+        """Set the z0x property."""
         self._cards[0].set_value("z0x", value)
 
     @property
@@ -153,6 +160,7 @@ class ControlFormingInitialThickness(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -163,6 +171,7 @@ class ControlFormingInitialThickness(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -173,5 +182,6 @@ class ControlFormingInitialThickness(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTACT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ContactExcludeInteraction(KeywordBase):
     subkeyword = "EXCLUDE_INTERACTION"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTACT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class ContactExcludeInteraction(KeywordBase):
 
     @ceid.setter
     def ceid(self, value: int) -> None:
+        """Set the ceid property."""
         self._cards[0].set_value("ceid", value)
 
     @property
@@ -105,6 +108,7 @@ class ContactExcludeInteraction(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -115,6 +119,7 @@ class ContactExcludeInteraction(KeywordBase):
 
     @sid2.setter
     def sid2(self, value: int) -> None:
+        """Set the sid2 property."""
         self._cards[1].set_value("sid2", value)
 
     @property
@@ -125,6 +130,7 @@ class ContactExcludeInteraction(KeywordBase):
 
     @sid1.setter
     def sid1(self, value: int) -> None:
+        """Set the sid1 property."""
         self._cards[1].set_value("sid1", value)
 
     @property
@@ -138,8 +144,9 @@ class ContactExcludeInteraction(KeywordBase):
 
     @type2.setter
     def type2(self, value: int) -> None:
+        """Set the type2 property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""type2 must be `None` or one of {0,1,2}""")
+            raise Exception("""type2 must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("type2", value)
 
     @property
@@ -153,7 +160,8 @@ class ContactExcludeInteraction(KeywordBase):
 
     @type1.setter
     def type1(self, value: int) -> None:
+        """Set the type1 property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""type1 must be `None` or one of {0,1,2}""")
+            raise Exception("""type1 must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("type1", value)
 

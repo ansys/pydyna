@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
     subkeyword = "FEM_PERI_TIE_BREAK"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -84,6 +86,7 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -94,6 +97,7 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
 
     @msid.setter
     def msid(self, value: int) -> None:
+        """Set the msid property."""
         self._cards[0].set_value("msid", value)
 
     @property
@@ -104,6 +108,7 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -114,6 +119,7 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
 
     @ft.setter
     def ft(self, value: int) -> None:
+        """Set the ft property."""
         self._cards[0].set_value("ft", value)
 
     @property
@@ -124,5 +130,6 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
 
     @fs.setter
     def fs(self, value: int) -> None:
+        """Set the fs property."""
         self._cards[0].set_value("fs", value)
 

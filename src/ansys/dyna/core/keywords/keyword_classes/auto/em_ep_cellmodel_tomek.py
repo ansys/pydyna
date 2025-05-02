@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EM keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEpCellmodelTomek(KeywordBase):
     subkeyword = "EP_CELLMODEL_TOMEK"
 
     def __init__(self, **kwargs):
+        """Initialize the EM keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class EmEpCellmodelTomek(KeywordBase):
 
     @matid.setter
     def matid(self, value: int) -> None:
+        """Set the matid property."""
         self._cards[0].set_value("matid", value)
 
     @property
@@ -78,6 +81,7 @@ class EmEpCellmodelTomek(KeywordBase):
 
     @phiendmid.setter
     def phiendmid(self, value: float) -> None:
+        """Set the phiendmid property."""
         self._cards[0].set_value("phiendmid", value)
 
     @property
@@ -88,5 +92,6 @@ class EmEpCellmodelTomek(KeywordBase):
 
     @phimidepl.setter
     def phimidepl(self, value: float) -> None:
+        """Set the phimidepl property."""
         self._cards[0].set_value("phimidepl", value)
 

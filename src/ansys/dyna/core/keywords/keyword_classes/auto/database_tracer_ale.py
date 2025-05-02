@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseTracerAle(KeywordBase):
     subkeyword = "TRACER_ALE"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class DatabaseTracerAle(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -107,8 +110,9 @@ class DatabaseTracerAle(KeywordBase):
 
     @track.setter
     def track(self, value: int) -> None:
+        """Set the track property."""
         if value not in [0, 1, None]:
-            raise Exception("""track must be `None` or one of {0,1}""")
+            raise Exception("""track must be `None` or one of {0,1}.""")
         self._cards[0].set_value("track", value)
 
     @property
@@ -119,6 +123,7 @@ class DatabaseTracerAle(KeywordBase):
 
     @ammgid.setter
     def ammgid(self, value: int) -> None:
+        """Set the ammgid property."""
         self._cards[0].set_value("ammgid", value)
 
     @property
@@ -129,6 +134,7 @@ class DatabaseTracerAle(KeywordBase):
 
     @hvbeg.setter
     def hvbeg(self, value: int) -> None:
+        """Set the hvbeg property."""
         self._cards[0].set_value("hvbeg", value)
 
     @property
@@ -139,6 +145,7 @@ class DatabaseTracerAle(KeywordBase):
 
     @hvend.setter
     def hvend(self, value: int) -> None:
+        """Set the hvend property."""
         self._cards[0].set_value("hvend", value)
 
     @property
@@ -149,5 +156,6 @@ class DatabaseTracerAle(KeywordBase):
 
     @time.setter
     def time(self, value: float) -> None:
+        """Set the time property."""
         self._cards[0].set_value("time", value)
 

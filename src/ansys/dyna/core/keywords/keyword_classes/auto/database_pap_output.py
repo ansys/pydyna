@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabasePapOutput(KeywordBase):
     subkeyword = "PAP_OUTPUT"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -89,8 +91,9 @@ class DatabasePapOutput(KeywordBase):
 
     @ivel.setter
     def ivel(self, value: int) -> None:
+        """Set the ivel property."""
         if value not in [0, 1, None]:
-            raise Exception("""ivel must be `None` or one of {0,1}""")
+            raise Exception("""ivel must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ivel", value)
 
     @property
@@ -106,8 +109,9 @@ class DatabasePapOutput(KeywordBase):
 
     @iaccx.setter
     def iaccx(self, value: int) -> None:
+        """Set the iaccx property."""
         if value not in [0, 21, 22, 24, 25, None]:
-            raise Exception("""iaccx must be `None` or one of {0,21,22,24,25}""")
+            raise Exception("""iaccx must be `None` or one of {0,21,22,24,25}.""")
         self._cards[0].set_value("iaccx", value)
 
     @property
@@ -123,8 +127,9 @@ class DatabasePapOutput(KeywordBase):
 
     @iaccy.setter
     def iaccy(self, value: int) -> None:
+        """Set the iaccy property."""
         if value not in [0, 21, 22, 24, 25, None]:
-            raise Exception("""iaccy must be `None` or one of {0,21,22,24,25}""")
+            raise Exception("""iaccy must be `None` or one of {0,21,22,24,25}.""")
         self._cards[0].set_value("iaccy", value)
 
     @property
@@ -140,8 +145,9 @@ class DatabasePapOutput(KeywordBase):
 
     @iaccz.setter
     def iaccz(self, value: int) -> None:
+        """Set the iaccz property."""
         if value not in [0, 21, 22, 24, 25, None]:
-            raise Exception("""iaccz must be `None` or one of {0,21,22,24,25}""")
+            raise Exception("""iaccz must be `None` or one of {0,21,22,24,25}.""")
         self._cards[0].set_value("iaccz", value)
 
     @property
@@ -152,5 +158,6 @@ class DatabasePapOutput(KeywordBase):
 
     @ncyout.setter
     def ncyout(self, value: int) -> None:
+        """Set the ncyout property."""
         self._cards[0].set_value("ncyout", value)
 

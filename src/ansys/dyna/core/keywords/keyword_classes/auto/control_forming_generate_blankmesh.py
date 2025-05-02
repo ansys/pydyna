@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
     subkeyword = "FORMING_GENERATE_BLANKMESH"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -179,6 +181,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @gentyp.setter
     def gentyp(self, value: int) -> None:
+        """Set the gentyp property."""
         self._cards[0].set_value("gentyp", value)
 
     @property
@@ -189,6 +192,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @eleng.setter
     def eleng(self, value: float) -> None:
+        """Set the eleng property."""
         self._cards[0].set_value("eleng", value)
 
     @property
@@ -201,8 +205,9 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @center.setter
     def center(self, value: int) -> None:
+        """Set the center property."""
         if value not in [0, 1, None]:
-            raise Exception("""center must be `None` or one of {0,1}""")
+            raise Exception("""center must be `None` or one of {0,1}.""")
         self._cards[0].set_value("center", value)
 
     @property
@@ -213,6 +218,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @xleng.setter
     def xleng(self, value: float) -> None:
+        """Set the xleng property."""
         self._cards[0].set_value("xleng", value)
 
     @property
@@ -223,6 +229,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @yleng.setter
     def yleng(self, value: float) -> None:
+        """Set the yleng property."""
         self._cards[0].set_value("yleng", value)
 
     @property
@@ -233,6 +240,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @align.setter
     def align(self, value: float) -> None:
+        """Set the align property."""
         self._cards[0].set_value("align", value)
 
     @property
@@ -246,8 +254,9 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @plane.setter
     def plane(self, value: int) -> None:
+        """Set the plane property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""plane must be `None` or one of {1,2,3}""")
+            raise Exception("""plane must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("plane", value)
 
     @property
@@ -258,6 +267,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -268,6 +278,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @bpid.setter
     def bpid(self, value: int) -> None:
+        """Set the bpid property."""
         self._cards[1].set_value("bpid", value)
 
     @property
@@ -278,6 +289,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @snid.setter
     def snid(self, value: int) -> None:
+        """Set the snid property."""
         self._cards[1].set_value("snid", value)
 
     @property
@@ -288,6 +300,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @seid.setter
     def seid(self, value: int) -> None:
+        """Set the seid property."""
         self._cards[1].set_value("seid", value)
 
     @property
@@ -298,6 +311,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @xcent.setter
     def xcent(self, value: float) -> None:
+        """Set the xcent property."""
         self._cards[1].set_value("xcent", value)
 
     @property
@@ -308,6 +322,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @ycent.setter
     def ycent(self, value: float) -> None:
+        """Set the ycent property."""
         self._cards[1].set_value("ycent", value)
 
     @property
@@ -318,6 +333,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @zcent.setter
     def zcent(self, value: float) -> None:
+        """Set the zcent property."""
         self._cards[1].set_value("zcent", value)
 
     @property
@@ -328,6 +344,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @xshift.setter
     def xshift(self, value: float) -> None:
+        """Set the xshift property."""
         self._cards[1].set_value("xshift", value)
 
     @property
@@ -338,6 +355,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @yshift.setter
     def yshift(self, value: float) -> None:
+        """Set the yshift property."""
         self._cards[1].set_value("yshift", value)
 
     @property
@@ -348,5 +366,6 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[2].set_value("filename", value)
 

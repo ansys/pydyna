@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAle03(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -451,6 +453,7 @@ class MatAle03(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -464,8 +467,9 @@ class MatAle03(KeywordBase):
 
     @iadiab.setter
     def iadiab(self, value: int) -> None:
+        """Set the iadiab property."""
         if value not in [0, 1, None]:
-            raise Exception("""iadiab must be `None` or one of {0,1}""")
+            raise Exception("""iadiab must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iadiab", value)
 
     @property
@@ -476,6 +480,7 @@ class MatAle03(KeywordBase):
 
     @runiv.setter
     def runiv(self, value: float) -> None:
+        """Set the runiv property."""
         self._cards[0].set_value("runiv", value)
 
     @property
@@ -486,6 +491,7 @@ class MatAle03(KeywordBase):
 
     @cvmass1.setter
     def cvmass1(self, value: float) -> None:
+        """Set the cvmass1 property."""
         self._cards[1].set_value("cvmass1", value)
 
     @property
@@ -496,6 +502,7 @@ class MatAle03(KeywordBase):
 
     @cvmass2.setter
     def cvmass2(self, value: float) -> None:
+        """Set the cvmass2 property."""
         self._cards[1].set_value("cvmass2", value)
 
     @property
@@ -506,6 +513,7 @@ class MatAle03(KeywordBase):
 
     @cvmass3.setter
     def cvmass3(self, value: float) -> None:
+        """Set the cvmass3 property."""
         self._cards[1].set_value("cvmass3", value)
 
     @property
@@ -516,6 +524,7 @@ class MatAle03(KeywordBase):
 
     @cvmass4.setter
     def cvmass4(self, value: float) -> None:
+        """Set the cvmass4 property."""
         self._cards[1].set_value("cvmass4", value)
 
     @property
@@ -526,6 +535,7 @@ class MatAle03(KeywordBase):
 
     @cvmass5.setter
     def cvmass5(self, value: float) -> None:
+        """Set the cvmass5 property."""
         self._cards[1].set_value("cvmass5", value)
 
     @property
@@ -536,6 +546,7 @@ class MatAle03(KeywordBase):
 
     @cvmass6.setter
     def cvmass6(self, value: float) -> None:
+        """Set the cvmass6 property."""
         self._cards[1].set_value("cvmass6", value)
 
     @property
@@ -546,6 +557,7 @@ class MatAle03(KeywordBase):
 
     @cvmass7.setter
     def cvmass7(self, value: float) -> None:
+        """Set the cvmass7 property."""
         self._cards[1].set_value("cvmass7", value)
 
     @property
@@ -556,6 +568,7 @@ class MatAle03(KeywordBase):
 
     @cvmass8.setter
     def cvmass8(self, value: float) -> None:
+        """Set the cvmass8 property."""
         self._cards[1].set_value("cvmass8", value)
 
     @property
@@ -566,6 +579,7 @@ class MatAle03(KeywordBase):
 
     @cpmass1.setter
     def cpmass1(self, value: float) -> None:
+        """Set the cpmass1 property."""
         self._cards[2].set_value("cpmass1", value)
 
     @property
@@ -576,6 +590,7 @@ class MatAle03(KeywordBase):
 
     @cpmass2.setter
     def cpmass2(self, value: float) -> None:
+        """Set the cpmass2 property."""
         self._cards[2].set_value("cpmass2", value)
 
     @property
@@ -586,6 +601,7 @@ class MatAle03(KeywordBase):
 
     @cpmass3.setter
     def cpmass3(self, value: float) -> None:
+        """Set the cpmass3 property."""
         self._cards[2].set_value("cpmass3", value)
 
     @property
@@ -596,6 +612,7 @@ class MatAle03(KeywordBase):
 
     @cpmass4.setter
     def cpmass4(self, value: float) -> None:
+        """Set the cpmass4 property."""
         self._cards[2].set_value("cpmass4", value)
 
     @property
@@ -606,6 +623,7 @@ class MatAle03(KeywordBase):
 
     @cpmass5.setter
     def cpmass5(self, value: float) -> None:
+        """Set the cpmass5 property."""
         self._cards[2].set_value("cpmass5", value)
 
     @property
@@ -616,6 +634,7 @@ class MatAle03(KeywordBase):
 
     @cpmass6.setter
     def cpmass6(self, value: float) -> None:
+        """Set the cpmass6 property."""
         self._cards[2].set_value("cpmass6", value)
 
     @property
@@ -626,6 +645,7 @@ class MatAle03(KeywordBase):
 
     @cpmass7.setter
     def cpmass7(self, value: float) -> None:
+        """Set the cpmass7 property."""
         self._cards[2].set_value("cpmass7", value)
 
     @property
@@ -636,6 +656,7 @@ class MatAle03(KeywordBase):
 
     @cpmass8.setter
     def cpmass8(self, value: float) -> None:
+        """Set the cpmass8 property."""
         self._cards[2].set_value("cpmass8", value)
 
     @property
@@ -646,6 +667,7 @@ class MatAle03(KeywordBase):
 
     @molwt1.setter
     def molwt1(self, value: float) -> None:
+        """Set the molwt1 property."""
         self._cards[3].set_value("molwt1", value)
 
     @property
@@ -656,6 +678,7 @@ class MatAle03(KeywordBase):
 
     @molwt2.setter
     def molwt2(self, value: float) -> None:
+        """Set the molwt2 property."""
         self._cards[3].set_value("molwt2", value)
 
     @property
@@ -666,6 +689,7 @@ class MatAle03(KeywordBase):
 
     @molwt3.setter
     def molwt3(self, value: float) -> None:
+        """Set the molwt3 property."""
         self._cards[3].set_value("molwt3", value)
 
     @property
@@ -676,6 +700,7 @@ class MatAle03(KeywordBase):
 
     @molwt4.setter
     def molwt4(self, value: float) -> None:
+        """Set the molwt4 property."""
         self._cards[3].set_value("molwt4", value)
 
     @property
@@ -686,6 +711,7 @@ class MatAle03(KeywordBase):
 
     @molwt5.setter
     def molwt5(self, value: float) -> None:
+        """Set the molwt5 property."""
         self._cards[3].set_value("molwt5", value)
 
     @property
@@ -696,6 +722,7 @@ class MatAle03(KeywordBase):
 
     @molwt6.setter
     def molwt6(self, value: float) -> None:
+        """Set the molwt6 property."""
         self._cards[3].set_value("molwt6", value)
 
     @property
@@ -706,6 +733,7 @@ class MatAle03(KeywordBase):
 
     @molwt7.setter
     def molwt7(self, value: float) -> None:
+        """Set the molwt7 property."""
         self._cards[3].set_value("molwt7", value)
 
     @property
@@ -716,6 +744,7 @@ class MatAle03(KeywordBase):
 
     @molwt8.setter
     def molwt8(self, value: float) -> None:
+        """Set the molwt8 property."""
         self._cards[3].set_value("molwt8", value)
 
     @property
@@ -726,6 +755,7 @@ class MatAle03(KeywordBase):
 
     @cpmole1.setter
     def cpmole1(self, value: float) -> None:
+        """Set the cpmole1 property."""
         self._cards[4].set_value("cpmole1", value)
 
     @property
@@ -736,6 +766,7 @@ class MatAle03(KeywordBase):
 
     @cpmole2.setter
     def cpmole2(self, value: float) -> None:
+        """Set the cpmole2 property."""
         self._cards[4].set_value("cpmole2", value)
 
     @property
@@ -746,6 +777,7 @@ class MatAle03(KeywordBase):
 
     @cpmole3.setter
     def cpmole3(self, value: float) -> None:
+        """Set the cpmole3 property."""
         self._cards[4].set_value("cpmole3", value)
 
     @property
@@ -756,6 +788,7 @@ class MatAle03(KeywordBase):
 
     @cpmole4.setter
     def cpmole4(self, value: float) -> None:
+        """Set the cpmole4 property."""
         self._cards[4].set_value("cpmole4", value)
 
     @property
@@ -766,6 +799,7 @@ class MatAle03(KeywordBase):
 
     @cpmole5.setter
     def cpmole5(self, value: float) -> None:
+        """Set the cpmole5 property."""
         self._cards[4].set_value("cpmole5", value)
 
     @property
@@ -776,6 +810,7 @@ class MatAle03(KeywordBase):
 
     @cpmole6.setter
     def cpmole6(self, value: float) -> None:
+        """Set the cpmole6 property."""
         self._cards[4].set_value("cpmole6", value)
 
     @property
@@ -786,6 +821,7 @@ class MatAle03(KeywordBase):
 
     @cpmole7.setter
     def cpmole7(self, value: float) -> None:
+        """Set the cpmole7 property."""
         self._cards[4].set_value("cpmole7", value)
 
     @property
@@ -796,6 +832,7 @@ class MatAle03(KeywordBase):
 
     @cpmole8.setter
     def cpmole8(self, value: float) -> None:
+        """Set the cpmole8 property."""
         self._cards[4].set_value("cpmole8", value)
 
     @property
@@ -806,6 +843,7 @@ class MatAle03(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[5].set_value("b1", value)
 
     @property
@@ -816,6 +854,7 @@ class MatAle03(KeywordBase):
 
     @b2.setter
     def b2(self, value: float) -> None:
+        """Set the b2 property."""
         self._cards[5].set_value("b2", value)
 
     @property
@@ -826,6 +865,7 @@ class MatAle03(KeywordBase):
 
     @b3.setter
     def b3(self, value: float) -> None:
+        """Set the b3 property."""
         self._cards[5].set_value("b3", value)
 
     @property
@@ -836,6 +876,7 @@ class MatAle03(KeywordBase):
 
     @b4.setter
     def b4(self, value: float) -> None:
+        """Set the b4 property."""
         self._cards[5].set_value("b4", value)
 
     @property
@@ -846,6 +887,7 @@ class MatAle03(KeywordBase):
 
     @b5.setter
     def b5(self, value: float) -> None:
+        """Set the b5 property."""
         self._cards[5].set_value("b5", value)
 
     @property
@@ -856,6 +898,7 @@ class MatAle03(KeywordBase):
 
     @b6.setter
     def b6(self, value: float) -> None:
+        """Set the b6 property."""
         self._cards[5].set_value("b6", value)
 
     @property
@@ -866,6 +909,7 @@ class MatAle03(KeywordBase):
 
     @b7.setter
     def b7(self, value: float) -> None:
+        """Set the b7 property."""
         self._cards[5].set_value("b7", value)
 
     @property
@@ -876,6 +920,7 @@ class MatAle03(KeywordBase):
 
     @b8.setter
     def b8(self, value: float) -> None:
+        """Set the b8 property."""
         self._cards[5].set_value("b8", value)
 
     @property
@@ -886,6 +931,7 @@ class MatAle03(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[6].set_value("c1", value)
 
     @property
@@ -896,6 +942,7 @@ class MatAle03(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[6].set_value("c2", value)
 
     @property
@@ -906,6 +953,7 @@ class MatAle03(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[6].set_value("c3", value)
 
     @property
@@ -916,6 +964,7 @@ class MatAle03(KeywordBase):
 
     @c4.setter
     def c4(self, value: float) -> None:
+        """Set the c4 property."""
         self._cards[6].set_value("c4", value)
 
     @property
@@ -926,6 +975,7 @@ class MatAle03(KeywordBase):
 
     @c5.setter
     def c5(self, value: float) -> None:
+        """Set the c5 property."""
         self._cards[6].set_value("c5", value)
 
     @property
@@ -936,6 +986,7 @@ class MatAle03(KeywordBase):
 
     @c6.setter
     def c6(self, value: float) -> None:
+        """Set the c6 property."""
         self._cards[6].set_value("c6", value)
 
     @property
@@ -946,6 +997,7 @@ class MatAle03(KeywordBase):
 
     @c7.setter
     def c7(self, value: float) -> None:
+        """Set the c7 property."""
         self._cards[6].set_value("c7", value)
 
     @property
@@ -956,6 +1008,7 @@ class MatAle03(KeywordBase):
 
     @c8.setter
     def c8(self, value: float) -> None:
+        """Set the c8 property."""
         self._cards[6].set_value("c8", value)
 
     @property
@@ -966,5 +1019,6 @@ class MatAle03(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
 

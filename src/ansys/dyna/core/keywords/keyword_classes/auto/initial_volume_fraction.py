@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialVolumeFraction(KeywordBase):
     subkeyword = "VOLUME_FRACTION"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,6 +112,7 @@ class InitialVolumeFraction(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -121,6 +124,7 @@ class InitialVolumeFraction(KeywordBase):
 
     @vf1.setter
     def vf1(self, value: float) -> None:
+        """Set the vf1 property."""
         self._cards[0].set_value("vf1", value)
 
     @property
@@ -132,6 +136,7 @@ class InitialVolumeFraction(KeywordBase):
 
     @vf2.setter
     def vf2(self, value: float) -> None:
+        """Set the vf2 property."""
         self._cards[0].set_value("vf2", value)
 
     @property
@@ -142,6 +147,7 @@ class InitialVolumeFraction(KeywordBase):
 
     @vf3.setter
     def vf3(self, value: float) -> None:
+        """Set the vf3 property."""
         self._cards[0].set_value("vf3", value)
 
     @property
@@ -152,6 +158,7 @@ class InitialVolumeFraction(KeywordBase):
 
     @vf4.setter
     def vf4(self, value: float) -> None:
+        """Set the vf4 property."""
         self._cards[0].set_value("vf4", value)
 
     @property
@@ -162,6 +169,7 @@ class InitialVolumeFraction(KeywordBase):
 
     @vf5.setter
     def vf5(self, value: float) -> None:
+        """Set the vf5 property."""
         self._cards[0].set_value("vf5", value)
 
     @property
@@ -172,6 +180,7 @@ class InitialVolumeFraction(KeywordBase):
 
     @vf6.setter
     def vf6(self, value: float) -> None:
+        """Set the vf6 property."""
         self._cards[0].set_value("vf6", value)
 
     @property
@@ -182,5 +191,6 @@ class InitialVolumeFraction(KeywordBase):
 
     @vf7.setter
     def vf7(self, value: float) -> None:
+        """Set the vf7 property."""
         self._cards[0].set_value("vf7", value)
 

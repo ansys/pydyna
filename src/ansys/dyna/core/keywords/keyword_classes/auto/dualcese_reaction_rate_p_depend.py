@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DUALCESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseReactionRatePDepend(KeywordBase):
     subkeyword = "REACTION_RATE_P_DEPEND"
 
     def __init__(self, **kwargs):
+        """Initialize the DUALCESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -75,6 +77,7 @@ class DualceseReactionRatePDepend(KeywordBase):
 
     @react_id.setter
     def react_id(self, value: int) -> None:
+        """Set the react_id property."""
         self._cards[0].set_value("react_id", value)
 
     @property
@@ -85,6 +88,7 @@ class DualceseReactionRatePDepend(KeywordBase):
 
     @sigma.setter
     def sigma(self, value: float) -> None:
+        """Set the sigma property."""
         self._cards[0].set_value("sigma", value)
 
     @property
@@ -95,6 +99,7 @@ class DualceseReactionRatePDepend(KeywordBase):
 
     @nu.setter
     def nu(self, value: float) -> None:
+        """Set the nu property."""
         self._cards[0].set_value("nu", value)
 
     @property
@@ -105,5 +110,6 @@ class DualceseReactionRatePDepend(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 

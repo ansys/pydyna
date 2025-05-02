@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the SET keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SET keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -176,6 +178,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -186,6 +189,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @da1.setter
     def da1(self, value: float) -> None:
+        """Set the da1 property."""
         self._cards[0].set_value("da1", value)
 
     @property
@@ -196,6 +200,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @da2.setter
     def da2(self, value: float) -> None:
+        """Set the da2 property."""
         self._cards[0].set_value("da2", value)
 
     @property
@@ -206,6 +211,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @da3.setter
     def da3(self, value: float) -> None:
+        """Set the da3 property."""
         self._cards[0].set_value("da3", value)
 
     @property
@@ -216,6 +222,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @da4.setter
     def da4(self, value: float) -> None:
+        """Set the da4 property."""
         self._cards[0].set_value("da4", value)
 
     @property
@@ -226,8 +233,9 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -238,6 +246,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @b1beg.setter
     def b1beg(self, value: int) -> None:
+        """Set the b1beg property."""
         self._cards[1].set_value("b1beg", value)
 
     @property
@@ -252,6 +261,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @b1end.setter
     def b1end(self, value: int) -> None:
+        """Set the b1end property."""
         self._cards[1].set_value("b1end", value)
 
     @property
@@ -262,6 +272,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @b2beg.setter
     def b2beg(self, value: int) -> None:
+        """Set the b2beg property."""
         self._cards[1].set_value("b2beg", value)
 
     @property
@@ -276,6 +287,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @b2end.setter
     def b2end(self, value: int) -> None:
+        """Set the b2end property."""
         self._cards[1].set_value("b2end", value)
 
     @property
@@ -286,6 +298,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @b3beg.setter
     def b3beg(self, value: int) -> None:
+        """Set the b3beg property."""
         self._cards[1].set_value("b3beg", value)
 
     @property
@@ -300,6 +313,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @b3end.setter
     def b3end(self, value: int) -> None:
+        """Set the b3end property."""
         self._cards[1].set_value("b3end", value)
 
     @property
@@ -310,6 +324,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @b4beg.setter
     def b4beg(self, value: int) -> None:
+        """Set the b4beg property."""
         self._cards[1].set_value("b4beg", value)
 
     @property
@@ -324,6 +339,7 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @b4end.setter
     def b4end(self, value: int) -> None:
+        """Set the b4end property."""
         self._cards[1].set_value("b4end", value)
 
     @property
@@ -334,5 +350,6 @@ class SetIgaFaceXyzListGenerate(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

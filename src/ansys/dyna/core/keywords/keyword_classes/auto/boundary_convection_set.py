@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryConvectionSet(KeywordBase):
     subkeyword = "CONVECTION_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class BoundaryConvectionSet(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -113,6 +116,7 @@ class BoundaryConvectionSet(KeywordBase):
 
     @pserod.setter
     def pserod(self, value: int) -> None:
+        """Set the pserod property."""
         self._cards[0].set_value("pserod", value)
 
     @property
@@ -126,6 +130,7 @@ class BoundaryConvectionSet(KeywordBase):
 
     @hlcid.setter
     def hlcid(self, value: int) -> None:
+        """Set the hlcid property."""
         self._cards[1].set_value("hlcid", value)
 
     @property
@@ -136,6 +141,7 @@ class BoundaryConvectionSet(KeywordBase):
 
     @hmult.setter
     def hmult(self, value: float) -> None:
+        """Set the hmult property."""
         self._cards[1].set_value("hmult", value)
 
     @property
@@ -147,6 +153,7 @@ class BoundaryConvectionSet(KeywordBase):
 
     @tlcid.setter
     def tlcid(self, value: int) -> None:
+        """Set the tlcid property."""
         self._cards[1].set_value("tlcid", value)
 
     @property
@@ -157,6 +164,7 @@ class BoundaryConvectionSet(KeywordBase):
 
     @tmult.setter
     def tmult(self, value: float) -> None:
+        """Set the tmult property."""
         self._cards[1].set_value("tmult", value)
 
     @property
@@ -169,7 +177,8 @@ class BoundaryConvectionSet(KeywordBase):
 
     @loc.setter
     def loc(self, value: int) -> None:
+        """Set the loc property."""
         if value not in [0, -1, 1, None]:
-            raise Exception("""loc must be `None` or one of {0,-1,1}""")
+            raise Exception("""loc must be `None` or one of {0,-1,1}.""")
         self._cards[1].set_value("loc", value)
 

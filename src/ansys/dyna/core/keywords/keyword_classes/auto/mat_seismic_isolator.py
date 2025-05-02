@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSeismicIsolator(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -470,6 +472,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -480,6 +483,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -490,6 +494,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -500,6 +505,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -510,6 +516,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[0].set_value("gamma", value)
 
     @property
@@ -520,6 +527,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @dispy.setter
     def dispy(self, value: float) -> None:
+        """Set the dispy property."""
         self._cards[0].set_value("dispy", value)
 
     @property
@@ -530,6 +538,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @stiffv.setter
     def stiffv(self, value: float) -> None:
+        """Set the stiffv property."""
         self._cards[0].set_value("stiffv", value)
 
     @property
@@ -545,8 +554,9 @@ class MatSeismicIsolator(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""itype must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""itype must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -557,6 +567,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @preload.setter
     def preload(self, value: float) -> None:
+        """Set the preload property."""
         self._cards[1].set_value("preload", value)
 
     @property
@@ -567,6 +578,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[1].set_value("damp", value)
 
     @property
@@ -577,6 +589,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @mx1.setter
     def mx1(self, value: float) -> None:
+        """Set the mx1 property."""
         self._cards[1].set_value("mx1", value)
 
     @property
@@ -587,6 +600,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @mx2.setter
     def mx2(self, value: float) -> None:
+        """Set the mx2 property."""
         self._cards[1].set_value("mx2", value)
 
     @property
@@ -597,6 +611,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @my1.setter
     def my1(self, value: float) -> None:
+        """Set the my1 property."""
         self._cards[1].set_value("my1", value)
 
     @property
@@ -607,6 +622,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @my2.setter
     def my2(self, value: float) -> None:
+        """Set the my2 property."""
         self._cards[1].set_value("my2", value)
 
     @property
@@ -617,6 +633,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @cde.setter
     def cde(self, value: float) -> None:
+        """Set the cde property."""
         self._cards[1].set_value("cde", value)
 
     @property
@@ -627,6 +644,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @iextra.setter
     def iextra(self, value: int) -> None:
+        """Set the iextra property."""
         self._cards[1].set_value("iextra", value)
 
     @property
@@ -637,6 +655,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @fmax.setter
     def fmax(self, value: float) -> None:
+        """Set the fmax property."""
         self._cards[2].set_value("fmax", value)
 
     @property
@@ -647,6 +666,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @delf.setter
     def delf(self, value: float) -> None:
+        """Set the delf property."""
         self._cards[2].set_value("delf", value)
 
     @property
@@ -657,6 +677,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @afric.setter
     def afric(self, value: float) -> None:
+        """Set the afric property."""
         self._cards[2].set_value("afric", value)
 
     @property
@@ -667,6 +688,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @radx.setter
     def radx(self, value: float) -> None:
+        """Set the radx property."""
         self._cards[2].set_value("radx", value)
 
     @property
@@ -677,6 +699,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @rady.setter
     def rady(self, value: float) -> None:
+        """Set the rady property."""
         self._cards[2].set_value("rady", value)
 
     @property
@@ -687,6 +710,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @radb.setter
     def radb(self, value: float) -> None:
+        """Set the radb property."""
         self._cards[2].set_value("radb", value)
 
     @property
@@ -697,6 +721,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @stiffl.setter
     def stiffl(self, value: float) -> None:
+        """Set the stiffl property."""
         self._cards[2].set_value("stiffl", value)
 
     @property
@@ -707,6 +732,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @stiffts.setter
     def stiffts(self, value: float) -> None:
+        """Set the stiffts property."""
         self._cards[2].set_value("stiffts", value)
 
     @property
@@ -717,6 +743,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @forcey.setter
     def forcey(self, value: float) -> None:
+        """Set the forcey property."""
         self._cards[3].set_value("forcey", value)
 
     @property
@@ -727,6 +754,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[3].set_value("alpha", value)
 
     @property
@@ -737,6 +765,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @stifft.setter
     def stifft(self, value: float) -> None:
+        """Set the stifft property."""
         self._cards[3].set_value("stifft", value)
 
     @property
@@ -747,6 +776,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @dfail.setter
     def dfail(self, value: float) -> None:
+        """Set the dfail property."""
         self._cards[3].set_value("dfail", value)
 
     @property
@@ -757,6 +787,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @fmaxyc.setter
     def fmaxyc(self, value: float) -> None:
+        """Set the fmaxyc property."""
         self._cards[3].set_value("fmaxyc", value)
 
     @property
@@ -767,6 +798,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @fmaxxt.setter
     def fmaxxt(self, value: float) -> None:
+        """Set the fmaxxt property."""
         self._cards[3].set_value("fmaxxt", value)
 
     @property
@@ -777,6 +809,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @fmaxyt.setter
     def fmaxyt(self, value: float) -> None:
+        """Set the fmaxyt property."""
         self._cards[3].set_value("fmaxyt", value)
 
     @property
@@ -787,6 +820,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @ylock.setter
     def ylock(self, value: float) -> None:
+        """Set the ylock property."""
         self._cards[3].set_value("ylock", value)
 
     @property
@@ -797,6 +831,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @htcore.setter
     def htcore(self, value: float) -> None:
+        """Set the htcore property."""
         self._cards[4].set_value("htcore", value)
 
     @property
@@ -807,6 +842,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @rcore.setter
     def rcore(self, value: float) -> None:
+        """Set the rcore property."""
         self._cards[4].set_value("rcore", value)
 
     @property
@@ -817,6 +853,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @tshim.setter
     def tshim(self, value: float) -> None:
+        """Set the tshim property."""
         self._cards[4].set_value("tshim", value)
 
     @property
@@ -827,6 +864,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @rolcl.setter
     def rolcl(self, value: float) -> None:
+        """Set the rolcl property."""
         self._cards[4].set_value("rolcl", value)
 
     @property
@@ -837,6 +875,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @roscs.setter
     def roscs(self, value: float) -> None:
+        """Set the roscs property."""
         self._cards[4].set_value("roscs", value)
 
     @property
@@ -847,6 +886,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @thcst.setter
     def thcst(self, value: float) -> None:
+        """Set the thcst property."""
         self._cards[4].set_value("thcst", value)
 
     @property
@@ -857,6 +897,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @yle2.setter
     def yle2(self, value: float) -> None:
+        """Set the yle2 property."""
         self._cards[4].set_value("yle2", value)
 
     @property
@@ -867,6 +908,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @pcrini.setter
     def pcrini(self, value: float) -> None:
+        """Set the pcrini property."""
         self._cards[5].set_value("pcrini", value)
 
     @property
@@ -877,6 +919,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @diamb.setter
     def diamb(self, value: float) -> None:
+        """Set the diamb property."""
         self._cards[5].set_value("diamb", value)
 
     @property
@@ -887,6 +930,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @fcav0.setter
     def fcav0(self, value: float) -> None:
+        """Set the fcav0 property."""
         self._cards[5].set_value("fcav0", value)
 
     @property
@@ -897,6 +941,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @cavk.setter
     def cavk(self, value: float) -> None:
+        """Set the cavk property."""
         self._cards[5].set_value("cavk", value)
 
     @property
@@ -907,6 +952,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @cavtr.setter
     def cavtr(self, value: float) -> None:
+        """Set the cavtr property."""
         self._cards[5].set_value("cavtr", value)
 
     @property
@@ -917,6 +963,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @cava.setter
     def cava(self, value: float) -> None:
+        """Set the cava property."""
         self._cards[5].set_value("cava", value)
 
     @property
@@ -927,6 +974,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @phim.setter
     def phim(self, value: float) -> None:
+        """Set the phim property."""
         self._cards[5].set_value("phim", value)
 
     @property
@@ -937,6 +985,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[6].set_value("beta", value)
 
     @property
@@ -947,6 +996,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @kthx.setter
     def kthx(self, value: float) -> None:
+        """Set the kthx property."""
         self._cards[7].set_value("kthx", value)
 
     @property
@@ -957,6 +1007,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @kthy.setter
     def kthy(self, value: float) -> None:
+        """Set the kthy property."""
         self._cards[7].set_value("kthy", value)
 
     @property
@@ -967,6 +1018,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @kthz.setter
     def kthz(self, value: float) -> None:
+        """Set the kthz property."""
         self._cards[7].set_value("kthz", value)
 
     @property
@@ -977,5 +1029,6 @@ class MatSeismicIsolator(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[8].cards[0].set_value("title", value)
 

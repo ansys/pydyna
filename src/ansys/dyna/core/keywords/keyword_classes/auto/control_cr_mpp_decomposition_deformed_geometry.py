@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlCrMppDecompositionDeformedGeometry(KeywordBase):
     subkeyword = "CR_MPP_DECOMPOSITION_DEFORMED_GEOMETRY"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -56,5 +58,6 @@ class ControlCrMppDecompositionDeformedGeometry(KeywordBase):
 
     @sph.setter
     def sph(self, value: int) -> None:
+        """Set the sph property."""
         self._cards[0].set_value("sph", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTACT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Contact2DAutomaticTied(KeywordBase):
     subkeyword = "2D_AUTOMATIC_TIED"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTACT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -272,6 +274,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @surfa.setter
     def surfa(self, value: int) -> None:
+        """Set the surfa property."""
         self._cards[0].set_value("surfa", value)
 
     @property
@@ -282,6 +285,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @surfb.setter
     def surfb(self, value: int) -> None:
+        """Set the surfb property."""
         self._cards[0].set_value("surfb", value)
 
     @property
@@ -292,6 +296,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @sfact.setter
     def sfact(self, value: float) -> None:
+        """Set the sfact property."""
         self._cards[0].set_value("sfact", value)
 
     @property
@@ -302,6 +307,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @freq.setter
     def freq(self, value: int) -> None:
+        """Set the freq property."""
         self._cards[0].set_value("freq", value)
 
     @property
@@ -312,6 +318,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[0].set_value("fs", value)
 
     @property
@@ -322,6 +329,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[0].set_value("fd", value)
 
     @property
@@ -332,6 +340,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[0].set_value("dc", value)
 
     @property
@@ -342,6 +351,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[1].set_value("tbirth", value)
 
     @property
@@ -352,6 +362,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[1].set_value("tdeath", value)
 
     @property
@@ -365,6 +376,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @soa.setter
     def soa(self, value: float) -> None:
+        """Set the soa property."""
         self._cards[1].set_value("soa", value)
 
     @property
@@ -378,6 +390,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @sob.setter
     def sob(self, value: float) -> None:
+        """Set the sob property."""
         self._cards[1].set_value("sob", value)
 
     @property
@@ -391,8 +404,9 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @nda.setter
     def nda(self, value: int) -> None:
+        """Set the nda property."""
         if value not in [0, 1, -1, None]:
-            raise Exception("""nda must be `None` or one of {0,1,-1}""")
+            raise Exception("""nda must be `None` or one of {0,1,-1}.""")
         self._cards[1].set_value("nda", value)
 
     @property
@@ -406,8 +420,9 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @ndb.setter
     def ndb(self, value: int) -> None:
+        """Set the ndb property."""
         if value not in [0, 1, -1, None]:
-            raise Exception("""ndb must be `None` or one of {0,1,-1}""")
+            raise Exception("""ndb must be `None` or one of {0,1,-1}.""")
         self._cards[1].set_value("ndb", value)
 
     @property
@@ -420,8 +435,9 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @cof.setter
     def cof(self, value: int) -> None:
+        """Set the cof property."""
         if value not in [0, 1, None]:
-            raise Exception("""cof must be `None` or one of {0,1}""")
+            raise Exception("""cof must be `None` or one of {0,1}.""")
         self._cards[1].set_value("cof", value)
 
     @property
@@ -434,8 +450,9 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @init.setter
     def init(self, value: int) -> None:
+        """Set the init property."""
         if value not in [0, 1, None]:
-            raise Exception("""init must be `None` or one of {0,1}""")
+            raise Exception("""init must be `None` or one of {0,1}.""")
         self._cards[1].set_value("init", value)
 
     @property
@@ -446,6 +463,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[2].set_value("vc", value)
 
     @property
@@ -456,6 +474,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @vdc.setter
     def vdc(self, value: float) -> None:
+        """Set the vdc property."""
         self._cards[2].set_value("vdc", value)
 
     @property
@@ -468,8 +487,9 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @ipf.setter
     def ipf(self, value: int) -> None:
+        """Set the ipf property."""
         if value not in [0, 1, None]:
-            raise Exception("""ipf must be `None` or one of {0,1}""")
+            raise Exception("""ipf must be `None` or one of {0,1}.""")
         self._cards[2].set_value("ipf", value)
 
     @property
@@ -482,8 +502,9 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @slide.setter
     def slide(self, value: int) -> None:
+        """Set the slide property."""
         if value not in [0, 1, None]:
-            raise Exception("""slide must be `None` or one of {0,1}""")
+            raise Exception("""slide must be `None` or one of {0,1}.""")
         self._cards[2].set_value("slide", value)
 
     @property
@@ -497,8 +518,9 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @istiff.setter
     def istiff(self, value: int) -> None:
+        """Set the istiff property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""istiff must be `None` or one of {0,1,2}""")
+            raise Exception("""istiff must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("istiff", value)
 
     @property
@@ -512,6 +534,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @tiedgap.setter
     def tiedgap(self, value: float) -> None:
+        """Set the tiedgap property."""
         self._cards[2].set_value("tiedgap", value)
 
     @property
@@ -524,8 +547,9 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @igapcl.setter
     def igapcl(self, value: int) -> None:
+        """Set the igapcl property."""
         if value not in [0, 1, None]:
-            raise Exception("""igapcl must be `None` or one of {0,1}""")
+            raise Exception("""igapcl must be `None` or one of {0,1}.""")
         self._cards[2].set_value("igapcl", value)
 
     @property
@@ -538,8 +562,9 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @tietyp.setter
     def tietyp(self, value: int) -> None:
+        """Set the tietyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""tietyp must be `None` or one of {0,1}""")
+            raise Exception("""tietyp must be `None` or one of {0,1}.""")
         self._cards[2].set_value("tietyp", value)
 
     @property
@@ -550,6 +575,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @sldsoa.setter
     def sldsoa(self, value: float) -> None:
+        """Set the sldsoa property."""
         self._cards[3].set_value("sldsoa", value)
 
     @property
@@ -560,6 +586,7 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @sldsob.setter
     def sldsob(self, value: float) -> None:
+        """Set the sldsob property."""
         self._cards[3].set_value("sldsob", value)
 
     @property
@@ -572,5 +599,6 @@ class Contact2DAutomaticTied(KeywordBase):
 
     @tdpen.setter
     def tdpen(self, value: float) -> None:
+        """Set the tdpen property."""
         self._cards[3].set_value("tdpen", value)
 

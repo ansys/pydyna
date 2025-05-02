@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementShellBextPatch(KeywordBase):
     subkeyword = "SHELL_BEXT_PATCH"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -514,6 +516,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @epid.setter
     def epid(self, value: int) -> None:
+        """Set the epid property."""
         self._cards[0].set_value("epid", value)
 
     @property
@@ -524,6 +527,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -534,6 +538,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @nel.setter
     def nel(self, value: int) -> None:
+        """Set the nel property."""
         self._cards[0].set_value("nel", value)
 
     @property
@@ -549,6 +554,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @wfl.setter
     def wfl(self, value: int) -> None:
+        """Set the wfl property."""
         self._cards[1].set_value("wfl", value)
 
     @property
@@ -563,8 +569,9 @@ class ElementShellBextPatch(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
+        """Set the form property."""
         if value not in [0, 1, 2, 4, None]:
-            raise Exception("""form must be `None` or one of {0,1,2,4}""")
+            raise Exception("""form must be `None` or one of {0,1,2,4}.""")
         self._cards[1].set_value("form", value)
 
     @property
@@ -581,8 +588,9 @@ class ElementShellBextPatch(KeywordBase):
 
     @int_.setter
     def int_(self, value: int) -> None:
+        """Set the int_ property."""
         if value not in [0, 1, None]:
-            raise Exception("""int_ must be `None` or one of {0,1}""")
+            raise Exception("""int_ must be `None` or one of {0,1}.""")
         self._cards[1].set_value("int", value)
 
     @property
@@ -593,6 +601,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @nisr.setter
     def nisr(self, value: int) -> None:
+        """Set the nisr property."""
         self._cards[1].set_value("nisr", value)
 
     @property
@@ -603,6 +612,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @niss.setter
     def niss(self, value: int) -> None:
+        """Set the niss property."""
         self._cards[1].set_value("niss", value)
 
     @property
@@ -615,8 +625,9 @@ class ElementShellBextPatch(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
+        """Set the imass property."""
         if value not in [0, 1, None]:
-            raise Exception("""imass must be `None` or one of {0,1}""")
+            raise Exception("""imass must be `None` or one of {0,1}.""")
         self._cards[1].set_value("imass", value)
 
     @property
@@ -629,6 +640,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @nl.setter
     def nl(self, value: int) -> None:
+        """Set the nl property."""
         self._cards[1].set_value("nl", value)
 
     @property
@@ -641,8 +653,9 @@ class ElementShellBextPatch(KeywordBase):
 
     @shpe.setter
     def shpe(self, value: int) -> None:
+        """Set the shpe property."""
         if value not in [0, 1, None]:
-            raise Exception("""shpe must be `None` or one of {0,1}""")
+            raise Exception("""shpe must be `None` or one of {0,1}.""")
         self._cards[2].set_value("shpe", value)
 
     @property
@@ -653,6 +666,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @pr.setter
     def pr(self, value: int) -> None:
+        """Set the pr property."""
         self._cards[2].set_value("pr", value)
 
     @property
@@ -663,6 +677,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @ps.setter
     def ps(self, value: int) -> None:
+        """Set the ps property."""
         self._cards[2].set_value("ps", value)
 
     @property
@@ -673,6 +688,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @bdry.setter
     def bdry(self, value: int) -> None:
+        """Set the bdry property."""
         self._cards[2].set_value("bdry", value)
 
     @property
@@ -683,6 +699,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @trm.setter
     def trm(self, value: int) -> None:
+        """Set the trm property."""
         self._cards[2].set_value("trm", value)
 
     @property
@@ -693,6 +710,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @smth.setter
     def smth(self, value: int) -> None:
+        """Set the smth property."""
         self._cards[2].set_value("smth", value)
 
     @property
@@ -703,6 +721,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @b1.setter
     def b1(self, value: int) -> None:
+        """Set the b1 property."""
         self._cards[3].set_value("b1", value)
 
     @property
@@ -713,6 +732,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @b2.setter
     def b2(self, value: int) -> None:
+        """Set the b2 property."""
         self._cards[3].set_value("b2", value)
 
     @property
@@ -723,6 +743,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @b3.setter
     def b3(self, value: int) -> None:
+        """Set the b3 property."""
         self._cards[3].set_value("b3", value)
 
     @property
@@ -733,6 +754,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @b4.setter
     def b4(self, value: int) -> None:
+        """Set the b4 property."""
         self._cards[3].set_value("b4", value)
 
     @property
@@ -743,6 +765,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @b5.setter
     def b5(self, value: int) -> None:
+        """Set the b5 property."""
         self._cards[3].set_value("b5", value)
 
     @property
@@ -753,6 +776,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @b6.setter
     def b6(self, value: int) -> None:
+        """Set the b6 property."""
         self._cards[3].set_value("b6", value)
 
     @property
@@ -763,6 +787,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @b7.setter
     def b7(self, value: int) -> None:
+        """Set the b7 property."""
         self._cards[3].set_value("b7", value)
 
     @property
@@ -773,6 +798,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @b8.setter
     def b8(self, value: int) -> None:
+        """Set the b8 property."""
         self._cards[3].set_value("b8", value)
 
     @property
@@ -783,6 +809,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @s1.setter
     def s1(self, value: int) -> None:
+        """Set the s1 property."""
         self._cards[4].set_value("s1", value)
 
     @property
@@ -793,6 +820,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @s2.setter
     def s2(self, value: int) -> None:
+        """Set the s2 property."""
         self._cards[4].set_value("s2", value)
 
     @property
@@ -803,6 +831,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @s3.setter
     def s3(self, value: int) -> None:
+        """Set the s3 property."""
         self._cards[4].set_value("s3", value)
 
     @property
@@ -813,6 +842,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @s4.setter
     def s4(self, value: int) -> None:
+        """Set the s4 property."""
         self._cards[4].set_value("s4", value)
 
     @property
@@ -823,6 +853,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @s5.setter
     def s5(self, value: int) -> None:
+        """Set the s5 property."""
         self._cards[4].set_value("s5", value)
 
     @property
@@ -833,6 +864,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @s6.setter
     def s6(self, value: int) -> None:
+        """Set the s6 property."""
         self._cards[4].set_value("s6", value)
 
     @property
@@ -843,6 +875,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @s7.setter
     def s7(self, value: int) -> None:
+        """Set the s7 property."""
         self._cards[4].set_value("s7", value)
 
     @property
@@ -853,6 +886,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @s8.setter
     def s8(self, value: int) -> None:
+        """Set the s8 property."""
         self._cards[4].set_value("s8", value)
 
     @property
@@ -865,6 +899,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[5].set_value("n1", value)
 
     @property
@@ -877,6 +912,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[5].set_value("n2", value)
 
     @property
@@ -889,6 +925,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[5].set_value("n3", value)
 
     @property
@@ -901,6 +938,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[5].set_value("n4", value)
 
     @property
@@ -913,6 +951,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @n5.setter
     def n5(self, value: int) -> None:
+        """Set the n5 property."""
         self._cards[5].set_value("n5", value)
 
     @property
@@ -925,6 +964,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @n6.setter
     def n6(self, value: int) -> None:
+        """Set the n6 property."""
         self._cards[5].set_value("n6", value)
 
     @property
@@ -937,6 +977,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @n7.setter
     def n7(self, value: int) -> None:
+        """Set the n7 property."""
         self._cards[5].set_value("n7", value)
 
     @property
@@ -949,6 +990,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @n8.setter
     def n8(self, value: int) -> None:
+        """Set the n8 property."""
         self._cards[5].set_value("n8", value)
 
     @property
@@ -959,6 +1001,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @w1.setter
     def w1(self, value: float) -> None:
+        """Set the w1 property."""
         self._cards[6].set_value("w1", value)
 
     @property
@@ -969,6 +1012,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @w2.setter
     def w2(self, value: float) -> None:
+        """Set the w2 property."""
         self._cards[6].set_value("w2", value)
 
     @property
@@ -979,6 +1023,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @w3.setter
     def w3(self, value: float) -> None:
+        """Set the w3 property."""
         self._cards[6].set_value("w3", value)
 
     @property
@@ -989,6 +1034,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @w4.setter
     def w4(self, value: float) -> None:
+        """Set the w4 property."""
         self._cards[6].set_value("w4", value)
 
     @property
@@ -999,6 +1045,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @w5.setter
     def w5(self, value: float) -> None:
+        """Set the w5 property."""
         self._cards[6].set_value("w5", value)
 
     @property
@@ -1009,6 +1056,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @w6.setter
     def w6(self, value: float) -> None:
+        """Set the w6 property."""
         self._cards[6].set_value("w6", value)
 
     @property
@@ -1019,6 +1067,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @w7.setter
     def w7(self, value: float) -> None:
+        """Set the w7 property."""
         self._cards[6].set_value("w7", value)
 
     @property
@@ -1029,6 +1078,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @w8.setter
     def w8(self, value: float) -> None:
+        """Set the w8 property."""
         self._cards[6].set_value("w8", value)
 
     @property
@@ -1039,6 +1089,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @o1.setter
     def o1(self, value: float) -> None:
+        """Set the o1 property."""
         self._cards[7].set_value("o1", value)
 
     @property
@@ -1049,6 +1100,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @o2.setter
     def o2(self, value: float) -> None:
+        """Set the o2 property."""
         self._cards[7].set_value("o2", value)
 
     @property
@@ -1059,6 +1111,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @o3.setter
     def o3(self, value: float) -> None:
+        """Set the o3 property."""
         self._cards[7].set_value("o3", value)
 
     @property
@@ -1069,6 +1122,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @o4.setter
     def o4(self, value: float) -> None:
+        """Set the o4 property."""
         self._cards[7].set_value("o4", value)
 
     @property
@@ -1079,6 +1133,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @o5.setter
     def o5(self, value: float) -> None:
+        """Set the o5 property."""
         self._cards[7].set_value("o5", value)
 
     @property
@@ -1089,6 +1144,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @o6.setter
     def o6(self, value: float) -> None:
+        """Set the o6 property."""
         self._cards[7].set_value("o6", value)
 
     @property
@@ -1099,6 +1155,7 @@ class ElementShellBextPatch(KeywordBase):
 
     @o7.setter
     def o7(self, value: float) -> None:
+        """Set the o7 property."""
         self._cards[7].set_value("o7", value)
 
     @property
@@ -1109,5 +1166,6 @@ class ElementShellBextPatch(KeywordBase):
 
     @o8.setter
     def o8(self, value: float) -> None:
+        """Set the o8 property."""
         self._cards[7].set_value("o8", value)
 

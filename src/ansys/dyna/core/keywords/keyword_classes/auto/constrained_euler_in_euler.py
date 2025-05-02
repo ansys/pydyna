@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONSTRAINED keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedEulerInEuler(KeywordBase):
     subkeyword = "EULER_IN_EULER"
 
     def __init__(self, **kwargs):
+        """Initialize the CONSTRAINED keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -71,6 +73,7 @@ class ConstrainedEulerInEuler(KeywordBase):
 
     @psid1.setter
     def psid1(self, value: int) -> None:
+        """Set the psid1 property."""
         self._cards[0].set_value("psid1", value)
 
     @property
@@ -81,6 +84,7 @@ class ConstrainedEulerInEuler(KeywordBase):
 
     @psid2.setter
     def psid2(self, value: int) -> None:
+        """Set the psid2 property."""
         self._cards[0].set_value("psid2", value)
 
     @property
@@ -91,5 +95,6 @@ class ConstrainedEulerInEuler(KeywordBase):
 
     @pfac.setter
     def pfac(self, value: float) -> None:
+        """Set the pfac property."""
         self._cards[0].set_value("pfac", value)
 

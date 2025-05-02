@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlReferenceConfiguration(KeywordBase):
     subkeyword = "REFERENCE_CONFIGURATION"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -88,6 +90,7 @@ class ControlReferenceConfiguration(KeywordBase):
 
     @maxiter.setter
     def maxiter(self, value: int) -> None:
+        """Set the maxiter property."""
         self._cards[0].set_value("maxiter", value)
 
     @property
@@ -98,6 +101,7 @@ class ControlReferenceConfiguration(KeywordBase):
 
     @target.setter
     def target(self, value: str) -> None:
+        """Set the target property."""
         self._cards[0].set_value("target", value)
 
     @property
@@ -111,6 +115,7 @@ class ControlReferenceConfiguration(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         self._cards[1].set_value("method", value)
 
     @property
@@ -121,6 +126,7 @@ class ControlReferenceConfiguration(KeywordBase):
 
     @step.setter
     def step(self, value: float) -> None:
+        """Set the step property."""
         self._cards[1].set_value("step", value)
 
     @property
@@ -131,5 +137,6 @@ class ControlReferenceConfiguration(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[1].set_value("tol", value)
 

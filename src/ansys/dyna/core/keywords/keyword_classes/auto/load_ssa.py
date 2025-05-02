@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSsa(KeywordBase):
     subkeyword = "SSA"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -193,6 +195,7 @@ class LoadSsa(KeywordBase):
 
     @vs.setter
     def vs(self, value: float) -> None:
+        """Set the vs property."""
         self._cards[0].set_value("vs", value)
 
     @property
@@ -203,6 +206,7 @@ class LoadSsa(KeywordBase):
 
     @ds.setter
     def ds(self, value: float) -> None:
+        """Set the ds property."""
         self._cards[0].set_value("ds", value)
 
     @property
@@ -215,8 +219,9 @@ class LoadSsa(KeywordBase):
 
     @refl.setter
     def refl(self, value: float) -> None:
+        """Set the refl property."""
         if value not in [0, 1, None]:
-            raise Exception("""refl must be `None` or one of {0,1}""")
+            raise Exception("""refl must be `None` or one of {0,1}.""")
         self._cards[0].set_value("refl", value)
 
     @property
@@ -227,6 +232,7 @@ class LoadSsa(KeywordBase):
 
     @zb.setter
     def zb(self, value: float) -> None:
+        """Set the zb property."""
         self._cards[0].set_value("zb", value)
 
     @property
@@ -237,6 +243,7 @@ class LoadSsa(KeywordBase):
 
     @zsurf.setter
     def zsurf(self, value: float) -> None:
+        """Set the zsurf property."""
         self._cards[0].set_value("zsurf", value)
 
     @property
@@ -254,6 +261,7 @@ class LoadSsa(KeywordBase):
 
     @fpsid.setter
     def fpsid(self, value: int) -> None:
+        """Set the fpsid property."""
         self._cards[0].set_value("fpsid", value)
 
     @property
@@ -266,6 +274,7 @@ class LoadSsa(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -276,6 +285,7 @@ class LoadSsa(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[1].set_value("a", value)
 
     @property
@@ -286,6 +296,7 @@ class LoadSsa(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
 
     @property
@@ -296,6 +307,7 @@ class LoadSsa(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[1].set_value("gamma", value)
 
     @property
@@ -306,6 +318,7 @@ class LoadSsa(KeywordBase):
 
     @ktheta.setter
     def ktheta(self, value: float) -> None:
+        """Set the ktheta property."""
         self._cards[1].set_value("ktheta", value)
 
     @property
@@ -316,6 +329,7 @@ class LoadSsa(KeywordBase):
 
     @kappa.setter
     def kappa(self, value: float) -> None:
+        """Set the kappa property."""
         self._cards[1].set_value("kappa", value)
 
     @property
@@ -326,6 +340,7 @@ class LoadSsa(KeywordBase):
 
     @xs.setter
     def xs(self, value: float) -> None:
+        """Set the xs property."""
         self._cards[2].set_value("xs", value)
 
     @property
@@ -336,6 +351,7 @@ class LoadSsa(KeywordBase):
 
     @ys.setter
     def ys(self, value: float) -> None:
+        """Set the ys property."""
         self._cards[2].set_value("ys", value)
 
     @property
@@ -346,6 +362,7 @@ class LoadSsa(KeywordBase):
 
     @zs.setter
     def zs(self, value: float) -> None:
+        """Set the zs property."""
         self._cards[2].set_value("zs", value)
 
     @property
@@ -356,6 +373,7 @@ class LoadSsa(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[2].set_value("w", value)
 
     @property
@@ -366,6 +384,7 @@ class LoadSsa(KeywordBase):
 
     @tdely.setter
     def tdely(self, value: float) -> None:
+        """Set the tdely property."""
         self._cards[2].set_value("tdely", value)
 
     @property
@@ -376,6 +395,7 @@ class LoadSsa(KeywordBase):
 
     @rad.setter
     def rad(self, value: float) -> None:
+        """Set the rad property."""
         self._cards[2].set_value("rad", value)
 
     @property
@@ -386,5 +406,6 @@ class LoadSsa(KeywordBase):
 
     @cz.setter
     def cz(self, value: float) -> None:
+        """Set the cz property."""
         self._cards[2].set_value("cz", value)
 

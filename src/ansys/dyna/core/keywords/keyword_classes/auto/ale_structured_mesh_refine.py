@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ALE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleStructuredMeshRefine(KeywordBase):
     subkeyword = "STRUCTURED_MESH_REFINE"
 
     def __init__(self, **kwargs):
+        """Initialize the ALE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class AleStructuredMeshRefine(KeywordBase):
 
     @mshid.setter
     def mshid(self, value: int) -> None:
+        """Set the mshid property."""
         self._cards[0].set_value("mshid", value)
 
     @property
@@ -89,6 +92,7 @@ class AleStructuredMeshRefine(KeywordBase):
 
     @ifx_.setter
     def ifx_(self, value: int) -> None:
+        """Set the ifx_ property."""
         self._cards[0].set_value("ifx,", value)
 
     @property
@@ -99,6 +103,7 @@ class AleStructuredMeshRefine(KeywordBase):
 
     @ify_.setter
     def ify_(self, value: int) -> None:
+        """Set the ify_ property."""
         self._cards[0].set_value("ify,", value)
 
     @property
@@ -109,5 +114,6 @@ class AleStructuredMeshRefine(KeywordBase):
 
     @ifz_.setter
     def ifz_(self, value: int) -> None:
+        """Set the ifz_ property."""
         self._cards[0].set_value("ifz,", value)
 

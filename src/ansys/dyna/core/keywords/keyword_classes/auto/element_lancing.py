@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ELEMENT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementLancing(KeywordBase):
     subkeyword = "LANCING"
 
     def __init__(self, **kwargs):
+        """Initialize the ELEMENT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -96,6 +98,7 @@ class ElementLancing(KeywordBase):
 
     @idpt.setter
     def idpt(self, value: int) -> None:
+        """Set the idpt property."""
         self._cards[0].set_value("idpt", value)
 
     @property
@@ -106,6 +109,7 @@ class ElementLancing(KeywordBase):
 
     @idcv.setter
     def idcv(self, value: int) -> None:
+        """Set the idcv property."""
         self._cards[0].set_value("idcv", value)
 
     @property
@@ -119,6 +123,7 @@ class ElementLancing(KeywordBase):
 
     @irefine.setter
     def irefine(self, value: int) -> None:
+        """Set the irefine property."""
         self._cards[0].set_value("irefine", value)
 
     @property
@@ -130,6 +135,7 @@ class ElementLancing(KeywordBase):
 
     @smin.setter
     def smin(self, value: float) -> None:
+        """Set the smin property."""
         self._cards[0].set_value("smin", value)
 
     @property
@@ -141,6 +147,7 @@ class ElementLancing(KeywordBase):
 
     @at.setter
     def at(self, value: float) -> None:
+        """Set the at property."""
         self._cards[0].set_value("at", value)
 
     @property
@@ -151,6 +158,7 @@ class ElementLancing(KeywordBase):
 
     @endt.setter
     def endt(self, value: float) -> None:
+        """Set the endt property."""
         self._cards[0].set_value("endt", value)
 
     @property
@@ -163,5 +171,6 @@ class ElementLancing(KeywordBase):
 
     @ntimes.setter
     def ntimes(self, value: int) -> None:
+        """Set the ntimes property."""
         self._cards[0].set_value("ntimes", value)
 

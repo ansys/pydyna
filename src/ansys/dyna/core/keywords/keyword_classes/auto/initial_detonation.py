@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the INITIAL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialDetonation(KeywordBase):
     subkeyword = "DETONATION"
 
     def __init__(self, **kwargs):
+        """Initialize the INITIAL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -153,6 +155,7 @@ class InitialDetonation(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -163,6 +166,7 @@ class InitialDetonation(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -173,6 +177,7 @@ class InitialDetonation(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -183,6 +188,7 @@ class InitialDetonation(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 
     @property
@@ -193,6 +199,7 @@ class InitialDetonation(KeywordBase):
 
     @lt.setter
     def lt(self, value: float) -> None:
+        """Set the lt property."""
         self._cards[0].set_value("lt", value)
 
     @property
@@ -203,6 +210,7 @@ class InitialDetonation(KeywordBase):
 
     @mmgset.setter
     def mmgset(self, value: int) -> None:
+        """Set the mmgset property."""
         self._cards[0].set_value("mmgset", value)
 
     @property
@@ -213,6 +221,7 @@ class InitialDetonation(KeywordBase):
 
     @peak.setter
     def peak(self, value: float) -> None:
+        """Set the peak property."""
         self._cards[1].set_value("peak", value)
 
     @property
@@ -223,6 +232,7 @@ class InitialDetonation(KeywordBase):
 
     @decay.setter
     def decay(self, value: float) -> None:
+        """Set the decay property."""
         self._cards[1].set_value("decay", value)
 
     @property
@@ -233,6 +243,7 @@ class InitialDetonation(KeywordBase):
 
     @xs.setter
     def xs(self, value: float) -> None:
+        """Set the xs property."""
         self._cards[1].set_value("xs", value)
 
     @property
@@ -243,6 +254,7 @@ class InitialDetonation(KeywordBase):
 
     @ys.setter
     def ys(self, value: float) -> None:
+        """Set the ys property."""
         self._cards[1].set_value("ys", value)
 
     @property
@@ -253,6 +265,7 @@ class InitialDetonation(KeywordBase):
 
     @zs.setter
     def zs(self, value: float) -> None:
+        """Set the zs property."""
         self._cards[1].set_value("zs", value)
 
     @property
@@ -263,5 +276,6 @@ class InitialDetonation(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 

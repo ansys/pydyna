@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseFrequencyAsciiEloutPsd(KeywordBase):
     subkeyword = "FREQUENCY_ASCII_ELOUT_PSD"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -87,6 +89,7 @@ class DatabaseFrequencyAsciiEloutPsd(KeywordBase):
 
     @fmin.setter
     def fmin(self, value: float) -> None:
+        """Set the fmin property."""
         self._cards[0].set_value("fmin", value)
 
     @property
@@ -97,6 +100,7 @@ class DatabaseFrequencyAsciiEloutPsd(KeywordBase):
 
     @fmax.setter
     def fmax(self, value: float) -> None:
+        """Set the fmax property."""
         self._cards[0].set_value("fmax", value)
 
     @property
@@ -107,6 +111,7 @@ class DatabaseFrequencyAsciiEloutPsd(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
+        """Set the nfreq property."""
         self._cards[0].set_value("nfreq", value)
 
     @property
@@ -121,8 +126,9 @@ class DatabaseFrequencyAsciiEloutPsd(KeywordBase):
 
     @fspace.setter
     def fspace(self, value: int) -> None:
+        """Set the fspace property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""fspace must be `None` or one of {0,1,2,3}""")
+            raise Exception("""fspace must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("fspace", value)
 
     @property
@@ -133,5 +139,6 @@ class DatabaseFrequencyAsciiEloutPsd(KeywordBase):
 
     @lcfreq.setter
     def lcfreq(self, value: int) -> None:
+        """Set the lcfreq property."""
         self._cards[0].set_value("lcfreq", value)
 

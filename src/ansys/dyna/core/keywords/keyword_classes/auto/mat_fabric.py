@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatFabric(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -491,6 +493,7 @@ class MatFabric(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -501,6 +504,7 @@ class MatFabric(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -511,6 +515,7 @@ class MatFabric(KeywordBase):
 
     @ea.setter
     def ea(self, value: float) -> None:
+        """Set the ea property."""
         self._cards[0].set_value("ea", value)
 
     @property
@@ -521,6 +526,7 @@ class MatFabric(KeywordBase):
 
     @eb.setter
     def eb(self, value: float) -> None:
+        """Set the eb property."""
         self._cards[0].set_value("eb", value)
 
     @property
@@ -531,6 +537,7 @@ class MatFabric(KeywordBase):
 
     @prba.setter
     def prba(self, value: float) -> None:
+        """Set the prba property."""
         self._cards[0].set_value("prba", value)
 
     @property
@@ -541,6 +548,7 @@ class MatFabric(KeywordBase):
 
     @prab.setter
     def prab(self, value: float) -> None:
+        """Set the prab property."""
         self._cards[0].set_value("prab", value)
 
     @property
@@ -551,6 +559,7 @@ class MatFabric(KeywordBase):
 
     @gab.setter
     def gab(self, value: float) -> None:
+        """Set the gab property."""
         self._cards[1].set_value("gab", value)
 
     @property
@@ -563,8 +572,9 @@ class MatFabric(KeywordBase):
 
     @cse.setter
     def cse(self, value: float) -> None:
+        """Set the cse property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""cse must be `None` or one of {0.0,1.0}""")
+            raise Exception("""cse must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("cse", value)
 
     @property
@@ -575,6 +585,7 @@ class MatFabric(KeywordBase):
 
     @el.setter
     def el(self, value: float) -> None:
+        """Set the el property."""
         self._cards[1].set_value("el", value)
 
     @property
@@ -585,6 +596,7 @@ class MatFabric(KeywordBase):
 
     @prl.setter
     def prl(self, value: float) -> None:
+        """Set the prl property."""
         self._cards[1].set_value("prl", value)
 
     @property
@@ -595,6 +607,7 @@ class MatFabric(KeywordBase):
 
     @lratio.setter
     def lratio(self, value: float) -> None:
+        """Set the lratio property."""
         self._cards[1].set_value("lratio", value)
 
     @property
@@ -605,6 +618,7 @@ class MatFabric(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[1].set_value("damp", value)
 
     @property
@@ -622,6 +636,7 @@ class MatFabric(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -633,6 +648,7 @@ class MatFabric(KeywordBase):
 
     @flc.setter
     def flc(self, value: float) -> None:
+        """Set the flc property."""
         self._cards[2].set_value("flc", value)
 
     @property
@@ -644,6 +660,7 @@ class MatFabric(KeywordBase):
 
     @fac.setter
     def fac(self, value: float) -> None:
+        """Set the fac property."""
         self._cards[2].set_value("fac", value)
 
     @property
@@ -655,6 +672,7 @@ class MatFabric(KeywordBase):
 
     @ela.setter
     def ela(self, value: float) -> None:
+        """Set the ela property."""
         self._cards[2].set_value("ela", value)
 
     @property
@@ -667,8 +685,9 @@ class MatFabric(KeywordBase):
 
     @lnrc.setter
     def lnrc(self, value: float) -> None:
+        """Set the lnrc property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""lnrc must be `None` or one of {0.0,1.0}""")
+            raise Exception("""lnrc must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("lnrc", value)
 
     @property
@@ -687,8 +706,9 @@ class MatFabric(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
+        """Set the form property."""
         if value not in [0, 1, 2, 3, 4, 12, 13, 14, -14, 24, None]:
-            raise Exception("""form must be `None` or one of {0,1,2,3,4,12,13,14,-14,24}""")
+            raise Exception("""form must be `None` or one of {0,1,2,3,4,12,13,14,-14,24}.""")
         self._cards[2].set_value("form", value)
 
     @property
@@ -708,6 +728,7 @@ class MatFabric(KeywordBase):
 
     @fvopt.setter
     def fvopt(self, value: int) -> None:
+        """Set the fvopt property."""
         self._cards[2].set_value("fvopt", value)
 
     @property
@@ -721,6 +742,7 @@ class MatFabric(KeywordBase):
 
     @tsrfac.setter
     def tsrfac(self, value: float) -> None:
+        """Set the tsrfac property."""
         self._cards[2].set_value("tsrfac", value)
 
     @property
@@ -733,6 +755,7 @@ class MatFabric(KeywordBase):
 
     @rgbrth.setter
     def rgbrth(self, value: float) -> None:
+        """Set the rgbrth property."""
         self._cards[3].set_value("rgbrth", value)
 
     @property
@@ -745,8 +768,9 @@ class MatFabric(KeywordBase):
 
     @a0ref.setter
     def a0ref(self, value: int) -> None:
+        """Set the a0ref property."""
         if value not in [0, 1, None]:
-            raise Exception("""a0ref must be `None` or one of {0,1}""")
+            raise Exception("""a0ref must be `None` or one of {0,1}.""")
         self._cards[3].set_value("a0ref", value)
 
     @property
@@ -757,6 +781,7 @@ class MatFabric(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[3].set_value("a1", value)
 
     @property
@@ -767,6 +792,7 @@ class MatFabric(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[3].set_value("a2", value)
 
     @property
@@ -777,6 +803,7 @@ class MatFabric(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[3].set_value("a3", value)
 
     @property
@@ -787,6 +814,7 @@ class MatFabric(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[3].set_value("x0", value)
 
     @property
@@ -797,6 +825,7 @@ class MatFabric(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[3].set_value("x1", value)
 
     @property
@@ -807,6 +836,7 @@ class MatFabric(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[4].set_value("v1", value)
 
     @property
@@ -817,6 +847,7 @@ class MatFabric(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[4].set_value("v2", value)
 
     @property
@@ -827,6 +858,7 @@ class MatFabric(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[4].set_value("v3", value)
 
     @property
@@ -837,6 +869,7 @@ class MatFabric(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[4].set_value("beta", value)
 
     @property
@@ -849,8 +882,9 @@ class MatFabric(KeywordBase):
 
     @isrefg.setter
     def isrefg(self, value: int) -> None:
+        """Set the isrefg property."""
         if value not in [0, 1, None]:
-            raise Exception("""isrefg must be `None` or one of {0,1}""")
+            raise Exception("""isrefg must be `None` or one of {0,1}.""")
         self._cards[4].set_value("isrefg", value)
 
     @property
@@ -861,6 +895,7 @@ class MatFabric(KeywordBase):
 
     @lca.setter
     def lca(self, value: int) -> None:
+        """Set the lca property."""
         self._cards[5].set_value("lca", value)
 
     @property
@@ -871,6 +906,7 @@ class MatFabric(KeywordBase):
 
     @lcb.setter
     def lcb(self, value: int) -> None:
+        """Set the lcb property."""
         self._cards[5].set_value("lcb", value)
 
     @property
@@ -881,6 +917,7 @@ class MatFabric(KeywordBase):
 
     @lcab.setter
     def lcab(self, value: int) -> None:
+        """Set the lcab property."""
         self._cards[5].set_value("lcab", value)
 
     @property
@@ -891,6 +928,7 @@ class MatFabric(KeywordBase):
 
     @lcua.setter
     def lcua(self, value: int) -> None:
+        """Set the lcua property."""
         self._cards[5].set_value("lcua", value)
 
     @property
@@ -901,6 +939,7 @@ class MatFabric(KeywordBase):
 
     @lcub.setter
     def lcub(self, value: int) -> None:
+        """Set the lcub property."""
         self._cards[5].set_value("lcub", value)
 
     @property
@@ -911,6 +950,7 @@ class MatFabric(KeywordBase):
 
     @lcuab.setter
     def lcuab(self, value: int) -> None:
+        """Set the lcuab property."""
         self._cards[5].set_value("lcuab", value)
 
     @property
@@ -921,6 +961,7 @@ class MatFabric(KeywordBase):
 
     @rl.setter
     def rl(self, value: float) -> None:
+        """Set the rl property."""
         self._cards[5].set_value("rl", value)
 
     @property
@@ -931,6 +972,7 @@ class MatFabric(KeywordBase):
 
     @lcaa.setter
     def lcaa(self, value: int) -> None:
+        """Set the lcaa property."""
         self._cards[6].set_value("lcaa", value)
 
     @property
@@ -941,6 +983,7 @@ class MatFabric(KeywordBase):
 
     @lcbb.setter
     def lcbb(self, value: int) -> None:
+        """Set the lcbb property."""
         self._cards[6].set_value("lcbb", value)
 
     @property
@@ -951,6 +994,7 @@ class MatFabric(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[6].set_value("h", value)
 
     @property
@@ -964,6 +1008,7 @@ class MatFabric(KeywordBase):
 
     @dt.setter
     def dt(self, value: int) -> None:
+        """Set the dt property."""
         self._cards[6].set_value("dt", value)
 
     @property
@@ -974,6 +1019,7 @@ class MatFabric(KeywordBase):
 
     @ecoat.setter
     def ecoat(self, value: float) -> None:
+        """Set the ecoat property."""
         self._cards[6].set_value("ecoat", value)
 
     @property
@@ -984,6 +1030,7 @@ class MatFabric(KeywordBase):
 
     @scoat.setter
     def scoat(self, value: float) -> None:
+        """Set the scoat property."""
         self._cards[6].set_value("scoat", value)
 
     @property
@@ -994,6 +1041,7 @@ class MatFabric(KeywordBase):
 
     @tcoat.setter
     def tcoat(self, value: float) -> None:
+        """Set the tcoat property."""
         self._cards[6].set_value("tcoat", value)
 
     @property
@@ -1004,5 +1052,6 @@ class MatFabric(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
 

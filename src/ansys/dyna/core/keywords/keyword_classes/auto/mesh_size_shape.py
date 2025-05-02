@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MESH keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class MeshSizeShape(KeywordBase):
     subkeyword = "SIZE_SHAPE"
 
     def __init__(self, **kwargs):
+        """Initialize the MESH keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -239,8 +241,9 @@ class MeshSizeShape(KeywordBase):
 
     @sname.setter
     def sname(self, value: str) -> None:
+        """Set the sname property."""
         if value not in ["BOX", "CYLINDER", "POL", "SPHERE", None]:
-            raise Exception("""sname must be `None` or one of {"BOX","CYLINDER","POL","SPHERE"}""")
+            raise Exception("""sname must be `None` or one of {"BOX","CYLINDER","POL","SPHERE"}.""")
         self._cards[0].set_value("sname", value)
 
     @property
@@ -253,8 +256,9 @@ class MeshSizeShape(KeywordBase):
 
     @force.setter
     def force(self, value: int) -> None:
+        """Set the force property."""
         if value not in [0, 1, None]:
-            raise Exception("""force must be `None` or one of {0,1}""")
+            raise Exception("""force must be `None` or one of {0,1}.""")
         self._cards[0].set_value("force", value)
 
     @property
@@ -267,8 +271,9 @@ class MeshSizeShape(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         if value not in [0, 1, None]:
-            raise Exception("""method must be `None` or one of {0,1}""")
+            raise Exception("""method must be `None` or one of {0,1}.""")
         self._cards[0].set_value("method", value)
 
     @property
@@ -281,6 +286,7 @@ class MeshSizeShape(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[0].set_value("bt", value)
 
     @property
@@ -293,6 +299,7 @@ class MeshSizeShape(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -303,6 +310,7 @@ class MeshSizeShape(KeywordBase):
 
     @msize.setter
     def msize(self, value: float) -> None:
+        """Set the msize property."""
         self._cards[1].set_value("msize", value)
 
     @property
@@ -313,6 +321,7 @@ class MeshSizeShape(KeywordBase):
 
     @pminx.setter
     def pminx(self, value: float) -> None:
+        """Set the pminx property."""
         self._cards[1].set_value("pminx", value)
 
     @property
@@ -323,6 +332,7 @@ class MeshSizeShape(KeywordBase):
 
     @pminy.setter
     def pminy(self, value: float) -> None:
+        """Set the pminy property."""
         self._cards[1].set_value("pminy", value)
 
     @property
@@ -333,6 +343,7 @@ class MeshSizeShape(KeywordBase):
 
     @pminz.setter
     def pminz(self, value: float) -> None:
+        """Set the pminz property."""
         self._cards[1].set_value("pminz", value)
 
     @property
@@ -343,6 +354,7 @@ class MeshSizeShape(KeywordBase):
 
     @pmaxx.setter
     def pmaxx(self, value: float) -> None:
+        """Set the pmaxx property."""
         self._cards[1].set_value("pmaxx", value)
 
     @property
@@ -353,6 +365,7 @@ class MeshSizeShape(KeywordBase):
 
     @pmaxy.setter
     def pmaxy(self, value: float) -> None:
+        """Set the pmaxy property."""
         self._cards[1].set_value("pmaxy", value)
 
     @property
@@ -363,6 +376,7 @@ class MeshSizeShape(KeywordBase):
 
     @pmaxz.setter
     def pmaxz(self, value: float) -> None:
+        """Set the pmaxz property."""
         self._cards[1].set_value("pmaxz", value)
 
     @property
@@ -373,6 +387,7 @@ class MeshSizeShape(KeywordBase):
 
     @msize.setter
     def msize(self, value: float) -> None:
+        """Set the msize property."""
         self._cards[2].set_value("msize", value)
 
     @property
@@ -383,6 +398,7 @@ class MeshSizeShape(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[2].set_value("radius", value)
 
     @property
@@ -393,6 +409,7 @@ class MeshSizeShape(KeywordBase):
 
     @centerx.setter
     def centerx(self, value: float) -> None:
+        """Set the centerx property."""
         self._cards[2].set_value("centerx", value)
 
     @property
@@ -403,6 +420,7 @@ class MeshSizeShape(KeywordBase):
 
     @centery.setter
     def centery(self, value: float) -> None:
+        """Set the centery property."""
         self._cards[2].set_value("centery", value)
 
     @property
@@ -413,6 +431,7 @@ class MeshSizeShape(KeywordBase):
 
     @centerz.setter
     def centerz(self, value: float) -> None:
+        """Set the centerz property."""
         self._cards[2].set_value("centerz", value)
 
     @property
@@ -423,6 +442,7 @@ class MeshSizeShape(KeywordBase):
 
     @msize.setter
     def msize(self, value: float) -> None:
+        """Set the msize property."""
         self._cards[3].set_value("msize", value)
 
     @property
@@ -433,6 +453,7 @@ class MeshSizeShape(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[3].set_value("radius", value)
 
     @property
@@ -443,6 +464,7 @@ class MeshSizeShape(KeywordBase):
 
     @pminx.setter
     def pminx(self, value: float) -> None:
+        """Set the pminx property."""
         self._cards[3].set_value("pminx", value)
 
     @property
@@ -453,6 +475,7 @@ class MeshSizeShape(KeywordBase):
 
     @pminy.setter
     def pminy(self, value: float) -> None:
+        """Set the pminy property."""
         self._cards[3].set_value("pminy", value)
 
     @property
@@ -463,6 +486,7 @@ class MeshSizeShape(KeywordBase):
 
     @pminz.setter
     def pminz(self, value: float) -> None:
+        """Set the pminz property."""
         self._cards[3].set_value("pminz", value)
 
     @property
@@ -473,6 +497,7 @@ class MeshSizeShape(KeywordBase):
 
     @pmaxx.setter
     def pmaxx(self, value: float) -> None:
+        """Set the pmaxx property."""
         self._cards[3].set_value("pmaxx", value)
 
     @property
@@ -483,6 +508,7 @@ class MeshSizeShape(KeywordBase):
 
     @pmaxy.setter
     def pmaxy(self, value: float) -> None:
+        """Set the pmaxy property."""
         self._cards[3].set_value("pmaxy", value)
 
     @property
@@ -493,5 +519,6 @@ class MeshSizeShape(KeywordBase):
 
     @pmaxz.setter
     def pmaxz(self, value: float) -> None:
+        """Set the pmaxz property."""
         self._cards[3].set_value("pmaxz", value)
 

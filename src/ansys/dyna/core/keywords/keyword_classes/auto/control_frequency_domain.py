@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFrequencyDomain(KeywordBase):
     subkeyword = "FREQUENCY_DOMAIN"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,8 +67,9 @@ class ControlFrequencyDomain(KeywordBase):
 
     @refgeo.setter
     def refgeo(self, value: int) -> None:
+        """Set the refgeo property."""
         if value not in [0, 1, None]:
-            raise Exception("""refgeo must be `None` or one of {0,1}""")
+            raise Exception("""refgeo must be `None` or one of {0,1}.""")
         self._cards[0].set_value("refgeo", value)
 
     @property
@@ -77,5 +80,6 @@ class ControlFrequencyDomain(KeywordBase):
 
     @mpn.setter
     def mpn(self, value: float) -> None:
+        """Set the mpn property."""
         self._cards[0].set_value("mpn", value)
 

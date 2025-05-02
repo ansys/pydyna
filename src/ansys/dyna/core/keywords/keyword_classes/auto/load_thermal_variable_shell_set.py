@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the LOAD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadThermalVariableShellSet(KeywordBase):
     subkeyword = "THERMAL_VARIABLE_SHELL_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the LOAD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -100,6 +102,7 @@ class LoadThermalVariableShellSet(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -110,6 +113,7 @@ class LoadThermalVariableShellSet(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -120,6 +124,7 @@ class LoadThermalVariableShellSet(KeywordBase):
 
     @tbase.setter
     def tbase(self, value: float) -> None:
+        """Set the tbase property."""
         self._cards[1].set_value("tbase", value)
 
     @property
@@ -130,6 +135,7 @@ class LoadThermalVariableShellSet(KeywordBase):
 
     @tscale.setter
     def tscale(self, value: float) -> None:
+        """Set the tscale property."""
         self._cards[1].set_value("tscale", value)
 
     @property
@@ -140,6 +146,7 @@ class LoadThermalVariableShellSet(KeywordBase):
 
     @tcurve.setter
     def tcurve(self, value: int) -> None:
+        """Set the tcurve property."""
         self._cards[1].set_value("tcurve", value)
 
     @property
@@ -150,6 +157,7 @@ class LoadThermalVariableShellSet(KeywordBase):
 
     @tcurdr.setter
     def tcurdr(self, value: int) -> None:
+        """Set the tcurdr property."""
         self._cards[1].set_value("tcurdr", value)
 
     @property
@@ -160,5 +168,6 @@ class LoadThermalVariableShellSet(KeywordBase):
 
     @zco.setter
     def zco(self, value: float) -> None:
+        """Set the zco property."""
         self._cards[1].set_value("zco", value)
 

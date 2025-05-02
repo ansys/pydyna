@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CHEMISTRY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryControlInflator(KeywordBase):
     subkeyword = "CONTROL_INFLATOR"
 
     def __init__(self, **kwargs):
+        """Initialize the CHEMISTRY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -116,8 +118,9 @@ class ChemistryControlInflator(KeywordBase):
 
     @model.setter
     def model(self, value: int) -> None:
+        """Set the model property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""model must be `None` or one of {1,2,3}""")
+            raise Exception("""model must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("model", value)
 
     @property
@@ -132,8 +135,9 @@ class ChemistryControlInflator(KeywordBase):
 
     @out_type.setter
     def out_type(self, value: int) -> None:
+        """Set the out_type property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""out_type must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""out_type must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("out_type", value)
 
     @property
@@ -144,6 +148,7 @@ class ChemistryControlInflator(KeywordBase):
 
     @truntim.setter
     def truntim(self, value: float) -> None:
+        """Set the truntim property."""
         self._cards[0].set_value("truntim", value)
 
     @property
@@ -154,6 +159,7 @@ class ChemistryControlInflator(KeywordBase):
 
     @delt.setter
     def delt(self, value: float) -> None:
+        """Set the delt property."""
         self._cards[0].set_value("delt", value)
 
     @property
@@ -164,6 +170,7 @@ class ChemistryControlInflator(KeywordBase):
 
     @ptime.setter
     def ptime(self, value: float) -> None:
+        """Set the ptime property."""
         self._cards[0].set_value("ptime", value)
 
     @property
@@ -174,6 +181,7 @@ class ChemistryControlInflator(KeywordBase):
 
     @file.setter
     def file(self, value: str) -> None:
+        """Set the file property."""
         self._cards[1].set_value("file", value)
 
     @property
@@ -184,6 +192,7 @@ class ChemistryControlInflator(KeywordBase):
 
     @density.setter
     def density(self, value: str) -> None:
+        """Set the density property."""
         self._cards[2].set_value("density", value)
 
     @property
@@ -194,5 +203,6 @@ class ChemistryControlInflator(KeywordBase):
 
     @species_name.setter
     def species_name(self, value: str) -> None:
+        """Set the species_name property."""
         self._cards[2].set_value("species name", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundaryBlastLoadMsurf(KeywordBase):
     subkeyword = "BOUNDARY_BLAST_LOAD_MSURF"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class CeseBoundaryBlastLoadMsurf(KeywordBase):
 
     @bid.setter
     def bid(self, value: int) -> None:
+        """Set the bid property."""
         self._cards[0].set_value("bid", value)
 
     @property
@@ -71,5 +74,6 @@ class CeseBoundaryBlastLoadMsurf(KeywordBase):
 
     @msurfid.setter
     def msurfid(self, value: int) -> None:
+        """Set the msurfid property."""
         self._cards[0].set_value("msurfid", value)
 

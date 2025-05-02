@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -148,6 +150,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -158,6 +161,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @node.setter
     def node(self, value: int) -> None:
+        """Set the node property."""
         self._cards[0].set_value("node", value)
 
     @property
@@ -168,6 +172,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @lcx.setter
     def lcx(self, value: int) -> None:
+        """Set the lcx property."""
         self._cards[0].set_value("lcx", value)
 
     @property
@@ -178,6 +183,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @lcy.setter
     def lcy(self, value: int) -> None:
+        """Set the lcy property."""
         self._cards[0].set_value("lcy", value)
 
     @property
@@ -188,6 +194,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @lcz.setter
     def lcz(self, value: int) -> None:
+        """Set the lcz property."""
         self._cards[0].set_value("lcz", value)
 
     @property
@@ -199,6 +206,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         self._cards[0].set_value("itype", value)
 
     @property
@@ -209,6 +217,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[0].set_value("radius", value)
 
     @property
@@ -219,6 +228,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @npiece.setter
     def npiece(self, value: int) -> None:
+        """Set the npiece property."""
         self._cards[0].set_value("npiece", value)
 
     @property
@@ -232,6 +242,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -242,6 +253,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @level.setter
     def level(self, value: int) -> None:
+        """Set the level property."""
         self._cards[1].set_value("level", value)
 
     @property
@@ -252,5 +264,6 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

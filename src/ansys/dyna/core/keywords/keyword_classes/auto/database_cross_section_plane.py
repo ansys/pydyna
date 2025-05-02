@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
     subkeyword = "CROSS_SECTION_PLANE"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -186,6 +188,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @csid.setter
     def csid(self, value: int) -> None:
+        """Set the csid property."""
         self._cards[0].set_value("csid", value)
 
     @property
@@ -196,6 +199,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -206,6 +210,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[1].set_value("psid", value)
 
     @property
@@ -216,6 +221,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @xct.setter
     def xct(self, value: float) -> None:
+        """Set the xct property."""
         self._cards[1].set_value("xct", value)
 
     @property
@@ -226,6 +232,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @yct.setter
     def yct(self, value: float) -> None:
+        """Set the yct property."""
         self._cards[1].set_value("yct", value)
 
     @property
@@ -236,6 +243,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @zct.setter
     def zct(self, value: float) -> None:
+        """Set the zct property."""
         self._cards[1].set_value("zct", value)
 
     @property
@@ -246,6 +254,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @xch.setter
     def xch(self, value: float) -> None:
+        """Set the xch property."""
         self._cards[1].set_value("xch", value)
 
     @property
@@ -256,6 +265,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @ych.setter
     def ych(self, value: float) -> None:
+        """Set the ych property."""
         self._cards[1].set_value("ych", value)
 
     @property
@@ -266,6 +276,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @zch.setter
     def zch(self, value: float) -> None:
+        """Set the zch property."""
         self._cards[1].set_value("zch", value)
 
     @property
@@ -280,6 +291,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[1].set_value("radius", value)
 
     @property
@@ -290,6 +302,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @xhev.setter
     def xhev(self, value: float) -> None:
+        """Set the xhev property."""
         self._cards[2].set_value("xhev", value)
 
     @property
@@ -300,6 +313,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @yhev.setter
     def yhev(self, value: float) -> None:
+        """Set the yhev property."""
         self._cards[2].set_value("yhev", value)
 
     @property
@@ -310,6 +324,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @zhev.setter
     def zhev(self, value: float) -> None:
+        """Set the zhev property."""
         self._cards[2].set_value("zhev", value)
 
     @property
@@ -320,6 +335,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @lenl.setter
     def lenl(self, value: float) -> None:
+        """Set the lenl property."""
         self._cards[2].set_value("lenl", value)
 
     @property
@@ -330,6 +346,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @lenm.setter
     def lenm(self, value: float) -> None:
+        """Set the lenm property."""
         self._cards[2].set_value("lenm", value)
 
     @property
@@ -340,6 +357,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[2].set_value("id", value)
 
     @property
@@ -353,7 +371,8 @@ class DatabaseCrossSectionPlane(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""itype must be `None` or one of {0,1,2}""")
+            raise Exception("""itype must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("itype", value)
 

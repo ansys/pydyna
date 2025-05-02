@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ALE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleFsiProjection(KeywordBase):
     subkeyword = "FSI_PROJECTION"
 
     def __init__(self, **kwargs):
+        """Initialize the ALE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -118,6 +120,7 @@ class AleFsiProjection(KeywordBase):
 
     @lagsid.setter
     def lagsid(self, value: int) -> None:
+        """Set the lagsid property."""
         self._cards[0].set_value("lagsid", value)
 
     @property
@@ -128,6 +131,7 @@ class AleFsiProjection(KeywordBase):
 
     @alesid.setter
     def alesid(self, value: int) -> None:
+        """Set the alesid property."""
         self._cards[0].set_value("alesid", value)
 
     @property
@@ -140,8 +144,9 @@ class AleFsiProjection(KeywordBase):
 
     @lsidtyp.setter
     def lsidtyp(self, value: int) -> None:
+        """Set the lsidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""lsidtyp must be `None` or one of {0,1}""")
+            raise Exception("""lsidtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("lsidtyp", value)
 
     @property
@@ -154,8 +159,9 @@ class AleFsiProjection(KeywordBase):
 
     @asidtyp.setter
     def asidtyp(self, value: int) -> None:
+        """Set the asidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""asidtyp must be `None` or one of {0,1}""")
+            raise Exception("""asidtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("asidtyp", value)
 
     @property
@@ -166,6 +172,7 @@ class AleFsiProjection(KeywordBase):
 
     @smmgid.setter
     def smmgid(self, value: int) -> None:
+        """Set the smmgid property."""
         self._cards[0].set_value("smmgid", value)
 
     @property
@@ -179,6 +186,7 @@ class AleFsiProjection(KeywordBase):
 
     @icorrec.setter
     def icorrec(self, value: int) -> None:
+        """Set the icorrec property."""
         self._cards[0].set_value("icorrec", value)
 
     @property
@@ -192,6 +200,7 @@ class AleFsiProjection(KeywordBase):
 
     @inorm.setter
     def inorm(self, value: int) -> None:
+        """Set the inorm property."""
         self._cards[0].set_value("inorm", value)
 
     @property
@@ -202,6 +211,7 @@ class AleFsiProjection(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -212,5 +222,6 @@ class AleFsiProjection(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 

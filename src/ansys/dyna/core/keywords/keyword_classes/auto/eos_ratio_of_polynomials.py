@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EOS keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EosRatioOfPolynomials(KeywordBase):
     subkeyword = "RATIO_OF_POLYNOMIALS"
 
     def __init__(self, **kwargs):
+        """Initialize the EOS keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -356,6 +358,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -366,6 +369,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a10.setter
     def a10(self, value: float) -> None:
+        """Set the a10 property."""
         self._cards[1].set_value("a10", value)
 
     @property
@@ -376,6 +380,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a11.setter
     def a11(self, value: float) -> None:
+        """Set the a11 property."""
         self._cards[1].set_value("a11", value)
 
     @property
@@ -386,6 +391,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a12.setter
     def a12(self, value: float) -> None:
+        """Set the a12 property."""
         self._cards[1].set_value("a12", value)
 
     @property
@@ -396,6 +402,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a13.setter
     def a13(self, value: float) -> None:
+        """Set the a13 property."""
         self._cards[1].set_value("a13", value)
 
     @property
@@ -406,6 +413,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a20.setter
     def a20(self, value: float) -> None:
+        """Set the a20 property."""
         self._cards[2].set_value("a20", value)
 
     @property
@@ -416,6 +424,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a21.setter
     def a21(self, value: float) -> None:
+        """Set the a21 property."""
         self._cards[2].set_value("a21", value)
 
     @property
@@ -426,6 +435,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a22.setter
     def a22(self, value: float) -> None:
+        """Set the a22 property."""
         self._cards[2].set_value("a22", value)
 
     @property
@@ -436,6 +446,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a23.setter
     def a23(self, value: float) -> None:
+        """Set the a23 property."""
         self._cards[2].set_value("a23", value)
 
     @property
@@ -446,6 +457,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a30.setter
     def a30(self, value: float) -> None:
+        """Set the a30 property."""
         self._cards[3].set_value("a30", value)
 
     @property
@@ -456,6 +468,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a31.setter
     def a31(self, value: float) -> None:
+        """Set the a31 property."""
         self._cards[3].set_value("a31", value)
 
     @property
@@ -466,6 +479,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a32.setter
     def a32(self, value: float) -> None:
+        """Set the a32 property."""
         self._cards[3].set_value("a32", value)
 
     @property
@@ -476,6 +490,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a33.setter
     def a33(self, value: float) -> None:
+        """Set the a33 property."""
         self._cards[3].set_value("a33", value)
 
     @property
@@ -486,6 +501,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a40.setter
     def a40(self, value: float) -> None:
+        """Set the a40 property."""
         self._cards[4].set_value("a40", value)
 
     @property
@@ -496,6 +512,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a41.setter
     def a41(self, value: float) -> None:
+        """Set the a41 property."""
         self._cards[4].set_value("a41", value)
 
     @property
@@ -506,6 +523,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a42.setter
     def a42(self, value: float) -> None:
+        """Set the a42 property."""
         self._cards[4].set_value("a42", value)
 
     @property
@@ -516,6 +534,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a43.setter
     def a43(self, value: float) -> None:
+        """Set the a43 property."""
         self._cards[4].set_value("a43", value)
 
     @property
@@ -526,6 +545,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a50.setter
     def a50(self, value: float) -> None:
+        """Set the a50 property."""
         self._cards[5].set_value("a50", value)
 
     @property
@@ -536,6 +556,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a51.setter
     def a51(self, value: float) -> None:
+        """Set the a51 property."""
         self._cards[5].set_value("a51", value)
 
     @property
@@ -546,6 +567,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a52.setter
     def a52(self, value: float) -> None:
+        """Set the a52 property."""
         self._cards[5].set_value("a52", value)
 
     @property
@@ -556,6 +578,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a53.setter
     def a53(self, value: float) -> None:
+        """Set the a53 property."""
         self._cards[5].set_value("a53", value)
 
     @property
@@ -566,6 +589,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a60.setter
     def a60(self, value: float) -> None:
+        """Set the a60 property."""
         self._cards[6].set_value("a60", value)
 
     @property
@@ -576,6 +600,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a61.setter
     def a61(self, value: float) -> None:
+        """Set the a61 property."""
         self._cards[6].set_value("a61", value)
 
     @property
@@ -586,6 +611,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a62.setter
     def a62(self, value: float) -> None:
+        """Set the a62 property."""
         self._cards[6].set_value("a62", value)
 
     @property
@@ -596,6 +622,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a63.setter
     def a63(self, value: float) -> None:
+        """Set the a63 property."""
         self._cards[6].set_value("a63", value)
 
     @property
@@ -606,6 +633,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a70.setter
     def a70(self, value: float) -> None:
+        """Set the a70 property."""
         self._cards[7].set_value("a70", value)
 
     @property
@@ -616,6 +644,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a71.setter
     def a71(self, value: float) -> None:
+        """Set the a71 property."""
         self._cards[7].set_value("a71", value)
 
     @property
@@ -626,6 +655,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a72.setter
     def a72(self, value: float) -> None:
+        """Set the a72 property."""
         self._cards[7].set_value("a72", value)
 
     @property
@@ -636,6 +666,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a73.setter
     def a73(self, value: float) -> None:
+        """Set the a73 property."""
         self._cards[7].set_value("a73", value)
 
     @property
@@ -646,6 +677,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a14.setter
     def a14(self, value: float) -> None:
+        """Set the a14 property."""
         self._cards[8].set_value("a14", value)
 
     @property
@@ -656,6 +688,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @a24.setter
     def a24(self, value: float) -> None:
+        """Set the a24 property."""
         self._cards[8].set_value("a24", value)
 
     @property
@@ -666,6 +699,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @alph.setter
     def alph(self, value: float) -> None:
+        """Set the alph property."""
         self._cards[9].set_value("alph", value)
 
     @property
@@ -676,6 +710,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[9].set_value("beta", value)
 
     @property
@@ -686,6 +721,7 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[9].set_value("e0", value)
 
     @property
@@ -696,5 +732,6 @@ class EosRatioOfPolynomials(KeywordBase):
 
     @v0.setter
     def v0(self, value: float) -> None:
+        """Set the v0 property."""
         self._cards[9].set_value("v0", value)
 

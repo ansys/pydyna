@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DAMPING keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DampingRelative(KeywordBase):
     subkeyword = "RELATIVE"
 
     def __init__(self, **kwargs):
+        """Initialize the DAMPING keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class DampingRelative(KeywordBase):
 
     @cdamp.setter
     def cdamp(self, value: float) -> None:
+        """Set the cdamp property."""
         self._cards[0].set_value("cdamp", value)
 
     @property
@@ -105,6 +108,7 @@ class DampingRelative(KeywordBase):
 
     @freq.setter
     def freq(self, value: float) -> None:
+        """Set the freq property."""
         self._cards[0].set_value("freq", value)
 
     @property
@@ -115,6 +119,7 @@ class DampingRelative(KeywordBase):
 
     @pidrb.setter
     def pidrb(self, value: int) -> None:
+        """Set the pidrb property."""
         self._cards[0].set_value("pidrb", value)
 
     @property
@@ -125,6 +130,7 @@ class DampingRelative(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -135,6 +141,7 @@ class DampingRelative(KeywordBase):
 
     @dv2.setter
     def dv2(self, value: float) -> None:
+        """Set the dv2 property."""
         self._cards[0].set_value("dv2", value)
 
     @property
@@ -145,5 +152,6 @@ class DampingRelative(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 

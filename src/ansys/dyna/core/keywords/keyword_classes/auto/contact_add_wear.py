@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTACT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ContactAddWear(KeywordBase):
     subkeyword = "ADD_WEAR"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTACT keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -166,6 +168,7 @@ class ContactAddWear(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -178,6 +181,7 @@ class ContactAddWear(KeywordBase):
 
     @wtype.setter
     def wtype(self, value: int) -> None:
+        """Set the wtype property."""
         self._cards[0].set_value("wtype", value)
 
     @property
@@ -190,6 +194,7 @@ class ContactAddWear(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[0].set_value("p1", value)
 
     @property
@@ -202,6 +207,7 @@ class ContactAddWear(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[0].set_value("p2", value)
 
     @property
@@ -214,6 +220,7 @@ class ContactAddWear(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[0].set_value("p3", value)
 
     @property
@@ -224,6 +231,7 @@ class ContactAddWear(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[0].set_value("p4", value)
 
     @property
@@ -234,6 +242,7 @@ class ContactAddWear(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[0].set_value("p5", value)
 
     @property
@@ -244,6 +253,7 @@ class ContactAddWear(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[0].set_value("p6", value)
 
     @property
@@ -254,6 +264,7 @@ class ContactAddWear(KeywordBase):
 
     @w1.setter
     def w1(self, value: float) -> None:
+        """Set the w1 property."""
         self._cards[1].set_value("w1", value)
 
     @property
@@ -264,6 +275,7 @@ class ContactAddWear(KeywordBase):
 
     @w2.setter
     def w2(self, value: float) -> None:
+        """Set the w2 property."""
         self._cards[1].set_value("w2", value)
 
     @property
@@ -274,6 +286,7 @@ class ContactAddWear(KeywordBase):
 
     @w3.setter
     def w3(self, value: float) -> None:
+        """Set the w3 property."""
         self._cards[1].set_value("w3", value)
 
     @property
@@ -284,6 +297,7 @@ class ContactAddWear(KeywordBase):
 
     @w4.setter
     def w4(self, value: float) -> None:
+        """Set the w4 property."""
         self._cards[1].set_value("w4", value)
 
     @property
@@ -294,6 +308,7 @@ class ContactAddWear(KeywordBase):
 
     @w5.setter
     def w5(self, value: float) -> None:
+        """Set the w5 property."""
         self._cards[1].set_value("w5", value)
 
     @property
@@ -304,6 +319,7 @@ class ContactAddWear(KeywordBase):
 
     @w6.setter
     def w6(self, value: float) -> None:
+        """Set the w6 property."""
         self._cards[1].set_value("w6", value)
 
     @property
@@ -314,6 +330,7 @@ class ContactAddWear(KeywordBase):
 
     @w7.setter
     def w7(self, value: float) -> None:
+        """Set the w7 property."""
         self._cards[1].set_value("w7", value)
 
     @property
@@ -324,5 +341,6 @@ class ContactAddWear(KeywordBase):
 
     @w8.setter
     def w8(self, value: float) -> None:
+        """Set the w8 property."""
         self._cards[1].set_value("w8", value)
 

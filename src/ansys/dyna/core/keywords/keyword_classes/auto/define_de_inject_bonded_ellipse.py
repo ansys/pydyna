@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -312,6 +314,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -322,6 +325,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -332,6 +336,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -342,6 +347,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -352,6 +358,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 
     @property
@@ -362,6 +369,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @xl.setter
     def xl(self, value: float) -> None:
+        """Set the xl property."""
         self._cards[0].set_value("xl", value)
 
     @property
@@ -372,6 +380,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @yl.setter
     def yl(self, value: float) -> None:
+        """Set the yl property."""
         self._cards[0].set_value("yl", value)
 
     @property
@@ -382,6 +391,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -394,6 +404,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @rmass.setter
     def rmass(self, value: float) -> None:
+        """Set the rmass property."""
         self._cards[1].set_value("rmass", value)
 
     @property
@@ -404,6 +415,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[1].set_value("vx", value)
 
     @property
@@ -414,6 +426,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @xy.setter
     def xy(self, value: float) -> None:
+        """Set the xy property."""
         self._cards[1].set_value("xy", value)
 
     @property
@@ -424,6 +437,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[1].set_value("vz", value)
 
     @property
@@ -434,6 +448,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @tbeg.setter
     def tbeg(self, value: float) -> None:
+        """Set the tbeg property."""
         self._cards[1].set_value("tbeg", value)
 
     @property
@@ -444,6 +459,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[1].set_value("tend", value)
 
     @property
@@ -454,6 +470,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @pbn.setter
     def pbn(self, value: float) -> None:
+        """Set the pbn property."""
         self._cards[2].set_value("pbn", value)
 
     @property
@@ -464,6 +481,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @pbs.setter
     def pbs(self, value: float) -> None:
+        """Set the pbs property."""
         self._cards[2].set_value("pbs", value)
 
     @property
@@ -474,6 +492,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @pbn_s.setter
     def pbn_s(self, value: float) -> None:
+        """Set the pbn_s property."""
         self._cards[2].set_value("pbn_s", value)
 
     @property
@@ -484,6 +503,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @pbs_s.setter
     def pbs_s(self, value: float) -> None:
+        """Set the pbs_s property."""
         self._cards[2].set_value("pbs_s", value)
 
     @property
@@ -494,6 +514,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @sfa.setter
     def sfa(self, value: float) -> None:
+        """Set the sfa property."""
         self._cards[2].set_value("sfa", value)
 
     @property
@@ -504,6 +525,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[2].set_value("alpha", value)
 
     @property
@@ -516,6 +538,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @maxgap.setter
     def maxgap(self, value: float) -> None:
+        """Set the maxgap property."""
         self._cards[2].set_value("maxgap", value)
 
     @property
@@ -526,6 +549,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @nshape.setter
     def nshape(self, value: int) -> None:
+        """Set the nshape property."""
         self._cards[3].set_value("nshape", value)
 
     @property
@@ -536,6 +560,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @ishape.setter
     def ishape(self, value: int) -> None:
+        """Set the ishape property."""
         self._cards[4].set_value("ishape", value)
 
     @property
@@ -546,6 +571,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @ishape.setter
     def ishape(self, value: int) -> None:
+        """Set the ishape property."""
         self._cards[4].set_value("ishape", value)
 
     @property
@@ -556,6 +582,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @ishape.setter
     def ishape(self, value: int) -> None:
+        """Set the ishape property."""
         self._cards[4].set_value("ishape", value)
 
     @property
@@ -566,6 +593,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @ishape.setter
     def ishape(self, value: int) -> None:
+        """Set the ishape property."""
         self._cards[4].set_value("ishape", value)
 
     @property
@@ -576,6 +604,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @ishape.setter
     def ishape(self, value: int) -> None:
+        """Set the ishape property."""
         self._cards[4].set_value("ishape", value)
 
     @property
@@ -586,6 +615,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @ishape.setter
     def ishape(self, value: int) -> None:
+        """Set the ishape property."""
         self._cards[4].set_value("ishape", value)
 
     @property
@@ -596,6 +626,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @ishape.setter
     def ishape(self, value: int) -> None:
+        """Set the ishape property."""
         self._cards[4].set_value("ishape", value)
 
     @property
@@ -606,6 +637,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @ishape.setter
     def ishape(self, value: int) -> None:
+        """Set the ishape property."""
         self._cards[4].set_value("ishape", value)
 
     @property
@@ -616,5 +648,6 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

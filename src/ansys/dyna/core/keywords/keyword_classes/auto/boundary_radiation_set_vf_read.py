@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryRadiationSetVfRead(KeywordBase):
     subkeyword = "RADIATION_SET_VF_READ"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class BoundaryRadiationSetVfRead(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -125,6 +128,7 @@ class BoundaryRadiationSetVfRead(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         self._cards[0].set_value("type", value)
 
     @property
@@ -135,6 +139,7 @@ class BoundaryRadiationSetVfRead(KeywordBase):
 
     @rad_grp.setter
     def rad_grp(self, value: int) -> None:
+        """Set the rad_grp property."""
         self._cards[0].set_value("rad_grp", value)
 
     @property
@@ -145,6 +150,7 @@ class BoundaryRadiationSetVfRead(KeywordBase):
 
     @file_no.setter
     def file_no(self, value: int) -> None:
+        """Set the file_no property."""
         self._cards[0].set_value("file_no", value)
 
     @property
@@ -157,8 +163,9 @@ class BoundaryRadiationSetVfRead(KeywordBase):
 
     @block.setter
     def block(self, value: int) -> None:
+        """Set the block property."""
         if value not in [0, 1, None]:
-            raise Exception("""block must be `None` or one of {0,1}""")
+            raise Exception("""block must be `None` or one of {0,1}.""")
         self._cards[0].set_value("block", value)
 
     @property
@@ -171,8 +178,9 @@ class BoundaryRadiationSetVfRead(KeywordBase):
 
     @nint.setter
     def nint(self, value: int) -> None:
+        """Set the nint property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, None]:
-            raise Exception("""nint must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10}""")
+            raise Exception("""nint must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10}.""")
         self._cards[0].set_value("nint", value)
 
     @property
@@ -186,6 +194,7 @@ class BoundaryRadiationSetVfRead(KeywordBase):
 
     @selcid.setter
     def selcid(self, value: int) -> None:
+        """Set the selcid property."""
         self._cards[1].set_value("selcid", value)
 
     @property
@@ -196,5 +205,6 @@ class BoundaryRadiationSetVfRead(KeywordBase):
 
     @semult.setter
     def semult(self, value: float) -> None:
+        """Set the semult property."""
         self._cards[1].set_value("semult", value)
 

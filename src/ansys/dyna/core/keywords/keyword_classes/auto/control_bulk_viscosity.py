@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CONTROL keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlBulkViscosity(KeywordBase):
     subkeyword = "BULK_VISCOSITY"
 
     def __init__(self, **kwargs):
+        """Initialize the CONTROL keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -87,6 +89,7 @@ class ControlBulkViscosity(KeywordBase):
 
     @q1.setter
     def q1(self, value: float) -> None:
+        """Set the q1 property."""
         self._cards[0].set_value("q1", value)
 
     @property
@@ -97,6 +100,7 @@ class ControlBulkViscosity(KeywordBase):
 
     @q2.setter
     def q2(self, value: float) -> None:
+        """Set the q2 property."""
         self._cards[0].set_value("q2", value)
 
     @property
@@ -112,8 +116,9 @@ class ControlBulkViscosity(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [1, -1, -2, 2, None]:
-            raise Exception("""type must be `None` or one of {1,-1,-2,2}""")
+            raise Exception("""type must be `None` or one of {1,-1,-2,2}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -127,8 +132,9 @@ class ControlBulkViscosity(KeywordBase):
 
     @btype.setter
     def btype(self, value: int) -> None:
+        """Set the btype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""btype must be `None` or one of {0,1,2}""")
+            raise Exception("""btype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("btype", value)
 
     @property
@@ -141,7 +147,8 @@ class ControlBulkViscosity(KeywordBase):
 
     @tstype.setter
     def tstype(self, value: int) -> None:
+        """Set the tstype property."""
         if value not in [0, 1, None]:
-            raise Exception("""tstype must be `None` or one of {0,1}""")
+            raise Exception("""tstype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("tstype", value)
 

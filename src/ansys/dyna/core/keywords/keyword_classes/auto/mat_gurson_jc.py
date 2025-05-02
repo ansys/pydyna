@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the MAT keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatGursonJc(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MAT keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -450,6 +452,7 @@ class MatGursonJc(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -460,6 +463,7 @@ class MatGursonJc(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -470,6 +474,7 @@ class MatGursonJc(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -480,6 +485,7 @@ class MatGursonJc(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -490,6 +496,7 @@ class MatGursonJc(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -500,6 +507,7 @@ class MatGursonJc(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -510,6 +518,7 @@ class MatGursonJc(KeywordBase):
 
     @q1.setter
     def q1(self, value: float) -> None:
+        """Set the q1 property."""
         self._cards[0].set_value("q1", value)
 
     @property
@@ -520,6 +529,7 @@ class MatGursonJc(KeywordBase):
 
     @q2.setter
     def q2(self, value: float) -> None:
+        """Set the q2 property."""
         self._cards[0].set_value("q2", value)
 
     @property
@@ -530,6 +540,7 @@ class MatGursonJc(KeywordBase):
 
     @fc.setter
     def fc(self, value: float) -> None:
+        """Set the fc property."""
         self._cards[1].set_value("fc", value)
 
     @property
@@ -540,6 +551,7 @@ class MatGursonJc(KeywordBase):
 
     @f0.setter
     def f0(self, value: float) -> None:
+        """Set the f0 property."""
         self._cards[1].set_value("f0", value)
 
     @property
@@ -552,6 +564,7 @@ class MatGursonJc(KeywordBase):
 
     @en.setter
     def en(self, value: float) -> None:
+        """Set the en property."""
         self._cards[1].set_value("en", value)
 
     @property
@@ -564,6 +577,7 @@ class MatGursonJc(KeywordBase):
 
     @sn.setter
     def sn(self, value: float) -> None:
+        """Set the sn property."""
         self._cards[1].set_value("sn", value)
 
     @property
@@ -574,6 +588,7 @@ class MatGursonJc(KeywordBase):
 
     @fn.setter
     def fn(self, value: float) -> None:
+        """Set the fn property."""
         self._cards[1].set_value("fn", value)
 
     @property
@@ -584,6 +599,7 @@ class MatGursonJc(KeywordBase):
 
     @etan.setter
     def etan(self, value: float) -> None:
+        """Set the etan property."""
         self._cards[1].set_value("etan", value)
 
     @property
@@ -597,8 +613,9 @@ class MatGursonJc(KeywordBase):
 
     @atyp.setter
     def atyp(self, value: float) -> None:
+        """Set the atyp property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""atyp must be `None` or one of {1,2,3}""")
+            raise Exception("""atyp must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("atyp", value)
 
     @property
@@ -609,6 +626,7 @@ class MatGursonJc(KeywordBase):
 
     @ff0.setter
     def ff0(self, value: float) -> None:
+        """Set the ff0 property."""
         self._cards[1].set_value("ff0", value)
 
     @property
@@ -619,6 +637,7 @@ class MatGursonJc(KeywordBase):
 
     @eps1.setter
     def eps1(self, value: float) -> None:
+        """Set the eps1 property."""
         self._cards[2].set_value("eps1", value)
 
     @property
@@ -629,6 +648,7 @@ class MatGursonJc(KeywordBase):
 
     @eps2.setter
     def eps2(self, value: float) -> None:
+        """Set the eps2 property."""
         self._cards[2].set_value("eps2", value)
 
     @property
@@ -639,6 +659,7 @@ class MatGursonJc(KeywordBase):
 
     @eps3.setter
     def eps3(self, value: float) -> None:
+        """Set the eps3 property."""
         self._cards[2].set_value("eps3", value)
 
     @property
@@ -649,6 +670,7 @@ class MatGursonJc(KeywordBase):
 
     @eps4.setter
     def eps4(self, value: float) -> None:
+        """Set the eps4 property."""
         self._cards[2].set_value("eps4", value)
 
     @property
@@ -659,6 +681,7 @@ class MatGursonJc(KeywordBase):
 
     @eps5.setter
     def eps5(self, value: float) -> None:
+        """Set the eps5 property."""
         self._cards[2].set_value("eps5", value)
 
     @property
@@ -669,6 +692,7 @@ class MatGursonJc(KeywordBase):
 
     @eps6.setter
     def eps6(self, value: float) -> None:
+        """Set the eps6 property."""
         self._cards[2].set_value("eps6", value)
 
     @property
@@ -679,6 +703,7 @@ class MatGursonJc(KeywordBase):
 
     @eps7.setter
     def eps7(self, value: float) -> None:
+        """Set the eps7 property."""
         self._cards[2].set_value("eps7", value)
 
     @property
@@ -689,6 +714,7 @@ class MatGursonJc(KeywordBase):
 
     @eps8.setter
     def eps8(self, value: float) -> None:
+        """Set the eps8 property."""
         self._cards[2].set_value("eps8", value)
 
     @property
@@ -699,6 +725,7 @@ class MatGursonJc(KeywordBase):
 
     @es1.setter
     def es1(self, value: float) -> None:
+        """Set the es1 property."""
         self._cards[3].set_value("es1", value)
 
     @property
@@ -709,6 +736,7 @@ class MatGursonJc(KeywordBase):
 
     @es2.setter
     def es2(self, value: float) -> None:
+        """Set the es2 property."""
         self._cards[3].set_value("es2", value)
 
     @property
@@ -719,6 +747,7 @@ class MatGursonJc(KeywordBase):
 
     @es3.setter
     def es3(self, value: float) -> None:
+        """Set the es3 property."""
         self._cards[3].set_value("es3", value)
 
     @property
@@ -729,6 +758,7 @@ class MatGursonJc(KeywordBase):
 
     @es4.setter
     def es4(self, value: float) -> None:
+        """Set the es4 property."""
         self._cards[3].set_value("es4", value)
 
     @property
@@ -739,6 +769,7 @@ class MatGursonJc(KeywordBase):
 
     @es5.setter
     def es5(self, value: float) -> None:
+        """Set the es5 property."""
         self._cards[3].set_value("es5", value)
 
     @property
@@ -749,6 +780,7 @@ class MatGursonJc(KeywordBase):
 
     @es6.setter
     def es6(self, value: float) -> None:
+        """Set the es6 property."""
         self._cards[3].set_value("es6", value)
 
     @property
@@ -759,6 +791,7 @@ class MatGursonJc(KeywordBase):
 
     @es7.setter
     def es7(self, value: float) -> None:
+        """Set the es7 property."""
         self._cards[3].set_value("es7", value)
 
     @property
@@ -769,6 +802,7 @@ class MatGursonJc(KeywordBase):
 
     @es8.setter
     def es8(self, value: float) -> None:
+        """Set the es8 property."""
         self._cards[3].set_value("es8", value)
 
     @property
@@ -779,6 +813,7 @@ class MatGursonJc(KeywordBase):
 
     @lcdam.setter
     def lcdam(self, value: int) -> None:
+        """Set the lcdam property."""
         self._cards[4].set_value("lcdam", value)
 
     @property
@@ -789,6 +824,7 @@ class MatGursonJc(KeywordBase):
 
     @l1.setter
     def l1(self, value: float) -> None:
+        """Set the l1 property."""
         self._cards[4].set_value("l1", value)
 
     @property
@@ -799,6 +835,7 @@ class MatGursonJc(KeywordBase):
 
     @l2.setter
     def l2(self, value: float) -> None:
+        """Set the l2 property."""
         self._cards[4].set_value("l2", value)
 
     @property
@@ -809,6 +846,7 @@ class MatGursonJc(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -819,6 +857,7 @@ class MatGursonJc(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -829,6 +868,7 @@ class MatGursonJc(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[4].set_value("d3", value)
 
     @property
@@ -839,6 +879,7 @@ class MatGursonJc(KeywordBase):
 
     @d4.setter
     def d4(self, value: float) -> None:
+        """Set the d4 property."""
         self._cards[4].set_value("d4", value)
 
     @property
@@ -849,6 +890,7 @@ class MatGursonJc(KeywordBase):
 
     @lcjc.setter
     def lcjc(self, value: float) -> None:
+        """Set the lcjc property."""
         self._cards[4].set_value("lcjc", value)
 
     @property
@@ -859,6 +901,7 @@ class MatGursonJc(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: int) -> None:
+        """Set the lcss property."""
         self._cards[5].set_value("lcss", value)
 
     @property
@@ -869,6 +912,7 @@ class MatGursonJc(KeywordBase):
 
     @lclf.setter
     def lclf(self, value: int) -> None:
+        """Set the lclf property."""
         self._cards[5].set_value("lclf", value)
 
     @property
@@ -879,6 +923,7 @@ class MatGursonJc(KeywordBase):
 
     @numint.setter
     def numint(self, value: float) -> None:
+        """Set the numint property."""
         self._cards[5].set_value("numint", value)
 
     @property
@@ -889,6 +934,7 @@ class MatGursonJc(KeywordBase):
 
     @lcf0.setter
     def lcf0(self, value: int) -> None:
+        """Set the lcf0 property."""
         self._cards[5].set_value("lcf0", value)
 
     @property
@@ -899,6 +945,7 @@ class MatGursonJc(KeywordBase):
 
     @lcfc.setter
     def lcfc(self, value: int) -> None:
+        """Set the lcfc property."""
         self._cards[5].set_value("lcfc", value)
 
     @property
@@ -909,6 +956,7 @@ class MatGursonJc(KeywordBase):
 
     @lcfn.setter
     def lcfn(self, value: int) -> None:
+        """Set the lcfn property."""
         self._cards[5].set_value("lcfn", value)
 
     @property
@@ -922,6 +970,7 @@ class MatGursonJc(KeywordBase):
 
     @vgtyp.setter
     def vgtyp(self, value: float) -> None:
+        """Set the vgtyp property."""
         self._cards[5].set_value("vgtyp", value)
 
     @property
@@ -932,6 +981,7 @@ class MatGursonJc(KeywordBase):
 
     @kw.setter
     def kw(self, value: int) -> None:
+        """Set the kw property."""
         self._cards[6].set_value("kw", value)
 
     @property
@@ -942,6 +992,7 @@ class MatGursonJc(KeywordBase):
 
     @beta.setter
     def beta(self, value: int) -> None:
+        """Set the beta property."""
         self._cards[6].set_value("beta", value)
 
     @property
@@ -952,6 +1003,7 @@ class MatGursonJc(KeywordBase):
 
     @m.setter
     def m(self, value: int) -> None:
+        """Set the m property."""
         self._cards[6].set_value("m", value)
 
     @property
@@ -962,5 +1014,6 @@ class MatGursonJc(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
 

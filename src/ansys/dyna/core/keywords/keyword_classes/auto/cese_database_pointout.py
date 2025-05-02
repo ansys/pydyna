@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the CESE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseDatabasePointout(KeywordBase):
     subkeyword = "DATABASE_POINTOUT"
 
     def __init__(self, **kwargs):
+        """Initialize the CESE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -127,6 +129,7 @@ class CeseDatabasePointout(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -137,6 +140,7 @@ class CeseDatabasePointout(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -150,8 +154,9 @@ class CeseDatabasePointout(KeywordBase):
 
     @pstype.setter
     def pstype(self, value: int) -> None:
+        """Set the pstype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""pstype must be `None` or one of {0,1,2}""")
+            raise Exception("""pstype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("pstype", value)
 
     @property
@@ -162,6 +167,7 @@ class CeseDatabasePointout(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -172,6 +178,7 @@ class CeseDatabasePointout(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -182,6 +189,7 @@ class CeseDatabasePointout(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -192,6 +200,7 @@ class CeseDatabasePointout(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -202,6 +211,7 @@ class CeseDatabasePointout(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -212,6 +222,7 @@ class CeseDatabasePointout(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -222,5 +233,6 @@ class CeseDatabasePointout(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DATABASE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseExtentBinaryComp(KeywordBase):
     subkeyword = "EXTENT_BINARY_COMP"
 
     def __init__(self, **kwargs):
+        """Initialize the DATABASE keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -105,8 +107,9 @@ class DatabaseExtentBinaryComp(KeywordBase):
 
     @iglb.setter
     def iglb(self, value: int) -> None:
+        """Set the iglb property."""
         if value not in [0, 1, None]:
-            raise Exception("""iglb must be `None` or one of {0,1}""")
+            raise Exception("""iglb must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iglb", value)
 
     @property
@@ -119,8 +122,9 @@ class DatabaseExtentBinaryComp(KeywordBase):
 
     @ixyz.setter
     def ixyz(self, value: int) -> None:
+        """Set the ixyz property."""
         if value not in [0, 1, None]:
-            raise Exception("""ixyz must be `None` or one of {0,1}""")
+            raise Exception("""ixyz must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ixyz", value)
 
     @property
@@ -133,8 +137,9 @@ class DatabaseExtentBinaryComp(KeywordBase):
 
     @ivel.setter
     def ivel(self, value: int) -> None:
+        """Set the ivel property."""
         if value not in [0, 1, None]:
-            raise Exception("""ivel must be `None` or one of {0,1}""")
+            raise Exception("""ivel must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ivel", value)
 
     @property
@@ -147,8 +152,9 @@ class DatabaseExtentBinaryComp(KeywordBase):
 
     @iacc.setter
     def iacc(self, value: int) -> None:
+        """Set the iacc property."""
         if value not in [0, 1, None]:
-            raise Exception("""iacc must be `None` or one of {0,1}""")
+            raise Exception("""iacc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iacc", value)
 
     @property
@@ -161,8 +167,9 @@ class DatabaseExtentBinaryComp(KeywordBase):
 
     @istrs.setter
     def istrs(self, value: int) -> None:
+        """Set the istrs property."""
         if value not in [0, 1, None]:
-            raise Exception("""istrs must be `None` or one of {0,1}""")
+            raise Exception("""istrs must be `None` or one of {0,1}.""")
         self._cards[0].set_value("istrs", value)
 
     @property
@@ -175,8 +182,9 @@ class DatabaseExtentBinaryComp(KeywordBase):
 
     @istra.setter
     def istra(self, value: int) -> None:
+        """Set the istra property."""
         if value not in [0, 1, None]:
-            raise Exception("""istra must be `None` or one of {0,1}""")
+            raise Exception("""istra must be `None` or one of {0,1}.""")
         self._cards[0].set_value("istra", value)
 
     @property
@@ -189,7 +197,8 @@ class DatabaseExtentBinaryComp(KeywordBase):
 
     @ised.setter
     def ised(self, value: int) -> None:
+        """Set the ised property."""
         if value not in [0, 1, None]:
-            raise Exception("""ised must be `None` or one of {0,1}""")
+            raise Exception("""ised must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ised", value)
 

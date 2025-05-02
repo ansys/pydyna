@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the DEFINE keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineTableMatrix(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DEFINE keyword."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -146,6 +148,7 @@ class DefineTableMatrix(KeywordBase):
 
     @tbid.setter
     def tbid(self, value: int) -> None:
+        """Set the tbid property."""
         self._cards[0].set_value("tbid", value)
 
     @property
@@ -156,6 +159,7 @@ class DefineTableMatrix(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -166,6 +170,7 @@ class DefineTableMatrix(KeywordBase):
 
     @nrow.setter
     def nrow(self, value: int) -> None:
+        """Set the nrow property."""
         self._cards[1].set_value("nrow", value)
 
     @property
@@ -176,6 +181,7 @@ class DefineTableMatrix(KeywordBase):
 
     @ncol.setter
     def ncol(self, value: int) -> None:
+        """Set the ncol property."""
         self._cards[1].set_value("ncol", value)
 
     @property
@@ -186,6 +192,7 @@ class DefineTableMatrix(KeywordBase):
 
     @srow.setter
     def srow(self, value: float) -> None:
+        """Set the srow property."""
         self._cards[1].set_value("srow", value)
 
     @property
@@ -196,6 +203,7 @@ class DefineTableMatrix(KeywordBase):
 
     @scol.setter
     def scol(self, value: float) -> None:
+        """Set the scol property."""
         self._cards[1].set_value("scol", value)
 
     @property
@@ -206,6 +214,7 @@ class DefineTableMatrix(KeywordBase):
 
     @sval.setter
     def sval(self, value: float) -> None:
+        """Set the sval property."""
         self._cards[1].set_value("sval", value)
 
     @property
@@ -216,6 +225,7 @@ class DefineTableMatrix(KeywordBase):
 
     @orow.setter
     def orow(self, value: float) -> None:
+        """Set the orow property."""
         self._cards[1].set_value("orow", value)
 
     @property
@@ -226,6 +236,7 @@ class DefineTableMatrix(KeywordBase):
 
     @ocol.setter
     def ocol(self, value: float) -> None:
+        """Set the ocol property."""
         self._cards[1].set_value("ocol", value)
 
     @property
@@ -236,6 +247,7 @@ class DefineTableMatrix(KeywordBase):
 
     @oval.setter
     def oval(self, value: float) -> None:
+        """Set the oval property."""
         self._cards[1].set_value("oval", value)
 
     @property
@@ -246,5 +258,6 @@ class DefineTableMatrix(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

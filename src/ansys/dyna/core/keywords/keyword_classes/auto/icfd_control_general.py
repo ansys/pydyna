@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the ICFD keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlGeneral(KeywordBase):
     subkeyword = "CONTROL_GENERAL"
 
     def __init__(self, **kwargs):
+        """Initialize the ICFD keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,8 +84,9 @@ class IcfdControlGeneral(KeywordBase):
 
     @atype.setter
     def atype(self, value: int) -> None:
+        """Set the atype property."""
         if value not in [0, -1, 1, None]:
-            raise Exception("""atype must be `None` or one of {0,-1,1}""")
+            raise Exception("""atype must be `None` or one of {0,-1,1}.""")
         self._cards[0].set_value("atype", value)
 
     @property
@@ -97,8 +100,9 @@ class IcfdControlGeneral(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""mtype must be `None` or one of {0,1,2}""")
+            raise Exception("""mtype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -113,8 +117,9 @@ class IcfdControlGeneral(KeywordBase):
 
     @dvcl.setter
     def dvcl(self, value: int) -> None:
+        """Set the dvcl property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""dvcl must be `None` or one of {0,1,2,3}""")
+            raise Exception("""dvcl must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("dvcl", value)
 
     @property
@@ -127,7 +132,8 @@ class IcfdControlGeneral(KeywordBase):
 
     @rdvcl.setter
     def rdvcl(self, value: int) -> None:
+        """Set the rdvcl property."""
         if value not in [0, 1, None]:
-            raise Exception("""rdvcl must be `None` or one of {0,1}""")
+            raise Exception("""rdvcl must be `None` or one of {0,1}.""")
         self._cards[0].set_value("rdvcl", value)
 

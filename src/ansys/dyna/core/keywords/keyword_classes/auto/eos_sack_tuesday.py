@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the EOS keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EosSackTuesday(KeywordBase):
     subkeyword = "SACK_TUESDAY"
 
     def __init__(self, **kwargs):
+        """Initialize the EOS keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class EosSackTuesday(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -113,6 +116,7 @@ class EosSackTuesday(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[0].set_value("a1", value)
 
     @property
@@ -123,6 +127,7 @@ class EosSackTuesday(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[0].set_value("a2", value)
 
     @property
@@ -133,6 +138,7 @@ class EosSackTuesday(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[0].set_value("a3", value)
 
     @property
@@ -143,6 +149,7 @@ class EosSackTuesday(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[0].set_value("b1", value)
 
     @property
@@ -153,6 +160,7 @@ class EosSackTuesday(KeywordBase):
 
     @b2.setter
     def b2(self, value: float) -> None:
+        """Set the b2 property."""
         self._cards[0].set_value("b2", value)
 
     @property
@@ -163,6 +171,7 @@ class EosSackTuesday(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[0].set_value("e0", value)
 
     @property
@@ -173,5 +182,6 @@ class EosSackTuesday(KeywordBase):
 
     @vo.setter
     def vo(self, value: float) -> None:
+        """Set the vo property."""
         self._cards[0].set_value("vo", value)
 

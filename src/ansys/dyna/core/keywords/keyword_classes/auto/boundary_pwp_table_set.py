@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for the BOUNDARY keyword."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPwpTableSet(KeywordBase):
     subkeyword = "PWP_TABLE_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the BOUNDARY keyword."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -125,6 +127,7 @@ class BoundaryPwpTableSet(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -135,6 +138,7 @@ class BoundaryPwpTableSet(KeywordBase):
 
     @lc.setter
     def lc(self, value: float) -> None:
+        """Set the lc property."""
         self._cards[0].set_value("lc", value)
 
     @property
@@ -145,6 +149,7 @@ class BoundaryPwpTableSet(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 
     @property
@@ -155,6 +160,7 @@ class BoundaryPwpTableSet(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -168,8 +174,9 @@ class BoundaryPwpTableSet(KeywordBase):
 
     @itotex.setter
     def itotex(self, value: int) -> None:
+        """Set the itotex property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""itotex must be `None` or one of {0,1,2}""")
+            raise Exception("""itotex must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("itotex", value)
 
     @property
@@ -180,5 +187,6 @@ class BoundaryPwpTableSet(KeywordBase):
 
     @table.setter
     def table(self, value: int) -> None:
+        """Set the table property."""
         self._cards[1].set_value("table", value)
 
