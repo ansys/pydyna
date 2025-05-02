@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the DAMPING keyword."""
+"""Module providing the DampingPartStiffnessSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class DampingPartStiffnessSet(KeywordBase):
     subkeyword = "PART_STIFFNESS_SET"
 
     def __init__(self, **kwargs):
-        """Initialize the DAMPING keyword."""
+        """Initialize the DampingPartStiffnessSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

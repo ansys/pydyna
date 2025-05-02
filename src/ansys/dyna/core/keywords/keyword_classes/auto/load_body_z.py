@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the LOAD keyword."""
+"""Module providing the LoadBodyZ class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class LoadBodyZ(KeywordBase):
     subkeyword = "BODY_Z"
 
     def __init__(self, **kwargs):
-        """Initialize the LOAD keyword."""
+        """Initialize the LoadBodyZ class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the INCLUDE keyword."""
+"""Module providing the IncludeCompensationOriginalDynain class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class IncludeCompensationOriginalDynain(KeywordBase):
     subkeyword = "COMPENSATION_ORIGINAL_DYNAIN"
 
     def __init__(self, **kwargs):
-        """Initialize the INCLUDE keyword."""
+        """Initialize the IncludeCompensationOriginalDynain class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the FREQUENCY keyword."""
+"""Module providing the FrequencyDomainSsdDirect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class FrequencyDomainSsdDirect(KeywordBase):
     subkeyword = "DOMAIN_SSD_DIRECT"
 
     def __init__(self, **kwargs):
-        """Initialize the FREQUENCY keyword."""
+        """Initialize the FrequencyDomainSsdDirect class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the SECTION keyword."""
+"""Module providing the SectionSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -38,7 +38,7 @@ class SectionSolid(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the SECTION keyword."""
+        """Initialize the SectionSolid class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

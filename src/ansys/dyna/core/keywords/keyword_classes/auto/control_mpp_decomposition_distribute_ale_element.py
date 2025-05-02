@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CONTROL keyword."""
+"""Module providing the ControlMppDecompositionDistributeAleElement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ControlMppDecompositionDistributeAleElement(KeywordBase):
     subkeyword = "MPP_DECOMPOSITION_DISTRIBUTE_ALE_ELEMENT"
 
     def __init__(self, **kwargs):
-        """Initialize the CONTROL keyword."""
+        """Initialize the ControlMppDecompositionDistributeAleElement class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

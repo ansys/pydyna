@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the INCLUDE keyword."""
+"""Module providing the Include class."""
 import typing
 from ansys.dyna.core.lib.cards_.special.include_card import IncludeCard, IncludeCardMixin
 from ansys.dyna.core.lib.card import Card, Field, Flag
@@ -36,7 +36,7 @@ class Include(
     subkeyword = "INCLUDE"
 
     def __init__(self, **kwargs):
-        """Initialize the INCLUDE keyword."""
+        """Initialize the Include class."""
         super().__init__(**kwargs)
         self._cards = [
             IncludeCard(**kwargs)

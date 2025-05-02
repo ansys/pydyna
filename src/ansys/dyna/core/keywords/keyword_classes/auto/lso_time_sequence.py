@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the LSO keyword."""
+"""Module providing the LsoTimeSequence class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class LsoTimeSequence(KeywordBase):
     subkeyword = "TIME_SEQUENCE"
 
     def __init__(self, **kwargs):
-        """Initialize the LSO keyword."""
+        """Initialize the LsoTimeSequence class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

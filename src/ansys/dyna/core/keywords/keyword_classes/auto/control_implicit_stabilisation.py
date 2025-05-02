@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CONTROL keyword."""
+"""Module providing the ControlImplicitStabilisation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ControlImplicitStabilisation(KeywordBase):
     subkeyword = "IMPLICIT_STABILISATION"
 
     def __init__(self, **kwargs):
-        """Initialize the CONTROL keyword."""
+        """Initialize the ControlImplicitStabilisation class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

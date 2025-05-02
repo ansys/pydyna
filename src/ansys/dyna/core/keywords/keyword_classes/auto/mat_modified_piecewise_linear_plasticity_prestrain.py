@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the MAT keyword."""
+"""Module providing the MatModifiedPiecewiseLinearPlasticityPrestrain class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
     subkeyword = "MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN"
 
     def __init__(self, **kwargs):
-        """Initialize the MAT keyword."""
+        """Initialize the MatModifiedPiecewiseLinearPlasticityPrestrain class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

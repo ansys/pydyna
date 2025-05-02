@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CONTACT keyword."""
+"""Module providing the ContactAutomaticSingleSurfaceTied class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -44,7 +44,7 @@ class ContactAutomaticSingleSurfaceTied(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the CONTACT keyword."""
+        """Initialize the ContactAutomaticSingleSurfaceTied class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

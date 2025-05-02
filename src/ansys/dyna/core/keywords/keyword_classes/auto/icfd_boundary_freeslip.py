@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the ICFD keyword."""
+"""Module providing the IcfdBoundaryFreeslip class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -33,7 +33,7 @@ class IcfdBoundaryFreeslip(KeywordBase):
     subkeyword = "BOUNDARY_FREESLIP"
 
     def __init__(self, **kwargs):
-        """Initialize the ICFD keyword."""
+        """Initialize the IcfdBoundaryFreeslip class."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the BOUNDARY keyword."""
+"""Module providing the BoundarySphNonReflecting class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class BoundarySphNonReflecting(KeywordBase):
     subkeyword = "SPH_NON_REFLECTING"
 
     def __init__(self, **kwargs):
-        """Initialize the BOUNDARY keyword."""
+        """Initialize the BoundarySphNonReflecting class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

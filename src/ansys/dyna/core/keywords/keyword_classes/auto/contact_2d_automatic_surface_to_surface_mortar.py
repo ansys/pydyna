@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CONTACT keyword."""
+"""Module providing the Contact2DAutomaticSurfaceToSurfaceMortar class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class Contact2DAutomaticSurfaceToSurfaceMortar(KeywordBase):
     subkeyword = "2D_AUTOMATIC_SURFACE_TO_SURFACE_MORTAR"
 
     def __init__(self, **kwargs):
-        """Initialize the CONTACT keyword."""
+        """Initialize the Contact2DAutomaticSurfaceToSurfaceMortar class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

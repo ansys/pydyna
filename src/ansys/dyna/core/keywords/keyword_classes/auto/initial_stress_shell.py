@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the INITIAL keyword."""
+"""Module providing the InitialStressShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.card_set import CardSet
@@ -412,7 +412,7 @@ class InitialStressShell(KeywordBase):
     subkeyword = "STRESS_SHELL"
 
     def __init__(self, **kwargs):
-        """Initialize the INITIAL keyword."""
+        """Initialize the InitialStressShell class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         kwargs["keyword"] = self

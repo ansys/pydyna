@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the DEFINE keyword."""
+"""Module providing the DefineElementErosionShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -36,7 +36,7 @@ class DefineElementErosionShell(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the DEFINE keyword."""
+        """Initialize the DefineElementErosionShell class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

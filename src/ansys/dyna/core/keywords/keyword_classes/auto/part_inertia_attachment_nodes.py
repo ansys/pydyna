@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the PART keyword."""
+"""Module providing the PartInertiaAttachmentNodes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class PartInertiaAttachmentNodes(KeywordBase):
     subkeyword = "INERTIA_ATTACHMENT_NODES"
 
     def __init__(self, **kwargs):
-        """Initialize the PART keyword."""
+        """Initialize the PartInertiaAttachmentNodes class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the MAT keyword."""
+"""Module providing the MatModifiedJohnsonCook class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class MatModifiedJohnsonCook(KeywordBase):
     subkeyword = "MODIFIED_JOHNSON_COOK"
 
     def __init__(self, **kwargs):
-        """Initialize the MAT keyword."""
+        """Initialize the MatModifiedJohnsonCook class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the ELEMENT keyword."""
+"""Module providing the ElementShellThicknessBeta class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ElementShellThicknessBeta(KeywordBase):
     subkeyword = "SHELL_THICKNESS_BETA"
 
     def __init__(self, **kwargs):
-        """Initialize the ELEMENT keyword."""
+        """Initialize the ElementShellThicknessBeta class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

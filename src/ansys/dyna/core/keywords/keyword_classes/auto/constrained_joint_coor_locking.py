@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CONSTRAINED keyword."""
+"""Module providing the ConstrainedJointCoorLocking class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ConstrainedJointCoorLocking(KeywordBase):
     subkeyword = "JOINT_COOR_LOCKING"
 
     def __init__(self, **kwargs):
-        """Initialize the CONSTRAINED keyword."""
+        """Initialize the ConstrainedJointCoorLocking class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

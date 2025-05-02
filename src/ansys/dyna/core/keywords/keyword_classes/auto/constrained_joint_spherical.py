@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CONSTRAINED keyword."""
+"""Module providing the ConstrainedJointSpherical class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ConstrainedJointSpherical(KeywordBase):
     subkeyword = "JOINT_SPHERICAL"
 
     def __init__(self, **kwargs):
-        """Initialize the CONSTRAINED keyword."""
+        """Initialize the ConstrainedJointSpherical class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the DEFINE keyword."""
+"""Module providing the DefineTransformation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -37,7 +37,7 @@ class DefineTransformation(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the DEFINE keyword."""
+        """Initialize the DefineTransformation class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

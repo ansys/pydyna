@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the SET keyword."""
+"""Module providing the SetPartListCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -37,7 +37,7 @@ class SetPartListCollect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the SET keyword."""
+        """Initialize the SetPartListCollect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

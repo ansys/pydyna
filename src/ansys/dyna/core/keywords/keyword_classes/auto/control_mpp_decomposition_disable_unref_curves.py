@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CONTROL keyword."""
+"""Module providing the ControlMppDecompositionDisableUnrefCurves class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ControlMppDecompositionDisableUnrefCurves(KeywordBase):
     subkeyword = "MPP_DECOMPOSITION_DISABLE_UNREF_CURVES"
 
     def __init__(self, **kwargs):
-        """Initialize the CONTROL keyword."""
+        """Initialize the ControlMppDecompositionDisableUnrefCurves class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

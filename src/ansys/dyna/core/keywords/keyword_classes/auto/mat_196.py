@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the MAT keyword."""
+"""Module providing the Mat196 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
@@ -37,7 +37,7 @@ class Mat196(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the MAT keyword."""
+        """Initialize the Mat196 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

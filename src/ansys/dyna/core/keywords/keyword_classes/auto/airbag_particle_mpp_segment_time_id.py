@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the AIRBAG keyword."""
+"""Module providing the AirbagParticleMppSegmentTimeId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class AirbagParticleMppSegmentTimeId(KeywordBase):
     subkeyword = "PARTICLE_MPP_SEGMENT_TIME_ID"
 
     def __init__(self, **kwargs):
-        """Initialize the AIRBAG keyword."""
+        """Initialize the AirbagParticleMppSegmentTimeId class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

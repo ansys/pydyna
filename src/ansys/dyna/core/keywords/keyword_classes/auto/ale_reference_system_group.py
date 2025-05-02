@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the ALE keyword."""
+"""Module providing the AleReferenceSystemGroup class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class AleReferenceSystemGroup(KeywordBase):
     subkeyword = "REFERENCE_SYSTEM_GROUP"
 
     def __init__(self, **kwargs):
-        """Initialize the ALE keyword."""
+        """Initialize the AleReferenceSystemGroup class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

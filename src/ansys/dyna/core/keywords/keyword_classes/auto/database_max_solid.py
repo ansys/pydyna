@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the DATABASE keyword."""
+"""Module providing the DatabaseMaxSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class DatabaseMaxSolid(KeywordBase):
     subkeyword = "MAX_SOLID"
 
     def __init__(self, **kwargs):
-        """Initialize the DATABASE keyword."""
+        """Initialize the DatabaseMaxSolid class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

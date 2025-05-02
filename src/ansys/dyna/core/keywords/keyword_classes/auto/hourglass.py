@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the HOURGLASS keyword."""
+"""Module providing the Hourglass class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.card_set import CardSet
@@ -253,7 +253,7 @@ class Hourglass(KeywordBase):
     subkeyword = "HOURGLASS"
 
     def __init__(self, **kwargs):
-        """Initialize the HOURGLASS keyword."""
+        """Initialize the Hourglass class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         kwargs["keyword"] = self

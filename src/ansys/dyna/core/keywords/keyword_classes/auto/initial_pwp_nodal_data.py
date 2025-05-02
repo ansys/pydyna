@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the INITIAL keyword."""
+"""Module providing the InitialPwpNodalData class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class InitialPwpNodalData(KeywordBase):
     subkeyword = "PWP_NODAL_DATA"
 
     def __init__(self, **kwargs):
-        """Initialize the INITIAL keyword."""
+        """Initialize the InitialPwpNodalData class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

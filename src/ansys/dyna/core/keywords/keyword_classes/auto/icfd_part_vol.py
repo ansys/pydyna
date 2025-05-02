@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the ICFD keyword."""
+"""Module providing the IcfdPartVol class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -37,7 +37,7 @@ class IcfdPartVol(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the ICFD keyword."""
+        """Initialize the IcfdPartVol class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

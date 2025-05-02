@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CHANGE keyword."""
+"""Module providing the ChangeVelocity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ChangeVelocity(KeywordBase):
     subkeyword = "VELOCITY"
 
     def __init__(self, **kwargs):
-        """Initialize the CHANGE keyword."""
+        """Initialize the ChangeVelocity class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

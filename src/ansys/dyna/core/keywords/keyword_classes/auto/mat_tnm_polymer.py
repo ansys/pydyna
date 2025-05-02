@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the MAT keyword."""
+"""Module providing the MatTnmPolymer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -36,7 +36,7 @@ class MatTnmPolymer(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the MAT keyword."""
+        """Initialize the MatTnmPolymer class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

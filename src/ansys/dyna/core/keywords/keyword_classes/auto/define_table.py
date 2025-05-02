@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the DEFINE keyword."""
+"""Module providing the DefineTable class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -37,7 +37,7 @@ class DefineTable(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the DEFINE keyword."""
+        """Initialize the DefineTable class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

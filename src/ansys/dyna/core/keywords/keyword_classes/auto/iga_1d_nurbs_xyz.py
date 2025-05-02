@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the IGA keyword."""
+"""Module providing the Iga1DNurbsXyz class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class Iga1DNurbsXyz(KeywordBase):
     subkeyword = "1D_NURBS_XYZ"
 
     def __init__(self, **kwargs):
-        """Initialize the IGA keyword."""
+        """Initialize the Iga1DNurbsXyz class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

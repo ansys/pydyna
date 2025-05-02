@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the ELEMENT keyword."""
+"""Module providing the ElementBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -33,7 +33,7 @@ class ElementBeam(KeywordBase):
     subkeyword = "BEAM"
 
     def __init__(self, **kwargs):
-        """Initialize the ELEMENT keyword."""
+        """Initialize the ElementBeam class."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(

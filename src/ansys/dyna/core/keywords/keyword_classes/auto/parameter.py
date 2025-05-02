@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the PARAMETER keyword."""
+"""Module providing the Parameter class."""
 import dataclasses
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
@@ -40,7 +40,7 @@ class Parameter(KeywordBase):
         val: str = None
 
     def __init__(self, **kwargs):
-        """Initialize the PARAMETER keyword."""
+        """Initialize the Parameter class."""
         super().__init__(**kwargs)
         self._cards = [
             SeriesCard(

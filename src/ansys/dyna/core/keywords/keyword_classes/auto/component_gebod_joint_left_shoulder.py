@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the COMPONENT keyword."""
+"""Module providing the ComponentGebodJointLeftShoulder class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ComponentGebodJointLeftShoulder(KeywordBase):
     subkeyword = "GEBOD_JOINT_LEFT_SHOULDER"
 
     def __init__(self, **kwargs):
-        """Initialize the COMPONENT keyword."""
+        """Initialize the ComponentGebodJointLeftShoulder class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

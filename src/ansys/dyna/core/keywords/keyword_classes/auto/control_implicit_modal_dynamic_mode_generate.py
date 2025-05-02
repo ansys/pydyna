@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CONTROL keyword."""
+"""Module providing the ControlImplicitModalDynamicModeGenerate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
     subkeyword = "IMPLICIT_MODAL_DYNAMIC_MODE_GENERATE"
 
     def __init__(self, **kwargs):
-        """Initialize the CONTROL keyword."""
+        """Initialize the ControlImplicitModalDynamicModeGenerate class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

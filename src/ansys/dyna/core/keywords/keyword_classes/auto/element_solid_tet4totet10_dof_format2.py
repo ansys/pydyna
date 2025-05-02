@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the ELEMENT keyword."""
+"""Module providing the ElementSolidTet4Totet10DofFormat2 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ElementSolidTet4Totet10DofFormat2(KeywordBase):
     subkeyword = "SOLID_TET4TOTET10_DOF_FORMAT2"
 
     def __init__(self, **kwargs):
-        """Initialize the ELEMENT keyword."""
+        """Initialize the ElementSolidTet4Totet10DofFormat2 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

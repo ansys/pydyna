@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the DEFORMABLE keyword."""
+"""Module providing the DeformableToRigidInertia class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class DeformableToRigidInertia(KeywordBase):
     subkeyword = "TO_RIGID_INERTIA"
 
     def __init__(self, **kwargs):
-        """Initialize the DEFORMABLE keyword."""
+        """Initialize the DeformableToRigidInertia class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

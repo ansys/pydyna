@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the MAT keyword."""
+"""Module providing the MatSimplifiedRubberFoamWithFailureLogLogInterpolation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -37,7 +37,7 @@ class MatSimplifiedRubberFoamWithFailureLogLogInterpolation(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the MAT keyword."""
+        """Initialize the MatSimplifiedRubberFoamWithFailureLogLogInterpolation class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

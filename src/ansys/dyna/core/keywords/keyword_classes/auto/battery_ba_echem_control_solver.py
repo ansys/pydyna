@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the BATTERY keyword."""
+"""Module providing the BatteryBaEchemControlSolver class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class BatteryBaEchemControlSolver(KeywordBase):
     subkeyword = "BA_ECHEM_CONTROL_SOLVER"
 
     def __init__(self, **kwargs):
-        """Initialize the BATTERY keyword."""
+        """Initialize the BatteryBaEchemControlSolver class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

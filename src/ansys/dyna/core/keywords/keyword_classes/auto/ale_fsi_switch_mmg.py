@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the ALE keyword."""
+"""Module providing the AleFsiSwitchMmg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class AleFsiSwitchMmg(KeywordBase):
     subkeyword = "FSI_SWITCH_MMG"
 
     def __init__(self, **kwargs):
-        """Initialize the ALE keyword."""
+        """Initialize the AleFsiSwitchMmg class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

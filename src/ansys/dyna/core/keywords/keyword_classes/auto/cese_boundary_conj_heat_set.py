@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CESE keyword."""
+"""Module providing the CeseBoundaryConjHeatSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class CeseBoundaryConjHeatSet(KeywordBase):
     subkeyword = "BOUNDARY_CONJ_HEAT_SET"
 
     def __init__(self, **kwargs):
-        """Initialize the CESE keyword."""
+        """Initialize the CeseBoundaryConjHeatSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

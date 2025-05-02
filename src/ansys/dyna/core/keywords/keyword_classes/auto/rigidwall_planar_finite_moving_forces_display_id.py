@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the RIGIDWALL keyword."""
+"""Module providing the RigidwallPlanarFiniteMovingForcesDisplayId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class RigidwallPlanarFiniteMovingForcesDisplayId(KeywordBase):
     subkeyword = "PLANAR_FINITE_MOVING_FORCES_DISPLAY_ID"
 
     def __init__(self, **kwargs):
-        """Initialize the RIGIDWALL keyword."""
+        """Initialize the RigidwallPlanarFiniteMovingForcesDisplayId class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

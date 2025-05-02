@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CHEMISTRY keyword."""
+"""Module providing the ChemistryControlHgiSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ChemistryControlHgiSet(KeywordBase):
     subkeyword = "CONTROL_HGI_SET"
 
     def __init__(self, **kwargs):
-        """Initialize the CHEMISTRY keyword."""
+        """Initialize the ChemistryControlHgiSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the BOUNDARY keyword."""
+"""Module providing the BoundaryAcousticCouplingSpectral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class BoundaryAcousticCouplingSpectral(KeywordBase):
     subkeyword = "ACOUSTIC_COUPLING_SPECTRAL"
 
     def __init__(self, **kwargs):
-        """Initialize the BOUNDARY keyword."""
+        """Initialize the BoundaryAcousticCouplingSpectral class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

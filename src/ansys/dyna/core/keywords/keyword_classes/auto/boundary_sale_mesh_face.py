@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the BOUNDARY keyword."""
+"""Module providing the BoundarySaleMeshFace class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class BoundarySaleMeshFace(KeywordBase):
     subkeyword = "SALE_MESH_FACE"
 
     def __init__(self, **kwargs):
-        """Initialize the BOUNDARY keyword."""
+        """Initialize the BoundarySaleMeshFace class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

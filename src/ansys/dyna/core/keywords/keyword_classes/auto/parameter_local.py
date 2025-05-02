@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the PARAMETER keyword."""
+"""Module providing the ParameterLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -33,7 +33,7 @@ class ParameterLocal(KeywordBase):
     subkeyword = "LOCAL"
 
     def __init__(self, **kwargs):
-        """Initialize the PARAMETER keyword."""
+        """Initialize the ParameterLocal class."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(

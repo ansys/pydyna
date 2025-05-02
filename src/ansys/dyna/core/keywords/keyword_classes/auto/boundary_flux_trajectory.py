@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the BOUNDARY keyword."""
+"""Module providing the BoundaryFluxTrajectory class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class BoundaryFluxTrajectory(KeywordBase):
     subkeyword = "FLUX_TRAJECTORY"
 
     def __init__(self, **kwargs):
-        """Initialize the BOUNDARY keyword."""
+        """Initialize the BoundaryFluxTrajectory class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

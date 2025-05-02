@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the BOUNDARY keyword."""
+"""Module providing the BoundarySpcSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -36,7 +36,7 @@ class BoundarySpcSet(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the BOUNDARY keyword."""
+        """Initialize the BoundarySpcSet class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

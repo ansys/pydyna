@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the INTERFACE keyword."""
+"""Module providing the InterfaceBlanksizeSymmetricPlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
     subkeyword = "BLANKSIZE_SYMMETRIC_PLANE"
 
     def __init__(self, **kwargs):
-        """Initialize the INTERFACE keyword."""
+        """Initialize the InterfaceBlanksizeSymmetricPlane class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

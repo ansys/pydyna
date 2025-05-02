@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the LOAD keyword."""
+"""Module providing the LoadSeismicSsiDeconv class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class LoadSeismicSsiDeconv(KeywordBase):
     subkeyword = "SEISMIC_SSI_DECONV"
 
     def __init__(self, **kwargs):
-        """Initialize the LOAD keyword."""
+        """Initialize the LoadSeismicSsiDeconv class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

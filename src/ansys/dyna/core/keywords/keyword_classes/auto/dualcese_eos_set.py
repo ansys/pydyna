@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the DUALCESE keyword."""
+"""Module providing the DualceseEosSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class DualceseEosSet(KeywordBase):
     subkeyword = "EOS_SET"
 
     def __init__(self, **kwargs):
-        """Initialize the DUALCESE keyword."""
+        """Initialize the DualceseEosSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

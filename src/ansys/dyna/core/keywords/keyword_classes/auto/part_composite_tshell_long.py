@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the PART keyword."""
+"""Module providing the PartCompositeTshellLong class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class PartCompositeTshellLong(KeywordBase):
     subkeyword = "COMPOSITE_TSHELL_LONG"
 
     def __init__(self, **kwargs):
-        """Initialize the PART keyword."""
+        """Initialize the PartCompositeTshellLong class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

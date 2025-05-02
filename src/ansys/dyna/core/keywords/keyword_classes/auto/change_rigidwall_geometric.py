@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CHANGE keyword."""
+"""Module providing the ChangeRigidwallGeometric class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ChangeRigidwallGeometric(KeywordBase):
     subkeyword = "RIGIDWALL_GEOMETRIC"
 
     def __init__(self, **kwargs):
-        """Initialize the CHANGE keyword."""
+        """Initialize the ChangeRigidwallGeometric class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

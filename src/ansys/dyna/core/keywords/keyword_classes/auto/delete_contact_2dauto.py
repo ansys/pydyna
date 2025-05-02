@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the DELETE keyword."""
+"""Module providing the DeleteContact2Dauto class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class DeleteContact2Dauto(KeywordBase):
     subkeyword = "CONTACT_2DAUTO"
 
     def __init__(self, **kwargs):
-        """Initialize the DELETE keyword."""
+        """Initialize the DeleteContact2Dauto class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

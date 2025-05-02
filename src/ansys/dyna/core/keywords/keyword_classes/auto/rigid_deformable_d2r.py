@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the RIGID keyword."""
+"""Module providing the RigidDeformableD2R class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class RigidDeformableD2R(KeywordBase):
     subkeyword = "DEFORMABLE_D2R"
 
     def __init__(self, **kwargs):
-        """Initialize the RIGID keyword."""
+        """Initialize the RigidDeformableD2R class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

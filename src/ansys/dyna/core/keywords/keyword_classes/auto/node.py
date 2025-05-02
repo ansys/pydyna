@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the NODE keyword."""
+"""Module providing the Node class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -33,7 +33,7 @@ class Node(KeywordBase):
     subkeyword = "NODE"
 
     def __init__(self, **kwargs):
-        """Initialize the NODE keyword."""
+        """Initialize the Node class."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(

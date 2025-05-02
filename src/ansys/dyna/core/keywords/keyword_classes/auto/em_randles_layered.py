@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the EM keyword."""
+"""Module providing the EmRandlesLayered class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class EmRandlesLayered(KeywordBase):
     subkeyword = "RANDLES_LAYERED"
 
     def __init__(self, **kwargs):
-        """Initialize the EM keyword."""
+        """Initialize the EmRandlesLayered class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

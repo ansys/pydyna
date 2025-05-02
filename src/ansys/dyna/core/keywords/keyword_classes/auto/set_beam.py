@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the SET keyword."""
+"""Module providing the SetBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -37,7 +37,7 @@ class SetBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the SET keyword."""
+        """Initialize the SetBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [

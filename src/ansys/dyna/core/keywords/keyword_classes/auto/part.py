@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the PART keyword."""
+"""Module providing the Part class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
@@ -33,7 +33,7 @@ class Part(KeywordBase):
     subkeyword = "PART"
 
     def __init__(self, **kwargs):
-        """Initialize the PART keyword."""
+        """Initialize the Part class."""
         super().__init__(**kwargs)
         self._cards = [
             TableCardGroup(

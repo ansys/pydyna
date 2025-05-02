@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the EM keyword."""
+"""Module providing the EmMat005 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class EmMat005(KeywordBase):
     subkeyword = "MAT_005"
 
     def __init__(self, **kwargs):
-        """Initialize the EM keyword."""
+        """Initialize the EmMat005 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

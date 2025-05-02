@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the DATABASE keyword."""
+"""Module providing the DatabaseHistorySph class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class DatabaseHistorySph(KeywordBase):
     subkeyword = "HISTORY_SPH"
 
     def __init__(self, **kwargs):
-        """Initialize the DATABASE keyword."""
+        """Initialize the DatabaseHistorySph class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

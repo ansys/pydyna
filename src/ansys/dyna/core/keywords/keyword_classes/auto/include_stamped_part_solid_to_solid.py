@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the INCLUDE keyword."""
+"""Module providing the IncludeStampedPartSolidToSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
     subkeyword = "STAMPED_PART_SOLID_TO_SOLID"
 
     def __init__(self, **kwargs):
-        """Initialize the INCLUDE keyword."""
+        """Initialize the IncludeStampedPartSolidToSolid class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

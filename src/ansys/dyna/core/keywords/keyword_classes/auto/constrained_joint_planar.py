@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the CONSTRAINED keyword."""
+"""Module providing the ConstrainedJointPlanar class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class ConstrainedJointPlanar(KeywordBase):
     subkeyword = "JOINT_PLANAR"
 
     def __init__(self, **kwargs):
-        """Initialize the CONSTRAINED keyword."""
+        """Initialize the ConstrainedJointPlanar class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

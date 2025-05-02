@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the FREQUENCY keyword."""
+"""Module providing the FrequencyDomainAcousticBemAtv class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class FrequencyDomainAcousticBemAtv(KeywordBase):
     subkeyword = "DOMAIN_ACOUSTIC_BEM_ATV"
 
     def __init__(self, **kwargs):
-        """Initialize the FREQUENCY keyword."""
+        """Initialize the FrequencyDomainAcousticBemAtv class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

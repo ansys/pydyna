@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the ICFD keyword."""
+"""Module providing the IcfdDatabaseSsoutExclude class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,7 +32,7 @@ class IcfdDatabaseSsoutExclude(KeywordBase):
     subkeyword = "DATABASE_SSOUT_EXCLUDE"
 
     def __init__(self, **kwargs):
-        """Initialize the ICFD keyword."""
+        """Initialize the IcfdDatabaseSsoutExclude class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
