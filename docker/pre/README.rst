@@ -1,5 +1,5 @@
 Build the Docker image for the ``pre`` service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------------
 
 You must build the Docker image for the PyDYNA ``pre`` service and then
 run the image as a container.
@@ -42,22 +42,22 @@ To build the Docker image, perform these steps:
 
    .. code:: bash
 
-       docker build -t ghcr.io/ansys/ls-pre:<DOCKER_IMAGE_TAG> -f <DOCKERFILE_NAME> .
+      docker build -t ghcr.io/ansys/ls-pre:<DOCKER_IMAGE_TAG> -f <DOCKERFILE_NAME> .
 
 #. Check that the image has been built successfully by running this command:
 
    .. code:: bash
 
-       docker images
+      docker images
 
 
    Your output should look similar to this:
 
    .. code:: bash
  
-       >>> REPOSITORY                                               TAG                                IMAGE ID       CREATED          SIZE
-       >>> ghcr.io/ansys/ls-pre                                     *******-latest                     ............   X seconds ago    188MB
-       >>> ......                                                   ......                             ............   ..............   ......
+      >>> REPOSITORY                                               TAG                                IMAGE ID       CREATED          SIZE
+      >>> ghcr.io/ansys/ls-pre                                     *******-latest                     ............   X seconds ago    188MB
+      >>> ......                                                   ......                             ............   ..............   ......
 
 
 Run the image as a container
@@ -69,21 +69,21 @@ run this image as a container:
 #. Run this Docker command:
  
    .. code:: bash
-
+      
       docker run -d -p 50051:50051 ghcr.io/ansys/ls-pre 
 
 #. Check that the image is running successfully by running this command.
 
    .. code:: bash
 
-       docker ps
+      docker ps
 
    Your output should look similar to this:
 
    .. code:: bash
 
-     >>> CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                           NAMES
-     >>> c77ffd67f9fa   ghcr.io/ansys/ls-pre   "python3 ./linux-bin…"   7 seconds ago   Up 7 seconds   0.0.0.0:50051->50051/tcp, :::50051->50051/tcp   hardcore_margulis
+    >>> CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                           NAMES
+    >>> c77ffd67f9fa   ghcr.io/ansys/ls-pre   "python3 ./linux-bin…"   7 seconds ago   Up 7 seconds   0.0.0.0:50051->50051/tcp, :::50051->50051/tcp   hardcore_margulis
 	 
 	 
 Alternatively, you can start the container for the ``pre`` service from a
@@ -95,7 +95,7 @@ Alternatively, you can start the container for the ``pre`` service from a
 
 #. In your terminal, go to the ``docker/pre`` directory and run this Docker command:
 
-  .. code:: bash
+   .. code:: bash
 
      docker compose up -d
 
@@ -103,8 +103,8 @@ Copy files from Docker
 ~~~~~~~~~~~~~~~~~~~~~~
 To copy files back from the ``pre`` docker container to your host machine use the command below:
 
-  .. code:: bash
+.. code:: bash
 
-     docker cp <containerId>:/file/path/within/container /host/target/path
+  docker cp <containerId>:/file/path/within/container /host/target/path
 
 The path within the container is ``/server/output``.
