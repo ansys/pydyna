@@ -1,5 +1,5 @@
 {{license}}
-"""Module for the {{keyword_data.keyword}} keyword."""
+"""Module providing the {{keyword_data.classname}} class."""
 {% if keyword_data.dataclasses %}
 import dataclasses
 {% endif %}
@@ -120,7 +120,7 @@ class {{keyword_data.classname}}(KeywordBase):
 {% endfor %}
 
     def __init__(self, **kwargs):
-        """Initialize the {{keyword_data.keyword}} keyword."""
+        """Initialize the {{keyword_data.classname}} class."""
         super().__init__(**kwargs)
 {% if keyword_data.card_sets %}
         kwargs["parent"] = self
