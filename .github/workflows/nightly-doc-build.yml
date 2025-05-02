@@ -88,7 +88,7 @@ jobs:
           LSTC_LICENSE: ansys
           PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
         run: |
-          xvfb-run make -C doc html
+          timeout 7200 xvfb-run make -C doc html
 
       - name: "Upload html documentation"
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
