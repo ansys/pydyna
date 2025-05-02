@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlMppIoNobeamout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppIoNobeamout(KeywordBase):
     subkeyword = "MPP_IO_NOBEAMOUT"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlMppIoNobeamout class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

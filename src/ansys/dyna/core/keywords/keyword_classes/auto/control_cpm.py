@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlCpm class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlCpm(KeywordBase):
     subkeyword = "CPM"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlCpm class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -106,8 +108,9 @@ class ControlCpm(KeywordBase):
 
     @cpmout.setter
     def cpmout(self, value: int) -> None:
+        """Set the cpmout property."""
         if value not in [11, 21, 22, 23, None]:
-            raise Exception("""cpmout must be `None` or one of {11,21,22,23}""")
+            raise Exception("""cpmout must be `None` or one of {11,21,22,23}.""")
         self._cards[0].set_value("cpmout", value)
 
     @property
@@ -118,6 +121,7 @@ class ControlCpm(KeywordBase):
 
     @np2p.setter
     def np2p(self, value: int) -> None:
+        """Set the np2p property."""
         self._cards[0].set_value("np2p", value)
 
     @property
@@ -130,8 +134,9 @@ class ControlCpm(KeywordBase):
 
     @ncpmts.setter
     def ncpmts(self, value: int) -> None:
+        """Set the ncpmts property."""
         if value not in [0, 1, None]:
-            raise Exception("""ncpmts must be `None` or one of {0,1}""")
+            raise Exception("""ncpmts must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ncpmts", value)
 
     @property
@@ -147,8 +152,9 @@ class ControlCpm(KeywordBase):
 
     @cpmerr.setter
     def cpmerr(self, value: int) -> None:
+        """Set the cpmerr property."""
         if value not in [0, 1, None]:
-            raise Exception("""cpmerr must be `None` or one of {0,1}""")
+            raise Exception("""cpmerr must be `None` or one of {0,1}.""")
         self._cards[0].set_value("cpmerr", value)
 
     @property
@@ -159,6 +165,7 @@ class ControlCpm(KeywordBase):
 
     @sffdc.setter
     def sffdc(self, value: float) -> None:
+        """Set the sffdc property."""
         self._cards[0].set_value("sffdc", value)
 
     @property
@@ -171,7 +178,8 @@ class ControlCpm(KeywordBase):
 
     @cpmmf.setter
     def cpmmf(self, value: int) -> None:
+        """Set the cpmmf property."""
         if value not in [0, 1, None]:
-            raise Exception("""cpmmf must be `None` or one of {0,1}""")
+            raise Exception("""cpmmf must be `None` or one of {0,1}.""")
         self._cards[0].set_value("cpmmf", value)
 

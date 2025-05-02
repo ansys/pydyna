@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineMultiDrawbeadsIges class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineMultiDrawbeadsIges(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineMultiDrawbeadsIges class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -134,6 +136,7 @@ class DefineMultiDrawbeadsIges(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -144,6 +147,7 @@ class DefineMultiDrawbeadsIges(KeywordBase):
 
     @dbid.setter
     def dbid(self, value: int) -> None:
+        """Set the dbid property."""
         self._cards[1].set_value("dbid", value)
 
     @property
@@ -155,6 +159,7 @@ class DefineMultiDrawbeadsIges(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[1].set_value("vid", value)
 
     @property
@@ -165,6 +170,7 @@ class DefineMultiDrawbeadsIges(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -175,6 +181,7 @@ class DefineMultiDrawbeadsIges(KeywordBase):
 
     @blkid.setter
     def blkid(self, value: int) -> None:
+        """Set the blkid property."""
         self._cards[1].set_value("blkid", value)
 
     @property
@@ -185,6 +192,7 @@ class DefineMultiDrawbeadsIges(KeywordBase):
 
     @ncur.setter
     def ncur(self, value: int) -> None:
+        """Set the ncur property."""
         self._cards[1].set_value("ncur", value)
 
     @property
@@ -195,6 +203,7 @@ class DefineMultiDrawbeadsIges(KeywordBase):
 
     @crvid.setter
     def crvid(self, value: int) -> None:
+        """Set the crvid property."""
         self._cards[2].set_value("crvid", value)
 
     @property
@@ -205,6 +214,7 @@ class DefineMultiDrawbeadsIges(KeywordBase):
 
     @bforce.setter
     def bforce(self, value: float) -> None:
+        """Set the bforce property."""
         self._cards[2].set_value("bforce", value)
 
     @property
@@ -215,5 +225,6 @@ class DefineMultiDrawbeadsIges(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

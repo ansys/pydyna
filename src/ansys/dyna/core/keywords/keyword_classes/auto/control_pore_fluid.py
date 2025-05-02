@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlPoreFluid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlPoreFluid(KeywordBase):
     subkeyword = "PORE_FLUID"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlPoreFluid class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -194,8 +196,9 @@ class ControlPoreFluid(KeywordBase):
 
     @atype.setter
     def atype(self, value: int) -> None:
+        """Set the atype property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""atype must be `None` or one of {0,1,2,3,4,5,6}""")
+            raise Exception("""atype must be `None` or one of {0,1,2,3,4,5,6}.""")
         self._cards[0].set_value("atype", value)
 
     @property
@@ -206,6 +209,7 @@ class ControlPoreFluid(KeywordBase):
 
     @wtable.setter
     def wtable(self, value: float) -> None:
+        """Set the wtable property."""
         self._cards[0].set_value("wtable", value)
 
     @property
@@ -216,6 +220,7 @@ class ControlPoreFluid(KeywordBase):
 
     @pf_rho.setter
     def pf_rho(self, value: float) -> None:
+        """Set the pf_rho property."""
         self._cards[0].set_value("pf_rho", value)
 
     @property
@@ -226,6 +231,7 @@ class ControlPoreFluid(KeywordBase):
 
     @grav.setter
     def grav(self, value: float) -> None:
+        """Set the grav property."""
         self._cards[0].set_value("grav", value)
 
     @property
@@ -236,6 +242,7 @@ class ControlPoreFluid(KeywordBase):
 
     @pf_bulk.setter
     def pf_bulk(self, value: float) -> None:
+        """Set the pf_bulk property."""
         self._cards[0].set_value("pf_bulk", value)
 
     @property
@@ -248,8 +255,9 @@ class ControlPoreFluid(KeywordBase):
 
     @output.setter
     def output(self, value: int) -> None:
+        """Set the output property."""
         if value not in [0, 1, None]:
-            raise Exception("""output must be `None` or one of {0,1}""")
+            raise Exception("""output must be `None` or one of {0,1}.""")
         self._cards[0].set_value("output", value)
 
     @property
@@ -262,6 +270,7 @@ class ControlPoreFluid(KeywordBase):
 
     @tmf.setter
     def tmf(self, value: float) -> None:
+        """Set the tmf property."""
         self._cards[0].set_value("tmf", value)
 
     @property
@@ -272,6 +281,7 @@ class ControlPoreFluid(KeywordBase):
 
     @targ.setter
     def targ(self, value: float) -> None:
+        """Set the targ property."""
         self._cards[1].set_value("targ", value)
 
     @property
@@ -282,6 +292,7 @@ class ControlPoreFluid(KeywordBase):
 
     @fmin.setter
     def fmin(self, value: float) -> None:
+        """Set the fmin property."""
         self._cards[1].set_value("fmin", value)
 
     @property
@@ -292,6 +303,7 @@ class ControlPoreFluid(KeywordBase):
 
     @fmax.setter
     def fmax(self, value: float) -> None:
+        """Set the fmax property."""
         self._cards[1].set_value("fmax", value)
 
     @property
@@ -304,6 +316,7 @@ class ControlPoreFluid(KeywordBase):
 
     @ftied_.setter
     def ftied_(self, value: float) -> None:
+        """Set the ftied_ property."""
         self._cards[1].set_value("ftied ", value)
 
     @property
@@ -314,6 +327,7 @@ class ControlPoreFluid(KeywordBase):
 
     @conv.setter
     def conv(self, value: float) -> None:
+        """Set the conv property."""
         self._cards[1].set_value("conv", value)
 
     @property
@@ -324,6 +338,7 @@ class ControlPoreFluid(KeywordBase):
 
     @conmax.setter
     def conmax(self, value: float) -> None:
+        """Set the conmax property."""
         self._cards[1].set_value("conmax", value)
 
     @property
@@ -334,6 +349,7 @@ class ControlPoreFluid(KeywordBase):
 
     @eterm.setter
     def eterm(self, value: float) -> None:
+        """Set the eterm property."""
         self._cards[1].set_value("eterm", value)
 
     @property
@@ -344,6 +360,7 @@ class ControlPoreFluid(KeywordBase):
 
     @therm.setter
     def therm(self, value: float) -> None:
+        """Set the therm property."""
         self._cards[1].set_value("therm", value)
 
     @property
@@ -356,7 +373,8 @@ class ControlPoreFluid(KeywordBase):
 
     @etfag.setter
     def etfag(self, value: int) -> None:
+        """Set the etfag property."""
         if value not in [0, 1, None]:
-            raise Exception("""etfag must be `None` or one of {0,1}""")
+            raise Exception("""etfag must be `None` or one of {0,1}.""")
         self._cards[2].set_value("etfag", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceSsiAuxEmbeddedConstrainedOffset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceSsiAuxEmbeddedConstrainedOffset(KeywordBase):
     subkeyword = "SSI_AUX_EMBEDDED_CONSTRAINED_OFFSET"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceSsiAuxEmbeddedConstrainedOffset class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -100,6 +102,7 @@ class InterfaceSsiAuxEmbeddedConstrainedOffset(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -110,6 +113,7 @@ class InterfaceSsiAuxEmbeddedConstrainedOffset(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -120,6 +124,7 @@ class InterfaceSsiAuxEmbeddedConstrainedOffset(KeywordBase):
 
     @gmset.setter
     def gmset(self, value: int) -> None:
+        """Set the gmset property."""
         self._cards[1].set_value("gmset", value)
 
     @property
@@ -130,6 +135,7 @@ class InterfaceSsiAuxEmbeddedConstrainedOffset(KeywordBase):
 
     @strid.setter
     def strid(self, value: int) -> None:
+        """Set the strid property."""
         self._cards[1].set_value("strid", value)
 
     @property
@@ -140,6 +146,7 @@ class InterfaceSsiAuxEmbeddedConstrainedOffset(KeywordBase):
 
     @soilid.setter
     def soilid(self, value: int) -> None:
+        """Set the soilid property."""
         self._cards[1].set_value("soilid", value)
 
     @property
@@ -152,6 +159,7 @@ class InterfaceSsiAuxEmbeddedConstrainedOffset(KeywordBase):
 
     @spr.setter
     def spr(self, value: int) -> None:
+        """Set the spr property."""
         self._cards[1].set_value("spr", value)
 
     @property
@@ -164,5 +172,6 @@ class InterfaceSsiAuxEmbeddedConstrainedOffset(KeywordBase):
 
     @mpr.setter
     def mpr(self, value: int) -> None:
+        """Set the mpr property."""
         self._cards[1].set_value("mpr", value)
 

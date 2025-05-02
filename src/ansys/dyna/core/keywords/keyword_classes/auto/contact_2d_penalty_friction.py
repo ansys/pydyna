@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Contact2DPenaltyFriction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Contact2DPenaltyFriction(KeywordBase):
     subkeyword = "2D_PENALTY_FRICTION"
 
     def __init__(self, **kwargs):
+        """Initialize the Contact2DPenaltyFriction class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -177,6 +179,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @surfa.setter
     def surfa(self, value: int) -> None:
+        """Set the surfa property."""
         self._cards[0].set_value("surfa", value)
 
     @property
@@ -187,6 +190,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @surfb.setter
     def surfb(self, value: int) -> None:
+        """Set the surfb property."""
         self._cards[0].set_value("surfb", value)
 
     @property
@@ -197,6 +201,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 
     @property
@@ -207,6 +212,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -219,8 +225,9 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @ext_pas.setter
     def ext_pas(self, value: int) -> None:
+        """Set the ext_pas property."""
         if value not in [0, 1, None]:
-            raise Exception("""ext_pas must be `None` or one of {0,1}""")
+            raise Exception("""ext_pas must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ext_pas", value)
 
     @property
@@ -232,6 +239,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @theta1.setter
     def theta1(self, value: float) -> None:
+        """Set the theta1 property."""
         self._cards[1].set_value("theta1", value)
 
     @property
@@ -243,6 +251,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @theta2.setter
     def theta2(self, value: float) -> None:
+        """Set the theta2 property."""
         self._cards[1].set_value("theta2", value)
 
     @property
@@ -253,6 +262,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @tol_ig.setter
     def tol_ig(self, value: float) -> None:
+        """Set the tol_ig property."""
         self._cards[1].set_value("tol_ig", value)
 
     @property
@@ -263,6 +273,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @pen.setter
     def pen(self, value: float) -> None:
+        """Set the pen property."""
         self._cards[1].set_value("pen", value)
 
     @property
@@ -273,6 +284,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @toloff.setter
     def toloff(self, value: float) -> None:
+        """Set the toloff property."""
         self._cards[1].set_value("toloff", value)
 
     @property
@@ -283,6 +295,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @frcscl.setter
     def frcscl(self, value: float) -> None:
+        """Set the frcscl property."""
         self._cards[1].set_value("frcscl", value)
 
     @property
@@ -293,6 +306,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @oneway.setter
     def oneway(self, value: float) -> None:
+        """Set the oneway property."""
         self._cards[1].set_value("oneway", value)
 
     @property
@@ -303,6 +317,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[2].set_value("fric", value)
 
     @property
@@ -313,6 +328,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @fric_l.setter
     def fric_l(self, value: float) -> None:
+        """Set the fric_l property."""
         self._cards[2].set_value("fric_l", value)
 
     @property
@@ -323,6 +339,7 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @fric_h.setter
     def fric_h(self, value: float) -> None:
+        """Set the fric_h property."""
         self._cards[2].set_value("fric_h", value)
 
     @property
@@ -333,5 +350,6 @@ class Contact2DPenaltyFriction(KeywordBase):
 
     @fric_s.setter
     def fric_s(self, value: float) -> None:
+        """Set the fric_s property."""
         self._cards[2].set_value("fric_s", value)
 

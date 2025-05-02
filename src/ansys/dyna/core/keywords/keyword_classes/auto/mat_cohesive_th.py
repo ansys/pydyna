@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatCohesiveTh class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatCohesiveTh(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatCohesiveTh class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -198,6 +200,7 @@ class MatCohesiveTh(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -208,6 +211,7 @@ class MatCohesiveTh(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -220,8 +224,9 @@ class MatCohesiveTh(KeywordBase):
 
     @roflg.setter
     def roflg(self, value: float) -> None:
+        """Set the roflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""roflg must be `None` or one of {0,1}""")
+            raise Exception("""roflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("roflg", value)
 
     @property
@@ -235,6 +240,7 @@ class MatCohesiveTh(KeywordBase):
 
     @intfail.setter
     def intfail(self, value: float) -> None:
+        """Set the intfail property."""
         self._cards[0].set_value("intfail", value)
 
     @property
@@ -245,6 +251,7 @@ class MatCohesiveTh(KeywordBase):
 
     @sigmax.setter
     def sigmax(self, value: float) -> None:
+        """Set the sigmax property."""
         self._cards[0].set_value("sigmax", value)
 
     @property
@@ -255,6 +262,7 @@ class MatCohesiveTh(KeywordBase):
 
     @nls.setter
     def nls(self, value: float) -> None:
+        """Set the nls property."""
         self._cards[0].set_value("nls", value)
 
     @property
@@ -265,6 +273,7 @@ class MatCohesiveTh(KeywordBase):
 
     @tls.setter
     def tls(self, value: float) -> None:
+        """Set the tls property."""
         self._cards[0].set_value("tls", value)
 
     @property
@@ -275,6 +284,7 @@ class MatCohesiveTh(KeywordBase):
 
     @tls2.setter
     def tls2(self, value: float) -> None:
+        """Set the tls2 property."""
         self._cards[0].set_value("tls2", value)
 
     @property
@@ -285,6 +295,7 @@ class MatCohesiveTh(KeywordBase):
 
     @lamda1.setter
     def lamda1(self, value: float) -> None:
+        """Set the lamda1 property."""
         self._cards[1].set_value("lamda1", value)
 
     @property
@@ -295,6 +306,7 @@ class MatCohesiveTh(KeywordBase):
 
     @lamda2.setter
     def lamda2(self, value: float) -> None:
+        """Set the lamda2 property."""
         self._cards[1].set_value("lamda2", value)
 
     @property
@@ -305,6 +317,7 @@ class MatCohesiveTh(KeywordBase):
 
     @lamdaf.setter
     def lamdaf(self, value: float) -> None:
+        """Set the lamdaf property."""
         self._cards[1].set_value("lamdaf", value)
 
     @property
@@ -315,6 +328,7 @@ class MatCohesiveTh(KeywordBase):
 
     @stfsf.setter
     def stfsf(self, value: float) -> None:
+        """Set the stfsf property."""
         self._cards[1].set_value("stfsf", value)
 
     @property
@@ -326,8 +340,9 @@ class MatCohesiveTh(KeywordBase):
 
     @isw.setter
     def isw(self, value: int) -> None:
+        """Set the isw property."""
         if value not in [-1, -2, None]:
-            raise Exception("""isw must be `None` or one of {-1,-2}""")
+            raise Exception("""isw must be `None` or one of {-1,-2}.""")
         self._cards[1].set_value("isw", value)
 
     @property
@@ -338,6 +353,7 @@ class MatCohesiveTh(KeywordBase):
 
     @alpha1.setter
     def alpha1(self, value: float) -> None:
+        """Set the alpha1 property."""
         self._cards[1].set_value("alpha1", value)
 
     @property
@@ -348,6 +364,7 @@ class MatCohesiveTh(KeywordBase):
 
     @alpha2.setter
     def alpha2(self, value: float) -> None:
+        """Set the alpha2 property."""
         self._cards[1].set_value("alpha2", value)
 
     @property
@@ -358,6 +375,7 @@ class MatCohesiveTh(KeywordBase):
 
     @dr.setter
     def dr(self, value: float) -> None:
+        """Set the dr property."""
         self._cards[2].set_value("dr", value)
 
     @property
@@ -368,6 +386,7 @@ class MatCohesiveTh(KeywordBase):
 
     @alpha3.setter
     def alpha3(self, value: float) -> None:
+        """Set the alpha3 property."""
         self._cards[2].set_value("alpha3", value)
 
     @property
@@ -378,5 +397,6 @@ class MatCohesiveTh(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

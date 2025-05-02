@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseBinaryD3Dump class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseBinaryD3Dump(KeywordBase):
     subkeyword = "BINARY_D3DUMP"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseBinaryD3Dump class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class DatabaseBinaryD3Dump(KeywordBase):
 
     @cycl.setter
     def cycl(self, value: float) -> None:
+        """Set the cycl property."""
         self._cards[0].set_value("cycl", value)
 
     @property
@@ -105,6 +108,7 @@ class DatabaseBinaryD3Dump(KeywordBase):
 
     @lcdt.setter
     def lcdt(self, value: int) -> None:
+        """Set the lcdt property."""
         self._cards[0].set_value("lcdt", value)
 
     @property
@@ -121,6 +125,7 @@ class DatabaseBinaryD3Dump(KeywordBase):
 
     @beam.setter
     def beam(self, value: int) -> None:
+        """Set the beam property."""
         self._cards[0].set_value("beam", value)
 
     @property
@@ -131,6 +136,7 @@ class DatabaseBinaryD3Dump(KeywordBase):
 
     @npltc.setter
     def npltc(self, value: int) -> None:
+        """Set the npltc property."""
         self._cards[0].set_value("npltc", value)
 
     @property
@@ -141,6 +147,7 @@ class DatabaseBinaryD3Dump(KeywordBase):
 
     @psetid.setter
     def psetid(self, value: int) -> None:
+        """Set the psetid property."""
         self._cards[0].set_value("psetid", value)
 
     @property
@@ -157,5 +164,6 @@ class DatabaseBinaryD3Dump(KeywordBase):
 
     @ioopt.setter
     def ioopt(self, value: int) -> None:
+        """Set the ioopt property."""
         self._cards[1].set_value("ioopt", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedLinearLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedLinearLocal(KeywordBase):
     subkeyword = "LINEAR_LOCAL"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedLinearLocal class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class ConstrainedLinearLocal(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -96,6 +99,7 @@ class ConstrainedLinearLocal(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -112,6 +116,7 @@ class ConstrainedLinearLocal(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         self._cards[1].set_value("dof", value)
 
     @property
@@ -122,6 +127,7 @@ class ConstrainedLinearLocal(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -132,5 +138,6 @@ class ConstrainedLinearLocal(KeywordBase):
 
     @coef.setter
     def coef(self, value: float) -> None:
+        """Set the coef property."""
         self._cards[1].set_value("coef", value)
 

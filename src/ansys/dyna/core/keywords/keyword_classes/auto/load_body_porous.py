@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadBodyPorous class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBodyPorous(KeywordBase):
     subkeyword = "BODY_POROUS"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadBodyPorous class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -122,6 +124,7 @@ class LoadBodyPorous(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -132,8 +135,9 @@ class LoadBodyPorous(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sidtyp", value)
 
     @property
@@ -144,6 +148,7 @@ class LoadBodyPorous(KeywordBase):
 
     @ax.setter
     def ax(self, value: float) -> None:
+        """Set the ax property."""
         self._cards[0].set_value("ax", value)
 
     @property
@@ -154,6 +159,7 @@ class LoadBodyPorous(KeywordBase):
 
     @ay.setter
     def ay(self, value: float) -> None:
+        """Set the ay property."""
         self._cards[0].set_value("ay", value)
 
     @property
@@ -164,6 +170,7 @@ class LoadBodyPorous(KeywordBase):
 
     @az.setter
     def az(self, value: float) -> None:
+        """Set the az property."""
         self._cards[0].set_value("az", value)
 
     @property
@@ -174,6 +181,7 @@ class LoadBodyPorous(KeywordBase):
 
     @bx.setter
     def bx(self, value: float) -> None:
+        """Set the bx property."""
         self._cards[0].set_value("bx", value)
 
     @property
@@ -184,6 +192,7 @@ class LoadBodyPorous(KeywordBase):
 
     @by.setter
     def by(self, value: float) -> None:
+        """Set the by property."""
         self._cards[0].set_value("by", value)
 
     @property
@@ -194,6 +203,7 @@ class LoadBodyPorous(KeywordBase):
 
     @bz.setter
     def bz(self, value: float) -> None:
+        """Set the bz property."""
         self._cards[0].set_value("bz", value)
 
     @property
@@ -206,7 +216,8 @@ class LoadBodyPorous(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: int) -> None:
+        """Set the aopt property."""
         if value not in [0, 1, None]:
-            raise Exception("""aopt must be `None` or one of {0,1}""")
+            raise Exception("""aopt must be `None` or one of {0,1}.""")
         self._cards[1].set_value("aopt", value)
 

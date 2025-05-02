@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedImmersedInSpg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedImmersedInSpg(KeywordBase):
     subkeyword = "IMMERSED_IN_SPG"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedImmersedInSpg class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class ConstrainedImmersedInSpg(KeywordBase):
 
     @spgpid.setter
     def spgpid(self, value: int) -> None:
+        """Set the spgpid property."""
         self._cards[0].set_value("spgpid", value)
 
     @property
@@ -124,6 +127,7 @@ class ConstrainedImmersedInSpg(KeywordBase):
 
     @ipid1.setter
     def ipid1(self, value: int) -> None:
+        """Set the ipid1 property."""
         self._cards[1].set_value("ipid1", value)
 
     @property
@@ -134,6 +138,7 @@ class ConstrainedImmersedInSpg(KeywordBase):
 
     @ipid2.setter
     def ipid2(self, value: int) -> None:
+        """Set the ipid2 property."""
         self._cards[1].set_value("ipid2", value)
 
     @property
@@ -144,6 +149,7 @@ class ConstrainedImmersedInSpg(KeywordBase):
 
     @ipid3.setter
     def ipid3(self, value: int) -> None:
+        """Set the ipid3 property."""
         self._cards[1].set_value("ipid3", value)
 
     @property
@@ -154,6 +160,7 @@ class ConstrainedImmersedInSpg(KeywordBase):
 
     @ipid4.setter
     def ipid4(self, value: int) -> None:
+        """Set the ipid4 property."""
         self._cards[1].set_value("ipid4", value)
 
     @property
@@ -164,6 +171,7 @@ class ConstrainedImmersedInSpg(KeywordBase):
 
     @ipid5.setter
     def ipid5(self, value: int) -> None:
+        """Set the ipid5 property."""
         self._cards[1].set_value("ipid5", value)
 
     @property
@@ -174,6 +182,7 @@ class ConstrainedImmersedInSpg(KeywordBase):
 
     @ipid6.setter
     def ipid6(self, value: int) -> None:
+        """Set the ipid6 property."""
         self._cards[1].set_value("ipid6", value)
 
     @property
@@ -184,6 +193,7 @@ class ConstrainedImmersedInSpg(KeywordBase):
 
     @ipid7.setter
     def ipid7(self, value: int) -> None:
+        """Set the ipid7 property."""
         self._cards[1].set_value("ipid7", value)
 
     @property
@@ -194,5 +204,6 @@ class ConstrainedImmersedInSpg(KeywordBase):
 
     @ipid8.setter
     def ipid8(self, value: int) -> None:
+        """Set the ipid8 property."""
         self._cards[1].set_value("ipid8", value)
 

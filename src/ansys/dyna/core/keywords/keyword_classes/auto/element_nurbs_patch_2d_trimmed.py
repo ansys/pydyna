@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementNurbsPatch2DTrimmed class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
     subkeyword = "NURBS_PATCH_2D_TRIMMED"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementNurbsPatch2DTrimmed class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -478,6 +480,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @npid.setter
     def npid(self, value: int) -> None:
+        """Set the npid property."""
         self._cards[0].set_value("npid", value)
 
     @property
@@ -488,6 +491,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -498,6 +502,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @npr.setter
     def npr(self, value: int) -> None:
+        """Set the npr property."""
         self._cards[0].set_value("npr", value)
 
     @property
@@ -508,6 +513,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @pr.setter
     def pr(self, value: int) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -518,6 +524,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @nps.setter
     def nps(self, value: int) -> None:
+        """Set the nps property."""
         self._cards[0].set_value("nps", value)
 
     @property
@@ -528,6 +535,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @ps.setter
     def ps(self, value: int) -> None:
+        """Set the ps property."""
         self._cards[0].set_value("ps", value)
 
     @property
@@ -538,6 +546,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @wfl.setter
     def wfl(self, value: int) -> None:
+        """Set the wfl property."""
         self._cards[1].set_value("wfl", value)
 
     @property
@@ -553,8 +562,9 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [0, 1, 2, 3, 4, -4, None]:
-            raise Exception("""elform must be `None` or one of {0,1,2,3,4,-4}""")
+            raise Exception("""elform must be `None` or one of {0,1,2,3,4,-4}.""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -567,8 +577,9 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @int_.setter
     def int_(self, value: int) -> None:
+        """Set the int_ property."""
         if value not in [0, 1, None]:
-            raise Exception("""int_ must be `None` or one of {0,1}""")
+            raise Exception("""int_ must be `None` or one of {0,1}.""")
         self._cards[1].set_value("int", value)
 
     @property
@@ -579,6 +590,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @nisr.setter
     def nisr(self, value: int) -> None:
+        """Set the nisr property."""
         self._cards[1].set_value("nisr", value)
 
     @property
@@ -589,6 +601,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @niss.setter
     def niss(self, value: int) -> None:
+        """Set the niss property."""
         self._cards[1].set_value("niss", value)
 
     @property
@@ -601,8 +614,9 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
+        """Set the imass property."""
         if value not in [0, 1, None]:
-            raise Exception("""imass must be `None` or one of {0,1}""")
+            raise Exception("""imass must be `None` or one of {0,1}.""")
         self._cards[1].set_value("imass", value)
 
     @property
@@ -613,6 +627,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @idfne.setter
     def idfne(self, value: int) -> None:
+        """Set the idfne property."""
         self._cards[1].set_value("idfne", value)
 
     @property
@@ -623,6 +638,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @rk1.setter
     def rk1(self, value: float) -> None:
+        """Set the rk1 property."""
         self._cards[2].set_value("rk1", value)
 
     @property
@@ -633,6 +649,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @rk2.setter
     def rk2(self, value: float) -> None:
+        """Set the rk2 property."""
         self._cards[2].set_value("rk2", value)
 
     @property
@@ -643,6 +660,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @rk3.setter
     def rk3(self, value: float) -> None:
+        """Set the rk3 property."""
         self._cards[2].set_value("rk3", value)
 
     @property
@@ -653,6 +671,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @rk4.setter
     def rk4(self, value: float) -> None:
+        """Set the rk4 property."""
         self._cards[2].set_value("rk4", value)
 
     @property
@@ -663,6 +682,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @rk5.setter
     def rk5(self, value: float) -> None:
+        """Set the rk5 property."""
         self._cards[2].set_value("rk5", value)
 
     @property
@@ -673,6 +693,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @rk6.setter
     def rk6(self, value: float) -> None:
+        """Set the rk6 property."""
         self._cards[2].set_value("rk6", value)
 
     @property
@@ -683,6 +704,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @rk7.setter
     def rk7(self, value: float) -> None:
+        """Set the rk7 property."""
         self._cards[2].set_value("rk7", value)
 
     @property
@@ -693,6 +715,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @rk8.setter
     def rk8(self, value: float) -> None:
+        """Set the rk8 property."""
         self._cards[2].set_value("rk8", value)
 
     @property
@@ -703,6 +726,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @sk1.setter
     def sk1(self, value: float) -> None:
+        """Set the sk1 property."""
         self._cards[3].set_value("sk1", value)
 
     @property
@@ -713,6 +737,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @sk2.setter
     def sk2(self, value: float) -> None:
+        """Set the sk2 property."""
         self._cards[3].set_value("sk2", value)
 
     @property
@@ -723,6 +748,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @sk3.setter
     def sk3(self, value: float) -> None:
+        """Set the sk3 property."""
         self._cards[3].set_value("sk3", value)
 
     @property
@@ -733,6 +759,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @sk4.setter
     def sk4(self, value: float) -> None:
+        """Set the sk4 property."""
         self._cards[3].set_value("sk4", value)
 
     @property
@@ -743,6 +770,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @sk5.setter
     def sk5(self, value: float) -> None:
+        """Set the sk5 property."""
         self._cards[3].set_value("sk5", value)
 
     @property
@@ -753,6 +781,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @sk6.setter
     def sk6(self, value: float) -> None:
+        """Set the sk6 property."""
         self._cards[3].set_value("sk6", value)
 
     @property
@@ -763,6 +792,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @sk7.setter
     def sk7(self, value: float) -> None:
+        """Set the sk7 property."""
         self._cards[3].set_value("sk7", value)
 
     @property
@@ -773,6 +803,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @sk8.setter
     def sk8(self, value: float) -> None:
+        """Set the sk8 property."""
         self._cards[3].set_value("sk8", value)
 
     @property
@@ -783,6 +814,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[4].set_value("n1", value)
 
     @property
@@ -793,6 +825,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[4].set_value("n2", value)
 
     @property
@@ -803,6 +836,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[4].set_value("n3", value)
 
     @property
@@ -813,6 +847,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[4].set_value("n4", value)
 
     @property
@@ -823,6 +858,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @n5.setter
     def n5(self, value: int) -> None:
+        """Set the n5 property."""
         self._cards[4].set_value("n5", value)
 
     @property
@@ -833,6 +869,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @n6.setter
     def n6(self, value: int) -> None:
+        """Set the n6 property."""
         self._cards[4].set_value("n6", value)
 
     @property
@@ -843,6 +880,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @n7.setter
     def n7(self, value: int) -> None:
+        """Set the n7 property."""
         self._cards[4].set_value("n7", value)
 
     @property
@@ -853,6 +891,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @n8.setter
     def n8(self, value: int) -> None:
+        """Set the n8 property."""
         self._cards[4].set_value("n8", value)
 
     @property
@@ -863,6 +902,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @w1.setter
     def w1(self, value: float) -> None:
+        """Set the w1 property."""
         self._cards[5].set_value("w1", value)
 
     @property
@@ -873,6 +913,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @w2.setter
     def w2(self, value: float) -> None:
+        """Set the w2 property."""
         self._cards[5].set_value("w2", value)
 
     @property
@@ -883,6 +924,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @w3.setter
     def w3(self, value: float) -> None:
+        """Set the w3 property."""
         self._cards[5].set_value("w3", value)
 
     @property
@@ -893,6 +935,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @w4.setter
     def w4(self, value: float) -> None:
+        """Set the w4 property."""
         self._cards[5].set_value("w4", value)
 
     @property
@@ -903,6 +946,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @w5.setter
     def w5(self, value: float) -> None:
+        """Set the w5 property."""
         self._cards[5].set_value("w5", value)
 
     @property
@@ -913,6 +957,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @w6.setter
     def w6(self, value: float) -> None:
+        """Set the w6 property."""
         self._cards[5].set_value("w6", value)
 
     @property
@@ -923,6 +968,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @w7.setter
     def w7(self, value: float) -> None:
+        """Set the w7 property."""
         self._cards[5].set_value("w7", value)
 
     @property
@@ -933,6 +979,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @w8.setter
     def w8(self, value: float) -> None:
+        """Set the w8 property."""
         self._cards[5].set_value("w8", value)
 
     @property
@@ -943,6 +990,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].set_value("title", value)
 
     @property
@@ -953,6 +1001,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @c1.setter
     def c1(self, value: int) -> None:
+        """Set the c1 property."""
         self._cards[7].set_value("c1", value)
 
     @property
@@ -963,6 +1012,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @c2.setter
     def c2(self, value: int) -> None:
+        """Set the c2 property."""
         self._cards[7].set_value("c2", value)
 
     @property
@@ -973,6 +1023,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @c3.setter
     def c3(self, value: int) -> None:
+        """Set the c3 property."""
         self._cards[7].set_value("c3", value)
 
     @property
@@ -983,6 +1034,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @c4.setter
     def c4(self, value: int) -> None:
+        """Set the c4 property."""
         self._cards[7].set_value("c4", value)
 
     @property
@@ -993,6 +1045,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @c5.setter
     def c5(self, value: int) -> None:
+        """Set the c5 property."""
         self._cards[7].set_value("c5", value)
 
     @property
@@ -1003,6 +1056,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @c6.setter
     def c6(self, value: int) -> None:
+        """Set the c6 property."""
         self._cards[7].set_value("c6", value)
 
     @property
@@ -1013,6 +1067,7 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @c7.setter
     def c7(self, value: int) -> None:
+        """Set the c7 property."""
         self._cards[7].set_value("c7", value)
 
     @property
@@ -1023,5 +1078,6 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
 
     @c8.setter
     def c8(self, value: int) -> None:
+        """Set the c8 property."""
         self._cards[7].set_value("c8", value)
 

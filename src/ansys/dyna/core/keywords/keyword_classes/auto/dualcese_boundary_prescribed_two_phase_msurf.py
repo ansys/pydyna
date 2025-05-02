@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseBoundaryPrescribedTwoPhaseMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
     subkeyword = "BOUNDARY_PRESCRIBED_TWO-PHASE_MSURF"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseBoundaryPrescribedTwoPhaseMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -210,6 +212,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @mspid.setter
     def mspid(self, value: int) -> None:
+        """Set the mspid property."""
         self._cards[0].set_value("mspid", value)
 
     @property
@@ -220,6 +223,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @idcomp.setter
     def idcomp(self, value: int) -> None:
+        """Set the idcomp property."""
         self._cards[0].set_value("idcomp", value)
 
     @property
@@ -230,6 +234,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @dirx.setter
     def dirx(self, value: float) -> None:
+        """Set the dirx property."""
         self._cards[0].set_value("dirx", value)
 
     @property
@@ -240,6 +245,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @diry.setter
     def diry(self, value: float) -> None:
+        """Set the diry property."""
         self._cards[0].set_value("diry", value)
 
     @property
@@ -250,6 +256,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @dirz.setter
     def dirz(self, value: float) -> None:
+        """Set the dirz property."""
         self._cards[0].set_value("dirz", value)
 
     @property
@@ -262,6 +269,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @lc_z1.setter
     def lc_z1(self, value: int) -> None:
+        """Set the lc_z1 property."""
         self._cards[1].set_value("lc_z1", value)
 
     @property
@@ -274,6 +282,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @lc_u.setter
     def lc_u(self, value: int) -> None:
+        """Set the lc_u property."""
         self._cards[1].set_value("lc_u", value)
 
     @property
@@ -286,6 +295,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @lc_v.setter
     def lc_v(self, value: int) -> None:
+        """Set the lc_v property."""
         self._cards[1].set_value("lc_v", value)
 
     @property
@@ -298,6 +308,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @lc_w.setter
     def lc_w(self, value: int) -> None:
+        """Set the lc_w property."""
         self._cards[1].set_value("lc_w", value)
 
     @property
@@ -310,6 +321,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @lc_d1.setter
     def lc_d1(self, value: int) -> None:
+        """Set the lc_d1 property."""
         self._cards[1].set_value("lc_d1", value)
 
     @property
@@ -322,6 +334,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @lc_d2.setter
     def lc_d2(self, value: int) -> None:
+        """Set the lc_d2 property."""
         self._cards[1].set_value("lc_d2", value)
 
     @property
@@ -334,6 +347,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @lc_p.setter
     def lc_p(self, value: float) -> None:
+        """Set the lc_p property."""
         self._cards[1].set_value("lc_p", value)
 
     @property
@@ -346,6 +360,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @lc_t.setter
     def lc_t(self, value: float) -> None:
+        """Set the lc_t property."""
         self._cards[1].set_value("lc_t", value)
 
     @property
@@ -356,6 +371,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @sf_z1.setter
     def sf_z1(self, value: float) -> None:
+        """Set the sf_z1 property."""
         self._cards[2].set_value("sf_z1", value)
 
     @property
@@ -366,6 +382,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @sf_u.setter
     def sf_u(self, value: float) -> None:
+        """Set the sf_u property."""
         self._cards[2].set_value("sf_u", value)
 
     @property
@@ -376,6 +393,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @sf_v.setter
     def sf_v(self, value: float) -> None:
+        """Set the sf_v property."""
         self._cards[2].set_value("sf_v", value)
 
     @property
@@ -386,6 +404,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @sf_w.setter
     def sf_w(self, value: float) -> None:
+        """Set the sf_w property."""
         self._cards[2].set_value("sf_w", value)
 
     @property
@@ -396,6 +415,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @sf_d1.setter
     def sf_d1(self, value: float) -> None:
+        """Set the sf_d1 property."""
         self._cards[2].set_value("sf_d1", value)
 
     @property
@@ -406,6 +426,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @sf_d2.setter
     def sf_d2(self, value: float) -> None:
+        """Set the sf_d2 property."""
         self._cards[2].set_value("sf_d2", value)
 
     @property
@@ -416,6 +437,7 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @sf_p.setter
     def sf_p(self, value: float) -> None:
+        """Set the sf_p property."""
         self._cards[2].set_value("sf_p", value)
 
     @property
@@ -426,5 +448,6 @@ class DualceseBoundaryPrescribedTwoPhaseMsurf(KeywordBase):
 
     @sf_t.setter
     def sf_t(self, value: float) -> None:
+        """Set the sf_t property."""
         self._cards[2].set_value("sf_t", value)
 

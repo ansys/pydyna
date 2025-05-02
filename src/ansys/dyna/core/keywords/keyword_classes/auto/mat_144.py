@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat144 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat144(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat144 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -157,6 +159,7 @@ class Mat144(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -167,6 +170,7 @@ class Mat144(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -177,6 +181,7 @@ class Mat144(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -187,6 +192,7 @@ class Mat144(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -197,6 +203,7 @@ class Mat144(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -207,6 +214,7 @@ class Mat144(KeywordBase):
 
     @ty.setter
     def ty(self, value: float) -> None:
+        """Set the ty property."""
         self._cards[0].set_value("ty", value)
 
     @property
@@ -217,6 +225,7 @@ class Mat144(KeywordBase):
 
     @srtv.setter
     def srtv(self, value: float) -> None:
+        """Set the srtv property."""
         self._cards[0].set_value("srtv", value)
 
     @property
@@ -227,6 +236,7 @@ class Mat144(KeywordBase):
 
     @lcpy.setter
     def lcpy(self, value: int) -> None:
+        """Set the lcpy property."""
         self._cards[1].set_value("lcpy", value)
 
     @property
@@ -237,6 +247,7 @@ class Mat144(KeywordBase):
 
     @lcuys.setter
     def lcuys(self, value: int) -> None:
+        """Set the lcuys property."""
         self._cards[1].set_value("lcuys", value)
 
     @property
@@ -247,6 +258,7 @@ class Mat144(KeywordBase):
 
     @lcsr.setter
     def lcsr(self, value: int) -> None:
+        """Set the lcsr property."""
         self._cards[1].set_value("lcsr", value)
 
     @property
@@ -257,6 +269,7 @@ class Mat144(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[1].set_value("vc", value)
 
     @property
@@ -269,6 +282,7 @@ class Mat144(KeywordBase):
 
     @dflg.setter
     def dflg(self, value: float) -> None:
+        """Set the dflg property."""
         self._cards[1].set_value("dflg", value)
 
     @property
@@ -279,5 +293,6 @@ class Mat144(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

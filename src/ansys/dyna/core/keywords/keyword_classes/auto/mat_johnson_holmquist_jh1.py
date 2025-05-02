@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatJohnsonHolmquistJh1 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatJohnsonHolmquistJh1 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -224,6 +226,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -234,6 +237,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -244,6 +248,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -254,6 +259,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[0].set_value("p1", value)
 
     @property
@@ -264,6 +270,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @s1.setter
     def s1(self, value: float) -> None:
+        """Set the s1 property."""
         self._cards[0].set_value("s1", value)
 
     @property
@@ -274,6 +281,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[0].set_value("p2", value)
 
     @property
@@ -284,6 +292,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @s2.setter
     def s2(self, value: float) -> None:
+        """Set the s2 property."""
         self._cards[0].set_value("s2", value)
 
     @property
@@ -294,6 +303,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -304,6 +314,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @epsi.setter
     def epsi(self, value: float) -> None:
+        """Set the epsi property."""
         self._cards[1].set_value("epsi", value)
 
     @property
@@ -314,6 +325,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 
     @property
@@ -324,6 +336,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
 
     @property
@@ -334,6 +347,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @sfmax.setter
     def sfmax(self, value: float) -> None:
+        """Set the sfmax property."""
         self._cards[1].set_value("sfmax", value)
 
     @property
@@ -344,6 +358,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[1].set_value("beta", value)
 
     @property
@@ -354,6 +369,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @dp1.setter
     def dp1(self, value: float) -> None:
+        """Set the dp1 property."""
         self._cards[1].set_value("dp1", value)
 
     @property
@@ -364,6 +380,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @epfmin.setter
     def epfmin(self, value: float) -> None:
+        """Set the epfmin property."""
         self._cards[2].set_value("epfmin", value)
 
     @property
@@ -374,6 +391,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @epfmax.setter
     def epfmax(self, value: float) -> None:
+        """Set the epfmax property."""
         self._cards[2].set_value("epfmax", value)
 
     @property
@@ -384,6 +402,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @k1.setter
     def k1(self, value: float) -> None:
+        """Set the k1 property."""
         self._cards[2].set_value("k1", value)
 
     @property
@@ -394,6 +413,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @k2.setter
     def k2(self, value: float) -> None:
+        """Set the k2 property."""
         self._cards[2].set_value("k2", value)
 
     @property
@@ -404,6 +424,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @k3.setter
     def k3(self, value: float) -> None:
+        """Set the k3 property."""
         self._cards[2].set_value("k3", value)
 
     @property
@@ -417,6 +438,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[2].set_value("fs", value)
 
     @property
@@ -427,5 +449,6 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

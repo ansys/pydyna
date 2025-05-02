@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmMat002 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmMat002(KeywordBase):
     subkeyword = "MAT_002"
 
     def __init__(self, **kwargs):
+        """Initialize the EmMat002 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -116,6 +118,7 @@ class EmMat002(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -131,8 +134,9 @@ class EmMat002(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         if value not in [0, 1, 2, 4, None]:
-            raise Exception("""mtype must be `None` or one of {0,1,2,4}""")
+            raise Exception("""mtype must be `None` or one of {0,1,2,4}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -143,6 +147,7 @@ class EmMat002(KeywordBase):
 
     @sigma.setter
     def sigma(self, value: float) -> None:
+        """Set the sigma property."""
         self._cards[0].set_value("sigma", value)
 
     @property
@@ -153,6 +158,7 @@ class EmMat002(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -163,6 +169,7 @@ class EmMat002(KeywordBase):
 
     @murel.setter
     def murel(self, value: float) -> None:
+        """Set the murel property."""
         self._cards[0].set_value("murel", value)
 
     @property
@@ -173,6 +180,7 @@ class EmMat002(KeywordBase):
 
     @eosmu.setter
     def eosmu(self, value: int) -> None:
+        """Set the eosmu property."""
         self._cards[0].set_value("eosmu", value)
 
     @property
@@ -183,6 +191,7 @@ class EmMat002(KeywordBase):
 
     @deatht.setter
     def deatht(self, value: float) -> None:
+        """Set the deatht property."""
         self._cards[0].set_value("deatht", value)
 
     @property
@@ -193,5 +202,6 @@ class EmMat002(KeywordBase):
 
     @eosid2.setter
     def eosid2(self, value: int) -> None:
+        """Set the eosid2 property."""
         self._cards[1].set_value("eosid2", value)
 

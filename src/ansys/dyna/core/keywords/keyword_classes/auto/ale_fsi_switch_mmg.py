@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleFsiSwitchMmg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleFsiSwitchMmg(KeywordBase):
     subkeyword = "FSI_SWITCH_MMG"
 
     def __init__(self, **kwargs):
+        """Initialize the AleFsiSwitchMmg class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -154,6 +156,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -164,6 +167,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -174,6 +178,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -187,8 +192,9 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2}""")
+            raise Exception("""stype must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("stype", value)
 
     @property
@@ -199,6 +205,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @nquad.setter
     def nquad(self, value: int) -> None:
+        """Set the nquad property."""
         self._cards[1].set_value("nquad", value)
 
     @property
@@ -209,6 +216,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @xoff.setter
     def xoff(self, value: float) -> None:
+        """Set the xoff property."""
         self._cards[1].set_value("xoff", value)
 
     @property
@@ -219,6 +227,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @btime.setter
     def btime(self, value: float) -> None:
+        """Set the btime property."""
         self._cards[1].set_value("btime", value)
 
     @property
@@ -229,6 +238,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @dtime.setter
     def dtime(self, value: float) -> None:
+        """Set the dtime property."""
         self._cards[1].set_value("dtime", value)
 
     @property
@@ -239,6 +249,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
+        """Set the nfreq property."""
         self._cards[1].set_value("nfreq", value)
 
     @property
@@ -249,6 +260,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @nfold.setter
     def nfold(self, value: int) -> None:
+        """Set the nfold property."""
         self._cards[1].set_value("nfold", value)
 
     @property
@@ -259,6 +271,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @fr_mmg.setter
     def fr_mmg(self, value: int) -> None:
+        """Set the fr_mmg property."""
         self._cards[2].set_value("fr_mmg", value)
 
     @property
@@ -269,6 +282,7 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @to_mmg.setter
     def to_mmg(self, value: int) -> None:
+        """Set the to_mmg property."""
         self._cards[2].set_value("to_mmg", value)
 
     @property
@@ -279,5 +293,6 @@ class AleFsiSwitchMmg(KeywordBase):
 
     @xclen.setter
     def xclen(self, value: float) -> None:
+        """Set the xclen property."""
         self._cards[2].set_value("xclen", value)
 

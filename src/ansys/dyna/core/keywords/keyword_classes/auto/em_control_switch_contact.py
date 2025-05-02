@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmControlSwitchContact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmControlSwitchContact(KeywordBase):
     subkeyword = "CONTROL_SWITCH_CONTACT"
 
     def __init__(self, **kwargs):
+        """Initialize the EmControlSwitchContact class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -71,6 +73,7 @@ class EmControlSwitchContact(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -81,6 +84,7 @@ class EmControlSwitchContact(KeywordBase):
 
     @ncylfem.setter
     def ncylfem(self, value: int) -> None:
+        """Set the ncylfem property."""
         self._cards[0].set_value("ncylfem", value)
 
     @property
@@ -91,5 +95,6 @@ class EmControlSwitchContact(KeywordBase):
 
     @ncylfem.setter
     def ncylfem(self, value: int) -> None:
+        """Set the ncylfem property."""
         self._cards[0].set_value("ncylfem", value)
 

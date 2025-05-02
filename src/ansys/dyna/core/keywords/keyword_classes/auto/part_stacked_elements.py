@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the PartStackedElements class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartStackedElements(KeywordBase):
     subkeyword = "STACKED_ELEMENTS"
 
     def __init__(self, **kwargs):
+        """Initialize the PartStackedElements class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -145,6 +147,7 @@ class PartStackedElements(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -155,6 +158,7 @@ class PartStackedElements(KeywordBase):
 
     @pidref.setter
     def pidref(self, value: int) -> None:
+        """Set the pidref property."""
         self._cards[1].set_value("pidref", value)
 
     @property
@@ -165,6 +169,7 @@ class PartStackedElements(KeywordBase):
 
     @numlay.setter
     def numlay(self, value: int) -> None:
+        """Set the numlay property."""
         self._cards[1].set_value("numlay", value)
 
     @property
@@ -175,6 +180,7 @@ class PartStackedElements(KeywordBase):
 
     @adpopt.setter
     def adpopt(self, value: int) -> None:
+        """Set the adpopt property."""
         self._cards[1].set_value("adpopt", value)
 
     @property
@@ -187,8 +193,9 @@ class PartStackedElements(KeywordBase):
 
     @inplcmp.setter
     def inplcmp(self, value: int) -> None:
+        """Set the inplcmp property."""
         if value not in [0, 1, None]:
-            raise Exception("""inplcmp must be `None` or one of {0,1}""")
+            raise Exception("""inplcmp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("inplcmp", value)
 
     @property
@@ -199,6 +206,7 @@ class PartStackedElements(KeywordBase):
 
     @pidi.setter
     def pidi(self, value: int) -> None:
+        """Set the pidi property."""
         self._cards[2].set_value("pidi", value)
 
     @property
@@ -209,6 +217,7 @@ class PartStackedElements(KeywordBase):
 
     @sidi.setter
     def sidi(self, value: int) -> None:
+        """Set the sidi property."""
         self._cards[2].set_value("sidi", value)
 
     @property
@@ -219,6 +228,7 @@ class PartStackedElements(KeywordBase):
 
     @midi.setter
     def midi(self, value: int) -> None:
+        """Set the midi property."""
         self._cards[2].set_value("midi", value)
 
     @property
@@ -229,6 +239,7 @@ class PartStackedElements(KeywordBase):
 
     @hgidi.setter
     def hgidi(self, value: int) -> None:
+        """Set the hgidi property."""
         self._cards[2].set_value("hgidi", value)
 
     @property
@@ -239,6 +250,7 @@ class PartStackedElements(KeywordBase):
 
     @tmidi.setter
     def tmidi(self, value: int) -> None:
+        """Set the tmidi property."""
         self._cards[2].set_value("tmidi", value)
 
     @property
@@ -249,6 +261,7 @@ class PartStackedElements(KeywordBase):
 
     @thki.setter
     def thki(self, value: float) -> None:
+        """Set the thki property."""
         self._cards[2].set_value("thki", value)
 
     @property
@@ -259,5 +272,6 @@ class PartStackedElements(KeywordBase):
 
     @nsldi.setter
     def nsldi(self, value: int) -> None:
+        """Set the nsldi property."""
         self._cards[2].set_value("nsldi", value)
 

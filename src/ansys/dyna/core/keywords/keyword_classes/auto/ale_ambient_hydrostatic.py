@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleAmbientHydrostatic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleAmbientHydrostatic(KeywordBase):
     subkeyword = "AMBIENT_HYDROSTATIC"
 
     def __init__(self, **kwargs):
+        """Initialize the AleAmbientHydrostatic class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,6 +112,7 @@ class AleAmbientHydrostatic(KeywordBase):
 
     @alesid.setter
     def alesid(self, value: int) -> None:
+        """Set the alesid property."""
         self._cards[0].set_value("alesid", value)
 
     @property
@@ -121,8 +124,9 @@ class AleAmbientHydrostatic(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2}""")
+            raise Exception("""stype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -133,6 +137,7 @@ class AleAmbientHydrostatic(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[0].set_value("vecid", value)
 
     @property
@@ -143,6 +148,7 @@ class AleAmbientHydrostatic(KeywordBase):
 
     @grav.setter
     def grav(self, value: float) -> None:
+        """Set the grav property."""
         self._cards[0].set_value("grav", value)
 
     @property
@@ -153,6 +159,7 @@ class AleAmbientHydrostatic(KeywordBase):
 
     @pbase.setter
     def pbase(self, value: float) -> None:
+        """Set the pbase property."""
         self._cards[0].set_value("pbase", value)
 
     @property
@@ -163,6 +170,7 @@ class AleAmbientHydrostatic(KeywordBase):
 
     @ramptlc.setter
     def ramptlc(self, value: int) -> None:
+        """Set the ramptlc property."""
         self._cards[0].set_value("ramptlc", value)
 
     @property
@@ -173,6 +181,7 @@ class AleAmbientHydrostatic(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -183,5 +192,6 @@ class AleAmbientHydrostatic(KeywordBase):
 
     @mmgbl.setter
     def mmgbl(self, value: int) -> None:
+        """Set the mmgbl property."""
         self._cards[1].set_value("mmgbl", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdSolverTolMmov class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdSolverTolMmov(KeywordBase):
     subkeyword = "SOLVER_TOL_MMOV"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdSolverTolMmov class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -92,6 +94,7 @@ class IcfdSolverTolMmov(KeywordBase):
 
     @atol.setter
     def atol(self, value: float) -> None:
+        """Set the atol property."""
         self._cards[0].set_value("atol", value)
 
     @property
@@ -102,6 +105,7 @@ class IcfdSolverTolMmov(KeywordBase):
 
     @rtol.setter
     def rtol(self, value: float) -> None:
+        """Set the rtol property."""
         self._cards[0].set_value("rtol", value)
 
     @property
@@ -112,6 +116,7 @@ class IcfdSolverTolMmov(KeywordBase):
 
     @maxit.setter
     def maxit(self, value: int) -> None:
+        """Set the maxit property."""
         self._cards[0].set_value("maxit", value)
 
     @property
@@ -122,5 +127,6 @@ class IcfdSolverTolMmov(KeywordBase):
 
     @disptol.setter
     def disptol(self, value: float) -> None:
+        """Set the disptol property."""
         self._cards[0].set_value("disptol", value)
 

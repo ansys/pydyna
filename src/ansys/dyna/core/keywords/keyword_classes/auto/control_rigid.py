@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlRigid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlRigid(KeywordBase):
     subkeyword = "RIGID"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlRigid class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -157,8 +159,9 @@ class ControlRigid(KeywordBase):
 
     @lmf.setter
     def lmf(self, value: int) -> None:
+        """Set the lmf property."""
         if value not in [0, 1, None]:
-            raise Exception("""lmf must be `None` or one of {0,1}""")
+            raise Exception("""lmf must be `None` or one of {0,1}.""")
         self._cards[0].set_value("lmf", value)
 
     @property
@@ -172,8 +175,9 @@ class ControlRigid(KeywordBase):
 
     @jntf.setter
     def jntf(self, value: int) -> None:
+        """Set the jntf property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""jntf must be `None` or one of {0,1,2}""")
+            raise Exception("""jntf must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("jntf", value)
 
     @property
@@ -186,8 +190,9 @@ class ControlRigid(KeywordBase):
 
     @orthmd.setter
     def orthmd(self, value: int) -> None:
+        """Set the orthmd property."""
         if value not in [0, 1, None]:
-            raise Exception("""orthmd must be `None` or one of {0,1}""")
+            raise Exception("""orthmd must be `None` or one of {0,1}.""")
         self._cards[0].set_value("orthmd", value)
 
     @property
@@ -200,8 +205,9 @@ class ControlRigid(KeywordBase):
 
     @partm.setter
     def partm(self, value: int) -> None:
+        """Set the partm property."""
         if value not in [0, 1, None]:
-            raise Exception("""partm must be `None` or one of {0,1}""")
+            raise Exception("""partm must be `None` or one of {0,1}.""")
         self._cards[0].set_value("partm", value)
 
     @property
@@ -214,8 +220,9 @@ class ControlRigid(KeywordBase):
 
     @sparse.setter
     def sparse(self, value: int) -> None:
+        """Set the sparse property."""
         if value not in [0, 1, None]:
-            raise Exception("""sparse must be `None` or one of {0,1}""")
+            raise Exception("""sparse must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sparse", value)
 
     @property
@@ -228,8 +235,9 @@ class ControlRigid(KeywordBase):
 
     @metalf.setter
     def metalf(self, value: int) -> None:
+        """Set the metalf property."""
         if value not in [0, 1, None]:
-            raise Exception("""metalf must be `None` or one of {0,1}""")
+            raise Exception("""metalf must be `None` or one of {0,1}.""")
         self._cards[0].set_value("metalf", value)
 
     @property
@@ -243,8 +251,9 @@ class ControlRigid(KeywordBase):
 
     @plotel.setter
     def plotel(self, value: int) -> None:
+        """Set the plotel property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""plotel must be `None` or one of {0,1,2}""")
+            raise Exception("""plotel must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("plotel", value)
 
     @property
@@ -257,8 +266,9 @@ class ControlRigid(KeywordBase):
 
     @rbsms.setter
     def rbsms(self, value: int) -> None:
+        """Set the rbsms property."""
         if value not in [0, 1, None]:
-            raise Exception("""rbsms must be `None` or one of {0,1}""")
+            raise Exception("""rbsms must be `None` or one of {0,1}.""")
         self._cards[0].set_value("rbsms", value)
 
     @property
@@ -271,8 +281,9 @@ class ControlRigid(KeywordBase):
 
     @norbic.setter
     def norbic(self, value: int) -> None:
+        """Set the norbic property."""
         if value not in [0, 1, None]:
-            raise Exception("""norbic must be `None` or one of {0,1}""")
+            raise Exception("""norbic must be `None` or one of {0,1}.""")
         self._cards[1].set_value("norbic", value)
 
     @property
@@ -283,6 +294,7 @@ class ControlRigid(KeywordBase):
 
     @gjadstf.setter
     def gjadstf(self, value: float) -> None:
+        """Set the gjadstf property."""
         self._cards[1].set_value("gjadstf", value)
 
     @property
@@ -293,6 +305,7 @@ class ControlRigid(KeywordBase):
 
     @gjadvsc.setter
     def gjadvsc(self, value: float) -> None:
+        """Set the gjadvsc property."""
         self._cards[1].set_value("gjadvsc", value)
 
     @property
@@ -303,6 +316,7 @@ class ControlRigid(KeywordBase):
 
     @tjastf.setter
     def tjastf(self, value: float) -> None:
+        """Set the tjastf property."""
         self._cards[1].set_value("tjastf", value)
 
     @property
@@ -313,5 +327,6 @@ class ControlRigid(KeywordBase):
 
     @tjadvsc.setter
     def tjadvsc(self, value: float) -> None:
+        """Set the tjadvsc property."""
         self._cards[1].set_value("tjadvsc", value)
 

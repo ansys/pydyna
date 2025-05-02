@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingProjection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingProjection(KeywordBase):
     subkeyword = "FORMING_PROJECTION"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingProjection class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -84,6 +86,7 @@ class ControlFormingProjection(KeywordBase):
 
     @pidb.setter
     def pidb(self, value: int) -> None:
+        """Set the pidb property."""
         self._cards[0].set_value("pidb", value)
 
     @property
@@ -94,6 +97,7 @@ class ControlFormingProjection(KeywordBase):
 
     @pidt.setter
     def pidt(self, value: int) -> None:
+        """Set the pidt property."""
         self._cards[0].set_value("pidt", value)
 
     @property
@@ -104,6 +108,7 @@ class ControlFormingProjection(KeywordBase):
 
     @gap.setter
     def gap(self, value: float) -> None:
+        """Set the gap property."""
         self._cards[0].set_value("gap", value)
 
     @property
@@ -117,8 +122,9 @@ class ControlFormingProjection(KeywordBase):
 
     @nrbst.setter
     def nrbst(self, value: int) -> None:
+        """Set the nrbst property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""nrbst must be `None` or one of {0,1,2}""")
+            raise Exception("""nrbst must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("nrbst", value)
 
     @property
@@ -131,7 +137,8 @@ class ControlFormingProjection(KeywordBase):
 
     @nrtst.setter
     def nrtst(self, value: int) -> None:
+        """Set the nrtst property."""
         if value not in [0, 1, None]:
-            raise Exception("""nrtst must be `None` or one of {0,1}""")
+            raise Exception("""nrtst must be `None` or one of {0,1}.""")
         self._cards[0].set_value("nrtst", value)
 

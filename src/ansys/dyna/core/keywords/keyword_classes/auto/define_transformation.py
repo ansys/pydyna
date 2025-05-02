@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineTransformation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -36,6 +37,7 @@ class DefineTransformation(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineTransformation class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -92,16 +94,17 @@ class DefineTransformation(KeywordBase):
 
     @tranid.setter
     def tranid(self, value: int) -> None:
+        """Set the tranid property."""
         self._cards[0].set_value("tranid", value)
 
     @property
     def transforms(self):
-        '''Gets the table of transforms'''
+        """Get the table of transforms."""
         return self._cards[1].table
 
     @transforms.setter
     def transforms(self, df):
-        '''sets transforms from the dataframe df'''
+        """Set transforms from the dataframe df"""
         self._cards[1].table = df
 
     @property
@@ -112,5 +115,6 @@ class DefineTransformation(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

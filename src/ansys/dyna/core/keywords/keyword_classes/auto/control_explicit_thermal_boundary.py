@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlExplicitThermalBoundary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlExplicitThermalBoundary(KeywordBase):
     subkeyword = "EXPLICIT_THERMAL_BOUNDARY"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlExplicitThermalBoundary class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class ControlExplicitThermalBoundary(KeywordBase):
 
     @partset.setter
     def partset(self, value: int) -> None:
+        """Set the partset property."""
         self._cards[0].set_value("partset", value)
 
     @property
@@ -71,5 +74,6 @@ class ControlExplicitThermalBoundary(KeywordBase):
 
     @mmgset.setter
     def mmgset(self, value: int) -> None:
+        """Set the mmgset property."""
         self._cards[0].set_value("mmgset", value)
 

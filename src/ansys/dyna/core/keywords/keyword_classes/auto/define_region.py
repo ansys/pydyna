@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineRegion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineRegion(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineRegion class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -162,6 +164,7 @@ class DefineRegion(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -172,6 +175,7 @@ class DefineRegion(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -186,8 +190,9 @@ class DefineRegion(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""type must be `None` or one of {0,1,2,3}""")
+            raise Exception("""type must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("type", value)
 
     @property
@@ -199,6 +204,7 @@ class DefineRegion(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -211,8 +217,9 @@ class DefineRegion(KeywordBase):
 
     @move.setter
     def move(self, value: int) -> None:
+        """Set the move property."""
         if value not in [0, 1, None]:
-            raise Exception("""move must be `None` or one of {0,1}""")
+            raise Exception("""move must be `None` or one of {0,1}.""")
         self._cards[1].set_value("move", value)
 
     @property
@@ -223,6 +230,7 @@ class DefineRegion(KeywordBase):
 
     @xmn.setter
     def xmn(self, value: float) -> None:
+        """Set the xmn property."""
         self._cards[2].set_value("xmn", value)
 
     @property
@@ -233,6 +241,7 @@ class DefineRegion(KeywordBase):
 
     @xmx.setter
     def xmx(self, value: float) -> None:
+        """Set the xmx property."""
         self._cards[2].set_value("xmx", value)
 
     @property
@@ -243,6 +252,7 @@ class DefineRegion(KeywordBase):
 
     @ymn.setter
     def ymn(self, value: float) -> None:
+        """Set the ymn property."""
         self._cards[2].set_value("ymn", value)
 
     @property
@@ -253,6 +263,7 @@ class DefineRegion(KeywordBase):
 
     @ymx.setter
     def ymx(self, value: float) -> None:
+        """Set the ymx property."""
         self._cards[2].set_value("ymx", value)
 
     @property
@@ -263,6 +274,7 @@ class DefineRegion(KeywordBase):
 
     @zmn.setter
     def zmn(self, value: float) -> None:
+        """Set the zmn property."""
         self._cards[2].set_value("zmn", value)
 
     @property
@@ -273,6 +285,7 @@ class DefineRegion(KeywordBase):
 
     @zmx.setter
     def zmx(self, value: float) -> None:
+        """Set the zmx property."""
         self._cards[2].set_value("zmx", value)
 
     @property
@@ -283,5 +296,6 @@ class DefineRegion(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

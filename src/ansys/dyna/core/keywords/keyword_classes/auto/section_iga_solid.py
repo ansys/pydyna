@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionIgaSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionIgaSolid(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionIgaSolid class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -92,6 +94,7 @@ class SectionIgaSolid(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -103,6 +106,7 @@ class SectionIgaSolid(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         self._cards[0].set_value("elform", value)
 
     @property
@@ -115,8 +119,9 @@ class SectionIgaSolid(KeywordBase):
 
     @ir.setter
     def ir(self, value: int) -> None:
+        """Set the ir property."""
         if value not in [0, 1, None]:
-            raise Exception("""ir must be `None` or one of {0,1}""")
+            raise Exception("""ir must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ir", value)
 
     @property
@@ -127,5 +132,6 @@ class SectionIgaSolid(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineStochasticElementShellVariaton class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineStochasticElementShellVariaton(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineStochasticElementShellVariaton class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -109,6 +111,7 @@ class DefineStochasticElementShellVariaton(KeywordBase):
 
     @ide.setter
     def ide(self, value: int) -> None:
+        """Set the ide property."""
         self._cards[0].set_value("ide", value)
 
     @property
@@ -119,6 +122,7 @@ class DefineStochasticElementShellVariaton(KeywordBase):
 
     @varsy.setter
     def varsy(self, value: float) -> None:
+        """Set the varsy property."""
         self._cards[0].set_value("varsy", value)
 
     @property
@@ -129,6 +133,7 @@ class DefineStochasticElementShellVariaton(KeywordBase):
 
     @varf.setter
     def varf(self, value: float) -> None:
+        """Set the varf property."""
         self._cards[0].set_value("varf", value)
 
     @property
@@ -139,6 +144,7 @@ class DefineStochasticElementShellVariaton(KeywordBase):
 
     @varro.setter
     def varro(self, value: float) -> None:
+        """Set the varro property."""
         self._cards[0].set_value("varro", value)
 
     @property
@@ -149,6 +155,7 @@ class DefineStochasticElementShellVariaton(KeywordBase):
 
     @vare.setter
     def vare(self, value: float) -> None:
+        """Set the vare property."""
         self._cards[0].set_value("vare", value)
 
     @property
@@ -159,5 +166,6 @@ class DefineStochasticElementShellVariaton(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

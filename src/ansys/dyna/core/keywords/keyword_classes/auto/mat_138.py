@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat138 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat138(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat138 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -173,6 +175,7 @@ class Mat138(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -183,6 +186,7 @@ class Mat138(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -195,8 +199,9 @@ class Mat138(KeywordBase):
 
     @roflg.setter
     def roflg(self, value: int) -> None:
+        """Set the roflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""roflg must be `None` or one of {0,1}""")
+            raise Exception("""roflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("roflg", value)
 
     @property
@@ -210,6 +215,7 @@ class Mat138(KeywordBase):
 
     @intfail.setter
     def intfail(self, value: float) -> None:
+        """Set the intfail property."""
         self._cards[0].set_value("intfail", value)
 
     @property
@@ -220,6 +226,7 @@ class Mat138(KeywordBase):
 
     @en.setter
     def en(self, value: float) -> None:
+        """Set the en property."""
         self._cards[0].set_value("en", value)
 
     @property
@@ -230,6 +237,7 @@ class Mat138(KeywordBase):
 
     @et.setter
     def et(self, value: float) -> None:
+        """Set the et property."""
         self._cards[0].set_value("et", value)
 
     @property
@@ -241,6 +249,7 @@ class Mat138(KeywordBase):
 
     @gic.setter
     def gic(self, value: float) -> None:
+        """Set the gic property."""
         self._cards[0].set_value("gic", value)
 
     @property
@@ -252,6 +261,7 @@ class Mat138(KeywordBase):
 
     @giic.setter
     def giic(self, value: float) -> None:
+        """Set the giic property."""
         self._cards[0].set_value("giic", value)
 
     @property
@@ -262,6 +272,7 @@ class Mat138(KeywordBase):
 
     @xmu.setter
     def xmu(self, value: float) -> None:
+        """Set the xmu property."""
         self._cards[1].set_value("xmu", value)
 
     @property
@@ -272,6 +283,7 @@ class Mat138(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 
     @property
@@ -282,6 +294,7 @@ class Mat138(KeywordBase):
 
     @s.setter
     def s(self, value: float) -> None:
+        """Set the s property."""
         self._cards[1].set_value("s", value)
 
     @property
@@ -292,6 +305,7 @@ class Mat138(KeywordBase):
 
     @und.setter
     def und(self, value: float) -> None:
+        """Set the und property."""
         self._cards[1].set_value("und", value)
 
     @property
@@ -302,6 +316,7 @@ class Mat138(KeywordBase):
 
     @utd.setter
     def utd(self, value: float) -> None:
+        """Set the utd property."""
         self._cards[1].set_value("utd", value)
 
     @property
@@ -312,6 +327,7 @@ class Mat138(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[1].set_value("gamma", value)
 
     @property
@@ -322,8 +338,10 @@ class Mat138(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 
 
 class MatCohesiveMixedMode(Mat138):
+    """Alias for MAT keyword."""
     subkeyword = "COHESIVE_MIXED_MODE"

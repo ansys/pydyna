@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadHeatController class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadHeatController(KeywordBase):
     subkeyword = "HEAT_CONTROLLER"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadHeatController class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -96,6 +98,7 @@ class LoadHeatController(KeywordBase):
 
     @node.setter
     def node(self, value: int) -> None:
+        """Set the node property."""
         self._cards[0].set_value("node", value)
 
     @property
@@ -106,6 +109,7 @@ class LoadHeatController(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -116,6 +120,7 @@ class LoadHeatController(KeywordBase):
 
     @load.setter
     def load(self, value: float) -> None:
+        """Set the load property."""
         self._cards[0].set_value("load", value)
 
     @property
@@ -126,6 +131,7 @@ class LoadHeatController(KeywordBase):
 
     @tset.setter
     def tset(self, value: float) -> None:
+        """Set the tset property."""
         self._cards[0].set_value("tset", value)
 
     @property
@@ -138,6 +144,7 @@ class LoadHeatController(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         self._cards[0].set_value("type", value)
 
     @property
@@ -148,6 +155,7 @@ class LoadHeatController(KeywordBase):
 
     @gp.setter
     def gp(self, value: float) -> None:
+        """Set the gp property."""
         self._cards[0].set_value("gp", value)
 
     @property
@@ -158,5 +166,6 @@ class LoadHeatController(KeywordBase):
 
     @gi.setter
     def gi(self, value: float) -> None:
+        """Set the gi property."""
         self._cards[0].set_value("gi", value)
 

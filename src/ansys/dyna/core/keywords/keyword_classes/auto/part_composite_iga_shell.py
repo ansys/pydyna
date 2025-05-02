@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the PartCompositeIgaShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartCompositeIgaShell(KeywordBase):
     subkeyword = "COMPOSITE_IGA_SHELL"
 
     def __init__(self, **kwargs):
+        """Initialize the PartCompositeIgaShell class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -177,6 +179,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -187,6 +190,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -201,8 +205,9 @@ class PartCompositeIgaShell(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""elform must be `None` or one of {0,1,2,3}""")
+            raise Exception("""elform must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -213,6 +218,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[1].set_value("shrf", value)
 
     @property
@@ -223,6 +229,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @nloc.setter
     def nloc(self, value: float) -> None:
+        """Set the nloc property."""
         self._cards[1].set_value("nloc", value)
 
     @property
@@ -236,6 +243,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @irl.setter
     def irl(self, value: int) -> None:
+        """Set the irl property."""
         self._cards[1].set_value("irl", value)
 
     @property
@@ -246,6 +254,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @mid1.setter
     def mid1(self, value: int) -> None:
+        """Set the mid1 property."""
         self._cards[2].set_value("mid1", value)
 
     @property
@@ -256,6 +265,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @thick1.setter
     def thick1(self, value: float) -> None:
+        """Set the thick1 property."""
         self._cards[2].set_value("thick1", value)
 
     @property
@@ -266,6 +276,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[2].set_value("b1", value)
 
     @property
@@ -276,6 +287,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @tmid1.setter
     def tmid1(self, value: int) -> None:
+        """Set the tmid1 property."""
         self._cards[2].set_value("tmid1", value)
 
     @property
@@ -286,6 +298,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @mid2.setter
     def mid2(self, value: int) -> None:
+        """Set the mid2 property."""
         self._cards[2].set_value("mid2", value)
 
     @property
@@ -296,6 +309,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @thick2.setter
     def thick2(self, value: float) -> None:
+        """Set the thick2 property."""
         self._cards[2].set_value("thick2", value)
 
     @property
@@ -306,6 +320,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @b2.setter
     def b2(self, value: float) -> None:
+        """Set the b2 property."""
         self._cards[2].set_value("b2", value)
 
     @property
@@ -316,5 +331,6 @@ class PartCompositeIgaShell(KeywordBase):
 
     @tmid2.setter
     def tmid2(self, value: int) -> None:
+        """Set the tmid2 property."""
         self._cards[2].set_value("tmid2", value)
 

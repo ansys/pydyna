@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatBoltBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatBoltBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatBoltBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -220,6 +222,7 @@ class MatBoltBeam(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -230,6 +233,7 @@ class MatBoltBeam(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -240,6 +244,7 @@ class MatBoltBeam(KeywordBase):
 
     @kax.setter
     def kax(self, value: float) -> None:
+        """Set the kax property."""
         self._cards[0].set_value("kax", value)
 
     @property
@@ -250,6 +255,7 @@ class MatBoltBeam(KeywordBase):
 
     @kshr.setter
     def kshr(self, value: float) -> None:
+        """Set the kshr property."""
         self._cards[0].set_value("kshr", value)
 
     @property
@@ -260,6 +266,7 @@ class MatBoltBeam(KeywordBase):
 
     @fpre.setter
     def fpre(self, value: float) -> None:
+        """Set the fpre property."""
         self._cards[0].set_value("fpre", value)
 
     @property
@@ -270,6 +277,7 @@ class MatBoltBeam(KeywordBase):
 
     @tramp.setter
     def tramp(self, value: float) -> None:
+        """Set the tramp property."""
         self._cards[0].set_value("tramp", value)
 
     @property
@@ -280,6 +288,7 @@ class MatBoltBeam(KeywordBase):
 
     @lcax.setter
     def lcax(self, value: int) -> None:
+        """Set the lcax property."""
         self._cards[1].set_value("lcax", value)
 
     @property
@@ -293,6 +302,7 @@ class MatBoltBeam(KeywordBase):
 
     @lcshr.setter
     def lcshr(self, value: int) -> None:
+        """Set the lcshr property."""
         self._cards[1].set_value("lcshr", value)
 
     @property
@@ -303,6 +313,7 @@ class MatBoltBeam(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[1].set_value("fric", value)
 
     @property
@@ -313,6 +324,7 @@ class MatBoltBeam(KeywordBase):
 
     @clear.setter
     def clear(self, value: float) -> None:
+        """Set the clear property."""
         self._cards[1].set_value("clear", value)
 
     @property
@@ -323,6 +335,7 @@ class MatBoltBeam(KeywordBase):
 
     @dafail.setter
     def dafail(self, value: float) -> None:
+        """Set the dafail property."""
         self._cards[1].set_value("dafail", value)
 
     @property
@@ -333,6 +346,7 @@ class MatBoltBeam(KeywordBase):
 
     @drfail.setter
     def drfail(self, value: float) -> None:
+        """Set the drfail property."""
         self._cards[1].set_value("drfail", value)
 
     @property
@@ -343,6 +357,7 @@ class MatBoltBeam(KeywordBase):
 
     @damag.setter
     def damag(self, value: float) -> None:
+        """Set the damag property."""
         self._cards[1].set_value("damag", value)
 
     @property
@@ -353,6 +368,7 @@ class MatBoltBeam(KeywordBase):
 
     @t0pre.setter
     def t0pre(self, value: float) -> None:
+        """Set the t0pre property."""
         self._cards[1].set_value("t0pre", value)
 
     @property
@@ -363,6 +379,7 @@ class MatBoltBeam(KeywordBase):
 
     @dacfail.setter
     def dacfail(self, value: float) -> None:
+        """Set the dacfail property."""
         self._cards[2].set_value("dacfail", value)
 
     @property
@@ -375,8 +392,9 @@ class MatBoltBeam(KeywordBase):
 
     @axshel.setter
     def axshel(self, value: int) -> None:
+        """Set the axshel property."""
         if value not in [0, 1, None]:
-            raise Exception("""axshel must be `None` or one of {0,1}""")
+            raise Exception("""axshel must be `None` or one of {0,1}.""")
         self._cards[2].set_value("axshel", value)
 
     @property
@@ -389,8 +407,9 @@ class MatBoltBeam(KeywordBase):
 
     @holshr.setter
     def holshr(self, value: int) -> None:
+        """Set the holshr property."""
         if value not in [0, 1, None]:
-            raise Exception("""holshr must be `None` or one of {0,1}""")
+            raise Exception("""holshr must be `None` or one of {0,1}.""")
         self._cards[2].set_value("holshr", value)
 
     @property
@@ -401,5 +420,6 @@ class MatBoltBeam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

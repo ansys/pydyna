@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingTravel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingTravel(KeywordBase):
     subkeyword = "FORMING_TRAVEL"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingTravel class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -96,6 +98,7 @@ class ControlFormingTravel(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -106,6 +109,7 @@ class ControlFormingTravel(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -116,6 +120,7 @@ class ControlFormingTravel(KeywordBase):
 
     @travel.setter
     def travel(self, value: float) -> None:
+        """Set the travel property."""
         self._cards[0].set_value("travel", value)
 
     @property
@@ -126,6 +131,7 @@ class ControlFormingTravel(KeywordBase):
 
     @target.setter
     def target(self, value: int) -> None:
+        """Set the target property."""
         self._cards[0].set_value("target", value)
 
     @property
@@ -136,6 +142,7 @@ class ControlFormingTravel(KeywordBase):
 
     @gap.setter
     def gap(self, value: float) -> None:
+        """Set the gap property."""
         self._cards[0].set_value("gap", value)
 
     @property
@@ -146,6 +153,7 @@ class ControlFormingTravel(KeywordBase):
 
     @phase.setter
     def phase(self, value: int) -> None:
+        """Set the phase property."""
         self._cards[0].set_value("phase", value)
 
     @property
@@ -156,5 +164,6 @@ class ControlFormingTravel(KeywordBase):
 
     @follow.setter
     def follow(self, value: int) -> None:
+        """Set the follow property."""
         self._cards[0].set_value("follow", value)
 

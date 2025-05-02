@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatGeneralizedPhaseChange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatGeneralizedPhaseChange class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -517,6 +519,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -527,6 +530,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -537,6 +541,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @n.setter
     def n(self, value: int) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -550,6 +555,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -563,6 +569,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -573,6 +580,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @mix.setter
     def mix(self, value: int) -> None:
+        """Set the mix property."""
         self._cards[0].set_value("mix", value)
 
     @property
@@ -583,6 +591,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @mixr.setter
     def mixr(self, value: int) -> None:
+        """Set the mixr property."""
         self._cards[0].set_value("mixr", value)
 
     @property
@@ -596,6 +605,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @tastrt.setter
     def tastrt(self, value: float) -> None:
+        """Set the tastrt property."""
         self._cards[1].set_value("tastrt", value)
 
     @property
@@ -606,6 +616,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[1].set_value("tend", value)
 
     @property
@@ -619,6 +630,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @cte.setter
     def cte(self, value: float) -> None:
+        """Set the cte property."""
         self._cards[1].set_value("cte", value)
 
     @property
@@ -629,6 +641,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @epsini.setter
     def epsini(self, value: int) -> None:
+        """Set the epsini property."""
         self._cards[1].set_value("epsini", value)
 
     @property
@@ -639,6 +652,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @dtemp.setter
     def dtemp(self, value: float) -> None:
+        """Set the dtemp property."""
         self._cards[1].set_value("dtemp", value)
 
     @property
@@ -649,6 +663,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @xastr.setter
     def xastr(self, value: float) -> None:
+        """Set the xastr property."""
         self._cards[2].set_value("xastr", value)
 
     @property
@@ -659,6 +674,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @xaend.setter
     def xaend(self, value: float) -> None:
+        """Set the xaend property."""
         self._cards[2].set_value("xaend", value)
 
     @property
@@ -669,6 +685,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @xa1pa1.setter
     def xa1pa1(self, value: int) -> None:
+        """Set the xa1pa1 property."""
         self._cards[2].set_value("xa1pa1", value)
 
     @property
@@ -679,6 +696,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @xa1pa2.setter
     def xa1pa2(self, value: int) -> None:
+        """Set the xa1pa2 property."""
         self._cards[2].set_value("xa1pa2", value)
 
     @property
@@ -689,6 +707,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @xa1pa3.setter
     def xa1pa3(self, value: int) -> None:
+        """Set the xa1pa3 property."""
         self._cards[2].set_value("xa1pa3", value)
 
     @property
@@ -699,6 +718,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @xafpa.setter
     def xafpa(self, value: float) -> None:
+        """Set the xafpa property."""
         self._cards[2].set_value("xafpa", value)
 
     @property
@@ -712,6 +732,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @cteann.setter
     def cteann(self, value: float) -> None:
+        """Set the cteann property."""
         self._cards[2].set_value("cteann", value)
 
     @property
@@ -736,6 +757,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ptlaw.setter
     def ptlaw(self, value: int) -> None:
+        """Set the ptlaw property."""
         self._cards[3].set_value("ptlaw", value)
 
     @property
@@ -750,6 +772,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ptstr.setter
     def ptstr(self, value: int) -> None:
+        """Set the ptstr property."""
         self._cards[3].set_value("ptstr", value)
 
     @property
@@ -764,6 +787,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ptend.setter
     def ptend(self, value: int) -> None:
+        """Set the ptend property."""
         self._cards[3].set_value("ptend", value)
 
     @property
@@ -780,6 +804,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ptx1.setter
     def ptx1(self, value: int) -> None:
+        """Set the ptx1 property."""
         self._cards[3].set_value("ptx1", value)
 
     @property
@@ -796,6 +821,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ptx2.setter
     def ptx2(self, value: int) -> None:
+        """Set the ptx2 property."""
         self._cards[3].set_value("ptx2", value)
 
     @property
@@ -812,6 +838,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ptx3.setter
     def ptx3(self, value: int) -> None:
+        """Set the ptx3 property."""
         self._cards[3].set_value("ptx3", value)
 
     @property
@@ -828,6 +855,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ptx4.setter
     def ptx4(self, value: int) -> None:
+        """Set the ptx4 property."""
         self._cards[3].set_value("ptx4", value)
 
     @property
@@ -844,6 +872,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ptx5.setter
     def ptx5(self, value: int) -> None:
+        """Set the ptx5 property."""
         self._cards[3].set_value("ptx5", value)
 
     @property
@@ -862,6 +891,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @pttab1.setter
     def pttab1(self, value: int) -> None:
+        """Set the pttab1 property."""
         self._cards[4].set_value("pttab1", value)
 
     @property
@@ -880,6 +910,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @pttab2.setter
     def pttab2(self, value: int) -> None:
+        """Set the pttab2 property."""
         self._cards[4].set_value("pttab2", value)
 
     @property
@@ -898,6 +929,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @pttab3.setter
     def pttab3(self, value: int) -> None:
+        """Set the pttab3 property."""
         self._cards[4].set_value("pttab3", value)
 
     @property
@@ -916,6 +948,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @pttab4.setter
     def pttab4(self, value: int) -> None:
+        """Set the pttab4 property."""
         self._cards[4].set_value("pttab4", value)
 
     @property
@@ -934,6 +967,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @pttab5.setter
     def pttab5(self, value: int) -> None:
+        """Set the pttab5 property."""
         self._cards[4].set_value("pttab5", value)
 
     @property
@@ -952,6 +986,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @pttab6.setter
     def pttab6(self, value: int) -> None:
+        """Set the pttab6 property."""
         self._cards[4].set_value("pttab6", value)
 
     @property
@@ -970,6 +1005,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @pttab7.setter
     def pttab7(self, value: int) -> None:
+        """Set the pttab7 property."""
         self._cards[4].set_value("pttab7", value)
 
     @property
@@ -981,6 +1017,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @pteps.setter
     def pteps(self, value: int) -> None:
+        """Set the pteps property."""
         self._cards[5].set_value("pteps", value)
 
     @property
@@ -992,6 +1029,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ptrip.setter
     def ptrip(self, value: int) -> None:
+        """Set the ptrip property."""
         self._cards[5].set_value("ptrip", value)
 
     @property
@@ -1002,6 +1040,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @ptlat.setter
     def ptlat(self, value: int) -> None:
+        """Set the ptlat property."""
         self._cards[5].set_value("ptlat", value)
 
     @property
@@ -1012,6 +1051,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @postv.setter
     def postv(self, value: int) -> None:
+        """Set the postv property."""
         self._cards[5].set_value("postv", value)
 
     @property
@@ -1022,6 +1062,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @nushis.setter
     def nushis(self, value: int) -> None:
+        """Set the nushis property."""
         self._cards[5].set_value("nushis", value)
 
     @property
@@ -1032,6 +1073,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @grai.setter
     def grai(self, value: float) -> None:
+        """Set the grai property."""
         self._cards[5].set_value("grai", value)
 
     @property
@@ -1042,6 +1084,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @t1phas.setter
     def t1phas(self, value: int) -> None:
+        """Set the t1phas property."""
         self._cards[5].set_value("t1phas", value)
 
     @property
@@ -1052,6 +1095,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @t2phas.setter
     def t2phas(self, value: int) -> None:
+        """Set the t2phas property."""
         self._cards[5].set_value("t2phas", value)
 
     @property
@@ -1062,6 +1106,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @fushi1.setter
     def fushi1(self, value: int) -> None:
+        """Set the fushi1 property."""
         self._cards[6].set_value("fushi1", value)
 
     @property
@@ -1072,6 +1117,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @fushi2.setter
     def fushi2(self, value: int) -> None:
+        """Set the fushi2 property."""
         self._cards[6].set_value("fushi2", value)
 
     @property
@@ -1082,6 +1128,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @fushi3.setter
     def fushi3(self, value: int) -> None:
+        """Set the fushi3 property."""
         self._cards[6].set_value("fushi3", value)
 
     @property
@@ -1092,6 +1139,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @fushi4.setter
     def fushi4(self, value: int) -> None:
+        """Set the fushi4 property."""
         self._cards[6].set_value("fushi4", value)
 
     @property
@@ -1102,6 +1150,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @fushi5.setter
     def fushi5(self, value: int) -> None:
+        """Set the fushi5 property."""
         self._cards[6].set_value("fushi5", value)
 
     @property
@@ -1112,6 +1161,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @fushi6.setter
     def fushi6(self, value: int) -> None:
+        """Set the fushi6 property."""
         self._cards[6].set_value("fushi6", value)
 
     @property
@@ -1122,6 +1172,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @fushi7.setter
     def fushi7(self, value: int) -> None:
+        """Set the fushi7 property."""
         self._cards[6].set_value("fushi7", value)
 
     @property
@@ -1132,6 +1183,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @fushi8.setter
     def fushi8(self, value: int) -> None:
+        """Set the fushi8 property."""
         self._cards[6].set_value("fushi8", value)
 
     @property
@@ -1142,6 +1194,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @sigy1.setter
     def sigy1(self, value: int) -> None:
+        """Set the sigy1 property."""
         self._cards[7].set_value("sigy1", value)
 
     @property
@@ -1152,6 +1205,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @sigy2.setter
     def sigy2(self, value: int) -> None:
+        """Set the sigy2 property."""
         self._cards[7].set_value("sigy2", value)
 
     @property
@@ -1162,6 +1216,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @sigy3.setter
     def sigy3(self, value: int) -> None:
+        """Set the sigy3 property."""
         self._cards[7].set_value("sigy3", value)
 
     @property
@@ -1172,6 +1227,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @sigy4.setter
     def sigy4(self, value: int) -> None:
+        """Set the sigy4 property."""
         self._cards[7].set_value("sigy4", value)
 
     @property
@@ -1182,6 +1238,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @sigy5.setter
     def sigy5(self, value: int) -> None:
+        """Set the sigy5 property."""
         self._cards[7].set_value("sigy5", value)
 
     @property
@@ -1192,6 +1249,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @sigy6.setter
     def sigy6(self, value: int) -> None:
+        """Set the sigy6 property."""
         self._cards[7].set_value("sigy6", value)
 
     @property
@@ -1202,6 +1260,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @sigy7.setter
     def sigy7(self, value: int) -> None:
+        """Set the sigy7 property."""
         self._cards[7].set_value("sigy7", value)
 
     @property
@@ -1212,6 +1271,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @sigy8.setter
     def sigy8(self, value: int) -> None:
+        """Set the sigy8 property."""
         self._cards[7].set_value("sigy8", value)
 
     @property
@@ -1222,5 +1282,6 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[8].cards[0].set_value("title", value)
 

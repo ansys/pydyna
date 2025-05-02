@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatKinematicHardeningBarlat2000 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatKinematicHardeningBarlat2000 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -371,6 +373,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -381,6 +384,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -391,6 +395,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -401,6 +406,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -412,6 +418,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @ea.setter
     def ea(self, value: float) -> None:
+        """Set the ea property."""
         self._cards[0].set_value("ea", value)
 
     @property
@@ -422,6 +429,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @coe.setter
     def coe(self, value: float) -> None:
+        """Set the coe property."""
         self._cards[0].set_value("coe", value)
 
     @property
@@ -433,6 +441,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[0].set_value("m", value)
 
     @property
@@ -444,6 +453,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @alpha1.setter
     def alpha1(self, value: float) -> None:
+        """Set the alpha1 property."""
         self._cards[1].set_value("alpha1", value)
 
     @property
@@ -455,6 +465,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @alpha2.setter
     def alpha2(self, value: float) -> None:
+        """Set the alpha2 property."""
         self._cards[1].set_value("alpha2", value)
 
     @property
@@ -466,6 +477,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @alpha3.setter
     def alpha3(self, value: float) -> None:
+        """Set the alpha3 property."""
         self._cards[1].set_value("alpha3", value)
 
     @property
@@ -477,6 +489,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @alpha4.setter
     def alpha4(self, value: float) -> None:
+        """Set the alpha4 property."""
         self._cards[1].set_value("alpha4", value)
 
     @property
@@ -488,6 +501,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @alpha5.setter
     def alpha5(self, value: float) -> None:
+        """Set the alpha5 property."""
         self._cards[1].set_value("alpha5", value)
 
     @property
@@ -499,6 +513,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @alpha6.setter
     def alpha6(self, value: float) -> None:
+        """Set the alpha6 property."""
         self._cards[1].set_value("alpha6", value)
 
     @property
@@ -510,6 +525,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @alpha7.setter
     def alpha7(self, value: float) -> None:
+        """Set the alpha7 property."""
         self._cards[1].set_value("alpha7", value)
 
     @property
@@ -521,6 +537,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @alpha8.setter
     def alpha8(self, value: float) -> None:
+        """Set the alpha8 property."""
         self._cards[1].set_value("alpha8", value)
 
     @property
@@ -531,6 +548,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @cb.setter
     def cb(self, value: float) -> None:
+        """Set the cb property."""
         self._cards[4].set_value("cb", value)
 
     @property
@@ -541,6 +559,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[4].set_value("y", value)
 
     @property
@@ -551,6 +570,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @sc1.setter
     def sc1(self, value: float) -> None:
+        """Set the sc1 property."""
         self._cards[4].set_value("sc1", value)
 
     @property
@@ -561,6 +581,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[4].set_value("k", value)
 
     @property
@@ -571,6 +592,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @rsat.setter
     def rsat(self, value: float) -> None:
+        """Set the rsat property."""
         self._cards[4].set_value("rsat", value)
 
     @property
@@ -581,6 +603,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @sb.setter
     def sb(self, value: float) -> None:
+        """Set the sb property."""
         self._cards[4].set_value("sb", value)
 
     @property
@@ -591,6 +614,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[4].set_value("h", value)
 
     @property
@@ -608,6 +632,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: int) -> None:
+        """Set the aopt property."""
         self._cards[5].set_value("aopt", value)
 
     @property
@@ -620,8 +645,9 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @iopt.setter
     def iopt(self, value: int) -> None:
+        """Set the iopt property."""
         if value not in [0, 1, None]:
-            raise Exception("""iopt must be `None` or one of {0,1}""")
+            raise Exception("""iopt must be `None` or one of {0,1}.""")
         self._cards[5].set_value("iopt", value)
 
     @property
@@ -632,6 +658,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[5].set_value("c1", value)
 
     @property
@@ -642,6 +669,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[5].set_value("c2", value)
 
     @property
@@ -652,6 +680,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[6].set_value("a1", value)
 
     @property
@@ -662,6 +691,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[6].set_value("a2", value)
 
     @property
@@ -672,6 +702,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[6].set_value("a3", value)
 
     @property
@@ -682,6 +713,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[7].set_value("v1", value)
 
     @property
@@ -692,6 +724,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[7].set_value("v2", value)
 
     @property
@@ -702,6 +735,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[7].set_value("v3", value)
 
     @property
@@ -712,6 +746,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[7].set_value("d1", value)
 
     @property
@@ -722,6 +757,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[7].set_value("d2", value)
 
     @property
@@ -732,6 +768,7 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[7].set_value("d3", value)
 
     @property
@@ -742,5 +779,6 @@ class MatKinematicHardeningBarlat2000(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[8].cards[0].set_value("title", value)
 

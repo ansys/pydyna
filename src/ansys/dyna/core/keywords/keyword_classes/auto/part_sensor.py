@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the PartSensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartSensor(KeywordBase):
     subkeyword = "SENSOR"
 
     def __init__(self, **kwargs):
+        """Initialize the PartSensor class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -71,6 +73,7 @@ class PartSensor(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -81,6 +84,7 @@ class PartSensor(KeywordBase):
 
     @sida.setter
     def sida(self, value: int) -> None:
+        """Set the sida property."""
         self._cards[0].set_value("sida", value)
 
     @property
@@ -91,5 +95,6 @@ class PartSensor(KeywordBase):
 
     @active.setter
     def active(self, value: int) -> None:
+        """Set the active property."""
         self._cards[0].set_value("active", value)
 

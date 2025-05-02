@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatRambergOsgood class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatRambergOsgood(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatRambergOsgood class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -118,6 +120,7 @@ class MatRambergOsgood(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -128,6 +131,7 @@ class MatRambergOsgood(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -138,6 +142,7 @@ class MatRambergOsgood(KeywordBase):
 
     @gamy.setter
     def gamy(self, value: float) -> None:
+        """Set the gamy property."""
         self._cards[0].set_value("gamy", value)
 
     @property
@@ -148,6 +153,7 @@ class MatRambergOsgood(KeywordBase):
 
     @tauy.setter
     def tauy(self, value: float) -> None:
+        """Set the tauy property."""
         self._cards[0].set_value("tauy", value)
 
     @property
@@ -158,6 +164,7 @@ class MatRambergOsgood(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 
     @property
@@ -168,6 +175,7 @@ class MatRambergOsgood(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[0].set_value("r", value)
 
     @property
@@ -178,6 +186,7 @@ class MatRambergOsgood(KeywordBase):
 
     @bulk.setter
     def bulk(self, value: float) -> None:
+        """Set the bulk property."""
         self._cards[0].set_value("bulk", value)
 
     @property
@@ -188,5 +197,6 @@ class MatRambergOsgood(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the PartMove class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartMove(KeywordBase):
     subkeyword = "MOVE"
 
     def __init__(self, **kwargs):
+        """Initialize the PartMove class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -91,6 +93,7 @@ class PartMove(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -101,6 +104,7 @@ class PartMove(KeywordBase):
 
     @xmov.setter
     def xmov(self, value: float) -> None:
+        """Set the xmov property."""
         self._cards[0].set_value("xmov", value)
 
     @property
@@ -111,6 +115,7 @@ class PartMove(KeywordBase):
 
     @ymov.setter
     def ymov(self, value: float) -> None:
+        """Set the ymov property."""
         self._cards[0].set_value("ymov", value)
 
     @property
@@ -121,6 +126,7 @@ class PartMove(KeywordBase):
 
     @zmov.setter
     def zmov(self, value: float) -> None:
+        """Set the zmov property."""
         self._cards[0].set_value("zmov", value)
 
     @property
@@ -132,6 +138,7 @@ class PartMove(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -142,7 +149,8 @@ class PartMove(KeywordBase):
 
     @ifset.setter
     def ifset(self, value: int) -> None:
+        """Set the ifset property."""
         if value not in [0, 1, None]:
-            raise Exception("""ifset must be `None` or one of {0,1}""")
+            raise Exception("""ifset must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ifset", value)
 

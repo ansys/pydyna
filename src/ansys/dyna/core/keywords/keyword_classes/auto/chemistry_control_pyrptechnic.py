@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ChemistryControlPyrptechnic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
     subkeyword = "CONTROL_PYRPTECHNIC"
 
     def __init__(self, **kwargs):
+        """Initialize the ChemistryControlPyrptechnic class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -213,6 +215,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @comp1id.setter
     def comp1id(self, value: int) -> None:
+        """Set the comp1id property."""
         self._cards[0].set_value("comp1id", value)
 
     @property
@@ -223,6 +226,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @vol1.setter
     def vol1(self, value: float) -> None:
+        """Set the vol1 property."""
         self._cards[0].set_value("vol1", value)
 
     @property
@@ -233,6 +237,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @area1.setter
     def area1(self, value: float) -> None:
+        """Set the area1 property."""
         self._cards[0].set_value("area1", value)
 
     @property
@@ -243,6 +248,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @cd1.setter
     def cd1(self, value: float) -> None:
+        """Set the cd1 property."""
         self._cards[0].set_value("cd1", value)
 
     @property
@@ -253,6 +259,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[0].set_value("p1", value)
 
     @property
@@ -263,6 +270,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @t1.setter
     def t1(self, value: float) -> None:
+        """Set the t1 property."""
         self._cards[0].set_value("t1", value)
 
     @property
@@ -273,6 +281,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @delp1.setter
     def delp1(self, value: float) -> None:
+        """Set the delp1 property."""
         self._cards[0].set_value("delp1", value)
 
     @property
@@ -283,6 +292,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @tflame.setter
     def tflame(self, value: float) -> None:
+        """Set the tflame property."""
         self._cards[0].set_value("tflame", value)
 
     @property
@@ -293,6 +303,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @comp2id.setter
     def comp2id(self, value: int) -> None:
+        """Set the comp2id property."""
         self._cards[1].set_value("comp2id", value)
 
     @property
@@ -303,6 +314,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @vol2.setter
     def vol2(self, value: float) -> None:
+        """Set the vol2 property."""
         self._cards[1].set_value("vol2", value)
 
     @property
@@ -313,6 +325,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @area2.setter
     def area2(self, value: float) -> None:
+        """Set the area2 property."""
         self._cards[1].set_value("area2", value)
 
     @property
@@ -323,6 +336,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @cd2.setter
     def cd2(self, value: float) -> None:
+        """Set the cd2 property."""
         self._cards[1].set_value("cd2", value)
 
     @property
@@ -333,6 +347,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[1].set_value("p2", value)
 
     @property
@@ -343,6 +358,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @t2.setter
     def t2(self, value: float) -> None:
+        """Set the t2 property."""
         self._cards[1].set_value("t2", value)
 
     @property
@@ -353,6 +369,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @delp2.setter
     def delp2(self, value: float) -> None:
+        """Set the delp2 property."""
         self._cards[1].set_value("delp2", value)
 
     @property
@@ -363,6 +380,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @truntime.setter
     def truntime(self, value: float) -> None:
+        """Set the truntime property."""
         self._cards[1].set_value("truntime", value)
 
     @property
@@ -373,6 +391,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @comp3id.setter
     def comp3id(self, value: int) -> None:
+        """Set the comp3id property."""
         self._cards[2].set_value("comp3id", value)
 
     @property
@@ -383,6 +402,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @vol3.setter
     def vol3(self, value: float) -> None:
+        """Set the vol3 property."""
         self._cards[2].set_value("vol3", value)
 
     @property
@@ -393,6 +413,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[2].set_value("p3", value)
 
     @property
@@ -403,6 +424,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @t3.setter
     def t3(self, value: float) -> None:
+        """Set the t3 property."""
         self._cards[2].set_value("t3", value)
 
     @property
@@ -413,6 +435,7 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @ptime.setter
     def ptime(self, value: float) -> None:
+        """Set the ptime property."""
         self._cards[2].set_value("ptime", value)
 
     @property
@@ -423,5 +446,6 @@ class ChemistryControlPyrptechnic(KeywordBase):
 
     @file.setter
     def file(self, value: str) -> None:
+        """Set the file property."""
         self._cards[3].set_value("file", value)
 

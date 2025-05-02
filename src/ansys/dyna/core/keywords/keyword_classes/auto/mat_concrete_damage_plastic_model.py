@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatConcreteDamagePlasticModel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatConcreteDamagePlasticModel class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -258,6 +260,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -268,6 +271,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -278,6 +282,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -288,6 +293,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -298,6 +304,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @ecc.setter
     def ecc(self, value: float) -> None:
+        """Set the ecc property."""
         self._cards[0].set_value("ecc", value)
 
     @property
@@ -308,6 +315,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @qh0.setter
     def qh0(self, value: float) -> None:
+        """Set the qh0 property."""
         self._cards[0].set_value("qh0", value)
 
     @property
@@ -318,6 +326,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @ft.setter
     def ft(self, value: float) -> None:
+        """Set the ft property."""
         self._cards[0].set_value("ft", value)
 
     @property
@@ -328,6 +337,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @fc.setter
     def fc(self, value: float) -> None:
+        """Set the fc property."""
         self._cards[0].set_value("fc", value)
 
     @property
@@ -338,6 +348,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @hp.setter
     def hp(self, value: float) -> None:
+        """Set the hp property."""
         self._cards[1].set_value("hp", value)
 
     @property
@@ -348,6 +359,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @ah.setter
     def ah(self, value: float) -> None:
+        """Set the ah property."""
         self._cards[1].set_value("ah", value)
 
     @property
@@ -358,6 +370,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @bh.setter
     def bh(self, value: float) -> None:
+        """Set the bh property."""
         self._cards[1].set_value("bh", value)
 
     @property
@@ -368,6 +381,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @ch.setter
     def ch(self, value: float) -> None:
+        """Set the ch property."""
         self._cards[1].set_value("ch", value)
 
     @property
@@ -378,6 +392,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @dh.setter
     def dh(self, value: float) -> None:
+        """Set the dh property."""
         self._cards[1].set_value("dh", value)
 
     @property
@@ -388,6 +403,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @as_.setter
     def as_(self, value: float) -> None:
+        """Set the as_ property."""
         self._cards[1].set_value("as", value)
 
     @property
@@ -398,6 +414,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @df.setter
     def df(self, value: float) -> None:
+        """Set the df property."""
         self._cards[1].set_value("df", value)
 
     @property
@@ -408,6 +425,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @fc0.setter
     def fc0(self, value: float) -> None:
+        """Set the fc0 property."""
         self._cards[1].set_value("fc0", value)
 
     @property
@@ -422,8 +440,9 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @type.setter
     def type(self, value: float) -> None:
+        """Set the type property."""
         if value not in [0.0, 1.0, 2.0, 3.0, None]:
-            raise Exception("""type must be `None` or one of {0.0,1.0,2.0,3.0}""")
+            raise Exception("""type must be `None` or one of {0.0,1.0,2.0,3.0}.""")
         self._cards[2].set_value("type", value)
 
     @property
@@ -434,6 +453,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @bs.setter
     def bs(self, value: float) -> None:
+        """Set the bs property."""
         self._cards[2].set_value("bs", value)
 
     @property
@@ -444,6 +464,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @wf.setter
     def wf(self, value: float) -> None:
+        """Set the wf property."""
         self._cards[2].set_value("wf", value)
 
     @property
@@ -454,6 +475,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @wf1.setter
     def wf1(self, value: float) -> None:
+        """Set the wf1 property."""
         self._cards[2].set_value("wf1", value)
 
     @property
@@ -464,6 +486,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @ft1.setter
     def ft1(self, value: float) -> None:
+        """Set the ft1 property."""
         self._cards[2].set_value("ft1", value)
 
     @property
@@ -476,8 +499,9 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @strflg.setter
     def strflg(self, value: float) -> None:
+        """Set the strflg property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""strflg must be `None` or one of {0.0,1.0}""")
+            raise Exception("""strflg must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("strflg", value)
 
     @property
@@ -492,6 +516,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @failflg.setter
     def failflg(self, value: float) -> None:
+        """Set the failflg property."""
         self._cards[2].set_value("failflg", value)
 
     @property
@@ -502,6 +527,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @efc.setter
     def efc(self, value: float) -> None:
+        """Set the efc property."""
         self._cards[2].set_value("efc", value)
 
     @property
@@ -512,5 +538,6 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

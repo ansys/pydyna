@@ -2,6 +2,7 @@
 {% for field in link.fields %}
     @property
     def {{field}}_link(self) -> {{link.classname}}:
+        """Get the {{link.classname}} object for {{field}}."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("{{link.keyword_type}}", "{{link.keyword_subtype}}"):
@@ -11,6 +12,7 @@
 
     @{{field}}_link.setter
     def {{field}}_link(self, value: {{link.classname}}) -> None:
+        """Set the {{link.classname}} object for {{field}}."""
         self.{{field}} = value.{{link.linkid}}
 
 {% endfor %}{# field in link.fields #}

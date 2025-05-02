@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat218 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat218(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat218 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -269,6 +271,7 @@ class Mat218(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -279,6 +282,7 @@ class Mat218(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -289,6 +293,7 @@ class Mat218(KeywordBase):
 
     @pr1.setter
     def pr1(self, value: float) -> None:
+        """Set the pr1 property."""
         self._cards[0].set_value("pr1", value)
 
     @property
@@ -299,6 +304,7 @@ class Mat218(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[0].set_value("a1", value)
 
     @property
@@ -309,6 +315,7 @@ class Mat218(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[0].set_value("b1", value)
 
     @property
@@ -322,8 +329,9 @@ class Mat218(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
+        """Set the ref property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ref must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("ref", value)
 
     @property
@@ -334,6 +342,7 @@ class Mat218(KeywordBase):
 
     @sgl1.setter
     def sgl1(self, value: float) -> None:
+        """Set the sgl1 property."""
         self._cards[1].set_value("sgl1", value)
 
     @property
@@ -344,6 +353,7 @@ class Mat218(KeywordBase):
 
     @sw1.setter
     def sw1(self, value: float) -> None:
+        """Set the sw1 property."""
         self._cards[1].set_value("sw1", value)
 
     @property
@@ -354,6 +364,7 @@ class Mat218(KeywordBase):
 
     @st1.setter
     def st1(self, value: float) -> None:
+        """Set the st1 property."""
         self._cards[1].set_value("st1", value)
 
     @property
@@ -364,6 +375,7 @@ class Mat218(KeywordBase):
 
     @lcid1.setter
     def lcid1(self, value: float) -> None:
+        """Set the lcid1 property."""
         self._cards[1].set_value("lcid1", value)
 
     @property
@@ -374,6 +386,7 @@ class Mat218(KeywordBase):
 
     @pr2.setter
     def pr2(self, value: float) -> None:
+        """Set the pr2 property."""
         self._cards[2].set_value("pr2", value)
 
     @property
@@ -384,6 +397,7 @@ class Mat218(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[2].set_value("a2", value)
 
     @property
@@ -394,6 +408,7 @@ class Mat218(KeywordBase):
 
     @b2.setter
     def b2(self, value: float) -> None:
+        """Set the b2 property."""
         self._cards[2].set_value("b2", value)
 
     @property
@@ -404,6 +419,7 @@ class Mat218(KeywordBase):
 
     @sgl1.setter
     def sgl1(self, value: float) -> None:
+        """Set the sgl1 property."""
         self._cards[3].set_value("sgl1", value)
 
     @property
@@ -414,6 +430,7 @@ class Mat218(KeywordBase):
 
     @sw1.setter
     def sw1(self, value: float) -> None:
+        """Set the sw1 property."""
         self._cards[3].set_value("sw1", value)
 
     @property
@@ -424,6 +441,7 @@ class Mat218(KeywordBase):
 
     @st1.setter
     def st1(self, value: float) -> None:
+        """Set the st1 property."""
         self._cards[3].set_value("st1", value)
 
     @property
@@ -434,6 +452,7 @@ class Mat218(KeywordBase):
 
     @lcid1.setter
     def lcid1(self, value: float) -> None:
+        """Set the lcid1 property."""
         self._cards[3].set_value("lcid1", value)
 
     @property
@@ -444,6 +463,7 @@ class Mat218(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[4].set_value("x1", value)
 
     @property
@@ -454,6 +474,7 @@ class Mat218(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[4].set_value("y1", value)
 
     @property
@@ -464,6 +485,7 @@ class Mat218(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[4].set_value("z1", value)
 
     @property
@@ -474,6 +496,7 @@ class Mat218(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[4].set_value("x2", value)
 
     @property
@@ -484,6 +507,7 @@ class Mat218(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[4].set_value("y2", value)
 
     @property
@@ -494,6 +518,7 @@ class Mat218(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[4].set_value("z2", value)
 
     @property
@@ -504,6 +529,7 @@ class Mat218(KeywordBase):
 
     @thkfac.setter
     def thkfac(self, value: float) -> None:
+        """Set the thkfac property."""
         self._cards[4].set_value("thkfac", value)
 
     @property
@@ -514,5 +540,6 @@ class Mat218(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

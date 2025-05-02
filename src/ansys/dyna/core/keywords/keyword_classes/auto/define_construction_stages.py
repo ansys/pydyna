@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineConstructionStages class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineConstructionStages(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineConstructionStages class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -130,6 +132,7 @@ class DefineConstructionStages(KeywordBase):
 
     @istage.setter
     def istage(self, value: int) -> None:
+        """Set the istage property."""
         self._cards[0].set_value("istage", value)
 
     @property
@@ -140,6 +143,7 @@ class DefineConstructionStages(KeywordBase):
 
     @ats.setter
     def ats(self, value: float) -> None:
+        """Set the ats property."""
         self._cards[0].set_value("ats", value)
 
     @property
@@ -150,6 +154,7 @@ class DefineConstructionStages(KeywordBase):
 
     @ate.setter
     def ate(self, value: float) -> None:
+        """Set the ate property."""
         self._cards[0].set_value("ate", value)
 
     @property
@@ -160,6 +165,7 @@ class DefineConstructionStages(KeywordBase):
 
     @atr.setter
     def atr(self, value: float) -> None:
+        """Set the atr property."""
         self._cards[0].set_value("atr", value)
 
     @property
@@ -170,6 +176,7 @@ class DefineConstructionStages(KeywordBase):
 
     @rts.setter
     def rts(self, value: float) -> None:
+        """Set the rts property."""
         self._cards[0].set_value("rts", value)
 
     @property
@@ -180,6 +187,7 @@ class DefineConstructionStages(KeywordBase):
 
     @rte.setter
     def rte(self, value: float) -> None:
+        """Set the rte property."""
         self._cards[0].set_value("rte", value)
 
     @property
@@ -192,8 +200,9 @@ class DefineConstructionStages(KeywordBase):
 
     @idynain.setter
     def idynain(self, value: int) -> None:
+        """Set the idynain property."""
         if value not in [0, 1, None]:
-            raise Exception("""idynain must be `None` or one of {0,1}""")
+            raise Exception("""idynain must be `None` or one of {0,1}.""")
         self._cards[0].set_value("idynain", value)
 
     @property
@@ -204,5 +213,6 @@ class DefineConstructionStages(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

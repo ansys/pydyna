@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IntegrationBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IntegrationBeam(KeywordBase):
     subkeyword = "BEAM"
 
     def __init__(self, **kwargs):
+        """Initialize the IntegrationBeam class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -180,6 +182,7 @@ class IntegrationBeam(KeywordBase):
 
     @irid.setter
     def irid(self, value: int) -> None:
+        """Set the irid property."""
         self._cards[0].set_value("irid", value)
 
     @property
@@ -190,6 +193,7 @@ class IntegrationBeam(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[0].set_value("nip", value)
 
     @property
@@ -200,6 +204,7 @@ class IntegrationBeam(KeywordBase):
 
     @ra.setter
     def ra(self, value: float) -> None:
+        """Set the ra property."""
         self._cards[0].set_value("ra", value)
 
     @property
@@ -218,8 +223,9 @@ class IntegrationBeam(KeywordBase):
 
     @icst.setter
     def icst(self, value: int) -> None:
+        """Set the icst property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, None]:
-            raise Exception("""icst must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22}""")
+            raise Exception("""icst must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22}.""")
         self._cards[0].set_value("icst", value)
 
     @property
@@ -230,6 +236,7 @@ class IntegrationBeam(KeywordBase):
 
     @k.setter
     def k(self, value: int) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -240,6 +247,7 @@ class IntegrationBeam(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[1].set_value("d1", value)
 
     @property
@@ -250,6 +258,7 @@ class IntegrationBeam(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[1].set_value("d2", value)
 
     @property
@@ -260,6 +269,7 @@ class IntegrationBeam(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[1].set_value("d3", value)
 
     @property
@@ -270,6 +280,7 @@ class IntegrationBeam(KeywordBase):
 
     @d4.setter
     def d4(self, value: float) -> None:
+        """Set the d4 property."""
         self._cards[1].set_value("d4", value)
 
     @property
@@ -280,6 +291,7 @@ class IntegrationBeam(KeywordBase):
 
     @sref.setter
     def sref(self, value: float) -> None:
+        """Set the sref property."""
         self._cards[1].set_value("sref", value)
 
     @property
@@ -290,6 +302,7 @@ class IntegrationBeam(KeywordBase):
 
     @tref.setter
     def tref(self, value: float) -> None:
+        """Set the tref property."""
         self._cards[1].set_value("tref", value)
 
     @property
@@ -300,6 +313,7 @@ class IntegrationBeam(KeywordBase):
 
     @d5.setter
     def d5(self, value: float) -> None:
+        """Set the d5 property."""
         self._cards[1].set_value("d5", value)
 
     @property
@@ -310,6 +324,7 @@ class IntegrationBeam(KeywordBase):
 
     @d6.setter
     def d6(self, value: float) -> None:
+        """Set the d6 property."""
         self._cards[1].set_value("d6", value)
 
     @property
@@ -320,6 +335,7 @@ class IntegrationBeam(KeywordBase):
 
     @s.setter
     def s(self, value: float) -> None:
+        """Set the s property."""
         self._cards[2].set_value("s", value)
 
     @property
@@ -330,6 +346,7 @@ class IntegrationBeam(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[2].set_value("t", value)
 
     @property
@@ -340,6 +357,7 @@ class IntegrationBeam(KeywordBase):
 
     @wf.setter
     def wf(self, value: float) -> None:
+        """Set the wf property."""
         self._cards[2].set_value("wf", value)
 
     @property
@@ -350,5 +368,6 @@ class IntegrationBeam(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[2].set_value("pid", value)
 

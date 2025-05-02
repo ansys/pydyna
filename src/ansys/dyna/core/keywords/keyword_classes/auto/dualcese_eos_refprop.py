@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseEosRefprop class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseEosRefprop(KeywordBase):
     subkeyword = "EOS_REFPROP"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseEosRefprop class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -200,6 +202,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -210,6 +213,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @ncomp.setter
     def ncomp(self, value: int) -> None:
+        """Set the ncomp property."""
         self._cards[0].set_value("ncomp", value)
 
     @property
@@ -224,6 +228,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @type.setter
     def type(self, value: str) -> None:
+        """Set the type property."""
         self._cards[0].set_value("type", value)
 
     @property
@@ -236,6 +241,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @phase.setter
     def phase(self, value: str) -> None:
+        """Set the phase property."""
         self._cards[0].set_value("phase", value)
 
     @property
@@ -248,6 +254,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @tabular.setter
     def tabular(self, value: str) -> None:
+        """Set the tabular property."""
         self._cards[0].set_value("tabular", value)
 
     @property
@@ -258,6 +265,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @mol_fr1.setter
     def mol_fr1(self, value: float) -> None:
+        """Set the mol_fr1 property."""
         self._cards[1].set_value("mol_fr1", value)
 
     @property
@@ -268,6 +276,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @mol_fr2.setter
     def mol_fr2(self, value: float) -> None:
+        """Set the mol_fr2 property."""
         self._cards[1].set_value("mol_fr2", value)
 
     @property
@@ -278,6 +287,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @mol_fr3.setter
     def mol_fr3(self, value: float) -> None:
+        """Set the mol_fr3 property."""
         self._cards[1].set_value("mol_fr3", value)
 
     @property
@@ -288,6 +298,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @mol_fr4.setter
     def mol_fr4(self, value: float) -> None:
+        """Set the mol_fr4 property."""
         self._cards[1].set_value("mol_fr4", value)
 
     @property
@@ -298,6 +309,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @mol_fr5.setter
     def mol_fr5(self, value: float) -> None:
+        """Set the mol_fr5 property."""
         self._cards[1].set_value("mol_fr5", value)
 
     @property
@@ -308,6 +320,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @mol_fr6.setter
     def mol_fr6(self, value: float) -> None:
+        """Set the mol_fr6 property."""
         self._cards[1].set_value("mol_fr6", value)
 
     @property
@@ -318,6 +331,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @mol_fr7.setter
     def mol_fr7(self, value: float) -> None:
+        """Set the mol_fr7 property."""
         self._cards[1].set_value("mol_fr7", value)
 
     @property
@@ -328,6 +342,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @mol_fr8.setter
     def mol_fr8(self, value: float) -> None:
+        """Set the mol_fr8 property."""
         self._cards[1].set_value("mol_fr8", value)
 
     @property
@@ -338,6 +353,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @n_t.setter
     def n_t(self, value: float) -> None:
+        """Set the n_t property."""
         self._cards[2].set_value("n_t", value)
 
     @property
@@ -348,6 +364,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @n_den.setter
     def n_den(self, value: float) -> None:
+        """Set the n_den property."""
         self._cards[2].set_value("n_den", value)
 
     @property
@@ -358,6 +375,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @den_low.setter
     def den_low(self, value: float) -> None:
+        """Set the den_low property."""
         self._cards[2].set_value("den_low", value)
 
     @property
@@ -368,6 +386,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @den_high.setter
     def den_high(self, value: float) -> None:
+        """Set the den_high property."""
         self._cards[2].set_value("den_high", value)
 
     @property
@@ -378,6 +397,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @t_low.setter
     def t_low(self, value: float) -> None:
+        """Set the t_low property."""
         self._cards[2].set_value("t_low", value)
 
     @property
@@ -388,6 +408,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @t_high.setter
     def t_high(self, value: float) -> None:
+        """Set the t_high property."""
         self._cards[2].set_value("t_high", value)
 
     @property
@@ -398,5 +419,6 @@ class DualceseEosRefprop(KeywordBase):
 
     @fluidname.setter
     def fluidname(self, value: str) -> None:
+        """Set the fluidname property."""
         self._cards[3].set_value("fluidname", value)
 

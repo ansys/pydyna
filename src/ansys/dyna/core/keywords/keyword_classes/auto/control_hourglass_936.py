@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlHourglass936 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlHourglass936(KeywordBase):
     subkeyword = "HOURGLASS_936"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlHourglass936 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class ControlHourglass936(KeywordBase):
 
     @ihq.setter
     def ihq(self, value: int) -> None:
+        """Set the ihq property."""
         self._cards[0].set_value("ihq", value)
 
     @property
@@ -78,5 +81,6 @@ class ControlHourglass936(KeywordBase):
 
     @qh.setter
     def qh(self, value: float) -> None:
+        """Set the qh property."""
         self._cards[0].set_value("qh", value)
 

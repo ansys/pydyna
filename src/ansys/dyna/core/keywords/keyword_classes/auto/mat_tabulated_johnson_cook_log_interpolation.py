@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatTabulatedJohnsonCookLogInterpolation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatTabulatedJohnsonCookLogInterpolation class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -222,6 +224,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -232,6 +235,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -244,6 +248,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -254,6 +259,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -264,6 +270,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[0].set_value("cp", value)
 
     @property
@@ -274,6 +281,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @tr.setter
     def tr(self, value: float) -> None:
+        """Set the tr property."""
         self._cards[0].set_value("tr", value)
 
     @property
@@ -287,6 +295,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -298,6 +307,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @numint.setter
     def numint(self, value: float) -> None:
+        """Set the numint property."""
         self._cards[0].set_value("numint", value)
 
     @property
@@ -308,6 +318,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @tabk1.setter
     def tabk1(self, value: int) -> None:
+        """Set the tabk1 property."""
         self._cards[1].set_value("tabk1", value)
 
     @property
@@ -318,6 +329,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @tabkt.setter
     def tabkt(self, value: int) -> None:
+        """Set the tabkt property."""
         self._cards[1].set_value("tabkt", value)
 
     @property
@@ -330,6 +342,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @lcf.setter
     def lcf(self, value: int) -> None:
+        """Set the lcf property."""
         self._cards[1].set_value("lcf", value)
 
     @property
@@ -340,6 +353,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @lcg.setter
     def lcg(self, value: int) -> None:
+        """Set the lcg property."""
         self._cards[1].set_value("lcg", value)
 
     @property
@@ -350,6 +364,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @lch.setter
     def lch(self, value: int) -> None:
+        """Set the lch property."""
         self._cards[1].set_value("lch", value)
 
     @property
@@ -360,6 +375,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @lci.setter
     def lci(self, value: int) -> None:
+        """Set the lci property."""
         self._cards[1].set_value("lci", value)
 
     @property
@@ -372,8 +388,9 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @failopt.setter
     def failopt(self, value: int) -> None:
+        """Set the failopt property."""
         if value not in [0, 1, None]:
-            raise Exception("""failopt must be `None` or one of {0,1}""")
+            raise Exception("""failopt must be `None` or one of {0,1}.""")
         self._cards[2].set_value("failopt", value)
 
     @property
@@ -384,6 +401,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @numavg.setter
     def numavg(self, value: int) -> None:
+        """Set the numavg property."""
         self._cards[2].set_value("numavg", value)
 
     @property
@@ -394,6 +412,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @ncyfail.setter
     def ncyfail(self, value: int) -> None:
+        """Set the ncyfail property."""
         self._cards[2].set_value("ncyfail", value)
 
     @property
@@ -406,8 +425,9 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @erode.setter
     def erode(self, value: int) -> None:
+        """Set the erode property."""
         if value not in [0, 1, None]:
-            raise Exception("""erode must be `None` or one of {0,1}""")
+            raise Exception("""erode must be `None` or one of {0,1}.""")
         self._cards[2].set_value("erode", value)
 
     @property
@@ -418,6 +438,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @lcps.setter
     def lcps(self, value: int) -> None:
+        """Set the lcps property."""
         self._cards[2].set_value("lcps", value)
 
     @property
@@ -428,5 +449,6 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

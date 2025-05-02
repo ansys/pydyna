@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAleHerschel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAleHerschel(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAleHerschel class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -143,6 +145,7 @@ class MatAleHerschel(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -153,6 +156,7 @@ class MatAleHerschel(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -163,6 +167,7 @@ class MatAleHerschel(KeywordBase):
 
     @pc.setter
     def pc(self, value: float) -> None:
+        """Set the pc property."""
         self._cards[0].set_value("pc", value)
 
     @property
@@ -178,6 +183,7 @@ class MatAleHerschel(KeywordBase):
 
     @mulo.setter
     def mulo(self, value: float) -> None:
+        """Set the mulo property."""
         self._cards[0].set_value("mulo", value)
 
     @property
@@ -188,6 +194,7 @@ class MatAleHerschel(KeywordBase):
 
     @muhi.setter
     def muhi(self, value: float) -> None:
+        """Set the muhi property."""
         self._cards[0].set_value("muhi", value)
 
     @property
@@ -198,6 +205,7 @@ class MatAleHerschel(KeywordBase):
 
     @rk.setter
     def rk(self, value: float) -> None:
+        """Set the rk property."""
         self._cards[0].set_value("rk", value)
 
     @property
@@ -208,6 +216,7 @@ class MatAleHerschel(KeywordBase):
 
     @rn.setter
     def rn(self, value: float) -> None:
+        """Set the rn property."""
         self._cards[0].set_value("rn", value)
 
     @property
@@ -218,6 +227,7 @@ class MatAleHerschel(KeywordBase):
 
     @gdotc.setter
     def gdotc(self, value: float) -> None:
+        """Set the gdotc property."""
         self._cards[1].set_value("gdotc", value)
 
     @property
@@ -228,6 +238,7 @@ class MatAleHerschel(KeywordBase):
 
     @tao0.setter
     def tao0(self, value: float) -> None:
+        """Set the tao0 property."""
         self._cards[1].set_value("tao0", value)
 
     @property
@@ -238,5 +249,6 @@ class MatAleHerschel(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

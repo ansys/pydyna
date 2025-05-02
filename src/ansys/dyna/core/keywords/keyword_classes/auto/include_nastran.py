@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IncludeNastran class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IncludeNastran(KeywordBase):
     subkeyword = "NASTRAN"
 
     def __init__(self, **kwargs):
+        """Initialize the IncludeNastran class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -83,6 +85,7 @@ class IncludeNastran(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -93,6 +96,7 @@ class IncludeNastran(KeywordBase):
 
     @beamdf.setter
     def beamdf(self, value: int) -> None:
+        """Set the beamdf property."""
         self._cards[1].set_value("beamdf", value)
 
     @property
@@ -103,6 +107,7 @@ class IncludeNastran(KeywordBase):
 
     @shelldf.setter
     def shelldf(self, value: int) -> None:
+        """Set the shelldf property."""
         self._cards[1].set_value("shelldf", value)
 
     @property
@@ -113,5 +118,6 @@ class IncludeNastran(KeywordBase):
 
     @soliddf.setter
     def soliddf(self, value: int) -> None:
+        """Set the soliddf property."""
         self._cards[1].set_value("soliddf", value)
 

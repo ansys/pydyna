@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineLanceSeedPointCoordinates class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineLanceSeedPointCoordinates class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -124,6 +126,7 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
 
     @nseed.setter
     def nseed(self, value: int) -> None:
+        """Set the nseed property."""
         self._cards[0].set_value("nseed", value)
 
     @property
@@ -134,6 +137,7 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[0].set_value("x1", value)
 
     @property
@@ -144,6 +148,7 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[0].set_value("y1", value)
 
     @property
@@ -154,6 +159,7 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[0].set_value("z1", value)
 
     @property
@@ -164,6 +170,7 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[0].set_value("x2", value)
 
     @property
@@ -174,6 +181,7 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[0].set_value("y2", value)
 
     @property
@@ -184,6 +192,7 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[0].set_value("z2", value)
 
     @property
@@ -194,5 +203,6 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

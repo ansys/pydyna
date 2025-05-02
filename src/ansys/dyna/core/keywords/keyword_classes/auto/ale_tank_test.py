@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleTankTest class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleTankTest(KeywordBase):
     subkeyword = "TANK_TEST"
 
     def __init__(self, **kwargs):
+        """Initialize the AleTankTest class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -131,6 +133,7 @@ class AleTankTest(KeywordBase):
 
     @mdotlc.setter
     def mdotlc(self, value: int) -> None:
+        """Set the mdotlc property."""
         self._cards[0].set_value("mdotlc", value)
 
     @property
@@ -141,6 +144,7 @@ class AleTankTest(KeywordBase):
 
     @tankvol.setter
     def tankvol(self, value: float) -> None:
+        """Set the tankvol property."""
         self._cards[0].set_value("tankvol", value)
 
     @property
@@ -151,6 +155,7 @@ class AleTankTest(KeywordBase):
 
     @pamb.setter
     def pamb(self, value: float) -> None:
+        """Set the pamb property."""
         self._cards[0].set_value("pamb", value)
 
     @property
@@ -161,6 +166,7 @@ class AleTankTest(KeywordBase):
 
     @pfinal.setter
     def pfinal(self, value: float) -> None:
+        """Set the pfinal property."""
         self._cards[0].set_value("pfinal", value)
 
     @property
@@ -171,6 +177,7 @@ class AleTankTest(KeywordBase):
 
     @machlim.setter
     def machlim(self, value: float) -> None:
+        """Set the machlim property."""
         self._cards[0].set_value("machlim", value)
 
     @property
@@ -181,6 +188,7 @@ class AleTankTest(KeywordBase):
 
     @velmax.setter
     def velmax(self, value: float) -> None:
+        """Set the velmax property."""
         self._cards[0].set_value("velmax", value)
 
     @property
@@ -191,6 +199,7 @@ class AleTankTest(KeywordBase):
 
     @aorif.setter
     def aorif(self, value: float) -> None:
+        """Set the aorif property."""
         self._cards[0].set_value("aorif", value)
 
     @property
@@ -201,6 +210,7 @@ class AleTankTest(KeywordBase):
 
     @ammgidg.setter
     def ammgidg(self, value: int) -> None:
+        """Set the ammgidg property."""
         self._cards[1].set_value("ammgidg", value)
 
     @property
@@ -211,6 +221,7 @@ class AleTankTest(KeywordBase):
 
     @ammgida.setter
     def ammgida(self, value: int) -> None:
+        """Set the ammgida property."""
         self._cards[1].set_value("ammgida", value)
 
     @property
@@ -221,5 +232,6 @@ class AleTankTest(KeywordBase):
 
     @numpnt.setter
     def numpnt(self, value: int) -> None:
+        """Set the numpnt property."""
         self._cards[1].set_value("numpnt", value)
 

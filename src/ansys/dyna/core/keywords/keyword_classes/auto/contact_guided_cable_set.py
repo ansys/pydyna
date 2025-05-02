@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ContactGuidedCableSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ContactGuidedCableSet(KeywordBase):
     subkeyword = "GUIDED_CABLE_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the ContactGuidedCableSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class ContactGuidedCableSet(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -119,6 +122,7 @@ class ContactGuidedCableSet(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -129,6 +133,7 @@ class ContactGuidedCableSet(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 
     @property
@@ -139,6 +144,7 @@ class ContactGuidedCableSet(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[1].set_value("psid", value)
 
     @property
@@ -149,6 +155,7 @@ class ContactGuidedCableSet(KeywordBase):
 
     @soft.setter
     def soft(self, value: int) -> None:
+        """Set the soft property."""
         self._cards[1].set_value("soft", value)
 
     @property
@@ -159,6 +166,7 @@ class ContactGuidedCableSet(KeywordBase):
 
     @ssfac.setter
     def ssfac(self, value: float) -> None:
+        """Set the ssfac property."""
         self._cards[1].set_value("ssfac", value)
 
     @property
@@ -169,6 +177,7 @@ class ContactGuidedCableSet(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[1].set_value("fric", value)
 
     @property
@@ -179,5 +188,6 @@ class ContactGuidedCableSet(KeywordBase):
 
     @endtol.setter
     def endtol(self, value: float) -> None:
+        """Set the endtol property."""
         self._cards[1].set_value("endtol", value)
 

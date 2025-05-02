@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseDefineNoninertial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseDefineNoninertial(KeywordBase):
     subkeyword = "DEFINE_NONINERTIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseDefineNoninertial class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -116,6 +118,7 @@ class CeseDefineNoninertial(KeywordBase):
 
     @freq.setter
     def freq(self, value: float) -> None:
+        """Set the freq property."""
         self._cards[0].set_value("freq", value)
 
     @property
@@ -126,6 +129,7 @@ class CeseDefineNoninertial(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -136,6 +140,7 @@ class CeseDefineNoninertial(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -146,6 +151,7 @@ class CeseDefineNoninertial(KeywordBase):
 
     @nx.setter
     def nx(self, value: float) -> None:
+        """Set the nx property."""
         self._cards[0].set_value("nx", value)
 
     @property
@@ -156,6 +162,7 @@ class CeseDefineNoninertial(KeywordBase):
 
     @ny.setter
     def ny(self, value: float) -> None:
+        """Set the ny property."""
         self._cards[0].set_value("ny", value)
 
     @property
@@ -166,6 +173,7 @@ class CeseDefineNoninertial(KeywordBase):
 
     @nz.setter
     def nz(self, value: float) -> None:
+        """Set the nz property."""
         self._cards[0].set_value("nz", value)
 
     @property
@@ -176,6 +184,7 @@ class CeseDefineNoninertial(KeywordBase):
 
     @l.setter
     def l(self, value: float) -> None:
+        """Set the l property."""
         self._cards[1].set_value("l", value)
 
     @property
@@ -186,6 +195,7 @@ class CeseDefineNoninertial(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[1].set_value("r", value)
 
     @property
@@ -198,7 +208,8 @@ class CeseDefineNoninertial(KeywordBase):
 
     @relv.setter
     def relv(self, value: int) -> None:
+        """Set the relv property."""
         if value not in [0, 1, None]:
-            raise Exception("""relv must be `None` or one of {0,1}""")
+            raise Exception("""relv must be `None` or one of {0,1}.""")
         self._cards[1].set_value("relv", value)
 

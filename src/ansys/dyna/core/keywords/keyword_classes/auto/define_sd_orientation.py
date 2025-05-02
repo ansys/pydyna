@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineSdOrientation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -36,6 +37,7 @@ class DefineSdOrientation(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineSdOrientation class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -74,12 +76,12 @@ class DefineSdOrientation(KeywordBase):
 
     @property
     def vectors(self):
-        '''Gets the table of vectors'''
+        """Get the table of vectors."""
         return self._cards[0].table
 
     @vectors.setter
     def vectors(self, df):
-        '''sets vectors from the dataframe df'''
+        """Set vectors from the dataframe df"""
         self._cards[0].table = df
 
     @property
@@ -90,5 +92,6 @@ class DefineSdOrientation(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

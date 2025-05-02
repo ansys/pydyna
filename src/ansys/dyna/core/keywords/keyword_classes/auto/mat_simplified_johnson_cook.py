@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSimplifiedJohnsonCook class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSimplifiedJohnsonCook class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -168,6 +170,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -178,6 +181,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -188,6 +192,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -198,6 +203,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -211,6 +217,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @vp.setter
     def vp(self, value: float) -> None:
+        """Set the vp property."""
         self._cards[0].set_value("vp", value)
 
     @property
@@ -222,6 +229,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[1].set_value("a", value)
 
     @property
@@ -233,6 +241,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[1].set_value("b", value)
 
     @property
@@ -244,6 +253,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[1].set_value("n", value)
 
     @property
@@ -255,6 +265,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[1].set_value("c", value)
 
     @property
@@ -266,6 +277,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @psfail.setter
     def psfail(self, value: float) -> None:
+        """Set the psfail property."""
         self._cards[1].set_value("psfail", value)
 
     @property
@@ -276,6 +288,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @sigmax.setter
     def sigmax(self, value: float) -> None:
+        """Set the sigmax property."""
         self._cards[1].set_value("sigmax", value)
 
     @property
@@ -286,6 +299,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @sigsat.setter
     def sigsat(self, value: float) -> None:
+        """Set the sigsat property."""
         self._cards[1].set_value("sigsat", value)
 
     @property
@@ -296,6 +310,7 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @epso.setter
     def epso(self, value: float) -> None:
+        """Set the epso property."""
         self._cards[1].set_value("epso", value)
 
     @property
@@ -306,5 +321,6 @@ class MatSimplifiedJohnsonCook(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

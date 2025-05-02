@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ChemistryComposition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryComposition(KeywordBase):
     subkeyword = "COMPOSITION"
 
     def __init__(self, **kwargs):
+        """Initialize the ChemistryComposition class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class ChemistryComposition(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -89,6 +92,7 @@ class ChemistryComposition(KeywordBase):
 
     @modelid.setter
     def modelid(self, value: int) -> None:
+        """Set the modelid property."""
         self._cards[0].set_value("modelid", value)
 
     @property
@@ -99,6 +103,7 @@ class ChemistryComposition(KeywordBase):
 
     @molfr.setter
     def molfr(self, value: float) -> None:
+        """Set the molfr property."""
         self._cards[1].set_value("molfr", value)
 
     @property
@@ -109,5 +114,6 @@ class ChemistryComposition(KeywordBase):
 
     @species.setter
     def species(self, value: str) -> None:
+        """Set the species property."""
         self._cards[1].set_value("species", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceBlanksizeDevelopment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
     subkeyword = "BLANKSIZE_DEVELOPMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceBlanksizeDevelopment class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -169,8 +171,9 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @ioption.setter
     def ioption(self, value: int) -> None:
+        """Set the ioption property."""
         if value not in [1, 2, -2, None]:
-            raise Exception("""ioption must be `None` or one of {1,2,-2}""")
+            raise Exception("""ioption must be `None` or one of {1,2,-2}.""")
         self._cards[0].set_value("ioption", value)
 
     @property
@@ -183,6 +186,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @iadapt.setter
     def iadapt(self, value: int) -> None:
+        """Set the iadapt property."""
         self._cards[0].set_value("iadapt", value)
 
     @property
@@ -193,6 +197,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @maxsize.setter
     def maxsize(self, value: float) -> None:
+        """Set the maxsize property."""
         self._cards[0].set_value("maxsize", value)
 
     @property
@@ -205,8 +210,9 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @referenc.setter
     def referenc(self, value: int) -> None:
+        """Set the referenc property."""
         if value not in [0, 1, None]:
-            raise Exception("""referenc must be `None` or one of {0,1}""")
+            raise Exception("""referenc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("referenc", value)
 
     @property
@@ -217,6 +223,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @space.setter
     def space(self, value: float) -> None:
+        """Set the space property."""
         self._cards[0].set_value("space", value)
 
     @property
@@ -227,6 +234,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @maxgap.setter
     def maxgap(self, value: float) -> None:
+        """Set the maxgap property."""
         self._cards[0].set_value("maxgap", value)
 
     @property
@@ -237,6 +245,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @orient.setter
     def orient(self, value: float) -> None:
+        """Set the orient property."""
         self._cards[0].set_value("orient", value)
 
     @property
@@ -251,6 +260,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @filename1.setter
     def filename1(self, value: str) -> None:
+        """Set the filename1 property."""
         self._cards[1].set_value("filename1", value)
 
     @property
@@ -262,6 +272,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @filename2.setter
     def filename2(self, value: str) -> None:
+        """Set the filename2 property."""
         self._cards[2].set_value("filename2", value)
 
     @property
@@ -274,6 +285,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @filename3.setter
     def filename3(self, value: str) -> None:
+        """Set the filename3 property."""
         self._cards[3].set_value("filename3", value)
 
     @property
@@ -284,6 +296,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @filename4.setter
     def filename4(self, value: str) -> None:
+        """Set the filename4 property."""
         self._cards[4].set_value("filename4", value)
 
     @property
@@ -294,5 +307,6 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
 
     @filename13.setter
     def filename13(self, value: str) -> None:
+        """Set the filename13 property."""
         self._cards[5].set_value("filename13", value)
 

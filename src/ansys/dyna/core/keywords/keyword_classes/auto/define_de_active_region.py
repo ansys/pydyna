@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeActiveRegion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeActiveRegion(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeActiveRegion class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -128,6 +130,7 @@ class DefineDeActiveRegion(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -141,8 +144,9 @@ class DefineDeActiveRegion(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""type must be `None` or one of {0,1,2,3}""")
+            raise Exception("""type must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -158,6 +162,7 @@ class DefineDeActiveRegion(KeywordBase):
 
     @xm_r.setter
     def xm_r(self, value: float) -> None:
+        """Set the xm_r property."""
         self._cards[0].set_value("xm/r", value)
 
     @property
@@ -173,6 +178,7 @@ class DefineDeActiveRegion(KeywordBase):
 
     @ym.setter
     def ym(self, value: float) -> None:
+        """Set the ym property."""
         self._cards[0].set_value("ym", value)
 
     @property
@@ -188,6 +194,7 @@ class DefineDeActiveRegion(KeywordBase):
 
     @zm.setter
     def zm(self, value: float) -> None:
+        """Set the zm property."""
         self._cards[0].set_value("zm", value)
 
     @property
@@ -198,6 +205,7 @@ class DefineDeActiveRegion(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 
     @property
@@ -208,6 +216,7 @@ class DefineDeActiveRegion(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -218,6 +227,7 @@ class DefineDeActiveRegion(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
+        """Set the nfreq property."""
         self._cards[0].set_value("nfreq", value)
 
     @property
@@ -228,5 +238,6 @@ class DefineDeActiveRegion(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

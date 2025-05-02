@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialInternalDofSolidType4 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialInternalDofSolidType4(KeywordBase):
     subkeyword = "INTERNAL_DOF_SOLID_TYPE4"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialInternalDofSolidType4 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class InitialInternalDofSolidType4(KeywordBase):
 
     @lid.setter
     def lid(self, value: int) -> None:
+        """Set the lid property."""
         self._cards[0].set_value("lid", value)
 
     @property
@@ -89,6 +92,7 @@ class InitialInternalDofSolidType4(KeywordBase):
 
     @valx.setter
     def valx(self, value: float) -> None:
+        """Set the valx property."""
         self._cards[1].set_value("valx", value)
 
     @property
@@ -99,6 +103,7 @@ class InitialInternalDofSolidType4(KeywordBase):
 
     @valy.setter
     def valy(self, value: float) -> None:
+        """Set the valy property."""
         self._cards[1].set_value("valy", value)
 
     @property
@@ -109,5 +114,6 @@ class InitialInternalDofSolidType4(KeywordBase):
 
     @valz.setter
     def valz(self, value: float) -> None:
+        """Set the valz property."""
         self._cards[1].set_value("valz", value)
 

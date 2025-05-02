@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EosPhaseChange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EosPhaseChange(KeywordBase):
     subkeyword = "PHASE_CHANGE"
 
     def __init__(self, **kwargs):
+        """Initialize the EosPhaseChange class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class EosPhaseChange(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -113,6 +116,7 @@ class EosPhaseChange(KeywordBase):
 
     @rhol.setter
     def rhol(self, value: float) -> None:
+        """Set the rhol property."""
         self._cards[0].set_value("rhol", value)
 
     @property
@@ -123,6 +127,7 @@ class EosPhaseChange(KeywordBase):
 
     @rhov.setter
     def rhov(self, value: float) -> None:
+        """Set the rhov property."""
         self._cards[0].set_value("rhov", value)
 
     @property
@@ -133,6 +138,7 @@ class EosPhaseChange(KeywordBase):
 
     @cl.setter
     def cl(self, value: float) -> None:
+        """Set the cl property."""
         self._cards[0].set_value("cl", value)
 
     @property
@@ -143,6 +149,7 @@ class EosPhaseChange(KeywordBase):
 
     @cv.setter
     def cv(self, value: float) -> None:
+        """Set the cv property."""
         self._cards[0].set_value("cv", value)
 
     @property
@@ -153,6 +160,7 @@ class EosPhaseChange(KeywordBase):
 
     @gamal.setter
     def gamal(self, value: float) -> None:
+        """Set the gamal property."""
         self._cards[0].set_value("gamal", value)
 
     @property
@@ -163,6 +171,7 @@ class EosPhaseChange(KeywordBase):
 
     @pv.setter
     def pv(self, value: float) -> None:
+        """Set the pv property."""
         self._cards[0].set_value("pv", value)
 
     @property
@@ -173,5 +182,6 @@ class EosPhaseChange(KeywordBase):
 
     @kl.setter
     def kl(self, value: float) -> None:
+        """Set the kl property."""
         self._cards[0].set_value("kl", value)
 

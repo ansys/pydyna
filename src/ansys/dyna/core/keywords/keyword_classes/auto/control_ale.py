@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlAle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlAle(KeywordBase):
     subkeyword = "ALE"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlAle class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -285,6 +287,7 @@ class ControlAle(KeywordBase):
 
     @dct.setter
     def dct(self, value: int) -> None:
+        """Set the dct property."""
         self._cards[0].set_value("dct", value)
 
     @property
@@ -295,6 +298,7 @@ class ControlAle(KeywordBase):
 
     @nadv.setter
     def nadv(self, value: int) -> None:
+        """Set the nadv property."""
         self._cards[0].set_value("nadv", value)
 
     @property
@@ -310,8 +314,9 @@ class ControlAle(KeywordBase):
 
     @meth.setter
     def meth(self, value: int) -> None:
+        """Set the meth property."""
         if value not in [2, 1, -2, 3, 6, None]:
-            raise Exception("""meth must be `None` or one of {2,1,-2,3,6}""")
+            raise Exception("""meth must be `None` or one of {2,1,-2,3,6}.""")
         self._cards[0].set_value("meth", value)
 
     @property
@@ -323,6 +328,7 @@ class ControlAle(KeywordBase):
 
     @afac.setter
     def afac(self, value: float) -> None:
+        """Set the afac property."""
         self._cards[0].set_value("afac", value)
 
     @property
@@ -333,6 +339,7 @@ class ControlAle(KeywordBase):
 
     @bfac.setter
     def bfac(self, value: float) -> None:
+        """Set the bfac property."""
         self._cards[0].set_value("bfac", value)
 
     @property
@@ -343,6 +350,7 @@ class ControlAle(KeywordBase):
 
     @cfac.setter
     def cfac(self, value: float) -> None:
+        """Set the cfac property."""
         self._cards[0].set_value("cfac", value)
 
     @property
@@ -353,6 +361,7 @@ class ControlAle(KeywordBase):
 
     @dfac.setter
     def dfac(self, value: float) -> None:
+        """Set the dfac property."""
         self._cards[0].set_value("dfac", value)
 
     @property
@@ -363,6 +372,7 @@ class ControlAle(KeywordBase):
 
     @efac.setter
     def efac(self, value: float) -> None:
+        """Set the efac property."""
         self._cards[0].set_value("efac", value)
 
     @property
@@ -373,6 +383,7 @@ class ControlAle(KeywordBase):
 
     @start.setter
     def start(self, value: float) -> None:
+        """Set the start property."""
         self._cards[1].set_value("start", value)
 
     @property
@@ -383,6 +394,7 @@ class ControlAle(KeywordBase):
 
     @end.setter
     def end(self, value: float) -> None:
+        """Set the end property."""
         self._cards[1].set_value("end", value)
 
     @property
@@ -393,6 +405,7 @@ class ControlAle(KeywordBase):
 
     @aafac.setter
     def aafac(self, value: float) -> None:
+        """Set the aafac property."""
         self._cards[1].set_value("aafac", value)
 
     @property
@@ -403,6 +416,7 @@ class ControlAle(KeywordBase):
 
     @vfact.setter
     def vfact(self, value: float) -> None:
+        """Set the vfact property."""
         self._cards[1].set_value("vfact", value)
 
     @property
@@ -415,8 +429,9 @@ class ControlAle(KeywordBase):
 
     @prit.setter
     def prit(self, value: int) -> None:
+        """Set the prit property."""
         if value not in [0, 1, None]:
-            raise Exception("""prit must be `None` or one of {0,1}""")
+            raise Exception("""prit must be `None` or one of {0,1}.""")
         self._cards[1].set_value("prit", value)
 
     @property
@@ -430,8 +445,9 @@ class ControlAle(KeywordBase):
 
     @ebc.setter
     def ebc(self, value: int) -> None:
+        """Set the ebc property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ebc must be `None` or one of {0,1,2}""")
+            raise Exception("""ebc must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("ebc", value)
 
     @property
@@ -442,6 +458,7 @@ class ControlAle(KeywordBase):
 
     @pref.setter
     def pref(self, value: float) -> None:
+        """Set the pref property."""
         self._cards[1].set_value("pref", value)
 
     @property
@@ -452,6 +469,7 @@ class ControlAle(KeywordBase):
 
     @nsidebc.setter
     def nsidebc(self, value: int) -> None:
+        """Set the nsidebc property."""
         self._cards[1].set_value("nsidebc", value)
 
     @property
@@ -462,6 +480,7 @@ class ControlAle(KeywordBase):
 
     @ncpl.setter
     def ncpl(self, value: int) -> None:
+        """Set the ncpl property."""
         self._cards[2].set_value("ncpl", value)
 
     @property
@@ -472,6 +491,7 @@ class ControlAle(KeywordBase):
 
     @nbkt.setter
     def nbkt(self, value: int) -> None:
+        """Set the nbkt property."""
         self._cards[2].set_value("nbkt", value)
 
     @property
@@ -485,8 +505,9 @@ class ControlAle(KeywordBase):
 
     @imascl.setter
     def imascl(self, value: int) -> None:
+        """Set the imascl property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""imascl must be `None` or one of {0,1,2}""")
+            raise Exception("""imascl must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("imascl", value)
 
     @property
@@ -497,6 +518,7 @@ class ControlAle(KeywordBase):
 
     @checkr.setter
     def checkr(self, value: float) -> None:
+        """Set the checkr property."""
         self._cards[2].set_value("checkr", value)
 
     @property
@@ -510,8 +532,9 @@ class ControlAle(KeywordBase):
 
     @beamin.setter
     def beamin(self, value: float) -> None:
+        """Set the beamin property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""beamin must be `None` or one of {0.0,1.0}""")
+            raise Exception("""beamin must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("beamin", value)
 
     @property
@@ -524,6 +547,7 @@ class ControlAle(KeywordBase):
 
     @mmgpref.setter
     def mmgpref(self, value: int) -> None:
+        """Set the mmgpref property."""
         self._cards[2].set_value("mmgpref", value)
 
     @property
@@ -537,6 +561,7 @@ class ControlAle(KeywordBase):
 
     @pdifmx.setter
     def pdifmx(self, value: float) -> None:
+        """Set the pdifmx property."""
         self._cards[2].set_value("pdifmx", value)
 
     @property
@@ -551,6 +576,7 @@ class ControlAle(KeywordBase):
 
     @dtmufac.setter
     def dtmufac(self, value: float) -> None:
+        """Set the dtmufac property."""
         self._cards[2].set_value("dtmufac", value)
 
     @property
@@ -565,6 +591,7 @@ class ControlAle(KeywordBase):
 
     @optimpp.setter
     def optimpp(self, value: int) -> None:
+        """Set the optimpp property."""
         self._cards[3].set_value("optimpp", value)
 
     @property
@@ -577,6 +604,7 @@ class ControlAle(KeywordBase):
 
     @ialedr.setter
     def ialedr(self, value: int) -> None:
+        """Set the ialedr property."""
         self._cards[3].set_value("ialedr", value)
 
     @property
@@ -590,6 +618,7 @@ class ControlAle(KeywordBase):
 
     @bndflx.setter
     def bndflx(self, value: int) -> None:
+        """Set the bndflx property."""
         self._cards[3].set_value("bndflx", value)
 
     @property
@@ -600,5 +629,6 @@ class ControlAle(KeywordBase):
 
     @minmas.setter
     def minmas(self, value: float) -> None:
+        """Set the minmas property."""
         self._cards[3].set_value("minmas", value)
 

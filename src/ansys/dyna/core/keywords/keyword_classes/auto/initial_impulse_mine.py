@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialImpulseMine class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialImpulseMine(KeywordBase):
     subkeyword = "IMPULSE_MINE"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialImpulseMine class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -176,6 +178,7 @@ class InitialImpulseMine(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -186,6 +189,7 @@ class InitialImpulseMine(KeywordBase):
 
     @mtnt.setter
     def mtnt(self, value: float) -> None:
+        """Set the mtnt property."""
         self._cards[0].set_value("mtnt", value)
 
     @property
@@ -196,6 +200,7 @@ class InitialImpulseMine(KeywordBase):
 
     @rhos.setter
     def rhos(self, value: float) -> None:
+        """Set the rhos property."""
         self._cards[0].set_value("rhos", value)
 
     @property
@@ -206,6 +211,7 @@ class InitialImpulseMine(KeywordBase):
 
     @depth.setter
     def depth(self, value: float) -> None:
+        """Set the depth property."""
         self._cards[0].set_value("depth", value)
 
     @property
@@ -216,6 +222,7 @@ class InitialImpulseMine(KeywordBase):
 
     @area.setter
     def area(self, value: float) -> None:
+        """Set the area property."""
         self._cards[0].set_value("area", value)
 
     @property
@@ -226,6 +233,7 @@ class InitialImpulseMine(KeywordBase):
 
     @scale.setter
     def scale(self, value: float) -> None:
+        """Set the scale property."""
         self._cards[0].set_value("scale", value)
 
     @property
@@ -242,8 +250,9 @@ class InitialImpulseMine(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
+        """Set the unit property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""unit must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""unit must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[0].set_value("unit", value)
 
     @property
@@ -254,6 +263,7 @@ class InitialImpulseMine(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -264,6 +274,7 @@ class InitialImpulseMine(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -274,6 +285,7 @@ class InitialImpulseMine(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 
     @property
@@ -284,6 +296,7 @@ class InitialImpulseMine(KeywordBase):
 
     @nidmc.setter
     def nidmc(self, value: int) -> None:
+        """Set the nidmc property."""
         self._cards[1].set_value("nidmc", value)
 
     @property
@@ -294,6 +307,7 @@ class InitialImpulseMine(KeywordBase):
 
     @gvid.setter
     def gvid(self, value: int) -> None:
+        """Set the gvid property."""
         self._cards[1].set_value("gvid", value)
 
     @property
@@ -304,6 +318,7 @@ class InitialImpulseMine(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[1].set_value("tbirth", value)
 
     @property
@@ -314,6 +329,7 @@ class InitialImpulseMine(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[1].set_value("psid", value)
 
     @property
@@ -326,5 +342,6 @@ class InitialImpulseMine(KeywordBase):
 
     @search.setter
     def search(self, value: float) -> None:
+        """Set the search property."""
         self._cards[1].set_value("search", value)
 

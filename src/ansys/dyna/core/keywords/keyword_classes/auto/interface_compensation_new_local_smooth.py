@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceCompensationNewLocalSmooth class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
     subkeyword = "COMPENSATION_NEW_LOCAL_SMOOTH"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceCompensationNewLocalSmooth class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -110,6 +112,7 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         self._cards[0].set_value("method", value)
 
     @property
@@ -120,6 +123,7 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
 
     @sl.setter
     def sl(self, value: float) -> None:
+        """Set the sl property."""
         self._cards[0].set_value("sl", value)
 
     @property
@@ -130,6 +134,7 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -141,8 +146,9 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
 
     @elref.setter
     def elref(self, value: int) -> None:
+        """Set the elref property."""
         if value not in [1, 2, None]:
-            raise Exception("""elref must be `None` or one of {1,2}""")
+            raise Exception("""elref must be `None` or one of {1,2}.""")
         self._cards[0].set_value("elref", value)
 
     @property
@@ -153,6 +159,7 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
 
     @psidm.setter
     def psidm(self, value: float) -> None:
+        """Set the psidm property."""
         self._cards[0].set_value("psidm", value)
 
     @property
@@ -163,8 +170,9 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
 
     @undct.setter
     def undct(self, value: float) -> None:
+        """Set the undct property."""
         if value not in [0, 1, None]:
-            raise Exception("""undct must be `None` or one of {0,1}""")
+            raise Exception("""undct must be `None` or one of {0,1}.""")
         self._cards[0].set_value("undct", value)
 
     @property
@@ -175,6 +183,7 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
 
     @angle.setter
     def angle(self, value: float) -> None:
+        """Set the angle property."""
         self._cards[0].set_value("angle", value)
 
     @property
@@ -185,5 +194,6 @@ class InterfaceCompensationNewLocalSmooth(KeywordBase):
 
     @nlinea.setter
     def nlinea(self, value: int) -> None:
+        """Set the nlinea property."""
         self._cards[0].set_value("nlinea", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SensorDefineForce class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorDefineForce(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SensorDefineForce class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -105,6 +107,7 @@ class SensorDefineForce(KeywordBase):
 
     @sensid.setter
     def sensid(self, value: int) -> None:
+        """Set the sensid property."""
         self._cards[0].set_value("sensid", value)
 
     @property
@@ -115,8 +118,9 @@ class SensorDefineForce(KeywordBase):
 
     @ftype.setter
     def ftype(self, value: str) -> None:
+        """Set the ftype property."""
         if value not in ["AIRBAG", "CONTACT", "CONTACT2D", "CPM", "JOINT", "JOINTSTIF", "PRESC-MOT", "RWALL", "SPC", "SPOTWELD", "XSECTION", None]:
-            raise Exception("""ftype must be `None` or one of {"AIRBAG","CONTACT","CONTACT2D","CPM","JOINT","JOINTSTIF","PRESC-MOT","RWALL","SPC","SPOTWELD","XSECTION"}""")
+            raise Exception("""ftype must be `None` or one of {"AIRBAG","CONTACT","CONTACT2D","CPM","JOINT","JOINTSTIF","PRESC-MOT","RWALL","SPC","SPOTWELD","XSECTION"}.""")
         self._cards[0].set_value("ftype", value)
 
     @property
@@ -127,6 +131,7 @@ class SensorDefineForce(KeywordBase):
 
     @typeid.setter
     def typeid(self, value: int) -> None:
+        """Set the typeid property."""
         self._cards[0].set_value("typeid", value)
 
     @property
@@ -152,6 +157,7 @@ class SensorDefineForce(KeywordBase):
 
     @vid.setter
     def vid(self, value: str) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -162,6 +168,7 @@ class SensorDefineForce(KeywordBase):
 
     @crd.setter
     def crd(self, value: int) -> None:
+        """Set the crd property."""
         self._cards[0].set_value("crd", value)
 
     @property
@@ -172,5 +179,6 @@ class SensorDefineForce(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

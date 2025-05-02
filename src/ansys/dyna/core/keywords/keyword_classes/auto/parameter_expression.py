@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ParameterExpression class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -32,6 +33,7 @@ class ParameterExpression(KeywordBase):
     subkeyword = "EXPRESSION"
 
     def __init__(self, **kwargs):
+        """Initialize the ParameterExpression class."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(
@@ -47,11 +49,11 @@ class ParameterExpression(KeywordBase):
 
     @property
     def parameters(self):
-        '''Gets the table of parameters'''
+        """Get the table of parameters."""
         return self._cards[0].table
 
     @parameters.setter
     def parameters(self, df):
-        '''sets parameters from the dataframe df'''
+        """Set parameters from the dataframe df"""
         self._cards[0].table = df
 

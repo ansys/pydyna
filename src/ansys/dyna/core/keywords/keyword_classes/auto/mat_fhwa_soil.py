@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatFhwaSoil class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatFhwaSoil(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatFhwaSoil class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -259,6 +261,7 @@ class MatFhwaSoil(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -269,6 +272,7 @@ class MatFhwaSoil(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -285,8 +289,9 @@ class MatFhwaSoil(KeywordBase):
 
     @nplot.setter
     def nplot(self, value: int) -> None:
+        """Set the nplot property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""nplot must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""nplot must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[0].set_value("nplot", value)
 
     @property
@@ -297,6 +302,7 @@ class MatFhwaSoil(KeywordBase):
 
     @spgrav.setter
     def spgrav(self, value: float) -> None:
+        """Set the spgrav property."""
         self._cards[0].set_value("spgrav", value)
 
     @property
@@ -307,6 +313,7 @@ class MatFhwaSoil(KeywordBase):
 
     @rhowat.setter
     def rhowat(self, value: float) -> None:
+        """Set the rhowat property."""
         self._cards[0].set_value("rhowat", value)
 
     @property
@@ -317,6 +324,7 @@ class MatFhwaSoil(KeywordBase):
 
     @vn.setter
     def vn(self, value: float) -> None:
+        """Set the vn property."""
         self._cards[0].set_value("vn", value)
 
     @property
@@ -327,6 +335,7 @@ class MatFhwaSoil(KeywordBase):
 
     @gammar.setter
     def gammar(self, value: float) -> None:
+        """Set the gammar property."""
         self._cards[0].set_value("gammar", value)
 
     @property
@@ -337,6 +346,7 @@ class MatFhwaSoil(KeywordBase):
 
     @intrmx.setter
     def intrmx(self, value: int) -> None:
+        """Set the intrmx property."""
         self._cards[0].set_value("intrmx", value)
 
     @property
@@ -347,6 +357,7 @@ class MatFhwaSoil(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[1].set_value("k", value)
 
     @property
@@ -357,6 +368,7 @@ class MatFhwaSoil(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[1].set_value("g", value)
 
     @property
@@ -367,6 +379,7 @@ class MatFhwaSoil(KeywordBase):
 
     @phimax.setter
     def phimax(self, value: float) -> None:
+        """Set the phimax property."""
         self._cards[1].set_value("phimax", value)
 
     @property
@@ -377,6 +390,7 @@ class MatFhwaSoil(KeywordBase):
 
     @ahyp.setter
     def ahyp(self, value: float) -> None:
+        """Set the ahyp property."""
         self._cards[1].set_value("ahyp", value)
 
     @property
@@ -387,6 +401,7 @@ class MatFhwaSoil(KeywordBase):
 
     @coh.setter
     def coh(self, value: float) -> None:
+        """Set the coh property."""
         self._cards[1].set_value("coh", value)
 
     @property
@@ -397,6 +412,7 @@ class MatFhwaSoil(KeywordBase):
 
     @eccen.setter
     def eccen(self, value: float) -> None:
+        """Set the eccen property."""
         self._cards[1].set_value("eccen", value)
 
     @property
@@ -407,6 +423,7 @@ class MatFhwaSoil(KeywordBase):
 
     @an.setter
     def an(self, value: float) -> None:
+        """Set the an property."""
         self._cards[1].set_value("an", value)
 
     @property
@@ -417,6 +434,7 @@ class MatFhwaSoil(KeywordBase):
 
     @et.setter
     def et(self, value: float) -> None:
+        """Set the et property."""
         self._cards[1].set_value("et", value)
 
     @property
@@ -427,6 +445,7 @@ class MatFhwaSoil(KeywordBase):
 
     @mcont.setter
     def mcont(self, value: float) -> None:
+        """Set the mcont property."""
         self._cards[2].set_value("mcont", value)
 
     @property
@@ -437,6 +456,7 @@ class MatFhwaSoil(KeywordBase):
 
     @pwd1.setter
     def pwd1(self, value: float) -> None:
+        """Set the pwd1 property."""
         self._cards[2].set_value("pwd1", value)
 
     @property
@@ -447,6 +467,7 @@ class MatFhwaSoil(KeywordBase):
 
     @pwksk.setter
     def pwksk(self, value: float) -> None:
+        """Set the pwksk property."""
         self._cards[2].set_value("pwksk", value)
 
     @property
@@ -457,6 +478,7 @@ class MatFhwaSoil(KeywordBase):
 
     @pwd2.setter
     def pwd2(self, value: float) -> None:
+        """Set the pwd2 property."""
         self._cards[2].set_value("pwd2", value)
 
     @property
@@ -467,6 +489,7 @@ class MatFhwaSoil(KeywordBase):
 
     @phires.setter
     def phires(self, value: float) -> None:
+        """Set the phires property."""
         self._cards[2].set_value("phires", value)
 
     @property
@@ -477,6 +500,7 @@ class MatFhwaSoil(KeywordBase):
 
     @dint.setter
     def dint(self, value: float) -> None:
+        """Set the dint property."""
         self._cards[2].set_value("dint", value)
 
     @property
@@ -487,6 +511,7 @@ class MatFhwaSoil(KeywordBase):
 
     @vdfm.setter
     def vdfm(self, value: float) -> None:
+        """Set the vdfm property."""
         self._cards[2].set_value("vdfm", value)
 
     @property
@@ -497,6 +522,7 @@ class MatFhwaSoil(KeywordBase):
 
     @damlev.setter
     def damlev(self, value: float) -> None:
+        """Set the damlev property."""
         self._cards[2].set_value("damlev", value)
 
     @property
@@ -507,6 +533,7 @@ class MatFhwaSoil(KeywordBase):
 
     @epsmax.setter
     def epsmax(self, value: float) -> None:
+        """Set the epsmax property."""
         self._cards[3].set_value("epsmax", value)
 
     @property
@@ -517,5 +544,6 @@ class MatFhwaSoil(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

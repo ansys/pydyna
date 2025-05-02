@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAddDamageGissmo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddDamageGissmo(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAddDamageGissmo class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -224,6 +226,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -239,8 +242,9 @@ class MatAddDamageGissmo(KeywordBase):
 
     @dtyp.setter
     def dtyp(self, value: float) -> None:
+        """Set the dtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""dtyp must be `None` or one of {0,1}""")
+            raise Exception("""dtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dtyp", value)
 
     @property
@@ -252,6 +256,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @refsz.setter
     def refsz(self, value: float) -> None:
+        """Set the refsz property."""
         self._cards[0].set_value("refsz", value)
 
     @property
@@ -265,6 +270,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @numfip.setter
     def numfip(self, value: float) -> None:
+        """Set the numfip property."""
         self._cards[0].set_value("numfip", value)
 
     @property
@@ -277,6 +283,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @lcsdg.setter
     def lcsdg(self, value: int) -> None:
+        """Set the lcsdg property."""
         self._cards[1].set_value("lcsdg", value)
 
     @property
@@ -290,6 +297,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @ecrit.setter
     def ecrit(self, value: float) -> None:
+        """Set the ecrit property."""
         self._cards[1].set_value("ecrit", value)
 
     @property
@@ -300,6 +308,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @dmgexp.setter
     def dmgexp(self, value: float) -> None:
+        """Set the dmgexp property."""
         self._cards[1].set_value("dmgexp", value)
 
     @property
@@ -310,6 +319,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @dcrit.setter
     def dcrit(self, value: float) -> None:
+        """Set the dcrit property."""
         self._cards[1].set_value("dcrit", value)
 
     @property
@@ -322,6 +332,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @fadexp.setter
     def fadexp(self, value: float) -> None:
+        """Set the fadexp property."""
         self._cards[1].set_value("fadexp", value)
 
     @property
@@ -335,6 +346,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @lcregd.setter
     def lcregd(self, value: int) -> None:
+        """Set the lcregd property."""
         self._cards[1].set_value("lcregd", value)
 
     @property
@@ -349,6 +361,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @instf.setter
     def instf(self, value: int) -> None:
+        """Set the instf property."""
         self._cards[1].set_value("instf", value)
 
     @property
@@ -362,6 +375,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @lcsrs.setter
     def lcsrs(self, value: int) -> None:
+        """Set the lcsrs property."""
         self._cards[2].set_value("lcsrs", value)
 
     @property
@@ -372,6 +386,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[2].set_value("shrf", value)
 
     @property
@@ -382,6 +397,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @biaxf.setter
     def biaxf(self, value: float) -> None:
+        """Set the biaxf property."""
         self._cards[2].set_value("biaxf", value)
 
     @property
@@ -392,6 +408,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @lcdlim.setter
     def lcdlim(self, value: int) -> None:
+        """Set the lcdlim property."""
         self._cards[2].set_value("lcdlim", value)
 
     @property
@@ -409,6 +426,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @midfail.setter
     def midfail(self, value: float) -> None:
+        """Set the midfail property."""
         self._cards[2].set_value("midfail", value)
 
     @property
@@ -421,6 +439,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @hisvn.setter
     def hisvn(self, value: float) -> None:
+        """Set the hisvn property."""
         self._cards[2].set_value("hisvn", value)
 
     @property
@@ -434,6 +453,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @soft.setter
     def soft(self, value: float) -> None:
+        """Set the soft property."""
         self._cards[2].set_value("soft", value)
 
     @property
@@ -447,6 +467,7 @@ class MatAddDamageGissmo(KeywordBase):
 
     @lp2bi.setter
     def lp2bi(self, value: float) -> None:
+        """Set the lp2bi property."""
         self._cards[2].set_value("lp2bi", value)
 
     @property
@@ -457,5 +478,6 @@ class MatAddDamageGissmo(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainAcousticFringePlotPlate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
     subkeyword = "DOMAIN_ACOUSTIC_FRINGE_PLOT_PLATE"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainAcousticFringePlotPlate class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,8 +111,9 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
 
     @norm.setter
     def norm(self, value: int) -> None:
+        """Set the norm property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""norm must be `None` or one of {1,2,3}""")
+            raise Exception("""norm must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("norm", value)
 
     @property
@@ -121,6 +124,7 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
 
     @len_x.setter
     def len_x(self, value: float) -> None:
+        """Set the len_x property."""
         self._cards[0].set_value("len_x", value)
 
     @property
@@ -131,6 +135,7 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
 
     @len_y.setter
     def len_y(self, value: float) -> None:
+        """Set the len_y property."""
         self._cards[0].set_value("len_y", value)
 
     @property
@@ -141,6 +146,7 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -151,6 +157,7 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -161,6 +168,7 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 
     @property
@@ -171,6 +179,7 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
 
     @nelm_x.setter
     def nelm_x(self, value: int) -> None:
+        """Set the nelm_x property."""
         self._cards[0].set_value("nelm_x", value)
 
     @property
@@ -181,5 +190,6 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
 
     @nelm_y.setter
     def nelm_y(self, value: int) -> None:
+        """Set the nelm_y property."""
         self._cards[0].set_value("nelm_y", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSamp1 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSamp1(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSamp1 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -313,6 +315,7 @@ class MatSamp1(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -323,6 +326,7 @@ class MatSamp1(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -333,6 +337,7 @@ class MatSamp1(KeywordBase):
 
     @bulk.setter
     def bulk(self, value: float) -> None:
+        """Set the bulk property."""
         self._cards[0].set_value("bulk", value)
 
     @property
@@ -343,6 +348,7 @@ class MatSamp1(KeywordBase):
 
     @gmod.setter
     def gmod(self, value: float) -> None:
+        """Set the gmod property."""
         self._cards[0].set_value("gmod", value)
 
     @property
@@ -353,6 +359,7 @@ class MatSamp1(KeywordBase):
 
     @emod.setter
     def emod(self, value: float) -> None:
+        """Set the emod property."""
         self._cards[0].set_value("emod", value)
 
     @property
@@ -363,6 +370,7 @@ class MatSamp1(KeywordBase):
 
     @nue.setter
     def nue(self, value: float) -> None:
+        """Set the nue property."""
         self._cards[0].set_value("nue", value)
 
     @property
@@ -373,6 +381,7 @@ class MatSamp1(KeywordBase):
 
     @rbcfac.setter
     def rbcfac(self, value: float) -> None:
+        """Set the rbcfac property."""
         self._cards[0].set_value("rbcfac", value)
 
     @property
@@ -383,6 +392,7 @@ class MatSamp1(KeywordBase):
 
     @numint.setter
     def numint(self, value: int) -> None:
+        """Set the numint property."""
         self._cards[0].set_value("numint", value)
 
     @property
@@ -393,6 +403,7 @@ class MatSamp1(KeywordBase):
 
     @lcid_t.setter
     def lcid_t(self, value: int) -> None:
+        """Set the lcid_t property."""
         self._cards[1].set_value("lcid-t", value)
 
     @property
@@ -403,6 +414,7 @@ class MatSamp1(KeywordBase):
 
     @lcid_c.setter
     def lcid_c(self, value: int) -> None:
+        """Set the lcid_c property."""
         self._cards[1].set_value("lcid-c", value)
 
     @property
@@ -413,6 +425,7 @@ class MatSamp1(KeywordBase):
 
     @lcid_s.setter
     def lcid_s(self, value: int) -> None:
+        """Set the lcid_s property."""
         self._cards[1].set_value("lcid-s", value)
 
     @property
@@ -423,6 +436,7 @@ class MatSamp1(KeywordBase):
 
     @lcid_b.setter
     def lcid_b(self, value: int) -> None:
+        """Set the lcid_b property."""
         self._cards[1].set_value("lcid-b", value)
 
     @property
@@ -433,6 +447,7 @@ class MatSamp1(KeywordBase):
 
     @nuep.setter
     def nuep(self, value: float) -> None:
+        """Set the nuep property."""
         self._cards[1].set_value("nuep", value)
 
     @property
@@ -443,6 +458,7 @@ class MatSamp1(KeywordBase):
 
     @lcid_p.setter
     def lcid_p(self, value: int) -> None:
+        """Set the lcid_p property."""
         self._cards[1].set_value("lcid-p", value)
 
     @property
@@ -453,8 +469,9 @@ class MatSamp1(KeywordBase):
 
     @incdam.setter
     def incdam(self, value: int) -> None:
+        """Set the incdam property."""
         if value not in [0, 1, None]:
-            raise Exception("""incdam must be `None` or one of {0,1}""")
+            raise Exception("""incdam must be `None` or one of {0,1}.""")
         self._cards[1].set_value("incdam", value)
 
     @property
@@ -465,6 +482,7 @@ class MatSamp1(KeywordBase):
 
     @lcid_d.setter
     def lcid_d(self, value: int) -> None:
+        """Set the lcid_d property."""
         self._cards[2].set_value("lcid_d", value)
 
     @property
@@ -475,6 +493,7 @@ class MatSamp1(KeywordBase):
 
     @epfail.setter
     def epfail(self, value: float) -> None:
+        """Set the epfail property."""
         self._cards[2].set_value("epfail", value)
 
     @property
@@ -485,6 +504,7 @@ class MatSamp1(KeywordBase):
 
     @deprpt.setter
     def deprpt(self, value: float) -> None:
+        """Set the deprpt property."""
         self._cards[2].set_value("deprpt", value)
 
     @property
@@ -495,6 +515,7 @@ class MatSamp1(KeywordBase):
 
     @lcid_tri.setter
     def lcid_tri(self, value: int) -> None:
+        """Set the lcid_tri property."""
         self._cards[2].set_value("lcid-tri", value)
 
     @property
@@ -505,6 +526,7 @@ class MatSamp1(KeywordBase):
 
     @lcid_lc.setter
     def lcid_lc(self, value: int) -> None:
+        """Set the lcid_lc property."""
         self._cards[2].set_value("lcid_lc", value)
 
     @property
@@ -515,6 +537,7 @@ class MatSamp1(KeywordBase):
 
     @miter.setter
     def miter(self, value: int) -> None:
+        """Set the miter property."""
         self._cards[3].set_value("miter", value)
 
     @property
@@ -525,6 +548,7 @@ class MatSamp1(KeywordBase):
 
     @mipds.setter
     def mipds(self, value: int) -> None:
+        """Set the mipds property."""
         self._cards[3].set_value("mipds", value)
 
     @property
@@ -535,8 +559,9 @@ class MatSamp1(KeywordBase):
 
     @incfail.setter
     def incfail(self, value: int) -> None:
+        """Set the incfail property."""
         if value not in [0, 1, -1, None]:
-            raise Exception("""incfail must be `None` or one of {0,1,-1}""")
+            raise Exception("""incfail must be `None` or one of {0,1,-1}.""")
         self._cards[3].set_value("incfail", value)
 
     @property
@@ -550,8 +575,9 @@ class MatSamp1(KeywordBase):
 
     @iconv.setter
     def iconv(self, value: int) -> None:
+        """Set the iconv property."""
         if value not in [0, 1, None]:
-            raise Exception("""iconv must be `None` or one of {0,1}""")
+            raise Exception("""iconv must be `None` or one of {0,1}.""")
         self._cards[3].set_value("iconv", value)
 
     @property
@@ -562,6 +588,7 @@ class MatSamp1(KeywordBase):
 
     @asaf.setter
     def asaf(self, value: int) -> None:
+        """Set the asaf property."""
         self._cards[3].set_value("asaf", value)
 
     @property
@@ -572,6 +599,7 @@ class MatSamp1(KeywordBase):
 
     @nhsv.setter
     def nhsv(self, value: int) -> None:
+        """Set the nhsv property."""
         self._cards[3].set_value("nhsv", value)
 
     @property
@@ -582,6 +610,7 @@ class MatSamp1(KeywordBase):
 
     @lcemod.setter
     def lcemod(self, value: int) -> None:
+        """Set the lcemod property."""
         self._cards[4].set_value("lcemod", value)
 
     @property
@@ -592,6 +621,7 @@ class MatSamp1(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[4].set_value("beta", value)
 
     @property
@@ -602,6 +632,7 @@ class MatSamp1(KeywordBase):
 
     @filt.setter
     def filt(self, value: float) -> None:
+        """Set the filt property."""
         self._cards[4].set_value("filt", value)
 
     @property
@@ -612,5 +643,6 @@ class MatSamp1(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

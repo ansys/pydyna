@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DeformableToRigidInertia class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DeformableToRigidInertia(KeywordBase):
     subkeyword = "TO_RIGID_INERTIA"
 
     def __init__(self, **kwargs):
+        """Initialize the DeformableToRigidInertia class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -135,6 +137,7 @@ class DeformableToRigidInertia(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -145,6 +148,7 @@ class DeformableToRigidInertia(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[1].set_value("xc", value)
 
     @property
@@ -155,6 +159,7 @@ class DeformableToRigidInertia(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[1].set_value("yc", value)
 
     @property
@@ -165,6 +170,7 @@ class DeformableToRigidInertia(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[1].set_value("zc", value)
 
     @property
@@ -175,6 +181,7 @@ class DeformableToRigidInertia(KeywordBase):
 
     @tm.setter
     def tm(self, value: float) -> None:
+        """Set the tm property."""
         self._cards[1].set_value("tm", value)
 
     @property
@@ -185,6 +192,7 @@ class DeformableToRigidInertia(KeywordBase):
 
     @ixx.setter
     def ixx(self, value: float) -> None:
+        """Set the ixx property."""
         self._cards[2].set_value("ixx", value)
 
     @property
@@ -195,6 +203,7 @@ class DeformableToRigidInertia(KeywordBase):
 
     @ixy.setter
     def ixy(self, value: float) -> None:
+        """Set the ixy property."""
         self._cards[2].set_value("ixy", value)
 
     @property
@@ -205,6 +214,7 @@ class DeformableToRigidInertia(KeywordBase):
 
     @ixz.setter
     def ixz(self, value: float) -> None:
+        """Set the ixz property."""
         self._cards[2].set_value("ixz", value)
 
     @property
@@ -215,6 +225,7 @@ class DeformableToRigidInertia(KeywordBase):
 
     @iyy.setter
     def iyy(self, value: float) -> None:
+        """Set the iyy property."""
         self._cards[2].set_value("iyy", value)
 
     @property
@@ -225,6 +236,7 @@ class DeformableToRigidInertia(KeywordBase):
 
     @iyz.setter
     def iyz(self, value: float) -> None:
+        """Set the iyz property."""
         self._cards[2].set_value("iyz", value)
 
     @property
@@ -235,5 +247,6 @@ class DeformableToRigidInertia(KeywordBase):
 
     @izz.setter
     def izz(self, value: float) -> None:
+        """Set the izz property."""
         self._cards[2].set_value("izz", value)
 

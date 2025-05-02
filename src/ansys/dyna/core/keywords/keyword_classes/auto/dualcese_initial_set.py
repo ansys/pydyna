@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseInitialSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseInitialSet(KeywordBase):
     subkeyword = "INITIAL_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseInitialSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -113,6 +115,7 @@ class DualceseInitialSet(KeywordBase):
 
     @esid.setter
     def esid(self, value: int) -> None:
+        """Set the esid property."""
         self._cards[0].set_value("esid", value)
 
     @property
@@ -125,6 +128,7 @@ class DualceseInitialSet(KeywordBase):
 
     @ifunc.setter
     def ifunc(self, value: int) -> None:
+        """Set the ifunc property."""
         self._cards[0].set_value("ifunc", value)
 
     @property
@@ -135,6 +139,7 @@ class DualceseInitialSet(KeywordBase):
 
     @u.setter
     def u(self, value: float) -> None:
+        """Set the u property."""
         self._cards[1].set_value("u", value)
 
     @property
@@ -145,6 +150,7 @@ class DualceseInitialSet(KeywordBase):
 
     @v.setter
     def v(self, value: float) -> None:
+        """Set the v property."""
         self._cards[1].set_value("v", value)
 
     @property
@@ -155,6 +161,7 @@ class DualceseInitialSet(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[1].set_value("w", value)
 
     @property
@@ -165,6 +172,7 @@ class DualceseInitialSet(KeywordBase):
 
     @rho.setter
     def rho(self, value: float) -> None:
+        """Set the rho property."""
         self._cards[1].set_value("rho", value)
 
     @property
@@ -175,6 +183,7 @@ class DualceseInitialSet(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[1].set_value("p", value)
 
     @property
@@ -185,5 +194,6 @@ class DualceseInitialSet(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 

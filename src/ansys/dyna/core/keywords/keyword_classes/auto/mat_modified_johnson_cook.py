@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatModifiedJohnsonCook class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class MatModifiedJohnsonCook(KeywordBase):
     subkeyword = "MODIFIED_JOHNSON_COOK"
 
     def __init__(self, **kwargs):
+        """Initialize the MatModifiedJohnsonCook class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -291,6 +293,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -301,6 +304,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -311,6 +315,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -321,6 +326,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -333,6 +339,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -343,6 +350,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @xsi.setter
     def xsi(self, value: float) -> None:
+        """Set the xsi property."""
         self._cards[0].set_value("xsi", value)
 
     @property
@@ -353,6 +361,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[0].set_value("cp", value)
 
     @property
@@ -363,6 +372,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 
     @property
@@ -373,6 +383,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @e0dot.setter
     def e0dot(self, value: float) -> None:
+        """Set the e0dot property."""
         self._cards[1].set_value("e0dot", value)
 
     @property
@@ -383,6 +394,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @tr.setter
     def tr(self, value: float) -> None:
+        """Set the tr property."""
         self._cards[1].set_value("tr", value)
 
     @property
@@ -393,6 +405,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @tm.setter
     def tm(self, value: float) -> None:
+        """Set the tm property."""
         self._cards[1].set_value("tm", value)
 
     @property
@@ -403,6 +416,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @t0.setter
     def t0(self, value: float) -> None:
+        """Set the t0 property."""
         self._cards[1].set_value("t0", value)
 
     @property
@@ -415,6 +429,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @flag1.setter
     def flag1(self, value: float) -> None:
+        """Set the flag1 property."""
         self._cards[1].set_value("flag1", value)
 
     @property
@@ -427,6 +442,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @flag2.setter
     def flag2(self, value: float) -> None:
+        """Set the flag2 property."""
         self._cards[1].set_value("flag2", value)
 
     @property
@@ -438,6 +454,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @a_siga.setter
     def a_siga(self, value: float) -> None:
+        """Set the a_siga property."""
         self._cards[2].set_value("a/siga", value)
 
     @property
@@ -449,6 +466,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @b_b.setter
     def b_b(self, value: float) -> None:
+        """Set the b_b property."""
         self._cards[2].set_value("b/b", value)
 
     @property
@@ -460,6 +478,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @n_beta0.setter
     def n_beta0(self, value: float) -> None:
+        """Set the n_beta0 property."""
         self._cards[2].set_value("n/beta0", value)
 
     @property
@@ -471,6 +490,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @c_beta1.setter
     def c_beta1(self, value: float) -> None:
+        """Set the c_beta1 property."""
         self._cards[2].set_value("c/beta1", value)
 
     @property
@@ -481,6 +501,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @m_na.setter
     def m_na(self, value: float) -> None:
+        """Set the m_na property."""
         self._cards[2].set_value("m/na", value)
 
     @property
@@ -492,6 +513,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @q1_a.setter
     def q1_a(self, value: float) -> None:
+        """Set the q1_a property."""
         self._cards[3].set_value("q1/a", value)
 
     @property
@@ -503,6 +525,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @c1_n.setter
     def c1_n(self, value: float) -> None:
+        """Set the c1_n property."""
         self._cards[3].set_value("c1/n", value)
 
     @property
@@ -514,6 +537,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @q2_alpha0.setter
     def q2_alpha0(self, value: float) -> None:
+        """Set the q2_alpha0 property."""
         self._cards[3].set_value("q2/alpha0", value)
 
     @property
@@ -525,6 +549,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @c2_alpha1.setter
     def c2_alpha1(self, value: float) -> None:
+        """Set the c2_alpha1 property."""
         self._cards[3].set_value("c2/alpha1", value)
 
     @property
@@ -535,6 +560,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @dc_dc.setter
     def dc_dc(self, value: float) -> None:
+        """Set the dc_dc property."""
         self._cards[4].set_value("dc/dc", value)
 
     @property
@@ -546,6 +572,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @pd_wc.setter
     def pd_wc(self, value: float) -> None:
+        """Set the pd_wc property."""
         self._cards[4].set_value("pd/wc", value)
 
     @property
@@ -556,6 +583,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @d1_na.setter
     def d1_na(self, value: float) -> None:
+        """Set the d1_na property."""
         self._cards[4].set_value("d1/na", value)
 
     @property
@@ -566,6 +594,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @d2_na.setter
     def d2_na(self, value: float) -> None:
+        """Set the d2_na property."""
         self._cards[4].set_value("d2/na", value)
 
     @property
@@ -576,6 +605,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @d3_na.setter
     def d3_na(self, value: float) -> None:
+        """Set the d3_na property."""
         self._cards[4].set_value("d3/na", value)
 
     @property
@@ -586,6 +616,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @d4_na.setter
     def d4_na(self, value: float) -> None:
+        """Set the d4_na property."""
         self._cards[4].set_value("d4/na", value)
 
     @property
@@ -596,6 +627,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @d5_na.setter
     def d5_na(self, value: float) -> None:
+        """Set the d5_na property."""
         self._cards[4].set_value("d5/na", value)
 
     @property
@@ -606,6 +638,7 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @tc.setter
     def tc(self, value: float) -> None:
+        """Set the tc property."""
         self._cards[5].set_value("tc", value)
 
     @property
@@ -616,8 +649,10 @@ class MatModifiedJohnsonCook(KeywordBase):
 
     @tauc.setter
     def tauc(self, value: float) -> None:
+        """Set the tauc property."""
         self._cards[5].set_value("tauc", value)
 
 
 class Mat107(MatModifiedJohnsonCook):
+    """Alias for MAT keyword."""
     subkeyword = "107"

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatComprf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatComprf(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatComprf class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -224,6 +226,7 @@ class MatComprf(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -234,6 +237,7 @@ class MatComprf(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -246,6 +250,7 @@ class MatComprf(KeywordBase):
 
     @et.setter
     def et(self, value: float) -> None:
+        """Set the et property."""
         self._cards[0].set_value("et", value)
 
     @property
@@ -258,6 +263,7 @@ class MatComprf(KeywordBase):
 
     @ec.setter
     def ec(self, value: float) -> None:
+        """Set the ec property."""
         self._cards[0].set_value("ec", value)
 
     @property
@@ -268,6 +274,7 @@ class MatComprf(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -280,6 +287,7 @@ class MatComprf(KeywordBase):
 
     @g121.setter
     def g121(self, value: float) -> None:
+        """Set the g121 property."""
         self._cards[0].set_value("g121", value)
 
     @property
@@ -292,6 +300,7 @@ class MatComprf(KeywordBase):
 
     @g122.setter
     def g122(self, value: float) -> None:
+        """Set the g122 property."""
         self._cards[0].set_value("g122", value)
 
     @property
@@ -304,6 +313,7 @@ class MatComprf(KeywordBase):
 
     @g123.setter
     def g123(self, value: float) -> None:
+        """Set the g123 property."""
         self._cards[0].set_value("g123", value)
 
     @property
@@ -316,6 +326,7 @@ class MatComprf(KeywordBase):
 
     @g124.setter
     def g124(self, value: float) -> None:
+        """Set the g124 property."""
         self._cards[1].set_value("g124", value)
 
     @property
@@ -328,6 +339,7 @@ class MatComprf(KeywordBase):
 
     @g125.setter
     def g125(self, value: float) -> None:
+        """Set the g125 property."""
         self._cards[1].set_value("g125", value)
 
     @property
@@ -340,6 +352,7 @@ class MatComprf(KeywordBase):
 
     @g126.setter
     def g126(self, value: float) -> None:
+        """Set the g126 property."""
         self._cards[1].set_value("g126", value)
 
     @property
@@ -350,6 +363,7 @@ class MatComprf(KeywordBase):
 
     @gammal.setter
     def gammal(self, value: float) -> None:
+        """Set the gammal property."""
         self._cards[1].set_value("gammal", value)
 
     @property
@@ -360,6 +374,7 @@ class MatComprf(KeywordBase):
 
     @vf.setter
     def vf(self, value: float) -> None:
+        """Set the vf property."""
         self._cards[1].set_value("vf", value)
 
     @property
@@ -370,6 +385,7 @@ class MatComprf(KeywordBase):
 
     @ef3.setter
     def ef3(self, value: float) -> None:
+        """Set the ef3 property."""
         self._cards[1].set_value("ef3", value)
 
     @property
@@ -380,6 +396,7 @@ class MatComprf(KeywordBase):
 
     @vf23.setter
     def vf23(self, value: float) -> None:
+        """Set the vf23 property."""
         self._cards[1].set_value("vf23", value)
 
     @property
@@ -390,6 +407,7 @@ class MatComprf(KeywordBase):
 
     @em.setter
     def em(self, value: float) -> None:
+        """Set the em property."""
         self._cards[1].set_value("em", value)
 
     @property
@@ -400,6 +418,7 @@ class MatComprf(KeywordBase):
 
     @vm.setter
     def vm(self, value: float) -> None:
+        """Set the vm property."""
         self._cards[2].set_value("vm", value)
 
     @property
@@ -411,6 +430,7 @@ class MatComprf(KeywordBase):
 
     @epsilon.setter
     def epsilon(self, value: float) -> None:
+        """Set the epsilon property."""
         self._cards[2].set_value("epsilon", value)
 
     @property
@@ -423,6 +443,7 @@ class MatComprf(KeywordBase):
 
     @theta.setter
     def theta(self, value: float) -> None:
+        """Set the theta property."""
         self._cards[2].set_value("theta", value)
 
     @property
@@ -433,6 +454,7 @@ class MatComprf(KeywordBase):
 
     @bulk.setter
     def bulk(self, value: float) -> None:
+        """Set the bulk property."""
         self._cards[2].set_value("bulk", value)
 
     @property
@@ -443,6 +465,7 @@ class MatComprf(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[2].set_value("g", value)
 
     @property
@@ -453,5 +476,6 @@ class MatComprf(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

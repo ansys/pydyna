@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AirbagAle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagAle(KeywordBase):
     subkeyword = "ALE"
 
     def __init__(self, **kwargs):
+        """Initialize the AirbagAle class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -624,6 +626,7 @@ class AirbagAle(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -636,8 +639,9 @@ class AirbagAle(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sidtyp", value)
 
     @property
@@ -648,6 +652,7 @@ class AirbagAle(KeywordBase):
 
     @mwd.setter
     def mwd(self, value: float) -> None:
+        """Set the mwd property."""
         self._cards[0].set_value("mwd", value)
 
     @property
@@ -658,6 +663,7 @@ class AirbagAle(KeywordBase):
 
     @spsf.setter
     def spsf(self, value: float) -> None:
+        """Set the spsf property."""
         self._cards[0].set_value("spsf", value)
 
     @property
@@ -668,6 +674,7 @@ class AirbagAle(KeywordBase):
 
     @atmost.setter
     def atmost(self, value: float) -> None:
+        """Set the atmost property."""
         self._cards[1].set_value("atmost", value)
 
     @property
@@ -678,6 +685,7 @@ class AirbagAle(KeywordBase):
 
     @atmosp.setter
     def atmosp(self, value: float) -> None:
+        """Set the atmosp property."""
         self._cards[1].set_value("atmosp", value)
 
     @property
@@ -688,6 +696,7 @@ class AirbagAle(KeywordBase):
 
     @gc.setter
     def gc(self, value: float) -> None:
+        """Set the gc property."""
         self._cards[1].set_value("gc", value)
 
     @property
@@ -698,6 +707,7 @@ class AirbagAle(KeywordBase):
 
     @cc.setter
     def cc(self, value: float) -> None:
+        """Set the cc property."""
         self._cards[1].set_value("cc", value)
 
     @property
@@ -714,6 +724,7 @@ class AirbagAle(KeywordBase):
 
     @tnkvol.setter
     def tnkvol(self, value: float) -> None:
+        """Set the tnkvol property."""
         self._cards[1].set_value("tnkvol", value)
 
     @property
@@ -724,6 +735,7 @@ class AirbagAle(KeywordBase):
 
     @tnkfinp.setter
     def tnkfinp(self, value: float) -> None:
+        """Set the tnkfinp property."""
         self._cards[1].set_value("tnkfinp", value)
 
     @property
@@ -735,6 +747,7 @@ class AirbagAle(KeywordBase):
 
     @nquad.setter
     def nquad(self, value: int) -> None:
+        """Set the nquad property."""
         self._cards[2].set_value("nquad", value)
 
     @property
@@ -747,6 +760,7 @@ class AirbagAle(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         self._cards[2].set_value("ctype", value)
 
     @property
@@ -759,6 +773,7 @@ class AirbagAle(KeywordBase):
 
     @pfac.setter
     def pfac(self, value: float) -> None:
+        """Set the pfac property."""
         self._cards[2].set_value("pfac", value)
 
     @property
@@ -769,6 +784,7 @@ class AirbagAle(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[2].set_value("fric", value)
 
     @property
@@ -779,6 +795,7 @@ class AirbagAle(KeywordBase):
 
     @frcmin.setter
     def frcmin(self, value: float) -> None:
+        """Set the frcmin property."""
         self._cards[2].set_value("frcmin", value)
 
     @property
@@ -791,8 +808,9 @@ class AirbagAle(KeywordBase):
 
     @normtyp.setter
     def normtyp(self, value: int) -> None:
+        """Set the normtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""normtyp must be `None` or one of {0,1}""")
+            raise Exception("""normtyp must be `None` or one of {0,1}.""")
         self._cards[2].set_value("normtyp", value)
 
     @property
@@ -803,6 +821,7 @@ class AirbagAle(KeywordBase):
 
     @ileak.setter
     def ileak(self, value: int) -> None:
+        """Set the ileak property."""
         self._cards[2].set_value("ileak", value)
 
     @property
@@ -813,6 +832,7 @@ class AirbagAle(KeywordBase):
 
     @pleak.setter
     def pleak(self, value: float) -> None:
+        """Set the pleak property."""
         self._cards[2].set_value("pleak", value)
 
     @property
@@ -823,6 +843,7 @@ class AirbagAle(KeywordBase):
 
     @ivsetid.setter
     def ivsetid(self, value: int) -> None:
+        """Set the ivsetid property."""
         self._cards[3].set_value("ivsetid", value)
 
     @property
@@ -836,8 +857,9 @@ class AirbagAle(KeywordBase):
 
     @ivtype.setter
     def ivtype(self, value: int) -> None:
+        """Set the ivtype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ivtype must be `None` or one of {0,1,2}""")
+            raise Exception("""ivtype must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("ivtype", value)
 
     @property
@@ -850,6 +872,7 @@ class AirbagAle(KeywordBase):
 
     @iblock.setter
     def iblock(self, value: int) -> None:
+        """Set the iblock property."""
         self._cards[3].set_value("iblock", value)
 
     @property
@@ -860,6 +883,7 @@ class AirbagAle(KeywordBase):
 
     @vntcof.setter
     def vntcof(self, value: float) -> None:
+        """Set the vntcof property."""
         self._cards[3].set_value("vntcof", value)
 
     @property
@@ -871,6 +895,7 @@ class AirbagAle(KeywordBase):
 
     @nx_ida.setter
     def nx_ida(self, value: int) -> None:
+        """Set the nx_ida property."""
         self._cards[4].set_value("nx/ida", value)
 
     @property
@@ -882,6 +907,7 @@ class AirbagAle(KeywordBase):
 
     @ny_idg.setter
     def ny_idg(self, value: int) -> None:
+        """Set the ny_idg property."""
         self._cards[4].set_value("ny/idg", value)
 
     @property
@@ -893,6 +919,7 @@ class AirbagAle(KeywordBase):
 
     @nz.setter
     def nz(self, value: int) -> None:
+        """Set the nz property."""
         self._cards[4].set_value("nz", value)
 
     @property
@@ -906,6 +933,7 @@ class AirbagAle(KeywordBase):
 
     @movern.setter
     def movern(self, value: int) -> None:
+        """Set the movern property."""
         self._cards[4].set_value("movern", value)
 
     @property
@@ -918,6 +946,7 @@ class AirbagAle(KeywordBase):
 
     @zoom.setter
     def zoom(self, value: int) -> None:
+        """Set the zoom property."""
         self._cards[4].set_value("zoom", value)
 
     @property
@@ -928,6 +957,7 @@ class AirbagAle(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[5].set_value("x0", value)
 
     @property
@@ -938,6 +968,7 @@ class AirbagAle(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[5].set_value("y0", value)
 
     @property
@@ -948,6 +979,7 @@ class AirbagAle(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[5].set_value("z0", value)
 
     @property
@@ -958,6 +990,7 @@ class AirbagAle(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[5].set_value("x1", value)
 
     @property
@@ -968,6 +1001,7 @@ class AirbagAle(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[5].set_value("y1", value)
 
     @property
@@ -978,6 +1012,7 @@ class AirbagAle(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[5].set_value("z1", value)
 
     @property
@@ -988,6 +1023,7 @@ class AirbagAle(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[6].set_value("x2", value)
 
     @property
@@ -998,6 +1034,7 @@ class AirbagAle(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[6].set_value("y2", value)
 
     @property
@@ -1008,6 +1045,7 @@ class AirbagAle(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[6].set_value("z2", value)
 
     @property
@@ -1018,6 +1056,7 @@ class AirbagAle(KeywordBase):
 
     @x3.setter
     def x3(self, value: float) -> None:
+        """Set the x3 property."""
         self._cards[6].set_value("x3", value)
 
     @property
@@ -1028,6 +1067,7 @@ class AirbagAle(KeywordBase):
 
     @y3.setter
     def y3(self, value: float) -> None:
+        """Set the y3 property."""
         self._cards[6].set_value("y3", value)
 
     @property
@@ -1038,6 +1078,7 @@ class AirbagAle(KeywordBase):
 
     @z3.setter
     def z3(self, value: float) -> None:
+        """Set the z3 property."""
         self._cards[6].set_value("z3", value)
 
     @property
@@ -1048,6 +1089,7 @@ class AirbagAle(KeywordBase):
 
     @swtime.setter
     def swtime(self, value: float) -> None:
+        """Set the swtime property."""
         self._cards[7].set_value("swtime", value)
 
     @property
@@ -1058,6 +1100,7 @@ class AirbagAle(KeywordBase):
 
     @hg.setter
     def hg(self, value: float) -> None:
+        """Set the hg property."""
         self._cards[7].set_value("hg", value)
 
     @property
@@ -1068,6 +1111,7 @@ class AirbagAle(KeywordBase):
 
     @nair.setter
     def nair(self, value: int) -> None:
+        """Set the nair property."""
         self._cards[7].set_value("nair", value)
 
     @property
@@ -1078,6 +1122,7 @@ class AirbagAle(KeywordBase):
 
     @ngas.setter
     def ngas(self, value: int) -> None:
+        """Set the ngas property."""
         self._cards[7].set_value("ngas", value)
 
     @property
@@ -1088,6 +1133,7 @@ class AirbagAle(KeywordBase):
 
     @norif.setter
     def norif(self, value: int) -> None:
+        """Set the norif property."""
         self._cards[7].set_value("norif", value)
 
     @property
@@ -1099,6 +1145,7 @@ class AirbagAle(KeywordBase):
 
     @lcvel.setter
     def lcvel(self, value: int) -> None:
+        """Set the lcvel property."""
         self._cards[7].set_value("lcvel", value)
 
     @property
@@ -1109,6 +1156,7 @@ class AirbagAle(KeywordBase):
 
     @lct.setter
     def lct(self, value: int) -> None:
+        """Set the lct property."""
         self._cards[7].set_value("lct", value)
 
     @property
@@ -1119,6 +1167,7 @@ class AirbagAle(KeywordBase):
 
     @mwair.setter
     def mwair(self, value: float) -> None:
+        """Set the mwair property."""
         self._cards[8].set_value("mwair", value)
 
     @property
@@ -1129,6 +1178,7 @@ class AirbagAle(KeywordBase):
 
     @initm.setter
     def initm(self, value: float) -> None:
+        """Set the initm property."""
         self._cards[8].set_value("initm", value)
 
     @property
@@ -1139,6 +1189,7 @@ class AirbagAle(KeywordBase):
 
     @aira.setter
     def aira(self, value: float) -> None:
+        """Set the aira property."""
         self._cards[8].set_value("aira", value)
 
     @property
@@ -1149,6 +1200,7 @@ class AirbagAle(KeywordBase):
 
     @airb.setter
     def airb(self, value: float) -> None:
+        """Set the airb property."""
         self._cards[8].set_value("airb", value)
 
     @property
@@ -1159,6 +1211,7 @@ class AirbagAle(KeywordBase):
 
     @airc.setter
     def airc(self, value: float) -> None:
+        """Set the airc property."""
         self._cards[8].set_value("airc", value)
 
     @property
@@ -1169,6 +1222,7 @@ class AirbagAle(KeywordBase):
 
     @lcmf.setter
     def lcmf(self, value: int) -> None:
+        """Set the lcmf property."""
         self._cards[9].set_value("lcmf", value)
 
     @property
@@ -1179,6 +1233,7 @@ class AirbagAle(KeywordBase):
 
     @mwgas.setter
     def mwgas(self, value: float) -> None:
+        """Set the mwgas property."""
         self._cards[9].set_value("mwgas", value)
 
     @property
@@ -1189,6 +1244,7 @@ class AirbagAle(KeywordBase):
 
     @gasa.setter
     def gasa(self, value: float) -> None:
+        """Set the gasa property."""
         self._cards[9].set_value("gasa", value)
 
     @property
@@ -1199,6 +1255,7 @@ class AirbagAle(KeywordBase):
 
     @gasb.setter
     def gasb(self, value: float) -> None:
+        """Set the gasb property."""
         self._cards[9].set_value("gasb", value)
 
     @property
@@ -1209,6 +1266,7 @@ class AirbagAle(KeywordBase):
 
     @gasc.setter
     def gasc(self, value: float) -> None:
+        """Set the gasc property."""
         self._cards[9].set_value("gasc", value)
 
     @property
@@ -1219,6 +1277,7 @@ class AirbagAle(KeywordBase):
 
     @nodeid.setter
     def nodeid(self, value: int) -> None:
+        """Set the nodeid property."""
         self._cards[10].set_value("nodeid", value)
 
     @property
@@ -1229,6 +1288,7 @@ class AirbagAle(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[10].set_value("vecid", value)
 
     @property
@@ -1239,5 +1299,6 @@ class AirbagAle(KeywordBase):
 
     @orifare.setter
     def orifare(self, value: float) -> None:
+        """Set the orifare property."""
         self._cards[10].set_value("orifare", value)
 

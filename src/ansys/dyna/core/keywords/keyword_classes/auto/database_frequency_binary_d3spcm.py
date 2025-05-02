@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseFrequencyBinaryD3Spcm class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseFrequencyBinaryD3Spcm(KeywordBase):
     subkeyword = "FREQUENCY_BINARY_D3SPCM"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseFrequencyBinaryD3Spcm class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,8 +79,9 @@ class DatabaseFrequencyBinaryD3Spcm(KeywordBase):
 
     @binary.setter
     def binary(self, value: int) -> None:
+        """Set the binary property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""binary must be `None` or one of {0,1,2,3}""")
+            raise Exception("""binary must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("binary", value)
 
     @property
@@ -89,6 +92,7 @@ class DatabaseFrequencyBinaryD3Spcm(KeywordBase):
 
     @istate.setter
     def istate(self, value: int) -> None:
+        """Set the istate property."""
         self._cards[1].set_value("istate", value)
 
     @property
@@ -99,5 +103,6 @@ class DatabaseFrequencyBinaryD3Spcm(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 

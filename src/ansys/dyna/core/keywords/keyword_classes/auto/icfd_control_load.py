@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdControlLoad class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlLoad(KeywordBase):
     subkeyword = "CONTROL_LOAD"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdControlLoad class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -55,5 +57,6 @@ class IcfdControlLoad(KeywordBase):
 
     @abl.setter
     def abl(self, value: int) -> None:
+        """Set the abl property."""
         self._cards[0].set_value("abl", value)
 

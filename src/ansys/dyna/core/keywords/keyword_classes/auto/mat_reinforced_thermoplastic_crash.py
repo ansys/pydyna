@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatReinforcedThermoplasticCrash class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatReinforcedThermoplasticCrash class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -602,6 +604,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -612,6 +615,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -622,6 +626,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @em.setter
     def em(self, value: float) -> None:
+        """Set the em property."""
         self._cards[0].set_value("em", value)
 
     @property
@@ -632,6 +637,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @prm.setter
     def prm(self, value: float) -> None:
+        """Set the prm property."""
         self._cards[0].set_value("prm", value)
 
     @property
@@ -642,6 +648,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @lcsigy.setter
     def lcsigy(self, value: int) -> None:
+        """Set the lcsigy property."""
         self._cards[0].set_value("lcsigy", value)
 
     @property
@@ -652,6 +659,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -662,6 +670,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @pfl.setter
     def pfl(self, value: float) -> None:
+        """Set the pfl property."""
         self._cards[0].set_value("pfl", value)
 
     @property
@@ -674,6 +683,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @visc.setter
     def visc(self, value: float) -> None:
+        """Set the visc property."""
         self._cards[0].set_value("visc", value)
 
     @property
@@ -684,6 +694,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @nfib.setter
     def nfib(self, value: int) -> None:
+        """Set the nfib property."""
         self._cards[1].set_value("nfib", value)
 
     @property
@@ -701,6 +712,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[1].set_value("aopt", value)
 
     @property
@@ -711,6 +723,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -721,6 +734,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -731,6 +745,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[1].set_value("a3", value)
 
     @property
@@ -741,6 +756,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[2].set_value("v1", value)
 
     @property
@@ -751,6 +767,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[2].set_value("v2", value)
 
     @property
@@ -761,6 +778,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[2].set_value("v3", value)
 
     @property
@@ -771,6 +789,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[2].set_value("d1", value)
 
     @property
@@ -781,6 +800,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[2].set_value("d2", value)
 
     @property
@@ -791,6 +811,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[2].set_value("d3", value)
 
     @property
@@ -801,6 +822,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @mangl.setter
     def mangl(self, value: float) -> None:
+        """Set the mangl property."""
         self._cards[2].set_value("mangl", value)
 
     @property
@@ -813,6 +835,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[2].set_value("thick", value)
 
     @property
@@ -823,6 +846,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @vg1.setter
     def vg1(self, value: float) -> None:
+        """Set the vg1 property."""
         self._cards[3].set_value("vg1", value)
 
     @property
@@ -833,6 +857,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @vb1.setter
     def vb1(self, value: float) -> None:
+        """Set the vb1 property."""
         self._cards[3].set_value("vb1", value)
 
     @property
@@ -843,6 +868,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @vg2.setter
     def vg2(self, value: float) -> None:
+        """Set the vg2 property."""
         self._cards[3].set_value("vg2", value)
 
     @property
@@ -853,6 +879,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @vb2.setter
     def vb2(self, value: float) -> None:
+        """Set the vb2 property."""
         self._cards[3].set_value("vb2", value)
 
     @property
@@ -863,6 +890,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @vg3.setter
     def vg3(self, value: float) -> None:
+        """Set the vg3 property."""
         self._cards[3].set_value("vg3", value)
 
     @property
@@ -873,6 +901,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @vb3.setter
     def vb3(self, value: float) -> None:
+        """Set the vb3 property."""
         self._cards[3].set_value("vb3", value)
 
     @property
@@ -883,6 +912,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @vg4.setter
     def vg4(self, value: float) -> None:
+        """Set the vg4 property."""
         self._cards[3].set_value("vg4", value)
 
     @property
@@ -893,6 +923,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @vb4.setter
     def vb4(self, value: float) -> None:
+        """Set the vb4 property."""
         self._cards[3].set_value("vb4", value)
 
     @property
@@ -903,6 +934,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @idf1.setter
     def idf1(self, value: int) -> None:
+        """Set the idf1 property."""
         self._cards[4].set_value("idf1", value)
 
     @property
@@ -913,6 +945,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @alph1.setter
     def alph1(self, value: int) -> None:
+        """Set the alph1 property."""
         self._cards[4].set_value("alph1", value)
 
     @property
@@ -923,6 +956,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @ef1.setter
     def ef1(self, value: int) -> None:
+        """Set the ef1 property."""
         self._cards[4].set_value("ef1", value)
 
     @property
@@ -933,6 +967,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @lcef1.setter
     def lcef1(self, value: int) -> None:
+        """Set the lcef1 property."""
         self._cards[4].set_value("lcef1", value)
 
     @property
@@ -943,6 +978,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @g23_1.setter
     def g23_1(self, value: int) -> None:
+        """Set the g23_1 property."""
         self._cards[4].set_value("g23_1", value)
 
     @property
@@ -953,6 +989,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @g31_1.setter
     def g31_1(self, value: int) -> None:
+        """Set the g31_1 property."""
         self._cards[4].set_value("g31_1", value)
 
     @property
@@ -964,6 +1001,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @daf1.setter
     def daf1(self, value: int) -> None:
+        """Set the daf1 property."""
         self._cards[4].set_value("daf1", value)
 
     @property
@@ -975,6 +1013,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @dam1.setter
     def dam1(self, value: int) -> None:
+        """Set the dam1 property."""
         self._cards[4].set_value("dam1", value)
 
     @property
@@ -985,6 +1024,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @g12.setter
     def g12(self, value: int) -> None:
+        """Set the g12 property."""
         self._cards[5].set_value("g12", value)
 
     @property
@@ -995,6 +1035,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @lcg12.setter
     def lcg12(self, value: int) -> None:
+        """Set the lcg12 property."""
         self._cards[5].set_value("lcg12", value)
 
     @property
@@ -1005,6 +1046,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @aloc12.setter
     def aloc12(self, value: int) -> None:
+        """Set the aloc12 property."""
         self._cards[5].set_value("aloc12", value)
 
     @property
@@ -1015,6 +1057,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @gloc12.setter
     def gloc12(self, value: int) -> None:
+        """Set the gloc12 property."""
         self._cards[5].set_value("gloc12", value)
 
     @property
@@ -1033,6 +1076,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @meth12.setter
     def meth12(self, value: int) -> None:
+        """Set the meth12 property."""
         self._cards[5].set_value("meth12", value)
 
     @property
@@ -1043,6 +1087,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @dam12.setter
     def dam12(self, value: int) -> None:
+        """Set the dam12 property."""
         self._cards[5].set_value("dam12", value)
 
     @property
@@ -1053,6 +1098,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @idf2.setter
     def idf2(self, value: int) -> None:
+        """Set the idf2 property."""
         self._cards[6].set_value("idf2", value)
 
     @property
@@ -1063,6 +1109,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @alph2.setter
     def alph2(self, value: float) -> None:
+        """Set the alph2 property."""
         self._cards[6].set_value("alph2", value)
 
     @property
@@ -1073,6 +1120,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @ef2.setter
     def ef2(self, value: float) -> None:
+        """Set the ef2 property."""
         self._cards[6].set_value("ef2", value)
 
     @property
@@ -1083,6 +1131,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @lcef2.setter
     def lcef2(self, value: int) -> None:
+        """Set the lcef2 property."""
         self._cards[6].set_value("lcef2", value)
 
     @property
@@ -1093,6 +1142,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @g23_2.setter
     def g23_2(self, value: float) -> None:
+        """Set the g23_2 property."""
         self._cards[6].set_value("g23_2", value)
 
     @property
@@ -1103,6 +1153,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @g31_2.setter
     def g31_2(self, value: float) -> None:
+        """Set the g31_2 property."""
         self._cards[6].set_value("g31_2", value)
 
     @property
@@ -1114,6 +1165,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @daf2.setter
     def daf2(self, value: int) -> None:
+        """Set the daf2 property."""
         self._cards[6].set_value("daf2", value)
 
     @property
@@ -1125,6 +1177,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @dam2.setter
     def dam2(self, value: int) -> None:
+        """Set the dam2 property."""
         self._cards[6].set_value("dam2", value)
 
     @property
@@ -1135,6 +1188,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @g23.setter
     def g23(self, value: float) -> None:
+        """Set the g23 property."""
         self._cards[7].set_value("g23", value)
 
     @property
@@ -1145,6 +1199,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @lcg23.setter
     def lcg23(self, value: int) -> None:
+        """Set the lcg23 property."""
         self._cards[7].set_value("lcg23", value)
 
     @property
@@ -1155,6 +1210,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @aloc23.setter
     def aloc23(self, value: float) -> None:
+        """Set the aloc23 property."""
         self._cards[7].set_value("aloc23", value)
 
     @property
@@ -1165,6 +1221,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @gloc23.setter
     def gloc23(self, value: float) -> None:
+        """Set the gloc23 property."""
         self._cards[7].set_value("gloc23", value)
 
     @property
@@ -1181,6 +1238,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @meth23.setter
     def meth23(self, value: int) -> None:
+        """Set the meth23 property."""
         self._cards[7].set_value("meth23", value)
 
     @property
@@ -1191,6 +1249,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @dam23.setter
     def dam23(self, value: int) -> None:
+        """Set the dam23 property."""
         self._cards[7].set_value("dam23", value)
 
     @property
@@ -1201,6 +1260,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @idf3.setter
     def idf3(self, value: int) -> None:
+        """Set the idf3 property."""
         self._cards[8].set_value("idf3", value)
 
     @property
@@ -1211,6 +1271,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @alph3.setter
     def alph3(self, value: float) -> None:
+        """Set the alph3 property."""
         self._cards[8].set_value("alph3", value)
 
     @property
@@ -1221,6 +1282,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @ef3.setter
     def ef3(self, value: float) -> None:
+        """Set the ef3 property."""
         self._cards[8].set_value("ef3", value)
 
     @property
@@ -1231,6 +1293,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @lcef3.setter
     def lcef3(self, value: int) -> None:
+        """Set the lcef3 property."""
         self._cards[8].set_value("lcef3", value)
 
     @property
@@ -1241,6 +1304,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @g23_3.setter
     def g23_3(self, value: float) -> None:
+        """Set the g23_3 property."""
         self._cards[8].set_value("g23_3", value)
 
     @property
@@ -1251,6 +1315,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @g31_3.setter
     def g31_3(self, value: float) -> None:
+        """Set the g31_3 property."""
         self._cards[8].set_value("g31_3", value)
 
     @property
@@ -1262,6 +1327,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @daf3.setter
     def daf3(self, value: int) -> None:
+        """Set the daf3 property."""
         self._cards[8].set_value("daf3", value)
 
     @property
@@ -1273,6 +1339,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @dam3.setter
     def dam3(self, value: int) -> None:
+        """Set the dam3 property."""
         self._cards[8].set_value("dam3", value)
 
     @property
@@ -1283,6 +1350,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @postv.setter
     def postv(self, value: float) -> None:
+        """Set the postv property."""
         self._cards[9].set_value("postv", value)
 
     @property
@@ -1293,6 +1361,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @viscs.setter
     def viscs(self, value: float) -> None:
+        """Set the viscs property."""
         self._cards[9].set_value("viscs", value)
 
     @property
@@ -1305,6 +1374,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @ihis.setter
     def ihis(self, value: float) -> None:
+        """Set the ihis property."""
         self._cards[9].set_value("ihis", value)
 
     @property
@@ -1315,5 +1385,6 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[10].cards[0].set_value("title", value)
 

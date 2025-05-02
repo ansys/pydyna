@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAddFatigue class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddFatigue(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAddFatigue class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -175,6 +177,7 @@ class MatAddFatigue(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -189,6 +192,7 @@ class MatAddFatigue(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -202,8 +206,9 @@ class MatAddFatigue(KeywordBase):
 
     @ltype.setter
     def ltype(self, value: int) -> None:
+        """Set the ltype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ltype must be `None` or one of {0,1,2}""")
+            raise Exception("""ltype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("ltype", value)
 
     @property
@@ -214,6 +219,7 @@ class MatAddFatigue(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -224,6 +230,7 @@ class MatAddFatigue(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[0].set_value("b", value)
 
     @property
@@ -234,6 +241,7 @@ class MatAddFatigue(KeywordBase):
 
     @sthres.setter
     def sthres(self, value: float) -> None:
+        """Set the sthres property."""
         self._cards[0].set_value("sthres", value)
 
     @property
@@ -253,8 +261,9 @@ class MatAddFatigue(KeywordBase):
 
     @snlimt.setter
     def snlimt(self, value: int) -> None:
+        """Set the snlimt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""snlimt must be `None` or one of {0,1,2}""")
+            raise Exception("""snlimt must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("snlimt", value)
 
     @property
@@ -267,8 +276,9 @@ class MatAddFatigue(KeywordBase):
 
     @sntype.setter
     def sntype(self, value: int) -> None:
+        """Set the sntype property."""
         if value not in [0, 1, None]:
-            raise Exception("""sntype must be `None` or one of {0,1}""")
+            raise Exception("""sntype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sntype", value)
 
     @property
@@ -279,6 +289,7 @@ class MatAddFatigue(KeywordBase):
 
     @ai.setter
     def ai(self, value: float) -> None:
+        """Set the ai property."""
         self._cards[1].set_value("ai", value)
 
     @property
@@ -289,6 +300,7 @@ class MatAddFatigue(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[1].set_value("bi", value)
 
     @property
@@ -299,6 +311,7 @@ class MatAddFatigue(KeywordBase):
 
     @sthresi.setter
     def sthresi(self, value: float) -> None:
+        """Set the sthresi property."""
         self._cards[1].set_value("sthresi", value)
 
     @property
@@ -309,5 +322,6 @@ class MatAddFatigue(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

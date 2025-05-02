@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementDirectMatrixInput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementDirectMatrixInput(KeywordBase):
     subkeyword = "DIRECT_MATRIX_INPUT"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementDirectMatrixInput class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -104,6 +106,7 @@ class ElementDirectMatrixInput(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -116,6 +119,7 @@ class ElementDirectMatrixInput(KeywordBase):
 
     @ifrmt.setter
     def ifrmt(self, value: int) -> None:
+        """Set the ifrmt property."""
         self._cards[0].set_value("ifrmt", value)
 
     @property
@@ -126,6 +130,7 @@ class ElementDirectMatrixInput(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 
     @property
@@ -136,6 +141,7 @@ class ElementDirectMatrixInput(KeywordBase):
 
     @mass.setter
     def mass(self, value: str) -> None:
+        """Set the mass property."""
         self._cards[2].set_value("mass", value)
 
     @property
@@ -146,6 +152,7 @@ class ElementDirectMatrixInput(KeywordBase):
 
     @damp.setter
     def damp(self, value: str) -> None:
+        """Set the damp property."""
         self._cards[2].set_value("damp", value)
 
     @property
@@ -156,6 +163,7 @@ class ElementDirectMatrixInput(KeywordBase):
 
     @stif.setter
     def stif(self, value: str) -> None:
+        """Set the stif property."""
         self._cards[2].set_value("stif", value)
 
     @property
@@ -166,5 +174,6 @@ class ElementDirectMatrixInput(KeywordBase):
 
     @inert.setter
     def inert(self, value: str) -> None:
+        """Set the inert property."""
         self._cards[2].set_value("inert", value)
 

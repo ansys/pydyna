@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatCfMicromechanics class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatCfMicromechanics(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatCfMicromechanics class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -533,6 +535,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -543,6 +546,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -553,6 +557,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @e1.setter
     def e1(self, value: float) -> None:
+        """Set the e1 property."""
         self._cards[0].set_value("e1", value)
 
     @property
@@ -563,6 +568,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @e2.setter
     def e2(self, value: float) -> None:
+        """Set the e2 property."""
         self._cards[0].set_value("e2", value)
 
     @property
@@ -573,6 +579,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @g12.setter
     def g12(self, value: float) -> None:
+        """Set the g12 property."""
         self._cards[0].set_value("g12", value)
 
     @property
@@ -583,6 +590,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @g23.setter
     def g23(self, value: float) -> None:
+        """Set the g23 property."""
         self._cards[0].set_value("g23", value)
 
     @property
@@ -593,6 +601,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @eu.setter
     def eu(self, value: float) -> None:
+        """Set the eu property."""
         self._cards[0].set_value("eu", value)
 
     @property
@@ -603,6 +612,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -613,6 +623,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @eka.setter
     def eka(self, value: float) -> None:
+        """Set the eka property."""
         self._cards[1].set_value("eka", value)
 
     @property
@@ -623,6 +634,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @eua.setter
     def eua(self, value: float) -> None:
+        """Set the eua property."""
         self._cards[1].set_value("eua", value)
 
     @property
@@ -633,6 +645,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @vmb.setter
     def vmb(self, value: float) -> None:
+        """Set the vmb property."""
         self._cards[1].set_value("vmb", value)
 
     @property
@@ -643,6 +656,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @ekb.setter
     def ekb(self, value: float) -> None:
+        """Set the ekb property."""
         self._cards[1].set_value("ekb", value)
 
     @property
@@ -653,6 +667,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @thl.setter
     def thl(self, value: float) -> None:
+        """Set the thl property."""
         self._cards[1].set_value("thl", value)
 
     @property
@@ -663,6 +678,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @ta.setter
     def ta(self, value: float) -> None:
+        """Set the ta property."""
         self._cards[1].set_value("ta", value)
 
     @property
@@ -673,6 +689,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @thi1.setter
     def thi1(self, value: float) -> None:
+        """Set the thi1 property."""
         self._cards[1].set_value("thi1", value)
 
     @property
@@ -683,6 +700,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @thi2.setter
     def thi2(self, value: float) -> None:
+        """Set the thi2 property."""
         self._cards[1].set_value("thi2", value)
 
     @property
@@ -693,6 +711,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[2].set_value("w", value)
 
     @property
@@ -703,6 +722,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @span.setter
     def span(self, value: float) -> None:
+        """Set the span property."""
         self._cards[2].set_value("span", value)
 
     @property
@@ -713,6 +733,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[2].set_value("thick", value)
 
     @property
@@ -723,6 +744,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[2].set_value("h", value)
 
     @property
@@ -733,6 +755,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @area.setter
     def area(self, value: float) -> None:
+        """Set the area property."""
         self._cards[2].set_value("area", value)
 
     @property
@@ -743,6 +766,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @e3.setter
     def e3(self, value: float) -> None:
+        """Set the e3 property."""
         self._cards[2].set_value("e3", value)
 
     @property
@@ -753,6 +777,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @pr13.setter
     def pr13(self, value: float) -> None:
+        """Set the pr13 property."""
         self._cards[2].set_value("pr13", value)
 
     @property
@@ -763,6 +788,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @pr23.setter
     def pr23(self, value: float) -> None:
+        """Set the pr23 property."""
         self._cards[2].set_value("pr23", value)
 
     @property
@@ -788,6 +814,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[3].set_value("aopt", value)
 
     @property
@@ -798,6 +825,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[3].set_value("a1", value)
 
     @property
@@ -808,6 +836,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[3].set_value("a2", value)
 
     @property
@@ -818,6 +847,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[3].set_value("a3", value)
 
     @property
@@ -828,6 +858,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[4].set_value("v1", value)
 
     @property
@@ -838,6 +869,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[4].set_value("v2", value)
 
     @property
@@ -848,6 +880,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[4].set_value("v3", value)
 
     @property
@@ -858,6 +891,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -868,6 +902,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -878,6 +913,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[4].set_value("d3", value)
 
     @property
@@ -888,6 +924,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @vyarn.setter
     def vyarn(self, value: float) -> None:
+        """Set the vyarn property."""
         self._cards[5].set_value("vyarn", value)
 
     @property
@@ -898,6 +935,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @k1.setter
     def k1(self, value: float) -> None:
+        """Set the k1 property."""
         self._cards[6].set_value("k1", value)
 
     @property
@@ -908,6 +946,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @k2.setter
     def k2(self, value: float) -> None:
+        """Set the k2 property."""
         self._cards[6].set_value("k2", value)
 
     @property
@@ -918,6 +957,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[6].set_value("c1", value)
 
     @property
@@ -928,6 +968,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[6].set_value("c2", value)
 
     @property
@@ -938,6 +979,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[6].set_value("m", value)
 
     @property
@@ -948,6 +990,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[6].set_value("n", value)
 
     @property
@@ -958,6 +1001,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @chexp1.setter
     def chexp1(self, value: float) -> None:
+        """Set the chexp1 property."""
         self._cards[7].set_value("chexp1", value)
 
     @property
@@ -968,6 +1012,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @chexp2.setter
     def chexp2(self, value: float) -> None:
+        """Set the chexp2 property."""
         self._cards[7].set_value("chexp2", value)
 
     @property
@@ -978,6 +1023,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @chexp3.setter
     def chexp3(self, value: float) -> None:
+        """Set the chexp3 property."""
         self._cards[7].set_value("chexp3", value)
 
     @property
@@ -990,6 +1036,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @lcchexp.setter
     def lcchexp(self, value: int) -> None:
+        """Set the lcchexp property."""
         self._cards[7].set_value("lcchexp", value)
 
     @property
@@ -1003,6 +1050,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @lcthexp.setter
     def lcthexp(self, value: int) -> None:
+        """Set the lcthexp property."""
         self._cards[7].set_value("lcthexp", value)
 
     @property
@@ -1013,6 +1061,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[7].set_value("r", value)
 
     @property
@@ -1023,6 +1072,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @tref.setter
     def tref(self, value: float) -> None:
+        """Set the tref property."""
         self._cards[7].set_value("tref", value)
 
     @property
@@ -1033,6 +1083,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @docref.setter
     def docref(self, value: float) -> None:
+        """Set the docref property."""
         self._cards[7].set_value("docref", value)
 
     @property
@@ -1043,6 +1094,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @wlftref.setter
     def wlftref(self, value: float) -> None:
+        """Set the wlftref property."""
         self._cards[8].set_value("wlftref", value)
 
     @property
@@ -1053,6 +1105,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @wlfa.setter
     def wlfa(self, value: float) -> None:
+        """Set the wlfa property."""
         self._cards[8].set_value("wlfa", value)
 
     @property
@@ -1063,6 +1116,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @wlfb.setter
     def wlfb(self, value: float) -> None:
+        """Set the wlfb property."""
         self._cards[8].set_value("wlfb", value)
 
     @property
@@ -1073,6 +1127,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @lcg0.setter
     def lcg0(self, value: int) -> None:
+        """Set the lcg0 property."""
         self._cards[8].set_value("lcg0", value)
 
     @property
@@ -1083,6 +1138,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @lck0.setter
     def lck0(self, value: int) -> None:
+        """Set the lck0 property."""
         self._cards[8].set_value("lck0", value)
 
     @property
@@ -1093,6 +1149,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @idoc.setter
     def idoc(self, value: float) -> None:
+        """Set the idoc property."""
         self._cards[8].set_value("idoc", value)
 
     @property
@@ -1105,8 +1162,9 @@ class MatCfMicromechanics(KeywordBase):
 
     @incr.setter
     def incr(self, value: int) -> None:
+        """Set the incr property."""
         if value not in [0, 1, None]:
-            raise Exception("""incr must be `None` or one of {0,1}""")
+            raise Exception("""incr must be `None` or one of {0,1}.""")
         self._cards[8].set_value("incr", value)
 
     @property
@@ -1117,6 +1175,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @qcure.setter
     def qcure(self, value: float) -> None:
+        """Set the qcure property."""
         self._cards[8].set_value("qcure", value)
 
     @property
@@ -1127,6 +1186,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @gi.setter
     def gi(self, value: float) -> None:
+        """Set the gi property."""
         self._cards[9].set_value("gi", value)
 
     @property
@@ -1137,6 +1197,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @betagi.setter
     def betagi(self, value: float) -> None:
+        """Set the betagi property."""
         self._cards[9].set_value("betagi", value)
 
     @property
@@ -1147,6 +1208,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @ki.setter
     def ki(self, value: float) -> None:
+        """Set the ki property."""
         self._cards[9].set_value("ki", value)
 
     @property
@@ -1157,6 +1219,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @betaki.setter
     def betaki(self, value: float) -> None:
+        """Set the betaki property."""
         self._cards[9].set_value("betaki", value)
 
     @property
@@ -1167,5 +1230,6 @@ class MatCfMicromechanics(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[10].cards[0].set_value("title", value)
 

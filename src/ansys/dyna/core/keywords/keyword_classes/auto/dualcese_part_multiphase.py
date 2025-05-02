@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualcesePartMultiphase class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualcesePartMultiphase(KeywordBase):
     subkeyword = "PART_MULTIPHASE"
 
     def __init__(self, **kwargs):
+        """Initialize the DualcesePartMultiphase class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -89,6 +91,7 @@ class DualcesePartMultiphase(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -99,6 +102,7 @@ class DualcesePartMultiphase(KeywordBase):
 
     @react_id.setter
     def react_id(self, value: int) -> None:
+        """Set the react_id property."""
         self._cards[0].set_value("react_id", value)
 
     @property
@@ -109,6 +113,7 @@ class DualcesePartMultiphase(KeywordBase):
 
     @eossid.setter
     def eossid(self, value: int) -> None:
+        """Set the eossid property."""
         self._cards[0].set_value("eossid", value)
 
     @property
@@ -119,6 +124,7 @@ class DualcesePartMultiphase(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -132,6 +138,7 @@ class DualcesePartMultiphase(KeywordBase):
 
     @fsitype.setter
     def fsitype(self, value: str) -> None:
+        """Set the fsitype property."""
         self._cards[0].set_value("fsitype", value)
 
     @property
@@ -142,5 +149,6 @@ class DualcesePartMultiphase(KeywordBase):
 
     @mmshid.setter
     def mmshid(self, value: int) -> None:
+        """Set the mmshid property."""
         self._cards[0].set_value("mmshid", value)
 

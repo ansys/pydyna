@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseBoundarySolidWallSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundarySolidWallSet(KeywordBase):
     subkeyword = "BOUNDARY_SOLID_WALL_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseBoundarySolidWallSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -85,6 +87,7 @@ class CeseBoundarySolidWallSet(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -95,6 +98,7 @@ class CeseBoundarySolidWallSet(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -107,6 +111,7 @@ class CeseBoundarySolidWallSet(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -119,6 +124,7 @@ class CeseBoundarySolidWallSet(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -131,5 +137,6 @@ class CeseBoundarySolidWallSet(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 

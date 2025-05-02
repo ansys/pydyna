@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineFibers class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFibers(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineFibers class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -197,6 +199,7 @@ class DefineFibers(KeywordBase):
 
     @idf.setter
     def idf(self, value: int) -> None:
+        """Set the idf property."""
         self._cards[0].set_value("idf", value)
 
     @property
@@ -207,6 +210,7 @@ class DefineFibers(KeywordBase):
 
     @idp.setter
     def idp(self, value: int) -> None:
+        """Set the idp property."""
         self._cards[0].set_value("idp", value)
 
     @property
@@ -217,6 +221,7 @@ class DefineFibers(KeywordBase):
 
     @numf.setter
     def numf(self, value: int) -> None:
+        """Set the numf property."""
         self._cards[0].set_value("numf", value)
 
     @property
@@ -227,6 +232,7 @@ class DefineFibers(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -237,6 +243,7 @@ class DefineFibers(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -249,6 +256,7 @@ class DefineFibers(KeywordBase):
 
     @efb.setter
     def efb(self, value: float) -> None:
+        """Set the efb property."""
         self._cards[0].set_value("efb", value)
 
     @property
@@ -261,6 +269,7 @@ class DefineFibers(KeywordBase):
 
     @shr.setter
     def shr(self, value: float) -> None:
+        """Set the shr property."""
         self._cards[0].set_value("shr", value)
 
     @property
@@ -271,6 +280,7 @@ class DefineFibers(KeywordBase):
 
     @hrgls.setter
     def hrgls(self, value: float) -> None:
+        """Set the hrgls property."""
         self._cards[0].set_value("hrgls", value)
 
     @property
@@ -282,6 +292,7 @@ class DefineFibers(KeywordBase):
 
     @alpha1.setter
     def alpha1(self, value: float) -> None:
+        """Set the alpha1 property."""
         self._cards[1].set_value("alpha1", value)
 
     @property
@@ -293,6 +304,7 @@ class DefineFibers(KeywordBase):
 
     @alpha2.setter
     def alpha2(self, value: float) -> None:
+        """Set the alpha2 property."""
         self._cards[1].set_value("alpha2", value)
 
     @property
@@ -304,6 +316,7 @@ class DefineFibers(KeywordBase):
 
     @alpha3.setter
     def alpha3(self, value: float) -> None:
+        """Set the alpha3 property."""
         self._cards[1].set_value("alpha3", value)
 
     @property
@@ -316,6 +329,7 @@ class DefineFibers(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[2].set_value("x1", value)
 
     @property
@@ -328,6 +342,7 @@ class DefineFibers(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[2].set_value("y1", value)
 
     @property
@@ -340,6 +355,7 @@ class DefineFibers(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[2].set_value("z1", value)
 
     @property
@@ -352,6 +368,7 @@ class DefineFibers(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[2].set_value("x2", value)
 
     @property
@@ -364,6 +381,7 @@ class DefineFibers(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[2].set_value("y2", value)
 
     @property
@@ -376,6 +394,7 @@ class DefineFibers(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[2].set_value("z2", value)
 
     @property
@@ -386,5 +405,6 @@ class DefineFibers(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

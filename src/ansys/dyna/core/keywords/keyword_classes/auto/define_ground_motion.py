@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineGroundMotion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineGroundMotion(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineGroundMotion class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -90,6 +92,7 @@ class DefineGroundMotion(KeywordBase):
 
     @gmid.setter
     def gmid(self, value: int) -> None:
+        """Set the gmid property."""
         self._cards[0].set_value("gmid", value)
 
     @property
@@ -100,6 +103,7 @@ class DefineGroundMotion(KeywordBase):
 
     @alcid.setter
     def alcid(self, value: int) -> None:
+        """Set the alcid property."""
         self._cards[0].set_value("alcid", value)
 
     @property
@@ -110,6 +114,7 @@ class DefineGroundMotion(KeywordBase):
 
     @vlcid.setter
     def vlcid(self, value: int) -> None:
+        """Set the vlcid property."""
         self._cards[0].set_value("vlcid", value)
 
     @property
@@ -120,5 +125,6 @@ class DefineGroundMotion(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

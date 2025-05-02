@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadBlast class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBlast(KeywordBase):
     subkeyword = "BLAST"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadBlast class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -146,6 +148,7 @@ class LoadBlast(KeywordBase):
 
     @wgt.setter
     def wgt(self, value: float) -> None:
+        """Set the wgt property."""
         self._cards[0].set_value("wgt", value)
 
     @property
@@ -156,6 +159,7 @@ class LoadBlast(KeywordBase):
 
     @xbo.setter
     def xbo(self, value: float) -> None:
+        """Set the xbo property."""
         self._cards[0].set_value("xbo", value)
 
     @property
@@ -166,6 +170,7 @@ class LoadBlast(KeywordBase):
 
     @ybo.setter
     def ybo(self, value: float) -> None:
+        """Set the ybo property."""
         self._cards[0].set_value("ybo", value)
 
     @property
@@ -176,6 +181,7 @@ class LoadBlast(KeywordBase):
 
     @zbo.setter
     def zbo(self, value: float) -> None:
+        """Set the zbo property."""
         self._cards[0].set_value("zbo", value)
 
     @property
@@ -186,6 +192,7 @@ class LoadBlast(KeywordBase):
 
     @tbo.setter
     def tbo(self, value: float) -> None:
+        """Set the tbo property."""
         self._cards[0].set_value("tbo", value)
 
     @property
@@ -201,8 +208,9 @@ class LoadBlast(KeywordBase):
 
     @iunit.setter
     def iunit(self, value: int) -> None:
+        """Set the iunit property."""
         if value not in [2, 1, 3, 4, 5, None]:
-            raise Exception("""iunit must be `None` or one of {2,1,3,4,5}""")
+            raise Exception("""iunit must be `None` or one of {2,1,3,4,5}.""")
         self._cards[0].set_value("iunit", value)
 
     @property
@@ -215,8 +223,9 @@ class LoadBlast(KeywordBase):
 
     @isurf.setter
     def isurf(self, value: int) -> None:
+        """Set the isurf property."""
         if value not in [2, 1, None]:
-            raise Exception("""isurf must be `None` or one of {2,1}""")
+            raise Exception("""isurf must be `None` or one of {2,1}.""")
         self._cards[0].set_value("isurf", value)
 
     @property
@@ -227,6 +236,7 @@ class LoadBlast(KeywordBase):
 
     @cfm.setter
     def cfm(self, value: float) -> None:
+        """Set the cfm property."""
         self._cards[1].set_value("cfm", value)
 
     @property
@@ -237,6 +247,7 @@ class LoadBlast(KeywordBase):
 
     @cfl.setter
     def cfl(self, value: float) -> None:
+        """Set the cfl property."""
         self._cards[1].set_value("cfl", value)
 
     @property
@@ -247,6 +258,7 @@ class LoadBlast(KeywordBase):
 
     @cft.setter
     def cft(self, value: float) -> None:
+        """Set the cft property."""
         self._cards[1].set_value("cft", value)
 
     @property
@@ -257,6 +269,7 @@ class LoadBlast(KeywordBase):
 
     @cfp.setter
     def cfp(self, value: float) -> None:
+        """Set the cfp property."""
         self._cards[1].set_value("cfp", value)
 
     @property
@@ -267,5 +280,6 @@ class LoadBlast(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 

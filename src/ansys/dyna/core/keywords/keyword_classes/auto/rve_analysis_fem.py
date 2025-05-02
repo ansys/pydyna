@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the RveAnalysisFem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RveAnalysisFem(KeywordBase):
     subkeyword = "ANALYSIS_FEM"
 
     def __init__(self, **kwargs):
+        """Initialize the RveAnalysisFem class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -153,6 +155,7 @@ class RveAnalysisFem(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -172,6 +175,7 @@ class RveAnalysisFem(KeywordBase):
 
     @inpt.setter
     def inpt(self, value: int) -> None:
+        """Set the inpt property."""
         self._cards[1].set_value("inpt", value)
 
     @property
@@ -182,6 +186,7 @@ class RveAnalysisFem(KeywordBase):
 
     @oupt.setter
     def oupt(self, value: int) -> None:
+        """Set the oupt property."""
         self._cards[1].set_value("oupt", value)
 
     @property
@@ -195,6 +200,7 @@ class RveAnalysisFem(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -207,6 +213,7 @@ class RveAnalysisFem(KeywordBase):
 
     @idof.setter
     def idof(self, value: int) -> None:
+        """Set the idof property."""
         self._cards[1].set_value("idof", value)
 
     @property
@@ -219,6 +226,7 @@ class RveAnalysisFem(KeywordBase):
 
     @bc.setter
     def bc(self, value: int) -> None:
+        """Set the bc property."""
         self._cards[1].set_value("bc", value)
 
     @property
@@ -239,6 +247,7 @@ class RveAnalysisFem(KeywordBase):
 
     @imatch.setter
     def imatch(self, value: int) -> None:
+        """Set the imatch property."""
         self._cards[1].set_value("imatch", value)
 
     @property
@@ -249,6 +258,7 @@ class RveAnalysisFem(KeywordBase):
 
     @h11.setter
     def h11(self, value: float) -> None:
+        """Set the h11 property."""
         self._cards[2].set_value("h11", value)
 
     @property
@@ -259,6 +269,7 @@ class RveAnalysisFem(KeywordBase):
 
     @h22.setter
     def h22(self, value: float) -> None:
+        """Set the h22 property."""
         self._cards[2].set_value("h22", value)
 
     @property
@@ -269,6 +280,7 @@ class RveAnalysisFem(KeywordBase):
 
     @h33.setter
     def h33(self, value: float) -> None:
+        """Set the h33 property."""
         self._cards[2].set_value("h33", value)
 
     @property
@@ -279,6 +291,7 @@ class RveAnalysisFem(KeywordBase):
 
     @h12.setter
     def h12(self, value: float) -> None:
+        """Set the h12 property."""
         self._cards[2].set_value("h12", value)
 
     @property
@@ -289,6 +302,7 @@ class RveAnalysisFem(KeywordBase):
 
     @h23.setter
     def h23(self, value: float) -> None:
+        """Set the h23 property."""
         self._cards[2].set_value("h23", value)
 
     @property
@@ -299,5 +313,6 @@ class RveAnalysisFem(KeywordBase):
 
     @h13.setter
     def h13(self, value: float) -> None:
+        """Set the h13 property."""
         self._cards[2].set_value("h13", value)
 

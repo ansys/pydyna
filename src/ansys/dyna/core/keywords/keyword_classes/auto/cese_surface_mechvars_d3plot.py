@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseSurfaceMechvarsD3Plot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseSurfaceMechvarsD3Plot(KeywordBase):
     subkeyword = "SURFACE_MECHVARS_D3PLOT"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseSurfaceMechvarsD3Plot class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class CeseSurfaceMechvarsD3Plot(KeywordBase):
 
     @output_quantity.setter
     def output_quantity(self, value: str) -> None:
+        """Set the output_quantity property."""
         self._cards[0].set_value("output quantity", value)
 

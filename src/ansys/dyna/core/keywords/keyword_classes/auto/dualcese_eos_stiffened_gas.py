@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseEosStiffenedGas class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseEosStiffenedGas(KeywordBase):
     subkeyword = "EOS_STIFFENED_GAS"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseEosStiffenedGas class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class DualceseEosStiffenedGas(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -78,6 +81,7 @@ class DualceseEosStiffenedGas(KeywordBase):
 
     @ga.setter
     def ga(self, value: float) -> None:
+        """Set the ga property."""
         self._cards[0].set_value("ga", value)
 
     @property
@@ -88,5 +92,6 @@ class DualceseEosStiffenedGas(KeywordBase):
 
     @gb.setter
     def gb(self, value: float) -> None:
+        """Set the gb property."""
         self._cards[0].set_value("gb", value)
 

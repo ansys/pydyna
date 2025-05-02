@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleEssentialBoundary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleEssentialBoundary(KeywordBase):
     subkeyword = "ESSENTIAL_BOUNDARY"
 
     def __init__(self, **kwargs):
+        """Initialize the AleEssentialBoundary class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class AleEssentialBoundary(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -90,8 +93,9 @@ class AleEssentialBoundary(KeywordBase):
 
     @idtype.setter
     def idtype(self, value: int) -> None:
+        """Set the idtype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""idtype must be `None` or one of {0,1,2}""")
+            raise Exception("""idtype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("idtype", value)
 
     @property
@@ -104,8 +108,9 @@ class AleEssentialBoundary(KeywordBase):
 
     @ictype.setter
     def ictype(self, value: int) -> None:
+        """Set the ictype property."""
         if value not in [1, 2, None]:
-            raise Exception("""ictype must be `None` or one of {1,2}""")
+            raise Exception("""ictype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("ictype", value)
 
     @property
@@ -116,5 +121,6 @@ class AleEssentialBoundary(KeywordBase):
 
     @iexcl.setter
     def iexcl(self, value: int) -> None:
+        """Set the iexcl property."""
         self._cards[0].set_value("iexcl", value)
 

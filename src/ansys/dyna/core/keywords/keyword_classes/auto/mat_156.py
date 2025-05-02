@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat156 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat156(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat156 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -164,6 +166,7 @@ class Mat156(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -174,6 +177,7 @@ class Mat156(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -184,6 +188,7 @@ class Mat156(KeywordBase):
 
     @sno.setter
     def sno(self, value: float) -> None:
+        """Set the sno property."""
         self._cards[0].set_value("sno", value)
 
     @property
@@ -194,6 +199,7 @@ class Mat156(KeywordBase):
 
     @srm.setter
     def srm(self, value: float) -> None:
+        """Set the srm property."""
         self._cards[0].set_value("srm", value)
 
     @property
@@ -204,6 +210,7 @@ class Mat156(KeywordBase):
 
     @pis.setter
     def pis(self, value: float) -> None:
+        """Set the pis property."""
         self._cards[0].set_value("pis", value)
 
     @property
@@ -214,6 +221,7 @@ class Mat156(KeywordBase):
 
     @ssm.setter
     def ssm(self, value: float) -> None:
+        """Set the ssm property."""
         self._cards[0].set_value("ssm", value)
 
     @property
@@ -224,6 +232,7 @@ class Mat156(KeywordBase):
 
     @cer.setter
     def cer(self, value: float) -> None:
+        """Set the cer property."""
         self._cards[0].set_value("cer", value)
 
     @property
@@ -234,6 +243,7 @@ class Mat156(KeywordBase):
 
     @dmp.setter
     def dmp(self, value: float) -> None:
+        """Set the dmp property."""
         self._cards[0].set_value("dmp", value)
 
     @property
@@ -246,6 +256,7 @@ class Mat156(KeywordBase):
 
     @alm.setter
     def alm(self, value: float) -> None:
+        """Set the alm property."""
         self._cards[1].set_value("alm", value)
 
     @property
@@ -258,6 +269,7 @@ class Mat156(KeywordBase):
 
     @sfr.setter
     def sfr(self, value: float) -> None:
+        """Set the sfr property."""
         self._cards[1].set_value("sfr", value)
 
     @property
@@ -270,6 +282,7 @@ class Mat156(KeywordBase):
 
     @svs.setter
     def svs(self, value: float) -> None:
+        """Set the svs property."""
         self._cards[1].set_value("svs", value)
 
     @property
@@ -282,6 +295,7 @@ class Mat156(KeywordBase):
 
     @svr.setter
     def svr(self, value: float) -> None:
+        """Set the svr property."""
         self._cards[1].set_value("svr", value)
 
     @property
@@ -295,6 +309,7 @@ class Mat156(KeywordBase):
 
     @ssp.setter
     def ssp(self, value: float) -> None:
+        """Set the ssp property."""
         self._cards[1].set_value("ssp", value)
 
     @property
@@ -305,5 +320,6 @@ class Mat156(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

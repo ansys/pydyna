@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryCoupled class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryCoupled(KeywordBase):
     subkeyword = "COUPLED"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryCoupled class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -87,6 +89,7 @@ class BoundaryCoupled(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -97,6 +100,7 @@ class BoundaryCoupled(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -107,6 +111,7 @@ class BoundaryCoupled(KeywordBase):
 
     @set.setter
     def set(self, value: int) -> None:
+        """Set the set property."""
         self._cards[1].set_value("set", value)
 
     @property
@@ -119,8 +124,9 @@ class BoundaryCoupled(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [1, 2, None]:
-            raise Exception("""type must be `None` or one of {1,2}""")
+            raise Exception("""type must be `None` or one of {1,2}.""")
         self._cards[1].set_value("type", value)
 
     @property
@@ -131,5 +137,6 @@ class BoundaryCoupled(KeywordBase):
 
     @prog.setter
     def prog(self, value: int) -> None:
+        """Set the prog property."""
         self._cards[1].set_value("prog", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitStaticCondensation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitStaticCondensation(KeywordBase):
     subkeyword = "IMPLICIT_STATIC_CONDENSATION"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitStaticCondensation class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -104,8 +106,9 @@ class ControlImplicitStaticCondensation(KeywordBase):
 
     @sc_flag.setter
     def sc_flag(self, value: int) -> None:
+        """Set the sc_flag property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sc_flag must be `None` or one of {0,1,2}""")
+            raise Exception("""sc_flag must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sc_flag", value)
 
     @property
@@ -116,6 +119,7 @@ class ControlImplicitStaticCondensation(KeywordBase):
 
     @sc_nsid.setter
     def sc_nsid(self, value: int) -> None:
+        """Set the sc_nsid property."""
         self._cards[0].set_value("sc_nsid", value)
 
     @property
@@ -126,6 +130,7 @@ class ControlImplicitStaticCondensation(KeywordBase):
 
     @sc_psid.setter
     def sc_psid(self, value: int) -> None:
+        """Set the sc_psid property."""
         self._cards[0].set_value("sc_psid", value)
 
     @property
@@ -136,6 +141,7 @@ class ControlImplicitStaticCondensation(KeywordBase):
 
     @se_mass.setter
     def se_mass(self, value: str) -> None:
+        """Set the se_mass property."""
         self._cards[0].set_value("se_mass", value)
 
     @property
@@ -146,6 +152,7 @@ class ControlImplicitStaticCondensation(KeywordBase):
 
     @se_stiff.setter
     def se_stiff(self, value: str) -> None:
+        """Set the se_stiff property."""
         self._cards[0].set_value("se_stiff", value)
 
     @property
@@ -156,6 +163,7 @@ class ControlImplicitStaticCondensation(KeywordBase):
 
     @se_inert.setter
     def se_inert(self, value: str) -> None:
+        """Set the se_inert property."""
         self._cards[0].set_value("se_inert", value)
 
     @property
@@ -166,5 +174,6 @@ class ControlImplicitStaticCondensation(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 

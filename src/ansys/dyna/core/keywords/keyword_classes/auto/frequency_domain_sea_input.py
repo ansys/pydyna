@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainSeaInput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainSeaInput(KeywordBase):
     subkeyword = "DOMAIN_SEA_INPUT"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainSeaInput class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -102,6 +104,7 @@ class FrequencyDomainSeaInput(KeywordBase):
 
     @subid.setter
     def subid(self, value: int) -> None:
+        """Set the subid property."""
         self._cards[0].set_value("subid", value)
 
     @property
@@ -115,8 +118,9 @@ class FrequencyDomainSeaInput(KeywordBase):
 
     @subtyp.setter
     def subtyp(self, value: int) -> None:
+        """Set the subtyp property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""subtyp must be `None` or one of {1,2,3}""")
+            raise Exception("""subtyp must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("subtyp", value)
 
     @property
@@ -133,8 +137,9 @@ class FrequencyDomainSeaInput(KeywordBase):
 
     @loadtyp.setter
     def loadtyp(self, value: int) -> None:
+        """Set the loadtyp property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""loadtyp must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""loadtyp must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("loadtyp", value)
 
     @property
@@ -145,6 +150,7 @@ class FrequencyDomainSeaInput(KeywordBase):
 
     @bwave.setter
     def bwave(self, value: float) -> None:
+        """Set the bwave property."""
         self._cards[1].set_value("bwave", value)
 
     @property
@@ -155,6 +161,7 @@ class FrequencyDomainSeaInput(KeywordBase):
 
     @lwave.setter
     def lwave(self, value: float) -> None:
+        """Set the lwave property."""
         self._cards[1].set_value("lwave", value)
 
     @property
@@ -165,6 +172,7 @@ class FrequencyDomainSeaInput(KeywordBase):
 
     @swave.setter
     def swave(self, value: float) -> None:
+        """Set the swave property."""
         self._cards[1].set_value("swave", value)
 
     @property
@@ -175,5 +183,6 @@ class FrequencyDomainSeaInput(KeywordBase):
 
     @twave.setter
     def twave(self, value: float) -> None:
+        """Set the twave property."""
         self._cards[1].set_value("twave", value)
 

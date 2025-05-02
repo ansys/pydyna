@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadMask class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadMask(KeywordBase):
     subkeyword = "MASK"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadMask class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -120,6 +122,7 @@ class LoadMask(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -130,6 +133,7 @@ class LoadMask(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -140,6 +144,7 @@ class LoadMask(KeywordBase):
 
     @vid1.setter
     def vid1(self, value: int) -> None:
+        """Set the vid1 property."""
         self._cards[0].set_value("vid1", value)
 
     @property
@@ -150,6 +155,7 @@ class LoadMask(KeywordBase):
 
     @off.setter
     def off(self, value: float) -> None:
+        """Set the off property."""
         self._cards[0].set_value("off", value)
 
     @property
@@ -160,6 +166,7 @@ class LoadMask(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -170,6 +177,7 @@ class LoadMask(KeywordBase):
 
     @lcidm.setter
     def lcidm(self, value: int) -> None:
+        """Set the lcidm property."""
         self._cards[0].set_value("lcidm", value)
 
     @property
@@ -180,6 +188,7 @@ class LoadMask(KeywordBase):
 
     @vid2.setter
     def vid2(self, value: int) -> None:
+        """Set the vid2 property."""
         self._cards[0].set_value("vid2", value)
 
     @property
@@ -191,8 +200,9 @@ class LoadMask(KeywordBase):
 
     @inout.setter
     def inout(self, value: int) -> None:
+        """Set the inout property."""
         if value not in [0, 1, None]:
-            raise Exception("""inout must be `None` or one of {0,1}""")
+            raise Exception("""inout must be `None` or one of {0,1}.""")
         self._cards[0].set_value("inout", value)
 
     @property
@@ -203,5 +213,6 @@ class LoadMask(KeywordBase):
 
     @icycle.setter
     def icycle(self, value: int) -> None:
+        """Set the icycle property."""
         self._cards[1].set_value("icycle", value)
 

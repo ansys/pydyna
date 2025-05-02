@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSchwerMurrayCapModel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSchwerMurrayCapModel class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -387,6 +389,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -397,6 +400,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -407,6 +411,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @shear.setter
     def shear(self, value: float) -> None:
+        """Set the shear property."""
         self._cards[0].set_value("shear", value)
 
     @property
@@ -417,6 +422,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @bulk.setter
     def bulk(self, value: float) -> None:
+        """Set the bulk property."""
         self._cards[0].set_value("bulk", value)
 
     @property
@@ -427,6 +433,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @grun.setter
     def grun(self, value: float) -> None:
+        """Set the grun property."""
         self._cards[0].set_value("grun", value)
 
     @property
@@ -437,6 +444,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @shock.setter
     def shock(self, value: float) -> None:
+        """Set the shock property."""
         self._cards[0].set_value("shock", value)
 
     @property
@@ -449,8 +457,9 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @pore.setter
     def pore(self, value: float) -> None:
+        """Set the pore property."""
         if value not in [1.0, 0.0, None]:
-            raise Exception("""pore must be `None` or one of {1.0,0.0}""")
+            raise Exception("""pore must be `None` or one of {1.0,0.0}.""")
         self._cards[0].set_value("pore", value)
 
     @property
@@ -461,6 +470,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
 
     @property
@@ -471,6 +481,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @theta.setter
     def theta(self, value: float) -> None:
+        """Set the theta property."""
         self._cards[1].set_value("theta", value)
 
     @property
@@ -481,6 +492,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[1].set_value("gamma", value)
 
     @property
@@ -491,6 +503,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[1].set_value("beta", value)
 
     @property
@@ -501,6 +514,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @efit.setter
     def efit(self, value: float) -> None:
+        """Set the efit property."""
         self._cards[1].set_value("efit", value)
 
     @property
@@ -511,6 +525,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @ffit.setter
     def ffit(self, value: float) -> None:
+        """Set the ffit property."""
         self._cards[1].set_value("ffit", value)
 
     @property
@@ -521,6 +536,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @alphan.setter
     def alphan(self, value: float) -> None:
+        """Set the alphan property."""
         self._cards[1].set_value("alphan", value)
 
     @property
@@ -531,6 +547,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @calpha.setter
     def calpha(self, value: float) -> None:
+        """Set the calpha property."""
         self._cards[1].set_value("calpha", value)
 
     @property
@@ -541,6 +558,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[2].set_value("ro", value)
 
     @property
@@ -551,6 +569,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @xo.setter
     def xo(self, value: float) -> None:
+        """Set the xo property."""
         self._cards[2].set_value("xo", value)
 
     @property
@@ -562,8 +581,9 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @irock.setter
     def irock(self, value: float) -> None:
+        """Set the irock property."""
         if value not in [0, 1, None]:
-            raise Exception("""irock must be `None` or one of {0,1}""")
+            raise Exception("""irock must be `None` or one of {0,1}.""")
         self._cards[2].set_value("irock", value)
 
     @property
@@ -574,6 +594,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @secp.setter
     def secp(self, value: float) -> None:
+        """Set the secp property."""
         self._cards[2].set_value("secp", value)
 
     @property
@@ -584,6 +605,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @afit.setter
     def afit(self, value: float) -> None:
+        """Set the afit property."""
         self._cards[2].set_value("afit", value)
 
     @property
@@ -594,6 +616,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @bfit.setter
     def bfit(self, value: float) -> None:
+        """Set the bfit property."""
         self._cards[2].set_value("bfit", value)
 
     @property
@@ -604,6 +627,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @rdamo.setter
     def rdamo(self, value: float) -> None:
+        """Set the rdamo property."""
         self._cards[2].set_value("rdamo", value)
 
     @property
@@ -614,6 +638,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[3].set_value("w", value)
 
     @property
@@ -624,6 +649,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[3].set_value("d1", value)
 
     @property
@@ -634,6 +660,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[3].set_value("d2", value)
 
     @property
@@ -644,6 +671,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @nplot.setter
     def nplot(self, value: float) -> None:
+        """Set the nplot property."""
         self._cards[3].set_value("nplot", value)
 
     @property
@@ -654,6 +682,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @epsmax.setter
     def epsmax(self, value: float) -> None:
+        """Set the epsmax property."""
         self._cards[3].set_value("epsmax", value)
 
     @property
@@ -664,6 +693,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @cfit.setter
     def cfit(self, value: float) -> None:
+        """Set the cfit property."""
         self._cards[3].set_value("cfit", value)
 
     @property
@@ -674,6 +704,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @dfit.setter
     def dfit(self, value: float) -> None:
+        """Set the dfit property."""
         self._cards[3].set_value("dfit", value)
 
     @property
@@ -684,6 +715,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @tfail.setter
     def tfail(self, value: float) -> None:
+        """Set the tfail property."""
         self._cards[3].set_value("tfail", value)
 
     @property
@@ -696,8 +728,9 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @failfg.setter
     def failfg(self, value: float) -> None:
+        """Set the failfg property."""
         if value not in [1, 0, None]:
-            raise Exception("""failfg must be `None` or one of {1,0}""")
+            raise Exception("""failfg must be `None` or one of {1,0}.""")
         self._cards[4].set_value("failfg", value)
 
     @property
@@ -708,6 +741,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @dbeta.setter
     def dbeta(self, value: float) -> None:
+        """Set the dbeta property."""
         self._cards[4].set_value("dbeta", value)
 
     @property
@@ -718,6 +752,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @ddelta.setter
     def ddelta(self, value: float) -> None:
+        """Set the ddelta property."""
         self._cards[4].set_value("ddelta", value)
 
     @property
@@ -728,6 +763,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @vptau.setter
     def vptau(self, value: float) -> None:
+        """Set the vptau property."""
         self._cards[4].set_value("vptau", value)
 
     @property
@@ -738,6 +774,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @alpha1.setter
     def alpha1(self, value: float) -> None:
+        """Set the alpha1 property."""
         self._cards[5].set_value("alpha1", value)
 
     @property
@@ -748,6 +785,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @theta1.setter
     def theta1(self, value: float) -> None:
+        """Set the theta1 property."""
         self._cards[5].set_value("theta1", value)
 
     @property
@@ -758,6 +796,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @gamma1.setter
     def gamma1(self, value: float) -> None:
+        """Set the gamma1 property."""
         self._cards[5].set_value("gamma1", value)
 
     @property
@@ -768,6 +807,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @beta1.setter
     def beta1(self, value: float) -> None:
+        """Set the beta1 property."""
         self._cards[5].set_value("beta1", value)
 
     @property
@@ -778,6 +818,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @alpha2.setter
     def alpha2(self, value: float) -> None:
+        """Set the alpha2 property."""
         self._cards[5].set_value("alpha2", value)
 
     @property
@@ -788,6 +829,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @theta2.setter
     def theta2(self, value: float) -> None:
+        """Set the theta2 property."""
         self._cards[5].set_value("theta2", value)
 
     @property
@@ -798,6 +840,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @gamma2.setter
     def gamma2(self, value: float) -> None:
+        """Set the gamma2 property."""
         self._cards[5].set_value("gamma2", value)
 
     @property
@@ -808,6 +851,7 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @beta2.setter
     def beta2(self, value: float) -> None:
+        """Set the beta2 property."""
         self._cards[5].set_value("beta2", value)
 
     @property
@@ -818,5 +862,6 @@ class MatSchwerMurrayCapModel(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 

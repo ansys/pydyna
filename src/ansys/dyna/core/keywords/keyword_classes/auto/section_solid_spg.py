@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionSolidSpg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionSolidSpg(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionSolidSpg class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -392,6 +394,7 @@ class SectionSolidSpg(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -452,8 +455,9 @@ class SectionSolidSpg(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [1, -1, -2, -18, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 42, 43, 45, 47, 60, 62, 98, 99, 101, 102, 103, 104, 105, 115, 201, 1000, None]:
-            raise Exception("""elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}""")
+            raise Exception("""elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}.""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -469,8 +473,9 @@ class SectionSolidSpg(KeywordBase):
 
     @aet.setter
     def aet(self, value: int) -> None:
+        """Set the aet property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""aet must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""aet must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("aet", value)
 
     @property
@@ -481,6 +486,7 @@ class SectionSolidSpg(KeywordBase):
 
     @cohoff.setter
     def cohoff(self, value: float) -> None:
+        """Set the cohoff property."""
         self._cards[0].set_value("cohoff", value)
 
     @property
@@ -491,6 +497,7 @@ class SectionSolidSpg(KeywordBase):
 
     @gaskeit.setter
     def gaskeit(self, value: float) -> None:
+        """Set the gaskeit property."""
         self._cards[0].set_value("gaskeit", value)
 
     @property
@@ -501,6 +508,7 @@ class SectionSolidSpg(KeywordBase):
 
     @dx.setter
     def dx(self, value: float) -> None:
+        """Set the dx property."""
         self._cards[1].set_value("dx", value)
 
     @property
@@ -511,6 +519,7 @@ class SectionSolidSpg(KeywordBase):
 
     @dy.setter
     def dy(self, value: float) -> None:
+        """Set the dy property."""
         self._cards[1].set_value("dy", value)
 
     @property
@@ -521,6 +530,7 @@ class SectionSolidSpg(KeywordBase):
 
     @dz.setter
     def dz(self, value: float) -> None:
+        """Set the dz property."""
         self._cards[1].set_value("dz", value)
 
     @property
@@ -534,8 +544,9 @@ class SectionSolidSpg(KeywordBase):
 
     @ispline.setter
     def ispline(self, value: int) -> None:
+        """Set the ispline property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ispline must be `None` or one of {0,1,2}""")
+            raise Exception("""ispline must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("ispline", value)
 
     @property
@@ -549,8 +560,9 @@ class SectionSolidSpg(KeywordBase):
 
     @kernel.setter
     def kernel(self, value: int) -> None:
+        """Set the kernel property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""kernel must be `None` or one of {0,1,2}""")
+            raise Exception("""kernel must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("kernel", value)
 
     @property
@@ -565,6 +577,7 @@ class SectionSolidSpg(KeywordBase):
 
     @smstep.setter
     def smstep(self, value: int) -> None:
+        """Set the smstep property."""
         self._cards[1].set_value("smstep", value)
 
     @property
@@ -577,6 +590,7 @@ class SectionSolidSpg(KeywordBase):
 
     @msc.setter
     def msc(self, value: float) -> None:
+        """Set the msc property."""
         self._cards[1].set_value("msc", value)
 
     @property
@@ -595,6 +609,7 @@ class SectionSolidSpg(KeywordBase):
 
     @idam.setter
     def idam(self, value: int) -> None:
+        """Set the idam property."""
         self._cards[2].set_value("idam", value)
 
     @property
@@ -608,6 +623,7 @@ class SectionSolidSpg(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[2].set_value("fs", value)
 
     @property
@@ -618,6 +634,7 @@ class SectionSolidSpg(KeywordBase):
 
     @stretch.setter
     def stretch(self, value: float) -> None:
+        """Set the stretch property."""
         self._cards[2].set_value("stretch", value)
 
     @property
@@ -633,6 +650,7 @@ class SectionSolidSpg(KeywordBase):
 
     @itb.setter
     def itb(self, value: int) -> None:
+        """Set the itb property."""
         self._cards[2].set_value("itb", value)
 
     @property
@@ -643,6 +661,7 @@ class SectionSolidSpg(KeywordBase):
 
     @msfac.setter
     def msfac(self, value: float) -> None:
+        """Set the msfac property."""
         self._cards[2].set_value("msfac", value)
 
     @property
@@ -655,6 +674,7 @@ class SectionSolidSpg(KeywordBase):
 
     @isc.setter
     def isc(self, value: float) -> None:
+        """Set the isc property."""
         self._cards[2].set_value("isc", value)
 
     @property
@@ -665,6 +685,7 @@ class SectionSolidSpg(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[2].set_value("boxid", value)
 
     @property
@@ -675,6 +696,7 @@ class SectionSolidSpg(KeywordBase):
 
     @pdamp.setter
     def pdamp(self, value: float) -> None:
+        """Set the pdamp property."""
         self._cards[2].set_value("pdamp", value)
 
     @property
@@ -685,6 +707,7 @@ class SectionSolidSpg(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[3].set_value("nip", value)
 
     @property
@@ -695,6 +718,7 @@ class SectionSolidSpg(KeywordBase):
 
     @nxdof.setter
     def nxdof(self, value: int) -> None:
+        """Set the nxdof property."""
         self._cards[3].set_value("nxdof", value)
 
     @property
@@ -705,8 +729,9 @@ class SectionSolidSpg(KeywordBase):
 
     @ihgf.setter
     def ihgf(self, value: int) -> None:
+        """Set the ihgf property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""ihgf must be `None` or one of {0,1,2,3}""")
+            raise Exception("""ihgf must be `None` or one of {0,1,2,3}.""")
         self._cards[3].set_value("ihgf", value)
 
     @property
@@ -717,8 +742,9 @@ class SectionSolidSpg(KeywordBase):
 
     @itaj.setter
     def itaj(self, value: int) -> None:
+        """Set the itaj property."""
         if value not in [0, 1, None]:
-            raise Exception("""itaj must be `None` or one of {0,1}""")
+            raise Exception("""itaj must be `None` or one of {0,1}.""")
         self._cards[3].set_value("itaj", value)
 
     @property
@@ -729,6 +755,7 @@ class SectionSolidSpg(KeywordBase):
 
     @lmc.setter
     def lmc(self, value: int) -> None:
+        """Set the lmc property."""
         self._cards[3].set_value("lmc", value)
 
     @property
@@ -739,6 +766,7 @@ class SectionSolidSpg(KeywordBase):
 
     @nhsv.setter
     def nhsv(self, value: int) -> None:
+        """Set the nhsv property."""
         self._cards[3].set_value("nhsv", value)
 
     @property
@@ -749,6 +777,7 @@ class SectionSolidSpg(KeywordBase):
 
     @xi.setter
     def xi(self, value: float) -> None:
+        """Set the xi property."""
         self._cards[4].set_value("xi", value)
 
     @property
@@ -759,6 +788,7 @@ class SectionSolidSpg(KeywordBase):
 
     @eta.setter
     def eta(self, value: float) -> None:
+        """Set the eta property."""
         self._cards[4].set_value("eta", value)
 
     @property
@@ -769,6 +799,7 @@ class SectionSolidSpg(KeywordBase):
 
     @zeta.setter
     def zeta(self, value: float) -> None:
+        """Set the zeta property."""
         self._cards[4].set_value("zeta", value)
 
     @property
@@ -779,6 +810,7 @@ class SectionSolidSpg(KeywordBase):
 
     @wgt.setter
     def wgt(self, value: float) -> None:
+        """Set the wgt property."""
         self._cards[4].set_value("wgt", value)
 
     @property
@@ -789,6 +821,7 @@ class SectionSolidSpg(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[5].set_value("p1", value)
 
     @property
@@ -799,6 +832,7 @@ class SectionSolidSpg(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[5].set_value("p2", value)
 
     @property
@@ -809,6 +843,7 @@ class SectionSolidSpg(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[5].set_value("p3", value)
 
     @property
@@ -819,6 +854,7 @@ class SectionSolidSpg(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[5].set_value("p4", value)
 
     @property
@@ -829,6 +865,7 @@ class SectionSolidSpg(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[5].set_value("p5", value)
 
     @property
@@ -839,6 +876,7 @@ class SectionSolidSpg(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[5].set_value("p6", value)
 
     @property
@@ -849,6 +887,7 @@ class SectionSolidSpg(KeywordBase):
 
     @p7.setter
     def p7(self, value: float) -> None:
+        """Set the p7 property."""
         self._cards[5].set_value("p7", value)
 
     @property
@@ -859,6 +898,7 @@ class SectionSolidSpg(KeywordBase):
 
     @p8.setter
     def p8(self, value: float) -> None:
+        """Set the p8 property."""
         self._cards[5].set_value("p8", value)
 
     @property
@@ -869,5 +909,6 @@ class SectionSolidSpg(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseExtentSsstatId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseExtentSsstatId(KeywordBase):
     subkeyword = "EXTENT_SSSTAT_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseExtentSsstatId class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class DatabaseExtentSsstatId(KeywordBase):
 
     @psidn.setter
     def psidn(self, value: int) -> None:
+        """Set the psidn property."""
         self._cards[0].set_value("psidn", value)
 
     @property
@@ -71,5 +74,6 @@ class DatabaseExtentSsstatId(KeywordBase):
 
     @headingn.setter
     def headingn(self, value: str) -> None:
+        """Set the headingn property."""
         self._cards[0].set_value("headingn", value)
 

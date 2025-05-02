@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadDensityDepth class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadDensityDepth(KeywordBase):
     subkeyword = "DENSITY_DEPTH"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadDensityDepth class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class LoadDensityDepth(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -89,6 +92,7 @@ class LoadDensityDepth(KeywordBase):
 
     @gc.setter
     def gc(self, value: float) -> None:
+        """Set the gc property."""
         self._cards[0].set_value("gc", value)
 
     @property
@@ -102,8 +106,9 @@ class LoadDensityDepth(KeywordBase):
 
     @dir.setter
     def dir(self, value: int) -> None:
+        """Set the dir property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""dir must be `None` or one of {1,2,3}""")
+            raise Exception("""dir must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("dir", value)
 
     @property
@@ -114,5 +119,6 @@ class LoadDensityDepth(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 

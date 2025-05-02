@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitModalDynamicDampingSpecific class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
     subkeyword = "IMPLICIT_MODAL_DYNAMIC_DAMPING_SPECIFIC"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitModalDynamicDampingSpecific class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
 
     @mid1.setter
     def mid1(self, value: int) -> None:
+        """Set the mid1 property."""
         self._cards[0].set_value("mid1", value)
 
     @property
@@ -113,6 +116,7 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
 
     @zeta1.setter
     def zeta1(self, value: float) -> None:
+        """Set the zeta1 property."""
         self._cards[0].set_value("zeta1", value)
 
     @property
@@ -123,6 +127,7 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
 
     @mid2.setter
     def mid2(self, value: int) -> None:
+        """Set the mid2 property."""
         self._cards[0].set_value("mid2", value)
 
     @property
@@ -133,6 +138,7 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
 
     @zeta2.setter
     def zeta2(self, value: float) -> None:
+        """Set the zeta2 property."""
         self._cards[0].set_value("zeta2", value)
 
     @property
@@ -143,6 +149,7 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
 
     @mid3.setter
     def mid3(self, value: int) -> None:
+        """Set the mid3 property."""
         self._cards[0].set_value("mid3", value)
 
     @property
@@ -153,6 +160,7 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
 
     @zeta3.setter
     def zeta3(self, value: float) -> None:
+        """Set the zeta3 property."""
         self._cards[0].set_value("zeta3", value)
 
     @property
@@ -163,6 +171,7 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
 
     @mid4.setter
     def mid4(self, value: int) -> None:
+        """Set the mid4 property."""
         self._cards[0].set_value("mid4", value)
 
     @property
@@ -173,5 +182,6 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
 
     @zeta4.setter
     def zeta4(self, value: float) -> None:
+        """Set the zeta4 property."""
         self._cards[0].set_value("zeta4", value)
 

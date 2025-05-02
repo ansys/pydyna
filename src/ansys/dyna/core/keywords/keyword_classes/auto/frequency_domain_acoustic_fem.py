@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainAcousticFem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
     subkeyword = "DOMAIN_ACOUSTIC_FEM"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainAcousticFem class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -255,6 +257,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -267,6 +270,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -277,6 +281,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @fmin.setter
     def fmin(self, value: float) -> None:
+        """Set the fmin property."""
         self._cards[0].set_value("fmin", value)
 
     @property
@@ -287,6 +292,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @fmax.setter
     def fmax(self, value: float) -> None:
+        """Set the fmax property."""
         self._cards[0].set_value("fmax", value)
 
     @property
@@ -297,6 +303,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
+        """Set the nfreq property."""
         self._cards[0].set_value("nfreq", value)
 
     @property
@@ -307,6 +314,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -317,6 +325,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @tstart.setter
     def tstart(self, value: float) -> None:
+        """Set the tstart property."""
         self._cards[0].set_value("tstart", value)
 
     @property
@@ -327,6 +336,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @pref.setter
     def pref(self, value: float) -> None:
+        """Set the pref property."""
         self._cards[0].set_value("pref", value)
 
     @property
@@ -342,8 +352,9 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @fftwin.setter
     def fftwin(self, value: int) -> None:
+        """Set the fftwin property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""fftwin must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""fftwin must be `None` or one of {0,1,2,3,4}.""")
         self._cards[1].set_value("fftwin", value)
 
     @property
@@ -356,8 +367,9 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @mixdmp.setter
     def mixdmp(self, value: int) -> None:
+        """Set the mixdmp property."""
         if value not in [0, 1, None]:
-            raise Exception("""mixdmp must be `None` or one of {0,1}""")
+            raise Exception("""mixdmp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("mixdmp", value)
 
     @property
@@ -368,6 +380,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[2].set_value("pid", value)
 
     @property
@@ -380,8 +393,9 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @ptyp.setter
     def ptyp(self, value: int) -> None:
+        """Set the ptyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""ptyp must be `None` or one of {0,1}""")
+            raise Exception("""ptyp must be `None` or one of {0,1}.""")
         self._cards[2].set_value("ptyp", value)
 
     @property
@@ -392,6 +406,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[3].set_value("sid", value)
 
     @property
@@ -406,8 +421,9 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @styp.setter
     def styp(self, value: int) -> None:
+        """Set the styp property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""styp must be `None` or one of {0,1,2,3}""")
+            raise Exception("""styp must be `None` or one of {0,1,2,3}.""")
         self._cards[3].set_value("styp", value)
 
     @property
@@ -431,8 +447,9 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
+        """Set the vad property."""
         if value not in [0, 1, 2, 11, 12, 21, 22, 31, 32, 41, 42, 51, 52, None]:
-            raise Exception("""vad must be `None` or one of {0,1,2,11,12,21,22,31,32,41,42,51,52}""")
+            raise Exception("""vad must be `None` or one of {0,1,2,11,12,21,22,31,32,41,42,51,52}.""")
         self._cards[3].set_value("vad", value)
 
     @property
@@ -449,8 +466,9 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""dof must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""dof must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[3].set_value("dof", value)
 
     @property
@@ -461,6 +479,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @lcid1.setter
     def lcid1(self, value: int) -> None:
+        """Set the lcid1 property."""
         self._cards[3].set_value("lcid1", value)
 
     @property
@@ -471,6 +490,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @lcid2.setter
     def lcid2(self, value: int) -> None:
+        """Set the lcid2 property."""
         self._cards[3].set_value("lcid2", value)
 
     @property
@@ -481,6 +501,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[3].set_value("sf", value)
 
     @property
@@ -491,6 +512,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[3].set_value("vid", value)
 
     @property
@@ -501,6 +523,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[4].set_value("nid", value)
 
     @property
@@ -513,8 +536,9 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @ntyp.setter
     def ntyp(self, value: int) -> None:
+        """Set the ntyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""ntyp must be `None` or one of {0,1}""")
+            raise Exception("""ntyp must be `None` or one of {0,1}.""")
         self._cards[4].set_value("ntyp", value)
 
     @property
@@ -527,8 +551,9 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @ipfile.setter
     def ipfile(self, value: int) -> None:
+        """Set the ipfile property."""
         if value not in [0, 1, None]:
-            raise Exception("""ipfile must be `None` or one of {0,1}""")
+            raise Exception("""ipfile must be `None` or one of {0,1}.""")
         self._cards[4].set_value("ipfile", value)
 
     @property
@@ -544,7 +569,8 @@ class FrequencyDomainAcousticFem(KeywordBase):
 
     @dba.setter
     def dba(self, value: int) -> None:
+        """Set the dba property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""dba must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""dba must be `None` or one of {0,1,2,3,4}.""")
         self._cards[4].set_value("dba", value)
 

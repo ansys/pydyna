@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatStoughtonNonAssociatedFlow class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatStoughtonNonAssociatedFlow class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -278,6 +280,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -288,6 +291,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -298,6 +302,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -308,6 +313,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -318,6 +324,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @r00.setter
     def r00(self, value: float) -> None:
+        """Set the r00 property."""
         self._cards[0].set_value("r00", value)
 
     @property
@@ -328,6 +335,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @r45.setter
     def r45(self, value: float) -> None:
+        """Set the r45 property."""
         self._cards[0].set_value("r45", value)
 
     @property
@@ -338,6 +346,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @r90.setter
     def r90(self, value: float) -> None:
+        """Set the r90 property."""
         self._cards[0].set_value("r90", value)
 
     @property
@@ -348,6 +357,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @sig00.setter
     def sig00(self, value: float) -> None:
+        """Set the sig00 property."""
         self._cards[0].set_value("sig00", value)
 
     @property
@@ -358,6 +368,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @sig45.setter
     def sig45(self, value: float) -> None:
+        """Set the sig45 property."""
         self._cards[1].set_value("sig45", value)
 
     @property
@@ -368,6 +379,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @sig90.setter
     def sig90(self, value: float) -> None:
+        """Set the sig90 property."""
         self._cards[1].set_value("sig90", value)
 
     @property
@@ -378,6 +390,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @sig_b.setter
     def sig_b(self, value: float) -> None:
+        """Set the sig_b property."""
         self._cards[1].set_value("sig_b", value)
 
     @property
@@ -388,6 +401,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @lcids.setter
     def lcids(self, value: int) -> None:
+        """Set the lcids property."""
         self._cards[1].set_value("lcids", value)
 
     @property
@@ -398,6 +412,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @lcidv.setter
     def lcidv(self, value: int) -> None:
+        """Set the lcidv property."""
         self._cards[1].set_value("lcidv", value)
 
     @property
@@ -408,6 +423,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @scale.setter
     def scale(self, value: float) -> None:
+        """Set the scale property."""
         self._cards[1].set_value("scale", value)
 
     @property
@@ -424,6 +440,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: int) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -434,6 +451,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[3].set_value("xp", value)
 
     @property
@@ -444,6 +462,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[3].set_value("yp", value)
 
     @property
@@ -454,6 +473,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[3].set_value("zp", value)
 
     @property
@@ -464,6 +484,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[3].set_value("a1", value)
 
     @property
@@ -474,6 +495,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[3].set_value("a2", value)
 
     @property
@@ -484,6 +506,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[3].set_value("a3", value)
 
     @property
@@ -494,6 +517,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[4].set_value("v1", value)
 
     @property
@@ -504,6 +528,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[4].set_value("v2", value)
 
     @property
@@ -514,6 +539,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[4].set_value("v3", value)
 
     @property
@@ -524,6 +550,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -534,6 +561,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -544,6 +572,7 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[4].set_value("d3", value)
 
     @property
@@ -554,5 +583,6 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

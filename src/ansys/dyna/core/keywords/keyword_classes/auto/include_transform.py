@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IncludeTransform class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,6 +33,7 @@ class IncludeTransform(KeywordBase):
     subkeyword = "TRANSFORM"
 
     def __init__(self, **kwargs):
+        """Initialize the IncludeTransform class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -212,6 +214,7 @@ class IncludeTransform(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -223,6 +226,7 @@ class IncludeTransform(KeywordBase):
 
     @idnoff.setter
     def idnoff(self, value: int) -> None:
+        """Set the idnoff property."""
         self._cards[1].set_value("idnoff", value)
 
     @property
@@ -234,6 +238,7 @@ class IncludeTransform(KeywordBase):
 
     @ideoff.setter
     def ideoff(self, value: int) -> None:
+        """Set the ideoff property."""
         self._cards[1].set_value("ideoff", value)
 
     @property
@@ -245,6 +250,7 @@ class IncludeTransform(KeywordBase):
 
     @idpoff.setter
     def idpoff(self, value: int) -> None:
+        """Set the idpoff property."""
         self._cards[1].set_value("idpoff", value)
 
     @property
@@ -256,6 +262,7 @@ class IncludeTransform(KeywordBase):
 
     @idmoff.setter
     def idmoff(self, value: int) -> None:
+        """Set the idmoff property."""
         self._cards[1].set_value("idmoff", value)
 
     @property
@@ -267,6 +274,7 @@ class IncludeTransform(KeywordBase):
 
     @idsoff.setter
     def idsoff(self, value: int) -> None:
+        """Set the idsoff property."""
         self._cards[1].set_value("idsoff", value)
 
     @property
@@ -278,6 +286,7 @@ class IncludeTransform(KeywordBase):
 
     @idfoff.setter
     def idfoff(self, value: int) -> None:
+        """Set the idfoff property."""
         self._cards[1].set_value("idfoff", value)
 
     @property
@@ -289,6 +298,7 @@ class IncludeTransform(KeywordBase):
 
     @iddoff.setter
     def iddoff(self, value: int) -> None:
+        """Set the iddoff property."""
         self._cards[1].set_value("iddoff", value)
 
     @property
@@ -299,6 +309,7 @@ class IncludeTransform(KeywordBase):
 
     @idroff.setter
     def idroff(self, value: int) -> None:
+        """Set the idroff property."""
         self._cards[2].set_value("idroff", value)
 
     @property
@@ -309,6 +320,7 @@ class IncludeTransform(KeywordBase):
 
     @prefix.setter
     def prefix(self, value: str) -> None:
+        """Set the prefix property."""
         self._cards[2].set_value("prefix", value)
 
     @property
@@ -319,6 +331,7 @@ class IncludeTransform(KeywordBase):
 
     @suffix.setter
     def suffix(self, value: str) -> None:
+        """Set the suffix property."""
         self._cards[2].set_value("suffix", value)
 
     @property
@@ -329,6 +342,7 @@ class IncludeTransform(KeywordBase):
 
     @fctmas.setter
     def fctmas(self, value: float) -> None:
+        """Set the fctmas property."""
         self._cards[3].set_value("fctmas", value)
 
     @property
@@ -339,6 +353,7 @@ class IncludeTransform(KeywordBase):
 
     @fcttim.setter
     def fcttim(self, value: float) -> None:
+        """Set the fcttim property."""
         self._cards[3].set_value("fcttim", value)
 
     @property
@@ -349,6 +364,7 @@ class IncludeTransform(KeywordBase):
 
     @fctlen.setter
     def fctlen(self, value: float) -> None:
+        """Set the fctlen property."""
         self._cards[3].set_value("fctlen", value)
 
     @property
@@ -359,6 +375,7 @@ class IncludeTransform(KeywordBase):
 
     @fcttem.setter
     def fcttem(self, value: str) -> None:
+        """Set the fcttem property."""
         self._cards[3].set_value("fcttem", value)
 
     @property
@@ -369,8 +386,9 @@ class IncludeTransform(KeywordBase):
 
     @incout1.setter
     def incout1(self, value: int) -> None:
+        """Set the incout1 property."""
         if value not in [1, 0, None]:
-            raise Exception("""incout1 must be `None` or one of {1,0}""")
+            raise Exception("""incout1 must be `None` or one of {1,0}.""")
         self._cards[3].set_value("incout1", value)
 
     @property
@@ -381,6 +399,7 @@ class IncludeTransform(KeywordBase):
 
     @fctchg.setter
     def fctchg(self, value: float) -> None:
+        """Set the fctchg property."""
         self._cards[3].set_value("fctchg", value)
 
     @property
@@ -392,10 +411,12 @@ class IncludeTransform(KeywordBase):
 
     @tranid.setter
     def tranid(self, value: int) -> None:
+        """Set the tranid property."""
         self._cards[4].set_value("tranid", value)
 
     @property
     def tranid_link(self) -> DefineTransformation:
+        """Get the DefineTransformation object for tranid."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TRANSFORMATION"):
@@ -405,5 +426,6 @@ class IncludeTransform(KeywordBase):
 
     @tranid_link.setter
     def tranid_link(self, value: DefineTransformation) -> None:
+        """Set the DefineTransformation object for tranid."""
         self.tranid = value.tranid
 

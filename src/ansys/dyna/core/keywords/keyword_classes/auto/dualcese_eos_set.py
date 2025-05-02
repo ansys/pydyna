@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseEosSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseEosSet(KeywordBase):
     subkeyword = "EOS_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseEosSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -75,6 +77,7 @@ class DualceseEosSet(KeywordBase):
 
     @eossid.setter
     def eossid(self, value: int) -> None:
+        """Set the eossid property."""
         self._cards[0].set_value("eossid", value)
 
     @property
@@ -85,6 +88,7 @@ class DualceseEosSet(KeywordBase):
 
     @eosinid.setter
     def eosinid(self, value: int) -> None:
+        """Set the eosinid property."""
         self._cards[0].set_value("eosinid", value)
 
     @property
@@ -95,6 +99,7 @@ class DualceseEosSet(KeywordBase):
 
     @eosrctid.setter
     def eosrctid(self, value: int) -> None:
+        """Set the eosrctid property."""
         self._cards[0].set_value("eosrctid", value)
 
     @property
@@ -105,5 +110,6 @@ class DualceseEosSet(KeywordBase):
 
     @eosprdi.setter
     def eosprdi(self, value: int) -> None:
+        """Set the eosprdi property."""
         self._cards[0].set_value("eosprdi", value)
 

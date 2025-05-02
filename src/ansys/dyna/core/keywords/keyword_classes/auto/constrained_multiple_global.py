@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedMultipleGlobal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedMultipleGlobal(KeywordBase):
     subkeyword = "MULTIPLE_GLOBAL"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedMultipleGlobal class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -91,6 +93,7 @@ class ConstrainedMultipleGlobal(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -101,6 +104,7 @@ class ConstrainedMultipleGlobal(KeywordBase):
 
     @nmp.setter
     def nmp(self, value: int) -> None:
+        """Set the nmp property."""
         self._cards[1].set_value("nmp", value)
 
     @property
@@ -111,6 +115,7 @@ class ConstrainedMultipleGlobal(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[2].set_value("nid", value)
 
     @property
@@ -124,8 +129,9 @@ class ConstrainedMultipleGlobal(KeywordBase):
 
     @dir.setter
     def dir(self, value: int) -> None:
+        """Set the dir property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""dir must be `None` or one of {1,2,3}""")
+            raise Exception("""dir must be `None` or one of {1,2,3}.""")
         self._cards[2].set_value("dir", value)
 
     @property
@@ -136,5 +142,6 @@ class ConstrainedMultipleGlobal(KeywordBase):
 
     @coef.setter
     def coef(self, value: float) -> None:
+        """Set the coef property."""
         self._cards[2].set_value("coef", value)
 

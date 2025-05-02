@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCurveTriaxialLimitFromFld class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveTriaxialLimitFromFld(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCurveTriaxialLimitFromFld class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -96,6 +98,7 @@ class DefineCurveTriaxialLimitFromFld(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -106,6 +109,7 @@ class DefineCurveTriaxialLimitFromFld(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -116,6 +120,7 @@ class DefineCurveTriaxialLimitFromFld(KeywordBase):
 
     @o1.setter
     def o1(self, value: float) -> None:
+        """Set the o1 property."""
         self._cards[1].set_value("o1", value)
 
     @property
@@ -126,5 +131,6 @@ class DefineCurveTriaxialLimitFromFld(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

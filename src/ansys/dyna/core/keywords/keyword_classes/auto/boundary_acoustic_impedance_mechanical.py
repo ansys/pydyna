@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryAcousticImpedanceMechanical class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryAcousticImpedanceMechanical(KeywordBase):
     subkeyword = "ACOUSTIC_IMPEDANCE_MECHANICAL"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryAcousticImpedanceMechanical class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -78,6 +80,7 @@ class BoundaryAcousticImpedanceMechanical(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -88,6 +91,7 @@ class BoundaryAcousticImpedanceMechanical(KeywordBase):
 
     @mparea.setter
     def mparea(self, value: float) -> None:
+        """Set the mparea property."""
         self._cards[0].set_value("mparea", value)
 
     @property
@@ -98,6 +102,7 @@ class BoundaryAcousticImpedanceMechanical(KeywordBase):
 
     @cparea.setter
     def cparea(self, value: float) -> None:
+        """Set the cparea property."""
         self._cards[0].set_value("cparea", value)
 
     @property
@@ -108,5 +113,6 @@ class BoundaryAcousticImpedanceMechanical(KeywordBase):
 
     @kparea.setter
     def kparea(self, value: int) -> None:
+        """Set the kparea property."""
         self._cards[0].set_value("kparea", value)
 

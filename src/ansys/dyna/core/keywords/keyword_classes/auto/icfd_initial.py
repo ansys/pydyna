@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdInitial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdInitial(KeywordBase):
     subkeyword = "INITIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdInitial class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -104,6 +106,7 @@ class IcfdInitial(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -114,6 +117,7 @@ class IcfdInitial(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -124,6 +128,7 @@ class IcfdInitial(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -134,6 +139,7 @@ class IcfdInitial(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -144,6 +150,7 @@ class IcfdInitial(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[0].set_value("t", value)
 
     @property
@@ -154,6 +161,7 @@ class IcfdInitial(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[0].set_value("p", value)
 
     @property
@@ -166,7 +174,8 @@ class IcfdInitial(KeywordBase):
 
     @dfunc.setter
     def dfunc(self, value: int) -> None:
+        """Set the dfunc property."""
         if value not in [0, 1, None]:
-            raise Exception("""dfunc must be `None` or one of {0,1}""")
+            raise Exception("""dfunc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dfunc", value)
 

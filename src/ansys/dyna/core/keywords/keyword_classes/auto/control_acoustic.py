@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlAcoustic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlAcoustic(KeywordBase):
     subkeyword = "ACOUSTIC"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlAcoustic class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -57,7 +59,8 @@ class ControlAcoustic(KeywordBase):
 
     @macdvp.setter
     def macdvp(self, value: int) -> None:
+        """Set the macdvp property."""
         if value not in [0, 1, None]:
-            raise Exception("""macdvp must be `None` or one of {0,1}""")
+            raise Exception("""macdvp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("macdvp", value)
 

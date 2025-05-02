@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseBoundaryBlastLoadMsurfSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundaryBlastLoadMsurfSet(KeywordBase):
     subkeyword = "BOUNDARY_BLAST_LOAD_MSURF_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseBoundaryBlastLoadMsurfSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class CeseBoundaryBlastLoadMsurfSet(KeywordBase):
 
     @bid.setter
     def bid(self, value: int) -> None:
+        """Set the bid property."""
         self._cards[0].set_value("bid", value)
 
     @property
@@ -71,5 +74,6 @@ class CeseBoundaryBlastLoadMsurfSet(KeywordBase):
 
     @msurf_s.setter
     def msurf_s(self, value: int) -> None:
+        """Set the msurf_s property."""
         self._cards[0].set_value("msurf_s", value)
 

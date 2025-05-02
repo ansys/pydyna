@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlUnits class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlUnits(KeywordBase):
     subkeyword = "UNITS"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlUnits class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,8 +88,9 @@ class ControlUnits(KeywordBase):
 
     @length.setter
     def length(self, value: str) -> None:
+        """Set the length property."""
         if value not in ["m", "mm", "cm", "mil", "in", "ft", "yd", None]:
-            raise Exception("""length must be `None` or one of {"m","mm","cm","mil","in","ft","yd"}""")
+            raise Exception("""length must be `None` or one of {"m","mm","cm","mil","in","ft","yd"}.""")
         self._cards[0].set_value("length", value)
 
     @property
@@ -103,8 +106,9 @@ class ControlUnits(KeywordBase):
 
     @time.setter
     def time(self, value: str) -> None:
+        """Set the time property."""
         if value not in ["sec", "min", "hr", "ms", "micro_s", None]:
-            raise Exception("""time must be `None` or one of {"sec","min","hr","ms","micro_s"}""")
+            raise Exception("""time must be `None` or one of {"sec","min","hr","ms","micro_s"}.""")
         self._cards[0].set_value("time", value)
 
     @property
@@ -121,8 +125,9 @@ class ControlUnits(KeywordBase):
 
     @mass.setter
     def mass(self, value: str) -> None:
+        """Set the mass property."""
         if value not in ["kg", "g", "oz", "lb", "ton", "mtrc_ton", None]:
-            raise Exception("""mass must be `None` or one of {"kg","g","oz","lb","ton","mtrc_ton"}""")
+            raise Exception("""mass must be `None` or one of {"kg","g","oz","lb","ton","mtrc_ton"}.""")
         self._cards[0].set_value("mass", value)
 
     @property
@@ -137,7 +142,8 @@ class ControlUnits(KeywordBase):
 
     @temp.setter
     def temp(self, value: str) -> None:
+        """Set the temp property."""
         if value not in ["k", "c", "f", "r", None]:
-            raise Exception("""temp must be `None` or one of {"k","c","f","r"}""")
+            raise Exception("""temp must be `None` or one of {"k","c","f","r"}.""")
         self._cards[0].set_value("temp", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialStressShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.card_set import CardSet
@@ -28,8 +29,10 @@ from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStressShellThicknessLargeCardSet(Cards):
+    """ CardSet."""
 
     def __init__(self, **kwargs):
+        """Initialize the InitialStressShellThicknessLargeCardSet CardSet."""
         super().__init__(kwargs["keyword"])
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
@@ -118,6 +121,7 @@ class InitialStressShellThicknessLargeCardSet(Cards):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[0].set_value("t", value)
 
     @property
@@ -128,6 +132,7 @@ class InitialStressShellThicknessLargeCardSet(Cards):
 
     @sigxx.setter
     def sigxx(self, value: float) -> None:
+        """Set the sigxx property."""
         self._cards[0].set_value("sigxx", value)
 
     @property
@@ -138,6 +143,7 @@ class InitialStressShellThicknessLargeCardSet(Cards):
 
     @sigyy.setter
     def sigyy(self, value: float) -> None:
+        """Set the sigyy property."""
         self._cards[0].set_value("sigyy", value)
 
     @property
@@ -148,6 +154,7 @@ class InitialStressShellThicknessLargeCardSet(Cards):
 
     @sigzz.setter
     def sigzz(self, value: float) -> None:
+        """Set the sigzz property."""
         self._cards[0].set_value("sigzz", value)
 
     @property
@@ -158,6 +165,7 @@ class InitialStressShellThicknessLargeCardSet(Cards):
 
     @sigxy.setter
     def sigxy(self, value: float) -> None:
+        """Set the sigxy property."""
         self._cards[0].set_value("sigxy", value)
 
     @property
@@ -168,6 +176,7 @@ class InitialStressShellThicknessLargeCardSet(Cards):
 
     @sigyz.setter
     def sigyz(self, value: float) -> None:
+        """Set the sigyz property."""
         self._cards[0].set_value("sigyz", value)
 
     @property
@@ -178,6 +187,7 @@ class InitialStressShellThicknessLargeCardSet(Cards):
 
     @sigzx.setter
     def sigzx(self, value: float) -> None:
+        """Set the sigzx property."""
         self._cards[0].set_value("sigzx", value)
 
     @property
@@ -188,11 +198,12 @@ class InitialStressShellThicknessLargeCardSet(Cards):
 
     @eps.setter
     def eps(self, value: float) -> None:
+        """Set the eps property."""
         self._cards[0].set_value("eps", value)
 
     @property
     def hisv(self) -> SeriesCard:
-        """dynamic array of history variables"""
+        """dynamic array of history variables."""
         return self._cards[1]
 
     @hisv.setter
@@ -201,12 +212,15 @@ class InitialStressShellThicknessLargeCardSet(Cards):
 
     @property
     def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
         return self._parent
 
 
 class InitialStressShellCardSet(Cards):
+    """ CardSet."""
 
     def __init__(self, **kwargs):
+        """Initialize the InitialStressShellCardSet CardSet."""
         super().__init__(kwargs["keyword"])
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
@@ -294,6 +308,7 @@ class InitialStressShellCardSet(Cards):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -304,6 +319,7 @@ class InitialStressShellCardSet(Cards):
 
     @nplane.setter
     def nplane(self, value: int) -> None:
+        """Set the nplane property."""
         self._cards[0].set_value("nplane", value)
 
     @property
@@ -314,6 +330,7 @@ class InitialStressShellCardSet(Cards):
 
     @nthick.setter
     def nthick(self, value: int) -> None:
+        """Set the nthick property."""
         self._cards[0].set_value("nthick", value)
 
     @property
@@ -324,6 +341,7 @@ class InitialStressShellCardSet(Cards):
 
     @nhisv.setter
     def nhisv(self, value: int) -> None:
+        """Set the nhisv property."""
         self._cards[0].set_value("nhisv", value)
 
     @property
@@ -334,6 +352,7 @@ class InitialStressShellCardSet(Cards):
 
     @ntensr.setter
     def ntensr(self, value: int) -> None:
+        """Set the ntensr property."""
         self._cards[0].set_value("ntensr", value)
 
     @property
@@ -344,8 +363,9 @@ class InitialStressShellCardSet(Cards):
 
     @large.setter
     def large(self, value: int) -> None:
+        """Set the large property."""
         if value not in [0, 1, None]:
-            raise Exception("""large must be `None` or one of {0,1}""")
+            raise Exception("""large must be `None` or one of {0,1}.""")
         self._cards[0].set_value("large", value)
 
     @property
@@ -356,6 +376,7 @@ class InitialStressShellCardSet(Cards):
 
     @nthint.setter
     def nthint(self, value: int) -> None:
+        """Set the nthint property."""
         self._cards[0].set_value("nthint", value)
 
     @property
@@ -366,17 +387,21 @@ class InitialStressShellCardSet(Cards):
 
     @nthhsv.setter
     def nthhsv(self, value: int) -> None:
+        """Set the nthhsv property."""
         self._cards[0].set_value("nthhsv", value)
 
     @property
     def sets(self) -> typing.List[InitialStressShellThicknessLargeCardSet]:
+        """Gets the list of sets."""
         return self._cards[1].items()
 
     def add_set(self, **kwargs):
+        """Adds a set to the list of sets."""
         self._cards[1].add_item(**kwargs)
 
     @property
     def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
         return self._parent
 
 
@@ -387,6 +412,7 @@ class InitialStressShell(KeywordBase):
     subkeyword = "STRESS_SHELL"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialStressShell class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         kwargs["keyword"] = self
@@ -399,8 +425,10 @@ class InitialStressShell(KeywordBase):
 
     @property
     def sets(self) -> typing.List[InitialStressShellCardSet]:
+        """Gets the list of sets."""
         return self._cards[0].items()
 
     def add_set(self, **kwargs):
+        """Adds a set to the list of sets."""
         self._cards[0].add_item(**kwargs)
 

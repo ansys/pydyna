@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlMppDecompositionArrangeParts class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
     subkeyword = "MPP_DECOMPOSITION_ARRANGE_PARTS"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlMppDecompositionArrangeParts class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -76,6 +78,7 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -91,8 +94,9 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, 10, 11, 20, 21, None]:
-            raise Exception("""type must be `None` or one of {0,1,10,11,20,21}""")
+            raise Exception("""type must be `None` or one of {0,1,10,11,20,21}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -105,6 +109,7 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
 
     @nproc.setter
     def nproc(self, value: int) -> None:
+        """Set the nproc property."""
         self._cards[0].set_value("nproc", value)
 
     @property
@@ -116,5 +121,6 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
 
     @frstp.setter
     def frstp(self, value: int) -> None:
+        """Set the frstp property."""
         self._cards[0].set_value("frstp", value)
 

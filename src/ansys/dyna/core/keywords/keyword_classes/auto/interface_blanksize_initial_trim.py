@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceBlanksizeInitialTrim class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
     subkeyword = "BLANKSIZE_INITIAL_TRIM"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceBlanksizeInitialTrim class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -89,6 +91,7 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
 
     @filename5.setter
     def filename5(self, value: str) -> None:
+        """Set the filename5 property."""
         self._cards[0].set_value("filename5", value)
 
     @property
@@ -99,6 +102,7 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
 
     @filename6.setter
     def filename6(self, value: str) -> None:
+        """Set the filename6 property."""
         self._cards[1].set_value("filename6", value)
 
     @property
@@ -109,6 +113,7 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
 
     @filename7.setter
     def filename7(self, value: str) -> None:
+        """Set the filename7 property."""
         self._cards[2].set_value("filename7", value)
 
     @property
@@ -119,5 +124,6 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
 
     @filename8.setter
     def filename8(self, value: str) -> None:
+        """Set the filename8 property."""
         self._cards[3].set_value("filename8", value)
 

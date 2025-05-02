@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdSetNodeList class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdSetNodeList(KeywordBase):
     subkeyword = "SET_NODE_LIST"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdSetNodeList class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -121,6 +123,7 @@ class IcfdSetNodeList(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -131,6 +134,7 @@ class IcfdSetNodeList(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -141,6 +145,7 @@ class IcfdSetNodeList(KeywordBase):
 
     @nid1.setter
     def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
         self._cards[1].set_value("nid1", value)
 
     @property
@@ -151,6 +156,7 @@ class IcfdSetNodeList(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[1].set_value("nid2", value)
 
     @property
@@ -161,6 +167,7 @@ class IcfdSetNodeList(KeywordBase):
 
     @nid3.setter
     def nid3(self, value: int) -> None:
+        """Set the nid3 property."""
         self._cards[1].set_value("nid3", value)
 
     @property
@@ -171,6 +178,7 @@ class IcfdSetNodeList(KeywordBase):
 
     @nid4.setter
     def nid4(self, value: int) -> None:
+        """Set the nid4 property."""
         self._cards[1].set_value("nid4", value)
 
     @property
@@ -181,6 +189,7 @@ class IcfdSetNodeList(KeywordBase):
 
     @nid5.setter
     def nid5(self, value: int) -> None:
+        """Set the nid5 property."""
         self._cards[1].set_value("nid5", value)
 
     @property
@@ -191,6 +200,7 @@ class IcfdSetNodeList(KeywordBase):
 
     @nid6.setter
     def nid6(self, value: int) -> None:
+        """Set the nid6 property."""
         self._cards[1].set_value("nid6", value)
 
     @property
@@ -201,6 +211,7 @@ class IcfdSetNodeList(KeywordBase):
 
     @nid7.setter
     def nid7(self, value: int) -> None:
+        """Set the nid7 property."""
         self._cards[1].set_value("nid7", value)
 
     @property
@@ -211,5 +222,6 @@ class IcfdSetNodeList(KeywordBase):
 
     @nid8.setter
     def nid8(self, value: int) -> None:
+        """Set the nid8 property."""
         self._cards[1].set_value("nid8", value)
 

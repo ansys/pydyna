@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingTrimming class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingTrimming(KeywordBase):
     subkeyword = "FORMING_TRIMMING"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingTrimming class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class ControlFormingTrimming(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -80,5 +83,6 @@ class ControlFormingTrimming(KeywordBase):
 
     @ityp.setter
     def ityp(self, value: int) -> None:
+        """Set the ityp property."""
         self._cards[0].set_value("ityp", value)
 

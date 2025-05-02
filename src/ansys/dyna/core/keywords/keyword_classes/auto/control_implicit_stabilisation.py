@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitStabilisation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitStabilisation(KeywordBase):
     subkeyword = "IMPLICIT_STABILISATION"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitStabilisation class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -81,8 +83,9 @@ class ControlImplicitStabilisation(KeywordBase):
 
     @ias.setter
     def ias(self, value: int) -> None:
+        """Set the ias property."""
         if value not in [2, 1, None]:
-            raise Exception("""ias must be `None` or one of {2,1}""")
+            raise Exception("""ias must be `None` or one of {2,1}.""")
         self._cards[0].set_value("ias", value)
 
     @property
@@ -93,6 +96,7 @@ class ControlImplicitStabilisation(KeywordBase):
 
     @scale.setter
     def scale(self, value: float) -> None:
+        """Set the scale property."""
         self._cards[0].set_value("scale", value)
 
     @property
@@ -103,6 +107,7 @@ class ControlImplicitStabilisation(KeywordBase):
 
     @tstart.setter
     def tstart(self, value: float) -> None:
+        """Set the tstart property."""
         self._cards[0].set_value("tstart", value)
 
     @property
@@ -113,5 +118,6 @@ class ControlImplicitStabilisation(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[0].set_value("tend", value)
 

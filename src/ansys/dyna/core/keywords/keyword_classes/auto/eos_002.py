@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Eos002 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Eos002(KeywordBase):
     subkeyword = "002"
 
     def __init__(self, **kwargs):
+        """Initialize the Eos002 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class Eos002(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -113,6 +116,7 @@ class Eos002(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -123,6 +127,7 @@ class Eos002(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[0].set_value("b", value)
 
     @property
@@ -133,6 +138,7 @@ class Eos002(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[0].set_value("r1", value)
 
     @property
@@ -143,6 +149,7 @@ class Eos002(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[0].set_value("r2", value)
 
     @property
@@ -153,6 +160,7 @@ class Eos002(KeywordBase):
 
     @omeg.setter
     def omeg(self, value: float) -> None:
+        """Set the omeg property."""
         self._cards[0].set_value("omeg", value)
 
     @property
@@ -163,6 +171,7 @@ class Eos002(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[0].set_value("e0", value)
 
     @property
@@ -173,5 +182,6 @@ class Eos002(KeywordBase):
 
     @vo.setter
     def vo(self, value: float) -> None:
+        """Set the vo property."""
         self._cards[0].set_value("vo", value)
 

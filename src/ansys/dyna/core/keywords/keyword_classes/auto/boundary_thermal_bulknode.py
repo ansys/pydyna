@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryThermalBulknode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryThermalBulknode(KeywordBase):
     subkeyword = "THERMAL_BULKNODE"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryThermalBulknode class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -135,6 +137,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -145,6 +148,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -155,6 +159,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @nbnseg.setter
     def nbnseg(self, value: int) -> None:
+        """Set the nbnseg property."""
         self._cards[0].set_value("nbnseg", value)
 
     @property
@@ -165,6 +170,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @vol.setter
     def vol(self, value: float) -> None:
+        """Set the vol property."""
         self._cards[0].set_value("vol", value)
 
     @property
@@ -175,6 +181,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -185,6 +192,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[0].set_value("h", value)
 
     @property
@@ -195,6 +203,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @aexp.setter
     def aexp(self, value: float) -> None:
+        """Set the aexp property."""
         self._cards[0].set_value("aexp", value)
 
     @property
@@ -205,6 +214,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @bexp.setter
     def bexp(self, value: float) -> None:
+        """Set the bexp property."""
         self._cards[0].set_value("bexp", value)
 
     @property
@@ -215,6 +225,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[1].set_value("n1", value)
 
     @property
@@ -225,6 +236,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[1].set_value("n2", value)
 
     @property
@@ -235,6 +247,7 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[1].set_value("n3", value)
 
     @property
@@ -245,5 +258,6 @@ class BoundaryThermalBulknode(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[1].set_value("n4", value)
 

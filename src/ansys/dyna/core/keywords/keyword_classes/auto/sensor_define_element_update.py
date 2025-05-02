@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SensorDefineElementUpdate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorDefineElementUpdate(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SensorDefineElementUpdate class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -154,6 +156,7 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @sensid.setter
     def sensid(self, value: int) -> None:
+        """Set the sensid property."""
         self._cards[0].set_value("sensid", value)
 
     @property
@@ -170,8 +173,9 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @etype.setter
     def etype(self, value: str) -> None:
+        """Set the etype property."""
         if value not in ["BEAM", "SHELL", "SOLID", "DISC-ELE", "SEATBELT", "TSHELL", None]:
-            raise Exception("""etype must be `None` or one of {"BEAM","SHELL","SOLID","DISC-ELE","SEATBELT","TSHELL"}""")
+            raise Exception("""etype must be `None` or one of {"BEAM","SHELL","SOLID","DISC-ELE","SEATBELT","TSHELL"}.""")
         self._cards[0].set_value("etype", value)
 
     @property
@@ -183,6 +187,7 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @elemid.setter
     def elemid(self, value: int) -> None:
+        """Set the elemid property."""
         self._cards[0].set_value("elemid", value)
 
     @property
@@ -203,8 +208,9 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @comp.setter
     def comp(self, value: str) -> None:
+        """Set the comp property."""
         if value not in ["XX", "YY", "ZZ", "XY", "YZ", "ZX", "AXIAL", "  ", "SHEARS", "SHEART", None]:
-            raise Exception("""comp must be `None` or one of {"XX","YY","ZZ","XY","YZ","ZX","AXIAL","  ","SHEARS","SHEART"}""")
+            raise Exception("""comp must be `None` or one of {"XX","YY","ZZ","XY","YZ","ZX","AXIAL","  ","SHEARS","SHEART"}.""")
         self._cards[0].set_value("comp", value)
 
     @property
@@ -222,8 +228,9 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: str) -> None:
+        """Set the ctype property."""
         if value not in ["STRAIN", "STRESS", "FORCE", "MOMENT", "DLEN", "FAIL", None]:
-            raise Exception("""ctype must be `None` or one of {"STRAIN","STRESS","FORCE","MOMENT","DLEN","FAIL"}""")
+            raise Exception("""ctype must be `None` or one of {"STRAIN","STRESS","FORCE","MOMENT","DLEN","FAIL"}.""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -236,8 +243,9 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @layer.setter
     def layer(self, value: str) -> None:
+        """Set the layer property."""
         if value not in ["BOT", "TOP", None]:
-            raise Exception("""layer must be `None` or one of {"BOT","TOP"}""")
+            raise Exception("""layer must be `None` or one of {"BOT","TOP"}.""")
         self._cards[0].set_value("layer", value)
 
     @property
@@ -248,6 +256,7 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -258,6 +267,7 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @pwr.setter
     def pwr(self, value: float) -> None:
+        """Set the pwr property."""
         self._cards[0].set_value("pwr", value)
 
     @property
@@ -268,6 +278,7 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -278,6 +289,7 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -288,6 +300,7 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @dtupd.setter
     def dtupd(self, value: float) -> None:
+        """Set the dtupd property."""
         self._cards[1].set_value("dtupd", value)
 
     @property
@@ -298,5 +311,6 @@ class SensorDefineElementUpdate(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

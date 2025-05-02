@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseBoundarySlidingMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseBoundarySlidingMsurf(KeywordBase):
     subkeyword = "BOUNDARY_SLIDING_MSURF"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseBoundarySlidingMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class DualceseBoundarySlidingMsurf(KeywordBase):
 
     @mspid.setter
     def mspid(self, value: int) -> None:
+        """Set the mspid property."""
         self._cards[0].set_value("mspid", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSteelConcentricBrace class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSteelConcentricBrace(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSteelConcentricBrace class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -211,6 +213,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -221,6 +224,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -231,6 +235,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @ym.setter
     def ym(self, value: float) -> None:
+        """Set the ym property."""
         self._cards[0].set_value("ym", value)
 
     @property
@@ -241,6 +246,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -251,6 +257,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -261,6 +268,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @lamda.setter
     def lamda(self, value: float) -> None:
+        """Set the lamda property."""
         self._cards[0].set_value("lamda", value)
 
     @property
@@ -271,6 +279,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @fbuck.setter
     def fbuck(self, value: float) -> None:
+        """Set the fbuck property."""
         self._cards[0].set_value("fbuck", value)
 
     @property
@@ -281,6 +290,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @fbuck2.setter
     def fbuck2(self, value: float) -> None:
+        """Set the fbuck2 property."""
         self._cards[0].set_value("fbuck2", value)
 
     @property
@@ -291,6 +301,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @ccbrf.setter
     def ccbrf(self, value: float) -> None:
+        """Set the ccbrf property."""
         self._cards[1].set_value("ccbrf", value)
 
     @property
@@ -301,6 +312,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @bcur.setter
     def bcur(self, value: float) -> None:
+        """Set the bcur property."""
         self._cards[1].set_value("bcur", value)
 
     @property
@@ -311,6 +323,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @ts1.setter
     def ts1(self, value: float) -> None:
+        """Set the ts1 property."""
         self._cards[2].set_value("ts1", value)
 
     @property
@@ -321,6 +334,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @ts2.setter
     def ts2(self, value: float) -> None:
+        """Set the ts2 property."""
         self._cards[2].set_value("ts2", value)
 
     @property
@@ -331,6 +345,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @ts3.setter
     def ts3(self, value: float) -> None:
+        """Set the ts3 property."""
         self._cards[2].set_value("ts3", value)
 
     @property
@@ -341,6 +356,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @ts4.setter
     def ts4(self, value: float) -> None:
+        """Set the ts4 property."""
         self._cards[2].set_value("ts4", value)
 
     @property
@@ -351,6 +367,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @cs1.setter
     def cs1(self, value: float) -> None:
+        """Set the cs1 property."""
         self._cards[2].set_value("cs1", value)
 
     @property
@@ -361,6 +378,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @cs2.setter
     def cs2(self, value: float) -> None:
+        """Set the cs2 property."""
         self._cards[2].set_value("cs2", value)
 
     @property
@@ -371,6 +389,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @cs3.setter
     def cs3(self, value: float) -> None:
+        """Set the cs3 property."""
         self._cards[2].set_value("cs3", value)
 
     @property
@@ -381,6 +400,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @cs4.setter
     def cs4(self, value: float) -> None:
+        """Set the cs4 property."""
         self._cards[2].set_value("cs4", value)
 
     @property
@@ -391,5 +411,6 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

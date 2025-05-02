@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AirbagWangNefskeJettingPop class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
     subkeyword = "WANG_NEFSKE_JETTING_POP"
 
     def __init__(self, **kwargs):
+        """Initialize the AirbagWangNefskeJettingPop class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -589,6 +591,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -601,8 +604,9 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sidtyp", value)
 
     @property
@@ -616,6 +620,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @rbid.setter
     def rbid(self, value: int) -> None:
+        """Set the rbid property."""
         self._cards[0].set_value("rbid", value)
 
     @property
@@ -626,6 +631,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @vsca.setter
     def vsca(self, value: float) -> None:
+        """Set the vsca property."""
         self._cards[0].set_value("vsca", value)
 
     @property
@@ -636,6 +642,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @psca.setter
     def psca(self, value: float) -> None:
+        """Set the psca property."""
         self._cards[0].set_value("psca", value)
 
     @property
@@ -646,6 +653,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @vini.setter
     def vini(self, value: float) -> None:
+        """Set the vini property."""
         self._cards[0].set_value("vini", value)
 
     @property
@@ -656,6 +664,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @mwd.setter
     def mwd(self, value: float) -> None:
+        """Set the mwd property."""
         self._cards[0].set_value("mwd", value)
 
     @property
@@ -666,6 +675,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @spsf.setter
     def spsf(self, value: float) -> None:
+        """Set the spsf property."""
         self._cards[0].set_value("spsf", value)
 
     @property
@@ -676,6 +686,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @cv.setter
     def cv(self, value: float) -> None:
+        """Set the cv property."""
         self._cards[1].set_value("cv", value)
 
     @property
@@ -686,6 +697,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[1].set_value("cp", value)
 
     @property
@@ -697,6 +709,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 
     @property
@@ -707,6 +720,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @lct.setter
     def lct(self, value: int) -> None:
+        """Set the lct property."""
         self._cards[1].set_value("lct", value)
 
     @property
@@ -717,6 +731,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @lcmt.setter
     def lcmt(self, value: int) -> None:
+        """Set the lcmt property."""
         self._cards[1].set_value("lcmt", value)
 
     @property
@@ -727,6 +742,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @tvol.setter
     def tvol(self, value: float) -> None:
+        """Set the tvol property."""
         self._cards[1].set_value("tvol", value)
 
     @property
@@ -737,6 +753,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @lcdt.setter
     def lcdt(self, value: int) -> None:
+        """Set the lcdt property."""
         self._cards[1].set_value("lcdt", value)
 
     @property
@@ -747,6 +764,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @iabt.setter
     def iabt(self, value: float) -> None:
+        """Set the iabt property."""
         self._cards[1].set_value("iabt", value)
 
     @property
@@ -757,6 +775,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @c23.setter
     def c23(self, value: float) -> None:
+        """Set the c23 property."""
         self._cards[2].set_value("c23", value)
 
     @property
@@ -767,6 +786,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @lcc23.setter
     def lcc23(self, value: int) -> None:
+        """Set the lcc23 property."""
         self._cards[2].set_value("lcc23", value)
 
     @property
@@ -777,6 +797,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @a23.setter
     def a23(self, value: float) -> None:
+        """Set the a23 property."""
         self._cards[2].set_value("a23", value)
 
     @property
@@ -787,6 +808,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @lca23.setter
     def lca23(self, value: int) -> None:
+        """Set the lca23 property."""
         self._cards[2].set_value("lca23", value)
 
     @property
@@ -797,6 +819,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @cp23.setter
     def cp23(self, value: float) -> None:
+        """Set the cp23 property."""
         self._cards[2].set_value("cp23", value)
 
     @property
@@ -807,6 +830,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @lccp23.setter
     def lccp23(self, value: int) -> None:
+        """Set the lccp23 property."""
         self._cards[2].set_value("lccp23", value)
 
     @property
@@ -817,6 +841,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @ap23.setter
     def ap23(self, value: float) -> None:
+        """Set the ap23 property."""
         self._cards[2].set_value("ap23", value)
 
     @property
@@ -827,6 +852,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @lcap23.setter
     def lcap23(self, value: int) -> None:
+        """Set the lcap23 property."""
         self._cards[2].set_value("lcap23", value)
 
     @property
@@ -837,6 +863,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @pe.setter
     def pe(self, value: float) -> None:
+        """Set the pe property."""
         self._cards[3].set_value("pe", value)
 
     @property
@@ -847,6 +874,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[3].set_value("ro", value)
 
     @property
@@ -857,6 +885,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @gc.setter
     def gc(self, value: float) -> None:
+        """Set the gc property."""
         self._cards[3].set_value("gc", value)
 
     @property
@@ -867,6 +896,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @lcefr.setter
     def lcefr(self, value: int) -> None:
+        """Set the lcefr property."""
         self._cards[3].set_value("lcefr", value)
 
     @property
@@ -877,6 +907,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @pover.setter
     def pover(self, value: float) -> None:
+        """Set the pover property."""
         self._cards[3].set_value("pover", value)
 
     @property
@@ -887,6 +918,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @ppop.setter
     def ppop(self, value: float) -> None:
+        """Set the ppop property."""
         self._cards[3].set_value("ppop", value)
 
     @property
@@ -905,8 +937,9 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @opt.setter
     def opt(self, value: int) -> None:
+        """Set the opt property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, None]:
-            raise Exception("""opt must be `None` or one of {1,2,3,4,5,6,7,8}""")
+            raise Exception("""opt must be `None` or one of {1,2,3,4,5,6,7,8}.""")
         self._cards[3].set_value("opt", value)
 
     @property
@@ -917,6 +950,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @knkdn.setter
     def knkdn(self, value: int) -> None:
+        """Set the knkdn property."""
         self._cards[3].set_value("knkdn", value)
 
     @property
@@ -927,6 +961,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @ioc.setter
     def ioc(self, value: float) -> None:
+        """Set the ioc property."""
         self._cards[4].set_value("ioc", value)
 
     @property
@@ -937,6 +972,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @ioa.setter
     def ioa(self, value: float) -> None:
+        """Set the ioa property."""
         self._cards[4].set_value("ioa", value)
 
     @property
@@ -947,6 +983,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @ivol.setter
     def ivol(self, value: float) -> None:
+        """Set the ivol property."""
         self._cards[4].set_value("ivol", value)
 
     @property
@@ -957,6 +994,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @iro.setter
     def iro(self, value: float) -> None:
+        """Set the iro property."""
         self._cards[4].set_value("iro", value)
 
     @property
@@ -967,6 +1005,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @it.setter
     def it(self, value: float) -> None:
+        """Set the it property."""
         self._cards[4].set_value("it", value)
 
     @property
@@ -977,6 +1016,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @lcbf.setter
     def lcbf(self, value: int) -> None:
+        """Set the lcbf property."""
         self._cards[4].set_value("lcbf", value)
 
     @property
@@ -987,6 +1027,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @text.setter
     def text(self, value: float) -> None:
+        """Set the text property."""
         self._cards[5].set_value("text", value)
 
     @property
@@ -997,6 +1038,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[5].set_value("a", value)
 
     @property
@@ -1007,6 +1049,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[5].set_value("b", value)
 
     @property
@@ -1017,6 +1060,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @mw.setter
     def mw(self, value: float) -> None:
+        """Set the mw property."""
         self._cards[5].set_value("mw", value)
 
     @property
@@ -1027,6 +1071,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @gasc.setter
     def gasc(self, value: float) -> None:
+        """Set the gasc property."""
         self._cards[5].set_value("gasc", value)
 
     @property
@@ -1037,6 +1082,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @hconv.setter
     def hconv(self, value: float) -> None:
+        """Set the hconv property."""
         self._cards[5].set_value("hconv", value)
 
     @property
@@ -1047,6 +1093,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @tdp.setter
     def tdp(self, value: float) -> None:
+        """Set the tdp property."""
         self._cards[6].set_value("tdp", value)
 
     @property
@@ -1058,6 +1105,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @axp.setter
     def axp(self, value: float) -> None:
+        """Set the axp property."""
         self._cards[6].set_value("axp", value)
 
     @property
@@ -1069,6 +1117,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @ayp.setter
     def ayp(self, value: float) -> None:
+        """Set the ayp property."""
         self._cards[6].set_value("ayp", value)
 
     @property
@@ -1080,6 +1129,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @azp.setter
     def azp(self, value: float) -> None:
+        """Set the azp property."""
         self._cards[6].set_value("azp", value)
 
     @property
@@ -1091,6 +1141,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @amagp.setter
     def amagp(self, value: float) -> None:
+        """Set the amagp property."""
         self._cards[6].set_value("amagp", value)
 
     @property
@@ -1101,6 +1152,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @tdurp.setter
     def tdurp(self, value: float) -> None:
+        """Set the tdurp property."""
         self._cards[6].set_value("tdurp", value)
 
     @property
@@ -1111,6 +1163,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @tda.setter
     def tda(self, value: float) -> None:
+        """Set the tda property."""
         self._cards[6].set_value("tda", value)
 
     @property
@@ -1121,6 +1174,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @rbidp.setter
     def rbidp(self, value: int) -> None:
+        """Set the rbidp property."""
         self._cards[6].set_value("rbidp", value)
 
     @property
@@ -1131,6 +1185,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @xjfp.setter
     def xjfp(self, value: float) -> None:
+        """Set the xjfp property."""
         self._cards[7].set_value("xjfp", value)
 
     @property
@@ -1141,6 +1196,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @yjfp.setter
     def yjfp(self, value: float) -> None:
+        """Set the yjfp property."""
         self._cards[7].set_value("yjfp", value)
 
     @property
@@ -1151,6 +1207,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @zjfp.setter
     def zjfp(self, value: float) -> None:
+        """Set the zjfp property."""
         self._cards[7].set_value("zjfp", value)
 
     @property
@@ -1161,6 +1218,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @xjvh.setter
     def xjvh(self, value: float) -> None:
+        """Set the xjvh property."""
         self._cards[7].set_value("xjvh", value)
 
     @property
@@ -1171,6 +1229,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @yjvh.setter
     def yjvh(self, value: float) -> None:
+        """Set the yjvh property."""
         self._cards[7].set_value("yjvh", value)
 
     @property
@@ -1181,6 +1240,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @zjvh.setter
     def zjvh(self, value: float) -> None:
+        """Set the zjvh property."""
         self._cards[7].set_value("zjvh", value)
 
     @property
@@ -1192,6 +1252,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @ca.setter
     def ca(self, value: float) -> None:
+        """Set the ca property."""
         self._cards[7].set_value("ca", value)
 
     @property
@@ -1203,6 +1264,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[7].set_value("beta", value)
 
     @property
@@ -1213,6 +1275,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @xsjfp.setter
     def xsjfp(self, value: float) -> None:
+        """Set the xsjfp property."""
         self._cards[8].set_value("xsjfp", value)
 
     @property
@@ -1223,6 +1286,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @ysjfp.setter
     def ysjfp(self, value: float) -> None:
+        """Set the ysjfp property."""
         self._cards[8].set_value("ysjfp", value)
 
     @property
@@ -1233,6 +1297,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @zsjfp.setter
     def zsjfp(self, value: float) -> None:
+        """Set the zsjfp property."""
         self._cards[8].set_value("zsjfp", value)
 
     @property
@@ -1244,6 +1309,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[8].set_value("psid", value)
 
     @property
@@ -1254,6 +1320,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @angle.setter
     def angle(self, value: float) -> None:
+        """Set the angle property."""
         self._cards[8].set_value("angle", value)
 
     @property
@@ -1264,6 +1331,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[8].set_value("node1", value)
 
     @property
@@ -1274,6 +1342,7 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[8].set_value("node2", value)
 
     @property
@@ -1284,5 +1353,6 @@ class AirbagWangNefskeJettingPop(KeywordBase):
 
     @node3.setter
     def node3(self, value: int) -> None:
+        """Set the node3 property."""
         self._cards[8].set_value("node3", value)
 

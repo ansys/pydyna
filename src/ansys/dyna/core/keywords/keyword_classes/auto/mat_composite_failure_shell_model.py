@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatCompositeFailureShellModel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatCompositeFailureShellModel(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatCompositeFailureShellModel class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -357,6 +359,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -367,6 +370,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -377,6 +381,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @ea.setter
     def ea(self, value: float) -> None:
+        """Set the ea property."""
         self._cards[0].set_value("ea", value)
 
     @property
@@ -387,6 +392,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @eb.setter
     def eb(self, value: float) -> None:
+        """Set the eb property."""
         self._cards[0].set_value("eb", value)
 
     @property
@@ -397,6 +403,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @ec.setter
     def ec(self, value: float) -> None:
+        """Set the ec property."""
         self._cards[0].set_value("ec", value)
 
     @property
@@ -407,6 +414,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @prba.setter
     def prba(self, value: float) -> None:
+        """Set the prba property."""
         self._cards[0].set_value("prba", value)
 
     @property
@@ -417,6 +425,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @prca.setter
     def prca(self, value: float) -> None:
+        """Set the prca property."""
         self._cards[0].set_value("prca", value)
 
     @property
@@ -427,6 +436,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @prcb.setter
     def prcb(self, value: float) -> None:
+        """Set the prcb property."""
         self._cards[0].set_value("prcb", value)
 
     @property
@@ -437,6 +447,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @gab.setter
     def gab(self, value: float) -> None:
+        """Set the gab property."""
         self._cards[1].set_value("gab", value)
 
     @property
@@ -447,6 +458,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @gbc.setter
     def gbc(self, value: float) -> None:
+        """Set the gbc property."""
         self._cards[1].set_value("gbc", value)
 
     @property
@@ -457,6 +469,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @gca.setter
     def gca(self, value: float) -> None:
+        """Set the gca property."""
         self._cards[1].set_value("gca", value)
 
     @property
@@ -467,6 +480,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @kf.setter
     def kf(self, value: float) -> None:
+        """Set the kf property."""
         self._cards[1].set_value("kf", value)
 
     @property
@@ -483,6 +497,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[1].set_value("aopt", value)
 
     @property
@@ -501,8 +516,9 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -4, -3, -2, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}.""")
         self._cards[1].set_value("macf", value)
 
     @property
@@ -513,6 +529,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[2].set_value("xp", value)
 
     @property
@@ -523,6 +540,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[2].set_value("yp", value)
 
     @property
@@ -533,6 +551,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[2].set_value("zp", value)
 
     @property
@@ -543,6 +562,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[2].set_value("a1", value)
 
     @property
@@ -553,6 +573,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[2].set_value("a2", value)
 
     @property
@@ -563,6 +584,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[2].set_value("a3", value)
 
     @property
@@ -573,6 +595,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[3].set_value("v1", value)
 
     @property
@@ -583,6 +606,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[3].set_value("v2", value)
 
     @property
@@ -593,6 +617,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[3].set_value("v3", value)
 
     @property
@@ -603,6 +628,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[3].set_value("d1", value)
 
     @property
@@ -613,6 +639,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[3].set_value("d2", value)
 
     @property
@@ -623,6 +650,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[3].set_value("d3", value)
 
     @property
@@ -633,6 +661,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[3].set_value("beta", value)
 
     @property
@@ -643,6 +672,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @tsize.setter
     def tsize(self, value: float) -> None:
+        """Set the tsize property."""
         self._cards[4].set_value("tsize", value)
 
     @property
@@ -653,6 +683,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @alp.setter
     def alp(self, value: float) -> None:
+        """Set the alp property."""
         self._cards[4].set_value("alp", value)
 
     @property
@@ -663,6 +694,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @soft.setter
     def soft(self, value: float) -> None:
+        """Set the soft property."""
         self._cards[4].set_value("soft", value)
 
     @property
@@ -673,6 +705,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @fbrt.setter
     def fbrt(self, value: float) -> None:
+        """Set the fbrt property."""
         self._cards[4].set_value("fbrt", value)
 
     @property
@@ -683,6 +716,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @sr.setter
     def sr(self, value: float) -> None:
+        """Set the sr property."""
         self._cards[4].set_value("sr", value)
 
     @property
@@ -693,6 +727,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[4].set_value("sf", value)
 
     @property
@@ -703,6 +738,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[5].set_value("xc", value)
 
     @property
@@ -713,6 +749,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @xt.setter
     def xt(self, value: float) -> None:
+        """Set the xt property."""
         self._cards[5].set_value("xt", value)
 
     @property
@@ -723,6 +760,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[5].set_value("yc", value)
 
     @property
@@ -733,6 +771,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @yt.setter
     def yt(self, value: float) -> None:
+        """Set the yt property."""
         self._cards[5].set_value("yt", value)
 
     @property
@@ -745,6 +784,7 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @sc.setter
     def sc(self, value: float) -> None:
+        """Set the sc property."""
         self._cards[5].set_value("sc", value)
 
     @property
@@ -755,5 +795,6 @@ class MatCompositeFailureShellModel(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 
