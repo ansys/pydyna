@@ -1,3 +1,6 @@
+PyDYNA Server
+=============
+
 Run PyDYNA server locally
 -------------------------
 Launching the servers directly on local machines.
@@ -8,7 +11,7 @@ Launching the servers directly on local machines.
 Run an example on the client side
 *********************************
 
-   .. code:: bash
+.. code:: bash
 
     hostname = "localhost"
     if len(sys.argv) > 1:
@@ -48,7 +51,7 @@ Start server on Linux(Centos7)
 Run an example on the client side
 *********************************
  
-   .. code:: bash
+.. code:: bash
 
     import ansys.dyna.core.solver as solver
 
@@ -65,6 +68,6 @@ Run PyDYNA Server in a Docker container
 ---------------------------------------
 PyDYNA server can be run in a Docker container.
 
-.. include:: ../../../docker/pre/README.rst
+.. include:: ../../../../docker/pre/README.rst
 
-.. include:: ../../../docker/solver/README.rst
+.. include:: ../../../../docker/solver/README.rst

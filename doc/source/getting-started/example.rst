@@ -1,6 +1,6 @@
 
 Keyword and run example
-=========================
+=======================
 
 The next few sections show how to generate, preview, solve, and review a Taylor bar impact problem.
 An example of a sweep over impact velocities for this problem can be found in this repository at
