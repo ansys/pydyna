@@ -23,8 +23,8 @@
 """Windows implementation of LS-DYNA runner."""
 
 import os
-import subprocess
 from pathlib import Path
+import subprocess
 
 from ansys.tools.path import get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
@@ -53,13 +53,7 @@ class WindowsRunner(BaseRunner):
         self.working_directory = working_directory
 
     def _find_solver(self, version: int, executable: str = None) -> None:
-        """Find LS-DYNA solver location.
-        
-        Priority:
-        1. if an executable path is explicitly passed,validate it and use it.
-        2. if version is passed, use the version to find the solver location.
-        3. if no version is passed, use the latest version installed on the system.
-        """
+        """Find LS-DYNA solver location."""
         if executable:
             exe_path = Path(executable)
             if exe_path.is_file():
@@ -67,20 +61,16 @@ class WindowsRunner(BaseRunner):
                 self.solver = f'"{str(exe_path)}"'
                 return
             raise FileNotFoundError(f"Specified executable not found: {executable}")
-        
         if version:
             install_base, _ = _get_unified_install_base_for_version(version)
         else:
             _, install_base = get_latest_ansys_installation()
-            
         solver_dir = Path(install_base) / "ansys" / "bin" / "winx64"
         solver_exe = solver_dir / self._get_exe_name()
         if not solver_exe.is_file():
             raise FileNotFoundError(f"LS-DYNA executable not found: {solver_exe}")
-        
         self.solver_location = str(solver_dir)
         self.solver = f'"{str(solver_exe)}"'
-
 
     def _get_env_script(self) -> str:
         """Get env script when running using lsrun from workbench."""
@@ -137,7 +127,7 @@ class WindowsRunner(BaseRunner):
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
             # -wdir is used here because sometimes mpiexec does not pass its working directory
             # to dyna on windows when run from python subprocess
-            command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}'
+            command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}' # noqa:E501
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
             command = (
                 f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}'
