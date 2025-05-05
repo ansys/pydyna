@@ -55,6 +55,7 @@ from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, Downl
 
 # sphinx_gallery_thumbnail_path = '_static/pre/opt/plate_thickness.png'
 
+
 workdir = tempfile.TemporaryDirectory()
 
 mesh_file_name = "bar_impact_mesh.k"
