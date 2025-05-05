@@ -133,6 +133,7 @@ html_theme_options = {
         #     "*core/keywords/keyword_classes/auto*",
         # ],
         "output": "api",
+        "own_page_level": "module",
     },
 }
 
