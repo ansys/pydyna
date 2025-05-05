@@ -95,11 +95,9 @@ class {{keyword_data.classname}}(
 {% endfor %}
     {% endif %}
     ):
-    """DYNA {{keyword_data.title}} keyword."""
 {% else %}
 class {{keyword_data.classname}}(KeywordBase):
 {% endif %}
-    """DYNA {{keyword_data.title}} keyword."""
 
     keyword = "{{keyword_data.keyword}}"
     subkeyword = "{{keyword_data.subkeyword}}"
