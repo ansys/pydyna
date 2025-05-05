@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryAcousticNonReflecting class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryAcousticNonReflecting(KeywordBase):
     subkeyword = "ACOUSTIC_NON_REFLECTING"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryAcousticNonReflecting class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -89,6 +91,7 @@ class BoundaryAcousticNonReflecting(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -101,6 +104,7 @@ class BoundaryAcousticNonReflecting(KeywordBase):
 
     @nrbtyp.setter
     def nrbtyp(self, value: int) -> None:
+        """Set the nrbtyp property."""
         self._cards[0].set_value("nrbtyp", value)
 
     @property
@@ -113,6 +117,7 @@ class BoundaryAcousticNonReflecting(KeywordBase):
 
     @crvopt.setter
     def crvopt(self, value: int) -> None:
+        """Set the crvopt property."""
         self._cards[0].set_value("crvopt", value)
 
     @property
@@ -124,6 +129,7 @@ class BoundaryAcousticNonReflecting(KeywordBase):
 
     @data1.setter
     def data1(self, value: float) -> None:
+        """Set the data1 property."""
         self._cards[0].set_value("data1", value)
 
     @property
@@ -134,6 +140,7 @@ class BoundaryAcousticNonReflecting(KeywordBase):
 
     @data2.setter
     def data2(self, value: float) -> None:
+        """Set the data2 property."""
         self._cards[0].set_value("data2", value)
 
     @property
@@ -144,5 +151,6 @@ class BoundaryAcousticNonReflecting(KeywordBase):
 
     @data3.setter
     def data3(self, value: float) -> None:
+        """Set the data3 property."""
         self._cards[0].set_value("data3", value)
 

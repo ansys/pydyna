@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseInitialChemistryElement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseInitialChemistryElement(KeywordBase):
     subkeyword = "INITIAL_CHEMISTRY_ELEMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseInitialChemistryElement class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -174,6 +176,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @chemid.setter
     def chemid(self, value: int) -> None:
+        """Set the chemid property."""
         self._cards[0].set_value("chemid", value)
 
     @property
@@ -184,6 +187,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @compid.setter
     def compid(self, value: int) -> None:
+        """Set the compid property."""
         self._cards[0].set_value("compid", value)
 
     @property
@@ -194,6 +198,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @uic.setter
     def uic(self, value: float) -> None:
+        """Set the uic property."""
         self._cards[1].set_value("uic", value)
 
     @property
@@ -204,6 +209,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @vic.setter
     def vic(self, value: float) -> None:
+        """Set the vic property."""
         self._cards[1].set_value("vic", value)
 
     @property
@@ -214,6 +220,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @wic.setter
     def wic(self, value: float) -> None:
+        """Set the wic property."""
         self._cards[1].set_value("wic", value)
 
     @property
@@ -224,6 +231,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @rhoic.setter
     def rhoic(self, value: float) -> None:
+        """Set the rhoic property."""
         self._cards[1].set_value("rhoic", value)
 
     @property
@@ -234,6 +242,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @pic.setter
     def pic(self, value: float) -> None:
+        """Set the pic property."""
         self._cards[1].set_value("pic", value)
 
     @property
@@ -244,6 +253,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @tic.setter
     def tic(self, value: float) -> None:
+        """Set the tic property."""
         self._cards[1].set_value("tic", value)
 
     @property
@@ -254,6 +264,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @hic.setter
     def hic(self, value: float) -> None:
+        """Set the hic property."""
         self._cards[1].set_value("hic", value)
 
     @property
@@ -264,6 +275,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @ele1.setter
     def ele1(self, value: int) -> None:
+        """Set the ele1 property."""
         self._cards[2].set_value("ele1", value)
 
     @property
@@ -274,6 +286,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @ele2.setter
     def ele2(self, value: int) -> None:
+        """Set the ele2 property."""
         self._cards[2].set_value("ele2", value)
 
     @property
@@ -284,6 +297,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @ele3.setter
     def ele3(self, value: int) -> None:
+        """Set the ele3 property."""
         self._cards[2].set_value("ele3", value)
 
     @property
@@ -294,6 +308,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @ele4.setter
     def ele4(self, value: int) -> None:
+        """Set the ele4 property."""
         self._cards[2].set_value("ele4", value)
 
     @property
@@ -304,6 +319,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @ele5.setter
     def ele5(self, value: int) -> None:
+        """Set the ele5 property."""
         self._cards[2].set_value("ele5", value)
 
     @property
@@ -314,6 +330,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @ele6.setter
     def ele6(self, value: int) -> None:
+        """Set the ele6 property."""
         self._cards[2].set_value("ele6", value)
 
     @property
@@ -324,6 +341,7 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @ele7.setter
     def ele7(self, value: int) -> None:
+        """Set the ele7 property."""
         self._cards[2].set_value("ele7", value)
 
     @property
@@ -334,5 +352,6 @@ class CeseInitialChemistryElement(KeywordBase):
 
     @ele8.setter
     def ele8(self, value: int) -> None:
+        """Set the ele8 property."""
         self._cards[2].set_value("ele8", value)
 

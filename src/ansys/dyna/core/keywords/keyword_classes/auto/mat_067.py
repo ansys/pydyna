@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat067 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat067(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat067 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -309,6 +311,7 @@ class Mat067(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -319,6 +322,7 @@ class Mat067(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -329,6 +333,7 @@ class Mat067(KeywordBase):
 
     @lcidtr.setter
     def lcidtr(self, value: int) -> None:
+        """Set the lcidtr property."""
         self._cards[0].set_value("lcidtr", value)
 
     @property
@@ -339,6 +344,7 @@ class Mat067(KeywordBase):
 
     @lcidts.setter
     def lcidts(self, value: int) -> None:
+        """Set the lcidts property."""
         self._cards[0].set_value("lcidts", value)
 
     @property
@@ -349,6 +355,7 @@ class Mat067(KeywordBase):
 
     @lcidtt.setter
     def lcidtt(self, value: int) -> None:
+        """Set the lcidtt property."""
         self._cards[0].set_value("lcidtt", value)
 
     @property
@@ -359,6 +366,7 @@ class Mat067(KeywordBase):
 
     @lcidrr.setter
     def lcidrr(self, value: int) -> None:
+        """Set the lcidrr property."""
         self._cards[0].set_value("lcidrr", value)
 
     @property
@@ -369,6 +377,7 @@ class Mat067(KeywordBase):
 
     @lcidrs.setter
     def lcidrs(self, value: int) -> None:
+        """Set the lcidrs property."""
         self._cards[0].set_value("lcidrs", value)
 
     @property
@@ -379,6 +388,7 @@ class Mat067(KeywordBase):
 
     @lcidrt.setter
     def lcidrt(self, value: int) -> None:
+        """Set the lcidrt property."""
         self._cards[0].set_value("lcidrt", value)
 
     @property
@@ -389,6 +399,7 @@ class Mat067(KeywordBase):
 
     @lcidtdr.setter
     def lcidtdr(self, value: int) -> None:
+        """Set the lcidtdr property."""
         self._cards[1].set_value("lcidtdr", value)
 
     @property
@@ -399,6 +410,7 @@ class Mat067(KeywordBase):
 
     @lcidtds.setter
     def lcidtds(self, value: int) -> None:
+        """Set the lcidtds property."""
         self._cards[1].set_value("lcidtds", value)
 
     @property
@@ -409,6 +421,7 @@ class Mat067(KeywordBase):
 
     @lcidtdt.setter
     def lcidtdt(self, value: int) -> None:
+        """Set the lcidtdt property."""
         self._cards[1].set_value("lcidtdt", value)
 
     @property
@@ -419,6 +432,7 @@ class Mat067(KeywordBase):
 
     @lcidrdr.setter
     def lcidrdr(self, value: int) -> None:
+        """Set the lcidrdr property."""
         self._cards[1].set_value("lcidrdr", value)
 
     @property
@@ -429,6 +443,7 @@ class Mat067(KeywordBase):
 
     @lcidrds.setter
     def lcidrds(self, value: int) -> None:
+        """Set the lcidrds property."""
         self._cards[1].set_value("lcidrds", value)
 
     @property
@@ -439,6 +454,7 @@ class Mat067(KeywordBase):
 
     @lcidrdt.setter
     def lcidrdt(self, value: int) -> None:
+        """Set the lcidrdt property."""
         self._cards[1].set_value("lcidrdt", value)
 
     @property
@@ -449,6 +465,7 @@ class Mat067(KeywordBase):
 
     @for_.setter
     def for_(self, value: float) -> None:
+        """Set the for_ property."""
         self._cards[2].set_value("for", value)
 
     @property
@@ -459,6 +476,7 @@ class Mat067(KeywordBase):
 
     @fos.setter
     def fos(self, value: float) -> None:
+        """Set the fos property."""
         self._cards[2].set_value("fos", value)
 
     @property
@@ -469,6 +487,7 @@ class Mat067(KeywordBase):
 
     @fot.setter
     def fot(self, value: float) -> None:
+        """Set the fot property."""
         self._cards[2].set_value("fot", value)
 
     @property
@@ -479,6 +498,7 @@ class Mat067(KeywordBase):
 
     @mor.setter
     def mor(self, value: float) -> None:
+        """Set the mor property."""
         self._cards[2].set_value("mor", value)
 
     @property
@@ -489,6 +509,7 @@ class Mat067(KeywordBase):
 
     @mos.setter
     def mos(self, value: float) -> None:
+        """Set the mos property."""
         self._cards[2].set_value("mos", value)
 
     @property
@@ -499,6 +520,7 @@ class Mat067(KeywordBase):
 
     @mot.setter
     def mot(self, value: float) -> None:
+        """Set the mot property."""
         self._cards[2].set_value("mot", value)
 
     @property
@@ -509,6 +531,7 @@ class Mat067(KeywordBase):
 
     @ffailr.setter
     def ffailr(self, value: float) -> None:
+        """Set the ffailr property."""
         self._cards[3].set_value("ffailr", value)
 
     @property
@@ -519,6 +542,7 @@ class Mat067(KeywordBase):
 
     @ffails.setter
     def ffails(self, value: float) -> None:
+        """Set the ffails property."""
         self._cards[3].set_value("ffails", value)
 
     @property
@@ -529,6 +553,7 @@ class Mat067(KeywordBase):
 
     @ffailt.setter
     def ffailt(self, value: float) -> None:
+        """Set the ffailt property."""
         self._cards[3].set_value("ffailt", value)
 
     @property
@@ -539,6 +564,7 @@ class Mat067(KeywordBase):
 
     @mfailr.setter
     def mfailr(self, value: float) -> None:
+        """Set the mfailr property."""
         self._cards[3].set_value("mfailr", value)
 
     @property
@@ -549,6 +575,7 @@ class Mat067(KeywordBase):
 
     @mfails.setter
     def mfails(self, value: float) -> None:
+        """Set the mfails property."""
         self._cards[3].set_value("mfails", value)
 
     @property
@@ -559,6 +586,7 @@ class Mat067(KeywordBase):
 
     @mfailt.setter
     def mfailt(self, value: float) -> None:
+        """Set the mfailt property."""
         self._cards[3].set_value("mfailt", value)
 
     @property
@@ -569,6 +597,7 @@ class Mat067(KeywordBase):
 
     @ufailr.setter
     def ufailr(self, value: float) -> None:
+        """Set the ufailr property."""
         self._cards[4].set_value("ufailr", value)
 
     @property
@@ -579,6 +608,7 @@ class Mat067(KeywordBase):
 
     @ufails.setter
     def ufails(self, value: float) -> None:
+        """Set the ufails property."""
         self._cards[4].set_value("ufails", value)
 
     @property
@@ -589,6 +619,7 @@ class Mat067(KeywordBase):
 
     @ufailt.setter
     def ufailt(self, value: float) -> None:
+        """Set the ufailt property."""
         self._cards[4].set_value("ufailt", value)
 
     @property
@@ -599,6 +630,7 @@ class Mat067(KeywordBase):
 
     @tfailr.setter
     def tfailr(self, value: float) -> None:
+        """Set the tfailr property."""
         self._cards[4].set_value("tfailr", value)
 
     @property
@@ -609,6 +641,7 @@ class Mat067(KeywordBase):
 
     @tfails.setter
     def tfails(self, value: float) -> None:
+        """Set the tfails property."""
         self._cards[4].set_value("tfails", value)
 
     @property
@@ -619,6 +652,7 @@ class Mat067(KeywordBase):
 
     @tfailt.setter
     def tfailt(self, value: float) -> None:
+        """Set the tfailt property."""
         self._cards[4].set_value("tfailt", value)
 
     @property
@@ -629,5 +663,6 @@ class Mat067(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

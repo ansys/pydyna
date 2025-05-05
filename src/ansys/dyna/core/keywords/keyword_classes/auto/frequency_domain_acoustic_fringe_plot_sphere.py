@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainAcousticFringePlotSphere class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
     subkeyword = "DOMAIN_ACOUSTIC_FRINGE_PLOT_SPHERE"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainAcousticFringePlotSphere class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,8 +111,9 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @center.setter
     def center(self, value: int) -> None:
+        """Set the center property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""center must be `None` or one of {1,2,3}""")
+            raise Exception("""center must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("center", value)
 
     @property
@@ -121,6 +124,7 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[0].set_value("r", value)
 
     @property
@@ -133,6 +137,7 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @density.setter
     def density(self, value: int) -> None:
+        """Set the density property."""
         self._cards[0].set_value("density", value)
 
     @property
@@ -143,6 +148,7 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -153,6 +159,7 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -163,6 +170,7 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 
     @property
@@ -180,8 +188,9 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @half1.setter
     def half1(self, value: int) -> None:
+        """Set the half1 property."""
         if value not in [0, 1, -1, 2, -2, 3, -3, None]:
-            raise Exception("""half1 must be `None` or one of {0,1,-1,2,-2,3,-3}""")
+            raise Exception("""half1 must be `None` or one of {0,1,-1,2,-2,3,-3}.""")
         self._cards[0].set_value("half1", value)
 
     @property
@@ -199,7 +208,8 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
 
     @half2.setter
     def half2(self, value: int) -> None:
+        """Set the half2 property."""
         if value not in [0, 1, -1, 2, -2, 3, -3, None]:
-            raise Exception("""half2 must be `None` or one of {0,1,-1,2,-2,3,-3}""")
+            raise Exception("""half2 must be `None` or one of {0,1,-1,2,-2,3,-3}.""")
         self._cards[0].set_value("half2", value)
 

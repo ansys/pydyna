@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefinePressureTube class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefinePressureTube(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefinePressureTube class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -268,6 +270,7 @@ class DefinePressureTube(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -278,6 +281,7 @@ class DefinePressureTube(KeywordBase):
 
     @ws.setter
     def ws(self, value: float) -> None:
+        """Set the ws property."""
         self._cards[0].set_value("ws", value)
 
     @property
@@ -288,6 +292,7 @@ class DefinePressureTube(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -301,6 +306,7 @@ class DefinePressureTube(KeywordBase):
 
     @mtd.setter
     def mtd(self, value: int) -> None:
+        """Set the mtd property."""
         self._cards[0].set_value("mtd", value)
 
     @property
@@ -318,6 +324,7 @@ class DefinePressureTube(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         self._cards[0].set_value("type", value)
 
     @property
@@ -329,6 +336,7 @@ class DefinePressureTube(KeywordBase):
 
     @visc.setter
     def visc(self, value: float) -> None:
+        """Set the visc property."""
         self._cards[1].set_value("visc", value)
 
     @property
@@ -340,6 +348,7 @@ class DefinePressureTube(KeywordBase):
 
     @cfl.setter
     def cfl(self, value: float) -> None:
+        """Set the cfl property."""
         self._cards[1].set_value("cfl", value)
 
     @property
@@ -350,6 +359,7 @@ class DefinePressureTube(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[1].set_value("damp", value)
 
     @property
@@ -364,6 +374,7 @@ class DefinePressureTube(KeywordBase):
 
     @bndl.setter
     def bndl(self, value: float) -> None:
+        """Set the bndl property."""
         self._cards[1].set_value("bndl", value)
 
     @property
@@ -378,6 +389,7 @@ class DefinePressureTube(KeywordBase):
 
     @bndr.setter
     def bndr(self, value: float) -> None:
+        """Set the bndr property."""
         self._cards[1].set_value("bndr", value)
 
     @property
@@ -394,6 +406,7 @@ class DefinePressureTube(KeywordBase):
 
     @cavl.setter
     def cavl(self, value: float) -> None:
+        """Set the cavl property."""
         self._cards[1].set_value("cavl", value)
 
     @property
@@ -410,6 +423,7 @@ class DefinePressureTube(KeywordBase):
 
     @cavr.setter
     def cavr(self, value: float) -> None:
+        """Set the cavr property."""
         self._cards[1].set_value("cavr", value)
 
     @property
@@ -420,6 +434,7 @@ class DefinePressureTube(KeywordBase):
 
     @snode.setter
     def snode(self, value: int) -> None:
+        """Set the snode property."""
         self._cards[1].set_value("snode", value)
 
     @property
@@ -430,6 +445,7 @@ class DefinePressureTube(KeywordBase):
 
     @nshl.setter
     def nshl(self, value: int) -> None:
+        """Set the nshl property."""
         self._cards[2].set_value("nshl", value)
 
     @property
@@ -440,6 +456,7 @@ class DefinePressureTube(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         self._cards[2].set_value("elform", value)
 
     @property
@@ -450,6 +467,7 @@ class DefinePressureTube(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[2].set_value("nip", value)
 
     @property
@@ -460,6 +478,7 @@ class DefinePressureTube(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[2].set_value("shrf", value)
 
     @property
@@ -470,6 +489,7 @@ class DefinePressureTube(KeywordBase):
 
     @bpid.setter
     def bpid(self, value: int) -> None:
+        """Set the bpid property."""
         self._cards[2].set_value("bpid", value)
 
     @property
@@ -480,6 +500,7 @@ class DefinePressureTube(KeywordBase):
 
     @nsld.setter
     def nsld(self, value: int) -> None:
+        """Set the nsld property."""
         self._cards[3].set_value("nsld", value)
 
     @property
@@ -490,6 +511,7 @@ class DefinePressureTube(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         self._cards[3].set_value("elform", value)
 
     @property
@@ -500,6 +522,7 @@ class DefinePressureTube(KeywordBase):
 
     @nthk.setter
     def nthk(self, value: int) -> None:
+        """Set the nthk property."""
         self._cards[3].set_value("nthk", value)
 
     @property
@@ -510,6 +533,7 @@ class DefinePressureTube(KeywordBase):
 
     @bpid.setter
     def bpid(self, value: int) -> None:
+        """Set the bpid property."""
         self._cards[3].set_value("bpid", value)
 
     @property
@@ -520,5 +544,6 @@ class DefinePressureTube(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

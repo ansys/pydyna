@@ -1,5 +1,5 @@
 Build the Docker image compatible with the `run` module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------
 
 This container is used by PyDYNA's `run` module.
 The `run_dyna` function can run LS-DYNA in a Docker container, though it assumes that the container was built
@@ -35,30 +35,30 @@ To build the ``run`` Docker image, perform these steps:
 
 #. Either run this Docker command (if defining licensing environment variables from Python):
 
-   .. code:: bash
+  .. code:: bash
 
-      docker build -t dyna_run .
+    docker build -t dyna_run .
 
 #. Or run this Docker command (if defining licensing environment variables in the container itself):
 
-.. code:: bash
+  .. code:: bash
 
-      docker build -t dyna_run . --build-arg LSTC_LICENSE=ansys --build-arg ANSYSLI_SERVERS=*** --build-arg ANSYSLMD_LICENSE_FILE=***
+    docker build -t dyna_run . --build-arg LSTC_LICENSE=ansys --build-arg ANSYSLI_SERVERS=*** --build-arg ANSYSLMD_LICENSE_FILE=***
 
 #. Check that the image has been built successfully by running this command:
 
-   .. code:: bash
+  .. code:: bash
 
-       docker images
+    docker images
 
 
-   Your output should look similar to this:
+Your output should look similar to this:
 
-   .. code:: bash
+  .. code:: bash
 
-       >>> REPOSITORY                        TAG                                        IMAGE ID       CREATED          SIZE
-       >>> dyna_run                          latest                                     defbadbeee8e   16 minutes ago   12.4GB
-       >>> ......                            ......                                     ............   ..............   ......
+    >>> REPOSITORY                        TAG                                        IMAGE ID       CREATED          SIZE
+    >>> dyna_run                          latest                                     defbadbeee8e   16 minutes ago   12.4GB
+    >>> ......                            ......                                     ............   ..............   ......
 
 
 Use the container to run a dyna input deck
@@ -86,20 +86,20 @@ If licenses were not configured into the container, they can be passed as enviro
 
 .. code:: python
 
-    from ansys.dyna.core.run import run_dyna, MpiOption, Precision, MemoryUnit
+  from ansys.dyna.core.run import run_dyna, MpiOption, Precision, MemoryUnit
 
-    run_dyna(
-        "input.k",
-        mpi_option=MpiOption.MPP_INTEL_MPI,
-        precision=Precision.DOUBLE,
-        ncpu=2,
-        memory=20,
-        memory_unit=MemoryUnit.MB,
-        container="dyna_run_v04:latest",
-        working_directory="run",
-        container_env = {
-            "LSTC_LICENSE": "ansys",
-            "ANSYSLI_SERVERS": "***",
-            "ANSYSLMD_LICENSE_FILE": "***",
-        }
-    )
+  run_dyna(
+      "input.k",
+      mpi_option=MpiOption.MPP_INTEL_MPI,
+      precision=Precision.DOUBLE,
+      ncpu=2,
+      memory=20,
+      memory_unit=MemoryUnit.MB,
+      container="dyna_run_v04:latest",
+      working_directory="run",
+      container_env = {
+          "LSTC_LICENSE": "ansys",
+          "ANSYSLI_SERVERS": "***",
+          "ANSYSLMD_LICENSE_FILE": "***",
+      }
+  )

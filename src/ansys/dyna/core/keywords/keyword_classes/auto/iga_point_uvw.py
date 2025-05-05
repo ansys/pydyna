@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IgaPointUvw class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IgaPointUvw(KeywordBase):
     subkeyword = "POINT_UVW"
 
     def __init__(self, **kwargs):
+        """Initialize the IgaPointUvw class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -85,6 +87,7 @@ class IgaPointUvw(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -95,6 +98,7 @@ class IgaPointUvw(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -105,6 +109,7 @@ class IgaPointUvw(KeywordBase):
 
     @u.setter
     def u(self, value: float) -> None:
+        """Set the u property."""
         self._cards[0].set_value("u", value)
 
     @property
@@ -115,6 +120,7 @@ class IgaPointUvw(KeywordBase):
 
     @v.setter
     def v(self, value: float) -> None:
+        """Set the v property."""
         self._cards[0].set_value("v", value)
 
     @property
@@ -125,5 +131,6 @@ class IgaPointUvw(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[0].set_value("w", value)
 

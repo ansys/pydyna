@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlLsda class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlLsda(KeywordBase):
     subkeyword = "LSDA"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlLsda class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -114,6 +116,7 @@ class ControlLsda(KeywordBase):
 
     @npexcl.setter
     def npexcl(self, value: int) -> None:
+        """Set the npexcl property."""
         self._cards[0].set_value("npexcl", value)
 
     @property
@@ -124,6 +127,7 @@ class ControlLsda(KeywordBase):
 
     @p1.setter
     def p1(self, value: int) -> None:
+        """Set the p1 property."""
         self._cards[1].set_value("p1", value)
 
     @property
@@ -134,6 +138,7 @@ class ControlLsda(KeywordBase):
 
     @p2.setter
     def p2(self, value: int) -> None:
+        """Set the p2 property."""
         self._cards[1].set_value("p2", value)
 
     @property
@@ -144,6 +149,7 @@ class ControlLsda(KeywordBase):
 
     @p3.setter
     def p3(self, value: int) -> None:
+        """Set the p3 property."""
         self._cards[1].set_value("p3", value)
 
     @property
@@ -154,6 +160,7 @@ class ControlLsda(KeywordBase):
 
     @p4.setter
     def p4(self, value: int) -> None:
+        """Set the p4 property."""
         self._cards[1].set_value("p4", value)
 
     @property
@@ -164,6 +171,7 @@ class ControlLsda(KeywordBase):
 
     @p5.setter
     def p5(self, value: int) -> None:
+        """Set the p5 property."""
         self._cards[1].set_value("p5", value)
 
     @property
@@ -174,6 +182,7 @@ class ControlLsda(KeywordBase):
 
     @p6.setter
     def p6(self, value: int) -> None:
+        """Set the p6 property."""
         self._cards[1].set_value("p6", value)
 
     @property
@@ -184,6 +193,7 @@ class ControlLsda(KeywordBase):
 
     @p7.setter
     def p7(self, value: int) -> None:
+        """Set the p7 property."""
         self._cards[1].set_value("p7", value)
 
     @property
@@ -194,5 +204,6 @@ class ControlLsda(KeywordBase):
 
     @p8.setter
     def p8(self, value: int) -> None:
+        """Set the p8 property."""
         self._cards[1].set_value("p8", value)
 

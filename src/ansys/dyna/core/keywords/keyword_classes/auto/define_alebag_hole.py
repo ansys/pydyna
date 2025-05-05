@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineAlebagHole class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineAlebagHole(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineAlebagHole class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -131,6 +133,7 @@ class DefineAlebagHole(KeywordBase):
 
     @holeid.setter
     def holeid(self, value: int) -> None:
+        """Set the holeid property."""
         self._cards[0].set_value("holeid", value)
 
     @property
@@ -141,6 +144,7 @@ class DefineAlebagHole(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -153,8 +157,9 @@ class DefineAlebagHole(KeywordBase):
 
     @sidtype.setter
     def sidtype(self, value: int) -> None:
+        """Set the sidtype property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtype must be `None` or one of {0,1}""")
+            raise Exception("""sidtype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sidtype", value)
 
     @property
@@ -165,6 +170,7 @@ class DefineAlebagHole(KeywordBase):
 
     @nquad.setter
     def nquad(self, value: int) -> None:
+        """Set the nquad property."""
         self._cards[0].set_value("nquad", value)
 
     @property
@@ -175,6 +181,7 @@ class DefineAlebagHole(KeywordBase):
 
     @xoff.setter
     def xoff(self, value: float) -> None:
+        """Set the xoff property."""
         self._cards[0].set_value("xoff", value)
 
     @property
@@ -185,6 +192,7 @@ class DefineAlebagHole(KeywordBase):
 
     @nfold.setter
     def nfold(self, value: int) -> None:
+        """Set the nfold property."""
         self._cards[0].set_value("nfold", value)
 
     @property
@@ -195,6 +203,7 @@ class DefineAlebagHole(KeywordBase):
 
     @xclen.setter
     def xclen(self, value: float) -> None:
+        """Set the xclen property."""
         self._cards[0].set_value("xclen", value)
 
     @property
@@ -207,8 +216,9 @@ class DefineAlebagHole(KeywordBase):
 
     @int_ext.setter
     def int_ext(self, value: int) -> None:
+        """Set the int_ext property."""
         if value not in [0, 1, None]:
-            raise Exception("""int_ext must be `None` or one of {0,1}""")
+            raise Exception("""int_ext must be `None` or one of {0,1}.""")
         self._cards[0].set_value("int/ext", value)
 
     @property
@@ -219,5 +229,6 @@ class DefineAlebagHole(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

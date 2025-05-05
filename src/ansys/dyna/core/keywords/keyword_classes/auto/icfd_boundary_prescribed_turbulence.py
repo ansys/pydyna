@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdBoundaryPrescribedTurbulence class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
     subkeyword = "BOUNDARY_PRESCRIBED_TURBULENCE"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdBoundaryPrescribedTurbulence class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -91,6 +93,7 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -105,8 +108,9 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
 
     @vtype.setter
     def vtype(self, value: int) -> None:
+        """Set the vtype property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""vtype must be `None` or one of {1,2,3,4}""")
+            raise Exception("""vtype must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("vtype", value)
 
     @property
@@ -120,8 +124,9 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
 
     @imp.setter
     def imp(self, value: int) -> None:
+        """Set the imp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""imp must be `None` or one of {0,1,2}""")
+            raise Exception("""imp must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("imp", value)
 
     @property
@@ -132,6 +137,7 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -142,6 +148,7 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
 
     @ks.setter
     def ks(self, value: float) -> None:
+        """Set the ks property."""
         self._cards[0].set_value("ks", value)
 
     @property
@@ -152,5 +159,6 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
 
     @cs.setter
     def cs(self, value: float) -> None:
+        """Set the cs property."""
         self._cards[0].set_value("cs", value)
 

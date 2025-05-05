@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlThermalTimestep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlThermalTimestep(KeywordBase):
     subkeyword = "THERMAL_TIMESTEP"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlThermalTimestep class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class ControlThermalTimestep(KeywordBase):
 
     @ts.setter
     def ts(self, value: int) -> None:
+        """Set the ts property."""
         self._cards[0].set_value("ts", value)
 
     @property
@@ -121,6 +124,7 @@ class ControlThermalTimestep(KeywordBase):
 
     @tip.setter
     def tip(self, value: float) -> None:
+        """Set the tip property."""
         self._cards[0].set_value("tip", value)
 
     @property
@@ -131,6 +135,7 @@ class ControlThermalTimestep(KeywordBase):
 
     @its.setter
     def its(self, value: float) -> None:
+        """Set the its property."""
         self._cards[0].set_value("its", value)
 
     @property
@@ -143,6 +148,7 @@ class ControlThermalTimestep(KeywordBase):
 
     @tmin.setter
     def tmin(self, value: float) -> None:
+        """Set the tmin property."""
         self._cards[0].set_value("tmin", value)
 
     @property
@@ -155,6 +161,7 @@ class ControlThermalTimestep(KeywordBase):
 
     @tmax.setter
     def tmax(self, value: float) -> None:
+        """Set the tmax property."""
         self._cards[0].set_value("tmax", value)
 
     @property
@@ -167,6 +174,7 @@ class ControlThermalTimestep(KeywordBase):
 
     @dtemp.setter
     def dtemp(self, value: float) -> None:
+        """Set the dtemp property."""
         self._cards[0].set_value("dtemp", value)
 
     @property
@@ -178,6 +186,7 @@ class ControlThermalTimestep(KeywordBase):
 
     @tscp.setter
     def tscp(self, value: float) -> None:
+        """Set the tscp property."""
         self._cards[0].set_value("tscp", value)
 
     @property
@@ -188,5 +197,6 @@ class ControlThermalTimestep(KeywordBase):
 
     @lcts.setter
     def lcts(self, value: int) -> None:
+        """Set the lcts property."""
         self._cards[0].set_value("lcts", value)
 

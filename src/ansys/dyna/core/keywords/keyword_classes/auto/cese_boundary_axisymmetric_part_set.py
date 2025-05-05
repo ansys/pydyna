@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseBoundaryAxisymmetricPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundaryAxisymmetricPartSet(KeywordBase):
     subkeyword = "BOUNDARY_AXISYMMETRIC_PART_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseBoundaryAxisymmetricPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class CeseBoundaryAxisymmetricPartSet(KeywordBase):
 
     @msurf_s.setter
     def msurf_s(self, value: int) -> None:
+        """Set the msurf_s property."""
         self._cards[0].set_value("msurf_s", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeByPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeByPart(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeByPart class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -195,6 +197,7 @@ class DefineDeByPart(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -205,6 +208,7 @@ class DefineDeByPart(KeywordBase):
 
     @ndamp.setter
     def ndamp(self, value: float) -> None:
+        """Set the ndamp property."""
         self._cards[0].set_value("ndamp", value)
 
     @property
@@ -215,6 +219,7 @@ class DefineDeByPart(KeywordBase):
 
     @tdamp.setter
     def tdamp(self, value: float) -> None:
+        """Set the tdamp property."""
         self._cards[0].set_value("tdamp", value)
 
     @property
@@ -227,6 +232,7 @@ class DefineDeByPart(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[0].set_value("fric", value)
 
     @property
@@ -237,6 +243,7 @@ class DefineDeByPart(KeywordBase):
 
     @fricr.setter
     def fricr(self, value: float) -> None:
+        """Set the fricr property."""
         self._cards[0].set_value("fricr", value)
 
     @property
@@ -247,6 +254,7 @@ class DefineDeByPart(KeywordBase):
 
     @normk.setter
     def normk(self, value: float) -> None:
+        """Set the normk property."""
         self._cards[0].set_value("normk", value)
 
     @property
@@ -257,6 +265,7 @@ class DefineDeByPart(KeywordBase):
 
     @sheark.setter
     def sheark(self, value: float) -> None:
+        """Set the sheark property."""
         self._cards[0].set_value("sheark", value)
 
     @property
@@ -267,6 +276,7 @@ class DefineDeByPart(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[1].set_value("gamma", value)
 
     @property
@@ -277,6 +287,7 @@ class DefineDeByPart(KeywordBase):
 
     @vol.setter
     def vol(self, value: float) -> None:
+        """Set the vol property."""
         self._cards[1].set_value("vol", value)
 
     @property
@@ -287,6 +298,7 @@ class DefineDeByPart(KeywordBase):
 
     @ang.setter
     def ang(self, value: float) -> None:
+        """Set the ang property."""
         self._cards[1].set_value("ang", value)
 
     @property
@@ -297,6 +309,7 @@ class DefineDeByPart(KeywordBase):
 
     @lnorm.setter
     def lnorm(self, value: int) -> None:
+        """Set the lnorm property."""
         self._cards[2].set_value("lnorm", value)
 
     @property
@@ -307,6 +320,7 @@ class DefineDeByPart(KeywordBase):
 
     @lshear.setter
     def lshear(self, value: int) -> None:
+        """Set the lshear property."""
         self._cards[2].set_value("lshear", value)
 
     @property
@@ -317,6 +331,7 @@ class DefineDeByPart(KeywordBase):
 
     @fricd.setter
     def fricd(self, value: float) -> None:
+        """Set the fricd property."""
         self._cards[2].set_value("fricd", value)
 
     @property
@@ -327,6 +342,7 @@ class DefineDeByPart(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[2].set_value("dc", value)
 
     @property
@@ -337,5 +353,6 @@ class DefineDeByPart(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseD3Plot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseD3Plot(KeywordBase):
     subkeyword = "D3PLOT"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseD3Plot class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,5 +70,6 @@ class DualceseD3Plot(KeywordBase):
 
     @flow_var.setter
     def flow_var(self, value: str) -> None:
+        """Set the flow_var property."""
         self._cards[0].set_value("flow_var", value)
 

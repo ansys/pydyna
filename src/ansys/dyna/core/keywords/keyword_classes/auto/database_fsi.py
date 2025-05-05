@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseFsi class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseFsi(KeywordBase):
     subkeyword = "FSI"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseFsi class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -116,6 +118,7 @@ class DatabaseFsi(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -130,8 +133,9 @@ class DatabaseFsi(KeywordBase):
 
     @binary.setter
     def binary(self, value: int) -> None:
+        """Set the binary property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""binary must be `None` or one of {1,2,3}""")
+            raise Exception("""binary must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("binary", value)
 
     @property
@@ -142,6 +146,7 @@ class DatabaseFsi(KeywordBase):
 
     @dbsfi_id.setter
     def dbsfi_id(self, value: int) -> None:
+        """Set the dbsfi_id property."""
         self._cards[1].set_value("dbsfi_id", value)
 
     @property
@@ -152,6 +157,7 @@ class DatabaseFsi(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -165,8 +171,9 @@ class DatabaseFsi(KeywordBase):
 
     @stdype.setter
     def stdype(self, value: int) -> None:
+        """Set the stdype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""stdype must be `None` or one of {0,1,2}""")
+            raise Exception("""stdype must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("stdype", value)
 
     @property
@@ -177,6 +184,7 @@ class DatabaseFsi(KeywordBase):
 
     @swid.setter
     def swid(self, value: int) -> None:
+        """Set the swid property."""
         self._cards[1].set_value("swid", value)
 
     @property
@@ -187,6 +195,7 @@ class DatabaseFsi(KeywordBase):
 
     @convid.setter
     def convid(self, value: int) -> None:
+        """Set the convid property."""
         self._cards[1].set_value("convid", value)
 
     @property
@@ -197,6 +206,7 @@ class DatabaseFsi(KeywordBase):
 
     @ndsetid.setter
     def ndsetid(self, value: int) -> None:
+        """Set the ndsetid property."""
         self._cards[1].set_value("ndsetid", value)
 
     @property
@@ -207,5 +217,6 @@ class DatabaseFsi(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 

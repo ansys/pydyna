@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCurveDuplicate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveDuplicate(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCurveDuplicate class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -123,6 +125,7 @@ class DefineCurveDuplicate(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -133,6 +136,7 @@ class DefineCurveDuplicate(KeywordBase):
 
     @rlcid.setter
     def rlcid(self, value: int) -> None:
+        """Set the rlcid property."""
         self._cards[0].set_value("rlcid", value)
 
     @property
@@ -144,6 +148,7 @@ class DefineCurveDuplicate(KeywordBase):
 
     @sfa.setter
     def sfa(self, value: float) -> None:
+        """Set the sfa property."""
         self._cards[0].set_value("sfa", value)
 
     @property
@@ -155,6 +160,7 @@ class DefineCurveDuplicate(KeywordBase):
 
     @sfo.setter
     def sfo(self, value: float) -> None:
+        """Set the sfo property."""
         self._cards[0].set_value("sfo", value)
 
     @property
@@ -165,6 +171,7 @@ class DefineCurveDuplicate(KeywordBase):
 
     @offa.setter
     def offa(self, value: float) -> None:
+        """Set the offa property."""
         self._cards[0].set_value("offa", value)
 
     @property
@@ -175,6 +182,7 @@ class DefineCurveDuplicate(KeywordBase):
 
     @offo.setter
     def offo(self, value: float) -> None:
+        """Set the offo property."""
         self._cards[0].set_value("offo", value)
 
     @property
@@ -185,8 +193,9 @@ class DefineCurveDuplicate(KeywordBase):
 
     @dattyp.setter
     def dattyp(self, value: int) -> None:
+        """Set the dattyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""dattyp must be `None` or one of {0,1}""")
+            raise Exception("""dattyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dattyp", value)
 
     @property
@@ -197,5 +206,6 @@ class DefineCurveDuplicate(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

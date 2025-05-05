@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementBeamPulley class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementBeamPulley(KeywordBase):
     subkeyword = "BEAM_PULLEY"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementBeamPulley class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -111,6 +113,7 @@ class ElementBeamPulley(KeywordBase):
 
     @puid.setter
     def puid(self, value: int) -> None:
+        """Set the puid property."""
         self._cards[0].set_value("puid", value)
 
     @property
@@ -121,6 +124,7 @@ class ElementBeamPulley(KeywordBase):
 
     @bid1.setter
     def bid1(self, value: int) -> None:
+        """Set the bid1 property."""
         self._cards[0].set_value("bid1", value)
 
     @property
@@ -131,6 +135,7 @@ class ElementBeamPulley(KeywordBase):
 
     @bid2.setter
     def bid2(self, value: int) -> None:
+        """Set the bid2 property."""
         self._cards[0].set_value("bid2", value)
 
     @property
@@ -141,6 +146,7 @@ class ElementBeamPulley(KeywordBase):
 
     @pnid.setter
     def pnid(self, value: int) -> None:
+        """Set the pnid property."""
         self._cards[0].set_value("pnid", value)
 
     @property
@@ -151,6 +157,7 @@ class ElementBeamPulley(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[0].set_value("fd", value)
 
     @property
@@ -161,6 +168,7 @@ class ElementBeamPulley(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[0].set_value("fs", value)
 
     @property
@@ -171,6 +179,7 @@ class ElementBeamPulley(KeywordBase):
 
     @lmin.setter
     def lmin(self, value: float) -> None:
+        """Set the lmin property."""
         self._cards[0].set_value("lmin", value)
 
     @property
@@ -181,5 +190,6 @@ class ElementBeamPulley(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[0].set_value("dc", value)
 

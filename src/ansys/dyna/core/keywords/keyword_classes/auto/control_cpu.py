@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlCpu class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlCpu(KeywordBase):
     subkeyword = "CPU"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlCpu class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -64,6 +66,7 @@ class ControlCpu(KeywordBase):
 
     @cputim.setter
     def cputim(self, value: float) -> None:
+        """Set the cputim property."""
         self._cards[0].set_value("cputim", value)
 
     @property
@@ -76,7 +79,8 @@ class ControlCpu(KeywordBase):
 
     @iglst.setter
     def iglst(self, value: int) -> None:
+        """Set the iglst property."""
         if value not in [0, 1, None]:
-            raise Exception("""iglst must be `None` or one of {0,1}""")
+            raise Exception("""iglst must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iglst", value)
 

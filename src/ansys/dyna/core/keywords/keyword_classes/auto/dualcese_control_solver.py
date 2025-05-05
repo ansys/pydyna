@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseControlSolver class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseControlSolver(KeywordBase):
     subkeyword = "CONTROL_SOLVER"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseControlSolver class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class DualceseControlSolver(KeywordBase):
 
     @eqns.setter
     def eqns(self, value: str) -> None:
+        """Set the eqns property."""
         self._cards[0].set_value("eqns", value)
 
     @property
@@ -108,6 +111,7 @@ class DualceseControlSolver(KeywordBase):
 
     @igeom.setter
     def igeom(self, value: str) -> None:
+        """Set the igeom property."""
         self._cards[0].set_value("igeom", value)
 
     @property
@@ -121,8 +125,9 @@ class DualceseControlSolver(KeywordBase):
 
     @iframe.setter
     def iframe(self, value: str) -> None:
+        """Set the iframe property."""
         if value not in ["FIXED", "ROT", "ROTATING", None]:
-            raise Exception("""iframe must be `None` or one of {"FIXED","ROT","ROTATING"}""")
+            raise Exception("""iframe must be `None` or one of {"FIXED","ROT","ROTATING"}.""")
         self._cards[0].set_value("iframe", value)
 
     @property
@@ -136,6 +141,7 @@ class DualceseControlSolver(KeywordBase):
 
     @mixtype.setter
     def mixtype(self, value: str) -> None:
+        """Set the mixtype property."""
         self._cards[0].set_value("mixtype", value)
 
     @property
@@ -146,6 +152,7 @@ class DualceseControlSolver(KeywordBase):
 
     @idc.setter
     def idc(self, value: float) -> None:
+        """Set the idc property."""
         self._cards[0].set_value("idc", value)
 
     @property
@@ -158,7 +165,8 @@ class DualceseControlSolver(KeywordBase):
 
     @isnan.setter
     def isnan(self, value: int) -> None:
+        """Set the isnan property."""
         if value not in [0, 1, None]:
-            raise Exception("""isnan must be `None` or one of {0,1}""")
+            raise Exception("""isnan must be `None` or one of {0,1}.""")
         self._cards[0].set_value("isnan", value)
 

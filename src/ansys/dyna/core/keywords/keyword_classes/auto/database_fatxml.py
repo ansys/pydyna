@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseFatxml class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseFatxml(KeywordBase):
     subkeyword = "FATXML"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseFatxml class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class DatabaseFatxml(KeywordBase):
 
     @xml.setter
     def xml(self, value: str) -> None:
+        """Set the xml property."""
         self._cards[0].set_value("xml", value)
 

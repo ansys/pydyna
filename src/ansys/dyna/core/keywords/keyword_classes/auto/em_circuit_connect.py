@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmCircuitConnect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmCircuitConnect(KeywordBase):
     subkeyword = "CIRCUIT_CONNECT"
 
     def __init__(self, **kwargs):
+        """Initialize the EmCircuitConnect class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -89,6 +91,7 @@ class EmCircuitConnect(KeywordBase):
 
     @conid.setter
     def conid(self, value: int) -> None:
+        """Set the conid property."""
         self._cards[0].set_value("conid", value)
 
     @property
@@ -99,6 +102,7 @@ class EmCircuitConnect(KeywordBase):
 
     @contype.setter
     def contype(self, value: int) -> None:
+        """Set the contype property."""
         self._cards[0].set_value("contype", value)
 
     @property
@@ -109,6 +113,7 @@ class EmCircuitConnect(KeywordBase):
 
     @circ1.setter
     def circ1(self, value: int) -> None:
+        """Set the circ1 property."""
         self._cards[0].set_value("circ1", value)
 
     @property
@@ -119,6 +124,7 @@ class EmCircuitConnect(KeywordBase):
 
     @circ2.setter
     def circ2(self, value: int) -> None:
+        """Set the circ2 property."""
         self._cards[0].set_value("circ2", value)
 
     @property
@@ -129,6 +135,7 @@ class EmCircuitConnect(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[0].set_value("c1", value)
 
     @property
@@ -139,5 +146,6 @@ class EmCircuitConnect(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[0].set_value("c2", value)
 

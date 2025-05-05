@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmEpPurkinjeNetwork class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
     subkeyword = "EP_PURKINJE_NETWORK"
 
     def __init__(self, **kwargs):
+        """Initialize the EmEpPurkinjeNetwork class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -142,6 +144,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @purkid.setter
     def purkid(self, value: int) -> None:
+        """Set the purkid property."""
         self._cards[0].set_value("purkid", value)
 
     @property
@@ -153,6 +156,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @buildnet.setter
     def buildnet(self, value: int) -> None:
+        """Set the buildnet property."""
         self._cards[0].set_value("buildnet", value)
 
     @property
@@ -163,6 +167,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -173,6 +178,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -183,6 +189,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @pointstx.setter
     def pointstx(self, value: float) -> None:
+        """Set the pointstx property."""
         self._cards[0].set_value("pointstx", value)
 
     @property
@@ -193,6 +200,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @pointsty.setter
     def pointsty(self, value: float) -> None:
+        """Set the pointsty property."""
         self._cards[0].set_value("pointsty", value)
 
     @property
@@ -203,6 +211,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @pointstz.setter
     def pointstz(self, value: float) -> None:
+        """Set the pointstz property."""
         self._cards[0].set_value("pointstz", value)
 
     @property
@@ -213,6 +222,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @edgetlen.setter
     def edgetlen(self, value: float) -> None:
+        """Set the edgetlen property."""
         self._cards[0].set_value("edgetlen", value)
 
     @property
@@ -223,6 +233,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @numgen.setter
     def numgen(self, value: int) -> None:
+        """Set the numgen property."""
         self._cards[1].set_value("numgen", value)
 
     @property
@@ -233,6 +244,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @numbrinit.setter
     def numbrinit(self, value: int) -> None:
+        """Set the numbrinit property."""
         self._cards[1].set_value("numbrinit", value)
 
     @property
@@ -243,6 +255,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @numsplit.setter
     def numsplit(self, value: int) -> None:
+        """Set the numsplit property."""
         self._cards[1].set_value("numsplit", value)
 
     @property
@@ -253,6 +266,7 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @inodestld.setter
     def inodestld(self, value: int) -> None:
+        """Set the inodestld property."""
         self._cards[1].set_value("inodestld", value)
 
     @property
@@ -263,5 +277,6 @@ class EmEpPurkinjeNetwork(KeywordBase):
 
     @iedgestld.setter
     def iedgestld(self, value: int) -> None:
+        """Set the iedgestld property."""
         self._cards[1].set_value("iedgestld", value)
 

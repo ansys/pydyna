@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlRefineAle2D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlRefineAle2D(KeywordBase):
     subkeyword = "REFINE_ALE2D"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlRefineAle2D class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -214,6 +216,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -230,8 +233,9 @@ class ControlRefineAle2D(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""type must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""type must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -242,6 +246,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @nlvl.setter
     def nlvl(self, value: int) -> None:
+        """Set the nlvl property."""
         self._cards[0].set_value("nlvl", value)
 
     @property
@@ -256,6 +261,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @mmsid.setter
     def mmsid(self, value: int) -> None:
+        """Set the mmsid property."""
         self._cards[0].set_value("mmsid", value)
 
     @property
@@ -266,6 +272,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @ibox.setter
     def ibox(self, value: int) -> None:
+        """Set the ibox property."""
         self._cards[0].set_value("ibox", value)
 
     @property
@@ -276,6 +283,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @ielout.setter
     def ielout(self, value: int) -> None:
+        """Set the ielout property."""
         self._cards[0].set_value("ielout", value)
 
     @property
@@ -288,6 +296,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @ntotrf.setter
     def ntotrf(self, value: int) -> None:
+        """Set the ntotrf property."""
         self._cards[1].set_value("ntotrf", value)
 
     @property
@@ -299,6 +308,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @ncycrf.setter
     def ncycrf(self, value: float) -> None:
+        """Set the ncycrf property."""
         self._cards[1].set_value("ncycrf", value)
 
     @property
@@ -316,8 +326,9 @@ class ControlRefineAle2D(KeywordBase):
 
     @critrf.setter
     def critrf(self, value: int) -> None:
+        """Set the critrf property."""
         if value not in [0, 1, 2, 3, 5, None]:
-            raise Exception("""critrf must be `None` or one of {0,1,2,3,5}""")
+            raise Exception("""critrf must be `None` or one of {0,1,2,3,5}.""")
         self._cards[1].set_value("critrf", value)
 
     @property
@@ -328,6 +339,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @valrf.setter
     def valrf(self, value: float) -> None:
+        """Set the valrf property."""
         self._cards[1].set_value("valrf", value)
 
     @property
@@ -338,6 +350,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @begrf.setter
     def begrf(self, value: float) -> None:
+        """Set the begrf property."""
         self._cards[1].set_value("begrf", value)
 
     @property
@@ -348,6 +361,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @endrf.setter
     def endrf(self, value: float) -> None:
+        """Set the endrf property."""
         self._cards[1].set_value("endrf", value)
 
     @property
@@ -358,6 +372,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @layrf.setter
     def layrf(self, value: int) -> None:
+        """Set the layrf property."""
         self._cards[1].set_value("layrf", value)
 
     @property
@@ -370,6 +385,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @maxrm.setter
     def maxrm(self, value: int) -> None:
+        """Set the maxrm property."""
         self._cards[2].set_value("maxrm", value)
 
     @property
@@ -381,6 +397,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @ncycrm.setter
     def ncycrm(self, value: float) -> None:
+        """Set the ncycrm property."""
         self._cards[2].set_value("ncycrm", value)
 
     @property
@@ -398,8 +415,9 @@ class ControlRefineAle2D(KeywordBase):
 
     @critrm.setter
     def critrm(self, value: int) -> None:
+        """Set the critrm property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""critrm must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""critrm must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[2].set_value("critrm", value)
 
     @property
@@ -410,6 +428,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @valrm.setter
     def valrm(self, value: float) -> None:
+        """Set the valrm property."""
         self._cards[2].set_value("valrm", value)
 
     @property
@@ -422,6 +441,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @begrm.setter
     def begrm(self, value: float) -> None:
+        """Set the begrm property."""
         self._cards[2].set_value("begrm", value)
 
     @property
@@ -432,6 +452,7 @@ class ControlRefineAle2D(KeywordBase):
 
     @endrm.setter
     def endrm(self, value: float) -> None:
+        """Set the endrm property."""
         self._cards[2].set_value("endrm", value)
 
     @property
@@ -442,5 +463,6 @@ class ControlRefineAle2D(KeywordBase):
 
     @mmsrm.setter
     def mmsrm(self, value: int) -> None:
+        """Set the mmsrm property."""
         self._cards[2].set_value("mmsrm", value)
 

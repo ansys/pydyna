@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatHill3R class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatHill3R(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatHill3R class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -268,6 +270,7 @@ class MatHill3R(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -278,6 +281,7 @@ class MatHill3R(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -288,6 +292,7 @@ class MatHill3R(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -298,6 +303,7 @@ class MatHill3R(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -311,8 +317,9 @@ class MatHill3R(KeywordBase):
 
     @hr.setter
     def hr(self, value: float) -> None:
+        """Set the hr property."""
         if value not in [1.0, 2.0, 3.0, None]:
-            raise Exception("""hr must be `None` or one of {1.0,2.0,3.0}""")
+            raise Exception("""hr must be `None` or one of {1.0,2.0,3.0}.""")
         self._cards[0].set_value("hr", value)
 
     @property
@@ -325,6 +332,7 @@ class MatHill3R(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[0].set_value("p1", value)
 
     @property
@@ -337,6 +345,7 @@ class MatHill3R(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[0].set_value("p2", value)
 
     @property
@@ -347,6 +356,7 @@ class MatHill3R(KeywordBase):
 
     @r00.setter
     def r00(self, value: float) -> None:
+        """Set the r00 property."""
         self._cards[1].set_value("r00", value)
 
     @property
@@ -357,6 +367,7 @@ class MatHill3R(KeywordBase):
 
     @r45.setter
     def r45(self, value: float) -> None:
+        """Set the r45 property."""
         self._cards[1].set_value("r45", value)
 
     @property
@@ -367,6 +378,7 @@ class MatHill3R(KeywordBase):
 
     @r90.setter
     def r90(self, value: float) -> None:
+        """Set the r90 property."""
         self._cards[1].set_value("r90", value)
 
     @property
@@ -377,6 +389,7 @@ class MatHill3R(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -387,6 +400,7 @@ class MatHill3R(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[1].set_value("e0", value)
 
     @property
@@ -404,6 +418,7 @@ class MatHill3R(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -414,6 +429,7 @@ class MatHill3R(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[3].set_value("a1", value)
 
     @property
@@ -424,6 +440,7 @@ class MatHill3R(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[3].set_value("a2", value)
 
     @property
@@ -434,6 +451,7 @@ class MatHill3R(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[3].set_value("a3", value)
 
     @property
@@ -444,6 +462,7 @@ class MatHill3R(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[4].set_value("v1", value)
 
     @property
@@ -454,6 +473,7 @@ class MatHill3R(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[4].set_value("v2", value)
 
     @property
@@ -464,6 +484,7 @@ class MatHill3R(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[4].set_value("v3", value)
 
     @property
@@ -474,6 +495,7 @@ class MatHill3R(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -484,6 +506,7 @@ class MatHill3R(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -494,6 +517,7 @@ class MatHill3R(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[4].set_value("d3", value)
 
     @property
@@ -504,6 +528,7 @@ class MatHill3R(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[4].set_value("beta", value)
 
     @property
@@ -514,5 +539,6 @@ class MatHill3R(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

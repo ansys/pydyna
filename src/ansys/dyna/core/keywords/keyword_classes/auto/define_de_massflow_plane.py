@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeMassflowPlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeMassflowPlane(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeMassflowPlane class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -101,6 +103,7 @@ class DefineDeMassflowPlane(KeywordBase):
 
     @prtclsid.setter
     def prtclsid(self, value: int) -> None:
+        """Set the prtclsid property."""
         self._cards[0].set_value("prtclsid", value)
 
     @property
@@ -111,6 +114,7 @@ class DefineDeMassflowPlane(KeywordBase):
 
     @surfsid.setter
     def surfsid(self, value: int) -> None:
+        """Set the surfsid property."""
         self._cards[0].set_value("surfsid", value)
 
     @property
@@ -125,8 +129,9 @@ class DefineDeMassflowPlane(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
+        """Set the ptype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""ptype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""ptype must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -139,8 +144,9 @@ class DefineDeMassflowPlane(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, None]:
-            raise Exception("""stype must be `None` or one of {0,1}""")
+            raise Exception("""stype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -151,5 +157,6 @@ class DefineDeMassflowPlane(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

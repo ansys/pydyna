@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmCircuitRogo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmCircuitRogo(KeywordBase):
     subkeyword = "CIRCUIT_ROGO"
 
     def __init__(self, **kwargs):
+        """Initialize the EmCircuitRogo class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class EmCircuitRogo(KeywordBase):
 
     @rogoid.setter
     def rogoid(self, value: int) -> None:
+        """Set the rogoid property."""
         self._cards[0].set_value("rogoid", value)
 
     @property
@@ -87,6 +90,7 @@ class EmCircuitRogo(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 
     @property
@@ -100,8 +104,9 @@ class EmCircuitRogo(KeywordBase):
 
     @settype.setter
     def settype(self, value: int) -> None:
+        """Set the settype property."""
         if value not in [1, 2, None]:
-            raise Exception("""settype must be `None` or one of {1,2}""")
+            raise Exception("""settype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("settype", value)
 
     @property
@@ -115,7 +120,8 @@ class EmCircuitRogo(KeywordBase):
 
     @curtyp.setter
     def curtyp(self, value: int) -> None:
+        """Set the curtyp property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""curtyp must be `None` or one of {1,2,3}""")
+            raise Exception("""curtyp must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("curtyp", value)
 

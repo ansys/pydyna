@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the PartDuplicate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -32,6 +33,7 @@ class PartDuplicate(KeywordBase):
     subkeyword = "DUPLICATE"
 
     def __init__(self, **kwargs):
+        """Initialize the PartDuplicate class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -111,8 +113,9 @@ class PartDuplicate(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: str) -> None:
+        """Set the ptype property."""
         if value not in ["PART", "PSET", None]:
-            raise Exception("""ptype must be `None` or one of {"PART","PSET"}""")
+            raise Exception("""ptype must be `None` or one of {"PART","PSET"}.""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -123,6 +126,7 @@ class PartDuplicate(KeywordBase):
 
     @typeid.setter
     def typeid(self, value: int) -> None:
+        """Set the typeid property."""
         self._cards[0].set_value("typeid", value)
 
     @property
@@ -133,6 +137,7 @@ class PartDuplicate(KeywordBase):
 
     @idpoff.setter
     def idpoff(self, value: int) -> None:
+        """Set the idpoff property."""
         self._cards[0].set_value("idpoff", value)
 
     @property
@@ -143,6 +148,7 @@ class PartDuplicate(KeywordBase):
 
     @ideoff.setter
     def ideoff(self, value: int) -> None:
+        """Set the ideoff property."""
         self._cards[0].set_value("ideoff", value)
 
     @property
@@ -153,6 +159,7 @@ class PartDuplicate(KeywordBase):
 
     @idnoff.setter
     def idnoff(self, value: int) -> None:
+        """Set the idnoff property."""
         self._cards[0].set_value("idnoff", value)
 
     @property
@@ -163,6 +170,7 @@ class PartDuplicate(KeywordBase):
 
     @tranid.setter
     def tranid(self, value: int) -> None:
+        """Set the tranid property."""
         self._cards[0].set_value("tranid", value)
 
     @property
@@ -173,6 +181,7 @@ class PartDuplicate(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -183,10 +192,12 @@ class PartDuplicate(KeywordBase):
 
     @zmin.setter
     def zmin(self, value: float) -> None:
+        """Set the zmin property."""
         self._cards[0].set_value("zmin", value)
 
     @property
     def tranid_link(self) -> DefineTransformation:
+        """Get the DefineTransformation object for tranid."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TRANSFORMATION"):
@@ -196,5 +207,6 @@ class PartDuplicate(KeywordBase):
 
     @tranid_link.setter
     def tranid_link(self, value: DefineTransformation) -> None:
+        """Set the DefineTransformation object for tranid."""
         self.tranid = value.tranid
 

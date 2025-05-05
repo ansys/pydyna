@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat077H class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -36,6 +37,7 @@ class Mat077H(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat077H class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -267,6 +269,7 @@ class Mat077H(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -277,6 +280,7 @@ class Mat077H(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -289,6 +293,7 @@ class Mat077H(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -302,8 +307,9 @@ class Mat077H(KeywordBase):
 
     @n.setter
     def n(self, value: int) -> None:
+        """Set the n property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""n must be `None` or one of {0,1,2,3}""")
+            raise Exception("""n must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("n", value)
 
     @property
@@ -314,6 +320,7 @@ class Mat077H(KeywordBase):
 
     @nv.setter
     def nv(self, value: int) -> None:
+        """Set the nv property."""
         self._cards[0].set_value("nv", value)
 
     @property
@@ -324,6 +331,7 @@ class Mat077H(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -334,6 +342,7 @@ class Mat077H(KeywordBase):
 
     @sigf.setter
     def sigf(self, value: float) -> None:
+        """Set the sigf property."""
         self._cards[0].set_value("sigf", value)
 
     @property
@@ -347,8 +356,9 @@ class Mat077H(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
+        """Set the ref property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ref must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("ref", value)
 
     @property
@@ -359,6 +369,7 @@ class Mat077H(KeywordBase):
 
     @tbhys.setter
     def tbhys(self, value: float) -> None:
+        """Set the tbhys property."""
         self._cards[1].set_value("tbhys", value)
 
     @property
@@ -369,6 +380,7 @@ class Mat077H(KeywordBase):
 
     @sgl.setter
     def sgl(self, value: float) -> None:
+        """Set the sgl property."""
         self._cards[2].set_value("sgl", value)
 
     @property
@@ -379,6 +391,7 @@ class Mat077H(KeywordBase):
 
     @sw.setter
     def sw(self, value: float) -> None:
+        """Set the sw property."""
         self._cards[2].set_value("sw", value)
 
     @property
@@ -389,6 +402,7 @@ class Mat077H(KeywordBase):
 
     @st.setter
     def st(self, value: float) -> None:
+        """Set the st property."""
         self._cards[2].set_value("st", value)
 
     @property
@@ -399,6 +413,7 @@ class Mat077H(KeywordBase):
 
     @lcid1.setter
     def lcid1(self, value: int) -> None:
+        """Set the lcid1 property."""
         self._cards[2].set_value("lcid1", value)
 
     @property
@@ -410,6 +425,7 @@ class Mat077H(KeywordBase):
 
     @data.setter
     def data(self, value: float) -> None:
+        """Set the data property."""
         self._cards[2].set_value("data", value)
 
     @property
@@ -421,6 +437,7 @@ class Mat077H(KeywordBase):
 
     @lcid2.setter
     def lcid2(self, value: int) -> None:
+        """Set the lcid2 property."""
         self._cards[2].set_value("lcid2", value)
 
     @property
@@ -431,6 +448,7 @@ class Mat077H(KeywordBase):
 
     @bstart.setter
     def bstart(self, value: float) -> None:
+        """Set the bstart property."""
         self._cards[2].set_value("bstart", value)
 
     @property
@@ -441,6 +459,7 @@ class Mat077H(KeywordBase):
 
     @tramp.setter
     def tramp(self, value: float) -> None:
+        """Set the tramp property."""
         self._cards[2].set_value("tramp", value)
 
     @property
@@ -451,6 +470,7 @@ class Mat077H(KeywordBase):
 
     @c10.setter
     def c10(self, value: float) -> None:
+        """Set the c10 property."""
         self._cards[3].set_value("c10", value)
 
     @property
@@ -461,6 +481,7 @@ class Mat077H(KeywordBase):
 
     @c01.setter
     def c01(self, value: float) -> None:
+        """Set the c01 property."""
         self._cards[3].set_value("c01", value)
 
     @property
@@ -471,6 +492,7 @@ class Mat077H(KeywordBase):
 
     @c11.setter
     def c11(self, value: float) -> None:
+        """Set the c11 property."""
         self._cards[3].set_value("c11", value)
 
     @property
@@ -481,6 +503,7 @@ class Mat077H(KeywordBase):
 
     @c20.setter
     def c20(self, value: float) -> None:
+        """Set the c20 property."""
         self._cards[3].set_value("c20", value)
 
     @property
@@ -491,6 +514,7 @@ class Mat077H(KeywordBase):
 
     @c02.setter
     def c02(self, value: float) -> None:
+        """Set the c02 property."""
         self._cards[3].set_value("c02", value)
 
     @property
@@ -501,6 +525,7 @@ class Mat077H(KeywordBase):
 
     @c30.setter
     def c30(self, value: float) -> None:
+        """Set the c30 property."""
         self._cards[3].set_value("c30", value)
 
     @property
@@ -511,16 +536,17 @@ class Mat077H(KeywordBase):
 
     @therml.setter
     def therml(self, value: float) -> None:
+        """Set the therml property."""
         self._cards[3].set_value("therml", value)
 
     @property
     def constants(self):
-        '''Gets the table of constants'''
+        """Get the table of constants."""
         return self._cards[4].table
 
     @constants.setter
     def constants(self, df):
-        '''sets constants from the dataframe df'''
+        """Set constants from the dataframe df"""
         self._cards[4].table = df
 
     @property
@@ -531,8 +557,10 @@ class Mat077H(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 
 
 class MatHyperelasticRubber(Mat077H):
+    """Alias for MAT keyword."""
     subkeyword = "HYPERELASTIC_RUBBER"

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ContactGebodRightFoot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -43,6 +44,7 @@ class ContactGebodRightFoot(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the ContactGebodRightFoot class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -668,6 +670,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @did.setter
     def did(self, value: int) -> None:
+        """Set the did property."""
         self._cards[0].set_value("did", value)
 
     @property
@@ -678,6 +681,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -691,8 +695,9 @@ class ContactGebodRightFoot(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
+        """Set the sstyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sstyp must be `None` or one of {0,1,2}""")
+            raise Exception("""sstyp must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sstyp", value)
 
     @property
@@ -703,6 +708,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -716,6 +722,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @df.setter
     def df(self, value: float) -> None:
+        """Set the df property."""
         self._cards[0].set_value("df", value)
 
     @property
@@ -726,6 +733,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @cf.setter
     def cf(self, value: float) -> None:
+        """Set the cf property."""
         self._cards[0].set_value("cf", value)
 
     @property
@@ -743,8 +751,9 @@ class ContactGebodRightFoot(KeywordBase):
 
     @intord.setter
     def intord(self, value: int) -> None:
+        """Set the intord property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""intord must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""intord must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("intord", value)
 
     @property
@@ -755,6 +764,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[1].set_value("bt", value)
 
     @property
@@ -765,6 +775,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -778,6 +789,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @so.setter
     def so(self, value: int) -> None:
+        """Set the so property."""
         self._cards[1].set_value("so", value)
 
     @property
@@ -788,6 +800,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[2].cards[0].set_value("cid", value)
 
     @property
@@ -798,6 +811,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[2].cards[0].set_value("heading", value)
 
     @property
@@ -808,6 +822,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[3].cards[0].set_value("ignore", value)
 
     @property
@@ -818,6 +833,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @bckt.setter
     def bckt(self, value: int) -> None:
+        """Set the bckt property."""
         self._cards[3].cards[0].set_value("bckt", value)
 
     @property
@@ -828,6 +844,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @lcbckt.setter
     def lcbckt(self, value: int) -> None:
+        """Set the lcbckt property."""
         self._cards[3].cards[0].set_value("lcbckt", value)
 
     @property
@@ -838,6 +855,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @ns2trk.setter
     def ns2trk(self, value: int) -> None:
+        """Set the ns2trk property."""
         self._cards[3].cards[0].set_value("ns2trk", value)
 
     @property
@@ -848,6 +866,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @inititr.setter
     def inititr(self, value: int) -> None:
+        """Set the inititr property."""
         self._cards[3].cards[0].set_value("inititr", value)
 
     @property
@@ -858,6 +877,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @parmax.setter
     def parmax(self, value: float) -> None:
+        """Set the parmax property."""
         self._cards[3].cards[0].set_value("parmax", value)
 
     @property
@@ -877,6 +897,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
+        """Set the cparm8 property."""
         if value not in [0, 1, 2, 10, 11, 12]:
             raise Exception("""cparm8 must be one of {0,1,2,10,11,12}""")
         self._cards[3].cards[0].set_value("cparm8", value)
@@ -889,6 +910,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @mpp2.setter
     def mpp2(self, value: bool) -> None:
+        """Set the mpp2 property."""
         self._cards[3].cards[1].set_value("mpp2", value)
 
     @property
@@ -899,6 +921,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @chksegs.setter
     def chksegs(self, value: int) -> None:
+        """Set the chksegs property."""
         self._cards[3].cards[1].set_value("chksegs", value)
 
     @property
@@ -909,6 +932,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @pensf.setter
     def pensf(self, value: float) -> None:
+        """Set the pensf property."""
         self._cards[3].cards[1].set_value("pensf", value)
 
     @property
@@ -919,6 +943,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @grpable.setter
     def grpable(self, value: int) -> None:
+        """Set the grpable property."""
         self._cards[3].cards[1].set_value("grpable", value)
 
     @property
@@ -934,6 +959,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @soft.setter
     def soft(self, value: int) -> None:
+        """Set the soft property."""
         if value not in [0, 1, 2, 4, 6]:
             raise Exception("""soft must be one of {0,1,2,4,6}""")
         self._cards[4].cards[0].set_value("soft", value)
@@ -946,6 +972,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @sofscl.setter
     def sofscl(self, value: float) -> None:
+        """Set the sofscl property."""
         self._cards[4].cards[0].set_value("sofscl", value)
 
     @property
@@ -956,6 +983,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @lcidab.setter
     def lcidab(self, value: int) -> None:
+        """Set the lcidab property."""
         self._cards[4].cards[0].set_value("lcidab", value)
 
     @property
@@ -966,6 +994,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @maxpar.setter
     def maxpar(self, value: float) -> None:
+        """Set the maxpar property."""
         self._cards[4].cards[0].set_value("maxpar", value)
 
     @property
@@ -982,6 +1011,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @sbopt.setter
     def sbopt(self, value: int) -> None:
+        """Set the sbopt property."""
         if value not in [2, 0, 1, 3, 4, 5]:
             raise Exception("""sbopt must be one of {2,0,1,3,4,5}""")
         self._cards[4].cards[0].set_value("sbopt", value)
@@ -995,6 +1025,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @depth.setter
     def depth(self, value: int) -> None:
+        """Set the depth property."""
         self._cards[4].cards[0].set_value("depth", value)
 
     @property
@@ -1006,6 +1037,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @bsort.setter
     def bsort(self, value: int) -> None:
+        """Set the bsort property."""
         self._cards[4].cards[0].set_value("bsort", value)
 
     @property
@@ -1017,6 +1049,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @frcfrq.setter
     def frcfrq(self, value: int) -> None:
+        """Set the frcfrq property."""
         self._cards[4].cards[0].set_value("frcfrq", value)
 
     @property
@@ -1030,6 +1063,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @penmax.setter
     def penmax(self, value: float) -> None:
+        """Set the penmax property."""
         self._cards[5].cards[0].set_value("penmax", value)
 
     @property
@@ -1043,6 +1077,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @thkopt.setter
     def thkopt(self, value: int) -> None:
+        """Set the thkopt property."""
         if value not in [0, 1, 2]:
             raise Exception("""thkopt must be one of {0,1,2}""")
         self._cards[5].cards[0].set_value("thkopt", value)
@@ -1058,6 +1093,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @shlthk.setter
     def shlthk(self, value: int) -> None:
+        """Set the shlthk property."""
         if value not in [0, 1, 2]:
             raise Exception("""shlthk must be one of {0,1,2}""")
         self._cards[5].cards[0].set_value("shlthk", value)
@@ -1072,6 +1108,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @snlog.setter
     def snlog(self, value: int) -> None:
+        """Set the snlog property."""
         if value not in [0, 1]:
             raise Exception("""snlog must be one of {0,1}""")
         self._cards[5].cards[0].set_value("snlog", value)
@@ -1087,6 +1124,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @isym.setter
     def isym(self, value: int) -> None:
+        """Set the isym property."""
         if value not in [0, 1]:
             raise Exception("""isym must be one of {0,1}""")
         self._cards[5].cards[0].set_value("isym", value)
@@ -1101,6 +1139,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @i2d3d.setter
     def i2d3d(self, value: int) -> None:
+        """Set the i2d3d property."""
         if value not in [0, 1]:
             raise Exception("""i2d3d must be one of {0,1}""")
         self._cards[5].cards[0].set_value("i2d3d", value)
@@ -1113,6 +1152,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @sldthk.setter
     def sldthk(self, value: float) -> None:
+        """Set the sldthk property."""
         self._cards[5].cards[0].set_value("sldthk", value)
 
     @property
@@ -1123,6 +1163,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @sldstf.setter
     def sldstf(self, value: float) -> None:
+        """Set the sldstf property."""
         self._cards[5].cards[0].set_value("sldstf", value)
 
     @property
@@ -1141,6 +1182,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @igap.setter
     def igap(self, value: int) -> None:
+        """Set the igap property."""
         self._cards[6].cards[0].set_value("igap", value)
 
     @property
@@ -1157,6 +1199,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[6].cards[0].set_value("ignore", value)
 
     @property
@@ -1171,6 +1214,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @dprfac.setter
     def dprfac(self, value: float) -> None:
+        """Set the dprfac property."""
         self._cards[6].cards[0].set_value("dprfac", value)
 
     @property
@@ -1186,6 +1230,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @dtstif.setter
     def dtstif(self, value: float) -> None:
+        """Set the dtstif property."""
         self._cards[6].cards[0].set_value("dtstif", value)
 
     @property
@@ -1198,6 +1243,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @edgek.setter
     def edgek(self, value: float) -> None:
+        """Set the edgek property."""
         self._cards[6].cards[0].set_value("edgek", value)
 
     @property
@@ -1210,6 +1256,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @flangl.setter
     def flangl(self, value: float) -> None:
+        """Set the flangl property."""
         self._cards[6].cards[0].set_value("flangl", value)
 
     @property
@@ -1220,6 +1267,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @cid_rcf.setter
     def cid_rcf(self, value: int) -> None:
+        """Set the cid_rcf property."""
         self._cards[6].cards[0].set_value("cid_rcf", value)
 
     @property
@@ -1235,6 +1283,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @q2tri.setter
     def q2tri(self, value: int) -> None:
+        """Set the q2tri property."""
         if value not in [0, 1, 2, 3, 4]:
             raise Exception("""q2tri must be one of {0,1,2,3,4}""")
         self._cards[7].cards[0].set_value("q2tri", value)
@@ -1250,6 +1299,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @dtpchk.setter
     def dtpchk(self, value: float) -> None:
+        """Set the dtpchk property."""
         self._cards[7].cards[0].set_value("dtpchk", value)
 
     @property
@@ -1262,6 +1312,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @sfnbr.setter
     def sfnbr(self, value: float) -> None:
+        """Set the sfnbr property."""
         self._cards[7].cards[0].set_value("sfnbr", value)
 
     @property
@@ -1272,6 +1323,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @fnlscl.setter
     def fnlscl(self, value: float) -> None:
+        """Set the fnlscl property."""
         self._cards[7].cards[0].set_value("fnlscl", value)
 
     @property
@@ -1282,6 +1334,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @dnlscl.setter
     def dnlscl(self, value: float) -> None:
+        """Set the dnlscl property."""
         self._cards[7].cards[0].set_value("dnlscl", value)
 
     @property
@@ -1295,6 +1348,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @tcso.setter
     def tcso(self, value: int) -> None:
+        """Set the tcso property."""
         if value not in [0, 1]:
             raise Exception("""tcso must be one of {0,1}""")
         self._cards[7].cards[0].set_value("tcso", value)
@@ -1308,6 +1362,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @tiedid.setter
     def tiedid(self, value: int) -> None:
+        """Set the tiedid property."""
         if value not in [0, 1]:
             raise Exception("""tiedid must be one of {0,1}""")
         self._cards[7].cards[0].set_value("tiedid", value)
@@ -1323,6 +1378,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @shledg.setter
     def shledg(self, value: int) -> None:
+        """Set the shledg property."""
         if value not in [0, 1, 2]:
             raise Exception("""shledg must be one of {0,1,2}""")
         self._cards[7].cards[0].set_value("shledg", value)
@@ -1337,6 +1393,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @sharec.setter
     def sharec(self, value: int) -> None:
+        """Set the sharec property."""
         if value not in [0, 1]:
             raise Exception("""sharec must be one of {0,1}""")
         self._cards[8].cards[0].set_value("sharec", value)
@@ -1351,6 +1408,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
+        """Set the cparm8 property."""
         if value not in [0, 2]:
             raise Exception("""cparm8 must be one of {0,2}""")
         self._cards[8].cards[0].set_value("cparm8", value)
@@ -1364,6 +1422,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @ipback.setter
     def ipback(self, value: int) -> None:
+        """Set the ipback property."""
         self._cards[8].cards[0].set_value("ipback", value)
 
     @property
@@ -1376,6 +1435,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @srnde.setter
     def srnde(self, value: int) -> None:
+        """Set the srnde property."""
         self._cards[8].cards[0].set_value("srnde", value)
 
     @property
@@ -1386,6 +1446,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @fricsf.setter
     def fricsf(self, value: float) -> None:
+        """Set the fricsf property."""
         self._cards[8].cards[0].set_value("fricsf", value)
 
     @property
@@ -1399,6 +1460,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @icor.setter
     def icor(self, value: int) -> None:
+        """Set the icor property."""
         self._cards[8].cards[0].set_value("icor", value)
 
     @property
@@ -1411,6 +1473,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @ftorq.setter
     def ftorq(self, value: int) -> None:
+        """Set the ftorq property."""
         self._cards[8].cards[0].set_value("ftorq", value)
 
     @property
@@ -1422,6 +1485,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @region.setter
     def region(self, value: int) -> None:
+        """Set the region property."""
         self._cards[8].cards[0].set_value("region", value)
 
     @property
@@ -1435,6 +1499,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @pstiff.setter
     def pstiff(self, value: int) -> None:
+        """Set the pstiff property."""
         if value not in [0, 1, 2]:
             raise Exception("""pstiff must be one of {0,1,2}""")
         self._cards[9].cards[0].set_value("pstiff", value)
@@ -1452,6 +1517,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @ignroff.setter
     def ignroff(self, value: int) -> None:
+        """Set the ignroff property."""
         if value not in [0, 1, 2, 3]:
             raise Exception("""ignroff must be one of {0,1,2,3}""")
         self._cards[9].cards[0].set_value("ignroff", value)
@@ -1464,6 +1530,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @fstol.setter
     def fstol(self, value: float) -> None:
+        """Set the fstol property."""
         self._cards[9].cards[0].set_value("fstol", value)
 
     @property
@@ -1476,6 +1543,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @_2dbinr.setter
     def _2dbinr(self, value: int) -> None:
+        """Set the _2dbinr property."""
         if value not in [0, 1]:
             raise Exception("""_2dbinr must be one of {0,1}""")
         self._cards[9].cards[0].set_value("2dbinr", value)
@@ -1490,6 +1558,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @ssftyp.setter
     def ssftyp(self, value: int) -> None:
+        """Set the ssftyp property."""
         if value not in [0, 1]:
             raise Exception("""ssftyp must be one of {0,1}""")
         self._cards[9].cards[0].set_value("ssftyp", value)
@@ -1504,6 +1573,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @swtpr.setter
     def swtpr(self, value: int) -> None:
+        """Set the swtpr property."""
         if value not in [0, 1]:
             raise Exception("""swtpr must be one of {0,1}""")
         self._cards[9].cards[0].set_value("swtpr", value)
@@ -1516,6 +1586,7 @@ class ContactGebodRightFoot(KeywordBase):
 
     @tetfac.setter
     def tetfac(self, value: float) -> None:
+        """Set the tetfac property."""
         self._cards[9].cards[0].set_value("tetfac", value)
 
     @property
@@ -1528,5 +1599,6 @@ class ContactGebodRightFoot(KeywordBase):
 
     @shloff.setter
     def shloff(self, value: float) -> None:
+        """Set the shloff property."""
         self._cards[10].cards[0].set_value("shloff", value)
 

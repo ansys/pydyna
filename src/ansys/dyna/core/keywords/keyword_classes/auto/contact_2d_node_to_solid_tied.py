@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Contact2DNodeToSolidTied class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Contact2DNodeToSolidTied(KeywordBase):
     subkeyword = "2D_NODE_TO_SOLID_TIED"
 
     def __init__(self, **kwargs):
+        """Initialize the Contact2DNodeToSolidTied class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -140,6 +142,7 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @sph.setter
     def sph(self, value: int) -> None:
+        """Set the sph property."""
         self._cards[0].set_value("sph", value)
 
     @property
@@ -150,6 +153,7 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @solid.setter
     def solid(self, value: int) -> None:
+        """Set the solid property."""
         self._cards[0].set_value("solid", value)
 
     @property
@@ -160,6 +164,7 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: int) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 
     @property
@@ -170,6 +175,7 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: int) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -187,8 +193,9 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @soft.setter
     def soft(self, value: int) -> None:
+        """Set the soft property."""
         if value not in [0, 1, None]:
-            raise Exception("""soft must be `None` or one of {0,1}""")
+            raise Exception("""soft must be `None` or one of {0,1}.""")
         self._cards[1].set_value("soft", value)
 
     @property
@@ -199,6 +206,7 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[1].set_value("vc", value)
 
     @property
@@ -210,6 +218,7 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @offd.setter
     def offd(self, value: float) -> None:
+        """Set the offd property."""
         self._cards[1].set_value("offd", value)
 
     @property
@@ -220,6 +229,7 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @pen.setter
     def pen(self, value: float) -> None:
+        """Set the pen property."""
         self._cards[1].set_value("pen", value)
 
     @property
@@ -230,6 +240,7 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[1].set_value("fs", value)
 
     @property
@@ -240,6 +251,7 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[1].set_value("fd", value)
 
     @property
@@ -250,5 +262,6 @@ class Contact2DNodeToSolidTied(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[1].set_value("dc", value)
 

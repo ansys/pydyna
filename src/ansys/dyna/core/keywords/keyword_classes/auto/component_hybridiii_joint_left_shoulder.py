@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ComponentHybridiiiJointLeftShoulder class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
     subkeyword = "HYBRIDIII_JOINT_LEFT_SHOULDER"
 
     def __init__(self, **kwargs):
+        """Initialize the ComponentHybridiiiJointLeftShoulder class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -290,6 +292,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @did.setter
     def did(self, value: int) -> None:
+        """Set the did property."""
         self._cards[0].set_value("did", value)
 
     @property
@@ -301,6 +304,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @q1.setter
     def q1(self, value: float) -> None:
+        """Set the q1 property."""
         self._cards[0].set_value("q1", value)
 
     @property
@@ -312,6 +316,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @q2.setter
     def q2(self, value: float) -> None:
+        """Set the q2 property."""
         self._cards[0].set_value("q2", value)
 
     @property
@@ -323,6 +328,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @q3.setter
     def q3(self, value: float) -> None:
+        """Set the q3 property."""
         self._cards[0].set_value("q3", value)
 
     @property
@@ -334,6 +340,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[0].set_value("fric", value)
 
     @property
@@ -345,6 +352,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[1].set_value("c1", value)
 
     @property
@@ -356,6 +364,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @alo1.setter
     def alo1(self, value: float) -> None:
+        """Set the alo1 property."""
         self._cards[1].set_value("alo1", value)
 
     @property
@@ -367,6 +376,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @blo1.setter
     def blo1(self, value: float) -> None:
+        """Set the blo1 property."""
         self._cards[1].set_value("blo1", value)
 
     @property
@@ -378,6 +388,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @ahi1.setter
     def ahi1(self, value: float) -> None:
+        """Set the ahi1 property."""
         self._cards[1].set_value("ahi1", value)
 
     @property
@@ -389,6 +400,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @bhi1.setter
     def bhi1(self, value: float) -> None:
+        """Set the bhi1 property."""
         self._cards[1].set_value("bhi1", value)
 
     @property
@@ -400,6 +412,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @qlo1.setter
     def qlo1(self, value: float) -> None:
+        """Set the qlo1 property."""
         self._cards[1].set_value("qlo1", value)
 
     @property
@@ -411,6 +424,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @qhi1.setter
     def qhi1(self, value: float) -> None:
+        """Set the qhi1 property."""
         self._cards[1].set_value("qhi1", value)
 
     @property
@@ -421,6 +435,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @sclk1.setter
     def sclk1(self, value: float) -> None:
+        """Set the sclk1 property."""
         self._cards[1].set_value("sclk1", value)
 
     @property
@@ -432,6 +447,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[2].set_value("c2", value)
 
     @property
@@ -443,6 +459,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @alo2.setter
     def alo2(self, value: float) -> None:
+        """Set the alo2 property."""
         self._cards[2].set_value("alo2", value)
 
     @property
@@ -454,6 +471,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @blo2.setter
     def blo2(self, value: float) -> None:
+        """Set the blo2 property."""
         self._cards[2].set_value("blo2", value)
 
     @property
@@ -465,6 +483,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @ahi2.setter
     def ahi2(self, value: float) -> None:
+        """Set the ahi2 property."""
         self._cards[2].set_value("ahi2", value)
 
     @property
@@ -476,6 +495,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @bhi2.setter
     def bhi2(self, value: float) -> None:
+        """Set the bhi2 property."""
         self._cards[2].set_value("bhi2", value)
 
     @property
@@ -487,6 +507,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @qlo2.setter
     def qlo2(self, value: float) -> None:
+        """Set the qlo2 property."""
         self._cards[2].set_value("qlo2", value)
 
     @property
@@ -498,6 +519,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @qhi2.setter
     def qhi2(self, value: float) -> None:
+        """Set the qhi2 property."""
         self._cards[2].set_value("qhi2", value)
 
     @property
@@ -508,6 +530,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @sclk2.setter
     def sclk2(self, value: float) -> None:
+        """Set the sclk2 property."""
         self._cards[2].set_value("sclk2", value)
 
     @property
@@ -519,6 +542,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[3].set_value("c3", value)
 
     @property
@@ -530,6 +554,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @alo3.setter
     def alo3(self, value: float) -> None:
+        """Set the alo3 property."""
         self._cards[3].set_value("alo3", value)
 
     @property
@@ -541,6 +566,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @blo3.setter
     def blo3(self, value: float) -> None:
+        """Set the blo3 property."""
         self._cards[3].set_value("blo3", value)
 
     @property
@@ -552,6 +578,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @ahi3.setter
     def ahi3(self, value: float) -> None:
+        """Set the ahi3 property."""
         self._cards[3].set_value("ahi3", value)
 
     @property
@@ -563,6 +590,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @bhi3.setter
     def bhi3(self, value: float) -> None:
+        """Set the bhi3 property."""
         self._cards[3].set_value("bhi3", value)
 
     @property
@@ -574,6 +602,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @qlo3.setter
     def qlo3(self, value: float) -> None:
+        """Set the qlo3 property."""
         self._cards[3].set_value("qlo3", value)
 
     @property
@@ -585,6 +614,7 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @qhi3.setter
     def qhi3(self, value: float) -> None:
+        """Set the qhi3 property."""
         self._cards[3].set_value("qhi3", value)
 
     @property
@@ -595,5 +625,6 @@ class ComponentHybridiiiJointLeftShoulder(KeywordBase):
 
     @sclk3.setter
     def sclk3(self, value: float) -> None:
+        """Set the sclk3 property."""
         self._cards[3].set_value("sclk3", value)
 

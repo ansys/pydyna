@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdControlMeshMov class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlMeshMov(KeywordBase):
     subkeyword = "CONTROL_MESH_MOV"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdControlMeshMov class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -78,8 +80,9 @@ class IcfdControlMeshMov(KeywordBase):
 
     @mmsh.setter
     def mmsh(self, value: int) -> None:
+        """Set the mmsh property."""
         if value not in [2, -1, 1, 3, 4, 11, 20, None]:
-            raise Exception("""mmsh must be `None` or one of {2,-1,1,3,4,11,20}""")
+            raise Exception("""mmsh must be `None` or one of {2,-1,1,3,4,11,20}.""")
         self._cards[0].set_value("mmsh", value)
 
     @property
@@ -90,6 +93,7 @@ class IcfdControlMeshMov(KeywordBase):
 
     @lim_iter.setter
     def lim_iter(self, value: int) -> None:
+        """Set the lim_iter property."""
         self._cards[0].set_value("lim_iter", value)
 
     @property
@@ -100,5 +104,6 @@ class IcfdControlMeshMov(KeywordBase):
 
     @reltol.setter
     def reltol(self, value: float) -> None:
+        """Set the reltol property."""
         self._cards[0].set_value("reltol", value)
 

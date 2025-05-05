@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadMovingPressure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadMovingPressure(KeywordBase):
     subkeyword = "MOVING_PRESSURE"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadMovingPressure class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -142,6 +144,7 @@ class LoadMovingPressure(KeywordBase):
 
     @loadid.setter
     def loadid(self, value: int) -> None:
+        """Set the loadid property."""
         self._cards[0].set_value("loadid", value)
 
     @property
@@ -152,6 +155,7 @@ class LoadMovingPressure(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[1].set_value("node1", value)
 
     @property
@@ -162,6 +166,7 @@ class LoadMovingPressure(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[1].set_value("node2", value)
 
     @property
@@ -172,6 +177,7 @@ class LoadMovingPressure(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -182,6 +188,7 @@ class LoadMovingPressure(KeywordBase):
 
     @cutoff.setter
     def cutoff(self, value: float) -> None:
+        """Set the cutoff property."""
         self._cards[1].set_value("cutoff", value)
 
     @property
@@ -193,6 +200,7 @@ class LoadMovingPressure(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[1].set_value("lcidt", value)
 
     @property
@@ -204,6 +212,7 @@ class LoadMovingPressure(KeywordBase):
 
     @lcidd.setter
     def lcidd(self, value: int) -> None:
+        """Set the lcidd property."""
         self._cards[1].set_value("lcidd", value)
 
     @property
@@ -218,8 +227,9 @@ class LoadMovingPressure(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
+        """Set the idir property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""idir must be `None` or one of {0,1,2,3}""")
+            raise Exception("""idir must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("idir", value)
 
     @property
@@ -232,8 +242,9 @@ class LoadMovingPressure(KeywordBase):
 
     @lsflg.setter
     def lsflg(self, value: int) -> None:
+        """Set the lsflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""lsflg must be `None` or one of {0,1}""")
+            raise Exception("""lsflg must be `None` or one of {0,1}.""")
         self._cards[1].set_value("lsflg", value)
 
     @property
@@ -244,6 +255,7 @@ class LoadMovingPressure(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[2].set_value("id", value)
 
     @property
@@ -258,8 +270,9 @@ class LoadMovingPressure(KeywordBase):
 
     @idtype.setter
     def idtype(self, value: int) -> None:
+        """Set the idtype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""idtype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""idtype must be `None` or one of {0,1,2,3}.""")
         self._cards[2].set_value("idtype", value)
 
     @property
@@ -270,5 +283,6 @@ class LoadMovingPressure(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[2].set_value("nip", value)
 

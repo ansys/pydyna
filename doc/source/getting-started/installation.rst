@@ -1,14 +1,6 @@
-Getting started
-===============
-
-To use the solver features of PyDYNA, you must have a valid LS-DYNA license.
-
-For information on getting a licensed copy of LS-DYNA, see
-the `Ansys LS-DYNA <https://www.ansys.com/products/structures/ansys-ls-dyna>`_
-page on the Ansys website.
-
 Installation
 ============
+
 PyDYNA consists of four modules, ``ansys.dyna.core.pre``, ``ansys.dyna.core.solver``,
 ``ansys.dyna.core.run``, and ``ansys.dyna.core.keywords``.
 
@@ -82,46 +74,3 @@ with these commands:
 
 If you're on Windows with Python 3.9, unzip the wheelhouse archive to a ``wheelhouse``
 directory and install PyDYNA using the preceding command.
-
-Working with LS-DYNA keywords
------------------------------
-The ``keywords`` module can be used to interact with LS-DYNA keywords.
-
-.. include:: ./KEYWORDS_README.rst
-
-Run PyDYNA server locally
--------------------------
-Launching the servers directly on local machines.
-
-.. include:: ./SERVER_PRE_README.rst
-
-.. include:: ./SERVER_SOLVER_README.rst
-
-Run PyDYNA Server in a Docker container
----------------------------------------
-PyDYNA server can be run in a Docker container.
-
-.. include:: ../../../docker/pre/README.rst
-
-.. include:: ../../../docker/solver/README.rst
-
-Run DYNA using ``ansys.dyna.core.run`` on a local machine,
-this does not require Docker.
-
-.. include:: ./RUN_README.rst
-
-Keyword and run example
------------------------
-
-.. include:: ./example1.rst
-
-Pre and solver example
-----------------------
-
-.. include:: ./example.rst
-
-.. LINKS
-.. _pydyna_pypi: https://pypi.org/projects/ansys-dyna-core/
-.. _pydyna_repo: https://github.com/ansys/pydyna/
-.. _pydyna_releases: https://github.com/ansys/pydyna/releases
-.. _pydyna_issues: https://github.com/ansys/pydyna/issues

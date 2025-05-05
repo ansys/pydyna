@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MeshNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -32,6 +33,7 @@ class MeshNode(KeywordBase):
     subkeyword = "NODE"
 
     def __init__(self, **kwargs):
+        """Initialize the MeshNode class."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(
@@ -49,11 +51,11 @@ class MeshNode(KeywordBase):
 
     @property
     def nodes(self):
-        '''Gets the table of nodes'''
+        """Get the table of nodes."""
         return self._cards[0].table
 
     @nodes.setter
     def nodes(self, df):
-        '''sets nodes from the dataframe df'''
+        """Set nodes from the dataframe df"""
         self._cards[0].table = df
 

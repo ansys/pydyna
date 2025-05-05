@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryPrescribedOrientationRigidVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
     subkeyword = "PRESCRIBED_ORIENTATION_RIGID_VECTOR"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryPrescribedOrientationRigidVector class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -132,6 +134,7 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @pidb.setter
     def pidb(self, value: int) -> None:
+        """Set the pidb property."""
         self._cards[0].set_value("pidb", value)
 
     @property
@@ -142,6 +145,7 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @pida.setter
     def pida(self, value: int) -> None:
+        """Set the pida property."""
         self._cards[0].set_value("pida", value)
 
     @property
@@ -153,6 +157,7 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @intrp.setter
     def intrp(self, value: int) -> None:
+        """Set the intrp property."""
         self._cards[0].set_value("intrp", value)
 
     @property
@@ -163,6 +168,7 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -173,6 +179,7 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -186,8 +193,9 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @toffset.setter
     def toffset(self, value: int) -> None:
+        """Set the toffset property."""
         if value not in [0, 1, None]:
-            raise Exception("""toffset must be `None` or one of {0,1}""")
+            raise Exception("""toffset must be `None` or one of {0,1}.""")
         self._cards[0].set_value("toffset", value)
 
     @property
@@ -198,6 +206,7 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @lcidv1.setter
     def lcidv1(self, value: int) -> None:
+        """Set the lcidv1 property."""
         self._cards[1].set_value("lcidv1", value)
 
     @property
@@ -208,6 +217,7 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @lcidv2.setter
     def lcidv2(self, value: int) -> None:
+        """Set the lcidv2 property."""
         self._cards[1].set_value("lcidv2", value)
 
     @property
@@ -218,6 +228,7 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @lcidv3.setter
     def lcidv3(self, value: int) -> None:
+        """Set the lcidv3 property."""
         self._cards[1].set_value("lcidv3", value)
 
     @property
@@ -228,6 +239,7 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @lcids.setter
     def lcids(self, value: int) -> None:
+        """Set the lcids property."""
         self._cards[1].set_value("lcids", value)
 
     @property
@@ -238,5 +250,6 @@ class BoundaryPrescribedOrientationRigidVector(KeywordBase):
 
     @valspin.setter
     def valspin(self, value: float) -> None:
+        """Set the valspin property."""
         self._cards[1].set_value("valspin", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmRandlesLayered class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmRandlesLayered(KeywordBase):
     subkeyword = "RANDLES_LAYERED"
 
     def __init__(self, **kwargs):
+        """Initialize the EmRandlesLayered class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -217,6 +219,7 @@ class EmRandlesLayered(KeywordBase):
 
     @rdlid.setter
     def rdlid(self, value: int) -> None:
+        """Set the rdlid property."""
         self._cards[0].set_value("rdlid", value)
 
     @property
@@ -228,6 +231,7 @@ class EmRandlesLayered(KeywordBase):
 
     @rdltype.setter
     def rdltype(self, value: int) -> None:
+        """Set the rdltype property."""
         self._cards[0].set_value("rdltype", value)
 
     @property
@@ -238,6 +242,7 @@ class EmRandlesLayered(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -251,6 +256,7 @@ class EmRandlesLayered(KeywordBase):
 
     @rdlarea_.setter
     def rdlarea_(self, value: int) -> None:
+        """Set the rdlarea_ property."""
         self._cards[0].set_value("rdlarea ", value)
 
     @property
@@ -261,6 +267,7 @@ class EmRandlesLayered(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[1].set_value("q", value)
 
     @property
@@ -271,6 +278,7 @@ class EmRandlesLayered(KeywordBase):
 
     @cq.setter
     def cq(self, value: float) -> None:
+        """Set the cq property."""
         self._cards[1].set_value("cq", value)
 
     @property
@@ -281,6 +289,7 @@ class EmRandlesLayered(KeywordBase):
 
     @socinit.setter
     def socinit(self, value: float) -> None:
+        """Set the socinit property."""
         self._cards[1].set_value("socinit", value)
 
     @property
@@ -291,6 +300,7 @@ class EmRandlesLayered(KeywordBase):
 
     @soctou.setter
     def soctou(self, value: float) -> None:
+        """Set the soctou property."""
         self._cards[1].set_value("soctou", value)
 
     @property
@@ -301,6 +311,7 @@ class EmRandlesLayered(KeywordBase):
 
     @r0cha.setter
     def r0cha(self, value: float) -> None:
+        """Set the r0cha property."""
         self._cards[2].set_value("r0cha", value)
 
     @property
@@ -311,6 +322,7 @@ class EmRandlesLayered(KeywordBase):
 
     @r0dis.setter
     def r0dis(self, value: float) -> None:
+        """Set the r0dis property."""
         self._cards[2].set_value("r0dis", value)
 
     @property
@@ -321,6 +333,7 @@ class EmRandlesLayered(KeywordBase):
 
     @r10cha.setter
     def r10cha(self, value: float) -> None:
+        """Set the r10cha property."""
         self._cards[2].set_value("r10cha", value)
 
     @property
@@ -331,6 +344,7 @@ class EmRandlesLayered(KeywordBase):
 
     @r10dis.setter
     def r10dis(self, value: float) -> None:
+        """Set the r10dis property."""
         self._cards[2].set_value("r10dis", value)
 
     @property
@@ -341,6 +355,7 @@ class EmRandlesLayered(KeywordBase):
 
     @c10cha.setter
     def c10cha(self, value: float) -> None:
+        """Set the c10cha property."""
         self._cards[2].set_value("c10cha", value)
 
     @property
@@ -351,6 +366,7 @@ class EmRandlesLayered(KeywordBase):
 
     @c10dis.setter
     def c10dis(self, value: float) -> None:
+        """Set the c10dis property."""
         self._cards[2].set_value("c10dis", value)
 
     @property
@@ -363,6 +379,7 @@ class EmRandlesLayered(KeywordBase):
 
     @r20cha.setter
     def r20cha(self, value: float) -> None:
+        """Set the r20cha property."""
         self._cards[3].set_value("r20cha", value)
 
     @property
@@ -375,6 +392,7 @@ class EmRandlesLayered(KeywordBase):
 
     @r20dis.setter
     def r20dis(self, value: float) -> None:
+        """Set the r20dis property."""
         self._cards[3].set_value("r20dis", value)
 
     @property
@@ -387,6 +405,7 @@ class EmRandlesLayered(KeywordBase):
 
     @c20cha.setter
     def c20cha(self, value: float) -> None:
+        """Set the c20cha property."""
         self._cards[3].set_value("c20cha", value)
 
     @property
@@ -399,6 +418,7 @@ class EmRandlesLayered(KeywordBase):
 
     @c20dis.setter
     def c20dis(self, value: float) -> None:
+        """Set the c20dis property."""
         self._cards[3].set_value("c20dis", value)
 
     @property
@@ -411,6 +431,7 @@ class EmRandlesLayered(KeywordBase):
 
     @r30cha.setter
     def r30cha(self, value: float) -> None:
+        """Set the r30cha property."""
         self._cards[3].set_value("r30cha", value)
 
     @property
@@ -421,5 +442,6 @@ class EmRandlesLayered(KeywordBase):
 
     @temp.setter
     def temp(self, value: float) -> None:
+        """Set the temp property."""
         self._cards[4].set_value("temp", value)
 

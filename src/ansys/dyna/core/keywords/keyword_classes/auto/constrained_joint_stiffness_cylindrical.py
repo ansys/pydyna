@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedJointStiffnessCylindrical class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
     subkeyword = "JOINT_STIFFNESS_CYLINDRICAL"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedJointStiffnessCylindrical class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -272,6 +274,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @jsid.setter
     def jsid(self, value: int) -> None:
+        """Set the jsid property."""
         self._cards[0].set_value("jsid", value)
 
     @property
@@ -282,6 +285,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @pida.setter
     def pida(self, value: int) -> None:
+        """Set the pida property."""
         self._cards[0].set_value("pida", value)
 
     @property
@@ -292,6 +296,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @pidb.setter
     def pidb(self, value: int) -> None:
+        """Set the pidb property."""
         self._cards[0].set_value("pidb", value)
 
     @property
@@ -302,6 +307,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @cida.setter
     def cida(self, value: int) -> None:
+        """Set the cida property."""
         self._cards[0].set_value("cida", value)
 
     @property
@@ -313,6 +319,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @cidb.setter
     def cidb(self, value: int) -> None:
+        """Set the cidb property."""
         self._cards[0].set_value("cidb", value)
 
     @property
@@ -323,6 +330,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @jid.setter
     def jid(self, value: int) -> None:
+        """Set the jid property."""
         self._cards[0].set_value("jid", value)
 
     @property
@@ -335,6 +343,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @lcidr.setter
     def lcidr(self, value: int) -> None:
+        """Set the lcidr property."""
         self._cards[1].set_value("lcidr", value)
 
     @property
@@ -347,6 +356,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @lcidz.setter
     def lcidz(self, value: int) -> None:
+        """Set the lcidz property."""
         self._cards[1].set_value("lcidz", value)
 
     @property
@@ -360,6 +370,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @dlcidr.setter
     def dlcidr(self, value: int) -> None:
+        """Set the dlcidr property."""
         self._cards[1].set_value("dlcidr", value)
 
     @property
@@ -373,6 +384,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @dlcidp.setter
     def dlcidp(self, value: int) -> None:
+        """Set the dlcidp property."""
         self._cards[1].set_value("dlcidp", value)
 
     @property
@@ -386,6 +398,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @dlcidz.setter
     def dlcidz(self, value: int) -> None:
+        """Set the dlcidz property."""
         self._cards[1].set_value("dlcidz", value)
 
     @property
@@ -398,6 +411,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[1].set_value("lcidt", value)
 
     @property
@@ -410,6 +424,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @dlcidt.setter
     def dlcidt(self, value: int) -> None:
+        """Set the dlcidt property."""
         self._cards[1].set_value("dlcidt", value)
 
     @property
@@ -421,6 +436,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @esr.setter
     def esr(self, value: float) -> None:
+        """Set the esr property."""
         self._cards[2].set_value("esr", value)
 
     @property
@@ -434,6 +450,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @ffr.setter
     def ffr(self, value: float) -> None:
+        """Set the ffr property."""
         self._cards[2].set_value("ffr", value)
 
     @property
@@ -445,6 +462,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @esz.setter
     def esz(self, value: float) -> None:
+        """Set the esz property."""
         self._cards[2].set_value("esz", value)
 
     @property
@@ -457,6 +475,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @ffz.setter
     def ffz(self, value: float) -> None:
+        """Set the ffz property."""
         self._cards[2].set_value("ffz", value)
 
     @property
@@ -467,6 +486,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @rad1.setter
     def rad1(self, value: float) -> None:
+        """Set the rad1 property."""
         self._cards[2].set_value("rad1", value)
 
     @property
@@ -477,6 +497,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @rad2.setter
     def rad2(self, value: float) -> None:
+        """Set the rad2 property."""
         self._cards[2].set_value("rad2", value)
 
     @property
@@ -487,6 +508,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @psdr.setter
     def psdr(self, value: float) -> None:
+        """Set the psdr property."""
         self._cards[3].set_value("psdr", value)
 
     @property
@@ -497,6 +519,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @nsdz.setter
     def nsdz(self, value: float) -> None:
+        """Set the nsdz property."""
         self._cards[3].set_value("nsdz", value)
 
     @property
@@ -507,5 +530,6 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @psdz.setter
     def psdz(self, value: float) -> None:
+        """Set the psdz property."""
         self._cards[3].set_value("psdz", value)
 

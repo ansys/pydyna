@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlRemeshingEfg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlRemeshingEfg(KeywordBase):
     subkeyword = "REMESHING_EFG"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlRemeshingEfg class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -180,6 +182,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @rmin.setter
     def rmin(self, value: float) -> None:
+        """Set the rmin property."""
         self._cards[0].set_value("rmin", value)
 
     @property
@@ -190,6 +193,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @rmax.setter
     def rmax(self, value: float) -> None:
+        """Set the rmax property."""
         self._cards[0].set_value("rmax", value)
 
     @property
@@ -200,6 +204,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @vf_loss.setter
     def vf_loss(self, value: float) -> None:
+        """Set the vf_loss property."""
         self._cards[0].set_value("vf_loss", value)
 
     @property
@@ -210,6 +215,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @mfrac.setter
     def mfrac(self, value: float) -> None:
+        """Set the mfrac property."""
         self._cards[0].set_value("mfrac", value)
 
     @property
@@ -220,6 +226,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @dt_min.setter
     def dt_min(self, value: float) -> None:
+        """Set the dt_min property."""
         self._cards[0].set_value("dt_min", value)
 
     @property
@@ -230,6 +237,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @icurv.setter
     def icurv(self, value: int) -> None:
+        """Set the icurv property."""
         self._cards[0].set_value("icurv", value)
 
     @property
@@ -240,6 +248,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @iadp10.setter
     def iadp10(self, value: int) -> None:
+        """Set the iadp10 property."""
         self._cards[0].set_value("iadp10", value)
 
     @property
@@ -250,6 +259,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @sefang.setter
     def sefang(self, value: float) -> None:
+        """Set the sefang property."""
         self._cards[0].set_value("sefang", value)
 
     @property
@@ -264,8 +274,9 @@ class ControlRemeshingEfg(KeywordBase):
 
     @ivt.setter
     def ivt(self, value: int) -> None:
+        """Set the ivt property."""
         if value not in [1, -1, 2, -2, None]:
-            raise Exception("""ivt must be `None` or one of {1,-1,2,-2}""")
+            raise Exception("""ivt must be `None` or one of {1,-1,2,-2}.""")
         self._cards[1].set_value("ivt", value)
 
     @property
@@ -280,8 +291,9 @@ class ControlRemeshingEfg(KeywordBase):
 
     @iat.setter
     def iat(self, value: int) -> None:
+        """Set the iat property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""iat must be `None` or one of {0,1,2,3}""")
+            raise Exception("""iat must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("iat", value)
 
     @property
@@ -294,8 +306,9 @@ class ControlRemeshingEfg(KeywordBase):
 
     @iaat.setter
     def iaat(self, value: int) -> None:
+        """Set the iaat property."""
         if value not in [0, 1, None]:
-            raise Exception("""iaat must be `None` or one of {0,1}""")
+            raise Exception("""iaat must be `None` or one of {0,1}.""")
         self._cards[1].set_value("iaat", value)
 
     @property
@@ -307,6 +320,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @mm.setter
     def mm(self, value: int) -> None:
+        """Set the mm property."""
         self._cards[1].set_value("mm", value)
 
     @property
@@ -317,6 +331,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @iat1.setter
     def iat1(self, value: float) -> None:
+        """Set the iat1 property."""
         self._cards[2].set_value("iat1", value)
 
     @property
@@ -327,6 +342,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @iat2.setter
     def iat2(self, value: float) -> None:
+        """Set the iat2 property."""
         self._cards[2].set_value("iat2", value)
 
     @property
@@ -337,5 +353,6 @@ class ControlRemeshingEfg(KeywordBase):
 
     @iat3.setter
     def iat3(self, value: float) -> None:
+        """Set the iat3 property."""
         self._cards[2].set_value("iat3", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatHotPlateRolling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatHotPlateRolling(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatHotPlateRolling class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -368,6 +370,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -378,6 +381,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -388,6 +392,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -398,6 +403,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -408,6 +414,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @alphat.setter
     def alphat(self, value: float) -> None:
+        """Set the alphat property."""
         self._cards[0].set_value("alphat", value)
 
     @property
@@ -418,6 +425,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -430,8 +438,9 @@ class MatHotPlateRolling(KeywordBase):
 
     @vp.setter
     def vp(self, value: float) -> None:
+        """Set the vp property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""vp must be `None` or one of {0.0,1.0}""")
+            raise Exception("""vp must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("vp", value)
 
     @property
@@ -445,6 +454,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[0].set_value("tol", value)
 
     @property
@@ -455,6 +465,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @yb.setter
     def yb(self, value: float) -> None:
+        """Set the yb property."""
         self._cards[1].set_value("yb", value)
 
     @property
@@ -465,6 +476,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @qdef.setter
     def qdef(self, value: float) -> None:
+        """Set the qdef property."""
         self._cards[1].set_value("qdef", value)
 
     @property
@@ -475,6 +487,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[1].set_value("r", value)
 
     @property
@@ -485,6 +498,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[1].set_value("a", value)
 
     @property
@@ -495,6 +509,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[1].set_value("b", value)
 
     @property
@@ -505,6 +520,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @minrt.setter
     def minrt(self, value: float) -> None:
+        """Set the minrt property."""
         self._cards[1].set_value("minrt", value)
 
     @property
@@ -515,6 +531,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @post.setter
     def post(self, value: float) -> None:
+        """Set the post property."""
         self._cards[1].set_value("post", value)
 
     @property
@@ -527,6 +544,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @odesol.setter
     def odesol(self, value: float) -> None:
+        """Set the odesol property."""
         self._cards[1].set_value("odesol", value)
 
     @property
@@ -537,6 +555,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @asig0.setter
     def asig0(self, value: float) -> None:
+        """Set the asig0 property."""
         self._cards[2].set_value("asig0", value)
 
     @property
@@ -547,6 +566,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @bsig0.setter
     def bsig0(self, value: float) -> None:
+        """Set the bsig0 property."""
         self._cards[2].set_value("bsig0", value)
 
     @property
@@ -557,6 +577,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @asigs.setter
     def asigs(self, value: float) -> None:
+        """Set the asigs property."""
         self._cards[2].set_value("asigs", value)
 
     @property
@@ -567,6 +588,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @bsigs.setter
     def bsigs(self, value: float) -> None:
+        """Set the bsigs property."""
         self._cards[2].set_value("bsigs", value)
 
     @property
@@ -577,6 +599,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @asigss.setter
     def asigss(self, value: float) -> None:
+        """Set the asigss property."""
         self._cards[2].set_value("asigss", value)
 
     @property
@@ -587,6 +610,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @bsigss.setter
     def bsigss(self, value: float) -> None:
+        """Set the bsigss property."""
         self._cards[2].set_value("bsigss", value)
 
     @property
@@ -597,6 +621,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @aeps.setter
     def aeps(self, value: float) -> None:
+        """Set the aeps property."""
         self._cards[2].set_value("aeps", value)
 
     @property
@@ -607,6 +632,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @beps.setter
     def beps(self, value: float) -> None:
+        """Set the beps property."""
         self._cards[2].set_value("beps", value)
 
     @property
@@ -617,6 +643,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @thres.setter
     def thres(self, value: float) -> None:
+        """Set the thres property."""
         self._cards[3].set_value("thres", value)
 
     @property
@@ -627,6 +654,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[3].set_value("m", value)
 
     @property
@@ -637,6 +665,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[3].set_value("alpha", value)
 
     @property
@@ -647,6 +676,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @nud.setter
     def nud(self, value: float) -> None:
+        """Set the nud property."""
         self._cards[3].set_value("nud", value)
 
     @property
@@ -657,6 +687,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @u0.setter
     def u0(self, value: float) -> None:
+        """Set the u0 property."""
         self._cards[3].set_value("u0", value)
 
     @property
@@ -667,6 +698,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[3].set_value("k", value)
 
     @property
@@ -677,6 +709,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @nu.setter
     def nu(self, value: float) -> None:
+        """Set the nu property."""
         self._cards[3].set_value("nu", value)
 
     @property
@@ -687,6 +720,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @bnu.setter
     def bnu(self, value: float) -> None:
+        """Set the bnu property."""
         self._cards[3].set_value("bnu", value)
 
     @property
@@ -697,6 +731,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @t50.setter
     def t50(self, value: float) -> None:
+        """Set the t50 property."""
         self._cards[4].set_value("t50", value)
 
     @property
@@ -707,6 +742,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[4].set_value("n", value)
 
     @property
@@ -720,6 +756,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @a50.setter
     def a50(self, value: float) -> None:
+        """Set the a50 property."""
         self._cards[4].set_value("a50", value)
 
     @property
@@ -730,6 +767,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[4].set_value("d", value)
 
     @property
@@ -740,6 +778,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @gsf.setter
     def gsf(self, value: float) -> None:
+        """Set the gsf property."""
         self._cards[4].set_value("gsf", value)
 
     @property
@@ -750,6 +789,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[4].set_value("p", value)
 
     @property
@@ -760,6 +800,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[4].set_value("q", value)
 
     @property
@@ -770,6 +811,7 @@ class MatHotPlateRolling(KeywordBase):
 
     @qrex.setter
     def qrex(self, value: float) -> None:
+        """Set the qrex property."""
         self._cards[4].set_value("qrex", value)
 
     @property
@@ -780,5 +822,6 @@ class MatHotPlateRolling(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

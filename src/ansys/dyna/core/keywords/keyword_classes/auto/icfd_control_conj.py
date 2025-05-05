@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdControlConj class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlConj(KeywordBase):
     subkeyword = "CONTROL_CONJ"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdControlConj class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -106,8 +108,9 @@ class IcfdControlConj(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         if value not in [0, 1, None]:
-            raise Exception("""ctype must be `None` or one of {0,1}""")
+            raise Exception("""ctype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -118,5 +121,6 @@ class IcfdControlConj(KeywordBase):
 
     @tsf.setter
     def tsf(self, value: float) -> None:
+        """Set the tsf property."""
         self._cards[0].set_value("tsf", value)
 

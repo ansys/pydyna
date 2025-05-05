@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryAmbient class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryAmbient(KeywordBase):
     subkeyword = "AMBIENT"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryAmbient class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -94,6 +96,7 @@ class BoundaryAmbient(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 
     @property
@@ -104,6 +107,7 @@ class BoundaryAmbient(KeywordBase):
 
     @mmg.setter
     def mmg(self, value: int) -> None:
+        """Set the mmg property."""
         self._cards[0].set_value("mmg", value)
 
     @property
@@ -116,6 +120,7 @@ class BoundaryAmbient(KeywordBase):
 
     @ambtyp.setter
     def ambtyp(self, value: int) -> None:
+        """Set the ambtyp property."""
         self._cards[0].set_value("ambtyp", value)
 
     @property
@@ -129,8 +134,9 @@ class BoundaryAmbient(KeywordBase):
 
     @sidr.setter
     def sidr(self, value: int) -> None:
+        """Set the sidr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sidr must be `None` or one of {0,1,2}""")
+            raise Exception("""sidr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sidr", value)
 
     @property
@@ -141,6 +147,7 @@ class BoundaryAmbient(KeywordBase):
 
     @lcid1.setter
     def lcid1(self, value: int) -> None:
+        """Set the lcid1 property."""
         self._cards[1].set_value("lcid1", value)
 
     @property
@@ -151,5 +158,6 @@ class BoundaryAmbient(KeywordBase):
 
     @lcid2.setter
     def lcid2(self, value: int) -> None:
+        """Set the lcid2 property."""
         self._cards[1].set_value("lcid2", value)
 

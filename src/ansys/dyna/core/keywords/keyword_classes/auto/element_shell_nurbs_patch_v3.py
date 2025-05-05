@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementShellNurbsPatchV3 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
     subkeyword = "SHELL_NURBS_PATCH_V3"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementShellNurbsPatchV3 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -456,6 +458,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @npeid.setter
     def npeid(self, value: int) -> None:
+        """Set the npeid property."""
         self._cards[0].set_value("npeid", value)
 
     @property
@@ -466,6 +469,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -476,6 +480,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @npr.setter
     def npr(self, value: int) -> None:
+        """Set the npr property."""
         self._cards[0].set_value("npr", value)
 
     @property
@@ -486,6 +491,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @pr.setter
     def pr(self, value: int) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -496,6 +502,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @nps.setter
     def nps(self, value: int) -> None:
+        """Set the nps property."""
         self._cards[0].set_value("nps", value)
 
     @property
@@ -506,6 +513,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @ps.setter
     def ps(self, value: int) -> None:
+        """Set the ps property."""
         self._cards[0].set_value("ps", value)
 
     @property
@@ -516,6 +524,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @wfl.setter
     def wfl(self, value: int) -> None:
+        """Set the wfl property."""
         self._cards[1].set_value("wfl", value)
 
     @property
@@ -531,8 +540,9 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
+        """Set the form property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""form must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""form must be `None` or one of {0,1,2,3,4}.""")
         self._cards[1].set_value("form", value)
 
     @property
@@ -545,8 +555,9 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @int_.setter
     def int_(self, value: int) -> None:
+        """Set the int_ property."""
         if value not in [0, 1, None]:
-            raise Exception("""int_ must be `None` or one of {0,1}""")
+            raise Exception("""int_ must be `None` or one of {0,1}.""")
         self._cards[1].set_value("int", value)
 
     @property
@@ -557,6 +568,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @nisr.setter
     def nisr(self, value: int) -> None:
+        """Set the nisr property."""
         self._cards[1].set_value("nisr", value)
 
     @property
@@ -567,6 +579,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @niss.setter
     def niss(self, value: int) -> None:
+        """Set the niss property."""
         self._cards[1].set_value("niss", value)
 
     @property
@@ -579,8 +592,9 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
+        """Set the imass property."""
         if value not in [0, 1, None]:
-            raise Exception("""imass must be `None` or one of {0,1}""")
+            raise Exception("""imass must be `None` or one of {0,1}.""")
         self._cards[1].set_value("imass", value)
 
     @property
@@ -591,6 +605,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @nl.setter
     def nl(self, value: int) -> None:
+        """Set the nl property."""
         self._cards[1].set_value("nl", value)
 
     @property
@@ -601,6 +616,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @rk1.setter
     def rk1(self, value: float) -> None:
+        """Set the rk1 property."""
         self._cards[2].set_value("rk1", value)
 
     @property
@@ -611,6 +627,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @rk2.setter
     def rk2(self, value: float) -> None:
+        """Set the rk2 property."""
         self._cards[2].set_value("rk2", value)
 
     @property
@@ -621,6 +638,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @rk3.setter
     def rk3(self, value: float) -> None:
+        """Set the rk3 property."""
         self._cards[2].set_value("rk3", value)
 
     @property
@@ -631,6 +649,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @rk4.setter
     def rk4(self, value: float) -> None:
+        """Set the rk4 property."""
         self._cards[2].set_value("rk4", value)
 
     @property
@@ -641,6 +660,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @rk5.setter
     def rk5(self, value: float) -> None:
+        """Set the rk5 property."""
         self._cards[2].set_value("rk5", value)
 
     @property
@@ -651,6 +671,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @rk6.setter
     def rk6(self, value: float) -> None:
+        """Set the rk6 property."""
         self._cards[2].set_value("rk6", value)
 
     @property
@@ -661,6 +682,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @rk7.setter
     def rk7(self, value: float) -> None:
+        """Set the rk7 property."""
         self._cards[2].set_value("rk7", value)
 
     @property
@@ -671,6 +693,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @rk8.setter
     def rk8(self, value: float) -> None:
+        """Set the rk8 property."""
         self._cards[2].set_value("rk8", value)
 
     @property
@@ -681,6 +704,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @sk1.setter
     def sk1(self, value: float) -> None:
+        """Set the sk1 property."""
         self._cards[3].set_value("sk1", value)
 
     @property
@@ -691,6 +715,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @sk2.setter
     def sk2(self, value: float) -> None:
+        """Set the sk2 property."""
         self._cards[3].set_value("sk2", value)
 
     @property
@@ -701,6 +726,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @sk3.setter
     def sk3(self, value: float) -> None:
+        """Set the sk3 property."""
         self._cards[3].set_value("sk3", value)
 
     @property
@@ -711,6 +737,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @sk4.setter
     def sk4(self, value: float) -> None:
+        """Set the sk4 property."""
         self._cards[3].set_value("sk4", value)
 
     @property
@@ -721,6 +748,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @sk5.setter
     def sk5(self, value: float) -> None:
+        """Set the sk5 property."""
         self._cards[3].set_value("sk5", value)
 
     @property
@@ -731,6 +759,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @sk6.setter
     def sk6(self, value: float) -> None:
+        """Set the sk6 property."""
         self._cards[3].set_value("sk6", value)
 
     @property
@@ -741,6 +770,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @sk7.setter
     def sk7(self, value: float) -> None:
+        """Set the sk7 property."""
         self._cards[3].set_value("sk7", value)
 
     @property
@@ -751,6 +781,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @sk8.setter
     def sk8(self, value: float) -> None:
+        """Set the sk8 property."""
         self._cards[3].set_value("sk8", value)
 
     @property
@@ -761,6 +792,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[4].set_value("n1", value)
 
     @property
@@ -771,6 +803,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[4].set_value("n2", value)
 
     @property
@@ -781,6 +814,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[4].set_value("n3", value)
 
     @property
@@ -791,6 +825,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[4].set_value("n4", value)
 
     @property
@@ -801,6 +836,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @n5.setter
     def n5(self, value: int) -> None:
+        """Set the n5 property."""
         self._cards[4].set_value("n5", value)
 
     @property
@@ -811,6 +847,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @n6.setter
     def n6(self, value: int) -> None:
+        """Set the n6 property."""
         self._cards[4].set_value("n6", value)
 
     @property
@@ -821,6 +858,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @n7.setter
     def n7(self, value: int) -> None:
+        """Set the n7 property."""
         self._cards[4].set_value("n7", value)
 
     @property
@@ -831,6 +869,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @n8.setter
     def n8(self, value: int) -> None:
+        """Set the n8 property."""
         self._cards[4].set_value("n8", value)
 
     @property
@@ -841,6 +880,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @w1.setter
     def w1(self, value: float) -> None:
+        """Set the w1 property."""
         self._cards[5].set_value("w1", value)
 
     @property
@@ -851,6 +891,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @w2.setter
     def w2(self, value: float) -> None:
+        """Set the w2 property."""
         self._cards[5].set_value("w2", value)
 
     @property
@@ -861,6 +902,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @w3.setter
     def w3(self, value: float) -> None:
+        """Set the w3 property."""
         self._cards[5].set_value("w3", value)
 
     @property
@@ -871,6 +913,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @w4.setter
     def w4(self, value: float) -> None:
+        """Set the w4 property."""
         self._cards[5].set_value("w4", value)
 
     @property
@@ -881,6 +924,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @w5.setter
     def w5(self, value: float) -> None:
+        """Set the w5 property."""
         self._cards[5].set_value("w5", value)
 
     @property
@@ -891,6 +935,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @w6.setter
     def w6(self, value: float) -> None:
+        """Set the w6 property."""
         self._cards[5].set_value("w6", value)
 
     @property
@@ -901,6 +946,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @w7.setter
     def w7(self, value: float) -> None:
+        """Set the w7 property."""
         self._cards[5].set_value("w7", value)
 
     @property
@@ -911,6 +957,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @w8.setter
     def w8(self, value: float) -> None:
+        """Set the w8 property."""
         self._cards[5].set_value("w8", value)
 
     @property
@@ -921,6 +968,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @nel.setter
     def nel(self, value: int) -> None:
+        """Set the nel property."""
         self._cards[6].set_value("nel", value)
 
     @property
@@ -931,6 +979,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @e1.setter
     def e1(self, value: int) -> None:
+        """Set the e1 property."""
         self._cards[7].set_value("e1", value)
 
     @property
@@ -941,6 +990,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @e2.setter
     def e2(self, value: int) -> None:
+        """Set the e2 property."""
         self._cards[7].set_value("e2", value)
 
     @property
@@ -951,6 +1001,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @e3.setter
     def e3(self, value: int) -> None:
+        """Set the e3 property."""
         self._cards[7].set_value("e3", value)
 
     @property
@@ -961,6 +1012,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @e4.setter
     def e4(self, value: int) -> None:
+        """Set the e4 property."""
         self._cards[7].set_value("e4", value)
 
     @property
@@ -971,6 +1023,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @e5.setter
     def e5(self, value: int) -> None:
+        """Set the e5 property."""
         self._cards[7].set_value("e5", value)
 
     @property
@@ -981,6 +1034,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @e6.setter
     def e6(self, value: int) -> None:
+        """Set the e6 property."""
         self._cards[7].set_value("e6", value)
 
     @property
@@ -991,6 +1045,7 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @e7.setter
     def e7(self, value: int) -> None:
+        """Set the e7 property."""
         self._cards[7].set_value("e7", value)
 
     @property
@@ -1001,5 +1056,6 @@ class ElementShellNurbsPatchV3(KeywordBase):
 
     @e8.setter
     def e8(self, value: int) -> None:
+        """Set the e8 property."""
         self._cards[7].set_value("e8", value)
 

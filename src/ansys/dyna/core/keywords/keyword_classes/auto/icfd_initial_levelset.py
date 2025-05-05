@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdInitialLevelset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdInitialLevelset(KeywordBase):
     subkeyword = "INITIAL_LEVELSET"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdInitialLevelset class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,8 +111,9 @@ class IcfdInitialLevelset(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""stype must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -121,6 +124,7 @@ class IcfdInitialLevelset(KeywordBase):
 
     @nx.setter
     def nx(self, value: float) -> None:
+        """Set the nx property."""
         self._cards[0].set_value("nx", value)
 
     @property
@@ -131,6 +135,7 @@ class IcfdInitialLevelset(KeywordBase):
 
     @ny.setter
     def ny(self, value: float) -> None:
+        """Set the ny property."""
         self._cards[0].set_value("ny", value)
 
     @property
@@ -141,6 +146,7 @@ class IcfdInitialLevelset(KeywordBase):
 
     @nz.setter
     def nz(self, value: float) -> None:
+        """Set the nz property."""
         self._cards[0].set_value("nz", value)
 
     @property
@@ -151,6 +157,7 @@ class IcfdInitialLevelset(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -161,6 +168,7 @@ class IcfdInitialLevelset(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -171,6 +179,7 @@ class IcfdInitialLevelset(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 
     @property
@@ -183,7 +192,8 @@ class IcfdInitialLevelset(KeywordBase):
 
     @invert.setter
     def invert(self, value: int) -> None:
+        """Set the invert property."""
         if value not in [0, 1, None]:
-            raise Exception("""invert must be `None` or one of {0,1}""")
+            raise Exception("""invert must be `None` or one of {0,1}.""")
         self._cards[0].set_value("invert", value)
 

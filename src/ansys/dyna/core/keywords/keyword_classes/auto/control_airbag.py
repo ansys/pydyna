@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlAirbag class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlAirbag(KeywordBase):
     subkeyword = "AIRBAG"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlAirbag class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -60,7 +62,8 @@ class ControlAirbag(KeywordBase):
 
     @ckerr.setter
     def ckerr(self, value: int) -> None:
+        """Set the ckerr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ckerr must be `None` or one of {0,1,2}""")
+            raise Exception("""ckerr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("ckerr", value)
 

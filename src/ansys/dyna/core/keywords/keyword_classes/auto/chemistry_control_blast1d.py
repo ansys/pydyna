@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ChemistryControlBlast1D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryControlBlast1D(KeywordBase):
     subkeyword = "CONTROL_BLAST1D"
 
     def __init__(self, **kwargs):
+        """Initialize the ChemistryControlBlast1D class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class ChemistryControlBlast1D(KeywordBase):
 
     @blastid.setter
     def blastid(self, value: int) -> None:
+        """Set the blastid property."""
         self._cards[0].set_value("blastid", value)
 
     @property
@@ -96,6 +99,7 @@ class ChemistryControlBlast1D(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[0].set_value("x0", value)
 
     @property
@@ -106,6 +110,7 @@ class ChemistryControlBlast1D(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[0].set_value("y0", value)
 
     @property
@@ -116,6 +121,7 @@ class ChemistryControlBlast1D(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[0].set_value("z0", value)
 
     @property
@@ -126,5 +132,6 @@ class ChemistryControlBlast1D(KeywordBase):
 
     @file.setter
     def file(self, value: str) -> None:
+        """Set the file property."""
         self._cards[1].set_value("file", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadSegmentContactMask class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSegmentContactMask(KeywordBase):
     subkeyword = "SEGMENT_CONTACT_MASK"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadSegmentContactMask class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -181,6 +183,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -191,6 +194,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -201,6 +205,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @lsid.setter
     def lsid(self, value: int) -> None:
+        """Set the lsid property."""
         self._cards[1].set_value("lsid", value)
 
     @property
@@ -213,6 +218,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[1].set_value("p1", value)
 
     @property
@@ -224,6 +230,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[1].set_value("p2", value)
 
     @property
@@ -238,6 +245,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid1.setter
     def cid1(self, value: int) -> None:
+        """Set the cid1 property."""
         self._cards[1].set_value("cid1", value)
 
     @property
@@ -252,6 +260,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid2.setter
     def cid2(self, value: int) -> None:
+        """Set the cid2 property."""
         self._cards[1].set_value("cid2", value)
 
     @property
@@ -266,6 +275,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid3.setter
     def cid3(self, value: int) -> None:
+        """Set the cid3 property."""
         self._cards[1].set_value("cid3", value)
 
     @property
@@ -280,6 +290,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid4.setter
     def cid4(self, value: int) -> None:
+        """Set the cid4 property."""
         self._cards[1].set_value("cid4", value)
 
     @property
@@ -294,6 +305,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid5.setter
     def cid5(self, value: int) -> None:
+        """Set the cid5 property."""
         self._cards[1].set_value("cid5", value)
 
     @property
@@ -308,6 +320,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid1.setter
     def cid1(self, value: int) -> None:
+        """Set the cid1 property."""
         self._cards[2].set_value("cid1", value)
 
     @property
@@ -322,6 +335,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid2.setter
     def cid2(self, value: int) -> None:
+        """Set the cid2 property."""
         self._cards[2].set_value("cid2", value)
 
     @property
@@ -336,6 +350,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid3.setter
     def cid3(self, value: int) -> None:
+        """Set the cid3 property."""
         self._cards[2].set_value("cid3", value)
 
     @property
@@ -350,6 +365,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid4.setter
     def cid4(self, value: int) -> None:
+        """Set the cid4 property."""
         self._cards[2].set_value("cid4", value)
 
     @property
@@ -364,6 +380,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid5.setter
     def cid5(self, value: int) -> None:
+        """Set the cid5 property."""
         self._cards[2].set_value("cid5", value)
 
     @property
@@ -378,6 +395,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid6.setter
     def cid6(self, value: int) -> None:
+        """Set the cid6 property."""
         self._cards[2].set_value("cid6", value)
 
     @property
@@ -392,6 +410,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid7.setter
     def cid7(self, value: int) -> None:
+        """Set the cid7 property."""
         self._cards[2].set_value("cid7", value)
 
     @property
@@ -406,5 +425,6 @@ class LoadSegmentContactMask(KeywordBase):
 
     @cid8.setter
     def cid8(self, value: int) -> None:
+        """Set the cid8 property."""
         self._cards[2].set_value("cid8", value)
 

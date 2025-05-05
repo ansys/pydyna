@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmPointSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmPointSet(KeywordBase):
     subkeyword = "POINT_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the EmPointSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -127,6 +129,7 @@ class EmPointSet(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -139,6 +142,7 @@ class EmPointSet(KeywordBase):
 
     @pstype.setter
     def pstype(self, value: int) -> None:
+        """Set the pstype property."""
         self._cards[0].set_value("pstype", value)
 
     @property
@@ -149,6 +153,7 @@ class EmPointSet(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -159,6 +164,7 @@ class EmPointSet(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -169,6 +175,7 @@ class EmPointSet(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -179,6 +186,7 @@ class EmPointSet(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -189,6 +197,7 @@ class EmPointSet(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -199,6 +208,7 @@ class EmPointSet(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -209,6 +219,7 @@ class EmPointSet(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 
     @property
@@ -221,7 +232,8 @@ class EmPointSet(KeywordBase):
 
     @pos.setter
     def pos(self, value: int) -> None:
+        """Set the pos property."""
         if value not in [0, 1, None]:
-            raise Exception("""pos must be `None` or one of {0,1}""")
+            raise Exception("""pos must be `None` or one of {0,1}.""")
         self._cards[1].set_value("pos", value)
 

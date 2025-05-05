@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleReferenceSystemGroup class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleReferenceSystemGroup(KeywordBase):
     subkeyword = "REFERENCE_SYSTEM_GROUP"
 
     def __init__(self, **kwargs):
+        """Initialize the AleReferenceSystemGroup class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -241,6 +243,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -255,8 +258,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -280,8 +284,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @prtype.setter
     def prtype(self, value: int) -> None:
+        """Set the prtype property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, None]:
-            raise Exception("""prtype must be `None` or one of {0,1,2,3,4,5,6,7,8,9}""")
+            raise Exception("""prtype must be `None` or one of {0,1,2,3,4,5,6,7,8,9}.""")
         self._cards[0].set_value("prtype", value)
 
     @property
@@ -298,6 +303,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @prid.setter
     def prid(self, value: int) -> None:
+        """Set the prid property."""
         self._cards[0].set_value("prid", value)
 
     @property
@@ -317,8 +323,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @bctran.setter
     def bctran(self, value: int) -> None:
+        """Set the bctran property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""bctran must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""bctran must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("bctran", value)
 
     @property
@@ -338,8 +345,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @bcexp.setter
     def bcexp(self, value: int) -> None:
+        """Set the bcexp property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""bcexp must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""bcexp must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("bcexp", value)
 
     @property
@@ -359,8 +367,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @bcrot.setter
     def bcrot(self, value: int) -> None:
+        """Set the bcrot property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""bcrot must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""bcrot must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("bcrot", value)
 
     @property
@@ -374,8 +383,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @icoord.setter
     def icoord(self, value: int) -> None:
+        """Set the icoord property."""
         if value not in [0, 1, None]:
-            raise Exception("""icoord must be `None` or one of {0,1}""")
+            raise Exception("""icoord must be `None` or one of {0,1}.""")
         self._cards[0].set_value("icoord", value)
 
     @property
@@ -386,6 +396,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -400,8 +411,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("stype", value)
 
     @property
@@ -425,8 +437,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @prtype.setter
     def prtype(self, value: int) -> None:
+        """Set the prtype property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, None]:
-            raise Exception("""prtype must be `None` or one of {0,1,2,3,4,5,6,7,8,9}""")
+            raise Exception("""prtype must be `None` or one of {0,1,2,3,4,5,6,7,8,9}.""")
         self._cards[1].set_value("prtype", value)
 
     @property
@@ -437,6 +450,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @prid.setter
     def prid(self, value: int) -> None:
+        """Set the prid property."""
         self._cards[1].set_value("prid", value)
 
     @property
@@ -456,8 +470,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @bctran.setter
     def bctran(self, value: int) -> None:
+        """Set the bctran property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""bctran must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""bctran must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("bctran", value)
 
     @property
@@ -477,8 +492,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @bcexp.setter
     def bcexp(self, value: int) -> None:
+        """Set the bcexp property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""bcexp must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""bcexp must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("bcexp", value)
 
     @property
@@ -498,8 +514,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @bcrot.setter
     def bcrot(self, value: int) -> None:
+        """Set the bcrot property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""bcrot must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""bcrot must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("bcrot", value)
 
     @property
@@ -513,8 +530,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @icoord.setter
     def icoord(self, value: int) -> None:
+        """Set the icoord property."""
         if value not in [0, 1, None]:
-            raise Exception("""icoord must be `None` or one of {0,1}""")
+            raise Exception("""icoord must be `None` or one of {0,1}.""")
         self._cards[1].set_value("icoord", value)
 
     @property
@@ -525,6 +543,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[2].set_value("sid", value)
 
     @property
@@ -539,8 +558,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
         self._cards[2].set_value("stype", value)
 
     @property
@@ -564,8 +584,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @prtype.setter
     def prtype(self, value: int) -> None:
+        """Set the prtype property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, None]:
-            raise Exception("""prtype must be `None` or one of {0,1,2,3,4,5,6,7,8,9}""")
+            raise Exception("""prtype must be `None` or one of {0,1,2,3,4,5,6,7,8,9}.""")
         self._cards[2].set_value("prtype", value)
 
     @property
@@ -576,6 +597,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @prid.setter
     def prid(self, value: int) -> None:
+        """Set the prid property."""
         self._cards[2].set_value("prid", value)
 
     @property
@@ -595,8 +617,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @bctran.setter
     def bctran(self, value: int) -> None:
+        """Set the bctran property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""bctran must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""bctran must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[2].set_value("bctran", value)
 
     @property
@@ -616,8 +639,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @bcexp.setter
     def bcexp(self, value: int) -> None:
+        """Set the bcexp property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""bcexp must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""bcexp must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[2].set_value("bcexp", value)
 
     @property
@@ -637,8 +661,9 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @bcrot.setter
     def bcrot(self, value: int) -> None:
+        """Set the bcrot property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""bcrot must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""bcrot must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[2].set_value("bcrot", value)
 
     @property
@@ -652,7 +677,8 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @icoord.setter
     def icoord(self, value: int) -> None:
+        """Set the icoord property."""
         if value not in [0, 1, None]:
-            raise Exception("""icoord must be `None` or one of {0,1}""")
+            raise Exception("""icoord must be `None` or one of {0,1}.""")
         self._cards[2].set_value("icoord", value)
 

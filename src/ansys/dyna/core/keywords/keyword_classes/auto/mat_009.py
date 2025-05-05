@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat009 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Mat009(KeywordBase):
     subkeyword = "009"
 
     def __init__(self, **kwargs):
+        """Initialize the Mat009 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class Mat009(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -113,6 +116,7 @@ class Mat009(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -123,6 +127,7 @@ class Mat009(KeywordBase):
 
     @pc.setter
     def pc(self, value: float) -> None:
+        """Set the pc property."""
         self._cards[0].set_value("pc", value)
 
     @property
@@ -133,6 +138,7 @@ class Mat009(KeywordBase):
 
     @mu.setter
     def mu(self, value: float) -> None:
+        """Set the mu property."""
         self._cards[0].set_value("mu", value)
 
     @property
@@ -143,6 +149,7 @@ class Mat009(KeywordBase):
 
     @terod.setter
     def terod(self, value: float) -> None:
+        """Set the terod property."""
         self._cards[0].set_value("terod", value)
 
     @property
@@ -153,6 +160,7 @@ class Mat009(KeywordBase):
 
     @cerod.setter
     def cerod(self, value: float) -> None:
+        """Set the cerod property."""
         self._cards[0].set_value("cerod", value)
 
     @property
@@ -163,6 +171,7 @@ class Mat009(KeywordBase):
 
     @ym.setter
     def ym(self, value: float) -> None:
+        """Set the ym property."""
         self._cards[0].set_value("ym", value)
 
     @property
@@ -173,5 +182,6 @@ class Mat009(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 

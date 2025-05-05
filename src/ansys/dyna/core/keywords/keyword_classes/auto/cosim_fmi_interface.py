@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CosimFmiInterface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CosimFmiInterface(KeywordBase):
     subkeyword = "FMI_INTERFACE"
 
     def __init__(self, **kwargs):
+        """Initialize the CosimFmiInterface class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -118,6 +120,7 @@ class CosimFmiInterface(KeywordBase):
 
     @appid.setter
     def appid(self, value: str) -> None:
+        """Set the appid property."""
         self._cards[0].set_value("appid", value)
 
     @property
@@ -130,8 +133,9 @@ class CosimFmiInterface(KeywordBase):
 
     @impexp.setter
     def impexp(self, value: str) -> None:
+        """Set the impexp property."""
         if value not in ["IMP", "EXP", None]:
-            raise Exception("""impexp must be `None` or one of {"IMP","EXP"}""")
+            raise Exception("""impexp must be `None` or one of {"IMP","EXP"}.""")
         self._cards[1].set_value("impexp", value)
 
     @property
@@ -150,8 +154,9 @@ class CosimFmiInterface(KeywordBase):
 
     @regtyp.setter
     def regtyp(self, value: str) -> None:
+        """Set the regtyp property."""
         if value not in ["NODE", "NSET", "SSET", "PART", "FUNC", "CURV", "SESW", "BAG", None]:
-            raise Exception("""regtyp must be `None` or one of {"NODE","NSET","SSET","PART","FUNC","CURV","SESW","BAG"}""")
+            raise Exception("""regtyp must be `None` or one of {"NODE","NSET","SSET","PART","FUNC","CURV","SESW","BAG"}.""")
         self._cards[1].set_value("regtyp", value)
 
     @property
@@ -162,6 +167,7 @@ class CosimFmiInterface(KeywordBase):
 
     @regid.setter
     def regid(self, value: int) -> None:
+        """Set the regid property."""
         self._cards[1].set_value("regid", value)
 
     @property
@@ -172,6 +178,7 @@ class CosimFmiInterface(KeywordBase):
 
     @field.setter
     def field(self, value: str) -> None:
+        """Set the field property."""
         self._cards[1].set_value("field", value)
 
     @property
@@ -182,6 +189,7 @@ class CosimFmiInterface(KeywordBase):
 
     @winit.setter
     def winit(self, value: float) -> None:
+        """Set the winit property."""
         self._cards[1].set_value("winit", value)
 
     @property
@@ -192,6 +200,7 @@ class CosimFmiInterface(KeywordBase):
 
     @ratio.setter
     def ratio(self, value: float) -> None:
+        """Set the ratio property."""
         self._cards[1].set_value("ratio", value)
 
     @property
@@ -203,6 +212,7 @@ class CosimFmiInterface(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -216,7 +226,8 @@ class CosimFmiInterface(KeywordBase):
 
     @ref.setter
     def ref(self, value: int) -> None:
+        """Set the ref property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ref must be `None` or one of {0,1,2}""")
+            raise Exception("""ref must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("ref", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitResidualVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitResidualVector(KeywordBase):
     subkeyword = "IMPLICIT_RESIDUAL_VECTOR"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitResidualVector class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -84,6 +86,7 @@ class ControlImplicitResidualVector(KeywordBase):
 
     @iresvec.setter
     def iresvec(self, value: int) -> None:
+        """Set the iresvec property."""
         self._cards[0].set_value("iresvec", value)
 
     @property
@@ -96,6 +99,7 @@ class ControlImplicitResidualVector(KeywordBase):
 
     @neig.setter
     def neig(self, value: int) -> None:
+        """Set the neig property."""
         self._cards[0].set_value("neig", value)
 
     @property
@@ -116,6 +120,7 @@ class ControlImplicitResidualVector(KeywordBase):
 
     @iformat.setter
     def iformat(self, value: int) -> None:
+        """Set the iformat property."""
         self._cards[0].set_value("iformat", value)
 
     @property
@@ -127,5 +132,6 @@ class ControlImplicitResidualVector(KeywordBase):
 
     @rv_filenam.setter
     def rv_filenam(self, value: str) -> None:
+        """Set the rv_filenam property."""
         self._cards[1].set_value("rv_filenam", value)
 

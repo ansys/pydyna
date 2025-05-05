@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialStrainShellIga class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialStrainShellIga(KeywordBase):
     subkeyword = "STRAIN_SHELL_IGA"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialStrainShellIga class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -162,6 +164,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -172,6 +175,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @nplane.setter
     def nplane(self, value: int) -> None:
+        """Set the nplane property."""
         self._cards[0].set_value("nplane", value)
 
     @property
@@ -184,8 +188,9 @@ class InitialStrainShellIga(KeywordBase):
 
     @nthk.setter
     def nthk(self, value: int) -> None:
+        """Set the nthk property."""
         if value not in [0, 1, None]:
-            raise Exception("""nthk must be `None` or one of {0,1}""")
+            raise Exception("""nthk must be `None` or one of {0,1}.""")
         self._cards[0].set_value("nthk", value)
 
     @property
@@ -198,8 +203,9 @@ class InitialStrainShellIga(KeywordBase):
 
     @large.setter
     def large(self, value: int) -> None:
+        """Set the large property."""
         if value not in [0, 1, None]:
-            raise Exception("""large must be `None` or one of {0,1}""")
+            raise Exception("""large must be `None` or one of {0,1}.""")
         self._cards[0].set_value("large", value)
 
     @property
@@ -210,6 +216,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[1].set_value("r", value)
 
     @property
@@ -220,6 +227,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @s.setter
     def s(self, value: float) -> None:
+        """Set the s property."""
         self._cards[1].set_value("s", value)
 
     @property
@@ -230,6 +238,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 
     @property
@@ -240,6 +249,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @epsxx.setter
     def epsxx(self, value: float) -> None:
+        """Set the epsxx property."""
         self._cards[2].set_value("epsxx", value)
 
     @property
@@ -250,6 +260,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @epsyy.setter
     def epsyy(self, value: float) -> None:
+        """Set the epsyy property."""
         self._cards[2].set_value("epsyy", value)
 
     @property
@@ -260,6 +271,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @epszz.setter
     def epszz(self, value: float) -> None:
+        """Set the epszz property."""
         self._cards[2].set_value("epszz", value)
 
     @property
@@ -270,6 +282,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @epsxy.setter
     def epsxy(self, value: float) -> None:
+        """Set the epsxy property."""
         self._cards[2].set_value("epsxy", value)
 
     @property
@@ -280,6 +293,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @epsyz.setter
     def epsyz(self, value: float) -> None:
+        """Set the epsyz property."""
         self._cards[2].set_value("epsyz", value)
 
     @property
@@ -290,6 +304,7 @@ class InitialStrainShellIga(KeywordBase):
 
     @epszx.setter
     def epszx(self, value: float) -> None:
+        """Set the epszx property."""
         self._cards[2].set_value("epszx", value)
 
     @property
@@ -300,5 +315,6 @@ class InitialStrainShellIga(KeywordBase):
 
     @thki.setter
     def thki(self, value: float) -> None:
+        """Set the thki property."""
         self._cards[2].set_value("thki", value)
 

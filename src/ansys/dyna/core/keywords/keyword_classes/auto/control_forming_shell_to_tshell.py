@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingShellToTshell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingShellToTshell(KeywordBase):
     subkeyword = "FORMING_SHELL_TO_TSHELL"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingShellToTshell class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -83,6 +85,7 @@ class ControlFormingShellToTshell(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -93,6 +96,7 @@ class ControlFormingShellToTshell(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[0].set_value("thick", value)
 
     @property
@@ -106,8 +110,9 @@ class ControlFormingShellToTshell(KeywordBase):
 
     @midsf.setter
     def midsf(self, value: float) -> None:
+        """Set the midsf property."""
         if value not in [0, 1, -1, None]:
-            raise Exception("""midsf must be `None` or one of {0,1,-1}""")
+            raise Exception("""midsf must be `None` or one of {0,1,-1}.""")
         self._cards[0].set_value("midsf", value)
 
     @property
@@ -118,6 +123,7 @@ class ControlFormingShellToTshell(KeywordBase):
 
     @idsegb.setter
     def idsegb(self, value: float) -> None:
+        """Set the idsegb property."""
         self._cards[0].set_value("idsegb", value)
 
     @property
@@ -128,5 +134,6 @@ class ControlFormingShellToTshell(KeywordBase):
 
     @idsegt.setter
     def idsegt(self, value: float) -> None:
+        """Set the idsegt property."""
         self._cards[0].set_value("idsegt", value)
 

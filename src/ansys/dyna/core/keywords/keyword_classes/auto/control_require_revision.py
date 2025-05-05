@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlRequireRevision class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlRequireRevision(KeywordBase):
     subkeyword = "REQUIRE_REVISION"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlRequireRevision class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class ControlRequireRevision(KeywordBase):
 
     @release.setter
     def release(self, value: str) -> None:
+        """Set the release property."""
         self._cards[0].set_value("release", value)
 
     @property
@@ -78,6 +81,7 @@ class ControlRequireRevision(KeywordBase):
 
     @svnrev.setter
     def svnrev(self, value: int) -> None:
+        """Set the svnrev property."""
         self._cards[0].set_value("svnrev", value)
 
     @property
@@ -88,5 +92,6 @@ class ControlRequireRevision(KeywordBase):
 
     @gitrev.setter
     def gitrev(self, value: int) -> None:
+        """Set the gitrev property."""
         self._cards[0].set_value("gitrev", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatResultantAnisotropic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatResultantAnisotropic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatResultantAnisotropic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -341,6 +343,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -351,6 +354,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -361,6 +365,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @e11p.setter
     def e11p(self, value: float) -> None:
+        """Set the e11p property."""
         self._cards[1].set_value("e11p", value)
 
     @property
@@ -371,6 +376,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @e22p.setter
     def e22p(self, value: float) -> None:
+        """Set the e22p property."""
         self._cards[1].set_value("e22p", value)
 
     @property
@@ -381,6 +387,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @v12p.setter
     def v12p(self, value: float) -> None:
+        """Set the v12p property."""
         self._cards[1].set_value("v12p", value)
 
     @property
@@ -391,6 +398,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @v21p.setter
     def v21p(self, value: float) -> None:
+        """Set the v21p property."""
         self._cards[1].set_value("v21p", value)
 
     @property
@@ -401,6 +409,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @g12p.setter
     def g12p(self, value: float) -> None:
+        """Set the g12p property."""
         self._cards[1].set_value("g12p", value)
 
     @property
@@ -411,6 +420,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @g23p.setter
     def g23p(self, value: float) -> None:
+        """Set the g23p property."""
         self._cards[1].set_value("g23p", value)
 
     @property
@@ -421,6 +431,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @g31p.setter
     def g31p(self, value: float) -> None:
+        """Set the g31p property."""
         self._cards[1].set_value("g31p", value)
 
     @property
@@ -431,6 +442,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @e11b.setter
     def e11b(self, value: float) -> None:
+        """Set the e11b property."""
         self._cards[2].set_value("e11b", value)
 
     @property
@@ -441,6 +453,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @e22b.setter
     def e22b(self, value: float) -> None:
+        """Set the e22b property."""
         self._cards[2].set_value("e22b", value)
 
     @property
@@ -451,6 +464,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @v12b.setter
     def v12b(self, value: float) -> None:
+        """Set the v12b property."""
         self._cards[2].set_value("v12b", value)
 
     @property
@@ -461,6 +475,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @v21b.setter
     def v21b(self, value: float) -> None:
+        """Set the v21b property."""
         self._cards[2].set_value("v21b", value)
 
     @property
@@ -471,6 +486,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @g12b.setter
     def g12b(self, value: float) -> None:
+        """Set the g12b property."""
         self._cards[2].set_value("g12b", value)
 
     @property
@@ -488,6 +504,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -498,6 +515,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @ln11.setter
     def ln11(self, value: float) -> None:
+        """Set the ln11 property."""
         self._cards[3].set_value("ln11", value)
 
     @property
@@ -508,6 +526,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @ln22.setter
     def ln22(self, value: float) -> None:
+        """Set the ln22 property."""
         self._cards[3].set_value("ln22", value)
 
     @property
@@ -518,6 +537,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @ln12.setter
     def ln12(self, value: float) -> None:
+        """Set the ln12 property."""
         self._cards[3].set_value("ln12", value)
 
     @property
@@ -528,6 +548,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @lq1.setter
     def lq1(self, value: float) -> None:
+        """Set the lq1 property."""
         self._cards[3].set_value("lq1", value)
 
     @property
@@ -538,6 +559,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @lq2.setter
     def lq2(self, value: float) -> None:
+        """Set the lq2 property."""
         self._cards[3].set_value("lq2", value)
 
     @property
@@ -548,6 +570,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @lm11.setter
     def lm11(self, value: float) -> None:
+        """Set the lm11 property."""
         self._cards[3].set_value("lm11", value)
 
     @property
@@ -558,6 +581,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @lm22.setter
     def lm22(self, value: float) -> None:
+        """Set the lm22 property."""
         self._cards[3].set_value("lm22", value)
 
     @property
@@ -568,6 +592,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @lm12.setter
     def lm12(self, value: float) -> None:
+        """Set the lm12 property."""
         self._cards[3].set_value("lm12", value)
 
     @property
@@ -578,6 +603,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[4].set_value("a1", value)
 
     @property
@@ -588,6 +614,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[4].set_value("a2", value)
 
     @property
@@ -598,6 +625,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[4].set_value("a3", value)
 
     @property
@@ -608,6 +636,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[5].set_value("v1", value)
 
     @property
@@ -618,6 +647,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[5].set_value("v2", value)
 
     @property
@@ -628,6 +658,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[5].set_value("v3", value)
 
     @property
@@ -638,6 +669,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[5].set_value("d1", value)
 
     @property
@@ -648,6 +680,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[5].set_value("d2", value)
 
     @property
@@ -658,6 +691,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[5].set_value("d3", value)
 
     @property
@@ -668,6 +702,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[5].set_value("beta", value)
 
     @property
@@ -678,5 +713,6 @@ class MatResultantAnisotropic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 

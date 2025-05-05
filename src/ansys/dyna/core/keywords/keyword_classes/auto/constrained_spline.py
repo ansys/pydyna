@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedSpline class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedSpline(KeywordBase):
     subkeyword = "SPLINE"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedSpline class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -80,6 +82,7 @@ class ConstrainedSpline(KeywordBase):
 
     @splid.setter
     def splid(self, value: int) -> None:
+        """Set the splid property."""
         self._cards[0].set_value("splid", value)
 
     @property
@@ -90,6 +93,7 @@ class ConstrainedSpline(KeywordBase):
 
     @dlratio.setter
     def dlratio(self, value: float) -> None:
+        """Set the dlratio property."""
         self._cards[0].set_value("dlratio", value)
 
     @property
@@ -100,6 +104,7 @@ class ConstrainedSpline(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -116,5 +121,6 @@ class ConstrainedSpline(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         self._cards[1].set_value("dof", value)
 

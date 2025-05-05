@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseCrossSectionSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseCrossSectionSet(KeywordBase):
     subkeyword = "CROSS_SECTION_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseCrossSectionSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -128,6 +130,7 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     @csid.setter
     def csid(self, value: int) -> None:
+        """Set the csid property."""
         self._cards[0].set_value("csid", value)
 
     @property
@@ -138,6 +141,7 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -148,6 +152,7 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 
     @property
@@ -158,6 +163,7 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     @hsid.setter
     def hsid(self, value: int) -> None:
+        """Set the hsid property."""
         self._cards[1].set_value("hsid", value)
 
     @property
@@ -168,6 +174,7 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     @bsid.setter
     def bsid(self, value: int) -> None:
+        """Set the bsid property."""
         self._cards[1].set_value("bsid", value)
 
     @property
@@ -178,6 +185,7 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[1].set_value("ssid", value)
 
     @property
@@ -188,6 +196,7 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     @tsid.setter
     def tsid(self, value: int) -> None:
+        """Set the tsid property."""
         self._cards[1].set_value("tsid", value)
 
     @property
@@ -198,6 +207,7 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     @dsid.setter
     def dsid(self, value: int) -> None:
+        """Set the dsid property."""
         self._cards[1].set_value("dsid", value)
 
     @property
@@ -208,6 +218,7 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[1].set_value("id", value)
 
     @property
@@ -221,7 +232,8 @@ class DatabaseCrossSectionSet(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""itype must be `None` or one of {0,1,2}""")
+            raise Exception("""itype must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("itype", value)
 

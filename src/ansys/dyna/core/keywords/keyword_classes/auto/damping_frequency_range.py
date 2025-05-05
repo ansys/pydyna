@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DampingFrequencyRange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DampingFrequencyRange(KeywordBase):
     subkeyword = "FREQUENCY_RANGE"
 
     def __init__(self, **kwargs):
+        """Initialize the DampingFrequencyRange class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class DampingFrequencyRange(KeywordBase):
 
     @cdamp.setter
     def cdamp(self, value: float) -> None:
+        """Set the cdamp property."""
         self._cards[0].set_value("cdamp", value)
 
     @property
@@ -113,6 +116,7 @@ class DampingFrequencyRange(KeywordBase):
 
     @flow.setter
     def flow(self, value: float) -> None:
+        """Set the flow property."""
         self._cards[0].set_value("flow", value)
 
     @property
@@ -123,6 +127,7 @@ class DampingFrequencyRange(KeywordBase):
 
     @fhigh.setter
     def fhigh(self, value: float) -> None:
+        """Set the fhigh property."""
         self._cards[0].set_value("fhigh", value)
 
     @property
@@ -133,6 +138,7 @@ class DampingFrequencyRange(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -143,6 +149,7 @@ class DampingFrequencyRange(KeywordBase):
 
     @blank.setter
     def blank(self, value: int) -> None:
+        """Set the blank property."""
         self._cards[0].set_value("blank", value)
 
     @property
@@ -153,6 +160,7 @@ class DampingFrequencyRange(KeywordBase):
 
     @pidrel.setter
     def pidrel(self, value: int) -> None:
+        """Set the pidrel property."""
         self._cards[0].set_value("pidrel", value)
 
     @property
@@ -165,7 +173,8 @@ class DampingFrequencyRange(KeywordBase):
 
     @iflg.setter
     def iflg(self, value: int) -> None:
+        """Set the iflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""iflg must be `None` or one of {0,1}""")
+            raise Exception("""iflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iflg", value)
 

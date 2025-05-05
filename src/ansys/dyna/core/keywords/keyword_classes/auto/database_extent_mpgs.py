@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseExtentMpgs class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseExtentMpgs(KeywordBase):
     subkeyword = "EXTENT_MPGS"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseExtentMpgs class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -67,8 +69,9 @@ class DatabaseExtentMpgs(KeywordBase):
 
     @vtype.setter
     def vtype(self, value: int) -> None:
+        """Set the vtype property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""vtype must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""vtype must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("vtype", value)
 
     @property
@@ -85,5 +88,6 @@ class DatabaseExtentMpgs(KeywordBase):
 
     @comp.setter
     def comp(self, value: int) -> None:
+        """Set the comp property."""
         self._cards[0].set_value("comp", value)
 

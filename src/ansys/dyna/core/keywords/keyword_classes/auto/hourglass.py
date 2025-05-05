@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Hourglass class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.card_set import CardSet
@@ -28,12 +29,14 @@ from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class HourglassCardSet(Cards):
+    """ CardSet."""
 
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the HourglassCardSet CardSet."""
         super().__init__(kwargs["keyword"])
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
@@ -132,6 +135,7 @@ class HourglassCardSet(Cards):
 
     @hgid.setter
     def hgid(self, value: int) -> None:
+        """Set the hgid property."""
         self._cards[0].set_value("hgid", value)
 
     @property
@@ -154,8 +158,9 @@ class HourglassCardSet(Cards):
 
     @ihq.setter
     def ihq(self, value: int) -> None:
+        """Set the ihq property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, None]:
-            raise Exception("""ihq must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10}""")
+            raise Exception("""ihq must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10}.""")
         self._cards[0].set_value("ihq", value)
 
     @property
@@ -166,6 +171,7 @@ class HourglassCardSet(Cards):
 
     @qm.setter
     def qm(self, value: float) -> None:
+        """Set the qm property."""
         self._cards[0].set_value("qm", value)
 
     @property
@@ -176,6 +182,7 @@ class HourglassCardSet(Cards):
 
     @ibq.setter
     def ibq(self, value: int) -> None:
+        """Set the ibq property."""
         self._cards[0].set_value("ibq", value)
 
     @property
@@ -186,6 +193,7 @@ class HourglassCardSet(Cards):
 
     @q1.setter
     def q1(self, value: float) -> None:
+        """Set the q1 property."""
         self._cards[0].set_value("q1", value)
 
     @property
@@ -196,6 +204,7 @@ class HourglassCardSet(Cards):
 
     @q2.setter
     def q2(self, value: float) -> None:
+        """Set the q2 property."""
         self._cards[0].set_value("q2", value)
 
     @property
@@ -206,6 +215,7 @@ class HourglassCardSet(Cards):
 
     @qb_vdc.setter
     def qb_vdc(self, value: float) -> None:
+        """Set the qb_vdc property."""
         self._cards[0].set_value("qb/vdc", value)
 
     @property
@@ -216,6 +226,7 @@ class HourglassCardSet(Cards):
 
     @qw.setter
     def qw(self, value: float) -> None:
+        """Set the qw property."""
         self._cards[0].set_value("qw", value)
 
     @property
@@ -226,10 +237,12 @@ class HourglassCardSet(Cards):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 
     @property
     def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
         return self._parent
 
 
@@ -240,6 +253,7 @@ class Hourglass(KeywordBase):
     subkeyword = "HOURGLASS"
 
     def __init__(self, **kwargs):
+        """Initialize the Hourglass class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         kwargs["keyword"] = self
@@ -253,8 +267,10 @@ class Hourglass(KeywordBase):
 
     @property
     def sets(self) -> typing.List[HourglassCardSet]:
+        """Gets the list of sets."""
         return self._cards[0].items()
 
     def add_set(self, **kwargs):
+        """Adds a set to the list of sets."""
         self._cards[0].add_item(**kwargs)
 

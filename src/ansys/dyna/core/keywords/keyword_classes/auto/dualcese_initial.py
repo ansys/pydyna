@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseInitial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseInitial(KeywordBase):
     subkeyword = "INITIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseInitial class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class DualceseInitial(KeywordBase):
 
     @u.setter
     def u(self, value: float) -> None:
+        """Set the u property."""
         self._cards[0].set_value("u", value)
 
     @property
@@ -119,6 +122,7 @@ class DualceseInitial(KeywordBase):
 
     @v.setter
     def v(self, value: float) -> None:
+        """Set the v property."""
         self._cards[0].set_value("v", value)
 
     @property
@@ -129,6 +133,7 @@ class DualceseInitial(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[0].set_value("w", value)
 
     @property
@@ -139,6 +144,7 @@ class DualceseInitial(KeywordBase):
 
     @rh.setter
     def rh(self, value: float) -> None:
+        """Set the rh property."""
         self._cards[0].set_value("rh", value)
 
     @property
@@ -149,6 +155,7 @@ class DualceseInitial(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[0].set_value("p", value)
 
     @property
@@ -159,6 +166,7 @@ class DualceseInitial(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[0].set_value("t", value)
 
     @property
@@ -171,5 +179,6 @@ class DualceseInitial(KeywordBase):
 
     @ifunc.setter
     def ifunc(self, value: int) -> None:
+        """Set the ifunc property."""
         self._cards[0].set_value("ifunc", value)
 

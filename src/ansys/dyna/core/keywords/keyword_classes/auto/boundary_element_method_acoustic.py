@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryElementMethodAcoustic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
     subkeyword = "ELEMENT_METHOD_ACOUSTIC"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryElementMethodAcoustic class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -220,6 +222,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -230,6 +233,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -240,6 +244,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @fmin.setter
     def fmin(self, value: float) -> None:
+        """Set the fmin property."""
         self._cards[0].set_value("fmin", value)
 
     @property
@@ -250,6 +255,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @fmax.setter
     def fmax(self, value: float) -> None:
+        """Set the fmax property."""
         self._cards[0].set_value("fmax", value)
 
     @property
@@ -260,6 +266,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
+        """Set the nfreq property."""
         self._cards[0].set_value("nfreq", value)
 
     @property
@@ -270,6 +277,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @dt_out.setter
     def dt_out(self, value: int) -> None:
+        """Set the dt_out property."""
         self._cards[0].set_value("dt_out", value)
 
     @property
@@ -280,6 +288,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @t_start.setter
     def t_start(self, value: float) -> None:
+        """Set the t_start property."""
         self._cards[0].set_value("t_start", value)
 
     @property
@@ -290,6 +299,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @pref.setter
     def pref(self, value: float) -> None:
+        """Set the pref property."""
         self._cards[0].set_value("pref", value)
 
     @property
@@ -300,6 +310,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @nsid_ext.setter
     def nsid_ext(self, value: int) -> None:
+        """Set the nsid_ext property."""
         self._cards[1].set_value("nsid_ext", value)
 
     @property
@@ -312,8 +323,9 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @type_ext.setter
     def type_ext(self, value: int) -> None:
+        """Set the type_ext property."""
         if value not in [1, 2, None]:
-            raise Exception("""type_ext must be `None` or one of {1,2}""")
+            raise Exception("""type_ext must be `None` or one of {1,2}.""")
         self._cards[1].set_value("type_ext", value)
 
     @property
@@ -324,6 +336,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @nsid_int.setter
     def nsid_int(self, value: int) -> None:
+        """Set the nsid_int property."""
         self._cards[1].set_value("nsid_int", value)
 
     @property
@@ -336,8 +349,9 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @type_int.setter
     def type_int(self, value: int) -> None:
+        """Set the type_int property."""
         if value not in [1, 2, None]:
-            raise Exception("""type_int must be `None` or one of {1,2}""")
+            raise Exception("""type_int must be `None` or one of {1,2}.""")
         self._cards[1].set_value("type_int", value)
 
     @property
@@ -353,8 +367,9 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @fft_win.setter
     def fft_win(self, value: int) -> None:
+        """Set the fft_win property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""fft_win must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""fft_win must be `None` or one of {0,1,2,3,4}.""")
         self._cards[1].set_value("fft_win", value)
 
     @property
@@ -368,8 +383,9 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""method must be `None` or one of {0,1,2}""")
+            raise Exception("""method must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("method", value)
 
     @property
@@ -380,6 +396,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @maxit.setter
     def maxit(self, value: int) -> None:
+        """Set the maxit property."""
         self._cards[2].set_value("maxit", value)
 
     @property
@@ -390,6 +407,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @res.setter
     def res(self, value: float) -> None:
+        """Set the res property."""
         self._cards[2].set_value("res", value)
 
     @property
@@ -400,6 +418,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @ndd.setter
     def ndd(self, value: int) -> None:
+        """Set the ndd property."""
         self._cards[2].set_value("ndd", value)
 
     @property
@@ -410,6 +429,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[3].set_value("ssid", value)
 
     @property
@@ -423,8 +443,9 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @sstype.setter
     def sstype(self, value: int) -> None:
+        """Set the sstype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sstype must be `None` or one of {0,1,2}""")
+            raise Exception("""sstype must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("sstype", value)
 
     @property
@@ -437,8 +458,9 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @norm.setter
     def norm(self, value: int) -> None:
+        """Set the norm property."""
         if value not in [0, 1, None]:
-            raise Exception("""norm must be `None` or one of {0,1}""")
+            raise Exception("""norm must be `None` or one of {0,1}.""")
         self._cards[3].set_value("norm", value)
 
     @property
@@ -452,6 +474,7 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @bem_type.setter
     def bem_type(self, value: int) -> None:
+        """Set the bem_type property."""
         self._cards[3].set_value("bem_type", value)
 
     @property
@@ -464,7 +487,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
 
     @restart.setter
     def restart(self, value: int) -> None:
+        """Set the restart property."""
         if value not in [0, 1, None]:
-            raise Exception("""restart must be `None` or one of {0,1}""")
+            raise Exception("""restart must be `None` or one of {0,1}.""")
         self._cards[3].set_value("restart", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainAcousticBemHalfSpace class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
     subkeyword = "DOMAIN_ACOUSTIC_BEM_HALF_SPACE"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainAcousticBemHalfSpace class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -392,6 +394,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -404,6 +407,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -414,6 +418,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @fmin.setter
     def fmin(self, value: float) -> None:
+        """Set the fmin property."""
         self._cards[0].set_value("fmin", value)
 
     @property
@@ -424,6 +429,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @fmax.setter
     def fmax(self, value: float) -> None:
+        """Set the fmax property."""
         self._cards[0].set_value("fmax", value)
 
     @property
@@ -434,6 +440,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
+        """Set the nfreq property."""
         self._cards[0].set_value("nfreq", value)
 
     @property
@@ -445,6 +452,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -455,6 +463,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @tstart.setter
     def tstart(self, value: float) -> None:
+        """Set the tstart property."""
         self._cards[0].set_value("tstart", value)
 
     @property
@@ -467,6 +476,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @pref.setter
     def pref(self, value: float) -> None:
+        """Set the pref property."""
         self._cards[0].set_value("pref", value)
 
     @property
@@ -477,6 +487,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @nsidext.setter
     def nsidext(self, value: int) -> None:
+        """Set the nsidext property."""
         self._cards[1].set_value("nsidext", value)
 
     @property
@@ -490,8 +501,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @typext.setter
     def typext(self, value: int) -> None:
+        """Set the typext property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""typext must be `None` or one of {0,1,2}""")
+            raise Exception("""typext must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("typext", value)
 
     @property
@@ -502,6 +514,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @nsidint.setter
     def nsidint(self, value: int) -> None:
+        """Set the nsidint property."""
         self._cards[1].set_value("nsidint", value)
 
     @property
@@ -515,8 +528,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @typint.setter
     def typint(self, value: int) -> None:
+        """Set the typint property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""typint must be `None` or one of {0,1,2}""")
+            raise Exception("""typint must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("typint", value)
 
     @property
@@ -533,8 +547,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @fftwin.setter
     def fftwin(self, value: int) -> None:
+        """Set the fftwin property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""fftwin must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""fftwin must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[1].set_value("fftwin", value)
 
     @property
@@ -547,8 +562,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @trslt.setter
     def trslt(self, value: int) -> None:
+        """Set the trslt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""trslt must be `None` or one of {0,1,2}""")
+            raise Exception("""trslt must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("trslt", value)
 
     @property
@@ -571,8 +587,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @ipfile.setter
     def ipfile(self, value: int) -> None:
+        """Set the ipfile property."""
         if value not in [0, 1, 10, 11, 20, 21, 31, 41, None]:
-            raise Exception("""ipfile must be `None` or one of {0,1,10,11,20,21,31,41}""")
+            raise Exception("""ipfile must be `None` or one of {0,1,10,11,20,21,31,41}.""")
         self._cards[1].set_value("ipfile", value)
 
     @property
@@ -591,8 +608,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @iunits.setter
     def iunits(self, value: int) -> None:
+        """Set the iunits property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""iunits must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""iunits must be `None` or one of {0,1,2,3,4}.""")
         self._cards[1].set_value("iunits", value)
 
     @property
@@ -610,8 +628,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""method must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""method must be `None` or one of {0,1,2,3,4}.""")
         self._cards[2].set_value("method", value)
 
     @property
@@ -622,6 +641,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @maxit.setter
     def maxit(self, value: int) -> None:
+        """Set the maxit property."""
         self._cards[2].set_value("maxit", value)
 
     @property
@@ -632,6 +652,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @tolitr.setter
     def tolitr(self, value: float) -> None:
+        """Set the tolitr property."""
         self._cards[2].set_value("tolitr", value)
 
     @property
@@ -645,6 +666,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @ndd.setter
     def ndd(self, value: int) -> None:
+        """Set the ndd property."""
         self._cards[2].set_value("ndd", value)
 
     @property
@@ -655,6 +677,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @tollr.setter
     def tollr(self, value: float) -> None:
+        """Set the tollr property."""
         self._cards[2].set_value("tollr", value)
 
     @property
@@ -665,6 +688,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @tolfct.setter
     def tolfct(self, value: float) -> None:
+        """Set the tolfct property."""
         self._cards[2].set_value("tolfct", value)
 
     @property
@@ -675,6 +699,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @ibdim.setter
     def ibdim(self, value: int) -> None:
+        """Set the ibdim property."""
         self._cards[2].set_value("ibdim", value)
 
     @property
@@ -685,6 +710,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @npg.setter
     def npg(self, value: int) -> None:
+        """Set the npg property."""
         self._cards[2].set_value("npg", value)
 
     @property
@@ -695,6 +721,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @nbc.setter
     def nbc(self, value: int) -> None:
+        """Set the nbc property."""
         self._cards[3].set_value("nbc", value)
 
     @property
@@ -712,8 +739,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
+        """Set the restrt property."""
         if value not in [0, 1, 2, 3, -3, 4, 5, None]:
-            raise Exception("""restrt must be `None` or one of {0,1,2,3,-3,4,5}""")
+            raise Exception("""restrt must be `None` or one of {0,1,2,3,-3,4,5}.""")
         self._cards[3].set_value("restrt", value)
 
     @property
@@ -728,8 +756,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @iedge.setter
     def iedge(self, value: int) -> None:
+        """Set the iedge property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""iedge must be `None` or one of {0,1,2,3}""")
+            raise Exception("""iedge must be `None` or one of {0,1,2,3}.""")
         self._cards[3].set_value("iedge", value)
 
     @property
@@ -742,8 +771,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @noel.setter
     def noel(self, value: int) -> None:
+        """Set the noel property."""
         if value not in [0, 1, None]:
-            raise Exception("""noel must be `None` or one of {0,1}""")
+            raise Exception("""noel must be `None` or one of {0,1}.""")
         self._cards[3].set_value("noel", value)
 
     @property
@@ -756,6 +786,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @nfrup.setter
     def nfrup(self, value: int) -> None:
+        """Set the nfrup property."""
         self._cards[3].set_value("nfrup", value)
 
     @property
@@ -769,8 +800,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @velout.setter
     def velout(self, value: int) -> None:
+        """Set the velout property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""velout must be `None` or one of {0,1,2}""")
+            raise Exception("""velout must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("velout", value)
 
     @property
@@ -786,8 +818,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @dba.setter
     def dba(self, value: int) -> None:
+        """Set the dba property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""dba must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""dba must be `None` or one of {0,1,2,3,4}.""")
         self._cards[3].set_value("dba", value)
 
     @property
@@ -798,6 +831,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[4].set_value("ssid", value)
 
     @property
@@ -811,8 +845,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @sstype.setter
     def sstype(self, value: int) -> None:
+        """Set the sstype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sstype must be `None` or one of {0,1,2}""")
+            raise Exception("""sstype must be `None` or one of {0,1,2}.""")
         self._cards[4].set_value("sstype", value)
 
     @property
@@ -825,8 +860,9 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @norm.setter
     def norm(self, value: int) -> None:
+        """Set the norm property."""
         if value not in [0, 1, None]:
-            raise Exception("""norm must be `None` or one of {0,1}""")
+            raise Exception("""norm must be `None` or one of {0,1}.""")
         self._cards[4].set_value("norm", value)
 
     @property
@@ -844,6 +880,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @bemtype.setter
     def bemtype(self, value: int) -> None:
+        """Set the bemtype property."""
         self._cards[4].set_value("bemtype", value)
 
     @property
@@ -854,6 +891,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @lc1.setter
     def lc1(self, value: int) -> None:
+        """Set the lc1 property."""
         self._cards[4].set_value("lc1", value)
 
     @property
@@ -864,6 +902,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @lc2.setter
     def lc2(self, value: int) -> None:
+        """Set the lc2 property."""
         self._cards[4].set_value("lc2", value)
 
     @property
@@ -874,6 +913,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[5].set_value("pid", value)
 
     @property
@@ -884,6 +924,7 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @t_hold.setter
     def t_hold(self, value: float) -> None:
+        """Set the t_hold property."""
         self._cards[6].set_value("t_hold", value)
 
     @property
@@ -894,5 +935,6 @@ class FrequencyDomainAcousticBemHalfSpace(KeywordBase):
 
     @decay.setter
     def decay(self, value: float) -> None:
+        """Set the decay property."""
         self._cards[6].set_value("decay", value)
 

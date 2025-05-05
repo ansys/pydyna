@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadThermalVariableElementSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadThermalVariableElementSolid(KeywordBase):
     subkeyword = "THERMAL_VARIABLE_ELEMENT_SOLID"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadThermalVariableElementSolid class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -75,6 +77,7 @@ class LoadThermalVariableElementSolid(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -85,6 +88,7 @@ class LoadThermalVariableElementSolid(KeywordBase):
 
     @ts.setter
     def ts(self, value: float) -> None:
+        """Set the ts property."""
         self._cards[0].set_value("ts", value)
 
     @property
@@ -95,6 +99,7 @@ class LoadThermalVariableElementSolid(KeywordBase):
 
     @tb.setter
     def tb(self, value: float) -> None:
+        """Set the tb property."""
         self._cards[0].set_value("tb", value)
 
     @property
@@ -105,5 +110,6 @@ class LoadThermalVariableElementSolid(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 

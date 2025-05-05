@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IncludeUnitcell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IncludeUnitcell(KeywordBase):
     subkeyword = "UNITCELL"
 
     def __init__(self, **kwargs):
+        """Initialize the IncludeUnitcell class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -224,6 +226,7 @@ class IncludeUnitcell(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -236,8 +239,9 @@ class IncludeUnitcell(KeywordBase):
 
     @inpt.setter
     def inpt(self, value: int) -> None:
+        """Set the inpt property."""
         if value not in [0, 1, None]:
-            raise Exception("""inpt must be `None` or one of {0,1}""")
+            raise Exception("""inpt must be `None` or one of {0,1}.""")
         self._cards[1].set_value("inpt", value)
 
     @property
@@ -249,6 +253,7 @@ class IncludeUnitcell(KeywordBase):
 
     @oupt.setter
     def oupt(self, value: int) -> None:
+        """Set the oupt property."""
         self._cards[1].set_value("oupt", value)
 
     @property
@@ -259,6 +264,7 @@ class IncludeUnitcell(KeywordBase):
 
     @nedof.setter
     def nedof(self, value: int) -> None:
+        """Set the nedof property."""
         self._cards[1].set_value("nedof", value)
 
     @property
@@ -269,6 +275,7 @@ class IncludeUnitcell(KeywordBase):
 
     @dx.setter
     def dx(self, value: float) -> None:
+        """Set the dx property."""
         self._cards[2].set_value("dx", value)
 
     @property
@@ -279,6 +286,7 @@ class IncludeUnitcell(KeywordBase):
 
     @dy.setter
     def dy(self, value: float) -> None:
+        """Set the dy property."""
         self._cards[2].set_value("dy", value)
 
     @property
@@ -289,6 +297,7 @@ class IncludeUnitcell(KeywordBase):
 
     @dz.setter
     def dz(self, value: float) -> None:
+        """Set the dz property."""
         self._cards[2].set_value("dz", value)
 
     @property
@@ -299,6 +308,7 @@ class IncludeUnitcell(KeywordBase):
 
     @nex.setter
     def nex(self, value: int) -> None:
+        """Set the nex property."""
         self._cards[2].set_value("nex", value)
 
     @property
@@ -309,6 +319,7 @@ class IncludeUnitcell(KeywordBase):
 
     @ney.setter
     def ney(self, value: int) -> None:
+        """Set the ney property."""
         self._cards[2].set_value("ney", value)
 
     @property
@@ -319,6 +330,7 @@ class IncludeUnitcell(KeywordBase):
 
     @nez.setter
     def nez(self, value: int) -> None:
+        """Set the nez property."""
         self._cards[2].set_value("nez", value)
 
     @property
@@ -329,6 +341,7 @@ class IncludeUnitcell(KeywordBase):
 
     @nnpe.setter
     def nnpe(self, value: int) -> None:
+        """Set the nnpe property."""
         self._cards[2].set_value("nnpe", value)
 
     @property
@@ -339,6 +352,7 @@ class IncludeUnitcell(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[2].set_value("tol", value)
 
     @property
@@ -349,6 +363,7 @@ class IncludeUnitcell(KeywordBase):
 
     @noff.setter
     def noff(self, value: int) -> None:
+        """Set the noff property."""
         self._cards[3].set_value("noff", value)
 
     @property
@@ -359,6 +374,7 @@ class IncludeUnitcell(KeywordBase):
 
     @eoff.setter
     def eoff(self, value: int) -> None:
+        """Set the eoff property."""
         self._cards[3].set_value("eoff", value)
 
     @property
@@ -369,6 +385,7 @@ class IncludeUnitcell(KeywordBase):
 
     @pnm.setter
     def pnm(self, value: int) -> None:
+        """Set the pnm property."""
         self._cards[3].set_value("pnm", value)
 
     @property
@@ -379,6 +396,7 @@ class IncludeUnitcell(KeywordBase):
 
     @cnx.setter
     def cnx(self, value: int) -> None:
+        """Set the cnx property."""
         self._cards[4].set_value("cnx", value)
 
     @property
@@ -389,6 +407,7 @@ class IncludeUnitcell(KeywordBase):
 
     @cny.setter
     def cny(self, value: int) -> None:
+        """Set the cny property."""
         self._cards[4].set_value("cny", value)
 
     @property
@@ -399,6 +418,7 @@ class IncludeUnitcell(KeywordBase):
 
     @cnz.setter
     def cnz(self, value: int) -> None:
+        """Set the cnz property."""
         self._cards[4].set_value("cnz", value)
 
     @property
@@ -409,6 +429,7 @@ class IncludeUnitcell(KeywordBase):
 
     @ecnx.setter
     def ecnx(self, value: int) -> None:
+        """Set the ecnx property."""
         self._cards[5].set_value("ecnx", value)
 
     @property
@@ -419,6 +440,7 @@ class IncludeUnitcell(KeywordBase):
 
     @ecny.setter
     def ecny(self, value: int) -> None:
+        """Set the ecny property."""
         self._cards[5].set_value("ecny", value)
 
     @property
@@ -429,5 +451,6 @@ class IncludeUnitcell(KeywordBase):
 
     @ecnz.setter
     def ecnz(self, value: int) -> None:
+        """Set the ecnz property."""
         self._cards[5].set_value("ecnz", value)
 

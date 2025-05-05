@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlDynamicRelaxation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlDynamicRelaxation(KeywordBase):
     subkeyword = "DYNAMIC_RELAXATION"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlDynamicRelaxation class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -162,6 +164,7 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @nrcyck.setter
     def nrcyck(self, value: int) -> None:
+        """Set the nrcyck property."""
         self._cards[0].set_value("nrcyck", value)
 
     @property
@@ -172,6 +175,7 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @drtol.setter
     def drtol(self, value: float) -> None:
+        """Set the drtol property."""
         self._cards[0].set_value("drtol", value)
 
     @property
@@ -182,6 +186,7 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @drfctr.setter
     def drfctr(self, value: float) -> None:
+        """Set the drfctr property."""
         self._cards[0].set_value("drfctr", value)
 
     @property
@@ -192,6 +197,7 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @drterm.setter
     def drterm(self, value: float) -> None:
+        """Set the drterm property."""
         self._cards[0].set_value("drterm", value)
 
     @property
@@ -203,6 +209,7 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @tssfdr.setter
     def tssfdr(self, value: float) -> None:
+        """Set the tssfdr property."""
         self._cards[0].set_value("tssfdr", value)
 
     @property
@@ -215,8 +222,9 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @irelal.setter
     def irelal(self, value: int) -> None:
+        """Set the irelal property."""
         if value not in [0, 1, None]:
-            raise Exception("""irelal must be `None` or one of {0,1}""")
+            raise Exception("""irelal must be `None` or one of {0,1}.""")
         self._cards[0].set_value("irelal", value)
 
     @property
@@ -227,6 +235,7 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @edttl.setter
     def edttl(self, value: float) -> None:
+        """Set the edttl property."""
         self._cards[0].set_value("edttl", value)
 
     @property
@@ -247,8 +256,9 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @idrflg.setter
     def idrflg(self, value: int) -> None:
+        """Set the idrflg property."""
         if value not in [0, -999, -3, -1, 1, 2, 3, 5, 6, None]:
-            raise Exception("""idrflg must be `None` or one of {0,-999,-3,-1,1,2,3,5,6}""")
+            raise Exception("""idrflg must be `None` or one of {0,-999,-3,-1,1,2,3,5,6}.""")
         self._cards[0].set_value("idrflg", value)
 
     @property
@@ -259,6 +269,7 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @drpset.setter
     def drpset(self, value: int) -> None:
+        """Set the drpset property."""
         self._cards[1].set_value("drpset", value)
 
     @property
@@ -269,6 +280,7 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @nc.setter
     def nc(self, value: int) -> None:
+        """Set the nc property."""
         self._cards[2].set_value("nc", value)
 
     @property
@@ -279,6 +291,7 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @np.setter
     def np(self, value: int) -> None:
+        """Set the np property."""
         self._cards[2].set_value("np", value)
 
     @property
@@ -289,6 +302,7 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[3].set_value("psid", value)
 
     @property
@@ -299,5 +313,6 @@ class ControlDynamicRelaxation(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[3].set_value("vecid", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementMassMatrixNodeSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
     subkeyword = "MASS_MATRIX_NODE_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementMassMatrixNodeSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -248,6 +250,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -258,6 +261,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -268,6 +272,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @cid.setter
     def cid(self, value: float) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -278,6 +283,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m11.setter
     def m11(self, value: float) -> None:
+        """Set the m11 property."""
         self._cards[1].set_value("m11", value)
 
     @property
@@ -288,6 +294,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m21.setter
     def m21(self, value: float) -> None:
+        """Set the m21 property."""
         self._cards[1].set_value("m21", value)
 
     @property
@@ -298,6 +305,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m22.setter
     def m22(self, value: float) -> None:
+        """Set the m22 property."""
         self._cards[1].set_value("m22", value)
 
     @property
@@ -308,6 +316,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m31.setter
     def m31(self, value: float) -> None:
+        """Set the m31 property."""
         self._cards[1].set_value("m31", value)
 
     @property
@@ -318,6 +327,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m32.setter
     def m32(self, value: float) -> None:
+        """Set the m32 property."""
         self._cards[1].set_value("m32", value)
 
     @property
@@ -328,6 +338,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m33.setter
     def m33(self, value: float) -> None:
+        """Set the m33 property."""
         self._cards[1].set_value("m33", value)
 
     @property
@@ -338,6 +349,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m41.setter
     def m41(self, value: float) -> None:
+        """Set the m41 property."""
         self._cards[1].set_value("m41", value)
 
     @property
@@ -348,6 +360,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m41.setter
     def m41(self, value: float) -> None:
+        """Set the m41 property."""
         self._cards[2].set_value("m41", value)
 
     @property
@@ -358,6 +371,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m43.setter
     def m43(self, value: float) -> None:
+        """Set the m43 property."""
         self._cards[2].set_value("m43", value)
 
     @property
@@ -368,6 +382,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m44.setter
     def m44(self, value: float) -> None:
+        """Set the m44 property."""
         self._cards[2].set_value("m44", value)
 
     @property
@@ -378,6 +393,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m51.setter
     def m51(self, value: float) -> None:
+        """Set the m51 property."""
         self._cards[2].set_value("m51", value)
 
     @property
@@ -388,6 +404,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m52.setter
     def m52(self, value: float) -> None:
+        """Set the m52 property."""
         self._cards[2].set_value("m52", value)
 
     @property
@@ -398,6 +415,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m53.setter
     def m53(self, value: float) -> None:
+        """Set the m53 property."""
         self._cards[2].set_value("m53", value)
 
     @property
@@ -408,6 +426,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m54.setter
     def m54(self, value: float) -> None:
+        """Set the m54 property."""
         self._cards[2].set_value("m54", value)
 
     @property
@@ -418,6 +437,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m55.setter
     def m55(self, value: float) -> None:
+        """Set the m55 property."""
         self._cards[3].set_value("m55", value)
 
     @property
@@ -428,6 +448,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m61.setter
     def m61(self, value: float) -> None:
+        """Set the m61 property."""
         self._cards[3].set_value("m61", value)
 
     @property
@@ -438,6 +459,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m62.setter
     def m62(self, value: float) -> None:
+        """Set the m62 property."""
         self._cards[3].set_value("m62", value)
 
     @property
@@ -448,6 +470,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m63.setter
     def m63(self, value: float) -> None:
+        """Set the m63 property."""
         self._cards[3].set_value("m63", value)
 
     @property
@@ -458,6 +481,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m64.setter
     def m64(self, value: float) -> None:
+        """Set the m64 property."""
         self._cards[3].set_value("m64", value)
 
     @property
@@ -468,6 +492,7 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m65.setter
     def m65(self, value: float) -> None:
+        """Set the m65 property."""
         self._cards[3].set_value("m65", value)
 
     @property
@@ -478,5 +503,6 @@ class ElementMassMatrixNodeSet(KeywordBase):
 
     @m66.setter
     def m66(self, value: float) -> None:
+        """Set the m66 property."""
         self._cards[3].set_value("m66", value)
 

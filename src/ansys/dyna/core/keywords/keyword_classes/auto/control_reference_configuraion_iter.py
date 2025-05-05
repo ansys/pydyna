@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlReferenceConfiguraionIter class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlReferenceConfiguraionIter(KeywordBase):
     subkeyword = "REFERENCE_CONFIGURAION_ITER"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlReferenceConfiguraionIter class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -99,6 +101,7 @@ class ControlReferenceConfiguraionIter(KeywordBase):
 
     @maxiter.setter
     def maxiter(self, value: int) -> None:
+        """Set the maxiter property."""
         self._cards[0].set_value("maxiter", value)
 
     @property
@@ -109,6 +112,7 @@ class ControlReferenceConfiguraionIter(KeywordBase):
 
     @target.setter
     def target(self, value: str) -> None:
+        """Set the target property."""
         self._cards[0].set_value("target", value)
 
     @property
@@ -122,6 +126,7 @@ class ControlReferenceConfiguraionIter(KeywordBase):
 
     @method.setter
     def method(self, value: int) -> None:
+        """Set the method property."""
         self._cards[1].set_value("method", value)
 
     @property
@@ -132,6 +137,7 @@ class ControlReferenceConfiguraionIter(KeywordBase):
 
     @step.setter
     def step(self, value: float) -> None:
+        """Set the step property."""
         self._cards[1].set_value("step", value)
 
     @property
@@ -142,6 +148,7 @@ class ControlReferenceConfiguraionIter(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[1].set_value("tol", value)
 
     @property
@@ -152,5 +159,6 @@ class ControlReferenceConfiguraionIter(KeywordBase):
 
     @iter.setter
     def iter(self, value: str) -> None:
+        """Set the iter property."""
         self._cards[2].set_value("iter", value)
 

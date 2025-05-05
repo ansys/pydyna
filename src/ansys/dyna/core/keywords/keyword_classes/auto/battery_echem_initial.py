@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BatteryEchemInitial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BatteryEchemInitial(KeywordBase):
     subkeyword = "ECHEM_INITIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the BatteryEchemInitial class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -107,6 +109,7 @@ class BatteryEchemInitial(KeywordBase):
 
     @echemid.setter
     def echemid(self, value: int) -> None:
+        """Set the echemid property."""
         self._cards[0].set_value("echemid", value)
 
     @property
@@ -117,6 +120,7 @@ class BatteryEchemInitial(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -127,6 +131,7 @@ class BatteryEchemInitial(KeywordBase):
 
     @lic.setter
     def lic(self, value: float) -> None:
+        """Set the lic property."""
         self._cards[1].set_value("lic", value)
 
     @property
@@ -137,6 +142,7 @@ class BatteryEchemInitial(KeywordBase):
 
     @lisic.setter
     def lisic(self, value: float) -> None:
+        """Set the lisic property."""
         self._cards[1].set_value("lisic", value)
 
     @property
@@ -147,6 +153,7 @@ class BatteryEchemInitial(KeywordBase):
 
     @phi2ic.setter
     def phi2ic(self, value: float) -> None:
+        """Set the phi2ic property."""
         self._cards[1].set_value("phi2ic", value)
 
     @property
@@ -157,6 +164,7 @@ class BatteryEchemInitial(KeywordBase):
 
     @phi1ic.setter
     def phi1ic(self, value: float) -> None:
+        """Set the phi1ic property."""
         self._cards[1].set_value("phi1ic", value)
 
     @property
@@ -167,6 +175,7 @@ class BatteryEchemInitial(KeywordBase):
 
     @curic.setter
     def curic(self, value: float) -> None:
+        """Set the curic property."""
         self._cards[1].set_value("curic", value)
 
     @property
@@ -177,5 +186,6 @@ class BatteryEchemInitial(KeywordBase):
 
     @fluxic.setter
     def fluxic(self, value: float) -> None:
+        """Set the fluxic property."""
         self._cards[1].set_value("fluxic", value)
 

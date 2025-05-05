@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat319 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat319(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat319 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -97,6 +99,7 @@ class Mat319(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -107,6 +110,7 @@ class Mat319(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -117,6 +121,7 @@ class Mat319(KeywordBase):
 
     @dynvis.setter
     def dynvis(self, value: float) -> None:
+        """Set the dynvis property."""
         self._cards[0].set_value("dynvis", value)
 
     @property
@@ -127,6 +132,7 @@ class Mat319(KeywordBase):
 
     @sften.setter
     def sften(self, value: float) -> None:
+        """Set the sften property."""
         self._cards[0].set_value("sften", value)
 
     @property
@@ -137,5 +143,6 @@ class Mat319(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

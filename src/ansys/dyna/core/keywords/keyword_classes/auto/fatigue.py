@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Fatigue class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Fatigue(KeywordBase):
     subkeyword = "FATIGUE"
 
     def __init__(self, **kwargs):
+        """Initialize the Fatigue class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -129,6 +131,7 @@ class Fatigue(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -145,8 +148,9 @@ class Fatigue(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
+        """Set the ptype property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""ptype must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""ptype must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -157,6 +161,7 @@ class Fatigue(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -169,8 +174,9 @@ class Fatigue(KeywordBase):
 
     @strsn.setter
     def strsn(self, value: int) -> None:
+        """Set the strsn property."""
         if value not in [0, 1, None]:
-            raise Exception("""strsn must be `None` or one of {0,1}""")
+            raise Exception("""strsn must be `None` or one of {0,1}.""")
         self._cards[2].set_value("strsn", value)
 
     @property
@@ -184,8 +190,9 @@ class Fatigue(KeywordBase):
 
     @index.setter
     def index(self, value: int) -> None:
+        """Set the index property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""index must be `None` or one of {0,1,2}""")
+            raise Exception("""index must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("index", value)
 
     @property
@@ -200,8 +207,9 @@ class Fatigue(KeywordBase):
 
     @restrt.setter
     def restrt(self, value: int) -> None:
+        """Set the restrt property."""
         if value not in [0, 1, None]:
-            raise Exception("""restrt must be `None` or one of {0,1}""")
+            raise Exception("""restrt must be `None` or one of {0,1}.""")
         self._cards[2].set_value("restrt", value)
 
     @property
@@ -212,6 +220,7 @@ class Fatigue(KeywordBase):
 
     @texpos.setter
     def texpos(self, value: float) -> None:
+        """Set the texpos property."""
         self._cards[2].set_value("texpos", value)
 
     @property
@@ -225,6 +234,7 @@ class Fatigue(KeywordBase):
 
     @dmgmin.setter
     def dmgmin(self, value: float) -> None:
+        """Set the dmgmin property."""
         self._cards[2].set_value("dmgmin", value)
 
     @property
@@ -235,5 +245,6 @@ class Fatigue(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[3].set_value("filename", value)
 

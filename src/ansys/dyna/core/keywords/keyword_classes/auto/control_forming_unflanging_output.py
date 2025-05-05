@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingUnflangingOutput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingUnflangingOutput(KeywordBase):
     subkeyword = "FORMING_UNFLANGING_OUTPUT"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingUnflangingOutput class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -72,6 +74,7 @@ class ControlFormingUnflangingOutput(KeywordBase):
 
     @thmx.setter
     def thmx(self, value: float) -> None:
+        """Set the thmx property."""
         self._cards[0].set_value("thmx", value)
 
     @property
@@ -83,6 +86,7 @@ class ControlFormingUnflangingOutput(KeywordBase):
 
     @thmn.setter
     def thmn(self, value: float) -> None:
+        """Set the thmn property."""
         self._cards[0].set_value("thmn", value)
 
     @property
@@ -94,5 +98,6 @@ class ControlFormingUnflangingOutput(KeywordBase):
 
     @epsmx.setter
     def epsmx(self, value: float) -> None:
+        """Set the epsmx property."""
         self._cards[0].set_value("epsmx", value)
 

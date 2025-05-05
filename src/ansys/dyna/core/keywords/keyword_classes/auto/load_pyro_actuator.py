@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadPyroActuator class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadPyroActuator(KeywordBase):
     subkeyword = "PYRO_ACTUATOR"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadPyroActuator class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -135,6 +137,7 @@ class LoadPyroActuator(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -146,6 +149,7 @@ class LoadPyroActuator(KeywordBase):
 
     @id1.setter
     def id1(self, value: int) -> None:
+        """Set the id1 property."""
         self._cards[0].set_value("id1", value)
 
     @property
@@ -157,6 +161,7 @@ class LoadPyroActuator(KeywordBase):
 
     @id2.setter
     def id2(self, value: int) -> None:
+        """Set the id2 property."""
         self._cards[0].set_value("id2", value)
 
     @property
@@ -167,6 +172,7 @@ class LoadPyroActuator(KeywordBase):
 
     @csa.setter
     def csa(self, value: float) -> None:
+        """Set the csa property."""
         self._cards[0].set_value("csa", value)
 
     @property
@@ -178,6 +184,7 @@ class LoadPyroActuator(KeywordBase):
 
     @vol.setter
     def vol(self, value: float) -> None:
+        """Set the vol property."""
         self._cards[0].set_value("vol", value)
 
     @property
@@ -188,6 +195,7 @@ class LoadPyroActuator(KeywordBase):
 
     @prs.setter
     def prs(self, value: float) -> None:
+        """Set the prs property."""
         self._cards[0].set_value("prs", value)
 
     @property
@@ -198,6 +206,7 @@ class LoadPyroActuator(KeywordBase):
 
     @dens.setter
     def dens(self, value: float) -> None:
+        """Set the dens property."""
         self._cards[0].set_value("dens", value)
 
     @property
@@ -208,6 +217,7 @@ class LoadPyroActuator(KeywordBase):
 
     @atime.setter
     def atime(self, value: float) -> None:
+        """Set the atime property."""
         self._cards[0].set_value("atime", value)
 
     @property
@@ -218,6 +228,7 @@ class LoadPyroActuator(KeywordBase):
 
     @mcid.setter
     def mcid(self, value: int) -> None:
+        """Set the mcid property."""
         self._cards[1].set_value("mcid", value)
 
     @property
@@ -228,6 +239,7 @@ class LoadPyroActuator(KeywordBase):
 
     @cv.setter
     def cv(self, value: float) -> None:
+        """Set the cv property."""
         self._cards[1].set_value("cv", value)
 
     @property
@@ -238,6 +250,7 @@ class LoadPyroActuator(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[1].set_value("cp", value)
 
     @property
@@ -248,5 +261,6 @@ class LoadPyroActuator(KeywordBase):
 
     @temp.setter
     def temp(self, value: float) -> None:
+        """Set the temp property."""
         self._cards[1].set_value("temp", value)
 

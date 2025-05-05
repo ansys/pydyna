@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseBoundaryCyclicMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseBoundaryCyclicMsurf(KeywordBase):
     subkeyword = "BOUNDARY_CYCLIC_MSURF"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseBoundaryCyclicMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class DualceseBoundaryCyclicMsurf(KeywordBase):
 
     @mspid1.setter
     def mspid1(self, value: int) -> None:
+        """Set the mspid1 property."""
         self._cards[0].set_value("mspid1", value)
 
     @property
@@ -79,6 +82,7 @@ class DualceseBoundaryCyclicMsurf(KeywordBase):
 
     @mspid2.setter
     def mspid2(self, value: int) -> None:
+        """Set the mspid2 property."""
         self._cards[0].set_value("mspid2", value)
 
     @property
@@ -92,7 +96,8 @@ class DualceseBoundaryCyclicMsurf(KeywordBase):
 
     @cyctyp.setter
     def cyctyp(self, value: int) -> None:
+        """Set the cyctyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""cyctyp must be `None` or one of {0,1,2}""")
+            raise Exception("""cyctyp must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("cyctyp", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineHazProperties class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineHazProperties(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineHazProperties class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -169,6 +171,7 @@ class DefineHazProperties(KeywordBase):
 
     @id_haz.setter
     def id_haz(self, value: int) -> None:
+        """Set the id_haz property."""
         self._cards[0].set_value("id_haz", value)
 
     @property
@@ -179,8 +182,9 @@ class DefineHazProperties(KeywordBase):
 
     @iop.setter
     def iop(self, value: int) -> None:
+        """Set the iop property."""
         if value not in [0, 1, None]:
-            raise Exception("""iop must be `None` or one of {0,1}""")
+            raise Exception("""iop must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iop", value)
 
     @property
@@ -191,6 +195,7 @@ class DefineHazProperties(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -201,8 +206,9 @@ class DefineHazProperties(KeywordBase):
 
     @pid_typ.setter
     def pid_typ(self, value: int) -> None:
+        """Set the pid_typ property."""
         if value not in [0, 1, None]:
-            raise Exception("""pid_typ must be `None` or one of {0,1}""")
+            raise Exception("""pid_typ must be `None` or one of {0,1}.""")
         self._cards[0].set_value("pid_typ", value)
 
     @property
@@ -213,6 +219,7 @@ class DefineHazProperties(KeywordBase):
 
     @iss.setter
     def iss(self, value: int) -> None:
+        """Set the iss property."""
         self._cards[1].set_value("iss", value)
 
     @property
@@ -223,6 +230,7 @@ class DefineHazProperties(KeywordBase):
 
     @ifs.setter
     def ifs(self, value: int) -> None:
+        """Set the ifs property."""
         self._cards[1].set_value("ifs", value)
 
     @property
@@ -233,6 +241,7 @@ class DefineHazProperties(KeywordBase):
 
     @isb.setter
     def isb(self, value: int) -> None:
+        """Set the isb property."""
         self._cards[1].set_value("isb", value)
 
     @property
@@ -243,6 +252,7 @@ class DefineHazProperties(KeywordBase):
 
     @ifb.setter
     def ifb(self, value: int) -> None:
+        """Set the ifb property."""
         self._cards[1].set_value("ifb", value)
 
     @property
@@ -253,6 +263,7 @@ class DefineHazProperties(KeywordBase):
 
     @isc.setter
     def isc(self, value: int) -> None:
+        """Set the isc property."""
         self._cards[1].set_value("isc", value)
 
     @property
@@ -263,6 +274,7 @@ class DefineHazProperties(KeywordBase):
 
     @ifc.setter
     def ifc(self, value: int) -> None:
+        """Set the ifc property."""
         self._cards[1].set_value("ifc", value)
 
     @property
@@ -273,6 +285,7 @@ class DefineHazProperties(KeywordBase):
 
     @isw.setter
     def isw(self, value: int) -> None:
+        """Set the isw property."""
         self._cards[1].set_value("isw", value)
 
     @property
@@ -283,6 +296,7 @@ class DefineHazProperties(KeywordBase):
 
     @ifw.setter
     def ifw(self, value: int) -> None:
+        """Set the ifw property."""
         self._cards[1].set_value("ifw", value)
 
     @property
@@ -293,5 +307,6 @@ class DefineHazProperties(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

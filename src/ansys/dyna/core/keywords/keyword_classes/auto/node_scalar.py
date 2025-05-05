@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the NodeScalar class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class NodeScalar(KeywordBase):
     subkeyword = "SCALAR"
 
     def __init__(self, **kwargs):
+        """Initialize the NodeScalar class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -62,6 +64,7 @@ class NodeScalar(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -76,7 +79,8 @@ class NodeScalar(KeywordBase):
 
     @ndof.setter
     def ndof(self, value: int) -> None:
+        """Set the ndof property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""ndof must be `None` or one of {0,1,2,3}""")
+            raise Exception("""ndof must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("ndof", value)
 

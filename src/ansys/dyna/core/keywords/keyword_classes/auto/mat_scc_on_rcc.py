@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSccOnRcc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSccOnRcc(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSccOnRcc class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -165,6 +167,7 @@ class MatSccOnRcc(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -175,6 +178,7 @@ class MatSccOnRcc(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -185,6 +189,7 @@ class MatSccOnRcc(KeywordBase):
 
     @e0.setter
     def e0(self, value: float) -> None:
+        """Set the e0 property."""
         self._cards[0].set_value("e0", value)
 
     @property
@@ -195,6 +200,7 @@ class MatSccOnRcc(KeywordBase):
 
     @e1.setter
     def e1(self, value: float) -> None:
+        """Set the e1 property."""
         self._cards[0].set_value("e1", value)
 
     @property
@@ -205,6 +211,7 @@ class MatSccOnRcc(KeywordBase):
 
     @e2.setter
     def e2(self, value: float) -> None:
+        """Set the e2 property."""
         self._cards[0].set_value("e2", value)
 
     @property
@@ -215,6 +222,7 @@ class MatSccOnRcc(KeywordBase):
 
     @e3.setter
     def e3(self, value: float) -> None:
+        """Set the e3 property."""
         self._cards[0].set_value("e3", value)
 
     @property
@@ -225,6 +233,7 @@ class MatSccOnRcc(KeywordBase):
 
     @e4.setter
     def e4(self, value: float) -> None:
+        """Set the e4 property."""
         self._cards[0].set_value("e4", value)
 
     @property
@@ -235,6 +244,7 @@ class MatSccOnRcc(KeywordBase):
 
     @e5.setter
     def e5(self, value: float) -> None:
+        """Set the e5 property."""
         self._cards[0].set_value("e5", value)
 
     @property
@@ -245,6 +255,7 @@ class MatSccOnRcc(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[1].set_value("pr", value)
 
     @property
@@ -255,6 +266,7 @@ class MatSccOnRcc(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[1].set_value("g", value)
 
     @property
@@ -265,6 +277,7 @@ class MatSccOnRcc(KeywordBase):
 
     @g_scl.setter
     def g_scl(self, value: float) -> None:
+        """Set the g_scl property."""
         self._cards[1].set_value("g_scl", value)
 
     @property
@@ -275,6 +288,7 @@ class MatSccOnRcc(KeywordBase):
 
     @tsl.setter
     def tsl(self, value: float) -> None:
+        """Set the tsl property."""
         self._cards[1].set_value("tsl", value)
 
     @property
@@ -285,6 +299,7 @@ class MatSccOnRcc(KeywordBase):
 
     @eps_tan.setter
     def eps_tan(self, value: float) -> None:
+        """Set the eps_tan property."""
         self._cards[1].set_value("eps_tan", value)
 
     @property
@@ -295,5 +310,6 @@ class MatSccOnRcc(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

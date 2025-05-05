@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlMppIoNod3Dump class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppIoNod3Dump(KeywordBase):
     subkeyword = "MPP_IO_NOD3DUMP"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlMppIoNod3Dump class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(

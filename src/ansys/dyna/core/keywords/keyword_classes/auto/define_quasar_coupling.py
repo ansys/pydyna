@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineQuasarCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineQuasarCoupling(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineQuasarCoupling class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -221,6 +223,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @node.setter
     def node(self, value: int) -> None:
+        """Set the node property."""
         self._cards[0].set_value("node", value)
 
     @property
@@ -233,8 +236,9 @@ class DefineQuasarCoupling(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, None]:
-            raise Exception("""type must be `None` or one of {0,1}""")
+            raise Exception("""type must be `None` or one of {0,1}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -245,6 +249,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @romid.setter
     def romid(self, value: int) -> None:
+        """Set the romid property."""
         self._cards[0].set_value("romid", value)
 
     @property
@@ -255,6 +260,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -267,8 +273,9 @@ class DefineQuasarCoupling(KeywordBase):
 
     @ptype.setter
     def ptype(self, value: int) -> None:
+        """Set the ptype property."""
         if value not in [0, 1, None]:
-            raise Exception("""ptype must be `None` or one of {0,1}""")
+            raise Exception("""ptype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ptype", value)
 
     @property
@@ -283,8 +290,9 @@ class DefineQuasarCoupling(KeywordBase):
 
     @iopt.setter
     def iopt(self, value: int) -> None:
+        """Set the iopt property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""iopt must be `None` or one of {0,1,2,3}""")
+            raise Exception("""iopt must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("iopt", value)
 
     @property
@@ -295,6 +303,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -305,6 +314,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @ex_id.setter
     def ex_id(self, value: int) -> None:
+        """Set the ex_id property."""
         self._cards[0].set_value("ex_id", value)
 
     @property
@@ -315,6 +325,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @frcfrq.setter
     def frcfrq(self, value: int) -> None:
+        """Set the frcfrq property."""
         self._cards[1].set_value("frcfrq", value)
 
     @property
@@ -325,6 +336,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @encname1.setter
     def encname1(self, value: str) -> None:
+        """Set the encname1 property."""
         self._cards[2].set_value("encname1", value)
 
     @property
@@ -335,6 +347,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @encname2.setter
     def encname2(self, value: str) -> None:
+        """Set the encname2 property."""
         self._cards[3].set_value("encname2", value)
 
     @property
@@ -345,6 +358,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @var1.setter
     def var1(self, value: float) -> None:
+        """Set the var1 property."""
         self._cards[4].set_value("var1", value)
 
     @property
@@ -355,6 +369,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @var2.setter
     def var2(self, value: float) -> None:
+        """Set the var2 property."""
         self._cards[4].set_value("var2", value)
 
     @property
@@ -365,6 +380,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @var3.setter
     def var3(self, value: float) -> None:
+        """Set the var3 property."""
         self._cards[4].set_value("var3", value)
 
     @property
@@ -375,6 +391,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @var4.setter
     def var4(self, value: float) -> None:
+        """Set the var4 property."""
         self._cards[4].set_value("var4", value)
 
     @property
@@ -385,6 +402,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @var5.setter
     def var5(self, value: float) -> None:
+        """Set the var5 property."""
         self._cards[4].set_value("var5", value)
 
     @property
@@ -395,6 +413,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @var6.setter
     def var6(self, value: float) -> None:
+        """Set the var6 property."""
         self._cards[4].set_value("var6", value)
 
     @property
@@ -405,6 +424,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @var7.setter
     def var7(self, value: float) -> None:
+        """Set the var7 property."""
         self._cards[4].set_value("var7", value)
 
     @property
@@ -415,6 +435,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @var8.setter
     def var8(self, value: float) -> None:
+        """Set the var8 property."""
         self._cards[4].set_value("var8", value)
 
     @property
@@ -425,5 +446,6 @@ class DefineQuasarCoupling(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

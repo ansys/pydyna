@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdDatabaseResiduals class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdDatabaseResiduals(KeywordBase):
     subkeyword = "DATABASE_RESIDUALS"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdDatabaseResiduals class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -59,7 +61,8 @@ class IcfdDatabaseResiduals(KeywordBase):
 
     @rlvl.setter
     def rlvl(self, value: int) -> None:
+        """Set the rlvl property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""rlvl must be `None` or one of {0,1,2,3}""")
+            raise Exception("""rlvl must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("rlvl", value)
 

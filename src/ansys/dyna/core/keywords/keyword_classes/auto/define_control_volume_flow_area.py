@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineControlVolumeFlowArea class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineControlVolumeFlowArea(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineControlVolumeFlowArea class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -113,6 +115,7 @@ class DefineControlVolumeFlowArea(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -123,6 +126,7 @@ class DefineControlVolumeFlowArea(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -135,8 +139,9 @@ class DefineControlVolumeFlowArea(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [1, 2, None]:
-            raise Exception("""stype must be `None` or one of {1,2}""")
+            raise Exception("""stype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -147,6 +152,7 @@ class DefineControlVolumeFlowArea(KeywordBase):
 
     @pid_.setter
     def pid_(self, value: int) -> None:
+        """Set the pid_ property."""
         self._cards[0].set_value("pid ", value)
 
     @property
@@ -157,6 +163,7 @@ class DefineControlVolumeFlowArea(KeywordBase):
 
     @area_.setter
     def area_(self, value: float) -> None:
+        """Set the area_ property."""
         self._cards[0].set_value("area ", value)
 
     @property
@@ -167,6 +174,7 @@ class DefineControlVolumeFlowArea(KeywordBase):
 
     @cviid_.setter
     def cviid_(self, value: float) -> None:
+        """Set the cviid_ property."""
         self._cards[0].set_value("cviid ", value)
 
     @property
@@ -177,5 +185,6 @@ class DefineControlVolumeFlowArea(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

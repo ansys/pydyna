@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmContact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmContact(KeywordBase):
     subkeyword = "CONTACT"
 
     def __init__(self, **kwargs):
+        """Initialize the EmContact class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -107,6 +109,7 @@ class EmContact(KeywordBase):
 
     @contid.setter
     def contid(self, value: int) -> None:
+        """Set the contid property."""
         self._cards[0].set_value("contid", value)
 
     @property
@@ -118,6 +121,7 @@ class EmContact(KeywordBase):
 
     @conttype.setter
     def conttype(self, value: int) -> None:
+        """Set the conttype property."""
         self._cards[0].set_value("conttype", value)
 
     @property
@@ -128,6 +132,7 @@ class EmContact(KeywordBase):
 
     @psidm.setter
     def psidm(self, value: int) -> None:
+        """Set the psidm property."""
         self._cards[0].set_value("psidm", value)
 
     @property
@@ -138,6 +143,7 @@ class EmContact(KeywordBase):
 
     @psids.setter
     def psids(self, value: int) -> None:
+        """Set the psids property."""
         self._cards[0].set_value("psids", value)
 
     @property
@@ -148,6 +154,7 @@ class EmContact(KeywordBase):
 
     @eps1.setter
     def eps1(self, value: float) -> None:
+        """Set the eps1 property."""
         self._cards[0].set_value("eps1", value)
 
     @property
@@ -158,6 +165,7 @@ class EmContact(KeywordBase):
 
     @eps2.setter
     def eps2(self, value: float) -> None:
+        """Set the eps2 property."""
         self._cards[0].set_value("eps2", value)
 
     @property
@@ -168,6 +176,7 @@ class EmContact(KeywordBase):
 
     @eps3.setter
     def eps3(self, value: float) -> None:
+        """Set the eps3 property."""
         self._cards[0].set_value("eps3", value)
 
     @property
@@ -178,5 +187,6 @@ class EmContact(KeywordBase):
 
     @d0.setter
     def d0(self, value: float) -> None:
+        """Set the d0 property."""
         self._cards[0].set_value("d0", value)
 

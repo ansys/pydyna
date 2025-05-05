@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingOnestep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingOnestep(KeywordBase):
     subkeyword = "FORMING_ONESTEP"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingOnestep class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -119,6 +121,7 @@ class ControlFormingOnestep(KeywordBase):
 
     @option.setter
     def option(self, value: int) -> None:
+        """Set the option property."""
         self._cards[0].set_value("option", value)
 
     @property
@@ -130,6 +133,7 @@ class ControlFormingOnestep(KeywordBase):
 
     @tsclmax.setter
     def tsclmax(self, value: float) -> None:
+        """Set the tsclmax property."""
         self._cards[0].set_value("tsclmax", value)
 
     @property
@@ -143,6 +147,7 @@ class ControlFormingOnestep(KeywordBase):
 
     @autobd.setter
     def autobd(self, value: float) -> None:
+        """Set the autobd property."""
         self._cards[0].set_value("autobd", value)
 
     @property
@@ -154,6 +159,7 @@ class ControlFormingOnestep(KeywordBase):
 
     @tsclmin.setter
     def tsclmin(self, value: float) -> None:
+        """Set the tsclmin property."""
         self._cards[0].set_value("tsclmin", value)
 
     @property
@@ -164,6 +170,7 @@ class ControlFormingOnestep(KeywordBase):
 
     @epsmax.setter
     def epsmax(self, value: float) -> None:
+        """Set the epsmax property."""
         self._cards[0].set_value("epsmax", value)
 
     @property
@@ -174,6 +181,7 @@ class ControlFormingOnestep(KeywordBase):
 
     @lcsdg.setter
     def lcsdg(self, value: int) -> None:
+        """Set the lcsdg property."""
         self._cards[0].set_value("lcsdg", value)
 
     @property
@@ -184,6 +192,7 @@ class ControlFormingOnestep(KeywordBase):
 
     @dmgexp.setter
     def dmgexp(self, value: float) -> None:
+        """Set the dmgexp property."""
         self._cards[0].set_value("dmgexp", value)
 
     @property
@@ -194,5 +203,6 @@ class ControlFormingOnestep(KeywordBase):
 
     @flatname.setter
     def flatname(self, value: str) -> None:
+        """Set the flatname property."""
         self._cards[1].set_value("flatname", value)
 

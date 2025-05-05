@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat163 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat163(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat163 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -143,6 +145,7 @@ class Mat163(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -153,6 +156,7 @@ class Mat163(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -163,6 +167,7 @@ class Mat163(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -173,6 +178,7 @@ class Mat163(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -183,6 +189,7 @@ class Mat163(KeywordBase):
 
     @tid.setter
     def tid(self, value: int) -> None:
+        """Set the tid property."""
         self._cards[0].set_value("tid", value)
 
     @property
@@ -193,6 +200,7 @@ class Mat163(KeywordBase):
 
     @tsc.setter
     def tsc(self, value: float) -> None:
+        """Set the tsc property."""
         self._cards[0].set_value("tsc", value)
 
     @property
@@ -203,6 +211,7 @@ class Mat163(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[0].set_value("damp", value)
 
     @property
@@ -213,6 +222,7 @@ class Mat163(KeywordBase):
 
     @ncycle.setter
     def ncycle(self, value: float) -> None:
+        """Set the ncycle property."""
         self._cards[0].set_value("ncycle", value)
 
     @property
@@ -223,6 +233,7 @@ class Mat163(KeywordBase):
 
     @srclmt.setter
     def srclmt(self, value: float) -> None:
+        """Set the srclmt property."""
         self._cards[1].set_value("srclmt", value)
 
     @property
@@ -233,6 +244,7 @@ class Mat163(KeywordBase):
 
     @srflag.setter
     def srflag(self, value: int) -> None:
+        """Set the srflag property."""
         self._cards[1].set_value("srflag", value)
 
     @property
@@ -243,5 +255,6 @@ class Mat163(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

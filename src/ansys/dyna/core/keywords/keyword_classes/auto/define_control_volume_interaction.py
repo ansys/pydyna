@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineControlVolumeInteraction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineControlVolumeInteraction(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineControlVolumeInteraction class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -104,6 +106,7 @@ class DefineControlVolumeInteraction(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -114,6 +117,7 @@ class DefineControlVolumeInteraction(KeywordBase):
 
     @cvid1.setter
     def cvid1(self, value: int) -> None:
+        """Set the cvid1 property."""
         self._cards[0].set_value("cvid1", value)
 
     @property
@@ -124,6 +128,7 @@ class DefineControlVolumeInteraction(KeywordBase):
 
     @cvid2.setter
     def cvid2(self, value: int) -> None:
+        """Set the cvid2 property."""
         self._cards[0].set_value("cvid2", value)
 
     @property
@@ -136,6 +141,7 @@ class DefineControlVolumeInteraction(KeywordBase):
 
     @lcid_.setter
     def lcid_(self, value: int) -> None:
+        """Set the lcid_ property."""
         self._cards[0].set_value("lcid ", value)
 
     @property
@@ -146,6 +152,7 @@ class DefineControlVolumeInteraction(KeywordBase):
 
     @area_.setter
     def area_(self, value: float) -> None:
+        """Set the area_ property."""
         self._cards[0].set_value("area ", value)
 
     @property
@@ -156,5 +163,6 @@ class DefineControlVolumeInteraction(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleMultiMaterialGroup class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleMultiMaterialGroup(KeywordBase):
     subkeyword = "MULTI-MATERIAL_GROUP"
 
     def __init__(self, **kwargs):
+        """Initialize the AleMultiMaterialGroup class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -62,6 +64,7 @@ class AleMultiMaterialGroup(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -74,7 +77,8 @@ class AleMultiMaterialGroup(KeywordBase):
 
     @idtype.setter
     def idtype(self, value: int) -> None:
+        """Set the idtype property."""
         if value not in [0, 1, None]:
-            raise Exception("""idtype must be `None` or one of {0,1}""")
+            raise Exception("""idtype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("idtype", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedLocal(KeywordBase):
     subkeyword = "LOCAL"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedLocal class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -126,6 +128,7 @@ class ConstrainedLocal(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -136,6 +139,7 @@ class ConstrainedLocal(KeywordBase):
 
     @heading.setter
     def heading(self, value: int) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -153,8 +157,9 @@ class ConstrainedLocal(KeywordBase):
 
     @tc.setter
     def tc(self, value: int) -> None:
+        """Set the tc property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""tc must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""tc must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("tc", value)
 
     @property
@@ -172,8 +177,9 @@ class ConstrainedLocal(KeywordBase):
 
     @rc.setter
     def rc(self, value: int) -> None:
+        """Set the rc property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rc must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""rc must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("rc", value)
 
     @property
@@ -187,8 +193,9 @@ class ConstrainedLocal(KeywordBase):
 
     @dir.setter
     def dir(self, value: int) -> None:
+        """Set the dir property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""dir must be `None` or one of {1,2,3}""")
+            raise Exception("""dir must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("dir", value)
 
     @property
@@ -199,6 +206,7 @@ class ConstrainedLocal(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -209,6 +217,7 @@ class ConstrainedLocal(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -219,6 +228,7 @@ class ConstrainedLocal(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 
     @property
@@ -229,6 +239,7 @@ class ConstrainedLocal(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -239,5 +250,6 @@ class ConstrainedLocal(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[1].set_value("tol", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseBinaryDemfor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseBinaryDemfor(KeywordBase):
     subkeyword = "BINARY_DEMFOR"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseBinaryDemfor class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -83,6 +85,7 @@ class DatabaseBinaryDemfor(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -93,6 +96,7 @@ class DatabaseBinaryDemfor(KeywordBase):
 
     @lcdt.setter
     def lcdt(self, value: int) -> None:
+        """Set the lcdt property."""
         self._cards[0].set_value("lcdt", value)
 
     @property
@@ -109,6 +113,7 @@ class DatabaseBinaryDemfor(KeywordBase):
 
     @beam.setter
     def beam(self, value: int) -> None:
+        """Set the beam property."""
         self._cards[0].set_value("beam", value)
 
     @property
@@ -119,6 +124,7 @@ class DatabaseBinaryDemfor(KeywordBase):
 
     @npltc.setter
     def npltc(self, value: int) -> None:
+        """Set the npltc property."""
         self._cards[0].set_value("npltc", value)
 
     @property
@@ -129,5 +135,6 @@ class DatabaseBinaryDemfor(KeywordBase):
 
     @psetid.setter
     def psetid(self, value: int) -> None:
+        """Set the psetid property."""
         self._cards[0].set_value("psetid", value)
 

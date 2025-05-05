@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeInjectionEllipse class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeInjectionEllipse(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeInjectionEllipse class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -311,6 +313,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -321,6 +324,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -331,6 +335,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -341,6 +346,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -351,6 +357,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 
     @property
@@ -361,6 +368,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @xl.setter
     def xl(self, value: float) -> None:
+        """Set the xl property."""
         self._cards[0].set_value("xl", value)
 
     @property
@@ -371,6 +379,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @yl.setter
     def yl(self, value: float) -> None:
+        """Set the yl property."""
         self._cards[0].set_value("yl", value)
 
     @property
@@ -381,6 +390,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -391,6 +401,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @rmass.setter
     def rmass(self, value: float) -> None:
+        """Set the rmass property."""
         self._cards[1].set_value("rmass", value)
 
     @property
@@ -401,6 +412,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @rmin.setter
     def rmin(self, value: float) -> None:
+        """Set the rmin property."""
         self._cards[1].set_value("rmin", value)
 
     @property
@@ -411,6 +423,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @rmax.setter
     def rmax(self, value: float) -> None:
+        """Set the rmax property."""
         self._cards[1].set_value("rmax", value)
 
     @property
@@ -421,6 +434,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[1].set_value("vx", value)
 
     @property
@@ -431,6 +445,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[1].set_value("vy", value)
 
     @property
@@ -441,6 +456,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[1].set_value("vz", value)
 
     @property
@@ -451,6 +467,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @tbeg.setter
     def tbeg(self, value: float) -> None:
+        """Set the tbeg property."""
         self._cards[1].set_value("tbeg", value)
 
     @property
@@ -461,6 +478,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[1].set_value("tend", value)
 
     @property
@@ -473,8 +491,9 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @ifunc.setter
     def ifunc(self, value: int) -> None:
+        """Set the ifunc property."""
         if value not in [0, 1, None]:
-            raise Exception("""ifunc must be `None` or one of {0,1}""")
+            raise Exception("""ifunc must be `None` or one of {0,1}.""")
         self._cards[2].set_value("ifunc", value)
 
     @property
@@ -485,6 +504,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[2].set_value("nid", value)
 
     @property
@@ -497,6 +517,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @imulti.setter
     def imulti(self, value: int) -> None:
+        """Set the imulti property."""
         self._cards[2].set_value("imulti", value)
 
     @property
@@ -507,6 +528,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @lcvx.setter
     def lcvx(self, value: int) -> None:
+        """Set the lcvx property."""
         self._cards[2].set_value("lcvx", value)
 
     @property
@@ -517,6 +539,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @lcvy.setter
     def lcvy(self, value: int) -> None:
+        """Set the lcvy property."""
         self._cards[2].set_value("lcvy", value)
 
     @property
@@ -527,6 +550,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @lcvz.setter
     def lcvz(self, value: int) -> None:
+        """Set the lcvz property."""
         self._cards[2].set_value("lcvz", value)
 
     @property
@@ -537,6 +561,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[3].set_value("r1", value)
 
     @property
@@ -547,6 +572,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[3].set_value("p1", value)
 
     @property
@@ -557,6 +583,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[3].set_value("r2", value)
 
     @property
@@ -567,6 +594,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[3].set_value("p2", value)
 
     @property
@@ -577,6 +605,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @r3.setter
     def r3(self, value: float) -> None:
+        """Set the r3 property."""
         self._cards[3].set_value("r3", value)
 
     @property
@@ -587,6 +616,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[3].set_value("p3", value)
 
     @property
@@ -597,6 +627,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @r4.setter
     def r4(self, value: float) -> None:
+        """Set the r4 property."""
         self._cards[3].set_value("r4", value)
 
     @property
@@ -607,6 +638,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[3].set_value("p4", value)
 
     @property
@@ -617,5 +649,6 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

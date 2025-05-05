@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadNodePoint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -32,6 +33,7 @@ class LoadNodePoint(KeywordBase):
     subkeyword = "NODE_POINT"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadNodePoint class."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(
@@ -53,11 +55,11 @@ class LoadNodePoint(KeywordBase):
 
     @property
     def nodes(self):
-        '''Gets the table of nodes'''
+        """Get the table of nodes."""
         return self._cards[0].table
 
     @nodes.setter
     def nodes(self, df):
-        '''sets nodes from the dataframe df'''
+        """Set nodes from the dataframe df"""
         self._cards[0].table = df
 

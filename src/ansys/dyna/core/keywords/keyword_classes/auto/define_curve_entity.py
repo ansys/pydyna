@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCurveEntity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveEntity(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCurveEntity class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -160,6 +162,7 @@ class DefineCurveEntity(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -170,6 +173,7 @@ class DefineCurveEntity(KeywordBase):
 
     @sfa.setter
     def sfa(self, value: float) -> None:
+        """Set the sfa property."""
         self._cards[0].set_value("sfa", value)
 
     @property
@@ -180,6 +184,7 @@ class DefineCurveEntity(KeywordBase):
 
     @sfo.setter
     def sfo(self, value: float) -> None:
+        """Set the sfo property."""
         self._cards[0].set_value("sfo", value)
 
     @property
@@ -190,6 +195,7 @@ class DefineCurveEntity(KeywordBase):
 
     @sfr.setter
     def sfr(self, value: float) -> None:
+        """Set the sfr property."""
         self._cards[0].set_value("sfr", value)
 
     @property
@@ -200,6 +206,7 @@ class DefineCurveEntity(KeywordBase):
 
     @offa.setter
     def offa(self, value: float) -> None:
+        """Set the offa property."""
         self._cards[0].set_value("offa", value)
 
     @property
@@ -210,6 +217,7 @@ class DefineCurveEntity(KeywordBase):
 
     @offo.setter
     def offo(self, value: float) -> None:
+        """Set the offo property."""
         self._cards[0].set_value("offo", value)
 
     @property
@@ -220,6 +228,7 @@ class DefineCurveEntity(KeywordBase):
 
     @offr.setter
     def offr(self, value: float) -> None:
+        """Set the offr property."""
         self._cards[0].set_value("offr", value)
 
     @property
@@ -230,6 +239,7 @@ class DefineCurveEntity(KeywordBase):
 
     @ai.setter
     def ai(self, value: float) -> None:
+        """Set the ai property."""
         self._cards[1].set_value("ai", value)
 
     @property
@@ -240,6 +250,7 @@ class DefineCurveEntity(KeywordBase):
 
     @oi.setter
     def oi(self, value: float) -> None:
+        """Set the oi property."""
         self._cards[1].set_value("oi", value)
 
     @property
@@ -250,6 +261,7 @@ class DefineCurveEntity(KeywordBase):
 
     @ri.setter
     def ri(self, value: float) -> None:
+        """Set the ri property."""
         self._cards[1].set_value("ri", value)
 
     @property
@@ -260,6 +272,7 @@ class DefineCurveEntity(KeywordBase):
 
     @iflag.setter
     def iflag(self, value: int) -> None:
+        """Set the iflag property."""
         self._cards[1].set_value("iflag", value)
 
     @property
@@ -270,5 +283,6 @@ class DefineCurveEntity(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

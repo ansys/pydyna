@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCurveBoxAdaptivity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveBoxAdaptivity(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCurveBoxAdaptivity class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -123,6 +125,7 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -133,6 +136,7 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -144,6 +148,7 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
     @level.setter
     def level(self, value: int) -> None:
+        """Set the level property."""
         self._cards[0].set_value("level", value)
 
     @property
@@ -155,6 +160,7 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
     @dist1.setter
     def dist1(self, value: float) -> None:
+        """Set the dist1 property."""
         self._cards[0].set_value("dist1", value)
 
     @property
@@ -165,6 +171,7 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -175,6 +182,7 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -185,6 +193,7 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 
     @property
@@ -195,5 +204,6 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

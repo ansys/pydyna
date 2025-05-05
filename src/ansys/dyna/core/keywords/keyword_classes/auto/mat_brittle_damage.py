@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatBrittleDamage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatBrittleDamage(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatBrittleDamage class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -178,6 +180,7 @@ class MatBrittleDamage(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -188,6 +191,7 @@ class MatBrittleDamage(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -198,6 +202,7 @@ class MatBrittleDamage(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -208,6 +213,7 @@ class MatBrittleDamage(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -218,6 +224,7 @@ class MatBrittleDamage(KeywordBase):
 
     @tlimit.setter
     def tlimit(self, value: float) -> None:
+        """Set the tlimit property."""
         self._cards[0].set_value("tlimit", value)
 
     @property
@@ -228,6 +235,7 @@ class MatBrittleDamage(KeywordBase):
 
     @slimit.setter
     def slimit(self, value: float) -> None:
+        """Set the slimit property."""
         self._cards[0].set_value("slimit", value)
 
     @property
@@ -238,6 +246,7 @@ class MatBrittleDamage(KeywordBase):
 
     @ftough.setter
     def ftough(self, value: float) -> None:
+        """Set the ftough property."""
         self._cards[0].set_value("ftough", value)
 
     @property
@@ -248,6 +257,7 @@ class MatBrittleDamage(KeywordBase):
 
     @sreten.setter
     def sreten(self, value: float) -> None:
+        """Set the sreten property."""
         self._cards[0].set_value("sreten", value)
 
     @property
@@ -258,6 +268,7 @@ class MatBrittleDamage(KeywordBase):
 
     @visc.setter
     def visc(self, value: float) -> None:
+        """Set the visc property."""
         self._cards[1].set_value("visc", value)
 
     @property
@@ -268,6 +279,7 @@ class MatBrittleDamage(KeywordBase):
 
     @fra_rf.setter
     def fra_rf(self, value: float) -> None:
+        """Set the fra_rf property."""
         self._cards[1].set_value("fra_rf", value)
 
     @property
@@ -278,6 +290,7 @@ class MatBrittleDamage(KeywordBase):
 
     @e_rf.setter
     def e_rf(self, value: float) -> None:
+        """Set the e_rf property."""
         self._cards[1].set_value("e_rf", value)
 
     @property
@@ -288,6 +301,7 @@ class MatBrittleDamage(KeywordBase):
 
     @ys_rf.setter
     def ys_rf(self, value: float) -> None:
+        """Set the ys_rf property."""
         self._cards[1].set_value("ys_rf", value)
 
     @property
@@ -298,6 +312,7 @@ class MatBrittleDamage(KeywordBase):
 
     @eh_rf.setter
     def eh_rf(self, value: float) -> None:
+        """Set the eh_rf property."""
         self._cards[1].set_value("eh_rf", value)
 
     @property
@@ -308,6 +323,7 @@ class MatBrittleDamage(KeywordBase):
 
     @fs_rf.setter
     def fs_rf(self, value: float) -> None:
+        """Set the fs_rf property."""
         self._cards[1].set_value("fs_rf", value)
 
     @property
@@ -319,6 +335,7 @@ class MatBrittleDamage(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[1].set_value("sigy", value)
 
     @property
@@ -329,5 +346,6 @@ class MatBrittleDamage(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

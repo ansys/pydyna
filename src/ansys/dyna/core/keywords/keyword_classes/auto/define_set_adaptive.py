@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineSetAdaptive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSetAdaptive(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineSetAdaptive class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -98,6 +100,7 @@ class DefineSetAdaptive(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 
     @property
@@ -108,8 +111,9 @@ class DefineSetAdaptive(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [1, 2, None]:
-            raise Exception("""stype must be `None` or one of {1,2}""")
+            raise Exception("""stype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -120,6 +124,7 @@ class DefineSetAdaptive(KeywordBase):
 
     @adplvl.setter
     def adplvl(self, value: int) -> None:
+        """Set the adplvl property."""
         self._cards[0].set_value("adplvl", value)
 
     @property
@@ -130,6 +135,7 @@ class DefineSetAdaptive(KeywordBase):
 
     @adpsize.setter
     def adpsize(self, value: float) -> None:
+        """Set the adpsize property."""
         self._cards[0].set_value("adpsize", value)
 
     @property
@@ -140,5 +146,6 @@ class DefineSetAdaptive(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

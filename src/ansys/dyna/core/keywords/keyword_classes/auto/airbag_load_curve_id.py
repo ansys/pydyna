@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AirbagLoadCurveId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagLoadCurveId(KeywordBase):
     subkeyword = "LOAD_CURVE_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the AirbagLoadCurveId class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -182,6 +184,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -192,6 +195,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -202,6 +206,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -214,8 +219,9 @@ class AirbagLoadCurveId(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("sidtyp", value)
 
     @property
@@ -229,6 +235,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @rbid.setter
     def rbid(self, value: int) -> None:
+        """Set the rbid property."""
         self._cards[1].set_value("rbid", value)
 
     @property
@@ -239,6 +246,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @vsca.setter
     def vsca(self, value: float) -> None:
+        """Set the vsca property."""
         self._cards[1].set_value("vsca", value)
 
     @property
@@ -249,6 +257,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @psca.setter
     def psca(self, value: float) -> None:
+        """Set the psca property."""
         self._cards[1].set_value("psca", value)
 
     @property
@@ -259,6 +268,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @vini.setter
     def vini(self, value: float) -> None:
+        """Set the vini property."""
         self._cards[1].set_value("vini", value)
 
     @property
@@ -269,6 +279,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @mwd.setter
     def mwd(self, value: float) -> None:
+        """Set the mwd property."""
         self._cards[1].set_value("mwd", value)
 
     @property
@@ -279,6 +290,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @spsf.setter
     def spsf(self, value: float) -> None:
+        """Set the spsf property."""
         self._cards[1].set_value("spsf", value)
 
     @property
@@ -289,6 +301,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @stime.setter
     def stime(self, value: float) -> None:
+        """Set the stime property."""
         self._cards[2].set_value("stime", value)
 
     @property
@@ -299,6 +312,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[2].set_value("lcid", value)
 
     @property
@@ -309,6 +323,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[2].set_value("ro", value)
 
     @property
@@ -319,6 +334,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @pe.setter
     def pe(self, value: float) -> None:
+        """Set the pe property."""
         self._cards[2].set_value("pe", value)
 
     @property
@@ -329,6 +345,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @p0.setter
     def p0(self, value: float) -> None:
+        """Set the p0 property."""
         self._cards[2].set_value("p0", value)
 
     @property
@@ -339,6 +356,7 @@ class AirbagLoadCurveId(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[2].set_value("t", value)
 
     @property
@@ -349,5 +367,6 @@ class AirbagLoadCurveId(KeywordBase):
 
     @t0.setter
     def t0(self, value: float) -> None:
+        """Set the t0 property."""
         self._cards[2].set_value("t0", value)
 

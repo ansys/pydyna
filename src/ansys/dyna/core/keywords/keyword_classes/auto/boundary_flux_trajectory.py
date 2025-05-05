@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryFluxTrajectory class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryFluxTrajectory(KeywordBase):
     subkeyword = "FLUX_TRAJECTORY"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryFluxTrajectory class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -259,6 +261,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -269,6 +272,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @pserod.setter
     def pserod(self, value: int) -> None:
+        """Set the pserod property."""
         self._cards[0].set_value("pserod", value)
 
     @property
@@ -281,6 +285,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @nsid1.setter
     def nsid1(self, value: int) -> None:
+        """Set the nsid1 property."""
         self._cards[0].set_value("nsid1", value)
 
     @property
@@ -293,6 +298,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @spd1.setter
     def spd1(self, value: float) -> None:
+        """Set the spd1 property."""
         self._cards[0].set_value("spd1", value)
 
     @property
@@ -309,6 +315,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @nsid2.setter
     def nsid2(self, value: int) -> None:
+        """Set the nsid2 property."""
         self._cards[0].set_value("nsid2", value)
 
     @property
@@ -322,6 +329,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @spd2.setter
     def spd2(self, value: float) -> None:
+        """Set the spd2 property."""
         self._cards[0].set_value("spd2", value)
 
     @property
@@ -335,8 +343,9 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @relvel.setter
     def relvel(self, value: int) -> None:
+        """Set the relvel property."""
         if value not in [0, 1, None]:
-            raise Exception("""relvel must be `None` or one of {0,1}""")
+            raise Exception("""relvel must be `None` or one of {0,1}.""")
         self._cards[0].set_value("relvel", value)
 
     @property
@@ -350,8 +359,9 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @erod.setter
     def erod(self, value: int) -> None:
+        """Set the erod property."""
         if value not in [0, 1, None]:
-            raise Exception("""erod must be `None` or one of {0,1}""")
+            raise Exception("""erod must be `None` or one of {0,1}.""")
         self._cards[1].set_value("erod", value)
 
     @property
@@ -366,6 +376,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @loc.setter
     def loc(self, value: int) -> None:
+        """Set the loc property."""
         self._cards[1].set_value("loc", value)
 
     @property
@@ -377,6 +388,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @lcrot.setter
     def lcrot(self, value: int) -> None:
+        """Set the lcrot property."""
         self._cards[1].set_value("lcrot", value)
 
     @property
@@ -387,6 +399,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @lclat.setter
     def lclat(self, value: int) -> None:
+        """Set the lclat property."""
         self._cards[1].set_value("lclat", value)
 
     @property
@@ -400,6 +413,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @iform.setter
     def iform(self, value: int) -> None:
+        """Set the iform property."""
         self._cards[2].set_value("iform", value)
 
     @property
@@ -412,6 +426,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @lctim.setter
     def lctim(self, value: int) -> None:
+        """Set the lctim property."""
         self._cards[2].set_value("lctim", value)
 
     @property
@@ -422,6 +437,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[2].set_value("q", value)
 
     @property
@@ -434,6 +450,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @lcinc.setter
     def lcinc(self, value: int) -> None:
+        """Set the lcinc property."""
         self._cards[2].set_value("lcinc", value)
 
     @property
@@ -450,6 +467,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @enfor.setter
     def enfor(self, value: int) -> None:
+        """Set the enfor property."""
         self._cards[2].set_value("enfor", value)
 
     @property
@@ -461,6 +479,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[3].set_value("p1", value)
 
     @property
@@ -472,6 +491,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[3].set_value("p2", value)
 
     @property
@@ -483,6 +503,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[3].set_value("p3", value)
 
     @property
@@ -494,6 +515,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[3].set_value("p4", value)
 
     @property
@@ -505,6 +527,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[3].set_value("p5", value)
 
     @property
@@ -516,6 +539,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[3].set_value("p6", value)
 
     @property
@@ -527,6 +551,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @p7.setter
     def p7(self, value: float) -> None:
+        """Set the p7 property."""
         self._cards[3].set_value("p7", value)
 
     @property
@@ -538,6 +563,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @p8.setter
     def p8(self, value: float) -> None:
+        """Set the p8 property."""
         self._cards[3].set_value("p8", value)
 
     @property
@@ -548,6 +574,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @tx.setter
     def tx(self, value: float) -> None:
+        """Set the tx property."""
         self._cards[4].set_value("tx", value)
 
     @property
@@ -558,6 +585,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @ty.setter
     def ty(self, value: float) -> None:
+        """Set the ty property."""
         self._cards[4].set_value("ty", value)
 
     @property
@@ -568,5 +596,6 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @tz.setter
     def tz(self, value: float) -> None:
+        """Set the tz property."""
         self._cards[4].set_value("tz", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadBodyVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBodyVector(KeywordBase):
     subkeyword = "BODY_VECTOR"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadBodyVector class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -130,6 +132,7 @@ class LoadBodyVector(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -140,6 +143,7 @@ class LoadBodyVector(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -150,6 +154,7 @@ class LoadBodyVector(KeywordBase):
 
     @lciddr.setter
     def lciddr(self, value: int) -> None:
+        """Set the lciddr property."""
         self._cards[0].set_value("lciddr", value)
 
     @property
@@ -160,6 +165,7 @@ class LoadBodyVector(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -170,6 +176,7 @@ class LoadBodyVector(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -180,6 +187,7 @@ class LoadBodyVector(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 
     @property
@@ -190,6 +198,7 @@ class LoadBodyVector(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -200,6 +209,7 @@ class LoadBodyVector(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[1].set_value("v1", value)
 
     @property
@@ -210,6 +220,7 @@ class LoadBodyVector(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[1].set_value("v2", value)
 
     @property
@@ -220,5 +231,6 @@ class LoadBodyVector(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[1].set_value("v3", value)
 

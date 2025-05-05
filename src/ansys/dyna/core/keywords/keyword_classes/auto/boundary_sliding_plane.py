@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundarySlidingPlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundarySlidingPlane(KeywordBase):
     subkeyword = "SLIDING_PLANE"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundarySlidingPlane class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class BoundarySlidingPlane(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -96,6 +99,7 @@ class BoundarySlidingPlane(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -106,6 +110,7 @@ class BoundarySlidingPlane(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -116,6 +121,7 @@ class BoundarySlidingPlane(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -128,7 +134,8 @@ class BoundarySlidingPlane(KeywordBase):
 
     @copt.setter
     def copt(self, value: int) -> None:
+        """Set the copt property."""
         if value not in [0, 1, None]:
-            raise Exception("""copt must be `None` or one of {0,1}""")
+            raise Exception("""copt must be `None` or one of {0,1}.""")
         self._cards[0].set_value("copt", value)
 
