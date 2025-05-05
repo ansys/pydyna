@@ -17,7 +17,6 @@
 
     @{{card.variable.name}}.setter
     def {{card.variable.name}}(self, value: typing.List) -> None:
-        """Sets the {{card.variable.name}} from the list value."""
         self._cards[{{card.index}}].data = value
 
 {% elif card.set %}
