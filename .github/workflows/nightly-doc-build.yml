@@ -111,15 +111,15 @@ jobs:
           path: doc/_build/html
           retention-days: 7
 
-      - name: "Download both the html and keyword class documentation"
-        uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: documentation-html
+      # - name: "Download both the html and keyword class documentation"
+      #   uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      #   with:
+      #     name: documentation-html
 
-      - name: "Download keyword class documentation"
-        uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: keyword_classes_docs
+      # - name: "Download keyword class documentation"
+      #   uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      #   with:
+      #     name: keyword_classes_docs
 
       - name: "Replace keywordclasses documentation in final HTML build"
         run: |
