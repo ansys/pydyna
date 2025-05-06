@@ -15,7 +15,7 @@ KEYWORDBUILD   = $(KEYWORDDIR)/_build/html
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help html Makefile clean pdf keyword_classes
+.PHONY: help Makefile clean pdf keyword_classes
 
 keyword_classes:
 	@echo "🔧 Building keywordclasses..."
