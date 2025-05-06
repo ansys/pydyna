@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 """
-Plate Thickness Optimization example
+Plate Thickness Optimization
 ------------------
 This example shows how to use PyDyna to import a mesh, set up a plate thickness 
 optimization analysis, run the analysis iteratively until a target displacement 
