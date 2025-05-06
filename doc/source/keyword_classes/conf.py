@@ -27,7 +27,7 @@ extensions = [
     'sphinx.ext.inheritance_diagram',
     "sphinx_jinja",
     "sphinx_design",
-    # "ansys_sphinx_theme.extension.autoapi",
+    "ansys_sphinx_theme.extension.autoapi",
 ]
 
 # Intersphinx mapping
@@ -124,7 +124,6 @@ html_theme_options = {
         ],
         "directory": "../../../src/ansys",
         "output": "api",
-        "own_page_level": "module",
     },
 }
 

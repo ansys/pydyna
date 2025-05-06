@@ -189,6 +189,46 @@ jinja_contexts = {
 }
 
 
+
+import os
+import json
+import shutil
+from sphinx.application import Sphinx
+
+def merge_search_index(app: Sphinx, exception):
+    if os.getenv("KEYWORDS") != "1" or exception:
+        return
+
+    print("🔍 Merging keywordclasses search.json...")
+
+    main_search = os.path.join(app.outdir, "_static", "search.json")
+    keywords_search = os.path.abspath("keywordclasses/_build/html/_static/search.json")
+
+    if not os.path.exists(keywords_search):
+        print("⚠️  keywordclasses search.json not found!")
+        return
+
+    try:
+        # Load both JSON files
+        with open(main_search, "r", encoding="utf-8") as f:
+            main_data = json.load(f)
+        with open(keywords_search, "r", encoding="utf-8") as f:
+            keywords_data = json.load(f)
+
+        if isinstance(main_data, list):
+            main_data.append(keywords_data)
+        else:
+            main_data = [main_data, keywords_data]
+
+        with open(main_search, "w", encoding="utf-8") as f:
+            json.dump(main_data, f, ensure_ascii=False)
+
+        print("✅ Appended keywordclasses search.json.")
+
+    except Exception as e:
+        print(f"❌ Error appending search.json: {e}")
+
+
 def skip_run_subpackage(app, what, name, obj, skip, options):
     """Skip specific members of the 'run' subpackage during documentation generation.
 
@@ -210,3 +250,5 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
 def setup(sphinx):
     """Add custom extensions to Sphinx."""
     sphinx.connect("autoapi-skip-member", skip_run_subpackage)
+    if os.getenv("KEYWORDS") == "1":
+        sphinx.connect("build-finished", merge_search_index, priority=600)
