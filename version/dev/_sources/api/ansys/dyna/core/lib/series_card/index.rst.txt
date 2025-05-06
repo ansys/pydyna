@@ -1,0 +1,73 @@
+
+
+
+
+
+
+The ``series_card.py`` module
+=============================
+
+.. py:module:: ansys.dyna.core.lib.series_card
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: series_card
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.series_card.SeriesCard`
+            - Card holding a series of values.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> SeriesCard</api/ansys/dyna/core/lib/series_card/SeriesCard>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

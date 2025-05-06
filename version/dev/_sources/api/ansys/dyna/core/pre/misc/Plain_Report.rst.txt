@@ -1,0 +1,98 @@
+
+
+
+
+
+
+:class:`Plain_Report`
+=====================
+
+
+.. py:class:: ansys.dyna.core.pre.misc.Plain_Report(core, optional=None, additional=None, **kwargs)
+
+
+
+.. py:currentmodule:: Plain_Report
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~get_version`
+            - 
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~additional`
+            - 
+          * - :py:attr:`~core`
+            - 
+          * - :py:attr:`~optional`
+            - 
+          * - :py:attr:`~kwargs`
+            - 
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__repr__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.misc import Plain_Report
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: additional
+   :value: None
+
+
+.. py:attribute:: core
+
+.. py:attribute:: optional
+   :value: None
+
+
+.. py:attribute:: kwargs
+
+
+
+Method detail
+-------------
+
+.. py:method:: get_version(package)
+
+.. py:method:: __repr__()
+
+
+
+

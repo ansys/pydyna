@@ -1,0 +1,74 @@
+
+
+
+
+
+
+The ``run`` package
+=======================
+
+.. py:module:: ansys.dyna.core.run
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: run
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.run.local_solver`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.run.options`
+            - Options to run LS-DYNA.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> local_solver</api/ansys/dyna/core/run/local_solver/index>
+    <span class="nf nf-fa-file"></span> options</api/ansys/dyna/core/run/options/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

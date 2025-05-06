@@ -1,0 +1,142 @@
+
+
+
+
+
+
+:class:`TrameVisualizer`
+========================
+
+
+.. py:class:: ansys.dyna.core.pre.graphics.trame_gui.TrameVisualizer
+
+   
+   Defines the view layout for the Trame visualizer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: TrameVisualizer
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_scene`
+            - Set the view layout for the Trame visualizer.
+          * - :py:attr:`~show`
+            - Start the server and show the mesh.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~server`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.graphics.trame_gui import TrameVisualizer
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: server
+
+
+
+Method detail
+-------------
+
+.. py:method:: set_scene(plotter)
+
+   
+   Set the view layout for the Trame visualizer.
+
+   This method also sets the mesh to show by the PyVista plotter.
+
+   :Parameters:
+
+       **plotter** : :obj:`pv.Plotter`
+           PyVista plotter to render the mesh.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: show()
+
+   
+   Start the server and show the mesh.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

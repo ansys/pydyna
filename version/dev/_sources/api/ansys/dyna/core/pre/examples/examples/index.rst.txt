@@ -1,0 +1,259 @@
+
+
+
+
+
+
+The ``examples.py`` module
+==========================
+
+.. py:module:: ansys.dyna.core.pre.examples.examples
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: examples
+.. tab-set::
+
+
+
+
+
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~airbag_deploy`
+            - 
+
+
+          * - :py:obj:`~em_railgun`
+            - 
+
+
+          * - :py:obj:`~em_resistive_heating`
+            - 
+
+
+          * - :py:obj:`~em_resistive_heating_2d`
+            - 
+
+
+          * - :py:obj:`~em_resistive_heating_2d_isopots`
+            - 
+
+
+          * - :py:obj:`~em_resistive_heating_2d_multi_isopots`
+            - 
+
+
+          * - :py:obj:`~em_rlc_isopotential`
+            - 
+
+
+          * - :py:obj:`~em_rlc_define_func`
+            - 
+
+
+          * - :py:obj:`~belted_dummy`
+            - 
+
+
+          * - :py:obj:`~ball_plate`
+            - 
+
+
+          * - :py:obj:`~cylinder_flow`
+            - 
+
+
+          * - :py:obj:`~internal_3d_flow`
+            - 
+
+
+          * - :py:obj:`~plate_flow`
+            - 
+
+
+          * - :py:obj:`~mesh_size`
+            - 
+
+
+          * - :py:obj:`~thermal_flow`
+            - 
+
+
+          * - :py:obj:`~free_convection_flow`
+            - 
+
+
+          * - :py:obj:`~dam_break`
+            - 
+
+
+          * - :py:obj:`~driven_cavity`
+            - 
+
+
+          * - :py:obj:`~weak_fsi`
+            - 
+
+
+          * - :py:obj:`~strong_fsi`
+            - 
+
+
+          * - :py:obj:`~imposed_move`
+            - 
+
+
+          * - :py:obj:`~mesh_adaptivity`
+            - 
+
+
+          * - :py:obj:`~mesh_morphing`
+            - 
+
+
+          * - :py:obj:`~dem_coupling`
+            - 
+
+
+          * - :py:obj:`~sloshing`
+            - 
+
+
+          * - :py:obj:`~camry_rc`
+            - 
+
+
+          * - :py:obj:`~sale_efp`
+            - 
+
+
+          * - :py:obj:`~isph_rigidtest`
+            - 
+
+
+          * - :py:obj:`~nvh_frf_plate_damping`
+            - 
+
+
+          * - :py:obj:`~nvh_frf_solid`
+            - 
+
+
+          * - :py:obj:`~thermal_stress`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Result Files Examples
+=====================
+Examples result files.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: airbag_deploy
+
+.. py:data:: em_railgun
+
+.. py:data:: em_resistive_heating
+
+.. py:data:: em_resistive_heating_2d
+
+.. py:data:: em_resistive_heating_2d_isopots
+
+.. py:data:: em_resistive_heating_2d_multi_isopots
+
+.. py:data:: em_rlc_isopotential
+
+.. py:data:: em_rlc_define_func
+
+.. py:data:: belted_dummy
+
+.. py:data:: ball_plate
+
+.. py:data:: cylinder_flow
+
+.. py:data:: internal_3d_flow
+
+.. py:data:: plate_flow
+
+.. py:data:: mesh_size
+
+.. py:data:: thermal_flow
+
+.. py:data:: free_convection_flow
+
+.. py:data:: dam_break
+
+.. py:data:: driven_cavity
+
+.. py:data:: weak_fsi
+
+.. py:data:: strong_fsi
+
+.. py:data:: imposed_move
+
+.. py:data:: mesh_adaptivity
+
+.. py:data:: mesh_morphing
+
+.. py:data:: dem_coupling
+
+.. py:data:: sloshing
+
+.. py:data:: camry_rc
+
+.. py:data:: sale_efp
+
+.. py:data:: isph_rigidtest
+
+.. py:data:: nvh_frf_plate_damping
+
+.. py:data:: nvh_frf_solid
+
+.. py:data:: thermal_stress
+
+
+

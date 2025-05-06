@@ -1,0 +1,163 @@
+
+
+
+
+
+
+:class:`Part`
+=============
+
+
+.. py:class:: ansys.dyna.core.pre.part.Part(model, id: int, name: str, type: str, conn: List)
+
+   Bases: :py:obj:`object`
+
+
+   
+   Defines and modifies the parts of a model.
+
+
+   :Parameters:
+
+       **model: ansys.dyna.core.pre.Model**
+           Model in which the part is created.
+
+       **id: int**
+           ID of the part provided by the server.
+
+       **name: str**
+           Part name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Part
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - 
+          * - :py:attr:`~name`
+            - 
+          * - :py:attr:`~type`
+            - 
+          * - :py:attr:`~connectivity`
+            - 
+          * - :py:attr:`~print_mesh`
+            - Whether the mesh summary is set to print along with the part summary.
+          * - :py:attr:`~print_id`
+            - Whether IDs of TopoEntities or zonelets are set to print along with the part summary.
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.part import Part
+
+Property detail
+---------------
+
+.. py:property:: id
+   :type: int
+
+
+.. py:property:: name
+   :type: str
+
+
+.. py:property:: type
+   :type: str
+
+
+.. py:property:: connectivity
+   :type: List
+
+
+.. py:property:: print_mesh
+   :type: bool
+
+
+   
+   Whether the mesh summary is set to print along with the part summary.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: print_id
+   :type: bool
+
+
+   
+   Whether IDs of TopoEntities or zonelets are set to print along with the part summary.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+
+

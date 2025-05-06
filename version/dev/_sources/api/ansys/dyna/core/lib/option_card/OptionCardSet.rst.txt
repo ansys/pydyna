@@ -1,0 +1,239 @@
+
+
+
+
+
+
+:class:`OptionCardSet`
+======================
+
+
+.. py:class:: ansys.dyna.core.lib.option_card.OptionCardSet(option_spec: OptionSpec, cards: List[ansys.dyna.core.lib.card_interface.CardInterface], **kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card_interface.CardInterface`
+
+
+   
+   Abstract base class for all the implementations of keyword cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+.. py:currentmodule:: OptionCardSet
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~read`
+            - Read from buf.
+          * - :py:attr:`~write`
+            - Renders the card in the dyna keyword format.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~cards`
+            - 
+          * - :py:attr:`~option_spec`
+            - 
+          * - :py:attr:`~name`
+            - 
+          * - :py:attr:`~title_order`
+            - 
+          * - :py:attr:`~card_order`
+            - 
+          * - :py:attr:`~active`
+            - Return whether the card is active.
+          * - :py:attr:`~format`
+            - Get the card format type.
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__hash__`
+            - 
+          * - :py:attr:`~__lt__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.option_card import OptionCardSet
+
+Property detail
+---------------
+
+.. py:property:: cards
+   :type: List[ansys.dyna.core.lib.card_interface.CardInterface]
+
+
+.. py:property:: option_spec
+   :type: OptionSpec
+
+
+.. py:property:: name
+   :type: str
+
+
+.. py:property:: title_order
+   :type: int
+
+
+.. py:property:: card_order
+   :type: int
+
+
+.. py:property:: active
+   :type: bool
+
+
+   
+   Return whether the card is active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: format
+   :type: ansys.dyna.core.lib.format_type.format_type
+
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __hash__()
+
+.. py:method:: __lt__(other: OptionCardSet)
+
+.. py:method:: read(buf: TextIO, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> bool
+
+   
+   Read from buf.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True) -> Union[str, None]
+
+   
+   Renders the card in the dyna keyword format.
+   :param buf: Buffer to write to. If None, the output is returned as a string
+   :param format: format_type to use. Default to standard.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

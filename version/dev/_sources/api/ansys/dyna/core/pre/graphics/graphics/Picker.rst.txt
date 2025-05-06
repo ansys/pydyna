@@ -1,0 +1,217 @@
+
+
+
+
+
+
+:class:`Picker`
+===============
+
+
+.. py:class:: ansys.dyna.core.pre.graphics.graphics.Picker(plotter: pyvista.Plotter, graphics)
+
+   
+   Contains the items that can be selected from the display with the mouse.
+
+
+   :Parameters:
+
+       **plotter** : :obj:`Plotter`
+           PyVista plotter to manipulate.
+
+       **graphics** : :obj:`Graphics`
+           Class for providing callbacks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+.. py:currentmodule:: Picker
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~clear_selection`
+            - Clear all picked selections in the display.
+          * - :py:attr:`~ignore`
+            - Setter for ignore_pick.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~selections`
+            - All selected meshes in the display.
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~plotter`
+            - 
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__call__`
+            - Call the code to run when something is clicked in the display.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.graphics.graphics import Picker
+
+Property detail
+---------------
+
+.. py:property:: selections
+
+   
+   All selected meshes in the display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: plotter
+
+
+
+Method detail
+-------------
+
+.. py:method:: clear_selection()
+
+   
+   Clear all picked selections in the display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: ignore(ignore_pick)
+
+   
+   Setter for ignore_pick.
+
+
+   :Parameters:
+
+       **ignore_pick** : :obj:`Any`
+           Picked selection to ignore.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: __call__(*args, **kwargs)
+
+   
+   Call the code to run when something is clicked in the display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``part.py`` module
+======================
+
+.. py:module:: ansys.dyna.core.pre.part
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: part
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.part.Part`
+            - Defines and modifies the parts of a model.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Part</api/ansys/dyna/core/pre/part/Part>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module containing the ``Part`` class.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

@@ -1,0 +1,146 @@
+
+
+
+
+
+
+:class:`Field`
+==============
+
+.. toctree::
+   :hidden:
+
+    ReadOnlyValue</api/ansys/dyna/core/lib/field/Field.ReadOnlyValue>
+
+
+.. py:class:: ansys.dyna.core.lib.field.Field(name: str, type: Field.__init__.type, offset: int, width: int, /, value: Any = None, **kwargs)
+
+
+
+.. py:currentmodule:: Field
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~io_info`
+            - Return the value and type used for io.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~name`
+            - 
+          * - :py:attr:`~type`
+            - 
+          * - :py:attr:`~offset`
+            - 
+          * - :py:attr:`~width`
+            - 
+          * - :py:attr:`~value`
+            - 
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__repr__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.field import Field
+
+Property detail
+---------------
+
+.. py:property:: name
+   :type: str
+
+
+.. py:property:: type
+   :type: type
+
+
+.. py:property:: offset
+   :type: int
+
+
+.. py:property:: width
+   :type: int
+
+
+.. py:property:: value
+   :type: Any
+
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __repr__() -> str
+
+.. py:method:: io_info() -> Tuple[str, Type]
+
+   
+   Return the value and type used for io.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+    ansys.dyna.core.lib.field.Field.ReadOnlyValue
+
+
+
+

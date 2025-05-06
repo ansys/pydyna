@@ -1,0 +1,168 @@
+
+
+
+
+
+
+:class:`ContactGroup`
+=====================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ContactGroup
+
+   
+   Create a contact group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ContactGroup
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~add`
+            - Add a contact in the group.
+          * - :py:attr:`~create`
+            - Create contacts.
+          * - :py:attr:`~num`
+            - Get the number of contact objects.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~stub`
+            - 
+          * - :py:attr:`~contactlist`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import ContactGroup
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: stub
+
+.. py:attribute:: contactlist
+   :value: []
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: add(contact)
+
+   
+   Add a contact in the group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: create()
+
+   
+   Create contacts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: num()
+
+   
+   Get the number of contact objects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

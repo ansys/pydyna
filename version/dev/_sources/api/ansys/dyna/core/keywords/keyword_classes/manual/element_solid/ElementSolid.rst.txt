@@ -1,0 +1,184 @@
+
+
+
+
+
+
+:class:`ElementSolid`
+=====================
+
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.element_solid.ElementSolid(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA ELEMENT_SOLID (ten nodes format) keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ElementSolid
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~before_read`
+            - Reads the first line of the buffer to determine the format.
+          * - :py:attr:`~set_legacy_format`
+            - Sets the legacy format.
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~elements`
+            - Gets the full table of elements
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.keywords.keyword_classes.manual.element_solid import ElementSolid
+
+Property detail
+---------------
+
+.. py:property:: elements
+
+   
+   Gets the full table of elements
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'ELEMENT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'SOLID'
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: before_read(buf: TextIO) -> None
+
+   
+   Reads the first line of the buffer to determine the format.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: set_legacy_format()
+
+   
+   Sets the legacy format.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

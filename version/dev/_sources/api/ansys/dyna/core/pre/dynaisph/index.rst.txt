@@ -1,0 +1,131 @@
+
+
+
+
+
+
+The ``dynaisph.py`` module
+==========================
+
+.. py:module:: ansys.dyna.core.pre.dynaisph
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynaisph
+.. tab-set::
+
+
+
+    .. tab-item:: Interfaces
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaisph.ISPHAnalysis`
+            - Provide controls related to ISPH.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaisph.ISPHFluidPart`
+            - Generates ISPH particles inside a box.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaisph.ISPHStructPart`
+            - Generates and places ISPH elements on the surface of triangular shell elements.
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaisph.DynaISPH`
+            - Contains methods for creating a keyword related to ISPH.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaisph.SPHSection`
+            - Defines section properties for ISPH particles.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaisph.MassflowPlane`
+            - Measures ISPH mass flow rate across a defined plane.
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_interface"></span> ISPHAnalysis</api/ansys/dyna/core/pre/dynaisph/ISPHAnalysis>
+    <span class="nf nf-cod-symbol_interface"></span> ISPHFluidPart</api/ansys/dyna/core/pre/dynaisph/ISPHFluidPart>
+    <span class="nf nf-cod-symbol_interface"></span> ISPHStructPart</api/ansys/dyna/core/pre/dynaisph/ISPHStructPart>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DynaISPH</api/ansys/dyna/core/pre/dynaisph/DynaISPH>
+    <span class="nf nf-cod-symbol_class"></span> SPHSection</api/ansys/dyna/core/pre/dynaisph/SPHSection>
+    <span class="nf nf-cod-symbol_class"></span> MassflowPlane</api/ansys/dyna/core/pre/dynaisph/MassflowPlane>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+ISPH API
+==========
+
+Module for creating an ISPH (incompressible smooth particle hydrodynamics) DYNA input deck.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

@@ -1,0 +1,195 @@
+
+
+
+
+
+
+:class:`NodeSet`
+================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.NodeSet(nodes=[])
+
+   
+   Defines a nodal set with some identical or unique attributes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: NodeSet
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create a node set.
+          * - :py:attr:`~num`
+            - Get the number of nodes in the node set.
+          * - :py:attr:`~id`
+            - Get the node ID by position.
+          * - :py:attr:`~get_nid`
+            - Get the node ID.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~nodes`
+            - 
+          * - :py:attr:`~type`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import NodeSet
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: nodes
+   :value: []
+
+
+.. py:attribute:: type
+   :value: 'NODESET'
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub)
+
+   
+   Create a node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: num()
+
+   
+   Get the number of nodes in the node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: id(pos)
+
+   
+   Get the node ID by position.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: get_nid()
+
+   
+   Get the node ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

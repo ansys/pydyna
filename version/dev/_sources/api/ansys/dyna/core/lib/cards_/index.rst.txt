@@ -1,0 +1,69 @@
+
+
+
+
+
+
+The ``cards_`` package
+==========================
+
+.. py:module:: ansys.dyna.core.lib.cards_
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: cards_
+.. tab-set::
+
+    .. tab-item:: Subpackages
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.cards_.special`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-package"></span> special</api/ansys/dyna/core/lib/cards_/special/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

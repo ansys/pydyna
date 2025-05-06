@@ -1,0 +1,87 @@
+
+
+
+
+
+
+The ``parameters.py`` module
+============================
+
+.. py:module:: ansys.dyna.core.lib.parameters
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: parameters
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.parameters.ParameterSet`
+            - Deck parameters.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.parameters.ParameterHandler`
+            - Base class for import handlers.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ParameterSet</api/ansys/dyna/core/lib/parameters/ParameterSet>
+    <span class="nf nf-cod-symbol_class"></span> ParameterHandler</api/ansys/dyna/core/lib/parameters/ParameterHandler>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Parameter classes.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+
+
+
+
+
+
+:class:`Transform`
+==================
+
+
+.. py:class:: ansys.dyna.core.lib.transforms.base_transform.Transform(xform: ansys.dyna.core.keywords.IncludeTransform)
+
+
+.. py:currentmodule:: Transform
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~transform`
+            - 
+
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.transforms.base_transform import Transform
+
+
+
+Method detail
+-------------
+
+.. py:method:: transform(keyword) -> None
+
+
+
+

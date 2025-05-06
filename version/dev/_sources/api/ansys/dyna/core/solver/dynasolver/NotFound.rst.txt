@@ -1,0 +1,49 @@
+
+
+
+
+
+
+:class:`NotFound`
+=================
+
+
+.. py:exception:: ansys.dyna.core.solver.dynasolver.NotFound
+
+   Bases: :py:obj:`Exception`
+
+
+   
+   Documentation missing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.solver.dynasolver import NotFound
+
+
+
+
+

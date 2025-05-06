@@ -1,0 +1,138 @@
+
+
+
+
+
+
+:class:`MatOgdenRubber`
+=======================
+
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatOgdenRubber(mass_density=0, poisson_ratio=0.3, limit_stress=0, shear_modulus=None, exponent=None)
+
+   
+   Provides the Ogden rubber model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatOgdenRubber
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create ogden rubber material.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ro`
+            - 
+          * - :py:attr:`~pr`
+            - 
+          * - :py:attr:`~sigf`
+            - 
+          * - :py:attr:`~mu`
+            - 
+          * - :py:attr:`~alpha`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynamaterial import MatOgdenRubber
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ro
+   :value: 0
+
+
+.. py:attribute:: pr
+   :value: 0.3
+
+
+.. py:attribute:: sigf
+   :value: 0
+
+
+.. py:attribute:: mu
+   :value: None
+
+
+.. py:attribute:: alpha
+   :value: None
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub)
+
+   
+   Create ogden rubber material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

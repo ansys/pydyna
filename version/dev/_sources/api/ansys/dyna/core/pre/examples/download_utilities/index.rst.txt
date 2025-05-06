@@ -1,0 +1,73 @@
+
+
+
+
+
+
+The ``download_utilities.py`` module
+====================================
+
+.. py:module:: ansys.dyna.core.pre.examples.download_utilities
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: download_utilities
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.examples.download_utilities.DownloadManager`
+            - Manages downloads of example files.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DownloadManager</api/ansys/dyna/core/pre/examples/download_utilities/DownloadManager>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

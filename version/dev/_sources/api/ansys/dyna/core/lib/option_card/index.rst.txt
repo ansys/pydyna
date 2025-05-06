@@ -1,0 +1,101 @@
+
+
+
+
+
+
+The ``option_card.py`` module
+=============================
+
+.. py:module:: ansys.dyna.core.lib.option_card
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: option_card
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.option_card.OptionSpec`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.option_card.OptionCardSet`
+            - Abstract base class for all the implementations of keyword cards.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.option_card.OptionsInterface`
+            - Abstract base class for option card api interface.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.option_card.OptionAPI`
+            - API for an individual option associated with a keyword.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.option_card.Options`
+            - Option collection associated with an options API.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> OptionSpec</api/ansys/dyna/core/lib/option_card/OptionSpec>
+    <span class="nf nf-cod-symbol_class"></span> OptionCardSet</api/ansys/dyna/core/lib/option_card/OptionCardSet>
+    <span class="nf nf-cod-symbol_class"></span> OptionsInterface</api/ansys/dyna/core/lib/option_card/OptionsInterface>
+    <span class="nf nf-cod-symbol_class"></span> OptionAPI</api/ansys/dyna/core/lib/option_card/OptionAPI>
+    <span class="nf nf-cod-symbol_class"></span> Options</api/ansys/dyna/core/lib/option_card/Options>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

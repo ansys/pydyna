@@ -1,0 +1,142 @@
+
+
+
+
+
+
+:class:`ElementSolidOrtho`
+==========================
+
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho.ElementSolidOrtho(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA ELEMENT_SOLID_ORTHO keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ElementSolidOrtho
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~before_read`
+            - 
+          * - :py:attr:`~set_legacy_format`
+            - 
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~elements`
+            - Gets the full table of elements
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho import ElementSolidOrtho
+
+Property detail
+---------------
+
+.. py:property:: elements
+
+   
+   Gets the full table of elements
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'ELEMENT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'SOLID_ORTHO'
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: before_read(buf: TextIO) -> None
+
+.. py:method:: set_legacy_format()
+
+
+
+

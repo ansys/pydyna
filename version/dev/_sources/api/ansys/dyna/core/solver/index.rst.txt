@@ -1,0 +1,84 @@
+
+
+
+
+
+
+The ``solver`` package
+==========================
+
+.. py:module:: ansys.dyna.core.solver
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: solver
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.solver.dynalogging`
+            - Logging module supplying a general framework for logging in the PyDYNA
+
+
+          * - :py:obj:`~ansys.dyna.core.solver.dynasolver`
+            - Dyna solver
+
+
+          * - :py:obj:`~ansys.dyna.core.solver.grpc_tags`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.solver.launcher`
+            - Module for launching the pydyna solver service locally.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> dynalogging</api/ansys/dyna/core/solver/dynalogging/index>
+    <span class="nf nf-fa-file"></span> dynasolver</api/ansys/dyna/core/solver/dynasolver/index>
+    <span class="nf nf-fa-file"></span> grpc_tags</api/ansys/dyna/core/solver/grpc_tags/index>
+    <span class="nf nf-fa-file"></span> launcher</api/ansys/dyna/core/solver/launcher/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

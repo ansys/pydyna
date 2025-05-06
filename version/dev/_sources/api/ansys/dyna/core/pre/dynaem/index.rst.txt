@@ -1,0 +1,188 @@
+
+
+
+
+
+
+The ``dynaem.py`` module
+========================
+
+.. py:module:: ansys.dyna.core.pre.dynaem
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynaem
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.Isopotential_ConnType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.DynaEM`
+            - Contains methods for creating keywords related to EM.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.EMType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.EMDimension`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.BEMSOLVER`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.FEMSOLVER`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.EMAnalysis`
+            - Enables the EM solver and sets its options.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.CircuitType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.Circuit`
+            - Defines an electrical circuit.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.EMContactType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.EMContact`
+            - Detects contact between conductors.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.EMRandlesLayer`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.Isopotential`
+            - Defines an isopotential.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.RogoCoil`
+            - Measures the total current flowing through a given section of the conductor.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.RandlesCellType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem.RandlesCell`
+            - Define parameters for a Randles Cell.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Isopotential_ConnType</api/ansys/dyna/core/pre/dynaem/Isopotential_ConnType>
+    <span class="nf nf-cod-symbol_class"></span> DynaEM</api/ansys/dyna/core/pre/dynaem/DynaEM>
+    <span class="nf nf-cod-symbol_class"></span> EMType</api/ansys/dyna/core/pre/dynaem/EMType>
+    <span class="nf nf-cod-symbol_class"></span> EMDimension</api/ansys/dyna/core/pre/dynaem/EMDimension>
+    <span class="nf nf-cod-symbol_class"></span> BEMSOLVER</api/ansys/dyna/core/pre/dynaem/BEMSOLVER>
+    <span class="nf nf-cod-symbol_class"></span> FEMSOLVER</api/ansys/dyna/core/pre/dynaem/FEMSOLVER>
+    <span class="nf nf-cod-symbol_class"></span> EMAnalysis</api/ansys/dyna/core/pre/dynaem/EMAnalysis>
+    <span class="nf nf-cod-symbol_class"></span> CircuitType</api/ansys/dyna/core/pre/dynaem/CircuitType>
+    <span class="nf nf-cod-symbol_class"></span> Circuit</api/ansys/dyna/core/pre/dynaem/Circuit>
+    <span class="nf nf-cod-symbol_class"></span> EMContactType</api/ansys/dyna/core/pre/dynaem/EMContactType>
+    <span class="nf nf-cod-symbol_class"></span> EMContact</api/ansys/dyna/core/pre/dynaem/EMContact>
+    <span class="nf nf-cod-symbol_class"></span> EMRandlesLayer</api/ansys/dyna/core/pre/dynaem/EMRandlesLayer>
+    <span class="nf nf-cod-symbol_class"></span> Isopotential</api/ansys/dyna/core/pre/dynaem/Isopotential>
+    <span class="nf nf-cod-symbol_class"></span> RogoCoil</api/ansys/dyna/core/pre/dynaem/RogoCoil>
+    <span class="nf nf-cod-symbol_class"></span> RandlesCellType</api/ansys/dyna/core/pre/dynaem/RandlesCellType>
+    <span class="nf nf-cod-symbol_class"></span> RandlesCell</api/ansys/dyna/core/pre/dynaem/RandlesCell>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+EM API
+======
+
+Module for creating an electromagnetism (EM) input deck.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

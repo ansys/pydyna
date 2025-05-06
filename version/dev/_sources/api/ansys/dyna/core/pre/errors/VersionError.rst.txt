@@ -1,0 +1,49 @@
+
+
+
+
+
+
+:class:`VersionError`
+=====================
+
+
+.. py:exception:: ansys.dyna.core.pre.errors.VersionError(msg='Invalid kwserver version')
+
+   Bases: :py:obj:`ValueError`
+
+
+   
+   Provides the error raised when the kwserver is invalid.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.errors import VersionError
+
+
+
+
+

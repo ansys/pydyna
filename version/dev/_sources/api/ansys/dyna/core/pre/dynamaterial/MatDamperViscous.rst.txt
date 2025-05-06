@@ -1,0 +1,118 @@
+
+
+
+
+
+
+:class:`MatDamperViscous`
+=========================
+
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatDamperViscous(damping_constant=0)
+
+   
+   Provides a linear translational or rotational damper located between two nodes.
+
+
+   :Parameters:
+
+       **damping_constant**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatDamperViscous
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create a material damper viscous.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~dc`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynamaterial import MatDamperViscous
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: dc
+   :value: 0
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub)
+
+   
+   Create a material damper viscous.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
