@@ -3,7 +3,6 @@
 import datetime
 import os
 
-import pyvista
 from ansys_sphinx_theme import get_version_match, ansys_favicon
 from sphinx.builders.latex import LaTeXBuilder
 from sphinx_gallery.sorting import FileNameSortKey
@@ -29,7 +28,6 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.inheritance_diagram',
     "sphinx_jinja",
-    "pyvista.ext.plot_directive",
     "sphinx_design",
     "ansys_sphinx_theme.extension.autoapi",
 ]
@@ -90,18 +88,8 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst", "keyword_classes/**"]
+exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst"]
 
-# make rst_epilog a variable, so you can add other epilog parts to it
-rst_epilog = ""
-
-# Read link all targets from file
-with open("links.rst") as f:
-    rst_epilog += f.read()
-linkcheck_exclude_documents = ["changelog"]
-
-inheritance_graph_attrs = dict(rankdir="RL", size='"8.0, 10.0"', fontsize=14, ratio="compress")
-inheritance_node_attrs = dict(shape="ellipse", fontsize=14, height=0.75, color="dodgerblue1", style="filled")
 
 # -- Options for HTML output -------------------------------------------------
 html_short_title = html_title = "PyDYNA"
@@ -130,83 +118,20 @@ html_theme_options = {
     "ansys_sphinx_theme_autoapi": {
         "project": project,
         "ignore": [
-            "*core/keywords/keyword_classes/auto*",
+            # all other than acore/keyword/auto
+            "*core/lib/*",
+            "*core/pre/*",
+            "*core/solver/*",
+            "*core/run/*",
         ],
+        "directory": "../../../src/ansys",
         "output": "api",
+        "own_page_level": "module",
     },
 }
 
-# static path
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
-
-# -- Declare the Jinja context -----------------------------------------------
-BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
-if not BUILD_API:
-    exclude_patterns.append("api")
-    html_theme_options.pop("ansys_sphinx_theme_autoapi")
-    extensions.remove("ansys_sphinx_theme.extension.autoapi")
-
-suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
-
-BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
-if BUILD_EXAMPLES is True:
-    # Necessary for pyvista when building the sphinx gallery
-    extensions.append("sphinx_gallery.gen_gallery")
-    pyvista.BUILDING_GALLERY = True
-    sphinx_gallery_conf = {
-                # convert rst to md for ipynb
-                "pypandoc": True,
-                # path to your examples scripts
-                "examples_dirs": ["../../examples/"],
-                # path where to save gallery generated examples
-                "gallery_dirs": ["examples"],
-                # Patter to search for examples files
-                "filename_pattern": r"\.py",
-                # Patter to omit some files
-                "ignore_pattern": r"/*_data.py",
-                # Remove the "Download all examples" button from the top level gallery
-                "download_all_examples": False,
-                # Sort gallery examples by file name instead of number of lines (default)
-                "within_subsection_order": FileNameSortKey,
-                # directory where function granular galleries are stored
-                "backreferences_dir": None,
-                # Modules for which function level galleries are created.  In
-                "doc_module": "ansys-dyna-core",
-                "image_scrapers": ("pyvista", "matplotlib"),
-                "thumbnail_size": (600, 300),
-                # 'first_notebook_cell': ("%matplotlib inline\n"
-                #                         "from pyvista import set_plot_theme\n"
-                #                         "set_plot_theme('document')"),
-                'remove_config_comments': True,
-            }
-
-jinja_contexts = {
-    "main_toctree": {
-        "build_api": BUILD_API,
-        "build_examples": BUILD_EXAMPLES,
-    },
+misc = {
+    "copy_overwrite": True
 }
-
-
-def skip_run_subpackage(app, what, name, obj, skip, options):
-    """Skip specific members of the 'run' subpackage during documentation generation.
-
-    This function skips:
-    - All modules under 'ansys.dyna.core.run' except 'local_solver' and 'options'.
-    - Within 'local_solver', skips all members except the 'run_dyna' function.
-    """
-    
-    
-    if name.startswith("ansys.dyna.core.run.") and not (name.startswith("ansys.dyna.core.run.local_solver") or name.startswith("ansys.dyna.core.run.options")):
-            skip = True
-
-    if name.startswith("ansys.dyna.core.run.local_solver"):
-        if what == "function" and name!= "ansys.dyna.core.run.local_solver.run_dyna":
-            skip = True
-
-    return skip
-
-def setup(sphinx):
-    """Add custom extensions to Sphinx."""
-    sphinx.connect("autoapi-skip-member", skip_run_subpackage)

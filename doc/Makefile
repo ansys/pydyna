@@ -7,13 +7,33 @@ SPHINXOPTS    = -j auto
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = _build
-APIDIR       = api
+APIDIR        = api
+KEYWORDDIR    = $(SOURCEDIR)/keywordclasses
+KEYWORDBUILD   = $(KEYWORDDIR)/_build/html
 
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile
+.PHONY: help html Makefile clean pdf
+
+html:
+ifdef KEYWORDS
+	@echo "🔧 Building keywordclasses..."
+	$(MAKE) -C "$(KEYWORDDIR)" html "$(KEYWORDBUILD)" $(SPHINXOPTS) $(O)
+
+else
+	@echo "⚠️  Skipping keywordclasses build"
+
+endif
+    @echo "🔧 Building main documentation..."
+	$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+ifdef KEYWORDS
+	@echo "replacing keywordclasses build..."
+	rm -rf $(BUILDDIR)/html/api/ansys/dyna/core/keywords
+	cp -r $(KEYWORDBUILD)/html/api/ansys/dyna/core/keywords $(BUILDDIR)/html/api/ansys/dyna/core/
+endif
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
