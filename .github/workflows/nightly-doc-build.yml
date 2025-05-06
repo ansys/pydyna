@@ -58,6 +58,16 @@ jobs:
           # TODO - consider adding to pyproject.toml under an option
           python -m pip install docker
 
+      - name: "Build keyword class documentation"
+        run: |
+          make -C doc keyword_classes
+
+      - name: "Upload keyword class documentation"
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: keyword_classes_docs
+          path: doc/keyword_classes/_build/html/
+
       - name: "Login to GitHub container registry"
         uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
         with:
@@ -100,6 +110,30 @@ jobs:
           name: documentation-html
           path: doc/_build/html
           retention-days: 7
+
+      - name: "Download both the html and keyword class documentation"
+        uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: documentation-html
+
+      - name: "Download keyword class documentation"
+        uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: keyword_classes_docs
+
+      - name: "Replace keywordclasses documentation in final HTML build"
+        run: |
+          echo "🧹 Removing existing keywordclasses output..."
+          rm -rf doc/_build/html/api/ansys/dyna/core/keywords
+          echo "📁 Copying new keywordclasses output..."
+          cp -r doc/keyword_classes/_build/html/api/ansys/dyna/core/keywords doc/_build/html/api/ansys/dyna/core/keywords
+          echo "✅ Keywordclasses documentation replaced."
+
+      - name: "Upload the final HTML documentation"
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: documentation-html-final
+
 
       - name: "Build the pdf documentation"
         env:

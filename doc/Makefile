@@ -15,23 +15,11 @@ KEYWORDBUILD   = $(KEYWORDDIR)/_build/html
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help html Makefile clean pdf
+.PHONY: help html Makefile clean pdf keyword_classes
 
-html:
-ifdef KEYWORDS
+keyword_classes:
 	@echo "🔧 Building keywordclasses..."
 	$(SPHINXBUILD) -b html "$(KEYWORDDIR)" "$(KEYWORDBUILD)" $(SPHINXOPTS) $(O)
-else
-	@echo "⚠️  Skipping keywordclasses build"
-endif
-	@echo "🔧 Building html..."
-	$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-
-ifdef KEYWORDS
-	@echo "replacing keywordclasses build..."
-	rm -rf $(BUILDDIR)/html/api/ansys/dyna/core/keywords
-	cp -r $(KEYWORDBUILD)/html/api/ansys/dyna/core/keywords $(BUILDDIR)/html/api/ansys/dyna/core/
-endif
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

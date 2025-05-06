@@ -6,7 +6,12 @@ These classes are used to create and manipulate keyword files for LS-DYNA
 and are essential for defining the input data for simulations.
 
 .. toctree::
-    :hidden:
-    :maxdepth: 3
+       :hidden:
+       :maxdepth: 3
 
-    api/ansys/dyna/core/keywords/index
+       ../getting-started
+       ../user-guide/index
+       ../api/index
+       ../examples/index
+       ../contributing
+       ../changelog
