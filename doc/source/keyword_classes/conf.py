@@ -22,14 +22,12 @@ cname = os.getenv("DOCUMENTATION_CNAME", default="dyna.docs.pyansys.com")
 # Sphinx extensions
 extensions = [
     'sphinx.ext.intersphinx',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.viewcode',
     'numpydoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.inheritance_diagram',
     "sphinx_jinja",
     "sphinx_design",
-    "ansys_sphinx_theme.extension.autoapi",
+    # "ansys_sphinx_theme.extension.autoapi",
 ]
 
 # Intersphinx mapping
@@ -88,7 +86,7 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst"]
+exclude_patterns = ["api/index.rst", "api/ansys/dyna/core/index.rst"]
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -130,8 +128,4 @@ html_theme_options = {
     },
 }
 
-html_static_path = ["_static"]
-
-misc = {
-    "copy_overwrite": True
-}
+suppress_warnings = ["misc.copy_overwrite"]

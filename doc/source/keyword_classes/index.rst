@@ -9,4 +9,4 @@ and are essential for defining the input data for simulations.
     :hidden:
     :maxdepth: 3
 
-    api/index
+    api/ansys/dyna/core/keywords/index

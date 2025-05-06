@@ -8,7 +8,7 @@ SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = _build
 APIDIR        = api
-KEYWORDDIR    = $(SOURCEDIR)/keywordclasses
+KEYWORDDIR    = $(SOURCEDIR)/keyword_classes
 KEYWORDBUILD   = $(KEYWORDDIR)/_build/html
 
 # Put it first so that "make" without argument is like "make help".
@@ -20,13 +20,11 @@ help:
 html:
 ifdef KEYWORDS
 	@echo "🔧 Building keywordclasses..."
-	$(MAKE) -C "$(KEYWORDDIR)" html "$(KEYWORDBUILD)" $(SPHINXOPTS) $(O)
-
+	$(SPHINXBUILD) -b html "$(KEYWORDDIR)" "$(KEYWORDBUILD)" $(SPHINXOPTS) $(O)
 else
 	@echo "⚠️  Skipping keywordclasses build"
-
 endif
-    @echo "🔧 Building main documentation..."
+	@echo "🔧 Building html..."
 	$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 ifdef KEYWORDS
