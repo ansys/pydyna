@@ -14,4 +14,4 @@ to interact with them programmatically.
    <span class="nf nf-md-package"></span> {{ page.name }}<{{ page.include_path }}>
    {% endif %}
    {% endfor %}
-   _autsummary/index
+   _autosummary/index
