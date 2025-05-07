@@ -31,7 +31,7 @@ extensions = [
     "sphinx_jinja",
     "pyvista.ext.plot_directive",
     "sphinx_design",
-    # "ansys_sphinx_theme.extension.autoapi",
+    "ansys_sphinx_theme.extension.autoapi",
 ]
 
 # Intersphinx mapping
