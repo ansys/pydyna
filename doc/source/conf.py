@@ -31,7 +31,7 @@ extensions = [
     "sphinx_jinja",
     "pyvista.ext.plot_directive",
     "sphinx_design",
-    "ansys_sphinx_theme.extension.autoapi",
+    # "ansys_sphinx_theme.extension.autoapi",
 ]
 
 # Intersphinx mapping
@@ -129,9 +129,9 @@ html_theme_options = {
     "use_edit_page_button": True,
     "ansys_sphinx_theme_autoapi": {
         "project": project,
-        # "ignore": [
-        #     "*core/keywords/keyword_classes/auto*",
-        # ],
+        "ignore": [
+            "*core/keywords/keyword_classes/auto*",
+        ],
         "output": "api",
     },
 }
@@ -147,7 +147,7 @@ if not BUILD_API:
     html_theme_options.pop("ansys_sphinx_theme_autoapi")
     extensions.remove("ansys_sphinx_theme.extension.autoapi")
 
-suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
+suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils"]
 
 BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
 if BUILD_EXAMPLES is True:
@@ -206,3 +206,4 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
             skip = True
 
     return skip
+
