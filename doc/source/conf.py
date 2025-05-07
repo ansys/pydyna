@@ -133,6 +133,7 @@ html_theme_options = {
             "*core/keywords/keyword_classes/auto*",
         ],
         "output": "api",
+        "templates": "autoapi/"
     },
 }
 
@@ -207,3 +208,7 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
 
     return skip
 
+
+def setup(sphinx):
+    """Add custom extensions to Sphinx."""
+    sphinx.connect("autoapi-skip-member", skip_run_subpackage)

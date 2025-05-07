@@ -74,4 +74,3 @@ PyDYNA documentation  |version|
        {% endif %}
        contributing
        changelog
-       _autosummary/core.keywords.rst
