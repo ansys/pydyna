@@ -1,7 +1,7 @@
 API reference
 =============
 
-This section describes {{ project_name }} endpoints, their capabilities, and how
+This section describes PyDYNA's endpoints, their capabilities, and how
 to interact with them programmatically.
 
 .. toctree::
@@ -14,4 +14,4 @@ to interact with them programmatically.
    <span class="nf nf-md-package"></span> {{ page.name }}<{{ page.include_path }}>
    {% endif %}
    {% endfor %}
-   _autosummary/index
+   <span class="nf nf-md-package"></span> Auto Keyword classes<../_autosummary/index>
