@@ -1,5 +1,7 @@
 :orphan:
 
+.. vale off
+
 core.keywords.keyword\_classes.auto package
 ===========================================
 
@@ -25333,3 +25335,5 @@ Module contents
    :members:
    :show-inheritance:
    :undoc-members:
+
+.. vale on
