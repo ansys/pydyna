@@ -14,7 +14,7 @@ on:
       - main
 
 env:
-  MAIN_PYTHON_VERSION: '3.12'
+  MAIN_PYTHON_VERSION: '3.13'
   PACKAGE_NAME: 'ansys-dyna-core'
   PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
@@ -140,8 +140,9 @@ jobs:
 
   doc:
     name: "Documentation build"
-    runs-on: ubuntu-latest
+    runs-on: [public-ubuntu-latest-8-cores]
     needs: [doc-style]
+    timeout-minutes: 720
     steps:
       - name: "Checkout project"
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -197,6 +198,7 @@ jobs:
           ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
           LSTC_LICENSE: ansys
           PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
+          BUILD_EXAMPLES: "False"
         run: |
           xvfb-run make -C doc html
 
