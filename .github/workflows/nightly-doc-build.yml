@@ -101,7 +101,10 @@ jobs:
           PYDYNA_RUN_STREAM: "0"
           extra_mem_bot: 20000000
           extra_mem_top: 30000000
-          pool_size: 9000000
+          pool_size: 15000000
+          string_vacancies: 90000
+          max_strings: 600000
+
         run: |
           xvfb-run make -C doc pdf
 
