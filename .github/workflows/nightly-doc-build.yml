@@ -48,7 +48,6 @@ jobs:
           # optional dependency for `run_dyna` to work with docker.
           # TODO - consider adding to pyproject.toml under an option
           python -m pip install docker
-
       - name: "Login to GitHub container registry"
         uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
         with:
@@ -83,7 +82,6 @@ jobs:
           LSTC_LICENSE: ansys
           PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
           BUILD_AUTOKEYWORS_API: True
-
         run: |
           timeout 7200 xvfb-run make -C doc html
 
