@@ -198,7 +198,6 @@ jobs:
           ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
           LSTC_LICENSE: ansys
           PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
-          BUILD_EXAMPLES: "False"
         run: |
           xvfb-run make -C doc html
 
