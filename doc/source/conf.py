@@ -137,7 +137,6 @@ html_theme_options = {
 }
 
 
-latex_engine = "xelatex"
 # static path
 html_static_path = ['_static']
 
