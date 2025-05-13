@@ -132,7 +132,7 @@ html_theme_options = {
             "*core/keywords/keyword_classes/auto*",
         ],
         "output": "api",
-        "templates": "autoapi/"
+        # "templates": "autoapi/"
     },
 }
 
@@ -150,6 +150,10 @@ if not BUILD_API:
     extensions.remove("ansys_sphinx_theme.extension.autoapi")
 
 suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils"]
+
+BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower() == "true"
+if BUILD_AUTOKEYWORS_API:
+    html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
 
 BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
 if BUILD_EXAMPLES is True:
