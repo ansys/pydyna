@@ -1,0 +1,135 @@
+
+
+
+
+
+
+:class:`ImportContext`
+======================
+
+
+.. py:class:: ansys.dyna.core.lib.import_handler.ImportContext
+
+   
+   Optional transformation to apply, using type `IncludeTransform`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ImportContext
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~xform`
+            - Deck into which the import is occurring.
+          * - :py:attr:`~deck`
+            - Path of file that is importing.
+          * - :py:attr:`~path`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.import_handler import ImportContext
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: xform
+   :type:  Any
+   :value: None
+
+
+   
+   Deck into which the import is occurring.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:attribute:: deck
+   :type:  Any
+   :value: None
+
+
+   
+   Path of file that is importing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:attribute:: path
+   :type:  str
+   :value: None
+
+
+
+
+
+

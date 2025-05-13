@@ -1,0 +1,76 @@
+
+
+
+
+
+
+:class:`ShellSection`
+=====================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ShellSection(element_formulation, shear_factor=1, integration_points=5, printout=0, thickness1=0, thickness2=0, thickness3=0, thickness4=0)
+
+   
+   Defines section properties for shell elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ShellSection
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import ShellSection
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: id
+
+
+
+
+

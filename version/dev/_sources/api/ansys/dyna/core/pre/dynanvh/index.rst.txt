@@ -1,0 +1,118 @@
+
+
+
+
+
+
+The ``dynanvh.py`` module
+=========================
+
+.. py:module:: ansys.dyna.core.pre.dynanvh
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynanvh
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynanvh.DynaNVH`
+            - Contains methods for creating a keyword related to NVH.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynanvh.ExcitationDOF`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynanvh.ExcitationType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynanvh.ResponseDOF`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynanvh.ResponseType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynanvh.FrequencyDomain`
+            - Provides a way of defining and solving frequency domain vibration and acoustic problems.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DynaNVH</api/ansys/dyna/core/pre/dynanvh/DynaNVH>
+    <span class="nf nf-cod-symbol_class"></span> ExcitationDOF</api/ansys/dyna/core/pre/dynanvh/ExcitationDOF>
+    <span class="nf nf-cod-symbol_class"></span> ExcitationType</api/ansys/dyna/core/pre/dynanvh/ExcitationType>
+    <span class="nf nf-cod-symbol_class"></span> ResponseDOF</api/ansys/dyna/core/pre/dynanvh/ResponseDOF>
+    <span class="nf nf-cod-symbol_class"></span> ResponseType</api/ansys/dyna/core/pre/dynanvh/ResponseType>
+    <span class="nf nf-cod-symbol_class"></span> FrequencyDomain</api/ansys/dyna/core/pre/dynanvh/FrequencyDomain>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+NVH API
+==========
+
+Module for creating an NVH Dyna input deck.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

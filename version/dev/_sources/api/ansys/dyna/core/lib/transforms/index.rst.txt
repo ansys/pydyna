@@ -1,0 +1,97 @@
+
+
+
+
+
+
+The ``transforms`` package
+==============================
+
+.. py:module:: ansys.dyna.core.lib.transforms
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: transforms
+.. tab-set::
+
+    .. tab-item:: Subpackages
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.transforms.utils`
+            - 
+
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.transforms.base_transform`
+            - Base Transform class.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.transforms.element_transform`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.transforms.node_transform`
+            - Transformation handler for *NODE.
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-package"></span> utils</api/ansys/dyna/core/lib/transforms/utils/index>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> base_transform</api/ansys/dyna/core/lib/transforms/base_transform/index>
+    <span class="nf nf-fa-file"></span> element_transform</api/ansys/dyna/core/lib/transforms/element_transform/index>
+    <span class="nf nf-fa-file"></span> node_transform</api/ansys/dyna/core/lib/transforms/node_transform/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

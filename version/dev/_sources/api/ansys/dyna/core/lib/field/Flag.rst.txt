@@ -1,0 +1,72 @@
+
+
+
+
+
+
+:class:`Flag`
+=============
+
+
+.. py:class:: ansys.dyna.core.lib.field.Flag
+
+
+.. py:currentmodule:: Flag
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~value`
+            - 
+          * - :py:attr:`~true_value`
+            - 
+          * - :py:attr:`~false_value`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.field import Flag
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: value
+   :type:  bool
+   :value: None
+
+
+.. py:attribute:: true_value
+   :type:  str
+   :value: None
+
+
+.. py:attribute:: false_value
+   :type:  str
+   :value: None
+
+
+
+
+
+

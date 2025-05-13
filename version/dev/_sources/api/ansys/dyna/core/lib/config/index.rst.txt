@@ -1,0 +1,91 @@
+
+
+
+
+
+
+The ``config.py`` module
+========================
+
+.. py:module:: ansys.dyna.core.lib.config
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: config
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~use_lspp_defaults`
+            - 
+
+
+          * - :py:obj:`~disable_lspp_defaults`
+            - 
+
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~USE_LSPP_DEFAULTS`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: use_lspp_defaults()
+
+.. py:function:: disable_lspp_defaults()
+
+.. py:data:: USE_LSPP_DEFAULTS
+   :value: True
+
+
+
+

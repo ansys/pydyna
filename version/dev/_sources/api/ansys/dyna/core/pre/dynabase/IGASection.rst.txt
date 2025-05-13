@@ -1,0 +1,76 @@
+
+
+
+
+
+
+:class:`IGASection`
+===================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.IGASection(element_formulation, shear_factor=1, thickness=1)
+
+   
+   Defines section properties for isogeometric shell elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: IGASection
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~id`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import IGASection
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: id
+
+
+
+
+

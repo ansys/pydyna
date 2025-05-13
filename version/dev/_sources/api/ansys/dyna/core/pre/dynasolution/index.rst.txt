@@ -1,0 +1,156 @@
+
+
+
+
+
+
+The ``dynasolution.py`` module
+==============================
+
+.. py:module:: ansys.dyna.core.pre.dynasolution
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynasolution
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynasolution.DynaSolution`
+            - Contains methods for creating a general LS-DYNA keyword.
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~init_log`
+            - Initialize a log file.
+
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~CHUNK_SIZE`
+            - 
+
+
+          * - :py:obj:`~MAX_MESSAGE_LENGTH`
+            - 
+
+
+          * - :py:obj:`~SERVER_PRE_VERSION`
+            - 
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DynaSolution</api/ansys/dyna/core/pre/dynasolution/DynaSolution>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Solution
+========
+
+Module for providing the top object that sets up a DYNA solution.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: init_log(log_file)
+
+   
+   Initialize a log file.
+
+
+   :Parameters:
+
+       **log_file** : :class:`python:str`
+           Name of the log file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: CHUNK_SIZE
+   :value: 1048576
+
+
+.. py:data:: MAX_MESSAGE_LENGTH
+   :value: 1073741824
+
+
+.. py:data:: SERVER_PRE_VERSION
+   :value: 'v0.4.6'
+
+
+
+

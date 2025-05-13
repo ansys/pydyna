@@ -1,0 +1,120 @@
+
+
+
+
+
+
+:class:`Options`
+================
+
+
+.. py:class:: ansys.dyna.core.lib.option_card.Options(api: OptionsInterface)
+
+   
+   Option collection associated with an options API.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+.. py:currentmodule:: Options
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~api`
+            - 
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__getitem__`
+            - Gets the option with the given name.
+          * - :py:attr:`~__repr__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.option_card import Options
+
+Property detail
+---------------
+
+.. py:property:: api
+   :type: OptionsInterface
+
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __getitem__(name: str) -> OptionAPI
+
+   
+   Gets the option with the given name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: __repr__() -> str
+
+
+
+

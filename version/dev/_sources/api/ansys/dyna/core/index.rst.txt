@@ -1,0 +1,108 @@
+
+
+
+
+
+
+The ``ansys.dyna.core`` library
+===============================
+
+.. py:module:: ansys.dyna.core
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: core
+.. tab-set::
+
+    .. tab-item:: Subpackages
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords`
+            - ANSYS Dyna Keywords Module.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.pre`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.run`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.solver`
+            - 
+
+
+
+
+
+
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~__version__`
+            - 
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-package"></span> keywords</api/ansys/dyna/core/keywords/index>
+    <span class="nf nf-md-package"></span> lib</api/ansys/dyna/core/lib/index>
+    <span class="nf nf-md-package"></span> pre</api/ansys/dyna/core/pre/index>
+    <span class="nf nf-md-package"></span> run</api/ansys/dyna/core/run/index>
+    <span class="nf nf-md-package"></span> solver</api/ansys/dyna/core/solver/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: __version__
+
+
+

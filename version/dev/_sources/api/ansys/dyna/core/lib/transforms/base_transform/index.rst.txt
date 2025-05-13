@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``base_transform.py`` module
+================================
+
+.. py:module:: ansys.dyna.core.lib.transforms.base_transform
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: base_transform
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.transforms.base_transform.Transform`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Transform</api/ansys/dyna/core/lib/transforms/base_transform/Transform>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Base Transform class.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

@@ -1,0 +1,118 @@
+
+
+
+
+
+
+:class:`EMEOSTabulated1`
+========================
+
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1(curve=None)
+
+   
+   Defines electrical conductivity or permeability.
+
+
+   :Parameters:
+
+       **curve** : :obj:`Curve`
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: EMEOSTabulated1
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create an EM EOS tabulated1.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~curve`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynamaterial import EMEOSTabulated1
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: curve
+   :value: None
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub)
+
+   
+   Create an EM EOS tabulated1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

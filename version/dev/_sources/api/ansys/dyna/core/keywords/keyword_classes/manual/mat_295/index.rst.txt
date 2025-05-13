@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``mat_295.py`` module
+=========================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.mat_295
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: mat_295
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.mat_295.Mat295`
+            - DYNA MAT_295 keyword
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.mat_295.MatAnisotropicHyperelastic`
+            - DYNA MAT_295 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Mat295</api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295/Mat295>
+    <span class="nf nf-cod-symbol_class"></span> MatAnisotropicHyperelastic</api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295/MatAnisotropicHyperelastic>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

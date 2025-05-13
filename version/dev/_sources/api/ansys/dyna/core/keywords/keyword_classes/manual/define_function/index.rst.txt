@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``define_function.py`` module
+=================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.define_function
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: define_function
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.define_function.DefineFunction`
+            - DYNA DEFINE_FUNCTION keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DefineFunction</api/ansys/dyna/core/keywords/keyword_classes/manual/define_function/DefineFunction>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module to define function.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

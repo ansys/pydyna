@@ -1,0 +1,105 @@
+
+
+
+
+
+
+:class:`SetType`
+================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.SetType(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Contains the enums for setting types.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: SetType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~SHELL`
+            - 
+          * - :py:attr:`~SOLID`
+            - 
+          * - :py:attr:`~BEAM`
+            - 
+          * - :py:attr:`~TSHELL`
+            - 
+          * - :py:attr:`~DISCRETE`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import SetType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: SHELL
+   :value: 'SET_SHELL'
+
+
+.. py:attribute:: SOLID
+   :value: 'SET_SOLID'
+
+
+.. py:attribute:: BEAM
+   :value: 'SET_BEAM'
+
+
+.. py:attribute:: TSHELL
+   :value: 'SET_TSHELL'
+
+
+.. py:attribute:: DISCRETE
+   :value: 'SET_DISCRETE'
+
+
+
+
+
+

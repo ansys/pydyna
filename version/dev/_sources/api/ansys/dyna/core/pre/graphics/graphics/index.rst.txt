@@ -1,0 +1,165 @@
+
+
+
+
+
+
+The ``graphics.py`` module
+==========================
+
+.. py:module:: ansys.dyna.core.pre.graphics.graphics
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: graphics
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.graphics.graphics.Picker`
+            - Contains the items that can be selected from the display with the mouse.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.graphics.graphics.Graphics`
+            - Manages graphics in PyDYNA.
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.graphics.graphics.DisplayMeshType`
+            - Contains the mesh types to display.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.graphics.graphics.ColorByType`
+            - Contains the zone types to display.
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~compute_distance`
+            - Compute the distance between two points.
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~color_matrix`
+            - 
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Picker</api/ansys/dyna/core/pre/graphics/graphics/Picker>
+    <span class="nf nf-cod-symbol_class"></span> Graphics</api/ansys/dyna/core/pre/graphics/graphics/Graphics>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> DisplayMeshType</api/ansys/dyna/core/pre/graphics/graphics/DisplayMeshType>
+    <span class="nf nf-cod-symbol_enum"></span> ColorByType</api/ansys/dyna/core/pre/graphics/graphics/ColorByType>
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for graphics-related implementations.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: compute_distance(point1, point2)
+
+   
+   Compute the distance between two points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: color_matrix
+
+
+

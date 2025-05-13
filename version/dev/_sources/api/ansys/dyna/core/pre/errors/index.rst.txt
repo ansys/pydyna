@@ -1,0 +1,145 @@
+
+
+
+
+
+
+The ``errors.py`` module
+========================
+
+.. py:module:: ansys.dyna.core.pre.errors
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: errors
+.. tab-set::
+
+
+
+
+
+
+    .. tab-item:: Exceptions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.errors.VersionError`
+            - Provides the error raised when the kwserver is invalid.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.errors.PydynaRuntimeError`
+            - Provides the error raised when PyDYNA passes an error.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.errors.PydynaInvalidRoutineError`
+            - Provides the error raised when MAPDL is in the wrong routine.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.errors.LockFileException`
+            - Provides the error raised when the lockfile has not been removed.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.errors.KwserverDidNotStart`
+            - Provides the error raised when the kwserver process does not start.
+
+
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~SIGINT_TRACKER`
+            - 
+
+
+          * - :py:obj:`~LOCKFILE_MSG`
+            - 
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-lightning_bolt"></span> VersionError</api/ansys/dyna/core/pre/errors/VersionError>
+    <span class="nf nf-md-lightning_bolt"></span> PydynaRuntimeError</api/ansys/dyna/core/pre/errors/PydynaRuntimeError>
+    <span class="nf nf-md-lightning_bolt"></span> PydynaInvalidRoutineError</api/ansys/dyna/core/pre/errors/PydynaInvalidRoutineError>
+    <span class="nf nf-md-lightning_bolt"></span> LockFileException</api/ansys/dyna/core/pre/errors/LockFileException>
+    <span class="nf nf-md-lightning_bolt"></span> KwserverDidNotStart</api/ansys/dyna/core/pre/errors/KwserverDidNotStart>
+
+
+
+
+
+
+
+Description
+-----------
+
+Module containing PyDYNA-specific errors.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: SIGINT_TRACKER
+   :value: []
+
+
+.. py:data:: LOCKFILE_MSG
+   :value: Multiline-String
+
+   .. raw:: html
+
+      <details><summary>Show Value</summary>
+
+   .. code-block:: python
+
+      """
+      Either another Ansys job with the same job name is already running in this
+      directory or the lock file has not been deleted from an abnormally
+      terminated Ansys run.
+      
+      Disable this check by passing ``override=True``
+      
+      """
+
+   .. raw:: html
+
+      </details>
+
+
+
+
+

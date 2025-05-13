@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``element_solid.py`` module
+===============================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.element_solid
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: element_solid
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.element_solid.ElementSolid`
+            - DYNA ELEMENT_SOLID (ten nodes format) keyword
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ElementSolid</api/ansys/dyna/core/keywords/keyword_classes/manual/element_solid/ElementSolid>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Contains the ElementSolid class.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

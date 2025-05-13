@@ -1,0 +1,84 @@
+
+
+
+
+
+
+:class:`BaseSet`
+================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.BaseSet
+
+   
+   Defines the base class for all set classes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: BaseSet
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~type`
+            - 
+          * - :py:attr:`~id`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import BaseSet
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: type
+   :value: 'PARTSET'
+
+
+.. py:attribute:: id
+   :value: 0
+
+
+
+
+
+

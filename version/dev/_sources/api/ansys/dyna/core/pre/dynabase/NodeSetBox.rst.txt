@@ -1,0 +1,127 @@
+
+
+
+
+
+
+:class:`NodeSetBox`
+===================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.NodeSetBox(boxes=[])
+
+   Bases: :py:obj:`BaseSet`
+
+
+   
+   include the nodes inside boxes.
+
+
+   :Parameters:
+
+       **boxes** : :class:`python:list`
+           A list of BOX.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: NodeSetBox
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create a node set.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~boxes`
+            - 
+          * - :py:attr:`~type`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import NodeSetBox
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: boxes
+   :value: []
+
+
+.. py:attribute:: type
+   :value: 'NODESETBOX'
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub)
+
+   
+   Create a node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

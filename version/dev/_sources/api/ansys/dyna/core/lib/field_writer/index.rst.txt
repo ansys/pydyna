@@ -1,0 +1,215 @@
+
+
+
+
+
+
+The ``field_writer.py`` module
+==============================
+
+.. py:module:: ansys.dyna.core.lib.field_writer
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: field_writer
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~check_field_type`
+            - 
+
+
+          * - :py:obj:`~write_field_c`
+            - 
+
+
+          * - :py:obj:`~write_field`
+            - 
+
+
+          * - :py:obj:`~write_c_dataframe`
+            - 
+
+
+          * - :py:obj:`~write_fields`
+            - Write `fields` representing a line of a keyword to `buf`.
+
+
+          * - :py:obj:`~write_comment_line`
+            - Writes the comment line to the buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: check_field_type(field_type: type)
+
+.. py:function:: write_field_c(buf: IO[AnyStr], field_type: type, value: Any, width: int) -> None
+
+.. py:function:: write_field(buf: IO[AnyStr], field_type: type, value: Any, width: int) -> None
+
+.. py:function:: write_c_dataframe(buf: IO[AnyStr], fields: List[ansys.dyna.core.lib.field.Field], table: pandas.DataFrame, format: ansys.dyna.core.lib.format_type.format_type) -> None
+
+.. py:function:: write_fields(buf: IO[AnyStr], fields: List[ansys.dyna.core.lib.field.Field], values: Optional[List[Any]] = None, format: Optional[ansys.dyna.core.lib.format_type.format_type] = format_type.default) -> None
+
+   
+   Write `fields` representing a line of a keyword to `buf`.
+
+   Use the fixed column offsets and width
+
+   :Parameters:
+
+       **buf: IO**
+           buffer to write to
+
+       **fields: List**
+           fields to write
+
+       **values: List**
+           optional - list of values for the field. If not set, use the value property of each field.
+           used by TableCard
+
+       **format: format_type**
+           optional - format to write
+
+       **>>> s=io.String()**
+           ..
+
+       **>>> fields = [**
+           ..
+
+       **...     Field("a", int, 0, 10, 1),**
+           ..
+
+       **...     Field("b", str, 10, 10, "hello")**
+           ..
+
+       **... ]**
+           ..
+
+       **>>> write_fields(s, fields)**
+           ..
+
+       **>>> s.getvalue()**
+           ..
+
+       **'         1     hello'**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: write_comment_line(buf: IO[AnyStr], fields: List[ansys.dyna.core.lib.field.Field], format: Optional[ansys.dyna.core.lib.format_type.format_type] = format_type.default) -> None
+
+   
+   Writes the comment line to the buffer.
+
+
+   :Parameters:
+
+       **buf: IO**
+           buffer to write to
+
+       **fields: List**
+           fields to write
+
+       **format: format_type**
+           format to write in
+
+       **>>> s=io.String()**
+           ..
+
+       **>>> fields = [**
+           ..
+
+       **...     Field("a", int, 0, 10, 1),**
+           ..
+
+       **...     Field("b", str, 10, 10, "hello")**
+           ..
+
+       **... ]**
+           ..
+
+       **>>> write_comment_line(s, fields)**
+           ..
+
+       **>>> s.getvalue()**
+           ..
+
+       **'         a         b'**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+

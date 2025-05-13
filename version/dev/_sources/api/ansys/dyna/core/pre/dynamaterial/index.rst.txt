@@ -1,0 +1,265 @@
+
+
+
+
+
+
+The ``dynamaterial.py`` module
+==============================
+
+.. py:module:: ansys.dyna.core.pre.dynamaterial
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynamaterial
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.Air`
+            - Defines an air material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.Liner`
+            - Defines a liner material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.HighExplosive`
+            - Defines a high-explosive material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.Vacuum`
+            - Defines a vacuum material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatNull`
+            - Defines a null material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1`
+            - Defines electrical conductivity or permeability.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.EMMATTYPE`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatAdditional`
+            - Defines additional properties for a material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatElastic`
+            - Defines an isotropic hypoelastic material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic`
+            - Define material of modelling isotropic and kinematic hardening plasticity.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal`
+            - Defines temperature-dependent material coefficients.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatRigid`
+            - Defines a rigid material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatShapeMemory`
+            - Describe the superelastic response present in shape-memory alloys,
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatCrushableFoam`
+            - Define material of modelling crushable foam.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatOgdenRubber`
+            - Provides the Ogden rubber model.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic`
+            - Defines isotropic thermal properties.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic`
+            - Defines orthotropic thermal properties.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete`
+            - Defines a rigid material for shells or solids.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity`
+            - Defines an elasto-plastic material with an arbitrary stress.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity`
+            - Defines an elasto-plastic material supporting an arbitrary stress.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatSpotweld`
+            - Defines a spotweld material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatFabric`
+            - Define an airbag material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic`
+            - Provides a nonlinear elastic translational and rotational spring with an arbitrary force.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatDamperViscous`
+            - Provides a linear translational or rotational damper located between two nodes.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous`
+            - Provides a viscous translational damper with an arbitrary force.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid`
+            - Defines an ISPH (incompressible smooth particle hyrodynamics) fluid material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure`
+            - Defines an ISPH structure material.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Air</api/ansys/dyna/core/pre/dynamaterial/Air>
+    <span class="nf nf-cod-symbol_class"></span> Liner</api/ansys/dyna/core/pre/dynamaterial/Liner>
+    <span class="nf nf-cod-symbol_class"></span> HighExplosive</api/ansys/dyna/core/pre/dynamaterial/HighExplosive>
+    <span class="nf nf-cod-symbol_class"></span> Vacuum</api/ansys/dyna/core/pre/dynamaterial/Vacuum>
+    <span class="nf nf-cod-symbol_class"></span> MatNull</api/ansys/dyna/core/pre/dynamaterial/MatNull>
+    <span class="nf nf-cod-symbol_class"></span> EMEOSTabulated1</api/ansys/dyna/core/pre/dynamaterial/EMEOSTabulated1>
+    <span class="nf nf-cod-symbol_class"></span> EMMATTYPE</api/ansys/dyna/core/pre/dynamaterial/EMMATTYPE>
+    <span class="nf nf-cod-symbol_class"></span> MatAdditional</api/ansys/dyna/core/pre/dynamaterial/MatAdditional>
+    <span class="nf nf-cod-symbol_class"></span> MatElastic</api/ansys/dyna/core/pre/dynamaterial/MatElastic>
+    <span class="nf nf-cod-symbol_class"></span> MatPlasticKinematic</api/ansys/dyna/core/pre/dynamaterial/MatPlasticKinematic>
+    <span class="nf nf-cod-symbol_class"></span> MatElasticPlasticThermal</api/ansys/dyna/core/pre/dynamaterial/MatElasticPlasticThermal>
+    <span class="nf nf-cod-symbol_class"></span> MatRigid</api/ansys/dyna/core/pre/dynamaterial/MatRigid>
+    <span class="nf nf-cod-symbol_class"></span> MatShapeMemory</api/ansys/dyna/core/pre/dynamaterial/MatShapeMemory>
+    <span class="nf nf-cod-symbol_class"></span> MatCrushableFoam</api/ansys/dyna/core/pre/dynamaterial/MatCrushableFoam>
+    <span class="nf nf-cod-symbol_class"></span> MatOgdenRubber</api/ansys/dyna/core/pre/dynamaterial/MatOgdenRubber>
+    <span class="nf nf-cod-symbol_class"></span> MatThermalIsotropic</api/ansys/dyna/core/pre/dynamaterial/MatThermalIsotropic>
+    <span class="nf nf-cod-symbol_class"></span> MatThermalOrthotropic</api/ansys/dyna/core/pre/dynamaterial/MatThermalOrthotropic>
+    <span class="nf nf-cod-symbol_class"></span> MatRigidDiscrete</api/ansys/dyna/core/pre/dynamaterial/MatRigidDiscrete>
+    <span class="nf nf-cod-symbol_class"></span> MatPiecewiseLinearPlasticity</api/ansys/dyna/core/pre/dynamaterial/MatPiecewiseLinearPlasticity>
+    <span class="nf nf-cod-symbol_class"></span> MatModifiedPiecewiseLinearPlasticity</api/ansys/dyna/core/pre/dynamaterial/MatModifiedPiecewiseLinearPlasticity>
+    <span class="nf nf-cod-symbol_class"></span> MatSpotweld</api/ansys/dyna/core/pre/dynamaterial/MatSpotweld>
+    <span class="nf nf-cod-symbol_class"></span> MatFabric</api/ansys/dyna/core/pre/dynamaterial/MatFabric>
+    <span class="nf nf-cod-symbol_class"></span> MatSpringNonlinearElastic</api/ansys/dyna/core/pre/dynamaterial/MatSpringNonlinearElastic>
+    <span class="nf nf-cod-symbol_class"></span> MatDamperViscous</api/ansys/dyna/core/pre/dynamaterial/MatDamperViscous>
+    <span class="nf nf-cod-symbol_class"></span> MatDamperNonlinearViscous</api/ansys/dyna/core/pre/dynamaterial/MatDamperNonlinearViscous>
+    <span class="nf nf-cod-symbol_class"></span> MatSPHIncompressibleFluid</api/ansys/dyna/core/pre/dynamaterial/MatSPHIncompressibleFluid>
+    <span class="nf nf-cod-symbol_class"></span> MatSPHIncompressibleStructure</api/ansys/dyna/core/pre/dynamaterial/MatSPHIncompressibleStructure>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Material API
+=============
+
+Module for creating a material.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

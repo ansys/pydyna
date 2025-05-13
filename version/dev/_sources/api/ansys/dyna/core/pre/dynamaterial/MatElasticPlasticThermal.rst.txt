@@ -1,0 +1,147 @@
+
+
+
+
+
+
+:class:`MatElasticPlasticThermal`
+=================================
+
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal(mass_density=0, temperatures=None, young_modulus=None, poisson_ratio=None, thermal_expansion=None, yield_stress=None)
+
+   Bases: :py:obj:`MatAdditional`
+
+
+   
+   Defines temperature-dependent material coefficients.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatElasticPlasticThermal
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create elastic plastic thermal material.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ro`
+            - 
+          * - :py:attr:`~ti`
+            - 
+          * - :py:attr:`~ei`
+            - 
+          * - :py:attr:`~pri`
+            - 
+          * - :py:attr:`~alphai`
+            - 
+          * - :py:attr:`~sigyi`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynamaterial import MatElasticPlasticThermal
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ro
+   :value: 0
+
+
+.. py:attribute:: ti
+   :value: None
+
+
+.. py:attribute:: ei
+   :value: None
+
+
+.. py:attribute:: pri
+   :value: None
+
+
+.. py:attribute:: alphai
+   :value: None
+
+
+.. py:attribute:: sigyi
+   :value: None
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub)
+
+   
+   Create elastic plastic thermal material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

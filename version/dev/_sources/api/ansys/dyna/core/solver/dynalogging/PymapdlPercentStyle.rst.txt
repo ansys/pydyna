@@ -1,0 +1,28 @@
+
+
+
+
+
+
+:class:`PymapdlPercentStyle`
+============================
+
+
+.. py:class:: ansys.dyna.core.solver.dynalogging.PymapdlPercentStyle(fmt, *, defaults=None)
+
+   Bases: :py:obj:`logging.PercentStyle`
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.solver.dynalogging import PymapdlPercentStyle
+
+
+
+
+

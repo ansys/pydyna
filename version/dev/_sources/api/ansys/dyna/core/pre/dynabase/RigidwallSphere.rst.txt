@@ -1,0 +1,214 @@
+
+
+
+
+
+
+:class:`RigidwallSphere`
+========================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.RigidwallSphere(center=Point(0, 0, 0), orient=Point(0, 0, 0), radius=1)
+
+   Bases: :py:obj:`BaseObj`
+
+
+   
+   Defines a rigid wall with a sphere form.
+
+
+   :Parameters:
+
+       **center** : :obj:`Point`, :obj:`optional`
+           The center of sphere.
+           The default is ``(0, 0, 0)``.
+
+       **orient** : :obj:`Point`, :obj:`optional`
+           Vector n determines the orintation of the rigidwall,the center define the tail of normal n,
+           the orient define the head of normal n.
+           The default is ``(0, 0, 0)``.
+
+       **radius** : :class:`python:float`, :obj:`optional`
+           Radius of the sphere. The default is ``1``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: RigidwallSphere
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_motion`
+            - Set the prescribed motion.
+          * - :py:attr:`~get_data`
+            - Get the rigidwall data.
+          * - :py:attr:`~create`
+            - Create a rigidwall sphere.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~stub`
+            - 
+          * - :py:attr:`~center`
+            - 
+          * - :py:attr:`~orient`
+            - 
+          * - :py:attr:`~radius`
+            - 
+          * - :py:attr:`~motion`
+            - 
+          * - :py:attr:`~lcid`
+            - 
+          * - :py:attr:`~dir`
+            - 
+          * - :py:attr:`~type`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import RigidwallSphere
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: stub
+
+.. py:attribute:: center
+
+.. py:attribute:: orient
+
+.. py:attribute:: radius
+   :value: 1
+
+
+.. py:attribute:: motion
+   :value: -1
+
+
+.. py:attribute:: lcid
+   :value: 0
+
+
+.. py:attribute:: dir
+
+.. py:attribute:: type
+   :value: 'rigidwall_sphere'
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: set_motion(curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0))
+
+   
+   Set the prescribed motion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: get_data() -> List
+
+   
+   Get the rigidwall data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: create()
+
+   
+   Create a rigidwall sphere.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

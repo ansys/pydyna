@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``format_type.py`` module
+=============================
+
+.. py:module:: ansys.dyna.core.lib.format_type
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: format_type
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.format_type.format_type`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> format_type</api/ansys/dyna/core/lib/format_type/format_type>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Format type for dyna keywords.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

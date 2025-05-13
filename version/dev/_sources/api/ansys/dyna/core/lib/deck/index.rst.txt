@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``deck.py`` module
+======================
+
+.. py:module:: ansys.dyna.core.lib.deck
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: deck
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.deck.Deck`
+            - Provides a collection of keywords that can read and write to a keyword file.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Deck</api/ansys/dyna/core/lib/deck/Deck>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module provides a collection of keywords that can read and write to a keyword file.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

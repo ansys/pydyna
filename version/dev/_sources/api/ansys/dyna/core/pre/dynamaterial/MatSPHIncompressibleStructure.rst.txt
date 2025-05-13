@@ -1,0 +1,145 @@
+
+
+
+
+
+
+:class:`MatSPHIncompressibleStructure`
+======================================
+
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure(mass_density=0, adhesion_coefficient=0, roughness_coefficient=0, adhesion_scaling_coefficient=0)
+
+   
+   Defines an ISPH structure material.
+
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``0``.
+
+       **adhension_coefficient**
+           ..
+
+       **roughness_coefficient**
+           ..
+
+       **adhesion_scaling_coefficient**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatSPHIncompressibleStructure
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create an ISPH structure material.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ro`
+            - 
+          * - :py:attr:`~beta`
+            - 
+          * - :py:attr:`~rough`
+            - 
+          * - :py:attr:`~adh`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynamaterial import MatSPHIncompressibleStructure
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: ro
+   :value: 0
+
+
+.. py:attribute:: beta
+   :value: 0
+
+
+.. py:attribute:: rough
+   :value: 0
+
+
+.. py:attribute:: adh
+   :value: 0
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub)
+
+   
+   Create an ISPH structure material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

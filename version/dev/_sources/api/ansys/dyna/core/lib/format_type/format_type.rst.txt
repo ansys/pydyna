@@ -1,0 +1,69 @@
+
+
+
+
+
+
+:class:`format_type`
+====================
+
+
+.. py:class:: ansys.dyna.core.lib.format_type.format_type
+
+
+.. py:currentmodule:: format_type
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~default`
+            - 
+          * - :py:attr:`~standard`
+            - 
+          * - :py:attr:`~long`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.format_type import format_type
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: default
+   :value: 's'
+
+
+.. py:attribute:: standard
+   :value: 'k'
+
+
+.. py:attribute:: long
+   :value: 'y'
+
+
+
+
+
+
