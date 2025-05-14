@@ -90,29 +90,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: ./.github/actions/test-codegen
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-
-      - name: Install library
-        run: pip install -e .[codegen]
-
-      - name: Generate codegen
-        run: |
-          python codegen/generate.py -c
-          python codegen/generate.py
-
-      - name: Run codegen testing
-        run: |
-          if git -C src/ansys/dyna/core/keywords/keyword_classes/auto diff --relative --exit-code; then
-            echo "CHANGES=false" >> "$GITHUB_ENV"
-          else
-            echo "CHANGES=true" >> "$GITHUB_ENV"
-          fi
-      - name: Exit on changes
-        if: ${{ env.CHANGES == 'true' }}
-        run: exit 1
 
   doc-style:
     name: "Documentation style"
