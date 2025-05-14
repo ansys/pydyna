@@ -22,18 +22,19 @@ concurrency:
 
 jobs:
 
-  # changelog-deployment:
-  #   name: "Update CHANGELOG (on release)"
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #     pull-requests: write
-  #   steps:
-  #     - uses: ansys/actions/doc-deploy-changelog@3e17ebb494f3333996ba36bbbadd47a6ff24ec0e # v9.0.15
-  #       with:
-  #         token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
-  #         bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
-  #         bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+  changelog-deployment:
+    name: "Update CHANGELOG (on release)"
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: ansys/actions/doc-deploy-changelog@3e17ebb494f3333996ba36bbbadd47a6ff24ec0e # v9.0.15
+        with:
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
   code-style:
     name: "Code style"
@@ -300,36 +301,36 @@ jobs:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
-  # release:
-  #   name: Release project
-  #   if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-  #   needs: [changelog-deployment, build-library]
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - name: "Release to the public PyPI repository"
-  #       uses: ansys/actions/release-pypi-public@3e17ebb494f3333996ba36bbbadd47a6ff24ec0e # v9.0.15
-  #       with:
-  #         library-name: ${{ env.PACKAGE_NAME }}
-  #         twine-username: "__token__"
-  #         twine-token: ${{ secrets.PYPI_TOKEN }}
+  release:
+    name: Release project
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    needs: [changelog-deployment, build-library]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: "Release to the public PyPI repository"
+        uses: ansys/actions/release-pypi-public@3e17ebb494f3333996ba36bbbadd47a6ff24ec0e # v9.0.15
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          twine-username: "__token__"
+          twine-token: ${{ secrets.PYPI_TOKEN }}
 
-  #     - name: "Release to GitHub"
-  #       uses: ansys/actions/release-github@3e17ebb494f3333996ba36bbbadd47a6ff24ec0e # v9.0.15
-  #       with:
-  #         library-name: ${{ env.PACKAGE_NAME }}
-  #         token: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Release to GitHub"
+        uses: ansys/actions/release-github@3e17ebb494f3333996ba36bbbadd47a6ff24ec0e # v9.0.15
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-  # doc-deploy-stable:
-  #   name: "Deploy stable documentation"
-  #   if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-  #   runs-on: ubuntu-latest
-  #   needs: [release]
-  #   steps:
-  #     - uses: ansys/actions/doc-deploy-stable@3e17ebb494f3333996ba36bbbadd47a6ff24ec0e # v9.0.15
-  #       with:
-  #         cname: ${{ env.DOCUMENTATION_CNAME }}
-  #         token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
-  #         bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
-  #         bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+  doc-deploy-stable:
+    name: "Deploy stable documentation"
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    needs: [release]
+    steps:
+      - uses: ansys/actions/doc-deploy-stable@3e17ebb494f3333996ba36bbbadd47a6ff24ec0e # v9.0.15
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
