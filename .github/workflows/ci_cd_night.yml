@@ -16,7 +16,6 @@ env:
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
   PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.PyDynaRunContainer || 'ghcr.io/ansys/pydyna-run:latest'}}
 
-
 jobs:
 
   doc-build:
