@@ -1,4 +1,3 @@
-# .github/actions/run-tests/action.yml
 name: Run Tests
 description: Composite action to run tests with LS-DYNA keyword server
 
