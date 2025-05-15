@@ -2,13 +2,11 @@ name: Documentation Build
 description: Composite action to build and upload documentation (HTML and PDF)
 
 inputs:
-  timeout-mins:
-    description: Optional timeout value for the HTML build in minutes
-    required: false
+
   build-autokeywords-api:
     description: Enable building the autokeywords API
     required: false
-    default: "True"
+    default: "False"
   pdf-pool-size:
     required: false
   pdf-string-vacancies:
@@ -17,8 +15,7 @@ inputs:
     required: false
   PyDynaRunContainer:
     description: Run container name
-    required: false
-    default: ghcr.io/ansys/pydyna-run:latest
+    required: true
   python-version:
     description: Python version to use
     required: true
@@ -102,12 +99,9 @@ runs:
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
         BUILD_AUTOKEYWORS_API: ${{ inputs.build-autokeywords-api }}
+        LSTC_LICENSE: ansys
       run: |
-        if [[ -n "${{ inputs.timeout-mins }}" ]]; then
-          timeout ${{ inputs.timeout-mins }}m xvfb-run make -C doc html
-        else
-          xvfb-run make -C doc html
-        fi
+        timeout 7200 xvfb-run make -C doc html
       shell: bash
 
     - name: Upload html documentation
