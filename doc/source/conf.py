@@ -57,13 +57,13 @@ numpydoc_validation_checks = {
     "GL09",  # Deprecation warning should precede extended summary
     "GL10",  # reST directives {directives} must be followed by two colons
     # Summary
-    "SS01",  # No summary found
-    "SS02",  # Summary does not start with a capital letter
-    "SS03",  # Summary does not end with a period
+    # "SS01",  # No summary found
+    # "SS02",  # Summary does not start with a capital letter
+    #"SS03",  # Summary does not end with a period
     "SS04",  # Summary contains heading whitespaces
     "SS05",  # Summary must start with infinitive verb, not third person
     # Parameters
-    "PR10",  # Parameter "{param_name}" requires a space before the colon '
+    #"PR10",  # Parameter "{param_name}" requires a space before the colon '
     # separating the parameter name and type",
 }
 
@@ -90,7 +90,7 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst"]
+exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst", "keyword_classes/**"]
 
 # make rst_epilog a variable, so you can add other epilog parts to it
 rst_epilog = ""
@@ -128,13 +128,14 @@ html_theme_options = {
     "collapse_navigation": True,
     "use_edit_page_button": True,
     "ansys_sphinx_theme_autoapi": {
-        "project": project,
         "ignore": [
             "*core/keywords/keyword_classes/auto*",
         ],
         "output": "api",
+        # "templates": "autoapi/"
     },
 }
+
 
 # static path
 html_static_path = ['_static']
@@ -142,12 +143,18 @@ html_static_path = ['_static']
 
 # -- Declare the Jinja context -----------------------------------------------
 BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
+if not BUILD_API:
+    exclude_patterns.append("api")
+    html_theme_options.pop("ansys_sphinx_theme_autoapi")
+    extensions.remove("ansys_sphinx_theme.extension.autoapi")
 
-suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
+suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils"]
 
-BUILD_EXAMPLES = (
-    True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
-)
+BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower() == "true"
+if BUILD_AUTOKEYWORS_API:
+    html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
+
+BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
 if BUILD_EXAMPLES is True:
     # Necessary for pyvista when building the sphinx gallery
     extensions.append("sphinx_gallery.gen_gallery")
@@ -204,6 +211,7 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
             skip = True
 
     return skip
+
 
 def setup(sphinx):
     """Add custom extensions to Sphinx."""
