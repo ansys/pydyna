@@ -1,0 +1,192 @@
+name: release
+on:
+  push:
+    tags:
+      - "v*.*.*"
+    inputs:
+      PyDynaRunContainer:
+        description: 'Run container name'
+        required: false
+        default: ghcr.io/ansys/pydyna-run:latest
+
+env:
+  MAIN_PYTHON_VERSION: '3.13'
+  PACKAGE_NAME: 'ansys-dyna-core'
+  PACKAGE_NAMESPACE: 'ansys.dyna.core'
+  DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
+  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.PyDynaRunContainer || 'ghcr.io/ansys/pydyna-run:latest'}}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  changelog-deployment:
+    name: "Update CHANGELOG (on release)"
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: ansys/actions/doc-deploy-changelog@2cf9a9c43235a000d613c2b13e64c954232a4553 # v9.0.15
+        with:
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+
+  code-style:
+    name: "Code style"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ansys/actions/code-style@2cf9a9c43235a000d613c2b13e64c954232a4553 # v9.0.15
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+  codegen-testing:
+    name: Build and Testing for codegen
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/test-codegen
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          
+  doc-style:
+    name: "Documentation style"
+    runs-on: ubuntu-latest
+    steps:
+      - name: PyAnsys documentation style checks
+        uses: ansys/actions/doc-style@2cf9a9c43235a000d613c2b13e64c954232a4553 # v9.0.15
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  doc-build:
+    name: "Documentation build"
+    runs-on: [public-ubuntu-latest-8-cores]
+    needs: [doc-style]
+    timeout-minutes: 720
+    steps:
+      - name: "Checkout project"
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: "Build documentation"
+        uses: ./.github/actions/doc-build
+        with:
+          timeout-mins: 7200
+          build-autokeywords-api: "True"
+          pdf-pool-size: 15000000
+          pdf-string-vacancies: 90000
+          pdf-max-strings: 600000
+          PyDynaRunContainer: ${{ env.PYDYNA_RUN_CONTAINER }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          license-server: ${{ secrets.LICENSE_SERVER }}
+          bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          github-actor: ${{ github.actor }}
+
+  smoke-tests:
+    name: "Build wheelhouse for ${{ matrix.os }} and Python ${{ matrix.python-version }}"
+    runs-on: ${{ matrix.os }}
+    needs: [code-style]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python-version: ['3.10', '3.11', '3.12', '3.13']
+    steps:
+      - uses: ansys/actions/build-wheelhouse@2cf9a9c43235a000d613c2b13e64c954232a4553 # v9.0.15
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          operating-system: ${{ matrix.os }}
+          python-version: ${{ matrix.python-version }}
+
+  tests:
+    name: "Testing"
+    runs-on: ubuntu-latest
+    needs: [smoke-tests]
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: ./.github/actions/unit-test
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  run-testing:
+    name: Test the "run" subpackage
+    runs-on: ubuntu-latest
+    needs: [code-style]
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: "Set up Python ${{ env.MAIN_PYTHON_VERSION }}"
+        uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5.5.0
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'pyproject.toml'
+
+      - name: "Install python dependencies"
+        run: |
+          python -m pip install docker # todo make this an option?
+          python -m pip install .[tests]
+
+      - name: Pull PyDyna-run image
+        run: |
+          docker pull ${{ env.PYDYNA_RUN_CONTAINER }}
+
+      - name: Unit testing
+        env:
+          PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
+          ANSYSLI_SERVERS: 2325@${{secrets.LICENSE_SERVER}}
+          ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
+          LSTC_LICENSE: ansys
+        run: |
+          pytest -m run
+
+  build-library:
+    name: "Build library"
+    needs: [doc-build, tests, run-testing]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ansys/actions/build-library@2cf9a9c43235a000d613c2b13e64c954232a4553 # v9.0.15
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+  release:
+    name: Release project
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    needs: [changelog-deployment, build-library]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: "Release to the public PyPI repository"
+        uses: ansys/actions/release-pypi-public@2cf9a9c43235a000d613c2b13e64c954232a4553 # v9.0.15
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          twine-username: "__token__"
+          twine-token: ${{ secrets.PYPI_TOKEN }}
+
+      - name: "Release to GitHub"
+        uses: ansys/actions/release-github@2cf9a9c43235a000d613c2b13e64c954232a4553 # v9.0.15
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  doc-deploy-stable:
+    name: "Deploy stable documentation"
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    needs: [release]
+    steps:
+      - uses: ansys/actions/doc-deploy-stable@2cf9a9c43235a000d613c2b13e64c954232a4553 # v9.0.15
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}

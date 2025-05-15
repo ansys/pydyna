@@ -7,13 +7,19 @@ SPHINXOPTS    = -j auto
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = _build
-APIDIR       = api
+APIDIR        = api
+KEYWORDDIR    = $(SOURCEDIR)/keyword_classes
+KEYWORDBUILD   = $(KEYWORDDIR)/_build/html
 
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile
+.PHONY: help Makefile clean pdf keyword_classes
+
+keyword_classes:
+	@echo "🔧 Building keywordclasses..."
+	$(SPHINXBUILD) -b html "$(KEYWORDDIR)" "$(KEYWORDBUILD)" $(SPHINXOPTS) $(O)
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
