@@ -123,9 +123,9 @@ runs:
         PYDYNA_RUN_STREAM: "0"
         extra_mem_bot: 20000000
         extra_mem_top: 30000000
-        pdf_pool_size: ${{ inputs.pdf-pool-size }}
-        pdf_string_vacancies: ${{ inputs.pdf-string-vacancies }}
-        pdf_max_strings: ${{ inputs.pdf-max-strings }}
+        pool_size: ${{ inputs.pdf-pool-size }}
+        string_vacancies: ${{ inputs.pdf-string-vacancies }}
+        max_strings: ${{ inputs.pdf-max-strings }}
 
     - name: Upload pdf documentation
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
