@@ -192,6 +192,7 @@ jobs:
       - uses: ./.github/actions/unit-test
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   run-testing:
     name: Test the "run" subpackage

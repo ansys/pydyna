@@ -8,6 +8,9 @@ inputs:
     required: true
     default: "3.13"
     type: string
+  github-token:
+    description: GitHub token for authentication
+    required: true
 
 runs:
   using: "composite"
@@ -27,7 +30,7 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ inputs.github-token }}
 
     - name: Pull and start LS-DYNA keyword server
       run: |
