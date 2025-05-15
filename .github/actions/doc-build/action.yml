@@ -35,6 +35,10 @@ inputs:
   bot-token:
     description: Bot token for authentication
     required: true
+  
+  github-actor:
+    description: GitHub actor for authentication
+    required: true
 
 
 
@@ -67,7 +71,7 @@ runs:
       uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772
       with:
         registry: ghcr.io
-        username: ${{ github.actor }}
+        username: ${{ inputs.github-actor }}
         password: ${{ inputs.github-token }}
 
     - name: Set Licensing
