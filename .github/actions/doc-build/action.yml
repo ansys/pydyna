@@ -114,6 +114,7 @@ runs:
         retention-days: 7
 
     - name: "Build the pdf documentation"
+      shell: bash
       run: |
         if [[ -n "${{ inputs.pdf-pool-size }}" ]]; then
           echo "pool_size=${{ inputs.pdf-pool-size }}" >> $GITHUB_ENV
