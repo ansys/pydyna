@@ -1,0 +1,66 @@
+# .github/actions/run-tests/action.yml
+name: Run Tests
+description: Composite action to run tests with LS-DYNA keyword server
+
+inputs:
+  python-version:
+    description: "Python version to use"
+    required: true
+    default: "3.13"
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+    - name: Set up Python
+      uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: 'pip'
+        cache-dependency-path: 'pyproject.toml'
+
+    - name: Login to GitHub container registry
+      uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Pull and start LS-DYNA keyword server
+      run: |
+        docker pull ghcr.io/ansys/ls-pre:latest
+        docker run -d --name kw_server -p 50051:50051 ghcr.io/ansys/ls-pre:latest && echo "Keyword server active on port 50051."
+      shell: bash
+
+    - name: Install package dependencies
+      run: |
+        pip install -e .[tests]
+      shell: bash
+
+    - name: Run tests
+      run: |
+        pytest
+      shell: bash
+
+    - name: Extract the server logs
+      if: always()
+      run: |
+        docker logs kw_server > server_output.txt
+      shell: bash
+
+    - name: Upload the server logs
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: server_output_tests.txt
+        path: server_output.txt
+
+    - name: Upload coverage results
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: coverage-html
+        path: .cov/html
+        retention-days: 7
