@@ -38,6 +38,9 @@ jobs:
           pdf-max-strings: 600000
           PyDynaRunContainer: ${{ env.PYDYNA_RUN_CONTAINER }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          license-server: ${{ secrets.LICENSE_SERVER }}
+          bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
 
   # doc-deploy-dev:
   #   name: "Deploy development documentation"

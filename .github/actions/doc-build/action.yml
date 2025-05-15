@@ -24,6 +24,19 @@ inputs:
     required: true
     default: "3.13"
     type: string
+  github-token:
+    description: GitHub token for authentication
+    required: true
+
+  license-server:
+    description: License server address
+    required: true
+
+  bot-token:
+    description: Bot token for authentication
+    required: true
+
+
 
 runs:
   using: "composite"
@@ -55,7 +68,7 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ inputs.github-token }}
 
     - name: Set Licensing
       run: |
@@ -65,7 +78,7 @@ runs:
     - name: Install DPF
       uses: ansys/pydpf-actions/install-dpf-server@v2.3
       with:
-        dpf-standalone-TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
         ANSYS_VERSION: "242"
 
     - name: LS-DYNA Keyword server activation
@@ -81,9 +94,8 @@ runs:
 
     - name: Build the html documentation
       env:
-        ANSYSLI_SERVERS: 2325@${{ secrets.LICENSE_SERVER }}
-        ANSYSLMD_LICENSE_FILE: 1055@${{ secrets.LICENSE_SERVER }}
-        LSTC_LICENSE: ansys
+        ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
+        ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
         BUILD_AUTOKEYWORS_API: ${{ inputs.build-autokeywords-api }}
       run: |
@@ -114,8 +126,8 @@ runs:
         fi
         xvfb-run make -C doc pdf
       env:
-        ANSYSLI_SERVERS: 2325@${{ secrets.LICENSE_SERVER }}
-        ANSYSLMD_LICENSE_FILE: 1055@${{ secrets.LICENSE_SERVER }}
+        ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
+        ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         LSTC_LICENSE: ansys
         PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
         PYDYNA_RUN_STREAM: "0"
