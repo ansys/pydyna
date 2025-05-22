@@ -103,53 +103,58 @@ jobs:
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
-  tests:
-    name: "Testing"
+
+  run-testing:
+    name: Test the "run" subpackage
     runs-on: ubuntu-latest
     needs: [smoke-tests]
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: ./.github/actions/unit-test
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
+          pytest-markers: run
+          license-server: ${{ secrets.LICENSE_SERVER }}
+
+  keyword-testing:
+    name: "Keyword testing"
+    runs-on: ${{ matrix.os }}
+    needs: [smoke-tests]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.10', '3.11', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: ./.github/actions/unit-test
+        with:
+          python-version: ${{ matrix.python-version }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pytest-markers: keywords
+
+  unit-tests:
+    name: "Testing"
+    runs-on: ubuntu-latest
+    needs: [run-testing, keyword-testing]
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: ./.github/actions/unit-test
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          server-logs: true
 
-  run-testing:
-    name: Test the "run" subpackage
-    runs-on: ubuntu-latest
-    needs: [code-style]
-
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-
-      - name: "Set up Python ${{ env.MAIN_PYTHON_VERSION }}"
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          cache: 'pip'
-          cache-dependency-path: 'pyproject.toml'
-
-      - name: "Install python dependencies"
-        run: |
-          python -m pip install docker # todo make this an option?
-          python -m pip install .[tests]
-
-      - name: Pull PyDyna-run image
-        run: |
-          docker pull ${{ env.PYDYNA_RUN_CONTAINER }}
-
-      - name: Unit testing
-        env:
-          PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
-          ANSYSLI_SERVERS: 2325@${{secrets.LICENSE_SERVER}}
-          ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
-          LSTC_LICENSE: ansys
-        run: |
-          pytest -m run
 
   build-library:
     name: "Build library"
-    needs: [doc-build, tests, run-testing]
+    needs: [doc-build, unit-tests]
     runs-on: ubuntu-latest
     steps:
       - uses: ansys/actions/build-library@2cf9a9c43235a000d613c2b13e64c954232a4553 # v9.0.15

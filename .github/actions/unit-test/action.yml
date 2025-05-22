@@ -7,9 +7,34 @@ inputs:
     required: true
     default: "3.13"
     type: string
+
   github-token:
     description: GitHub token for authentication
     required: true
+
+  pytest-markers:
+    description: Pytest markers to use (e.g., 'run', 'keywords')
+    required: false
+    default: ""
+    type: string
+
+  docker-image:
+    description: Docker image to use for LS-DYNA keyword server
+    required: false
+    default: "ghcr.io/ansys/ls-pre:latest"
+    type: string
+
+  server-logs:
+    description: Whether to extract server logs
+    required: false
+    default: "false"
+    type: boolean
+
+  license-server:
+    description: License server for LS-DYNA
+    required: false
+    default: ""
+    type: string
 
 runs:
   using: "composite"
@@ -25,43 +50,55 @@ runs:
         cache-dependency-path: 'pyproject.toml'
 
     - name: Login to GitHub container registry
-      uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772
+      uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ inputs.github-token }}
 
     - name: Pull and start LS-DYNA keyword server
+      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
       run: |
-        docker pull ghcr.io/ansys/ls-pre:latest
-        docker run -d --name kw_server -p 50051:50051 ghcr.io/ansys/ls-pre:latest && echo "Keyword server active on port 50051."
+        python -m pip install docker
+        docker pull ${{ inputs.docker-image }}
+        docker run -d --name kw_server -p 50051:50051 ${{ inputs.docker-image }} && echo "Keyword server active on port 50051."
       shell: bash
 
-    - name: Install package dependencies
+    - name: Install test dependencies
       run: |
         pip install -e .[tests]
       shell: bash
 
-    - name: Run tests
+    - name: Run pytest
       run: |
-        pytest
+        if [ "${{ inputs.pytest-markers }}" = "" ]; then
+          pytest
+        else
+          pytest -m "${{ inputs.pytest-markers }}"
+        fi
       shell: bash
+      env:
+        PYDYNA_RUN_CONTAINER: ${{ inputs.docker-image }}
+        ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
+        ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
+        LSTC_LICENSE: ansys
 
     - name: Extract the server logs
-      if: always()
+      if: ${{ inputs.server-logs == 'true' }}
       run: |
         docker logs kw_server > server_output.txt
       shell: bash
 
     - name: Upload the server logs
-      if: always()
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: ${{ inputs.server-logs == 'true' }}
+      uses: actions/upload-artifact@v4
       with:
         name: server_output_tests.txt
         path: server_output.txt
 
     - name: Upload coverage results
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      if: ${{ inputs.server-logs == 'true' }}
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-html
         path: .cov/html
