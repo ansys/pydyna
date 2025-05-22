@@ -10,6 +10,26 @@ inputs:
   github-token:
     description: GitHub token for authentication
     required: true
+  pytest-markers:
+    description: Pytest markers to use
+    required: false
+    default: ""
+    type: string
+  docker-image:
+    description: Docker image to use for LS-DYNA keyword server
+    required: false
+    default: ""
+    type: string
+  server-logs:
+    description: Server logs to extract
+    required: false
+    default: False
+    type: boolean
+  license-server:
+    description: License server for LS-DYNA
+    required: false
+    default: ""
+    type: string
 
 runs:
   using: "composite"
@@ -32,9 +52,17 @@ runs:
         password: ${{ inputs.github-token }}
 
     - name: Pull and start LS-DYNA keyword server
+      if: inputs.docker-image == ''
       run: |
         docker pull ghcr.io/ansys/ls-pre:latest
         docker run -d --name kw_server -p 50051:50051 ghcr.io/ansys/ls-pre:latest && echo "Keyword server active on port 50051."
+      shell: bash
+
+    - name: Pull other docker image
+      if: inputs.docker-image != ''
+      run: |
+        python -m pip install docker
+        docker pull ${{ inputs.docker-image }}
       shell: bash
 
     - name: Install package dependencies
@@ -42,19 +70,37 @@ runs:
         pip install -e .[tests]
       shell: bash
 
-    - name: Run tests
+    - name: Run tests without markers
+      if: inputs.pytest-markers == ''
       run: |
         pytest
       shell: bash
 
+    - name: Run tests with  run markers
+      if: input.pytest-markers == 'run'
+      run: |
+        pytest -m run
+      shell: bash
+      env:
+        PYDYNA_RUN_CONTAINER: ${{ inputs.docker-image }}
+        ANSYSLI_SERVERS: 2325@${{inputs.license-server}}
+        ANSYSLMD_LICENSE_FILE: 1055@${{inputs.license-server}}
+        LSTC_LICENSE: ansys
+
+    - name: Run tests with keywords
+      if: inputs.pytest-markers == 'keywords'
+      run: |
+        pytest -m keywords
+      shell: bash
+  
     - name: Extract the server logs
-      if: always()
+      if: inputs.server-logs == 'true'
       run: |
         docker logs kw_server > server_output.txt
       shell: bash
 
     - name: Upload the server logs
-      if: always()
+      if: inputs.server-logs == 'true'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
         name: server_output_tests.txt

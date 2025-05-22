@@ -148,7 +148,7 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
+          server-logs: true
 
   run-testing:
     name: Test the "run" subpackage
@@ -158,30 +158,14 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: "Set up Python ${{ env.MAIN_PYTHON_VERSION }}"
-        uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5.5.0
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: ./.github/actions/unit-test
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          cache: 'pip'
-          cache-dependency-path: 'pyproject.toml'
-
-      - name: "Install python dependencies"
-        run: |
-          python -m pip install docker # todo make this an option?
-          python -m pip install .[tests]
-
-      - name: Pull PyDyna-run image
-        run: |
-          docker pull ${{ env.PYDYNA_RUN_CONTAINER }}
-
-      - name: Unit testing
-        env:
-          PYDYNA_RUN_CONTAINER: ${{ env.PYDYNA_RUN_CONTAINER }}
-          ANSYSLI_SERVERS: 2325@${{secrets.LICENSE_SERVER}}
-          ANSYSLMD_LICENSE_FILE: 1055@${{secrets.LICENSE_SERVER}}
-          LSTC_LICENSE: ansys
-        run: |
-          pytest -m run
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
+          pytest-markers: run
+          license-server: ${{ secrets.LICENSE_SERVER }}
 
   build-library:
     name: "Build library"
