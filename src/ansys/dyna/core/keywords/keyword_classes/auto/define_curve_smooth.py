@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCurveSmooth class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveSmooth(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCurveSmooth class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -119,6 +121,7 @@ class DefineCurveSmooth(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -132,8 +135,9 @@ class DefineCurveSmooth(KeywordBase):
 
     @sidr.setter
     def sidr(self, value: int) -> None:
+        """Set the sidr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sidr must be `None` or one of {0,1,2}""")
+            raise Exception("""sidr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sidr", value)
 
     @property
@@ -144,6 +148,7 @@ class DefineCurveSmooth(KeywordBase):
 
     @dist.setter
     def dist(self, value: float) -> None:
+        """Set the dist property."""
         self._cards[0].set_value("dist", value)
 
     @property
@@ -154,6 +159,7 @@ class DefineCurveSmooth(KeywordBase):
 
     @tstart.setter
     def tstart(self, value: float) -> None:
+        """Set the tstart property."""
         self._cards[0].set_value("tstart", value)
 
     @property
@@ -165,6 +171,7 @@ class DefineCurveSmooth(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[0].set_value("tend", value)
 
     @property
@@ -175,6 +182,7 @@ class DefineCurveSmooth(KeywordBase):
 
     @trise.setter
     def trise(self, value: float) -> None:
+        """Set the trise property."""
         self._cards[0].set_value("trise", value)
 
     @property
@@ -186,6 +194,7 @@ class DefineCurveSmooth(KeywordBase):
 
     @vmax.setter
     def vmax(self, value: float) -> None:
+        """Set the vmax property."""
         self._cards[0].set_value("vmax", value)
 
     @property
@@ -196,5 +205,6 @@ class DefineCurveSmooth(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

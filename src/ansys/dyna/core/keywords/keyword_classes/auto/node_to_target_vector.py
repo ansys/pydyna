@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the NodeToTargetVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class NodeToTargetVector(KeywordBase):
     subkeyword = "TO_TARGET_VECTOR"
 
     def __init__(self, **kwargs):
+        """Initialize the NodeToTargetVector class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -78,6 +80,7 @@ class NodeToTargetVector(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -88,6 +91,7 @@ class NodeToTargetVector(KeywordBase):
 
     @xdelta.setter
     def xdelta(self, value: float) -> None:
+        """Set the xdelta property."""
         self._cards[0].set_value("xdelta", value)
 
     @property
@@ -98,6 +102,7 @@ class NodeToTargetVector(KeywordBase):
 
     @ydelta.setter
     def ydelta(self, value: float) -> None:
+        """Set the ydelta property."""
         self._cards[0].set_value("ydelta", value)
 
     @property
@@ -108,5 +113,6 @@ class NodeToTargetVector(KeywordBase):
 
     @zdelta.setter
     def zdelta(self, value: float) -> None:
+        """Set the zdelta property."""
         self._cards[0].set_value("zdelta", value)
 

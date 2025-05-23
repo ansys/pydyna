@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -37,6 +38,7 @@ class SectionSolid(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionSolid class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -202,6 +204,7 @@ class SectionSolid(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -262,8 +265,9 @@ class SectionSolid(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [1, -1, -2, -18, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 42, 43, 45, 47, 60, 62, 98, 99, 101, 102, 103, 104, 105, 115, 201, 1000, None]:
-            raise Exception("""elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}""")
+            raise Exception("""elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}.""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -279,8 +283,9 @@ class SectionSolid(KeywordBase):
 
     @aet.setter
     def aet(self, value: int) -> None:
+        """Set the aet property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""aet must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""aet must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("aet", value)
 
     @property
@@ -291,6 +296,7 @@ class SectionSolid(KeywordBase):
 
     @cohoff.setter
     def cohoff(self, value: float) -> None:
+        """Set the cohoff property."""
         self._cards[0].set_value("cohoff", value)
 
     @property
@@ -301,6 +307,7 @@ class SectionSolid(KeywordBase):
 
     @gaskeit.setter
     def gaskeit(self, value: float) -> None:
+        """Set the gaskeit property."""
         self._cards[0].set_value("gaskeit", value)
 
     @property
@@ -311,6 +318,7 @@ class SectionSolid(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[1].set_value("nip", value)
 
     @property
@@ -321,6 +329,7 @@ class SectionSolid(KeywordBase):
 
     @nxdof.setter
     def nxdof(self, value: int) -> None:
+        """Set the nxdof property."""
         self._cards[1].set_value("nxdof", value)
 
     @property
@@ -331,8 +340,9 @@ class SectionSolid(KeywordBase):
 
     @ihgf.setter
     def ihgf(self, value: int) -> None:
+        """Set the ihgf property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""ihgf must be `None` or one of {0,1,2,3}""")
+            raise Exception("""ihgf must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("ihgf", value)
 
     @property
@@ -343,8 +353,9 @@ class SectionSolid(KeywordBase):
 
     @itaj.setter
     def itaj(self, value: int) -> None:
+        """Set the itaj property."""
         if value not in [0, 1, None]:
-            raise Exception("""itaj must be `None` or one of {0,1}""")
+            raise Exception("""itaj must be `None` or one of {0,1}.""")
         self._cards[1].set_value("itaj", value)
 
     @property
@@ -355,6 +366,7 @@ class SectionSolid(KeywordBase):
 
     @lmc.setter
     def lmc(self, value: int) -> None:
+        """Set the lmc property."""
         self._cards[1].set_value("lmc", value)
 
     @property
@@ -365,21 +377,22 @@ class SectionSolid(KeywordBase):
 
     @nhsv.setter
     def nhsv(self, value: int) -> None:
+        """Set the nhsv property."""
         self._cards[1].set_value("nhsv", value)
 
     @property
     def integration_points(self):
-        '''Gets the table of integration_points'''
+        """Get the table of integration_points."""
         return self._cards[2].table
 
     @integration_points.setter
     def integration_points(self, df):
-        '''sets integration_points from the dataframe df'''
+        """Set integration_points from the dataframe df"""
         self._cards[2].table = df
 
     @property
     def pi(self) -> SeriesCard:
-        """dynamic array of LMC property parameters."""
+        """dynamic array of LMC property parameters.."""
         return self._cards[3]
 
     @pi.setter
@@ -394,5 +407,6 @@ class SectionSolid(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

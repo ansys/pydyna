@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitConsistentMass class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitConsistentMass(KeywordBase):
     subkeyword = "IMPLICIT_CONSISTENT_MASS"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitConsistentMass class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -57,7 +59,8 @@ class ControlImplicitConsistentMass(KeywordBase):
 
     @iflag.setter
     def iflag(self, value: int) -> None:
+        """Set the iflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""iflag must be `None` or one of {0,1}""")
+            raise Exception("""iflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iflag", value)
 

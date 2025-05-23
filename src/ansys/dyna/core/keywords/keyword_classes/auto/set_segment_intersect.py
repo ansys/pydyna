@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetSegmentIntersect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetSegmentIntersect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetSegmentIntersect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -136,6 +138,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -146,6 +149,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @ssid1.setter
     def ssid1(self, value: int) -> None:
+        """Set the ssid1 property."""
         self._cards[1].set_value("ssid1", value)
 
     @property
@@ -156,6 +160,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @ssid2.setter
     def ssid2(self, value: int) -> None:
+        """Set the ssid2 property."""
         self._cards[1].set_value("ssid2", value)
 
     @property
@@ -166,6 +171,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @ssid3.setter
     def ssid3(self, value: int) -> None:
+        """Set the ssid3 property."""
         self._cards[1].set_value("ssid3", value)
 
     @property
@@ -176,6 +182,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @ssid4.setter
     def ssid4(self, value: int) -> None:
+        """Set the ssid4 property."""
         self._cards[1].set_value("ssid4", value)
 
     @property
@@ -186,6 +193,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @ssid5.setter
     def ssid5(self, value: int) -> None:
+        """Set the ssid5 property."""
         self._cards[1].set_value("ssid5", value)
 
     @property
@@ -196,6 +204,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @ssid6.setter
     def ssid6(self, value: int) -> None:
+        """Set the ssid6 property."""
         self._cards[1].set_value("ssid6", value)
 
     @property
@@ -206,6 +215,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @ssid7.setter
     def ssid7(self, value: int) -> None:
+        """Set the ssid7 property."""
         self._cards[1].set_value("ssid7", value)
 
     @property
@@ -216,6 +226,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @ssid8.setter
     def ssid8(self, value: int) -> None:
+        """Set the ssid8 property."""
         self._cards[1].set_value("ssid8", value)
 
     @property
@@ -226,5 +237,6 @@ class SetSegmentIntersect(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

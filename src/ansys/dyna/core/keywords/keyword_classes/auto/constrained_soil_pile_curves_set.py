@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedSoilPileCurvesSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
     subkeyword = "SOIL_PILE_CURVES_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedSoilPileCurvesSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -239,6 +241,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @pbsid.setter
     def pbsid(self, value: int) -> None:
+        """Set the pbsid property."""
         self._cards[0].set_value("pbsid", value)
 
     @property
@@ -249,6 +252,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @diam.setter
     def diam(self, value: float) -> None:
+        """Set the diam property."""
         self._cards[0].set_value("diam", value)
 
     @property
@@ -260,6 +264,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @pidns.setter
     def pidns(self, value: int) -> None:
+        """Set the pidns property."""
         self._cards[0].set_value("pidns", value)
 
     @property
@@ -271,6 +276,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @pidnb.setter
     def pidnb(self, value: int) -> None:
+        """Set the pidnb property."""
         self._cards[0].set_value("pidnb", value)
 
     @property
@@ -283,8 +289,9 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @error.setter
     def error(self, value: int) -> None:
+        """Set the error property."""
         if value not in [0, 1, None]:
-            raise Exception("""error must be `None` or one of {0,1}""")
+            raise Exception("""error must be `None` or one of {0,1}.""")
         self._cards[0].set_value("error", value)
 
     @property
@@ -297,6 +304,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @nring.setter
     def nring(self, value: int) -> None:
+        """Set the nring property."""
         self._cards[0].set_value("nring", value)
 
     @property
@@ -307,6 +315,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @nringb.setter
     def nringb(self, value: int) -> None:
+        """Set the nringb property."""
         self._cards[0].set_value("nringb", value)
 
     @property
@@ -317,6 +326,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[1].set_value("damp", value)
 
     @property
@@ -329,8 +339,9 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @local.setter
     def local(self, value: int) -> None:
+        """Set the local property."""
         if value not in [1, 2, None]:
-            raise Exception("""local must be `None` or one of {1,2}""")
+            raise Exception("""local must be `None` or one of {1,2}.""")
         self._cards[1].set_value("local", value)
 
     @property
@@ -341,6 +352,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[2].set_value("psid", value)
 
     @property
@@ -351,6 +363,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @zref.setter
     def zref(self, value: float) -> None:
+        """Set the zref property."""
         self._cards[2].set_value("zref", value)
 
     @property
@@ -361,6 +374,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @blcz.setter
     def blcz(self, value: int) -> None:
+        """Set the blcz property."""
         self._cards[3].set_value("blcz", value)
 
     @property
@@ -371,6 +385,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @blc.setter
     def blc(self, value: int) -> None:
+        """Set the blc property."""
         self._cards[3].set_value("blc", value)
 
     @property
@@ -381,6 +396,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @blcsh.setter
     def blcsh(self, value: int) -> None:
+        """Set the blcsh property."""
         self._cards[3].set_value("blcsh", value)
 
     @property
@@ -391,6 +407,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @blcsv.setter
     def blcsv(self, value: int) -> None:
+        """Set the blcsv property."""
         self._cards[3].set_value("blcsv", value)
 
     @property
@@ -401,6 +418,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @vlcz.setter
     def vlcz(self, value: int) -> None:
+        """Set the vlcz property."""
         self._cards[4].set_value("vlcz", value)
 
     @property
@@ -411,6 +429,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @vlc.setter
     def vlc(self, value: int) -> None:
+        """Set the vlc property."""
         self._cards[4].set_value("vlc", value)
 
     @property
@@ -421,6 +440,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @vlcsh.setter
     def vlcsh(self, value: int) -> None:
+        """Set the vlcsh property."""
         self._cards[4].set_value("vlcsh", value)
 
     @property
@@ -431,6 +451,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @vlcsv.setter
     def vlcsv(self, value: int) -> None:
+        """Set the vlcsv property."""
         self._cards[4].set_value("vlcsv", value)
 
     @property
@@ -441,6 +462,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @hlcz.setter
     def hlcz(self, value: int) -> None:
+        """Set the hlcz property."""
         self._cards[5].set_value("hlcz", value)
 
     @property
@@ -451,6 +473,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @hlc.setter
     def hlc(self, value: int) -> None:
+        """Set the hlc property."""
         self._cards[5].set_value("hlc", value)
 
     @property
@@ -461,6 +484,7 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @hlcsh.setter
     def hlcsh(self, value: int) -> None:
+        """Set the hlcsh property."""
         self._cards[5].set_value("hlcsh", value)
 
     @property
@@ -471,5 +495,6 @@ class ConstrainedSoilPileCurvesSet(KeywordBase):
 
     @hlcsv.setter
     def hlcsv(self, value: int) -> None:
+        """Set the hlcsv property."""
         self._cards[5].set_value("hlcsv", value)
 

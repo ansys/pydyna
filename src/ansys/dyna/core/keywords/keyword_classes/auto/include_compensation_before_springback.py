@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IncludeCompensationBeforeSpringback class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IncludeCompensationBeforeSpringback(KeywordBase):
     subkeyword = "COMPENSATION_BEFORE_SPRINGBACK"
 
     def __init__(self, **kwargs):
+        """Initialize the IncludeCompensationBeforeSpringback class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class IncludeCompensationBeforeSpringback(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 

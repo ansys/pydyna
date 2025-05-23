@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleUpSwitch class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleUpSwitch(KeywordBase):
     subkeyword = "UP_SWITCH"
 
     def __init__(self, **kwargs):
+        """Initialize the AleUpSwitch class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -176,6 +178,7 @@ class AleUpSwitch(KeywordBase):
 
     @upid.setter
     def upid(self, value: int) -> None:
+        """Set the upid property."""
         self._cards[0].set_value("upid", value)
 
     @property
@@ -186,6 +189,7 @@ class AleUpSwitch(KeywordBase):
 
     @swtime.setter
     def swtime(self, value: float) -> None:
+        """Set the swtime property."""
         self._cards[0].set_value("swtime", value)
 
     @property
@@ -197,6 +201,7 @@ class AleUpSwitch(KeywordBase):
 
     @fsi_id1.setter
     def fsi_id1(self, value: int) -> None:
+        """Set the fsi_id1 property."""
         self._cards[1].set_value("fsi_id1", value)
 
     @property
@@ -208,6 +213,7 @@ class AleUpSwitch(KeywordBase):
 
     @fsi_id2.setter
     def fsi_id2(self, value: int) -> None:
+        """Set the fsi_id2 property."""
         self._cards[1].set_value("fsi_id2", value)
 
     @property
@@ -219,6 +225,7 @@ class AleUpSwitch(KeywordBase):
 
     @fsi_id3.setter
     def fsi_id3(self, value: int) -> None:
+        """Set the fsi_id3 property."""
         self._cards[1].set_value("fsi_id3", value)
 
     @property
@@ -230,6 +237,7 @@ class AleUpSwitch(KeywordBase):
 
     @fsi_id4.setter
     def fsi_id4(self, value: int) -> None:
+        """Set the fsi_id4 property."""
         self._cards[1].set_value("fsi_id4", value)
 
     @property
@@ -241,6 +249,7 @@ class AleUpSwitch(KeywordBase):
 
     @fsi_id5.setter
     def fsi_id5(self, value: int) -> None:
+        """Set the fsi_id5 property."""
         self._cards[1].set_value("fsi_id5", value)
 
     @property
@@ -252,6 +261,7 @@ class AleUpSwitch(KeywordBase):
 
     @fsi_id6.setter
     def fsi_id6(self, value: int) -> None:
+        """Set the fsi_id6 property."""
         self._cards[1].set_value("fsi_id6", value)
 
     @property
@@ -263,6 +273,7 @@ class AleUpSwitch(KeywordBase):
 
     @fsi_id7.setter
     def fsi_id7(self, value: int) -> None:
+        """Set the fsi_id7 property."""
         self._cards[1].set_value("fsi_id7", value)
 
     @property
@@ -274,6 +285,7 @@ class AleUpSwitch(KeywordBase):
 
     @fsi_id8.setter
     def fsi_id8(self, value: int) -> None:
+        """Set the fsi_id8 property."""
         self._cards[1].set_value("fsi_id8", value)
 
     @property
@@ -284,6 +296,7 @@ class AleUpSwitch(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[2].set_value("sid", value)
 
     @property
@@ -297,6 +310,7 @@ class AleUpSwitch(KeywordBase):
 
     @sidtype.setter
     def sidtype(self, value: int) -> None:
+        """Set the sidtype property."""
         self._cards[2].set_value("sidtype", value)
 
     @property
@@ -307,6 +321,7 @@ class AleUpSwitch(KeywordBase):
 
     @mmgair.setter
     def mmgair(self, value: int) -> None:
+        """Set the mmgair property."""
         self._cards[2].set_value("mmgair", value)
 
     @property
@@ -317,5 +332,6 @@ class AleUpSwitch(KeywordBase):
 
     @mmggas.setter
     def mmggas(self, value: int) -> None:
+        """Set the mmggas property."""
         self._cards[2].set_value("mmggas", value)
 

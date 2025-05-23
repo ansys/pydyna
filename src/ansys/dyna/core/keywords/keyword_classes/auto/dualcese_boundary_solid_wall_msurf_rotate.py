@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseBoundarySolidWallMsurfRotate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
     subkeyword = "BOUNDARY_SOLID_WALL_MSURF_ROTATE"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseBoundarySolidWallMsurfRotate class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @mspid.setter
     def mspid(self, value: int) -> None:
+        """Set the mspid property."""
         self._cards[0].set_value("mspid", value)
 
     @property
@@ -119,6 +122,7 @@ class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -129,6 +133,7 @@ class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[0].set_value("xp", value)
 
     @property
@@ -139,6 +144,7 @@ class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[0].set_value("yp", value)
 
     @property
@@ -149,6 +155,7 @@ class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[0].set_value("zp", value)
 
     @property
@@ -159,6 +166,7 @@ class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @nx.setter
     def nx(self, value: float) -> None:
+        """Set the nx property."""
         self._cards[0].set_value("nx", value)
 
     @property
@@ -169,6 +177,7 @@ class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @ny.setter
     def ny(self, value: float) -> None:
+        """Set the ny property."""
         self._cards[0].set_value("ny", value)
 
     @property
@@ -179,5 +188,6 @@ class DualceseBoundarySolidWallMsurfRotate(KeywordBase):
 
     @nz.setter
     def nz(self, value: float) -> None:
+        """Set the nz property."""
         self._cards[0].set_value("nz", value)
 

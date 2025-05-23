@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementInterpolationSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementInterpolationSolid(KeywordBase):
     subkeyword = "INTERPOLATION_SOLID"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementInterpolationSolid class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -130,6 +132,7 @@ class ElementInterpolationSolid(KeywordBase):
 
     @eids.setter
     def eids(self, value: int) -> None:
+        """Set the eids property."""
         self._cards[0].set_value("eids", value)
 
     @property
@@ -140,6 +143,7 @@ class ElementInterpolationSolid(KeywordBase):
 
     @eidgs.setter
     def eidgs(self, value: int) -> None:
+        """Set the eidgs property."""
         self._cards[0].set_value("eidgs", value)
 
     @property
@@ -150,6 +154,7 @@ class ElementInterpolationSolid(KeywordBase):
 
     @ngp.setter
     def ngp(self, value: int) -> None:
+        """Set the ngp property."""
         self._cards[0].set_value("ngp", value)
 
     @property
@@ -160,6 +165,7 @@ class ElementInterpolationSolid(KeywordBase):
 
     @ip1.setter
     def ip1(self, value: int) -> None:
+        """Set the ip1 property."""
         self._cards[1].set_value("ip1", value)
 
     @property
@@ -170,6 +176,7 @@ class ElementInterpolationSolid(KeywordBase):
 
     @w1.setter
     def w1(self, value: float) -> None:
+        """Set the w1 property."""
         self._cards[1].set_value("w1", value)
 
     @property
@@ -180,6 +187,7 @@ class ElementInterpolationSolid(KeywordBase):
 
     @ip2.setter
     def ip2(self, value: int) -> None:
+        """Set the ip2 property."""
         self._cards[1].set_value("ip2", value)
 
     @property
@@ -190,6 +198,7 @@ class ElementInterpolationSolid(KeywordBase):
 
     @w2.setter
     def w2(self, value: float) -> None:
+        """Set the w2 property."""
         self._cards[1].set_value("w2", value)
 
     @property
@@ -200,6 +209,7 @@ class ElementInterpolationSolid(KeywordBase):
 
     @ip3.setter
     def ip3(self, value: int) -> None:
+        """Set the ip3 property."""
         self._cards[1].set_value("ip3", value)
 
     @property
@@ -210,6 +220,7 @@ class ElementInterpolationSolid(KeywordBase):
 
     @w3.setter
     def w3(self, value: float) -> None:
+        """Set the w3 property."""
         self._cards[1].set_value("w3", value)
 
     @property
@@ -220,6 +231,7 @@ class ElementInterpolationSolid(KeywordBase):
 
     @ip4.setter
     def ip4(self, value: int) -> None:
+        """Set the ip4 property."""
         self._cards[1].set_value("ip4", value)
 
     @property
@@ -230,5 +242,6 @@ class ElementInterpolationSolid(KeywordBase):
 
     @w4.setter
     def w4(self, value: float) -> None:
+        """Set the w4 property."""
         self._cards[1].set_value("w4", value)
 

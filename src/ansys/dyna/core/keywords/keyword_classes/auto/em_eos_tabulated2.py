@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmEosTabulated2 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEosTabulated2(KeywordBase):
     subkeyword = "EOS_TABULATED2"
 
     def __init__(self, **kwargs):
+        """Initialize the EmEosTabulated2 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class EmEosTabulated2(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -79,6 +82,7 @@ class EmEosTabulated2(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -91,7 +95,8 @@ class EmEosTabulated2(KeywordBase):
 
     @iflag.setter
     def iflag(self, value: int) -> None:
+        """Set the iflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""iflag must be `None` or one of {0,1}""")
+            raise Exception("""iflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iflag", value)
 

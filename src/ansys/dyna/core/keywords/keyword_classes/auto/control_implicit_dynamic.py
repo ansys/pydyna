@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitDynamic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitDynamic(KeywordBase):
     subkeyword = "IMPLICIT_DYNAMIC"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitDynamic class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -116,6 +118,7 @@ class ControlImplicitDynamic(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
+        """Set the imass property."""
         self._cards[0].set_value("imass", value)
 
     @property
@@ -126,6 +129,7 @@ class ControlImplicitDynamic(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[0].set_value("gamma", value)
 
     @property
@@ -136,6 +140,7 @@ class ControlImplicitDynamic(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -146,6 +151,7 @@ class ControlImplicitDynamic(KeywordBase):
 
     @tdybir.setter
     def tdybir(self, value: float) -> None:
+        """Set the tdybir property."""
         self._cards[0].set_value("tdybir", value)
 
     @property
@@ -156,6 +162,7 @@ class ControlImplicitDynamic(KeywordBase):
 
     @tdydth.setter
     def tdydth(self, value: float) -> None:
+        """Set the tdydth property."""
         self._cards[0].set_value("tdydth", value)
 
     @property
@@ -166,6 +173,7 @@ class ControlImplicitDynamic(KeywordBase):
 
     @tdybur.setter
     def tdybur(self, value: float) -> None:
+        """Set the tdybur property."""
         self._cards[0].set_value("tdybur", value)
 
     @property
@@ -180,6 +188,7 @@ class ControlImplicitDynamic(KeywordBase):
 
     @irate.setter
     def irate(self, value: int) -> None:
+        """Set the irate property."""
         self._cards[0].set_value("irate", value)
 
     @property
@@ -193,5 +202,6 @@ class ControlImplicitDynamic(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 

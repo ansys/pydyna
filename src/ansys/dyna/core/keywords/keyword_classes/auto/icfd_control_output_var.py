@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdControlOutputVar class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlOutputVar(KeywordBase):
     subkeyword = "CONTROL_OUTPUT_VAR"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdControlOutputVar class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -181,8 +183,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @vel.setter
     def vel(self, value: int) -> None:
+        """Set the vel property."""
         if value not in [0, 1, None]:
-            raise Exception("""vel must be `None` or one of {0,1}""")
+            raise Exception("""vel must be `None` or one of {0,1}.""")
         self._cards[0].set_value("vel", value)
 
     @property
@@ -195,8 +198,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @avgvel.setter
     def avgvel(self, value: int) -> None:
+        """Set the avgvel property."""
         if value not in [0, 1, None]:
-            raise Exception("""avgvel must be `None` or one of {0,1}""")
+            raise Exception("""avgvel must be `None` or one of {0,1}.""")
         self._cards[0].set_value("avgvel", value)
 
     @property
@@ -209,8 +213,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @vort.setter
     def vort(self, value: int) -> None:
+        """Set the vort property."""
         if value not in [0, 1, None]:
-            raise Exception("""vort must be `None` or one of {0,1}""")
+            raise Exception("""vort must be `None` or one of {0,1}.""")
         self._cards[0].set_value("vort", value)
 
     @property
@@ -223,8 +228,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @pre.setter
     def pre(self, value: int) -> None:
+        """Set the pre property."""
         if value not in [0, 1, None]:
-            raise Exception("""pre must be `None` or one of {0,1}""")
+            raise Exception("""pre must be `None` or one of {0,1}.""")
         self._cards[1].set_value("pre", value)
 
     @property
@@ -237,8 +243,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @preavg.setter
     def preavg(self, value: int) -> None:
+        """Set the preavg property."""
         if value not in [0, 1, None]:
-            raise Exception("""preavg must be `None` or one of {0,1}""")
+            raise Exception("""preavg must be `None` or one of {0,1}.""")
         self._cards[1].set_value("preavg", value)
 
     @property
@@ -251,8 +258,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @lset.setter
     def lset(self, value: int) -> None:
+        """Set the lset property."""
         if value not in [0, 1, None]:
-            raise Exception("""lset must be `None` or one of {0,1}""")
+            raise Exception("""lset must be `None` or one of {0,1}.""")
         self._cards[1].set_value("lset", value)
 
     @property
@@ -265,8 +273,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @oc.setter
     def oc(self, value: int) -> None:
+        """Set the oc property."""
         if value not in [0, 1, None]:
-            raise Exception("""oc must be `None` or one of {0,1}""")
+            raise Exception("""oc must be `None` or one of {0,1}.""")
         self._cards[1].set_value("oc", value)
 
     @property
@@ -279,8 +288,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @cfl.setter
     def cfl(self, value: int) -> None:
+        """Set the cfl property."""
         if value not in [0, 1, None]:
-            raise Exception("""cfl must be `None` or one of {0,1}""")
+            raise Exception("""cfl must be `None` or one of {0,1}.""")
         self._cards[1].set_value("cfl", value)
 
     @property
@@ -293,8 +303,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @temp.setter
     def temp(self, value: int) -> None:
+        """Set the temp property."""
         if value not in [0, 1, None]:
-            raise Exception("""temp must be `None` or one of {0,1}""")
+            raise Exception("""temp must be `None` or one of {0,1}.""")
         self._cards[2].set_value("temp", value)
 
     @property
@@ -307,8 +318,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @tempavg.setter
     def tempavg(self, value: int) -> None:
+        """Set the tempavg property."""
         if value not in [0, 1, None]:
-            raise Exception("""tempavg must be `None` or one of {0,1}""")
+            raise Exception("""tempavg must be `None` or one of {0,1}.""")
         self._cards[2].set_value("tempavg", value)
 
     @property
@@ -321,8 +333,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @kp.setter
     def kp(self, value: int) -> None:
+        """Set the kp property."""
         if value not in [0, 1, None]:
-            raise Exception("""kp must be `None` or one of {0,1}""")
+            raise Exception("""kp must be `None` or one of {0,1}.""")
         self._cards[3].set_value("kp", value)
 
     @property
@@ -335,8 +348,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @ep.setter
     def ep(self, value: int) -> None:
+        """Set the ep property."""
         if value not in [0, 1, None]:
-            raise Exception("""ep must be `None` or one of {0,1}""")
+            raise Exception("""ep must be `None` or one of {0,1}.""")
         self._cards[3].set_value("ep", value)
 
     @property
@@ -349,8 +363,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @mut.setter
     def mut(self, value: int) -> None:
+        """Set the mut property."""
         if value not in [0, 1, None]:
-            raise Exception("""mut must be `None` or one of {0,1}""")
+            raise Exception("""mut must be `None` or one of {0,1}.""")
         self._cards[3].set_value("mut", value)
 
     @property
@@ -363,8 +378,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @int_.setter
     def int_(self, value: int) -> None:
+        """Set the int_ property."""
         if value not in [0, 1, None]:
-            raise Exception("""int_ must be `None` or one of {0,1}""")
+            raise Exception("""int_ must be `None` or one of {0,1}.""")
         self._cards[3].set_value("int", value)
 
     @property
@@ -377,7 +393,8 @@ class IcfdControlOutputVar(KeywordBase):
 
     @cmu.setter
     def cmu(self, value: int) -> None:
+        """Set the cmu property."""
         if value not in [0, 1, None]:
-            raise Exception("""cmu must be `None` or one of {0,1}""")
+            raise Exception("""cmu must be `None` or one of {0,1}.""")
         self._cards[3].set_value("cmu", value)
 

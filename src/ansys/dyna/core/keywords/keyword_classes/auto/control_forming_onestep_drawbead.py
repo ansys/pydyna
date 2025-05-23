@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingOnestepDrawbead class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingOnestepDrawbead(KeywordBase):
     subkeyword = "FORMING_ONESTEP_DRAWBEAD"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingOnestepDrawbead class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class ControlFormingOnestepDrawbead(KeywordBase):
 
     @ndset.setter
     def ndset(self, value: int) -> None:
+        """Set the ndset property."""
         self._cards[0].set_value("ndset", value)
 
     @property
@@ -87,6 +90,7 @@ class ControlFormingOnestepDrawbead(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -97,6 +101,7 @@ class ControlFormingOnestepDrawbead(KeywordBase):
 
     @th.setter
     def th(self, value: float) -> None:
+        """Set the th property."""
         self._cards[0].set_value("th", value)
 
     @property
@@ -107,5 +112,6 @@ class ControlFormingOnestepDrawbead(KeywordBase):
 
     @percnt.setter
     def percnt(self, value: float) -> None:
+        """Set the percnt property."""
         self._cards[0].set_value("percnt", value)
 

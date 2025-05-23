@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseBoundaryFsiSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseBoundaryFsiSegmentSet(KeywordBase):
     subkeyword = "BOUNDARY_FSI_SEGMENT_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseBoundaryFsiSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -62,6 +64,7 @@ class DualceseBoundaryFsiSegmentSet(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -72,5 +75,6 @@ class DualceseBoundaryFsiSegmentSet(KeywordBase):
 
     @ref_p.setter
     def ref_p(self, value: float) -> None:
+        """Set the ref_p property."""
         self._cards[0].set_value("ref_p", value)
 

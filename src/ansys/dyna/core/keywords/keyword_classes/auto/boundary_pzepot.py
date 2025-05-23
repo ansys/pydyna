@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryPzepot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPzepot(KeywordBase):
     subkeyword = "PZEPOT"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryPzepot class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -75,6 +77,7 @@ class BoundaryPzepot(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -85,6 +88,7 @@ class BoundaryPzepot(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -95,6 +99,7 @@ class BoundaryPzepot(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -105,5 +110,6 @@ class BoundaryPzepot(KeywordBase):
 
     @sf.setter
     def sf(self, value: int) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 

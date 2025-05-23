@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmPermanentMagnet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmPermanentMagnet(KeywordBase):
     subkeyword = "PERMANENT_MAGNET"
 
     def __init__(self, **kwargs):
+        """Initialize the EmPermanentMagnet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -115,6 +117,7 @@ class EmPermanentMagnet(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -125,6 +128,7 @@ class EmPermanentMagnet(KeywordBase):
 
     @partid.setter
     def partid(self, value: int) -> None:
+        """Set the partid property."""
         self._cards[0].set_value("partid", value)
 
     @property
@@ -139,8 +143,9 @@ class EmPermanentMagnet(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         if value not in [0, 1, 3, 4, None]:
-            raise Exception("""mtype must be `None` or one of {0,1,3,4}""")
+            raise Exception("""mtype must be `None` or one of {0,1,3,4}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -151,6 +156,7 @@ class EmPermanentMagnet(KeywordBase):
 
     @north.setter
     def north(self, value: int) -> None:
+        """Set the north property."""
         self._cards[0].set_value("north", value)
 
     @property
@@ -161,6 +167,7 @@ class EmPermanentMagnet(KeywordBase):
 
     @south.setter
     def south(self, value: int) -> None:
+        """Set the south property."""
         self._cards[0].set_value("south", value)
 
     @property
@@ -171,6 +178,7 @@ class EmPermanentMagnet(KeywordBase):
 
     @hc.setter
     def hc(self, value: float) -> None:
+        """Set the hc property."""
         self._cards[0].set_value("hc", value)
 
     @property
@@ -182,6 +190,7 @@ class EmPermanentMagnet(KeywordBase):
 
     @x_nid1.setter
     def x_nid1(self, value: float) -> None:
+        """Set the x_nid1 property."""
         self._cards[1].set_value("x/nid1", value)
 
     @property
@@ -193,6 +202,7 @@ class EmPermanentMagnet(KeywordBase):
 
     @y_nid2.setter
     def y_nid2(self, value: float) -> None:
+        """Set the y_nid2 property."""
         self._cards[1].set_value("y/nid2", value)
 
     @property
@@ -203,5 +213,6 @@ class EmPermanentMagnet(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 

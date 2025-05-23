@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ContactCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ContactCoupling(KeywordBase):
     subkeyword = "COUPLING"
 
     def __init__(self, **kwargs):
+        """Initialize the ContactCoupling class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -73,6 +75,7 @@ class ContactCoupling(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -83,6 +86,7 @@ class ContactCoupling(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -96,7 +100,8 @@ class ContactCoupling(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("stype", value)
 

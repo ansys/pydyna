@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatS06 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatS06(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatS06 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -111,6 +113,7 @@ class MatS06(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -121,6 +124,7 @@ class MatS06(KeywordBase):
 
     @lcdl.setter
     def lcdl(self, value: int) -> None:
+        """Set the lcdl property."""
         self._cards[0].set_value("lcdl", value)
 
     @property
@@ -131,6 +135,7 @@ class MatS06(KeywordBase):
 
     @lcdu.setter
     def lcdu(self, value: int) -> None:
+        """Set the lcdu property."""
         self._cards[0].set_value("lcdu", value)
 
     @property
@@ -144,6 +149,7 @@ class MatS06(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -154,6 +160,7 @@ class MatS06(KeywordBase):
 
     @tyi.setter
     def tyi(self, value: float) -> None:
+        """Set the tyi property."""
         self._cards[0].set_value("tyi", value)
 
     @property
@@ -164,6 +171,7 @@ class MatS06(KeywordBase):
 
     @cyi.setter
     def cyi(self, value: float) -> None:
+        """Set the cyi property."""
         self._cards[0].set_value("cyi", value)
 
     @property
@@ -174,5 +182,6 @@ class MatS06(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

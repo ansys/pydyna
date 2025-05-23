@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatInvHyperbolicSin class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatInvHyperbolicSin(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatInvHyperbolicSin class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -172,6 +174,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -182,6 +185,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -192,6 +196,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -202,6 +207,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -212,6 +218,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[0].set_value("t", value)
 
     @property
@@ -222,6 +229,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @hc.setter
     def hc(self, value: float) -> None:
+        """Set the hc property."""
         self._cards[0].set_value("hc", value)
 
     @property
@@ -234,8 +242,9 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @vp.setter
     def vp(self, value: float) -> None:
+        """Set the vp property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""vp must be `None` or one of {0.0,1.0}""")
+            raise Exception("""vp must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("vp", value)
 
     @property
@@ -246,6 +255,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
 
     @property
@@ -256,6 +266,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[1].set_value("n", value)
 
     @property
@@ -266,6 +277,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[1].set_value("a", value)
 
     @property
@@ -276,6 +288,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[1].set_value("q", value)
 
     @property
@@ -286,6 +299,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[1].set_value("g", value)
 
     @property
@@ -296,6 +310,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @epso.setter
     def epso(self, value: float) -> None:
+        """Set the epso property."""
         self._cards[1].set_value("epso", value)
 
     @property
@@ -308,6 +323,7 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @lcq.setter
     def lcq(self, value: float) -> None:
+        """Set the lcq property."""
         self._cards[1].set_value("lcq", value)
 
     @property
@@ -318,5 +334,6 @@ class MatInvHyperbolicSin(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

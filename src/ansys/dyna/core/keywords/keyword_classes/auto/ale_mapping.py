@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleMapping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleMapping(KeywordBase):
     subkeyword = "MAPPING"
 
     def __init__(self, **kwargs):
+        """Initialize the AleMapping class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -226,6 +228,7 @@ class AleMapping(KeywordBase):
 
     @ammsid.setter
     def ammsid(self, value: int) -> None:
+        """Set the ammsid property."""
         self._cards[0].set_value("ammsid", value)
 
     @property
@@ -240,6 +243,7 @@ class AleMapping(KeywordBase):
 
     @rw.setter
     def rw(self, value: int) -> None:
+        """Set the rw property."""
         self._cards[0].set_value("rw", value)
 
     @property
@@ -254,6 +258,7 @@ class AleMapping(KeywordBase):
 
     @ntim.setter
     def ntim(self, value: int) -> None:
+        """Set the ntim property."""
         self._cards[1].set_value("ntim", value)
 
     @property
@@ -267,6 +272,7 @@ class AleMapping(KeywordBase):
 
     @tbeg.setter
     def tbeg(self, value: float) -> None:
+        """Set the tbeg property."""
         self._cards[1].set_value("tbeg", value)
 
     @property
@@ -280,6 +286,7 @@ class AleMapping(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[1].set_value("tend", value)
 
     @property
@@ -294,6 +301,7 @@ class AleMapping(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[2].set_value("vecid", value)
 
     @property
@@ -307,6 +315,7 @@ class AleMapping(KeywordBase):
 
     @angle.setter
     def angle(self, value: float) -> None:
+        """Set the angle property."""
         self._cards[2].set_value("angle", value)
 
     @property
@@ -320,6 +329,7 @@ class AleMapping(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[2].set_value("xp", value)
 
     @property
@@ -333,6 +343,7 @@ class AleMapping(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[2].set_value("yp", value)
 
     @property
@@ -346,6 +357,7 @@ class AleMapping(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[2].set_value("zp", value)
 
     @property
@@ -356,6 +368,7 @@ class AleMapping(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[3].set_value("id", value)
 
     @property
@@ -369,8 +382,9 @@ class AleMapping(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""type must be `None` or one of {0,1,2}""")
+            raise Exception("""type must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("type", value)
 
     @property
@@ -381,6 +395,7 @@ class AleMapping(KeywordBase):
 
     @nvol.setter
     def nvol(self, value: int) -> None:
+        """Set the nvol property."""
         self._cards[3].set_value("nvol", value)
 
     @property
@@ -400,6 +415,7 @@ class AleMapping(KeywordBase):
 
     @voltyp.setter
     def voltyp(self, value: int) -> None:
+        """Set the voltyp property."""
         self._cards[4].set_value("voltyp", value)
 
     @property
@@ -410,6 +426,7 @@ class AleMapping(KeywordBase):
 
     @vecid1.setter
     def vecid1(self, value: int) -> None:
+        """Set the vecid1 property."""
         self._cards[4].set_value("vecid1", value)
 
     @property
@@ -420,6 +437,7 @@ class AleMapping(KeywordBase):
 
     @dw1.setter
     def dw1(self, value: float) -> None:
+        """Set the dw1 property."""
         self._cards[4].set_value("dw1", value)
 
     @property
@@ -430,6 +448,7 @@ class AleMapping(KeywordBase):
 
     @xl.setter
     def xl(self, value: float) -> None:
+        """Set the xl property."""
         self._cards[4].set_value("xl", value)
 
     @property
@@ -440,6 +459,7 @@ class AleMapping(KeywordBase):
 
     @yl.setter
     def yl(self, value: float) -> None:
+        """Set the yl property."""
         self._cards[4].set_value("yl", value)
 
     @property
@@ -450,6 +470,7 @@ class AleMapping(KeywordBase):
 
     @zl.setter
     def zl(self, value: float) -> None:
+        """Set the zl property."""
         self._cards[4].set_value("zl", value)
 
     @property
@@ -460,6 +481,7 @@ class AleMapping(KeywordBase):
 
     @dw2.setter
     def dw2(self, value: float) -> None:
+        """Set the dw2 property."""
         self._cards[4].set_value("dw2", value)
 
     @property
@@ -470,5 +492,6 @@ class AleMapping(KeywordBase):
 
     @dv2.setter
     def dv2(self, value: float) -> None:
+        """Set the dv2 property."""
         self._cards[4].set_value("dv2", value)
 

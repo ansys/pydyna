@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatHighExplosiveBurn class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatHighExplosiveBurn(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatHighExplosiveBurn class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -126,6 +128,7 @@ class MatHighExplosiveBurn(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -136,6 +139,7 @@ class MatHighExplosiveBurn(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -146,6 +150,7 @@ class MatHighExplosiveBurn(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[0].set_value("d", value)
 
     @property
@@ -156,6 +161,7 @@ class MatHighExplosiveBurn(KeywordBase):
 
     @pcj.setter
     def pcj(self, value: float) -> None:
+        """Set the pcj property."""
         self._cards[0].set_value("pcj", value)
 
     @property
@@ -169,8 +175,9 @@ class MatHighExplosiveBurn(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         if value not in [0.0, 1.0, 2.0, None]:
-            raise Exception("""beta must be `None` or one of {0.0,1.0,2.0}""")
+            raise Exception("""beta must be `None` or one of {0.0,1.0,2.0}.""")
         self._cards[0].set_value("beta", value)
 
     @property
@@ -181,6 +188,7 @@ class MatHighExplosiveBurn(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -191,6 +199,7 @@ class MatHighExplosiveBurn(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -201,6 +210,7 @@ class MatHighExplosiveBurn(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -211,5 +221,6 @@ class MatHighExplosiveBurn(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

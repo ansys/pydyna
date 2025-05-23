@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseBoundaryCyclicPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
     subkeyword = "BOUNDARY_CYCLIC_PART"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseBoundaryCyclicPart class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -150,6 +152,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @srfprt1.setter
     def srfprt1(self, value: int) -> None:
+        """Set the srfprt1 property."""
         self._cards[0].set_value("srfprt1", value)
 
     @property
@@ -160,6 +163,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @srfprt2.setter
     def srfprt2(self, value: int) -> None:
+        """Set the srfprt2 property."""
         self._cards[0].set_value("srfprt2", value)
 
     @property
@@ -172,8 +176,9 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @cyctyp.setter
     def cyctyp(self, value: int) -> None:
+        """Set the cyctyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""cyctyp must be `None` or one of {0,1,2}""")
+            raise Exception("""cyctyp must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("cyctyp", value)
 
     @property
@@ -184,6 +189,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @axisx1.setter
     def axisx1(self, value: float) -> None:
+        """Set the axisx1 property."""
         self._cards[1].set_value("axisx1", value)
 
     @property
@@ -194,6 +200,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @axisy1.setter
     def axisy1(self, value: float) -> None:
+        """Set the axisy1 property."""
         self._cards[1].set_value("axisy1", value)
 
     @property
@@ -204,6 +211,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @axisz1.setter
     def axisz1(self, value: float) -> None:
+        """Set the axisz1 property."""
         self._cards[1].set_value("axisz1", value)
 
     @property
@@ -214,6 +222,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @dirx.setter
     def dirx(self, value: float) -> None:
+        """Set the dirx property."""
         self._cards[1].set_value("dirx", value)
 
     @property
@@ -224,6 +233,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @diry.setter
     def diry(self, value: float) -> None:
+        """Set the diry property."""
         self._cards[1].set_value("diry", value)
 
     @property
@@ -234,6 +244,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @dirz.setter
     def dirz(self, value: float) -> None:
+        """Set the dirz property."""
         self._cards[1].set_value("dirz", value)
 
     @property
@@ -244,6 +255,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @rotang.setter
     def rotang(self, value: float) -> None:
+        """Set the rotang property."""
         self._cards[1].set_value("rotang", value)
 
     @property
@@ -254,6 +266,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @transx.setter
     def transx(self, value: float) -> None:
+        """Set the transx property."""
         self._cards[2].set_value("transx", value)
 
     @property
@@ -264,6 +277,7 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @transy.setter
     def transy(self, value: float) -> None:
+        """Set the transy property."""
         self._cards[2].set_value("transy", value)
 
     @property
@@ -274,5 +288,6 @@ class CeseBoundaryCyclicPart(KeywordBase):
 
     @transz.setter
     def transz(self, value: float) -> None:
+        """Set the transz property."""
         self._cards[2].set_value("transz", value)
 

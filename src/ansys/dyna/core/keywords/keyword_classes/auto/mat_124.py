@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat124 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -36,6 +37,7 @@ class Mat124(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat124 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -270,6 +272,7 @@ class Mat124(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -280,6 +283,7 @@ class Mat124(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -290,6 +294,7 @@ class Mat124(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -300,6 +305,7 @@ class Mat124(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -310,6 +316,7 @@ class Mat124(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -320,6 +327,7 @@ class Mat124(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[0].set_value("p", value)
 
     @property
@@ -333,6 +341,7 @@ class Mat124(KeywordBase):
 
     @fail.setter
     def fail(self, value: float) -> None:
+        """Set the fail property."""
         self._cards[0].set_value("fail", value)
 
     @property
@@ -343,6 +352,7 @@ class Mat124(KeywordBase):
 
     @tdel.setter
     def tdel(self, value: float) -> None:
+        """Set the tdel property."""
         self._cards[0].set_value("tdel", value)
 
     @property
@@ -353,6 +363,7 @@ class Mat124(KeywordBase):
 
     @lcidc.setter
     def lcidc(self, value: int) -> None:
+        """Set the lcidc property."""
         self._cards[1].set_value("lcidc", value)
 
     @property
@@ -363,6 +374,7 @@ class Mat124(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[1].set_value("lcidt", value)
 
     @property
@@ -374,6 +386,7 @@ class Mat124(KeywordBase):
 
     @lcsrc.setter
     def lcsrc(self, value: int) -> None:
+        """Set the lcsrc property."""
         self._cards[1].set_value("lcsrc", value)
 
     @property
@@ -385,6 +398,7 @@ class Mat124(KeywordBase):
 
     @lcsrt.setter
     def lcsrt(self, value: int) -> None:
+        """Set the lcsrt property."""
         self._cards[1].set_value("lcsrt", value)
 
     @property
@@ -397,6 +411,7 @@ class Mat124(KeywordBase):
 
     @srflag.setter
     def srflag(self, value: float) -> None:
+        """Set the srflag property."""
         self._cards[1].set_value("srflag", value)
 
     @property
@@ -407,6 +422,7 @@ class Mat124(KeywordBase):
 
     @lcfail.setter
     def lcfail(self, value: int) -> None:
+        """Set the lcfail property."""
         self._cards[1].set_value("lcfail", value)
 
     @property
@@ -417,6 +433,7 @@ class Mat124(KeywordBase):
 
     @ec.setter
     def ec(self, value: float) -> None:
+        """Set the ec property."""
         self._cards[1].set_value("ec", value)
 
     @property
@@ -427,6 +444,7 @@ class Mat124(KeywordBase):
 
     @rpct.setter
     def rpct(self, value: float) -> None:
+        """Set the rpct property."""
         self._cards[1].set_value("rpct", value)
 
     @property
@@ -437,6 +455,7 @@ class Mat124(KeywordBase):
 
     @pc.setter
     def pc(self, value: float) -> None:
+        """Set the pc property."""
         self._cards[2].set_value("pc", value)
 
     @property
@@ -447,6 +466,7 @@ class Mat124(KeywordBase):
 
     @pt.setter
     def pt(self, value: float) -> None:
+        """Set the pt property."""
         self._cards[2].set_value("pt", value)
 
     @property
@@ -457,6 +477,7 @@ class Mat124(KeywordBase):
 
     @pcutc.setter
     def pcutc(self, value: float) -> None:
+        """Set the pcutc property."""
         self._cards[2].set_value("pcutc", value)
 
     @property
@@ -467,6 +488,7 @@ class Mat124(KeywordBase):
 
     @pcutt.setter
     def pcutt(self, value: float) -> None:
+        """Set the pcutt property."""
         self._cards[2].set_value("pcutt", value)
 
     @property
@@ -479,6 +501,7 @@ class Mat124(KeywordBase):
 
     @pcutf.setter
     def pcutf(self, value: float) -> None:
+        """Set the pcutf property."""
         self._cards[2].set_value("pcutf", value)
 
     @property
@@ -489,6 +512,7 @@ class Mat124(KeywordBase):
 
     @srfilt.setter
     def srfilt(self, value: float) -> None:
+        """Set the srfilt property."""
         self._cards[2].set_value("srfilt", value)
 
     @property
@@ -499,16 +523,17 @@ class Mat124(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[3].set_value("k", value)
 
     @property
     def constants(self):
-        '''Gets the table of constants'''
+        """Get the table of constants."""
         return self._cards[4].table
 
     @constants.setter
     def constants(self, df):
-        '''sets constants from the dataframe df'''
+        """Set constants from the dataframe df"""
         self._cards[4].table = df
 
     @property
@@ -519,8 +544,10 @@ class Mat124(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 
 
 class MatPlasticityCompressionTension(Mat124):
+    """Alias for MAT keyword."""
     subkeyword = "PLASTICITY_COMPRESSION_TENSION"

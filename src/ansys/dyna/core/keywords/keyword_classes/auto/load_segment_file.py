@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadSegmentFile class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSegmentFile(KeywordBase):
     subkeyword = "SEGMENT_FILE"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadSegmentFile class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,6 +67,7 @@ class LoadSegmentFile(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -75,5 +78,6 @@ class LoadSegmentFile(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 

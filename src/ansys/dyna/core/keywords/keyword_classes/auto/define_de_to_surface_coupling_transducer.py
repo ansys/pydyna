@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeToSurfaceCouplingTransducer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeToSurfaceCouplingTransducer class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -289,6 +291,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @slave.setter
     def slave(self, value: int) -> None:
+        """Set the slave property."""
         self._cards[0].set_value("slave", value)
 
     @property
@@ -299,6 +302,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @master.setter
     def master(self, value: int) -> None:
+        """Set the master property."""
         self._cards[0].set_value("master", value)
 
     @property
@@ -312,8 +316,9 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -326,8 +331,9 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""mtype must be `None` or one of {0,1,2}""")
+            raise Exception("""mtype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -338,6 +344,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @frics.setter
     def frics(self, value: float) -> None:
+        """Set the frics property."""
         self._cards[1].set_value("frics", value)
 
     @property
@@ -348,6 +355,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @fricd.setter
     def fricd(self, value: float) -> None:
+        """Set the fricd property."""
         self._cards[1].set_value("fricd", value)
 
     @property
@@ -358,6 +366,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[1].set_value("damp", value)
 
     @property
@@ -368,6 +377,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @bsort.setter
     def bsort(self, value: int) -> None:
+        """Set the bsort property."""
         self._cards[1].set_value("bsort", value)
 
     @property
@@ -378,6 +388,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @lcvx.setter
     def lcvx(self, value: int) -> None:
+        """Set the lcvx property."""
         self._cards[1].set_value("lcvx", value)
 
     @property
@@ -388,6 +399,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @lcvy.setter
     def lcvy(self, value: int) -> None:
+        """Set the lcvy property."""
         self._cards[1].set_value("lcvy", value)
 
     @property
@@ -398,6 +410,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @lcvz.setter
     def lcvz(self, value: int) -> None:
+        """Set the lcvz property."""
         self._cards[1].set_value("lcvz", value)
 
     @property
@@ -408,6 +421,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @wearc.setter
     def wearc(self, value: float) -> None:
+        """Set the wearc property."""
         self._cards[1].set_value("wearc", value)
 
     @property
@@ -418,6 +432,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @w1.setter
     def w1(self, value: float) -> None:
+        """Set the w1 property."""
         self._cards[2].set_value("w1", value)
 
     @property
@@ -428,6 +443,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @w2.setter
     def w2(self, value: float) -> None:
+        """Set the w2 property."""
         self._cards[2].set_value("w2", value)
 
     @property
@@ -438,6 +454,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @w3.setter
     def w3(self, value: float) -> None:
+        """Set the w3 property."""
         self._cards[2].set_value("w3", value)
 
     @property
@@ -448,6 +465,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @w4.setter
     def w4(self, value: float) -> None:
+        """Set the w4 property."""
         self._cards[2].set_value("w4", value)
 
     @property
@@ -458,6 +476,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @w5.setter
     def w5(self, value: float) -> None:
+        """Set the w5 property."""
         self._cards[2].set_value("w5", value)
 
     @property
@@ -468,6 +487,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @w6.setter
     def w6(self, value: float) -> None:
+        """Set the w6 property."""
         self._cards[2].set_value("w6", value)
 
     @property
@@ -478,6 +498,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @w7.setter
     def w7(self, value: float) -> None:
+        """Set the w7 property."""
         self._cards[2].set_value("w7", value)
 
     @property
@@ -488,6 +509,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @w8.setter
     def w8(self, value: float) -> None:
+        """Set the w8 property."""
         self._cards[2].set_value("w8", value)
 
     @property
@@ -498,6 +520,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @sfp.setter
     def sfp(self, value: float) -> None:
+        """Set the sfp property."""
         self._cards[3].set_value("sfp", value)
 
     @property
@@ -509,6 +532,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @sft.setter
     def sft(self, value: float) -> None:
+        """Set the sft property."""
         self._cards[3].set_value("sft", value)
 
     @property
@@ -519,6 +543,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @cid_rcf.setter
     def cid_rcf(self, value: int) -> None:
+        """Set the cid_rcf property."""
         self._cards[3].set_value("cid_rcf", value)
 
     @property
@@ -529,6 +554,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[3].set_value("bt", value)
 
     @property
@@ -539,6 +565,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[3].set_value("dt", value)
 
     @property
@@ -549,5 +576,6 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 

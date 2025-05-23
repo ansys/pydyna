@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceSsi class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceSsi(KeywordBase):
     subkeyword = "SSI"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceSsi class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -136,6 +138,7 @@ class InterfaceSsi(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -146,6 +149,7 @@ class InterfaceSsi(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -156,6 +160,7 @@ class InterfaceSsi(KeywordBase):
 
     @strid.setter
     def strid(self, value: int) -> None:
+        """Set the strid property."""
         self._cards[1].set_value("strid", value)
 
     @property
@@ -166,6 +171,7 @@ class InterfaceSsi(KeywordBase):
 
     @soilid.setter
     def soilid(self, value: int) -> None:
+        """Set the soilid property."""
         self._cards[1].set_value("soilid", value)
 
     @property
@@ -178,6 +184,7 @@ class InterfaceSsi(KeywordBase):
 
     @spr.setter
     def spr(self, value: int) -> None:
+        """Set the spr property."""
         self._cards[1].set_value("spr", value)
 
     @property
@@ -190,6 +197,7 @@ class InterfaceSsi(KeywordBase):
 
     @mpr.setter
     def mpr(self, value: int) -> None:
+        """Set the mpr property."""
         self._cards[1].set_value("mpr", value)
 
     @property
@@ -200,6 +208,7 @@ class InterfaceSsi(KeywordBase):
 
     @gmset.setter
     def gmset(self, value: int) -> None:
+        """Set the gmset property."""
         self._cards[2].set_value("gmset", value)
 
     @property
@@ -210,6 +219,7 @@ class InterfaceSsi(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[2].set_value("sf", value)
 
     @property
@@ -220,6 +230,7 @@ class InterfaceSsi(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[2].set_value("birth", value)
 
     @property
@@ -230,6 +241,7 @@ class InterfaceSsi(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[2].set_value("death", value)
 
     @property
@@ -240,5 +252,6 @@ class InterfaceSsi(KeywordBase):
 
     @memgm.setter
     def memgm(self, value: int) -> None:
+        """Set the memgm property."""
         self._cards[2].set_value("memgm", value)
 

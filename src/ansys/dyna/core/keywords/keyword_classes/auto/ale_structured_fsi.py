@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleStructuredFsi class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleStructuredFsi(KeywordBase):
     subkeyword = "STRUCTURED_FSI"
 
     def __init__(self, **kwargs):
+        """Initialize the AleStructuredFsi class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -174,6 +176,7 @@ class AleStructuredFsi(KeywordBase):
 
     @coupid.setter
     def coupid(self, value: int) -> None:
+        """Set the coupid property."""
         self._cards[0].set_value("coupid", value)
 
     @property
@@ -184,6 +187,7 @@ class AleStructuredFsi(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -194,6 +198,7 @@ class AleStructuredFsi(KeywordBase):
 
     @lstrsid.setter
     def lstrsid(self, value: int) -> None:
+        """Set the lstrsid property."""
         self._cards[1].set_value("lstrsid", value)
 
     @property
@@ -204,6 +209,7 @@ class AleStructuredFsi(KeywordBase):
 
     @alesid.setter
     def alesid(self, value: int) -> None:
+        """Set the alesid property."""
         self._cards[1].set_value("alesid", value)
 
     @property
@@ -217,8 +223,9 @@ class AleStructuredFsi(KeywordBase):
 
     @lstrstyp.setter
     def lstrstyp(self, value: int) -> None:
+        """Set the lstrstyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""lstrstyp must be `None` or one of {0,1,2}""")
+            raise Exception("""lstrstyp must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("lstrstyp", value)
 
     @property
@@ -231,8 +238,9 @@ class AleStructuredFsi(KeywordBase):
 
     @alestyp.setter
     def alestyp(self, value: int) -> None:
+        """Set the alestyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""alestyp must be `None` or one of {0,1}""")
+            raise Exception("""alestyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("alestyp", value)
 
     @property
@@ -245,6 +253,7 @@ class AleStructuredFsi(KeywordBase):
 
     @mcoup.setter
     def mcoup(self, value: int) -> None:
+        """Set the mcoup property."""
         self._cards[1].set_value("mcoup", value)
 
     @property
@@ -255,6 +264,7 @@ class AleStructuredFsi(KeywordBase):
 
     @start.setter
     def start(self, value: float) -> None:
+        """Set the start property."""
         self._cards[2].set_value("start", value)
 
     @property
@@ -265,6 +275,7 @@ class AleStructuredFsi(KeywordBase):
 
     @end.setter
     def end(self, value: float) -> None:
+        """Set the end property."""
         self._cards[2].set_value("end", value)
 
     @property
@@ -277,6 +288,7 @@ class AleStructuredFsi(KeywordBase):
 
     @pfac.setter
     def pfac(self, value: float) -> None:
+        """Set the pfac property."""
         self._cards[2].set_value("pfac", value)
 
     @property
@@ -289,6 +301,7 @@ class AleStructuredFsi(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[2].set_value("fric", value)
 
     @property
@@ -301,7 +314,8 @@ class AleStructuredFsi(KeywordBase):
 
     @flip.setter
     def flip(self, value: int) -> None:
+        """Set the flip property."""
         if value not in [0, 1, None]:
-            raise Exception("""flip must be `None` or one of {0,1}""")
+            raise Exception("""flip must be `None` or one of {0,1}.""")
         self._cards[2].set_value("flip", value)
 

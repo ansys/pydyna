@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualcesePart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualcesePart(KeywordBase):
     subkeyword = "PART"
 
     def __init__(self, **kwargs):
+        """Initialize the DualcesePart class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class DualcesePart(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -92,6 +95,7 @@ class DualcesePart(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -102,6 +106,7 @@ class DualcesePart(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -115,6 +120,7 @@ class DualcesePart(KeywordBase):
 
     @fsitype.setter
     def fsitype(self, value: str) -> None:
+        """Set the fsitype property."""
         self._cards[0].set_value("fsitype", value)
 
     @property
@@ -125,5 +131,6 @@ class DualcesePart(KeywordBase):
 
     @mmshid.setter
     def mmshid(self, value: int) -> None:
+        """Set the mmshid property."""
         self._cards[0].set_value("mmshid", value)
 

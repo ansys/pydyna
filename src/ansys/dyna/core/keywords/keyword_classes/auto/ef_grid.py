@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EfGrid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EfGrid(KeywordBase):
     subkeyword = "GRID"
 
     def __init__(self, **kwargs):
+        """Initialize the EfGrid class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class EfGrid(KeywordBase):
 
     @ngx.setter
     def ngx(self, value: int) -> None:
+        """Set the ngx property."""
         self._cards[0].set_value("ngx", value)
 
     @property
@@ -78,6 +81,7 @@ class EfGrid(KeywordBase):
 
     @ngy.setter
     def ngy(self, value: int) -> None:
+        """Set the ngy property."""
         self._cards[0].set_value("ngy", value)
 
     @property
@@ -88,5 +92,6 @@ class EfGrid(KeywordBase):
 
     @ngz.setter
     def ngz(self, value: int) -> None:
+        """Set the ngz property."""
         self._cards[0].set_value("ngz", value)
 

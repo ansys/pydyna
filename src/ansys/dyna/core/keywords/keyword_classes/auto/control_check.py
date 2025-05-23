@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlCheck class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlCheck(KeywordBase):
     subkeyword = "CHECK"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlCheck class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -106,6 +108,7 @@ class ControlCheck(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -118,8 +121,9 @@ class ControlCheck(KeywordBase):
 
     @ifauto.setter
     def ifauto(self, value: int) -> None:
+        """Set the ifauto property."""
         if value not in [0, 1, None]:
-            raise Exception("""ifauto must be `None` or one of {0,1}""")
+            raise Exception("""ifauto must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ifauto", value)
 
     @property
@@ -132,8 +136,9 @@ class ControlCheck(KeywordBase):
 
     @convex.setter
     def convex(self, value: int) -> None:
+        """Set the convex property."""
         if value not in [1, 0, None]:
-            raise Exception("""convex must be `None` or one of {1,0}""")
+            raise Exception("""convex must be `None` or one of {1,0}.""")
         self._cards[0].set_value("convex", value)
 
     @property
@@ -146,8 +151,9 @@ class ControlCheck(KeywordBase):
 
     @adpt.setter
     def adpt(self, value: int) -> None:
+        """Set the adpt property."""
         if value not in [1, 0, None]:
-            raise Exception("""adpt must be `None` or one of {1,0}""")
+            raise Exception("""adpt must be `None` or one of {1,0}.""")
         self._cards[0].set_value("adpt", value)
 
     @property
@@ -158,6 +164,7 @@ class ControlCheck(KeywordBase):
 
     @aratio.setter
     def aratio(self, value: float) -> None:
+        """Set the aratio property."""
         self._cards[0].set_value("aratio", value)
 
     @property
@@ -168,6 +175,7 @@ class ControlCheck(KeywordBase):
 
     @angke.setter
     def angke(self, value: float) -> None:
+        """Set the angke property."""
         self._cards[0].set_value("angke", value)
 
     @property
@@ -178,5 +186,6 @@ class ControlCheck(KeywordBase):
 
     @smin.setter
     def smin(self, value: float) -> None:
+        """Set the smin property."""
         self._cards[0].set_value("smin", value)
 

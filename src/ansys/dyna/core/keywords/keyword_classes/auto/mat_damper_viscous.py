@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatDamperViscous class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatDamperViscous(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatDamperViscous class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -83,6 +85,7 @@ class MatDamperViscous(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -93,6 +96,7 @@ class MatDamperViscous(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[0].set_value("dc", value)
 
     @property
@@ -103,5 +107,6 @@ class MatDamperViscous(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

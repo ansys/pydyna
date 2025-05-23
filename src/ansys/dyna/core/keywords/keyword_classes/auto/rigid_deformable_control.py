@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the RigidDeformableControl class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RigidDeformableControl(KeywordBase):
     subkeyword = "DEFORMABLE_CONTROL"
 
     def __init__(self, **kwargs):
+        """Initialize the RigidDeformableControl class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -81,8 +83,9 @@ class RigidDeformableControl(KeywordBase):
 
     @nrbf.setter
     def nrbf(self, value: int) -> None:
+        """Set the nrbf property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""nrbf must be `None` or one of {0,1,2}""")
+            raise Exception("""nrbf must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("nrbf", value)
 
     @property
@@ -96,8 +99,9 @@ class RigidDeformableControl(KeywordBase):
 
     @ncsf.setter
     def ncsf(self, value: int) -> None:
+        """Set the ncsf property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ncsf must be `None` or one of {0,1,2}""")
+            raise Exception("""ncsf must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("ncsf", value)
 
     @property
@@ -111,8 +115,9 @@ class RigidDeformableControl(KeywordBase):
 
     @rwf.setter
     def rwf(self, value: int) -> None:
+        """Set the rwf property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""rwf must be `None` or one of {0,1,2}""")
+            raise Exception("""rwf must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("rwf", value)
 
     @property
@@ -123,5 +128,6 @@ class RigidDeformableControl(KeywordBase):
 
     @dtmax.setter
     def dtmax(self, value: float) -> None:
+        """Set the dtmax property."""
         self._cards[0].set_value("dtmax", value)
 

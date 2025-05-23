@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryFluxSegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryFluxSegment(KeywordBase):
     subkeyword = "FLUX_SEGMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryFluxSegment class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -209,6 +211,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -219,6 +222,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -229,6 +233,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -239,6 +244,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[0].set_value("n4", value)
 
     @property
@@ -252,6 +258,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -262,6 +269,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @mlc1.setter
     def mlc1(self, value: float) -> None:
+        """Set the mlc1 property."""
         self._cards[1].set_value("mlc1", value)
 
     @property
@@ -272,6 +280,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @mlc2.setter
     def mlc2(self, value: float) -> None:
+        """Set the mlc2 property."""
         self._cards[1].set_value("mlc2", value)
 
     @property
@@ -282,6 +291,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @mlc3.setter
     def mlc3(self, value: float) -> None:
+        """Set the mlc3 property."""
         self._cards[1].set_value("mlc3", value)
 
     @property
@@ -292,6 +302,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @mlc4.setter
     def mlc4(self, value: float) -> None:
+        """Set the mlc4 property."""
         self._cards[1].set_value("mlc4", value)
 
     @property
@@ -304,8 +315,9 @@ class BoundaryFluxSegment(KeywordBase):
 
     @loc.setter
     def loc(self, value: int) -> None:
+        """Set the loc property."""
         if value not in [0, -1, 1, None]:
-            raise Exception("""loc must be `None` or one of {0,-1,1}""")
+            raise Exception("""loc must be `None` or one of {0,-1,1}.""")
         self._cards[1].set_value("loc", value)
 
     @property
@@ -317,6 +329,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @nhisv.setter
     def nhisv(self, value: int) -> None:
+        """Set the nhisv property."""
         self._cards[1].set_value("nhisv", value)
 
     @property
@@ -327,6 +340,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @nhisv1.setter
     def nhisv1(self, value: float) -> None:
+        """Set the nhisv1 property."""
         self._cards[2].set_value("nhisv1", value)
 
     @property
@@ -337,6 +351,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @nhisv2.setter
     def nhisv2(self, value: float) -> None:
+        """Set the nhisv2 property."""
         self._cards[2].set_value("nhisv2", value)
 
     @property
@@ -347,6 +362,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @nhisv3.setter
     def nhisv3(self, value: float) -> None:
+        """Set the nhisv3 property."""
         self._cards[2].set_value("nhisv3", value)
 
     @property
@@ -357,6 +373,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @nhisv4.setter
     def nhisv4(self, value: float) -> None:
+        """Set the nhisv4 property."""
         self._cards[2].set_value("nhisv4", value)
 
     @property
@@ -367,6 +384,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @nhisv5.setter
     def nhisv5(self, value: float) -> None:
+        """Set the nhisv5 property."""
         self._cards[2].set_value("nhisv5", value)
 
     @property
@@ -377,6 +395,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @nhisv6.setter
     def nhisv6(self, value: float) -> None:
+        """Set the nhisv6 property."""
         self._cards[2].set_value("nhisv6", value)
 
     @property
@@ -387,6 +406,7 @@ class BoundaryFluxSegment(KeywordBase):
 
     @nhisv7.setter
     def nhisv7(self, value: float) -> None:
+        """Set the nhisv7 property."""
         self._cards[2].set_value("nhisv7", value)
 
     @property
@@ -397,5 +417,6 @@ class BoundaryFluxSegment(KeywordBase):
 
     @nhisv8.setter
     def nhisv8(self, value: float) -> None:
+        """Set the nhisv8 property."""
         self._cards[2].set_value("nhisv8", value)
 

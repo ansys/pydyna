@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedAdaptivity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -32,6 +33,7 @@ class ConstrainedAdaptivity(KeywordBase):
     subkeyword = "ADAPTIVITY"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedAdaptivity class."""
         super().__init__(**kwargs)
         self._cards = [
             TableCard(
@@ -48,11 +50,11 @@ class ConstrainedAdaptivity(KeywordBase):
 
     @property
     def constrains(self):
-        '''Gets the table of constrains'''
+        """Get the table of constrains."""
         return self._cards[0].table
 
     @constrains.setter
     def constrains(self, df):
-        '''sets constrains from the dataframe df'''
+        """Set constrains from the dataframe df"""
         self._cards[0].table = df
 

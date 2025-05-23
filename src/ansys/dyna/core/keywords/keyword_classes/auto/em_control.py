@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmControl class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmControl(KeywordBase):
     subkeyword = "CONTROL"
 
     def __init__(self, **kwargs):
+        """Initialize the EmControl class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -117,8 +119,9 @@ class EmControl(KeywordBase):
 
     @emsol.setter
     def emsol(self, value: int) -> None:
+        """Set the emsol property."""
         if value not in [-1, 1, 2, 3, 11, 12, 13, None]:
-            raise Exception("""emsol must be `None` or one of {-1,1,2,3,11,12,13}""")
+            raise Exception("""emsol must be `None` or one of {-1,1,2,3,11,12,13}.""")
         self._cards[0].set_value("emsol", value)
 
     @property
@@ -129,6 +132,7 @@ class EmControl(KeywordBase):
 
     @numls.setter
     def numls(self, value: int) -> None:
+        """Set the numls property."""
         self._cards[0].set_value("numls", value)
 
     @property
@@ -139,6 +143,7 @@ class EmControl(KeywordBase):
 
     @macrodt.setter
     def macrodt(self, value: float) -> None:
+        """Set the macrodt property."""
         self._cards[0].set_value("macrodt", value)
 
     @property
@@ -152,8 +157,9 @@ class EmControl(KeywordBase):
 
     @dimtype.setter
     def dimtype(self, value: int) -> None:
+        """Set the dimtype property."""
         if value not in [0, 1, 3, None]:
-            raise Exception("""dimtype must be `None` or one of {0,1,3}""")
+            raise Exception("""dimtype must be `None` or one of {0,1,3}.""")
         self._cards[0].set_value("dimtype", value)
 
     @property
@@ -164,6 +170,7 @@ class EmControl(KeywordBase):
 
     @nperio.setter
     def nperio(self, value: int) -> None:
+        """Set the nperio property."""
         self._cards[0].set_value("nperio", value)
 
     @property
@@ -174,6 +181,7 @@ class EmControl(KeywordBase):
 
     @ncylfem.setter
     def ncylfem(self, value: int) -> None:
+        """Set the ncylfem property."""
         self._cards[0].set_value("ncylfem", value)
 
     @property
@@ -184,5 +192,6 @@ class EmControl(KeywordBase):
 
     @ncylbem.setter
     def ncylbem(self, value: int) -> None:
+        """Set the ncylbem property."""
         self._cards[0].set_value("ncylbem", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DualceseBoundaryNonReflectiveMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
     subkeyword = "BOUNDARY_NON_REFLECTIVE_MSURF"
 
     def __init__(self, **kwargs):
+        """Initialize the DualceseBoundaryNonReflectiveMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -75,6 +77,7 @@ class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
 
     @mspid.setter
     def mspid(self, value: int) -> None:
+        """Set the mspid property."""
         self._cards[0].set_value("mspid", value)
 
     @property
@@ -85,6 +88,7 @@ class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
 
     @dirx.setter
     def dirx(self, value: float) -> None:
+        """Set the dirx property."""
         self._cards[0].set_value("dirx", value)
 
     @property
@@ -95,6 +99,7 @@ class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
 
     @diry.setter
     def diry(self, value: float) -> None:
+        """Set the diry property."""
         self._cards[0].set_value("diry", value)
 
     @property
@@ -105,5 +110,6 @@ class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
 
     @dirz.setter
     def dirz(self, value: float) -> None:
+        """Set the dirz property."""
         self._cards[0].set_value("dirz", value)
 

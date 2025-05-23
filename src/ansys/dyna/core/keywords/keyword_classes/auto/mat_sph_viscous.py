@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSphViscous class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSphViscous(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSphViscous class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -125,6 +127,7 @@ class MatSphViscous(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -135,6 +138,7 @@ class MatSphViscous(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -145,6 +149,7 @@ class MatSphViscous(KeywordBase):
 
     @pc.setter
     def pc(self, value: float) -> None:
+        """Set the pc property."""
         self._cards[0].set_value("pc", value)
 
     @property
@@ -163,6 +168,7 @@ class MatSphViscous(KeywordBase):
 
     @mulo.setter
     def mulo(self, value: float) -> None:
+        """Set the mulo property."""
         self._cards[0].set_value("mulo", value)
 
     @property
@@ -179,6 +185,7 @@ class MatSphViscous(KeywordBase):
 
     @muhi.setter
     def muhi(self, value: float) -> None:
+        """Set the muhi property."""
         self._cards[0].set_value("muhi", value)
 
     @property
@@ -189,6 +196,7 @@ class MatSphViscous(KeywordBase):
 
     @rk.setter
     def rk(self, value: float) -> None:
+        """Set the rk property."""
         self._cards[0].set_value("rk", value)
 
     @property
@@ -203,6 +211,7 @@ class MatSphViscous(KeywordBase):
 
     @rc.setter
     def rc(self, value: float) -> None:
+        """Set the rc property."""
         self._cards[0].set_value("rc", value)
 
     @property
@@ -213,6 +222,7 @@ class MatSphViscous(KeywordBase):
 
     @rn.setter
     def rn(self, value: float) -> None:
+        """Set the rn property."""
         self._cards[0].set_value("rn", value)
 
     @property
@@ -223,5 +233,6 @@ class MatSphViscous(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IncludeMultiscale class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IncludeMultiscale(KeywordBase):
     subkeyword = "MULTISCALE"
 
     def __init__(self, **kwargs):
+        """Initialize the IncludeMultiscale class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,6 +67,7 @@ class IncludeMultiscale(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -75,5 +78,6 @@ class IncludeMultiscale(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 

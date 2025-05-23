@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ChemistryInflatorProperties class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryInflatorProperties(KeywordBase):
     subkeyword = "INFLATOR_PROPERTIES"
 
     def __init__(self, **kwargs):
+        """Initialize the ChemistryInflatorProperties class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -394,6 +396,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @comp_id.setter
     def comp_id(self, value: int) -> None:
+        """Set the comp_id property."""
         self._cards[0].set_value("comp_id", value)
 
     @property
@@ -404,6 +407,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @pdia.setter
     def pdia(self, value: float) -> None:
+        """Set the pdia property."""
         self._cards[0].set_value("pdia", value)
 
     @property
@@ -414,6 +418,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @pheight.setter
     def pheight(self, value: float) -> None:
+        """Set the pheight property."""
         self._cards[0].set_value("pheight", value)
 
     @property
@@ -424,6 +429,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @pmass.setter
     def pmass(self, value: float) -> None:
+        """Set the pmass property."""
         self._cards[0].set_value("pmass", value)
 
     @property
@@ -434,6 +440,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @totmass.setter
     def totmass(self, value: float) -> None:
+        """Set the totmass property."""
         self._cards[0].set_value("totmass", value)
 
     @property
@@ -444,6 +451,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @tflame.setter
     def tflame(self, value: float) -> None:
+        """Set the tflame property."""
         self._cards[1].set_value("tflame", value)
 
     @property
@@ -454,6 +462,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @pindex.setter
     def pindex(self, value: float) -> None:
+        """Set the pindex property."""
         self._cards[1].set_value("pindex", value)
 
     @property
@@ -464,6 +473,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @a0.setter
     def a0(self, value: float) -> None:
+        """Set the a0 property."""
         self._cards[1].set_value("a0", value)
 
     @property
@@ -474,6 +484,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @tdelay.setter
     def tdelay(self, value: float) -> None:
+        """Set the tdelay property."""
         self._cards[1].set_value("tdelay", value)
 
     @property
@@ -484,6 +495,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @risetime.setter
     def risetime(self, value: float) -> None:
+        """Set the risetime property."""
         self._cards[1].set_value("risetime", value)
 
     @property
@@ -494,6 +506,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @comp1id.setter
     def comp1id(self, value: int) -> None:
+        """Set the comp1id property."""
         self._cards[2].set_value("comp1id", value)
 
     @property
@@ -504,6 +517,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @vol1.setter
     def vol1(self, value: float) -> None:
+        """Set the vol1 property."""
         self._cards[2].set_value("vol1", value)
 
     @property
@@ -514,6 +528,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @area1.setter
     def area1(self, value: float) -> None:
+        """Set the area1 property."""
         self._cards[2].set_value("area1", value)
 
     @property
@@ -524,6 +539,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @cd1.setter
     def cd1(self, value: float) -> None:
+        """Set the cd1 property."""
         self._cards[2].set_value("cd1", value)
 
     @property
@@ -534,6 +550,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[2].set_value("p1", value)
 
     @property
@@ -544,6 +561,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @t1.setter
     def t1(self, value: float) -> None:
+        """Set the t1 property."""
         self._cards[2].set_value("t1", value)
 
     @property
@@ -554,6 +572,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @delp1.setter
     def delp1(self, value: float) -> None:
+        """Set the delp1 property."""
         self._cards[2].set_value("delp1", value)
 
     @property
@@ -564,6 +583,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @delt1.setter
     def delt1(self, value: float) -> None:
+        """Set the delt1 property."""
         self._cards[2].set_value("delt1", value)
 
     @property
@@ -574,6 +594,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @comp2id.setter
     def comp2id(self, value: int) -> None:
+        """Set the comp2id property."""
         self._cards[3].set_value("comp2id", value)
 
     @property
@@ -584,6 +605,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @vol2.setter
     def vol2(self, value: float) -> None:
+        """Set the vol2 property."""
         self._cards[3].set_value("vol2", value)
 
     @property
@@ -594,6 +616,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @area2.setter
     def area2(self, value: float) -> None:
+        """Set the area2 property."""
         self._cards[3].set_value("area2", value)
 
     @property
@@ -604,6 +627,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @cd2.setter
     def cd2(self, value: float) -> None:
+        """Set the cd2 property."""
         self._cards[3].set_value("cd2", value)
 
     @property
@@ -614,6 +638,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[3].set_value("p2", value)
 
     @property
@@ -624,6 +649,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @t2.setter
     def t2(self, value: float) -> None:
+        """Set the t2 property."""
         self._cards[3].set_value("t2", value)
 
     @property
@@ -634,6 +660,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @delp2.setter
     def delp2(self, value: float) -> None:
+        """Set the delp2 property."""
         self._cards[3].set_value("delp2", value)
 
     @property
@@ -644,6 +671,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @delt2.setter
     def delt2(self, value: float) -> None:
+        """Set the delt2 property."""
         self._cards[3].set_value("delt2", value)
 
     @property
@@ -654,6 +682,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @comp3id.setter
     def comp3id(self, value: int) -> None:
+        """Set the comp3id property."""
         self._cards[4].set_value("comp3id", value)
 
     @property
@@ -664,6 +693,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @vol3.setter
     def vol3(self, value: float) -> None:
+        """Set the vol3 property."""
         self._cards[4].set_value("vol3", value)
 
     @property
@@ -674,6 +704,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[4].set_value("p3", value)
 
     @property
@@ -684,6 +715,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @t3.setter
     def t3(self, value: float) -> None:
+        """Set the t3 property."""
         self._cards[4].set_value("t3", value)
 
     @property
@@ -694,6 +726,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @com42id.setter
     def com42id(self, value: int) -> None:
+        """Set the com42id property."""
         self._cards[5].set_value("com42id", value)
 
     @property
@@ -704,6 +737,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @vol4.setter
     def vol4(self, value: float) -> None:
+        """Set the vol4 property."""
         self._cards[5].set_value("vol4", value)
 
     @property
@@ -714,6 +748,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @area4.setter
     def area4(self, value: float) -> None:
+        """Set the area4 property."""
         self._cards[5].set_value("area4", value)
 
     @property
@@ -724,6 +759,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @cd4.setter
     def cd4(self, value: float) -> None:
+        """Set the cd4 property."""
         self._cards[5].set_value("cd4", value)
 
     @property
@@ -734,6 +770,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[5].set_value("p4", value)
 
     @property
@@ -744,6 +781,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @t4.setter
     def t4(self, value: float) -> None:
+        """Set the t4 property."""
         self._cards[5].set_value("t4", value)
 
     @property
@@ -754,6 +792,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @delp4.setter
     def delp4(self, value: float) -> None:
+        """Set the delp4 property."""
         self._cards[5].set_value("delp4", value)
 
     @property
@@ -764,6 +803,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @delt4.setter
     def delt4(self, value: float) -> None:
+        """Set the delt4 property."""
         self._cards[5].set_value("delt4", value)
 
     @property
@@ -774,6 +814,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @comp5id.setter
     def comp5id(self, value: int) -> None:
+        """Set the comp5id property."""
         self._cards[6].set_value("comp5id", value)
 
     @property
@@ -784,6 +825,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @vol5.setter
     def vol5(self, value: float) -> None:
+        """Set the vol5 property."""
         self._cards[6].set_value("vol5", value)
 
     @property
@@ -794,6 +836,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @area5.setter
     def area5(self, value: float) -> None:
+        """Set the area5 property."""
         self._cards[6].set_value("area5", value)
 
     @property
@@ -804,6 +847,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @cd5.setter
     def cd5(self, value: float) -> None:
+        """Set the cd5 property."""
         self._cards[6].set_value("cd5", value)
 
     @property
@@ -814,6 +858,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[6].set_value("p5", value)
 
     @property
@@ -824,6 +869,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @t5.setter
     def t5(self, value: float) -> None:
+        """Set the t5 property."""
         self._cards[6].set_value("t5", value)
 
     @property
@@ -834,6 +880,7 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @delp5.setter
     def delp5(self, value: float) -> None:
+        """Set the delp5 property."""
         self._cards[6].set_value("delp5", value)
 
     @property
@@ -844,5 +891,6 @@ class ChemistryInflatorProperties(KeywordBase):
 
     @delt5.setter
     def delt5(self, value: float) -> None:
+        """Set the delt5 property."""
         self._cards[6].set_value("delt5", value)
 

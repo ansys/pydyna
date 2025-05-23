@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlAdapstep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlAdapstep(KeywordBase):
     subkeyword = "ADAPSTEP"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlAdapstep class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -63,6 +65,7 @@ class ControlAdapstep(KeywordBase):
 
     @factin.setter
     def factin(self, value: float) -> None:
+        """Set the factin property."""
         self._cards[0].set_value("factin", value)
 
     @property
@@ -73,5 +76,6 @@ class ControlAdapstep(KeywordBase):
 
     @dfactr.setter
     def dfactr(self, value: float) -> None:
+        """Set the dfactr property."""
         self._cards[0].set_value("dfactr", value)
 

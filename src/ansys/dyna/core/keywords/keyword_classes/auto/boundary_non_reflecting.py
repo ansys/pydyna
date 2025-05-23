@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryNonReflecting class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryNonReflecting(KeywordBase):
     subkeyword = "NON_REFLECTING"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryNonReflecting class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -70,6 +72,7 @@ class BoundaryNonReflecting(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -82,6 +85,7 @@ class BoundaryNonReflecting(KeywordBase):
 
     @ad.setter
     def ad(self, value: float) -> None:
+        """Set the ad property."""
         self._cards[0].set_value("ad", value)
 
     @property
@@ -94,5 +98,6 @@ class BoundaryNonReflecting(KeywordBase):
 
     @as_.setter
     def as_(self, value: float) -> None:
+        """Set the as_ property."""
         self._cards[0].set_value("as", value)
 

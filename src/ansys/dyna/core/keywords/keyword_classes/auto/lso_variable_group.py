@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LsoVariableGroup class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LsoVariableGroup(KeywordBase):
     subkeyword = "VARIABLE_GROUP"
 
     def __init__(self, **kwargs):
+        """Initialize the LsoVariableGroup class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -88,6 +90,7 @@ class LsoVariableGroup(KeywordBase):
 
     @solver_name.setter
     def solver_name(self, value: str) -> None:
+        """Set the solver_name property."""
         self._cards[0].set_value("solver_name", value)
 
     @property
@@ -108,8 +111,9 @@ class LsoVariableGroup(KeywordBase):
 
     @domain_type.setter
     def domain_type(self, value: str) -> None:
+        """Set the domain_type property."""
         if value not in ["NODE", "BEAM_ELEMENT", "SHELL_ELEMENT", "THICK_SHELL_ELEMENT", "SOLID_ELEMENT", "SEGMENT", "PART", "GLOBAL", "SURFACE_ELEMENT", "VOLUME_ELEMENT", None]:
-            raise Exception("""domain_type must be `None` or one of {"NODE","BEAM_ELEMENT","SHELL_ELEMENT","THICK_SHELL_ELEMENT","SOLID_ELEMENT","SEGMENT","PART","GLOBAL","SURFACE_ELEMENT","VOLUME_ELEMENT"}""")
+            raise Exception("""domain_type must be `None` or one of {"NODE","BEAM_ELEMENT","SHELL_ELEMENT","THICK_SHELL_ELEMENT","SOLID_ELEMENT","SEGMENT","PART","GLOBAL","SURFACE_ELEMENT","VOLUME_ELEMENT"}.""")
         self._cards[1].set_value("domain_type", value)
 
     @property
@@ -120,6 +124,7 @@ class LsoVariableGroup(KeywordBase):
 
     @group_name.setter
     def group_name(self, value: str) -> None:
+        """Set the group_name property."""
         self._cards[2].set_value("group_name", value)
 
     @property
@@ -201,5 +206,6 @@ class LsoVariableGroup(KeywordBase):
 
     @var_name.setter
     def var_name(self, value: str) -> None:
+        """Set the var_name property."""
         self._cards[3].set_value("var_name", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlTermination class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlTermination(KeywordBase):
     subkeyword = "TERMINATION"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlTermination class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class ControlTermination(KeywordBase):
 
     @endtim.setter
     def endtim(self, value: float) -> None:
+        """Set the endtim property."""
         self._cards[0].set_value("endtim", value)
 
     @property
@@ -105,6 +108,7 @@ class ControlTermination(KeywordBase):
 
     @endcyc.setter
     def endcyc(self, value: int) -> None:
+        """Set the endcyc property."""
         self._cards[0].set_value("endcyc", value)
 
     @property
@@ -115,6 +119,7 @@ class ControlTermination(KeywordBase):
 
     @dtmin.setter
     def dtmin(self, value: float) -> None:
+        """Set the dtmin property."""
         self._cards[0].set_value("dtmin", value)
 
     @property
@@ -125,6 +130,7 @@ class ControlTermination(KeywordBase):
 
     @endeng.setter
     def endeng(self, value: float) -> None:
+        """Set the endeng property."""
         self._cards[0].set_value("endeng", value)
 
     @property
@@ -136,6 +142,7 @@ class ControlTermination(KeywordBase):
 
     @endmas.setter
     def endmas(self, value: float) -> None:
+        """Set the endmas property."""
         self._cards[0].set_value("endmas", value)
 
     @property
@@ -148,7 +155,8 @@ class ControlTermination(KeywordBase):
 
     @nosol.setter
     def nosol(self, value: int) -> None:
+        """Set the nosol property."""
         if value not in [0, 1, None]:
-            raise Exception("""nosol must be `None` or one of {0,1}""")
+            raise Exception("""nosol must be `None` or one of {0,1}.""")
         self._cards[0].set_value("nosol", value)
 

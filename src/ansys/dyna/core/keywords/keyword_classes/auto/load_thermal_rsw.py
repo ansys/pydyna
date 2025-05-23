@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadThermalRsw class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadThermalRsw(KeywordBase):
     subkeyword = "THERMAL_RSW"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadThermalRsw class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -220,6 +222,7 @@ class LoadThermalRsw(KeywordBase):
 
     @deftemp.setter
     def deftemp(self, value: int) -> None:
+        """Set the deftemp property."""
         self._cards[0].set_value("deftemp", value)
 
     @property
@@ -230,6 +233,7 @@ class LoadThermalRsw(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -242,8 +246,9 @@ class LoadThermalRsw(KeywordBase):
 
     @option.setter
     def option(self, value: int) -> None:
+        """Set the option property."""
         if value not in [0, 1, None]:
-            raise Exception("""option must be `None` or one of {0,1}""")
+            raise Exception("""option must be `None` or one of {0,1}.""")
         self._cards[1].set_value("option", value)
 
     @property
@@ -256,6 +261,7 @@ class LoadThermalRsw(KeywordBase):
 
     @nid1.setter
     def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
         self._cards[1].set_value("nid1", value)
 
     @property
@@ -267,6 +273,7 @@ class LoadThermalRsw(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[1].set_value("nid2", value)
 
     @property
@@ -278,6 +285,7 @@ class LoadThermalRsw(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[1].set_value("tdeath", value)
 
     @property
@@ -289,6 +297,7 @@ class LoadThermalRsw(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[1].set_value("tbirth", value)
 
     @property
@@ -303,8 +312,9 @@ class LoadThermalRsw(KeywordBase):
 
     @loc.setter
     def loc(self, value: int) -> None:
+        """Set the loc property."""
         if value not in [0, -1, 1, None]:
-            raise Exception("""loc must be `None` or one of {0,-1,1}""")
+            raise Exception("""loc must be `None` or one of {0,-1,1}.""")
         self._cards[1].set_value("loc", value)
 
     @property
@@ -316,6 +326,7 @@ class LoadThermalRsw(KeywordBase):
 
     @geoup.setter
     def geoup(self, value: int) -> None:
+        """Set the geoup property."""
         self._cards[1].set_value("geoup", value)
 
     @property
@@ -327,6 +338,7 @@ class LoadThermalRsw(KeywordBase):
 
     @dist.setter
     def dist(self, value: float) -> None:
+        """Set the dist property."""
         self._cards[2].set_value("dist", value)
 
     @property
@@ -337,6 +349,7 @@ class LoadThermalRsw(KeywordBase):
 
     @h1.setter
     def h1(self, value: float) -> None:
+        """Set the h1 property."""
         self._cards[2].set_value("h1", value)
 
     @property
@@ -347,6 +360,7 @@ class LoadThermalRsw(KeywordBase):
 
     @h2.setter
     def h2(self, value: float) -> None:
+        """Set the h2 property."""
         self._cards[2].set_value("h2", value)
 
     @property
@@ -357,6 +371,7 @@ class LoadThermalRsw(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[2].set_value("r", value)
 
     @property
@@ -367,6 +382,7 @@ class LoadThermalRsw(KeywordBase):
 
     @tempc.setter
     def tempc(self, value: float) -> None:
+        """Set the tempc property."""
         self._cards[2].set_value("tempc", value)
 
     @property
@@ -377,6 +393,7 @@ class LoadThermalRsw(KeywordBase):
 
     @tempb.setter
     def tempb(self, value: float) -> None:
+        """Set the tempb property."""
         self._cards[2].set_value("tempb", value)
 
     @property
@@ -390,6 +407,7 @@ class LoadThermalRsw(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[2].set_value("lcidt", value)
 
     @property
@@ -401,6 +419,7 @@ class LoadThermalRsw(KeywordBase):
 
     @hz1.setter
     def hz1(self, value: float) -> None:
+        """Set the hz1 property."""
         self._cards[3].set_value("hz1", value)
 
     @property
@@ -412,6 +431,7 @@ class LoadThermalRsw(KeywordBase):
 
     @hz2.setter
     def hz2(self, value: float) -> None:
+        """Set the hz2 property."""
         self._cards[3].set_value("hz2", value)
 
     @property
@@ -423,6 +443,7 @@ class LoadThermalRsw(KeywordBase):
 
     @rz.setter
     def rz(self, value: float) -> None:
+        """Set the rz property."""
         self._cards[3].set_value("rz", value)
 
     @property
@@ -434,5 +455,6 @@ class LoadThermalRsw(KeywordBase):
 
     @tempzb.setter
     def tempzb(self, value: float) -> None:
+        """Set the tempzb property."""
         self._cards[3].set_value("tempzb", value)
 

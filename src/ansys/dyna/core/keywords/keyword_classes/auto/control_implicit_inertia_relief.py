@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitInertiaRelief class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitInertiaRelief(KeywordBase):
     subkeyword = "IMPLICIT_INERTIA_RELIEF"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitInertiaRelief class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -134,8 +136,9 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @irflag.setter
     def irflag(self, value: int) -> None:
+        """Set the irflag property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""irflag must be `None` or one of {0,1,2}""")
+            raise Exception("""irflag must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("irflag", value)
 
     @property
@@ -146,6 +149,7 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @thresh.setter
     def thresh(self, value: float) -> None:
+        """Set the thresh property."""
         self._cards[0].set_value("thresh", value)
 
     @property
@@ -156,6 +160,7 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @ircnt.setter
     def ircnt(self, value: int) -> None:
+        """Set the ircnt property."""
         self._cards[0].set_value("ircnt", value)
 
     @property
@@ -166,6 +171,7 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @mode1.setter
     def mode1(self, value: int) -> None:
+        """Set the mode1 property."""
         self._cards[1].set_value("mode1", value)
 
     @property
@@ -176,6 +182,7 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @mode2.setter
     def mode2(self, value: int) -> None:
+        """Set the mode2 property."""
         self._cards[1].set_value("mode2", value)
 
     @property
@@ -186,6 +193,7 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @mode3.setter
     def mode3(self, value: int) -> None:
+        """Set the mode3 property."""
         self._cards[1].set_value("mode3", value)
 
     @property
@@ -196,6 +204,7 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @mode1.setter
     def mode1(self, value: int) -> None:
+        """Set the mode1 property."""
         self._cards[1].set_value("mode1", value)
 
     @property
@@ -206,6 +215,7 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @mode1.setter
     def mode1(self, value: int) -> None:
+        """Set the mode1 property."""
         self._cards[1].set_value("mode1", value)
 
     @property
@@ -216,6 +226,7 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @mode1.setter
     def mode1(self, value: int) -> None:
+        """Set the mode1 property."""
         self._cards[1].set_value("mode1", value)
 
     @property
@@ -226,6 +237,7 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @mode1.setter
     def mode1(self, value: int) -> None:
+        """Set the mode1 property."""
         self._cards[1].set_value("mode1", value)
 
     @property
@@ -236,5 +248,6 @@ class ControlImplicitInertiaRelief(KeywordBase):
 
     @mode1.setter
     def mode1(self, value: int) -> None:
+        """Set the mode1 property."""
         self._cards[1].set_value("mode1", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleReferenceSystemSwitch class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleReferenceSystemSwitch(KeywordBase):
     subkeyword = "REFERENCE_SYSTEM_SWITCH"
 
     def __init__(self, **kwargs):
+        """Initialize the AleReferenceSystemSwitch class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -242,6 +244,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -252,6 +255,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @t1.setter
     def t1(self, value: float) -> None:
+        """Set the t1 property."""
         self._cards[1].set_value("t1", value)
 
     @property
@@ -262,6 +266,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @t2.setter
     def t2(self, value: float) -> None:
+        """Set the t2 property."""
         self._cards[1].set_value("t2", value)
 
     @property
@@ -272,6 +277,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @t3.setter
     def t3(self, value: float) -> None:
+        """Set the t3 property."""
         self._cards[1].set_value("t3", value)
 
     @property
@@ -282,6 +288,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @t4.setter
     def t4(self, value: float) -> None:
+        """Set the t4 property."""
         self._cards[1].set_value("t4", value)
 
     @property
@@ -292,6 +299,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @t5.setter
     def t5(self, value: float) -> None:
+        """Set the t5 property."""
         self._cards[1].set_value("t5", value)
 
     @property
@@ -302,6 +310,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @t6.setter
     def t6(self, value: float) -> None:
+        """Set the t6 property."""
         self._cards[1].set_value("t6", value)
 
     @property
@@ -312,6 +321,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @t7.setter
     def t7(self, value: float) -> None:
+        """Set the t7 property."""
         self._cards[1].set_value("t7", value)
 
     @property
@@ -329,8 +339,9 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type1.setter
     def type1(self, value: int) -> None:
+        """Set the type1 property."""
         if value not in [0, 1, 2, 3, 4, 5, 7, None]:
-            raise Exception("""type1 must be `None` or one of {0,1,2,3,4,5,7}""")
+            raise Exception("""type1 must be `None` or one of {0,1,2,3,4,5,7}.""")
         self._cards[2].set_value("type1", value)
 
     @property
@@ -348,8 +359,9 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type2.setter
     def type2(self, value: int) -> None:
+        """Set the type2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 7, None]:
-            raise Exception("""type2 must be `None` or one of {0,1,2,3,4,5,7}""")
+            raise Exception("""type2 must be `None` or one of {0,1,2,3,4,5,7}.""")
         self._cards[2].set_value("type2", value)
 
     @property
@@ -367,8 +379,9 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type3.setter
     def type3(self, value: int) -> None:
+        """Set the type3 property."""
         if value not in [0, 1, 2, 3, 4, 5, 7, None]:
-            raise Exception("""type3 must be `None` or one of {0,1,2,3,4,5,7}""")
+            raise Exception("""type3 must be `None` or one of {0,1,2,3,4,5,7}.""")
         self._cards[2].set_value("type3", value)
 
     @property
@@ -386,8 +399,9 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type4.setter
     def type4(self, value: int) -> None:
+        """Set the type4 property."""
         if value not in [0, 1, 2, 3, 4, 5, 7, None]:
-            raise Exception("""type4 must be `None` or one of {0,1,2,3,4,5,7}""")
+            raise Exception("""type4 must be `None` or one of {0,1,2,3,4,5,7}.""")
         self._cards[2].set_value("type4", value)
 
     @property
@@ -405,8 +419,9 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type5.setter
     def type5(self, value: int) -> None:
+        """Set the type5 property."""
         if value not in [0, 1, 2, 3, 4, 5, 7, None]:
-            raise Exception("""type5 must be `None` or one of {0,1,2,3,4,5,7}""")
+            raise Exception("""type5 must be `None` or one of {0,1,2,3,4,5,7}.""")
         self._cards[2].set_value("type5", value)
 
     @property
@@ -424,8 +439,9 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type6.setter
     def type6(self, value: int) -> None:
+        """Set the type6 property."""
         if value not in [0, 1, 2, 3, 4, 5, 7, None]:
-            raise Exception("""type6 must be `None` or one of {0,1,2,3,4,5,7}""")
+            raise Exception("""type6 must be `None` or one of {0,1,2,3,4,5,7}.""")
         self._cards[2].set_value("type6", value)
 
     @property
@@ -443,8 +459,9 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type7.setter
     def type7(self, value: int) -> None:
+        """Set the type7 property."""
         if value not in [0, 1, 2, 3, 4, 5, 7, None]:
-            raise Exception("""type7 must be `None` or one of {0,1,2,3,4,5,7}""")
+            raise Exception("""type7 must be `None` or one of {0,1,2,3,4,5,7}.""")
         self._cards[2].set_value("type7", value)
 
     @property
@@ -462,8 +479,9 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @type8.setter
     def type8(self, value: int) -> None:
+        """Set the type8 property."""
         if value not in [0, 1, 2, 3, 4, 5, 7, None]:
-            raise Exception("""type8 must be `None` or one of {0,1,2,3,4,5,7}""")
+            raise Exception("""type8 must be `None` or one of {0,1,2,3,4,5,7}.""")
         self._cards[2].set_value("type8", value)
 
     @property
@@ -474,6 +492,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @id1.setter
     def id1(self, value: int) -> None:
+        """Set the id1 property."""
         self._cards[3].set_value("id1", value)
 
     @property
@@ -484,6 +503,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @id2.setter
     def id2(self, value: int) -> None:
+        """Set the id2 property."""
         self._cards[3].set_value("id2", value)
 
     @property
@@ -494,6 +514,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @id3.setter
     def id3(self, value: int) -> None:
+        """Set the id3 property."""
         self._cards[3].set_value("id3", value)
 
     @property
@@ -504,6 +525,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @id4.setter
     def id4(self, value: int) -> None:
+        """Set the id4 property."""
         self._cards[3].set_value("id4", value)
 
     @property
@@ -514,6 +536,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @id5.setter
     def id5(self, value: int) -> None:
+        """Set the id5 property."""
         self._cards[3].set_value("id5", value)
 
     @property
@@ -524,6 +547,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @id6.setter
     def id6(self, value: int) -> None:
+        """Set the id6 property."""
         self._cards[3].set_value("id6", value)
 
     @property
@@ -534,6 +558,7 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @id7.setter
     def id7(self, value: int) -> None:
+        """Set the id7 property."""
         self._cards[3].set_value("id7", value)
 
     @property
@@ -544,5 +569,6 @@ class AleReferenceSystemSwitch(KeywordBase):
 
     @id8.setter
     def id8(self, value: int) -> None:
+        """Set the id8 property."""
         self._cards[3].set_value("id8", value)
 

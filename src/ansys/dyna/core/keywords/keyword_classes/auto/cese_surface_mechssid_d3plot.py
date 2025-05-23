@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseSurfaceMechssidD3Plot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseSurfaceMechssidD3Plot(KeywordBase):
     subkeyword = "SURFACE_MECHSSID_D3PLOT"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseSurfaceMechssidD3Plot class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class CeseSurfaceMechssidD3Plot(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -71,5 +74,6 @@ class CeseSurfaceMechssidD3Plot(KeywordBase):
 
     @dir.setter
     def dir(self, value: str) -> None:
+        """Set the dir property."""
         self._cards[0].set_value("dir", value)
 

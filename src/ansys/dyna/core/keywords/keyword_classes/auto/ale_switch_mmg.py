@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleSwitchMmg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleSwitchMmg(KeywordBase):
     subkeyword = "SWITCH_MMG"
 
     def __init__(self, **kwargs):
+        """Initialize the AleSwitchMmg class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -170,6 +172,7 @@ class AleSwitchMmg(KeywordBase):
 
     @fr_mmg.setter
     def fr_mmg(self, value: int) -> None:
+        """Set the fr_mmg property."""
         self._cards[0].set_value("fr_mmg", value)
 
     @property
@@ -182,6 +185,7 @@ class AleSwitchMmg(KeywordBase):
 
     @to_mmg.setter
     def to_mmg(self, value: int) -> None:
+        """Set the to_mmg property."""
         self._cards[0].set_value("to_mmg", value)
 
     @property
@@ -193,6 +197,7 @@ class AleSwitchMmg(KeywordBase):
 
     @idfunc.setter
     def idfunc(self, value: int) -> None:
+        """Set the idfunc property."""
         self._cards[0].set_value("idfunc", value)
 
     @property
@@ -207,6 +212,7 @@ class AleSwitchMmg(KeywordBase):
 
     @idsegset.setter
     def idsegset(self, value: int) -> None:
+        """Set the idsegset property."""
         self._cards[0].set_value("idsegset", value)
 
     @property
@@ -221,6 +227,7 @@ class AleSwitchMmg(KeywordBase):
 
     @idsldset.setter
     def idsldset(self, value: int) -> None:
+        """Set the idsldset property."""
         self._cards[0].set_value("idsldset", value)
 
     @property
@@ -235,6 +242,7 @@ class AleSwitchMmg(KeywordBase):
 
     @ncycseg.setter
     def ncycseg(self, value: int) -> None:
+        """Set the ncycseg property."""
         self._cards[0].set_value("ncycseg", value)
 
     @property
@@ -249,6 +257,7 @@ class AleSwitchMmg(KeywordBase):
 
     @ncycsld.setter
     def ncycsld(self, value: int) -> None:
+        """Set the ncycsld property."""
         self._cards[0].set_value("ncycsld", value)
 
     @property
@@ -312,6 +321,7 @@ class AleSwitchMmg(KeywordBase):
 
     @var1.setter
     def var1(self, value: int) -> None:
+        """Set the var1 property."""
         self._cards[1].set_value("var1", value)
 
     @property
@@ -375,6 +385,7 @@ class AleSwitchMmg(KeywordBase):
 
     @var2.setter
     def var2(self, value: int) -> None:
+        """Set the var2 property."""
         self._cards[1].set_value("var2", value)
 
     @property
@@ -438,6 +449,7 @@ class AleSwitchMmg(KeywordBase):
 
     @var3.setter
     def var3(self, value: int) -> None:
+        """Set the var3 property."""
         self._cards[1].set_value("var3", value)
 
     @property
@@ -501,6 +513,7 @@ class AleSwitchMmg(KeywordBase):
 
     @var4.setter
     def var4(self, value: int) -> None:
+        """Set the var4 property."""
         self._cards[1].set_value("var4", value)
 
     @property
@@ -564,6 +577,7 @@ class AleSwitchMmg(KeywordBase):
 
     @var5.setter
     def var5(self, value: int) -> None:
+        """Set the var5 property."""
         self._cards[1].set_value("var5", value)
 
     @property
@@ -627,6 +641,7 @@ class AleSwitchMmg(KeywordBase):
 
     @var6.setter
     def var6(self, value: int) -> None:
+        """Set the var6 property."""
         self._cards[1].set_value("var6", value)
 
     @property
@@ -690,6 +705,7 @@ class AleSwitchMmg(KeywordBase):
 
     @var7.setter
     def var7(self, value: int) -> None:
+        """Set the var7 property."""
         self._cards[1].set_value("var7", value)
 
     @property
@@ -753,5 +769,6 @@ class AleSwitchMmg(KeywordBase):
 
     @var8.setter
     def var8(self, value: int) -> None:
+        """Set the var8 property."""
         self._cards[1].set_value("var8", value)
 

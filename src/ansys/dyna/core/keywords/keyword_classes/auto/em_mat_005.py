@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmMat005 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmMat005(KeywordBase):
     subkeyword = "MAT_005"
 
     def __init__(self, **kwargs):
+        """Initialize the EmMat005 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -322,6 +324,7 @@ class EmMat005(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -338,8 +341,9 @@ class EmMat005(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         if value not in [0, 1, 2, 4, 5, None]:
-            raise Exception("""mtype must be `None` or one of {0,1,2,4,5}""")
+            raise Exception("""mtype must be `None` or one of {0,1,2,4,5}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -350,6 +354,7 @@ class EmMat005(KeywordBase):
 
     @sigmaxxa.setter
     def sigmaxxa(self, value: float) -> None:
+        """Set the sigmaxxa property."""
         self._cards[0].set_value("sigmaxxa", value)
 
     @property
@@ -360,6 +365,7 @@ class EmMat005(KeywordBase):
 
     @sigmayya.setter
     def sigmayya(self, value: float) -> None:
+        """Set the sigmayya property."""
         self._cards[0].set_value("sigmayya", value)
 
     @property
@@ -370,6 +376,7 @@ class EmMat005(KeywordBase):
 
     @sigmazza.setter
     def sigmazza(self, value: float) -> None:
+        """Set the sigmazza property."""
         self._cards[0].set_value("sigmazza", value)
 
     @property
@@ -380,6 +387,7 @@ class EmMat005(KeywordBase):
 
     @sigmaxya.setter
     def sigmaxya(self, value: float) -> None:
+        """Set the sigmaxya property."""
         self._cards[1].set_value("sigmaxya", value)
 
     @property
@@ -390,6 +398,7 @@ class EmMat005(KeywordBase):
 
     @sigmaxza.setter
     def sigmaxza(self, value: float) -> None:
+        """Set the sigmaxza property."""
         self._cards[1].set_value("sigmaxza", value)
 
     @property
@@ -400,6 +409,7 @@ class EmMat005(KeywordBase):
 
     @sigmayxa.setter
     def sigmayxa(self, value: float) -> None:
+        """Set the sigmayxa property."""
         self._cards[1].set_value("sigmayxa", value)
 
     @property
@@ -410,6 +420,7 @@ class EmMat005(KeywordBase):
 
     @sigmayza.setter
     def sigmayza(self, value: float) -> None:
+        """Set the sigmayza property."""
         self._cards[1].set_value("sigmayza", value)
 
     @property
@@ -420,6 +431,7 @@ class EmMat005(KeywordBase):
 
     @sigmazxa.setter
     def sigmazxa(self, value: float) -> None:
+        """Set the sigmazxa property."""
         self._cards[1].set_value("sigmazxa", value)
 
     @property
@@ -430,6 +442,7 @@ class EmMat005(KeywordBase):
 
     @sigmazya.setter
     def sigmazya(self, value: float) -> None:
+        """Set the sigmazya property."""
         self._cards[1].set_value("sigmazya", value)
 
     @property
@@ -440,6 +453,7 @@ class EmMat005(KeywordBase):
 
     @sigmaxxb.setter
     def sigmaxxb(self, value: float) -> None:
+        """Set the sigmaxxb property."""
         self._cards[2].set_value("sigmaxxb", value)
 
     @property
@@ -450,6 +464,7 @@ class EmMat005(KeywordBase):
 
     @sigmayyb.setter
     def sigmayyb(self, value: float) -> None:
+        """Set the sigmayyb property."""
         self._cards[2].set_value("sigmayyb", value)
 
     @property
@@ -460,6 +475,7 @@ class EmMat005(KeywordBase):
 
     @sigmazzb.setter
     def sigmazzb(self, value: float) -> None:
+        """Set the sigmazzb property."""
         self._cards[2].set_value("sigmazzb", value)
 
     @property
@@ -470,6 +486,7 @@ class EmMat005(KeywordBase):
 
     @sigmaxyb.setter
     def sigmaxyb(self, value: float) -> None:
+        """Set the sigmaxyb property."""
         self._cards[3].set_value("sigmaxyb", value)
 
     @property
@@ -480,6 +497,7 @@ class EmMat005(KeywordBase):
 
     @sigmaxzb.setter
     def sigmaxzb(self, value: float) -> None:
+        """Set the sigmaxzb property."""
         self._cards[3].set_value("sigmaxzb", value)
 
     @property
@@ -490,6 +508,7 @@ class EmMat005(KeywordBase):
 
     @sigmayxb.setter
     def sigmayxb(self, value: float) -> None:
+        """Set the sigmayxb property."""
         self._cards[3].set_value("sigmayxb", value)
 
     @property
@@ -500,6 +519,7 @@ class EmMat005(KeywordBase):
 
     @sigmayzb.setter
     def sigmayzb(self, value: float) -> None:
+        """Set the sigmayzb property."""
         self._cards[3].set_value("sigmayzb", value)
 
     @property
@@ -510,6 +530,7 @@ class EmMat005(KeywordBase):
 
     @sigmazxb.setter
     def sigmazxb(self, value: float) -> None:
+        """Set the sigmazxb property."""
         self._cards[3].set_value("sigmazxb", value)
 
     @property
@@ -520,6 +541,7 @@ class EmMat005(KeywordBase):
 
     @sigmazyb.setter
     def sigmazyb(self, value: float) -> None:
+        """Set the sigmazyb property."""
         self._cards[3].set_value("sigmazyb", value)
 
     @property
@@ -536,8 +558,9 @@ class EmMat005(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: int) -> None:
+        """Set the aopt property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""aopt must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""aopt must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[4].set_value("aopt", value)
 
     @property
@@ -548,6 +571,7 @@ class EmMat005(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[4].set_value("xp", value)
 
     @property
@@ -558,6 +582,7 @@ class EmMat005(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[4].set_value("yp", value)
 
     @property
@@ -568,6 +593,7 @@ class EmMat005(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[4].set_value("zp", value)
 
     @property
@@ -578,6 +604,7 @@ class EmMat005(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[4].set_value("a1", value)
 
     @property
@@ -588,6 +615,7 @@ class EmMat005(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[4].set_value("a2", value)
 
     @property
@@ -598,6 +626,7 @@ class EmMat005(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[4].set_value("a3", value)
 
     @property
@@ -609,6 +638,7 @@ class EmMat005(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         self._cards[4].set_value("macf", value)
 
     @property
@@ -619,6 +649,7 @@ class EmMat005(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[5].set_value("v1", value)
 
     @property
@@ -629,6 +660,7 @@ class EmMat005(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[5].set_value("v2", value)
 
     @property
@@ -639,6 +671,7 @@ class EmMat005(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[5].set_value("v3", value)
 
     @property
@@ -649,6 +682,7 @@ class EmMat005(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[5].set_value("d1", value)
 
     @property
@@ -659,6 +693,7 @@ class EmMat005(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[5].set_value("d2", value)
 
     @property
@@ -669,5 +704,6 @@ class EmMat005(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[5].set_value("d3", value)
 

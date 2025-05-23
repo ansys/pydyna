@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingTipping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingTipping(KeywordBase):
     subkeyword = "FORMING_TIPPING"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingTipping class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -205,6 +207,7 @@ class ControlFormingTipping(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -218,8 +221,9 @@ class ControlFormingTipping(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [1, 2, None]:
-            raise Exception("""itype must be `None` or one of {1,2}""")
+            raise Exception("""itype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -231,6 +235,7 @@ class ControlFormingTipping(KeywordBase):
 
     @ifstrn.setter
     def ifstrn(self, value: int) -> None:
+        """Set the ifstrn property."""
         self._cards[0].set_value("ifstrn", value)
 
     @property
@@ -242,6 +247,7 @@ class ControlFormingTipping(KeywordBase):
 
     @ifstrs.setter
     def ifstrs(self, value: int) -> None:
+        """Set the ifstrs property."""
         self._cards[0].set_value("ifstrs", value)
 
     @property
@@ -252,6 +258,7 @@ class ControlFormingTipping(KeywordBase):
 
     @nmove.setter
     def nmove(self, value: int) -> None:
+        """Set the nmove property."""
         self._cards[0].set_value("nmove", value)
 
     @property
@@ -264,8 +271,9 @@ class ControlFormingTipping(KeywordBase):
 
     @rot_tran.setter
     def rot_tran(self, value: int) -> None:
+        """Set the rot_tran property."""
         if value not in [1, 2, None]:
-            raise Exception("""rot_tran must be `None` or one of {1,2}""")
+            raise Exception("""rot_tran must be `None` or one of {1,2}.""")
         self._cards[1].set_value("rot/tran", value)
 
     @property
@@ -276,6 +284,7 @@ class ControlFormingTipping(KeywordBase):
 
     @v11.setter
     def v11(self, value: float) -> None:
+        """Set the v11 property."""
         self._cards[1].set_value("v11", value)
 
     @property
@@ -286,6 +295,7 @@ class ControlFormingTipping(KeywordBase):
 
     @v12.setter
     def v12(self, value: float) -> None:
+        """Set the v12 property."""
         self._cards[1].set_value("v12", value)
 
     @property
@@ -296,6 +306,7 @@ class ControlFormingTipping(KeywordBase):
 
     @v13.setter
     def v13(self, value: float) -> None:
+        """Set the v13 property."""
         self._cards[1].set_value("v13", value)
 
     @property
@@ -306,6 +317,7 @@ class ControlFormingTipping(KeywordBase):
 
     @x01.setter
     def x01(self, value: float) -> None:
+        """Set the x01 property."""
         self._cards[1].set_value("x01", value)
 
     @property
@@ -316,6 +328,7 @@ class ControlFormingTipping(KeywordBase):
 
     @y01.setter
     def y01(self, value: float) -> None:
+        """Set the y01 property."""
         self._cards[1].set_value("y01", value)
 
     @property
@@ -326,6 +339,7 @@ class ControlFormingTipping(KeywordBase):
 
     @z01.setter
     def z01(self, value: float) -> None:
+        """Set the z01 property."""
         self._cards[1].set_value("z01", value)
 
     @property
@@ -336,6 +350,7 @@ class ControlFormingTipping(KeywordBase):
 
     @dista1.setter
     def dista1(self, value: float) -> None:
+        """Set the dista1 property."""
         self._cards[1].set_value("dista1", value)
 
     @property
@@ -348,8 +363,9 @@ class ControlFormingTipping(KeywordBase):
 
     @rot_tran.setter
     def rot_tran(self, value: int) -> None:
+        """Set the rot_tran property."""
         if value not in [1, 2, None]:
-            raise Exception("""rot_tran must be `None` or one of {1,2}""")
+            raise Exception("""rot_tran must be `None` or one of {1,2}.""")
         self._cards[2].set_value("rot/tran", value)
 
     @property
@@ -360,6 +376,7 @@ class ControlFormingTipping(KeywordBase):
 
     @dx.setter
     def dx(self, value: float) -> None:
+        """Set the dx property."""
         self._cards[2].set_value("dx", value)
 
     @property
@@ -370,6 +387,7 @@ class ControlFormingTipping(KeywordBase):
 
     @dy.setter
     def dy(self, value: float) -> None:
+        """Set the dy property."""
         self._cards[2].set_value("dy", value)
 
     @property
@@ -380,5 +398,6 @@ class ControlFormingTipping(KeywordBase):
 
     @dz.setter
     def dz(self, value: float) -> None:
+        """Set the dz property."""
         self._cards[2].set_value("dz", value)
 

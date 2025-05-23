@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlSubcycle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlSubcycle(KeywordBase):
     subkeyword = "SUBCYCLE"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlSubcycle class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -63,8 +65,9 @@ class ControlSubcycle(KeywordBase):
 
     @k.setter
     def k(self, value: int) -> None:
+        """Set the k property."""
         if value not in [16, 1, 2, 4, 8, 32, 64, None]:
-            raise Exception("""k must be `None` or one of {16,1,2,4,8,32,64}""")
+            raise Exception("""k must be `None` or one of {16,1,2,4,8,32,64}.""")
         self._cards[0].set_value("k", value)
 
     @property
@@ -75,7 +78,8 @@ class ControlSubcycle(KeywordBase):
 
     @l.setter
     def l(self, value: int) -> None:
+        """Set the l property."""
         if value not in [1, 2, 4, 8, 16, 32, 64, None]:
-            raise Exception("""l must be `None` or one of {1,2,4,8,16,32,64}""")
+            raise Exception("""l must be `None` or one of {1,2,4,8,16,32,64}.""")
         self._cards[0].set_value("l", value)
 

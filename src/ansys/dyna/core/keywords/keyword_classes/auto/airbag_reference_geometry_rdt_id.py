@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AirbagReferenceGeometryRdtId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagReferenceGeometryRdtId(KeywordBase):
     subkeyword = "REFERENCE_GEOMETRY_RDT_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the AirbagReferenceGeometryRdtId class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -117,6 +119,7 @@ class AirbagReferenceGeometryRdtId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -127,6 +130,7 @@ class AirbagReferenceGeometryRdtId(KeywordBase):
 
     @sx.setter
     def sx(self, value: float) -> None:
+        """Set the sx property."""
         self._cards[0].set_value("sx", value)
 
     @property
@@ -137,6 +141,7 @@ class AirbagReferenceGeometryRdtId(KeywordBase):
 
     @sy.setter
     def sy(self, value: float) -> None:
+        """Set the sy property."""
         self._cards[0].set_value("sy", value)
 
     @property
@@ -147,6 +152,7 @@ class AirbagReferenceGeometryRdtId(KeywordBase):
 
     @sz.setter
     def sz(self, value: float) -> None:
+        """Set the sz property."""
         self._cards[0].set_value("sz", value)
 
     @property
@@ -157,6 +163,7 @@ class AirbagReferenceGeometryRdtId(KeywordBase):
 
     @nido.setter
     def nido(self, value: int) -> None:
+        """Set the nido property."""
         self._cards[0].set_value("nido", value)
 
     @property
@@ -167,6 +174,7 @@ class AirbagReferenceGeometryRdtId(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -177,6 +185,7 @@ class AirbagReferenceGeometryRdtId(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -187,6 +196,7 @@ class AirbagReferenceGeometryRdtId(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -197,5 +207,6 @@ class AirbagReferenceGeometryRdtId(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 

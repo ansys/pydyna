@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialStrainSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialStrainSolid(KeywordBase):
     subkeyword = "STRAIN_SOLID"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialStrainSolid class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -106,6 +108,7 @@ class InitialStrainSolid(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -116,6 +119,7 @@ class InitialStrainSolid(KeywordBase):
 
     @epsxx.setter
     def epsxx(self, value: float) -> None:
+        """Set the epsxx property."""
         self._cards[1].set_value("epsxx", value)
 
     @property
@@ -126,6 +130,7 @@ class InitialStrainSolid(KeywordBase):
 
     @epsyy.setter
     def epsyy(self, value: float) -> None:
+        """Set the epsyy property."""
         self._cards[1].set_value("epsyy", value)
 
     @property
@@ -136,6 +141,7 @@ class InitialStrainSolid(KeywordBase):
 
     @epszz.setter
     def epszz(self, value: float) -> None:
+        """Set the epszz property."""
         self._cards[1].set_value("epszz", value)
 
     @property
@@ -146,6 +152,7 @@ class InitialStrainSolid(KeywordBase):
 
     @epsxy.setter
     def epsxy(self, value: float) -> None:
+        """Set the epsxy property."""
         self._cards[1].set_value("epsxy", value)
 
     @property
@@ -156,6 +163,7 @@ class InitialStrainSolid(KeywordBase):
 
     @epsyz.setter
     def epsyz(self, value: float) -> None:
+        """Set the epsyz property."""
         self._cards[1].set_value("epsyz", value)
 
     @property
@@ -166,5 +174,6 @@ class InitialStrainSolid(KeywordBase):
 
     @epszx.setter
     def epszx(self, value: float) -> None:
+        """Set the epszx property."""
         self._cards[1].set_value("epszx", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControllerPlant class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControllerPlant(KeywordBase):
     subkeyword = "PLANT"
 
     def __init__(self, **kwargs):
+        """Initialize the ControllerPlant class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -385,6 +387,7 @@ class ControllerPlant(KeywordBase):
 
     @plntid.setter
     def plntid(self, value: int) -> None:
+        """Set the plntid property."""
         self._cards[0].set_value("plntid", value)
 
     @property
@@ -395,6 +398,7 @@ class ControllerPlant(KeywordBase):
 
     @nin.setter
     def nin(self, value: int) -> None:
+        """Set the nin property."""
         self._cards[0].set_value("nin", value)
 
     @property
@@ -405,6 +409,7 @@ class ControllerPlant(KeywordBase):
 
     @nout.setter
     def nout(self, value: int) -> None:
+        """Set the nout property."""
         self._cards[0].set_value("nout", value)
 
     @property
@@ -415,6 +420,7 @@ class ControllerPlant(KeywordBase):
 
     @nmode.setter
     def nmode(self, value: int) -> None:
+        """Set the nmode property."""
         self._cards[0].set_value("nmode", value)
 
     @property
@@ -425,6 +431,7 @@ class ControllerPlant(KeywordBase):
 
     @mtxq.setter
     def mtxq(self, value: int) -> None:
+        """Set the mtxq property."""
         self._cards[0].set_value("mtxq", value)
 
     @property
@@ -435,6 +442,7 @@ class ControllerPlant(KeywordBase):
 
     @mtxr.setter
     def mtxr(self, value: int) -> None:
+        """Set the mtxr property."""
         self._cards[0].set_value("mtxr", value)
 
     @property
@@ -447,6 +455,7 @@ class ControllerPlant(KeywordBase):
 
     @mopt.setter
     def mopt(self, value: int) -> None:
+        """Set the mopt property."""
         self._cards[0].set_value("mopt", value)
 
     @property
@@ -457,6 +466,7 @@ class ControllerPlant(KeywordBase):
 
     @fscilab.setter
     def fscilab(self, value: str) -> None:
+        """Set the fscilab property."""
         self._cards[1].set_value("fscilab", value)
 
     @property
@@ -467,6 +477,7 @@ class ControllerPlant(KeywordBase):
 
     @flsdyna.setter
     def flsdyna(self, value: str) -> None:
+        """Set the flsdyna property."""
         self._cards[1].set_value("flsdyna", value)
 
     @property
@@ -477,6 +488,7 @@ class ControllerPlant(KeywordBase):
 
     @fmatlab.setter
     def fmatlab(self, value: str) -> None:
+        """Set the fmatlab property."""
         self._cards[1].set_value("fmatlab", value)
 
     @property
@@ -489,6 +501,7 @@ class ControllerPlant(KeywordBase):
 
     @nodi1.setter
     def nodi1(self, value: int) -> None:
+        """Set the nodi1 property."""
         self._cards[2].set_value("nodi1", value)
 
     @property
@@ -503,8 +516,9 @@ class ControllerPlant(KeywordBase):
 
     @dofi1.setter
     def dofi1(self, value: int) -> None:
+        """Set the dofi1 property."""
         if value not in [1, 2, 3, 7, None]:
-            raise Exception("""dofi1 must be `None` or one of {1,2,3,7}""")
+            raise Exception("""dofi1 must be `None` or one of {1,2,3,7}.""")
         self._cards[2].set_value("dofi1", value)
 
     @property
@@ -517,6 +531,7 @@ class ControllerPlant(KeywordBase):
 
     @nodi2.setter
     def nodi2(self, value: int) -> None:
+        """Set the nodi2 property."""
         self._cards[2].set_value("nodi2", value)
 
     @property
@@ -531,8 +546,9 @@ class ControllerPlant(KeywordBase):
 
     @dofi2.setter
     def dofi2(self, value: int) -> None:
+        """Set the dofi2 property."""
         if value not in [1, 2, 3, 7, None]:
-            raise Exception("""dofi2 must be `None` or one of {1,2,3,7}""")
+            raise Exception("""dofi2 must be `None` or one of {1,2,3,7}.""")
         self._cards[2].set_value("dofi2", value)
 
     @property
@@ -545,6 +561,7 @@ class ControllerPlant(KeywordBase):
 
     @nodi3.setter
     def nodi3(self, value: int) -> None:
+        """Set the nodi3 property."""
         self._cards[2].set_value("nodi3", value)
 
     @property
@@ -559,8 +576,9 @@ class ControllerPlant(KeywordBase):
 
     @dofi3.setter
     def dofi3(self, value: int) -> None:
+        """Set the dofi3 property."""
         if value not in [1, 2, 3, 7, None]:
-            raise Exception("""dofi3 must be `None` or one of {1,2,3,7}""")
+            raise Exception("""dofi3 must be `None` or one of {1,2,3,7}.""")
         self._cards[2].set_value("dofi3", value)
 
     @property
@@ -573,6 +591,7 @@ class ControllerPlant(KeywordBase):
 
     @nodi4.setter
     def nodi4(self, value: int) -> None:
+        """Set the nodi4 property."""
         self._cards[2].set_value("nodi4", value)
 
     @property
@@ -587,8 +606,9 @@ class ControllerPlant(KeywordBase):
 
     @dofi4.setter
     def dofi4(self, value: int) -> None:
+        """Set the dofi4 property."""
         if value not in [1, 2, 3, 7, None]:
-            raise Exception("""dofi4 must be `None` or one of {1,2,3,7}""")
+            raise Exception("""dofi4 must be `None` or one of {1,2,3,7}.""")
         self._cards[2].set_value("dofi4", value)
 
     @property
@@ -599,6 +619,7 @@ class ControllerPlant(KeywordBase):
 
     @nodo1.setter
     def nodo1(self, value: int) -> None:
+        """Set the nodo1 property."""
         self._cards[3].set_value("nodo1", value)
 
     @property
@@ -613,8 +634,9 @@ class ControllerPlant(KeywordBase):
 
     @dofo1.setter
     def dofo1(self, value: int) -> None:
+        """Set the dofo1 property."""
         if value not in [1, 2, 3, 7, None]:
-            raise Exception("""dofo1 must be `None` or one of {1,2,3,7}""")
+            raise Exception("""dofo1 must be `None` or one of {1,2,3,7}.""")
         self._cards[3].set_value("dofo1", value)
 
     @property
@@ -625,6 +647,7 @@ class ControllerPlant(KeywordBase):
 
     @nodo2.setter
     def nodo2(self, value: int) -> None:
+        """Set the nodo2 property."""
         self._cards[3].set_value("nodo2", value)
 
     @property
@@ -639,8 +662,9 @@ class ControllerPlant(KeywordBase):
 
     @dofo2.setter
     def dofo2(self, value: int) -> None:
+        """Set the dofo2 property."""
         if value not in [1, 2, 3, 7, None]:
-            raise Exception("""dofo2 must be `None` or one of {1,2,3,7}""")
+            raise Exception("""dofo2 must be `None` or one of {1,2,3,7}.""")
         self._cards[3].set_value("dofo2", value)
 
     @property
@@ -651,6 +675,7 @@ class ControllerPlant(KeywordBase):
 
     @nodo3.setter
     def nodo3(self, value: int) -> None:
+        """Set the nodo3 property."""
         self._cards[3].set_value("nodo3", value)
 
     @property
@@ -665,8 +690,9 @@ class ControllerPlant(KeywordBase):
 
     @dofo3.setter
     def dofo3(self, value: int) -> None:
+        """Set the dofo3 property."""
         if value not in [1, 2, 3, 7, None]:
-            raise Exception("""dofo3 must be `None` or one of {1,2,3,7}""")
+            raise Exception("""dofo3 must be `None` or one of {1,2,3,7}.""")
         self._cards[3].set_value("dofo3", value)
 
     @property
@@ -677,6 +703,7 @@ class ControllerPlant(KeywordBase):
 
     @nodo4.setter
     def nodo4(self, value: int) -> None:
+        """Set the nodo4 property."""
         self._cards[3].set_value("nodo4", value)
 
     @property
@@ -691,8 +718,9 @@ class ControllerPlant(KeywordBase):
 
     @dofo4.setter
     def dofo4(self, value: int) -> None:
+        """Set the dofo4 property."""
         if value not in [1, 2, 3, 7, None]:
-            raise Exception("""dofo4 must be `None` or one of {1,2,3,7}""")
+            raise Exception("""dofo4 must be `None` or one of {1,2,3,7}.""")
         self._cards[3].set_value("dofo4", value)
 
     @property
@@ -703,6 +731,7 @@ class ControllerPlant(KeywordBase):
 
     @nfeq.setter
     def nfeq(self, value: int) -> None:
+        """Set the nfeq property."""
         self._cards[4].set_value("nfeq", value)
 
     @property
@@ -713,6 +742,7 @@ class ControllerPlant(KeywordBase):
 
     @deftol.setter
     def deftol(self, value: float) -> None:
+        """Set the deftol property."""
         self._cards[4].set_value("deftol", value)
 
     @property
@@ -723,6 +753,7 @@ class ControllerPlant(KeywordBase):
 
     @mod1.setter
     def mod1(self, value: int) -> None:
+        """Set the mod1 property."""
         self._cards[5].set_value("mod1", value)
 
     @property
@@ -733,6 +764,7 @@ class ControllerPlant(KeywordBase):
 
     @mod2.setter
     def mod2(self, value: int) -> None:
+        """Set the mod2 property."""
         self._cards[5].set_value("mod2", value)
 
     @property
@@ -743,6 +775,7 @@ class ControllerPlant(KeywordBase):
 
     @mod3.setter
     def mod3(self, value: int) -> None:
+        """Set the mod3 property."""
         self._cards[5].set_value("mod3", value)
 
     @property
@@ -753,6 +786,7 @@ class ControllerPlant(KeywordBase):
 
     @mod4.setter
     def mod4(self, value: int) -> None:
+        """Set the mod4 property."""
         self._cards[5].set_value("mod4", value)
 
     @property
@@ -763,6 +797,7 @@ class ControllerPlant(KeywordBase):
 
     @mod5.setter
     def mod5(self, value: int) -> None:
+        """Set the mod5 property."""
         self._cards[5].set_value("mod5", value)
 
     @property
@@ -773,6 +808,7 @@ class ControllerPlant(KeywordBase):
 
     @mod6.setter
     def mod6(self, value: int) -> None:
+        """Set the mod6 property."""
         self._cards[5].set_value("mod6", value)
 
     @property
@@ -783,6 +819,7 @@ class ControllerPlant(KeywordBase):
 
     @mod7.setter
     def mod7(self, value: int) -> None:
+        """Set the mod7 property."""
         self._cards[5].set_value("mod7", value)
 
     @property
@@ -793,5 +830,6 @@ class ControllerPlant(KeywordBase):
 
     @mod8.setter
     def mod8(self, value: int) -> None:
+        """Set the mod8 property."""
         self._cards[5].set_value("mod8", value)
 

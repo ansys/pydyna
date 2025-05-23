@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingOutputIntfor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingOutputIntfor(KeywordBase):
     subkeyword = "FORMING_OUTPUT_INTFOR"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingOutputIntfor class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class ControlFormingOutputIntfor(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -113,6 +116,7 @@ class ControlFormingOutputIntfor(KeywordBase):
 
     @nout.setter
     def nout(self, value: int) -> None:
+        """Set the nout property."""
         self._cards[0].set_value("nout", value)
 
     @property
@@ -123,6 +127,7 @@ class ControlFormingOutputIntfor(KeywordBase):
 
     @tbeg.setter
     def tbeg(self, value: float) -> None:
+        """Set the tbeg property."""
         self._cards[0].set_value("tbeg", value)
 
     @property
@@ -133,6 +138,7 @@ class ControlFormingOutputIntfor(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[0].set_value("tend", value)
 
     @property
@@ -149,6 +155,7 @@ class ControlFormingOutputIntfor(KeywordBase):
 
     @y1_lcid.setter
     def y1_lcid(self, value: float) -> None:
+        """Set the y1_lcid property."""
         self._cards[0].set_value("y1/lcid", value)
 
     @property
@@ -164,6 +171,7 @@ class ControlFormingOutputIntfor(KeywordBase):
 
     @y2_lcid.setter
     def y2_lcid(self, value: float) -> None:
+        """Set the y2_lcid property."""
         self._cards[0].set_value("y2/lcid", value)
 
     @property
@@ -174,6 +182,7 @@ class ControlFormingOutputIntfor(KeywordBase):
 
     @y3.setter
     def y3(self, value: float) -> None:
+        """Set the y3 property."""
         self._cards[0].set_value("y3", value)
 
     @property
@@ -184,5 +193,6 @@ class ControlFormingOutputIntfor(KeywordBase):
 
     @y4.setter
     def y4(self, value: float) -> None:
+        """Set the y4 property."""
         self._cards[0].set_value("y4", value)
 

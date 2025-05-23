@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BatteryEchemCellGeometry class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BatteryEchemCellGeometry(KeywordBase):
     subkeyword = "ECHEM_CELL_GEOMETRY"
 
     def __init__(self, **kwargs):
+        """Initialize the BatteryEchemCellGeometry class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -128,6 +130,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @imodel.setter
     def imodel(self, value: int) -> None:
+        """Set the imodel property."""
         self._cards[0].set_value("imodel", value)
 
     @property
@@ -138,6 +141,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @alen.setter
     def alen(self, value: float) -> None:
+        """Set the alen property."""
         self._cards[0].set_value("alen", value)
 
     @property
@@ -148,6 +152,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @slen.setter
     def slen(self, value: float) -> None:
+        """Set the slen property."""
         self._cards[0].set_value("slen", value)
 
     @property
@@ -158,6 +163,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @clen.setter
     def clen(self, value: float) -> None:
+        """Set the clen property."""
         self._cards[0].set_value("clen", value)
 
     @property
@@ -168,6 +174,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @acclen.setter
     def acclen(self, value: float) -> None:
+        """Set the acclen property."""
         self._cards[0].set_value("acclen", value)
 
     @property
@@ -178,6 +185,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @cclen.setter
     def cclen(self, value: float) -> None:
+        """Set the cclen property."""
         self._cards[0].set_value("cclen", value)
 
     @property
@@ -188,6 +196,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @amesh.setter
     def amesh(self, value: int) -> None:
+        """Set the amesh property."""
         self._cards[1].set_value("amesh", value)
 
     @property
@@ -198,6 +207,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @smesh.setter
     def smesh(self, value: int) -> None:
+        """Set the smesh property."""
         self._cards[1].set_value("smesh", value)
 
     @property
@@ -208,6 +218,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @cmesh.setter
     def cmesh(self, value: int) -> None:
+        """Set the cmesh property."""
         self._cards[1].set_value("cmesh", value)
 
     @property
@@ -218,6 +229,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @accmesh.setter
     def accmesh(self, value: int) -> None:
+        """Set the accmesh property."""
         self._cards[1].set_value("accmesh", value)
 
     @property
@@ -228,5 +240,6 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @cccmesh.setter
     def cccmesh(self, value: int) -> None:
+        """Set the cccmesh property."""
         self._cards[1].set_value("cccmesh", value)
 

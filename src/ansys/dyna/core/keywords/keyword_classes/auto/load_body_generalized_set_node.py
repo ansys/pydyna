@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadBodyGeneralizedSetNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
     subkeyword = "BODY_GENERALIZED_SET_NODE"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadBodyGeneralizedSetNode class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -167,6 +169,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -177,6 +180,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -187,6 +191,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -197,6 +202,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @drlcid.setter
     def drlcid(self, value: int) -> None:
+        """Set the drlcid property."""
         self._cards[0].set_value("drlcid", value)
 
     @property
@@ -207,6 +213,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[0].set_value("xc", value)
 
     @property
@@ -217,6 +224,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[0].set_value("yc", value)
 
     @property
@@ -227,6 +235,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[0].set_value("zc", value)
 
     @property
@@ -237,6 +246,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @ax.setter
     def ax(self, value: float) -> None:
+        """Set the ax property."""
         self._cards[1].set_value("ax", value)
 
     @property
@@ -247,6 +257,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @ay.setter
     def ay(self, value: float) -> None:
+        """Set the ay property."""
         self._cards[1].set_value("ay", value)
 
     @property
@@ -257,6 +268,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @az.setter
     def az(self, value: float) -> None:
+        """Set the az property."""
         self._cards[1].set_value("az", value)
 
     @property
@@ -267,6 +279,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @omx.setter
     def omx(self, value: float) -> None:
+        """Set the omx property."""
         self._cards[1].set_value("omx", value)
 
     @property
@@ -277,6 +290,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @omy.setter
     def omy(self, value: float) -> None:
+        """Set the omy property."""
         self._cards[1].set_value("omy", value)
 
     @property
@@ -287,6 +301,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @omz.setter
     def omz(self, value: float) -> None:
+        """Set the omz property."""
         self._cards[1].set_value("omz", value)
 
     @property
@@ -297,6 +312,7 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -310,7 +326,8 @@ class LoadBodyGeneralizedSetNode(KeywordBase):
 
     @angtyp.setter
     def angtyp(self, value: str) -> None:
+        """Set the angtyp property."""
         if value not in ["CENT", "CORI", "ROTA", None]:
-            raise Exception("""angtyp must be `None` or one of {"CENT","CORI","ROTA"}""")
+            raise Exception("""angtyp must be `None` or one of {"CENT","CORI","ROTA"}.""")
         self._cards[1].set_value("angtyp", value)
 

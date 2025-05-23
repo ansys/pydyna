@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlParallel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlParallel(KeywordBase):
     subkeyword = "PARALLEL"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlParallel class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,6 +81,7 @@ class ControlParallel(KeywordBase):
 
     @ncpu.setter
     def ncpu(self, value: int) -> None:
+        """Set the ncpu property."""
         self._cards[0].set_value("ncpu", value)
 
     @property
@@ -91,8 +94,9 @@ class ControlParallel(KeywordBase):
 
     @numrhs.setter
     def numrhs(self, value: int) -> None:
+        """Set the numrhs property."""
         if value not in [0, 1, None]:
-            raise Exception("""numrhs must be `None` or one of {0,1}""")
+            raise Exception("""numrhs must be `None` or one of {0,1}.""")
         self._cards[0].set_value("numrhs", value)
 
     @property
@@ -105,8 +109,9 @@ class ControlParallel(KeywordBase):
 
     @const.setter
     def const(self, value: int) -> None:
+        """Set the const property."""
         if value not in [2, 1, None]:
-            raise Exception("""const must be `None` or one of {2,1}""")
+            raise Exception("""const must be `None` or one of {2,1}.""")
         self._cards[0].set_value("const", value)
 
     @property
@@ -120,7 +125,8 @@ class ControlParallel(KeywordBase):
 
     @para.setter
     def para(self, value: int) -> None:
+        """Set the para property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""para must be `None` or one of {0,1,2}""")
+            raise Exception("""para must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("para", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the RigidwallForceTransducer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RigidwallForceTransducer(KeywordBase):
     subkeyword = "FORCE_TRANSDUCER"
 
     def __init__(self, **kwargs):
+        """Initialize the RigidwallForceTransducer class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class RigidwallForceTransducer(KeywordBase):
 
     @tid.setter
     def tid(self, value: int) -> None:
+        """Set the tid property."""
         self._cards[0].set_value("tid", value)
 
     @property
@@ -96,6 +99,7 @@ class RigidwallForceTransducer(KeywordBase):
 
     @rwid.setter
     def rwid(self, value: int) -> None:
+        """Set the rwid property."""
         self._cards[0].set_value("rwid", value)
 
     @property
@@ -106,6 +110,7 @@ class RigidwallForceTransducer(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[1].set_value("heading", value)
 
     @property
@@ -116,5 +121,6 @@ class RigidwallForceTransducer(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[2].set_value("nsid", value)
 

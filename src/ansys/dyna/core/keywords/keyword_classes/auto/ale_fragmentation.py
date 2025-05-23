@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleFragmentation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleFragmentation(KeywordBase):
     subkeyword = "FRAGMENTATION"
 
     def __init__(self, **kwargs):
+        """Initialize the AleFragmentation class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class AleFragmentation(KeywordBase):
 
     @fr_mmg.setter
     def fr_mmg(self, value: int) -> None:
+        """Set the fr_mmg property."""
         self._cards[0].set_value("fr_mmg", value)
 
     @property
@@ -79,6 +82,7 @@ class AleFragmentation(KeywordBase):
 
     @to_mmg.setter
     def to_mmg(self, value: int) -> None:
+        """Set the to_mmg property."""
         self._cards[0].set_value("to_mmg", value)
 
     @property
@@ -91,7 +95,8 @@ class AleFragmentation(KeywordBase):
 
     @fragtyp.setter
     def fragtyp(self, value: int) -> None:
+        """Set the fragtyp property."""
         if value not in [1, 2, None]:
-            raise Exception("""fragtyp must be `None` or one of {1,2}""")
+            raise Exception("""fragtyp must be `None` or one of {1,2}.""")
         self._cards[0].set_value("fragtyp", value)
 

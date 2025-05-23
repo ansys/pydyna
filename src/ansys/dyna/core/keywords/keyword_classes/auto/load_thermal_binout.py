@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadThermalBinout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadThermalBinout(KeywordBase):
     subkeyword = "THERMAL_BINOUT"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadThermalBinout class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -86,6 +88,7 @@ class LoadThermalBinout(KeywordBase):
 
     @deftemp.setter
     def deftemp(self, value: float) -> None:
+        """Set the deftemp property."""
         self._cards[0].set_value("deftemp", value)
 
     @property
@@ -96,6 +99,7 @@ class LoadThermalBinout(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 
     @property
@@ -106,6 +110,7 @@ class LoadThermalBinout(KeywordBase):
 
     @startt.setter
     def startt(self, value: float) -> None:
+        """Set the startt property."""
         self._cards[2].set_value("startt", value)
 
     @property
@@ -116,5 +121,6 @@ class LoadThermalBinout(KeywordBase):
 
     @tsf.setter
     def tsf(self, value: float) -> None:
+        """Set the tsf property."""
         self._cards[2].set_value("tsf", value)
 

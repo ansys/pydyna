@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundarySphSymmetryPlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundarySphSymmetryPlane(KeywordBase):
     subkeyword = "SPH_SYMMETRY_PLANE"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundarySphSymmetryPlane class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -95,6 +97,7 @@ class BoundarySphSymmetryPlane(KeywordBase):
 
     @vtx.setter
     def vtx(self, value: float) -> None:
+        """Set the vtx property."""
         self._cards[0].set_value("vtx", value)
 
     @property
@@ -105,6 +108,7 @@ class BoundarySphSymmetryPlane(KeywordBase):
 
     @vty.setter
     def vty(self, value: float) -> None:
+        """Set the vty property."""
         self._cards[0].set_value("vty", value)
 
     @property
@@ -115,6 +119,7 @@ class BoundarySphSymmetryPlane(KeywordBase):
 
     @vtz.setter
     def vtz(self, value: float) -> None:
+        """Set the vtz property."""
         self._cards[0].set_value("vtz", value)
 
     @property
@@ -125,6 +130,7 @@ class BoundarySphSymmetryPlane(KeywordBase):
 
     @vhx.setter
     def vhx(self, value: float) -> None:
+        """Set the vhx property."""
         self._cards[0].set_value("vhx", value)
 
     @property
@@ -135,6 +141,7 @@ class BoundarySphSymmetryPlane(KeywordBase):
 
     @vhy.setter
     def vhy(self, value: float) -> None:
+        """Set the vhy property."""
         self._cards[0].set_value("vhy", value)
 
     @property
@@ -145,5 +152,6 @@ class BoundarySphSymmetryPlane(KeywordBase):
 
     @vhz.setter
     def vhz(self, value: float) -> None:
+        """Set the vhz property."""
         self._cards[0].set_value("vhz", value)
 

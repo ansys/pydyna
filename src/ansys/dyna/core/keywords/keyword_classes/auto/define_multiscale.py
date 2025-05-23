@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineMultiscale class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineMultiscale(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineMultiscale class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -125,6 +127,7 @@ class DefineMultiscale(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -135,6 +138,7 @@ class DefineMultiscale(KeywordBase):
 
     @bset.setter
     def bset(self, value: int) -> None:
+        """Set the bset property."""
         self._cards[0].set_value("bset", value)
 
     @property
@@ -145,6 +149,7 @@ class DefineMultiscale(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -155,6 +160,7 @@ class DefineMultiscale(KeywordBase):
 
     @bset.setter
     def bset(self, value: int) -> None:
+        """Set the bset property."""
         self._cards[0].set_value("bset", value)
 
     @property
@@ -165,6 +171,7 @@ class DefineMultiscale(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -175,6 +182,7 @@ class DefineMultiscale(KeywordBase):
 
     @bset.setter
     def bset(self, value: int) -> None:
+        """Set the bset property."""
         self._cards[0].set_value("bset", value)
 
     @property
@@ -185,6 +193,7 @@ class DefineMultiscale(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -195,6 +204,7 @@ class DefineMultiscale(KeywordBase):
 
     @bset.setter
     def bset(self, value: int) -> None:
+        """Set the bset property."""
         self._cards[0].set_value("bset", value)
 
     @property
@@ -205,5 +215,6 @@ class DefineMultiscale(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialVelocity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialVelocity(KeywordBase):
     subkeyword = "VELOCITY"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialVelocity class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -192,6 +194,7 @@ class InitialVelocity(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -202,6 +205,7 @@ class InitialVelocity(KeywordBase):
 
     @nsidex.setter
     def nsidex(self, value: int) -> None:
+        """Set the nsidex property."""
         self._cards[0].set_value("nsidex", value)
 
     @property
@@ -213,6 +217,7 @@ class InitialVelocity(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -226,6 +231,7 @@ class InitialVelocity(KeywordBase):
 
     @irigid.setter
     def irigid(self, value: int) -> None:
+        """Set the irigid property."""
         self._cards[0].set_value("irigid", value)
 
     @property
@@ -236,6 +242,7 @@ class InitialVelocity(KeywordBase):
 
     @icid.setter
     def icid(self, value: int) -> None:
+        """Set the icid property."""
         self._cards[0].set_value("icid", value)
 
     @property
@@ -246,6 +253,7 @@ class InitialVelocity(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[1].set_value("vx", value)
 
     @property
@@ -256,6 +264,7 @@ class InitialVelocity(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[1].set_value("vy", value)
 
     @property
@@ -266,6 +275,7 @@ class InitialVelocity(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[1].set_value("vz", value)
 
     @property
@@ -276,6 +286,7 @@ class InitialVelocity(KeywordBase):
 
     @vxr.setter
     def vxr(self, value: float) -> None:
+        """Set the vxr property."""
         self._cards[1].set_value("vxr", value)
 
     @property
@@ -286,6 +297,7 @@ class InitialVelocity(KeywordBase):
 
     @vyr.setter
     def vyr(self, value: float) -> None:
+        """Set the vyr property."""
         self._cards[1].set_value("vyr", value)
 
     @property
@@ -296,6 +308,7 @@ class InitialVelocity(KeywordBase):
 
     @vzr.setter
     def vzr(self, value: float) -> None:
+        """Set the vzr property."""
         self._cards[1].set_value("vzr", value)
 
     @property
@@ -306,6 +319,7 @@ class InitialVelocity(KeywordBase):
 
     @vxe.setter
     def vxe(self, value: float) -> None:
+        """Set the vxe property."""
         self._cards[2].set_value("vxe", value)
 
     @property
@@ -316,6 +330,7 @@ class InitialVelocity(KeywordBase):
 
     @vye.setter
     def vye(self, value: float) -> None:
+        """Set the vye property."""
         self._cards[2].set_value("vye", value)
 
     @property
@@ -326,6 +341,7 @@ class InitialVelocity(KeywordBase):
 
     @vze.setter
     def vze(self, value: float) -> None:
+        """Set the vze property."""
         self._cards[2].set_value("vze", value)
 
     @property
@@ -336,6 +352,7 @@ class InitialVelocity(KeywordBase):
 
     @vxre.setter
     def vxre(self, value: float) -> None:
+        """Set the vxre property."""
         self._cards[2].set_value("vxre", value)
 
     @property
@@ -346,6 +363,7 @@ class InitialVelocity(KeywordBase):
 
     @vyre.setter
     def vyre(self, value: float) -> None:
+        """Set the vyre property."""
         self._cards[2].set_value("vyre", value)
 
     @property
@@ -356,5 +374,6 @@ class InitialVelocity(KeywordBase):
 
     @vzre.setter
     def vzre(self, value: float) -> None:
+        """Set the vzre property."""
         self._cards[2].set_value("vzre", value)
 

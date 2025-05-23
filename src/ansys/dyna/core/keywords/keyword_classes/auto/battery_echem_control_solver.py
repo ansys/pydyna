@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BatteryEchemControlSolver class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BatteryEchemControlSolver(KeywordBase):
     subkeyword = "ECHEM_CONTROL_SOLVER"
 
     def __init__(self, **kwargs):
+        """Initialize the BatteryEchemControlSolver class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -322,6 +324,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @imodel.setter
     def imodel(self, value: int) -> None:
+        """Set the imodel property."""
         self._cards[0].set_value("imodel", value)
 
     @property
@@ -336,6 +339,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @igeom.setter
     def igeom(self, value: int) -> None:
+        """Set the igeom property."""
         self._cards[0].set_value("igeom", value)
 
     @property
@@ -346,6 +350,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @ncycle.setter
     def ncycle(self, value: int) -> None:
+        """Set the ncycle property."""
         self._cards[0].set_value("ncycle", value)
 
     @property
@@ -356,6 +361,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @aging.setter
     def aging(self, value: int) -> None:
+        """Set the aging property."""
         self._cards[0].set_value("aging", value)
 
     @property
@@ -366,6 +372,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @tra.setter
     def tra(self, value: int) -> None:
+        """Set the tra property."""
         self._cards[0].set_value("tra", value)
 
     @property
@@ -376,6 +383,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @gas.setter
     def gas(self, value: int) -> None:
+        """Set the gas property."""
         self._cards[0].set_value("gas", value)
 
     @property
@@ -388,6 +396,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @esolid.setter
     def esolid(self, value: int) -> None:
+        """Set the esolid property."""
         self._cards[0].set_value("esolid", value)
 
     @property
@@ -400,6 +409,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @irun.setter
     def irun(self, value: int) -> None:
+        """Set the irun property."""
         self._cards[1].set_value("irun", value)
 
     @property
@@ -412,6 +422,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @lcur.setter
     def lcur(self, value: int) -> None:
+        """Set the lcur property."""
         self._cards[1].set_value("lcur", value)
 
     @property
@@ -422,6 +433,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @curv.setter
     def curv(self, value: float) -> None:
+        """Set the curv property."""
         self._cards[1].set_value("curv", value)
 
     @property
@@ -432,6 +444,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @ctime.setter
     def ctime(self, value: float) -> None:
+        """Set the ctime property."""
         self._cards[1].set_value("ctime", value)
 
     @property
@@ -442,6 +455,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @vcut.setter
     def vcut(self, value: float) -> None:
+        """Set the vcut property."""
         self._cards[1].set_value("vcut", value)
 
     @property
@@ -452,6 +466,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @mws.setter
     def mws(self, value: float) -> None:
+        """Set the mws property."""
         self._cards[2].set_value("mws", value)
 
     @property
@@ -462,6 +477,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @dens.setter
     def dens(self, value: float) -> None:
+        """Set the dens property."""
         self._cards[2].set_value("dens", value)
 
     @property
@@ -472,6 +488,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @brugs.setter
     def brugs(self, value: float) -> None:
+        """Set the brugs property."""
         self._cards[2].set_value("brugs", value)
 
     @property
@@ -482,6 +499,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @epss.setter
     def epss(self, value: float) -> None:
+        """Set the epss property."""
         self._cards[2].set_value("epss", value)
 
     @property
@@ -492,6 +510,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @cseio.setter
     def cseio(self, value: float) -> None:
+        """Set the cseio property."""
         self._cards[2].set_value("cseio", value)
 
     @property
@@ -502,6 +521,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @tseio.setter
     def tseio(self, value: float) -> None:
+        """Set the tseio property."""
         self._cards[2].set_value("tseio", value)
 
     @property
@@ -512,6 +532,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @ecdo.setter
     def ecdo(self, value: float) -> None:
+        """Set the ecdo property."""
         self._cards[3].set_value("ecdo", value)
 
     @property
@@ -522,6 +543,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @kfs.setter
     def kfs(self, value: float) -> None:
+        """Set the kfs property."""
         self._cards[3].set_value("kfs", value)
 
     @property
@@ -532,6 +554,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @ceco.setter
     def ceco(self, value: float) -> None:
+        """Set the ceco property."""
         self._cards[3].set_value("ceco", value)
 
     @property
@@ -542,6 +565,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @ecdf.setter
     def ecdf(self, value: float) -> None:
+        """Set the ecdf property."""
         self._cards[3].set_value("ecdf", value)
 
     @property
@@ -552,6 +576,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @hofeln.setter
     def hofeln(self, value: int) -> None:
+        """Set the hofeln property."""
         self._cards[4].set_value("hofeln", value)
 
     @property
@@ -562,6 +587,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @hofli.setter
     def hofli(self, value: int) -> None:
+        """Set the hofli property."""
         self._cards[4].set_value("hofli", value)
 
     @property
@@ -572,6 +598,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @hofsei.setter
     def hofsei(self, value: float) -> None:
+        """Set the hofsei property."""
         self._cards[4].set_value("hofsei", value)
 
     @property
@@ -582,6 +609,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @hofc2h4.setter
     def hofc2h4(self, value: float) -> None:
+        """Set the hofc2h4 property."""
         self._cards[4].set_value("hofc2h4", value)
 
     @property
@@ -592,6 +620,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @afi.setter
     def afi(self, value: float) -> None:
+        """Set the afi property."""
         self._cards[5].set_value("afi", value)
 
     @property
@@ -602,6 +631,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @eat.setter
     def eat(self, value: float) -> None:
+        """Set the eat property."""
         self._cards[5].set_value("eat", value)
 
     @property
@@ -612,6 +642,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @hoflc.setter
     def hoflc(self, value: float) -> None:
+        """Set the hoflc property."""
         self._cards[5].set_value("hoflc", value)
 
     @property
@@ -622,6 +653,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @hofco2.setter
     def hofco2(self, value: float) -> None:
+        """Set the hofco2 property."""
         self._cards[5].set_value("hofco2", value)
 
     @property
@@ -632,6 +664,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @hofo2.setter
     def hofo2(self, value: float) -> None:
+        """Set the hofo2 property."""
         self._cards[5].set_value("hofo2", value)
 
     @property
@@ -642,6 +675,7 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @file1.setter
     def file1(self, value: str) -> None:
+        """Set the file1 property."""
         self._cards[6].set_value("file1", value)
 
     @property
@@ -652,5 +686,6 @@ class BatteryEchemControlSolver(KeywordBase):
 
     @file2.setter
     def file2(self, value: str) -> None:
+        """Set the file2 property."""
         self._cards[7].set_value("file2", value)
 

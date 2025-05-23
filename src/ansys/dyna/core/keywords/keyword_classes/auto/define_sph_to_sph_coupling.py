@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineSphToSphCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSphToSphCoupling(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineSphToSphCoupling class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -149,6 +151,7 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -159,6 +162,7 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @msid.setter
     def msid(self, value: int) -> None:
+        """Set the msid property."""
         self._cards[0].set_value("msid", value)
 
     @property
@@ -172,8 +176,9 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
+        """Set the sstyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sstyp must be `None` or one of {0,1}""")
+            raise Exception("""sstyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sstyp", value)
 
     @property
@@ -187,8 +192,9 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @mstyp.setter
     def mstyp(self, value: int) -> None:
+        """Set the mstyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""mstyp must be `None` or one of {0,1}""")
+            raise Exception("""mstyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("mstyp", value)
 
     @property
@@ -199,6 +205,7 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @ibox1.setter
     def ibox1(self, value: int) -> None:
+        """Set the ibox1 property."""
         self._cards[0].set_value("ibox1", value)
 
     @property
@@ -209,6 +216,7 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @ibox2.setter
     def ibox2(self, value: int) -> None:
+        """Set the ibox2 property."""
         self._cards[0].set_value("ibox2", value)
 
     @property
@@ -219,6 +227,7 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @pfact.setter
     def pfact(self, value: float) -> None:
+        """Set the pfact property."""
         self._cards[0].set_value("pfact", value)
 
     @property
@@ -229,6 +238,7 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @srad.setter
     def srad(self, value: float) -> None:
+        """Set the srad property."""
         self._cards[0].set_value("srad", value)
 
     @property
@@ -239,6 +249,7 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @dfact.setter
     def dfact(self, value: float) -> None:
+        """Set the dfact property."""
         self._cards[1].set_value("dfact", value)
 
     @property
@@ -252,8 +263,9 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @isoft.setter
     def isoft(self, value: int) -> None:
+        """Set the isoft property."""
         if value not in [0, 1, None]:
-            raise Exception("""isoft must be `None` or one of {0,1}""")
+            raise Exception("""isoft must be `None` or one of {0,1}.""")
         self._cards[1].set_value("isoft", value)
 
     @property
@@ -264,5 +276,6 @@ class DefineSphToSphCoupling(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

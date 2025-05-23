@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdBoundaryConvectionTemp class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdBoundaryConvectionTemp(KeywordBase):
     subkeyword = "BOUNDARY_CONVECTION_TEMP"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdBoundaryConvectionTemp class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -84,6 +86,7 @@ class IcfdBoundaryConvectionTemp(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -94,6 +97,7 @@ class IcfdBoundaryConvectionTemp(KeywordBase):
 
     @hlcid.setter
     def hlcid(self, value: int) -> None:
+        """Set the hlcid property."""
         self._cards[0].set_value("hlcid", value)
 
     @property
@@ -104,6 +108,7 @@ class IcfdBoundaryConvectionTemp(KeywordBase):
 
     @hsf.setter
     def hsf(self, value: float) -> None:
+        """Set the hsf property."""
         self._cards[0].set_value("hsf", value)
 
     @property
@@ -114,6 +119,7 @@ class IcfdBoundaryConvectionTemp(KeywordBase):
 
     @tblcid.setter
     def tblcid(self, value: int) -> None:
+        """Set the tblcid property."""
         self._cards[0].set_value("tblcid", value)
 
     @property
@@ -124,5 +130,6 @@ class IcfdBoundaryConvectionTemp(KeywordBase):
 
     @tbsf.setter
     def tbsf(self, value: float) -> None:
+        """Set the tbsf property."""
         self._cards[0].set_value("tbsf", value)
 

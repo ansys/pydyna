@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementShellSourceSink class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementShellSourceSink(KeywordBase):
     subkeyword = "SHELL_SOURCE_SINK"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementShellSourceSink class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class ElementShellSourceSink(KeywordBase):
 
     @nssr.setter
     def nssr(self, value: int) -> None:
+        """Set the nssr property."""
         self._cards[0].set_value("nssr", value)
 
     @property
@@ -78,6 +81,7 @@ class ElementShellSourceSink(KeywordBase):
 
     @nssk.setter
     def nssk(self, value: int) -> None:
+        """Set the nssk property."""
         self._cards[0].set_value("nssk", value)
 
     @property
@@ -88,5 +92,6 @@ class ElementShellSourceSink(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 

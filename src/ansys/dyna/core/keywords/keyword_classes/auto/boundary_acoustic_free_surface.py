@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryAcousticFreeSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryAcousticFreeSurface(KeywordBase):
     subkeyword = "ACOUSTIC_FREE_SURFACE"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryAcousticFreeSurface class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class BoundaryAcousticFreeSurface(KeywordBase):
 
     @ssids.setter
     def ssids(self, value: int) -> None:
+        """Set the ssids property."""
         self._cards[0].set_value("ssids", value)
 
     @property
@@ -71,5 +74,6 @@ class BoundaryAcousticFreeSurface(KeywordBase):
 
     @ssidf.setter
     def ssidf(self, value: int) -> None:
+        """Set the ssidf property."""
         self._cards[0].set_value("ssidf", value)
 

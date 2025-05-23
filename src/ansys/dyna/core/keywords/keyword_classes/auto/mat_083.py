@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat083 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat083(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat083 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -335,6 +337,7 @@ class Mat083(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -345,6 +348,7 @@ class Mat083(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -355,6 +359,7 @@ class Mat083(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -366,6 +371,7 @@ class Mat083(KeywordBase):
 
     @kcon.setter
     def kcon(self, value: float) -> None:
+        """Set the kcon property."""
         self._cards[0].set_value("kcon", value)
 
     @property
@@ -376,6 +382,7 @@ class Mat083(KeywordBase):
 
     @tc.setter
     def tc(self, value: float) -> None:
+        """Set the tc property."""
         self._cards[0].set_value("tc", value)
 
     @property
@@ -388,8 +395,9 @@ class Mat083(KeywordBase):
 
     @fail.setter
     def fail(self, value: float) -> None:
+        """Set the fail property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""fail must be `None` or one of {0.0,1.0}""")
+            raise Exception("""fail must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("fail", value)
 
     @property
@@ -400,6 +408,7 @@ class Mat083(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[0].set_value("damp", value)
 
     @property
@@ -410,6 +419,7 @@ class Mat083(KeywordBase):
 
     @tbid.setter
     def tbid(self, value: int) -> None:
+        """Set the tbid property."""
         self._cards[0].set_value("tbid", value)
 
     @property
@@ -422,6 +432,7 @@ class Mat083(KeywordBase):
 
     @bvflag.setter
     def bvflag(self, value: float) -> None:
+        """Set the bvflag property."""
         self._cards[1].set_value("bvflag", value)
 
     @property
@@ -434,8 +445,9 @@ class Mat083(KeywordBase):
 
     @sflag.setter
     def sflag(self, value: float) -> None:
+        """Set the sflag property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""sflag must be `None` or one of {0.0,1.0}""")
+            raise Exception("""sflag must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("sflag", value)
 
     @property
@@ -449,8 +461,9 @@ class Mat083(KeywordBase):
 
     @rflag.setter
     def rflag(self, value: float) -> None:
+        """Set the rflag property."""
         if value not in [0.0, 1.0, 2.0, None]:
-            raise Exception("""rflag must be `None` or one of {0.0,1.0,2.0}""")
+            raise Exception("""rflag must be `None` or one of {0.0,1.0,2.0}.""")
         self._cards[1].set_value("rflag", value)
 
     @property
@@ -463,8 +476,9 @@ class Mat083(KeywordBase):
 
     @tflag.setter
     def tflag(self, value: float) -> None:
+        """Set the tflag property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""tflag must be `None` or one of {0.0,1.0}""")
+            raise Exception("""tflag must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("tflag", value)
 
     @property
@@ -475,6 +489,7 @@ class Mat083(KeywordBase):
 
     @pvid.setter
     def pvid(self, value: int) -> None:
+        """Set the pvid property."""
         self._cards[1].set_value("pvid", value)
 
     @property
@@ -487,6 +502,7 @@ class Mat083(KeywordBase):
 
     @sraf.setter
     def sraf(self, value: float) -> None:
+        """Set the sraf property."""
         self._cards[1].set_value("sraf", value)
 
     @property
@@ -499,8 +515,9 @@ class Mat083(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
+        """Set the ref property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ref must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("ref", value)
 
     @property
@@ -511,6 +528,7 @@ class Mat083(KeywordBase):
 
     @hu.setter
     def hu(self, value: float) -> None:
+        """Set the hu property."""
         self._cards[1].set_value("hu", value)
 
     @property
@@ -521,6 +539,7 @@ class Mat083(KeywordBase):
 
     @d0.setter
     def d0(self, value: float) -> None:
+        """Set the d0 property."""
         self._cards[2].set_value("d0", value)
 
     @property
@@ -531,6 +550,7 @@ class Mat083(KeywordBase):
 
     @n0.setter
     def n0(self, value: float) -> None:
+        """Set the n0 property."""
         self._cards[2].set_value("n0", value)
 
     @property
@@ -541,6 +561,7 @@ class Mat083(KeywordBase):
 
     @n1.setter
     def n1(self, value: float) -> None:
+        """Set the n1 property."""
         self._cards[2].set_value("n1", value)
 
     @property
@@ -551,6 +572,7 @@ class Mat083(KeywordBase):
 
     @n2.setter
     def n2(self, value: float) -> None:
+        """Set the n2 property."""
         self._cards[2].set_value("n2", value)
 
     @property
@@ -561,6 +583,7 @@ class Mat083(KeywordBase):
 
     @n3.setter
     def n3(self, value: float) -> None:
+        """Set the n3 property."""
         self._cards[2].set_value("n3", value)
 
     @property
@@ -571,6 +594,7 @@ class Mat083(KeywordBase):
 
     @c0.setter
     def c0(self, value: float) -> None:
+        """Set the c0 property."""
         self._cards[2].set_value("c0", value)
 
     @property
@@ -581,6 +605,7 @@ class Mat083(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[2].set_value("c1", value)
 
     @property
@@ -591,6 +616,7 @@ class Mat083(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[2].set_value("c2", value)
 
     @property
@@ -601,6 +627,7 @@ class Mat083(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[3].set_value("c3", value)
 
     @property
@@ -611,6 +638,7 @@ class Mat083(KeywordBase):
 
     @c4.setter
     def c4(self, value: float) -> None:
+        """Set the c4 property."""
         self._cards[3].set_value("c4", value)
 
     @property
@@ -621,6 +649,7 @@ class Mat083(KeywordBase):
 
     @c5.setter
     def c5(self, value: float) -> None:
+        """Set the c5 property."""
         self._cards[3].set_value("c5", value)
 
     @property
@@ -631,6 +660,7 @@ class Mat083(KeywordBase):
 
     @aij.setter
     def aij(self, value: float) -> None:
+        """Set the aij property."""
         self._cards[3].set_value("aij", value)
 
     @property
@@ -641,6 +671,7 @@ class Mat083(KeywordBase):
 
     @sij.setter
     def sij(self, value: float) -> None:
+        """Set the sij property."""
         self._cards[3].set_value("sij", value)
 
     @property
@@ -651,6 +682,7 @@ class Mat083(KeywordBase):
 
     @minr.setter
     def minr(self, value: float) -> None:
+        """Set the minr property."""
         self._cards[3].set_value("minr", value)
 
     @property
@@ -661,6 +693,7 @@ class Mat083(KeywordBase):
 
     @maxr.setter
     def maxr(self, value: float) -> None:
+        """Set the maxr property."""
         self._cards[3].set_value("maxr", value)
 
     @property
@@ -671,6 +704,7 @@ class Mat083(KeywordBase):
 
     @shape.setter
     def shape(self, value: float) -> None:
+        """Set the shape property."""
         self._cards[3].set_value("shape", value)
 
     @property
@@ -681,6 +715,7 @@ class Mat083(KeywordBase):
 
     @expon.setter
     def expon(self, value: float) -> None:
+        """Set the expon property."""
         self._cards[4].set_value("expon", value)
 
     @property
@@ -693,8 +728,9 @@ class Mat083(KeywordBase):
 
     @riuld.setter
     def riuld(self, value: float) -> None:
+        """Set the riuld property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""riuld must be `None` or one of {0.0,1.0}""")
+            raise Exception("""riuld must be `None` or one of {0.0,1.0}.""")
         self._cards[4].set_value("riuld", value)
 
     @property
@@ -705,5 +741,6 @@ class Mat083(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlSegmentsInAleCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlSegmentsInAleCoupling(KeywordBase):
     subkeyword = "SEGMENTS_IN_ALE_COUPLING"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlSegmentsInAleCoupling class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -99,6 +101,7 @@ class ControlSegmentsInAleCoupling(KeywordBase):
 
     @rankey.setter
     def rankey(self, value: int) -> None:
+        """Set the rankey property."""
         self._cards[0].set_value("rankey", value)
 
     @property
@@ -109,6 +112,7 @@ class ControlSegmentsInAleCoupling(KeywordBase):
 
     @segset.setter
     def segset(self, value: int) -> None:
+        """Set the segset property."""
         self._cards[0].set_value("segset", value)
 
     @property
@@ -119,6 +123,7 @@ class ControlSegmentsInAleCoupling(KeywordBase):
 
     @ncychk.setter
     def ncychk(self, value: int) -> None:
+        """Set the ncychk property."""
         self._cards[0].set_value("ncychk", value)
 
     @property
@@ -131,8 +136,9 @@ class ControlSegmentsInAleCoupling(KeywordBase):
 
     @sym.setter
     def sym(self, value: int) -> None:
+        """Set the sym property."""
         if value not in [0, 1, None]:
-            raise Exception("""sym must be `None` or one of {0,1}""")
+            raise Exception("""sym must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sym", value)
 
     @property
@@ -143,6 +149,7 @@ class ControlSegmentsInAleCoupling(KeywordBase):
 
     @ninthk.setter
     def ninthk(self, value: int) -> None:
+        """Set the ninthk property."""
         self._cards[1].set_value("ninthk", value)
 
     @property
@@ -153,5 +160,6 @@ class ControlSegmentsInAleCoupling(KeywordBase):
 
     @conthk.setter
     def conthk(self, value: float) -> None:
+        """Set the conthk property."""
         self._cards[1].set_value("conthk", value)
 

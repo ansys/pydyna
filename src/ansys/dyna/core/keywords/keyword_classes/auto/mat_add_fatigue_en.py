@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAddFatigueEn class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddFatigueEn(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAddFatigueEn class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -136,6 +138,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -146,6 +149,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @kp.setter
     def kp(self, value: float) -> None:
+        """Set the kp property."""
         self._cards[0].set_value("kp", value)
 
     @property
@@ -156,6 +160,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @np.setter
     def np(self, value: float) -> None:
+        """Set the np property."""
         self._cards[0].set_value("np", value)
 
     @property
@@ -166,6 +171,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @sigmaf.setter
     def sigmaf(self, value: float) -> None:
+        """Set the sigmaf property."""
         self._cards[0].set_value("sigmaf", value)
 
     @property
@@ -176,6 +182,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @epsp.setter
     def epsp(self, value: float) -> None:
+        """Set the epsp property."""
         self._cards[0].set_value("epsp", value)
 
     @property
@@ -186,6 +193,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @bp.setter
     def bp(self, value: float) -> None:
+        """Set the bp property."""
         self._cards[0].set_value("bp", value)
 
     @property
@@ -196,6 +204,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[0].set_value("cp", value)
 
     @property
@@ -206,6 +215,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @e.setter
     def e(self, value: int) -> None:
+        """Set the e property."""
         self._cards[1].set_value("e", value)
 
     @property
@@ -216,6 +226,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[1].set_value("pr", value)
 
     @property
@@ -226,5 +237,6 @@ class MatAddFatigueEn(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

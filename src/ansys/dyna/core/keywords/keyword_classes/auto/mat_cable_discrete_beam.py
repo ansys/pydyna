@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatCableDiscreteBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatCableDiscreteBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatCableDiscreteBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -171,6 +173,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -181,6 +184,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -192,6 +196,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -202,6 +207,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -212,6 +218,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @f0.setter
     def f0(self, value: float) -> None:
+        """Set the f0 property."""
         self._cards[0].set_value("f0", value)
 
     @property
@@ -222,6 +229,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @tmaxf0.setter
     def tmaxf0(self, value: float) -> None:
+        """Set the tmaxf0 property."""
         self._cards[0].set_value("tmaxf0", value)
 
     @property
@@ -232,6 +240,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @tramp.setter
     def tramp(self, value: float) -> None:
+        """Set the tramp property."""
         self._cards[0].set_value("tramp", value)
 
     @property
@@ -242,6 +251,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @iread.setter
     def iread(self, value: int) -> None:
+        """Set the iread property."""
         self._cards[0].set_value("iread", value)
 
     @property
@@ -252,6 +262,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @output.setter
     def output(self, value: int) -> None:
+        """Set the output property."""
         self._cards[1].set_value("output", value)
 
     @property
@@ -262,6 +273,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @tstart.setter
     def tstart(self, value: float) -> None:
+        """Set the tstart property."""
         self._cards[1].set_value("tstart", value)
 
     @property
@@ -274,6 +286,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @fracl0.setter
     def fracl0(self, value: float) -> None:
+        """Set the fracl0 property."""
         self._cards[1].set_value("fracl0", value)
 
     @property
@@ -284,6 +297,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @mxeps.setter
     def mxeps(self, value: float) -> None:
+        """Set the mxeps property."""
         self._cards[1].set_value("mxeps", value)
 
     @property
@@ -294,6 +308,7 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @mxfrc.setter
     def mxfrc(self, value: float) -> None:
+        """Set the mxfrc property."""
         self._cards[1].set_value("mxfrc", value)
 
     @property
@@ -304,5 +319,6 @@ class MatCableDiscreteBeam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

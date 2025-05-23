@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat090PorousDb class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat090PorousDb(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat090PorousDb class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -157,6 +159,7 @@ class Mat090PorousDb(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -167,6 +170,7 @@ class Mat090PorousDb(KeywordBase):
 
     @rho0.setter
     def rho0(self, value: float) -> None:
+        """Set the rho0 property."""
         self._cards[0].set_value("rho0", value)
 
     @property
@@ -177,6 +181,7 @@ class Mat090PorousDb(KeywordBase):
 
     @cee0.setter
     def cee0(self, value: float) -> None:
+        """Set the cee0 property."""
         self._cards[0].set_value("cee0", value)
 
     @property
@@ -187,6 +192,7 @@ class Mat090PorousDb(KeywordBase):
 
     @sigma.setter
     def sigma(self, value: float) -> None:
+        """Set the sigma property."""
         self._cards[0].set_value("sigma", value)
 
     @property
@@ -197,6 +203,7 @@ class Mat090PorousDb(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[1].set_value("c1", value)
 
     @property
@@ -207,6 +214,7 @@ class Mat090PorousDb(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[1].set_value("c2", value)
 
     @property
@@ -217,6 +225,7 @@ class Mat090PorousDb(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[1].set_value("c3", value)
 
     @property
@@ -227,6 +236,7 @@ class Mat090PorousDb(KeywordBase):
 
     @c4.setter
     def c4(self, value: float) -> None:
+        """Set the c4 property."""
         self._cards[1].set_value("c4", value)
 
     @property
@@ -237,6 +247,7 @@ class Mat090PorousDb(KeywordBase):
 
     @c5.setter
     def c5(self, value: float) -> None:
+        """Set the c5 property."""
         self._cards[1].set_value("c5", value)
 
     @property
@@ -247,6 +258,7 @@ class Mat090PorousDb(KeywordBase):
 
     @c6.setter
     def c6(self, value: float) -> None:
+        """Set the c6 property."""
         self._cards[1].set_value("c6", value)
 
     @property
@@ -257,6 +269,7 @@ class Mat090PorousDb(KeywordBase):
 
     @c7.setter
     def c7(self, value: float) -> None:
+        """Set the c7 property."""
         self._cards[1].set_value("c7", value)
 
     @property
@@ -267,6 +280,7 @@ class Mat090PorousDb(KeywordBase):
 
     @c8.setter
     def c8(self, value: float) -> None:
+        """Set the c8 property."""
         self._cards[1].set_value("c8", value)
 
     @property
@@ -277,5 +291,6 @@ class Mat090PorousDb(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadFaceXyz class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadFaceXyz(KeywordBase):
     subkeyword = "FACE_XYZ"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadFaceXyz class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class LoadFaceXyz(KeywordBase):
 
     @fxyzid.setter
     def fxyzid(self, value: int) -> None:
+        """Set the fxyzid property."""
         self._cards[0].set_value("fxyzid", value)
 
     @property
@@ -87,6 +90,7 @@ class LoadFaceXyz(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -97,6 +101,7 @@ class LoadFaceXyz(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -107,5 +112,6 @@ class LoadFaceXyz(KeywordBase):
 
     @at.setter
     def at(self, value: float) -> None:
+        """Set the at property."""
         self._cards[0].set_value("at", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseBoundaryCyclicSegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundaryCyclicSegment(KeywordBase):
     subkeyword = "BOUNDARY_CYCLIC_SEGMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseBoundaryCyclicSegment class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class CeseBoundaryCyclicSegment(KeywordBase):
 
     @nd1.setter
     def nd1(self, value: int) -> None:
+        """Set the nd1 property."""
         self._cards[0].set_value("nd1", value)
 
     @property
@@ -113,6 +116,7 @@ class CeseBoundaryCyclicSegment(KeywordBase):
 
     @nd2.setter
     def nd2(self, value: int) -> None:
+        """Set the nd2 property."""
         self._cards[0].set_value("nd2", value)
 
     @property
@@ -123,6 +127,7 @@ class CeseBoundaryCyclicSegment(KeywordBase):
 
     @nd3.setter
     def nd3(self, value: int) -> None:
+        """Set the nd3 property."""
         self._cards[0].set_value("nd3", value)
 
     @property
@@ -133,6 +138,7 @@ class CeseBoundaryCyclicSegment(KeywordBase):
 
     @nd4.setter
     def nd4(self, value: int) -> None:
+        """Set the nd4 property."""
         self._cards[0].set_value("nd4", value)
 
     @property
@@ -143,6 +149,7 @@ class CeseBoundaryCyclicSegment(KeywordBase):
 
     @np1.setter
     def np1(self, value: int) -> None:
+        """Set the np1 property."""
         self._cards[0].set_value("np1", value)
 
     @property
@@ -153,6 +160,7 @@ class CeseBoundaryCyclicSegment(KeywordBase):
 
     @np2.setter
     def np2(self, value: int) -> None:
+        """Set the np2 property."""
         self._cards[0].set_value("np2", value)
 
     @property
@@ -163,6 +171,7 @@ class CeseBoundaryCyclicSegment(KeywordBase):
 
     @np3.setter
     def np3(self, value: int) -> None:
+        """Set the np3 property."""
         self._cards[0].set_value("np3", value)
 
     @property
@@ -173,5 +182,6 @@ class CeseBoundaryCyclicSegment(KeywordBase):
 
     @np4.setter
     def np4(self, value: int) -> None:
+        """Set the np4 property."""
         self._cards[0].set_value("np4", value)
 

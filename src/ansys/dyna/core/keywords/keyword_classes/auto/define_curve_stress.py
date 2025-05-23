@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCurveStress class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveStress(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCurveStress class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -201,6 +203,7 @@ class DefineCurveStress(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -218,8 +221,9 @@ class DefineCurveStress(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [1, 2, 3, 4, 5, 11, None]:
-            raise Exception("""itype must be `None` or one of {1,2,3,4,5,11}""")
+            raise Exception("""itype must be `None` or one of {1,2,3,4,5,11}.""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -236,6 +240,7 @@ class DefineCurveStress(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[0].set_value("p1", value)
 
     @property
@@ -252,6 +257,7 @@ class DefineCurveStress(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[0].set_value("p2", value)
 
     @property
@@ -268,6 +274,7 @@ class DefineCurveStress(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[0].set_value("p3", value)
 
     @property
@@ -284,6 +291,7 @@ class DefineCurveStress(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[0].set_value("p4", value)
 
     @property
@@ -300,6 +308,7 @@ class DefineCurveStress(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[0].set_value("p5", value)
 
     @property
@@ -316,6 +325,7 @@ class DefineCurveStress(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[0].set_value("p6", value)
 
     @property
@@ -326,6 +336,7 @@ class DefineCurveStress(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -343,8 +354,9 @@ class DefineCurveStress(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [1, 2, 3, 4, 5, 11, None]:
-            raise Exception("""itype must be `None` or one of {1,2,3,4,5,11}""")
+            raise Exception("""itype must be `None` or one of {1,2,3,4,5,11}.""")
         self._cards[1].set_value("itype", value)
 
     @property
@@ -361,6 +373,7 @@ class DefineCurveStress(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[1].set_value("p1", value)
 
     @property
@@ -377,6 +390,7 @@ class DefineCurveStress(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[1].set_value("p2", value)
 
     @property
@@ -393,6 +407,7 @@ class DefineCurveStress(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[1].set_value("p3", value)
 
     @property
@@ -409,6 +424,7 @@ class DefineCurveStress(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[1].set_value("p4", value)
 
     @property
@@ -425,6 +441,7 @@ class DefineCurveStress(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[1].set_value("p5", value)
 
     @property
@@ -441,6 +458,7 @@ class DefineCurveStress(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[1].set_value("p6", value)
 
     @property
@@ -451,5 +469,6 @@ class DefineCurveStress(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

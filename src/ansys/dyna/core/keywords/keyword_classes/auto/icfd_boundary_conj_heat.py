@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdBoundaryConjHeat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdBoundaryConjHeat(KeywordBase):
     subkeyword = "BOUNDARY_CONJ_HEAT"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdBoundaryConjHeat class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class IcfdBoundaryConjHeat(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -89,8 +92,9 @@ class IcfdBoundaryConjHeat(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: int) -> None:
+        """Set the ctype property."""
         if value not in [0, 1, None]:
-            raise Exception("""ctype must be `None` or one of {0,1}""")
+            raise Exception("""ctype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -101,6 +105,7 @@ class IcfdBoundaryConjHeat(KeywordBase):
 
     @val.setter
     def val(self, value: float) -> None:
+        """Set the val property."""
         self._cards[0].set_value("val", value)
 
     @property
@@ -111,5 +116,6 @@ class IcfdBoundaryConjHeat(KeywordBase):
 
     @sflcid.setter
     def sflcid(self, value: float) -> None:
+        """Set the sflcid property."""
         self._cards[0].set_value("sflcid", value)
 

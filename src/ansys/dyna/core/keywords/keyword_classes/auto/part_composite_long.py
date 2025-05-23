@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the PartCompositeLong class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartCompositeLong(KeywordBase):
     subkeyword = "COMPOSITE_LONG"
 
     def __init__(self, **kwargs):
+        """Initialize the PartCompositeLong class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -180,6 +182,7 @@ class PartCompositeLong(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -190,6 +193,7 @@ class PartCompositeLong(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -212,8 +216,9 @@ class PartCompositeLong(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16, -16, None]:
-            raise Exception("""elform must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,16,-16}""")
+            raise Exception("""elform must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,16,-16}.""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -224,6 +229,7 @@ class PartCompositeLong(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[1].set_value("shrf", value)
 
     @property
@@ -237,6 +243,7 @@ class PartCompositeLong(KeywordBase):
 
     @nloc.setter
     def nloc(self, value: float) -> None:
+        """Set the nloc property."""
         self._cards[1].set_value("nloc", value)
 
     @property
@@ -247,6 +254,7 @@ class PartCompositeLong(KeywordBase):
 
     @marea.setter
     def marea(self, value: float) -> None:
+        """Set the marea property."""
         self._cards[1].set_value("marea", value)
 
     @property
@@ -258,6 +266,7 @@ class PartCompositeLong(KeywordBase):
 
     @hgid.setter
     def hgid(self, value: int) -> None:
+        """Set the hgid property."""
         self._cards[1].set_value("hgid", value)
 
     @property
@@ -271,8 +280,9 @@ class PartCompositeLong(KeywordBase):
 
     @adpopt.setter
     def adpopt(self, value: int) -> None:
+        """Set the adpopt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""adpopt must be `None` or one of {0,1,2}""")
+            raise Exception("""adpopt must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("adpopt", value)
 
     @property
@@ -285,8 +295,9 @@ class PartCompositeLong(KeywordBase):
 
     @thshel.setter
     def thshel(self, value: int) -> None:
+        """Set the thshel property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""thshel must be `None` or one of {0,1,2}""")
+            raise Exception("""thshel must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("thshel", value)
 
     @property
@@ -297,6 +308,7 @@ class PartCompositeLong(KeywordBase):
 
     @mid1.setter
     def mid1(self, value: int) -> None:
+        """Set the mid1 property."""
         self._cards[2].set_value("mid1", value)
 
     @property
@@ -307,6 +319,7 @@ class PartCompositeLong(KeywordBase):
 
     @thick1.setter
     def thick1(self, value: float) -> None:
+        """Set the thick1 property."""
         self._cards[2].set_value("thick1", value)
 
     @property
@@ -317,6 +330,7 @@ class PartCompositeLong(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[2].set_value("b1", value)
 
     @property
@@ -327,6 +341,7 @@ class PartCompositeLong(KeywordBase):
 
     @tmid1.setter
     def tmid1(self, value: int) -> None:
+        """Set the tmid1 property."""
         self._cards[2].set_value("tmid1", value)
 
     @property
@@ -337,6 +352,7 @@ class PartCompositeLong(KeywordBase):
 
     @plyid.setter
     def plyid(self, value: int) -> None:
+        """Set the plyid property."""
         self._cards[2].set_value("plyid", value)
 
     @property
@@ -347,5 +363,6 @@ class PartCompositeLong(KeywordBase):
 
     @shrfac.setter
     def shrfac(self, value: float) -> None:
+        """Set the shrfac property."""
         self._cards[2].set_value("shrfac", value)
 

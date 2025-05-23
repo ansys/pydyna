@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseMat002 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseMat002(KeywordBase):
     subkeyword = "MAT_002"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseMat002 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class CeseMat002(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -79,6 +82,7 @@ class CeseMat002(KeywordBase):
 
     @mu.setter
     def mu(self, value: float) -> None:
+        """Set the mu property."""
         self._cards[0].set_value("mu", value)
 
     @property
@@ -89,5 +93,6 @@ class CeseMat002(KeywordBase):
 
     @prnd.setter
     def prnd(self, value: float) -> None:
+        """Set the prnd property."""
         self._cards[0].set_value("prnd", value)
 

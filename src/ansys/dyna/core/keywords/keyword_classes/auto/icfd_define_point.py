@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdDefinePoint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdDefinePoint(KeywordBase):
     subkeyword = "DEFINE_POINT"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdDefinePoint class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -160,6 +162,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @poid.setter
     def poid(self, value: int) -> None:
+        """Set the poid property."""
         self._cards[0].set_value("poid", value)
 
     @property
@@ -170,6 +173,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -180,6 +184,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -190,6 +195,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 
     @property
@@ -200,6 +206,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @constpid.setter
     def constpid(self, value: int) -> None:
+        """Set the constpid property."""
         self._cards[0].set_value("constpid", value)
 
     @property
@@ -210,6 +217,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @lcidx.setter
     def lcidx(self, value: int) -> None:
+        """Set the lcidx property."""
         self._cards[1].set_value("lcidx", value)
 
     @property
@@ -220,6 +228,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @lcidy.setter
     def lcidy(self, value: int) -> None:
+        """Set the lcidy property."""
         self._cards[1].set_value("lcidy", value)
 
     @property
@@ -230,6 +239,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @lcidz.setter
     def lcidz(self, value: int) -> None:
+        """Set the lcidz property."""
         self._cards[1].set_value("lcidz", value)
 
     @property
@@ -240,6 +250,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @lcidw.setter
     def lcidw(self, value: int) -> None:
+        """Set the lcidw property."""
         self._cards[2].set_value("lcidw", value)
 
     @property
@@ -250,6 +261,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @xt.setter
     def xt(self, value: float) -> None:
+        """Set the xt property."""
         self._cards[2].set_value("xt", value)
 
     @property
@@ -260,6 +272,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @yt.setter
     def yt(self, value: float) -> None:
+        """Set the yt property."""
         self._cards[2].set_value("yt", value)
 
     @property
@@ -270,6 +283,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @zt.setter
     def zt(self, value: float) -> None:
+        """Set the zt property."""
         self._cards[2].set_value("zt", value)
 
     @property
@@ -280,6 +294,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @xh.setter
     def xh(self, value: float) -> None:
+        """Set the xh property."""
         self._cards[2].set_value("xh", value)
 
     @property
@@ -290,6 +305,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @yh.setter
     def yh(self, value: float) -> None:
+        """Set the yh property."""
         self._cards[2].set_value("yh", value)
 
     @property
@@ -300,5 +316,6 @@ class IcfdDefinePoint(KeywordBase):
 
     @zh.setter
     def zh(self, value: float) -> None:
+        """Set the zh property."""
         self._cards[2].set_value("zh", value)
 

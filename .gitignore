@@ -164,4 +164,6 @@ cython_debug/
 # Ignore rendered examples
 doc/source/examples/
 doc/source/API/_autosummary/
-doc/source/autoapi
+doc/source/api
+doc/source/keyword_classes/api
+doc/source/keyword_classes/_build/

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetSolidGenerateIncrement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetSolidGenerateIncrement(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetSolidGenerateIncrement class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -109,6 +111,7 @@ class SetSolidGenerateIncrement(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -121,8 +124,9 @@ class SetSolidGenerateIncrement(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -133,6 +137,7 @@ class SetSolidGenerateIncrement(KeywordBase):
 
     @bbeg.setter
     def bbeg(self, value: int) -> None:
+        """Set the bbeg property."""
         self._cards[1].set_value("bbeg", value)
 
     @property
@@ -143,6 +148,7 @@ class SetSolidGenerateIncrement(KeywordBase):
 
     @bend.setter
     def bend(self, value: int) -> None:
+        """Set the bend property."""
         self._cards[1].set_value("bend", value)
 
     @property
@@ -153,6 +159,7 @@ class SetSolidGenerateIncrement(KeywordBase):
 
     @incr.setter
     def incr(self, value: int) -> None:
+        """Set the incr property."""
         self._cards[1].set_value("incr", value)
 
     @property
@@ -163,5 +170,6 @@ class SetSolidGenerateIncrement(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

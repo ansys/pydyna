@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundarySpcSymmetryPlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundarySpcSymmetryPlane(KeywordBase):
     subkeyword = "SPC_SYMMETRY_PLANE"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundarySpcSymmetryPlane class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -121,6 +123,7 @@ class BoundarySpcSymmetryPlane(KeywordBase):
 
     @idsp.setter
     def idsp(self, value: int) -> None:
+        """Set the idsp property."""
         self._cards[0].set_value("idsp", value)
 
     @property
@@ -131,6 +134,7 @@ class BoundarySpcSymmetryPlane(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -141,6 +145,7 @@ class BoundarySpcSymmetryPlane(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[0].set_value("x", value)
 
     @property
@@ -151,6 +156,7 @@ class BoundarySpcSymmetryPlane(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[0].set_value("y", value)
 
     @property
@@ -161,6 +167,7 @@ class BoundarySpcSymmetryPlane(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[0].set_value("z", value)
 
     @property
@@ -171,6 +178,7 @@ class BoundarySpcSymmetryPlane(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -181,6 +189,7 @@ class BoundarySpcSymmetryPlane(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -191,6 +200,7 @@ class BoundarySpcSymmetryPlane(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -201,5 +211,6 @@ class BoundarySpcSymmetryPlane(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[1].set_value("tol", value)
 

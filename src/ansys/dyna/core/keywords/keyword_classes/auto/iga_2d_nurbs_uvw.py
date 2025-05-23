@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Iga2DNurbsUvw class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Iga2DNurbsUvw(KeywordBase):
     subkeyword = "2D_NURBS_UVW"
 
     def __init__(self, **kwargs):
+        """Initialize the Iga2DNurbsUvw class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -235,6 +237,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -245,6 +248,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @nr.setter
     def nr(self, value: int) -> None:
+        """Set the nr property."""
         self._cards[0].set_value("nr", value)
 
     @property
@@ -255,6 +259,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @ns.setter
     def ns(self, value: int) -> None:
+        """Set the ns property."""
         self._cards[0].set_value("ns", value)
 
     @property
@@ -265,6 +270,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @pr.setter
     def pr(self, value: int) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -275,6 +281,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @ps.setter
     def ps(self, value: int) -> None:
+        """Set the ps property."""
         self._cards[0].set_value("ps", value)
 
     @property
@@ -288,8 +295,9 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @unir.setter
     def unir(self, value: int) -> None:
+        """Set the unir property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""unir must be `None` or one of {0,1,2}""")
+            raise Exception("""unir must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("unir", value)
 
     @property
@@ -303,8 +311,9 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @unis.setter
     def unis(self, value: int) -> None:
+        """Set the unis property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""unis must be `None` or one of {0,1,2}""")
+            raise Exception("""unis must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("unis", value)
 
     @property
@@ -315,6 +324,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[2].set_value("r1", value)
 
     @property
@@ -325,6 +335,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[2].set_value("r2", value)
 
     @property
@@ -335,6 +346,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @r3.setter
     def r3(self, value: float) -> None:
+        """Set the r3 property."""
         self._cards[2].set_value("r3", value)
 
     @property
@@ -345,6 +357,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @r4.setter
     def r4(self, value: float) -> None:
+        """Set the r4 property."""
         self._cards[2].set_value("r4", value)
 
     @property
@@ -355,6 +368,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @rfirst.setter
     def rfirst(self, value: float) -> None:
+        """Set the rfirst property."""
         self._cards[3].set_value("rfirst", value)
 
     @property
@@ -365,6 +379,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @rlast.setter
     def rlast(self, value: float) -> None:
+        """Set the rlast property."""
         self._cards[3].set_value("rlast", value)
 
     @property
@@ -375,6 +390,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @s1.setter
     def s1(self, value: float) -> None:
+        """Set the s1 property."""
         self._cards[4].set_value("s1", value)
 
     @property
@@ -385,6 +401,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @s2.setter
     def s2(self, value: float) -> None:
+        """Set the s2 property."""
         self._cards[4].set_value("s2", value)
 
     @property
@@ -395,6 +412,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @s3.setter
     def s3(self, value: float) -> None:
+        """Set the s3 property."""
         self._cards[4].set_value("s3", value)
 
     @property
@@ -405,6 +423,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @s4.setter
     def s4(self, value: float) -> None:
+        """Set the s4 property."""
         self._cards[4].set_value("s4", value)
 
     @property
@@ -415,6 +434,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @sfirst.setter
     def sfirst(self, value: float) -> None:
+        """Set the sfirst property."""
         self._cards[5].set_value("sfirst", value)
 
     @property
@@ -425,6 +445,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @slast.setter
     def slast(self, value: float) -> None:
+        """Set the slast property."""
         self._cards[5].set_value("slast", value)
 
     @property
@@ -435,6 +456,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @u.setter
     def u(self, value: float) -> None:
+        """Set the u property."""
         self._cards[6].set_value("u", value)
 
     @property
@@ -445,6 +467,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @v.setter
     def v(self, value: float) -> None:
+        """Set the v property."""
         self._cards[6].set_value("v", value)
 
     @property
@@ -455,6 +478,7 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[6].set_value("w", value)
 
     @property
@@ -465,5 +489,6 @@ class Iga2DNurbsUvw(KeywordBase):
 
     @wgt.setter
     def wgt(self, value: float) -> None:
+        """Set the wgt property."""
         self._cards[6].set_value("wgt", value)
 

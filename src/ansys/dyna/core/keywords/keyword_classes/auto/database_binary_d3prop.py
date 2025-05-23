@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseBinaryD3Prop class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseBinaryD3Prop(KeywordBase):
     subkeyword = "BINARY_D3PROP"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseBinaryD3Prop class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -73,8 +75,9 @@ class DatabaseBinaryD3Prop(KeywordBase):
 
     @ifile.setter
     def ifile(self, value: int) -> None:
+        """Set the ifile property."""
         if value not in [1, 2, None]:
-            raise Exception("""ifile must be `None` or one of {1,2}""")
+            raise Exception("""ifile must be `None` or one of {1,2}.""")
         self._cards[0].set_value("ifile", value)
 
     @property
@@ -87,8 +90,9 @@ class DatabaseBinaryD3Prop(KeywordBase):
 
     @imatl.setter
     def imatl(self, value: int) -> None:
+        """Set the imatl property."""
         if value not in [0, 1, None]:
-            raise Exception("""imatl must be `None` or one of {0,1}""")
+            raise Exception("""imatl must be `None` or one of {0,1}.""")
         self._cards[0].set_value("imatl", value)
 
     @property
@@ -101,7 +105,8 @@ class DatabaseBinaryD3Prop(KeywordBase):
 
     @iwall.setter
     def iwall(self, value: int) -> None:
+        """Set the iwall property."""
         if value not in [0, 1, None]:
-            raise Exception("""iwall must be `None` or one of {0,1}""")
+            raise Exception("""iwall must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iwall", value)
 

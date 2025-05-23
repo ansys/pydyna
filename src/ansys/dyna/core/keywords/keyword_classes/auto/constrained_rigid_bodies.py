@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedRigidBodies class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedRigidBodies(KeywordBase):
     subkeyword = "RIGID_BODIES"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedRigidBodies class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class ConstrainedRigidBodies(KeywordBase):
 
     @pidl.setter
     def pidl(self, value: int) -> None:
+        """Set the pidl property."""
         self._cards[0].set_value("pidl", value)
 
     @property
@@ -78,6 +81,7 @@ class ConstrainedRigidBodies(KeywordBase):
 
     @pidc.setter
     def pidc(self, value: int) -> None:
+        """Set the pidc property."""
         self._cards[0].set_value("pidc", value)
 
     @property
@@ -90,5 +94,6 @@ class ConstrainedRigidBodies(KeywordBase):
 
     @iflag.setter
     def iflag(self, value: int) -> None:
+        """Set the iflag property."""
         self._cards[0].set_value("iflag", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseExtentD3Part class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseExtentD3Part(KeywordBase):
     subkeyword = "EXTENT_D3PART"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseExtentD3Part class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -177,6 +179,7 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @neiph.setter
     def neiph(self, value: int) -> None:
+        """Set the neiph property."""
         self._cards[0].set_value("neiph", value)
 
     @property
@@ -189,6 +192,7 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @neips.setter
     def neips(self, value: int) -> None:
+        """Set the neips property."""
         self._cards[0].set_value("neips", value)
 
     @property
@@ -211,6 +215,7 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @maxint.setter
     def maxint(self, value: int) -> None:
+        """Set the maxint property."""
         self._cards[0].set_value("maxint", value)
 
     @property
@@ -225,6 +230,7 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @strflg.setter
     def strflg(self, value: int) -> None:
+        """Set the strflg property."""
         self._cards[0].set_value("strflg", value)
 
     @property
@@ -237,8 +243,9 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @sigflg.setter
     def sigflg(self, value: int) -> None:
+        """Set the sigflg property."""
         if value not in [1, 2, None]:
-            raise Exception("""sigflg must be `None` or one of {1,2}""")
+            raise Exception("""sigflg must be `None` or one of {1,2}.""")
         self._cards[0].set_value("sigflg", value)
 
     @property
@@ -251,8 +258,9 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @epsflg.setter
     def epsflg(self, value: int) -> None:
+        """Set the epsflg property."""
         if value not in [1, 2, None]:
-            raise Exception("""epsflg must be `None` or one of {1,2}""")
+            raise Exception("""epsflg must be `None` or one of {1,2}.""")
         self._cards[0].set_value("epsflg", value)
 
     @property
@@ -265,8 +273,9 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @rltflg.setter
     def rltflg(self, value: int) -> None:
+        """Set the rltflg property."""
         if value not in [1, 2, None]:
-            raise Exception("""rltflg must be `None` or one of {1,2}""")
+            raise Exception("""rltflg must be `None` or one of {1,2}.""")
         self._cards[0].set_value("rltflg", value)
 
     @property
@@ -279,8 +288,9 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @engflg.setter
     def engflg(self, value: int) -> None:
+        """Set the engflg property."""
         if value not in [1, 2, None]:
-            raise Exception("""engflg must be `None` or one of {1,2}""")
+            raise Exception("""engflg must be `None` or one of {1,2}.""")
         self._cards[0].set_value("engflg", value)
 
     @property
@@ -293,8 +303,9 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @ieverp.setter
     def ieverp(self, value: int) -> None:
+        """Set the ieverp property."""
         if value not in [0, 1, None]:
-            raise Exception("""ieverp must be `None` or one of {0,1}""")
+            raise Exception("""ieverp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ieverp", value)
 
     @property
@@ -307,8 +318,9 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @shge.setter
     def shge(self, value: int) -> None:
+        """Set the shge property."""
         if value not in [1, 2, None]:
-            raise Exception("""shge must be `None` or one of {1,2}""")
+            raise Exception("""shge must be `None` or one of {1,2}.""")
         self._cards[1].set_value("shge", value)
 
     @property
@@ -323,8 +335,9 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @stssz.setter
     def stssz(self, value: int) -> None:
+        """Set the stssz property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""stssz must be `None` or one of {1,2,3}""")
+            raise Exception("""stssz must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("stssz", value)
 
     @property
@@ -339,5 +352,6 @@ class DatabaseExtentD3Part(KeywordBase):
 
     @nintsld.setter
     def nintsld(self, value: int) -> None:
+        """Set the nintsld property."""
         self._cards[2].set_value("nintsld", value)
 

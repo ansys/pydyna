@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryPrescribedFinalGeometry class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
     subkeyword = "PRESCRIBED_FINAL_GEOMETRY"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryPrescribedFinalGeometry class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -119,6 +121,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @bpfgid.setter
     def bpfgid(self, value: int) -> None:
+        """Set the bpfgid property."""
         self._cards[0].set_value("bpfgid", value)
 
     @property
@@ -129,6 +132,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @lcidf.setter
     def lcidf(self, value: int) -> None:
+        """Set the lcidf property."""
         self._cards[0].set_value("lcidf", value)
 
     @property
@@ -139,6 +143,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @deathd.setter
     def deathd(self, value: float) -> None:
+        """Set the deathd property."""
         self._cards[0].set_value("deathd", value)
 
     @property
@@ -149,6 +154,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -159,6 +165,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -169,6 +176,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -179,6 +187,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 
     @property
@@ -189,6 +198,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -199,5 +209,6 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 

@@ -1,0 +1,60 @@
+name: night doc build
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # 22:00 UTC
+  workflow_dispatch:
+    inputs:
+      PyDynaRunContainer:
+        description: 'Run container name'
+        required: false
+        default: ghcr.io/ansys/pydyna-run:latest
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  MAIN_PYTHON_VERSION: '3.13'
+  PACKAGE_NAME: 'ansys-dyna-core'
+  PACKAGE_NAMESPACE: 'ansys.dyna.core'
+  DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
+  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.PyDynaRunContainer || 'ghcr.io/ansys/pydyna-run:latest'}}
+
+jobs:
+
+  doc-build:
+    name: "Documentation build"
+    runs-on: [public-ubuntu-latest-8-cores]
+    timeout-minutes: 720
+    steps:
+      - name: "Checkout project"
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: "Build documentation"
+        uses: ./.github/actions/doc-build
+        with:
+          build-autokeywords-api: "True"
+          pdf-pool-size: 15000000
+          pdf-string-vacancies: 90000
+          pdf-max-strings: 600000
+          PyDynaRunContainer: ${{ env.PYDYNA_RUN_CONTAINER }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          license-server: ${{ secrets.LICENSE_SERVER }}
+          bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          github-actor: ${{ github.actor }}
+
+  doc-deploy-dev:
+    name: "Deploy development documentation"
+    runs-on: ubuntu-latest
+    needs: [doc-build]
+    steps:
+      - uses: ansys/actions/doc-deploy-dev@2cf9a9c43235a000d613c2b13e64c954232a4553 # v9.0.15
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+

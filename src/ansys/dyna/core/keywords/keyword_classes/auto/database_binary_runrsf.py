@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseBinaryRunrsf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseBinaryRunrsf(KeywordBase):
     subkeyword = "BINARY_RUNRSF"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseBinaryRunrsf class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -85,6 +87,7 @@ class DatabaseBinaryRunrsf(KeywordBase):
 
     @cycl.setter
     def cycl(self, value: float) -> None:
+        """Set the cycl property."""
         self._cards[0].set_value("cycl", value)
 
     @property
@@ -95,6 +98,7 @@ class DatabaseBinaryRunrsf(KeywordBase):
 
     @nr.setter
     def nr(self, value: int) -> None:
+        """Set the nr property."""
         self._cards[0].set_value("nr", value)
 
     @property
@@ -107,6 +111,7 @@ class DatabaseBinaryRunrsf(KeywordBase):
 
     @beam.setter
     def beam(self, value: int) -> None:
+        """Set the beam property."""
         self._cards[0].set_value("beam", value)
 
     @property
@@ -117,6 +122,7 @@ class DatabaseBinaryRunrsf(KeywordBase):
 
     @npltc.setter
     def npltc(self, value: int) -> None:
+        """Set the npltc property."""
         self._cards[0].set_value("npltc", value)
 
     @property
@@ -127,5 +133,6 @@ class DatabaseBinaryRunrsf(KeywordBase):
 
     @psetid.setter
     def psetid(self, value: int) -> None:
+        """Set the psetid property."""
         self._cards[0].set_value("psetid", value)
 

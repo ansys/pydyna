@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlMppDecompositionContactIsolate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMppDecompositionContactIsolate(KeywordBase):
     subkeyword = "MPP_DECOMPOSITION_CONTACT_ISOLATE"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlMppDecompositionContactIsolate class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -82,6 +84,7 @@ class ControlMppDecompositionContactIsolate(KeywordBase):
 
     @id1.setter
     def id1(self, value: int) -> None:
+        """Set the id1 property."""
         self._cards[0].set_value("id1", value)
 
     @property
@@ -92,6 +95,7 @@ class ControlMppDecompositionContactIsolate(KeywordBase):
 
     @id2.setter
     def id2(self, value: int) -> None:
+        """Set the id2 property."""
         self._cards[0].set_value("id2", value)
 
     @property
@@ -102,6 +106,7 @@ class ControlMppDecompositionContactIsolate(KeywordBase):
 
     @id3.setter
     def id3(self, value: int) -> None:
+        """Set the id3 property."""
         self._cards[0].set_value("id3", value)
 
     @property
@@ -112,6 +117,7 @@ class ControlMppDecompositionContactIsolate(KeywordBase):
 
     @id4.setter
     def id4(self, value: int) -> None:
+        """Set the id4 property."""
         self._cards[0].set_value("id4", value)
 
     @property
@@ -122,5 +128,6 @@ class ControlMppDecompositionContactIsolate(KeywordBase):
 
     @id5.setter
     def id5(self, value: int) -> None:
+        """Set the id5 property."""
         self._cards[0].set_value("id5", value)
 

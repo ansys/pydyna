@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadBeamElement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBeamElement(KeywordBase):
     subkeyword = "BEAM_ELEMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadBeamElement class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class LoadBeamElement(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -90,8 +93,9 @@ class LoadBeamElement(KeywordBase):
 
     @dal.setter
     def dal(self, value: int) -> None:
+        """Set the dal property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""dal must be `None` or one of {1,2,3}""")
+            raise Exception("""dal must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("dal", value)
 
     @property
@@ -102,6 +106,7 @@ class LoadBeamElement(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -112,5 +117,6 @@ class LoadBeamElement(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 

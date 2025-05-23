@@ -18,7 +18,7 @@ project = 'ansys-dyna-core'
 copyright = f"(c) {datetime.datetime.now().year} ANSYS, Inc. All rights reserved"
 author = 'ANSYS Inc.'
 release = version = __version__
-cname = os.getenv("DOCUMENTATION_CNAME", default="nocname.com")
+cname = os.getenv("DOCUMENTATION_CNAME", default="dyna.docs.pyansys.com")
 
 # Sphinx extensions
 extensions = [
@@ -30,6 +30,8 @@ extensions = [
     'sphinx.ext.inheritance_diagram',
     "sphinx_jinja",
     "pyvista.ext.plot_directive",
+    "sphinx_design",
+    "ansys_sphinx_theme.extension.autoapi",
 ]
 
 # Intersphinx mapping
@@ -55,13 +57,13 @@ numpydoc_validation_checks = {
     "GL09",  # Deprecation warning should precede extended summary
     "GL10",  # reST directives {directives} must be followed by two colons
     # Summary
-    "SS01",  # No summary found
-    "SS02",  # Summary does not start with a capital letter
-    "SS03",  # Summary does not end with a period
+    # "SS01",  # No summary found
+    # "SS02",  # Summary does not start with a capital letter
+    #"SS03",  # Summary does not end with a period
     "SS04",  # Summary contains heading whitespaces
     "SS05",  # Summary must start with infinitive verb, not third person
     # Parameters
-    "PR10",  # Parameter "{param_name}" requires a space before the colon '
+    #"PR10",  # Parameter "{param_name}" requires a space before the colon '
     # separating the parameter name and type",
 }
 
@@ -88,7 +90,7 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst"]
+exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst", "keyword_classes/**"]
 
 # make rst_epilog a variable, so you can add other epilog parts to it
 rst_epilog = ""
@@ -117,8 +119,6 @@ html_theme_options = {
         "json_url": f"https://{cname}/versions.json",
         "version_match": get_version_match(__version__),
     },
-    "check_switcher": False,
-    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
     "github_url": "https://github.com/ansys/pydyna",
     "show_prev_next": False,
     "show_breadcrumbs": True,
@@ -127,7 +127,15 @@ html_theme_options = {
     ],
     "collapse_navigation": True,
     "use_edit_page_button": True,
+    "ansys_sphinx_theme_autoapi": {
+        "ignore": [
+            "*core/keywords/keyword_classes/auto*",
+        ],
+        "output": "api",
+        # "templates": "autoapi/"
+    },
 }
+
 
 # static path
 html_static_path = ['_static']
@@ -136,28 +144,17 @@ html_static_path = ['_static']
 # -- Declare the Jinja context -----------------------------------------------
 BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
 if not BUILD_API:
-    exclude_patterns.append("_autoapi_templates")
-else:
-    # Configuration for Sphinx autoapi
-    extensions.append("autoapi.extension")
-    autoapi_dirs = ["../../src/ansys"]
-    autoapi_ignore = ["*core/keywords/keyword_classes/auto*"]
-    autoapi_type = "python"
-    autoapi_options = [
-        "members",
-        "undoc-members",
-        "show-inheritance",
-        "show-module-summary",
-        "special-members",
-    ]
-    autoapi_template_dir = "_autoapi_templates"
-    suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
-    exclude_patterns.append("_autoapi_templates/index.rst")
-    autoapi_python_use_implicit_namespaces = True
+    exclude_patterns.append("api")
+    html_theme_options.pop("ansys_sphinx_theme_autoapi")
+    extensions.remove("ansys_sphinx_theme.extension.autoapi")
 
-BUILD_EXAMPLES = (
-    True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
-)
+suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils"]
+
+BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower() == "true"
+if BUILD_AUTOKEYWORS_API:
+    html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
+
+BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
 if BUILD_EXAMPLES is True:
     # Necessary for pyvista when building the sphinx gallery
     extensions.append("sphinx_gallery.gen_gallery")
@@ -195,3 +192,27 @@ jinja_contexts = {
         "build_examples": BUILD_EXAMPLES,
     },
 }
+
+
+def skip_run_subpackage(app, what, name, obj, skip, options):
+    """Skip specific members of the 'run' subpackage during documentation generation.
+
+    This function skips:
+    - All modules under 'ansys.dyna.core.run' except 'local_solver' and 'options'.
+    - Within 'local_solver', skips all members except the 'run_dyna' function.
+    """
+    
+    
+    if name.startswith("ansys.dyna.core.run.") and not (name.startswith("ansys.dyna.core.run.local_solver") or name.startswith("ansys.dyna.core.run.options")):
+            skip = True
+
+    if name.startswith("ansys.dyna.core.run.local_solver"):
+        if what == "function" and name!= "ansys.dyna.core.run.local_solver.run_dyna":
+            skip = True
+
+    return skip
+
+
+def setup(sphinx):
+    """Add custom extensions to Sphinx."""
+    sphinx.connect("autoapi-skip-member", skip_run_subpackage)

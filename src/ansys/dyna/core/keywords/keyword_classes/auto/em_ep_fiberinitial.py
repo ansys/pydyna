@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmEpFiberinitial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEpFiberinitial(KeywordBase):
     subkeyword = "EP_FIBERINITIAL"
 
     def __init__(self, **kwargs):
+        """Initialize the EmEpFiberinitial class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -83,6 +85,7 @@ class EmEpFiberinitial(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -93,6 +96,7 @@ class EmEpFiberinitial(KeywordBase):
 
     @partid.setter
     def partid(self, value: int) -> None:
+        """Set the partid property."""
         self._cards[0].set_value("partid", value)
 
     @property
@@ -105,8 +109,9 @@ class EmEpFiberinitial(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [1, 2, None]:
-            raise Exception("""stype must be `None` or one of {1,2}""")
+            raise Exception("""stype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -117,6 +122,7 @@ class EmEpFiberinitial(KeywordBase):
 
     @ssid1.setter
     def ssid1(self, value: int) -> None:
+        """Set the ssid1 property."""
         self._cards[0].set_value("ssid1", value)
 
     @property
@@ -127,5 +133,6 @@ class EmEpFiberinitial(KeywordBase):
 
     @ssid0.setter
     def ssid0(self, value: int) -> None:
+        """Set the ssid0 property."""
         self._cards[0].set_value("ssid0", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Keyword class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Keyword(KeywordBase):
     subkeyword = "KEYWORD"
 
     def __init__(self, **kwargs):
+        """Initialize the Keyword class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class Keyword(KeywordBase):
 
     @memory.setter
     def memory(self, value: str) -> None:
+        """Set the memory property."""
         self._cards[0].set_value("memory", value)
 
     @property
@@ -78,6 +81,7 @@ class Keyword(KeywordBase):
 
     @memory2.setter
     def memory2(self, value: str) -> None:
+        """Set the memory2 property."""
         self._cards[0].set_value("memory2", value)
 
     @property
@@ -88,5 +92,6 @@ class Keyword(KeywordBase):
 
     @ncpu.setter
     def ncpu(self, value: int) -> None:
+        """Set the ncpu property."""
         self._cards[0].set_value("ncpu", value)
 

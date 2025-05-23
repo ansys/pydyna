@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedJointStiffnessGeneral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
     subkeyword = "JOINT_STIFFNESS_GENERAL"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedJointStiffnessGeneral class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -246,6 +248,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @jsid.setter
     def jsid(self, value: int) -> None:
+        """Set the jsid property."""
         self._cards[0].set_value("jsid", value)
 
     @property
@@ -256,6 +259,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @pida.setter
     def pida(self, value: int) -> None:
+        """Set the pida property."""
         self._cards[0].set_value("pida", value)
 
     @property
@@ -266,6 +270,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @pidb.setter
     def pidb(self, value: int) -> None:
+        """Set the pidb property."""
         self._cards[0].set_value("pidb", value)
 
     @property
@@ -276,6 +281,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @cida.setter
     def cida(self, value: int) -> None:
+        """Set the cida property."""
         self._cards[0].set_value("cida", value)
 
     @property
@@ -287,6 +293,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @cidb.setter
     def cidb(self, value: int) -> None:
+        """Set the cidb property."""
         self._cards[0].set_value("cidb", value)
 
     @property
@@ -297,6 +304,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @jid.setter
     def jid(self, value: int) -> None:
+        """Set the jid property."""
         self._cards[0].set_value("jid", value)
 
     @property
@@ -308,6 +316,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @lcidph.setter
     def lcidph(self, value: int) -> None:
+        """Set the lcidph property."""
         self._cards[1].set_value("lcidph", value)
 
     @property
@@ -319,6 +328,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[1].set_value("lcidt", value)
 
     @property
@@ -330,6 +340,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @lcidps.setter
     def lcidps(self, value: int) -> None:
+        """Set the lcidps property."""
         self._cards[1].set_value("lcidps", value)
 
     @property
@@ -341,6 +352,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @dlcidph.setter
     def dlcidph(self, value: int) -> None:
+        """Set the dlcidph property."""
         self._cards[1].set_value("dlcidph", value)
 
     @property
@@ -352,6 +364,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @dlcidt.setter
     def dlcidt(self, value: int) -> None:
+        """Set the dlcidt property."""
         self._cards[1].set_value("dlcidt", value)
 
     @property
@@ -363,6 +376,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @dlcidps.setter
     def dlcidps(self, value: int) -> None:
+        """Set the dlcidps property."""
         self._cards[1].set_value("dlcidps", value)
 
     @property
@@ -374,6 +388,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @esph.setter
     def esph(self, value: float) -> None:
+        """Set the esph property."""
         self._cards[2].set_value("esph", value)
 
     @property
@@ -384,6 +399,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @fmph.setter
     def fmph(self, value: float) -> None:
+        """Set the fmph property."""
         self._cards[2].set_value("fmph", value)
 
     @property
@@ -395,6 +411,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @est.setter
     def est(self, value: float) -> None:
+        """Set the est property."""
         self._cards[2].set_value("est", value)
 
     @property
@@ -405,6 +422,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @fmt.setter
     def fmt(self, value: float) -> None:
+        """Set the fmt property."""
         self._cards[2].set_value("fmt", value)
 
     @property
@@ -416,6 +434,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @esps.setter
     def esps(self, value: float) -> None:
+        """Set the esps property."""
         self._cards[2].set_value("esps", value)
 
     @property
@@ -427,6 +446,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @fmps.setter
     def fmps(self, value: float) -> None:
+        """Set the fmps property."""
         self._cards[2].set_value("fmps", value)
 
     @property
@@ -438,6 +458,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @nsaph.setter
     def nsaph(self, value: float) -> None:
+        """Set the nsaph property."""
         self._cards[3].set_value("nsaph", value)
 
     @property
@@ -449,6 +470,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @psaph.setter
     def psaph(self, value: float) -> None:
+        """Set the psaph property."""
         self._cards[3].set_value("psaph", value)
 
     @property
@@ -460,6 +482,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @nsat.setter
     def nsat(self, value: float) -> None:
+        """Set the nsat property."""
         self._cards[3].set_value("nsat", value)
 
     @property
@@ -471,6 +494,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @psat.setter
     def psat(self, value: float) -> None:
+        """Set the psat property."""
         self._cards[3].set_value("psat", value)
 
     @property
@@ -482,6 +506,7 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @nsaps.setter
     def nsaps(self, value: float) -> None:
+        """Set the nsaps property."""
         self._cards[3].set_value("nsaps", value)
 
     @property
@@ -493,5 +518,6 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
 
     @psaps.setter
     def psaps(self, value: float) -> None:
+        """Set the psaps property."""
         self._cards[3].set_value("psaps", value)
 

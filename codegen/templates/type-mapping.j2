@@ -1,4 +1,5 @@
 {{license}}
+"""Module containing mapping from keywords to classes."""
 TypeMapping = {
 {% for keyword in keywords %}
     "*{{keyword.title}}": "{{keyword.classname}}",

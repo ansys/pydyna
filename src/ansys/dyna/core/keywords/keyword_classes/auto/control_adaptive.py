@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlAdaptive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlAdaptive(KeywordBase):
     subkeyword = "ADAPTIVE"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlAdaptive class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -309,6 +311,7 @@ class ControlAdaptive(KeywordBase):
 
     @adpfreq.setter
     def adpfreq(self, value: float) -> None:
+        """Set the adpfreq property."""
         self._cards[0].set_value("adpfreq", value)
 
     @property
@@ -319,6 +322,7 @@ class ControlAdaptive(KeywordBase):
 
     @adptol.setter
     def adptol(self, value: float) -> None:
+        """Set the adptol property."""
         self._cards[0].set_value("adptol", value)
 
     @property
@@ -340,8 +344,9 @@ class ControlAdaptive(KeywordBase):
 
     @adptyp.setter
     def adptyp(self, value: int) -> None:
+        """Set the adptyp property."""
         if value not in [1, 2, 4, 7, 8, -8, None]:
-            raise Exception("""adptyp must be `None` or one of {1,2,4,7,8,-8}""")
+            raise Exception("""adptyp must be `None` or one of {1,2,4,7,8,-8}.""")
         self._cards[0].set_value("adptyp", value)
 
     @property
@@ -352,6 +357,7 @@ class ControlAdaptive(KeywordBase):
 
     @maxlvl.setter
     def maxlvl(self, value: int) -> None:
+        """Set the maxlvl property."""
         self._cards[0].set_value("maxlvl", value)
 
     @property
@@ -362,6 +368,7 @@ class ControlAdaptive(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 
     @property
@@ -372,6 +379,7 @@ class ControlAdaptive(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -383,6 +391,7 @@ class ControlAdaptive(KeywordBase):
 
     @lcadp.setter
     def lcadp(self, value: int) -> None:
+        """Set the lcadp property."""
         self._cards[0].set_value("lcadp", value)
 
     @property
@@ -395,8 +404,9 @@ class ControlAdaptive(KeywordBase):
 
     @ioflag.setter
     def ioflag(self, value: int) -> None:
+        """Set the ioflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""ioflag must be `None` or one of {0,1}""")
+            raise Exception("""ioflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ioflag", value)
 
     @property
@@ -407,6 +417,7 @@ class ControlAdaptive(KeywordBase):
 
     @adpsize.setter
     def adpsize(self, value: float) -> None:
+        """Set the adpsize property."""
         self._cards[1].set_value("adpsize", value)
 
     @property
@@ -419,8 +430,9 @@ class ControlAdaptive(KeywordBase):
 
     @adpass.setter
     def adpass(self, value: int) -> None:
+        """Set the adpass property."""
         if value not in [0, 1, None]:
-            raise Exception("""adpass must be `None` or one of {0,1}""")
+            raise Exception("""adpass must be `None` or one of {0,1}.""")
         self._cards[1].set_value("adpass", value)
 
     @property
@@ -431,6 +443,7 @@ class ControlAdaptive(KeywordBase):
 
     @ireflg.setter
     def ireflg(self, value: int) -> None:
+        """Set the ireflg property."""
         self._cards[1].set_value("ireflg", value)
 
     @property
@@ -441,6 +454,7 @@ class ControlAdaptive(KeywordBase):
 
     @adpene.setter
     def adpene(self, value: float) -> None:
+        """Set the adpene property."""
         self._cards[1].set_value("adpene", value)
 
     @property
@@ -453,6 +467,7 @@ class ControlAdaptive(KeywordBase):
 
     @adpth.setter
     def adpth(self, value: float) -> None:
+        """Set the adpth property."""
         self._cards[1].set_value("adpth", value)
 
     @property
@@ -464,6 +479,7 @@ class ControlAdaptive(KeywordBase):
 
     @memory.setter
     def memory(self, value: int) -> None:
+        """Set the memory property."""
         self._cards[1].set_value("memory", value)
 
     @property
@@ -476,8 +492,9 @@ class ControlAdaptive(KeywordBase):
 
     @orient.setter
     def orient(self, value: int) -> None:
+        """Set the orient property."""
         if value not in [0, 1, None]:
-            raise Exception("""orient must be `None` or one of {0,1}""")
+            raise Exception("""orient must be `None` or one of {0,1}.""")
         self._cards[1].set_value("orient", value)
 
     @property
@@ -489,6 +506,7 @@ class ControlAdaptive(KeywordBase):
 
     @maxel.setter
     def maxel(self, value: int) -> None:
+        """Set the maxel property."""
         self._cards[1].set_value("maxel", value)
 
     @property
@@ -499,6 +517,7 @@ class ControlAdaptive(KeywordBase):
 
     @ladpn90.setter
     def ladpn90(self, value: int) -> None:
+        """Set the ladpn90 property."""
         self._cards[2].set_value("ladpn90", value)
 
     @property
@@ -511,6 +530,7 @@ class ControlAdaptive(KeywordBase):
 
     @ladpgh.setter
     def ladpgh(self, value: int) -> None:
+        """Set the ladpgh property."""
         self._cards[2].set_value("ladpgh", value)
 
     @property
@@ -521,6 +541,7 @@ class ControlAdaptive(KeywordBase):
 
     @ncfred.setter
     def ncfred(self, value: int) -> None:
+        """Set the ncfred property."""
         self._cards[2].set_value("ncfred", value)
 
     @property
@@ -531,6 +552,7 @@ class ControlAdaptive(KeywordBase):
 
     @ladpcl.setter
     def ladpcl(self, value: int) -> None:
+        """Set the ladpcl property."""
         self._cards[2].set_value("ladpcl", value)
 
     @property
@@ -541,6 +563,7 @@ class ControlAdaptive(KeywordBase):
 
     @adpctl.setter
     def adpctl(self, value: float) -> None:
+        """Set the adpctl property."""
         self._cards[2].set_value("adpctl", value)
 
     @property
@@ -551,6 +574,7 @@ class ControlAdaptive(KeywordBase):
 
     @cbirth.setter
     def cbirth(self, value: float) -> None:
+        """Set the cbirth property."""
         self._cards[2].set_value("cbirth", value)
 
     @property
@@ -561,6 +585,7 @@ class ControlAdaptive(KeywordBase):
 
     @cdeath.setter
     def cdeath(self, value: float) -> None:
+        """Set the cdeath property."""
         self._cards[2].set_value("cdeath", value)
 
     @property
@@ -571,6 +596,7 @@ class ControlAdaptive(KeywordBase):
 
     @lclvl.setter
     def lclvl(self, value: int) -> None:
+        """Set the lclvl property."""
         self._cards[2].set_value("lclvl", value)
 
     @property
@@ -583,6 +609,7 @@ class ControlAdaptive(KeywordBase):
 
     @cnla.setter
     def cnla(self, value: float) -> None:
+        """Set the cnla property."""
         self._cards[3].set_value("cnla", value)
 
     @property
@@ -593,6 +620,7 @@ class ControlAdaptive(KeywordBase):
 
     @mmm2d.setter
     def mmm2d(self, value: int) -> None:
+        """Set the mmm2d property."""
         self._cards[3].set_value("mmm2d", value)
 
     @property
@@ -627,6 +655,7 @@ class ControlAdaptive(KeywordBase):
 
     @adperr.setter
     def adperr(self, value: str) -> None:
+        """Set the adperr property."""
         self._cards[3].set_value("adperr", value)
 
     @property
@@ -639,6 +668,7 @@ class ControlAdaptive(KeywordBase):
 
     @d3trace.setter
     def d3trace(self, value: int) -> None:
+        """Set the d3trace property."""
         self._cards[3].set_value("d3trace", value)
 
     @property
@@ -652,6 +682,7 @@ class ControlAdaptive(KeywordBase):
 
     @iadpcf.setter
     def iadpcf(self, value: int) -> None:
+        """Set the iadpcf property."""
         self._cards[3].set_value("iadpcf", value)
 
     @property
@@ -662,5 +693,6 @@ class ControlAdaptive(KeywordBase):
 
     @ifsand.setter
     def ifsand(self, value: int) -> None:
+        """Set the ifsand property."""
         self._cards[3].set_value("ifsand", value)
 

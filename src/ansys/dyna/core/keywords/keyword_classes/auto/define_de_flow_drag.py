@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeFlowDrag class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeFlowDrag(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeFlowDrag class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -171,6 +173,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @cd.setter
     def cd(self, value: float) -> None:
+        """Set the cd property."""
         self._cards[0].set_value("cd", value)
 
     @property
@@ -181,6 +184,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @rho.setter
     def rho(self, value: float) -> None:
+        """Set the rho property."""
         self._cards[0].set_value("rho", value)
 
     @property
@@ -191,6 +195,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @mu.setter
     def mu(self, value: float) -> None:
+        """Set the mu property."""
         self._cards[0].set_value("mu", value)
 
     @property
@@ -201,6 +206,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -211,6 +217,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -221,6 +228,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -231,6 +239,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 
     @property
@@ -241,6 +250,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -251,6 +261,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @vs.setter
     def vs(self, value: float) -> None:
+        """Set the vs property."""
         self._cards[1].set_value("vs", value)
 
     @property
@@ -264,8 +275,9 @@ class DefineDeFlowDrag(KeywordBase):
 
     @dflag.setter
     def dflag(self, value: int) -> None:
+        """Set the dflag property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""dflag must be `None` or one of {1,2,3}""")
+            raise Exception("""dflag must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("dflag", value)
 
     @property
@@ -276,6 +288,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @sfn.setter
     def sfn(self, value: float) -> None:
+        """Set the sfn property."""
         self._cards[1].set_value("sfn", value)
 
     @property
@@ -286,6 +299,7 @@ class DefineDeFlowDrag(KeywordBase):
 
     @sfs.setter
     def sfs(self, value: float) -> None:
+        """Set the sfs property."""
         self._cards[1].set_value("sfs", value)
 
     @property
@@ -296,5 +310,6 @@ class DefineDeFlowDrag(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetBeamAdd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -36,6 +37,7 @@ class SetBeamAdd(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetBeamAdd class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -84,11 +86,12 @@ class SetBeamAdd(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
     def beams(self) -> SeriesCard:
-        """dynamic array of beam set ids."""
+        """dynamic array of beam set ids.."""
         return self._cards[1]
 
     @beams.setter
@@ -103,5 +106,6 @@ class SetBeamAdd(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatThermalCwm class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatThermalCwm(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatThermalCwm class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -185,6 +187,7 @@ class MatThermalCwm(KeywordBase):
 
     @tmid.setter
     def tmid(self, value: int) -> None:
+        """Set the tmid property."""
         self._cards[0].set_value("tmid", value)
 
     @property
@@ -195,6 +198,7 @@ class MatThermalCwm(KeywordBase):
 
     @tro.setter
     def tro(self, value: float) -> None:
+        """Set the tro property."""
         self._cards[0].set_value("tro", value)
 
     @property
@@ -209,6 +213,7 @@ class MatThermalCwm(KeywordBase):
 
     @tgrlc.setter
     def tgrlc(self, value: float) -> None:
+        """Set the tgrlc property."""
         self._cards[0].set_value("tgrlc", value)
 
     @property
@@ -219,6 +224,7 @@ class MatThermalCwm(KeywordBase):
 
     @tgmult.setter
     def tgmult(self, value: float) -> None:
+        """Set the tgmult property."""
         self._cards[0].set_value("tgmult", value)
 
     @property
@@ -229,6 +235,7 @@ class MatThermalCwm(KeywordBase):
 
     @hdead.setter
     def hdead(self, value: float) -> None:
+        """Set the hdead property."""
         self._cards[0].set_value("hdead", value)
 
     @property
@@ -239,6 +246,7 @@ class MatThermalCwm(KeywordBase):
 
     @tdead.setter
     def tdead(self, value: float) -> None:
+        """Set the tdead property."""
         self._cards[0].set_value("tdead", value)
 
     @property
@@ -249,6 +257,7 @@ class MatThermalCwm(KeywordBase):
 
     @tlat.setter
     def tlat(self, value: float) -> None:
+        """Set the tlat property."""
         self._cards[0].set_value("tlat", value)
 
     @property
@@ -259,6 +268,7 @@ class MatThermalCwm(KeywordBase):
 
     @hlat.setter
     def hlat(self, value: float) -> None:
+        """Set the hlat property."""
         self._cards[0].set_value("hlat", value)
 
     @property
@@ -269,6 +279,7 @@ class MatThermalCwm(KeywordBase):
 
     @lchc.setter
     def lchc(self, value: int) -> None:
+        """Set the lchc property."""
         self._cards[1].set_value("lchc", value)
 
     @property
@@ -279,6 +290,7 @@ class MatThermalCwm(KeywordBase):
 
     @lctc.setter
     def lctc(self, value: int) -> None:
+        """Set the lctc property."""
         self._cards[1].set_value("lctc", value)
 
     @property
@@ -289,6 +301,7 @@ class MatThermalCwm(KeywordBase):
 
     @tlstart.setter
     def tlstart(self, value: float) -> None:
+        """Set the tlstart property."""
         self._cards[1].set_value("tlstart", value)
 
     @property
@@ -299,6 +312,7 @@ class MatThermalCwm(KeywordBase):
 
     @tlend.setter
     def tlend(self, value: float) -> None:
+        """Set the tlend property."""
         self._cards[1].set_value("tlend", value)
 
     @property
@@ -309,6 +323,7 @@ class MatThermalCwm(KeywordBase):
 
     @tistart.setter
     def tistart(self, value: float) -> None:
+        """Set the tistart property."""
         self._cards[1].set_value("tistart", value)
 
     @property
@@ -319,6 +334,7 @@ class MatThermalCwm(KeywordBase):
 
     @tiend.setter
     def tiend(self, value: float) -> None:
+        """Set the tiend property."""
         self._cards[1].set_value("tiend", value)
 
     @property
@@ -329,6 +345,7 @@ class MatThermalCwm(KeywordBase):
 
     @hghost.setter
     def hghost(self, value: float) -> None:
+        """Set the hghost property."""
         self._cards[1].set_value("hghost", value)
 
     @property
@@ -339,6 +356,7 @@ class MatThermalCwm(KeywordBase):
 
     @tghost.setter
     def tghost(self, value: float) -> None:
+        """Set the tghost property."""
         self._cards[1].set_value("tghost", value)
 
     @property
@@ -349,5 +367,6 @@ class MatThermalCwm(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

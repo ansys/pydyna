@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAddPzelectric class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddPzelectric(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAddPzelectric class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -376,6 +378,7 @@ class MatAddPzelectric(KeywordBase):
 
     @mid.setter
     def mid(self, value: str) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -388,8 +391,9 @@ class MatAddPzelectric(KeywordBase):
 
     @dtype.setter
     def dtype(self, value: str) -> None:
+        """Set the dtype property."""
         if value not in ["S", "E", None]:
-            raise Exception("""dtype must be `None` or one of {"S","E"}""")
+            raise Exception("""dtype must be `None` or one of {"S","E"}.""")
         self._cards[0].set_value("dtype", value)
 
     @property
@@ -402,6 +406,7 @@ class MatAddPzelectric(KeywordBase):
 
     @gpt.setter
     def gpt(self, value: int) -> None:
+        """Set the gpt property."""
         self._cards[0].set_value("gpt", value)
 
     @property
@@ -415,8 +420,9 @@ class MatAddPzelectric(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: int) -> None:
+        """Set the aopt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""aopt must be `None` or one of {0,1,2}""")
+            raise Exception("""aopt must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("aopt", value)
 
     @property
@@ -427,6 +433,7 @@ class MatAddPzelectric(KeywordBase):
 
     @dxx.setter
     def dxx(self, value: float) -> None:
+        """Set the dxx property."""
         self._cards[1].set_value("dxx", value)
 
     @property
@@ -437,6 +444,7 @@ class MatAddPzelectric(KeywordBase):
 
     @dyy.setter
     def dyy(self, value: float) -> None:
+        """Set the dyy property."""
         self._cards[1].set_value("dyy", value)
 
     @property
@@ -447,6 +455,7 @@ class MatAddPzelectric(KeywordBase):
 
     @dzz.setter
     def dzz(self, value: float) -> None:
+        """Set the dzz property."""
         self._cards[1].set_value("dzz", value)
 
     @property
@@ -457,6 +466,7 @@ class MatAddPzelectric(KeywordBase):
 
     @dxy.setter
     def dxy(self, value: float) -> None:
+        """Set the dxy property."""
         self._cards[1].set_value("dxy", value)
 
     @property
@@ -467,6 +477,7 @@ class MatAddPzelectric(KeywordBase):
 
     @dxz.setter
     def dxz(self, value: float) -> None:
+        """Set the dxz property."""
         self._cards[1].set_value("dxz", value)
 
     @property
@@ -477,6 +488,7 @@ class MatAddPzelectric(KeywordBase):
 
     @dyz.setter
     def dyz(self, value: float) -> None:
+        """Set the dyz property."""
         self._cards[1].set_value("dyz", value)
 
     @property
@@ -487,6 +499,7 @@ class MatAddPzelectric(KeywordBase):
 
     @px11.setter
     def px11(self, value: float) -> None:
+        """Set the px11 property."""
         self._cards[2].set_value("px11", value)
 
     @property
@@ -497,6 +510,7 @@ class MatAddPzelectric(KeywordBase):
 
     @px22.setter
     def px22(self, value: float) -> None:
+        """Set the px22 property."""
         self._cards[2].set_value("px22", value)
 
     @property
@@ -507,6 +521,7 @@ class MatAddPzelectric(KeywordBase):
 
     @px33.setter
     def px33(self, value: float) -> None:
+        """Set the px33 property."""
         self._cards[2].set_value("px33", value)
 
     @property
@@ -517,6 +532,7 @@ class MatAddPzelectric(KeywordBase):
 
     @px12.setter
     def px12(self, value: float) -> None:
+        """Set the px12 property."""
         self._cards[2].set_value("px12", value)
 
     @property
@@ -527,6 +543,7 @@ class MatAddPzelectric(KeywordBase):
 
     @px13.setter
     def px13(self, value: float) -> None:
+        """Set the px13 property."""
         self._cards[2].set_value("px13", value)
 
     @property
@@ -537,6 +554,7 @@ class MatAddPzelectric(KeywordBase):
 
     @px23.setter
     def px23(self, value: float) -> None:
+        """Set the px23 property."""
         self._cards[2].set_value("px23", value)
 
     @property
@@ -547,6 +565,7 @@ class MatAddPzelectric(KeywordBase):
 
     @py11.setter
     def py11(self, value: float) -> None:
+        """Set the py11 property."""
         self._cards[2].set_value("py11", value)
 
     @property
@@ -557,6 +576,7 @@ class MatAddPzelectric(KeywordBase):
 
     @py22.setter
     def py22(self, value: float) -> None:
+        """Set the py22 property."""
         self._cards[2].set_value("py22", value)
 
     @property
@@ -567,6 +587,7 @@ class MatAddPzelectric(KeywordBase):
 
     @py33.setter
     def py33(self, value: float) -> None:
+        """Set the py33 property."""
         self._cards[3].set_value("py33", value)
 
     @property
@@ -577,6 +598,7 @@ class MatAddPzelectric(KeywordBase):
 
     @py12.setter
     def py12(self, value: float) -> None:
+        """Set the py12 property."""
         self._cards[3].set_value("py12", value)
 
     @property
@@ -587,6 +609,7 @@ class MatAddPzelectric(KeywordBase):
 
     @px13.setter
     def px13(self, value: float) -> None:
+        """Set the px13 property."""
         self._cards[3].set_value("px13", value)
 
     @property
@@ -597,6 +620,7 @@ class MatAddPzelectric(KeywordBase):
 
     @py23.setter
     def py23(self, value: float) -> None:
+        """Set the py23 property."""
         self._cards[3].set_value("py23", value)
 
     @property
@@ -607,6 +631,7 @@ class MatAddPzelectric(KeywordBase):
 
     @pz11.setter
     def pz11(self, value: float) -> None:
+        """Set the pz11 property."""
         self._cards[3].set_value("pz11", value)
 
     @property
@@ -617,6 +642,7 @@ class MatAddPzelectric(KeywordBase):
 
     @pz22.setter
     def pz22(self, value: float) -> None:
+        """Set the pz22 property."""
         self._cards[3].set_value("pz22", value)
 
     @property
@@ -627,6 +653,7 @@ class MatAddPzelectric(KeywordBase):
 
     @pz33.setter
     def pz33(self, value: float) -> None:
+        """Set the pz33 property."""
         self._cards[3].set_value("pz33", value)
 
     @property
@@ -637,6 +664,7 @@ class MatAddPzelectric(KeywordBase):
 
     @pz12.setter
     def pz12(self, value: float) -> None:
+        """Set the pz12 property."""
         self._cards[3].set_value("pz12", value)
 
     @property
@@ -647,6 +675,7 @@ class MatAddPzelectric(KeywordBase):
 
     @pz13.setter
     def pz13(self, value: float) -> None:
+        """Set the pz13 property."""
         self._cards[4].set_value("pz13", value)
 
     @property
@@ -657,6 +686,7 @@ class MatAddPzelectric(KeywordBase):
 
     @pz23.setter
     def pz23(self, value: float) -> None:
+        """Set the pz23 property."""
         self._cards[4].set_value("pz23", value)
 
     @property
@@ -667,6 +697,7 @@ class MatAddPzelectric(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[5].set_value("xp", value)
 
     @property
@@ -677,6 +708,7 @@ class MatAddPzelectric(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[5].set_value("yp", value)
 
     @property
@@ -687,6 +719,7 @@ class MatAddPzelectric(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[5].set_value("zp", value)
 
     @property
@@ -697,6 +730,7 @@ class MatAddPzelectric(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[5].set_value("a1", value)
 
     @property
@@ -707,6 +741,7 @@ class MatAddPzelectric(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[5].set_value("a2", value)
 
     @property
@@ -717,6 +752,7 @@ class MatAddPzelectric(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[5].set_value("a3", value)
 
     @property
@@ -727,6 +763,7 @@ class MatAddPzelectric(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[6].set_value("d1", value)
 
     @property
@@ -737,6 +774,7 @@ class MatAddPzelectric(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[6].set_value("d2", value)
 
     @property
@@ -747,6 +785,7 @@ class MatAddPzelectric(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[6].set_value("d3", value)
 
     @property
@@ -757,5 +796,6 @@ class MatAddPzelectric(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
 

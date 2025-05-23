@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingTrimMerge class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingTrimMerge(KeywordBase):
     subkeyword = "FORMING_TRIM_MERGE"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingTrimMerge class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -63,6 +65,7 @@ class ControlFormingTrimMerge(KeywordBase):
 
     @imerge.setter
     def imerge(self, value: int) -> None:
+        """Set the imerge property."""
         self._cards[0].set_value("imerge", value)
 
     @property
@@ -74,5 +77,6 @@ class ControlFormingTrimMerge(KeywordBase):
 
     @gapm.setter
     def gapm(self, value: float) -> None:
+        """Set the gapm property."""
         self._cards[0].set_value("gapm", value)
 

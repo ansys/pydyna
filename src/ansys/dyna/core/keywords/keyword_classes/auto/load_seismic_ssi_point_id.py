@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadSeismicSsiPointId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSeismicSsiPointId(KeywordBase):
     subkeyword = "SEISMIC_SSI_POINT_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadSeismicSsiPointId class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -169,6 +171,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -179,6 +182,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -189,6 +193,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[1].set_value("ssid", value)
 
     @property
@@ -199,6 +204,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[1].set_value("xp", value)
 
     @property
@@ -209,6 +215,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[1].set_value("yp", value)
 
     @property
@@ -219,6 +226,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[1].set_value("zp", value)
 
     @property
@@ -229,6 +237,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @gmx.setter
     def gmx(self, value: int) -> None:
+        """Set the gmx property."""
         self._cards[1].set_value("gmx", value)
 
     @property
@@ -239,6 +248,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @gmy.setter
     def gmy(self, value: int) -> None:
+        """Set the gmy property."""
         self._cards[1].set_value("gmy", value)
 
     @property
@@ -249,6 +259,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @gmz.setter
     def gmz(self, value: int) -> None:
+        """Set the gmz property."""
         self._cards[1].set_value("gmz", value)
 
     @property
@@ -259,6 +270,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[2].set_value("sf", value)
 
     @property
@@ -269,6 +281,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[2].set_value("cid", value)
 
     @property
@@ -279,6 +292,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[2].set_value("birth", value)
 
     @property
@@ -289,6 +303,7 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[2].set_value("death", value)
 
     @property
@@ -301,8 +316,9 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @isg.setter
     def isg(self, value: int) -> None:
+        """Set the isg property."""
         if value not in [0, 1, None]:
-            raise Exception("""isg must be `None` or one of {0,1}""")
+            raise Exception("""isg must be `None` or one of {0,1}.""")
         self._cards[2].set_value("isg", value)
 
     @property
@@ -316,7 +332,8 @@ class LoadSeismicSsiPointId(KeywordBase):
 
     @igm.setter
     def igm(self, value: int) -> None:
+        """Set the igm property."""
         if value not in [0, 1, None]:
-            raise Exception("""igm must be `None` or one of {0,1}""")
+            raise Exception("""igm must be `None` or one of {0,1}.""")
         self._cards[2].set_value("igm", value)
 

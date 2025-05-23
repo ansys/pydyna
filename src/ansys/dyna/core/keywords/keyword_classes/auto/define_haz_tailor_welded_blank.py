@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineHazTailorWeldedBlank class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineHazTailorWeldedBlank(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineHazTailorWeldedBlank class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -109,6 +111,7 @@ class DefineHazTailorWeldedBlank(KeywordBase):
 
     @idtwb.setter
     def idtwb(self, value: int) -> None:
+        """Set the idtwb property."""
         self._cards[0].set_value("idtwb", value)
 
     @property
@@ -119,6 +122,7 @@ class DefineHazTailorWeldedBlank(KeywordBase):
 
     @idns.setter
     def idns(self, value: int) -> None:
+        """Set the idns property."""
         self._cards[0].set_value("idns", value)
 
     @property
@@ -129,6 +133,7 @@ class DefineHazTailorWeldedBlank(KeywordBase):
 
     @idp.setter
     def idp(self, value: int) -> None:
+        """Set the idp property."""
         self._cards[0].set_value("idp", value)
 
     @property
@@ -141,8 +146,9 @@ class DefineHazTailorWeldedBlank(KeywordBase):
 
     @ipflag.setter
     def ipflag(self, value: int) -> None:
+        """Set the ipflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""ipflag must be `None` or one of {0,1}""")
+            raise Exception("""ipflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ipflag", value)
 
     @property
@@ -155,8 +161,9 @@ class DefineHazTailorWeldedBlank(KeywordBase):
 
     @imonflag.setter
     def imonflag(self, value: int) -> None:
+        """Set the imonflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""imonflag must be `None` or one of {0,1}""")
+            raise Exception("""imonflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("imonflag", value)
 
     @property
@@ -167,5 +174,6 @@ class DefineHazTailorWeldedBlank(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

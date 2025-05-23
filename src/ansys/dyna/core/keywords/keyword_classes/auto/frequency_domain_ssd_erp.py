@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainSsdErp class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainSsdErp(KeywordBase):
     subkeyword = "DOMAIN_SSD_ERP"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainSsdErp class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -353,6 +355,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @mdmin.setter
     def mdmin(self, value: int) -> None:
+        """Set the mdmin property."""
         self._cards[0].set_value("mdmin", value)
 
     @property
@@ -363,6 +366,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @mdmax.setter
     def mdmax(self, value: int) -> None:
+        """Set the mdmax property."""
         self._cards[0].set_value("mdmax", value)
 
     @property
@@ -373,6 +377,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @fnmin.setter
     def fnmin(self, value: float) -> None:
+        """Set the fnmin property."""
         self._cards[0].set_value("fnmin", value)
 
     @property
@@ -383,6 +388,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @fnmax.setter
     def fnmax(self, value: float) -> None:
+        """Set the fnmax property."""
         self._cards[0].set_value("fnmax", value)
 
     @property
@@ -396,8 +402,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @restmd.setter
     def restmd(self, value: int) -> None:
+        """Set the restmd property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""restmd must be `None` or one of {0,1,2}""")
+            raise Exception("""restmd must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("restmd", value)
 
     @property
@@ -410,8 +417,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @restdp.setter
     def restdp(self, value: int) -> None:
+        """Set the restdp property."""
         if value not in [0, 1, None]:
-            raise Exception("""restdp must be `None` or one of {0,1}""")
+            raise Exception("""restdp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("restdp", value)
 
     @property
@@ -424,8 +432,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @lcflag.setter
     def lcflag(self, value: int) -> None:
+        """Set the lcflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""lcflag must be `None` or one of {0,1}""")
+            raise Exception("""lcflag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("lcflag", value)
 
     @property
@@ -438,8 +447,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @relatv.setter
     def relatv(self, value: int) -> None:
+        """Set the relatv property."""
         if value not in [0, 1, None]:
-            raise Exception("""relatv must be `None` or one of {0,1}""")
+            raise Exception("""relatv must be `None` or one of {0,1}.""")
         self._cards[0].set_value("relatv", value)
 
     @property
@@ -450,6 +460,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @dampf.setter
     def dampf(self, value: float) -> None:
+        """Set the dampf property."""
         self._cards[1].set_value("dampf", value)
 
     @property
@@ -460,6 +471,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @lcdam.setter
     def lcdam(self, value: int) -> None:
+        """Set the lcdam property."""
         self._cards[1].set_value("lcdam", value)
 
     @property
@@ -472,6 +484,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @lctyp.setter
     def lctyp(self, value: int) -> None:
+        """Set the lctyp property."""
         self._cards[1].set_value("lctyp", value)
 
     @property
@@ -482,6 +495,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @dmpmas.setter
     def dmpmas(self, value: float) -> None:
+        """Set the dmpmas property."""
         self._cards[1].set_value("dmpmas", value)
 
     @property
@@ -492,6 +506,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @dmpstf.setter
     def dmpstf(self, value: float) -> None:
+        """Set the dmpstf property."""
         self._cards[1].set_value("dmpstf", value)
 
     @property
@@ -504,8 +519,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @dmpflg.setter
     def dmpflg(self, value: int) -> None:
+        """Set the dmpflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""dmpflg must be `None` or one of {0,1}""")
+            raise Exception("""dmpflg must be `None` or one of {0,1}.""")
         self._cards[1].set_value("dmpflg", value)
 
     @property
@@ -516,6 +532,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @istress.setter
     def istress(self, value: int) -> None:
+        """Set the istress property."""
         self._cards[2].set_value("istress", value)
 
     @property
@@ -528,8 +545,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @memory.setter
     def memory(self, value: int) -> None:
+        """Set the memory property."""
         if value not in [0, 1, None]:
-            raise Exception("""memory must be `None` or one of {0,1}""")
+            raise Exception("""memory must be `None` or one of {0,1}.""")
         self._cards[2].set_value("memory", value)
 
     @property
@@ -540,6 +558,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @nerp.setter
     def nerp(self, value: int) -> None:
+        """Set the nerp property."""
         self._cards[2].set_value("nerp", value)
 
     @property
@@ -553,8 +572,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @strtyp.setter
     def strtyp(self, value: int) -> None:
+        """Set the strtyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""strtyp must be `None` or one of {0,1,2}""")
+            raise Exception("""strtyp must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("strtyp", value)
 
     @property
@@ -565,6 +585,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @nout.setter
     def nout(self, value: int) -> None:
+        """Set the nout property."""
         self._cards[2].set_value("nout", value)
 
     @property
@@ -580,8 +601,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @notyp.setter
     def notyp(self, value: int) -> None:
+        """Set the notyp property."""
         if value not in [0, 1, 2, 3, -2, None]:
-            raise Exception("""notyp must be `None` or one of {0,1,2,3,-2}""")
+            raise Exception("""notyp must be `None` or one of {0,1,2,3,-2}.""")
         self._cards[2].set_value("notyp", value)
 
     @property
@@ -594,8 +616,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @nova.setter
     def nova(self, value: int) -> None:
+        """Set the nova property."""
         if value not in [0, 1, None]:
-            raise Exception("""nova must be `None` or one of {0,1}""")
+            raise Exception("""nova must be `None` or one of {0,1}.""")
         self._cards[2].set_value("nova", value)
 
     @property
@@ -606,6 +629,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[3].set_value("ro", value)
 
     @property
@@ -616,6 +640,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[3].set_value("c", value)
 
     @property
@@ -626,6 +651,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @erprlf.setter
     def erprlf(self, value: float) -> None:
+        """Set the erprlf property."""
         self._cards[3].set_value("erprlf", value)
 
     @property
@@ -636,6 +662,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @erpref.setter
     def erpref(self, value: float) -> None:
+        """Set the erpref property."""
         self._cards[3].set_value("erpref", value)
 
     @property
@@ -648,8 +675,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @radeff.setter
     def radeff(self, value: int) -> None:
+        """Set the radeff property."""
         if value not in [0, 1, None]:
-            raise Exception("""radeff must be `None` or one of {0,1}""")
+            raise Exception("""radeff must be `None` or one of {0,1}.""")
         self._cards[3].set_value("radeff", value)
 
     @property
@@ -660,6 +688,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[4].set_value("pid", value)
 
     @property
@@ -673,8 +702,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @ptyp.setter
     def ptyp(self, value: int) -> None:
+        """Set the ptyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ptyp must be `None` or one of {0,1,2}""")
+            raise Exception("""ptyp must be `None` or one of {0,1,2}.""")
         self._cards[4].set_value("ptyp", value)
 
     @property
@@ -685,6 +715,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[5].set_value("nid", value)
 
     @property
@@ -698,8 +729,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @ntyp.setter
     def ntyp(self, value: int) -> None:
+        """Set the ntyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""ntyp must be `None` or one of {0,1,2}""")
+            raise Exception("""ntyp must be `None` or one of {0,1,2}.""")
         self._cards[5].set_value("ntyp", value)
 
     @property
@@ -714,8 +746,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""dof must be `None` or one of {1,2,3,4}""")
+            raise Exception("""dof must be `None` or one of {1,2,3,4}.""")
         self._cards[5].set_value("dof", value)
 
     @property
@@ -741,8 +774,9 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
+        """Set the vad property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, None]:
-            raise Exception("""vad must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14}""")
+            raise Exception("""vad must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14}.""")
         self._cards[5].set_value("vad", value)
 
     @property
@@ -753,6 +787,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @lc1.setter
     def lc1(self, value: int) -> None:
+        """Set the lc1 property."""
         self._cards[5].set_value("lc1", value)
 
     @property
@@ -763,6 +798,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @lc2.setter
     def lc2(self, value: int) -> None:
+        """Set the lc2 property."""
         self._cards[5].set_value("lc2", value)
 
     @property
@@ -773,6 +809,7 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[5].set_value("sf", value)
 
     @property
@@ -783,5 +820,6 @@ class FrequencyDomainSsdErp(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[5].set_value("vid", value)
 

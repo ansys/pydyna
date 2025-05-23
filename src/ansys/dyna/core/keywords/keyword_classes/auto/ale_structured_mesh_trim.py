@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleStructuredMeshTrim class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleStructuredMeshTrim(KeywordBase):
     subkeyword = "STRUCTURED_MESH_TRIM"
 
     def __init__(self, **kwargs):
+        """Initialize the AleStructuredMeshTrim class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -107,6 +109,7 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @mshid.setter
     def mshid(self, value: int) -> None:
+        """Set the mshid property."""
         self._cards[0].set_value("mshid", value)
 
     @property
@@ -118,8 +121,9 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
+        """Set the option property."""
         if value not in ["PARTSET", "SEGSET", "PLANE", "CYLINDER", "BOXCOR", "BOXCPT", "SPHERE", None]:
-            raise Exception("""option must be `None` or one of {"PARTSET","SEGSET","PLANE","CYLINDER","BOXCOR","BOXCPT","SPHERE"}""")
+            raise Exception("""option must be `None` or one of {"PARTSET","SEGSET","PLANE","CYLINDER","BOXCOR","BOXCPT","SPHERE"}.""")
         self._cards[0].set_value("option", value)
 
     @property
@@ -132,8 +136,9 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @oper.setter
     def oper(self, value: int) -> None:
+        """Set the oper property."""
         if value not in [0, 1, None]:
-            raise Exception("""oper must be `None` or one of {0,1}""")
+            raise Exception("""oper must be `None` or one of {0,1}.""")
         self._cards[0].set_value("oper", value)
 
     @property
@@ -147,8 +152,9 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @ioutin.setter
     def ioutin(self, value: int) -> None:
+        """Set the ioutin property."""
         if value not in [0, 1, None]:
-            raise Exception("""ioutin must be `None` or one of {0,1}""")
+            raise Exception("""ioutin must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ioutin", value)
 
     @property
@@ -159,6 +165,7 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -171,6 +178,7 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @dist.setter
     def dist(self, value: float) -> None:
+        """Set the dist property."""
         self._cards[0].set_value("dist", value)
 
     @property
@@ -181,6 +189,7 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @e3.setter
     def e3(self, value: float) -> None:
+        """Set the e3 property."""
         self._cards[0].set_value("e3", value)
 
     @property
@@ -191,5 +200,6 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @e4.setter
     def e4(self, value: float) -> None:
+        """Set the e4 property."""
         self._cards[0].set_value("e4", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat001 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat001(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat001 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -118,6 +120,7 @@ class Mat001(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -128,6 +131,7 @@ class Mat001(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -138,6 +142,7 @@ class Mat001(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -148,6 +153,7 @@ class Mat001(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -158,6 +164,7 @@ class Mat001(KeywordBase):
 
     @da.setter
     def da(self, value: float) -> None:
+        """Set the da property."""
         self._cards[0].set_value("da", value)
 
     @property
@@ -168,6 +175,7 @@ class Mat001(KeywordBase):
 
     @db.setter
     def db(self, value: float) -> None:
+        """Set the db property."""
         self._cards[0].set_value("db", value)
 
     @property
@@ -178,5 +186,6 @@ class Mat001(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 

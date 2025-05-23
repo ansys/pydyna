@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleBurnSwitchMmg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleBurnSwitchMmg(KeywordBase):
     subkeyword = "BURN_SWITCH_MMG"
 
     def __init__(self, **kwargs):
+        """Initialize the AleBurnSwitchMmg class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -245,6 +247,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @mmgfr.setter
     def mmgfr(self, value: int) -> None:
+        """Set the mmgfr property."""
         self._cards[0].set_value("mmgfr", value)
 
     @property
@@ -255,6 +258,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @mmgto.setter
     def mmgto(self, value: int) -> None:
+        """Set the mmgto property."""
         self._cards[0].set_value("mmgto", value)
 
     @property
@@ -265,6 +269,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @nvarline.setter
     def nvarline(self, value: int) -> None:
+        """Set the nvarline property."""
         self._cards[0].set_value("nvarline", value)
 
     @property
@@ -276,6 +281,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @react.setter
     def react(self, value: int) -> None:
+        """Set the react property."""
         self._cards[1].set_value("react", value)
 
     @property
@@ -286,6 +292,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @igni.setter
     def igni(self, value: int) -> None:
+        """Set the igni property."""
         self._cards[2].set_value("igni", value)
 
     @property
@@ -296,6 +303,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @igniv.setter
     def igniv(self, value: int) -> None:
+        """Set the igniv property."""
         self._cards[2].set_value("igniv", value)
 
     @property
@@ -309,8 +317,9 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @ignivf.setter
     def ignivf(self, value: int) -> None:
+        """Set the ignivf property."""
         if value not in [0, 1, None]:
-            raise Exception("""ignivf must be `None` or one of {0,1}""")
+            raise Exception("""ignivf must be `None` or one of {0,1}.""")
         self._cards[2].set_value("ignivf", value)
 
     @property
@@ -352,6 +361,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @var.setter
     def var(self, value: int) -> None:
+        """Set the var property."""
         self._cards[3].set_value("var", value)
 
     @property
@@ -393,6 +403,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @var.setter
     def var(self, value: int) -> None:
+        """Set the var property."""
         self._cards[3].set_value("var", value)
 
     @property
@@ -434,6 +445,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @var.setter
     def var(self, value: int) -> None:
+        """Set the var property."""
         self._cards[3].set_value("var", value)
 
     @property
@@ -475,6 +487,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @var.setter
     def var(self, value: int) -> None:
+        """Set the var property."""
         self._cards[3].set_value("var", value)
 
     @property
@@ -516,6 +529,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @var.setter
     def var(self, value: int) -> None:
+        """Set the var property."""
         self._cards[3].set_value("var", value)
 
     @property
@@ -557,6 +571,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @var.setter
     def var(self, value: int) -> None:
+        """Set the var property."""
         self._cards[3].set_value("var", value)
 
     @property
@@ -598,6 +613,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @var.setter
     def var(self, value: int) -> None:
+        """Set the var property."""
         self._cards[3].set_value("var", value)
 
     @property
@@ -639,6 +655,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @var.setter
     def var(self, value: int) -> None:
+        """Set the var property."""
         self._cards[3].set_value("var", value)
 
     @property
@@ -649,6 +666,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @par.setter
     def par(self, value: float) -> None:
+        """Set the par property."""
         self._cards[4].set_value("par", value)
 
     @property
@@ -659,6 +677,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @par.setter
     def par(self, value: float) -> None:
+        """Set the par property."""
         self._cards[4].set_value("par", value)
 
     @property
@@ -669,6 +688,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @par.setter
     def par(self, value: float) -> None:
+        """Set the par property."""
         self._cards[4].set_value("par", value)
 
     @property
@@ -679,6 +699,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @par.setter
     def par(self, value: float) -> None:
+        """Set the par property."""
         self._cards[4].set_value("par", value)
 
     @property
@@ -689,6 +710,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @par.setter
     def par(self, value: float) -> None:
+        """Set the par property."""
         self._cards[4].set_value("par", value)
 
     @property
@@ -699,6 +721,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @par.setter
     def par(self, value: float) -> None:
+        """Set the par property."""
         self._cards[4].set_value("par", value)
 
     @property
@@ -709,6 +732,7 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @par.setter
     def par(self, value: float) -> None:
+        """Set the par property."""
         self._cards[4].set_value("par", value)
 
     @property
@@ -719,5 +743,6 @@ class AleBurnSwitchMmg(KeywordBase):
 
     @par.setter
     def par(self, value: float) -> None:
+        """Set the par property."""
         self._cards[4].set_value("par", value)
 

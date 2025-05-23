@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedTiedNodesFailure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedTiedNodesFailure(KeywordBase):
     subkeyword = "TIED_NODES_FAILURE"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedTiedNodesFailure class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -70,6 +72,7 @@ class ConstrainedTiedNodesFailure(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -80,6 +83,7 @@ class ConstrainedTiedNodesFailure(KeywordBase):
 
     @eppf.setter
     def eppf(self, value: float) -> None:
+        """Set the eppf property."""
         self._cards[0].set_value("eppf", value)
 
     @property
@@ -92,7 +96,8 @@ class ConstrainedTiedNodesFailure(KeywordBase):
 
     @etype.setter
     def etype(self, value: int) -> None:
+        """Set the etype property."""
         if value not in [0, 1, None]:
-            raise Exception("""etype must be `None` or one of {0,1}""")
+            raise Exception("""etype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("etype", value)
 

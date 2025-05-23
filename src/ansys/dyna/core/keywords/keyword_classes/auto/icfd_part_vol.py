@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdPartVol class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -36,6 +37,7 @@ class IcfdPartVol(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdPartVol class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -106,6 +108,7 @@ class IcfdPartVol(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -116,6 +119,7 @@ class IcfdPartVol(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -126,16 +130,17 @@ class IcfdPartVol(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
     def nodes(self):
-        '''Gets the table of nodes'''
+        """Get the table of nodes."""
         return self._cards[1].table
 
     @nodes.setter
     def nodes(self, df):
-        '''sets nodes from the dataframe df'''
+        """Set nodes from the dataframe df"""
         self._cards[1].table = df
 
     @property
@@ -146,5 +151,6 @@ class IcfdPartVol(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 

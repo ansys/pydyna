@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Algorithms to compute 4x4 transformation matrices from a *DEFINE_TRANSFORMATION keyword."""
+"""Algorithms to compute 4x4 transformation matrices from a ``*DEFINE_TRANSFORMATION`` keyword."""
 
 import math
 import typing

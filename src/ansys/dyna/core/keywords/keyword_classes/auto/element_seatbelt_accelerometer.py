@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementSeatbeltAccelerometer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementSeatbeltAccelerometer(KeywordBase):
     subkeyword = "SEATBELT_ACCELEROMETER"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementSeatbeltAccelerometer class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -102,6 +104,7 @@ class ElementSeatbeltAccelerometer(KeywordBase):
 
     @sbacid.setter
     def sbacid(self, value: int) -> None:
+        """Set the sbacid property."""
         self._cards[0].set_value("sbacid", value)
 
     @property
@@ -112,6 +115,7 @@ class ElementSeatbeltAccelerometer(KeywordBase):
 
     @nid1.setter
     def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
         self._cards[0].set_value("nid1", value)
 
     @property
@@ -122,6 +126,7 @@ class ElementSeatbeltAccelerometer(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[0].set_value("nid2", value)
 
     @property
@@ -132,6 +137,7 @@ class ElementSeatbeltAccelerometer(KeywordBase):
 
     @nid3.setter
     def nid3(self, value: int) -> None:
+        """Set the nid3 property."""
         self._cards[0].set_value("nid3", value)
 
     @property
@@ -150,8 +156,9 @@ class ElementSeatbeltAccelerometer(KeywordBase):
 
     @igrav.setter
     def igrav(self, value: int) -> None:
+        """Set the igrav property."""
         if value not in [0, -6, -5, -5, -3, -1, 1, None]:
-            raise Exception("""igrav must be `None` or one of {0,-6,-5,-5,-3,-1,1}""")
+            raise Exception("""igrav must be `None` or one of {0,-6,-5,-5,-3,-1,1}.""")
         self._cards[0].set_value("igrav", value)
 
     @property
@@ -164,8 +171,9 @@ class ElementSeatbeltAccelerometer(KeywordBase):
 
     @intopt.setter
     def intopt(self, value: int) -> None:
+        """Set the intopt property."""
         if value not in [0, 1, None]:
-            raise Exception("""intopt must be `None` or one of {0,1}""")
+            raise Exception("""intopt must be `None` or one of {0,1}.""")
         self._cards[0].set_value("intopt", value)
 
     @property
@@ -176,5 +184,6 @@ class ElementSeatbeltAccelerometer(KeywordBase):
 
     @mass.setter
     def mass(self, value: float) -> None:
+        """Set the mass property."""
         self._cards[0].set_value("mass", value)
 
