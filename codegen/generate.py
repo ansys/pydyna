@@ -185,12 +185,10 @@ def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.Li
 
     return keywords
 
+
 def generate_index_rst(autodoc_path: str, title: str = "Keyword Classes") -> None:
     # List all .rst files (excluding index.rst itself)
-    rst_files = sorted([
-        f for f in os.listdir(autodoc_path)
-        if f.endswith(".rst") and f != "index.rst"
-    ])
+    rst_files = sorted([f for f in os.listdir(autodoc_path) if f.endswith(".rst") and f != "index.rst"])
     # Title and underline
     index_content = f"{title}\n{'=' * len(title)}\n\n"
     index_content += ".. toctree::\n"
@@ -205,8 +203,8 @@ def generate_index_rst(autodoc_path: str, title: str = "Keyword Classes") -> Non
     with open(index_path, "w", encoding="utf-8") as f:
         f.write(index_content)
 
-def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None,
-                     autodoc_output_path: str = "") -> None:
+
+def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autodoc_output_path: str = "") -> None:
     """Generates the keyword classes, importer, and type-mapper
     if kwd_name is not None, this only generates that particular keyword class
     """
@@ -268,6 +266,7 @@ def run_codegen(args):
         print(f"Generating code for {kwd}")
         generate_classes(output, autodoc_path, kwd)
     generate_index_rst(autodoc_path)
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run pydyna codegen")

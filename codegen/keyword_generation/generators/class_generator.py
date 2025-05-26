@@ -389,9 +389,7 @@ def generate_class(env: Environment, lib_path: str, item: typing.Dict, autodoc_p
         if autodoc_path:
             os.mkdir(autodoc_path) if not os.path.exists(autodoc_path) else None
             rst_template = env.get_template("autodoc_rst.jinja")
-            rst_content = rst_template.render(
-                classname=classname,
-                filename=fixed_keyword.lower())
+            rst_content = rst_template.render(classname=classname, filename=fixed_keyword.lower())
             rst_filepath = os.path.join(autodoc_path, f"{fixed_keyword.lower()}.rst")
             with open(rst_filepath, "w", encoding="utf-8") as rst_file:
                 rst_file.write(rst_content)
