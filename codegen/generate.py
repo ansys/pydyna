@@ -220,7 +220,7 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None,
             continue
         if data_model.is_aliased(name):
             continue
-    generate_class(env, lib_path, item, autodoc_output_path)
+        generate_class(env, lib_path, item, autodoc_output_path)
     keywords_list.extend(get_undefined_alias_keywords(keywords_list))
     if kwd_name == None:
         generate_entrypoints(env, lib_path, keywords_list)
