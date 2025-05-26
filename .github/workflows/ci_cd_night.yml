@@ -37,7 +37,7 @@ jobs:
       - name: "Build documentation"
         uses: ./.github/actions/doc-build
         with:
-          # build-autokeywords-api: "True"
+          build-autokeywords-api: "True"
           pdf-pool-size: 15000000
           pdf-string-vacancies: 90000
           pdf-max-strings: 600000

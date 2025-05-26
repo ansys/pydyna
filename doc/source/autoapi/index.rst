@@ -13,5 +13,5 @@ to interact with them programmatically.
    {% if (page.top_level_object or page.name.split('.') | length == length) and page.display %}
    <span class="nf nf-md-package"></span> {{ page.name }}<{{ page.include_path }}>
    {% endif %}
-   {% endfor %}
-   <span class="nf nf-md-package"></span> Auto Keyword classes<../_autosummary/index>
+   {% endfor -%}
+   <span class="nf nf-md-package"></span> Auto Keyword classes<../keywords/index>

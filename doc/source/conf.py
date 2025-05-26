@@ -90,7 +90,7 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst", "keyword_classes/**"]
+exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst", "keyword_classes/**", "keywords/**"]
 
 # make rst_epilog a variable, so you can add other epilog parts to it
 rst_epilog = ""
@@ -148,9 +148,10 @@ if not BUILD_API:
 
 suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils"]
 
-# BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower() == "true"
-# if BUILD_AUTOKEYWORS_API:
-#     html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
+BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower() == "true"
+if BUILD_AUTOKEYWORS_API:
+    html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
+    exclude_patterns.remove("keywords/**")
 
 BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
 if BUILD_EXAMPLES is True:
