@@ -82,14 +82,14 @@ doc = [
     "sphinx-autodoc-typehints==3.1.0",
     "ansys-sphinx-theme==1.4.4",
     "pypandoc==1.15",
-    "nbsphinx==0.9.6",
+    "nbsphinx==0.9.7",
 
 
     "ipywidgets==8.1.7",
     "joblib==1.5.0",
     "scikit-learn==1.6.1",
     "ipython==8.36.0",
-    "jupyterlab==4.4.2",
+    "jupyterlab==4.4.3",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.6.0",
     "pyvista==0.45.1",
