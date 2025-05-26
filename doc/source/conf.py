@@ -129,10 +129,13 @@ html_theme_options = {
     "use_edit_page_button": True,
     "ansys_sphinx_theme_autoapi": {
         "ignore": [
-            "*core/keywords/keyword_classes/auto*",
+           "*core/keywords/keyword_classes/auto*",
         ],
         "output": "api",
         # "templates": "autoapi/"
+        # "options": ["members"],
+        # "own_page-level": "module",
+        
     },
 }
 
@@ -150,9 +153,9 @@ if not BUILD_API:
 
 suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils"]
 
-BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower() == "true"
-if BUILD_AUTOKEYWORS_API:
-    html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
+# BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower() == "true"
+# if BUILD_AUTOKEYWORS_API:
+#     html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
 
 BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
 if BUILD_EXAMPLES is True:
@@ -192,6 +195,8 @@ jinja_contexts = {
         "build_examples": BUILD_EXAMPLES,
     },
 }
+
+# def 
 
 
 def skip_run_subpackage(app, what, name, obj, skip, options):
