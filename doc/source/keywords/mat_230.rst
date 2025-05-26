@@ -1,0 +1,7 @@
+Mat230
+======
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_230
+   :members:
+   :undoc-members:
+   :show-inheritance:

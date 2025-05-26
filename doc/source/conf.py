@@ -131,14 +131,9 @@ html_theme_options = {
         "ignore": [
            "*core/keywords/keyword_classes/auto*",
         ],
-        "output": "api",
-        # "templates": "autoapi/"
-        # "options": ["members"],
-        # "own_page-level": "module",
-        
+        "output": "api",        
     },
 }
-
 
 # static path
 html_static_path = ['_static']

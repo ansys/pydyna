@@ -74,6 +74,3 @@ PyDYNA documentation  |version|
        {% endif %}
        contributing
        changelog
-
-
-.. autoapimodule:: ansys.dyna.core.keywords.keyword_classes.auto

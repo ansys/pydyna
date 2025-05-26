@@ -1,0 +1,7 @@
+Mat143
+======
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_143
+   :members:
+   :undoc-members:
+   :show-inheritance:

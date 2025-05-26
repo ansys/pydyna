@@ -1,0 +1,7 @@
+Mat082
+======
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_082
+   :members:
+   :undoc-members:
+   :show-inheritance:

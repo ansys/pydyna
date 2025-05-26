@@ -1,0 +1,7 @@
+ChangeRigidBodyStopper
+======================
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.change_rigid_body_stopper
+   :members:
+   :undoc-members:
+   :show-inheritance:

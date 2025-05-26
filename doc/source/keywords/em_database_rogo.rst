@@ -1,0 +1,7 @@
+EmDatabaseRogo
+==============
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_database_rogo
+   :members:
+   :undoc-members:
+   :show-inheritance:

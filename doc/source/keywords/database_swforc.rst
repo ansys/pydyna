@@ -1,0 +1,7 @@
+DatabaseSwforc
+==============
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_swforc
+   :members:
+   :undoc-members:
+   :show-inheritance:

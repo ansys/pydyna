@@ -185,14 +185,40 @@ def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.Li
 
     return keywords
 
+def generate_index_rst(autodoc_path: str, title: str = "Keyword Classes") -> None:
+    # List all .rst files (excluding index.rst itself)
+    rst_files = sorted([
+        f for f in os.listdir(autodoc_path)
+        if f.endswith(".rst") and f != "index.rst"
+    ])
+    
+    # Title and underline
+    index_content = f"{title}\n{'=' * len(title)}\n\n"
+    index_content += ".. toctree::\n"
+    index_content += "   :maxdepth: 1\n"
+    index_content += "   :caption: Contents:\n\n"
 
-def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None) -> None:
+    # Add each file (without extension)
+    for rst_file in rst_files:
+        filename = os.path.splitext(rst_file)[0]
+        index_content += f"   {filename}\n"
+
+    # Write index.rst
+    index_path = os.path.join(autodoc_path, "index.rst")
+    with open(index_path, "w", encoding="utf-8") as f:
+        f.write(index_content)
+
+
+
+def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, 
+                     autodoc_output_path: str = "") -> None:
     """Generates the keyword classes, importer, and type-mapper
     if kwd_name is not None, this only generates that particular keyword class
     """
     env = Environment(loader=get_loader(), trim_blocks=True, lstrip_blocks=True)
     if not os.path.exists(os.path.join(lib_path, "auto")):
         os.mkdir(os.path.join(lib_path, "auto"))
+        
     keywords_list = get_keywords_to_generate(kwd_name)
     for item in keywords_list:
         name = item["name"]
@@ -200,7 +226,7 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None) -> No
             continue
         if data_model.is_aliased(name):
             continue
-        generate_class(env, lib_path, item)
+        generate_class(env, lib_path, item, autodoc_output_path)
     keywords_list.extend(get_undefined_alias_keywords(keywords_list))
     if kwd_name == None:
         generate_entrypoints(env, lib_path, keywords_list)
@@ -224,6 +250,14 @@ def load_inputs(this_folder, args):
 def run_codegen(args):
     output = args.output
     this_folder = get_this_folder()
+    autodoc_path = args.autodoc_path
+    if not autodoc_path:
+        autodoc_path = this_folder.parent / "doc" / "source" / "keywords"
+    if not os.path.exists(autodoc_path):
+        os.makedirs(autodoc_path)
+        
+    autodoc_path = str(autodoc_path.resolve())
+        
     if args.output == "":
         output = this_folder.parent / "src" / "ansys" / "dyna" / "core" / "keywords" / "keyword_classes"
         output = str(output.resolve())
@@ -232,16 +266,35 @@ def run_codegen(args):
     if args.clean:
         clean(output)
         return
-
+    
     load_inputs(this_folder, args)
     if args.keyword == "":
         kwd = None
         print(f"Generating code for all keywords")
-        generate_classes(output)
+        generate_classes(output, autodoc_output_path=autodoc_path)
     else:
         kwd = args.keyword
         print(f"Generating code for {kwd}")
-        generate_classes(output, kwd)
+        generate_classes(output, autodoc_path, kwd)
+    generate_index_rst(autodoc_path)
+        
+    
+        
+def generate_autodoc_rst(env, docs_output_path: str, item: typing.Dict) -> None:
+    """Generate the autodoc .rst file for a keyword class."""
+    template = env.get_template("autodoc_rst.jinja")
+    rendered = template.render(
+        classname=item["classname"],
+        filename=item["filename"]
+    )
+    rst_filename = f"{item['filename']}.rst"
+    rst_path = os.path.join(docs_output_path, rst_filename)
+
+    os.makedirs(docs_output_path, exist_ok=True)
+
+    with open(rst_path, "w", encoding="utf-8") as f:
+        f.write(rendered)
+
 
 
 def parse_args():
@@ -275,6 +328,12 @@ def parse_args():
         "--additional-cards",
         default="",
         help="Path to additional cards file, defaults to additional-cards.json in the same folder as this file.",
+    )
+    parser.add_argument(
+        "autodoc_path",
+        default="",
+        nargs="?",
+        help="Path to the autodoc output folder. Defaults to doc/source/keywords.",
     )
     return parser.parse_args()
 
