@@ -17,6 +17,6 @@ to interact with them programmatically.
 
 .. toctree::
    :titlesonly:
-   :maxdepth: 3
+   :maxdepth: 1
    
    <span class="nf nf-md-package"></span> Auto Keyword classes<../_autosummary/index>
