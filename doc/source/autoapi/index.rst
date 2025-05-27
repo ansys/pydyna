@@ -14,4 +14,4 @@ to interact with them programmatically.
    <span class="nf nf-md-package"></span> {{ page.name }}<{{ page.include_path }}>
    {% endif %}
    {% endfor -%}
-   <span class="nf nf-md-package"></span> Auto Keyword classes<../keywords/index>
+   <span class="nf nf-md-package"></span> Auto Keyword classes<../_autosummary/index>
