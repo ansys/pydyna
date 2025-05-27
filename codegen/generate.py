@@ -185,6 +185,7 @@ def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.Li
 
     return keywords
 
+
 def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autodoc_output_path: str = "") -> None:
     """Generates the keyword classes, importer, and type-mapper
     if kwd_name is not None, this only generates that particular keyword class
@@ -256,6 +257,7 @@ def run_codegen(args):
         kwd = args.keyword
         print(f"Generating code for {kwd}")
         generate_classes(output, autodoc_path, kwd)
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run pydyna codegen")
