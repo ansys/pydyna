@@ -14,9 +14,9 @@ to interact with them programmatically.
    <span class="nf nf-md-package"></span> {{ page.name }}<{{ page.include_path }}>
    {% endif %}
    {% endfor %}
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   
    <span class="nf nf-md-package"></span> Auto Keyword classes<../_autosummary/index>
+
+..    :titlesonly:
+..    :maxdepth: 1
+   
+..    <span class="nf nf-md-package"></span> Auto Keyword classes<../_autosummary/index>
