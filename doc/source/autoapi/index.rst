@@ -15,8 +15,3 @@ to interact with them programmatically.
    {% endif %}
    {% endfor %}
    <span class="nf nf-md-package"></span> Auto Keyword classes<../_autosummary/index>
-
-..    :titlesonly:
-..    :maxdepth: 1
-   
-..    <span class="nf nf-md-package"></span> Auto Keyword classes<../_autosummary/index>
