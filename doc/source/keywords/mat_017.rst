@@ -1,7 +1,0 @@
-Mat017
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_017
-   :members:
-   :undoc-members:
-   :show-inheritance:

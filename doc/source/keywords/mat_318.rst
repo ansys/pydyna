@@ -1,7 +1,0 @@
-Mat318
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_318
-   :members:
-   :undoc-members:
-   :show-inheritance:

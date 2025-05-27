@@ -1,7 +1,0 @@
-Mat091
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_091
-   :members:
-   :undoc-members:
-   :show-inheritance:

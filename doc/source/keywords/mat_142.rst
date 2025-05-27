@@ -1,7 +1,0 @@
-Mat142
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_142
-   :members:
-   :undoc-members:
-   :show-inheritance:

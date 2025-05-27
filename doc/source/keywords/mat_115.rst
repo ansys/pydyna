@@ -1,7 +1,0 @@
-Mat115
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_115
-   :members:
-   :undoc-members:
-   :show-inheritance:

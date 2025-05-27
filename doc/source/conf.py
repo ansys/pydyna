@@ -151,7 +151,6 @@ suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docuti
 BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower() == "true"
 if BUILD_AUTOKEYWORS_API:
     html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
-    exclude_patterns.remove("keywords/**")
 
 BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
 if BUILD_EXAMPLES is True:

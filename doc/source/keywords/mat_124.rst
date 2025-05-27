@@ -1,7 +1,0 @@
-Mat124
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_124
-   :members:
-   :undoc-members:
-   :show-inheritance:

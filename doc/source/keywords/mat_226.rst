@@ -1,7 +1,0 @@
-Mat226
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_226
-   :members:
-   :undoc-members:
-   :show-inheritance:

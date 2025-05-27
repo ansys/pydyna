@@ -1,7 +1,0 @@
-Mat248
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_248
-   :members:
-   :undoc-members:
-   :show-inheritance:

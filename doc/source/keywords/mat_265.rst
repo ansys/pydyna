@@ -1,7 +1,0 @@
-Mat265
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_265
-   :members:
-   :undoc-members:
-   :show-inheritance:

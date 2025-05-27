@@ -208,6 +208,7 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autod
     """Generates the keyword classes, importer, and type-mapper
     if kwd_name is not None, this only generates that particular keyword class
     """
+    autodoc_entries = []
     env = Environment(loader=get_loader(), trim_blocks=True, lstrip_blocks=True)
     if not os.path.exists(os.path.join(lib_path, "auto")):
         os.mkdir(os.path.join(lib_path, "auto"))
@@ -218,7 +219,16 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autod
             continue
         if data_model.is_aliased(name):
             continue
-        generate_class(env, lib_path, item, autodoc_output_path)
+        classname, filename = generate_class(env, lib_path, item, autodoc_output_path)
+        autodoc_entries.append((classname, filename))
+        
+    if autodoc_output_path:
+        os.makedirs(autodoc_output_path, exist_ok=True)
+        rst_template = env.get_template("autodoc_rst.jinja")
+        combined_rst = rst_template.render(entries=autodoc_entries)
+        combined_filepath = os.path.join(autodoc_output_path, "all_keywords.rst")
+        with open(combined_filepath, "w", encoding="utf-8") as f:
+            f.write(combined_rst)
     keywords_list.extend(get_undefined_alias_keywords(keywords_list))
     if kwd_name == None:
         generate_entrypoints(env, lib_path, keywords_list)
@@ -244,7 +254,7 @@ def run_codegen(args):
     this_folder = get_this_folder()
     autodoc_path = args.autodoc_path
     if not autodoc_path:
-        autodoc_path = this_folder.parent / "doc" / "source" / "keywords"
+        autodoc_path = this_folder.parent / "doc" / "source" / "_autosummary"
     if not os.path.exists(autodoc_path):
         os.makedirs(autodoc_path)
     autodoc_path = str(autodoc_path.resolve())
@@ -265,7 +275,7 @@ def run_codegen(args):
         kwd = args.keyword
         print(f"Generating code for {kwd}")
         generate_classes(output, autodoc_path, kwd)
-    generate_index_rst(autodoc_path)
+    # generate_index_rst(autodoc_path)
 
 
 def parse_args():

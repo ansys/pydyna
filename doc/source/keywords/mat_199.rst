@@ -1,7 +1,0 @@
-Mat199
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_199
-   :members:
-   :undoc-members:
-   :show-inheritance:

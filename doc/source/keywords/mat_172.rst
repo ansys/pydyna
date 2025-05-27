@@ -1,7 +1,0 @@
-Mat172
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_172
-   :members:
-   :undoc-members:
-   :show-inheritance:

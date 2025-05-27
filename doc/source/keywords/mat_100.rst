@@ -1,7 +1,0 @@
-Mat100
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_100
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -1,7 +1,0 @@
-Mat232
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_232
-   :members:
-   :undoc-members:
-   :show-inheritance:

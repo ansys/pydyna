@@ -1,7 +1,0 @@
-Mat033
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_033
-   :members:
-   :undoc-members:
-   :show-inheritance:

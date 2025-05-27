@@ -1,7 +1,0 @@
-ConstrainedJointCoorConstantVelocity
-====================================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_joint_coor_constant_velocity
-   :members:
-   :undoc-members:
-   :show-inheritance:

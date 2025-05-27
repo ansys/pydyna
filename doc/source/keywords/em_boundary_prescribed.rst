@@ -1,7 +1,0 @@
-EmBoundaryPrescribed
-====================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_boundary_prescribed
-   :members:
-   :undoc-members:
-   :show-inheritance:

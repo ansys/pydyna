@@ -1,7 +1,0 @@
-Eos008
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.eos_008
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -1,7 +1,0 @@
-Mat041050
-=========
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_041_050
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -1,7 +1,0 @@
-Mat072R3
-========
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_072r3
-   :members:
-   :undoc-members:
-   :show-inheritance:

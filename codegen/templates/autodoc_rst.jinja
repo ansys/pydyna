@@ -1,7 +1,15 @@
+.. _autodoc_all:
+
+===========================
+All Keyword Class Summaries
+===========================
+
+{% for classname, filename in entries %}
+
 {{ classname }}
 {{ "=" * classname|length }}
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.{{ filename }}
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.{{ filename }} 
+    :members:
+
+{% endfor %}
