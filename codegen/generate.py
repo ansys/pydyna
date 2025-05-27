@@ -221,7 +221,7 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autod
             continue
         classname, filename = generate_class(env, lib_path, item, autodoc_output_path)
         autodoc_entries.append((classname, filename))
-        
+
     if autodoc_output_path:
         os.makedirs(autodoc_output_path, exist_ok=True)
         rst_template = env.get_template("autodoc_rst.jinja")
