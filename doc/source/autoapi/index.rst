@@ -13,5 +13,10 @@ to interact with them programmatically.
    {% if (page.top_level_object or page.name.split('.') | length == length) and page.display %}
    <span class="nf nf-md-package"></span> {{ page.name }}<{{ page.include_path }}>
    {% endif %}
-   {% endfor -%}
+   {% endfor %}
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+   
    <span class="nf nf-md-package"></span> Auto Keyword classes<../_autosummary/index>
