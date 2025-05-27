@@ -90,7 +90,7 @@ language = "en"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst", "keyword_classes/**", "keywords/**"]
+exclude_patterns = ["_build", "sphinx_boogergreen_theme_1", "Thumbs.db", ".DS_Store", "*.txt", "links.rst", "keyword_classes/**"]
 
 # make rst_epilog a variable, so you can add other epilog parts to it
 rst_epilog = ""
@@ -190,9 +190,6 @@ jinja_contexts = {
         "build_examples": BUILD_EXAMPLES,
     },
 }
-
-# def 
-
 
 def skip_run_subpackage(app, what, name, obj, skip, options):
     """Skip specific members of the 'run' subpackage during documentation generation.

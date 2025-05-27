@@ -256,7 +256,7 @@ def run_codegen(args):
     else:
         kwd = args.keyword
         print(f"Generating code for {kwd}")
-        generate_classes(output, autodoc_path, kwd)
+        generate_classes(output, kwd, autodoc_output_path=autodoc_path)
 
 
 def parse_args():
@@ -295,7 +295,7 @@ def parse_args():
         "autodoc_path",
         default="",
         nargs="?",
-        help="Path to the autodoc output folder. Defaults to doc/source/keywords.",
+        help="Path to the autodoc output folder. Defaults to doc/source/_autosummary.",
     )
     return parser.parse_args()
 
