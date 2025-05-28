@@ -376,7 +376,7 @@ def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dic
     return data
 
 
-def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> None:
+def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> typing.Tuple[str, str]:
     keyword = item["name"]
     fixed_keyword = fix_keyword(keyword)
     classname = item["options"].get("classname", get_classname(fixed_keyword))
