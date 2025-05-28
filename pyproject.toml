@@ -63,7 +63,7 @@ tests = [
     "scikit-learn==1.6.1",
     "pytest-xdist==3.6.1",
     "ipython==8.36.0",
-    "pyvista==0.45.1",
+    "pyvista==0.45.2",
 ]
 doc = [
     "recommonmark==0.7.1",
@@ -92,7 +92,7 @@ doc = [
     "jupyterlab==4.4.2",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.6.0",
-    "pyvista==0.45.1",
+    "pyvista==0.45.2",
 ]
 
 [tool.flit.module]
