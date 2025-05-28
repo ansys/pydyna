@@ -188,8 +188,7 @@ jobs:
 
   build-library:
     name: "Build library"
-    # needs: [doc, unit-tests]
-    needs: [unit-tests]
+    needs: [doc, unit-tests]
     runs-on: ubuntu-latest
     steps:
       - uses: ansys/actions/build-library@5dc39c7838f50142138f7ac518ff3e4dca065d97 # v9.0.15
