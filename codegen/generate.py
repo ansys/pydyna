@@ -186,10 +186,11 @@ def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.Li
     return keywords
 
 
-def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None) -> None:
+def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autodoc_output_path: str = "") -> None:
     """Generates the keyword classes, importer, and type-mapper
     if kwd_name is not None, this only generates that particular keyword class
     """
+    autodoc_entries = []
     env = Environment(loader=get_loader(), trim_blocks=True, lstrip_blocks=True)
     if not os.path.exists(os.path.join(lib_path, "auto")):
         os.mkdir(os.path.join(lib_path, "auto"))
@@ -200,7 +201,16 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None) -> No
             continue
         if data_model.is_aliased(name):
             continue
-        generate_class(env, lib_path, item)
+        classname, filename = generate_class(env, lib_path, item)
+        autodoc_entries.append((classname, filename))
+
+    if autodoc_output_path:
+        os.makedirs(autodoc_output_path, exist_ok=True)
+        rst_template = env.get_template("autodoc_rst.jinja")
+        combined_rst = rst_template.render(entries=autodoc_entries)
+        combined_filepath = os.path.join(autodoc_output_path, "index.rst")
+        with open(combined_filepath, "w", encoding="utf-8") as f:
+            f.write(combined_rst)
     keywords_list.extend(get_undefined_alias_keywords(keywords_list))
     if kwd_name == None:
         generate_entrypoints(env, lib_path, keywords_list)
@@ -224,6 +234,12 @@ def load_inputs(this_folder, args):
 def run_codegen(args):
     output = args.output
     this_folder = get_this_folder()
+    autodoc_path = args.autodoc_path
+    if not autodoc_path:
+        autodoc_path = this_folder.parent / "doc" / "source" / "_autosummary"
+    if not os.path.exists(autodoc_path):
+        os.makedirs(autodoc_path)
+    autodoc_path = str(autodoc_path.resolve())
     if args.output == "":
         output = this_folder.parent / "src" / "ansys" / "dyna" / "core" / "keywords" / "keyword_classes"
         output = str(output.resolve())
@@ -232,16 +248,15 @@ def run_codegen(args):
     if args.clean:
         clean(output)
         return
-
     load_inputs(this_folder, args)
     if args.keyword == "":
         kwd = None
         print(f"Generating code for all keywords")
-        generate_classes(output)
+        generate_classes(output, autodoc_output_path=autodoc_path)
     else:
         kwd = args.keyword
         print(f"Generating code for {kwd}")
-        generate_classes(output, kwd)
+        generate_classes(output, kwd, autodoc_output_path=autodoc_path)
 
 
 def parse_args():
@@ -275,6 +290,12 @@ def parse_args():
         "--additional-cards",
         default="",
         help="Path to additional cards file, defaults to additional-cards.json in the same folder as this file.",
+    )
+    parser.add_argument(
+        "autodoc_path",
+        default="",
+        nargs="?",
+        help="Path to the autodoc output folder. Defaults to doc/source/_autosummary.",
     )
     return parser.parse_args()
 

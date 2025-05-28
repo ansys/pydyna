@@ -129,13 +129,11 @@ html_theme_options = {
     "use_edit_page_button": True,
     "ansys_sphinx_theme_autoapi": {
         "ignore": [
-            "*core/keywords/keyword_classes/auto*",
+           "*core/keywords/keyword_classes/auto*",
         ],
-        "output": "api",
-        # "templates": "autoapi/"
+        "output": "api",        
     },
 }
-
 
 # static path
 html_static_path = ['_static']
@@ -192,7 +190,6 @@ jinja_contexts = {
         "build_examples": BUILD_EXAMPLES,
     },
 }
-
 
 def skip_run_subpackage(app, what, name, obj, skip, options):
     """Skip specific members of the 'run' subpackage during documentation generation.

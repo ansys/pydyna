@@ -376,7 +376,7 @@ def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dic
     return data
 
 
-def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> None:
+def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> typing.Tuple[str, str]:
     keyword = item["name"]
     fixed_keyword = fix_keyword(keyword)
     classname = item["options"].get("classname", get_classname(fixed_keyword))
@@ -386,6 +386,7 @@ def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> None:
         filename = os.path.join(lib_path, "auto", fixed_keyword.lower() + ".py")
         with open(filename, "w", encoding="utf-8") as f:
             f.write(env.get_template("keyword.j2").render(**jinja_variable))
+        return classname, fixed_keyword.lower()
     except Exception as e:
         print(f"Failure in generating {classname}")
         raise e
