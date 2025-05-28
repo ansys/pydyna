@@ -201,14 +201,14 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autod
             continue
         if data_model.is_aliased(name):
             continue
-        classname, filename = generate_class(env, lib_path, item, autodoc_output_path)
+        classname, filename = generate_class(env, lib_path, item)
         autodoc_entries.append((classname, filename))
 
     if autodoc_output_path:
         os.makedirs(autodoc_output_path, exist_ok=True)
         rst_template = env.get_template("autodoc_rst.jinja")
         combined_rst = rst_template.render(entries=autodoc_entries)
-        combined_filepath = os.path.join(autodoc_output_path, "all_keywords.rst")
+        combined_filepath = os.path.join(autodoc_output_path, "index.rst")
         with open(combined_filepath, "w", encoding="utf-8") as f:
             f.write(combined_rst)
     keywords_list.extend(get_undefined_alias_keywords(keywords_list))

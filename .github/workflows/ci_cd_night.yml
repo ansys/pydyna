@@ -10,8 +10,6 @@ on:
         required: false
         default: ghcr.io/ansys/pydyna-run:latest
 
-  push:
-
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
