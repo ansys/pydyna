@@ -165,5 +165,3 @@ cython_debug/
 doc/source/examples/
 doc/source/API/_autosummary/
 doc/source/api
-doc/source/keyword_classes/api
-doc/source/keyword_classes/_build/
