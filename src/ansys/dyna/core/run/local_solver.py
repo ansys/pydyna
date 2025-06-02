@@ -157,6 +157,8 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
 
     runner = get_runner(**kwargs)
     runner.set_input(input_file, wdir)
+    print(f"Running LS-DYNA in {wdir} with input file {input_file}")
+    print(f"Using {runner.ncpu} CPUs and {runner.get_memory_string()} memory")
 
     result = runner.run()
     if container != None and kwargs.get("stream", True) is False:

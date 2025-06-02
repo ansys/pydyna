@@ -25,6 +25,7 @@
 import os
 from pathlib import Path
 import subprocess
+import shutil
 
 from ansys.tools.path import get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
@@ -106,22 +107,56 @@ class WindowsRunner(BaseRunner):
     def run(self) -> None:
         """Run LS-DYNA."""
         self._write_runscript()
-        subprocess.check_call(
-            f"cmd /c {self._scriptname}",
-            shell=False,
-            universal_newlines=True,
-            cwd=self.working_directory,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-
+        script_path = os.path.join(self.working_directory, self._scriptname)
+        print(f"working_directory: {self.working_directory}")
+        try:
+            result = subprocess.check_call(
+                f"cmd /c {script_path}",
+                shell=False,
+                universal_newlines=True,
+                cwd=self.working_directory,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            print(f"LS-DYNA run completed with exit code {result}.")
+            if result != 0:
+                print("LS-DYNA exited with an error!")
+                # Show contents of lsrun.out.txt for clarity
+                log_file = Path(self.working_directory) / "lsrun.out.txt"
+                if log_file.exists():
+                    print("------ LS-DYNA Output ------")
+                    print(log_file.read_text())
+                    print("----------------------------")
+                raise RuntimeError(f"LS-DYNA run failed with exit code {result.returncode}")
+        except subprocess.CalledProcessError as e:
+            print(f"\n[ERROR] LS-DYNA exited with return code {e.returncode}")
+            log_path = os.path.join(self.working_directory, "lsrun.out.txt")
+            if os.path.isfile(log_path):
+                print(f"\n[LOG] Contents of lsrun.out.txt:\n{'-'*60}")
+                with open(log_path, "r", errors="replace") as f:
+                    print(f.read())
+            else:
+                print("[WARNING] lsrun.out.txt not found!")
+            raise RuntimeWarning(f"LS-DYNA run failed with error: {e.stderr}") from e
+        
+        
+    def set_input_file(self) -> None:
+        """Set input file and working directory."""
+        input_file =os.path.basename(self.input_file)
+        dest_path = os.path.join(self.working_directory, input_file)
+        if not os.path.isfile(dest_path):
+            shutil.copyfile(self.input_file, dest_path)
+        
+        
     def _get_command_line(self) -> str:
         """Get the command line to run LS-DYNA."""
         script = f'call "{self._get_env_script()}"'
         ncpu = self.ncpu
         mem = self.get_memory_string()
         input_file = self.input_file
+        # get the input file path relative to the working directory
+        self.set_input_file()
         if self.mpi_option == MpiOption.SMP:
             command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem}"
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
@@ -132,5 +167,6 @@ class WindowsRunner(BaseRunner):
             command = (
                 f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}'
             )
-
-        return f"{script} && {command} > lsrun.out.txt 2>&1"
+        print(f"Running command: {command}")
+        print(f"script: {script}")
+        return f'{script} && {command} > lsrun.out.txt 2>&1 || exit /b %ERRORLEVEL%'
