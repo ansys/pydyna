@@ -32,7 +32,7 @@ def test_run_from_input_file_001(file_utils, runner):
     input_file = file_utils.testfiles_folder / "run"/ "basic-eddy-current" / "test.k"
     example_folder = str(input_file.parent.resolve())
     try:
-        wdir = runner.run("i.k", working_directory = rundir.name, input_file=input_file)
+        wdir = runner.run("i.k", working_directory = rundir.name)
         assert wdir == example_folder
         assert os.path.isfile(os.path.join(example_folder, "d3plot"))
     except Exception as e:
