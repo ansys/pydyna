@@ -24,8 +24,8 @@
 
 import os
 from pathlib import Path
-import subprocess
 import shutil
+import subprocess
 
 from ansys.tools.path import get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
@@ -127,7 +127,7 @@ class WindowsRunner(BaseRunner):
                     print(log_file.read_text())
                     print("----------------------------")
                 raise RuntimeError(f"LS-DYNA run failed with exit code {result.returncode}")
-            
+
         except subprocess.CalledProcessError as e:
             print(f"\n[ERROR] LS-DYNA exited with return code {e.returncode}")
             log_path = os.path.join(self.working_directory, "lsrun.out.txt")
@@ -138,16 +138,14 @@ class WindowsRunner(BaseRunner):
             else:
                 print("[WARNING] lsrun.out.txt not found!")
             raise RuntimeWarning(f"LS-DYNA run failed with error: {e.stderr}") from e
-        
-        
+
     def set_input_file(self) -> None:
         """set the input file in the working directory if it does not exist."""
-        input_file =os.path.basename(self.input_file)
+        input_file = os.path.basename(self.input_file)
         dest_path = os.path.join(self.working_directory, input_file)
         if not os.path.isfile(dest_path):
             shutil.copyfile(self.input_file, dest_path)
-        
-        
+
     def _get_command_line(self) -> str:
         """Get the command line to run LS-DYNA."""
         script = f'call "{self._get_env_script()}"'
