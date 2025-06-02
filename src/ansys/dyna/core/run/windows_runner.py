@@ -108,7 +108,6 @@ class WindowsRunner(BaseRunner):
         """Run LS-DYNA."""
         self._write_runscript()
         script_path = os.path.join(self.working_directory, self._scriptname)
-        print(f"working_directory: {self.working_directory}")
         try:
             result = subprocess.check_call(
                 f"cmd /c {script_path}",
@@ -119,7 +118,6 @@ class WindowsRunner(BaseRunner):
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
-            print(f"LS-DYNA run completed with exit code {result}.")
             if result != 0:
                 print("LS-DYNA exited with an error!")
                 # Show contents of lsrun.out.txt for clarity
@@ -129,6 +127,7 @@ class WindowsRunner(BaseRunner):
                     print(log_file.read_text())
                     print("----------------------------")
                 raise RuntimeError(f"LS-DYNA run failed with exit code {result.returncode}")
+            
         except subprocess.CalledProcessError as e:
             print(f"\n[ERROR] LS-DYNA exited with return code {e.returncode}")
             log_path = os.path.join(self.working_directory, "lsrun.out.txt")
@@ -142,7 +141,7 @@ class WindowsRunner(BaseRunner):
         
         
     def set_input_file(self) -> None:
-        """Set input file and working directory."""
+        """set the input file in the working directory if it does not exist."""
         input_file =os.path.basename(self.input_file)
         dest_path = os.path.join(self.working_directory, input_file)
         if not os.path.isfile(dest_path):
@@ -167,6 +166,4 @@ class WindowsRunner(BaseRunner):
             command = (
                 f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}'
             )
-        print(f"Running command: {command}")
-        print(f"script: {script}")
-        return f'{script} && {command} > lsrun.out.txt 2>&1 || exit /b %ERRORLEVEL%'
+        return f"{script} && {command} > lsrun.out.txt 2>&1"
