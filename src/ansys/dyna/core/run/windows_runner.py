@@ -24,8 +24,8 @@
 
 import os
 from pathlib import Path
-import subprocess
 import shutil
+import subprocess
 
 from ansys.tools.path import get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
@@ -130,7 +130,7 @@ class WindowsRunner(BaseRunner):
                     print(log_file.read_text())
                     print("----------------------------")
                 raise RuntimeError(f"LS-DYNA run failed with exit code {result.returncode}")
-            
+
         except subprocess.CalledProcessError as e:
             print(f"\n[ERROR] LS-DYNA exited with return code {e.returncode}")
             log_path = os.path.join(self.working_directory, "lsrun.out.txt")
