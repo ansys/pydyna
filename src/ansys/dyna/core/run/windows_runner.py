@@ -50,6 +50,9 @@ class WindowsRunner(BaseRunner):
 
     def set_input(self, input_file: str, working_directory: str) -> None:
         """Set input file and working directory."""
+        if not os.path.isfile(input_file):
+            raise FileNotFoundError(f"Input file not found: {input_file}")
+        print("input file:", input_file)
         self.input_file = input_file
         self.working_directory = working_directory
 
@@ -140,12 +143,12 @@ class WindowsRunner(BaseRunner):
             raise RuntimeWarning(f"LS-DYNA run failed with error: {e.stderr}") from e
         
         
-    def set_input_file(self) -> None:
-        """set the input file in the working directory if it does not exist."""
-        input_file =os.path.basename(self.input_file)
-        dest_path = os.path.join(self.working_directory, input_file)
-        if not os.path.isfile(dest_path):
-            shutil.copyfile(self.input_file, dest_path)
+    # def set_input_file(self) -> None:
+    #     """set the input file in the working directory if it does not exist."""
+    #     input_file =os.path.basename(self.input_file)
+    #     dest_path = os.path.join(self.working_directory, input_file)
+    #     if not os.path.isfile(dest_path):
+    #         shutil.copyfile(self.input_file, dest_path)
         
         
     def _get_command_line(self) -> str:
@@ -155,7 +158,7 @@ class WindowsRunner(BaseRunner):
         mem = self.get_memory_string()
         input_file = self.input_file
         # get the input file path relative to the working directory
-        self.set_input_file()
+        # self.set_input_file()
         if self.mpi_option == MpiOption.SMP:
             command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem}"
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
