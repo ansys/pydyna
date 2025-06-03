@@ -125,9 +125,8 @@ class WindowsRunner(BaseRunner):
                 # Show contents of lsrun.out.txt for clarity
                 log_file = Path(self.working_directory) / "lsrun.out.txt"
                 if log_file.exists():
-                    print("------ LS-DYNA Output ------")
-                    print(log_file.read_text())
-                    print("----------------------------")
+                    print("Ls dyna failed with log file, found at:")
+                    print(log_file)
                 raise RuntimeError(f"LS-DYNA run failed with exit code {result.returncode}")
 
         except subprocess.CalledProcessError as e:
