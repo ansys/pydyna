@@ -125,7 +125,7 @@ class WindowsRunner(BaseRunner):
                 # Show contents of lsrun.out.txt for clarity
                 log_file = Path(self.working_directory) / "lsrun.out.txt"
                 if log_file.exists():
-                
+
                     print(log_file)
                 raise RuntimeError(f"LS-DYNA run failed with exit code {result.returncode}")
 
