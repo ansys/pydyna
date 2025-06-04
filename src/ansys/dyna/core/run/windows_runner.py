@@ -22,15 +22,19 @@
 
 """Windows implementation of LS-DYNA runner."""
 
+import logging
 import os
 from pathlib import Path
 import subprocess
+import time
 
 from ansys.tools.path import get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
 
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
+
+log = logging.getLogger(__name__)
 
 
 class WindowsRunner(BaseRunner):
@@ -80,6 +84,7 @@ class WindowsRunner(BaseRunner):
             script_name = "lsdynamsvar.bat"
         lsprepost = [p for p in os.listdir(self.solver_location) if "lsprepost" in p][0]
         env_script_path = os.path.join(self.solver_location, lsprepost, "LS-Run", script_name)
+
         return env_script_path
 
     def _get_exe_name(self) -> str:
@@ -106,15 +111,52 @@ class WindowsRunner(BaseRunner):
     def run(self) -> None:
         """Run LS-DYNA."""
         self._write_runscript()
-        subprocess.check_call(
-            f"cmd /c {self._scriptname}",
-            shell=False,
-            universal_newlines=True,
-            cwd=self.working_directory,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
+        script_path = Path(self.working_directory) / self._scriptname
+        log_file = Path(self.working_directory) / "lsrun.out.txt"
+
+        try:
+            process = subprocess.Popen(
+                ["cmd", "/c", str(script_path)],
+                cwd=self.working_directory,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                universal_newlines=True,
+                bufsize=1,
+            )
+            log.info("LS-DYNA execution started.")
+
+            warning_detected = False
+
+            while process.poll() is None:
+                if log_file.exists():
+                    with log_file.open("r", encoding="utf-8", errors="ignore") as f:
+                        content = f.readlines()
+                        for line in content:
+                            if "warning" in line.lower() or "error" in line.lower():
+                                warning_detected = True
+                time.sleep(2)
+
+            process.wait()
+            if warning_detected:
+                log.warning("LS-DYNA completed with warnings or errors in the log.")
+                log.warning(f"Check the log file for details: {log_file}")
+
+            if process.returncode != 0:
+                log.error(f"LS-DYNA run failed with exit code {process.returncode}.")
+                if log_file.exists():
+                    log.error(f"See log file for details: {log_file}")
+                raise RuntimeError(f"LS-DYNA failed with exit code {process.returncode}")
+
+            log.info("LS-DYNA run completed successfully.")
+
+        except subprocess.SubprocessError as e:
+            msg = f"Subprocess execution failed: {e}"
+            msg += f"to run LS-DYNA in {self.working_directory} with command: {self._get_command_line()}"
+            if log_file.exists():
+                msg += f"\nSee log file at: {log_file}"
+            log.error(msg)
+            raise RuntimeError(msg) from e
 
     def _get_command_line(self) -> str:
         """Get the command line to run LS-DYNA."""
@@ -132,5 +174,4 @@ class WindowsRunner(BaseRunner):
             command = (
                 f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}'
             )
-
         return f"{script} && {command} > lsrun.out.txt 2>&1"
