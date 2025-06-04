@@ -171,7 +171,7 @@ class WindowsRunner(BaseRunner):
         if self.mpi_option == MpiOption.SMP:
             command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem}"
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
-            # -wdir is used here because sometimes mpiexec does not pass its working directry
+            # -wdir is used here because sometimes mpiexec does not pass its working directory
             # to dyna on windows when run from python subprocess
             command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}'  # noqa:E501
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
