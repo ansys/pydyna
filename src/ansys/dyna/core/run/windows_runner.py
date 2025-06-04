@@ -152,6 +152,7 @@ class WindowsRunner(BaseRunner):
 
         except subprocess.SubprocessError as e:
             msg = f"Subprocess execution failed: {e}"
+            msg += f"to run LS-DYNA in {self.working_directory} with command: {self._get_command_line()}"
             if log_file.exists():
                 msg += f"\nSee log file at: {log_file}"
             log.error(msg)
