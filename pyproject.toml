@@ -61,7 +61,7 @@ tests = [
     "pandas==2.2.3",
     "openpyxl==3.1.5",
     "scikit-learn==1.6.1",
-    "pytest-xdist==3.6.1",
+    "pytest-xdist==3.7.0",
     "ipython==8.36.0",
     "pyvista==0.45.2",
 ]
