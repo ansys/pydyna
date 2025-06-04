@@ -171,7 +171,5 @@ class WindowsRunner(BaseRunner):
             # to dyna on windows when run from python subprocess
             command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}'  # noqa:E501
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
-            command = (
-                f'mpiexec -np {ncpu} {self.solver} i={input_file}'
-            )
+            command = f"mpiexec -np {ncpu} {self.solver} i={input_file}"
         return f"{script} && {command} > lsrun.out.txt 2>&1"
