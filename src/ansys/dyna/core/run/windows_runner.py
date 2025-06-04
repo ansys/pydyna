@@ -23,17 +23,16 @@
 """Windows implementation of LS-DYNA runner."""
 
 import logging
-
 import os
 from pathlib import Path
 import subprocess
+import time
 
 from ansys.tools.path import get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
 
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
-import time
 
 log = logging.getLogger(__name__)
 
@@ -153,6 +152,7 @@ class WindowsRunner(BaseRunner):
 
         except subprocess.SubprocessError as e:
             msg = f"Subprocess execution failed: {e}"
+            msg += f"to run LS-DYNA in {self.working_directory} with command: {self._get_command_line()}"
             if log_file.exists():
                 msg += f"\nSee log file at: {log_file}"
             log.error(msg)
