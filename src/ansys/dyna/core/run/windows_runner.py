@@ -164,6 +164,10 @@ class WindowsRunner(BaseRunner):
         ncpu = self.ncpu
         mem = self.get_memory_string()
         input_file = self.input_file
+
+        if not os.path.isabs(self.working_directory):
+            self.working_directory = os.path.abspath(self.working_directory)
+
         if self.mpi_option == MpiOption.SMP:
             command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem}"
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
