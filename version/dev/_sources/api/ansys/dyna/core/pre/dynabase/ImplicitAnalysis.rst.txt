@@ -1,0 +1,291 @@
+ansys.dyna.core.pre.dynabase.ImplicitAnalysis
+=============================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ImplicitAnalysis(analysis_type=AnalysisType.IMPLICIT, initial_timestep_size=0)
+
+   
+   Activates implicit analysis and defines associated control parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: defined
+      :value: False
+
+
+
+   .. py:attribute:: defined_auto
+      :value: False
+
+
+
+   .. py:attribute:: defined_dynamic
+      :value: False
+
+
+
+   .. py:attribute:: defined_eigenvalue
+      :value: False
+
+
+
+   .. py:attribute:: defined_solution
+      :value: False
+
+
+
+   .. py:attribute:: defined_mass_matrix
+      :value: False
+
+
+
+   .. py:attribute:: imflag
+      :value: 1
+
+
+
+   .. py:attribute:: dt0
+      :value: 0
+
+
+
+   .. py:attribute:: stub
+
+
+   .. py:method:: set_initial_timestep_size(size=0)
+
+      
+      Define the initial time step size.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_timestep(control_flag=TimestepCtrol.CONSTANT_TIMESTEP_SIZE, Optimum_equilibrium_iteration_count=11)
+
+      
+      Define parameters for automatic time step control during implicit analysis.
+
+
+      :Parameters:
+
+          **control_flag** : :class:`python:int`
+              Automatic time step control flag.
+
+          **Optimum_equilibrium_iteration_count** : :class:`python:int`, :obj:`optional`
+              Optimum equilibrium iteration count per time step. The default is ``11``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_dynamic(integration_method=Integration.NEWMARK_TIME_INTEGRATION, gamma=0.5, beta=0.25)
+
+      
+      Activate implicit dynamic analysis and define time integration constants.
+
+
+      :Parameters:
+
+          **integration_method** : :obj:`enum`
+              Implicit analysis type.
+
+          **gamma** : :class:`python:float`, :obj:`optional`
+              Newmark time integration constant. The default is ``0.5``.
+
+          **beta** : :class:`python:float`, :obj:`optional`
+              Newmark time integration constant. The default is ``0.25``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_eigenvalue(number_eigenvalues=0, shift_scale=0)
+
+      
+      Activate implicit eigenvalue analysis and define associated input parameters.
+
+
+      :Parameters:
+
+          **number_eigenvalues** : :class:`python:int`, :obj:`optional`
+              Number of eigenvalues to extract. The default is ``0``.
+
+          **shift_scale** : :class:`python:float`, :obj:`optional`
+              Shift scale. The default is ``0``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_solution(solution_method=12, iteration_limit=11, stiffness_reformation_limit=55, absolute_convergence_tolerance=1e-10)
+
+      
+      Specify whether a linear or nonlinear solution is desired.
+
+
+      :Parameters:
+
+          **solution_method** : :class:`python:int`, :obj:`optional`
+              Solution method for implicit analysis. The default is ``12``.
+
+          **iteration_limit** : :class:`python:int`, :obj:`optional`
+              Iteration limit between automatic stiffness reformations.
+              The default is ``11``.
+
+          **stiffness_reformation_limit** : :class:`python:int`, :obj:`optional`
+              Stiffness reformation limit per time step. The default is
+              ``55``.
+
+          **absolute_convergence_tolerance** : :class:`python:float`, :obj:`optional`
+              Absolute convergence tolerance. The default is ``1e-10``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_consistent_mass_matrix()
+
+      
+      Use the consistent mass matrix in implicit dynamics and eigenvalue solutions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create an implicit analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
