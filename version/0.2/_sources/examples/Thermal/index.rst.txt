@@ -1,0 +1,43 @@
+
+
+.. _sphx_glr_examples_Thermal:
+
+Thermal examples
+~~~~~~~~~~~~~~~~
+
+These examples show how to create thermal model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example show how to create a thermal stress model with Pydyna-pre module. ">
+
+.. only:: html
+
+  .. image:: /examples/Thermal/images/thumb/sphx_glr_thermal_stress_thumb.png
+    :alt: Thermal stress example
+
+  :ref:`sphx_glr_examples_Thermal_thermal_stress.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Thermal stress example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Thermal/thermal_stress
+
