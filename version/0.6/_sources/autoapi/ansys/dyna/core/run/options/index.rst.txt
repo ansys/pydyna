@@ -1,0 +1,145 @@
+ansys.dyna.core.run.options
+===========================
+
+.. py:module:: ansys.dyna.core.run.options
+
+.. autoapi-nested-parse::
+
+   Options to run LS-DYNA.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.run.options.MpiOption
+   ansys.dyna.core.run.options.Precision
+   ansys.dyna.core.run.options.MemoryUnit
+
+
+Module Contents
+---------------
+
+.. py:class:: MpiOption
+
+   
+   MPI option to configure the LS-DYNA execution command line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: SMP
+      :value: 0
+
+
+
+   .. py:attribute:: MPP_INTEL_MPI
+      :value: 1
+
+
+
+   .. py:attribute:: MPP_MS_MPI
+      :value: 2
+
+
+
+.. py:class:: Precision
+
+   
+   Precision for LS-DYNA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: SINGLE
+      :value: 0
+
+
+
+   .. py:attribute:: DOUBLE
+      :value: 1
+
+
+
+.. py:class:: MemoryUnit
+
+   
+   Memory unit for LS-DYNA command line.  Only MB and GB are currently supported.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: BYTE
+      :value: 0
+
+
+
+   .. py:attribute:: KB
+      :value: 1
+
+
+
+   .. py:attribute:: MB
+      :value: 2
+
+
+
+   .. py:attribute:: GB
+      :value: 3
+
+
+
+   .. py:attribute:: TB
+      :value: 4
+
+
+
