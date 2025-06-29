@@ -1,0 +1,183 @@
+ansys.dyna.core.pre.dynamaterial.Liner
+======================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.Liner(mass_density=8.96, shear_modulus=0.46, youngs_modulus=0, poissons_ratio=0.34, constants=[0.0009, 0.00292, 0.31, 0.025, 1.09], melt_temperature=1356, room_temperature=293, strain_rate=1e-06, specific_heat=3.83e-06, tensile_failure_stress=-0.012, spall_type=2, iteration_option=0, failure_parameters=[0.54, 4.89, 3.03, 0.014, 1.12], equation_constants=[0.394, 1.489, 0, 0, 2.02], volume_correction_coefficient=0.47, initial_internal_energy=0)
+
+   
+   Defines a liner material.
+
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``8.96``.
+
+       **shear_modulus** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **youngs_modulus** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **poissons_ratio** : :class:`python:float` :obj:`optional`
+           ..
+
+       **constants** : :class:`python:list`, :obj:`optional`
+           ..
+
+       **melt_temperature** : :class:`python:int`, :obj:`optional`
+           ..
+
+       **room_temperature** : :class:`python:int`, :obj:`optional`
+           ..
+
+       **strain_rate** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **specific_heat** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **tensile_failure_stress** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **spall_type, int, optional**
+           ..
+
+       **iteration_option ; int, optional**
+           ..
+
+       **failure_parameters** : :class:`python:list`, :obj:`optional`
+           ..
+
+       **equation_constants, list, optional**
+           ..
+
+       **volume_correction_coefficient** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **initial_internal_energy** : :class:`python:float`, :obj:`optional`
+           Initial internal energy per unit reference volume.
+           The default is ``0``.
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: mass_density
+      :value: 8.96
+
+
+
+   .. py:attribute:: shear_modulus
+      :value: 0.46
+
+
+
+   .. py:attribute:: youngs_modulus
+      :value: 0
+
+
+
+   .. py:attribute:: poissons_ratio
+      :value: 0.34
+
+
+
+   .. py:attribute:: constants
+      :value: [0.0009, 0.00292, 0.31, 0.025, 1.09]
+
+
+
+   .. py:attribute:: melt_temperature
+      :value: 1356
+
+
+
+   .. py:attribute:: room_temperature
+      :value: 293
+
+
+
+   .. py:attribute:: strain_rate
+      :value: 1e-06
+
+
+
+   .. py:attribute:: specific_heat
+      :value: 3.83e-06
+
+
+
+   .. py:attribute:: tensile_failure_stress
+      :value: -0.012
+
+
+
+   .. py:attribute:: spall_type
+      :value: 2
+
+
+
+   .. py:attribute:: iteration_option
+      :value: 0
+
+
+
+   .. py:attribute:: failure_parameters
+      :value: [0.54, 4.89, 3.03, 0.014, 1.12]
+
+
+
+   .. py:attribute:: equation_constants
+      :value: [0.394, 1.489, 0, 0, 2.02]
+
+
+
+   .. py:attribute:: volume_correction_coefficient
+      :value: 0.47
+
+
+
+   .. py:attribute:: initial_internal_energy
+      :value: 0
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a liner material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
