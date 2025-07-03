@@ -286,3 +286,6 @@ class DefineCurveEntity(KeywordBase):
         """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
 
+        if value:
+            self.activate_option("TITLE")
+

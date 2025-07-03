@@ -315,6 +315,17 @@ def test_deck_load_title(ref_string):
     assert deck.keywords[0].title == "title"
     assert deck.keywords[0].options["TITLE"].active
 
+@pytest.mark.keywords
+def test_deck_active_options(ref_string):
+    """Test that active options set with setters."""
+    deck = Deck()
+    deck_test = Deck()
+    deck_test.append(kwd.DefineCurve())
+    deck_test.keywords[0].title = "title"
+    deck.loads(ref_string.test_title_string)
+    assert deck.keywords[0].title == deck_test.keywords[0].title
+    assert deck_test.keywords[0].options["TITLE"].active
+
 
 @pytest.mark.keywords
 def test_deck_default_write_long(ref_string):

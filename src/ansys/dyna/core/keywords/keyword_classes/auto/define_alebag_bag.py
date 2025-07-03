@@ -473,3 +473,6 @@ class DefineAlebagBag(KeywordBase):
         """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
 
+        if value:
+            self.activate_option("TITLE")
+
