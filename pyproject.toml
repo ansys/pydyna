@@ -60,7 +60,7 @@ tests = [
     "joblib==1.5.1",
     "pandas==2.2.3",
     "openpyxl==3.1.5",
-    "scikit-learn==1.6.1",
+    "scikit-learn==1.7.0",
     "pytest-xdist==3.7.0",
     "ipython==8.37.0",
     "pyvista==0.45.2",
@@ -87,7 +87,7 @@ doc = [
 
     "ipywidgets==8.1.7",
     "joblib==1.5.1",
-    "scikit-learn==1.6.1",
+    "scikit-learn==1.7.0",
     "ipython==8.37.0",
     "jupyterlab==4.4.4",
     "sphinx-jinja==2.0.2",
