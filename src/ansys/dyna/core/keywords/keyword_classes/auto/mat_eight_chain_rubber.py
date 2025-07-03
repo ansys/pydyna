@@ -1399,3 +1399,6 @@ class MatEightChainRubber(KeywordBase):
         """Set the title property."""
         self._cards[14].cards[0].set_value("title", value)
 
+        if value:
+            self.activate_option("TITLE")
+

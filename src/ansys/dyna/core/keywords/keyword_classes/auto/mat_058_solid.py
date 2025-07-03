@@ -1843,6 +1843,9 @@ class Mat058Solid(KeywordBase):
         """Set the title property."""
         self._cards[14].cards[0].set_value("title", value)
 
+        if value:
+            self.activate_option("TITLE")
+
 
 class MatLaminatedCompositeFabricSolid(Mat058Solid):
     """Alias for MAT keyword."""

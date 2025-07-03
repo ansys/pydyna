@@ -1215,6 +1215,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the cid property."""
         self._cards[4].cards[0].set_value("cid", value)
 
+        if value:
+            self.activate_option("CID")
+
     @property
     def heading(self) -> typing.Optional[str]:
         """Get or set the Interface descriptor. We suggest using unique descriptions.
@@ -1225,6 +1228,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def heading(self, value: str) -> None:
         """Set the heading property."""
         self._cards[4].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 
     @property
     def ignore(self) -> int:
@@ -1237,6 +1243,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the ignore property."""
         self._cards[5].cards[0].set_value("ignore", value)
 
+        if value:
+            self.activate_option("IGNORE")
+
     @property
     def bckt(self) -> int:
         """Get or set the Bucket sort frequency. This parameter does not apply when SOFT = 2 on Optional Card A or to Mortar contacts. For these two exceptions, the BSORT option on Optional Card A applies instead.
@@ -1247,6 +1256,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def bckt(self, value: int) -> None:
         """Set the bckt property."""
         self._cards[5].cards[0].set_value("bckt", value)
+
+        if value:
+            self.activate_option("BCKT")
 
     @property
     def lcbckt(self) -> typing.Optional[int]:
@@ -1259,6 +1271,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the lcbckt property."""
         self._cards[5].cards[0].set_value("lcbckt", value)
 
+        if value:
+            self.activate_option("LCBCKT")
+
     @property
     def ns2trk(self) -> int:
         """Get or set the Number of potential contacts to track for each tracked node.  The normal input for this (DEPTH on Optional Card A) is ignored..
@@ -1269,6 +1284,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def ns2trk(self, value: int) -> None:
         """Set the ns2trk property."""
         self._cards[5].cards[0].set_value("ns2trk", value)
+
+        if value:
+            self.activate_option("NS2TRK")
 
     @property
     def inititr(self) -> int:
@@ -1281,6 +1299,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the inititr property."""
         self._cards[5].cards[0].set_value("inititr", value)
 
+        if value:
+            self.activate_option("INITITR")
+
     @property
     def parmax(self) -> float:
         """Get or set the The parametric extension distance for contact segments.  The MAXPAR parameter on Optional Card A is not used for MPP.  For non-tied contacts, the default is 1.0005. For tied contacts the default is 1.035 and, the actual extension used is computed as follows: see the manual
@@ -1291,6 +1312,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def parmax(self, value: float) -> None:
         """Set the parmax property."""
         self._cards[5].cards[0].set_value("parmax", value)
+
+        if value:
+            self.activate_option("PARMAX")
 
     @property
     def cparm8(self) -> int:
@@ -1314,6 +1338,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""cparm8 must be one of {0,1,2,10,11,12}""")
         self._cards[5].cards[0].set_value("cparm8", value)
 
+        if value:
+            self.activate_option("CPARM8")
+
     @property
     def mpp2(self) -> bool:
         """Get or set the Flag whether this is the MPP card.
@@ -1324,6 +1351,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def mpp2(self, value: bool) -> None:
         """Set the mpp2 property."""
         self._cards[5].cards[1].set_value("mpp2", value)
+
+        if value:
+            self.activate_option("MPP2")
 
     @property
     def chksegs(self) -> int:
@@ -1336,6 +1366,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the chksegs property."""
         self._cards[5].cards[1].set_value("chksegs", value)
 
+        if value:
+            self.activate_option("CHKSEGS")
+
     @property
     def pensf(self) -> float:
         """Get or set the This option is used together with IGNORE for 3D forging problems.  If non-zero, the IGNORE penetration distance is multiplied by this value each cycle, effectively pushing the tracked node back out to the surface.  This is useful for nodes that might get generated below the reference surface during 3D remeshing.  Care should be exercised, as energy may be generated and stability may be effected for values lower than 0.95.  A value in the range of 0.98 to 0.99 or higher (but < 1.0) is recommended
@@ -1347,6 +1380,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the pensf property."""
         self._cards[5].cards[1].set_value("pensf", value)
 
+        if value:
+            self.activate_option("PENSF")
+
     @property
     def grpable(self) -> int:
         """Get or set the Set to 1 to invoke an alternate MPP communication algorithm for various SINGLE_SURFACE (including AUTOMATIC_GEN-ERAL), NODES_TO_SURFACE, SURFACE_TO_SURFACE, ERODING and SOFT = 2 contacts.  This groupable algorithm does not support all contact options, including MORTAR. It is still under development.  It can be significantly faster and scale better than the normal algorithm when there are more than two or three applicable contact types defined in the model. It is intended for speeding up the contact processing without changing the behavior of the contact.  See also *CONTROL_MPP_-CONTACT_GROUPABLE.
@@ -1357,6 +1393,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def grpable(self, value: int) -> None:
         """Set the grpable property."""
         self._cards[5].cards[1].set_value("grpable", value)
+
+        if value:
+            self.activate_option("GRPABLE")
 
     @property
     def soft(self) -> typing.Optional[int]:
@@ -1376,6 +1415,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""soft must be one of {0,1,2,4,6}""")
         self._cards[6].cards[0].set_value("soft", value)
 
+        if value:
+            self.activate_option("SOFT")
+
     @property
     def sofscl(self) -> float:
         """Get or set the Scale factor for constraint forces of soft constraint option invoked with SOFT = 1(default=.10). Values greater than .5 for single surface contact and 1.0 for a one way treatment are inadmissible.
@@ -1386,6 +1428,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def sofscl(self, value: float) -> None:
         """Set the sofscl property."""
         self._cards[6].cards[0].set_value("sofscl", value)
+
+        if value:
+            self.activate_option("SOFSCL")
 
     @property
     def lcidab(self) -> int:
@@ -1398,6 +1443,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the lcidab property."""
         self._cards[6].cards[0].set_value("lcidab", value)
 
+        if value:
+            self.activate_option("LCIDAB")
+
     @property
     def maxpar(self) -> float:
         """Get or set the Maximum parametric coordinate in segment search (values 1.025 and 1.20 recommended). Larger values can increase cost. If zero, the default is set to 1.025. This factor allows an increase in the size of the segments . May be useful at sharp corners.
@@ -1408,6 +1456,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def maxpar(self, value: float) -> None:
         """Set the maxpar property."""
         self._cards[6].cards[0].set_value("maxpar", value)
+
+        if value:
+            self.activate_option("MAXPAR")
 
     @property
     def sbopt(self) -> int:
@@ -1428,6 +1479,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""sbopt must be one of {2,0,1,3,4,5}""")
         self._cards[6].cards[0].set_value("sbopt", value)
 
+        if value:
+            self.activate_option("SBOPT")
+
     @property
     def depth(self) -> int:
         """Get or set the Search depth in automatic contact. Value of 1 is sufficiently accurate for most crash applications and is much less expensive. LS-DYNA for improved accuracy sets this value to 2. If zero, the default is set to 2.
@@ -1439,6 +1493,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def depth(self, value: int) -> None:
         """Set the depth property."""
         self._cards[6].cards[0].set_value("depth", value)
+
+        if value:
+            self.activate_option("DEPTH")
 
     @property
     def bsort(self) -> typing.Optional[int]:
@@ -1452,6 +1509,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the bsort property."""
         self._cards[6].cards[0].set_value("bsort", value)
 
+        if value:
+            self.activate_option("BSORT")
+
     @property
     def frcfrq(self) -> int:
         """Get or set the Number of cycles between contact force updates for penalty contact formulations. This option can provide a significant speed-up of the contact treatment. If used, values exceeding 3 or 4 are dangerous. Considerable care must be exercised when using this option, as this option assumes that contact does not change FRCFRG cycles.
@@ -1463,6 +1523,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def frcfrq(self, value: int) -> None:
         """Set the frcfrq property."""
         self._cards[6].cards[0].set_value("frcfrq", value)
+
+        if value:
+            self.activate_option("FRCFRQ")
 
     @property
     def penmax(self) -> float:
@@ -1477,6 +1540,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def penmax(self, value: float) -> None:
         """Set the penmax property."""
         self._cards[7].cards[0].set_value("penmax", value)
+
+        if value:
+            self.activate_option("PENMAX")
 
     @property
     def thkopt(self) -> int:
@@ -1494,6 +1560,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""thkopt must be one of {0,1,2}""")
         self._cards[7].cards[0].set_value("thkopt", value)
 
+        if value:
+            self.activate_option("THKOPT")
+
     @property
     def shlthk(self) -> int:
         """Get or set the Define if and only if THKOPT above equals 1. Shell thickness considered in type surface to surface and node to surface type contact options, where options 1 and 2 below activate the new contact algorithms. The thickness offsets are always included in single surface and constraint method contact types:
@@ -1510,6 +1579,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""shlthk must be one of {0,1,2}""")
         self._cards[7].cards[0].set_value("shlthk", value)
 
+        if value:
+            self.activate_option("SHLTHK")
+
     @property
     def snlog(self) -> int:
         """Get or set the Disable shooting node logic in thickness offset contact. With the shooting node logic enabled, the first cycle that a tracked node penetrates a reference segment, that node is moved back to the reference surface without applying any contact force.
@@ -1524,6 +1596,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         if value not in [0, 1]:
             raise Exception("""snlog must be one of {0,1}""")
         self._cards[7].cards[0].set_value("snlog", value)
+
+        if value:
+            self.activate_option("SNLOG")
 
     @property
     def isym(self) -> int:
@@ -1541,6 +1616,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""isym must be one of {0,1}""")
         self._cards[7].cards[0].set_value("isym", value)
 
+        if value:
+            self.activate_option("ISYM")
+
     @property
     def i2d3d(self) -> int:
         """Get or set the Segment searching option:
@@ -1556,6 +1634,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""i2d3d must be one of {0,1}""")
         self._cards[7].cards[0].set_value("i2d3d", value)
 
+        if value:
+            self.activate_option("I2D3D")
+
     @property
     def sldthk(self) -> float:
         """Get or set the Optional solid element thickness. A nonzero positive value will activate the contact thickness offsets in the contact algorithms where offsets apply. The contact treatment with then be equivalent to the case where null shell elements are used to cover the brick elements. The contact stiffness parameter below, SLDSTF, may also be used to override the default value.
@@ -1567,6 +1648,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the sldthk property."""
         self._cards[7].cards[0].set_value("sldthk", value)
 
+        if value:
+            self.activate_option("SLDTHK")
+
     @property
     def sldstf(self) -> float:
         """Get or set the Optional solid element stiffness. A nonzero positive value overrides the bulk modulus taken from the material model referenced by the solid element.
@@ -1577,6 +1661,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def sldstf(self, value: float) -> None:
         """Set the sldstf property."""
         self._cards[7].cards[0].set_value("sldstf", value)
+
+        if value:
+            self.activate_option("SLDSTF")
 
     @property
     def igap(self) -> int:
@@ -1597,6 +1684,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the igap property."""
         self._cards[8].cards[0].set_value("igap", value)
 
+        if value:
+            self.activate_option("IGAP")
+
     @property
     def ignore(self) -> int:
         """Get or set the Ignore initial penetrations for the *CONTACT_AUTOMATIC options:LT.0:Applies only to the Mortar contact.When less than zero, the behavior is the same as for | IGNORE| , but contact between segments belonging to the same part is ignored.
@@ -1614,6 +1704,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the ignore property."""
         self._cards[8].cards[0].set_value("ignore", value)
 
+        if value:
+            self.activate_option("IGNORE")
+
     @property
     def dprfac(self) -> float:
         """Get or set the Applies to the SOFT=2 and Mortar contacts. Depth of penetration reduction factor for SOFT=2 contact.
@@ -1628,6 +1721,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def dprfac(self, value: float) -> None:
         """Set the dprfac property."""
         self._cards[8].cards[0].set_value("dprfac", value)
+
+        if value:
+            self.activate_option("DPRFAC")
 
     @property
     def dtstif(self) -> float:
@@ -1645,6 +1741,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the dtstif property."""
         self._cards[8].cards[0].set_value("dtstif", value)
 
+        if value:
+            self.activate_option("DTSTIF")
+
     @property
     def edgek(self) -> float:
         """Get or set the Scale factor for penalty stiffness of edge to edge contact when SOFT = 2 and DEPTH = 5, 15, 25, or 35:
@@ -1657,6 +1756,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def edgek(self, value: float) -> None:
         """Set the edgek property."""
         self._cards[8].cards[0].set_value("edgek", value)
+
+        if value:
+            self.activate_option("EDGEK")
 
     @property
     def flangl(self) -> float:
@@ -1671,6 +1773,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the flangl property."""
         self._cards[8].cards[0].set_value("flangl", value)
 
+        if value:
+            self.activate_option("FLANGL")
+
     @property
     def cid_rcf(self) -> typing.Optional[int]:
         """Get or set the Coordinate system ID to output RCFORC force resultants in a local system.
@@ -1681,6 +1786,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def cid_rcf(self, value: int) -> None:
         """Set the cid_rcf property."""
         self._cards[8].cards[0].set_value("cid_rcf", value)
+
+        if value:
+            self.activate_option("CID_RCF")
 
     @property
     def q2tri(self) -> int:
@@ -1700,6 +1808,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""q2tri must be one of {0,1,2,3,4}""")
         self._cards[9].cards[0].set_value("q2tri", value)
 
+        if value:
+            self.activate_option("Q2TRI")
+
     @property
     def dtpchk(self) -> float:
         """Get or set the Time interval between shell penetration reports (only available for segment based contact)
@@ -1714,6 +1825,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the dtpchk property."""
         self._cards[9].cards[0].set_value("dtpchk", value)
 
+        if value:
+            self.activate_option("DTPCHK")
+
     @property
     def sfnbr(self) -> float:
         """Get or set the Scale factor for neighbor segment contact (only available for segment based contact)
@@ -1727,6 +1841,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the sfnbr property."""
         self._cards[9].cards[0].set_value("sfnbr", value)
 
+        if value:
+            self.activate_option("SFNBR")
+
     @property
     def fnlscl(self) -> float:
         """Get or set the Scale factor for nonlinear force scaling
@@ -1738,6 +1855,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the fnlscl property."""
         self._cards[9].cards[0].set_value("fnlscl", value)
 
+        if value:
+            self.activate_option("FNLSCL")
+
     @property
     def dnlscl(self) -> float:
         """Get or set the Distance for nonlinear force scaling
@@ -1748,6 +1868,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def dnlscl(self, value: float) -> None:
         """Set the dnlscl property."""
         self._cards[9].cards[0].set_value("dnlscl", value)
+
+        if value:
+            self.activate_option("DNLSCL")
 
     @property
     def tcso(self) -> int:
@@ -1765,6 +1888,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""tcso must be one of {0,1}""")
         self._cards[9].cards[0].set_value("tcso", value)
 
+        if value:
+            self.activate_option("TCSO")
+
     @property
     def tiedid(self) -> int:
         """Get or set the Incremental displacement update for tied contacts.EQ.0:  Off (default).
@@ -1778,6 +1904,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         if value not in [0, 1]:
             raise Exception("""tiedid must be one of {0,1}""")
         self._cards[9].cards[0].set_value("tiedid", value)
+
+        if value:
+            self.activate_option("TIEDID")
 
     @property
     def shledg(self) -> int:
@@ -1795,6 +1924,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""shledg must be one of {0,1,2}""")
         self._cards[9].cards[0].set_value("shledg", value)
 
+        if value:
+            self.activate_option("SHLEDG")
+
     @property
     def sharec(self) -> int:
         """Get or set the Shared constraint flag (only available for segment based contact)
@@ -1809,6 +1941,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         if value not in [0, 1]:
             raise Exception("""sharec must be one of {0,1}""")
         self._cards[10].cards[0].set_value("sharec", value)
+
+        if value:
+            self.activate_option("SHAREC")
 
     @property
     def cparm8(self) -> int:
@@ -1825,6 +1960,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""cparm8 must be one of {0,2}""")
         self._cards[10].cards[0].set_value("cparm8", value)
 
+        if value:
+            self.activate_option("CPARM8")
+
     @property
     def ipback(self) -> int:
         """Get or set the If set to a nonzero value, creates a  backup  penalty tied contact for this
@@ -1836,6 +1974,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def ipback(self, value: int) -> None:
         """Set the ipback property."""
         self._cards[10].cards[0].set_value("ipback", value)
+
+        if value:
+            self.activate_option("IPBACK")
 
     @property
     def srnde(self) -> int:
@@ -1850,6 +1991,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the srnde property."""
         self._cards[10].cards[0].set_value("srnde", value)
 
+        if value:
+            self.activate_option("SRNDE")
+
     @property
     def fricsf(self) -> float:
         """Get or set the Scale factor for frictional stiffness (available for SOFT = 2 only).
@@ -1860,6 +2004,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def fricsf(self, value: float) -> None:
         """Set the fricsf property."""
         self._cards[10].cards[0].set_value("fricsf", value)
+
+        if value:
+            self.activate_option("FRICSF")
 
     @property
     def icor(self) -> int:
@@ -1875,6 +2022,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the icor property."""
         self._cards[10].cards[0].set_value("icor", value)
 
+        if value:
+            self.activate_option("ICOR")
+
     @property
     def ftorq(self) -> int:
         """Get or set the If set to 1, a torsional force is computed in the beam to beam portion
@@ -1888,6 +2038,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         """Set the ftorq property."""
         self._cards[10].cards[0].set_value("ftorq", value)
 
+        if value:
+            self.activate_option("FTORQ")
+
     @property
     def region(self) -> int:
         """Get or set the The ID of a *DEFINE_REGION which will delimit the volume of
@@ -1899,6 +2052,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def region(self, value: int) -> None:
         """Set the region property."""
         self._cards[10].cards[0].set_value("region", value)
+
+        if value:
+            self.activate_option("REGION")
 
     @property
     def pstiff(self) -> int:
@@ -1915,6 +2071,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         if value not in [0, 1, 2]:
             raise Exception("""pstiff must be one of {0,1,2}""")
         self._cards[11].cards[0].set_value("pstiff", value)
+
+        if value:
+            self.activate_option("PSTIFF")
 
     @property
     def ignroff(self) -> int:
@@ -1934,6 +2093,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""ignroff must be one of {0,1,2,3}""")
         self._cards[11].cards[0].set_value("ignroff", value)
 
+        if value:
+            self.activate_option("IGNROFF")
+
     @property
     def fstol(self) -> float:
         """Get or set the Tolerance used with the SMOOTH option for determining which segments are considered flat.  The value is in degrees and approximately represents half the angle between adjacent segments
@@ -1944,6 +2106,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def fstol(self, value: float) -> None:
         """Set the fstol property."""
         self._cards[11].cards[0].set_value("fstol", value)
+
+        if value:
+            self.activate_option("FSTOL")
 
     @property
     def _2dbinr(self) -> int:
@@ -1960,6 +2125,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""_2dbinr must be one of {0,1}""")
         self._cards[11].cards[0].set_value("2dbinr", value)
 
+        if value:
+            self.activate_option("_2DBINR")
+
     @property
     def ssftyp(self) -> int:
         """Get or set the Flag to determine how the SSF option on *PART_CONTACT behaves when SOFT = 2 on optional card A:
@@ -1974,6 +2142,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
         if value not in [0, 1]:
             raise Exception("""ssftyp must be one of {0,1}""")
         self._cards[11].cards[0].set_value("ssftyp", value)
+
+        if value:
+            self.activate_option("SSFTYP")
 
     @property
     def swtpr(self) -> int:
@@ -1990,6 +2161,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
             raise Exception("""swtpr must be one of {0,1}""")
         self._cards[11].cards[0].set_value("swtpr", value)
 
+        if value:
+            self.activate_option("SWTPR")
+
     @property
     def tetfac(self) -> float:
         """Get or set the Scale factor for the computed volume of tetrahedral solid elements for the mass calculation in SOFT=2 contact. By default, half the mass of a solid element is considered for the contact segment, which is reasonable for hexahedrons. In contrast, for tetrahedrons, a larger value than 0.5 would be preferrable, because several tets fit into one hex. Therefore, a TETFAC value around 3.0 to 5.0 should make the contact stiffness more comparable with hex meshes.
@@ -2000,6 +2174,9 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def tetfac(self, value: float) -> None:
         """Set the tetfac property."""
         self._cards[11].cards[0].set_value("tetfac", value)
+
+        if value:
+            self.activate_option("TETFAC")
 
     @property
     def shloff(self) -> float:
@@ -2013,4 +2190,7 @@ class ContactRigidBodyTwoWayToRigidBody(KeywordBase):
     def shloff(self, value: float) -> None:
         """Set the shloff property."""
         self._cards[12].cards[0].set_value("shloff", value)
+
+        if value:
+            self.activate_option("SHLOFF")
 

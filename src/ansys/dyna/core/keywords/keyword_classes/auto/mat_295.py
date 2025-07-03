@@ -1837,6 +1837,9 @@ class Mat295(KeywordBase):
         """Set the title property."""
         self._cards[19].cards[0].set_value("title", value)
 
+        if value:
+            self.activate_option("TITLE")
+
 
 class MatAnisotropicHyperelastic(Mat295):
     """Alias for MAT keyword."""

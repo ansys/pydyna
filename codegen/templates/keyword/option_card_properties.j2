@@ -28,6 +28,9 @@
         self._cards[{{card.index}}].cards[{{card_loop.index-1}}].set_value("{{field.name}}", value)
 {% endif %}{# card.indices #}
 
+        if value:
+            self.activate_option("{{field.property_name.upper()}}")
+
 {% endif %}{# not field.readonly #}
 {% endif %}{# not field.redundant #}
 {% endif %}{# field.used #}
