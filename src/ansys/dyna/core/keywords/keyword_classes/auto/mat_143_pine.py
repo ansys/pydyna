@@ -634,3 +634,6 @@ class Mat143Pine(KeywordBase):
         """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
 
+        if value:
+            self.activate_option("TITLE")
+

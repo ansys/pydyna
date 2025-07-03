@@ -357,6 +357,9 @@ class BoundaryPrescribedMotionNode(KeywordBase):
         """Set the id property."""
         self._cards[2].cards[0].set_value("id", value)
 
+        if value:
+            self.activate_option("ID")
+
     @property
     def heading(self) -> typing.Optional[str]:
         """Get or set the Descriptor. We suggest using unique descriptions.
@@ -367,4 +370,7 @@ class BoundaryPrescribedMotionNode(KeywordBase):
     def heading(self, value: str) -> None:
         """Set the heading property."""
         self._cards[2].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 

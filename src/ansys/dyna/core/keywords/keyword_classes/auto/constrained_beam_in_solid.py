@@ -370,6 +370,9 @@ class ConstrainedBeamInSolid(KeywordBase):
         self._cards[2].cards[0].set_value("coupid", value)
         self._cards[3].cards[0].set_value("coupid", value)
 
+        if value:
+            self.activate_option("COUPID")
+
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the A description of this coupling definition
@@ -381,4 +384,7 @@ class ConstrainedBeamInSolid(KeywordBase):
         """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
