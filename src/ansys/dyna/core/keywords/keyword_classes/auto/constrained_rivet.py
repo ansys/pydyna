@@ -129,3 +129,6 @@ class ConstrainedRivet(KeywordBase):
         """Set the id property."""
         self._cards[1].cards[0].set_value("id", value)
 
+        if value:
+            self.activate_option("ID")
+

@@ -527,3 +527,6 @@ class MatT08(KeywordBase):
         """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 
+        if value:
+            self.activate_option("TITLE")
+
