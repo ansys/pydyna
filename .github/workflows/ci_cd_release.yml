@@ -30,7 +30,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: ansys/actions/doc-deploy-changelog@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.15
+      - uses: ansys/actions/doc-deploy-changelog@8d3e4946f36c2a7d447b92e34b1022a5c9dc77a7 # v9.0.15
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
@@ -40,7 +40,7 @@ jobs:
     name: "Code style"
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/code-style@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.15
+      - uses: ansys/actions/code-style@8d3e4946f36c2a7d447b92e34b1022a5c9dc77a7 # v9.0.15
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.15
+        uses: ansys/actions/doc-style@8d3e4946f36c2a7d447b92e34b1022a5c9dc77a7 # v9.0.15
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -97,7 +97,7 @@ jobs:
         os: [windows-latest, ubuntu-latest]
         python-version: ['3.10', '3.11', '3.12', '3.13']
     steps:
-      - uses: ansys/actions/build-wheelhouse@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.15
+      - uses: ansys/actions/build-wheelhouse@8d3e4946f36c2a7d447b92e34b1022a5c9dc77a7 # v9.0.15
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
@@ -157,7 +157,7 @@ jobs:
     needs: [doc-build, unit-tests]
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/build-library@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.15
+      - uses: ansys/actions/build-library@8d3e4946f36c2a7d447b92e34b1022a5c9dc77a7 # v9.0.15
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -171,14 +171,14 @@ jobs:
       contents: write
     steps:
       - name: "Release to the public PyPI repository"
-        uses: ansys/actions/release-pypi-public@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.15
+        uses: ansys/actions/release-pypi-public@8d3e4946f36c2a7d447b92e34b1022a5c9dc77a7 # v9.0.15
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: "Release to GitHub"
-        uses: ansys/actions/release-github@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.15
+        uses: ansys/actions/release-github@8d3e4946f36c2a7d447b92e34b1022a5c9dc77a7 # v9.0.15
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -189,7 +189,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [release]
     steps:
-      - uses: ansys/actions/doc-deploy-stable@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.15
+      - uses: ansys/actions/doc-deploy-stable@8d3e4946f36c2a7d447b92e34b1022a5c9dc77a7 # v9.0.15
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
