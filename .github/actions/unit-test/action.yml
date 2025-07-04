@@ -72,9 +72,9 @@ runs:
     - name: Run pytest
       run: |
         if [ "${{ inputs.pytest-markers }}" = "" ]; then
-          pytest -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
+          pytest 
         else
-          pytest -m "${{ inputs.pytest-markers }}" -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
+          pytest -m "${{ inputs.pytest-markers }}"
         fi
       shell: bash
       env:
