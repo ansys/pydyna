@@ -10,7 +10,8 @@ updates:
     labels:
       - "maintenance"
       - "dependencies"
-      - "dependabot"
+    assignees:
+      - "pyansys-ci-bot"
     groups:
       doc:
         patterns:
@@ -25,3 +26,14 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    labels:
+      - "maintenance"
+    assignees:
+      - "pyansys-ci-bot"
+    commit-message:
+      prefix: "ci"
+    groups:
+       actions:
+          patterns:
+            - "*"
+
