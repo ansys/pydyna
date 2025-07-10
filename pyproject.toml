@@ -117,10 +117,6 @@ src_paths = ["doc", "src", "tests"]
 
 [tool.coverage.run]
 source = ["ansys.dyna.core"]
-omit = [
-    "*/keywords/keyword_classes/auto/**",
-    "keywords/keyword_classes/auto_keywords.py",
-]
 
 [tool.coverage.report]
 show_missing = true
