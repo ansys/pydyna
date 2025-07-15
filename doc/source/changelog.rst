@@ -7,6 +7,222 @@ This document contains the release notes for the PyDyna project.
 
 .. towncrier release notes start
 
+`0.9.0 <https://github.com/ansys/pydyna/releases/tag/v0.9.0>`_ - July 15, 2025
+==============================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - general updates
+          - `#792 <https://github.com/ansys/pydyna/pull/792>`_
+
+        * - add windows exe parameter to run dyna
+          - `#801 <https://github.com/ansys/pydyna/pull/801>`_
+
+        * - build docs in python 3.13
+          - `#814 <https://github.com/ansys/pydyna/pull/814>`_
+
+        * - add run and keyword markers to composite action and matrix for keyword test
+          - `#819 <https://github.com/ansys/pydyna/pull/819>`_
+
+        * - add autosummary using jinja to all auto keywords files
+          - `#820 <https://github.com/ansys/pydyna/pull/820>`_
+
+        * - add options to activate with setter
+          - `#846 <https://github.com/ansys/pydyna/pull/846>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - feat: add license header
+          - `#787 <https://github.com/ansys/pydyna/pull/787>`_
+
+        * - add changelog fragments in PRs
+          - `#793 <https://github.com/ansys/pydyna/pull/793>`_
+
+        * - change example data url
+          - `#796 <https://github.com/ansys/pydyna/pull/796>`_
+
+        * - hide some implementation from run package and migrate to theme autoapi
+          - `#797 <https://github.com/ansys/pydyna/pull/797>`_
+
+        * - add additional doc strings to auto keyword 'jinja' template
+          - `#803 <https://github.com/ansys/pydyna/pull/803>`_
+
+        * - The nan comparison in series card test
+          - `#804 <https://github.com/ansys/pydyna/pull/804>`_
+
+        * - run module subprocess exit properly on failing
+          - `#826 <https://github.com/ansys/pydyna/pull/826>`_
+
+        * - check the working directory path before run subprocess
+          - `#831 <https://github.com/ansys/pydyna/pull/831>`_
+
+        * - badge
+          - `#840 <https://github.com/ansys/pydyna/pull/840>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: bump numpy from 2.2.3 to 2.2.4
+          - `#770 <https://github.com/ansys/pydyna/pull/770>`_
+
+        * - chore: bump pytest-cov from 6.0.0 to 6.1.1
+          - `#780 <https://github.com/ansys/pydyna/pull/780>`_
+
+        * - chore: bump ipywidgets from 8.1.5 to 8.1.6
+          - `#784 <https://github.com/ansys/pydyna/pull/784>`_
+
+        * - docs: revert beer can buckling example
+          - `#790 <https://github.com/ansys/pydyna/pull/790>`_
+
+        * - add keywords to autoapi docs
+          - `#800 <https://github.com/ansys/pydyna/pull/800>`_
+
+        * - improve getting started documentation
+          - `#802 <https://github.com/ansys/pydyna/pull/802>`_
+
+        * - Add deep wiki badge
+          - `#854 <https://github.com/ansys/pydyna/pull/854>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: bump ansys/actions from 8 to 9
+          - `#785 <https://github.com/ansys/pydyna/pull/785>`_
+
+        * - chore: bump numpy from 2.2.4 to 2.2.5
+          - `#789 <https://github.com/ansys/pydyna/pull/789>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - bump pyvista from 0.44.2 to 0.45.0
+          - `#788 <https://github.com/ansys/pydyna/pull/788>`_
+
+        * - bump the doc group across 1 directory with 3 updates
+          - `#798 <https://github.com/ansys/pydyna/pull/798>`_, `#812 <https://github.com/ansys/pydyna/pull/812>`_
+
+        * - bump ansys/actions from 9.0.2 to 9.0.6
+          - `#799 <https://github.com/ansys/pydyna/pull/799>`_
+
+        * - bump ipywidgets from 8.1.6 to 8.1.7
+          - `#806 <https://github.com/ansys/pydyna/pull/806>`_
+
+        * - bump joblib from 1.4.2 to 1.5.0
+          - `#808 <https://github.com/ansys/pydyna/pull/808>`_
+
+        * - bump ansys/actions from 9.0.6 to 9.0.7
+          - `#809 <https://github.com/ansys/pydyna/pull/809>`_
+
+        * - bump ansys/actions from 9.0.7 to 9.0.15
+          - `#810 <https://github.com/ansys/pydyna/pull/810>`_
+
+        * - bump pyvista from 0.45.0 to 0.45.1
+          - `#811 <https://github.com/ansys/pydyna/pull/811>`_
+
+        * - bump matplotlib from 3.10.1 to 3.10.3
+          - `#813 <https://github.com/ansys/pydyna/pull/813>`_
+
+        * - bump pyvista from 0.45.1 to 0.45.2
+          - `#815 <https://github.com/ansys/pydyna/pull/815>`_
+
+        * - bump numpy from 2.2.5 to 2.2.6
+          - `#817 <https://github.com/ansys/pydyna/pull/817>`_
+
+        * - bump actions/setup-python from 5.5.0 to 5.6.0
+          - `#818 <https://github.com/ansys/pydyna/pull/818>`_
+
+        * - bump joblib from 1.5.0 to 1.5.1
+          - `#822 <https://github.com/ansys/pydyna/pull/822>`_
+
+        * - bump ansys/actions from 9.0.9 to 9.0.12
+          - `#823 <https://github.com/ansys/pydyna/pull/823>`_
+
+        * - bump ansys/actions from 9.0.12 to 9.0.13
+          - `#828 <https://github.com/ansys/pydyna/pull/828>`_
+
+        * - bump pytest-xdist from 3.6.1 to 3.7.0
+          - `#829 <https://github.com/ansys/pydyna/pull/829>`_
+
+        * - bump pandas from 2.2.3 to 2.3.0
+          - `#834 <https://github.com/ansys/pydyna/pull/834>`_
+
+        * - bump scikit-learn from 1.6.1 to 1.7.0
+          - `#836 <https://github.com/ansys/pydyna/pull/836>`_
+
+        * - bump pytest-cov from 6.1.1 to 6.2.1
+          - `#837 <https://github.com/ansys/pydyna/pull/837>`_
+
+        * - bump pytest from 8.3.5 to 8.4.1
+          - `#838 <https://github.com/ansys/pydyna/pull/838>`_
+
+        * - pre-commit automatic update
+          - `#839 <https://github.com/ansys/pydyna/pull/839>`_
+
+        * - Bump ansys/actions from 9.0.13 to 10.0.12
+          - `#844 <https://github.com/ansys/pydyna/pull/844>`_
+
+        * - bump the doc group across 1 directory with 5 updates
+          - `#845 <https://github.com/ansys/pydyna/pull/845>`_
+
+        * - Bump the doc group with 2 updates
+          - `#849 <https://github.com/ansys/pydyna/pull/849>`_
+
+        * - Bump pytest-xdist from 3.7.0 to 3.8.0
+          - `#850 <https://github.com/ansys/pydyna/pull/850>`_
+
+        * - Pre-commit automatic update
+          - `#851 <https://github.com/ansys/pydyna/pull/851>`_
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - [pre-commit.ci] pre-commit autoupdate
+          - `#773 <https://github.com/ansys/pydyna/pull/773>`_
+
+        * - chore: update CHANGELOG for v0.8.0
+          - `#775 <https://github.com/ansys/pydyna/pull/775>`_
+
+        * - build: bump dev version after 0.8.0 release
+          - `#776 <https://github.com/ansys/pydyna/pull/776>`_
+
+        * - docs: Update ``CONTRIBUTORS.md`` with the latest contributors
+          - `#779 <https://github.com/ansys/pydyna/pull/779>`_
+
+        * - fix: Fix define table keyword
+          - `#782 <https://github.com/ansys/pydyna/pull/782>`_
+
+        * - test: add test case for icfd_part
+          - `#783 <https://github.com/ansys/pydyna/pull/783>`_
+
+
 `0.8.0 <https://github.com/ansys/pydyna/releases/tag/v0.8.0>`_ - April 02, 2025
 ===============================================================================
 
