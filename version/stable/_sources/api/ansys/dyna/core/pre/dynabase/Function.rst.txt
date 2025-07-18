@@ -1,0 +1,62 @@
+ansys.dyna.core.pre.dynabase.Function
+=====================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Function(Function=None)
+
+   
+   Defines a function that can be referenced by a limited number of keyword options.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: function
+      :value: None
+
+
+
+   .. py:attribute:: tabulated
+      :value: False
+
+
+
+   .. py:method:: set_tabulated(heading='', function='', x=[], y=[])
+
+
+   .. py:method:: create(stub)
+
+      
+      Create function.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

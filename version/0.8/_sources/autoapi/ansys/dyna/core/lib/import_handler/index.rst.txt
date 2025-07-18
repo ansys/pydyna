@@ -1,0 +1,191 @@
+ansys.dyna.core.lib.import_handler
+==================================
+
+.. py:module:: ansys.dyna.core.lib.import_handler
+
+.. autoapi-nested-parse::
+
+   Import handler used by the import deck feature
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.import_handler.ImportContext
+   ansys.dyna.core.lib.import_handler.ImportHandler
+
+
+Module Contents
+---------------
+
+.. py:class:: ImportContext
+
+   
+   Optional transformation to apply, using type `IncludeTransform`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: xform
+      :type:  Any
+      :value: None
+
+
+      
+      Deck into which the import is occurring.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: deck
+      :type:  Any
+      :value: None
+
+
+      
+      Path of file that is importing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: path
+      :type:  str
+      :value: None
+
+
+
+.. py:class:: ImportHandler
+
+   
+   Base class for import handlers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: before_import(context: ImportContext, keyword: str, buffer: TextIO)
+
+      
+      Event called before reading a keyword.
+
+      `keyword` is the string label of the keyword
+      `buffer` is a copy of the buffer to read from.
+
+      Usage:
+      Return True if the keyword is to be imported as usual.
+      Return False if the keyword is not to be imported.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: after_import(context: ImportContext, keyword: Union[str, ansys.dyna.core.lib.keyword_base.KeywordBase])
+
+      
+      Event called after a keyword is imported.
+
+      `keyword` is the imported keyword. It could be a string or a keyword object
+
+      Depending on the `context` is a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: on_error(error)
+
+

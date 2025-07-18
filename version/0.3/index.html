@@ -1,0 +1,907 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PyDYNA documentation 0.3.5 &#8212; PyDYNA</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=e5fbc548" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/css/ansys_sphinx_theme.css?v=068850c2" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+ 
+<link href="_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e83b937b"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3';
+        </script>
+    <link rel="icon" href="_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting started" href="getting-started/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/index.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+<!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="getting-started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="user-guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="autoapi/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="contributing.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>   <div class="container-xl">
+  <div class="row">
+    <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
+    <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul> 
+<li class="nav-item nav-item-additional-breadcrumb">
+  <a href="https://docs.pyansys.com/">PyAnsys</a> » 
+</li>
+  
+        <li class="nav-item nav-item-this"><a href="">PyDYNA documentation  0.3.5</a></li> 
+      </ul>
+    </div></div>
+  </div>
+</div>
+ 
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="getting-started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="user-guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="autoapi/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="contributing.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="pydyna-documentation-version">
+<h1>PyDYNA documentation  0.3.5<a class="headerlink" href="#pydyna-documentation-version" title="Permalink to this heading">#</a></h1>
+</section>
+<section id="pydyna">
+<h1>PyDYNA<a class="headerlink" href="#pydyna" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://docs.pyansys.com/"><img alt="PyAnsys" src="https://img.shields.io/badge/Py-Ansys-ffc107.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABDklEQVQ4jWNgoDfg5mD8vE7q/3bpVyskbW0sMRUwofHD7Dh5OBkZGBgW7/3W2tZpa2tLQEOyOzeEsfumlK2tbVpaGj4N6jIs1lpsDAwMJ278sveMY2BgCA0NFRISwqkhyQ1q/Nyd3zg4OBgYGNjZ2ePi4rB5loGBhZnhxTLJ/9ulv26Q4uVk1NXV/f///////69du4Zdg78lx//t0v+3S88rFISInD59GqIH2esIJ8G9O2/XVwhjzpw5EAam1xkkBJn/bJX+v1365hxxuCAfH9+3b9/+////48cPuNehNsS7cDEzMTAwMMzb+Q2u4dOnT2vWrMHu9ZtzxP9vl/69RVpCkBlZ3N7enoDXBwEAAA+YYitOilMVAAAAAElFTkSuQmCC" /></a> <a class="reference external" href="https://pypi.org/project/ansys-dyna-core/"><img alt="Python" src="https://img.shields.io/pypi/pyversions/ansys-dyna-core?logo=pypi" /></a> <a class="reference external" href="https://pypi.org/project/ansys-dyna-core"><img alt="PyPI" src="https://img.shields.io/pypi/v/ansys-dyna-core.svg?logo=python&amp;logoColor=white" /></a> <a class="reference external" href="https://github.com/ansys/pydyna/actions/workflows/ci_cd.yml"><img alt="GH-CI" src="https://github.com/ansys/pydyna/actions/workflows/ci_cd.yml/badge.svg" /></a> <a class="reference external" href="https://codecov.io/gh/ansys/pydyna"><img alt="Codecov" src="https://codecov.io/gh/ansys/ansys-dyna-core/branch/main/graph/badge.svg" /></a> <a class="reference external" href="https://opensource.org/licenses/MIT"><img alt="MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a> <a class="reference external" href="https://github.com/psf/black"><img alt="Black" src="https://img.shields.io/badge/code%20style-black-000000.svg?style=flat" /></a></p>
+</section>
+<section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h1>
+<p>PyDYNA is a Pythonic package for providing a more convenient and complete way to
+build an Ansys DYNA input deck, submit it to the Ansys LS-DYNA solver, and
+finally postprocess the results.</p>
+<p>In the PyDYNA installation, the <code class="docutils literal notranslate"><span class="pre">docker</span></code> directory has two child
+directories:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pre</span></code>: Provides the interface for creating DYNA input decks.
+This service includes highly abstracted APIs for setting up
+LS-DYNA input decks. Included are DynaMech, DynaIGA, DynaICFD,
+DynaSALE, DynaEM, and DynaAirbag.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">solver</span></code>: Contains the code for interfacing directly with
+the Ansys LS-DYNA solver. Because LS-DYNA is primarily a batch
+solver with very limited interactive capabilities, the code in
+this directory is similarly limited. The target use case is that
+LS-DYNA is running in a container environment such as Docker or
+Kubernetes. The code in the <code class="docutils literal notranslate"><span class="pre">solver</span></code> directory allows you to push
+input files to the container, start LS-DYNA and monitor its progress,
+and then retrieve results (RST) files.`</p></li>
+</ul>
+<p>Once you have results, you can use the Ansys Data Processing Framework (DPF),
+which is designed to provide numerical simulation users and engineers
+with a toolbox for accessing and transforming simulation data. DPF
+can access data from Ansys solver result files and from several
+files with neutral formats, including CSV, HDF5, and VTK. Using DPF’s
+various operators, you can manipulate and transform this data.</p>
+<p>The <a class="reference external" href="https://github.com/ansys/pydpf-post">ansys-dpf-post package</a> provides
+a simplified Python interface to DPF, thus enabling rapid postprocessing
+without ever leaving a Python environment. For more information on DPF-Post,
+see the <a class="reference external" href="https://post.docs.pyansys.com">DPF-Post documentation</a>.</p>
+</section>
+<section id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">#</a></h1>
+<p>For comprehesive information on PyDYNA, see the latest release
+<a class="reference external" href="https://dyna.docs.pyansys.com/">documentation</a>.</p>
+<p>On the <a class="reference external" href="https://github.com.mcas.ms/pyansys/pyDyna/issues">PyDyna Issues</a> page, you can create
+issues to submit questions, report bugs, and request new features. To reach
+the PyAnsys support team, email <a class="reference external" href="mailto:pyansys&#46;support&#37;&#52;&#48;ansys&#46;com">pyansys<span>&#46;</span>support<span>&#64;</span>ansys<span>&#46;</span>com</a>.</p>
+</section>
+<section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h1>
+<p>Here is a basic preprocessing example:</p>
+<p>Get the input file from (<code class="docutils literal notranslate"><span class="pre">&lt;repository-root-folder&gt;/src/ansys/dyna/core/pre/examples/explicit/ball_plate/ball_plate.k</span></code>)</p>
+<p>The follow example can be obtained from (<code class="docutils literal notranslate"><span class="pre">&lt;repository-root-folder&gt;/examples/Explicit/ball_plate.py</span></code>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.pre.dynasolution</span> <span class="kn">import</span> <span class="n">DynaSolution</span>
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.pre.dynamech</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DynaMech</span><span class="p">,</span>
+    <span class="n">Velocity</span><span class="p">,</span>
+    <span class="n">PartSet</span><span class="p">,</span>
+    <span class="n">ShellPart</span><span class="p">,</span>
+    <span class="n">SolidPart</span><span class="p">,</span>
+    <span class="n">NodeSet</span><span class="p">,</span>
+    <span class="n">Contact</span><span class="p">,</span>
+    <span class="n">ContactSurface</span><span class="p">,</span>
+    <span class="n">ShellFormulation</span><span class="p">,</span>
+    <span class="n">SolidFormulation</span><span class="p">,</span>
+    <span class="n">ContactType</span><span class="p">,</span>
+    <span class="n">AnalysisType</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.pre.dynamaterial</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MatRigid</span><span class="p">,</span>
+    <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.pre</span> <span class="kn">import</span> <span class="n">examples</span>
+
+<span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">hostname</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">DynaSolution</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
+
+<span class="n">fns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">ball_plate</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+<span class="n">fns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s2">&quot;ball_plate.k&quot;</span><span class="p">)</span>
+<span class="n">solution</span><span class="o">.</span><span class="n">open_files</span><span class="p">(</span><span class="n">fns</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="o">.</span><span class="n">set_termination</span><span class="p">(</span><span class="n">termination_time</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">ballplate</span> <span class="o">=</span> <span class="n">DynaMech</span><span class="p">(</span><span class="n">AnalysisType</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span>
+<span class="n">solution</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ballplate</span><span class="p">)</span>
+
+<span class="n">matrigid</span> <span class="o">=</span> <span class="n">MatRigid</span><span class="p">(</span><span class="n">mass_density</span><span class="o">=</span><span class="mf">7.83e-6</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">207</span><span class="p">,</span> <span class="n">poisson_ratio</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">matplastic</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span><span class="n">mass_density</span><span class="o">=</span><span class="mf">7.83e-6</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">207</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plate</span> <span class="o">=</span> <span class="n">ShellPart</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plate</span><span class="o">.</span><span class="n">set_element_formulation</span><span class="p">(</span><span class="n">ShellFormulation</span><span class="o">.</span><span class="n">BELYTSCHKO_TSAY</span><span class="p">)</span>
+<span class="n">plate</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">matplastic</span><span class="p">)</span>
+<span class="n">plate</span><span class="o">.</span><span class="n">set_thickness</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plate</span><span class="o">.</span><span class="n">set_integration_points</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ballplate</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">plate</span><span class="p">)</span>
+
+<span class="n">ball</span> <span class="o">=</span> <span class="n">SolidPart</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ball</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">matrigid</span><span class="p">)</span>
+<span class="n">ball</span><span class="o">.</span><span class="n">set_element_formulation</span><span class="p">(</span><span class="n">SolidFormulation</span><span class="o">.</span><span class="n">CONSTANT_STRESS_SOLID_ELEMENT</span><span class="p">)</span>
+<span class="n">ballplate</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ball</span><span class="p">)</span>
+
+<span class="n">selfcontact</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">ContactType</span><span class="o">.</span><span class="n">AUTOMATIC</span><span class="p">)</span>
+<span class="n">surf1</span> <span class="o">=</span> <span class="n">ContactSurface</span><span class="p">(</span><span class="n">PartSet</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="n">selfcontact</span><span class="o">.</span><span class="n">set_slave_surface</span><span class="p">(</span><span class="n">surf1</span><span class="p">)</span>
+<span class="n">ballplate</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">selfcontact</span><span class="p">)</span>
+
+<span class="n">spc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">68</span><span class="p">,</span><span class="mi">69</span><span class="p">,</span><span class="mi">85</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">119</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">136</span><span class="p">,</span><span class="mi">137</span><span class="p">,</span><span class="mi">153</span><span class="p">,</span><span class="mi">154</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">171</span><span class="p">,</span><span class="mi">187</span><span class="p">,</span><span class="mi">188</span><span class="p">,</span><span class="mi">204</span><span class="p">,</span><span class="mi">205</span><span class="p">,</span><span class="mi">221</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">238</span><span class="p">,</span><span class="mi">239</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">256</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">19</span><span class="p">):</span>
+    <span class="n">spc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">272</span><span class="p">,</span><span class="mi">290</span><span class="p">):</span>
+    <span class="n">spc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">ballplate</span><span class="o">.</span><span class="n">boundaryconditions</span><span class="o">.</span><span class="n">create_spc</span><span class="p">(</span><span class="n">NodeSet</span><span class="p">(</span><span class="n">spc</span><span class="p">),</span><span class="n">rx</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ry</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">rz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1652</span><span class="p">):</span>
+    <span class="n">ballplate</span><span class="o">.</span><span class="n">initialconditions</span><span class="o">.</span><span class="n">create_velocity_node</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">trans</span><span class="o">=</span><span class="n">Velocity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">solution</span><span class="o">.</span><span class="n">set_output_database</span><span class="p">(</span><span class="n">glstat</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">matsum</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">sleout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">solution</span><span class="o">.</span><span class="n">create_database_binary</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">serverpath</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">save_file</span><span class="p">()</span>
+
+<span class="n">serveroutfile</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">serverpath</span><span class="p">,</span><span class="s2">&quot;ball_plate.k&quot;</span><span class="p">))</span>
+<span class="n">downloadpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">downloadpath</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">downloadpath</span><span class="p">)</span>
+<span class="n">downloadfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">downloadpath</span><span class="p">,</span><span class="s2">&quot;ball_plate.k&quot;</span><span class="p">)</span>
+<span class="n">solution</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">serveroutfile</span><span class="p">,</span><span class="n">downloadfile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here is a basic solving example:</p>
+<p>The follow example can be obtained from (<code class="docutils literal notranslate"><span class="pre">&lt;repository-root-folder&gt;/examples/solver/ball_plate_solver.py</span></code>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ansys.dyna.core.solver</span> <span class="k">as</span> <span class="nn">solver</span>
+
+<span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="s2">&quot;5000&quot;</span>
+<span class="n">dyna</span><span class="o">=</span><span class="n">solver</span><span class="o">.</span><span class="n">DynaSolver</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span><span class="n">port</span><span class="p">)</span>           <span class="c1"># connect to the container</span>
+<span class="n">dyna</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="s2">&quot;./output/ball_plate.k&quot;</span><span class="p">)</span>                            <span class="c1"># push an input file</span>
+<span class="n">dyna</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>                                   <span class="c1"># start 4 ranks of mppdyna</span>
+<span class="n">dyna</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;i=ball_plate.k memory=10m ncycle=20000&quot;</span><span class="p">)</span>   <span class="c1"># begin execution</span>
+</pre></div>
+</div>
+<p>Here is a basic postprocessing example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.dpf</span> <span class="kn">import</span> <span class="n">core</span> <span class="k">as</span> <span class="n">dpf</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">DataSources</span><span class="p">()</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">set_result_file_path</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;./d3plot&#39;</span><span class="p">,</span> <span class="s1">&#39;d3plot&#39;</span><span class="p">)</span>
+
+<span class="n">resultOp</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">Operator</span><span class="p">(</span><span class="s2">&quot;lsdyna::d3plot::stress_von_mises&quot;</span><span class="p">)</span>
+<span class="n">resultOp</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">data_sources</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="c1"># set the time</span>
+<span class="n">resultOp</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">time_scoping</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">resultOp</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">stress_von_mises</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For more examples, see <a class="reference external" href="https://dyna.docs.pyansys.com/version/stable/examples/index.html">Examples</a>
+in the PyDYNA documentation.</p>
+</section>
+<section id="license">
+<h1>License<a class="headerlink" href="#license" title="Permalink to this heading">#</a></h1>
+<p>PyDYNA is licensed under the MIT license.</p>
+<p>PyDYNA makes no commercial claim over Ansys whatsoever. This libray extends the functionality of
+Ansys LS-DYNA by adding a Python interface to LS-DYNA without changing the core behavior or
+license of the original software. The use of the interactive control of PyDYNA requires a legally
+licensed local copy of LS-DYNA.</p>
+<p>For more information on LS-DYNA, see the
+<a class="reference external" href="https://www.ansys.com/products/structures/ansys-ls-dyna">Ansys LS-DYNA</a>
+page on the Ansys website.</p>
+</section>
+<section id="build-the-docker-image-for-the-pre-service">
+<h1>Build the Docker image for the <code class="docutils literal notranslate"><span class="pre">pre</span></code> service<a class="headerlink" href="#build-the-docker-image-for-the-pre-service" title="Permalink to this heading">#</a></h1>
+<p>You must build the Docker image for the PyDYNA <code class="docutils literal notranslate"><span class="pre">pre</span></code> service and then
+run the image as a container.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>Ensure that you have cloned the PyDYNA repository locally with these commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/pyansys/pydyna.git</span>
+<span class="go">cd pydyna</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">docker</span></code> file in the  <code class="docutils literal notranslate"><span class="pre">docker/pre</span></code> directory is used to build the
+Linux-based Docker image.</p>
+</li>
+<li><p>Ensure that Docker is installed on your machine. If you do not have Docker installed,
+see the <a class="reference external" href="https://www.docker.com">Docker website</a> for more information.</p></li>
+<li><p>If you are building the image on Windows, ensure that the Windows Subsystem for Linux (WSL)
+is installed. For installation information, see Microsoft’s
+<a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">Install Linux on Windows with WSL</a>.</p></li>
+<li><p>Download the latest Linux release artifacts for the Linux Docker container:
+<a class="reference external" href="https://github.com/ansys/pydyna/releases/download/v0.3.5/linux-binaries.zip">linux-binaries.zip</a>.</p></li>
+<li><p>Move this ZIP file to the current location (<code class="docutils literal notranslate"><span class="pre">&lt;repository-root-folder&gt;/docker/pre</span></code>).</p></li>
+</ul>
+<section id="starting-the-docker-container">
+<h3>Starting the docker container<a class="headerlink" href="#starting-the-docker-container" title="Permalink to this heading">#</a></h3>
+<p>There are two ways to start docker container.</p>
+<p>1.build image and run container</p>
+<section id="build-the-docker-image">
+<h4>Build the Docker image<a class="headerlink" href="#build-the-docker-image" title="Permalink to this heading">#</a></h4>
+<p>Once all prerequisites are met, perform these steps to build the Docker image:</p>
+<ol class="arabic">
+<li><p>In your terminal, go to the <code class="docutils literal notranslate"><span class="pre">docker</span></code> directory.</p></li>
+<li><p>Run the following Docker command, replacing <code class="docutils literal notranslate"><span class="pre">&lt;DOCKERFILE_NAME&gt;</span></code>
+with <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;DOCKER_IMAGE_TAG&gt;</span></code> with <code class="docutils literal notranslate"><span class="pre">latest</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>ghcr.io/ansys/ls-pre:&lt;DOCKER_IMAGE_TAG&gt;<span class="w"> </span>-f<span class="w"> </span>&lt;DOCKERFILE_NAME&gt;<span class="w"> </span>.
+</pre></div>
+</div>
+</li>
+<li><p>Check that the image has been built successfully by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>images
+</pre></div>
+</div>
+<p>Your output should look similar to this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt;<span class="w"> </span>REPOSITORY<span class="w">                                               </span>TAG<span class="w">                                </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">          </span>SIZE
+&gt;&gt;&gt;<span class="w"> </span>ghcr.io/ansys/ls-pre<span class="w">                                     </span>*******-latest<span class="w">                     </span>............<span class="w">   </span>X<span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">    </span>188MB
+&gt;&gt;&gt;<span class="w"> </span>......<span class="w">                                                   </span>......<span class="w">                             </span>............<span class="w">   </span>..............<span class="w">   </span>......
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="run-the-image-as-a-container">
+<h4>Run the image as a container<a class="headerlink" href="#run-the-image-as-a-container" title="Permalink to this heading">#</a></h4>
+<p>Perform these steps to run the image as a container:</p>
+<ol class="arabic">
+<li><p>Run this Docker command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">50051</span>:50051<span class="w"> </span>ghcr.io/ansys/ls-pre
+</pre></div>
+</div>
+</li>
+<li><p>Check that the image is running successfully by running this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>ps
+</pre></div>
+</div>
+<p>Your output should look similar to this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt;<span class="w"> </span>CONTAINER<span class="w"> </span>ID<span class="w">   </span>IMAGE<span class="w">                  </span>COMMAND<span class="w">                  </span>CREATED<span class="w">         </span>STATUS<span class="w">         </span>PORTS<span class="w">                                           </span>NAMES
+&gt;&gt;&gt;<span class="w"> </span>c77ffd67f9fa<span class="w">   </span>ghcr.io/ansys/ls-pre<span class="w">   </span><span class="s2">&quot;python3 ./linux-bin…&quot;</span><span class="w">   </span><span class="m">7</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">   </span>Up<span class="w"> </span><span class="m">7</span><span class="w"> </span>seconds<span class="w">   </span><span class="m">0</span>.0.0.0:50051-&gt;50051/tcp,<span class="w"> </span>:::50051-&gt;50051/tcp<span class="w">   </span>hardcore_margulis
+</pre></div>
+</div>
+</li>
+</ol>
+<p>2.Start the container from docker-compose.yml file</p>
+<p>Make sure the docker compose have been installed on your computer.
+For more information: <a class="reference external" href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a>
+Ensure that Docker compose is installed on your machine. If you do not have Docker compose installed,
+see the <a class="reference external" href="https://docs.docker.com/compose/install/">Docker website</a> for more information.</p>
+<ul>
+<li><p>Locate yourself at <code class="docutils literal notranslate"><span class="pre">&lt;repository-root-folder&gt;/docker/pre</span></code> in your terminal.</p></li>
+<li><p>Run this Docker command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="build-the-docker-image-for-the-solver-service">
+<h1>Build the Docker image for the <code class="docutils literal notranslate"><span class="pre">solver</span></code> service<a class="headerlink" href="#build-the-docker-image-for-the-solver-service" title="Permalink to this heading">#</a></h1>
+<p>You must build the Docker image for the PyDNA <code class="docutils literal notranslate"><span class="pre">solver</span></code> service and then
+run the image as a container.</p>
+<section id="id3">
+<h2>Prerequisites<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>Ensure that you have cloned the PyDYNA repository locally with these commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/pyansys/pydyna.git</span>
+<span class="go">cd pydyna</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">docker</span></code> file in the the <code class="docutils literal notranslate"><span class="pre">docker/solver</span></code> directory is used to build the
+Linux-based Docker image.</p>
+</li>
+<li><p>Ensure that Docker is installed on your machine. If you do not have Docker installed,
+see the <a class="reference external" href="https://www.docker.com">Docker website</a> for more information.</p></li>
+<li><p>If you are building the image on Windows, ensure that the Windows Subsystem for Linux (WSL)
+is installed. For installation information, see Microsoft’s
+<a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">Install Linux on Windows with WSL</a>.</p></li>
+<li><p>Download the latest Linux release artifacts for the Linux Docker container:
+<a class="reference external" href="https://github.com/ansys/pydyna/releases/download/v0.3.5/mppdyna_docker_centos7.zip">mppdyna_docker_centos7.zip</a>.</p></li>
+<li><p>Move this ZIP file to the current location (<code class="docutils literal notranslate"><span class="pre">&lt;repository-root-folder&gt;/docker/solver</span></code>) and unzip the mppdyna_docker_centos7.zip file.</p>
+<blockquote>
+<div><p>The files in this folder should look similar to this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt;<span class="w"> </span>Dockerfile<span class="w"> </span>README.rst<span class="w"> </span>do_build<span class="w"> </span>docker-compose.yml<span class="w"> </span>docker_dir<span class="w"> </span>mpi<span class="w"> </span>mppdyna_docker_centos7.zip
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id6">
+<h2>Build the Docker image<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>Once all prerequisites are met, perform these steps to build the Docker image:</p>
+<ol class="arabic">
+<li><p>In your terminal, go to the <code class="docutils literal notranslate"><span class="pre">pydyna/docker/solver</span></code> directory.</p></li>
+<li><p>Run this Docker command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./do_build
+</pre></div>
+</div>
+</li>
+<li><p>Check that the image has been built successfully by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>images
+</pre></div>
+</div>
+<p>Your output should look similar to this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt;<span class="w"> </span>REPOSITORY<span class="w">                        </span>TAG<span class="w">                                        </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">          </span>SIZE
+&gt;&gt;&gt;<span class="w"> </span>dyna_solver_v04<span class="w">                   </span>latest<span class="w">                                     </span>defbadbeee8e<span class="w">   </span><span class="m">16</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>730MB
+&gt;&gt;&gt;<span class="w"> </span>......<span class="w">                                                   </span>......<span class="w">                             </span>............<span class="w">   </span>..............<span class="w">   </span>......
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="id7">
+<h2>Run the image as a container<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>Perform these steps to run the image as a container:</p>
+<ol class="arabic">
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file, replace <code class="docutils literal notranslate"><span class="pre">&lt;license_server_name&gt;</span></code> with the correct
+license server hosting the DYNA license.
+If you are using Ansy Flexlm license</p></li>
+<li><p>Run this Docker command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</li>
+<li><p>Check that the image is running successfully by running this command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>ps
+</pre></div>
+</div>
+<p>Your output should look similar to this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt;<span class="w"> </span>CONTAINER<span class="w"> </span>ID<span class="w">   </span>IMAGE<span class="w">             </span>COMMAND<span class="w">                  </span>CREATED<span class="w">          </span>STATUS<span class="w">         </span>PORTS<span class="w">                            </span>NAMES
+&gt;&gt;&gt;<span class="w"> </span>be84c95db31d<span class="w">   </span>dyna_solver_v04<span class="w">   </span><span class="s2">&quot;/ansys_inc/server.p…&quot;</span><span class="w">   </span><span class="m">18</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>Up<span class="w"> </span><span class="m">8</span><span class="w"> </span>seconds<span class="w">   </span><span class="m">22</span>/tcp,<span class="w"> </span><span class="m">0</span>.0.0.0:5000-&gt;5000/tcp<span class="w">   </span>mppdyna_docker_centos7_dyna_1
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">PyDYNA documentation  0.3.5</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pydyna">PyDYNA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-docker-image-for-the-pre-service">Build the Docker image for the <code class="docutils literal notranslate"><span class="pre">pre</span></code> service</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-docker-container">Starting the docker container</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-docker-image">Build the Docker image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-image-as-a-container">Run the image as a container</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-docker-image-for-the-solver-service">Build the Docker image for the <code class="docutils literal notranslate"><span class="pre">solver</span></code> service</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Build the Docker image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Run the image as a container</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/pyansys/pydyna/edit/main/doc/source/index.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright (c) 2023 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  0.10.2. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
