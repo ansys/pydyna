@@ -160,6 +160,8 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
             # threadserver.start()
             # env_path = get_virtualenv_path()
             args = [sys.executable, "kwserver.py"]
+            # Excluding bandit warning for subprocess usage
+            # as this is a controlled environment where pre service is run.
             process = subprocess.Popen(args, cwd=server_path) # nosec: B603
             waittime = 0
             while not DynaSolution.grpc_local_server_on():
@@ -180,7 +182,10 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
     LOG.info(f"Running in {ip}:{port} the following command: '{command}'")
 
     LOG.debug("the pre service starting in background.")
+    
     # args = [sys.executable, "kwserver.py"]
+    # Excluding bandit warning for subprocess usage
+    # as this is a controlled environment where pre service is run.
     # process = subprocess.Popen(args, cwd=server_path) # nosec: B603
     # process.wait()
     # return port
