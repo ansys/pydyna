@@ -24,11 +24,11 @@
 
 import inspect
 import os
-import random
 import socket
 import string
 import sys
 import tempfile
+import secrets
 
 # path of this module
 MODULE_PATH = os.path.dirname(inspect.getfile(inspect.currentframe()))
@@ -155,7 +155,7 @@ def random_string(stringLength=10, letters=string.ascii_lowercase):
     letters :
 
     """
-    return "".join(random.choice(letters) for i in range(stringLength))
+    return "".join(secrets.choice(letters) for i in range(stringLength))
 
 
 def create_temp_dir(tmpdir=None):

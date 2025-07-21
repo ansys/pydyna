@@ -212,7 +212,8 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
                         value = False
                     raise Exception("Failed to find true or false value in flag")
         elif has_parameter(text_block):
-            assert parameter_set != None
+            if parameter_set is None:
+                raise ValueError("Parameter set must be provided when using parameters in keyword data.")
             value = get_parameter(text_block, item_type)
         elif item_type is int:
             value = int(float(text_block))

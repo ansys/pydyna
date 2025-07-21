@@ -23,7 +23,7 @@
 import os
 from threading import Lock
 from typing import Optional
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 import urllib.request
 
 from ansys.dyna.core.pre.internals.defaults import EXAMPLES_PATH
@@ -142,7 +142,13 @@ class DownloadManager(metaclass=DownloadManagerMeta):
             return joiner(server, filename)
 
     def _retrieve_url(self, url, dest):
-        saved_file, _ = urllib.request.urlretrieve(url, filename=dest)
+        parsed_url = urlparse(url)
+        allowed_schemes = {"http", "https", "ftp"}
+        if parsed_url.scheme not in allowed_schemes:
+            raise ValueError(f"URL scheme '{parsed_url.scheme}' not allowed for download.")
+        # Ignore the B310 warning as this is a safe use of urllib
+        # as it is used to download files from a trusted source.
+        saved_file, _ = urllib.request.urlretrieve(url, filename=dest)  # nosec: B310
         return saved_file
 
     def _retrieve_data(self, url: str, filename: str, dest: str = None, force: bool = False):

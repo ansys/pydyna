@@ -138,8 +138,8 @@ class DynaSolver:
         return appdata_folder
 
     @staticmethod
-    def downloadfile(url: str, fname: str):
-        resp = requests.get(url, stream=True)
+    def downloadfile(url: str, fname: str, timeout: float = 10.0) -> None:
+        resp = requests.get(url, stream=True, timeout=timeout)
         total = int(resp.headers.get("content-length", 0))
         with (
             open(fname, "wb") as file,
