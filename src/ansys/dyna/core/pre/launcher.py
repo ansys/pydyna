@@ -24,7 +24,9 @@
 
 import os
 import socket
-import subprocess
+
+# Subprocess is used to run LS-DYNA commands, excluding bandit warning
+import subprocess  # nosec: B404
 import sys
 import threading
 from time import sleep
@@ -158,7 +160,10 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
             # threadserver.setDaemon(True)
             # threadserver.start()
             # env_path = get_virtualenv_path()
-            process = subprocess.Popen(f"{sys.executable} kwserver.py", cwd=server_path, shell=True)
+            args = [sys.executable, "kwserver.py"]
+            # Excluding bandit warning for subprocess usage
+            # as this is a controlled environment where pre service is run.
+            process = subprocess.Popen(args, cwd=server_path)  # nosec: B603
             waittime = 0
             while not DynaSolution.grpc_local_server_on():
                 sleep(5)
@@ -178,7 +183,11 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
     LOG.info(f"Running in {ip}:{port} the following command: '{command}'")
 
     LOG.debug("the pre service starting in background.")
-    # process = subprocess.Popen("python kwserver.py", cwd=server_path, shell=True)
+
+    # args = [sys.executable, "kwserver.py"]
+    # Excluding bandit warning for subprocess usage
+    # as this is a controlled environment where pre service is run.
+    # process = subprocess.Popen(args, cwd=server_path) # nosec: B603
     # process.wait()
     # return port
 
@@ -306,7 +315,10 @@ def launch_dynapre(
 
 if __name__ == "__main__":
     server_path = os.path.join(os.getcwd(), "Server")
-    process = subprocess.Popen(f"{sys.executable} kwserver.py", cwd=server_path, shell=True)
+    args = [sys.executable, "kwserver.py"]
+    # Excluding bandit warning for subprocess usage
+    # as this is a controlled environment where dyna is run.
+    process = subprocess.Popen(args, cwd=server_path)  # nosec: B603
     process.wait()
     process.terminate()
     print(process)
