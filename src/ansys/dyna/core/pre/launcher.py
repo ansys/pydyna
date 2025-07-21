@@ -179,7 +179,7 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
     LOG.info(f"Running in {ip}:{port} the following command: '{command}'")
 
     LOG.debug("the pre service starting in background.")
-    # process = subprocess.Popen("python kwserver.py", cwd=server_path, shell=True)
+    # process = subprocess.Popen("python kwserver.py", cwd=server_path, shell=True) # nosec: B603
     # process.wait()
     # return port
 

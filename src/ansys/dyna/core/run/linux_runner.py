@@ -76,10 +76,12 @@ class LinuxRunner(BaseRunner):
     def run(self) -> None:
         os.chdir(self.working_directory)
         if self.mpi_option == MpiOption.MPP_INTEL_MPI:
-            os.system(
-                f"mpirun -np {self.ncpu} {self.solver} i={self.input_file} memory={self.get_memory_string()}"  # noqa: E501
-            )
+            args = f"mpirun -np {self.ncpu} {self.solver} i={self.input_file} memory={self.get_memory_string()}"
+            # Excluding bandit warning for subprocess usage
+            # as this is a controlled environment where we run LS-DYNA.
+            os.system(args) # nosec: B605
         else:
-            os.system(
-                f"{self.solver} i={self.input_file} ncpu={self.ncpu} memory={self.get_memory_string()}"  # noqa: E501
-            )
+            args = f"{self.solver} i={self.input_file} ncpu={self.ncpu} memory={self.get_memory_string()}"
+            # Excluding bandit warning for subprocess usage
+            # as this is a controlled environment where we run LS-DYNA.
+            os.system(args) # nosec: B605
