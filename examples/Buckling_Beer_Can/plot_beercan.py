@@ -39,7 +39,9 @@ Python.
 
 import os
 import shutil
-import subprocess
+
+# subprocess is used to run LS-DYNA commands, excluding bandit warning
+import subprocess  # nosec: B404
 import tempfile
 
 import numpy as np
