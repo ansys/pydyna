@@ -116,8 +116,11 @@ class WindowsRunner(BaseRunner):
         log_file = Path(self.working_directory) / "lsrun.out.txt"
 
         try:
+            args = ["cmd", "/c", str(script_path)]
+            # Excluding bandit warning for subprocess usage
+            # as this is a controlled environment where we run LS-DYNA.
             process = subprocess.Popen(
-                ["cmd", "/c", str(script_path)],
+                args,
                 cwd=self.working_directory,
                 stdin=subprocess.DEVNULL,
                 stdout=subprocess.DEVNULL,
