@@ -42,9 +42,7 @@ def _get_rotation_matrix(a1: float, a2: float, a3: float, a4: float, a5: float, 
         if a7 != 0.0:
             # simple rotation about an axis going through the origin
             if not (a1, a2, a3) == (0.0, 0.0, 0.0):
-                raise ValueError(
-                    "Direction vector A1, A2, A3 cannot be all zero !"
-                )
+                raise ValueError("Direction vector A1, A2, A3 cannot be all zero !")
             return tfm.rotation_matrix(math.radians(a7), [a1, a2, a3])
     parameters = (a1, a2, a3, a4, a5, a6, a7)
     warnings.warn(f"DEFINE_TRANFORMATION ROTATE option with parameters {parameters} not handled yet by pydyna!")

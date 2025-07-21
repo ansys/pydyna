@@ -145,7 +145,7 @@ class Deck:
                 if len(line) > 0:
                     if line[0] == "*":
                         kwcount += 1
-                        
+
                 if kwcount != 1:
                     raise ValueError("Appended string must contain only one keyword.")
                 width = 80
@@ -478,10 +478,10 @@ class Deck:
         sections = self.get(type="SECTION", filter=lambda kwd: kwd.secid == id)
         if len(sections) == 0:
             return None
-        
+
         if len(sections) != 1:
             raise Exception(
-                f"Failure in `deck.get_section_by_id() method`. Multiple SECTION keywords use secid {id}." # noqa: E501
+                f"Failure in `deck.get_section_by_id() method`. Multiple SECTION keywords use secid {id}."  # noqa: E501
             )
         return sections[0]
 

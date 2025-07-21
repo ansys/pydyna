@@ -64,7 +64,7 @@ def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Ite
             empty_width = pos - offset
             yield Field(None, None, offset, empty_width)
             offset += empty_width
-            
+
         if pos != offset:
             raise ValueError(f"Field {field.name} has offset {pos} not equal to previous field offset {offset}.")
         if dataclasses.is_dataclass(field.type):
