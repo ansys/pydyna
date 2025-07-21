@@ -148,7 +148,6 @@ class DownloadManager(metaclass=DownloadManagerMeta):
             raise ValueError(f"URL scheme '{parsed_url.scheme}' not allowed for download.")
         # Ignore the B310 warning as this is a safe use of urllib
         # as it is used to download files from a trusted source.
-        
         saved_file, _ = urllib.request.urlretrieve(url, filename=dest)  # nosec: B310
         return saved_file
 

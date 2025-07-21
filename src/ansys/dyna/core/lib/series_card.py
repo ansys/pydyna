@@ -103,7 +103,7 @@ class SeriesCard(CardInterface):
         int_num = int(num)
         if num - int_num != 0:
             raise ValueError(
-                f"fields_per_card {self._fields_per_card} is not a multiple of the number of fields {self._num_fields()}"
+                f"fields_per_card {self._fields_per_card} is not a multiple of the number of fields {self._num_fields()}"  # noqa: E501
             )
         return int_num
 
