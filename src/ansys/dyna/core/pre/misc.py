@@ -24,11 +24,11 @@
 
 import inspect
 import os
+import secrets
 import socket
 import string
 import sys
 import tempfile
-import secrets
 
 # path of this module
 MODULE_PATH = os.path.dirname(inspect.getfile(inspect.currentframe()))
