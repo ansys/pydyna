@@ -24,6 +24,7 @@
 
 import os
 import socket
+
 # Subprocess is used to run LS-DYNA commands, excluding bandit warning
 import subprocess  # nosec: B404
 import sys
@@ -317,7 +318,7 @@ if __name__ == "__main__":
     args = [sys.executable, "kwserver.py"]
     # Excluding bandit warning for subprocess usage
     # as this is a controlled environment where dyna is run.
-    process = subprocess.Popen(args, cwd=server_path) # nosec: B603
+    process = subprocess.Popen(args, cwd=server_path)  # nosec: B603
     process.wait()
     process.terminate()
     print(process)

@@ -25,6 +25,7 @@
 import logging
 import os
 from pathlib import Path
+
 # Subprocess is used to run LS-DYNA commands, excluding bandit warning
 import subprocess  # nosec: B404
 import time
@@ -127,7 +128,7 @@ class WindowsRunner(BaseRunner):
                 stderr=subprocess.DEVNULL,
                 universal_newlines=True,
                 bufsize=1,
-            ) # nosec: B603
+            )  # nosec: B603
             log.info("LS-DYNA execution started.")
 
             warning_detected = False
