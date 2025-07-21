@@ -24,6 +24,7 @@
 
 import os
 import socket
+
 # Subprocess is used to run LS-DYNA commands, excluding bandit warning
 import subprocess  # nosec: B404
 import sys
@@ -160,7 +161,7 @@ def launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path="") -> tupl
             # threadserver.start()
             # env_path = get_virtualenv_path()
             args = [sys.executable, "kwserver.py"]
-            process = subprocess.Popen(args, cwd=server_path) # nosec: B603
+            process = subprocess.Popen(args, cwd=server_path)  # nosec: B603
             waittime = 0
             while not DynaSolution.grpc_local_server_on():
                 sleep(5)
@@ -312,7 +313,7 @@ if __name__ == "__main__":
     args = [sys.executable, "kwserver.py"]
     # Excluding bandit warning for subprocess usage
     # as this is a controlled environment where dyna is run.
-    process = subprocess.Popen(args, cwd=server_path) # nosec: B603
+    process = subprocess.Popen(args, cwd=server_path)  # nosec: B603
     process.wait()
     process.terminate()
     print(process)
