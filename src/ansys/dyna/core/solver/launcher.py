@@ -24,7 +24,9 @@
 
 import os
 import socket
-import subprocess
+
+# Subprocess is used to run LS-DYNA commands, excluding bandit warning
+import subprocess  # nosec: B404
 import sys
 from time import sleep
 from zipfile import ZipFile
@@ -198,7 +200,11 @@ def launch_grpc(
             # threadserver.setDaemon(True)
             # threadserver.start()
 
-            process = subprocess.Popen(f"{sys.executable} server.py {product_version}", cwd=server_path, shell=True)
+            args = [f"{sys.executable}", "server.py", str(product_version)]
+
+            # Excluding bandit warning for subprocess usage
+            # as this is a controlled environment where we use LS dyna solver.
+            process = subprocess.Popen(args, cwd=server_path)  # nosec: B603
 
             # if platform.system() == "Windows":
             #     process = subprocess.Popen("python server.py", cwd=server_path, shell=True)

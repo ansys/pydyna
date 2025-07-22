@@ -108,7 +108,8 @@ class Cards(OptionsInterface):
     def _get_post_options_with_no_title_order(self):
         option_cards = [card for card in self._get_sorted_option_cards() if card.title_order == 0]
         for option_card in option_cards:
-            assert option_card.card_order > 0, "Cards with a title order of 0 must have a positive card order"
+            if option_card.card_order < 0:
+                raise ValueError("Cards with a title order of 0 must have a positive card order")
         return option_cards
 
     def _get_active_options(self) -> typing.List[OptionCardSet]:

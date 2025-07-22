@@ -25,7 +25,9 @@
 import logging
 import os
 from pathlib import Path
-import subprocess
+
+# Subprocess is used to run LS-DYNA commands, excluding bandit warning
+import subprocess  # nosec: B404
 import time
 
 from ansys.tools.path import get_latest_ansys_installation
@@ -115,15 +117,19 @@ class WindowsRunner(BaseRunner):
         log_file = Path(self.working_directory) / "lsrun.out.txt"
 
         try:
+            args = ["cmd", "/c", str(script_path)]
+            # Excluding bandit warning for subprocess usage
+            # as this is a controlled environment where we run LS-DYNA.
             process = subprocess.Popen(
-                ["cmd", "/c", str(script_path)],
+                args,
                 cwd=self.working_directory,
                 stdin=subprocess.DEVNULL,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 universal_newlines=True,
+                shell=False,
                 bufsize=1,
-            )
+            )  # nosec: B603
             log.info("LS-DYNA execution started.")
 
             warning_detected = False

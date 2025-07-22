@@ -99,9 +99,9 @@ class Deck:
         check : bool, optional
             The default is ``False``.
         """
-        assert (
-            isinstance(keyword, KeywordBase) or isinstance(keyword, str) or isinstance(keyword, EncryptedKeyword)
-        ), "Only keywords, encrypted keywords, or strings can be included in a deck."
+        if not (isinstance(keyword, KeywordBase) or isinstance(keyword, str) or isinstance(keyword, EncryptedKeyword)):
+            raise TypeError("Only keywords, encrypted keywords, or strings can be included in a deck.")
+
         if isinstance(keyword, str):
             self._keywords.append(self._formatstring(keyword, check))
         elif isinstance(keyword, KeywordBase):
@@ -138,13 +138,16 @@ class Deck:
         """Format a string to be appended to the deck."""
         linelist = string.split("\n")
         if check:
-            assert linelist[0][0] == "*", "Appended string must begin with a keyword."
+            if linelist[0][0] != "*":
+                raise ValueError("Appended string must begin with a keyword.")
             kwcount = 0
             for idx, line in enumerate(linelist):
                 if len(line) > 0:
                     if line[0] == "*":
                         kwcount += 1
-                assert kwcount == 1, "Appended string must contain only one keyword."
+
+                if kwcount != 1:
+                    raise ValueError("Appended string must contain only one keyword.")
                 width = 80
                 if self.format == format_type.long:
                     width = 200
@@ -475,9 +478,11 @@ class Deck:
         sections = self.get(type="SECTION", filter=lambda kwd: kwd.secid == id)
         if len(sections) == 0:
             return None
-        assert (
-            len(sections) == 1
-        ), f"Failure in `deck.get_section_by_id() method`. Multiple SECTION keywords use matid {id}."  # noqa: E501
+
+        if len(sections) != 1:
+            raise Exception(
+                f"Failure in `deck.get_section_by_id() method`. Multiple SECTION keywords use secid {id}."  # noqa: E501
+            )
         return sections[0]
 
     def get(self, **kwargs) -> typing.List[KeywordBase]:
