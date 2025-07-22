@@ -139,7 +139,7 @@ def test_table_card_assign_wrong_types():
         node_ids = np.arange(30) + 1
         d.table = node_ids
 
-    pytest.raises(AssertionError, assign)
+    pytest.raises(TypeError, assign)
 
 
 @pytest.mark.keywords

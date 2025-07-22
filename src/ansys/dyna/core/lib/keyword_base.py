@@ -271,7 +271,10 @@ class KeywordBase(Cards):
         title_line = title_line.strip()
 
         # the options are not activated yet, therefore get_title only returns title_prime
-        assert self.get_title().strip("*") in title_line, "first line in loads must contain the keyword title"
+        if self.get_title().strip("*") not in title_line:
+            raise ValueError(
+                f"Title line '{title_line}' does not match expected title '{self.get_title().strip('*')}'."
+            )
 
         if title_line.endswith("-"):
             self.format = format_type.standard

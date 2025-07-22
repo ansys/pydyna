@@ -39,7 +39,8 @@ CHECK_TYPE = True
 def _check_type(value):
     global CHECK_TYPE
     if CHECK_TYPE:
-        assert isinstance(value, pd.DataFrame), "value must be a DataFrame"
+        if not isinstance(value, pd.DataFrame):
+            raise TypeError("value must be a DataFrame")
 
 
 def try_initialize_table(card, name: str, **kwargs):
