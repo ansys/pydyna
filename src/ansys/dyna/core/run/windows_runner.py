@@ -127,6 +127,7 @@ class WindowsRunner(BaseRunner):
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 universal_newlines=True,
+                shell=False,
                 bufsize=1,
             )  # nosec: B603
             log.info("LS-DYNA execution started.")

@@ -69,8 +69,10 @@ class SeriesCard(CardInterface):
         self._format_type = format
 
     def _make_struct_datatype(self, type_names, type_types):
-        assert type_names is not None, "Type names are required if a list of types is used!"
-        assert len(type_types) == len(type_names), "The `type_names` and `input_type` lists have to be the same length"
+        if type_names is None:
+            raise ValueError("Type names are required if a list of types is used!")
+        if len(type_types) != len(type_names):
+            raise ValueError("The `type_names` and `input_type` lists have to be the same length")
         dataclass_spec = []
         for type_name, type_type in zip(type_names, type_types):
             dataclass_spec.append((type_name, type_type))
@@ -99,7 +101,10 @@ class SeriesCard(CardInterface):
     def _get_fields_per_card(self) -> int:
         num = self._fields_per_card / self._num_fields()
         int_num = int(num)
-        assert num - int_num == 0, "Error"
+        if num - int_num != 0:
+            raise ValueError(
+                f"fields_per_card {self._fields_per_card} is not a multiple of the number of fields {self._num_fields()}"  # noqa: E501
+            )
         return int_num
 
     def _is_last_card(self, card_index: int) -> bool:
@@ -139,7 +144,8 @@ class SeriesCard(CardInterface):
     def _get_comment_scalar(self, count: int, format: format_type) -> str:
         element_width = self._get_width(format)
         element = " " * element_width
-        assert len(self._name) <= element_width - 2, "name of variable field is too long"
+        if len(self._name) > element_width - 2:
+            raise ValueError("Name of variable field is too long")
         element = element[: -len(self._name)] + self._name
         array = element * count
         return "$#" + array[2:]
@@ -183,15 +189,20 @@ class SeriesCard(CardInterface):
 
     def __getitem__(self, index):
         err_string = f"get indexer for SeriesCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
-        assert type(index) in (slice, int), err_string
+        if not isinstance(index, (slice, int)):
+            raise TypeError(err_string)
         if type(index) == int:
             return self.__get_value(index)
-        assert index.stop > index.start and index.step == None, err_string
+        if index.stop <= index.start or index.step is not None:
+            raise TypeError(err_string)
         start = index.start
         end = index.stop
-        assert type(start) == int, err_string
-        assert type(end) == int, err_string
-        assert end > start, err_string
+        if type(start) != int:
+            raise TypeError(err_string)
+        if type(end) != int:
+            raise TypeError(err_string)
+        if end <= start:
+            raise TypeError(err_string)
         return [self.__get_value(i) for i in range(start, end)]
 
     def _wrap_value(self, value):
@@ -253,7 +264,8 @@ class SeriesCard(CardInterface):
         width = self._get_width()
         read_format = [(i * width * num_fields, width, self._type) for i in range(size)]
         values = load_dataline(read_format, line)
-        assert len(values) > 0, f"Didn't read any values from line {line}"
+        if len(values) == 0:
+            raise ValueError(f"Failed to read any values from line: {line}")
         last_real_index = -1
         for loc, val in enumerate(values):
             if self._check_null(val):
