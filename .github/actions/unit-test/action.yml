@@ -72,7 +72,7 @@ runs:
     - name: Run pytest
       run: |
         if [ "${{ inputs.pytest-markers }}" = "" ]; then
-          pytest
+          pytest 
         else
           pytest -m "${{ inputs.pytest-markers }}"
         fi
