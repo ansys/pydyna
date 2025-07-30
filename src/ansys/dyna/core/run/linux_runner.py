@@ -66,7 +66,7 @@ class LinuxRunner(BaseRunner):
         if version:
             install_loc, _ = _get_unified_install_base_for_version(version)
         else:
-            install_loc, _ = get_latest_ansys_installation()
+            _, install_loc = get_latest_ansys_installation()
 
         self.solver = os.path.join(install_loc, "ansys", "bin", "linx64", self._get_exe_name())
 
