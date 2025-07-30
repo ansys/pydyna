@@ -61,7 +61,7 @@ tests = [
     "joblib==1.5.1",
     "pandas==2.3.1",
     "openpyxl==3.1.5",
-    "scikit-learn==1.7.0",
+    "scikit-learn==1.7.1",
     "pytest-xdist==3.8.0",
     "ipython==8.37.0",
     "pyvista==0.45.3",
@@ -88,7 +88,7 @@ doc = [
 
     "ipywidgets==8.1.7",
     "joblib==1.5.1",
-    "scikit-learn==1.7.0",
+    "scikit-learn==1.7.1",
     "ipython==8.37.0",
     "jupyterlab==4.4.4",
     "sphinx-jinja==2.0.2",
@@ -121,10 +121,16 @@ source = ["ansys.dyna.core"]
 [tool.coverage.report]
 show_missing = true
 
+
 [tool.pytest.ini_options]
 minversion = "7.1"
 addopts = "-ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv"
 testpaths = ["tests"]
+markers = """
+    run: tests that exercise the `run` subpackage
+    keywords: tests that exercies the `keyword` subpackage
+    viz: tests that do 3d visualization
+    """
 
 [tool.towncrier]
 directory = "doc/changelog"
