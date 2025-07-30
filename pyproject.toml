@@ -121,10 +121,16 @@ source = ["ansys.dyna.core"]
 [tool.coverage.report]
 show_missing = true
 
+
 [tool.pytest.ini_options]
 minversion = "7.1"
 addopts = "-ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv"
 testpaths = ["tests"]
+markers = """
+    run: tests that exercise the `run` subpackage
+    keywords: tests that exercies the `keyword` subpackage
+    viz: tests that do 3d visualization
+    """
 
 [tool.towncrier]
 directory = "doc/changelog"
