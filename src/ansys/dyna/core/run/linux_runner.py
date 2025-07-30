@@ -28,6 +28,8 @@ from ansys.tools.path.path import _get_unified_install_base_for_version
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
 
+from typing import Optional
+
 
 class LinuxRunner(BaseRunner):
     """Linux implementation to Run LS-DYNA. Tested with a custom exutable
@@ -44,25 +46,30 @@ class LinuxRunner(BaseRunner):
         self.input_file = input_file
         self.working_directory = working_directory
 
-    def _find_solver(self, version: int, executable: str) -> None:
-        atp_dyna_path = get_dyna_path(find=False, allow_input=False)
-        if executable is not None:
-            # User passed in executable directly. Use that.
-            if os.path.isfile(executable):
-                self.solver = executable
-        elif atp_dyna_path is not None:
-            # User stored dyna solver in ansys-tools-path, use that
+    def _find_solver(self, version: Optional[int], executable: Optional[str]) -> None:
+        """Determine the appropriate LS-DYNA solver executable path."""
+        
+        if executable:
+            # Use user-provided executable path
+            if not os.path.isfile(executable):
+                raise FileNotFoundError(f"LS-DYNA executable not found at: {executable}")
+            self.solver = executable
+            return
+
+        # Check if solver is available from ansys-tools-path
+        atp_dyna_path = get_dyna_path(find=True, allow_input=False)
+        if atp_dyna_path:
             self.solver = atp_dyna_path
-        elif version is not None:
-            # User passed in the version, compute the path to the dyna solver from the
-            # unified installation
-            # of that version
+            return
+
+        # Resolve from specified version or fallback to latest
+        if version:
             install_loc, _ = _get_unified_install_base_for_version(version)
-            self.solver = os.path.join(install_loc, "ansys", "bin", "linx64", self._get_exe_name())
         else:
-            # User passed nothing, find the dyna solver from the latest unified installation
             install_loc, _ = get_latest_ansys_installation()
-            self.solver = os.path.join(install_loc, "ansys", "bin", "linx64", self._get_exe_name())
+
+        self.solver = os.path.join(install_loc, "ansys", "bin", "linx64", self._get_exe_name())
+
 
     def _get_exe_name(self) -> str:
         exe_name = {
