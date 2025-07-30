@@ -177,10 +177,13 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         if text_block.startswith("-&"):
             negative = True
             text_block = text_block[1:]
-        assert text_block.startswith("&")
+
+        if not text_block.startswith("&"):
+            raise ValueError(f"Expected parameter to start with '&', got '{text_block}' instead.")
         param_name = text_block[1:]
         value = parameter_set.get(param_name)
-        assert type(value) == item_type
+        if not isinstance(value, item_type):
+            raise TypeError(f"Expected parameter '{param_name}' to be of type {item_type}, got {type(value)} instead.")
         if negative:
             value *= -1.0
         return value
@@ -209,7 +212,8 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
                         value = False
                     raise Exception("Failed to find true or false value in flag")
         elif has_parameter(text_block):
-            assert parameter_set != None
+            if parameter_set is None:
+                raise ValueError("Parameter set must be provided when using parameters in keyword data.")
             value = get_parameter(text_block, item_type)
         elif item_type is int:
             value = int(float(text_block))

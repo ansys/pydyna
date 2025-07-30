@@ -240,6 +240,9 @@ class HourglassCardSet(Cards):
         """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
 
+        if value:
+            self.activate_option("TITLE")
+
     @property
     def parent(self) -> KeywordBase:
         """Get the parent keyword."""

@@ -57,7 +57,7 @@ def test_transform_rotation_1():
 
     # a1, a2, a3 cannot be zero if the angle of rotation is nonzero
     define_transform_kwd = kwd.DefineTransformation(option="ROTATE", a1=0, a2=0, a3=0, a7=90)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError, match="Direction vector A1, A2, A3 cannot be all zero!"):
         get_transform_matrix(define_transform_kwd)
 
 @pytest.mark.keywords

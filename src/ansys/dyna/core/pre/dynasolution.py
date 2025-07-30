@@ -33,8 +33,6 @@ import sys
 
 from ansys.api.dyna.v0.kwprocess_pb2 import *  # noqa : F403
 from ansys.api.dyna.v0.kwprocess_pb2_grpc import *  # noqa : F403
-
-# from subprocess import DETACHED_PROCESS
 import grpc
 import requests
 from tqdm import tqdm
@@ -150,8 +148,8 @@ class DynaSolution:
         return appdata_folder
 
     @staticmethod
-    def downloadfile(url: str, fname: str):
-        resp = requests.get(url, stream=True)
+    def downloadfile(url: str, fname: str, timeout: float = 10.0) -> None:
+        resp = requests.get(url, stream=True, timeout=timeout)
         total = int(resp.headers.get("content-length", 0))
         with (
             open(fname, "wb") as file,

@@ -698,3 +698,6 @@ class MatBarlatYld96(KeywordBase):
         """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
 
+        if value:
+            self.activate_option("TITLE")
+

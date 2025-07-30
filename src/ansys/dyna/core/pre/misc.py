@@ -24,7 +24,7 @@
 
 import inspect
 import os
-import random
+import secrets
 import socket
 import string
 import sys
@@ -155,7 +155,7 @@ def random_string(stringLength=10, letters=string.ascii_lowercase):
     letters :
 
     """
-    return "".join(random.choice(letters) for i in range(stringLength))
+    return "".join(secrets.choice(letters) for i in range(stringLength))
 
 
 def create_temp_dir(tmpdir=None):

@@ -43,7 +43,7 @@ class IncludeCard(Card):
     def _read_line(self, buf: typing.TextIO) -> str:
         line, to_exit = read_line(buf)
         if to_exit:
-            assert False, "*INCLUDE card missing filename"
+            raise RuntimeError("*INCLUDE card missing filename")
         return line
 
     def read(self, buf: typing.TextIO, parameter_set) -> None:
