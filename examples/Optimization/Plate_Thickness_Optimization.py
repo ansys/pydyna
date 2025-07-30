@@ -23,8 +23,8 @@
 """
 Plate Thickness Optimization
 ------------------
-This example shows how to use PyDyna to import a mesh, set up a plate thickness 
-optimization analysis, run the analysis iteratively until a target displacement 
+This example shows how to use PyDyna to import a mesh, set up a plate thickness
+optimization analysis, run the analysis iteratively until a target displacement
 is reached,and then display the results of that optimization.
 
 .. LINKS AND REFERENCES
@@ -42,16 +42,16 @@ import shutil
 import tempfile
 
 import ansys.dpf.core as dpf
+from ansys.dpf.core import operators as ops
 import matplotlib.pyplot as plt
 import pandas as pd
 
 from ansys.dyna.core import Deck
 from ansys.dyna.core import keywords as kwd
-from ansys.dyna.core.run.windows_runner import WindowsRunner
-from ansys.dyna.core.run.linux_runner import LinuxRunner
-from ansys.dyna.core.run.options import MpiOption, Precision, MemoryUnit
-from ansys.dpf.core import operators as ops
 from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
+from ansys.dyna.core.run.linux_runner import LinuxRunner
+from ansys.dyna.core.run.options import MemoryUnit, MpiOption, Precision
+from ansys.dyna.core.run.windows_runner import WindowsRunner
 
 # sphinx_gallery_thumbnail_path = '_static/pre/opt/plate_thickness.png'
 
@@ -61,12 +61,12 @@ workdir = tempfile.TemporaryDirectory()
 mesh_file_name = "bar_impact_mesh.k"
 
 mesh_file = DownloadManager().download_file(
-     mesh_file_name, "ls-dyna", "Bar_Impact", destination=os.path.join(EXAMPLES_PATH, "Bar_Impact")
+    mesh_file_name, "ls-dyna", "Bar_Impact", destination=os.path.join(EXAMPLES_PATH, "Bar_Impact")
 )
 
-# If you'd like to insert your own path to a local mesh file you can do so by replacing the line 
+# If you'd like to insert your own path to a local mesh file you can do so by replacing the line
 # above with:
-#mesh_file = "C:\Path\to\file\\bar_impact_mesh.k"
+# mesh_file = "C:\Path\to\file\\bar_impact_mesh.k"
 
 ###############################################################################
 # Set analysis parameters
@@ -78,13 +78,14 @@ max_iterations = 20
 initial_thickness = 0.1
 thickness_increment = 0.05
 target_displacement = 1.0
-initial_velocity = 275.0e2 
+initial_velocity = 275.0e2
 
 ###############################################################################
 # Create a deck and keywords
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create a deck, which is the container for all the keywords.
 # Then, create and append individual keywords to the deck.
+
 
 def create_input_deck(thickness):
     deck = Deck()
@@ -153,7 +154,6 @@ def create_input_deck(thickness):
     box_plate_xP = kwd.DefineBox(boxid=4, xmn=9.9, xmx=10.1, ymn=41.0, ymx=43.0, zmn=-10.1, zmx=0.1)
     box_plate_xN = kwd.DefineBox(boxid=5, xmn=-0.1, xmx=0.1, ymn=41.0, ymx=43.0, zmn=-9.9, zmx=-0.1)
 
-
     # Create node set for fixed BC
     set_node_Fixed = kwd.SetNodeGeneral()
     set_node_Fixed.sid = 2
@@ -161,7 +161,6 @@ def create_input_deck(thickness):
     set_node_Fixed.e1 = box_plate_zN.boxid
     set_node_Fixed.e2 = box_plate_xP.boxid
 
-    
     # Define fixed Boundary Conditions
     fixed_bc = kwd.BoundarySpcSet(dofx=1, dofy=1, dofz=1, dofrx=1, dofry=1, dofrz=1)
     fixed_bc.nsid = set_node_Fixed.sid
@@ -214,7 +213,6 @@ def create_input_deck(thickness):
     # Define deck history node
     deck_hist_node_1 = kwd.DatabaseHistoryNodeSet()
     deck_hist_node_1.id1 = set_node_1.sid
-
 
     # Append all cards to input deck
     deck.extend(
@@ -270,25 +268,32 @@ def write_input_deck(**kwargs):
     deck.export_file(os.path.join(wd, "input.k"))
     shutil.copyfile(mesh_file, os.path.join(wd, mesh_file_name))
 
+
 ###############################################################################
 # Define the Dyna solver function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
+
 def run_job(directory):
     if os.name == "nt":
-        runner = WindowsRunner(ncpu=2, memory=2, precision=Precision.SINGLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB)
+        runner = WindowsRunner(
+            ncpu=2, memory=2, precision=Precision.SINGLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
+        )
     elif os.name == "posix":
-        runner = LinuxRunner(ncpu=2, memory=2, precision=Precision.DOUBLE, 
-                             mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB)
+        runner = LinuxRunner(
+            ncpu=2, memory=2, precision=Precision.DOUBLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
+        )
     runner.set_input("input.k", directory)
-    runner.run() # Run LS-DYNA simulation
+    runner.run()  # Run LS-DYNA simulation
     assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
+
 
 ###############################################################################
 # Define the DPF output function
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
+
 
 def get_plate_displacement(directory):
     ds = dpf.DataSources()
@@ -297,12 +302,12 @@ def get_plate_displacement(directory):
     ds.set_result_file_path(result_file, "d3plot")
     model = dpf.Model(ds)
 
-    # Create mesh operator 
+    # Create mesh operator
     mes_op = dpf.operators.mesh.mesh_provider()
     mes_op.inputs.data_sources.connect(ds)
-    #Isolate Part 2
+    # Isolate Part 2
     mes_op.connect(25, [2])
-    #Extract mesh
+    # Extract mesh
     part_mesh = mes_op.outputs.mesh()
 
     # Create scoping operator from mesh using from_mesh scoping operator
@@ -329,17 +334,18 @@ def get_plate_displacement(directory):
 
     return tdata, max_disp_data, min_disp_data
 
+
 ###############################################################################
 # Run solver iteratively until target displacement is reached
 # ~~~~~~~~~~~~~~~~~~~~~~
-# 
+#
 
 for iteration in range(0, max_iterations):
     # Define thickness based on iteration
     thickness = initial_thickness + thickness_increment * iteration
     wd = os.path.join(workdir.name, "thickness_%.4s" % thickness)
     print(wd)
-    pathlib.Path(wd).mkdir(exist_ok=True) 
+    pathlib.Path(wd).mkdir(exist_ok=True)
     # Create LS-Dyna input deck with new thickness
     write_input_deck(thickness=thickness, wd=wd)
     # Run Solver
@@ -351,7 +357,9 @@ for iteration in range(0, max_iterations):
         # Determine if target displacement is reached
         if max(max_disp_data) <= target_displacement:
             print("Final Thickness: %.4s, Max Plate Displacement: %.5s" % (thickness, max(max_disp_data)))
-            plt.plot(reduced_time_data, max_disp_data, "r", label="Max Plate Displacement with %.4s thickness" % thickness)
+            plt.plot(
+                reduced_time_data, max_disp_data, "r", label="Max Plate Displacement with %.4s thickness" % thickness
+            )
             break
         # Add series to the plot
         plt.plot(reduced_time_data, max_disp_data, "b")
@@ -361,7 +369,7 @@ for iteration in range(0, max_iterations):
 ###############################################################################
 # Generate graphical output
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
-# 
+#
 
 plt.xlabel("Time (e^-3 s)")
 plt.ylabel("Displacement (mm)")
