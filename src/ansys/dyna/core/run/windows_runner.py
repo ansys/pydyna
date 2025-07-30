@@ -64,22 +64,22 @@ class WindowsRunner(BaseRunner):
             exe_path = Path(executable)
             if not exe_path.is_file():
                 raise FileNotFoundError(f"Specified LS-DYNA executable not found: {executable}")
-            
+
             self.solver_location = str(exe_path.parent)
-            self.solver  = f'"{exe_path}"'  # Proper quoting for Windows paths with spaces
+            self.solver = f'"{exe_path}"'  # Proper quoting for Windows paths with spaces
             return
-        
+
         if version:
             install_base, _ = _get_unified_install_base_for_version(version)
         else:
             _, install_base = get_latest_ansys_installation()
-        
+
         solver_dir = Path(install_base) / "ansys" / "bin" / "winx64"
         solver_exe = solver_dir / self._get_exe_name()
-        
+
         if not solver_exe.is_file():
             raise FileNotFoundError(f"LS-DYNA executable not found: {solver_exe}")
-    
+
         self.solver_location = str(solver_dir)
         self.solver = f'"{str(solver_exe)}"'
 

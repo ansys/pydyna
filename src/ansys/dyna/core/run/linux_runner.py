@@ -21,14 +21,13 @@
 # SOFTWARE.
 
 import os
+from typing import Optional
 
 from ansys.tools.path import get_dyna_path, get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
 
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
-
-from typing import Optional
 
 
 class LinuxRunner(BaseRunner):
@@ -48,7 +47,7 @@ class LinuxRunner(BaseRunner):
 
     def _find_solver(self, version: Optional[int], executable: Optional[str]) -> None:
         """Determine the appropriate LS-DYNA solver executable path."""
-        
+
         if executable:
             # Use user-provided executable path
             if not os.path.isfile(executable):
@@ -69,7 +68,6 @@ class LinuxRunner(BaseRunner):
             _, install_loc = get_latest_ansys_installation()
 
         self.solver = os.path.join(install_loc, "ansys", "bin", "linx64", self._get_exe_name())
-
 
     def _get_exe_name(self) -> str:
         exe_name = {
