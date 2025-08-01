@@ -1,0 +1,85 @@
+ansys.dyna.core.lib.import_handler.ImportHandler
+================================================
+
+.. py:class:: ansys.dyna.core.lib.import_handler.ImportHandler
+
+   
+   Base class for import handlers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: before_import(context: ImportContext, keyword: str, buffer: TextIO)
+
+      
+      Event called before reading a keyword.
+
+      `keyword` is the string label of the keyword
+      `buffer` is a copy of the buffer to read from.
+
+      Usage:
+      Return True if the keyword is to be imported as usual.
+      Return False if the keyword is not to be imported.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: after_import(context: ImportContext, keyword: Union[str, ansys.dyna.core.lib.keyword_base.KeywordBase])
+
+      
+      Event called after a keyword is imported.
+
+      `keyword` is the imported keyword. It could be a string or a keyword object
+
+      Depending on the `context` is a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: on_error(error)
+
