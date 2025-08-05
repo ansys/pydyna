@@ -54,7 +54,7 @@ codegen = [
     "Jinja2"
 ]
 tests = [
-    "matplotlib==3.10.3",
+    "matplotlib==3.10.5",
     "numpy==2.2.6",
     "pytest==8.4.1",
     "pytest-cov==6.2.1",
@@ -64,11 +64,11 @@ tests = [
     "scikit-learn==1.7.1",
     "pytest-xdist==3.8.0",
     "ipython==8.37.0",
-    "pyvista==0.45.2",
+    "pyvista==0.45.3",
 ]
 doc = [
     "recommonmark==0.7.1",
-    "matplotlib==3.10.3",
+    "matplotlib==3.10.5",
     "imageio==2.37.0",
     "imageio-ffmpeg==0.6.0",
     "numpydoc==1.9.0",
@@ -94,7 +94,7 @@ doc = [
     "jupyterlab==4.4.5",
     "sphinx-jinja==2.0.2",
     "sphinx-autoapi==3.6.0",
-    "pyvista==0.45.2",
+    "pyvista==0.45.3",
 ]
 
 [tool.flit.module]
