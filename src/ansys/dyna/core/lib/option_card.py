@@ -191,7 +191,7 @@ class OptionAPI:
 
         if value:
             self._options_api.activate_option(self._name)
-            
+
             # Determine if we should use cascading activation based on card order
             # If title_order exists (not None/0), use title-based mutual exclusion
             # If only card_order exists, use card_order-based cascading activation
@@ -210,11 +210,13 @@ class OptionAPI:
                 # When activating an option, also activate all options with lower card_order
                 current_card_order = option_spec.card_order
                 for any_option_spec in self._options_api.option_specs:
-                    if (any_option_spec.card_order < current_card_order and 
-                        any_option_spec.title_order == 0):  # Only cascade to options without title_order
+                    if (
+                        any_option_spec.card_order < current_card_order and any_option_spec.title_order == 0
+                    ):  # Only cascade to options without title_order
                         self._options_api.activate_option(any_option_spec.name)
         else:
             self._options_api.deactivate_option(self._name)
+
 
 class Options:
     """Option collection associated with an options API."""
