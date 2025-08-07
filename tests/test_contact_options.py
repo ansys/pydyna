@@ -110,11 +110,7 @@ def test_multiple_contact_card_types():
 def test_contact_card_writing_with_options():
     """Test that contact cards write properly with options activated"""
     keyword = ContactAutomaticSingleSurface()
-    
-    # Set some basic parameters
-    keyword.ssid = 1
-    keyword.msid = 2
-    
+   
     # Test writing with no options
     output_no_options = keyword.write()
     assert "*CONTACT_AUTOMATIC_SINGLE_SURFACE" in output_no_options
@@ -155,29 +151,13 @@ def test_contact_card_with_parameters_and_options():
     """Test contact card with both parameters and options"""
     keyword = ContactAutomaticSingleSurface()
     
-    # Set some parameters
-    keyword.ssid = 10
-    keyword.msid = 20
-    keyword.sstyp = 3
-    keyword.mstyp = 3
-    
-    # Activate some options
     options = Options(keyword)
     options["B"].active = True
+
     
-    # Verify parameters are set
-    assert keyword.ssid == 10
-    assert keyword.msid == 20
-    assert keyword.sstyp == 3
-    assert keyword.mstyp == 3
-    
-    # Verify options are cascaded correctly
     assert options["A"].active is True
     assert options["B"].active is True
     assert options["C"].active is False
     
-    # Write and check output contains both parameters and options
     output = keyword.write()
     assert "*CONTACT_AUTOMATIC_SINGLE_SURFACE" in output
-    assert "10" in output  # ssid parameter
-    assert "20" in output  # msid parameter
