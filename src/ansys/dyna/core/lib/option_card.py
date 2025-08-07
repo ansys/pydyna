@@ -194,7 +194,7 @@ class OptionAPI:
             
             # Determine if we should use cascading activation based on card order
             # If title_order exists (not None/0), use title-based mutual exclusion
-            # If only card_order exists, use card_order-based cascading activation
+            # If only card_order exists, use card_order-based logic
             if option_spec.title_order:
                 # Title-based behavior: deactivate mutually exclusive options
                 for any_option_spec in self._options_api.option_specs:
@@ -206,13 +206,18 @@ class OptionAPI:
                     ):
                         self._options_api.deactivate_option(any_option_spec.name)
             else:
-                # Card order-based cascading activation
-                # When activating an option, also activate all options with lower card_order
+                # Card order-based logic
                 current_card_order = option_spec.card_order
                 for any_option_spec in self._options_api.option_specs:
-                    if (any_option_spec.card_order < current_card_order and 
-                        any_option_spec.title_order == 0):  # Only cascade to options without title_order
-                        self._options_api.activate_option(any_option_spec.name)
+                    if any_option_spec.name == self._name:
+                        continue
+                    if any_option_spec.title_order == 0:  # Only affect options without title_order
+                        if any_option_spec.card_order == current_card_order:
+                            # Same card_order: mutually exclusive
+                            self._options_api.deactivate_option(any_option_spec.name)
+                        elif any_option_spec.card_order < current_card_order:
+                            # Lower card_order: cascading activation (prerequisite)
+                            self._options_api.activate_option(any_option_spec.name)
         else:
             self._options_api.deactivate_option(self._name)
 
