@@ -117,11 +117,11 @@ def test_extract_shell_facets():
     )
     numpy.testing.assert_allclose(
         extract_shell_facets(test_1_pddf, {1: 1, 2: 2, 3: 3, 4: 4}),
-        [3, 1, 2, 3, 4, 2, 3, 4, 1],
+        [3, 1, 2, 3, 4, 2, 3, 4, 1],np.array([1,3]), np.array([1,3]), 
     )
     numpy.testing.assert_allclose(
         extract_shell_facets(test_1_pddf, {1: 2, 2: 3, 3: 4, 4: 5}),
-        [3, 2, 3, 4, 4, 3, 4, 5, 2],
+        [3, 2, 3, 4, 4, 3, 4, 5, 2],np.array([1,3]), np.array([1,3]), 
     )
 
 

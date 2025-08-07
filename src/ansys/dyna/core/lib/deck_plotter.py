@@ -224,25 +224,26 @@ def extract_shell_facets(shells: pd.DataFrame, mapping):
     """
 
     if len(shells) == 0:
-        return []
+        return np.empty((0), dtype=int), np.empty((0), dtype=int), np.empty((0), dtype=int)
 
-    # extract only the node information
-    # could keep in the future to separate the parts or elements
-    shells = shells.drop(columns=["eid", "pid"])
-
+    # extract the node information, element_ids and part_ids
     facet_with_prefix = []
+    eid = []
+    pid = []
 
     idx = 0
     for row in shells.itertuples(index=False):
-        array = shell_facet_array(row)
+        array = shell_facet_array(row[2:])
         facet_with_prefix.append(array)
+        eid.append(row[0])
+        pid.append(row[1])
         idx += 1
 
+    # Convert list to np.ndarray
     flat_facets = np.concatenate(facet_with_prefix, axis=0)
-
     flat_facets_indexed = map_facet_nid_to_index(flat_facets, mapping)
 
-    return flat_facets_indexed
+    return flat_facets_indexed, np.array(eid), np.array(pid)
 
 
 def extract_lines(beams: pd.DataFrame, mapping: typing.Dict[int, int]) -> np.ndarray:
@@ -264,43 +265,63 @@ def extract_lines(beams: pd.DataFrame, mapping: typing.Dict[int, int]) -> np.nda
     """
     # dont need to do this if there is no beams
     if len(beams) == 0:
-        return np.empty((0), dtype=int)
+        return np.empty((0), dtype=int), np.empty((0), dtype=int), np.empty((0), dtype=int)
 
-    # extract only the node information
-    # could keep in the future to separate the parts or elements
-    beams = beams[["n1", "n2"]]
-
+    # extract the node information, element_ids and part_ids
     line_with_prefix = []
+    eid = []
+    pid = []
 
     for row in beams.itertuples(index=False):
-        line_with_prefix.append(line_array(row))
+        line_with_prefix.append(line_array(row[2:]))
+        eid.append(row[0])
+        pid.append(row[1])
 
+    # Convert list to np.ndarray
     flat_lines = np.concatenate(line_with_prefix, axis=0)
-
     flat_lines_indexed = map_facet_nid_to_index(flat_lines, mapping)
 
-    return flat_lines_indexed
+    return flat_lines_indexed, np.array(eid), np.array(pid)
 
 
 def extract_solids(solids: pd.DataFrame, mapping: typing.Dict[int, int]):
     if len(solids) == 0:
-        return []
+        return {}
 
-    solids = solids.drop(columns=["eid", "pid"])
+    solid_with_prefix = {
+        8: [[], [], []],  # Hexa
+        6: [[], [], []],  # Wedge
+        5: [[], [], []],  # Pyramid
+        4: [[], [], []],  # Tetra
+    }
 
-    idx = 0
-
-    solid_with_prefix = []
-
+    # extract the node information, element_ids and part_ids
     for row in solids.itertuples(index=False):
-        solid_with_prefix.append(solid_array(row))
-        idx += 1
+        arr = np.array(row[2:10])
+        temp_array, indices = np.unique(arr, return_index=True)
+        key = len(temp_array)
 
-    flat_solids = np.concatenate(solid_with_prefix, axis=0)
+        sorted_unique_indices = np.sort(indices)
+        temp_array = arr[sorted_unique_indices]
 
-    flat_solids_indexed = map_facet_nid_to_index(flat_solids, mapping)
+        if key == 6:  # convert node numbering to PyVista Style for Wedge
+            temp_array = temp_array[np.array((0, 1, 4, 3, 2, 5))]
 
-    return flat_solids_indexed
+        solid_with_prefix[key][0].append([key, *temp_array])  # connectivity
+        solid_with_prefix[key][1].append(row[0])  # element_ids
+        solid_with_prefix[key][2].append(row[1])  # part_ids
+
+    # Convert list to np.ndarray
+    for key, value in solid_with_prefix.items():
+        if value[0]:
+            flat_solids = np.concatenate(value[0], axis=0)
+
+            value[0] = map_facet_nid_to_index(flat_solids, mapping)  # connectivity
+
+            value[1] = np.array(value[1])  # element_ids
+            value[2] = np.array(value[2])  # part_ids
+
+    return solid_with_prefix
 
 
 def get_pyvista():
@@ -318,9 +339,14 @@ def get_polydata(deck: Deck, cwd=None):
     pv = get_pyvista()
 
     # check kwargs for cwd. future more arguments to plot
-    flat_deck = deck.expand(cwd)
-    nodes_df, element_dict = merge_keywords(flat_deck)
+    # flatten deck
+    if cwd is not None:
+        flat_deck = deck.expand(cwd=cwd, recurse=True)
+    else:
+        flat_deck = deck.expand(recurse=True)
 
+    # get dataframes for each element types
+    nodes_df, element_dict = merge_keywords(flat_deck)
     shells_df = element_dict["SHELL"]
     beams_df = element_dict["BEAM"]
     solids_df = element_dict["SOLID"]
@@ -332,12 +358,55 @@ def get_polydata(deck: Deck, cwd=None):
 
     mapping = get_nid_to_index_mapping(nodes_df)
 
-    facets = extract_shell_facets(shells_df, mapping)
-    lines = extract_lines(beams_df, mapping)
-    solids = extract_solids(solids_df, mapping)
-    plot_data = pv.PolyData(nodes_list, [*facets, *solids])
-    if len(lines) > 0:
-        plot_data.lines = lines
+    # get the node information, element_ids and part_ids
+    facets, shell_eids, shell_pids = extract_shell_facets(shells_df, mapping)
+    lines, line_eids, line_pids = extract_lines(beams_df, mapping)
+    solids_info = extract_solids(solids_df, mapping)
+
+    # celltype_dict for beam and shell
+    celltype_dict = {
+        pv.CellType.LINE: lines.reshape([-1, 3])[:, 1:],
+        pv.CellType.QUAD: facets.reshape([-1, 5])[:, 1:],
+    }
+
+    # dict of cell types for node counts
+    solid_celltype = {
+        4: pv.CellType.TETRA,
+        5: pv.CellType.PYRAMID,
+        6: pv.CellType.WEDGE,
+        8: pv.CellType.HEXAHEDRON,
+    }
+
+    # Update celltype_dict with solid elements
+    solids_pids = np.empty((0), dtype=int)
+    solids_eids = np.empty((0), dtype=int)
+
+    for n_points, elements in solids_info.items():
+        if len(elements[0]) == 0:
+            continue
+
+        temp_solids, temp_solids_eids, temp_solids_pids = elements
+
+        celltype_dict[solid_celltype[n_points]] = temp_solids.reshape([-1, n_points + 1])[:, 1:]
+
+        # Update part_ids and element_ids info for solid elements
+        if len(solids_pids) != 0:
+            solids_pids = np.concatenate((solids_pids, temp_solids_pids), axis=0)
+        else:
+            solids_pids = temp_solids_pids
+
+        if len(solids_pids) != 0:
+            solids_eids = np.concatenate((solids_eids, temp_solids_eids), axis=0)
+        else:
+            solids_eids = temp_solids_eids
+
+    # Create UnstructuredGrid
+    plot_data = pv.UnstructuredGrid(celltype_dict, nodes_list)
+
+    # Mapping part_ids and element_ids
+    plot_data.cell_data["part_ids"] = np.concatenate((line_pids, shell_pids, solids_pids), axis=0)
+    plot_data.cell_data["element_ids"] = np.concatenate((line_eids, shell_eids, solids_eids), axis=0)
+
     return plot_data
 
 
