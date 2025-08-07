@@ -188,20 +188,51 @@ class OptionAPI:
     @active.setter
     def active(self, value: bool) -> None:
         option_spec: OptionSpec = self._options_api.get_option_spec(self._name)
+        
+        # Check if this is a contact card with special options A, B, C, D, E, F, G
+        SPECIAL_CONTACT_OPTIONS = ["A", "B", "C", "D", "E", "F", "G"]
+        is_contact_card = self._is_contact_card_with_special_options()
+        
         if value:
             self._options_api.activate_option(self._name)
-            # deactivate all other options with the same card order and title order
-            # since they will be mutually exclusive
-            for any_option_spec in self._options_api.option_specs:
-                if any_option_spec.name == self._name:
-                    continue
-                if (
-                    any_option_spec.title_order == option_spec.title_order
-                    and any_option_spec.card_order == option_spec.card_order
-                ):
-                    self._options_api.deactivate_option(any_option_spec.name)
+            
+            if is_contact_card and self._name in SPECIAL_CONTACT_OPTIONS:
+                # For contact cards, implement cascading activation
+                # When activating option X, also activate all options that come before it (A, B, C, etc.)
+                option_index = SPECIAL_CONTACT_OPTIONS.index(self._name)
+                for i in range(option_index + 1):  # Include the current option
+                    prerequisite_option = SPECIAL_CONTACT_OPTIONS[i]
+                    if self._has_option(prerequisite_option):
+                        self._options_api.activate_option(prerequisite_option)
+            else:
+                # For non-contact cards, deactivate mutually exclusive options
+                for any_option_spec in self._options_api.option_specs:
+                    if any_option_spec.name == self._name:
+                        continue
+                    if (
+                        any_option_spec.title_order == option_spec.title_order
+                        and any_option_spec.card_order == option_spec.card_order
+                    ):
+                        self._options_api.deactivate_option(any_option_spec.name)
         else:
             self._options_api.deactivate_option(self._name)
+    
+    def _is_contact_card_with_special_options(self) -> bool:
+        """Check if this is a contact card that uses the special A-G options."""
+        try:
+            # Get the class name of the keyword to determine if it's a contact card
+            keyword_class = self._options_api.__class__.__name__
+            return keyword_class.startswith("Contact")
+        except:
+            return False
+    
+    def _has_option(self, option_name: str) -> bool:
+        """Check if the keyword has a specific option."""
+        try:
+            self._options_api.get_option_spec(option_name)
+            return True
+        except:
+            return False
 
 
 class Options:
