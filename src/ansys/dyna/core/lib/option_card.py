@@ -188,14 +188,14 @@ class OptionAPI:
     @active.setter
     def active(self, value: bool) -> None:
         option_spec: OptionSpec = self._options_api.get_option_spec(self._name)
-        
+
         # Check if this is a contact card with special options A, B, C, D, E, F, G
         SPECIAL_CONTACT_OPTIONS = ["A", "B", "C", "D", "E", "F", "G"]
         is_contact_card = self._is_contact_card_with_special_options()
-        
+
         if value:
             self._options_api.activate_option(self._name)
-            
+
             if is_contact_card and self._name in SPECIAL_CONTACT_OPTIONS:
                 # For contact cards, implement cascading activation
                 # When activating option X, also activate all options that come before it (A, B, C, etc.)
@@ -216,7 +216,7 @@ class OptionAPI:
                         self._options_api.deactivate_option(any_option_spec.name)
         else:
             self._options_api.deactivate_option(self._name)
-    
+
     def _is_contact_card_with_special_options(self) -> bool:
         """Check if this is a contact card that uses the special A-G options."""
         try:
@@ -225,7 +225,7 @@ class OptionAPI:
             return keyword_class.startswith("Contact")
         except:
             return False
-    
+
     def _has_option(self, option_name: str) -> bool:
         """Check if the keyword has a specific option."""
         try:
