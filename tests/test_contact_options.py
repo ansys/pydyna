@@ -36,11 +36,7 @@ def test_contact_automatic_single_surface_option_dependencies():
 
 @pytest.mark.keywords
 def test_contact_option_cascading_activation():
-    """Test cascading activation for all contact option levels"""
-    keyword = ContactAutomaticSingleSurface()
-    options = Options(keyword)
-
-    # Test activating each option individually and verify cascading
+    """Test cascading activation for all contact option levels."""
     test_cases = [
         ("A", ["A"]),
         ("B", ["A", "B"]),
@@ -52,20 +48,17 @@ def test_contact_option_cascading_activation():
     ]
 
     for option_to_activate, expected_active in test_cases:
-        # Reset all options
-        for opt in ["A", "B", "C", "D", "E", "F", "G"]:
-            options[opt].active = False
+        keyword = ContactAutomaticSingleSurface()
+        options = Options(keyword)
 
-        # Activate the specific option
         options[option_to_activate].active = True
 
-        # Check which options should be active
+    
         for opt in ["A", "B", "C", "D", "E", "F", "G"]:
             if opt in expected_active:
                 assert options[opt].active is True, f"Option {opt} should be active when {option_to_activate} is activated"
             else:
                 assert options[opt].active is False, f"Option {opt} should not be active when {option_to_activate} is activated"
-
 
 @pytest.mark.keywords
 def test_contact_option_deactivation():
