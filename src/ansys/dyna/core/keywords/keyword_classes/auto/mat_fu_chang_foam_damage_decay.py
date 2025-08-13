@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatFuChangFoamDamageDecay class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatFuChangFoamDamageDecay class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -254,6 +256,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -264,6 +267,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -274,6 +278,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -285,6 +290,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @kcon.setter
     def kcon(self, value: float) -> None:
+        """Set the kcon property."""
         self._cards[0].set_value("kcon", value)
 
     @property
@@ -295,6 +301,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @tc.setter
     def tc(self, value: float) -> None:
+        """Set the tc property."""
         self._cards[0].set_value("tc", value)
 
     @property
@@ -307,8 +314,9 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @fail.setter
     def fail(self, value: float) -> None:
+        """Set the fail property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""fail must be `None` or one of {0.0,1.0}""")
+            raise Exception("""fail must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("fail", value)
 
     @property
@@ -319,6 +327,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[0].set_value("damp", value)
 
     @property
@@ -329,6 +338,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @tbid.setter
     def tbid(self, value: int) -> None:
+        """Set the tbid property."""
         self._cards[0].set_value("tbid", value)
 
     @property
@@ -341,6 +351,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @bvflag.setter
     def bvflag(self, value: float) -> None:
+        """Set the bvflag property."""
         self._cards[1].set_value("bvflag", value)
 
     @property
@@ -353,8 +364,9 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @sflag.setter
     def sflag(self, value: float) -> None:
+        """Set the sflag property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""sflag must be `None` or one of {0.0,1.0}""")
+            raise Exception("""sflag must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("sflag", value)
 
     @property
@@ -368,8 +380,9 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @rflag.setter
     def rflag(self, value: float) -> None:
+        """Set the rflag property."""
         if value not in [0.0, 1.0, 2.0, None]:
-            raise Exception("""rflag must be `None` or one of {0.0,1.0,2.0}""")
+            raise Exception("""rflag must be `None` or one of {0.0,1.0,2.0}.""")
         self._cards[1].set_value("rflag", value)
 
     @property
@@ -382,8 +395,9 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @tflag.setter
     def tflag(self, value: float) -> None:
+        """Set the tflag property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""tflag must be `None` or one of {0.0,1.0}""")
+            raise Exception("""tflag must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("tflag", value)
 
     @property
@@ -394,6 +408,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @pvid.setter
     def pvid(self, value: int) -> None:
+        """Set the pvid property."""
         self._cards[1].set_value("pvid", value)
 
     @property
@@ -406,6 +421,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @sraf.setter
     def sraf(self, value: float) -> None:
+        """Set the sraf property."""
         self._cards[1].set_value("sraf", value)
 
     @property
@@ -418,8 +434,9 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
+        """Set the ref property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ref must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("ref", value)
 
     @property
@@ -430,6 +447,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @hu.setter
     def hu(self, value: float) -> None:
+        """Set the hu property."""
         self._cards[1].set_value("hu", value)
 
     @property
@@ -440,6 +458,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @minr.setter
     def minr(self, value: float) -> None:
+        """Set the minr property."""
         self._cards[2].set_value("minr", value)
 
     @property
@@ -450,6 +469,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @maxr.setter
     def maxr(self, value: float) -> None:
+        """Set the maxr property."""
         self._cards[2].set_value("maxr", value)
 
     @property
@@ -460,6 +480,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @shape.setter
     def shape(self, value: float) -> None:
+        """Set the shape property."""
         self._cards[2].set_value("shape", value)
 
     @property
@@ -470,6 +491,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @betat.setter
     def betat(self, value: float) -> None:
+        """Set the betat property."""
         self._cards[2].set_value("betat", value)
 
     @property
@@ -480,6 +502,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @betac.setter
     def betac(self, value: float) -> None:
+        """Set the betac property."""
         self._cards[2].set_value("betac", value)
 
     @property
@@ -490,6 +513,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @expon.setter
     def expon(self, value: float) -> None:
+        """Set the expon property."""
         self._cards[3].set_value("expon", value)
 
     @property
@@ -502,8 +526,9 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @riuld.setter
     def riuld(self, value: float) -> None:
+        """Set the riuld property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""riuld must be `None` or one of {0.0,1.0}""")
+            raise Exception("""riuld must be `None` or one of {0.0,1.0}.""")
         self._cards[3].set_value("riuld", value)
 
     @property
@@ -514,5 +539,9 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

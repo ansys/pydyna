@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineFrictionScaling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFrictionScaling(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineFrictionScaling class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -108,6 +110,7 @@ class DefineFrictionScaling(KeywordBase):
 
     @fsid.setter
     def fsid(self, value: int) -> None:
+        """Set the fsid property."""
         self._cards[0].set_value("fsid", value)
 
     @property
@@ -118,6 +121,7 @@ class DefineFrictionScaling(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -128,6 +132,7 @@ class DefineFrictionScaling(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -138,6 +143,7 @@ class DefineFrictionScaling(KeywordBase):
 
     @scale1.setter
     def scale1(self, value: float) -> None:
+        """Set the scale1 property."""
         self._cards[0].set_value("scale1", value)
 
     @property
@@ -148,6 +154,7 @@ class DefineFrictionScaling(KeywordBase):
 
     @scaleo.setter
     def scaleo(self, value: float) -> None:
+        """Set the scaleo property."""
         self._cards[0].set_value("scaleo", value)
 
     @property
@@ -158,5 +165,9 @@ class DefineFrictionScaling(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

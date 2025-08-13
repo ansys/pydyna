@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineFormingContact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFormingContact(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineFormingContact class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -98,6 +100,7 @@ class DefineFormingContact(KeywordBase):
 
     @ips.setter
     def ips(self, value: int) -> None:
+        """Set the ips property."""
         self._cards[0].set_value("ips", value)
 
     @property
@@ -108,6 +111,7 @@ class DefineFormingContact(KeywordBase):
 
     @ipm.setter
     def ipm(self, value: int) -> None:
+        """Set the ipm property."""
         self._cards[0].set_value("ipm", value)
 
     @property
@@ -118,6 +122,7 @@ class DefineFormingContact(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[0].set_value("fs", value)
 
     @property
@@ -130,8 +135,9 @@ class DefineFormingContact(KeywordBase):
 
     @oneway.setter
     def oneway(self, value: int) -> None:
+        """Set the oneway property."""
         if value not in [0, 1, None]:
-            raise Exception("""oneway must be `None` or one of {0,1}""")
+            raise Exception("""oneway must be `None` or one of {0,1}.""")
         self._cards[0].set_value("oneway", value)
 
     @property
@@ -142,5 +148,9 @@ class DefineFormingContact(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

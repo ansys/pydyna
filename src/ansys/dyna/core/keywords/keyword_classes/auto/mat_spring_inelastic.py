@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSpringInelastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSpringInelastic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSpringInelastic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -98,6 +100,7 @@ class MatSpringInelastic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -108,6 +111,7 @@ class MatSpringInelastic(KeywordBase):
 
     @lcfd.setter
     def lcfd(self, value: int) -> None:
+        """Set the lcfd property."""
         self._cards[0].set_value("lcfd", value)
 
     @property
@@ -118,6 +122,7 @@ class MatSpringInelastic(KeywordBase):
 
     @ku.setter
     def ku(self, value: float) -> None:
+        """Set the ku property."""
         self._cards[0].set_value("ku", value)
 
     @property
@@ -131,8 +136,9 @@ class MatSpringInelastic(KeywordBase):
 
     @ctf.setter
     def ctf(self, value: float) -> None:
+        """Set the ctf property."""
         if value not in [1.0, -1.0, None]:
-            raise Exception("""ctf must be `None` or one of {1.0,-1.0}""")
+            raise Exception("""ctf must be `None` or one of {1.0,-1.0}.""")
         self._cards[0].set_value("ctf", value)
 
     @property
@@ -143,5 +149,9 @@ class MatSpringInelastic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

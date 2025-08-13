@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineAlebagInflator class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineAlebagInflator(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineAlebagInflator class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -219,6 +221,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @infid.setter
     def infid(self, value: int) -> None:
+        """Set the infid property."""
         self._cards[0].set_value("infid", value)
 
     @property
@@ -229,6 +232,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @ngas.setter
     def ngas(self, value: int) -> None:
+        """Set the ngas property."""
         self._cards[0].set_value("ngas", value)
 
     @property
@@ -239,6 +243,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @norif.setter
     def norif(self, value: int) -> None:
+        """Set the norif property."""
         self._cards[0].set_value("norif", value)
 
     @property
@@ -249,6 +254,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @lcvel.setter
     def lcvel(self, value: int) -> None:
+        """Set the lcvel property."""
         self._cards[0].set_value("lcvel", value)
 
     @property
@@ -259,6 +265,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @lct.setter
     def lct(self, value: int) -> None:
+        """Set the lct property."""
         self._cards[0].set_value("lct", value)
 
     @property
@@ -269,6 +276,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @lcidm.setter
     def lcidm(self, value: int) -> None:
+        """Set the lcidm property."""
         self._cards[1].set_value("lcidm", value)
 
     @property
@@ -279,6 +287,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @mwgas.setter
     def mwgas(self, value: float) -> None:
+        """Set the mwgas property."""
         self._cards[1].set_value("mwgas", value)
 
     @property
@@ -289,6 +298,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @gasa.setter
     def gasa(self, value: float) -> None:
+        """Set the gasa property."""
         self._cards[1].set_value("gasa", value)
 
     @property
@@ -299,6 +309,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @gasb.setter
     def gasb(self, value: float) -> None:
+        """Set the gasb property."""
         self._cards[1].set_value("gasb", value)
 
     @property
@@ -309,6 +320,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @gasc.setter
     def gasc(self, value: float) -> None:
+        """Set the gasc property."""
         self._cards[1].set_value("gasc", value)
 
     @property
@@ -319,6 +331,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @nodeid.setter
     def nodeid(self, value: int) -> None:
+        """Set the nodeid property."""
         self._cards[2].set_value("nodeid", value)
 
     @property
@@ -329,6 +342,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[2].set_value("vecid", value)
 
     @property
@@ -339,6 +353,7 @@ class DefineAlebagInflator(KeywordBase):
 
     @orifare.setter
     def orifare(self, value: float) -> None:
+        """Set the orifare property."""
         self._cards[2].set_value("orifare", value)
 
     @property
@@ -349,5 +364,9 @@ class DefineAlebagInflator(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

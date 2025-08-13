@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatDamage3 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatDamage3(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatDamage3 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -287,6 +289,7 @@ class MatDamage3(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -297,6 +300,7 @@ class MatDamage3(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -308,6 +312,7 @@ class MatDamage3(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -319,6 +324,7 @@ class MatDamage3(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -329,6 +335,7 @@ class MatDamage3(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -339,6 +346,7 @@ class MatDamage3(KeywordBase):
 
     @hardi.setter
     def hardi(self, value: float) -> None:
+        """Set the hardi property."""
         self._cards[0].set_value("hardi", value)
 
     @property
@@ -349,6 +357,7 @@ class MatDamage3(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -359,6 +368,7 @@ class MatDamage3(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: int) -> None:
+        """Set the lcss property."""
         self._cards[0].set_value("lcss", value)
 
     @property
@@ -370,6 +380,7 @@ class MatDamage3(KeywordBase):
 
     @hardk1.setter
     def hardk1(self, value: float) -> None:
+        """Set the hardk1 property."""
         self._cards[1].set_value("hardk1", value)
 
     @property
@@ -381,6 +392,7 @@ class MatDamage3(KeywordBase):
 
     @gamma1.setter
     def gamma1(self, value: float) -> None:
+        """Set the gamma1 property."""
         self._cards[1].set_value("gamma1", value)
 
     @property
@@ -391,6 +403,7 @@ class MatDamage3(KeywordBase):
 
     @hardk2.setter
     def hardk2(self, value: float) -> None:
+        """Set the hardk2 property."""
         self._cards[1].set_value("hardk2", value)
 
     @property
@@ -401,6 +414,7 @@ class MatDamage3(KeywordBase):
 
     @gamma2.setter
     def gamma2(self, value: float) -> None:
+        """Set the gamma2 property."""
         self._cards[1].set_value("gamma2", value)
 
     @property
@@ -412,6 +426,7 @@ class MatDamage3(KeywordBase):
 
     @src.setter
     def src(self, value: float) -> None:
+        """Set the src property."""
         self._cards[1].set_value("src", value)
 
     @property
@@ -423,6 +438,7 @@ class MatDamage3(KeywordBase):
 
     @srp.setter
     def srp(self, value: float) -> None:
+        """Set the srp property."""
         self._cards[1].set_value("srp", value)
 
     @property
@@ -433,6 +449,7 @@ class MatDamage3(KeywordBase):
 
     @hardk3.setter
     def hardk3(self, value: float) -> None:
+        """Set the hardk3 property."""
         self._cards[1].set_value("hardk3", value)
 
     @property
@@ -443,6 +460,7 @@ class MatDamage3(KeywordBase):
 
     @gamma3.setter
     def gamma3(self, value: float) -> None:
+        """Set the gamma3 property."""
         self._cards[1].set_value("gamma3", value)
 
     @property
@@ -455,8 +473,9 @@ class MatDamage3(KeywordBase):
 
     @idamage.setter
     def idamage(self, value: int) -> None:
+        """Set the idamage property."""
         if value not in [0, 1, None]:
-            raise Exception("""idamage must be `None` or one of {0,1}""")
+            raise Exception("""idamage must be `None` or one of {0,1}.""")
         self._cards[2].set_value("idamage", value)
 
     @property
@@ -469,8 +488,9 @@ class MatDamage3(KeywordBase):
 
     @ids.setter
     def ids(self, value: int) -> None:
+        """Set the ids property."""
         if value not in [0, 1, None]:
-            raise Exception("""ids must be `None` or one of {0,1}""")
+            raise Exception("""ids must be `None` or one of {0,1}.""")
         self._cards[2].set_value("ids", value)
 
     @property
@@ -483,8 +503,9 @@ class MatDamage3(KeywordBase):
 
     @idep.setter
     def idep(self, value: int) -> None:
+        """Set the idep property."""
         if value not in [0, 1, None]:
-            raise Exception("""idep must be `None` or one of {0,1}""")
+            raise Exception("""idep must be `None` or one of {0,1}.""")
         self._cards[2].set_value("idep", value)
 
     @property
@@ -495,6 +516,7 @@ class MatDamage3(KeywordBase):
 
     @epsd.setter
     def epsd(self, value: float) -> None:
+        """Set the epsd property."""
         self._cards[2].set_value("epsd", value)
 
     @property
@@ -505,6 +527,7 @@ class MatDamage3(KeywordBase):
 
     @s.setter
     def s(self, value: float) -> None:
+        """Set the s property."""
         self._cards[2].set_value("s", value)
 
     @property
@@ -515,6 +538,7 @@ class MatDamage3(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[2].set_value("t", value)
 
     @property
@@ -525,6 +549,7 @@ class MatDamage3(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[2].set_value("dc", value)
 
     @property
@@ -540,8 +565,9 @@ class MatDamage3(KeywordBase):
 
     @khflg.setter
     def khflg(self, value: int) -> None:
+        """Set the khflg property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""khflg must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""khflg must be `None` or one of {0,1,2,3,4}.""")
         self._cards[2].set_value("khflg", value)
 
     @property
@@ -553,6 +579,7 @@ class MatDamage3(KeywordBase):
 
     @hardk4.setter
     def hardk4(self, value: float) -> None:
+        """Set the hardk4 property."""
         self._cards[3].set_value("hardk4", value)
 
     @property
@@ -564,6 +591,7 @@ class MatDamage3(KeywordBase):
 
     @gamma5.setter
     def gamma5(self, value: float) -> None:
+        """Set the gamma5 property."""
         self._cards[3].set_value("gamma5", value)
 
     @property
@@ -574,6 +602,7 @@ class MatDamage3(KeywordBase):
 
     @lckh.setter
     def lckh(self, value: int) -> None:
+        """Set the lckh property."""
         self._cards[4].set_value("lckh", value)
 
     @property
@@ -584,6 +613,7 @@ class MatDamage3(KeywordBase):
 
     @nkh.setter
     def nkh(self, value: int) -> None:
+        """Set the nkh property."""
         self._cards[4].set_value("nkh", value)
 
     @property
@@ -594,5 +624,9 @@ class MatDamage3(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

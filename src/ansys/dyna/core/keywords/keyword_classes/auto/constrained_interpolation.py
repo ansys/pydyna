@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedInterpolation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedInterpolation(KeywordBase):
     subkeyword = "INTERPOLATION"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedInterpolation class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -169,6 +171,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @icid.setter
     def icid(self, value: int) -> None:
+        """Set the icid property."""
         self._cards[0].set_value("icid", value)
 
     @property
@@ -179,6 +182,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @dnid.setter
     def dnid(self, value: int) -> None:
+        """Set the dnid property."""
         self._cards[0].set_value("dnid", value)
 
     @property
@@ -196,6 +200,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @ddof.setter
     def ddof(self, value: int) -> None:
+        """Set the ddof property."""
         self._cards[0].set_value("ddof", value)
 
     @property
@@ -206,6 +211,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @cidd.setter
     def cidd(self, value: int) -> None:
+        """Set the cidd property."""
         self._cards[0].set_value("cidd", value)
 
     @property
@@ -218,8 +224,9 @@ class ConstrainedInterpolation(KeywordBase):
 
     @ityp.setter
     def ityp(self, value: int) -> None:
+        """Set the ityp property."""
         if value not in [0, 1, None]:
-            raise Exception("""ityp must be `None` or one of {0,1}""")
+            raise Exception("""ityp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ityp", value)
 
     @property
@@ -233,8 +240,9 @@ class ConstrainedInterpolation(KeywordBase):
 
     @idnsw.setter
     def idnsw(self, value: int) -> None:
+        """Set the idnsw property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""idnsw must be `None` or one of {0,1,2}""")
+            raise Exception("""idnsw must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("idnsw", value)
 
     @property
@@ -247,8 +255,9 @@ class ConstrainedInterpolation(KeywordBase):
 
     @fgm.setter
     def fgm(self, value: int) -> None:
+        """Set the fgm property."""
         if value not in [0, 1, None]:
-            raise Exception("""fgm must be `None` or one of {0,1}""")
+            raise Exception("""fgm must be `None` or one of {0,1}.""")
         self._cards[0].set_value("fgm", value)
 
     @property
@@ -259,6 +268,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @inid.setter
     def inid(self, value: int) -> None:
+        """Set the inid property."""
         self._cards[1].set_value("inid", value)
 
     @property
@@ -269,6 +279,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @idof.setter
     def idof(self, value: int) -> None:
+        """Set the idof property."""
         self._cards[1].set_value("idof", value)
 
     @property
@@ -279,6 +290,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @twghtx.setter
     def twghtx(self, value: float) -> None:
+        """Set the twghtx property."""
         self._cards[1].set_value("twghtx", value)
 
     @property
@@ -289,6 +301,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @twghty.setter
     def twghty(self, value: float) -> None:
+        """Set the twghty property."""
         self._cards[1].set_value("twghty", value)
 
     @property
@@ -299,6 +312,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @twghtz.setter
     def twghtz(self, value: float) -> None:
+        """Set the twghtz property."""
         self._cards[1].set_value("twghtz", value)
 
     @property
@@ -309,6 +323,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @rwghtx.setter
     def rwghtx(self, value: float) -> None:
+        """Set the rwghtx property."""
         self._cards[1].set_value("rwghtx", value)
 
     @property
@@ -319,6 +334,7 @@ class ConstrainedInterpolation(KeywordBase):
 
     @rwghty.setter
     def rwghty(self, value: float) -> None:
+        """Set the rwghty property."""
         self._cards[1].set_value("rwghty", value)
 
     @property
@@ -329,5 +345,6 @@ class ConstrainedInterpolation(KeywordBase):
 
     @rwghtz.setter
     def rwghtz(self, value: float) -> None:
+        """Set the rwghtz property."""
         self._cards[1].set_value("rwghtz", value)
 

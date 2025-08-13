@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryElementMethodWake class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryElementMethodWake(KeywordBase):
     subkeyword = "ELEMENT_METHOD_WAKE"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryElementMethodWake class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class BoundaryElementMethodWake(KeywordBase):
 
     @nelem.setter
     def nelem(self, value: int) -> None:
+        """Set the nelem property."""
         self._cards[0].set_value("nelem", value)
 
     @property
@@ -71,5 +74,6 @@ class BoundaryElementMethodWake(KeywordBase):
 
     @nside.setter
     def nside(self, value: int) -> None:
+        """Set the nside property."""
         self._cards[0].set_value("nside", value)
 

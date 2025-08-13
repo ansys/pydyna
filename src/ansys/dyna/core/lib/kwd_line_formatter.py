@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -127,9 +127,11 @@ def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterab
 def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> typing.List:
     """loads a keyword card line with fixed column offsets and width from string
     spec: list of tuples representing the (offset, width, type) of each field
-          type can be a Flag which represents the True and False value
+    type can be a Flag which represents the True and False value
     line_data: string with keyword data
-    example:
+
+    Example
+    -------
     >>> load_dataline([(0,10, int),(10,10, str)], '         1     hello')
     (1, 'hello')
     """
@@ -175,10 +177,13 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         if text_block.startswith("-&"):
             negative = True
             text_block = text_block[1:]
-        assert text_block.startswith("&")
+
+        if not text_block.startswith("&"):
+            raise ValueError(f"Expected parameter to start with '&', got '{text_block}' instead.")
         param_name = text_block[1:]
         value = parameter_set.get(param_name)
-        assert type(value) == item_type
+        if not isinstance(value, item_type):
+            raise TypeError(f"Expected parameter '{param_name}' to be of type {item_type}, got {type(value)} instead.")
         if negative:
             value *= -1.0
         return value
@@ -207,7 +212,8 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
                         value = False
                     raise Exception("Failed to find true or false value in flag")
         elif has_parameter(text_block):
-            assert parameter_set != None
+            if parameter_set is None:
+                raise ValueError("Parameter set must be provided when using parameters in keyword data.")
             value = get_parameter(text_block, item_type)
         elif item_type is int:
             value = int(float(text_block))

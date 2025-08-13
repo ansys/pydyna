@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the RigidwallGeometricCylinderInteriorDeformDisplay class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
     subkeyword = "GEOMETRIC_CYLINDER_INTERIOR_DEFORM_DISPLAY"
 
     def __init__(self, **kwargs):
+        """Initialize the RigidwallGeometricCylinderInteriorDeformDisplay class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -320,6 +322,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -330,6 +333,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -341,6 +345,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 
     @property
@@ -351,6 +356,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @nsidex.setter
     def nsidex(self, value: int) -> None:
+        """Set the nsidex property."""
         self._cards[1].set_value("nsidex", value)
 
     @property
@@ -361,6 +367,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[1].set_value("boxid", value)
 
     @property
@@ -371,6 +378,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -381,6 +389,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -391,6 +400,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @xt.setter
     def xt(self, value: float) -> None:
+        """Set the xt property."""
         self._cards[2].set_value("xt", value)
 
     @property
@@ -401,6 +411,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @yt.setter
     def yt(self, value: float) -> None:
+        """Set the yt property."""
         self._cards[2].set_value("yt", value)
 
     @property
@@ -411,6 +422,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @zt.setter
     def zt(self, value: float) -> None:
+        """Set the zt property."""
         self._cards[2].set_value("zt", value)
 
     @property
@@ -421,6 +433,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @xh.setter
     def xh(self, value: float) -> None:
+        """Set the xh property."""
         self._cards[2].set_value("xh", value)
 
     @property
@@ -431,6 +444,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @yh.setter
     def yh(self, value: float) -> None:
+        """Set the yh property."""
         self._cards[2].set_value("yh", value)
 
     @property
@@ -441,6 +455,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @zh.setter
     def zh(self, value: float) -> None:
+        """Set the zh property."""
         self._cards[2].set_value("zh", value)
 
     @property
@@ -453,6 +468,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[2].set_value("fric", value)
 
     @property
@@ -463,6 +479,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @radcyl.setter
     def radcyl(self, value: float) -> None:
+        """Set the radcyl property."""
         self._cards[3].set_value("radcyl", value)
 
     @property
@@ -473,6 +490,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @lencyl.setter
     def lencyl(self, value: float) -> None:
+        """Set the lencyl property."""
         self._cards[3].set_value("lencyl", value)
 
     @property
@@ -483,6 +501,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @nsegs.setter
     def nsegs(self, value: int) -> None:
+        """Set the nsegs property."""
         self._cards[3].set_value("nsegs", value)
 
     @property
@@ -493,6 +512,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @vl.setter
     def vl(self, value: float) -> None:
+        """Set the vl property."""
         self._cards[4].set_value("vl", value)
 
     @property
@@ -503,6 +523,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @height.setter
     def height(self, value: float) -> None:
+        """Set the height property."""
         self._cards[4].set_value("height", value)
 
     @property
@@ -513,6 +534,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[5].set_value("xp", value)
 
     @property
@@ -523,6 +545,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[5].set_value("yp", value)
 
     @property
@@ -533,6 +556,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[5].set_value("zp", value)
 
     @property
@@ -543,6 +567,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @nl.setter
     def nl(self, value: int) -> None:
+        """Set the nl property."""
         self._cards[5].set_value("nl", value)
 
     @property
@@ -553,6 +578,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @narc.setter
     def narc(self, value: int) -> None:
+        """Set the narc property."""
         self._cards[5].set_value("narc", value)
 
     @property
@@ -563,6 +589,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @nr.setter
     def nr(self, value: int) -> None:
+        """Set the nr property."""
         self._cards[5].set_value("nr", value)
 
     @property
@@ -573,6 +600,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @lcidr.setter
     def lcidr(self, value: int) -> None:
+        """Set the lcidr property."""
         self._cards[6].set_value("lcidr", value)
 
     @property
@@ -583,6 +611,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @lcida.setter
     def lcida(self, value: int) -> None:
+        """Set the lcida property."""
         self._cards[6].set_value("lcida", value)
 
     @property
@@ -594,6 +623,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @lcidb.setter
     def lcidb(self, value: int) -> None:
+        """Set the lcidb property."""
         self._cards[6].set_value("lcidb", value)
 
     @property
@@ -604,6 +634,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @lcidg.setter
     def lcidg(self, value: int) -> None:
+        """Set the lcidg property."""
         self._cards[6].set_value("lcidg", value)
 
     @property
@@ -614,6 +645,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[7].set_value("pid", value)
 
     @property
@@ -624,6 +656,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[7].set_value("ro", value)
 
     @property
@@ -634,6 +667,7 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[7].set_value("e", value)
 
     @property
@@ -644,5 +678,6 @@ class RigidwallGeometricCylinderInteriorDeformDisplay(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[7].set_value("pr", value)
 

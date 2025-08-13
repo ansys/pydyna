@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatElasticFluid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatElasticFluid(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatElasticFluid class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -138,6 +140,7 @@ class MatElasticFluid(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -148,6 +151,7 @@ class MatElasticFluid(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -158,6 +162,7 @@ class MatElasticFluid(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -168,6 +173,7 @@ class MatElasticFluid(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -178,6 +184,7 @@ class MatElasticFluid(KeywordBase):
 
     @da.setter
     def da(self, value: float) -> None:
+        """Set the da property."""
         self._cards[0].set_value("da", value)
 
     @property
@@ -188,6 +195,7 @@ class MatElasticFluid(KeywordBase):
 
     @db.setter
     def db(self, value: float) -> None:
+        """Set the db property."""
         self._cards[0].set_value("db", value)
 
     @property
@@ -198,6 +206,7 @@ class MatElasticFluid(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -208,6 +217,7 @@ class MatElasticFluid(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[1].set_value("vc", value)
 
     @property
@@ -218,6 +228,7 @@ class MatElasticFluid(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[1].set_value("cp", value)
 
     @property
@@ -228,5 +239,9 @@ class MatElasticFluid(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

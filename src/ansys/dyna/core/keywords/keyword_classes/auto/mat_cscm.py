@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatCscm class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatCscm(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatCscm class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -419,6 +421,7 @@ class MatCscm(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -429,6 +432,7 @@ class MatCscm(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -446,8 +450,9 @@ class MatCscm(KeywordBase):
 
     @nplot.setter
     def nplot(self, value: int) -> None:
+        """Set the nplot property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""nplot must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""nplot must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("nplot", value)
 
     @property
@@ -458,6 +463,7 @@ class MatCscm(KeywordBase):
 
     @incre.setter
     def incre(self, value: float) -> None:
+        """Set the incre property."""
         self._cards[0].set_value("incre", value)
 
     @property
@@ -470,8 +476,9 @@ class MatCscm(KeywordBase):
 
     @irate.setter
     def irate(self, value: int) -> None:
+        """Set the irate property."""
         if value not in [0, 1, None]:
-            raise Exception("""irate must be `None` or one of {0,1}""")
+            raise Exception("""irate must be `None` or one of {0,1}.""")
         self._cards[0].set_value("irate", value)
 
     @property
@@ -482,6 +489,7 @@ class MatCscm(KeywordBase):
 
     @erode.setter
     def erode(self, value: float) -> None:
+        """Set the erode property."""
         self._cards[0].set_value("erode", value)
 
     @property
@@ -494,6 +502,7 @@ class MatCscm(KeywordBase):
 
     @recov.setter
     def recov(self, value: float) -> None:
+        """Set the recov property."""
         self._cards[0].set_value("recov", value)
 
     @property
@@ -506,8 +515,9 @@ class MatCscm(KeywordBase):
 
     @itretrc.setter
     def itretrc(self, value: int) -> None:
+        """Set the itretrc property."""
         if value not in [0, 1, None]:
-            raise Exception("""itretrc must be `None` or one of {0,1}""")
+            raise Exception("""itretrc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("itretrc", value)
 
     @property
@@ -518,6 +528,7 @@ class MatCscm(KeywordBase):
 
     @pred.setter
     def pred(self, value: float) -> None:
+        """Set the pred property."""
         self._cards[1].set_value("pred", value)
 
     @property
@@ -528,6 +539,7 @@ class MatCscm(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[2].set_value("g", value)
 
     @property
@@ -538,6 +550,7 @@ class MatCscm(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[2].set_value("k", value)
 
     @property
@@ -548,6 +561,7 @@ class MatCscm(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[2].set_value("alpha", value)
 
     @property
@@ -558,6 +572,7 @@ class MatCscm(KeywordBase):
 
     @theta.setter
     def theta(self, value: float) -> None:
+        """Set the theta property."""
         self._cards[2].set_value("theta", value)
 
     @property
@@ -568,6 +583,7 @@ class MatCscm(KeywordBase):
 
     @lamda.setter
     def lamda(self, value: float) -> None:
+        """Set the lamda property."""
         self._cards[2].set_value("lamda", value)
 
     @property
@@ -578,6 +594,7 @@ class MatCscm(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[2].set_value("beta", value)
 
     @property
@@ -588,6 +605,7 @@ class MatCscm(KeywordBase):
 
     @nh.setter
     def nh(self, value: float) -> None:
+        """Set the nh property."""
         self._cards[2].set_value("nh", value)
 
     @property
@@ -598,6 +616,7 @@ class MatCscm(KeywordBase):
 
     @ch.setter
     def ch(self, value: float) -> None:
+        """Set the ch property."""
         self._cards[2].set_value("ch", value)
 
     @property
@@ -608,6 +627,7 @@ class MatCscm(KeywordBase):
 
     @alpha1.setter
     def alpha1(self, value: float) -> None:
+        """Set the alpha1 property."""
         self._cards[3].set_value("alpha1", value)
 
     @property
@@ -618,6 +638,7 @@ class MatCscm(KeywordBase):
 
     @theta1.setter
     def theta1(self, value: float) -> None:
+        """Set the theta1 property."""
         self._cards[3].set_value("theta1", value)
 
     @property
@@ -628,6 +649,7 @@ class MatCscm(KeywordBase):
 
     @lamda1.setter
     def lamda1(self, value: float) -> None:
+        """Set the lamda1 property."""
         self._cards[3].set_value("lamda1", value)
 
     @property
@@ -638,6 +660,7 @@ class MatCscm(KeywordBase):
 
     @beta1.setter
     def beta1(self, value: float) -> None:
+        """Set the beta1 property."""
         self._cards[3].set_value("beta1", value)
 
     @property
@@ -648,6 +671,7 @@ class MatCscm(KeywordBase):
 
     @alpha2.setter
     def alpha2(self, value: float) -> None:
+        """Set the alpha2 property."""
         self._cards[3].set_value("alpha2", value)
 
     @property
@@ -658,6 +682,7 @@ class MatCscm(KeywordBase):
 
     @theta2.setter
     def theta2(self, value: float) -> None:
+        """Set the theta2 property."""
         self._cards[3].set_value("theta2", value)
 
     @property
@@ -668,6 +693,7 @@ class MatCscm(KeywordBase):
 
     @lamda2.setter
     def lamda2(self, value: float) -> None:
+        """Set the lamda2 property."""
         self._cards[3].set_value("lamda2", value)
 
     @property
@@ -678,6 +704,7 @@ class MatCscm(KeywordBase):
 
     @beta2.setter
     def beta2(self, value: float) -> None:
+        """Set the beta2 property."""
         self._cards[3].set_value("beta2", value)
 
     @property
@@ -688,6 +715,7 @@ class MatCscm(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[4].set_value("r", value)
 
     @property
@@ -698,6 +726,7 @@ class MatCscm(KeywordBase):
 
     @xd.setter
     def xd(self, value: float) -> None:
+        """Set the xd property."""
         self._cards[4].set_value("xd", value)
 
     @property
@@ -708,6 +737,7 @@ class MatCscm(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[4].set_value("w", value)
 
     @property
@@ -718,6 +748,7 @@ class MatCscm(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -728,6 +759,7 @@ class MatCscm(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -738,6 +770,7 @@ class MatCscm(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[5].set_value("b", value)
 
     @property
@@ -748,6 +781,7 @@ class MatCscm(KeywordBase):
 
     @gfc.setter
     def gfc(self, value: float) -> None:
+        """Set the gfc property."""
         self._cards[5].set_value("gfc", value)
 
     @property
@@ -758,6 +792,7 @@ class MatCscm(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[5].set_value("d", value)
 
     @property
@@ -768,6 +803,7 @@ class MatCscm(KeywordBase):
 
     @gft.setter
     def gft(self, value: float) -> None:
+        """Set the gft property."""
         self._cards[5].set_value("gft", value)
 
     @property
@@ -778,6 +814,7 @@ class MatCscm(KeywordBase):
 
     @gfs.setter
     def gfs(self, value: float) -> None:
+        """Set the gfs property."""
         self._cards[5].set_value("gfs", value)
 
     @property
@@ -788,6 +825,7 @@ class MatCscm(KeywordBase):
 
     @pwrc.setter
     def pwrc(self, value: float) -> None:
+        """Set the pwrc property."""
         self._cards[5].set_value("pwrc", value)
 
     @property
@@ -798,6 +836,7 @@ class MatCscm(KeywordBase):
 
     @pwrt.setter
     def pwrt(self, value: float) -> None:
+        """Set the pwrt property."""
         self._cards[5].set_value("pwrt", value)
 
     @property
@@ -808,6 +847,7 @@ class MatCscm(KeywordBase):
 
     @pmod.setter
     def pmod(self, value: float) -> None:
+        """Set the pmod property."""
         self._cards[5].set_value("pmod", value)
 
     @property
@@ -818,6 +858,7 @@ class MatCscm(KeywordBase):
 
     @eta0c.setter
     def eta0c(self, value: float) -> None:
+        """Set the eta0c property."""
         self._cards[6].set_value("eta0c", value)
 
     @property
@@ -828,6 +869,7 @@ class MatCscm(KeywordBase):
 
     @nc.setter
     def nc(self, value: float) -> None:
+        """Set the nc property."""
         self._cards[6].set_value("nc", value)
 
     @property
@@ -838,6 +880,7 @@ class MatCscm(KeywordBase):
 
     @etaot.setter
     def etaot(self, value: float) -> None:
+        """Set the etaot property."""
         self._cards[6].set_value("etaot", value)
 
     @property
@@ -848,6 +891,7 @@ class MatCscm(KeywordBase):
 
     @nt.setter
     def nt(self, value: float) -> None:
+        """Set the nt property."""
         self._cards[6].set_value("nt", value)
 
     @property
@@ -858,6 +902,7 @@ class MatCscm(KeywordBase):
 
     @overc.setter
     def overc(self, value: float) -> None:
+        """Set the overc property."""
         self._cards[6].set_value("overc", value)
 
     @property
@@ -868,6 +913,7 @@ class MatCscm(KeywordBase):
 
     @overt.setter
     def overt(self, value: float) -> None:
+        """Set the overt property."""
         self._cards[6].set_value("overt", value)
 
     @property
@@ -878,6 +924,7 @@ class MatCscm(KeywordBase):
 
     @srate.setter
     def srate(self, value: float) -> None:
+        """Set the srate property."""
         self._cards[6].set_value("srate", value)
 
     @property
@@ -888,6 +935,7 @@ class MatCscm(KeywordBase):
 
     @rep0w.setter
     def rep0w(self, value: float) -> None:
+        """Set the rep0w property."""
         self._cards[6].set_value("rep0w", value)
 
     @property
@@ -898,5 +946,9 @@ class MatCscm(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

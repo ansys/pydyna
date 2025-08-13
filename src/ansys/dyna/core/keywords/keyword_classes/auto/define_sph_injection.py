@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineSphInjection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSphInjection(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineSphInjection class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -158,6 +160,7 @@ class DefineSphInjection(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -168,6 +171,7 @@ class DefineSphInjection(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -178,6 +182,7 @@ class DefineSphInjection(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -188,6 +193,7 @@ class DefineSphInjection(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -198,6 +204,7 @@ class DefineSphInjection(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -208,6 +215,7 @@ class DefineSphInjection(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -218,6 +226,7 @@ class DefineSphInjection(KeywordBase):
 
     @area.setter
     def area(self, value: float) -> None:
+        """Set the area property."""
         self._cards[0].set_value("area", value)
 
     @property
@@ -230,6 +239,7 @@ class DefineSphInjection(KeywordBase):
 
     @vmag.setter
     def vmag(self, value: int) -> None:
+        """Set the vmag property."""
         self._cards[0].set_value("vmag", value)
 
     @property
@@ -240,6 +250,7 @@ class DefineSphInjection(KeywordBase):
 
     @tbeg.setter
     def tbeg(self, value: float) -> None:
+        """Set the tbeg property."""
         self._cards[1].set_value("tbeg", value)
 
     @property
@@ -250,6 +261,7 @@ class DefineSphInjection(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[1].set_value("tend", value)
 
     @property
@@ -260,6 +272,7 @@ class DefineSphInjection(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -270,5 +283,9 @@ class DefineSphInjection(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

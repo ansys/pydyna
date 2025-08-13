@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat159 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat159(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat159 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -166,6 +168,7 @@ class Mat159(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -176,6 +179,7 @@ class Mat159(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -193,8 +197,9 @@ class Mat159(KeywordBase):
 
     @nplot.setter
     def nplot(self, value: int) -> None:
+        """Set the nplot property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""nplot must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""nplot must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("nplot", value)
 
     @property
@@ -205,6 +210,7 @@ class Mat159(KeywordBase):
 
     @incre.setter
     def incre(self, value: float) -> None:
+        """Set the incre property."""
         self._cards[0].set_value("incre", value)
 
     @property
@@ -217,8 +223,9 @@ class Mat159(KeywordBase):
 
     @irate.setter
     def irate(self, value: int) -> None:
+        """Set the irate property."""
         if value not in [0, 1, None]:
-            raise Exception("""irate must be `None` or one of {0,1}""")
+            raise Exception("""irate must be `None` or one of {0,1}.""")
         self._cards[0].set_value("irate", value)
 
     @property
@@ -229,6 +236,7 @@ class Mat159(KeywordBase):
 
     @erode.setter
     def erode(self, value: float) -> None:
+        """Set the erode property."""
         self._cards[0].set_value("erode", value)
 
     @property
@@ -241,6 +249,7 @@ class Mat159(KeywordBase):
 
     @recov.setter
     def recov(self, value: float) -> None:
+        """Set the recov property."""
         self._cards[0].set_value("recov", value)
 
     @property
@@ -253,8 +262,9 @@ class Mat159(KeywordBase):
 
     @itretrc.setter
     def itretrc(self, value: int) -> None:
+        """Set the itretrc property."""
         if value not in [0, 1, None]:
-            raise Exception("""itretrc must be `None` or one of {0,1}""")
+            raise Exception("""itretrc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("itretrc", value)
 
     @property
@@ -265,6 +275,7 @@ class Mat159(KeywordBase):
 
     @pred.setter
     def pred(self, value: float) -> None:
+        """Set the pred property."""
         self._cards[1].set_value("pred", value)
 
     @property
@@ -275,6 +286,7 @@ class Mat159(KeywordBase):
 
     @fpc.setter
     def fpc(self, value: float) -> None:
+        """Set the fpc property."""
         self._cards[2].set_value("fpc", value)
 
     @property
@@ -285,6 +297,7 @@ class Mat159(KeywordBase):
 
     @dagg.setter
     def dagg(self, value: float) -> None:
+        """Set the dagg property."""
         self._cards[2].set_value("dagg", value)
 
     @property
@@ -300,8 +313,9 @@ class Mat159(KeywordBase):
 
     @units.setter
     def units(self, value: int) -> None:
+        """Set the units property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""units must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""units must be `None` or one of {0,1,2,3,4}.""")
         self._cards[2].set_value("units", value)
 
     @property
@@ -312,5 +326,9 @@ class Mat159(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

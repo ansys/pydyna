@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleStructuredMeshMotion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleStructuredMeshMotion(KeywordBase):
     subkeyword = "STRUCTURED_MESH_MOTION"
 
     def __init__(self, **kwargs):
+        """Initialize the AleStructuredMeshMotion class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -107,6 +109,7 @@ class AleStructuredMeshMotion(KeywordBase):
 
     @mshid.setter
     def mshid(self, value: int) -> None:
+        """Set the mshid property."""
         self._cards[0].set_value("mshid", value)
 
     @property
@@ -117,8 +120,9 @@ class AleStructuredMeshMotion(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
+        """Set the option property."""
         if value not in ["FOLLOW_GC", "COVER_LAG", None]:
-            raise Exception("""option must be `None` or one of {"FOLLOW_GC","COVER_LAG"}""")
+            raise Exception("""option must be `None` or one of {"FOLLOW_GC","COVER_LAG"}.""")
         self._cards[0].set_value("option", value)
 
     @property
@@ -130,6 +134,7 @@ class AleStructuredMeshMotion(KeywordBase):
 
     @ammgsid.setter
     def ammgsid(self, value: int) -> None:
+        """Set the ammgsid property."""
         self._cards[0].set_value("ammgsid", value)
 
     @property
@@ -141,6 +146,7 @@ class AleStructuredMeshMotion(KeywordBase):
 
     @explim.setter
     def explim(self, value: float) -> None:
+        """Set the explim property."""
         self._cards[0].set_value("explim", value)
 
     @property
@@ -151,5 +157,6 @@ class AleStructuredMeshMotion(KeywordBase):
 
     @symcod.setter
     def symcod(self, value: int) -> None:
+        """Set the symcod property."""
         self._cards[0].set_value("symcod", value)
 

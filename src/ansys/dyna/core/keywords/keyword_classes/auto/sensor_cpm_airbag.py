@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SensorCpmAirbag class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorCpmAirbag(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SensorCpmAirbag class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -118,6 +120,7 @@ class SensorCpmAirbag(KeywordBase):
 
     @cpmid.setter
     def cpmid(self, value: int) -> None:
+        """Set the cpmid property."""
         self._cards[0].set_value("cpmid", value)
 
     @property
@@ -128,6 +131,7 @@ class SensorCpmAirbag(KeywordBase):
 
     @switid.setter
     def switid(self, value: int) -> None:
+        """Set the switid property."""
         self._cards[0].set_value("switid", value)
 
     @property
@@ -140,6 +144,7 @@ class SensorCpmAirbag(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[0].set_value("tbirth", value)
 
     @property
@@ -150,6 +155,7 @@ class SensorCpmAirbag(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[0].set_value("tdeath", value)
 
     @property
@@ -161,6 +167,7 @@ class SensorCpmAirbag(KeywordBase):
 
     @tdr.setter
     def tdr(self, value: float) -> None:
+        """Set the tdr property."""
         self._cards[0].set_value("tdr", value)
 
     @property
@@ -171,6 +178,7 @@ class SensorCpmAirbag(KeywordBase):
 
     @defps.setter
     def defps(self, value: int) -> None:
+        """Set the defps property."""
         self._cards[0].set_value("defps", value)
 
     @property
@@ -181,6 +189,7 @@ class SensorCpmAirbag(KeywordBase):
 
     @rbpid.setter
     def rbpid(self, value: int) -> None:
+        """Set the rbpid property."""
         self._cards[0].set_value("rbpid", value)
 
     @property
@@ -191,5 +200,9 @@ class SensorCpmAirbag(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

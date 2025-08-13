@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCurveTrim2D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveTrim2D(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCurveTrim2D class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -159,6 +161,7 @@ class DefineCurveTrim2D(KeywordBase):
 
     @tcid.setter
     def tcid(self, value: int) -> None:
+        """Set the tcid property."""
         self._cards[0].set_value("tcid", value)
 
     @property
@@ -171,8 +174,9 @@ class DefineCurveTrim2D(KeywordBase):
 
     @tctype.setter
     def tctype(self, value: int) -> None:
+        """Set the tctype property."""
         if value not in [1, 2, None]:
-            raise Exception("""tctype must be `None` or one of {1,2}""")
+            raise Exception("""tctype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("tctype", value)
 
     @property
@@ -185,8 +189,9 @@ class DefineCurveTrim2D(KeywordBase):
 
     @tflg.setter
     def tflg(self, value: int) -> None:
+        """Set the tflg property."""
         if value not in [-1, 1, None]:
-            raise Exception("""tflg must be `None` or one of {-1,1}""")
+            raise Exception("""tflg must be `None` or one of {-1,1}.""")
         self._cards[0].set_value("tflg", value)
 
     @property
@@ -198,6 +203,7 @@ class DefineCurveTrim2D(KeywordBase):
 
     @tdir.setter
     def tdir(self, value: int) -> None:
+        """Set the tdir property."""
         self._cards[0].set_value("tdir", value)
 
     @property
@@ -208,6 +214,7 @@ class DefineCurveTrim2D(KeywordBase):
 
     @tctol.setter
     def tctol(self, value: float) -> None:
+        """Set the tctol property."""
         self._cards[0].set_value("tctol", value)
 
     @property
@@ -218,6 +225,7 @@ class DefineCurveTrim2D(KeywordBase):
 
     @depth.setter
     def depth(self, value: float) -> None:
+        """Set the depth property."""
         self._cards[0].set_value("depth", value)
 
     @property
@@ -229,6 +237,7 @@ class DefineCurveTrim2D(KeywordBase):
 
     @nseed1.setter
     def nseed1(self, value: int) -> None:
+        """Set the nseed1 property."""
         self._cards[0].set_value("nseed1", value)
 
     @property
@@ -240,6 +249,7 @@ class DefineCurveTrim2D(KeywordBase):
 
     @nseed2.setter
     def nseed2(self, value: int) -> None:
+        """Set the nseed2 property."""
         self._cards[0].set_value("nseed2", value)
 
     @property
@@ -250,6 +260,7 @@ class DefineCurveTrim2D(KeywordBase):
 
     @cx.setter
     def cx(self, value: float) -> None:
+        """Set the cx property."""
         self._cards[1].set_value("cx", value)
 
     @property
@@ -260,6 +271,7 @@ class DefineCurveTrim2D(KeywordBase):
 
     @cy.setter
     def cy(self, value: float) -> None:
+        """Set the cy property."""
         self._cards[1].set_value("cy", value)
 
     @property
@@ -270,6 +282,7 @@ class DefineCurveTrim2D(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[2].set_value("filename", value)
 
     @property
@@ -280,5 +293,9 @@ class DefineCurveTrim2D(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

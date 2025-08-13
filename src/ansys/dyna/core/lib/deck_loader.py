@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -100,12 +100,14 @@ def _update_iterstate(line: str):
 
 
 def _update_deck_format(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
-    assert len(block) == 1
+    if len(block) != 1:
+        raise ValueError("Format line should only have one line")
     line = block[0].upper()
     if "LONG" in line:
         format_setter = line[line.find("LONG") + 4 :].strip()
         tokens = format_setter.split("=")
-        assert len(tokens) >= 2
+        if len(tokens) < 2:
+            raise ValueError("Invalid format line")
         format = tokens[1]
         if format == "S":
             deck.format = format_type.default
@@ -135,7 +137,8 @@ def _before_import(
     if len(import_handlers) == 0:
         return True
 
-    assert context != None
+    if context is None:
+        raise ValueError("Context cannot be None")
     s = io.StringIO()
     s.write(keyword_data)
     s.seek(0)
@@ -149,7 +152,8 @@ def _before_import(
 
 def _update_deck_title(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck") -> None:
     block = [line for line in block if not line.startswith("$")]
-    assert len(block) == 2, "Title block can only have one line"
+    if len(block) != 2:
+        raise ValueError("Title block can only have one line")
     deck.title = block[1]
 
 

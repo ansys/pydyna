@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineSphMeshBox class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSphMeshBox(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineSphMeshBox class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -165,6 +167,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @xmin.setter
     def xmin(self, value: float) -> None:
+        """Set the xmin property."""
         self._cards[0].set_value("xmin", value)
 
     @property
@@ -175,6 +178,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @ymin.setter
     def ymin(self, value: float) -> None:
+        """Set the ymin property."""
         self._cards[0].set_value("ymin", value)
 
     @property
@@ -185,6 +189,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @zmin.setter
     def zmin(self, value: float) -> None:
+        """Set the zmin property."""
         self._cards[0].set_value("zmin", value)
 
     @property
@@ -195,6 +200,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @xlen.setter
     def xlen(self, value: float) -> None:
+        """Set the xlen property."""
         self._cards[0].set_value("xlen", value)
 
     @property
@@ -205,6 +211,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @ylen.setter
     def ylen(self, value: float) -> None:
+        """Set the ylen property."""
         self._cards[0].set_value("ylen", value)
 
     @property
@@ -215,6 +222,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @zlen.setter
     def zlen(self, value: float) -> None:
+        """Set the zlen property."""
         self._cards[0].set_value("zlen", value)
 
     @property
@@ -225,6 +233,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @ipid.setter
     def ipid(self, value: int) -> None:
+        """Set the ipid property."""
         self._cards[1].set_value("ipid", value)
 
     @property
@@ -235,6 +244,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @nx.setter
     def nx(self, value: int) -> None:
+        """Set the nx property."""
         self._cards[1].set_value("nx", value)
 
     @property
@@ -245,6 +255,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @ny.setter
     def ny(self, value: int) -> None:
+        """Set the ny property."""
         self._cards[1].set_value("ny", value)
 
     @property
@@ -255,6 +266,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @nz.setter
     def nz(self, value: int) -> None:
+        """Set the nz property."""
         self._cards[1].set_value("nz", value)
 
     @property
@@ -268,6 +280,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @idseg.setter
     def idseg(self, value: int) -> None:
+        """Set the idseg property."""
         self._cards[1].set_value("idseg", value)
 
     @property
@@ -279,6 +292,7 @@ class DefineSphMeshBox(KeywordBase):
 
     @sfsp.setter
     def sfsp(self, value: float) -> None:
+        """Set the sfsp property."""
         self._cards[1].set_value("sfsp", value)
 
     @property
@@ -289,5 +303,9 @@ class DefineSphMeshBox(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

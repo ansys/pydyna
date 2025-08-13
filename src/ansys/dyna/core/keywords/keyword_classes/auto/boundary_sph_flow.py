@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundarySphFlow class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundarySphFlow(KeywordBase):
     subkeyword = "SPH_FLOW"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundarySphFlow class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -127,6 +129,7 @@ class BoundarySphFlow(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -140,8 +143,9 @@ class BoundarySphFlow(KeywordBase):
 
     @styp.setter
     def styp(self, value: int) -> None:
+        """Set the styp property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""styp must be `None` or one of {1,2,3}""")
+            raise Exception("""styp must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("styp", value)
 
     @property
@@ -157,8 +161,9 @@ class BoundarySphFlow(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""dof must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""dof must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("dof", value)
 
     @property
@@ -172,8 +177,9 @@ class BoundarySphFlow(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
+        """Set the vad property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""vad must be `None` or one of {0,1,2}""")
+            raise Exception("""vad must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("vad", value)
 
     @property
@@ -184,6 +190,7 @@ class BoundarySphFlow(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -194,6 +201,7 @@ class BoundarySphFlow(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -205,6 +213,7 @@ class BoundarySphFlow(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -215,6 +224,7 @@ class BoundarySphFlow(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -225,6 +235,7 @@ class BoundarySphFlow(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -235,5 +246,6 @@ class BoundarySphFlow(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[1].set_value("vid", value)
 

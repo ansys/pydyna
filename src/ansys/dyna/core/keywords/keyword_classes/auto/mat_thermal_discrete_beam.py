@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatThermalDiscreteBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatThermalDiscreteBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatThermalDiscreteBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -101,6 +103,7 @@ class MatThermalDiscreteBeam(KeywordBase):
 
     @tmid.setter
     def tmid(self, value: int) -> None:
+        """Set the tmid property."""
         self._cards[0].set_value("tmid", value)
 
     @property
@@ -111,6 +114,7 @@ class MatThermalDiscreteBeam(KeywordBase):
 
     @tro.setter
     def tro(self, value: float) -> None:
+        """Set the tro property."""
         self._cards[0].set_value("tro", value)
 
     @property
@@ -121,6 +125,7 @@ class MatThermalDiscreteBeam(KeywordBase):
 
     @hc.setter
     def hc(self, value: float) -> None:
+        """Set the hc property."""
         self._cards[1].set_value("hc", value)
 
     @property
@@ -131,6 +136,7 @@ class MatThermalDiscreteBeam(KeywordBase):
 
     @tc.setter
     def tc(self, value: float) -> None:
+        """Set the tc property."""
         self._cards[1].set_value("tc", value)
 
     @property
@@ -141,5 +147,9 @@ class MatThermalDiscreteBeam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

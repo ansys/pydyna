@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceCompensationNewPartChange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceCompensationNewPartChange(KeywordBase):
     subkeyword = "COMPENSATION_NEW_PART_CHANGE"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceCompensationNewPartChange class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class InterfaceCompensationNewPartChange(KeywordBase):
 
     @maxgap.setter
     def maxgap(self, value: float) -> None:
+        """Set the maxgap property."""
         self._cards[0].set_value("maxgap", value)
 

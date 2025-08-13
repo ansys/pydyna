@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetSolidGeneralCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetSolidGeneralCollect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetSolidGeneralCollect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -145,6 +147,7 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -157,8 +160,9 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -177,8 +181,9 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
+        """Set the option property."""
         if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SALECPT", "SALEFAC", None]:
-            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SALECPT","SALEFAC"}""")
+            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SALECPT","SALEFAC"}.""")
         self._cards[1].set_value("option", value)
 
     @property
@@ -195,6 +200,7 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @e1.setter
     def e1(self, value: int) -> None:
+        """Set the e1 property."""
         self._cards[1].set_value("e1", value)
 
     @property
@@ -211,6 +217,7 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @e2.setter
     def e2(self, value: int) -> None:
+        """Set the e2 property."""
         self._cards[1].set_value("e2", value)
 
     @property
@@ -227,6 +234,7 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @e3.setter
     def e3(self, value: int) -> None:
+        """Set the e3 property."""
         self._cards[1].set_value("e3", value)
 
     @property
@@ -243,6 +251,7 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @e4.setter
     def e4(self, value: int) -> None:
+        """Set the e4 property."""
         self._cards[1].set_value("e4", value)
 
     @property
@@ -259,6 +268,7 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @e5.setter
     def e5(self, value: int) -> None:
+        """Set the e5 property."""
         self._cards[1].set_value("e5", value)
 
     @property
@@ -275,6 +285,7 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @e6.setter
     def e6(self, value: int) -> None:
+        """Set the e6 property."""
         self._cards[1].set_value("e6", value)
 
     @property
@@ -291,6 +302,7 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @e7.setter
     def e7(self, value: int) -> None:
+        """Set the e7 property."""
         self._cards[1].set_value("e7", value)
 
     @property
@@ -301,5 +313,9 @@ class SetSolidGeneralCollect(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

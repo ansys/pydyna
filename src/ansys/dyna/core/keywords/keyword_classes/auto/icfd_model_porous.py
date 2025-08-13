@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdModelPorous class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdModelPorous(KeywordBase):
     subkeyword = "MODEL_POROUS"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdModelPorous class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -199,6 +201,7 @@ class IcfdModelPorous(KeywordBase):
 
     @pmmoid.setter
     def pmmoid(self, value: int) -> None:
+        """Set the pmmoid property."""
         self._cards[0].set_value("pmmoid", value)
 
     @property
@@ -222,8 +225,9 @@ class IcfdModelPorous(KeywordBase):
 
     @pmid.setter
     def pmid(self, value: int) -> None:
+        """Set the pmid property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, None]:
-            raise Exception("""pmid must be `None` or one of {1,2,3,4,5,6,7,8,10,11}""")
+            raise Exception("""pmid must be `None` or one of {1,2,3,4,5,6,7,8,10,11}.""")
         self._cards[0].set_value("pmid", value)
 
     @property
@@ -234,6 +238,7 @@ class IcfdModelPorous(KeywordBase):
 
     @por.setter
     def por(self, value: float) -> None:
+        """Set the por property."""
         self._cards[1].set_value("por", value)
 
     @property
@@ -244,6 +249,7 @@ class IcfdModelPorous(KeywordBase):
 
     @per_thx.setter
     def per_thx(self, value: float) -> None:
+        """Set the per_thx property."""
         self._cards[1].set_value("per/thx", value)
 
     @property
@@ -254,6 +260,7 @@ class IcfdModelPorous(KeywordBase):
 
     @ff_thy.setter
     def ff_thy(self, value: float) -> None:
+        """Set the ff_thy property."""
         self._cards[1].set_value("ff/thy", value)
 
     @property
@@ -264,6 +271,7 @@ class IcfdModelPorous(KeywordBase):
 
     @thz.setter
     def thz(self, value: float) -> None:
+        """Set the thz property."""
         self._cards[1].set_value("thz", value)
 
     @property
@@ -274,6 +282,7 @@ class IcfdModelPorous(KeywordBase):
 
     @pvlcidx.setter
     def pvlcidx(self, value: int) -> None:
+        """Set the pvlcidx property."""
         self._cards[1].set_value("pvlcidx", value)
 
     @property
@@ -284,6 +293,7 @@ class IcfdModelPorous(KeywordBase):
 
     @pvlcidy.setter
     def pvlcidy(self, value: int) -> None:
+        """Set the pvlcidy property."""
         self._cards[1].set_value("pvlcidy", value)
 
     @property
@@ -294,6 +304,7 @@ class IcfdModelPorous(KeywordBase):
 
     @pvlcidz.setter
     def pvlcidz(self, value: int) -> None:
+        """Set the pvlcidz property."""
         self._cards[1].set_value("pvlcidz", value)
 
     @property
@@ -304,6 +315,7 @@ class IcfdModelPorous(KeywordBase):
 
     @kxp_.setter
     def kxp_(self, value: float) -> None:
+        """Set the kxp_ property."""
         self._cards[2].set_value("kxp'", value)
 
     @property
@@ -314,6 +326,7 @@ class IcfdModelPorous(KeywordBase):
 
     @kyp_.setter
     def kyp_(self, value: float) -> None:
+        """Set the kyp_ property."""
         self._cards[2].set_value("kyp'", value)
 
     @property
@@ -324,6 +337,7 @@ class IcfdModelPorous(KeywordBase):
 
     @kzp_.setter
     def kzp_(self, value: float) -> None:
+        """Set the kzp_ property."""
         self._cards[2].set_value("kzp'", value)
 
     @property
@@ -334,6 +348,7 @@ class IcfdModelPorous(KeywordBase):
 
     @p_x_pid1r.setter
     def p_x_pid1r(self, value: float) -> None:
+        """Set the p_x_pid1r property."""
         self._cards[3].set_value("p-x/pid1r", value)
 
     @property
@@ -344,6 +359,7 @@ class IcfdModelPorous(KeywordBase):
 
     @p_y_pid2r.setter
     def p_y_pid2r(self, value: float) -> None:
+        """Set the p_y_pid2r property."""
         self._cards[3].set_value("p-y/pid2r", value)
 
     @property
@@ -354,6 +370,7 @@ class IcfdModelPorous(KeywordBase):
 
     @projxp_z.setter
     def projxp_z(self, value: float) -> None:
+        """Set the projxp_z property."""
         self._cards[3].set_value("projxp-z", value)
 
     @property
@@ -364,6 +381,7 @@ class IcfdModelPorous(KeywordBase):
 
     @projyp_x.setter
     def projyp_x(self, value: float) -> None:
+        """Set the projyp_x property."""
         self._cards[3].set_value("projyp-x", value)
 
     @property
@@ -374,6 +392,7 @@ class IcfdModelPorous(KeywordBase):
 
     @projyp_y.setter
     def projyp_y(self, value: float) -> None:
+        """Set the projyp_y property."""
         self._cards[3].set_value("projyp-y", value)
 
     @property
@@ -384,5 +403,6 @@ class IcfdModelPorous(KeywordBase):
 
     @projyp_z.setter
     def projyp_z(self, value: float) -> None:
+        """Set the projyp_z property."""
         self._cards[3].set_value("projyp-z", value)
 

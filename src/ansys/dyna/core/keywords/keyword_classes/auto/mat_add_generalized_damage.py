@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAddGeneralizedDamage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddGeneralizedDamage(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAddGeneralizedDamage class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -371,6 +373,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -383,8 +386,9 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @idam.setter
     def idam(self, value: int) -> None:
+        """Set the idam property."""
         if value not in [0, 1, None]:
-            raise Exception("""idam must be `None` or one of {0,1}""")
+            raise Exception("""idam must be `None` or one of {0,1}.""")
         self._cards[0].set_value("idam", value)
 
     @property
@@ -397,8 +401,9 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @dtyp.setter
     def dtyp(self, value: int) -> None:
+        """Set the dtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""dtyp must be `None` or one of {0,1}""")
+            raise Exception("""dtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dtyp", value)
 
     @property
@@ -411,6 +416,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @refsz.setter
     def refsz(self, value: float) -> None:
+        """Set the refsz property."""
         self._cards[0].set_value("refsz", value)
 
     @property
@@ -422,6 +428,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @numfip.setter
     def numfip(self, value: float) -> None:
+        """Set the numfip property."""
         self._cards[0].set_value("numfip", value)
 
     @property
@@ -437,8 +444,9 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @pddt.setter
     def pddt(self, value: int) -> None:
+        """Set the pddt property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""pddt must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""pddt must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("pddt", value)
 
     @property
@@ -449,6 +457,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @nhis.setter
     def nhis(self, value: int) -> None:
+        """Set the nhis property."""
         self._cards[0].set_value("nhis", value)
 
     @property
@@ -466,6 +475,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @his1.setter
     def his1(self, value: int) -> None:
+        """Set the his1 property."""
         self._cards[1].set_value("his1", value)
 
     @property
@@ -483,6 +493,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @his2.setter
     def his2(self, value: int) -> None:
+        """Set the his2 property."""
         self._cards[1].set_value("his2", value)
 
     @property
@@ -500,6 +511,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @his3.setter
     def his3(self, value: int) -> None:
+        """Set the his3 property."""
         self._cards[1].set_value("his3", value)
 
     @property
@@ -514,8 +526,9 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @iflg1.setter
     def iflg1(self, value: int) -> None:
+        """Set the iflg1 property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""iflg1 must be `None` or one of {0,1,2}""")
+            raise Exception("""iflg1 must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("iflg1", value)
 
     @property
@@ -530,8 +543,9 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @iflg2.setter
     def iflg2(self, value: int) -> None:
+        """Set the iflg2 property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""iflg2 must be `None` or one of {0,1,2,3}""")
+            raise Exception("""iflg2 must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("iflg2", value)
 
     @property
@@ -547,8 +561,9 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @iflg3.setter
     def iflg3(self, value: int) -> None:
+        """Set the iflg3 property."""
         if value not in [0, 1, None]:
-            raise Exception("""iflg3 must be `None` or one of {0,1}""")
+            raise Exception("""iflg3 must be `None` or one of {0,1}.""")
         self._cards[1].set_value("iflg3", value)
 
     @property
@@ -559,6 +574,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d11.setter
     def d11(self, value: int) -> None:
+        """Set the d11 property."""
         self._cards[2].set_value("d11", value)
 
     @property
@@ -569,6 +585,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d22.setter
     def d22(self, value: int) -> None:
+        """Set the d22 property."""
         self._cards[2].set_value("d22", value)
 
     @property
@@ -579,6 +596,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d33.setter
     def d33(self, value: int) -> None:
+        """Set the d33 property."""
         self._cards[2].set_value("d33", value)
 
     @property
@@ -589,6 +607,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d44.setter
     def d44(self, value: int) -> None:
+        """Set the d44 property."""
         self._cards[2].set_value("d44", value)
 
     @property
@@ -599,6 +618,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d55.setter
     def d55(self, value: int) -> None:
+        """Set the d55 property."""
         self._cards[2].set_value("d55", value)
 
     @property
@@ -609,6 +629,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d66.setter
     def d66(self, value: int) -> None:
+        """Set the d66 property."""
         self._cards[2].set_value("d66", value)
 
     @property
@@ -619,6 +640,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d12.setter
     def d12(self, value: int) -> None:
+        """Set the d12 property."""
         self._cards[3].set_value("d12", value)
 
     @property
@@ -629,6 +651,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d21.setter
     def d21(self, value: int) -> None:
+        """Set the d21 property."""
         self._cards[3].set_value("d21", value)
 
     @property
@@ -639,6 +662,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d24.setter
     def d24(self, value: int) -> None:
+        """Set the d24 property."""
         self._cards[3].set_value("d24", value)
 
     @property
@@ -649,6 +673,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d42.setter
     def d42(self, value: int) -> None:
+        """Set the d42 property."""
         self._cards[3].set_value("d42", value)
 
     @property
@@ -659,6 +684,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d14.setter
     def d14(self, value: int) -> None:
+        """Set the d14 property."""
         self._cards[3].set_value("d14", value)
 
     @property
@@ -669,6 +695,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @d41.setter
     def d41(self, value: int) -> None:
+        """Set the d41 property."""
         self._cards[3].set_value("d41", value)
 
     @property
@@ -679,6 +706,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @lcsdg.setter
     def lcsdg(self, value: int) -> None:
+        """Set the lcsdg property."""
         self._cards[4].set_value("lcsdg", value)
 
     @property
@@ -692,6 +720,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @ecrit.setter
     def ecrit(self, value: float) -> None:
+        """Set the ecrit property."""
         self._cards[4].set_value("ecrit", value)
 
     @property
@@ -702,6 +731,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @dmgexp.setter
     def dmgexp(self, value: float) -> None:
+        """Set the dmgexp property."""
         self._cards[4].set_value("dmgexp", value)
 
     @property
@@ -713,6 +743,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @dcrit.setter
     def dcrit(self, value: float) -> None:
+        """Set the dcrit property."""
         self._cards[4].set_value("dcrit", value)
 
     @property
@@ -725,6 +756,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @fadexp.setter
     def fadexp(self, value: float) -> None:
+        """Set the fadexp property."""
         self._cards[4].set_value("fadexp", value)
 
     @property
@@ -735,6 +767,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @lcreg.setter
     def lcreg(self, value: int) -> None:
+        """Set the lcreg property."""
         self._cards[4].set_value("lcreg", value)
 
     @property
@@ -749,6 +782,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @lcsrs.setter
     def lcsrs(self, value: int) -> None:
+        """Set the lcsrs property."""
         self._cards[5].set_value("lcsrs", value)
 
     @property
@@ -759,6 +793,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[5].set_value("shrf", value)
 
     @property
@@ -769,6 +804,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @biaxf.setter
     def biaxf(self, value: float) -> None:
+        """Set the biaxf property."""
         self._cards[5].set_value("biaxf", value)
 
     @property
@@ -779,6 +815,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @lcdlim.setter
     def lcdlim(self, value: int) -> None:
+        """Set the lcdlim property."""
         self._cards[5].set_value("lcdlim", value)
 
     @property
@@ -794,8 +831,9 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @midfail.setter
     def midfail(self, value: float) -> None:
+        """Set the midfail property."""
         if value not in [0.0, 1.0, 2.0, 3.0, 4.0, None]:
-            raise Exception("""midfail must be `None` or one of {0.0,1.0,2.0,3.0,4.0}""")
+            raise Exception("""midfail must be `None` or one of {0.0,1.0,2.0,3.0,4.0}.""")
         self._cards[5].set_value("midfail", value)
 
     @property
@@ -806,6 +844,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @nfloc.setter
     def nfloc(self, value: float) -> None:
+        """Set the nfloc property."""
         self._cards[5].set_value("nfloc", value)
 
     @property
@@ -816,5 +855,9 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

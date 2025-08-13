@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineNurbsCurve class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineNurbsCurve(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineNurbsCurve class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -205,6 +207,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -215,6 +218,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @n.setter
     def n(self, value: int) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -225,6 +229,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @p.setter
     def p(self, value: int) -> None:
+        """Set the p property."""
         self._cards[0].set_value("p", value)
 
     @property
@@ -237,8 +242,9 @@ class DefineNurbsCurve(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, None]:
-            raise Exception("""type must be `None` or one of {0,1}""")
+            raise Exception("""type must be `None` or one of {0,1}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -251,8 +257,9 @@ class DefineNurbsCurve(KeywordBase):
 
     @wfl.setter
     def wfl(self, value: int) -> None:
+        """Set the wfl property."""
         if value not in [0, 1, None]:
-            raise Exception("""wfl must be `None` or one of {0,1}""")
+            raise Exception("""wfl must be `None` or one of {0,1}.""")
         self._cards[0].set_value("wfl", value)
 
     @property
@@ -263,6 +270,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @k1.setter
     def k1(self, value: float) -> None:
+        """Set the k1 property."""
         self._cards[1].set_value("k1", value)
 
     @property
@@ -273,6 +281,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @k2.setter
     def k2(self, value: float) -> None:
+        """Set the k2 property."""
         self._cards[1].set_value("k2", value)
 
     @property
@@ -283,6 +292,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @k3.setter
     def k3(self, value: float) -> None:
+        """Set the k3 property."""
         self._cards[1].set_value("k3", value)
 
     @property
@@ -293,6 +303,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @k4.setter
     def k4(self, value: float) -> None:
+        """Set the k4 property."""
         self._cards[1].set_value("k4", value)
 
     @property
@@ -303,6 +314,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @k5.setter
     def k5(self, value: float) -> None:
+        """Set the k5 property."""
         self._cards[1].set_value("k5", value)
 
     @property
@@ -313,6 +325,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @k6.setter
     def k6(self, value: float) -> None:
+        """Set the k6 property."""
         self._cards[1].set_value("k6", value)
 
     @property
@@ -323,6 +336,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @k7.setter
     def k7(self, value: float) -> None:
+        """Set the k7 property."""
         self._cards[1].set_value("k7", value)
 
     @property
@@ -333,6 +347,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @k8.setter
     def k8(self, value: float) -> None:
+        """Set the k8 property."""
         self._cards[1].set_value("k8", value)
 
     @property
@@ -343,6 +358,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[2].set_value("x", value)
 
     @property
@@ -353,6 +369,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[2].set_value("y", value)
 
     @property
@@ -363,6 +380,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[2].set_value("z", value)
 
     @property
@@ -373,6 +391,7 @@ class DefineNurbsCurve(KeywordBase):
 
     @w.setter
     def w(self, value: float) -> None:
+        """Set the w property."""
         self._cards[2].set_value("w", value)
 
     @property
@@ -383,5 +402,9 @@ class DefineNurbsCurve(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

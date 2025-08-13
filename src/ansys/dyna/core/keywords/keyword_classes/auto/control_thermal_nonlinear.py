@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlThermalNonlinear class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlThermalNonlinear(KeywordBase):
     subkeyword = "THERMAL_NONLINEAR"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlThermalNonlinear class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,6 +105,7 @@ class ControlThermalNonlinear(KeywordBase):
 
     @refmax.setter
     def refmax(self, value: int) -> None:
+        """Set the refmax property."""
         self._cards[0].set_value("refmax", value)
 
     @property
@@ -113,6 +116,7 @@ class ControlThermalNonlinear(KeywordBase):
 
     @tol.setter
     def tol(self, value: float) -> None:
+        """Set the tol property."""
         self._cards[0].set_value("tol", value)
 
     @property
@@ -125,6 +129,7 @@ class ControlThermalNonlinear(KeywordBase):
 
     @dcp.setter
     def dcp(self, value: float) -> None:
+        """Set the dcp property."""
         self._cards[0].set_value("dcp", value)
 
     @property
@@ -137,8 +142,9 @@ class ControlThermalNonlinear(KeywordBase):
 
     @lumpbc.setter
     def lumpbc(self, value: int) -> None:
+        """Set the lumpbc property."""
         if value not in [0, 1, None]:
-            raise Exception("""lumpbc must be `None` or one of {0,1}""")
+            raise Exception("""lumpbc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("lumpbc", value)
 
     @property
@@ -151,6 +157,7 @@ class ControlThermalNonlinear(KeywordBase):
 
     @thlstl.setter
     def thlstl(self, value: float) -> None:
+        """Set the thlstl property."""
         self._cards[0].set_value("thlstl", value)
 
     @property
@@ -163,6 +170,7 @@ class ControlThermalNonlinear(KeywordBase):
 
     @nlthpr.setter
     def nlthpr(self, value: int) -> None:
+        """Set the nlthpr property."""
         self._cards[0].set_value("nlthpr", value)
 
     @property
@@ -175,5 +183,6 @@ class ControlThermalNonlinear(KeywordBase):
 
     @phchpn.setter
     def phchpn(self, value: float) -> None:
+        """Set the phchpn property."""
         self._cards[0].set_value("phchpn", value)
 

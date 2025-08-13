@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementBeamElbow class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementBeamElbow(KeywordBase):
     subkeyword = "BEAM_ELBOW"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementBeamElbow class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -93,6 +95,7 @@ class ElementBeamElbow(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -103,6 +106,7 @@ class ElementBeamElbow(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -113,6 +117,7 @@ class ElementBeamElbow(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -123,6 +128,7 @@ class ElementBeamElbow(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -133,6 +139,7 @@ class ElementBeamElbow(KeywordBase):
 
     @n5.setter
     def n5(self, value: int) -> None:
+        """Set the n5 property."""
         self._cards[0].set_value("n5", value)
 
     @property
@@ -143,5 +150,6 @@ class ElementBeamElbow(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[1].set_value("n3", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat216 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat216(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat216 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -183,6 +185,7 @@ class Mat216(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -193,6 +196,7 @@ class Mat216(KeywordBase):
 
     @ro1.setter
     def ro1(self, value: float) -> None:
+        """Set the ro1 property."""
         self._cards[0].set_value("ro1", value)
 
     @property
@@ -203,6 +207,7 @@ class Mat216(KeywordBase):
 
     @e1.setter
     def e1(self, value: float) -> None:
+        """Set the e1 property."""
         self._cards[0].set_value("e1", value)
 
     @property
@@ -213,6 +218,7 @@ class Mat216(KeywordBase):
 
     @pr1.setter
     def pr1(self, value: float) -> None:
+        """Set the pr1 property."""
         self._cards[0].set_value("pr1", value)
 
     @property
@@ -223,6 +229,7 @@ class Mat216(KeywordBase):
 
     @ro2.setter
     def ro2(self, value: float) -> None:
+        """Set the ro2 property."""
         self._cards[1].set_value("ro2", value)
 
     @property
@@ -233,6 +240,7 @@ class Mat216(KeywordBase):
 
     @e2.setter
     def e2(self, value: float) -> None:
+        """Set the e2 property."""
         self._cards[1].set_value("e2", value)
 
     @property
@@ -243,6 +251,7 @@ class Mat216(KeywordBase):
 
     @pr2.setter
     def pr2(self, value: float) -> None:
+        """Set the pr2 property."""
         self._cards[1].set_value("pr2", value)
 
     @property
@@ -253,6 +262,7 @@ class Mat216(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[2].set_value("x1", value)
 
     @property
@@ -263,6 +273,7 @@ class Mat216(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[2].set_value("y1", value)
 
     @property
@@ -273,6 +284,7 @@ class Mat216(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[2].set_value("z1", value)
 
     @property
@@ -283,6 +295,7 @@ class Mat216(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[2].set_value("x2", value)
 
     @property
@@ -293,6 +306,7 @@ class Mat216(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[2].set_value("y2", value)
 
     @property
@@ -303,6 +317,7 @@ class Mat216(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[2].set_value("z2", value)
 
     @property
@@ -313,6 +328,7 @@ class Mat216(KeywordBase):
 
     @thkfac.setter
     def thkfac(self, value: float) -> None:
+        """Set the thkfac property."""
         self._cards[2].set_value("thkfac", value)
 
     @property
@@ -323,5 +339,9 @@ class Mat216(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatRcShearWall class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatRcShearWall(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatRcShearWall class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -404,6 +406,7 @@ class MatRcShearWall(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -414,6 +417,7 @@ class MatRcShearWall(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -424,6 +428,7 @@ class MatRcShearWall(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -434,6 +439,7 @@ class MatRcShearWall(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -445,6 +451,7 @@ class MatRcShearWall(KeywordBase):
 
     @tmax.setter
     def tmax(self, value: float) -> None:
+        """Set the tmax property."""
         self._cards[0].set_value("tmax", value)
 
     @property
@@ -456,6 +463,7 @@ class MatRcShearWall(KeywordBase):
 
     @fc_.setter
     def fc_(self, value: float) -> None:
+        """Set the fc_ property."""
         self._cards[1].set_value("fc'", value)
 
     @property
@@ -467,6 +475,7 @@ class MatRcShearWall(KeywordBase):
 
     @pref.setter
     def pref(self, value: float) -> None:
+        """Set the pref property."""
         self._cards[1].set_value("pref", value)
 
     @property
@@ -478,6 +487,7 @@ class MatRcShearWall(KeywordBase):
 
     @fyield.setter
     def fyield(self, value: float) -> None:
+        """Set the fyield property."""
         self._cards[1].set_value("fyield", value)
 
     @property
@@ -489,6 +499,7 @@ class MatRcShearWall(KeywordBase):
 
     @sig0.setter
     def sig0(self, value: float) -> None:
+        """Set the sig0 property."""
         self._cards[1].set_value("sig0", value)
 
     @property
@@ -504,6 +515,7 @@ class MatRcShearWall(KeywordBase):
 
     @unconv.setter
     def unconv(self, value: float) -> None:
+        """Set the unconv property."""
         self._cards[1].set_value("unconv", value)
 
     @property
@@ -514,6 +526,7 @@ class MatRcShearWall(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
 
     @property
@@ -525,6 +538,7 @@ class MatRcShearWall(KeywordBase):
 
     @ft.setter
     def ft(self, value: float) -> None:
+        """Set the ft property."""
         self._cards[1].set_value("ft", value)
 
     @property
@@ -535,6 +549,7 @@ class MatRcShearWall(KeywordBase):
 
     @erienf.setter
     def erienf(self, value: float) -> None:
+        """Set the erienf property."""
         self._cards[1].set_value("erienf", value)
 
     @property
@@ -546,6 +561,7 @@ class MatRcShearWall(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[2].set_value("a", value)
 
     @property
@@ -557,6 +573,7 @@ class MatRcShearWall(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[2].set_value("b", value)
 
     @property
@@ -568,6 +585,7 @@ class MatRcShearWall(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[2].set_value("c", value)
 
     @property
@@ -579,6 +597,7 @@ class MatRcShearWall(KeywordBase):
 
     @d.setter
     def d(self, value: float) -> None:
+        """Set the d property."""
         self._cards[2].set_value("d", value)
 
     @property
@@ -590,6 +609,7 @@ class MatRcShearWall(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[2].set_value("e", value)
 
     @property
@@ -602,6 +622,7 @@ class MatRcShearWall(KeywordBase):
 
     @f.setter
     def f(self, value: float) -> None:
+        """Set the f property."""
         self._cards[2].set_value("f", value)
 
     @property
@@ -613,6 +634,7 @@ class MatRcShearWall(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[3].set_value("y1", value)
 
     @property
@@ -624,6 +646,7 @@ class MatRcShearWall(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[3].set_value("y2", value)
 
     @property
@@ -635,6 +658,7 @@ class MatRcShearWall(KeywordBase):
 
     @y3.setter
     def y3(self, value: float) -> None:
+        """Set the y3 property."""
         self._cards[3].set_value("y3", value)
 
     @property
@@ -646,6 +670,7 @@ class MatRcShearWall(KeywordBase):
 
     @y4.setter
     def y4(self, value: float) -> None:
+        """Set the y4 property."""
         self._cards[3].set_value("y4", value)
 
     @property
@@ -657,6 +682,7 @@ class MatRcShearWall(KeywordBase):
 
     @y5.setter
     def y5(self, value: float) -> None:
+        """Set the y5 property."""
         self._cards[3].set_value("y5", value)
 
     @property
@@ -668,6 +694,7 @@ class MatRcShearWall(KeywordBase):
 
     @t1.setter
     def t1(self, value: float) -> None:
+        """Set the t1 property."""
         self._cards[4].set_value("t1", value)
 
     @property
@@ -679,6 +706,7 @@ class MatRcShearWall(KeywordBase):
 
     @t2.setter
     def t2(self, value: float) -> None:
+        """Set the t2 property."""
         self._cards[4].set_value("t2", value)
 
     @property
@@ -690,6 +718,7 @@ class MatRcShearWall(KeywordBase):
 
     @t3.setter
     def t3(self, value: float) -> None:
+        """Set the t3 property."""
         self._cards[4].set_value("t3", value)
 
     @property
@@ -701,6 +730,7 @@ class MatRcShearWall(KeywordBase):
 
     @t4.setter
     def t4(self, value: float) -> None:
+        """Set the t4 property."""
         self._cards[4].set_value("t4", value)
 
     @property
@@ -712,6 +742,7 @@ class MatRcShearWall(KeywordBase):
 
     @t5.setter
     def t5(self, value: float) -> None:
+        """Set the t5 property."""
         self._cards[4].set_value("t5", value)
 
     @property
@@ -731,6 +762,7 @@ class MatRcShearWall(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[5].set_value("aopt", value)
 
     @property
@@ -741,6 +773,7 @@ class MatRcShearWall(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[6].set_value("xp", value)
 
     @property
@@ -751,6 +784,7 @@ class MatRcShearWall(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[6].set_value("yp", value)
 
     @property
@@ -761,6 +795,7 @@ class MatRcShearWall(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[6].set_value("zp", value)
 
     @property
@@ -771,6 +806,7 @@ class MatRcShearWall(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[6].set_value("a1", value)
 
     @property
@@ -781,6 +817,7 @@ class MatRcShearWall(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[6].set_value("a2", value)
 
     @property
@@ -791,6 +828,7 @@ class MatRcShearWall(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[6].set_value("a3", value)
 
     @property
@@ -801,6 +839,7 @@ class MatRcShearWall(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[7].set_value("v1", value)
 
     @property
@@ -811,6 +850,7 @@ class MatRcShearWall(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[7].set_value("v2", value)
 
     @property
@@ -821,6 +861,7 @@ class MatRcShearWall(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[7].set_value("v3", value)
 
     @property
@@ -831,6 +872,7 @@ class MatRcShearWall(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[7].set_value("d1", value)
 
     @property
@@ -841,6 +883,7 @@ class MatRcShearWall(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[7].set_value("d2", value)
 
     @property
@@ -851,6 +894,7 @@ class MatRcShearWall(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[7].set_value("d3", value)
 
     @property
@@ -861,6 +905,7 @@ class MatRcShearWall(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[7].set_value("beta", value)
 
     @property
@@ -871,5 +916,9 @@ class MatRcShearWall(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[8].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

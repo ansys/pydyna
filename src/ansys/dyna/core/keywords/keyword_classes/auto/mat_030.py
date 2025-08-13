@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat030 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat030(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat030 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -176,6 +178,7 @@ class Mat030(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -186,6 +189,7 @@ class Mat030(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -196,6 +200,7 @@ class Mat030(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -206,6 +211,7 @@ class Mat030(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -217,6 +223,7 @@ class Mat030(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: float) -> None:
+        """Set the lcss property."""
         self._cards[0].set_value("lcss", value)
 
     @property
@@ -228,6 +235,7 @@ class Mat030(KeywordBase):
 
     @sig_ass.setter
     def sig_ass(self, value: float) -> None:
+        """Set the sig_ass property."""
         self._cards[1].set_value("sig_ass", value)
 
     @property
@@ -239,6 +247,7 @@ class Mat030(KeywordBase):
 
     @sig_asf.setter
     def sig_asf(self, value: float) -> None:
+        """Set the sig_asf property."""
         self._cards[1].set_value("sig_asf", value)
 
     @property
@@ -250,6 +259,7 @@ class Mat030(KeywordBase):
 
     @sig_sas.setter
     def sig_sas(self, value: float) -> None:
+        """Set the sig_sas property."""
         self._cards[1].set_value("sig_sas", value)
 
     @property
@@ -261,6 +271,7 @@ class Mat030(KeywordBase):
 
     @sig_saf.setter
     def sig_saf(self, value: float) -> None:
+        """Set the sig_saf property."""
         self._cards[1].set_value("sig_saf", value)
 
     @property
@@ -271,6 +282,7 @@ class Mat030(KeywordBase):
 
     @epsl.setter
     def epsl(self, value: float) -> None:
+        """Set the epsl property."""
         self._cards[1].set_value("epsl", value)
 
     @property
@@ -281,6 +293,7 @@ class Mat030(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
 
     @property
@@ -291,6 +304,7 @@ class Mat030(KeywordBase):
 
     @ymrt.setter
     def ymrt(self, value: float) -> None:
+        """Set the ymrt property."""
         self._cards[1].set_value("ymrt", value)
 
     @property
@@ -304,6 +318,7 @@ class Mat030(KeywordBase):
 
     @lcid_as.setter
     def lcid_as(self, value: int) -> None:
+        """Set the lcid_as property."""
         self._cards[2].set_value("lcid_as", value)
 
     @property
@@ -318,6 +333,7 @@ class Mat030(KeywordBase):
 
     @lcid_sa.setter
     def lcid_sa(self, value: int) -> None:
+        """Set the lcid_sa property."""
         self._cards[2].set_value("lcid_sa", value)
 
     @property
@@ -328,5 +344,9 @@ class Mat030(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

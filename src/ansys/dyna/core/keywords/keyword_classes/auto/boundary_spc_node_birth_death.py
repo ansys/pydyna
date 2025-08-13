@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundarySpcNodeBirthDeath class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the BoundarySpcNodeBirthDeath class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -159,6 +161,7 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -169,6 +172,7 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -180,8 +184,9 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @dofx.setter
     def dofx(self, value: int) -> None:
+        """Set the dofx property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofx must be `None` or one of {0,1}""")
+            raise Exception("""dofx must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofx", value)
 
     @property
@@ -193,8 +198,9 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @dofy.setter
     def dofy(self, value: int) -> None:
+        """Set the dofy property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofy must be `None` or one of {0,1}""")
+            raise Exception("""dofy must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofy", value)
 
     @property
@@ -206,8 +212,9 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @dofz.setter
     def dofz(self, value: int) -> None:
+        """Set the dofz property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofz must be `None` or one of {0,1}""")
+            raise Exception("""dofz must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofz", value)
 
     @property
@@ -219,8 +226,9 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @dofrx.setter
     def dofrx(self, value: int) -> None:
+        """Set the dofrx property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofrx must be `None` or one of {0,1}""")
+            raise Exception("""dofrx must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofrx", value)
 
     @property
@@ -232,8 +240,9 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @dofry.setter
     def dofry(self, value: int) -> None:
+        """Set the dofry property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofry must be `None` or one of {0,1}""")
+            raise Exception("""dofry must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofry", value)
 
     @property
@@ -245,8 +254,9 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @dofrz.setter
     def dofrz(self, value: int) -> None:
+        """Set the dofrz property."""
         if value not in [0, 1, None]:
-            raise Exception("""dofrz must be `None` or one of {0,1}""")
+            raise Exception("""dofrz must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofrz", value)
 
     @property
@@ -257,6 +267,7 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -267,6 +278,7 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -277,7 +289,11 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[2].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
 
     @property
     def heading(self) -> typing.Optional[str]:
@@ -287,5 +303,9 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[2].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 

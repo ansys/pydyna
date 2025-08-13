@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCpmVent class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCpmVent(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCpmVent class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -253,6 +255,7 @@ class DefineCpmVent(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -263,6 +266,7 @@ class DefineCpmVent(KeywordBase):
 
     @c23.setter
     def c23(self, value: float) -> None:
+        """Set the c23 property."""
         self._cards[0].set_value("c23", value)
 
     @property
@@ -273,6 +277,7 @@ class DefineCpmVent(KeywordBase):
 
     @lctc23.setter
     def lctc23(self, value: int) -> None:
+        """Set the lctc23 property."""
         self._cards[0].set_value("lctc23", value)
 
     @property
@@ -283,6 +288,7 @@ class DefineCpmVent(KeywordBase):
 
     @lcpc23.setter
     def lcpc23(self, value: int) -> None:
+        """Set the lcpc23 property."""
         self._cards[0].set_value("lcpc23", value)
 
     @property
@@ -295,8 +301,9 @@ class DefineCpmVent(KeywordBase):
 
     @enh_v.setter
     def enh_v(self, value: int) -> None:
+        """Set the enh_v property."""
         if value not in [0, 1, None]:
-            raise Exception("""enh_v must be `None` or one of {0,1}""")
+            raise Exception("""enh_v must be `None` or one of {0,1}.""")
         self._cards[0].set_value("enh_v", value)
 
     @property
@@ -307,6 +314,7 @@ class DefineCpmVent(KeywordBase):
 
     @ppop.setter
     def ppop(self, value: float) -> None:
+        """Set the ppop property."""
         self._cards[0].set_value("ppop", value)
 
     @property
@@ -317,6 +325,7 @@ class DefineCpmVent(KeywordBase):
 
     @c23up.setter
     def c23up(self, value: float) -> None:
+        """Set the c23up property."""
         self._cards[0].set_value("c23up", value)
 
     @property
@@ -335,6 +344,7 @@ class DefineCpmVent(KeywordBase):
 
     @iopt.setter
     def iopt(self, value: int) -> None:
+        """Set the iopt property."""
         self._cards[0].set_value("iopt", value)
 
     @property
@@ -348,8 +358,9 @@ class DefineCpmVent(KeywordBase):
 
     @jt.setter
     def jt(self, value: int) -> None:
+        """Set the jt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""jt must be `None` or one of {0,1,2}""")
+            raise Exception("""jt must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("jt", value)
 
     @property
@@ -360,6 +371,7 @@ class DefineCpmVent(KeywordBase):
 
     @ids1.setter
     def ids1(self, value: int) -> None:
+        """Set the ids1 property."""
         self._cards[1].set_value("ids1", value)
 
     @property
@@ -371,6 +383,7 @@ class DefineCpmVent(KeywordBase):
 
     @ids2.setter
     def ids2(self, value: int) -> None:
+        """Set the ids2 property."""
         self._cards[1].set_value("ids2", value)
 
     @property
@@ -381,6 +394,7 @@ class DefineCpmVent(KeywordBase):
 
     @iopt1.setter
     def iopt1(self, value: int) -> None:
+        """Set the iopt1 property."""
         self._cards[1].set_value("iopt1", value)
 
     @property
@@ -393,6 +407,7 @@ class DefineCpmVent(KeywordBase):
 
     @pid1.setter
     def pid1(self, value: int) -> None:
+        """Set the pid1 property."""
         self._cards[1].set_value("pid1", value)
 
     @property
@@ -405,6 +420,7 @@ class DefineCpmVent(KeywordBase):
 
     @pid2.setter
     def pid2(self, value: int) -> None:
+        """Set the pid2 property."""
         self._cards[1].set_value("pid2", value)
 
     @property
@@ -419,6 +435,7 @@ class DefineCpmVent(KeywordBase):
 
     @vang.setter
     def vang(self, value: float) -> None:
+        """Set the vang property."""
         self._cards[1].set_value("vang", value)
 
     @property
@@ -429,6 +446,7 @@ class DefineCpmVent(KeywordBase):
 
     @lcred.setter
     def lcred(self, value: int) -> None:
+        """Set the lcred property."""
         self._cards[1].set_value("lcred", value)
 
     @property
@@ -439,6 +457,7 @@ class DefineCpmVent(KeywordBase):
 
     @nid1.setter
     def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
         self._cards[2].set_value("nid1", value)
 
     @property
@@ -449,6 +468,7 @@ class DefineCpmVent(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[2].set_value("nid2", value)
 
     @property
@@ -459,6 +479,7 @@ class DefineCpmVent(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[2].set_value("nid2", value)
 
     @property
@@ -469,6 +490,7 @@ class DefineCpmVent(KeywordBase):
 
     @lcac23.setter
     def lcac23(self, value: int) -> None:
+        """Set the lcac23 property."""
         self._cards[2].set_value("lcac23", value)
 
     @property
@@ -481,6 +503,7 @@ class DefineCpmVent(KeywordBase):
 
     @psetpv.setter
     def psetpv(self, value: int) -> None:
+        """Set the psetpv property."""
         self._cards[2].set_value("psetpv", value)
 
     @property
@@ -491,6 +514,7 @@ class DefineCpmVent(KeywordBase):
 
     @sfpv.setter
     def sfpv(self, value: int) -> None:
+        """Set the sfpv property."""
         self._cards[2].set_value("sfpv", value)
 
     @property
@@ -501,6 +525,7 @@ class DefineCpmVent(KeywordBase):
 
     @lpatm.setter
     def lpatm(self, value: int) -> None:
+        """Set the lpatm property."""
         self._cards[2].set_value("lpatm", value)
 
     @property
@@ -513,6 +538,7 @@ class DefineCpmVent(KeywordBase):
 
     @jtnd.setter
     def jtnd(self, value: int) -> None:
+        """Set the jtnd property."""
         self._cards[3].set_value("jtnd", value)
 
     @property
@@ -523,5 +549,9 @@ class DefineCpmVent(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

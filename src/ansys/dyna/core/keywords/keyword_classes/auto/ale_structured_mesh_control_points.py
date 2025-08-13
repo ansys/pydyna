@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AleStructuredMeshControlPoints class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
     subkeyword = "STRUCTURED_MESH_CONTROL_POINTS"
 
     def __init__(self, **kwargs):
+        """Initialize the AleStructuredMeshControlPoints class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -121,6 +123,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
 
     @cpid.setter
     def cpid(self, value: int) -> None:
+        """Set the cpid property."""
         self._cards[0].set_value("cpid", value)
 
     @property
@@ -131,6 +134,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
 
     @icase.setter
     def icase(self, value: int) -> None:
+        """Set the icase property."""
         self._cards[0].set_value("icase", value)
 
     @property
@@ -141,6 +145,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
 
     @sfo.setter
     def sfo(self, value: float) -> None:
+        """Set the sfo property."""
         self._cards[0].set_value("sfo", value)
 
     @property
@@ -151,6 +156,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
 
     @offo.setter
     def offo(self, value: float) -> None:
+        """Set the offo property."""
         self._cards[0].set_value("offo", value)
 
     @property
@@ -161,6 +167,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
 
     @n.setter
     def n(self, value: int) -> None:
+        """Set the n property."""
         self._cards[1].set_value("n", value)
 
     @property
@@ -171,6 +178,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -183,5 +191,6 @@ class AleStructuredMeshControlPoints(KeywordBase):
 
     @ratio.setter
     def ratio(self, value: float) -> None:
+        """Set the ratio property."""
         self._cards[1].set_value("ratio", value)
 

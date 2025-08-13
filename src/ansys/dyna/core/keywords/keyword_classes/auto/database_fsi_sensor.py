@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseFsiSensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseFsiSensor(KeywordBase):
     subkeyword = "FSI_SENSOR"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseFsiSensor class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -115,6 +117,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -129,8 +132,9 @@ class DatabaseFsiSensor(KeywordBase):
 
     @binary.setter
     def binary(self, value: int) -> None:
+        """Set the binary property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""binary must be `None` or one of {1,2,3}""")
+            raise Exception("""binary must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("binary", value)
 
     @property
@@ -141,6 +145,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @dbfsi_id.setter
     def dbfsi_id(self, value: int) -> None:
+        """Set the dbfsi_id property."""
         self._cards[1].set_value("dbfsi_id", value)
 
     @property
@@ -151,6 +156,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[1].set_value("nid", value)
 
     @property
@@ -161,6 +167,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @segmid.setter
     def segmid(self, value: int) -> None:
+        """Set the segmid property."""
         self._cards[1].set_value("segmid", value)
 
     @property
@@ -171,6 +178,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[1].set_value("offset", value)
 
     @property
@@ -184,6 +192,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @nd1.setter
     def nd1(self, value: int) -> None:
+        """Set the nd1 property."""
         self._cards[1].set_value("nd1", value)
 
     @property
@@ -197,6 +206,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @nd2.setter
     def nd2(self, value: int) -> None:
+        """Set the nd2 property."""
         self._cards[1].set_value("nd2", value)
 
     @property
@@ -210,5 +220,6 @@ class DatabaseFsiSensor(KeywordBase):
 
     @nd3.setter
     def nd3(self, value: int) -> None:
+        """Set the nd3 property."""
         self._cards[1].set_value("nd3", value)
 

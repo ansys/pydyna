@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ContactForceTransducerPenalty class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class ContactForceTransducerPenalty(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the ContactForceTransducerPenalty class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -257,6 +259,7 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     @surfa.setter
     def surfa(self, value: int) -> None:
+        """Set the surfa property."""
         self._cards[0].set_value("surfa", value)
 
     @property
@@ -268,6 +271,7 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     @surfb.setter
     def surfb(self, value: int) -> None:
+        """Set the surfb property."""
         self._cards[0].set_value("surfb", value)
 
     @property
@@ -286,8 +290,9 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     @surfatyp.setter
     def surfatyp(self, value: int) -> None:
+        """Set the surfatyp property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("surfatyp", value)
 
     @property
@@ -305,8 +310,9 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     @surfbtyp.setter
     def surfbtyp(self, value: int) -> None:
+        """Set the surfbtyp property."""
         if value not in [0, 1, 2, 3, 5, 6, 7, None]:
-            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}""")
+            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}.""")
         self._cards[0].set_value("surfbtyp", value)
 
     @property
@@ -317,6 +323,7 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     @saboxid.setter
     def saboxid(self, value: int) -> None:
+        """Set the saboxid property."""
         self._cards[0].set_value("saboxid", value)
 
     @property
@@ -327,6 +334,7 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     @sbboxid.setter
     def sbboxid(self, value: int) -> None:
+        """Set the sbboxid property."""
         self._cards[0].set_value("sbboxid", value)
 
     @property
@@ -340,8 +348,9 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     @sapr.setter
     def sapr(self, value: int) -> None:
+        """Set the sapr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sapr must be `None` or one of {0,1,2}""")
+            raise Exception("""sapr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sapr", value)
 
     @property
@@ -355,8 +364,9 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     @sbpr.setter
     def sbpr(self, value: int) -> None:
+        """Set the sbpr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sbpr must be `None` or one of {0,1,2}""")
+            raise Exception("""sbpr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sbpr", value)
 
     @property
@@ -367,7 +377,11 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[3].cards[0].set_value("cid", value)
+
+        if value:
+            self.activate_option("CID")
 
     @property
     def heading(self) -> typing.Optional[str]:
@@ -377,5 +391,9 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[3].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 

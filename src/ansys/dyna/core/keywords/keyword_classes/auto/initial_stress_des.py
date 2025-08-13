@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialStressDes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialStressDes(KeywordBase):
     subkeyword = "STRESS_DES"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialStressDes class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class InitialStressDes(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -119,6 +122,7 @@ class InitialStressDes(KeywordBase):
 
     @sigxx.setter
     def sigxx(self, value: float) -> None:
+        """Set the sigxx property."""
         self._cards[0].set_value("sigxx", value)
 
     @property
@@ -129,6 +133,7 @@ class InitialStressDes(KeywordBase):
 
     @sigyy.setter
     def sigyy(self, value: float) -> None:
+        """Set the sigyy property."""
         self._cards[0].set_value("sigyy", value)
 
     @property
@@ -139,6 +144,7 @@ class InitialStressDes(KeywordBase):
 
     @sigzz.setter
     def sigzz(self, value: float) -> None:
+        """Set the sigzz property."""
         self._cards[0].set_value("sigzz", value)
 
     @property
@@ -149,6 +155,7 @@ class InitialStressDes(KeywordBase):
 
     @sigxy.setter
     def sigxy(self, value: float) -> None:
+        """Set the sigxy property."""
         self._cards[0].set_value("sigxy", value)
 
     @property
@@ -159,6 +166,7 @@ class InitialStressDes(KeywordBase):
 
     @sigyz.setter
     def sigyz(self, value: float) -> None:
+        """Set the sigyz property."""
         self._cards[0].set_value("sigyz", value)
 
     @property
@@ -169,6 +177,7 @@ class InitialStressDes(KeywordBase):
 
     @sigzx.setter
     def sigzx(self, value: float) -> None:
+        """Set the sigzx property."""
         self._cards[0].set_value("sigzx", value)
 
     @property
@@ -179,5 +188,6 @@ class InitialStressDes(KeywordBase):
 
     @coor.setter
     def coor(self, value: float) -> None:
+        """Set the coor property."""
         self._cards[0].set_value("coor", value)
 

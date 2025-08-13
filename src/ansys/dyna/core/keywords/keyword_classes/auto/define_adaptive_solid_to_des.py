@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineAdaptiveSolidToDes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineAdaptiveSolidToDes class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -196,6 +198,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @did.setter
     def did(self, value: int) -> None:
+        """Set the did property."""
         self._cards[0].set_value("did", value)
 
     @property
@@ -206,6 +209,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -216,6 +220,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @ipid.setter
     def ipid(self, value: int) -> None:
+        """Set the ipid property."""
         self._cards[1].set_value("ipid", value)
 
     @property
@@ -228,8 +233,9 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [0, 1, None]:
-            raise Exception("""itype must be `None` or one of {0,1}""")
+            raise Exception("""itype must be `None` or one of {0,1}.""")
         self._cards[1].set_value("itype", value)
 
     @property
@@ -244,8 +250,9 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @nq.setter
     def nq(self, value: int) -> None:
+        """Set the nq property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""nq must be `None` or one of {1,2,3}""")
+            raise Exception("""nq must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("nq", value)
 
     @property
@@ -256,6 +263,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @ipdes.setter
     def ipdes(self, value: int) -> None:
+        """Set the ipdes property."""
         self._cards[1].set_value("ipdes", value)
 
     @property
@@ -266,6 +274,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @isdes.setter
     def isdes(self, value: int) -> None:
+        """Set the isdes property."""
         self._cards[1].set_value("isdes", value)
 
     @property
@@ -276,6 +285,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @rsf.setter
     def rsf(self, value: float) -> None:
+        """Set the rsf property."""
         self._cards[1].set_value("rsf", value)
 
     @property
@@ -288,8 +298,9 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @outdes.setter
     def outdes(self, value: int) -> None:
+        """Set the outdes property."""
         if value not in [0, 1, None]:
-            raise Exception("""outdes must be `None` or one of {0,1}""")
+            raise Exception("""outdes must be `None` or one of {0,1}.""")
         self._cards[1].set_value("outdes", value)
 
     @property
@@ -302,8 +313,9 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @ibond.setter
     def ibond(self, value: int) -> None:
+        """Set the ibond property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibond must be `None` or one of {0,1}""")
+            raise Exception("""ibond must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ibond", value)
 
     @property
@@ -314,6 +326,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @pbn.setter
     def pbn(self, value: float) -> None:
+        """Set the pbn property."""
         self._cards[2].set_value("pbn", value)
 
     @property
@@ -324,6 +337,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @pbs.setter
     def pbs(self, value: float) -> None:
+        """Set the pbs property."""
         self._cards[2].set_value("pbs", value)
 
     @property
@@ -334,6 +348,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @pbn_s.setter
     def pbn_s(self, value: float) -> None:
+        """Set the pbn_s property."""
         self._cards[2].set_value("pbn_s", value)
 
     @property
@@ -344,6 +359,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @pbs_s.setter
     def pbs_s(self, value: float) -> None:
+        """Set the pbs_s property."""
         self._cards[2].set_value("pbs_s", value)
 
     @property
@@ -354,6 +370,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @sfa.setter
     def sfa(self, value: float) -> None:
+        """Set the sfa property."""
         self._cards[2].set_value("sfa", value)
 
     @property
@@ -364,6 +381,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[2].set_value("alpha", value)
 
     @property
@@ -374,5 +392,9 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

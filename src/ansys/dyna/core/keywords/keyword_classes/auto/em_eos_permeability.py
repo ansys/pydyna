@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmEosPermeability class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEosPermeability(KeywordBase):
     subkeyword = "EOS_PERMEABILITY"
 
     def __init__(self, **kwargs):
+        """Initialize the EmEosPermeability class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -69,6 +71,7 @@ class EmEosPermeability(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -82,8 +85,9 @@ class EmEosPermeability(KeywordBase):
 
     @eostype.setter
     def eostype(self, value: int) -> None:
+        """Set the eostype property."""
         if value not in [1, 2, None]:
-            raise Exception("""eostype must be `None` or one of {1,2}""")
+            raise Exception("""eostype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("eostype", value)
 
     @property
@@ -94,5 +98,6 @@ class EmEosPermeability(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 

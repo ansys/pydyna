@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat177 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat177(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat177 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -268,6 +270,7 @@ class Mat177(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -278,6 +281,7 @@ class Mat177(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -288,6 +292,7 @@ class Mat177(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -298,6 +303,7 @@ class Mat177(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -308,6 +314,7 @@ class Mat177(KeywordBase):
 
     @nu.setter
     def nu(self, value: float) -> None:
+        """Set the nu property."""
         self._cards[0].set_value("nu", value)
 
     @property
@@ -318,6 +325,7 @@ class Mat177(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -330,8 +338,9 @@ class Mat177(KeywordBase):
 
     @fittype.setter
     def fittype(self, value: int) -> None:
+        """Set the fittype property."""
         if value not in [1, 2, None]:
-            raise Exception("""fittype must be `None` or one of {1,2}""")
+            raise Exception("""fittype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("fittype", value)
 
     @property
@@ -342,6 +351,7 @@ class Mat177(KeywordBase):
 
     @lcsr.setter
     def lcsr(self, value: int) -> None:
+        """Set the lcsr property."""
         self._cards[0].set_value("lcsr", value)
 
     @property
@@ -352,6 +362,7 @@ class Mat177(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[1].set_value("c1", value)
 
     @property
@@ -362,6 +373,7 @@ class Mat177(KeywordBase):
 
     @c2.setter
     def c2(self, value: float) -> None:
+        """Set the c2 property."""
         self._cards[1].set_value("c2", value)
 
     @property
@@ -372,6 +384,7 @@ class Mat177(KeywordBase):
 
     @c3.setter
     def c3(self, value: float) -> None:
+        """Set the c3 property."""
         self._cards[1].set_value("c3", value)
 
     @property
@@ -382,6 +395,7 @@ class Mat177(KeywordBase):
 
     @c4.setter
     def c4(self, value: float) -> None:
+        """Set the c4 property."""
         self._cards[1].set_value("c4", value)
 
     @property
@@ -392,6 +406,7 @@ class Mat177(KeywordBase):
 
     @c5.setter
     def c5(self, value: float) -> None:
+        """Set the c5 property."""
         self._cards[1].set_value("c5", value)
 
     @property
@@ -402,6 +417,7 @@ class Mat177(KeywordBase):
 
     @c6.setter
     def c6(self, value: float) -> None:
+        """Set the c6 property."""
         self._cards[1].set_value("c6", value)
 
     @property
@@ -412,6 +428,7 @@ class Mat177(KeywordBase):
 
     @c7.setter
     def c7(self, value: float) -> None:
+        """Set the c7 property."""
         self._cards[1].set_value("c7", value)
 
     @property
@@ -422,6 +439,7 @@ class Mat177(KeywordBase):
 
     @c8.setter
     def c8(self, value: float) -> None:
+        """Set the c8 property."""
         self._cards[1].set_value("c8", value)
 
     @property
@@ -432,6 +450,7 @@ class Mat177(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[2].set_value("b1", value)
 
     @property
@@ -442,6 +461,7 @@ class Mat177(KeywordBase):
 
     @b2.setter
     def b2(self, value: float) -> None:
+        """Set the b2 property."""
         self._cards[2].set_value("b2", value)
 
     @property
@@ -452,6 +472,7 @@ class Mat177(KeywordBase):
 
     @b3.setter
     def b3(self, value: float) -> None:
+        """Set the b3 property."""
         self._cards[2].set_value("b3", value)
 
     @property
@@ -462,6 +483,7 @@ class Mat177(KeywordBase):
 
     @b4.setter
     def b4(self, value: float) -> None:
+        """Set the b4 property."""
         self._cards[2].set_value("b4", value)
 
     @property
@@ -472,6 +494,7 @@ class Mat177(KeywordBase):
 
     @b5.setter
     def b5(self, value: float) -> None:
+        """Set the b5 property."""
         self._cards[2].set_value("b5", value)
 
     @property
@@ -482,6 +505,7 @@ class Mat177(KeywordBase):
 
     @b6.setter
     def b6(self, value: float) -> None:
+        """Set the b6 property."""
         self._cards[2].set_value("b6", value)
 
     @property
@@ -492,6 +516,7 @@ class Mat177(KeywordBase):
 
     @b7.setter
     def b7(self, value: float) -> None:
+        """Set the b7 property."""
         self._cards[2].set_value("b7", value)
 
     @property
@@ -502,6 +527,7 @@ class Mat177(KeywordBase):
 
     @b8.setter
     def b8(self, value: float) -> None:
+        """Set the b8 property."""
         self._cards[2].set_value("b8", value)
 
     @property
@@ -512,6 +538,7 @@ class Mat177(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[3].set_value("r", value)
 
     @property
@@ -522,6 +549,7 @@ class Mat177(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[3].set_value("m", value)
 
     @property
@@ -532,5 +560,9 @@ class Mat177(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

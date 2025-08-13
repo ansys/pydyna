@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedSpotweldFilteredForce class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
     subkeyword = "SPOTWELD_FILTERED_FORCE"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedSpotweldFilteredForce class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -134,6 +136,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @wid.setter
     def wid(self, value: int) -> None:
+        """Set the wid property."""
         self._cards[0].set_value("wid", value)
 
     @property
@@ -144,6 +147,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[1].set_value("n1", value)
 
     @property
@@ -154,6 +158,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[1].set_value("n2", value)
 
     @property
@@ -164,6 +169,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @sn.setter
     def sn(self, value: float) -> None:
+        """Set the sn property."""
         self._cards[1].set_value("sn", value)
 
     @property
@@ -174,6 +180,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @ss.setter
     def ss(self, value: float) -> None:
+        """Set the ss property."""
         self._cards[1].set_value("ss", value)
 
     @property
@@ -184,6 +191,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[1].set_value("n", value)
 
     @property
@@ -194,6 +202,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[1].set_value("m", value)
 
     @property
@@ -204,6 +213,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @tf.setter
     def tf(self, value: float) -> None:
+        """Set the tf property."""
         self._cards[1].set_value("tf", value)
 
     @property
@@ -214,6 +224,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @ep.setter
     def ep(self, value: float) -> None:
+        """Set the ep property."""
         self._cards[1].set_value("ep", value)
 
     @property
@@ -224,6 +235,7 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @nf.setter
     def nf(self, value: int) -> None:
+        """Set the nf property."""
         self._cards[2].set_value("nf", value)
 
     @property
@@ -234,5 +246,6 @@ class ConstrainedSpotweldFilteredForce(KeywordBase):
 
     @tw.setter
     def tw(self, value: float) -> None:
+        """Set the tw property."""
         self._cards[2].set_value("tw", value)
 

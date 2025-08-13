@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineBoxDrawbead class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineBoxDrawbead(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineBoxDrawbead class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -125,6 +127,7 @@ class DefineBoxDrawbead(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -135,6 +138,7 @@ class DefineBoxDrawbead(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -145,6 +149,7 @@ class DefineBoxDrawbead(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -158,8 +163,9 @@ class DefineBoxDrawbead(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
+        """Set the idir property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""idir must be `None` or one of {1,2,3}""")
+            raise Exception("""idir must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("idir", value)
 
     @property
@@ -173,8 +179,9 @@ class DefineBoxDrawbead(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [4, 2, 3, 0, None]:
-            raise Exception("""stype must be `None` or one of {4,2,3,0}""")
+            raise Exception("""stype must be `None` or one of {4,2,3,0}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -185,6 +192,7 @@ class DefineBoxDrawbead(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[0].set_value("radius", value)
 
     @property
@@ -195,6 +203,7 @@ class DefineBoxDrawbead(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -205,5 +214,9 @@ class DefineBoxDrawbead(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

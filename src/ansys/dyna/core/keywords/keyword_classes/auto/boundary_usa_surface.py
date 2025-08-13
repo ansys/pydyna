@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryUsaSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryUsaSurface(KeywordBase):
     subkeyword = "USA_SURFACE"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryUsaSurface class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -70,6 +72,7 @@ class BoundaryUsaSurface(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -82,8 +85,9 @@ class BoundaryUsaSurface(KeywordBase):
 
     @wetdry.setter
     def wetdry(self, value: int) -> None:
+        """Set the wetdry property."""
         if value not in [0, 1, None]:
-            raise Exception("""wetdry must be `None` or one of {0,1}""")
+            raise Exception("""wetdry must be `None` or one of {0,1}.""")
         self._cards[0].set_value("wetdry", value)
 
     @property
@@ -94,5 +98,6 @@ class BoundaryUsaSurface(KeywordBase):
 
     @nbeam.setter
     def nbeam(self, value: int) -> None:
+        """Set the nbeam property."""
         self._cards[0].set_value("nbeam", value)
 

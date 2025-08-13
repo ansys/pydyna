@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlMat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlMat(KeywordBase):
     subkeyword = "MAT"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlMat class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -71,8 +73,9 @@ class ControlMat(KeywordBase):
 
     @maef.setter
     def maef(self, value: int) -> None:
+        """Set the maef property."""
         if value not in [0, 1, None]:
-            raise Exception("""maef must be `None` or one of {0,1}""")
+            raise Exception("""maef must be `None` or one of {0,1}.""")
         self._cards[0].set_value("maef", value)
 
     @property
@@ -85,7 +88,8 @@ class ControlMat(KeywordBase):
 
     @umchk.setter
     def umchk(self, value: int) -> None:
+        """Set the umchk property."""
         if value not in [0, 1, None]:
-            raise Exception("""umchk must be `None` or one of {0,1}""")
+            raise Exception("""umchk must be `None` or one of {0,1}.""")
         self._cards[0].set_value("umchk", value)
 

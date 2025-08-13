@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineSpotweldRuptureStress class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSpotweldRuptureStress(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineSpotweldRuptureStress class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -93,6 +95,7 @@ class DefineSpotweldRuptureStress(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -103,6 +106,7 @@ class DefineSpotweldRuptureStress(KeywordBase):
 
     @srsig.setter
     def srsig(self, value: float) -> None:
+        """Set the srsig property."""
         self._cards[0].set_value("srsig", value)
 
     @property
@@ -113,6 +117,7 @@ class DefineSpotweldRuptureStress(KeywordBase):
 
     @sigtau.setter
     def sigtau(self, value: float) -> None:
+        """Set the sigtau property."""
         self._cards[0].set_value("sigtau", value)
 
     @property
@@ -123,5 +128,9 @@ class DefineSpotweldRuptureStress(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IgaFaceXyz class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IgaFaceXyz(KeywordBase):
     subkeyword = "FACE_XYZ"
 
     def __init__(self, **kwargs):
+        """Initialize the IgaFaceXyz class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -143,6 +145,7 @@ class IgaFaceXyz(KeywordBase):
 
     @fid.setter
     def fid(self, value: int) -> None:
+        """Set the fid property."""
         self._cards[0].set_value("fid", value)
 
     @property
@@ -153,6 +156,7 @@ class IgaFaceXyz(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -165,8 +169,9 @@ class IgaFaceXyz(KeywordBase):
 
     @ori.setter
     def ori(self, value: int) -> None:
+        """Set the ori property."""
         if value not in [0, 1, None]:
-            raise Exception("""ori must be `None` or one of {0,1}""")
+            raise Exception("""ori must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ori", value)
 
     @property
@@ -177,6 +182,7 @@ class IgaFaceXyz(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -187,6 +193,7 @@ class IgaFaceXyz(KeywordBase):
 
     @esid.setter
     def esid(self, value: int) -> None:
+        """Set the esid property."""
         self._cards[0].set_value("esid", value)
 
     @property
@@ -197,6 +204,7 @@ class IgaFaceXyz(KeywordBase):
 
     @brid1.setter
     def brid1(self, value: int) -> None:
+        """Set the brid1 property."""
         self._cards[1].set_value("brid1", value)
 
     @property
@@ -207,6 +215,7 @@ class IgaFaceXyz(KeywordBase):
 
     @brid2.setter
     def brid2(self, value: int) -> None:
+        """Set the brid2 property."""
         self._cards[1].set_value("brid2", value)
 
     @property
@@ -217,6 +226,7 @@ class IgaFaceXyz(KeywordBase):
 
     @brid3.setter
     def brid3(self, value: int) -> None:
+        """Set the brid3 property."""
         self._cards[1].set_value("brid3", value)
 
     @property
@@ -227,6 +237,7 @@ class IgaFaceXyz(KeywordBase):
 
     @brid4.setter
     def brid4(self, value: int) -> None:
+        """Set the brid4 property."""
         self._cards[1].set_value("brid4", value)
 
     @property
@@ -237,6 +248,7 @@ class IgaFaceXyz(KeywordBase):
 
     @brid5.setter
     def brid5(self, value: int) -> None:
+        """Set the brid5 property."""
         self._cards[1].set_value("brid5", value)
 
     @property
@@ -247,6 +259,7 @@ class IgaFaceXyz(KeywordBase):
 
     @brid6.setter
     def brid6(self, value: int) -> None:
+        """Set the brid6 property."""
         self._cards[1].set_value("brid6", value)
 
     @property
@@ -257,6 +270,7 @@ class IgaFaceXyz(KeywordBase):
 
     @brid7.setter
     def brid7(self, value: int) -> None:
+        """Set the brid7 property."""
         self._cards[1].set_value("brid7", value)
 
     @property
@@ -267,5 +281,6 @@ class IgaFaceXyz(KeywordBase):
 
     @brid8.setter
     def brid8(self, value: int) -> None:
+        """Set the brid8 property."""
         self._cards[1].set_value("brid8", value)
 

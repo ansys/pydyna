@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialStrainShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -28,8 +29,10 @@ from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class InitialStrainShellCardSet(Cards):
+    """ CardSet."""
 
     def __init__(self, **kwargs):
+        """Initialize the InitialStrainShellCardSet CardSet."""
         super().__init__(kwargs["keyword"])
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
@@ -121,6 +124,7 @@ class InitialStrainShellCardSet(Cards):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -131,6 +135,7 @@ class InitialStrainShellCardSet(Cards):
 
     @nplane.setter
     def nplane(self, value: int) -> None:
+        """Set the nplane property."""
         self._cards[0].set_value("nplane", value)
 
     @property
@@ -141,6 +146,7 @@ class InitialStrainShellCardSet(Cards):
 
     @nthick.setter
     def nthick(self, value: int) -> None:
+        """Set the nthick property."""
         self._cards[0].set_value("nthick", value)
 
     @property
@@ -153,8 +159,9 @@ class InitialStrainShellCardSet(Cards):
 
     @large.setter
     def large(self, value: int) -> None:
+        """Set the large property."""
         if value not in [0, 1, None]:
-            raise Exception("""large must be `None` or one of {0,1}""")
+            raise Exception("""large must be `None` or one of {0,1}.""")
         self._cards[0].set_value("large", value)
 
     @property
@@ -167,22 +174,24 @@ class InitialStrainShellCardSet(Cards):
 
     @ilocal.setter
     def ilocal(self, value: int) -> None:
+        """Set the ilocal property."""
         if value not in [0, 1, None]:
-            raise Exception("""ilocal must be `None` or one of {0,1}""")
+            raise Exception("""ilocal must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ilocal", value)
 
     @property
     def strains(self):
-        '''Gets the table of strains'''
+        """Get the table of strains."""
         return self._cards[1].table
 
     @strains.setter
     def strains(self, df):
-        '''sets strains from the dataframe df'''
+        """Set strains from the dataframe df"""
         self._cards[1].table = df
 
     @property
     def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
         return self._parent
 
 
@@ -193,6 +202,7 @@ class InitialStrainShell(KeywordBase):
     subkeyword = "STRAIN_SHELL"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialStrainShell class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         kwargs["keyword"] = self
@@ -205,8 +215,10 @@ class InitialStrainShell(KeywordBase):
 
     @property
     def sets(self) -> typing.List[InitialStrainShellCardSet]:
+        """Gets the list of sets."""
         return self._cards[0].items()
 
     def add_set(self, **kwargs):
+        """Adds a set to the list of sets."""
         self._cards[0].add_item(**kwargs)
 

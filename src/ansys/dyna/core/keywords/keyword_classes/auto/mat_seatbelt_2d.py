@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSeatbelt2D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSeatbelt2D(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSeatbelt2D class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -260,6 +262,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -270,6 +273,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @mpul.setter
     def mpul(self, value: float) -> None:
+        """Set the mpul property."""
         self._cards[0].set_value("mpul", value)
 
     @property
@@ -280,6 +284,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @llcid.setter
     def llcid(self, value: int) -> None:
+        """Set the llcid property."""
         self._cards[0].set_value("llcid", value)
 
     @property
@@ -290,6 +295,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @ulcid.setter
     def ulcid(self, value: int) -> None:
+        """Set the ulcid property."""
         self._cards[0].set_value("ulcid", value)
 
     @property
@@ -300,6 +306,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @lmin.setter
     def lmin(self, value: float) -> None:
+        """Set the lmin property."""
         self._cards[0].set_value("lmin", value)
 
     @property
@@ -313,8 +320,9 @@ class MatSeatbelt2D(KeywordBase):
 
     @cse.setter
     def cse(self, value: float) -> None:
+        """Set the cse property."""
         if value not in [0.0, 1.0, 2.0, None]:
-            raise Exception("""cse must be `None` or one of {0.0,1.0,2.0}""")
+            raise Exception("""cse must be `None` or one of {0.0,1.0,2.0}.""")
         self._cards[0].set_value("cse", value)
 
     @property
@@ -325,6 +333,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[0].set_value("damp", value)
 
     @property
@@ -335,6 +344,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -345,6 +355,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[1].set_value("a", value)
 
     @property
@@ -355,6 +366,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @i.setter
     def i(self, value: float) -> None:
+        """Set the i property."""
         self._cards[1].set_value("i", value)
 
     @property
@@ -365,6 +377,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @j.setter
     def j(self, value: float) -> None:
+        """Set the j property."""
         self._cards[1].set_value("j", value)
 
     @property
@@ -375,6 +388,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @as_.setter
     def as_(self, value: float) -> None:
+        """Set the as_ property."""
         self._cards[1].set_value("as", value)
 
     @property
@@ -385,6 +399,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @f.setter
     def f(self, value: float) -> None:
+        """Set the f property."""
         self._cards[1].set_value("f", value)
 
     @property
@@ -395,6 +410,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @m.setter
     def m(self, value: float) -> None:
+        """Set the m property."""
         self._cards[1].set_value("m", value)
 
     @property
@@ -405,6 +421,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[1].set_value("r", value)
 
     @property
@@ -415,6 +432,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @p1doff.setter
     def p1doff(self, value: int) -> None:
+        """Set the p1doff property."""
         self._cards[2].set_value("p1doff", value)
 
     @property
@@ -425,6 +443,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
+        """Set the form property."""
         self._cards[2].set_value("form", value)
 
     @property
@@ -439,6 +458,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @ecoat.setter
     def ecoat(self, value: float) -> None:
+        """Set the ecoat property."""
         self._cards[2].set_value("ecoat", value)
 
     @property
@@ -451,6 +471,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @tcoat.setter
     def tcoat(self, value: float) -> None:
+        """Set the tcoat property."""
         self._cards[2].set_value("tcoat", value)
 
     @property
@@ -462,6 +483,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @scoat.setter
     def scoat(self, value: float) -> None:
+        """Set the scoat property."""
         self._cards[2].set_value("scoat", value)
 
     @property
@@ -477,6 +499,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @eb.setter
     def eb(self, value: float) -> None:
+        """Set the eb property."""
         self._cards[2].set_value("eb", value)
 
     @property
@@ -487,6 +510,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @prba.setter
     def prba(self, value: float) -> None:
+        """Set the prba property."""
         self._cards[2].set_value("prba", value)
 
     @property
@@ -497,6 +521,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @prba.setter
     def prba(self, value: float) -> None:
+        """Set the prba property."""
         self._cards[2].set_value("prba", value)
 
     @property
@@ -511,6 +536,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @gab.setter
     def gab(self, value: float) -> None:
+        """Set the gab property."""
         self._cards[3].set_value("gab", value)
 
     @property
@@ -521,5 +547,9 @@ class MatSeatbelt2D(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

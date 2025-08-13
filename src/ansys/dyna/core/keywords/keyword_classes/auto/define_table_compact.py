@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineTableCompact class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineTableCompact(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineTableCompact class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -383,6 +385,7 @@ class DefineTableCompact(KeywordBase):
 
     @tbid.setter
     def tbid(self, value: int) -> None:
+        """Set the tbid property."""
         self._cards[0].set_value("tbid", value)
 
     @property
@@ -393,6 +396,7 @@ class DefineTableCompact(KeywordBase):
 
     @nvar.setter
     def nvar(self, value: int) -> None:
+        """Set the nvar property."""
         self._cards[0].set_value("nvar", value)
 
     @property
@@ -404,6 +408,7 @@ class DefineTableCompact(KeywordBase):
 
     @lcint.setter
     def lcint(self, value: int) -> None:
+        """Set the lcint property."""
         self._cards[0].set_value("lcint", value)
 
     @property
@@ -416,8 +421,9 @@ class DefineTableCompact(KeywordBase):
 
     @mathis.setter
     def mathis(self, value: int) -> None:
+        """Set the mathis property."""
         if value not in [0, 1, None]:
-            raise Exception("""mathis must be `None` or one of {0,1}""")
+            raise Exception("""mathis must be `None` or one of {0,1}.""")
         self._cards[0].set_value("mathis", value)
 
     @property
@@ -430,8 +436,9 @@ class DefineTableCompact(KeywordBase):
 
     @inexect.setter
     def inexect(self, value: int) -> None:
+        """Set the inexect property."""
         if value not in [0, 1, None]:
-            raise Exception("""inexect must be `None` or one of {0,1}""")
+            raise Exception("""inexect must be `None` or one of {0,1}.""")
         self._cards[0].set_value("inexect", value)
 
     @property
@@ -442,6 +449,7 @@ class DefineTableCompact(KeywordBase):
 
     @his1.setter
     def his1(self, value: int) -> None:
+        """Set the his1 property."""
         self._cards[1].set_value("his1", value)
 
     @property
@@ -452,6 +460,7 @@ class DefineTableCompact(KeywordBase):
 
     @his2.setter
     def his2(self, value: int) -> None:
+        """Set the his2 property."""
         self._cards[1].set_value("his2", value)
 
     @property
@@ -462,6 +471,7 @@ class DefineTableCompact(KeywordBase):
 
     @his3.setter
     def his3(self, value: int) -> None:
+        """Set the his3 property."""
         self._cards[1].set_value("his3", value)
 
     @property
@@ -472,6 +482,7 @@ class DefineTableCompact(KeywordBase):
 
     @his4.setter
     def his4(self, value: int) -> None:
+        """Set the his4 property."""
         self._cards[1].set_value("his4", value)
 
     @property
@@ -482,6 +493,7 @@ class DefineTableCompact(KeywordBase):
 
     @his5.setter
     def his5(self, value: int) -> None:
+        """Set the his5 property."""
         self._cards[1].set_value("his5", value)
 
     @property
@@ -492,6 +504,7 @@ class DefineTableCompact(KeywordBase):
 
     @his6.setter
     def his6(self, value: int) -> None:
+        """Set the his6 property."""
         self._cards[1].set_value("his6", value)
 
     @property
@@ -502,6 +515,7 @@ class DefineTableCompact(KeywordBase):
 
     @his7.setter
     def his7(self, value: int) -> None:
+        """Set the his7 property."""
         self._cards[1].set_value("his7", value)
 
     @property
@@ -512,6 +526,7 @@ class DefineTableCompact(KeywordBase):
 
     @his8.setter
     def his8(self, value: int) -> None:
+        """Set the his8 property."""
         self._cards[2].set_value("his8", value)
 
     @property
@@ -522,6 +537,7 @@ class DefineTableCompact(KeywordBase):
 
     @his9.setter
     def his9(self, value: int) -> None:
+        """Set the his9 property."""
         self._cards[2].set_value("his9", value)
 
     @property
@@ -532,6 +548,7 @@ class DefineTableCompact(KeywordBase):
 
     @ixe1.setter
     def ixe1(self, value: int) -> None:
+        """Set the ixe1 property."""
         self._cards[3].set_value("ixe1", value)
 
     @property
@@ -542,6 +559,7 @@ class DefineTableCompact(KeywordBase):
 
     @ixe2.setter
     def ixe2(self, value: int) -> None:
+        """Set the ixe2 property."""
         self._cards[3].set_value("ixe2", value)
 
     @property
@@ -552,6 +570,7 @@ class DefineTableCompact(KeywordBase):
 
     @ixe3.setter
     def ixe3(self, value: int) -> None:
+        """Set the ixe3 property."""
         self._cards[3].set_value("ixe3", value)
 
     @property
@@ -562,6 +581,7 @@ class DefineTableCompact(KeywordBase):
 
     @ixe4.setter
     def ixe4(self, value: int) -> None:
+        """Set the ixe4 property."""
         self._cards[3].set_value("ixe4", value)
 
     @property
@@ -572,6 +592,7 @@ class DefineTableCompact(KeywordBase):
 
     @ixe5.setter
     def ixe5(self, value: int) -> None:
+        """Set the ixe5 property."""
         self._cards[3].set_value("ixe5", value)
 
     @property
@@ -582,6 +603,7 @@ class DefineTableCompact(KeywordBase):
 
     @ixe6.setter
     def ixe6(self, value: int) -> None:
+        """Set the ixe6 property."""
         self._cards[3].set_value("ixe6", value)
 
     @property
@@ -592,6 +614,7 @@ class DefineTableCompact(KeywordBase):
 
     @ixe7.setter
     def ixe7(self, value: int) -> None:
+        """Set the ixe7 property."""
         self._cards[3].set_value("ixe7", value)
 
     @property
@@ -602,6 +625,7 @@ class DefineTableCompact(KeywordBase):
 
     @ixe8.setter
     def ixe8(self, value: int) -> None:
+        """Set the ixe8 property."""
         self._cards[4].set_value("ixe8", value)
 
     @property
@@ -612,6 +636,7 @@ class DefineTableCompact(KeywordBase):
 
     @ixe9.setter
     def ixe9(self, value: int) -> None:
+        """Set the ixe9 property."""
         self._cards[4].set_value("ixe9", value)
 
     @property
@@ -622,6 +647,7 @@ class DefineTableCompact(KeywordBase):
 
     @o1.setter
     def o1(self, value: float) -> None:
+        """Set the o1 property."""
         self._cards[5].set_value("o1", value)
 
     @property
@@ -632,6 +658,7 @@ class DefineTableCompact(KeywordBase):
 
     @a1_1.setter
     def a1_1(self, value: float) -> None:
+        """Set the a1_1 property."""
         self._cards[5].set_value("a1.1", value)
 
     @property
@@ -642,6 +669,7 @@ class DefineTableCompact(KeywordBase):
 
     @a1_2.setter
     def a1_2(self, value: float) -> None:
+        """Set the a1_2 property."""
         self._cards[5].set_value("a1.2", value)
 
     @property
@@ -652,6 +680,7 @@ class DefineTableCompact(KeywordBase):
 
     @a1_3.setter
     def a1_3(self, value: float) -> None:
+        """Set the a1_3 property."""
         self._cards[5].set_value("a1.3", value)
 
     @property
@@ -662,6 +691,7 @@ class DefineTableCompact(KeywordBase):
 
     @a1_4.setter
     def a1_4(self, value: float) -> None:
+        """Set the a1_4 property."""
         self._cards[5].set_value("a1.4", value)
 
     @property
@@ -672,6 +702,7 @@ class DefineTableCompact(KeywordBase):
 
     @a1_5.setter
     def a1_5(self, value: float) -> None:
+        """Set the a1_5 property."""
         self._cards[5].set_value("a1.5", value)
 
     @property
@@ -682,6 +713,7 @@ class DefineTableCompact(KeywordBase):
 
     @a1_6.setter
     def a1_6(self, value: float) -> None:
+        """Set the a1_6 property."""
         self._cards[5].set_value("a1.6", value)
 
     @property
@@ -692,6 +724,7 @@ class DefineTableCompact(KeywordBase):
 
     @a1_7.setter
     def a1_7(self, value: float) -> None:
+        """Set the a1_7 property."""
         self._cards[5].set_value("a1.7", value)
 
     @property
@@ -702,6 +735,7 @@ class DefineTableCompact(KeywordBase):
 
     @a1_8.setter
     def a1_8(self, value: float) -> None:
+        """Set the a1_8 property."""
         self._cards[6].set_value("a1.8", value)
 
     @property
@@ -712,6 +746,7 @@ class DefineTableCompact(KeywordBase):
 
     @a1_9.setter
     def a1_9(self, value: float) -> None:
+        """Set the a1_9 property."""
         self._cards[6].set_value("a1.9", value)
 
     @property
@@ -722,5 +757,9 @@ class DefineTableCompact(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

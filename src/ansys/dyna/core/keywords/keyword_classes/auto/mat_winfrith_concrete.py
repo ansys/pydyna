@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatWinfrithConcrete class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatWinfrithConcrete(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatWinfrithConcrete class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -306,6 +308,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -316,6 +319,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -326,6 +330,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @tm.setter
     def tm(self, value: float) -> None:
+        """Set the tm property."""
         self._cards[0].set_value("tm", value)
 
     @property
@@ -336,6 +341,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -346,6 +352,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @ucs.setter
     def ucs(self, value: float) -> None:
+        """Set the ucs property."""
         self._cards[0].set_value("ucs", value)
 
     @property
@@ -356,6 +363,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @uts.setter
     def uts(self, value: float) -> None:
+        """Set the uts property."""
         self._cards[0].set_value("uts", value)
 
     @property
@@ -368,6 +376,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @fe.setter
     def fe(self, value: float) -> None:
+        """Set the fe property."""
         self._cards[0].set_value("fe", value)
 
     @property
@@ -378,6 +387,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @asize.setter
     def asize(self, value: float) -> None:
+        """Set the asize property."""
         self._cards[0].set_value("asize", value)
 
     @property
@@ -388,6 +398,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[1].set_value("e", value)
 
     @property
@@ -398,6 +409,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @ys.setter
     def ys(self, value: float) -> None:
+        """Set the ys property."""
         self._cards[1].set_value("ys", value)
 
     @property
@@ -408,6 +420,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @eh.setter
     def eh(self, value: float) -> None:
+        """Set the eh property."""
         self._cards[1].set_value("eh", value)
 
     @property
@@ -418,6 +431,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @uelong.setter
     def uelong(self, value: float) -> None:
+        """Set the uelong property."""
         self._cards[1].set_value("uelong", value)
 
     @property
@@ -431,8 +445,9 @@ class MatWinfrithConcrete(KeywordBase):
 
     @rate.setter
     def rate(self, value: float) -> None:
+        """Set the rate property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""rate must be `None` or one of {0,1,2}""")
+            raise Exception("""rate must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("rate", value)
 
     @property
@@ -448,6 +463,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @conm.setter
     def conm(self, value: float) -> None:
+        """Set the conm property."""
         self._cards[1].set_value("conm", value)
 
     @property
@@ -458,6 +474,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @conl.setter
     def conl(self, value: float) -> None:
+        """Set the conl property."""
         self._cards[1].set_value("conl", value)
 
     @property
@@ -468,6 +485,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @cont.setter
     def cont(self, value: float) -> None:
+        """Set the cont property."""
         self._cards[1].set_value("cont", value)
 
     @property
@@ -480,6 +498,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @eps1.setter
     def eps1(self, value: float) -> None:
+        """Set the eps1 property."""
         self._cards[2].set_value("eps1", value)
 
     @property
@@ -490,6 +509,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @eps2.setter
     def eps2(self, value: float) -> None:
+        """Set the eps2 property."""
         self._cards[2].set_value("eps2", value)
 
     @property
@@ -500,6 +520,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @eps3.setter
     def eps3(self, value: float) -> None:
+        """Set the eps3 property."""
         self._cards[2].set_value("eps3", value)
 
     @property
@@ -510,6 +531,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @eps4.setter
     def eps4(self, value: float) -> None:
+        """Set the eps4 property."""
         self._cards[2].set_value("eps4", value)
 
     @property
@@ -520,6 +542,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @eps5.setter
     def eps5(self, value: float) -> None:
+        """Set the eps5 property."""
         self._cards[2].set_value("eps5", value)
 
     @property
@@ -530,6 +553,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @eps6.setter
     def eps6(self, value: float) -> None:
+        """Set the eps6 property."""
         self._cards[2].set_value("eps6", value)
 
     @property
@@ -540,6 +564,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @eps7.setter
     def eps7(self, value: float) -> None:
+        """Set the eps7 property."""
         self._cards[2].set_value("eps7", value)
 
     @property
@@ -550,6 +575,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @eps8.setter
     def eps8(self, value: float) -> None:
+        """Set the eps8 property."""
         self._cards[2].set_value("eps8", value)
 
     @property
@@ -560,6 +586,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[3].set_value("p1", value)
 
     @property
@@ -570,6 +597,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[3].set_value("p2", value)
 
     @property
@@ -580,6 +608,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[3].set_value("p3", value)
 
     @property
@@ -590,6 +619,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[3].set_value("p4", value)
 
     @property
@@ -600,6 +630,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[3].set_value("p5", value)
 
     @property
@@ -610,6 +641,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[3].set_value("p6", value)
 
     @property
@@ -620,6 +652,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @p7.setter
     def p7(self, value: float) -> None:
+        """Set the p7 property."""
         self._cards[3].set_value("p7", value)
 
     @property
@@ -630,6 +663,7 @@ class MatWinfrithConcrete(KeywordBase):
 
     @p8.setter
     def p8(self, value: float) -> None:
+        """Set the p8 property."""
         self._cards[3].set_value("p8", value)
 
     @property
@@ -640,5 +674,9 @@ class MatWinfrithConcrete(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

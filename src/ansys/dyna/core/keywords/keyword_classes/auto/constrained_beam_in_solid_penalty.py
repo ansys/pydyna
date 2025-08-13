@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedBeamInSolidPenalty class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
     subkeyword = "BEAM_IN_SOLID_PENALTY"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedBeamInSolidPenalty class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -186,6 +188,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @coupid.setter
     def coupid(self, value: int) -> None:
+        """Set the coupid property."""
         self._cards[0].set_value("coupid", value)
 
     @property
@@ -196,6 +199,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -206,6 +210,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @bside.setter
     def bside(self, value: int) -> None:
+        """Set the bside property."""
         self._cards[1].set_value("bside", value)
 
     @property
@@ -216,6 +221,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[1].set_value("ssid", value)
 
     @property
@@ -228,8 +234,9 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @bstyp.setter
     def bstyp(self, value: int) -> None:
+        """Set the bstyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""bstyp must be `None` or one of {0,1}""")
+            raise Exception("""bstyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("bstyp", value)
 
     @property
@@ -242,8 +249,9 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
+        """Set the sstyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sstyp must be `None` or one of {0,1}""")
+            raise Exception("""sstyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("sstyp", value)
 
     @property
@@ -254,6 +262,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @ncoup_.setter
     def ncoup_(self, value: int) -> None:
+        """Set the ncoup_ property."""
         self._cards[1].set_value("ncoup ", value)
 
     @property
@@ -266,6 +275,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @cdir.setter
     def cdir(self, value: int) -> None:
+        """Set the cdir property."""
         self._cards[1].set_value("cdir", value)
 
     @property
@@ -278,6 +288,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @start.setter
     def start(self, value: float) -> None:
+        """Set the start property."""
         self._cards[2].set_value("start", value)
 
     @property
@@ -290,6 +301,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @end.setter
     def end(self, value: float) -> None:
+        """Set the end property."""
         self._cards[2].set_value("end", value)
 
     @property
@@ -302,6 +314,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @axfor_.setter
     def axfor_(self, value: int) -> None:
+        """Set the axfor_ property."""
         self._cards[2].set_value("axfor ", value)
 
     @property
@@ -312,6 +325,7 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @pssf.setter
     def pssf(self, value: float) -> None:
+        """Set the pssf property."""
         self._cards[2].set_value("pssf", value)
 
     @property
@@ -327,5 +341,6 @@ class ConstrainedBeamInSolidPenalty(KeywordBase):
 
     @xint.setter
     def xint(self, value: int) -> None:
+        """Set the xint property."""
         self._cards[2].set_value("xint", value)
 

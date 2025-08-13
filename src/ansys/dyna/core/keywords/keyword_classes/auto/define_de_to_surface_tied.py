@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeToSurfaceTied class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeToSurfaceTied(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeToSurfaceTied class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -157,6 +159,7 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @slave.setter
     def slave(self, value: int) -> None:
+        """Set the slave property."""
         self._cards[0].set_value("slave", value)
 
     @property
@@ -167,6 +170,7 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @master.setter
     def master(self, value: int) -> None:
+        """Set the master property."""
         self._cards[0].set_value("master", value)
 
     @property
@@ -180,8 +184,9 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -193,8 +198,9 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: int) -> None:
+        """Set the mtype property."""
         if value not in [0, 1, None]:
-            raise Exception("""mtype must be `None` or one of {0,1}""")
+            raise Exception("""mtype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -205,6 +211,7 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @nflf.setter
     def nflf(self, value: float) -> None:
+        """Set the nflf property."""
         self._cards[1].set_value("nflf", value)
 
     @property
@@ -215,6 +222,7 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @sflf.setter
     def sflf(self, value: float) -> None:
+        """Set the sflf property."""
         self._cards[1].set_value("sflf", value)
 
     @property
@@ -225,6 +233,7 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @nen.setter
     def nen(self, value: float) -> None:
+        """Set the nen property."""
         self._cards[1].set_value("nen", value)
 
     @property
@@ -235,6 +244,7 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @mes.setter
     def mes(self, value: float) -> None:
+        """Set the mes property."""
         self._cards[1].set_value("mes", value)
 
     @property
@@ -245,6 +255,7 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -255,6 +266,7 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @nsort.setter
     def nsort(self, value: int) -> None:
+        """Set the nsort property."""
         self._cards[1].set_value("nsort", value)
 
     @property
@@ -267,6 +279,7 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @maxgap.setter
     def maxgap(self, value: float) -> None:
+        """Set the maxgap property."""
         self._cards[1].set_value("maxgap", value)
 
     @property
@@ -277,5 +290,9 @@ class DefineDeToSurfaceTied(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

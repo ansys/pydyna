@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetIgaPointUvwListCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetIgaPointUvwListCollect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -176,6 +178,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -186,6 +189,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @da1.setter
     def da1(self, value: float) -> None:
+        """Set the da1 property."""
         self._cards[0].set_value("da1", value)
 
     @property
@@ -196,6 +200,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @da2.setter
     def da2(self, value: float) -> None:
+        """Set the da2 property."""
         self._cards[0].set_value("da2", value)
 
     @property
@@ -206,6 +211,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @da3.setter
     def da3(self, value: float) -> None:
+        """Set the da3 property."""
         self._cards[0].set_value("da3", value)
 
     @property
@@ -216,6 +222,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @da4.setter
     def da4(self, value: float) -> None:
+        """Set the da4 property."""
         self._cards[0].set_value("da4", value)
 
     @property
@@ -226,8 +233,9 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -238,6 +246,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @pid1.setter
     def pid1(self, value: int) -> None:
+        """Set the pid1 property."""
         self._cards[1].set_value("pid1", value)
 
     @property
@@ -248,6 +257,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @pid2.setter
     def pid2(self, value: int) -> None:
+        """Set the pid2 property."""
         self._cards[1].set_value("pid2", value)
 
     @property
@@ -258,6 +268,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @pid3.setter
     def pid3(self, value: int) -> None:
+        """Set the pid3 property."""
         self._cards[1].set_value("pid3", value)
 
     @property
@@ -268,6 +279,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @pid4.setter
     def pid4(self, value: int) -> None:
+        """Set the pid4 property."""
         self._cards[1].set_value("pid4", value)
 
     @property
@@ -278,6 +290,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @pid5.setter
     def pid5(self, value: int) -> None:
+        """Set the pid5 property."""
         self._cards[1].set_value("pid5", value)
 
     @property
@@ -288,6 +301,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @pid6.setter
     def pid6(self, value: int) -> None:
+        """Set the pid6 property."""
         self._cards[1].set_value("pid6", value)
 
     @property
@@ -298,6 +312,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @pid7.setter
     def pid7(self, value: int) -> None:
+        """Set the pid7 property."""
         self._cards[1].set_value("pid7", value)
 
     @property
@@ -308,6 +323,7 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @pid8.setter
     def pid8(self, value: int) -> None:
+        """Set the pid8 property."""
         self._cards[1].set_value("pid8", value)
 
     @property
@@ -318,5 +334,9 @@ class SetIgaPointUvwListCollect(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

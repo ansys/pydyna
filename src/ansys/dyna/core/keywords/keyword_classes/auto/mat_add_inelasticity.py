@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAddInelasticity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddInelasticity(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAddInelasticity class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -317,6 +319,7 @@ class MatAddInelasticity(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -327,6 +330,7 @@ class MatAddInelasticity(KeywordBase):
 
     @nielinks.setter
     def nielinks(self, value: int) -> None:
+        """Set the nielinks property."""
         self._cards[0].set_value("nielinks", value)
 
     @property
@@ -337,6 +341,7 @@ class MatAddInelasticity(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -347,6 +352,7 @@ class MatAddInelasticity(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -363,6 +369,7 @@ class MatAddInelasticity(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[0].set_value("aopt", value)
 
     @property
@@ -380,6 +387,7 @@ class MatAddInelasticity(KeywordBase):
 
     @macf.setter
     def macf(self, value: float) -> None:
+        """Set the macf property."""
         self._cards[0].set_value("macf", value)
 
     @property
@@ -390,6 +398,7 @@ class MatAddInelasticity(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -400,6 +409,7 @@ class MatAddInelasticity(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[1].set_value("xp", value)
 
     @property
@@ -410,6 +420,7 @@ class MatAddInelasticity(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[1].set_value("yp", value)
 
     @property
@@ -420,6 +431,7 @@ class MatAddInelasticity(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[1].set_value("zp", value)
 
     @property
@@ -430,6 +442,7 @@ class MatAddInelasticity(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -440,6 +453,7 @@ class MatAddInelasticity(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -450,6 +464,7 @@ class MatAddInelasticity(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[1].set_value("a3", value)
 
     @property
@@ -460,6 +475,7 @@ class MatAddInelasticity(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[2].set_value("v1", value)
 
     @property
@@ -470,6 +486,7 @@ class MatAddInelasticity(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[2].set_value("v2", value)
 
     @property
@@ -480,6 +497,7 @@ class MatAddInelasticity(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[2].set_value("v3", value)
 
     @property
@@ -490,6 +508,7 @@ class MatAddInelasticity(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[2].set_value("d1", value)
 
     @property
@@ -500,6 +519,7 @@ class MatAddInelasticity(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[2].set_value("d2", value)
 
     @property
@@ -510,6 +530,7 @@ class MatAddInelasticity(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[2].set_value("d3", value)
 
     @property
@@ -520,6 +541,7 @@ class MatAddInelasticity(KeywordBase):
 
     @nielaws.setter
     def nielaws(self, value: int) -> None:
+        """Set the nielaws property."""
         self._cards[3].set_value("nielaws", value)
 
     @property
@@ -530,6 +552,7 @@ class MatAddInelasticity(KeywordBase):
 
     @weight.setter
     def weight(self, value: float) -> None:
+        """Set the weight property."""
         self._cards[3].set_value("weight", value)
 
     @property
@@ -543,8 +566,9 @@ class MatAddInelasticity(KeywordBase):
 
     @law.setter
     def law(self, value: int) -> None:
+        """Set the law property."""
         if value not in [3, 5, 6, None]:
-            raise Exception("""law must be `None` or one of {3,5,6}""")
+            raise Exception("""law must be `None` or one of {3,5,6}.""")
         self._cards[4].set_value("law", value)
 
     @property
@@ -568,6 +592,7 @@ class MatAddInelasticity(KeywordBase):
 
     @model.setter
     def model(self, value: int) -> None:
+        """Set the model property."""
         self._cards[4].set_value("model", value)
 
     @property
@@ -578,6 +603,7 @@ class MatAddInelasticity(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[5].set_value("p1", value)
 
     @property
@@ -588,6 +614,7 @@ class MatAddInelasticity(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[5].set_value("p2", value)
 
     @property
@@ -598,5 +625,9 @@ class MatAddInelasticity(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

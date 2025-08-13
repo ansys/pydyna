@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineStagedConstructionPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineStagedConstructionPartSet(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineStagedConstructionPartSet class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -90,6 +92,7 @@ class DefineStagedConstructionPartSet(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -100,6 +103,7 @@ class DefineStagedConstructionPartSet(KeywordBase):
 
     @stga.setter
     def stga(self, value: int) -> None:
+        """Set the stga property."""
         self._cards[0].set_value("stga", value)
 
     @property
@@ -110,6 +114,7 @@ class DefineStagedConstructionPartSet(KeywordBase):
 
     @stgr.setter
     def stgr(self, value: int) -> None:
+        """Set the stgr property."""
         self._cards[0].set_value("stgr", value)
 
     @property
@@ -120,5 +125,9 @@ class DefineStagedConstructionPartSet(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

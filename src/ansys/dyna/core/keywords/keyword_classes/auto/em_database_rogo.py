@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmDatabaseRogo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmDatabaseRogo(KeywordBase):
     subkeyword = "DATABASE_ROGO"
 
     def __init__(self, **kwargs):
+        """Initialize the EmDatabaseRogo class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,8 +67,9 @@ class EmDatabaseRogo(KeywordBase):
 
     @outlv.setter
     def outlv(self, value: int) -> None:
+        """Set the outlv property."""
         if value not in [1, 0, None]:
-            raise Exception("""outlv must be `None` or one of {1,0}""")
+            raise Exception("""outlv must be `None` or one of {1,0}.""")
         self._cards[0].set_value("outlv", value)
 
     @property
@@ -77,5 +80,6 @@ class EmDatabaseRogo(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 

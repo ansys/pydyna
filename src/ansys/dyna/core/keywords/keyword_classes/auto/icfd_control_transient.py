@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdControlTransient class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlTransient(KeywordBase):
     subkeyword = "CONTROL_TRANSIENT"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdControlTransient class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -65,8 +67,9 @@ class IcfdControlTransient(KeywordBase):
 
     @tord.setter
     def tord(self, value: int) -> None:
+        """Set the tord property."""
         if value not in [0, 1, None]:
-            raise Exception("""tord must be `None` or one of {0,1}""")
+            raise Exception("""tord must be `None` or one of {0,1}.""")
         self._cards[0].set_value("tord", value)
 
     @property
@@ -79,7 +82,8 @@ class IcfdControlTransient(KeywordBase):
 
     @fsord.setter
     def fsord(self, value: int) -> None:
+        """Set the fsord property."""
         if value not in [0, 1, None]:
-            raise Exception("""fsord must be `None` or one of {0,1}""")
+            raise Exception("""fsord must be `None` or one of {0,1}.""")
         self._cards[0].set_value("fsord", value)
 

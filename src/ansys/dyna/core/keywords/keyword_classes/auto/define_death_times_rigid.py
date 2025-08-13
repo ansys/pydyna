@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeathTimesRigid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeathTimesRigid(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeathTimesRigid class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -157,6 +159,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @geo.setter
     def geo(self, value: int) -> None:
+        """Set the geo property."""
         self._cards[0].set_value("geo", value)
 
     @property
@@ -167,6 +170,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -177,6 +181,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -187,6 +192,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -197,6 +203,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @x_t.setter
     def x_t(self, value: float) -> None:
+        """Set the x_t property."""
         self._cards[1].set_value("x_t", value)
 
     @property
@@ -207,6 +214,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @y_t.setter
     def y_t(self, value: float) -> None:
+        """Set the y_t property."""
         self._cards[1].set_value("y_t", value)
 
     @property
@@ -217,6 +225,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @z_t.setter
     def z_t(self, value: float) -> None:
+        """Set the z_t property."""
         self._cards[1].set_value("z_t", value)
 
     @property
@@ -227,6 +236,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @x_h.setter
     def x_h(self, value: float) -> None:
+        """Set the x_h property."""
         self._cards[1].set_value("x_h", value)
 
     @property
@@ -237,6 +247,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @y_h.setter
     def y_h(self, value: float) -> None:
+        """Set the y_h property."""
         self._cards[1].set_value("y_h", value)
 
     @property
@@ -247,6 +258,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @x_h.setter
     def x_h(self, value: float) -> None:
+        """Set the x_h property."""
         self._cards[1].set_value("x_h", value)
 
     @property
@@ -257,6 +269,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[1].set_value("r", value)
 
     @property
@@ -267,6 +280,7 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @flag.setter
     def flag(self, value: int) -> None:
+        """Set the flag property."""
         self._cards[1].set_value("flag", value)
 
     @property
@@ -277,5 +291,9 @@ class DefineDeathTimesRigid(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

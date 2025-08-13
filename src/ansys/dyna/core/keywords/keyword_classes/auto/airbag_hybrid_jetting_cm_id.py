@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AirbagHybridJettingCmId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagHybridJettingCmId(KeywordBase):
     subkeyword = "HYBRID_JETTING_CM_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the AirbagHybridJettingCmId class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -487,6 +489,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -497,6 +500,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -507,6 +511,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[1].set_value("sid", value)
 
     @property
@@ -519,8 +524,9 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("sidtyp", value)
 
     @property
@@ -534,6 +540,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @rbid.setter
     def rbid(self, value: int) -> None:
+        """Set the rbid property."""
         self._cards[1].set_value("rbid", value)
 
     @property
@@ -544,6 +551,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @vsca.setter
     def vsca(self, value: float) -> None:
+        """Set the vsca property."""
         self._cards[1].set_value("vsca", value)
 
     @property
@@ -554,6 +562,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @psca.setter
     def psca(self, value: float) -> None:
+        """Set the psca property."""
         self._cards[1].set_value("psca", value)
 
     @property
@@ -564,6 +573,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @vini.setter
     def vini(self, value: float) -> None:
+        """Set the vini property."""
         self._cards[1].set_value("vini", value)
 
     @property
@@ -574,6 +584,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @mwd.setter
     def mwd(self, value: float) -> None:
+        """Set the mwd property."""
         self._cards[1].set_value("mwd", value)
 
     @property
@@ -584,6 +595,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @spsf.setter
     def spsf(self, value: float) -> None:
+        """Set the spsf property."""
         self._cards[1].set_value("spsf", value)
 
     @property
@@ -594,6 +606,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @atmost.setter
     def atmost(self, value: float) -> None:
+        """Set the atmost property."""
         self._cards[2].set_value("atmost", value)
 
     @property
@@ -604,6 +617,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @atmosp.setter
     def atmosp(self, value: float) -> None:
+        """Set the atmosp property."""
         self._cards[2].set_value("atmosp", value)
 
     @property
@@ -614,6 +628,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @atmosd.setter
     def atmosd(self, value: float) -> None:
+        """Set the atmosd property."""
         self._cards[2].set_value("atmosd", value)
 
     @property
@@ -624,6 +639,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @gc.setter
     def gc(self, value: float) -> None:
+        """Set the gc property."""
         self._cards[2].set_value("gc", value)
 
     @property
@@ -634,6 +650,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @cc.setter
     def cc(self, value: float) -> None:
+        """Set the cc property."""
         self._cards[2].set_value("cc", value)
 
     @property
@@ -644,6 +661,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @c23.setter
     def c23(self, value: float) -> None:
+        """Set the c23 property."""
         self._cards[3].set_value("c23", value)
 
     @property
@@ -654,6 +672,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @lcc23.setter
     def lcc23(self, value: int) -> None:
+        """Set the lcc23 property."""
         self._cards[3].set_value("lcc23", value)
 
     @property
@@ -664,6 +683,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @a23.setter
     def a23(self, value: float) -> None:
+        """Set the a23 property."""
         self._cards[3].set_value("a23", value)
 
     @property
@@ -674,6 +694,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @lca23.setter
     def lca23(self, value: int) -> None:
+        """Set the lca23 property."""
         self._cards[3].set_value("lca23", value)
 
     @property
@@ -684,6 +705,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @cp23.setter
     def cp23(self, value: float) -> None:
+        """Set the cp23 property."""
         self._cards[3].set_value("cp23", value)
 
     @property
@@ -694,6 +716,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @lcp23.setter
     def lcp23(self, value: int) -> None:
+        """Set the lcp23 property."""
         self._cards[3].set_value("lcp23", value)
 
     @property
@@ -704,6 +727,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @ap23.setter
     def ap23(self, value: float) -> None:
+        """Set the ap23 property."""
         self._cards[3].set_value("ap23", value)
 
     @property
@@ -714,6 +738,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @lcap23.setter
     def lcap23(self, value: int) -> None:
+        """Set the lcap23 property."""
         self._cards[3].set_value("lcap23", value)
 
     @property
@@ -732,8 +757,9 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @opt.setter
     def opt(self, value: int) -> None:
+        """Set the opt property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, None]:
-            raise Exception("""opt must be `None` or one of {1,2,3,4,5,6,7,8}""")
+            raise Exception("""opt must be `None` or one of {1,2,3,4,5,6,7,8}.""")
         self._cards[4].set_value("opt", value)
 
     @property
@@ -744,6 +770,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @pvent.setter
     def pvent(self, value: float) -> None:
+        """Set the pvent property."""
         self._cards[4].set_value("pvent", value)
 
     @property
@@ -754,6 +781,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @ngas.setter
     def ngas(self, value: int) -> None:
+        """Set the ngas property."""
         self._cards[4].set_value("ngas", value)
 
     @property
@@ -764,6 +792,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @lcefr.setter
     def lcefr(self, value: int) -> None:
+        """Set the lcefr property."""
         self._cards[4].set_value("lcefr", value)
 
     @property
@@ -777,6 +806,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @lcidm0.setter
     def lcidm0(self, value: int) -> None:
+        """Set the lcidm0 property."""
         self._cards[4].set_value("lcidm0", value)
 
     @property
@@ -798,6 +828,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @vntopt.setter
     def vntopt(self, value: int) -> None:
+        """Set the vntopt property."""
         self._cards[4].set_value("vntopt", value)
 
     @property
@@ -810,6 +841,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @lcidm.setter
     def lcidm(self, value: int) -> None:
+        """Set the lcidm property."""
         self._cards[5].set_value("lcidm", value)
 
     @property
@@ -822,6 +854,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[5].set_value("lcidt", value)
 
     @property
@@ -832,6 +865,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @mw.setter
     def mw(self, value: float) -> None:
+        """Set the mw property."""
         self._cards[5].set_value("mw", value)
 
     @property
@@ -842,6 +876,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @initm.setter
     def initm(self, value: float) -> None:
+        """Set the initm property."""
         self._cards[5].set_value("initm", value)
 
     @property
@@ -852,6 +887,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[5].set_value("a", value)
 
     @property
@@ -862,6 +898,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[5].set_value("b", value)
 
     @property
@@ -872,6 +909,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[5].set_value("c", value)
 
     @property
@@ -882,6 +920,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @fmass.setter
     def fmass(self, value: float) -> None:
+        """Set the fmass property."""
         self._cards[6].set_value("fmass", value)
 
     @property
@@ -892,6 +931,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @xjfp.setter
     def xjfp(self, value: float) -> None:
+        """Set the xjfp property."""
         self._cards[7].set_value("xjfp", value)
 
     @property
@@ -902,6 +942,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @yjfp.setter
     def yjfp(self, value: float) -> None:
+        """Set the yjfp property."""
         self._cards[7].set_value("yjfp", value)
 
     @property
@@ -912,6 +953,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @zjfp.setter
     def zjfp(self, value: float) -> None:
+        """Set the zjfp property."""
         self._cards[7].set_value("zjfp", value)
 
     @property
@@ -922,6 +964,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @xjvh.setter
     def xjvh(self, value: float) -> None:
+        """Set the xjvh property."""
         self._cards[7].set_value("xjvh", value)
 
     @property
@@ -932,6 +975,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @yjvh.setter
     def yjvh(self, value: float) -> None:
+        """Set the yjvh property."""
         self._cards[7].set_value("yjvh", value)
 
     @property
@@ -942,6 +986,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @zjvh.setter
     def zjvh(self, value: float) -> None:
+        """Set the zjvh property."""
         self._cards[7].set_value("zjvh", value)
 
     @property
@@ -952,6 +997,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @ca.setter
     def ca(self, value: float) -> None:
+        """Set the ca property."""
         self._cards[7].set_value("ca", value)
 
     @property
@@ -963,6 +1009,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[7].set_value("beta", value)
 
     @property
@@ -973,6 +1020,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @xsjfp.setter
     def xsjfp(self, value: float) -> None:
+        """Set the xsjfp property."""
         self._cards[8].set_value("xsjfp", value)
 
     @property
@@ -983,6 +1031,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @ysjfp.setter
     def ysjfp(self, value: float) -> None:
+        """Set the ysjfp property."""
         self._cards[8].set_value("ysjfp", value)
 
     @property
@@ -993,6 +1042,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @zsjfp.setter
     def zsjfp(self, value: float) -> None:
+        """Set the zsjfp property."""
         self._cards[8].set_value("zsjfp", value)
 
     @property
@@ -1004,6 +1054,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[8].set_value("psid", value)
 
     @property
@@ -1014,6 +1065,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @idum.setter
     def idum(self, value: float) -> None:
+        """Set the idum property."""
         self._cards[8].set_value("idum", value)
 
     @property
@@ -1024,6 +1076,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[8].set_value("node1", value)
 
     @property
@@ -1034,6 +1087,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[8].set_value("node2", value)
 
     @property
@@ -1044,6 +1098,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @node3.setter
     def node3(self, value: int) -> None:
+        """Set the node3 property."""
         self._cards[8].set_value("node3", value)
 
     @property
@@ -1055,5 +1110,6 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @nreact.setter
     def nreact(self, value: int) -> None:
+        """Set the nreact property."""
         self._cards[9].set_value("nreact", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingTrimSolidRefinement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingTrimSolidRefinement(KeywordBase):
     subkeyword = "FORMING_TRIM_SOLID_REFINEMENT"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingTrimSolidRefinement class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -64,6 +66,7 @@ class ControlFormingTrimSolidRefinement(KeywordBase):
 
     @irefine.setter
     def irefine(self, value: int) -> None:
+        """Set the irefine property."""
         self._cards[0].set_value("irefine", value)
 
     @property
@@ -76,7 +79,8 @@ class ControlFormingTrimSolidRefinement(KeywordBase):
 
     @ilevel.setter
     def ilevel(self, value: int) -> None:
+        """Set the ilevel property."""
         if value not in [0, 1, None]:
-            raise Exception("""ilevel must be `None` or one of {0,1}""")
+            raise Exception("""ilevel must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ilevel", value)
 

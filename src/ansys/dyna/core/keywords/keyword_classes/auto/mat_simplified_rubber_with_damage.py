@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSimplifiedRubberWithDamage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSimplifiedRubberWithDamage class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -178,6 +180,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -188,6 +191,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -198,6 +202,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -208,6 +213,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @mu.setter
     def mu(self, value: float) -> None:
+        """Set the mu property."""
         self._cards[0].set_value("mu", value)
 
     @property
@@ -218,6 +224,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -228,6 +235,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @sigf.setter
     def sigf(self, value: float) -> None:
+        """Set the sigf property."""
         self._cards[0].set_value("sigf", value)
 
     @property
@@ -238,6 +246,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @sgl.setter
     def sgl(self, value: float) -> None:
+        """Set the sgl property."""
         self._cards[1].set_value("sgl", value)
 
     @property
@@ -248,6 +257,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @sw.setter
     def sw(self, value: float) -> None:
+        """Set the sw property."""
         self._cards[1].set_value("sw", value)
 
     @property
@@ -258,6 +268,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @st.setter
     def st(self, value: float) -> None:
+        """Set the st property."""
         self._cards[1].set_value("st", value)
 
     @property
@@ -268,6 +279,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @lc_tbid.setter
     def lc_tbid(self, value: float) -> None:
+        """Set the lc_tbid property."""
         self._cards[1].set_value("lc/tbid", value)
 
     @property
@@ -281,8 +293,9 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @tension.setter
     def tension(self, value: float) -> None:
+        """Set the tension property."""
         if value not in [-1.0, 0.0, 1.0, None]:
-            raise Exception("""tension must be `None` or one of {-1.0,0.0,1.0}""")
+            raise Exception("""tension must be `None` or one of {-1.0,0.0,1.0}.""")
         self._cards[1].set_value("tension", value)
 
     @property
@@ -295,8 +308,9 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @rtype.setter
     def rtype(self, value: float) -> None:
+        """Set the rtype property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""rtype must be `None` or one of {0.0,1.0}""")
+            raise Exception("""rtype must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("rtype", value)
 
     @property
@@ -309,8 +323,9 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @avgopt.setter
     def avgopt(self, value: float) -> None:
+        """Set the avgopt property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""avgopt must be `None` or one of {0.0,1.0}""")
+            raise Exception("""avgopt must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("avgopt", value)
 
     @property
@@ -321,6 +336,7 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @lcunld.setter
     def lcunld(self, value: int) -> None:
+        """Set the lcunld property."""
         self._cards[2].set_value("lcunld", value)
 
     @property
@@ -331,5 +347,9 @@ class MatSimplifiedRubberWithDamage(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

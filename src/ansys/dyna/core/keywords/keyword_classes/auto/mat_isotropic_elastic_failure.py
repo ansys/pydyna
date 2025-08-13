@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatIsotropicElasticFailure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatIsotropicElasticFailure(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatIsotropicElasticFailure class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -143,6 +145,7 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -153,6 +156,7 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -163,6 +167,7 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -173,6 +178,7 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @sigy.setter
     def sigy(self, value: float) -> None:
+        """Set the sigy property."""
         self._cards[0].set_value("sigy", value)
 
     @property
@@ -183,6 +189,7 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @etan.setter
     def etan(self, value: float) -> None:
+        """Set the etan property."""
         self._cards[0].set_value("etan", value)
 
     @property
@@ -193,6 +200,7 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @bulk.setter
     def bulk(self, value: float) -> None:
+        """Set the bulk property."""
         self._cards[0].set_value("bulk", value)
 
     @property
@@ -203,6 +211,7 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @epf.setter
     def epf(self, value: float) -> None:
+        """Set the epf property."""
         self._cards[1].set_value("epf", value)
 
     @property
@@ -213,6 +222,7 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @prf.setter
     def prf(self, value: float) -> None:
+        """Set the prf property."""
         self._cards[1].set_value("prf", value)
 
     @property
@@ -225,6 +235,7 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @rem.setter
     def rem(self, value: float) -> None:
+        """Set the rem property."""
         self._cards[1].set_value("rem", value)
 
     @property
@@ -237,6 +248,7 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @trem.setter
     def trem(self, value: float) -> None:
+        """Set the trem property."""
         self._cards[1].set_value("trem", value)
 
     @property
@@ -247,5 +259,9 @@ class MatIsotropicElasticFailure(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

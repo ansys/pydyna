@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ChemistryControl0D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChemistryControl0D(KeywordBase):
     subkeyword = "CONTROL_0D"
 
     def __init__(self, **kwargs):
+        """Initialize the ChemistryControl0D class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -149,6 +151,7 @@ class ChemistryControl0D(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -159,6 +162,7 @@ class ChemistryControl0D(KeywordBase):
 
     @compid.setter
     def compid(self, value: int) -> None:
+        """Set the compid property."""
         self._cards[0].set_value("compid", value)
 
     @property
@@ -171,8 +175,9 @@ class ChemistryControl0D(KeywordBase):
 
     @soltyp.setter
     def soltyp(self, value: int) -> None:
+        """Set the soltyp property."""
         if value not in [1, 2, None]:
-            raise Exception("""soltyp must be `None` or one of {1,2}""")
+            raise Exception("""soltyp must be `None` or one of {1,2}.""")
         self._cards[0].set_value("soltyp", value)
 
     @property
@@ -183,6 +188,7 @@ class ChemistryControl0D(KeywordBase):
 
     @plotdt.setter
     def plotdt(self, value: float) -> None:
+        """Set the plotdt property."""
         self._cards[0].set_value("plotdt", value)
 
     @property
@@ -195,6 +201,7 @@ class ChemistryControl0D(KeywordBase):
 
     @csp_sel.setter
     def csp_sel(self, value: int) -> None:
+        """Set the csp_sel property."""
         self._cards[0].set_value("csp_sel", value)
 
     @property
@@ -205,6 +212,7 @@ class ChemistryControl0D(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -215,6 +223,7 @@ class ChemistryControl0D(KeywordBase):
 
     @tlimit.setter
     def tlimit(self, value: float) -> None:
+        """Set the tlimit property."""
         self._cards[1].set_value("tlimit", value)
 
     @property
@@ -225,6 +234,7 @@ class ChemistryControl0D(KeywordBase):
 
     @tic.setter
     def tic(self, value: float) -> None:
+        """Set the tic property."""
         self._cards[1].set_value("tic", value)
 
     @property
@@ -235,6 +245,7 @@ class ChemistryControl0D(KeywordBase):
 
     @pic.setter
     def pic(self, value: float) -> None:
+        """Set the pic property."""
         self._cards[1].set_value("pic", value)
 
     @property
@@ -245,6 +256,7 @@ class ChemistryControl0D(KeywordBase):
 
     @ric.setter
     def ric(self, value: float) -> None:
+        """Set the ric property."""
         self._cards[1].set_value("ric", value)
 
     @property
@@ -255,6 +267,7 @@ class ChemistryControl0D(KeywordBase):
 
     @eic.setter
     def eic(self, value: float) -> None:
+        """Set the eic property."""
         self._cards[1].set_value("eic", value)
 
     @property
@@ -265,6 +278,7 @@ class ChemistryControl0D(KeywordBase):
 
     @ampl.setter
     def ampl(self, value: float) -> None:
+        """Set the ampl property."""
         self._cards[2].set_value("ampl", value)
 
     @property
@@ -275,5 +289,6 @@ class ChemistryControl0D(KeywordBase):
 
     @ycut.setter
     def ycut(self, value: float) -> None:
+        """Set the ycut property."""
         self._cards[2].set_value("ycut", value)
 

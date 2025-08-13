@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatTransverselyIsotropicCrushableFoam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatTransverselyIsotropicCrushableFoam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -310,6 +312,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -320,6 +323,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -330,6 +334,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @e11.setter
     def e11(self, value: float) -> None:
+        """Set the e11 property."""
         self._cards[0].set_value("e11", value)
 
     @property
@@ -340,6 +345,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @e22.setter
     def e22(self, value: float) -> None:
+        """Set the e22 property."""
         self._cards[0].set_value("e22", value)
 
     @property
@@ -350,6 +356,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @e12.setter
     def e12(self, value: float) -> None:
+        """Set the e12 property."""
         self._cards[0].set_value("e12", value)
 
     @property
@@ -360,6 +367,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @e23.setter
     def e23(self, value: float) -> None:
+        """Set the e23 property."""
         self._cards[0].set_value("e23", value)
 
     @property
@@ -370,6 +378,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -380,6 +389,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -390,6 +400,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @i11.setter
     def i11(self, value: int) -> None:
+        """Set the i11 property."""
         self._cards[1].set_value("i11", value)
 
     @property
@@ -400,6 +411,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @i22.setter
     def i22(self, value: int) -> None:
+        """Set the i22 property."""
         self._cards[1].set_value("i22", value)
 
     @property
@@ -410,6 +422,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @i12.setter
     def i12(self, value: int) -> None:
+        """Set the i12 property."""
         self._cards[1].set_value("i12", value)
 
     @property
@@ -420,6 +433,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @i23.setter
     def i23(self, value: int) -> None:
+        """Set the i23 property."""
         self._cards[1].set_value("i23", value)
 
     @property
@@ -430,6 +444,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @iaa.setter
     def iaa(self, value: int) -> None:
+        """Set the iaa property."""
         self._cards[1].set_value("iaa", value)
 
     @property
@@ -440,6 +455,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @nsym.setter
     def nsym(self, value: int) -> None:
+        """Set the nsym property."""
         self._cards[1].set_value("nsym", value)
 
     @property
@@ -450,6 +466,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @ang.setter
     def ang(self, value: float) -> None:
+        """Set the ang property."""
         self._cards[1].set_value("ang", value)
 
     @property
@@ -460,6 +477,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @mu.setter
     def mu(self, value: float) -> None:
+        """Set the mu property."""
         self._cards[1].set_value("mu", value)
 
     @property
@@ -476,6 +494,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[2].set_value("aopt", value)
 
     @property
@@ -486,6 +505,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @iscl.setter
     def iscl(self, value: int) -> None:
+        """Set the iscl property."""
         self._cards[2].set_value("iscl", value)
 
     @property
@@ -498,6 +518,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[2].set_value("beta", value)
 
     @property
@@ -516,8 +537,9 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -4, -3, -2, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}.""")
         self._cards[2].set_value("macf", value)
 
     @property
@@ -528,6 +550,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[3].set_value("xp", value)
 
     @property
@@ -538,6 +561,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[3].set_value("yp", value)
 
     @property
@@ -548,6 +572,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[3].set_value("zp", value)
 
     @property
@@ -558,6 +583,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[3].set_value("a1", value)
 
     @property
@@ -568,6 +594,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[3].set_value("a2", value)
 
     @property
@@ -578,6 +605,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[3].set_value("a3", value)
 
     @property
@@ -588,6 +616,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[4].set_value("d1", value)
 
     @property
@@ -598,6 +627,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[4].set_value("d2", value)
 
     @property
@@ -608,6 +638,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[4].set_value("d3", value)
 
     @property
@@ -618,6 +649,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[4].set_value("v1", value)
 
     @property
@@ -628,6 +660,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[4].set_value("v2", value)
 
     @property
@@ -638,6 +671,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[4].set_value("v3", value)
 
     @property
@@ -648,5 +682,9 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSampLight class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSampLight(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSampLight class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -183,6 +185,7 @@ class MatSampLight(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -193,6 +196,7 @@ class MatSampLight(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -203,6 +207,7 @@ class MatSampLight(KeywordBase):
 
     @emod.setter
     def emod(self, value: float) -> None:
+        """Set the emod property."""
         self._cards[0].set_value("emod", value)
 
     @property
@@ -213,6 +218,7 @@ class MatSampLight(KeywordBase):
 
     @nue.setter
     def nue(self, value: float) -> None:
+        """Set the nue property."""
         self._cards[0].set_value("nue", value)
 
     @property
@@ -223,6 +229,7 @@ class MatSampLight(KeywordBase):
 
     @lcemod.setter
     def lcemod(self, value: int) -> None:
+        """Set the lcemod property."""
         self._cards[0].set_value("lcemod", value)
 
     @property
@@ -234,6 +241,7 @@ class MatSampLight(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -250,6 +258,7 @@ class MatSampLight(KeywordBase):
 
     @lcid_t.setter
     def lcid_t(self, value: int) -> None:
+        """Set the lcid_t property."""
         self._cards[1].set_value("lcid_t", value)
 
     @property
@@ -262,6 +271,7 @@ class MatSampLight(KeywordBase):
 
     @lcid_c.setter
     def lcid_c(self, value: int) -> None:
+        """Set the lcid_c property."""
         self._cards[1].set_value("lcid_c", value)
 
     @property
@@ -274,8 +284,9 @@ class MatSampLight(KeywordBase):
 
     @ctflg.setter
     def ctflg(self, value: int) -> None:
+        """Set the ctflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""ctflg must be `None` or one of {0,1}""")
+            raise Exception("""ctflg must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ctflg", value)
 
     @property
@@ -288,8 +299,9 @@ class MatSampLight(KeywordBase):
 
     @rateop.setter
     def rateop(self, value: int) -> None:
+        """Set the rateop property."""
         if value not in [0, 2, None]:
-            raise Exception("""rateop must be `None` or one of {0,2}""")
+            raise Exception("""rateop must be `None` or one of {0,2}.""")
         self._cards[1].set_value("rateop", value)
 
     @property
@@ -300,6 +312,7 @@ class MatSampLight(KeywordBase):
 
     @nuep.setter
     def nuep(self, value: float) -> None:
+        """Set the nuep property."""
         self._cards[1].set_value("nuep", value)
 
     @property
@@ -311,6 +324,7 @@ class MatSampLight(KeywordBase):
 
     @lcid_p.setter
     def lcid_p(self, value: int) -> None:
+        """Set the lcid_p property."""
         self._cards[1].set_value("lcid-p", value)
 
     @property
@@ -321,6 +335,7 @@ class MatSampLight(KeywordBase):
 
     @rfiltf.setter
     def rfiltf(self, value: float) -> None:
+        """Set the rfiltf property."""
         self._cards[1].set_value("rfiltf", value)
 
     @property
@@ -331,5 +346,9 @@ class MatSampLight(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

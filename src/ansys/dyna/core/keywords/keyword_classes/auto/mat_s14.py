@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatS14 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatS14(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatS14 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -125,6 +127,7 @@ class MatS14(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -135,6 +138,7 @@ class MatS14(KeywordBase):
 
     @a14.setter
     def a14(self, value: float) -> None:
+        """Set the a14 property."""
         self._cards[0].set_value("a14", value)
 
     @property
@@ -145,6 +149,7 @@ class MatS14(KeywordBase):
 
     @b14.setter
     def b14(self, value: float) -> None:
+        """Set the b14 property."""
         self._cards[0].set_value("b14", value)
 
     @property
@@ -155,6 +160,7 @@ class MatS14(KeywordBase):
 
     @c14.setter
     def c14(self, value: float) -> None:
+        """Set the c14 property."""
         self._cards[0].set_value("c14", value)
 
     @property
@@ -165,6 +171,7 @@ class MatS14(KeywordBase):
 
     @d14.setter
     def d14(self, value: float) -> None:
+        """Set the d14 property."""
         self._cards[0].set_value("d14", value)
 
     @property
@@ -175,6 +182,7 @@ class MatS14(KeywordBase):
 
     @e14.setter
     def e14(self, value: float) -> None:
+        """Set the e14 property."""
         self._cards[0].set_value("e14", value)
 
     @property
@@ -185,6 +193,7 @@ class MatS14(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -195,6 +204,7 @@ class MatS14(KeywordBase):
 
     @psd.setter
     def psd(self, value: float) -> None:
+        """Set the psd property."""
         self._cards[0].set_value("psd", value)
 
     @property
@@ -205,5 +215,9 @@ class MatS14(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

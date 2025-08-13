@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SensorDefineNodeSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorDefineNodeSet(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SensorDefineNodeSet class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -120,6 +122,7 @@ class SensorDefineNodeSet(KeywordBase):
 
     @sensid.setter
     def sensid(self, value: int) -> None:
+        """Set the sensid property."""
         self._cards[0].set_value("sensid", value)
 
     @property
@@ -132,6 +135,7 @@ class SensorDefineNodeSet(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[0].set_value("node1", value)
 
     @property
@@ -144,6 +148,7 @@ class SensorDefineNodeSet(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[0].set_value("node2", value)
 
     @property
@@ -154,6 +159,7 @@ class SensorDefineNodeSet(KeywordBase):
 
     @vid.setter
     def vid(self, value: str) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -168,8 +174,9 @@ class SensorDefineNodeSet(KeywordBase):
 
     @ctype.setter
     def ctype(self, value: str) -> None:
+        """Set the ctype property."""
         if value not in ["ACC", "VEL", "COORD", "TEMP", None]:
-            raise Exception("""ctype must be `None` or one of {"ACC","VEL","COORD","TEMP"}""")
+            raise Exception("""ctype must be `None` or one of {"ACC","VEL","COORD","TEMP"}.""")
         self._cards[0].set_value("ctype", value)
 
     @property
@@ -184,8 +191,9 @@ class SensorDefineNodeSet(KeywordBase):
 
     @setopt.setter
     def setopt(self, value: str) -> None:
+        """Set the setopt property."""
         if value not in ["AVG", "MAX", "MIN", "SUM", None]:
-            raise Exception("""setopt must be `None` or one of {"AVG","MAX","MIN","SUM"}""")
+            raise Exception("""setopt must be `None` or one of {"AVG","MAX","MIN","SUM"}.""")
         self._cards[0].set_value("setopt", value)
 
     @property
@@ -196,5 +204,9 @@ class SensorDefineNodeSet(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

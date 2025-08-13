@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineBoxAdaptiveLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineBoxAdaptiveLocal class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -264,6 +266,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[0].set_value("boxid", value)
 
     @property
@@ -274,6 +277,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @xmn.setter
     def xmn(self, value: float) -> None:
+        """Set the xmn property."""
         self._cards[0].set_value("xmn", value)
 
     @property
@@ -284,6 +288,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @xmx.setter
     def xmx(self, value: float) -> None:
+        """Set the xmx property."""
         self._cards[0].set_value("xmx", value)
 
     @property
@@ -294,6 +299,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @ymn.setter
     def ymn(self, value: float) -> None:
+        """Set the ymn property."""
         self._cards[0].set_value("ymn", value)
 
     @property
@@ -304,6 +310,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @ymx.setter
     def ymx(self, value: float) -> None:
+        """Set the ymx property."""
         self._cards[0].set_value("ymx", value)
 
     @property
@@ -314,6 +321,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @zmn.setter
     def zmn(self, value: float) -> None:
+        """Set the zmn property."""
         self._cards[0].set_value("zmn", value)
 
     @property
@@ -324,6 +332,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @zmx.setter
     def zmx(self, value: float) -> None:
+        """Set the zmx property."""
         self._cards[0].set_value("zmx", value)
 
     @property
@@ -334,6 +343,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -344,6 +354,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @level.setter
     def level(self, value: int) -> None:
+        """Set the level property."""
         self._cards[1].set_value("level", value)
 
     @property
@@ -360,6 +371,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @lidx_ndid.setter
     def lidx_ndid(self, value: int) -> None:
+        """Set the lidx_ndid property."""
         self._cards[1].set_value("lidx/ndid", value)
 
     @property
@@ -373,6 +385,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @lidy.setter
     def lidy(self, value: int) -> None:
+        """Set the lidy property."""
         self._cards[1].set_value("lidy", value)
 
     @property
@@ -386,6 +399,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @lidz.setter
     def lidz(self, value: int) -> None:
+        """Set the lidz property."""
         self._cards[1].set_value("lidz", value)
 
     @property
@@ -396,6 +410,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @brmin.setter
     def brmin(self, value: float) -> None:
+        """Set the brmin property."""
         self._cards[1].set_value("brmin", value)
 
     @property
@@ -406,6 +421,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @brmax.setter
     def brmax(self, value: float) -> None:
+        """Set the brmax property."""
         self._cards[1].set_value("brmax", value)
 
     @property
@@ -416,6 +432,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @xx.setter
     def xx(self, value: float) -> None:
+        """Set the xx property."""
         self._cards[2].set_value("xx", value)
 
     @property
@@ -426,6 +443,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @yx.setter
     def yx(self, value: float) -> None:
+        """Set the yx property."""
         self._cards[2].set_value("yx", value)
 
     @property
@@ -436,6 +454,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @zx.setter
     def zx(self, value: float) -> None:
+        """Set the zx property."""
         self._cards[2].set_value("zx", value)
 
     @property
@@ -446,6 +465,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @xv.setter
     def xv(self, value: float) -> None:
+        """Set the xv property."""
         self._cards[2].set_value("xv", value)
 
     @property
@@ -456,6 +476,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @yv.setter
     def yv(self, value: float) -> None:
+        """Set the yv property."""
         self._cards[2].set_value("yv", value)
 
     @property
@@ -466,6 +487,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @zv.setter
     def zv(self, value: float) -> None:
+        """Set the zv property."""
         self._cards[2].set_value("zv", value)
 
     @property
@@ -476,6 +498,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @cx.setter
     def cx(self, value: float) -> None:
+        """Set the cx property."""
         self._cards[3].set_value("cx", value)
 
     @property
@@ -486,6 +509,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @cy.setter
     def cy(self, value: float) -> None:
+        """Set the cy property."""
         self._cards[3].set_value("cy", value)
 
     @property
@@ -496,6 +520,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @cz.setter
     def cz(self, value: float) -> None:
+        """Set the cz property."""
         self._cards[3].set_value("cz", value)
 
     @property
@@ -506,5 +531,9 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

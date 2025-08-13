@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdControlTurbulence class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdControlTurbulence(KeywordBase):
     subkeyword = "CONTROL_TURBULENCE"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdControlTurbulence class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -345,8 +347,9 @@ class IcfdControlTurbulence(KeywordBase):
 
     @tmod.setter
     def tmod(self, value: int) -> None:
+        """Set the tmod property."""
         if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""tmod must be `None` or one of {0,1,2,3,4,5}""")
+            raise Exception("""tmod must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("tmod", value)
 
     @property
@@ -364,8 +367,9 @@ class IcfdControlTurbulence(KeywordBase):
 
     @submod.setter
     def submod(self, value: int) -> None:
+        """Set the submod property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""submod must be `None` or one of {0,1,2,3}""")
+            raise Exception("""submod must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("submod", value)
 
     @property
@@ -380,8 +384,9 @@ class IcfdControlTurbulence(KeywordBase):
 
     @wlaw.setter
     def wlaw(self, value: int) -> None:
+        """Set the wlaw property."""
         if value not in [0, 1, 2, 4, 5, None]:
-            raise Exception("""wlaw must be `None` or one of {0,1,2,4,5}""")
+            raise Exception("""wlaw must be `None` or one of {0,1,2,4,5}.""")
         self._cards[0].set_value("wlaw", value)
 
     @property
@@ -392,6 +397,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @ks.setter
     def ks(self, value: float) -> None:
+        """Set the ks property."""
         self._cards[0].set_value("ks", value)
 
     @property
@@ -402,6 +408,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @cs.setter
     def cs(self, value: float) -> None:
+        """Set the cs property."""
         self._cards[0].set_value("cs", value)
 
     @property
@@ -412,6 +419,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @lcids1.setter
     def lcids1(self, value: int) -> None:
+        """Set the lcids1 property."""
         self._cards[0].set_value("lcids1", value)
 
     @property
@@ -422,6 +430,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @lcids2.setter
     def lcids2(self, value: int) -> None:
+        """Set the lcids2 property."""
         self._cards[0].set_value("lcids2", value)
 
     @property
@@ -432,6 +441,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @ce1.setter
     def ce1(self, value: float) -> None:
+        """Set the ce1 property."""
         self._cards[1].set_value("ce1", value)
 
     @property
@@ -442,6 +452,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @ce2.setter
     def ce2(self, value: float) -> None:
+        """Set the ce2 property."""
         self._cards[1].set_value("ce2", value)
 
     @property
@@ -452,6 +463,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @qe.setter
     def qe(self, value: float) -> None:
+        """Set the qe property."""
         self._cards[1].set_value("qe", value)
 
     @property
@@ -462,6 +474,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @qk.setter
     def qk(self, value: float) -> None:
+        """Set the qk property."""
         self._cards[1].set_value("qk", value)
 
     @property
@@ -472,6 +485,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @cu.setter
     def cu(self, value: float) -> None:
+        """Set the cu property."""
         self._cards[1].set_value("cu", value)
 
     @property
@@ -482,6 +496,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @ccut.setter
     def ccut(self, value: float) -> None:
+        """Set the ccut property."""
         self._cards[1].set_value("ccut", value)
         self._cards[4].set_value("ccut", value)
 
@@ -493,6 +508,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @cs.setter
     def cs(self, value: float) -> None:
+        """Set the cs property."""
         self._cards[2].set_value("cs", value)
 
     @property
@@ -503,6 +519,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @cs.setter
     def cs(self, value: float) -> None:
+        """Set the cs property."""
         self._cards[3].set_value("cs", value)
 
     @property
@@ -513,6 +530,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[4].set_value("r", value)
 
     @property
@@ -523,6 +541,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @beta_01.setter
     def beta_01(self, value: float) -> None:
+        """Set the beta_01 property."""
         self._cards[4].set_value("beta-01", value)
 
     @property
@@ -533,6 +552,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @beta_w1.setter
     def beta_w1(self, value: float) -> None:
+        """Set the beta_w1 property."""
         self._cards[4].set_value("beta-w1", value)
 
     @property
@@ -543,6 +563,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @sigma_w1.setter
     def sigma_w1(self, value: float) -> None:
+        """Set the sigma_w1 property."""
         self._cards[4].set_value("sigma-w1", value)
 
     @property
@@ -553,6 +574,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @sigma_k1.setter
     def sigma_k1(self, value: float) -> None:
+        """Set the sigma_k1 property."""
         self._cards[4].set_value("sigma-k1", value)
 
     @property
@@ -563,6 +585,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @alpha1.setter
     def alpha1(self, value: float) -> None:
+        """Set the alpha1 property."""
         self._cards[5].set_value("alpha1", value)
 
     @property
@@ -573,6 +596,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @beta_02.setter
     def beta_02(self, value: float) -> None:
+        """Set the beta_02 property."""
         self._cards[5].set_value("beta-02", value)
 
     @property
@@ -583,6 +607,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @sigma_w2.setter
     def sigma_w2(self, value: float) -> None:
+        """Set the sigma_w2 property."""
         self._cards[5].set_value("sigma-w2", value)
 
     @property
@@ -593,6 +618,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @sigma_k2.setter
     def sigma_k2(self, value: float) -> None:
+        """Set the sigma_k2 property."""
         self._cards[5].set_value("sigma-k2", value)
 
     @property
@@ -603,6 +629,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @cl.setter
     def cl(self, value: float) -> None:
+        """Set the cl property."""
         self._cards[5].set_value("cl", value)
 
     @property
@@ -613,6 +640,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @cb1.setter
     def cb1(self, value: float) -> None:
+        """Set the cb1 property."""
         self._cards[6].set_value("cb1", value)
 
     @property
@@ -623,6 +651,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @cb2.setter
     def cb2(self, value: float) -> None:
+        """Set the cb2 property."""
         self._cards[6].set_value("cb2", value)
 
     @property
@@ -633,6 +662,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @sigma_v.setter
     def sigma_v(self, value: float) -> None:
+        """Set the sigma_v property."""
         self._cards[6].set_value("sigma-v", value)
 
     @property
@@ -643,6 +673,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @cv1.setter
     def cv1(self, value: float) -> None:
+        """Set the cv1 property."""
         self._cards[6].set_value("cv1", value)
 
     @property
@@ -653,6 +684,7 @@ class IcfdControlTurbulence(KeywordBase):
 
     @cw1.setter
     def cw1(self, value: float) -> None:
+        """Set the cw1 property."""
         self._cards[6].set_value("cw1", value)
 
     @property
@@ -663,5 +695,6 @@ class IcfdControlTurbulence(KeywordBase):
 
     @cw2.setter
     def cw2(self, value: float) -> None:
+        """Set the cw2 property."""
         self._cards[6].set_value("cw2", value)
 

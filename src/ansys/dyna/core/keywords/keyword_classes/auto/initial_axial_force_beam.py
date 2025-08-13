@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialAxialForceBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialAxialForceBeam(KeywordBase):
     subkeyword = "AXIAL_FORCE_BEAM"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialAxialForceBeam class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class InitialAxialForceBeam(KeywordBase):
 
     @bsid.setter
     def bsid(self, value: int) -> None:
+        """Set the bsid property."""
         self._cards[0].set_value("bsid", value)
 
     @property
@@ -87,6 +90,7 @@ class InitialAxialForceBeam(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -97,6 +101,7 @@ class InitialAxialForceBeam(KeywordBase):
 
     @scale.setter
     def scale(self, value: float) -> None:
+        """Set the scale property."""
         self._cards[0].set_value("scale", value)
 
     @property
@@ -110,7 +115,8 @@ class InitialAxialForceBeam(KeywordBase):
 
     @kbend.setter
     def kbend(self, value: int) -> None:
+        """Set the kbend property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""kbend must be `None` or one of {0,1,2}""")
+            raise Exception("""kbend must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("kbend", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineVector(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineVector class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -133,6 +135,7 @@ class DefineVector(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -143,6 +146,7 @@ class DefineVector(KeywordBase):
 
     @xt.setter
     def xt(self, value: float) -> None:
+        """Set the xt property."""
         self._cards[0].set_value("xt", value)
 
     @property
@@ -153,6 +157,7 @@ class DefineVector(KeywordBase):
 
     @yt.setter
     def yt(self, value: float) -> None:
+        """Set the yt property."""
         self._cards[0].set_value("yt", value)
 
     @property
@@ -163,6 +168,7 @@ class DefineVector(KeywordBase):
 
     @zt.setter
     def zt(self, value: float) -> None:
+        """Set the zt property."""
         self._cards[0].set_value("zt", value)
 
     @property
@@ -173,6 +179,7 @@ class DefineVector(KeywordBase):
 
     @xh.setter
     def xh(self, value: float) -> None:
+        """Set the xh property."""
         self._cards[0].set_value("xh", value)
 
     @property
@@ -183,6 +190,7 @@ class DefineVector(KeywordBase):
 
     @yh.setter
     def yh(self, value: float) -> None:
+        """Set the yh property."""
         self._cards[0].set_value("yh", value)
 
     @property
@@ -193,6 +201,7 @@ class DefineVector(KeywordBase):
 
     @zh.setter
     def zh(self, value: float) -> None:
+        """Set the zh property."""
         self._cards[0].set_value("zh", value)
 
     @property
@@ -203,6 +212,7 @@ class DefineVector(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -213,5 +223,9 @@ class DefineVector(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ChangeBoundaryCondition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChangeBoundaryCondition(KeywordBase):
     subkeyword = "BOUNDARY_CONDITION"
 
     def __init__(self, **kwargs):
+        """Initialize the ChangeBoundaryCondition class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -62,6 +64,7 @@ class ChangeBoundaryCondition(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -79,7 +82,8 @@ class ChangeBoundaryCondition(KeywordBase):
 
     @bcc.setter
     def bcc(self, value: int) -> None:
+        """Set the bcc property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""bcc must be `None` or one of {1,2,3,4,5,6,7}""")
+            raise Exception("""bcc must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("bcc", value)
 

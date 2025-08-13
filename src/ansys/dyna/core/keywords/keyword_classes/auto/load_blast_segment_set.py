@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadBlastSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadBlastSegmentSet(KeywordBase):
     subkeyword = "BLAST_SEGMENT_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadBlastSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -84,6 +86,7 @@ class LoadBlastSegmentSet(KeywordBase):
 
     @bid.setter
     def bid(self, value: int) -> None:
+        """Set the bid property."""
         self._cards[0].set_value("bid", value)
 
     @property
@@ -94,6 +97,7 @@ class LoadBlastSegmentSet(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -104,6 +108,7 @@ class LoadBlastSegmentSet(KeywordBase):
 
     @alepid.setter
     def alepid(self, value: int) -> None:
+        """Set the alepid property."""
         self._cards[0].set_value("alepid", value)
 
     @property
@@ -114,6 +119,7 @@ class LoadBlastSegmentSet(KeywordBase):
 
     @sfnrb.setter
     def sfnrb(self, value: float) -> None:
+        """Set the sfnrb property."""
         self._cards[0].set_value("sfnrb", value)
 
     @property
@@ -124,5 +130,6 @@ class LoadBlastSegmentSet(KeywordBase):
 
     @scalep.setter
     def scalep(self, value: float) -> None:
+        """Set the scalep property."""
         self._cards[0].set_value("scalep", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the PartInertiaPrint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartInertiaPrint(KeywordBase):
     subkeyword = "INERTIA_PRINT"
 
     def __init__(self, **kwargs):
+        """Initialize the PartInertiaPrint class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -322,6 +324,7 @@ class PartInertiaPrint(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -332,6 +335,7 @@ class PartInertiaPrint(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -342,6 +346,7 @@ class PartInertiaPrint(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[1].set_value("secid", value)
 
     @property
@@ -352,6 +357,7 @@ class PartInertiaPrint(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[1].set_value("mid", value)
 
     @property
@@ -362,6 +368,7 @@ class PartInertiaPrint(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[1].set_value("eosid", value)
 
     @property
@@ -373,6 +380,7 @@ class PartInertiaPrint(KeywordBase):
 
     @hgid.setter
     def hgid(self, value: int) -> None:
+        """Set the hgid property."""
         self._cards[1].set_value("hgid", value)
 
     @property
@@ -385,8 +393,9 @@ class PartInertiaPrint(KeywordBase):
 
     @grav.setter
     def grav(self, value: int) -> None:
+        """Set the grav property."""
         if value not in [0, 1, None]:
-            raise Exception("""grav must be `None` or one of {0,1}""")
+            raise Exception("""grav must be `None` or one of {0,1}.""")
         self._cards[1].set_value("grav", value)
 
     @property
@@ -403,6 +412,7 @@ class PartInertiaPrint(KeywordBase):
 
     @adpopt.setter
     def adpopt(self, value: int) -> None:
+        """Set the adpopt property."""
         self._cards[1].set_value("adpopt", value)
 
     @property
@@ -414,6 +424,7 @@ class PartInertiaPrint(KeywordBase):
 
     @tmid.setter
     def tmid(self, value: int) -> None:
+        """Set the tmid property."""
         self._cards[1].set_value("tmid", value)
 
     @property
@@ -424,6 +435,7 @@ class PartInertiaPrint(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[2].set_value("xc", value)
 
     @property
@@ -434,6 +446,7 @@ class PartInertiaPrint(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[2].set_value("yc", value)
 
     @property
@@ -444,6 +457,7 @@ class PartInertiaPrint(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[2].set_value("zc", value)
 
     @property
@@ -454,6 +468,7 @@ class PartInertiaPrint(KeywordBase):
 
     @tm.setter
     def tm(self, value: float) -> None:
+        """Set the tm property."""
         self._cards[2].set_value("tm", value)
 
     @property
@@ -466,8 +481,9 @@ class PartInertiaPrint(KeywordBase):
 
     @ircs.setter
     def ircs(self, value: int) -> None:
+        """Set the ircs property."""
         if value not in [0, 1, None]:
-            raise Exception("""ircs must be `None` or one of {0,1}""")
+            raise Exception("""ircs must be `None` or one of {0,1}.""")
         self._cards[2].set_value("ircs", value)
 
     @property
@@ -478,6 +494,7 @@ class PartInertiaPrint(KeywordBase):
 
     @nodeid.setter
     def nodeid(self, value: int) -> None:
+        """Set the nodeid property."""
         self._cards[2].set_value("nodeid", value)
 
     @property
@@ -488,6 +505,7 @@ class PartInertiaPrint(KeywordBase):
 
     @ixx.setter
     def ixx(self, value: float) -> None:
+        """Set the ixx property."""
         self._cards[3].set_value("ixx", value)
 
     @property
@@ -498,6 +516,7 @@ class PartInertiaPrint(KeywordBase):
 
     @ixy.setter
     def ixy(self, value: float) -> None:
+        """Set the ixy property."""
         self._cards[3].set_value("ixy", value)
 
     @property
@@ -508,6 +527,7 @@ class PartInertiaPrint(KeywordBase):
 
     @ixz.setter
     def ixz(self, value: float) -> None:
+        """Set the ixz property."""
         self._cards[3].set_value("ixz", value)
 
     @property
@@ -518,6 +538,7 @@ class PartInertiaPrint(KeywordBase):
 
     @iyy.setter
     def iyy(self, value: float) -> None:
+        """Set the iyy property."""
         self._cards[3].set_value("iyy", value)
 
     @property
@@ -528,6 +549,7 @@ class PartInertiaPrint(KeywordBase):
 
     @iyz.setter
     def iyz(self, value: float) -> None:
+        """Set the iyz property."""
         self._cards[3].set_value("iyz", value)
 
     @property
@@ -538,6 +560,7 @@ class PartInertiaPrint(KeywordBase):
 
     @izz.setter
     def izz(self, value: float) -> None:
+        """Set the izz property."""
         self._cards[3].set_value("izz", value)
 
     @property
@@ -548,6 +571,7 @@ class PartInertiaPrint(KeywordBase):
 
     @vtx.setter
     def vtx(self, value: float) -> None:
+        """Set the vtx property."""
         self._cards[4].set_value("vtx", value)
 
     @property
@@ -558,6 +582,7 @@ class PartInertiaPrint(KeywordBase):
 
     @vty.setter
     def vty(self, value: float) -> None:
+        """Set the vty property."""
         self._cards[4].set_value("vty", value)
 
     @property
@@ -568,6 +593,7 @@ class PartInertiaPrint(KeywordBase):
 
     @vtz.setter
     def vtz(self, value: float) -> None:
+        """Set the vtz property."""
         self._cards[4].set_value("vtz", value)
 
     @property
@@ -578,6 +604,7 @@ class PartInertiaPrint(KeywordBase):
 
     @vrx.setter
     def vrx(self, value: float) -> None:
+        """Set the vrx property."""
         self._cards[4].set_value("vrx", value)
 
     @property
@@ -588,6 +615,7 @@ class PartInertiaPrint(KeywordBase):
 
     @vry.setter
     def vry(self, value: float) -> None:
+        """Set the vry property."""
         self._cards[4].set_value("vry", value)
 
     @property
@@ -598,6 +626,7 @@ class PartInertiaPrint(KeywordBase):
 
     @vrz.setter
     def vrz(self, value: float) -> None:
+        """Set the vrz property."""
         self._cards[4].set_value("vrz", value)
 
     @property
@@ -608,6 +637,7 @@ class PartInertiaPrint(KeywordBase):
 
     @xl.setter
     def xl(self, value: float) -> None:
+        """Set the xl property."""
         self._cards[5].set_value("xl", value)
 
     @property
@@ -618,6 +648,7 @@ class PartInertiaPrint(KeywordBase):
 
     @yl.setter
     def yl(self, value: float) -> None:
+        """Set the yl property."""
         self._cards[5].set_value("yl", value)
 
     @property
@@ -628,6 +659,7 @@ class PartInertiaPrint(KeywordBase):
 
     @zl.setter
     def zl(self, value: float) -> None:
+        """Set the zl property."""
         self._cards[5].set_value("zl", value)
 
     @property
@@ -638,6 +670,7 @@ class PartInertiaPrint(KeywordBase):
 
     @xlip.setter
     def xlip(self, value: float) -> None:
+        """Set the xlip property."""
         self._cards[5].set_value("xlip", value)
 
     @property
@@ -648,6 +681,7 @@ class PartInertiaPrint(KeywordBase):
 
     @ylip.setter
     def ylip(self, value: float) -> None:
+        """Set the ylip property."""
         self._cards[5].set_value("ylip", value)
 
     @property
@@ -658,6 +692,7 @@ class PartInertiaPrint(KeywordBase):
 
     @zlip.setter
     def zlip(self, value: float) -> None:
+        """Set the zlip property."""
         self._cards[5].set_value("zlip", value)
 
     @property
@@ -669,6 +704,7 @@ class PartInertiaPrint(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[5].set_value("cid", value)
 
     @property
@@ -683,7 +719,8 @@ class PartInertiaPrint(KeywordBase):
 
     @prbf.setter
     def prbf(self, value: int) -> None:
+        """Set the prbf property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""prbf must be `None` or one of {0,1,2,3}""")
+            raise Exception("""prbf must be `None` or one of {0,1,2,3}.""")
         self._cards[6].set_value("prbf", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ContactSpg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ContactSpg(KeywordBase):
     subkeyword = "SPG"
 
     def __init__(self, **kwargs):
+        """Initialize the ContactSpg class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -255,6 +257,7 @@ class ContactSpg(KeywordBase):
 
     @pid1.setter
     def pid1(self, value: int) -> None:
+        """Set the pid1 property."""
         self._cards[0].set_value("pid1", value)
 
     @property
@@ -265,6 +268,7 @@ class ContactSpg(KeywordBase):
 
     @pid2.setter
     def pid2(self, value: int) -> None:
+        """Set the pid2 property."""
         self._cards[0].set_value("pid2", value)
 
     @property
@@ -275,6 +279,7 @@ class ContactSpg(KeywordBase):
 
     @pid3.setter
     def pid3(self, value: int) -> None:
+        """Set the pid3 property."""
         self._cards[0].set_value("pid3", value)
 
     @property
@@ -285,6 +290,7 @@ class ContactSpg(KeywordBase):
 
     @pid4.setter
     def pid4(self, value: int) -> None:
+        """Set the pid4 property."""
         self._cards[0].set_value("pid4", value)
 
     @property
@@ -295,6 +301,7 @@ class ContactSpg(KeywordBase):
 
     @pid5.setter
     def pid5(self, value: int) -> None:
+        """Set the pid5 property."""
         self._cards[0].set_value("pid5", value)
 
     @property
@@ -305,6 +312,7 @@ class ContactSpg(KeywordBase):
 
     @pid6.setter
     def pid6(self, value: int) -> None:
+        """Set the pid6 property."""
         self._cards[0].set_value("pid6", value)
 
     @property
@@ -315,6 +323,7 @@ class ContactSpg(KeywordBase):
 
     @pid7.setter
     def pid7(self, value: int) -> None:
+        """Set the pid7 property."""
         self._cards[0].set_value("pid7", value)
 
     @property
@@ -325,6 +334,7 @@ class ContactSpg(KeywordBase):
 
     @pid8.setter
     def pid8(self, value: int) -> None:
+        """Set the pid8 property."""
         self._cards[0].set_value("pid8", value)
 
     @property
@@ -337,6 +347,7 @@ class ContactSpg(KeywordBase):
 
     @iself1.setter
     def iself1(self, value: int) -> None:
+        """Set the iself1 property."""
         self._cards[1].set_value("iself1", value)
 
     @property
@@ -349,6 +360,7 @@ class ContactSpg(KeywordBase):
 
     @iself2.setter
     def iself2(self, value: int) -> None:
+        """Set the iself2 property."""
         self._cards[1].set_value("iself2", value)
 
     @property
@@ -361,6 +373,7 @@ class ContactSpg(KeywordBase):
 
     @iself3.setter
     def iself3(self, value: int) -> None:
+        """Set the iself3 property."""
         self._cards[1].set_value("iself3", value)
 
     @property
@@ -373,6 +386,7 @@ class ContactSpg(KeywordBase):
 
     @iself4.setter
     def iself4(self, value: int) -> None:
+        """Set the iself4 property."""
         self._cards[1].set_value("iself4", value)
 
     @property
@@ -385,6 +399,7 @@ class ContactSpg(KeywordBase):
 
     @iself5.setter
     def iself5(self, value: int) -> None:
+        """Set the iself5 property."""
         self._cards[1].set_value("iself5", value)
 
     @property
@@ -397,6 +412,7 @@ class ContactSpg(KeywordBase):
 
     @iself6.setter
     def iself6(self, value: int) -> None:
+        """Set the iself6 property."""
         self._cards[1].set_value("iself6", value)
 
     @property
@@ -409,6 +425,7 @@ class ContactSpg(KeywordBase):
 
     @iself7.setter
     def iself7(self, value: int) -> None:
+        """Set the iself7 property."""
         self._cards[1].set_value("iself7", value)
 
     @property
@@ -421,6 +438,7 @@ class ContactSpg(KeywordBase):
 
     @iself8.setter
     def iself8(self, value: int) -> None:
+        """Set the iself8 property."""
         self._cards[1].set_value("iself8", value)
 
     @property
@@ -431,6 +449,7 @@ class ContactSpg(KeywordBase):
 
     @pfac1.setter
     def pfac1(self, value: float) -> None:
+        """Set the pfac1 property."""
         self._cards[2].set_value("pfac1", value)
 
     @property
@@ -441,6 +460,7 @@ class ContactSpg(KeywordBase):
 
     @pfac2.setter
     def pfac2(self, value: float) -> None:
+        """Set the pfac2 property."""
         self._cards[2].set_value("pfac2", value)
 
     @property
@@ -451,6 +471,7 @@ class ContactSpg(KeywordBase):
 
     @pfac3.setter
     def pfac3(self, value: float) -> None:
+        """Set the pfac3 property."""
         self._cards[2].set_value("pfac3", value)
 
     @property
@@ -461,6 +482,7 @@ class ContactSpg(KeywordBase):
 
     @pfac4.setter
     def pfac4(self, value: float) -> None:
+        """Set the pfac4 property."""
         self._cards[2].set_value("pfac4", value)
 
     @property
@@ -471,6 +493,7 @@ class ContactSpg(KeywordBase):
 
     @pfac5.setter
     def pfac5(self, value: float) -> None:
+        """Set the pfac5 property."""
         self._cards[2].set_value("pfac5", value)
 
     @property
@@ -481,6 +504,7 @@ class ContactSpg(KeywordBase):
 
     @pfac6.setter
     def pfac6(self, value: float) -> None:
+        """Set the pfac6 property."""
         self._cards[2].set_value("pfac6", value)
 
     @property
@@ -491,6 +515,7 @@ class ContactSpg(KeywordBase):
 
     @pfac7.setter
     def pfac7(self, value: float) -> None:
+        """Set the pfac7 property."""
         self._cards[2].set_value("pfac7", value)
 
     @property
@@ -501,6 +526,7 @@ class ContactSpg(KeywordBase):
 
     @pfac8.setter
     def pfac8(self, value: float) -> None:
+        """Set the pfac8 property."""
         self._cards[2].set_value("pfac8", value)
 
     @property
@@ -511,6 +537,7 @@ class ContactSpg(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[3].set_value("fs", value)
 
     @property
@@ -521,6 +548,7 @@ class ContactSpg(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[3].set_value("fd", value)
 
     @property
@@ -531,6 +559,7 @@ class ContactSpg(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[3].set_value("dc", value)
 
     @property
@@ -541,5 +570,6 @@ class ContactSpg(KeywordBase):
 
     @nfreq.setter
     def nfreq(self, value: float) -> None:
+        """Set the nfreq property."""
         self._cards[3].set_value("nfreq", value)
 

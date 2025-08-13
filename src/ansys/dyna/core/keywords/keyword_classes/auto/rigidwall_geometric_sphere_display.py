@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the RigidwallGeometricSphereDisplay class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
     subkeyword = "GEOMETRIC_SPHERE_DISPLAY"
 
     def __init__(self, **kwargs):
+        """Initialize the RigidwallGeometricSphereDisplay class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -211,6 +213,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -221,6 +224,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -232,6 +236,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[1].set_value("nsid", value)
 
     @property
@@ -242,6 +247,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @nsidex.setter
     def nsidex(self, value: int) -> None:
+        """Set the nsidex property."""
         self._cards[1].set_value("nsidex", value)
 
     @property
@@ -252,6 +258,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @boxid.setter
     def boxid(self, value: int) -> None:
+        """Set the boxid property."""
         self._cards[1].set_value("boxid", value)
 
     @property
@@ -262,6 +269,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -272,6 +280,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -282,6 +291,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @xt.setter
     def xt(self, value: float) -> None:
+        """Set the xt property."""
         self._cards[2].set_value("xt", value)
 
     @property
@@ -292,6 +302,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @yt.setter
     def yt(self, value: float) -> None:
+        """Set the yt property."""
         self._cards[2].set_value("yt", value)
 
     @property
@@ -302,6 +313,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @zt.setter
     def zt(self, value: float) -> None:
+        """Set the zt property."""
         self._cards[2].set_value("zt", value)
 
     @property
@@ -312,6 +324,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @xh.setter
     def xh(self, value: float) -> None:
+        """Set the xh property."""
         self._cards[2].set_value("xh", value)
 
     @property
@@ -322,6 +335,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @yh.setter
     def yh(self, value: float) -> None:
+        """Set the yh property."""
         self._cards[2].set_value("yh", value)
 
     @property
@@ -332,6 +346,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @zh.setter
     def zh(self, value: float) -> None:
+        """Set the zh property."""
         self._cards[2].set_value("zh", value)
 
     @property
@@ -344,6 +359,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[2].set_value("fric", value)
 
     @property
@@ -354,6 +370,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @radsph.setter
     def radsph(self, value: float) -> None:
+        """Set the radsph property."""
         self._cards[3].set_value("radsph", value)
 
     @property
@@ -364,6 +381,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[4].set_value("pid", value)
 
     @property
@@ -374,6 +392,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[4].set_value("ro", value)
 
     @property
@@ -384,6 +403,7 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[4].set_value("e", value)
 
     @property
@@ -394,5 +414,6 @@ class RigidwallGeometricSphereDisplay(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[4].set_value("pr", value)
 

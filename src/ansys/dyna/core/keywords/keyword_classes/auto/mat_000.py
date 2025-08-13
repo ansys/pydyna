@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat000 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat000(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat000 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -157,6 +159,7 @@ class Mat000(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -167,6 +170,7 @@ class Mat000(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -177,6 +181,7 @@ class Mat000(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -187,6 +192,7 @@ class Mat000(KeywordBase):
 
     @em.setter
     def em(self, value: float) -> None:
+        """Set the em property."""
         self._cards[0].set_value("em", value)
 
     @property
@@ -197,6 +203,7 @@ class Mat000(KeywordBase):
 
     @vfm.setter
     def vfm(self, value: float) -> None:
+        """Set the vfm property."""
         self._cards[0].set_value("vfm", value)
 
     @property
@@ -207,6 +214,7 @@ class Mat000(KeywordBase):
 
     @gfm.setter
     def gfm(self, value: float) -> None:
+        """Set the gfm property."""
         self._cards[0].set_value("gfm", value)
 
     @property
@@ -217,6 +225,7 @@ class Mat000(KeywordBase):
 
     @fopt.setter
     def fopt(self, value: float) -> None:
+        """Set the fopt property."""
         self._cards[1].set_value("fopt", value)
 
     @property
@@ -227,6 +236,7 @@ class Mat000(KeywordBase):
 
     @fcf.setter
     def fcf(self, value: float) -> None:
+        """Set the fcf property."""
         self._cards[1].set_value("fcf", value)
 
     @property
@@ -237,6 +247,7 @@ class Mat000(KeywordBase):
 
     @fcm.setter
     def fcm(self, value: float) -> None:
+        """Set the fcm property."""
         self._cards[1].set_value("fcm", value)
 
     @property
@@ -247,6 +258,7 @@ class Mat000(KeywordBase):
 
     @fcfc.setter
     def fcfc(self, value: float) -> None:
+        """Set the fcfc property."""
         self._cards[1].set_value("fcfc", value)
 
     @property
@@ -257,6 +269,7 @@ class Mat000(KeywordBase):
 
     @fcmc.setter
     def fcmc(self, value: float) -> None:
+        """Set the fcmc property."""
         self._cards[1].set_value("fcmc", value)
 
     @property
@@ -267,6 +280,7 @@ class Mat000(KeywordBase):
 
     @fcd.setter
     def fcd(self, value: float) -> None:
+        """Set the fcd property."""
         self._cards[1].set_value("fcd", value)
 
     @property
@@ -277,5 +291,9 @@ class Mat000(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingAutopositionParameterSetPositive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingAutopositionParameterSetPositive(KeywordBase):
     subkeyword = "FORMING_AUTOPOSITION_PARAMETER_SET_POSITIVE"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingAutopositionParameterSetPositive class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -105,6 +107,7 @@ class ControlFormingAutopositionParameterSetPositive(KeywordBase):
 
     @psid.setter
     def psid(self, value: int) -> None:
+        """Set the psid property."""
         self._cards[0].set_value("psid", value)
 
     @property
@@ -115,6 +118,7 @@ class ControlFormingAutopositionParameterSetPositive(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -128,8 +132,9 @@ class ControlFormingAutopositionParameterSetPositive(KeywordBase):
 
     @dir.setter
     def dir(self, value: int) -> None:
+        """Set the dir property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""dir must be `None` or one of {1,2,3}""")
+            raise Exception("""dir must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("dir", value)
 
     @property
@@ -140,6 +145,7 @@ class ControlFormingAutopositionParameterSetPositive(KeywordBase):
 
     @mpsid.setter
     def mpsid(self, value: int) -> None:
+        """Set the mpsid property."""
         self._cards[0].set_value("mpsid", value)
 
     @property
@@ -150,8 +156,9 @@ class ControlFormingAutopositionParameterSetPositive(KeywordBase):
 
     @position.setter
     def position(self, value: int) -> None:
+        """Set the position property."""
         if value not in [1, -1, None]:
-            raise Exception("""position must be `None` or one of {1,-1}""")
+            raise Exception("""position must be `None` or one of {1,-1}.""")
         self._cards[0].set_value("position", value)
 
     @property
@@ -162,6 +169,7 @@ class ControlFormingAutopositionParameterSetPositive(KeywordBase):
 
     @premove.setter
     def premove(self, value: float) -> None:
+        """Set the premove property."""
         self._cards[0].set_value("premove", value)
 
     @property
@@ -172,6 +180,7 @@ class ControlFormingAutopositionParameterSetPositive(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[0].set_value("thick", value)
 
     @property
@@ -182,5 +191,6 @@ class ControlFormingAutopositionParameterSetPositive(KeywordBase):
 
     @porder.setter
     def porder(self, value: str) -> None:
+        """Set the porder property."""
         self._cards[0].set_value("porder", value)
 

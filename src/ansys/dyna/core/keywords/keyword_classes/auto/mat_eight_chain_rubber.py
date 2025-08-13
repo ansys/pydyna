@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatEightChainRubber class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatEightChainRubber(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatEightChainRubber class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -590,6 +592,7 @@ class MatEightChainRubber(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -600,6 +603,7 @@ class MatEightChainRubber(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -610,6 +614,7 @@ class MatEightChainRubber(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -620,6 +625,7 @@ class MatEightChainRubber(KeywordBase):
 
     @mu.setter
     def mu(self, value: float) -> None:
+        """Set the mu property."""
         self._cards[0].set_value("mu", value)
 
     @property
@@ -630,6 +636,7 @@ class MatEightChainRubber(KeywordBase):
 
     @n.setter
     def n(self, value: int) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -648,8 +655,9 @@ class MatEightChainRubber(KeywordBase):
 
     @mull.setter
     def mull(self, value: int) -> None:
+        """Set the mull property."""
         if value not in [1, 2, None]:
-            raise Exception("""mull must be `None` or one of {1,2}""")
+            raise Exception("""mull must be `None` or one of {1,2}.""")
         self._cards[0].set_value("mull", value)
 
     @property
@@ -665,8 +673,9 @@ class MatEightChainRubber(KeywordBase):
 
     @vispl.setter
     def vispl(self, value: int) -> None:
+        """Set the vispl property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""vispl must be `None` or one of {0,1,2,3}""")
+            raise Exception("""vispl must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("vispl", value)
 
     @property
@@ -680,8 +689,9 @@ class MatEightChainRubber(KeywordBase):
 
     @visel.setter
     def visel(self, value: int) -> None:
+        """Set the visel property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""visel must be `None` or one of {0,1,2,3}""")
+            raise Exception("""visel must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("visel", value)
 
     @property
@@ -696,6 +706,7 @@ class MatEightChainRubber(KeywordBase):
 
     @yld0.setter
     def yld0(self, value: float) -> None:
+        """Set the yld0 property."""
         self._cards[1].set_value("yld0", value)
 
     @property
@@ -706,6 +717,7 @@ class MatEightChainRubber(KeywordBase):
 
     @fp.setter
     def fp(self, value: float) -> None:
+        """Set the fp property."""
         self._cards[1].set_value("fp", value)
 
     @property
@@ -716,6 +728,7 @@ class MatEightChainRubber(KeywordBase):
 
     @gp.setter
     def gp(self, value: float) -> None:
+        """Set the gp property."""
         self._cards[1].set_value("gp", value)
 
     @property
@@ -726,6 +739,7 @@ class MatEightChainRubber(KeywordBase):
 
     @hp.setter
     def hp(self, value: float) -> None:
+        """Set the hp property."""
         self._cards[1].set_value("hp", value)
 
     @property
@@ -736,6 +750,7 @@ class MatEightChainRubber(KeywordBase):
 
     @lp.setter
     def lp(self, value: float) -> None:
+        """Set the lp property."""
         self._cards[1].set_value("lp", value)
 
     @property
@@ -746,6 +761,7 @@ class MatEightChainRubber(KeywordBase):
 
     @mp.setter
     def mp(self, value: float) -> None:
+        """Set the mp property."""
         self._cards[1].set_value("mp", value)
 
     @property
@@ -756,6 +772,7 @@ class MatEightChainRubber(KeywordBase):
 
     @np.setter
     def np(self, value: float) -> None:
+        """Set the np property."""
         self._cards[1].set_value("np", value)
 
     @property
@@ -766,6 +783,7 @@ class MatEightChainRubber(KeywordBase):
 
     @pmu.setter
     def pmu(self, value: float) -> None:
+        """Set the pmu property."""
         self._cards[1].set_value("pmu", value)
 
     @property
@@ -778,6 +796,7 @@ class MatEightChainRubber(KeywordBase):
 
     @m1.setter
     def m1(self, value: float) -> None:
+        """Set the m1 property."""
         self._cards[2].set_value("m1", value)
 
     @property
@@ -790,6 +809,7 @@ class MatEightChainRubber(KeywordBase):
 
     @m2.setter
     def m2(self, value: float) -> None:
+        """Set the m2 property."""
         self._cards[2].set_value("m2", value)
 
     @property
@@ -802,6 +822,7 @@ class MatEightChainRubber(KeywordBase):
 
     @m3.setter
     def m3(self, value: float) -> None:
+        """Set the m3 property."""
         self._cards[2].set_value("m3", value)
 
     @property
@@ -814,6 +835,7 @@ class MatEightChainRubber(KeywordBase):
 
     @m4.setter
     def m4(self, value: float) -> None:
+        """Set the m4 property."""
         self._cards[2].set_value("m4", value)
 
     @property
@@ -826,6 +848,7 @@ class MatEightChainRubber(KeywordBase):
 
     @m5.setter
     def m5(self, value: float) -> None:
+        """Set the m5 property."""
         self._cards[2].set_value("m5", value)
 
     @property
@@ -836,6 +859,7 @@ class MatEightChainRubber(KeywordBase):
 
     @time.setter
     def time(self, value: float) -> None:
+        """Set the time property."""
         self._cards[2].set_value("time", value)
 
     @property
@@ -846,6 +870,7 @@ class MatEightChainRubber(KeywordBase):
 
     @vcon.setter
     def vcon(self, value: float) -> None:
+        """Set the vcon property."""
         self._cards[2].set_value("vcon", value)
 
     @property
@@ -856,6 +881,7 @@ class MatEightChainRubber(KeywordBase):
 
     @q1.setter
     def q1(self, value: float) -> None:
+        """Set the q1 property."""
         self._cards[3].set_value("q1", value)
 
     @property
@@ -866,6 +892,7 @@ class MatEightChainRubber(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[3].set_value("b1", value)
 
     @property
@@ -876,6 +903,7 @@ class MatEightChainRubber(KeywordBase):
 
     @q2.setter
     def q2(self, value: float) -> None:
+        """Set the q2 property."""
         self._cards[3].set_value("q2", value)
 
     @property
@@ -886,6 +914,7 @@ class MatEightChainRubber(KeywordBase):
 
     @b2.setter
     def b2(self, value: float) -> None:
+        """Set the b2 property."""
         self._cards[3].set_value("b2", value)
 
     @property
@@ -896,6 +925,7 @@ class MatEightChainRubber(KeywordBase):
 
     @q3.setter
     def q3(self, value: float) -> None:
+        """Set the q3 property."""
         self._cards[3].set_value("q3", value)
 
     @property
@@ -906,6 +936,7 @@ class MatEightChainRubber(KeywordBase):
 
     @b3.setter
     def b3(self, value: float) -> None:
+        """Set the b3 property."""
         self._cards[3].set_value("b3", value)
 
     @property
@@ -916,6 +947,7 @@ class MatEightChainRubber(KeywordBase):
 
     @q4.setter
     def q4(self, value: float) -> None:
+        """Set the q4 property."""
         self._cards[3].set_value("q4", value)
 
     @property
@@ -926,6 +958,7 @@ class MatEightChainRubber(KeywordBase):
 
     @b4.setter
     def b4(self, value: float) -> None:
+        """Set the b4 property."""
         self._cards[3].set_value("b4", value)
 
     @property
@@ -939,6 +972,7 @@ class MatEightChainRubber(KeywordBase):
 
     @k1.setter
     def k1(self, value: float) -> None:
+        """Set the k1 property."""
         self._cards[4].set_value("k1", value)
 
     @property
@@ -952,6 +986,7 @@ class MatEightChainRubber(KeywordBase):
 
     @s1.setter
     def s1(self, value: float) -> None:
+        """Set the s1 property."""
         self._cards[4].set_value("s1", value)
 
     @property
@@ -965,6 +1000,7 @@ class MatEightChainRubber(KeywordBase):
 
     @k2.setter
     def k2(self, value: float) -> None:
+        """Set the k2 property."""
         self._cards[4].set_value("k2", value)
 
     @property
@@ -978,6 +1014,7 @@ class MatEightChainRubber(KeywordBase):
 
     @s2.setter
     def s2(self, value: float) -> None:
+        """Set the s2 property."""
         self._cards[4].set_value("s2", value)
 
     @property
@@ -991,6 +1028,7 @@ class MatEightChainRubber(KeywordBase):
 
     @k3.setter
     def k3(self, value: float) -> None:
+        """Set the k3 property."""
         self._cards[4].set_value("k3", value)
 
     @property
@@ -1004,6 +1042,7 @@ class MatEightChainRubber(KeywordBase):
 
     @s3.setter
     def s3(self, value: float) -> None:
+        """Set the s3 property."""
         self._cards[4].set_value("s3", value)
 
     @property
@@ -1019,8 +1058,9 @@ class MatEightChainRubber(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         if value not in [0.0, 1.0, 2.0, 3.0, 4.0, None]:
-            raise Exception("""aopt must be `None` or one of {0.0,1.0,2.0,3.0,4.0}""")
+            raise Exception("""aopt must be `None` or one of {0.0,1.0,2.0,3.0,4.0}.""")
         self._cards[5].set_value("aopt", value)
 
     @property
@@ -1039,8 +1079,9 @@ class MatEightChainRubber(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -2, -3, -4, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-2,-3,-4}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-2,-3,-4}.""")
         self._cards[5].set_value("macf", value)
 
     @property
@@ -1051,6 +1092,7 @@ class MatEightChainRubber(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[5].set_value("xp", value)
 
     @property
@@ -1061,6 +1103,7 @@ class MatEightChainRubber(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[5].set_value("yp", value)
 
     @property
@@ -1071,6 +1114,7 @@ class MatEightChainRubber(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[5].set_value("zp", value)
 
     @property
@@ -1081,6 +1125,7 @@ class MatEightChainRubber(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[5].set_value("a1", value)
 
     @property
@@ -1091,6 +1136,7 @@ class MatEightChainRubber(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[5].set_value("a2", value)
 
     @property
@@ -1101,6 +1147,7 @@ class MatEightChainRubber(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[5].set_value("a3", value)
 
     @property
@@ -1111,6 +1158,7 @@ class MatEightChainRubber(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[6].set_value("v1", value)
 
     @property
@@ -1121,6 +1169,7 @@ class MatEightChainRubber(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[6].set_value("v2", value)
 
     @property
@@ -1131,6 +1180,7 @@ class MatEightChainRubber(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[6].set_value("v3", value)
 
     @property
@@ -1141,6 +1191,7 @@ class MatEightChainRubber(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[6].set_value("d1", value)
 
     @property
@@ -1151,6 +1202,7 @@ class MatEightChainRubber(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[6].set_value("d2", value)
 
     @property
@@ -1161,6 +1213,7 @@ class MatEightChainRubber(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[6].set_value("d3", value)
 
     @property
@@ -1171,6 +1224,7 @@ class MatEightChainRubber(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[6].set_value("beta", value)
 
     @property
@@ -1181,6 +1235,7 @@ class MatEightChainRubber(KeywordBase):
 
     @taui.setter
     def taui(self, value: float) -> None:
+        """Set the taui property."""
         self._cards[7].set_value("taui", value)
 
     @property
@@ -1192,6 +1247,7 @@ class MatEightChainRubber(KeywordBase):
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
+        """Set the betai_gammai property."""
         self._cards[7].set_value("betai/gammai", value)
 
     @property
@@ -1202,6 +1258,7 @@ class MatEightChainRubber(KeywordBase):
 
     @taui.setter
     def taui(self, value: float) -> None:
+        """Set the taui property."""
         self._cards[8].set_value("taui", value)
 
     @property
@@ -1213,6 +1270,7 @@ class MatEightChainRubber(KeywordBase):
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
+        """Set the betai_gammai property."""
         self._cards[8].set_value("betai/gammai", value)
 
     @property
@@ -1223,6 +1281,7 @@ class MatEightChainRubber(KeywordBase):
 
     @taui.setter
     def taui(self, value: float) -> None:
+        """Set the taui property."""
         self._cards[9].set_value("taui", value)
 
     @property
@@ -1234,6 +1293,7 @@ class MatEightChainRubber(KeywordBase):
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
+        """Set the betai_gammai property."""
         self._cards[9].set_value("betai/gammai", value)
 
     @property
@@ -1244,6 +1304,7 @@ class MatEightChainRubber(KeywordBase):
 
     @taui.setter
     def taui(self, value: float) -> None:
+        """Set the taui property."""
         self._cards[10].set_value("taui", value)
 
     @property
@@ -1255,6 +1316,7 @@ class MatEightChainRubber(KeywordBase):
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
+        """Set the betai_gammai property."""
         self._cards[10].set_value("betai/gammai", value)
 
     @property
@@ -1265,6 +1327,7 @@ class MatEightChainRubber(KeywordBase):
 
     @taui.setter
     def taui(self, value: float) -> None:
+        """Set the taui property."""
         self._cards[11].set_value("taui", value)
 
     @property
@@ -1276,6 +1339,7 @@ class MatEightChainRubber(KeywordBase):
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
+        """Set the betai_gammai property."""
         self._cards[11].set_value("betai/gammai", value)
 
     @property
@@ -1286,6 +1350,7 @@ class MatEightChainRubber(KeywordBase):
 
     @taui.setter
     def taui(self, value: float) -> None:
+        """Set the taui property."""
         self._cards[12].set_value("taui", value)
 
     @property
@@ -1297,6 +1362,7 @@ class MatEightChainRubber(KeywordBase):
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
+        """Set the betai_gammai property."""
         self._cards[12].set_value("betai/gammai", value)
 
     @property
@@ -1307,6 +1373,7 @@ class MatEightChainRubber(KeywordBase):
 
     @taui.setter
     def taui(self, value: float) -> None:
+        """Set the taui property."""
         self._cards[13].set_value("taui", value)
 
     @property
@@ -1318,6 +1385,7 @@ class MatEightChainRubber(KeywordBase):
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
+        """Set the betai_gammai property."""
         self._cards[13].set_value("betai/gammai", value)
 
     @property
@@ -1328,5 +1396,9 @@ class MatEightChainRubber(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[14].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

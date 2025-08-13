@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineTransform class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineTransform(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineTransform class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -137,6 +139,7 @@ class DefineTransform(KeywordBase):
 
     @tranid.setter
     def tranid(self, value: int) -> None:
+        """Set the tranid property."""
         self._cards[0].set_value("tranid", value)
 
     @property
@@ -174,8 +177,9 @@ class DefineTransform(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
+        """Set the option property."""
         if value not in ["MIRROR", "SCALE", "ROTATE", "ROTATE3NA", "TRANSL", "TRANSL2ND", "POINT", "POS6P", "POS6N", None]:
-            raise Exception("""option must be `None` or one of {"MIRROR","SCALE","ROTATE","ROTATE3NA","TRANSL","TRANSL2ND","POINT","POS6P","POS6N"}""")
+            raise Exception("""option must be `None` or one of {"MIRROR","SCALE","ROTATE","ROTATE3NA","TRANSL","TRANSL2ND","POINT","POS6P","POS6N"}.""")
         self._cards[1].set_value("option", value)
 
     @property
@@ -187,6 +191,7 @@ class DefineTransform(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -198,6 +203,7 @@ class DefineTransform(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -209,6 +215,7 @@ class DefineTransform(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[1].set_value("a3", value)
 
     @property
@@ -220,6 +227,7 @@ class DefineTransform(KeywordBase):
 
     @a4.setter
     def a4(self, value: float) -> None:
+        """Set the a4 property."""
         self._cards[1].set_value("a4", value)
 
     @property
@@ -231,6 +239,7 @@ class DefineTransform(KeywordBase):
 
     @a5.setter
     def a5(self, value: float) -> None:
+        """Set the a5 property."""
         self._cards[1].set_value("a5", value)
 
     @property
@@ -242,6 +251,7 @@ class DefineTransform(KeywordBase):
 
     @a6.setter
     def a6(self, value: float) -> None:
+        """Set the a6 property."""
         self._cards[1].set_value("a6", value)
 
     @property
@@ -253,6 +263,7 @@ class DefineTransform(KeywordBase):
 
     @a7.setter
     def a7(self, value: float) -> None:
+        """Set the a7 property."""
         self._cards[1].set_value("a7", value)
 
     @property
@@ -263,5 +274,9 @@ class DefineTransform(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

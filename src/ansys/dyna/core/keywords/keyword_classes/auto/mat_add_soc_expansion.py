@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAddSocExpansion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddSocExpansion(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAddSocExpansion class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -119,6 +121,7 @@ class MatAddSocExpansion(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -129,6 +132,7 @@ class MatAddSocExpansion(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -139,6 +143,7 @@ class MatAddSocExpansion(KeywordBase):
 
     @mult.setter
     def mult(self, value: float) -> None:
+        """Set the mult property."""
         self._cards[0].set_value("mult", value)
 
     @property
@@ -149,6 +154,7 @@ class MatAddSocExpansion(KeywordBase):
 
     @lcidy.setter
     def lcidy(self, value: int) -> None:
+        """Set the lcidy property."""
         self._cards[0].set_value("lcidy", value)
 
     @property
@@ -159,6 +165,7 @@ class MatAddSocExpansion(KeywordBase):
 
     @multy.setter
     def multy(self, value: float) -> None:
+        """Set the multy property."""
         self._cards[0].set_value("multy", value)
 
     @property
@@ -169,6 +176,7 @@ class MatAddSocExpansion(KeywordBase):
 
     @lcidz.setter
     def lcidz(self, value: int) -> None:
+        """Set the lcidz property."""
         self._cards[0].set_value("lcidz", value)
 
     @property
@@ -179,6 +187,7 @@ class MatAddSocExpansion(KeywordBase):
 
     @multz.setter
     def multz(self, value: float) -> None:
+        """Set the multz property."""
         self._cards[0].set_value("multz", value)
 
     @property
@@ -189,5 +198,9 @@ class MatAddSocExpansion(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

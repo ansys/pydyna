@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineFormingSolidSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFormingSolidSurface(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineFormingSolidSurface class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -90,6 +92,7 @@ class DefineFormingSolidSurface(KeywordBase):
 
     @spid.setter
     def spid(self, value: int) -> None:
+        """Set the spid property."""
         self._cards[0].set_value("spid", value)
 
     @property
@@ -100,6 +103,7 @@ class DefineFormingSolidSurface(KeywordBase):
 
     @ssetlow.setter
     def ssetlow(self, value: int) -> None:
+        """Set the ssetlow property."""
         self._cards[0].set_value("ssetlow", value)
 
     @property
@@ -110,6 +114,7 @@ class DefineFormingSolidSurface(KeywordBase):
 
     @ssetupp.setter
     def ssetupp(self, value: int) -> None:
+        """Set the ssetupp property."""
         self._cards[0].set_value("ssetupp", value)
 
     @property
@@ -120,5 +125,9 @@ class DefineFormingSolidSurface(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

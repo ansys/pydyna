@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionAle1D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionAle1D(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionAle1D class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -118,6 +120,7 @@ class SectionAle1D(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -132,6 +135,7 @@ class SectionAle1D(KeywordBase):
 
     @aleform.setter
     def aleform(self, value: int) -> None:
+        """Set the aleform property."""
         self._cards[0].set_value("aleform", value)
 
     @property
@@ -144,6 +148,7 @@ class SectionAle1D(KeywordBase):
 
     @aet.setter
     def aet(self, value: int) -> None:
+        """Set the aet property."""
         self._cards[0].set_value("aet", value)
 
     @property
@@ -157,8 +162,9 @@ class SectionAle1D(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [7, 8, -8, None]:
-            raise Exception("""elform must be `None` or one of {7,8,-8}""")
+            raise Exception("""elform must be `None` or one of {7,8,-8}.""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -169,6 +175,7 @@ class SectionAle1D(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[1].set_value("thick", value)
 
     @property
@@ -179,6 +186,7 @@ class SectionAle1D(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[1].set_value("thick", value)
 
     @property
@@ -189,5 +197,9 @@ class SectionAle1D(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

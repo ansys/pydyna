@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedRivet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class ConstrainedRivet(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedRivet class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -91,6 +93,7 @@ class ConstrainedRivet(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -101,6 +104,7 @@ class ConstrainedRivet(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -111,6 +115,7 @@ class ConstrainedRivet(KeywordBase):
 
     @tf.setter
     def tf(self, value: float) -> None:
+        """Set the tf property."""
         self._cards[0].set_value("tf", value)
 
     @property
@@ -121,5 +126,9 @@ class ConstrainedRivet(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[1].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
 

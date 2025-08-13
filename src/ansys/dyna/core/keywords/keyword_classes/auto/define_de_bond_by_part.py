@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeBondByPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeBondByPart(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeBondByPart class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -132,6 +134,7 @@ class DefineDeBondByPart(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -145,8 +148,9 @@ class DefineDeBondByPart(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3}""")
+            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -157,6 +161,7 @@ class DefineDeBondByPart(KeywordBase):
 
     @pbn.setter
     def pbn(self, value: float) -> None:
+        """Set the pbn property."""
         self._cards[1].set_value("pbn", value)
 
     @property
@@ -167,6 +172,7 @@ class DefineDeBondByPart(KeywordBase):
 
     @pbs.setter
     def pbs(self, value: float) -> None:
+        """Set the pbs property."""
         self._cards[1].set_value("pbs", value)
 
     @property
@@ -177,6 +183,7 @@ class DefineDeBondByPart(KeywordBase):
 
     @pbn_s.setter
     def pbn_s(self, value: float) -> None:
+        """Set the pbn_s property."""
         self._cards[1].set_value("pbn_s", value)
 
     @property
@@ -187,6 +194,7 @@ class DefineDeBondByPart(KeywordBase):
 
     @pbs_s.setter
     def pbs_s(self, value: float) -> None:
+        """Set the pbs_s property."""
         self._cards[1].set_value("pbs_s", value)
 
     @property
@@ -197,6 +205,7 @@ class DefineDeBondByPart(KeywordBase):
 
     @sfa.setter
     def sfa(self, value: float) -> None:
+        """Set the sfa property."""
         self._cards[1].set_value("sfa", value)
 
     @property
@@ -207,6 +216,7 @@ class DefineDeBondByPart(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
 
     @property
@@ -217,5 +227,9 @@ class DefineDeBondByPart(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

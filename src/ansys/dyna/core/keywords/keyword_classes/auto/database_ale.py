@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseAle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseAle(KeywordBase):
     subkeyword = "ALE"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseAle class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -121,6 +123,7 @@ class DatabaseAle(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -134,6 +137,7 @@ class DatabaseAle(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 
     @property
@@ -165,6 +169,7 @@ class DatabaseAle(KeywordBase):
 
     @var1.setter
     def var1(self, value: int) -> None:
+        """Set the var1 property."""
         self._cards[1].set_value("var1", value)
 
     @property
@@ -196,6 +201,7 @@ class DatabaseAle(KeywordBase):
 
     @var2.setter
     def var2(self, value: int) -> None:
+        """Set the var2 property."""
         self._cards[1].set_value("var2", value)
 
     @property
@@ -227,6 +233,7 @@ class DatabaseAle(KeywordBase):
 
     @var3.setter
     def var3(self, value: int) -> None:
+        """Set the var3 property."""
         self._cards[1].set_value("var3", value)
 
     @property
@@ -258,6 +265,7 @@ class DatabaseAle(KeywordBase):
 
     @var4.setter
     def var4(self, value: int) -> None:
+        """Set the var4 property."""
         self._cards[1].set_value("var4", value)
 
     @property
@@ -289,6 +297,7 @@ class DatabaseAle(KeywordBase):
 
     @var5.setter
     def var5(self, value: int) -> None:
+        """Set the var5 property."""
         self._cards[1].set_value("var5", value)
 
     @property
@@ -320,6 +329,7 @@ class DatabaseAle(KeywordBase):
 
     @var6.setter
     def var6(self, value: int) -> None:
+        """Set the var6 property."""
         self._cards[1].set_value("var6", value)
 
     @property
@@ -351,6 +361,7 @@ class DatabaseAle(KeywordBase):
 
     @var7.setter
     def var7(self, value: int) -> None:
+        """Set the var7 property."""
         self._cards[1].set_value("var7", value)
 
     @property
@@ -382,5 +393,6 @@ class DatabaseAle(KeywordBase):
 
     @var8.setter
     def var8(self, value: int) -> None:
+        """Set the var8 property."""
         self._cards[1].set_value("var8", value)
 

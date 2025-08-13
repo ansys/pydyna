@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -58,12 +58,15 @@ def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Ite
             field = to_long(field, offset)
         pos, width = (field.offset, field.width)
         # check pos, add a null if its not correct
-        assert pos >= offset
+        if pos < offset:
+            raise ValueError(f"Field {field.name} has offset {pos} less than previous field offset {offset}.")
         if pos != offset:
             empty_width = pos - offset
             yield Field(None, None, offset, empty_width)
             offset += empty_width
-        assert pos == offset
+
+        if pos != offset:
+            raise ValueError(f"Field {field.name} has offset {pos} not equal to previous field offset {offset}.")
         if dataclasses.is_dataclass(field.type):
             field_offset = field.offset
             total_width = 0
@@ -82,7 +85,8 @@ def _field_iterator(fields: typing.List[Field], long_format: bool) -> typing.Ite
 
 
 def check_field_type(field_type: type):
-    assert field_type == str or field_type == int or field_type == float, "Unexpected type"
+    if field_type != str and field_type != int and field_type != float:
+        raise TypeError(f"Unexpected field type: {field_type}. Expected str, int, or float.")
 
 
 def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:

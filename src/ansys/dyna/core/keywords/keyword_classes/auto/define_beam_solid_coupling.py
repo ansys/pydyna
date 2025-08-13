@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineBeamSolidCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineBeamSolidCoupling(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineBeamSolidCoupling class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -115,6 +117,7 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     @lstrid.setter
     def lstrid(self, value: int) -> None:
+        """Set the lstrid property."""
         self._cards[0].set_value("lstrid", value)
 
     @property
@@ -125,6 +128,7 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     @msolidm.setter
     def msolidm(self, value: int) -> None:
+        """Set the msolidm property."""
         self._cards[0].set_value("msolidm", value)
 
     @property
@@ -137,8 +141,9 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     @lstrtype.setter
     def lstrtype(self, value: int) -> None:
+        """Set the lstrtype property."""
         if value not in [0, 1, None]:
-            raise Exception("""lstrtype must be `None` or one of {0,1}""")
+            raise Exception("""lstrtype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("lstrtype", value)
 
     @property
@@ -151,8 +156,9 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     @soltype.setter
     def soltype(self, value: int) -> None:
+        """Set the soltype property."""
         if value not in [0, 1, None]:
-            raise Exception("""soltype must be `None` or one of {0,1}""")
+            raise Exception("""soltype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("soltype", value)
 
     @property
@@ -165,8 +171,9 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
+        """Set the form property."""
         if value not in [0, 1, None]:
-            raise Exception("""form must be `None` or one of {0,1}""")
+            raise Exception("""form must be `None` or one of {0,1}.""")
         self._cards[0].set_value("form", value)
 
     @property
@@ -177,6 +184,7 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     @psf.setter
     def psf(self, value: float) -> None:
+        """Set the psf property."""
         self._cards[0].set_value("psf", value)
 
     @property
@@ -187,5 +195,9 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

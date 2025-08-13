@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCoordinateVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCoordinateVector(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCoordinateVector class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -133,6 +135,7 @@ class DefineCoordinateVector(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -143,6 +146,7 @@ class DefineCoordinateVector(KeywordBase):
 
     @xx.setter
     def xx(self, value: float) -> None:
+        """Set the xx property."""
         self._cards[0].set_value("xx", value)
 
     @property
@@ -153,6 +157,7 @@ class DefineCoordinateVector(KeywordBase):
 
     @yx.setter
     def yx(self, value: float) -> None:
+        """Set the yx property."""
         self._cards[0].set_value("yx", value)
 
     @property
@@ -163,6 +168,7 @@ class DefineCoordinateVector(KeywordBase):
 
     @zx.setter
     def zx(self, value: float) -> None:
+        """Set the zx property."""
         self._cards[0].set_value("zx", value)
 
     @property
@@ -173,6 +179,7 @@ class DefineCoordinateVector(KeywordBase):
 
     @xv.setter
     def xv(self, value: float) -> None:
+        """Set the xv property."""
         self._cards[0].set_value("xv", value)
 
     @property
@@ -183,6 +190,7 @@ class DefineCoordinateVector(KeywordBase):
 
     @yv.setter
     def yv(self, value: float) -> None:
+        """Set the yv property."""
         self._cards[0].set_value("yv", value)
 
     @property
@@ -193,6 +201,7 @@ class DefineCoordinateVector(KeywordBase):
 
     @zv.setter
     def zv(self, value: float) -> None:
+        """Set the zv property."""
         self._cards[0].set_value("zv", value)
 
     @property
@@ -203,6 +212,7 @@ class DefineCoordinateVector(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -213,5 +223,9 @@ class DefineCoordinateVector(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

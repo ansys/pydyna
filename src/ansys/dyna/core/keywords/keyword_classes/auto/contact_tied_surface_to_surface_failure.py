@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ContactTiedSurfaceToSurfaceFailure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -43,6 +44,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the ContactTiedSurfaceToSurfaceFailure class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -780,6 +782,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @surfa.setter
     def surfa(self, value: int) -> None:
+        """Set the surfa property."""
         self._cards[0].set_value("surfa", value)
 
     @property
@@ -791,6 +794,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @surfb.setter
     def surfb(self, value: int) -> None:
+        """Set the surfb property."""
         self._cards[0].set_value("surfb", value)
 
     @property
@@ -809,8 +813,9 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @surfatyp.setter
     def surfatyp(self, value: int) -> None:
+        """Set the surfatyp property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""surfatyp must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("surfatyp", value)
 
     @property
@@ -828,8 +833,9 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @surfbtyp.setter
     def surfbtyp(self, value: int) -> None:
+        """Set the surfbtyp property."""
         if value not in [0, 1, 2, 3, 5, 6, 7, None]:
-            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}""")
+            raise Exception("""surfbtyp must be `None` or one of {0,1,2,3,5,6,7}.""")
         self._cards[0].set_value("surfbtyp", value)
 
     @property
@@ -840,6 +846,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @saboxid.setter
     def saboxid(self, value: int) -> None:
+        """Set the saboxid property."""
         self._cards[0].set_value("saboxid", value)
 
     @property
@@ -850,6 +857,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sbboxid.setter
     def sbboxid(self, value: int) -> None:
+        """Set the sbboxid property."""
         self._cards[0].set_value("sbboxid", value)
 
     @property
@@ -863,8 +871,9 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sapr.setter
     def sapr(self, value: int) -> None:
+        """Set the sapr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sapr must be `None` or one of {0,1,2}""")
+            raise Exception("""sapr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sapr", value)
 
     @property
@@ -878,8 +887,9 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sbpr.setter
     def sbpr(self, value: int) -> None:
+        """Set the sbpr property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sbpr must be `None` or one of {0,1,2}""")
+            raise Exception("""sbpr must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sbpr", value)
 
     @property
@@ -893,6 +903,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[1].set_value("fs", value)
 
     @property
@@ -903,6 +914,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[1].set_value("fd", value)
 
     @property
@@ -913,6 +925,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[1].set_value("dc", value)
 
     @property
@@ -923,6 +936,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[1].set_value("vc", value)
 
     @property
@@ -933,6 +947,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @vdc.setter
     def vdc(self, value: float) -> None:
+        """Set the vdc property."""
         self._cards[1].set_value("vdc", value)
 
     @property
@@ -943,6 +958,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @penchk.setter
     def penchk(self, value: int) -> None:
+        """Set the penchk property."""
         self._cards[1].set_value("penchk", value)
 
     @property
@@ -953,6 +969,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[1].set_value("bt", value)
 
     @property
@@ -963,6 +980,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[1].set_value("dt", value)
 
     @property
@@ -973,6 +991,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sfsa.setter
     def sfsa(self, value: float) -> None:
+        """Set the sfsa property."""
         self._cards[2].set_value("sfsa", value)
 
     @property
@@ -983,6 +1002,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sfsb.setter
     def sfsb(self, value: float) -> None:
+        """Set the sfsb property."""
         self._cards[2].set_value("sfsb", value)
 
     @property
@@ -993,6 +1013,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sast.setter
     def sast(self, value: float) -> None:
+        """Set the sast property."""
         self._cards[2].set_value("sast", value)
 
     @property
@@ -1003,6 +1024,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sbst.setter
     def sbst(self, value: float) -> None:
+        """Set the sbst property."""
         self._cards[2].set_value("sbst", value)
 
     @property
@@ -1015,6 +1037,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sfsat.setter
     def sfsat(self, value: float) -> None:
+        """Set the sfsat property."""
         self._cards[2].set_value("sfsat", value)
 
     @property
@@ -1027,6 +1050,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sfsbt.setter
     def sfsbt(self, value: float) -> None:
+        """Set the sfsbt property."""
         self._cards[2].set_value("sfsbt", value)
 
     @property
@@ -1037,6 +1061,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @fsf.setter
     def fsf(self, value: float) -> None:
+        """Set the fsf property."""
         self._cards[2].set_value("fsf", value)
 
     @property
@@ -1047,6 +1072,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @vsf.setter
     def vsf(self, value: float) -> None:
+        """Set the vsf property."""
         self._cards[2].set_value("vsf", value)
 
     @property
@@ -1057,7 +1083,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[3].cards[0].set_value("cid", value)
+
+        if value:
+            self.activate_option("CID")
 
     @property
     def heading(self) -> typing.Optional[str]:
@@ -1067,7 +1097,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[3].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 
     @property
     def ignore(self) -> int:
@@ -1077,7 +1111,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[4].cards[0].set_value("ignore", value)
+
+        if value:
+            self.activate_option("IGNORE")
 
     @property
     def bckt(self) -> int:
@@ -1087,7 +1125,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @bckt.setter
     def bckt(self, value: int) -> None:
+        """Set the bckt property."""
         self._cards[4].cards[0].set_value("bckt", value)
+
+        if value:
+            self.activate_option("BCKT")
 
     @property
     def lcbckt(self) -> typing.Optional[int]:
@@ -1097,7 +1139,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @lcbckt.setter
     def lcbckt(self, value: int) -> None:
+        """Set the lcbckt property."""
         self._cards[4].cards[0].set_value("lcbckt", value)
+
+        if value:
+            self.activate_option("LCBCKT")
 
     @property
     def ns2trk(self) -> int:
@@ -1107,7 +1153,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @ns2trk.setter
     def ns2trk(self, value: int) -> None:
+        """Set the ns2trk property."""
         self._cards[4].cards[0].set_value("ns2trk", value)
+
+        if value:
+            self.activate_option("NS2TRK")
 
     @property
     def inititr(self) -> int:
@@ -1117,7 +1167,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @inititr.setter
     def inititr(self, value: int) -> None:
+        """Set the inititr property."""
         self._cards[4].cards[0].set_value("inititr", value)
+
+        if value:
+            self.activate_option("INITITR")
 
     @property
     def parmax(self) -> float:
@@ -1127,7 +1181,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @parmax.setter
     def parmax(self, value: float) -> None:
+        """Set the parmax property."""
         self._cards[4].cards[0].set_value("parmax", value)
+
+        if value:
+            self.activate_option("PARMAX")
 
     @property
     def cparm8(self) -> int:
@@ -1146,9 +1204,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
+        """Set the cparm8 property."""
         if value not in [0, 1, 2, 10, 11, 12]:
             raise Exception("""cparm8 must be one of {0,1,2,10,11,12}""")
         self._cards[4].cards[0].set_value("cparm8", value)
+
+        if value:
+            self.activate_option("CPARM8")
 
     @property
     def mpp2(self) -> bool:
@@ -1158,7 +1220,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @mpp2.setter
     def mpp2(self, value: bool) -> None:
+        """Set the mpp2 property."""
         self._cards[4].cards[1].set_value("mpp2", value)
+
+        if value:
+            self.activate_option("MPP2")
 
     @property
     def chksegs(self) -> int:
@@ -1168,7 +1234,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @chksegs.setter
     def chksegs(self, value: int) -> None:
+        """Set the chksegs property."""
         self._cards[4].cards[1].set_value("chksegs", value)
+
+        if value:
+            self.activate_option("CHKSEGS")
 
     @property
     def pensf(self) -> float:
@@ -1178,7 +1248,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @pensf.setter
     def pensf(self, value: float) -> None:
+        """Set the pensf property."""
         self._cards[4].cards[1].set_value("pensf", value)
+
+        if value:
+            self.activate_option("PENSF")
 
     @property
     def grpable(self) -> int:
@@ -1188,7 +1262,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @grpable.setter
     def grpable(self, value: int) -> None:
+        """Set the grpable property."""
         self._cards[4].cards[1].set_value("grpable", value)
+
+        if value:
+            self.activate_option("GRPABLE")
 
     @property
     def soft(self) -> typing.Optional[int]:
@@ -1203,9 +1281,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @soft.setter
     def soft(self, value: int) -> None:
+        """Set the soft property."""
         if value not in [0, 1, 2, 4, 6]:
             raise Exception("""soft must be one of {0,1,2,4,6}""")
         self._cards[5].cards[0].set_value("soft", value)
+
+        if value:
+            self.activate_option("SOFT")
 
     @property
     def sofscl(self) -> float:
@@ -1215,7 +1297,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sofscl.setter
     def sofscl(self, value: float) -> None:
+        """Set the sofscl property."""
         self._cards[5].cards[0].set_value("sofscl", value)
+
+        if value:
+            self.activate_option("SOFSCL")
 
     @property
     def lcidab(self) -> int:
@@ -1225,7 +1311,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @lcidab.setter
     def lcidab(self, value: int) -> None:
+        """Set the lcidab property."""
         self._cards[5].cards[0].set_value("lcidab", value)
+
+        if value:
+            self.activate_option("LCIDAB")
 
     @property
     def maxpar(self) -> float:
@@ -1235,7 +1325,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @maxpar.setter
     def maxpar(self, value: float) -> None:
+        """Set the maxpar property."""
         self._cards[5].cards[0].set_value("maxpar", value)
+
+        if value:
+            self.activate_option("MAXPAR")
 
     @property
     def sbopt(self) -> int:
@@ -1251,9 +1345,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sbopt.setter
     def sbopt(self, value: int) -> None:
+        """Set the sbopt property."""
         if value not in [2, 0, 1, 3, 4, 5]:
             raise Exception("""sbopt must be one of {2,0,1,3,4,5}""")
         self._cards[5].cards[0].set_value("sbopt", value)
+
+        if value:
+            self.activate_option("SBOPT")
 
     @property
     def depth(self) -> int:
@@ -1264,7 +1362,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @depth.setter
     def depth(self, value: int) -> None:
+        """Set the depth property."""
         self._cards[5].cards[0].set_value("depth", value)
+
+        if value:
+            self.activate_option("DEPTH")
 
     @property
     def bsort(self) -> typing.Optional[int]:
@@ -1275,7 +1377,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @bsort.setter
     def bsort(self, value: int) -> None:
+        """Set the bsort property."""
         self._cards[5].cards[0].set_value("bsort", value)
+
+        if value:
+            self.activate_option("BSORT")
 
     @property
     def frcfrq(self) -> int:
@@ -1286,7 +1392,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @frcfrq.setter
     def frcfrq(self, value: int) -> None:
+        """Set the frcfrq property."""
         self._cards[5].cards[0].set_value("frcfrq", value)
+
+        if value:
+            self.activate_option("FRCFRQ")
 
     @property
     def penmax(self) -> float:
@@ -1299,7 +1409,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @penmax.setter
     def penmax(self, value: float) -> None:
+        """Set the penmax property."""
         self._cards[6].cards[0].set_value("penmax", value)
+
+        if value:
+            self.activate_option("PENMAX")
 
     @property
     def thkopt(self) -> int:
@@ -1312,9 +1426,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @thkopt.setter
     def thkopt(self, value: int) -> None:
+        """Set the thkopt property."""
         if value not in [0, 1, 2]:
             raise Exception("""thkopt must be one of {0,1,2}""")
         self._cards[6].cards[0].set_value("thkopt", value)
+
+        if value:
+            self.activate_option("THKOPT")
 
     @property
     def shlthk(self) -> int:
@@ -1327,9 +1445,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @shlthk.setter
     def shlthk(self, value: int) -> None:
+        """Set the shlthk property."""
         if value not in [0, 1, 2]:
             raise Exception("""shlthk must be one of {0,1,2}""")
         self._cards[6].cards[0].set_value("shlthk", value)
+
+        if value:
+            self.activate_option("SHLTHK")
 
     @property
     def snlog(self) -> int:
@@ -1341,9 +1463,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @snlog.setter
     def snlog(self, value: int) -> None:
+        """Set the snlog property."""
         if value not in [0, 1]:
             raise Exception("""snlog must be one of {0,1}""")
         self._cards[6].cards[0].set_value("snlog", value)
+
+        if value:
+            self.activate_option("SNLOG")
 
     @property
     def isym(self) -> int:
@@ -1356,9 +1482,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @isym.setter
     def isym(self, value: int) -> None:
+        """Set the isym property."""
         if value not in [0, 1]:
             raise Exception("""isym must be one of {0,1}""")
         self._cards[6].cards[0].set_value("isym", value)
+
+        if value:
+            self.activate_option("ISYM")
 
     @property
     def i2d3d(self) -> int:
@@ -1370,9 +1500,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @i2d3d.setter
     def i2d3d(self, value: int) -> None:
+        """Set the i2d3d property."""
         if value not in [0, 1]:
             raise Exception("""i2d3d must be one of {0,1}""")
         self._cards[6].cards[0].set_value("i2d3d", value)
+
+        if value:
+            self.activate_option("I2D3D")
 
     @property
     def sldthk(self) -> float:
@@ -1382,7 +1516,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sldthk.setter
     def sldthk(self, value: float) -> None:
+        """Set the sldthk property."""
         self._cards[6].cards[0].set_value("sldthk", value)
+
+        if value:
+            self.activate_option("SLDTHK")
 
     @property
     def sldstf(self) -> float:
@@ -1392,7 +1530,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sldstf.setter
     def sldstf(self, value: float) -> None:
+        """Set the sldstf property."""
         self._cards[6].cards[0].set_value("sldstf", value)
+
+        if value:
+            self.activate_option("SLDSTF")
 
     @property
     def igap(self) -> int:
@@ -1410,7 +1552,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @igap.setter
     def igap(self, value: int) -> None:
+        """Set the igap property."""
         self._cards[7].cards[0].set_value("igap", value)
+
+        if value:
+            self.activate_option("IGAP")
 
     @property
     def ignore(self) -> int:
@@ -1426,7 +1572,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @ignore.setter
     def ignore(self, value: int) -> None:
+        """Set the ignore property."""
         self._cards[7].cards[0].set_value("ignore", value)
+
+        if value:
+            self.activate_option("IGNORE")
 
     @property
     def dprfac(self) -> float:
@@ -1440,7 +1590,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @dprfac.setter
     def dprfac(self, value: float) -> None:
+        """Set the dprfac property."""
         self._cards[7].cards[0].set_value("dprfac", value)
+
+        if value:
+            self.activate_option("DPRFAC")
 
     @property
     def dtstif(self) -> float:
@@ -1455,7 +1609,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @dtstif.setter
     def dtstif(self, value: float) -> None:
+        """Set the dtstif property."""
         self._cards[7].cards[0].set_value("dtstif", value)
+
+        if value:
+            self.activate_option("DTSTIF")
 
     @property
     def edgek(self) -> float:
@@ -1467,7 +1625,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @edgek.setter
     def edgek(self, value: float) -> None:
+        """Set the edgek property."""
         self._cards[7].cards[0].set_value("edgek", value)
+
+        if value:
+            self.activate_option("EDGEK")
 
     @property
     def flangl(self) -> float:
@@ -1479,7 +1641,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @flangl.setter
     def flangl(self, value: float) -> None:
+        """Set the flangl property."""
         self._cards[7].cards[0].set_value("flangl", value)
+
+        if value:
+            self.activate_option("FLANGL")
 
     @property
     def cid_rcf(self) -> typing.Optional[int]:
@@ -1489,7 +1655,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @cid_rcf.setter
     def cid_rcf(self, value: int) -> None:
+        """Set the cid_rcf property."""
         self._cards[7].cards[0].set_value("cid_rcf", value)
+
+        if value:
+            self.activate_option("CID_RCF")
 
     @property
     def q2tri(self) -> int:
@@ -1504,9 +1674,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @q2tri.setter
     def q2tri(self, value: int) -> None:
+        """Set the q2tri property."""
         if value not in [0, 1, 2, 3, 4]:
             raise Exception("""q2tri must be one of {0,1,2,3,4}""")
         self._cards[8].cards[0].set_value("q2tri", value)
+
+        if value:
+            self.activate_option("Q2TRI")
 
     @property
     def dtpchk(self) -> float:
@@ -1519,7 +1693,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @dtpchk.setter
     def dtpchk(self, value: float) -> None:
+        """Set the dtpchk property."""
         self._cards[8].cards[0].set_value("dtpchk", value)
+
+        if value:
+            self.activate_option("DTPCHK")
 
     @property
     def sfnbr(self) -> float:
@@ -1531,7 +1709,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sfnbr.setter
     def sfnbr(self, value: float) -> None:
+        """Set the sfnbr property."""
         self._cards[8].cards[0].set_value("sfnbr", value)
+
+        if value:
+            self.activate_option("SFNBR")
 
     @property
     def fnlscl(self) -> float:
@@ -1541,7 +1723,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @fnlscl.setter
     def fnlscl(self, value: float) -> None:
+        """Set the fnlscl property."""
         self._cards[8].cards[0].set_value("fnlscl", value)
+
+        if value:
+            self.activate_option("FNLSCL")
 
     @property
     def dnlscl(self) -> float:
@@ -1551,7 +1737,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @dnlscl.setter
     def dnlscl(self, value: float) -> None:
+        """Set the dnlscl property."""
         self._cards[8].cards[0].set_value("dnlscl", value)
+
+        if value:
+            self.activate_option("DNLSCL")
 
     @property
     def tcso(self) -> int:
@@ -1564,9 +1754,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @tcso.setter
     def tcso(self, value: int) -> None:
+        """Set the tcso property."""
         if value not in [0, 1]:
             raise Exception("""tcso must be one of {0,1}""")
         self._cards[8].cards[0].set_value("tcso", value)
+
+        if value:
+            self.activate_option("TCSO")
 
     @property
     def tiedid(self) -> int:
@@ -1577,9 +1771,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @tiedid.setter
     def tiedid(self, value: int) -> None:
+        """Set the tiedid property."""
         if value not in [0, 1]:
             raise Exception("""tiedid must be one of {0,1}""")
         self._cards[8].cards[0].set_value("tiedid", value)
+
+        if value:
+            self.activate_option("TIEDID")
 
     @property
     def shledg(self) -> int:
@@ -1592,9 +1790,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @shledg.setter
     def shledg(self, value: int) -> None:
+        """Set the shledg property."""
         if value not in [0, 1, 2]:
             raise Exception("""shledg must be one of {0,1,2}""")
         self._cards[8].cards[0].set_value("shledg", value)
+
+        if value:
+            self.activate_option("SHLEDG")
 
     @property
     def sharec(self) -> int:
@@ -1606,9 +1808,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @sharec.setter
     def sharec(self, value: int) -> None:
+        """Set the sharec property."""
         if value not in [0, 1]:
             raise Exception("""sharec must be one of {0,1}""")
         self._cards[9].cards[0].set_value("sharec", value)
+
+        if value:
+            self.activate_option("SHAREC")
 
     @property
     def cparm8(self) -> int:
@@ -1620,9 +1826,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
+        """Set the cparm8 property."""
         if value not in [0, 2]:
             raise Exception("""cparm8 must be one of {0,2}""")
         self._cards[9].cards[0].set_value("cparm8", value)
+
+        if value:
+            self.activate_option("CPARM8")
 
     @property
     def ipback(self) -> int:
@@ -1633,7 +1843,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @ipback.setter
     def ipback(self, value: int) -> None:
+        """Set the ipback property."""
         self._cards[9].cards[0].set_value("ipback", value)
+
+        if value:
+            self.activate_option("IPBACK")
 
     @property
     def srnde(self) -> int:
@@ -1645,7 +1859,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @srnde.setter
     def srnde(self, value: int) -> None:
+        """Set the srnde property."""
         self._cards[9].cards[0].set_value("srnde", value)
+
+        if value:
+            self.activate_option("SRNDE")
 
     @property
     def fricsf(self) -> float:
@@ -1655,7 +1873,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @fricsf.setter
     def fricsf(self, value: float) -> None:
+        """Set the fricsf property."""
         self._cards[9].cards[0].set_value("fricsf", value)
+
+        if value:
+            self.activate_option("FRICSF")
 
     @property
     def icor(self) -> int:
@@ -1668,7 +1890,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @icor.setter
     def icor(self, value: int) -> None:
+        """Set the icor property."""
         self._cards[9].cards[0].set_value("icor", value)
+
+        if value:
+            self.activate_option("ICOR")
 
     @property
     def ftorq(self) -> int:
@@ -1680,7 +1906,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @ftorq.setter
     def ftorq(self, value: int) -> None:
+        """Set the ftorq property."""
         self._cards[9].cards[0].set_value("ftorq", value)
+
+        if value:
+            self.activate_option("FTORQ")
 
     @property
     def region(self) -> int:
@@ -1691,7 +1921,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @region.setter
     def region(self, value: int) -> None:
+        """Set the region property."""
         self._cards[9].cards[0].set_value("region", value)
+
+        if value:
+            self.activate_option("REGION")
 
     @property
     def pstiff(self) -> int:
@@ -1704,9 +1938,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @pstiff.setter
     def pstiff(self, value: int) -> None:
+        """Set the pstiff property."""
         if value not in [0, 1, 2]:
             raise Exception("""pstiff must be one of {0,1,2}""")
         self._cards[10].cards[0].set_value("pstiff", value)
+
+        if value:
+            self.activate_option("PSTIFF")
 
     @property
     def ignroff(self) -> int:
@@ -1721,9 +1959,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @ignroff.setter
     def ignroff(self, value: int) -> None:
+        """Set the ignroff property."""
         if value not in [0, 1, 2, 3]:
             raise Exception("""ignroff must be one of {0,1,2,3}""")
         self._cards[10].cards[0].set_value("ignroff", value)
+
+        if value:
+            self.activate_option("IGNROFF")
 
     @property
     def fstol(self) -> float:
@@ -1733,7 +1975,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @fstol.setter
     def fstol(self, value: float) -> None:
+        """Set the fstol property."""
         self._cards[10].cards[0].set_value("fstol", value)
+
+        if value:
+            self.activate_option("FSTOL")
 
     @property
     def _2dbinr(self) -> int:
@@ -1745,9 +1991,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @_2dbinr.setter
     def _2dbinr(self, value: int) -> None:
+        """Set the _2dbinr property."""
         if value not in [0, 1]:
             raise Exception("""_2dbinr must be one of {0,1}""")
         self._cards[10].cards[0].set_value("2dbinr", value)
+
+        if value:
+            self.activate_option("_2DBINR")
 
     @property
     def ssftyp(self) -> int:
@@ -1759,9 +2009,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @ssftyp.setter
     def ssftyp(self, value: int) -> None:
+        """Set the ssftyp property."""
         if value not in [0, 1]:
             raise Exception("""ssftyp must be one of {0,1}""")
         self._cards[10].cards[0].set_value("ssftyp", value)
+
+        if value:
+            self.activate_option("SSFTYP")
 
     @property
     def swtpr(self) -> int:
@@ -1773,9 +2027,13 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @swtpr.setter
     def swtpr(self, value: int) -> None:
+        """Set the swtpr property."""
         if value not in [0, 1]:
             raise Exception("""swtpr must be one of {0,1}""")
         self._cards[10].cards[0].set_value("swtpr", value)
+
+        if value:
+            self.activate_option("SWTPR")
 
     @property
     def tetfac(self) -> float:
@@ -1785,7 +2043,11 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @tetfac.setter
     def tetfac(self, value: float) -> None:
+        """Set the tetfac property."""
         self._cards[10].cards[0].set_value("tetfac", value)
+
+        if value:
+            self.activate_option("TETFAC")
 
     @property
     def shloff(self) -> float:
@@ -1797,5 +2059,9 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @shloff.setter
     def shloff(self, value: float) -> None:
+        """Set the shloff property."""
         self._cards[11].cards[0].set_value("shloff", value)
+
+        if value:
+            self.activate_option("SHLOFF")
 

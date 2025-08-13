@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadSeismicSsiSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadSeismicSsiSet(KeywordBase):
     subkeyword = "SEISMIC_SSI_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadSeismicSsiSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -134,6 +136,7 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -144,6 +147,7 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @typeid.setter
     def typeid(self, value: int) -> None:
+        """Set the typeid property."""
         self._cards[0].set_value("typeid", value)
 
     @property
@@ -154,6 +158,7 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @gmx.setter
     def gmx(self, value: int) -> None:
+        """Set the gmx property."""
         self._cards[0].set_value("gmx", value)
 
     @property
@@ -164,6 +169,7 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @gmy.setter
     def gmy(self, value: int) -> None:
+        """Set the gmy property."""
         self._cards[0].set_value("gmy", value)
 
     @property
@@ -174,6 +180,7 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @gmz.setter
     def gmz(self, value: int) -> None:
+        """Set the gmz property."""
         self._cards[0].set_value("gmz", value)
 
     @property
@@ -184,6 +191,7 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[1].set_value("sf", value)
 
     @property
@@ -194,6 +202,7 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -204,6 +213,7 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -214,6 +224,7 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -226,8 +237,9 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @isg.setter
     def isg(self, value: int) -> None:
+        """Set the isg property."""
         if value not in [0, 1, None]:
-            raise Exception("""isg must be `None` or one of {0,1}""")
+            raise Exception("""isg must be `None` or one of {0,1}.""")
         self._cards[1].set_value("isg", value)
 
     @property
@@ -241,7 +253,8 @@ class LoadSeismicSsiSet(KeywordBase):
 
     @igm.setter
     def igm(self, value: int) -> None:
+        """Set the igm property."""
         if value not in [0, 1, None]:
-            raise Exception("""igm must be `None` or one of {0,1}""")
+            raise Exception("""igm must be `None` or one of {0,1}.""")
         self._cards[1].set_value("igm", value)
 

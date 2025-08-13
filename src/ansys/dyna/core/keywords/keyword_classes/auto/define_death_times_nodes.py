@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeathTimesNodes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeathTimesNodes(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeathTimesNodes class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -217,6 +219,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @geo.setter
     def geo(self, value: int) -> None:
+        """Set the geo property."""
         self._cards[0].set_value("geo", value)
 
     @property
@@ -227,6 +230,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -237,6 +241,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -247,6 +252,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -257,6 +263,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @x_t.setter
     def x_t(self, value: float) -> None:
+        """Set the x_t property."""
         self._cards[1].set_value("x_t", value)
 
     @property
@@ -267,6 +274,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @y_t.setter
     def y_t(self, value: float) -> None:
+        """Set the y_t property."""
         self._cards[1].set_value("y_t", value)
 
     @property
@@ -277,6 +285,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @z_t.setter
     def z_t(self, value: float) -> None:
+        """Set the z_t property."""
         self._cards[1].set_value("z_t", value)
 
     @property
@@ -287,6 +296,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @x_h.setter
     def x_h(self, value: float) -> None:
+        """Set the x_h property."""
         self._cards[1].set_value("x_h", value)
 
     @property
@@ -297,6 +307,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @y_h.setter
     def y_h(self, value: float) -> None:
+        """Set the y_h property."""
         self._cards[1].set_value("y_h", value)
 
     @property
@@ -307,6 +318,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @x_h.setter
     def x_h(self, value: float) -> None:
+        """Set the x_h property."""
         self._cards[1].set_value("x_h", value)
 
     @property
@@ -317,6 +329,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[1].set_value("r", value)
 
     @property
@@ -327,6 +340,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @flag.setter
     def flag(self, value: int) -> None:
+        """Set the flag property."""
         self._cards[1].set_value("flag", value)
 
     @property
@@ -337,6 +351,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @nid1.setter
     def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
         self._cards[2].set_value("nid1", value)
 
     @property
@@ -347,6 +362,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[2].set_value("nid2", value)
 
     @property
@@ -357,6 +373,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @nid3.setter
     def nid3(self, value: int) -> None:
+        """Set the nid3 property."""
         self._cards[2].set_value("nid3", value)
 
     @property
@@ -367,6 +384,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @nid4.setter
     def nid4(self, value: int) -> None:
+        """Set the nid4 property."""
         self._cards[2].set_value("nid4", value)
 
     @property
@@ -377,6 +395,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @nid5.setter
     def nid5(self, value: int) -> None:
+        """Set the nid5 property."""
         self._cards[2].set_value("nid5", value)
 
     @property
@@ -387,6 +406,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @nid6.setter
     def nid6(self, value: int) -> None:
+        """Set the nid6 property."""
         self._cards[2].set_value("nid6", value)
 
     @property
@@ -397,6 +417,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @nid7.setter
     def nid7(self, value: int) -> None:
+        """Set the nid7 property."""
         self._cards[2].set_value("nid7", value)
 
     @property
@@ -407,6 +428,7 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @nid8.setter
     def nid8(self, value: int) -> None:
+        """Set the nid8 property."""
         self._cards[2].set_value("nid8", value)
 
     @property
@@ -417,5 +439,9 @@ class DefineDeathTimesNodes(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

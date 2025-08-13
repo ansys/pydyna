@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionFpd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionFpd(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionFpd class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -170,6 +172,7 @@ class SectionFpd(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -181,6 +184,7 @@ class SectionFpd(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         self._cards[0].set_value("elform", value)
 
     @property
@@ -191,6 +195,7 @@ class SectionFpd(KeywordBase):
 
     @dx.setter
     def dx(self, value: float) -> None:
+        """Set the dx property."""
         self._cards[1].set_value("dx", value)
 
     @property
@@ -201,6 +206,7 @@ class SectionFpd(KeywordBase):
 
     @dy.setter
     def dy(self, value: float) -> None:
+        """Set the dy property."""
         self._cards[1].set_value("dy", value)
 
     @property
@@ -211,6 +217,7 @@ class SectionFpd(KeywordBase):
 
     @dz.setter
     def dz(self, value: float) -> None:
+        """Set the dz property."""
         self._cards[1].set_value("dz", value)
 
     @property
@@ -221,6 +228,7 @@ class SectionFpd(KeywordBase):
 
     @kernel.setter
     def kernel(self, value: int) -> None:
+        """Set the kernel property."""
         self._cards[1].set_value("kernel", value)
 
     @property
@@ -231,6 +239,7 @@ class SectionFpd(KeywordBase):
 
     @tstart.setter
     def tstart(self, value: float) -> None:
+        """Set the tstart property."""
         self._cards[2].set_value("tstart", value)
 
     @property
@@ -241,6 +250,7 @@ class SectionFpd(KeywordBase):
 
     @dt_imp.setter
     def dt_imp(self, value: float) -> None:
+        """Set the dt_imp property."""
         self._cards[2].set_value("dt_imp", value)
 
     @property
@@ -251,6 +261,7 @@ class SectionFpd(KeywordBase):
 
     @dtscl.setter
     def dtscl(self, value: float) -> None:
+        """Set the dtscl property."""
         self._cards[2].set_value("dtscl", value)
 
     @property
@@ -261,5 +272,9 @@ class SectionFpd(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

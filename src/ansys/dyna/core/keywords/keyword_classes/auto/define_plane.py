@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefinePlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefinePlane(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefinePlane class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -161,6 +163,7 @@ class DefinePlane(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -171,6 +174,7 @@ class DefinePlane(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[0].set_value("x1", value)
 
     @property
@@ -181,6 +185,7 @@ class DefinePlane(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[0].set_value("y1", value)
 
     @property
@@ -191,6 +196,7 @@ class DefinePlane(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[0].set_value("z1", value)
 
     @property
@@ -201,6 +207,7 @@ class DefinePlane(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[0].set_value("x2", value)
 
     @property
@@ -211,6 +218,7 @@ class DefinePlane(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[0].set_value("y2", value)
 
     @property
@@ -221,6 +229,7 @@ class DefinePlane(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[0].set_value("z2", value)
 
     @property
@@ -231,6 +240,7 @@ class DefinePlane(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -241,6 +251,7 @@ class DefinePlane(KeywordBase):
 
     @x3.setter
     def x3(self, value: float) -> None:
+        """Set the x3 property."""
         self._cards[1].set_value("x3", value)
 
     @property
@@ -251,6 +262,7 @@ class DefinePlane(KeywordBase):
 
     @y3.setter
     def y3(self, value: float) -> None:
+        """Set the y3 property."""
         self._cards[1].set_value("y3", value)
 
     @property
@@ -261,6 +273,7 @@ class DefinePlane(KeywordBase):
 
     @z3.setter
     def z3(self, value: float) -> None:
+        """Set the z3 property."""
         self._cards[1].set_value("z3", value)
 
     @property
@@ -271,5 +284,9 @@ class DefinePlane(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionTShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -36,6 +37,7 @@ class SectionTShell(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionTShell class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -141,6 +143,7 @@ class SectionTShell(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -157,8 +160,9 @@ class SectionTShell(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [1, 2, 3, 5, 6, 7, None]:
-            raise Exception("""elform must be `None` or one of {1,2,3,5,6,7}""")
+            raise Exception("""elform must be `None` or one of {1,2,3,5,6,7}.""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -169,6 +173,7 @@ class SectionTShell(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[0].set_value("shrf", value)
 
     @property
@@ -179,6 +184,7 @@ class SectionTShell(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[0].set_value("nip", value)
 
     @property
@@ -192,8 +198,9 @@ class SectionTShell(KeywordBase):
 
     @propt.setter
     def propt(self, value: float) -> None:
+        """Set the propt property."""
         if value not in [1.0, 2.0, 3.0, None]:
-            raise Exception("""propt must be `None` or one of {1.0,2.0,3.0}""")
+            raise Exception("""propt must be `None` or one of {1.0,2.0,3.0}.""")
         self._cards[0].set_value("propt", value)
 
     @property
@@ -207,6 +214,7 @@ class SectionTShell(KeywordBase):
 
     @qr.setter
     def qr(self, value: int) -> None:
+        """Set the qr property."""
         self._cards[0].set_value("qr", value)
 
     @property
@@ -219,8 +227,9 @@ class SectionTShell(KeywordBase):
 
     @icomp.setter
     def icomp(self, value: int) -> None:
+        """Set the icomp property."""
         if value not in [0, 1, None]:
-            raise Exception("""icomp must be `None` or one of {0,1}""")
+            raise Exception("""icomp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("icomp", value)
 
     @property
@@ -233,13 +242,14 @@ class SectionTShell(KeywordBase):
 
     @tshear.setter
     def tshear(self, value: int) -> None:
+        """Set the tshear property."""
         if value not in [0, 1, None]:
-            raise Exception("""tshear must be `None` or one of {0,1}""")
+            raise Exception("""tshear must be `None` or one of {0,1}.""")
         self._cards[0].set_value("tshear", value)
 
     @property
     def bi(self) -> SeriesCard:
-        """dynamic array of beta-i: material angle at ith-integration point."""
+        """dynamic array of beta-i: material angle at ith-integration point.."""
         return self._cards[1]
 
     @bi.setter
@@ -254,5 +264,9 @@ class SectionTShell(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

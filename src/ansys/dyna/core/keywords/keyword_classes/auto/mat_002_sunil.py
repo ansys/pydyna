@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat002Sunil class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat002Sunil(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat002Sunil class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -371,6 +373,7 @@ class Mat002Sunil(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -381,6 +384,7 @@ class Mat002Sunil(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -391,6 +395,7 @@ class Mat002Sunil(KeywordBase):
 
     @ea.setter
     def ea(self, value: float) -> None:
+        """Set the ea property."""
         self._cards[0].set_value("ea", value)
 
     @property
@@ -401,6 +406,7 @@ class Mat002Sunil(KeywordBase):
 
     @eb.setter
     def eb(self, value: float) -> None:
+        """Set the eb property."""
         self._cards[0].set_value("eb", value)
 
     @property
@@ -411,6 +417,7 @@ class Mat002Sunil(KeywordBase):
 
     @ec.setter
     def ec(self, value: float) -> None:
+        """Set the ec property."""
         self._cards[0].set_value("ec", value)
 
     @property
@@ -421,6 +428,7 @@ class Mat002Sunil(KeywordBase):
 
     @prba.setter
     def prba(self, value: float) -> None:
+        """Set the prba property."""
         self._cards[0].set_value("prba", value)
 
     @property
@@ -431,6 +439,7 @@ class Mat002Sunil(KeywordBase):
 
     @prca.setter
     def prca(self, value: float) -> None:
+        """Set the prca property."""
         self._cards[0].set_value("prca", value)
 
     @property
@@ -441,6 +450,7 @@ class Mat002Sunil(KeywordBase):
 
     @prcb.setter
     def prcb(self, value: float) -> None:
+        """Set the prcb property."""
         self._cards[0].set_value("prcb", value)
 
     @property
@@ -451,6 +461,7 @@ class Mat002Sunil(KeywordBase):
 
     @gab.setter
     def gab(self, value: float) -> None:
+        """Set the gab property."""
         self._cards[1].set_value("gab", value)
 
     @property
@@ -461,6 +472,7 @@ class Mat002Sunil(KeywordBase):
 
     @gbc.setter
     def gbc(self, value: float) -> None:
+        """Set the gbc property."""
         self._cards[1].set_value("gbc", value)
 
     @property
@@ -471,6 +483,7 @@ class Mat002Sunil(KeywordBase):
 
     @gca.setter
     def gca(self, value: float) -> None:
+        """Set the gca property."""
         self._cards[1].set_value("gca", value)
 
     @property
@@ -481,6 +494,7 @@ class Mat002Sunil(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[1].set_value("aopt", value)
 
     @property
@@ -491,6 +505,7 @@ class Mat002Sunil(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[1].set_value("g", value)
 
     @property
@@ -501,6 +516,7 @@ class Mat002Sunil(KeywordBase):
 
     @sigf.setter
     def sigf(self, value: float) -> None:
+        """Set the sigf property."""
         self._cards[1].set_value("sigf", value)
 
     @property
@@ -511,8 +527,9 @@ class Mat002Sunil(KeywordBase):
 
     @mfparm.setter
     def mfparm(self, value: int) -> None:
+        """Set the mfparm property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""mfparm must be `None` or one of {0,1,2,3,4,5,6}""")
+            raise Exception("""mfparm must be `None` or one of {0,1,2,3,4,5,6}.""")
         self._cards[1].set_value("mfparm", value)
 
     @property
@@ -523,6 +540,7 @@ class Mat002Sunil(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[2].set_value("xp", value)
 
     @property
@@ -533,6 +551,7 @@ class Mat002Sunil(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[2].set_value("yp", value)
 
     @property
@@ -543,6 +562,7 @@ class Mat002Sunil(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[2].set_value("zp", value)
 
     @property
@@ -553,6 +573,7 @@ class Mat002Sunil(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[2].set_value("a1", value)
 
     @property
@@ -563,6 +584,7 @@ class Mat002Sunil(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[2].set_value("a2", value)
 
     @property
@@ -573,6 +595,7 @@ class Mat002Sunil(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[2].set_value("a3", value)
 
     @property
@@ -587,8 +610,9 @@ class Mat002Sunil(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4}.""")
         self._cards[2].set_value("macf", value)
 
     @property
@@ -599,6 +623,7 @@ class Mat002Sunil(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[3].set_value("v1", value)
 
     @property
@@ -609,6 +634,7 @@ class Mat002Sunil(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[3].set_value("v2", value)
 
     @property
@@ -619,6 +645,7 @@ class Mat002Sunil(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[3].set_value("v3", value)
 
     @property
@@ -629,6 +656,7 @@ class Mat002Sunil(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[3].set_value("d1", value)
 
     @property
@@ -639,6 +667,7 @@ class Mat002Sunil(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[3].set_value("d2", value)
 
     @property
@@ -649,6 +678,7 @@ class Mat002Sunil(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[3].set_value("d3", value)
 
     @property
@@ -659,6 +689,7 @@ class Mat002Sunil(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[3].set_value("beta", value)
 
     @property
@@ -669,6 +700,7 @@ class Mat002Sunil(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
+        """Set the ref property."""
         self._cards[3].set_value("ref", value)
 
     @property
@@ -679,6 +711,7 @@ class Mat002Sunil(KeywordBase):
 
     @t1fail.setter
     def t1fail(self, value: float) -> None:
+        """Set the t1fail property."""
         self._cards[4].set_value("t1fail", value)
 
     @property
@@ -689,6 +722,7 @@ class Mat002Sunil(KeywordBase):
 
     @c1fail.setter
     def c1fail(self, value: float) -> None:
+        """Set the c1fail property."""
         self._cards[4].set_value("c1fail", value)
 
     @property
@@ -699,6 +733,7 @@ class Mat002Sunil(KeywordBase):
 
     @t2fail.setter
     def t2fail(self, value: float) -> None:
+        """Set the t2fail property."""
         self._cards[4].set_value("t2fail", value)
 
     @property
@@ -709,6 +744,7 @@ class Mat002Sunil(KeywordBase):
 
     @c2fail.setter
     def c2fail(self, value: float) -> None:
+        """Set the c2fail property."""
         self._cards[4].set_value("c2fail", value)
 
     @property
@@ -719,6 +755,7 @@ class Mat002Sunil(KeywordBase):
 
     @t3fail.setter
     def t3fail(self, value: float) -> None:
+        """Set the t3fail property."""
         self._cards[4].set_value("t3fail", value)
 
     @property
@@ -729,6 +766,7 @@ class Mat002Sunil(KeywordBase):
 
     @c3fail.setter
     def c3fail(self, value: float) -> None:
+        """Set the c3fail property."""
         self._cards[4].set_value("c3fail", value)
 
     @property
@@ -739,6 +777,7 @@ class Mat002Sunil(KeywordBase):
 
     @s12fail.setter
     def s12fail(self, value: float) -> None:
+        """Set the s12fail property."""
         self._cards[5].set_value("s12fail", value)
 
     @property
@@ -749,6 +788,7 @@ class Mat002Sunil(KeywordBase):
 
     @s23fail.setter
     def s23fail(self, value: float) -> None:
+        """Set the s23fail property."""
         self._cards[5].set_value("s23fail", value)
 
     @property
@@ -759,6 +799,7 @@ class Mat002Sunil(KeywordBase):
 
     @s31fail.setter
     def s31fail(self, value: float) -> None:
+        """Set the s31fail property."""
         self._cards[5].set_value("s31fail", value)
 
     @property
@@ -769,5 +810,9 @@ class Mat002Sunil(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

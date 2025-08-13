@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Algorithms to compute 4x4 transformation matrices from a *DEFINE_TRANSFORMATION keyword."""
+"""Algorithms to compute 4x4 transformation matrices from a ``*DEFINE_TRANSFORMATION`` keyword."""
 
 import math
 import typing
@@ -41,9 +41,9 @@ def _get_rotation_matrix(a1: float, a2: float, a3: float, a4: float, a5: float, 
     if (a4, a5, a6) == (0.0, 0.0, 0.0):
         if a7 != 0.0:
             # simple rotation about an axis going through the origin
-            assert (a1, a2, a3) != (0.0, 0.0, 0.0), "Direction vector A1, A2, A3 cannot be all zero!"
+            if np.isclose((a1, a2, a3), (0.0, 0.0, 0.0)).all():
+                raise ValueError("Direction vector A1, A2, A3 cannot be all zero!")
             return tfm.rotation_matrix(math.radians(a7), [a1, a2, a3])
-
     parameters = (a1, a2, a3, a4, a5, a6, a7)
     warnings.warn(f"DEFINE_TRANFORMATION ROTATE option with parameters {parameters} not handled yet by pydyna!")
     return None

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineSpotweldRuptureParameter class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineSpotweldRuptureParameter class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -263,6 +265,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -273,6 +276,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @c11.setter
     def c11(self, value: float) -> None:
+        """Set the c11 property."""
         self._cards[1].set_value("c11", value)
 
     @property
@@ -283,6 +287,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @c12.setter
     def c12(self, value: float) -> None:
+        """Set the c12 property."""
         self._cards[1].set_value("c12", value)
 
     @property
@@ -293,6 +298,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @c13.setter
     def c13(self, value: float) -> None:
+        """Set the c13 property."""
         self._cards[1].set_value("c13", value)
 
     @property
@@ -303,6 +309,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @n11.setter
     def n11(self, value: float) -> None:
+        """Set the n11 property."""
         self._cards[1].set_value("n11", value)
 
     @property
@@ -313,6 +320,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @n12.setter
     def n12(self, value: float) -> None:
+        """Set the n12 property."""
         self._cards[1].set_value("n12", value)
 
     @property
@@ -323,6 +331,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @n13.setter
     def n13(self, value: float) -> None:
+        """Set the n13 property."""
         self._cards[1].set_value("n13", value)
 
     @property
@@ -333,6 +342,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @sig_pf.setter
     def sig_pf(self, value: float) -> None:
+        """Set the sig_pf property."""
         self._cards[1].set_value("sig_pf", value)
 
     @property
@@ -343,6 +353,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @c21.setter
     def c21(self, value: float) -> None:
+        """Set the c21 property."""
         self._cards[2].set_value("c21", value)
 
     @property
@@ -353,6 +364,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @c22.setter
     def c22(self, value: float) -> None:
+        """Set the c22 property."""
         self._cards[2].set_value("c22", value)
 
     @property
@@ -363,6 +375,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @c23.setter
     def c23(self, value: float) -> None:
+        """Set the c23 property."""
         self._cards[2].set_value("c23", value)
 
     @property
@@ -373,6 +386,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @n2.setter
     def n2(self, value: float) -> None:
+        """Set the n2 property."""
         self._cards[2].set_value("n2", value)
 
     @property
@@ -383,6 +397,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @sig_nf.setter
     def sig_nf(self, value: float) -> None:
+        """Set the sig_nf property."""
         self._cards[2].set_value("sig_nf", value)
 
     @property
@@ -393,6 +408,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @lcdpa.setter
     def lcdpa(self, value: int) -> None:
+        """Set the lcdpa property."""
         self._cards[3].set_value("lcdpa", value)
 
     @property
@@ -404,6 +420,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @lcdpm.setter
     def lcdpm(self, value: int) -> None:
+        """Set the lcdpm property."""
         self._cards[3].set_value("lcdpm", value)
 
     @property
@@ -415,6 +432,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @lcdps.setter
     def lcdps(self, value: int) -> None:
+        """Set the lcdps property."""
         self._cards[3].set_value("lcdps", value)
 
     @property
@@ -426,6 +444,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @lcdna.setter
     def lcdna(self, value: int) -> None:
+        """Set the lcdna property."""
         self._cards[3].set_value("lcdna", value)
 
     @property
@@ -437,6 +456,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @lcdnm.setter
     def lcdnm(self, value: int) -> None:
+        """Set the lcdnm property."""
         self._cards[3].set_value("lcdnm", value)
 
     @property
@@ -448,6 +468,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @lcdns.setter
     def lcdns(self, value: int) -> None:
+        """Set the lcdns property."""
         self._cards[3].set_value("lcdns", value)
 
     @property
@@ -459,6 +480,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @nsmt.setter
     def nsmt(self, value: int) -> None:
+        """Set the nsmt property."""
         self._cards[3].set_value("nsmt", value)
 
     @property
@@ -469,5 +491,9 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

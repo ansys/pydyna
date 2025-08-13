@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the PartAveraged class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class PartAveraged(KeywordBase):
     subkeyword = "AVERAGED"
 
     def __init__(self, **kwargs):
+        """Initialize the PartAveraged class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -118,6 +120,7 @@ class PartAveraged(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -128,6 +131,7 @@ class PartAveraged(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -138,6 +142,7 @@ class PartAveraged(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[1].set_value("secid", value)
 
     @property
@@ -148,6 +153,7 @@ class PartAveraged(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[1].set_value("mid", value)
 
     @property
@@ -158,6 +164,7 @@ class PartAveraged(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[1].set_value("eosid", value)
 
     @property
@@ -169,6 +176,7 @@ class PartAveraged(KeywordBase):
 
     @hgid.setter
     def hgid(self, value: int) -> None:
+        """Set the hgid property."""
         self._cards[1].set_value("hgid", value)
 
     @property
@@ -181,8 +189,9 @@ class PartAveraged(KeywordBase):
 
     @grav.setter
     def grav(self, value: int) -> None:
+        """Set the grav property."""
         if value not in [0, 1, None]:
-            raise Exception("""grav must be `None` or one of {0,1}""")
+            raise Exception("""grav must be `None` or one of {0,1}.""")
         self._cards[1].set_value("grav", value)
 
     @property
@@ -199,6 +208,7 @@ class PartAveraged(KeywordBase):
 
     @adpopt.setter
     def adpopt(self, value: int) -> None:
+        """Set the adpopt property."""
         self._cards[1].set_value("adpopt", value)
 
     @property
@@ -210,5 +220,6 @@ class PartAveraged(KeywordBase):
 
     @tmid.setter
     def tmid(self, value: int) -> None:
+        """Set the tmid property."""
         self._cards[1].set_value("tmid", value)
 

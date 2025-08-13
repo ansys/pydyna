@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineTable class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -36,6 +37,7 @@ class DefineTable(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineTable class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -100,6 +102,7 @@ class DefineTable(KeywordBase):
 
     @tbid.setter
     def tbid(self, value: int) -> None:
+        """Set the tbid property."""
         self._cards[0].set_value("tbid", value)
 
     @property
@@ -110,6 +113,7 @@ class DefineTable(KeywordBase):
 
     @sfa.setter
     def sfa(self, value: float) -> None:
+        """Set the sfa property."""
         self._cards[0].set_value("sfa", value)
 
     @property
@@ -120,11 +124,12 @@ class DefineTable(KeywordBase):
 
     @offa.setter
     def offa(self, value: float) -> None:
+        """Set the offa property."""
         self._cards[0].set_value("offa", value)
 
     @property
     def points(self) -> SeriesCard:
-        """Interpolation points for subsequent DEFINE_CURVE keywords."""
+        """Interpolation points for subsequent DEFINE_CURVE keywords.."""
         return self._cards[1]
 
     @points.setter
@@ -139,5 +144,9 @@ class DefineTable(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

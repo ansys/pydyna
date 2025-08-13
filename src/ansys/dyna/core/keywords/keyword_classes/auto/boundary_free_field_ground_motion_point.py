@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryFreeFieldGroundMotionPoint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
     subkeyword = "FREE_FIELD_GROUND_MOTION_POINT"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryFreeFieldGroundMotionPoint class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -151,6 +153,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -161,6 +164,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[0].set_value("xp", value)
 
     @property
@@ -171,6 +175,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[0].set_value("yp", value)
 
     @property
@@ -181,6 +186,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[0].set_value("zp", value)
 
     @property
@@ -191,6 +197,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @gmx.setter
     def gmx(self, value: int) -> None:
+        """Set the gmx property."""
         self._cards[0].set_value("gmx", value)
 
     @property
@@ -201,6 +208,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @gmy.setter
     def gmy(self, value: int) -> None:
+        """Set the gmy property."""
         self._cards[0].set_value("gmy", value)
 
     @property
@@ -211,6 +219,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @gmz.setter
     def gmz(self, value: int) -> None:
+        """Set the gmz property."""
         self._cards[0].set_value("gmz", value)
 
     @property
@@ -221,6 +230,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[1].set_value("sf", value)
 
     @property
@@ -231,6 +241,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[1].set_value("cid", value)
 
     @property
@@ -241,6 +252,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -251,6 +263,7 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -264,8 +277,9 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @isg.setter
     def isg(self, value: int) -> None:
+        """Set the isg property."""
         if value not in [0, 1, None]:
-            raise Exception("""isg must be `None` or one of {0,1}""")
+            raise Exception("""isg must be `None` or one of {0,1}.""")
         self._cards[1].set_value("isg", value)
 
     @property
@@ -279,7 +293,8 @@ class BoundaryFreeFieldGroundMotionPoint(KeywordBase):
 
     @igm.setter
     def igm(self, value: int) -> None:
+        """Set the igm property."""
         if value not in [0, 1, None]:
-            raise Exception("""igm must be `None` or one of {0,1}""")
+            raise Exception("""igm must be `None` or one of {0,1}.""")
         self._cards[1].set_value("igm", value)
 

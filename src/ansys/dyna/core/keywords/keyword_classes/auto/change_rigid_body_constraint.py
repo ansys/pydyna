@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ChangeRigidBodyConstraint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ChangeRigidBodyConstraint(KeywordBase):
     subkeyword = "RIGID_BODY_CONSTRAINT"
 
     def __init__(self, **kwargs):
+        """Initialize the ChangeRigidBodyConstraint class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -70,6 +72,7 @@ class ChangeRigidBodyConstraint(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -88,8 +91,9 @@ class ChangeRigidBodyConstraint(KeywordBase):
 
     @tc.setter
     def tc(self, value: int) -> None:
+        """Set the tc property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""tc must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""tc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("tc", value)
 
     @property
@@ -108,7 +112,8 @@ class ChangeRigidBodyConstraint(KeywordBase):
 
     @rc.setter
     def rc(self, value: int) -> None:
+        """Set the rc property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rc must be `None` or one of {0,1,2,3,4,5,6,7}""")
+            raise Exception("""rc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rc", value)
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -99,9 +99,9 @@ class Deck:
         check : bool, optional
             The default is ``False``.
         """
-        assert (
-            isinstance(keyword, KeywordBase) or isinstance(keyword, str) or isinstance(keyword, EncryptedKeyword)
-        ), "Only keywords, encrypted keywords, or strings can be included in a deck."
+        if not (isinstance(keyword, KeywordBase) or isinstance(keyword, str) or isinstance(keyword, EncryptedKeyword)):
+            raise TypeError("Only keywords, encrypted keywords, or strings can be included in a deck.")
+
         if isinstance(keyword, str):
             self._keywords.append(self._formatstring(keyword, check))
         elif isinstance(keyword, KeywordBase):
@@ -138,13 +138,16 @@ class Deck:
         """Format a string to be appended to the deck."""
         linelist = string.split("\n")
         if check:
-            assert linelist[0][0] == "*", "Appended string must begin with a keyword."
+            if linelist[0][0] != "*":
+                raise ValueError("Appended string must begin with a keyword.")
             kwcount = 0
             for idx, line in enumerate(linelist):
                 if len(line) > 0:
                     if line[0] == "*":
                         kwcount += 1
-                assert kwcount == 1, "Appended string must contain only one keyword."
+
+                if kwcount != 1:
+                    raise ValueError("Appended string must contain only one keyword.")
                 width = 80
                 if self.format == format_type.long:
                     width = 200
@@ -252,10 +255,10 @@ class Deck:
     def expand(self, cwd=None, recurse=True):
         """Get a new deck that is flattened copy of `self`.
 
-        A flattened deck is one where the *INCLUDE keywords are replaced
+        A flattened deck is one where the ``*INCLUDE`` keywords are replaced
         by the contents of the file that is included.
         `cwd` is a working directory used to resolve the filename
-        If `recurse` is true, *INCLUDE keywords within included decks
+        If `recurse` is true, ``*INCLUDE`` keywords within included decks
         are expanded, recursively.
         """
         cwd = cwd or os.getcwd()
@@ -424,7 +427,7 @@ class Deck:
 
         Examples
         --------
-        Get all *SECTION_* keywords in the deck.
+        Get all ``*SECTION_*`` keywords in the deck.
 
         >>>deck.get_kwds_by_type("SECTION")
         """
@@ -446,7 +449,7 @@ class Deck:
 
         Examples
         --------
-        Get all *SECTION_SHELL keyword instances in the deck.
+        Get all ``*SECTION_SHELL`` keyword instances in the deck.
 
         >>>deck.get_kwds_by_full_type("SECTION", "SHELL")
         """
@@ -475,9 +478,11 @@ class Deck:
         sections = self.get(type="SECTION", filter=lambda kwd: kwd.secid == id)
         if len(sections) == 0:
             return None
-        assert (
-            len(sections) == 1
-        ), f"Failure in `deck.get_section_by_id() method`. Multiple SECTION keywords use matid {id}."  # noqa: E501
+
+        if len(sections) != 1:
+            raise Exception(
+                f"Failure in `deck.get_section_by_id() method`. Multiple SECTION keywords use secid {id}."  # noqa: E501
+            )
         return sections[0]
 
     def get(self, **kwargs) -> typing.List[KeywordBase]:
@@ -485,10 +490,11 @@ class Deck:
 
         Parameters
         ----------
-        :Keyword Arguments:
-        * *type* (``str``) --
+        - *kwargs* (``dict``) --
+            Keyword arguments.
+            * *type* (``str``) --
             The type of keyword to get. For example, "SECTION" returns all section keywords.
-        * *filter* (``callable``) --
+            * *filter* (``callable``) --
             The filter to apply to the result. Only keywords which pass the filter will be returned.
 
         """

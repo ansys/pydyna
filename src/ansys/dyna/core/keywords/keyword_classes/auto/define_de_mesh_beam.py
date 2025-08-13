@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeMeshBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeMeshBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeMeshBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -158,6 +160,7 @@ class DefineDeMeshBeam(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -169,8 +172,9 @@ class DefineDeMeshBeam(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, None]:
-            raise Exception("""type must be `None` or one of {0,1}""")
+            raise Exception("""type must be `None` or one of {0,1}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -181,6 +185,7 @@ class DefineDeMeshBeam(KeywordBase):
 
     @nquad.setter
     def nquad(self, value: int) -> None:
+        """Set the nquad property."""
         self._cards[0].set_value("nquad", value)
 
     @property
@@ -191,6 +196,7 @@ class DefineDeMeshBeam(KeywordBase):
 
     @despid.setter
     def despid(self, value: int) -> None:
+        """Set the despid property."""
         self._cards[0].set_value("despid", value)
 
     @property
@@ -201,6 +207,7 @@ class DefineDeMeshBeam(KeywordBase):
 
     @desxid.setter
     def desxid(self, value: int) -> None:
+        """Set the desxid property."""
         self._cards[0].set_value("desxid", value)
 
     @property
@@ -211,6 +218,7 @@ class DefineDeMeshBeam(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -221,6 +229,7 @@ class DefineDeMeshBeam(KeywordBase):
 
     @rsf.setter
     def rsf(self, value: float) -> None:
+        """Set the rsf property."""
         self._cards[0].set_value("rsf", value)
 
     @property
@@ -233,8 +242,9 @@ class DefineDeMeshBeam(KeywordBase):
 
     @iactive.setter
     def iactive(self, value: int) -> None:
+        """Set the iactive property."""
         if value not in [0, 1, None]:
-            raise Exception("""iactive must be `None` or one of {0,1}""")
+            raise Exception("""iactive must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iactive", value)
 
     @property
@@ -247,6 +257,7 @@ class DefineDeMeshBeam(KeywordBase):
 
     @mass.setter
     def mass(self, value: float) -> None:
+        """Set the mass property."""
         self._cards[1].set_value("mass", value)
 
     @property
@@ -257,6 +268,7 @@ class DefineDeMeshBeam(KeywordBase):
 
     @inertia.setter
     def inertia(self, value: float) -> None:
+        """Set the inertia property."""
         self._cards[1].set_value("inertia", value)
 
     @property
@@ -267,6 +279,7 @@ class DefineDeMeshBeam(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[1].set_value("radius", value)
 
     @property
@@ -277,5 +290,9 @@ class DefineDeMeshBeam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

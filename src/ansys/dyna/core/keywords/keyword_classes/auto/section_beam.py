@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -403,6 +405,7 @@ class SectionBeam(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -427,8 +430,9 @@ class SectionBeam(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, None]:
-            raise Exception("""elform must be `None` or one of {1,2,3,4,5,6,7,8,9,11,12,13,14}""")
+            raise Exception("""elform must be `None` or one of {1,2,3,4,5,6,7,8,9,11,12,13,14}.""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -439,6 +443,7 @@ class SectionBeam(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[0].set_value("shrf", value)
 
     @property
@@ -455,6 +460,7 @@ class SectionBeam(KeywordBase):
 
     @qr_irid.setter
     def qr_irid(self, value: int) -> None:
+        """Set the qr_irid property."""
         self._cards[0].set_value("qr/irid", value)
 
     @property
@@ -468,8 +474,9 @@ class SectionBeam(KeywordBase):
 
     @cst.setter
     def cst(self, value: int) -> None:
+        """Set the cst property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""cst must be `None` or one of {0,1,2}""")
+            raise Exception("""cst must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("cst", value)
 
     @property
@@ -483,8 +490,9 @@ class SectionBeam(KeywordBase):
 
     @scoor.setter
     def scoor(self, value: float) -> None:
+        """Set the scoor property."""
         if value not in [0.0, 1.0, 2.0, 3.0, 12.0, 13.0, -13.0, -12.0, -3.0, -2.0, -1.0, None]:
-            raise Exception("""scoor must be `None` or one of {0.0,1.0,2.0,3.0,12.0,13.0,-13.0,-12.0,-3.0,-2.0,-1.0}""")
+            raise Exception("""scoor must be `None` or one of {0.0,1.0,2.0,3.0,12.0,13.0,-13.0,-12.0,-3.0,-2.0,-1.0}.""")
         self._cards[0].set_value("scoor", value)
 
     @property
@@ -495,6 +503,7 @@ class SectionBeam(KeywordBase):
 
     @nsm.setter
     def nsm(self, value: float) -> None:
+        """Set the nsm property."""
         self._cards[0].set_value("nsm", value)
 
     @property
@@ -507,8 +516,9 @@ class SectionBeam(KeywordBase):
 
     @naupd.setter
     def naupd(self, value: int) -> None:
+        """Set the naupd property."""
         if value not in [0, 1, None]:
-            raise Exception("""naupd must be `None` or one of {0,1}""")
+            raise Exception("""naupd must be `None` or one of {0,1}.""")
         self._cards[0].set_value("naupd", value)
 
     @property
@@ -519,6 +529,7 @@ class SectionBeam(KeywordBase):
 
     @ts1.setter
     def ts1(self, value: float) -> None:
+        """Set the ts1 property."""
         self._cards[1].set_value("ts1", value)
 
     @property
@@ -529,6 +540,7 @@ class SectionBeam(KeywordBase):
 
     @ts2.setter
     def ts2(self, value: float) -> None:
+        """Set the ts2 property."""
         self._cards[1].set_value("ts2", value)
 
     @property
@@ -539,6 +551,7 @@ class SectionBeam(KeywordBase):
 
     @tt1.setter
     def tt1(self, value: float) -> None:
+        """Set the tt1 property."""
         self._cards[1].set_value("tt1", value)
 
     @property
@@ -549,6 +562,7 @@ class SectionBeam(KeywordBase):
 
     @tt2.setter
     def tt2(self, value: float) -> None:
+        """Set the tt2 property."""
         self._cards[1].set_value("tt2", value)
 
     @property
@@ -562,6 +576,7 @@ class SectionBeam(KeywordBase):
 
     @nsloc.setter
     def nsloc(self, value: float) -> None:
+        """Set the nsloc property."""
         self._cards[1].set_value("nsloc", value)
 
     @property
@@ -575,6 +590,7 @@ class SectionBeam(KeywordBase):
 
     @ntloc.setter
     def ntloc(self, value: float) -> None:
+        """Set the ntloc property."""
         self._cards[1].set_value("ntloc", value)
 
     @property
@@ -585,6 +601,7 @@ class SectionBeam(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[2].set_value("a", value)
 
     @property
@@ -595,6 +612,7 @@ class SectionBeam(KeywordBase):
 
     @iss.setter
     def iss(self, value: float) -> None:
+        """Set the iss property."""
         self._cards[2].set_value("iss", value)
 
     @property
@@ -605,6 +623,7 @@ class SectionBeam(KeywordBase):
 
     @itt.setter
     def itt(self, value: float) -> None:
+        """Set the itt property."""
         self._cards[2].set_value("itt", value)
 
     @property
@@ -615,6 +634,7 @@ class SectionBeam(KeywordBase):
 
     @j.setter
     def j(self, value: float) -> None:
+        """Set the j property."""
         self._cards[2].set_value("j", value)
 
     @property
@@ -625,6 +645,7 @@ class SectionBeam(KeywordBase):
 
     @sa.setter
     def sa(self, value: float) -> None:
+        """Set the sa property."""
         self._cards[2].set_value("sa", value)
 
     @property
@@ -635,6 +656,7 @@ class SectionBeam(KeywordBase):
 
     @ist.setter
     def ist(self, value: float) -> None:
+        """Set the ist property."""
         self._cards[2].set_value("ist", value)
 
     @property
@@ -645,6 +667,7 @@ class SectionBeam(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[3].set_value("a", value)
 
     @property
@@ -655,6 +678,7 @@ class SectionBeam(KeywordBase):
 
     @rampt.setter
     def rampt(self, value: float) -> None:
+        """Set the rampt property."""
         self._cards[3].set_value("rampt", value)
 
     @property
@@ -665,6 +689,7 @@ class SectionBeam(KeywordBase):
 
     @stress.setter
     def stress(self, value: float) -> None:
+        """Set the stress property."""
         self._cards[3].set_value("stress", value)
 
     @property
@@ -675,6 +700,7 @@ class SectionBeam(KeywordBase):
 
     @ts1.setter
     def ts1(self, value: float) -> None:
+        """Set the ts1 property."""
         self._cards[4].set_value("ts1", value)
 
     @property
@@ -685,6 +711,7 @@ class SectionBeam(KeywordBase):
 
     @ts2.setter
     def ts2(self, value: float) -> None:
+        """Set the ts2 property."""
         self._cards[4].set_value("ts2", value)
 
     @property
@@ -695,6 +722,7 @@ class SectionBeam(KeywordBase):
 
     @tt1.setter
     def tt1(self, value: float) -> None:
+        """Set the tt1 property."""
         self._cards[4].set_value("tt1", value)
 
     @property
@@ -705,6 +733,7 @@ class SectionBeam(KeywordBase):
 
     @tt2.setter
     def tt2(self, value: float) -> None:
+        """Set the tt2 property."""
         self._cards[4].set_value("tt2", value)
 
     @property
@@ -715,6 +744,7 @@ class SectionBeam(KeywordBase):
 
     @vol.setter
     def vol(self, value: float) -> None:
+        """Set the vol property."""
         self._cards[5].set_value("vol", value)
 
     @property
@@ -725,6 +755,7 @@ class SectionBeam(KeywordBase):
 
     @iner.setter
     def iner(self, value: float) -> None:
+        """Set the iner property."""
         self._cards[5].set_value("iner", value)
 
     @property
@@ -735,6 +766,7 @@ class SectionBeam(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[5].set_value("cid", value)
 
     @property
@@ -745,6 +777,7 @@ class SectionBeam(KeywordBase):
 
     @ca.setter
     def ca(self, value: float) -> None:
+        """Set the ca property."""
         self._cards[5].set_value("ca", value)
 
     @property
@@ -755,6 +788,7 @@ class SectionBeam(KeywordBase):
 
     @offset.setter
     def offset(self, value: float) -> None:
+        """Set the offset property."""
         self._cards[5].set_value("offset", value)
 
     @property
@@ -767,8 +801,9 @@ class SectionBeam(KeywordBase):
 
     @rrcon.setter
     def rrcon(self, value: float) -> None:
+        """Set the rrcon property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""rrcon must be `None` or one of {0.0,1.0}""")
+            raise Exception("""rrcon must be `None` or one of {0.0,1.0}.""")
         self._cards[5].set_value("rrcon", value)
 
     @property
@@ -781,8 +816,9 @@ class SectionBeam(KeywordBase):
 
     @srcon.setter
     def srcon(self, value: float) -> None:
+        """Set the srcon property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""srcon must be `None` or one of {0.0,1.0}""")
+            raise Exception("""srcon must be `None` or one of {0.0,1.0}.""")
         self._cards[5].set_value("srcon", value)
 
     @property
@@ -795,8 +831,9 @@ class SectionBeam(KeywordBase):
 
     @trcon.setter
     def trcon(self, value: float) -> None:
+        """Set the trcon property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""trcon must be `None` or one of {0.0,1.0}""")
+            raise Exception("""trcon must be `None` or one of {0.0,1.0}.""")
         self._cards[5].set_value("trcon", value)
 
     @property
@@ -807,6 +844,7 @@ class SectionBeam(KeywordBase):
 
     @ts1.setter
     def ts1(self, value: float) -> None:
+        """Set the ts1 property."""
         self._cards[6].set_value("ts1", value)
 
     @property
@@ -817,6 +855,7 @@ class SectionBeam(KeywordBase):
 
     @ts2.setter
     def ts2(self, value: float) -> None:
+        """Set the ts2 property."""
         self._cards[6].set_value("ts2", value)
 
     @property
@@ -827,6 +866,7 @@ class SectionBeam(KeywordBase):
 
     @tt1.setter
     def tt1(self, value: float) -> None:
+        """Set the tt1 property."""
         self._cards[6].set_value("tt1", value)
 
     @property
@@ -837,6 +877,7 @@ class SectionBeam(KeywordBase):
 
     @tt2.setter
     def tt2(self, value: float) -> None:
+        """Set the tt2 property."""
         self._cards[6].set_value("tt2", value)
 
     @property
@@ -849,6 +890,7 @@ class SectionBeam(KeywordBase):
 
     @print.setter
     def print(self, value: float) -> None:
+        """Set the print property."""
         self._cards[6].set_value("print", value)
 
     @property
@@ -861,6 +903,7 @@ class SectionBeam(KeywordBase):
 
     @itoff.setter
     def itoff(self, value: float) -> None:
+        """Set the itoff property."""
         self._cards[6].set_value("itoff", value)
 
     @property
@@ -871,5 +914,9 @@ class SectionBeam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

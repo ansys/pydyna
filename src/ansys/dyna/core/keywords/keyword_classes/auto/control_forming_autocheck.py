@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingAutocheck class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingAutocheck(KeywordBase):
     subkeyword = "FORMING_AUTOCHECK"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingAutocheck class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -79,8 +81,9 @@ class ControlFormingAutocheck(KeywordBase):
 
     @icheck.setter
     def icheck(self, value: int) -> None:
+        """Set the icheck property."""
         if value not in [0, 1, None]:
-            raise Exception("""icheck must be `None` or one of {0,1}""")
+            raise Exception("""icheck must be `None` or one of {0,1}.""")
         self._cards[0].set_value("icheck", value)
 
     @property
@@ -91,6 +94,7 @@ class ControlFormingAutocheck(KeywordBase):
 
     @igd.setter
     def igd(self, value: int) -> None:
+        """Set the igd property."""
         self._cards[0].set_value("igd", value)
 
     @property
@@ -103,8 +107,9 @@ class ControlFormingAutocheck(KeywordBase):
 
     @ioffset.setter
     def ioffset(self, value: int) -> None:
+        """Set the ioffset property."""
         if value not in [0, 1, None]:
-            raise Exception("""ioffset must be `None` or one of {0,1}""")
+            raise Exception("""ioffset must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ioffset", value)
 
     @property
@@ -119,5 +124,6 @@ class ControlFormingAutocheck(KeywordBase):
 
     @ioutputp.setter
     def ioutputp(self, value: int) -> None:
+        """Set the ioutputp property."""
         self._cards[0].set_value("ioutputp", value)
 

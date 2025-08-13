@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseFormat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseFormat(KeywordBase):
     subkeyword = "FORMAT"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseFormat class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -66,8 +68,9 @@ class DatabaseFormat(KeywordBase):
 
     @iform.setter
     def iform(self, value: int) -> None:
+        """Set the iform property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""iform must be `None` or one of {0,1,2}""")
+            raise Exception("""iform must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("iform", value)
 
     @property
@@ -80,7 +83,8 @@ class DatabaseFormat(KeywordBase):
 
     @ibinary.setter
     def ibinary(self, value: int) -> None:
+        """Set the ibinary property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibinary must be `None` or one of {0,1}""")
+            raise Exception("""ibinary must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ibinary", value)
 

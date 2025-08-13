@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineSphActiveRegion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSphActiveRegion(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineSphActiveRegion class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -363,6 +365,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -374,8 +377,9 @@ class DefineSphActiveRegion(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, None]:
-            raise Exception("""type must be `None` or one of {0,1}""")
+            raise Exception("""type must be `None` or one of {0,1}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -389,8 +393,9 @@ class DefineSphActiveRegion(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2}""")
+            raise Exception("""stype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("stype", value)
 
     @property
@@ -401,6 +406,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @cycle.setter
     def cycle(self, value: int) -> None:
+        """Set the cycle property."""
         self._cards[0].set_value("cycle", value)
 
     @property
@@ -411,6 +417,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -421,6 +428,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @icid.setter
     def icid(self, value: int) -> None:
+        """Set the icid property."""
         self._cards[0].set_value("icid", value)
 
     @property
@@ -434,8 +442,9 @@ class DefineSphActiveRegion(KeywordBase):
 
     @ibuff.setter
     def ibuff(self, value: int) -> None:
+        """Set the ibuff property."""
         if value not in [0, 1, None]:
-            raise Exception("""ibuff must be `None` or one of {0,1}""")
+            raise Exception("""ibuff must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ibuff", value)
 
     @property
@@ -446,6 +455,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @ximin.setter
     def ximin(self, value: float) -> None:
+        """Set the ximin property."""
         self._cards[1].set_value("ximin", value)
 
     @property
@@ -456,6 +466,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @yimin.setter
     def yimin(self, value: float) -> None:
+        """Set the yimin property."""
         self._cards[1].set_value("yimin", value)
 
     @property
@@ -466,6 +477,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @zimin.setter
     def zimin(self, value: float) -> None:
+        """Set the zimin property."""
         self._cards[1].set_value("zimin", value)
 
     @property
@@ -476,6 +488,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @ximax.setter
     def ximax(self, value: float) -> None:
+        """Set the ximax property."""
         self._cards[1].set_value("ximax", value)
 
     @property
@@ -486,6 +499,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @yimax.setter
     def yimax(self, value: float) -> None:
+        """Set the yimax property."""
         self._cards[1].set_value("yimax", value)
 
     @property
@@ -496,6 +510,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @zimax.setter
     def zimax(self, value: float) -> None:
+        """Set the zimax property."""
         self._cards[1].set_value("zimax", value)
 
     @property
@@ -506,6 +521,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @xomin.setter
     def xomin(self, value: float) -> None:
+        """Set the xomin property."""
         self._cards[2].set_value("xomin", value)
 
     @property
@@ -516,6 +532,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @yomin.setter
     def yomin(self, value: float) -> None:
+        """Set the yomin property."""
         self._cards[2].set_value("yomin", value)
 
     @property
@@ -526,6 +543,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @zomin.setter
     def zomin(self, value: float) -> None:
+        """Set the zomin property."""
         self._cards[2].set_value("zomin", value)
 
     @property
@@ -536,6 +554,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @xomax.setter
     def xomax(self, value: float) -> None:
+        """Set the xomax property."""
         self._cards[2].set_value("xomax", value)
 
     @property
@@ -546,6 +565,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @yomax.setter
     def yomax(self, value: float) -> None:
+        """Set the yomax property."""
         self._cards[2].set_value("yomax", value)
 
     @property
@@ -556,6 +576,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @zomax.setter
     def zomax(self, value: float) -> None:
+        """Set the zomax property."""
         self._cards[2].set_value("zomax", value)
 
     @property
@@ -566,6 +587,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[3].set_value("x0", value)
 
     @property
@@ -576,6 +598,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[3].set_value("y0", value)
 
     @property
@@ -586,6 +609,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[3].set_value("z0", value)
 
     @property
@@ -596,6 +620,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @xh.setter
     def xh(self, value: float) -> None:
+        """Set the xh property."""
         self._cards[3].set_value("xh", value)
 
     @property
@@ -606,6 +631,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @yh.setter
     def yh(self, value: float) -> None:
+        """Set the yh property."""
         self._cards[3].set_value("yh", value)
 
     @property
@@ -616,6 +642,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @zh.setter
     def zh(self, value: float) -> None:
+        """Set the zh property."""
         self._cards[3].set_value("zh", value)
 
     @property
@@ -626,6 +653,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @rmin.setter
     def rmin(self, value: float) -> None:
+        """Set the rmin property."""
         self._cards[4].set_value("rmin", value)
 
     @property
@@ -636,6 +664,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @zmin.setter
     def zmin(self, value: float) -> None:
+        """Set the zmin property."""
         self._cards[4].set_value("zmin", value)
 
     @property
@@ -646,6 +675,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @rmax.setter
     def rmax(self, value: float) -> None:
+        """Set the rmax property."""
         self._cards[4].set_value("rmax", value)
 
     @property
@@ -656,6 +686,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @zmax.setter
     def zmax(self, value: float) -> None:
+        """Set the zmax property."""
         self._cards[4].set_value("zmax", value)
 
     @property
@@ -666,6 +697,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[5].set_value("x0", value)
 
     @property
@@ -676,6 +708,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[5].set_value("y0", value)
 
     @property
@@ -686,6 +719,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[5].set_value("z0", value)
 
     @property
@@ -696,6 +730,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @rmin.setter
     def rmin(self, value: float) -> None:
+        """Set the rmin property."""
         self._cards[6].set_value("rmin", value)
 
     @property
@@ -706,6 +741,7 @@ class DefineSphActiveRegion(KeywordBase):
 
     @rmax.setter
     def rmax(self, value: float) -> None:
+        """Set the rmax property."""
         self._cards[6].set_value("rmax", value)
 
     @property
@@ -716,5 +752,9 @@ class DefineSphActiveRegion(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCoordinateSystem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCoordinateSystem(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCoordinateSystem class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -161,6 +163,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -171,6 +174,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @xo.setter
     def xo(self, value: float) -> None:
+        """Set the xo property."""
         self._cards[0].set_value("xo", value)
 
     @property
@@ -181,6 +185,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @yo.setter
     def yo(self, value: float) -> None:
+        """Set the yo property."""
         self._cards[0].set_value("yo", value)
 
     @property
@@ -191,6 +196,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @zo.setter
     def zo(self, value: float) -> None:
+        """Set the zo property."""
         self._cards[0].set_value("zo", value)
 
     @property
@@ -201,6 +207,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @xl.setter
     def xl(self, value: float) -> None:
+        """Set the xl property."""
         self._cards[0].set_value("xl", value)
 
     @property
@@ -211,6 +218,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @yl.setter
     def yl(self, value: float) -> None:
+        """Set the yl property."""
         self._cards[0].set_value("yl", value)
 
     @property
@@ -221,6 +229,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @zl.setter
     def zl(self, value: float) -> None:
+        """Set the zl property."""
         self._cards[0].set_value("zl", value)
 
     @property
@@ -233,6 +242,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @cidl.setter
     def cidl(self, value: int) -> None:
+        """Set the cidl property."""
         self._cards[0].set_value("cidl", value)
 
     @property
@@ -243,6 +253,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[1].set_value("xp", value)
 
     @property
@@ -253,6 +264,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[1].set_value("yp", value)
 
     @property
@@ -263,6 +275,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[1].set_value("zp", value)
 
     @property
@@ -273,5 +286,9 @@ class DefineCoordinateSystem(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

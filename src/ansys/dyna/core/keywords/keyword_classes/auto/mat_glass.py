@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatGlass class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatGlass(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatGlass class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -275,6 +277,7 @@ class MatGlass(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -285,6 +288,7 @@ class MatGlass(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -295,6 +299,7 @@ class MatGlass(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -305,6 +310,7 @@ class MatGlass(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -321,8 +327,9 @@ class MatGlass(KeywordBase):
 
     @imod.setter
     def imod(self, value: float) -> None:
+        """Set the imod property."""
         if value not in [0.0, 1.0, 2.0, 10.0, 11.0, 12.0, None]:
-            raise Exception("""imod must be `None` or one of {0.0,1.0,2.0,10.0,11.0,12.0}""")
+            raise Exception("""imod must be `None` or one of {0.0,1.0,2.0,10.0,11.0,12.0}.""")
         self._cards[0].set_value("imod", value)
 
     @property
@@ -335,8 +342,9 @@ class MatGlass(KeywordBase):
 
     @ilaw.setter
     def ilaw(self, value: float) -> None:
+        """Set the ilaw property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ilaw must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ilaw must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("ilaw", value)
 
     @property
@@ -350,8 +358,9 @@ class MatGlass(KeywordBase):
 
     @fmod.setter
     def fmod(self, value: float) -> None:
+        """Set the fmod property."""
         if value not in [0.0, 1.0, 2.0, None]:
-            raise Exception("""fmod must be `None` or one of {0.0,1.0,2.0}""")
+            raise Exception("""fmod must be `None` or one of {0.0,1.0,2.0}.""")
         self._cards[1].set_value("fmod", value)
 
     @property
@@ -363,6 +372,7 @@ class MatGlass(KeywordBase):
 
     @ft.setter
     def ft(self, value: float) -> None:
+        """Set the ft property."""
         self._cards[1].set_value("ft", value)
 
     @property
@@ -373,6 +383,7 @@ class MatGlass(KeywordBase):
 
     @fc.setter
     def fc(self, value: float) -> None:
+        """Set the fc property."""
         self._cards[1].set_value("fc", value)
 
     @property
@@ -383,6 +394,7 @@ class MatGlass(KeywordBase):
 
     @at.setter
     def at(self, value: float) -> None:
+        """Set the at property."""
         self._cards[1].set_value("at", value)
 
     @property
@@ -393,6 +405,7 @@ class MatGlass(KeywordBase):
 
     @bt.setter
     def bt(self, value: int) -> None:
+        """Set the bt property."""
         self._cards[1].set_value("bt", value)
 
     @property
@@ -403,6 +416,7 @@ class MatGlass(KeywordBase):
 
     @ac.setter
     def ac(self, value: int) -> None:
+        """Set the ac property."""
         self._cards[1].set_value("ac", value)
 
     @property
@@ -413,6 +427,7 @@ class MatGlass(KeywordBase):
 
     @bc.setter
     def bc(self, value: float) -> None:
+        """Set the bc property."""
         self._cards[1].set_value("bc", value)
 
     @property
@@ -425,6 +440,7 @@ class MatGlass(KeywordBase):
 
     @ftscl.setter
     def ftscl(self, value: float) -> None:
+        """Set the ftscl property."""
         self._cards[1].set_value("ftscl", value)
 
     @property
@@ -436,6 +452,7 @@ class MatGlass(KeywordBase):
 
     @sfsti.setter
     def sfsti(self, value: float) -> None:
+        """Set the sfsti property."""
         self._cards[2].set_value("sfsti", value)
 
     @property
@@ -447,6 +464,7 @@ class MatGlass(KeywordBase):
 
     @sfstr.setter
     def sfstr(self, value: float) -> None:
+        """Set the sfstr property."""
         self._cards[2].set_value("sfstr", value)
 
     @property
@@ -459,8 +477,9 @@ class MatGlass(KeywordBase):
 
     @crin.setter
     def crin(self, value: float) -> None:
+        """Set the crin property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""crin must be `None` or one of {0.0,1.0}""")
+            raise Exception("""crin must be `None` or one of {0.0,1.0}.""")
         self._cards[2].set_value("crin", value)
 
     @property
@@ -471,6 +490,7 @@ class MatGlass(KeywordBase):
 
     @ecrcl.setter
     def ecrcl(self, value: float) -> None:
+        """Set the ecrcl property."""
         self._cards[2].set_value("ecrcl", value)
 
     @property
@@ -481,6 +501,7 @@ class MatGlass(KeywordBase):
 
     @ncycr.setter
     def ncycr(self, value: float) -> None:
+        """Set the ncycr property."""
         self._cards[2].set_value("ncycr", value)
 
     @property
@@ -491,6 +512,7 @@ class MatGlass(KeywordBase):
 
     @nipf.setter
     def nipf(self, value: float) -> None:
+        """Set the nipf property."""
         self._cards[2].set_value("nipf", value)
 
     @property
@@ -501,6 +523,7 @@ class MatGlass(KeywordBase):
 
     @epscr.setter
     def epscr(self, value: float) -> None:
+        """Set the epscr property."""
         self._cards[3].set_value("epscr", value)
 
     @property
@@ -511,6 +534,7 @@ class MatGlass(KeywordBase):
 
     @engcrt.setter
     def engcrt(self, value: float) -> None:
+        """Set the engcrt property."""
         self._cards[3].set_value("engcrt", value)
 
     @property
@@ -521,6 +545,7 @@ class MatGlass(KeywordBase):
 
     @radcrt.setter
     def radcrt(self, value: float) -> None:
+        """Set the radcrt property."""
         self._cards[3].set_value("radcrt", value)
 
     @property
@@ -531,6 +556,7 @@ class MatGlass(KeywordBase):
 
     @ratenl.setter
     def ratenl(self, value: float) -> None:
+        """Set the ratenl property."""
         self._cards[3].set_value("ratenl", value)
 
     @property
@@ -541,6 +567,7 @@ class MatGlass(KeywordBase):
 
     @rfiltf.setter
     def rfiltf(self, value: float) -> None:
+        """Set the rfiltf property."""
         self._cards[3].set_value("rfiltf", value)
 
     @property
@@ -551,5 +578,9 @@ class MatGlass(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryRadiationSetEfRead class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryRadiationSetEfRead(KeywordBase):
     subkeyword = "RADIATION_SET_EF_READ"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryRadiationSetEfRead class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -77,6 +79,7 @@ class BoundaryRadiationSetEfRead(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -87,6 +90,7 @@ class BoundaryRadiationSetEfRead(KeywordBase):
 
     @nmat.setter
     def nmat(self, value: int) -> None:
+        """Set the nmat property."""
         self._cards[0].set_value("nmat", value)
 
     @property
@@ -97,6 +101,7 @@ class BoundaryRadiationSetEfRead(KeywordBase):
 
     @npht.setter
     def npht(self, value: int) -> None:
+        """Set the npht property."""
         self._cards[0].set_value("npht", value)
 
     @property
@@ -107,5 +112,6 @@ class BoundaryRadiationSetEfRead(KeywordBase):
 
     @errmax.setter
     def errmax(self, value: int) -> None:
+        """Set the errmax property."""
         self._cards[0].set_value("errmax", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the CeseBoundaryReflectivePartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class CeseBoundaryReflectivePartSet(KeywordBase):
     subkeyword = "BOUNDARY_REFLECTIVE_PART_SET"
 
     def __init__(self, **kwargs):
+        """Initialize the CeseBoundaryReflectivePartSet class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class CeseBoundaryReflectivePartSet(KeywordBase):
 
     @surfsid.setter
     def surfsid(self, value: int) -> None:
+        """Set the surfsid property."""
         self._cards[0].set_value("surfsid", value)
 

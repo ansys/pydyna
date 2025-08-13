@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitOrdering class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitOrdering(KeywordBase):
     subkeyword = "IMPLICIT_ORDERING"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitOrdering class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -67,8 +69,9 @@ class ControlImplicitOrdering(KeywordBase):
 
     @order.setter
     def order(self, value: int) -> None:
+        """Set the order property."""
         if value not in [0, 1, 2, 4, None]:
-            raise Exception("""order must be `None` or one of {0,1,2,4}""")
+            raise Exception("""order must be `None` or one of {0,1,2,4}.""")
         self._cards[0].set_value("order", value)
 
     @property
@@ -79,5 +82,6 @@ class ControlImplicitOrdering(KeywordBase):
 
     @nmetis.setter
     def nmetis(self, value: int) -> None:
+        """Set the nmetis property."""
         self._cards[0].set_value("nmetis", value)
 

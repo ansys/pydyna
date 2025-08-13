@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatTemperatureDependentOrthotropic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatTemperatureDependentOrthotropic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -304,6 +306,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -314,6 +317,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -330,6 +334,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[0].set_value("aopt", value)
 
     @property
@@ -342,8 +347,9 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
+        """Set the ref property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ref must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("ref", value)
 
     @property
@@ -362,8 +368,9 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -4, -3, -2, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}.""")
         self._cards[0].set_value("macf", value)
 
     @property
@@ -374,6 +381,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[1].set_value("xp", value)
 
     @property
@@ -384,6 +392,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[1].set_value("yp", value)
 
     @property
@@ -394,6 +403,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[1].set_value("zp", value)
 
     @property
@@ -404,6 +414,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -414,6 +425,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -424,6 +436,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[1].set_value("a3", value)
 
     @property
@@ -434,6 +447,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[2].set_value("v1", value)
 
     @property
@@ -444,6 +458,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[2].set_value("v2", value)
 
     @property
@@ -454,6 +469,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[2].set_value("v3", value)
 
     @property
@@ -464,6 +480,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[2].set_value("d1", value)
 
     @property
@@ -474,6 +491,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[2].set_value("d2", value)
 
     @property
@@ -484,6 +502,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[2].set_value("d3", value)
 
     @property
@@ -494,6 +513,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[2].set_value("beta", value)
 
     @property
@@ -504,6 +524,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @eai.setter
     def eai(self, value: float) -> None:
+        """Set the eai property."""
         self._cards[3].set_value("eai", value)
 
     @property
@@ -514,6 +535,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @ebi.setter
     def ebi(self, value: float) -> None:
+        """Set the ebi property."""
         self._cards[3].set_value("ebi", value)
 
     @property
@@ -524,6 +546,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @eci.setter
     def eci(self, value: float) -> None:
+        """Set the eci property."""
         self._cards[3].set_value("eci", value)
 
     @property
@@ -534,6 +557,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @prabi.setter
     def prabi(self, value: float) -> None:
+        """Set the prabi property."""
         self._cards[3].set_value("prabi", value)
 
     @property
@@ -544,6 +568,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @prcai.setter
     def prcai(self, value: float) -> None:
+        """Set the prcai property."""
         self._cards[3].set_value("prcai", value)
 
     @property
@@ -554,6 +579,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @prcbi.setter
     def prcbi(self, value: float) -> None:
+        """Set the prcbi property."""
         self._cards[3].set_value("prcbi", value)
 
     @property
@@ -564,6 +590,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @aai.setter
     def aai(self, value: float) -> None:
+        """Set the aai property."""
         self._cards[4].set_value("aai", value)
 
     @property
@@ -574,6 +601,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @abi.setter
     def abi(self, value: float) -> None:
+        """Set the abi property."""
         self._cards[4].set_value("abi", value)
 
     @property
@@ -584,6 +612,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @aci.setter
     def aci(self, value: float) -> None:
+        """Set the aci property."""
         self._cards[4].set_value("aci", value)
 
     @property
@@ -594,6 +623,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @gabi.setter
     def gabi(self, value: float) -> None:
+        """Set the gabi property."""
         self._cards[4].set_value("gabi", value)
 
     @property
@@ -604,6 +634,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @gbci.setter
     def gbci(self, value: float) -> None:
+        """Set the gbci property."""
         self._cards[4].set_value("gbci", value)
 
     @property
@@ -614,6 +645,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @gcai.setter
     def gcai(self, value: float) -> None:
+        """Set the gcai property."""
         self._cards[4].set_value("gcai", value)
 
     @property
@@ -624,6 +656,7 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @ti.setter
     def ti(self, value: float) -> None:
+        """Set the ti property."""
         self._cards[4].set_value("ti", value)
 
     @property
@@ -634,5 +667,9 @@ class MatTemperatureDependentOrthotropic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

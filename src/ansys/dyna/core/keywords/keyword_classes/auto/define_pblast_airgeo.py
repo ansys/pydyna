@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefinePblastAirgeo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefinePblastAirgeo(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefinePblastAirgeo class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -249,6 +251,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @gid.setter
     def gid(self, value: int) -> None:
+        """Set the gid property."""
         self._cards[0].set_value("gid", value)
 
     @property
@@ -264,8 +267,9 @@ class DefinePblastAirgeo(KeywordBase):
 
     @gtype1.setter
     def gtype1(self, value: int) -> None:
+        """Set the gtype1 property."""
         if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""gtype1 must be `None` or one of {1,2,3,4,5}""")
+            raise Exception("""gtype1 must be `None` or one of {1,2,3,4,5}.""")
         self._cards[0].set_value("gtype1", value)
 
     @property
@@ -281,8 +285,9 @@ class DefinePblastAirgeo(KeywordBase):
 
     @gtype2.setter
     def gtype2(self, value: int) -> None:
+        """Set the gtype2 property."""
         if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""gtype2 must be `None` or one of {1,2,3,4,5}""")
+            raise Exception("""gtype2 must be `None` or one of {1,2,3,4,5}.""")
         self._cards[0].set_value("gtype2", value)
 
     @property
@@ -293,6 +298,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @xa.setter
     def xa(self, value: float) -> None:
+        """Set the xa property."""
         self._cards[1].set_value("xa", value)
 
     @property
@@ -303,6 +309,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @ya.setter
     def ya(self, value: float) -> None:
+        """Set the ya property."""
         self._cards[1].set_value("ya", value)
 
     @property
@@ -313,6 +320,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @za.setter
     def za(self, value: float) -> None:
+        """Set the za property."""
         self._cards[1].set_value("za", value)
 
     @property
@@ -323,6 +331,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @xb.setter
     def xb(self, value: float) -> None:
+        """Set the xb property."""
         self._cards[1].set_value("xb", value)
 
     @property
@@ -333,6 +342,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @yb.setter
     def yb(self, value: float) -> None:
+        """Set the yb property."""
         self._cards[1].set_value("yb", value)
 
     @property
@@ -343,6 +353,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @zb.setter
     def zb(self, value: float) -> None:
+        """Set the zb property."""
         self._cards[1].set_value("zb", value)
 
     @property
@@ -353,6 +364,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[2].set_value("x0", value)
 
     @property
@@ -363,6 +375,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[2].set_value("y0", value)
 
     @property
@@ -373,6 +386,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[2].set_value("z0", value)
 
     @property
@@ -388,6 +402,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @g1.setter
     def g1(self, value: float) -> None:
+        """Set the g1 property."""
         self._cards[2].set_value("g1", value)
 
     @property
@@ -401,6 +416,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @g2.setter
     def g2(self, value: float) -> None:
+        """Set the g2 property."""
         self._cards[2].set_value("g2", value)
 
     @property
@@ -413,6 +429,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @g3.setter
     def g3(self, value: float) -> None:
+        """Set the g3 property."""
         self._cards[2].set_value("g3", value)
 
     @property
@@ -423,6 +440,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[3].set_value("xc", value)
 
     @property
@@ -433,6 +451,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[3].set_value("yc", value)
 
     @property
@@ -443,6 +462,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[3].set_value("zc", value)
 
     @property
@@ -453,6 +473,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @g4.setter
     def g4(self, value: float) -> None:
+        """Set the g4 property."""
         self._cards[3].set_value("g4", value)
 
     @property
@@ -463,6 +484,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @g5.setter
     def g5(self, value: float) -> None:
+        """Set the g5 property."""
         self._cards[3].set_value("g5", value)
 
     @property
@@ -473,6 +495,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     @g6.setter
     def g6(self, value: float) -> None:
+        """Set the g6 property."""
         self._cards[3].set_value("g6", value)
 
     @property
@@ -483,5 +506,9 @@ class DefinePblastAirgeo(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

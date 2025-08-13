@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatThermalChemicalReactionOrthotropic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatThermalChemicalReactionOrthotropic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -604,6 +606,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @tmid.setter
     def tmid(self, value: int) -> None:
+        """Set the tmid property."""
         self._cards[0].set_value("tmid", value)
 
     @property
@@ -614,6 +617,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @nchsp.setter
     def nchsp(self, value: int) -> None:
+        """Set the nchsp property."""
         self._cards[0].set_value("nchsp", value)
 
     @property
@@ -624,6 +628,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @nchrx.setter
     def nchrx(self, value: int) -> None:
+        """Set the nchrx property."""
         self._cards[0].set_value("nchrx", value)
 
     @property
@@ -634,6 +639,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @icend.setter
     def icend(self, value: int) -> None:
+        """Set the icend property."""
         self._cards[0].set_value("icend", value)
 
     @property
@@ -644,6 +650,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @cend.setter
     def cend(self, value: float) -> None:
+        """Set the cend property."""
         self._cards[0].set_value("cend", value)
 
     @property
@@ -654,6 +661,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @gasc.setter
     def gasc(self, value: float) -> None:
+        """Set the gasc property."""
         self._cards[0].set_value("gasc", value)
 
     @property
@@ -664,6 +672,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @fid.setter
     def fid(self, value: int) -> None:
+        """Set the fid property."""
         self._cards[0].set_value("fid", value)
 
     @property
@@ -676,8 +685,9 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @mf.setter
     def mf(self, value: int) -> None:
+        """Set the mf property."""
         if value not in [0, 1, None]:
-            raise Exception("""mf must be `None` or one of {0,1}""")
+            raise Exception("""mf must be `None` or one of {0,1}.""")
         self._cards[0].set_value("mf", value)
 
     @property
@@ -692,8 +702,9 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: int) -> None:
+        """Set the aopt property."""
         if value not in [0.0, 1.0, 2.0, 3.0, 4.0, None]:
-            raise Exception("""aopt must be `None` or one of {0.0,1.0,2.0,3.0,4.0}""")
+            raise Exception("""aopt must be `None` or one of {0.0,1.0,2.0,3.0,4.0}.""")
         self._cards[1].set_value("aopt", value)
 
     @property
@@ -704,6 +715,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[1].set_value("xp", value)
 
     @property
@@ -714,6 +726,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[1].set_value("yp", value)
 
     @property
@@ -724,6 +737,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[1].set_value("zp", value)
 
     @property
@@ -734,6 +748,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -744,6 +759,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -754,6 +770,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[1].set_value("a3", value)
 
     @property
@@ -764,6 +781,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[2].set_value("d1", value)
 
     @property
@@ -774,6 +792,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[2].set_value("d2", value)
 
     @property
@@ -784,6 +803,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[2].set_value("d3", value)
 
     @property
@@ -794,6 +814,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rhof.setter
     def rhof(self, value: float) -> None:
+        """Set the rhof property."""
         self._cards[3].set_value("rhof", value)
 
     @property
@@ -804,6 +825,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lccf.setter
     def lccf(self, value: int) -> None:
+        """Set the lccf property."""
         self._cards[3].set_value("lccf", value)
 
     @property
@@ -814,6 +836,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lck1f.setter
     def lck1f(self, value: int) -> None:
+        """Set the lck1f property."""
         self._cards[3].set_value("lck1f", value)
 
     @property
@@ -824,6 +847,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lck2f.setter
     def lck2f(self, value: float) -> None:
+        """Set the lck2f property."""
         self._cards[3].set_value("lck2f", value)
 
     @property
@@ -834,6 +858,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lck3f.setter
     def lck3f(self, value: float) -> None:
+        """Set the lck3f property."""
         self._cards[3].set_value("lck3f", value)
 
     @property
@@ -844,6 +869,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @vff.setter
     def vff(self, value: float) -> None:
+        """Set the vff property."""
         self._cards[3].set_value("vff", value)
 
     @property
@@ -854,6 +880,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rhoi.setter
     def rhoi(self, value: float) -> None:
+        """Set the rhoi property."""
         self._cards[4].set_value("rhoi", value)
 
     @property
@@ -864,6 +891,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lcci.setter
     def lcci(self, value: int) -> None:
+        """Set the lcci property."""
         self._cards[4].set_value("lcci", value)
 
     @property
@@ -874,6 +902,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lck1i.setter
     def lck1i(self, value: int) -> None:
+        """Set the lck1i property."""
         self._cards[4].set_value("lck1i", value)
 
     @property
@@ -884,6 +913,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lck2i.setter
     def lck2i(self, value: int) -> None:
+        """Set the lck2i property."""
         self._cards[4].set_value("lck2i", value)
 
     @property
@@ -894,6 +924,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lck3i.setter
     def lck3i(self, value: int) -> None:
+        """Set the lck3i property."""
         self._cards[4].set_value("lck3i", value)
 
     @property
@@ -904,6 +935,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @vfi.setter
     def vfi(self, value: float) -> None:
+        """Set the vfi property."""
         self._cards[4].set_value("vfi", value)
 
     @property
@@ -914,6 +946,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @mwi.setter
     def mwi(self, value: float) -> None:
+        """Set the mwi property."""
         self._cards[4].set_value("mwi", value)
 
     @property
@@ -924,6 +957,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rci1.setter
     def rci1(self, value: float) -> None:
+        """Set the rci1 property."""
         self._cards[5].set_value("rci1", value)
 
     @property
@@ -934,6 +968,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rci2.setter
     def rci2(self, value: float) -> None:
+        """Set the rci2 property."""
         self._cards[5].set_value("rci2", value)
 
     @property
@@ -944,6 +979,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rci3.setter
     def rci3(self, value: float) -> None:
+        """Set the rci3 property."""
         self._cards[5].set_value("rci3", value)
 
     @property
@@ -954,6 +990,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rci4.setter
     def rci4(self, value: float) -> None:
+        """Set the rci4 property."""
         self._cards[5].set_value("rci4", value)
 
     @property
@@ -964,6 +1001,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rci5.setter
     def rci5(self, value: float) -> None:
+        """Set the rci5 property."""
         self._cards[5].set_value("rci5", value)
 
     @property
@@ -974,6 +1012,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rci6.setter
     def rci6(self, value: float) -> None:
+        """Set the rci6 property."""
         self._cards[5].set_value("rci6", value)
 
     @property
@@ -984,6 +1023,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rci7.setter
     def rci7(self, value: float) -> None:
+        """Set the rci7 property."""
         self._cards[5].set_value("rci7", value)
 
     @property
@@ -994,6 +1034,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rci8.setter
     def rci8(self, value: float) -> None:
+        """Set the rci8 property."""
         self._cards[5].set_value("rci8", value)
 
     @property
@@ -1004,6 +1045,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rxi1.setter
     def rxi1(self, value: float) -> None:
+        """Set the rxi1 property."""
         self._cards[6].set_value("rxi1", value)
 
     @property
@@ -1014,6 +1056,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rxi2.setter
     def rxi2(self, value: float) -> None:
+        """Set the rxi2 property."""
         self._cards[6].set_value("rxi2", value)
 
     @property
@@ -1024,6 +1067,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rxi3.setter
     def rxi3(self, value: float) -> None:
+        """Set the rxi3 property."""
         self._cards[6].set_value("rxi3", value)
 
     @property
@@ -1034,6 +1078,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rxi4.setter
     def rxi4(self, value: float) -> None:
+        """Set the rxi4 property."""
         self._cards[6].set_value("rxi4", value)
 
     @property
@@ -1044,6 +1089,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rxi5.setter
     def rxi5(self, value: float) -> None:
+        """Set the rxi5 property."""
         self._cards[6].set_value("rxi5", value)
 
     @property
@@ -1054,6 +1100,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rxi6.setter
     def rxi6(self, value: float) -> None:
+        """Set the rxi6 property."""
         self._cards[6].set_value("rxi6", value)
 
     @property
@@ -1064,6 +1111,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rxi7.setter
     def rxi7(self, value: float) -> None:
+        """Set the rxi7 property."""
         self._cards[6].set_value("rxi7", value)
 
     @property
@@ -1074,6 +1122,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @rxi8.setter
     def rxi8(self, value: float) -> None:
+        """Set the rxi8 property."""
         self._cards[6].set_value("rxi8", value)
 
     @property
@@ -1084,6 +1133,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi1.setter
     def lczi1(self, value: float) -> None:
+        """Set the lczi1 property."""
         self._cards[7].set_value("lczi1", value)
 
     @property
@@ -1094,6 +1144,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi2.setter
     def lczi2(self, value: float) -> None:
+        """Set the lczi2 property."""
         self._cards[7].set_value("lczi2", value)
 
     @property
@@ -1104,6 +1155,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi3.setter
     def lczi3(self, value: float) -> None:
+        """Set the lczi3 property."""
         self._cards[7].set_value("lczi3", value)
 
     @property
@@ -1114,6 +1166,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi4.setter
     def lczi4(self, value: float) -> None:
+        """Set the lczi4 property."""
         self._cards[7].set_value("lczi4", value)
 
     @property
@@ -1124,6 +1177,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi5.setter
     def lczi5(self, value: float) -> None:
+        """Set the lczi5 property."""
         self._cards[7].set_value("lczi5", value)
 
     @property
@@ -1134,6 +1188,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi6.setter
     def lczi6(self, value: float) -> None:
+        """Set the lczi6 property."""
         self._cards[7].set_value("lczi6", value)
 
     @property
@@ -1144,6 +1199,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi7.setter
     def lczi7(self, value: float) -> None:
+        """Set the lczi7 property."""
         self._cards[7].set_value("lczi7", value)
 
     @property
@@ -1154,6 +1210,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi8.setter
     def lczi8(self, value: float) -> None:
+        """Set the lczi8 property."""
         self._cards[7].set_value("lczi8", value)
 
     @property
@@ -1164,6 +1221,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi1.setter
     def lczi1(self, value: float) -> None:
+        """Set the lczi1 property."""
         self._cards[8].set_value("lczi1", value)
 
     @property
@@ -1174,6 +1232,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi2.setter
     def lczi2(self, value: float) -> None:
+        """Set the lczi2 property."""
         self._cards[8].set_value("lczi2", value)
 
     @property
@@ -1184,6 +1243,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi3.setter
     def lczi3(self, value: float) -> None:
+        """Set the lczi3 property."""
         self._cards[8].set_value("lczi3", value)
 
     @property
@@ -1194,6 +1254,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi4.setter
     def lczi4(self, value: float) -> None:
+        """Set the lczi4 property."""
         self._cards[8].set_value("lczi4", value)
 
     @property
@@ -1204,6 +1265,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi5.setter
     def lczi5(self, value: float) -> None:
+        """Set the lczi5 property."""
         self._cards[8].set_value("lczi5", value)
 
     @property
@@ -1214,6 +1276,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi6.setter
     def lczi6(self, value: float) -> None:
+        """Set the lczi6 property."""
         self._cards[8].set_value("lczi6", value)
 
     @property
@@ -1224,6 +1287,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi7.setter
     def lczi7(self, value: float) -> None:
+        """Set the lczi7 property."""
         self._cards[8].set_value("lczi7", value)
 
     @property
@@ -1234,6 +1298,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi8.setter
     def lczi8(self, value: float) -> None:
+        """Set the lczi8 property."""
         self._cards[8].set_value("lczi8", value)
 
     @property
@@ -1244,6 +1309,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi1.setter
     def lczi1(self, value: float) -> None:
+        """Set the lczi1 property."""
         self._cards[9].set_value("lczi1", value)
 
     @property
@@ -1254,6 +1320,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi2.setter
     def lczi2(self, value: float) -> None:
+        """Set the lczi2 property."""
         self._cards[9].set_value("lczi2", value)
 
     @property
@@ -1264,6 +1331,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi3.setter
     def lczi3(self, value: float) -> None:
+        """Set the lczi3 property."""
         self._cards[9].set_value("lczi3", value)
 
     @property
@@ -1274,6 +1342,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi4.setter
     def lczi4(self, value: float) -> None:
+        """Set the lczi4 property."""
         self._cards[9].set_value("lczi4", value)
 
     @property
@@ -1284,6 +1353,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi5.setter
     def lczi5(self, value: float) -> None:
+        """Set the lczi5 property."""
         self._cards[9].set_value("lczi5", value)
 
     @property
@@ -1294,6 +1364,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi6.setter
     def lczi6(self, value: float) -> None:
+        """Set the lczi6 property."""
         self._cards[9].set_value("lczi6", value)
 
     @property
@@ -1304,6 +1375,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi7.setter
     def lczi7(self, value: float) -> None:
+        """Set the lczi7 property."""
         self._cards[9].set_value("lczi7", value)
 
     @property
@@ -1314,6 +1386,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @lczi8.setter
     def lczi8(self, value: float) -> None:
+        """Set the lczi8 property."""
         self._cards[9].set_value("lczi8", value)
 
     @property
@@ -1324,5 +1397,9 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[10].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

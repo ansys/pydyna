@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineElementGeneralizedShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineElementGeneralizedShell(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineElementGeneralizedShell class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -187,6 +189,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         self._cards[0].set_value("elform", value)
 
     @property
@@ -197,6 +200,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[0].set_value("nip", value)
 
     @property
@@ -207,6 +211,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @nmnp.setter
     def nmnp(self, value: int) -> None:
+        """Set the nmnp property."""
         self._cards[0].set_value("nmnp", value)
 
     @property
@@ -219,8 +224,9 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
+        """Set the imass property."""
         if value not in [0, 1, None]:
-            raise Exception("""imass must be `None` or one of {0,1}""")
+            raise Exception("""imass must be `None` or one of {0,1}.""")
         self._cards[0].set_value("imass", value)
 
     @property
@@ -235,8 +241,9 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @form.setter
     def form(self, value: int) -> None:
+        """Set the form property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""form must be `None` or one of {0,1,2,3}""")
+            raise Exception("""form must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("form", value)
 
     @property
@@ -247,6 +254,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @wi.setter
     def wi(self, value: float) -> None:
+        """Set the wi property."""
         self._cards[1].set_value("wi", value)
 
     @property
@@ -257,6 +265,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @nki.setter
     def nki(self, value: float) -> None:
+        """Set the nki property."""
         self._cards[2].set_value("nki", value)
 
     @property
@@ -267,6 +276,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @dnkidr.setter
     def dnkidr(self, value: float) -> None:
+        """Set the dnkidr property."""
         self._cards[2].set_value("dnkidr", value)
 
     @property
@@ -277,6 +287,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @dnkids.setter
     def dnkids(self, value: float) -> None:
+        """Set the dnkids property."""
         self._cards[2].set_value("dnkids", value)
 
     @property
@@ -287,6 +298,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @dnkldr.setter
     def dnkldr(self, value: float) -> None:
+        """Set the dnkldr property."""
         self._cards[3].set_value("dnkldr", value)
 
     @property
@@ -297,6 +309,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @dnklds.setter
     def dnklds(self, value: float) -> None:
+        """Set the dnklds property."""
         self._cards[3].set_value("dnklds", value)
 
     @property
@@ -307,6 +320,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @d2nkidr2.setter
     def d2nkidr2(self, value: float) -> None:
+        """Set the d2nkidr2 property."""
         self._cards[4].set_value("d2nkidr2", value)
 
     @property
@@ -317,6 +331,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @d2nkidrds.setter
     def d2nkidrds(self, value: float) -> None:
+        """Set the d2nkidrds property."""
         self._cards[4].set_value("d2nkidrds", value)
 
     @property
@@ -327,6 +342,7 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @d2nkids2.setter
     def d2nkids2(self, value: float) -> None:
+        """Set the d2nkids2 property."""
         self._cards[4].set_value("d2nkids2", value)
 
     @property
@@ -337,5 +353,9 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

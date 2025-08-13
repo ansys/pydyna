@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineVectorNodes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineVectorNodes(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineVectorNodes class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -93,6 +95,7 @@ class DefineVectorNodes(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -103,6 +106,7 @@ class DefineVectorNodes(KeywordBase):
 
     @nodet.setter
     def nodet(self, value: int) -> None:
+        """Set the nodet property."""
         self._cards[0].set_value("nodet", value)
 
     @property
@@ -113,6 +117,7 @@ class DefineVectorNodes(KeywordBase):
 
     @nodeh.setter
     def nodeh(self, value: int) -> None:
+        """Set the nodeh property."""
         self._cards[0].set_value("nodeh", value)
 
     @property
@@ -123,5 +128,9 @@ class DefineVectorNodes(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

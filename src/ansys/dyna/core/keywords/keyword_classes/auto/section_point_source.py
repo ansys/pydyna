@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionPointSource class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionPointSource(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionPointSource class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -143,6 +145,7 @@ class SectionPointSource(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -153,6 +156,7 @@ class SectionPointSource(KeywordBase):
 
     @lcidt.setter
     def lcidt(self, value: int) -> None:
+        """Set the lcidt property."""
         self._cards[0].set_value("lcidt", value)
 
     @property
@@ -163,6 +167,7 @@ class SectionPointSource(KeywordBase):
 
     @lcidvolr.setter
     def lcidvolr(self, value: int) -> None:
+        """Set the lcidvolr property."""
         self._cards[0].set_value("lcidvolr", value)
 
     @property
@@ -173,6 +178,7 @@ class SectionPointSource(KeywordBase):
 
     @lcidvel.setter
     def lcidvel(self, value: int) -> None:
+        """Set the lcidvel property."""
         self._cards[0].set_value("lcidvel", value)
 
     @property
@@ -183,6 +189,7 @@ class SectionPointSource(KeywordBase):
 
     @nlc001.setter
     def nlc001(self, value: int) -> None:
+        """Set the nlc001 property."""
         self._cards[0].set_value("nlc001", value)
 
     @property
@@ -193,6 +200,7 @@ class SectionPointSource(KeywordBase):
 
     @nlc002.setter
     def nlc002(self, value: int) -> None:
+        """Set the nlc002 property."""
         self._cards[0].set_value("nlc002", value)
 
     @property
@@ -203,6 +211,7 @@ class SectionPointSource(KeywordBase):
 
     @nlc003.setter
     def nlc003(self, value: int) -> None:
+        """Set the nlc003 property."""
         self._cards[0].set_value("nlc003", value)
 
     @property
@@ -213,6 +222,7 @@ class SectionPointSource(KeywordBase):
 
     @nodeid.setter
     def nodeid(self, value: int) -> None:
+        """Set the nodeid property."""
         self._cards[1].set_value("nodeid", value)
 
     @property
@@ -223,6 +233,7 @@ class SectionPointSource(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[1].set_value("vecid", value)
 
     @property
@@ -233,6 +244,7 @@ class SectionPointSource(KeywordBase):
 
     @orifarea.setter
     def orifarea(self, value: float) -> None:
+        """Set the orifarea property."""
         self._cards[1].set_value("orifarea", value)
 
     @property
@@ -243,5 +255,9 @@ class SectionPointSource(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -1,7 +1,29 @@
+# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 import os
 from threading import Lock
 from typing import Optional
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 import urllib.request
 
 from ansys.dyna.core.pre.internals.defaults import EXAMPLES_PATH
@@ -110,7 +132,7 @@ class DownloadManager(metaclass=DownloadManagerMeta):
         return base
 
     def _get_default_server_and_joiner(self):
-        return "https://github.com/ansys/example-data/raw/master", self._joinurl
+        return "https://github.com/ansys/example-data/raw/main", self._joinurl
 
     def _get_filepath_on_default_server(self, filename: str, *directory: str):
         server, joiner = self._get_default_server_and_joiner()
@@ -120,7 +142,13 @@ class DownloadManager(metaclass=DownloadManagerMeta):
             return joiner(server, filename)
 
     def _retrieve_url(self, url, dest):
-        saved_file, _ = urllib.request.urlretrieve(url, filename=dest)
+        parsed_url = urlparse(url)
+        allowed_schemes = {"http", "https", "ftp"}
+        if parsed_url.scheme not in allowed_schemes:
+            raise ValueError(f"URL scheme '{parsed_url.scheme}' not allowed for download.")
+        # Ignore the B310 warning as this is a safe use of urllib
+        # as it is used to download files from a trusted source.
+        saved_file, _ = urllib.request.urlretrieve(url, filename=dest)  # nosec: B310
         return saved_file
 
     def _retrieve_data(self, url: str, filename: str, dest: str = None, force: bool = False):

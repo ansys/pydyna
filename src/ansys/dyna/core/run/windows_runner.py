@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -22,14 +22,21 @@
 
 """Windows implementation of LS-DYNA runner."""
 
+import logging
 import os
-import subprocess
+from pathlib import Path
+
+# Subprocess is used to run LS-DYNA commands, excluding bandit warning
+import subprocess  # nosec: B404
+import time
 
 from ansys.tools.path import get_latest_ansys_installation
 from ansys.tools.path.path import _get_unified_install_base_for_version
 
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
+
+log = logging.getLogger(__name__)
 
 
 class WindowsRunner(BaseRunner):
@@ -43,20 +50,38 @@ class WindowsRunner(BaseRunner):
         """Initialize WindowsRunner."""
         super().__init__(**kwargs)
         version = kwargs.get("version", None)
-        self._find_solver(version)
+        executable = kwargs.get("executable", None)
+        self._find_solver(version, executable)
 
     def set_input(self, input_file: str, working_directory: str) -> None:
         """Set input file and working directory."""
         self.input_file = input_file
         self.working_directory = working_directory
 
-    def _find_solver(self, version: int) -> None:
+    def _find_solver(self, version: int, executable: str = None) -> None:
         """Find LS-DYNA solver location."""
-        if version is not None:
-            install_loc, _ = _get_unified_install_base_for_version(version)
+        if executable:
+            exe_path = Path(executable)
+            if not exe_path.is_file():
+                raise FileNotFoundError(f"Specified LS-DYNA executable not found: {executable}")
+
+            self.solver_location = str(exe_path.parent)
+            self.solver = f'"{exe_path}"'  # Proper quoting for Windows paths with spaces
+            return
+
+        if version:
+            install_base, _ = _get_unified_install_base_for_version(version)
         else:
-            _, install_loc = get_latest_ansys_installation()
-        self.solver_location = os.path.join(install_loc, "ansys", "bin", "winx64")
+            _, install_base = get_latest_ansys_installation()
+
+        solver_dir = Path(install_base) / "ansys" / "bin" / "winx64"
+        solver_exe = solver_dir / self._get_exe_name()
+
+        if not solver_exe.is_file():
+            raise FileNotFoundError(f"LS-DYNA executable not found: {solver_exe}")
+
+        self.solver_location = str(solver_dir)
+        self.solver = f'"{str(solver_exe)}"'
 
     def _get_env_script(self) -> str:
         """Get env script when running using lsrun from workbench."""
@@ -66,6 +91,7 @@ class WindowsRunner(BaseRunner):
             script_name = "lsdynamsvar.bat"
         lsprepost = [p for p in os.listdir(self.solver_location) if "lsprepost" in p][0]
         env_script_path = os.path.join(self.solver_location, lsprepost, "LS-Run", script_name)
+
         return env_script_path
 
     def _get_exe_name(self) -> str:
@@ -80,9 +106,6 @@ class WindowsRunner(BaseRunner):
         }[(self.mpi_option, self.precision)]
         return exe_name
 
-    def _get_executable(self) -> str:
-        return os.path.join(self.solver_location, self._get_exe_name())
-
     def _write_runscript(self) -> None:
         with open(os.path.join(self.working_directory, self._scriptname), "w") as f:
             f.write(self._get_command_line())
@@ -95,32 +118,75 @@ class WindowsRunner(BaseRunner):
     def run(self) -> None:
         """Run LS-DYNA."""
         self._write_runscript()
-        subprocess.check_call(
-            f"cmd /c {self._scriptname}",
-            shell=False,
-            universal_newlines=True,
-            cwd=self.working_directory,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
+        script_path = Path(self.working_directory) / self._scriptname
+        log_file = Path(self.working_directory) / "lsrun.out.txt"
+
+        try:
+            args = ["cmd", "/c", str(script_path)]
+            # Excluding bandit warning for subprocess usage
+            # as this is a controlled environment where we run LS-DYNA.
+            process = subprocess.Popen(
+                args,
+                cwd=self.working_directory,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                universal_newlines=True,
+                shell=False,
+                bufsize=1,
+            )  # nosec: B603
+            log.info("LS-DYNA execution started.")
+
+            warning_detected = False
+
+            while process.poll() is None:
+                if log_file.exists():
+                    with log_file.open("r", encoding="utf-8", errors="ignore") as f:
+                        content = f.readlines()
+                        for line in content:
+                            if "warning" in line.lower() or "error" in line.lower():
+                                warning_detected = True
+                time.sleep(2)
+
+            process.wait()
+            if warning_detected:
+                log.warning("LS-DYNA completed with warnings or errors in the log.")
+                log.warning(f"Check the log file for details: {log_file}")
+
+            if process.returncode != 0:
+                log.error(f"LS-DYNA run failed with exit code {process.returncode}.")
+                if log_file.exists():
+                    log.error(f"See log file for details: {log_file}")
+                raise RuntimeError(f"LS-DYNA failed with exit code {process.returncode}")
+
+            log.info("LS-DYNA run completed successfully.")
+
+        except subprocess.SubprocessError as e:
+            msg = f"Subprocess execution failed: {e}"
+            msg += f"to run LS-DYNA in {self.working_directory} with command: {self._get_command_line()}"
+            if log_file.exists():
+                msg += f"\nSee log file at: {log_file}"
+            log.error(msg)
+            raise RuntimeError(msg) from e
 
     def _get_command_line(self) -> str:
         """Get the command line to run LS-DYNA."""
         script = f'call "{self._get_env_script()}"'
-        solver = f'"{self._get_executable()}"'
         ncpu = self.ncpu
         mem = self.get_memory_string()
         input_file = self.input_file
+
+        if not os.path.isabs(self.working_directory):
+            self.working_directory = os.path.abspath(self.working_directory)
+
         if self.mpi_option == MpiOption.SMP:
-            command = f"{solver} i={input_file} ncpu={ncpu} memory={mem}"
+            command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem}"
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
             # -wdir is used here because sometimes mpiexec does not pass its working directory
             # to dyna on windows when run from python subprocess
-            command = (
-                f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {solver} i={input_file} memory={mem}'
-            )
+            command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}'  # noqa:E501
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
-            command = f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {solver} i={input_file} memory={mem}'
-
+            command = (
+                f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}'
+            )
         return f"{script} && {command} > lsrun.out.txt 2>&1"

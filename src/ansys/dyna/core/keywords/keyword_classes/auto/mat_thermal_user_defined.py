@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatThermalUserDefined class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatThermalUserDefined(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatThermalUserDefined class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -198,6 +200,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @tmid.setter
     def tmid(self, value: int) -> None:
+        """Set the tmid property."""
         self._cards[0].set_value("tmid", value)
 
     @property
@@ -208,6 +211,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -218,8 +222,9 @@ class MatThermalUserDefined(KeywordBase):
 
     @mt.setter
     def mt(self, value: int) -> None:
+        """Set the mt property."""
         if value not in [11, 12, 13, 14, 15, None]:
-            raise Exception("""mt must be `None` or one of {11,12,13,14,15}""")
+            raise Exception("""mt must be `None` or one of {11,12,13,14,15}.""")
         self._cards[0].set_value("mt", value)
 
     @property
@@ -230,6 +235,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @lmc.setter
     def lmc(self, value: int) -> None:
+        """Set the lmc property."""
         self._cards[0].set_value("lmc", value)
 
     @property
@@ -240,6 +246,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @nhv.setter
     def nhv(self, value: int) -> None:
+        """Set the nhv property."""
         self._cards[0].set_value("nhv", value)
 
     @property
@@ -256,6 +263,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[0].set_value("aopt", value)
 
     @property
@@ -268,8 +276,9 @@ class MatThermalUserDefined(KeywordBase):
 
     @iortho.setter
     def iortho(self, value: int) -> None:
+        """Set the iortho property."""
         if value not in [0, 1, None]:
-            raise Exception("""iortho must be `None` or one of {0,1}""")
+            raise Exception("""iortho must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iortho", value)
 
     @property
@@ -280,6 +289,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @ihve.setter
     def ihve(self, value: int) -> None:
+        """Set the ihve property."""
         self._cards[0].set_value("ihve", value)
 
     @property
@@ -290,6 +300,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[1].set_value("xp", value)
 
     @property
@@ -300,6 +311,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[1].set_value("yp", value)
 
     @property
@@ -310,6 +322,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[1].set_value("zp", value)
 
     @property
@@ -320,6 +333,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -330,6 +344,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -340,6 +355,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[1].set_value("a3", value)
 
     @property
@@ -350,6 +366,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[2].set_value("d1", value)
 
     @property
@@ -360,6 +377,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[2].set_value("d2", value)
 
     @property
@@ -370,6 +388,7 @@ class MatThermalUserDefined(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[2].set_value("d3", value)
 
     @property
@@ -380,5 +399,9 @@ class MatThermalUserDefined(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatOrthoElasticPlastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatOrthoElasticPlastic(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatOrthoElasticPlastic class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -313,6 +315,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -323,6 +326,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -333,6 +337,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @e11.setter
     def e11(self, value: float) -> None:
+        """Set the e11 property."""
         self._cards[0].set_value("e11", value)
 
     @property
@@ -343,6 +348,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @e22.setter
     def e22(self, value: float) -> None:
+        """Set the e22 property."""
         self._cards[0].set_value("e22", value)
 
     @property
@@ -353,6 +359,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @g12.setter
     def g12(self, value: float) -> None:
+        """Set the g12 property."""
         self._cards[0].set_value("g12", value)
 
     @property
@@ -363,6 +370,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @pr12.setter
     def pr12(self, value: float) -> None:
+        """Set the pr12 property."""
         self._cards[0].set_value("pr12", value)
 
     @property
@@ -373,6 +381,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @pr23.setter
     def pr23(self, value: float) -> None:
+        """Set the pr23 property."""
         self._cards[0].set_value("pr23", value)
 
     @property
@@ -383,6 +392,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @pr31.setter
     def pr31(self, value: float) -> None:
+        """Set the pr31 property."""
         self._cards[0].set_value("pr31", value)
 
     @property
@@ -393,6 +403,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @sigma0.setter
     def sigma0(self, value: float) -> None:
+        """Set the sigma0 property."""
         self._cards[1].set_value("sigma0", value)
 
     @property
@@ -403,6 +414,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @lc.setter
     def lc(self, value: int) -> None:
+        """Set the lc property."""
         self._cards[1].set_value("lc", value)
 
     @property
@@ -413,6 +425,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @qr1.setter
     def qr1(self, value: float) -> None:
+        """Set the qr1 property."""
         self._cards[1].set_value("qr1", value)
 
     @property
@@ -423,6 +436,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @cr1.setter
     def cr1(self, value: float) -> None:
+        """Set the cr1 property."""
         self._cards[1].set_value("cr1", value)
 
     @property
@@ -433,6 +447,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @qr2.setter
     def qr2(self, value: float) -> None:
+        """Set the qr2 property."""
         self._cards[1].set_value("qr2", value)
 
     @property
@@ -443,6 +458,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @cr2.setter
     def cr2(self, value: float) -> None:
+        """Set the cr2 property."""
         self._cards[1].set_value("cr2", value)
 
     @property
@@ -453,6 +469,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @r11.setter
     def r11(self, value: float) -> None:
+        """Set the r11 property."""
         self._cards[2].set_value("r11", value)
 
     @property
@@ -463,6 +480,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @r22.setter
     def r22(self, value: float) -> None:
+        """Set the r22 property."""
         self._cards[2].set_value("r22", value)
 
     @property
@@ -473,6 +491,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @r33.setter
     def r33(self, value: float) -> None:
+        """Set the r33 property."""
         self._cards[2].set_value("r33", value)
 
     @property
@@ -483,6 +502,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @r12.setter
     def r12(self, value: float) -> None:
+        """Set the r12 property."""
         self._cards[2].set_value("r12", value)
 
     @property
@@ -500,6 +520,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[3].set_value("aopt", value)
 
     @property
@@ -510,6 +531,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[3].set_value("beta", value)
 
     @property
@@ -520,6 +542,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[4].set_value("xp", value)
 
     @property
@@ -530,6 +553,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[4].set_value("yp", value)
 
     @property
@@ -540,6 +564,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[4].set_value("zp", value)
 
     @property
@@ -550,6 +575,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[4].set_value("a1", value)
 
     @property
@@ -560,6 +586,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[4].set_value("a2", value)
 
     @property
@@ -570,6 +597,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[4].set_value("a3", value)
 
     @property
@@ -580,6 +608,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[5].set_value("v1", value)
 
     @property
@@ -590,6 +619,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[5].set_value("v2", value)
 
     @property
@@ -600,6 +630,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[5].set_value("v3", value)
 
     @property
@@ -610,6 +641,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[5].set_value("d1", value)
 
     @property
@@ -620,6 +652,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[5].set_value("d2", value)
 
     @property
@@ -630,6 +663,7 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[5].set_value("d3", value)
 
     @property
@@ -640,5 +674,9 @@ class MatOrthoElasticPlastic(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

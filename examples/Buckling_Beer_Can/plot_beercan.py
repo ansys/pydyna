@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -39,7 +39,9 @@ Python.
 
 import os
 import shutil
-import subprocess
+
+# subprocess is used to run LS-DYNA commands, excluding bandit warning
+import subprocess  # nosec: B404
 import tempfile
 
 import numpy as np

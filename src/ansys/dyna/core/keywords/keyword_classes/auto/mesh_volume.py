@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MeshVolume class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -32,6 +33,7 @@ class MeshVolume(KeywordBase):
     subkeyword = "VOLUME"
 
     def __init__(self, **kwargs):
+        """Initialize the MeshVolume class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -62,11 +64,12 @@ class MeshVolume(KeywordBase):
 
     @volid.setter
     def volid(self, value: int) -> None:
+        """Set the volid property."""
         self._cards[0].set_value("volid", value)
 
     @property
     def elements(self) -> SeriesCard:
-        """dynamic array of surface element ids."""
+        """dynamic array of surface element ids.."""
         return self._cards[1]
 
     @elements.setter

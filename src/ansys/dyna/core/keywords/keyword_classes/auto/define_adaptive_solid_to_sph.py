@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineAdaptiveSolidToSph class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineAdaptiveSolidToSph class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -147,6 +149,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @did.setter
     def did(self, value: int) -> None:
+        """Set the did property."""
         self._cards[0].set_value("did", value)
 
     @property
@@ -157,6 +160,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -167,6 +171,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @ipid.setter
     def ipid(self, value: int) -> None:
+        """Set the ipid property."""
         self._cards[1].set_value("ipid", value)
 
     @property
@@ -179,8 +184,9 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [0, 1, None]:
-            raise Exception("""itype must be `None` or one of {0,1}""")
+            raise Exception("""itype must be `None` or one of {0,1}.""")
         self._cards[1].set_value("itype", value)
 
     @property
@@ -195,8 +201,9 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @nq.setter
     def nq(self, value: int) -> None:
+        """Set the nq property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""nq must be `None` or one of {1,2,3}""")
+            raise Exception("""nq must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("nq", value)
 
     @property
@@ -207,6 +214,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @ipsph.setter
     def ipsph(self, value: int) -> None:
+        """Set the ipsph property."""
         self._cards[1].set_value("ipsph", value)
 
     @property
@@ -217,6 +225,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @issph.setter
     def issph(self, value: int) -> None:
+        """Set the issph property."""
         self._cards[1].set_value("issph", value)
 
     @property
@@ -230,8 +239,9 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @icpl.setter
     def icpl(self, value: int) -> None:
+        """Set the icpl property."""
         if value not in [0, 1, 3, None]:
-            raise Exception("""icpl must be `None` or one of {0,1,3}""")
+            raise Exception("""icpl must be `None` or one of {0,1,3}.""")
         self._cards[1].set_value("icpl", value)
 
     @property
@@ -244,8 +254,9 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @iopt.setter
     def iopt(self, value: int) -> None:
+        """Set the iopt property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""iopt must be `None` or one of {0,1,2}""")
+            raise Exception("""iopt must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("iopt", value)
 
     @property
@@ -257,6 +268,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @cpcd.setter
     def cpcd(self, value: float) -> None:
+        """Set the cpcd property."""
         self._cards[1].set_value("cpcd", value)
 
     @property
@@ -267,5 +279,9 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

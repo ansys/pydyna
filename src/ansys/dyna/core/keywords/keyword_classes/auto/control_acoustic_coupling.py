@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlAcousticCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlAcousticCoupling(KeywordBase):
     subkeyword = "ACOUSTIC_COUPLING"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlAcousticCoupling class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -92,6 +94,7 @@ class ControlAcousticCoupling(KeywordBase):
 
     @maccpl.setter
     def maccpl(self, value: int) -> None:
+        """Set the maccpl property."""
         self._cards[0].set_value("maccpl", value)
 
     @property
@@ -102,6 +105,7 @@ class ControlAcousticCoupling(KeywordBase):
 
     @acecf1.setter
     def acecf1(self, value: float) -> None:
+        """Set the acecf1 property."""
         self._cards[0].set_value("acecf1", value)
 
     @property
@@ -112,6 +116,7 @@ class ControlAcousticCoupling(KeywordBase):
 
     @acecf2.setter
     def acecf2(self, value: float) -> None:
+        """Set the acecf2 property."""
         self._cards[0].set_value("acecf2", value)
 
     @property
@@ -122,6 +127,7 @@ class ControlAcousticCoupling(KeywordBase):
 
     @acecf3.setter
     def acecf3(self, value: float) -> None:
+        """Set the acecf3 property."""
         self._cards[0].set_value("acecf3", value)
 
     @property
@@ -133,5 +139,6 @@ class ControlAcousticCoupling(KeywordBase):
 
     @acecf4.setter
     def acecf4(self, value: float) -> None:
+        """Set the acecf4 property."""
         self._cards[0].set_value("acecf4", value)
 

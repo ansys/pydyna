@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AirbagInteraction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagInteraction(KeywordBase):
     subkeyword = "INTERACTION"
 
     def __init__(self, **kwargs):
+        """Initialize the AirbagInteraction class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -99,6 +101,7 @@ class AirbagInteraction(KeywordBase):
 
     @ab1.setter
     def ab1(self, value: int) -> None:
+        """Set the ab1 property."""
         self._cards[0].set_value("ab1", value)
 
     @property
@@ -109,6 +112,7 @@ class AirbagInteraction(KeywordBase):
 
     @ab2.setter
     def ab2(self, value: int) -> None:
+        """Set the ab2 property."""
         self._cards[0].set_value("ab2", value)
 
     @property
@@ -121,6 +125,7 @@ class AirbagInteraction(KeywordBase):
 
     @area.setter
     def area(self, value: float) -> None:
+        """Set the area property."""
         self._cards[0].set_value("area", value)
 
     @property
@@ -132,6 +137,7 @@ class AirbagInteraction(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -142,6 +148,7 @@ class AirbagInteraction(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -152,6 +159,7 @@ class AirbagInteraction(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -165,5 +173,6 @@ class AirbagInteraction(KeywordBase):
 
     @iflow.setter
     def iflow(self, value: int) -> None:
+        """Set the iflow property."""
         self._cards[0].set_value("iflow", value)
 

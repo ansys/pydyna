@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineFrictionOrientation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineFrictionOrientation(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineFrictionOrientation class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -116,6 +118,7 @@ class DefineFrictionOrientation(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -126,6 +129,7 @@ class DefineFrictionOrientation(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -136,6 +140,7 @@ class DefineFrictionOrientation(KeywordBase):
 
     @lcidp.setter
     def lcidp(self, value: int) -> None:
+        """Set the lcidp property."""
         self._cards[0].set_value("lcidp", value)
 
     @property
@@ -146,6 +151,7 @@ class DefineFrictionOrientation(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[0].set_value("v1", value)
 
     @property
@@ -156,6 +162,7 @@ class DefineFrictionOrientation(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[0].set_value("v2", value)
 
     @property
@@ -166,6 +173,7 @@ class DefineFrictionOrientation(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[0].set_value("v3", value)
 
     @property
@@ -176,5 +184,9 @@ class DefineFrictionOrientation(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

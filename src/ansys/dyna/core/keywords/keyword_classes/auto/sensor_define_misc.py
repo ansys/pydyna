@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SensorDefineMisc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SensorDefineMisc(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SensorDefineMisc class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -126,6 +128,7 @@ class SensorDefineMisc(KeywordBase):
 
     @sensid.setter
     def sensid(self, value: int) -> None:
+        """Set the sensid property."""
         self._cards[0].set_value("sensid", value)
 
     @property
@@ -161,8 +164,9 @@ class SensorDefineMisc(KeywordBase):
 
     @mtype.setter
     def mtype(self, value: str) -> None:
+        """Set the mtype property."""
         if value not in ["ANGLE", "BNDOUT", "CURVE", "CVBAG", "ICVOL", "MATSUM", "NFAILE", "RETRACTOR", "RIGIDBODY", "TIME", None]:
-            raise Exception("""mtype must be `None` or one of {"ANGLE","BNDOUT","CURVE","CVBAG","ICVOL","MATSUM","NFAILE","RETRACTOR","RIGIDBODY","TIME"}""")
+            raise Exception("""mtype must be `None` or one of {"ANGLE","BNDOUT","CURVE","CVBAG","ICVOL","MATSUM","NFAILE","RETRACTOR","RIGIDBODY","TIME"}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -173,6 +177,7 @@ class SensorDefineMisc(KeywordBase):
 
     @i0.setter
     def i0(self, value: str) -> None:
+        """Set the i0 property."""
         self._cards[0].set_value("i0", value)
 
     @property
@@ -183,6 +188,7 @@ class SensorDefineMisc(KeywordBase):
 
     @i1.setter
     def i1(self, value: str) -> None:
+        """Set the i1 property."""
         self._cards[0].set_value("i1", value)
 
     @property
@@ -193,6 +199,7 @@ class SensorDefineMisc(KeywordBase):
 
     @i2.setter
     def i2(self, value: str) -> None:
+        """Set the i2 property."""
         self._cards[0].set_value("i2", value)
 
     @property
@@ -203,6 +210,7 @@ class SensorDefineMisc(KeywordBase):
 
     @i3.setter
     def i3(self, value: str) -> None:
+        """Set the i3 property."""
         self._cards[0].set_value("i3", value)
 
     @property
@@ -213,6 +221,7 @@ class SensorDefineMisc(KeywordBase):
 
     @i4.setter
     def i4(self, value: str) -> None:
+        """Set the i4 property."""
         self._cards[0].set_value("i4", value)
 
     @property
@@ -223,6 +232,7 @@ class SensorDefineMisc(KeywordBase):
 
     @i5.setter
     def i5(self, value: str) -> None:
+        """Set the i5 property."""
         self._cards[0].set_value("i5", value)
 
     @property
@@ -233,5 +243,9 @@ class SensorDefineMisc(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

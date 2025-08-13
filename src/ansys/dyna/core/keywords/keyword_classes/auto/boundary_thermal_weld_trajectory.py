@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryThermalWeldTrajectory class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
     subkeyword = "THERMAL_WELD_TRAJECTORY"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryThermalWeldTrajectory class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -253,6 +255,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -265,8 +268,9 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @ptyp.setter
     def ptyp(self, value: int) -> None:
+        """Set the ptyp property."""
         if value not in [1, 2, None]:
-            raise Exception("""ptyp must be `None` or one of {1,2}""")
+            raise Exception("""ptyp must be `None` or one of {1,2}.""")
         self._cards[0].set_value("ptyp", value)
 
     @property
@@ -277,6 +281,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @nsid1.setter
     def nsid1(self, value: int) -> None:
+        """Set the nsid1 property."""
         self._cards[0].set_value("nsid1", value)
 
     @property
@@ -289,6 +294,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @spd1.setter
     def spd1(self, value: float) -> None:
+        """Set the spd1 property."""
         self._cards[0].set_value("spd1", value)
 
     @property
@@ -302,6 +308,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @nsid2.setter
     def nsid2(self, value: int) -> None:
+        """Set the nsid2 property."""
         self._cards[0].set_value("nsid2", value)
 
     @property
@@ -314,6 +321,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @spd2.setter
     def spd2(self, value: float) -> None:
+        """Set the spd2 property."""
         self._cards[0].set_value("spd2", value)
 
     @property
@@ -324,6 +332,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @ncyc.setter
     def ncyc(self, value: int) -> None:
+        """Set the ncyc property."""
         self._cards[0].set_value("ncyc", value)
 
     @property
@@ -336,8 +345,9 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @relvel.setter
     def relvel(self, value: int) -> None:
+        """Set the relvel property."""
         if value not in [0, 1, None]:
-            raise Exception("""relvel must be `None` or one of {0,1}""")
+            raise Exception("""relvel must be `None` or one of {0,1}.""")
         self._cards[0].set_value("relvel", value)
 
     @property
@@ -353,8 +363,9 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @iform.setter
     def iform(self, value: int) -> None:
+        """Set the iform property."""
         if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""iform must be `None` or one of {1,2,3,4,5}""")
+            raise Exception("""iform must be `None` or one of {1,2,3,4,5}.""")
         self._cards[1].set_value("iform", value)
 
     @property
@@ -366,6 +377,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -377,6 +389,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[1].set_value("q", value)
 
     @property
@@ -387,6 +400,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @lcrot.setter
     def lcrot(self, value: int) -> None:
+        """Set the lcrot property."""
         self._cards[1].set_value("lcrot", value)
 
     @property
@@ -397,6 +411,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @lcmov.setter
     def lcmov(self, value: int) -> None:
+        """Set the lcmov property."""
         self._cards[1].set_value("lcmov", value)
 
     @property
@@ -407,6 +422,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @lclat.setter
     def lclat(self, value: int) -> None:
+        """Set the lclat property."""
         self._cards[1].set_value("lclat", value)
 
     @property
@@ -417,6 +433,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @disc.setter
     def disc(self, value: float) -> None:
+        """Set the disc property."""
         self._cards[1].set_value("disc", value)
 
     @property
@@ -428,6 +445,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @enfor.setter
     def enfor(self, value: int) -> None:
+        """Set the enfor property."""
         self._cards[1].set_value("enfor", value)
 
     @property
@@ -438,6 +456,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @p1.setter
     def p1(self, value: float) -> None:
+        """Set the p1 property."""
         self._cards[2].set_value("p1", value)
 
     @property
@@ -448,6 +467,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @p2.setter
     def p2(self, value: float) -> None:
+        """Set the p2 property."""
         self._cards[2].set_value("p2", value)
 
     @property
@@ -458,6 +478,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @p3.setter
     def p3(self, value: float) -> None:
+        """Set the p3 property."""
         self._cards[2].set_value("p3", value)
 
     @property
@@ -468,6 +489,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @p4.setter
     def p4(self, value: float) -> None:
+        """Set the p4 property."""
         self._cards[2].set_value("p4", value)
 
     @property
@@ -478,6 +500,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @p5.setter
     def p5(self, value: float) -> None:
+        """Set the p5 property."""
         self._cards[2].set_value("p5", value)
 
     @property
@@ -488,6 +511,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @p6.setter
     def p6(self, value: float) -> None:
+        """Set the p6 property."""
         self._cards[2].set_value("p6", value)
 
     @property
@@ -498,6 +522,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @p7.setter
     def p7(self, value: float) -> None:
+        """Set the p7 property."""
         self._cards[2].set_value("p7", value)
 
     @property
@@ -508,6 +533,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @p8.setter
     def p8(self, value: float) -> None:
+        """Set the p8 property."""
         self._cards[2].set_value("p8", value)
 
     @property
@@ -518,6 +544,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @tx.setter
     def tx(self, value: float) -> None:
+        """Set the tx property."""
         self._cards[3].set_value("tx", value)
 
     @property
@@ -528,6 +555,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @ty.setter
     def ty(self, value: float) -> None:
+        """Set the ty property."""
         self._cards[3].set_value("ty", value)
 
     @property
@@ -538,5 +566,6 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @tz.setter
     def tz(self, value: float) -> None:
+        """Set the tz property."""
         self._cards[3].set_value("tz", value)
 

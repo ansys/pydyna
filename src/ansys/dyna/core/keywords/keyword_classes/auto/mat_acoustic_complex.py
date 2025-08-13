@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAcousticComplex class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAcousticComplex(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAcousticComplex class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -136,6 +138,7 @@ class MatAcousticComplex(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -146,6 +149,7 @@ class MatAcousticComplex(KeywordBase):
 
     @rhor.setter
     def rhor(self, value: float) -> None:
+        """Set the rhor property."""
         self._cards[0].set_value("rhor", value)
 
     @property
@@ -156,6 +160,7 @@ class MatAcousticComplex(KeywordBase):
 
     @bulkr.setter
     def bulkr(self, value: float) -> None:
+        """Set the bulkr property."""
         self._cards[0].set_value("bulkr", value)
 
     @property
@@ -166,6 +171,7 @@ class MatAcousticComplex(KeywordBase):
 
     @rhoi.setter
     def rhoi(self, value: float) -> None:
+        """Set the rhoi property."""
         self._cards[0].set_value("rhoi", value)
 
     @property
@@ -176,6 +182,7 @@ class MatAcousticComplex(KeywordBase):
 
     @bulki.setter
     def bulki(self, value: float) -> None:
+        """Set the bulki property."""
         self._cards[0].set_value("bulki", value)
 
     @property
@@ -186,6 +193,7 @@ class MatAcousticComplex(KeywordBase):
 
     @lcidrr.setter
     def lcidrr(self, value: int) -> None:
+        """Set the lcidrr property."""
         self._cards[1].set_value("lcidrr", value)
 
     @property
@@ -196,6 +204,7 @@ class MatAcousticComplex(KeywordBase):
 
     @lcidkr.setter
     def lcidkr(self, value: int) -> None:
+        """Set the lcidkr property."""
         self._cards[1].set_value("lcidkr", value)
 
     @property
@@ -206,6 +215,7 @@ class MatAcousticComplex(KeywordBase):
 
     @lcidri.setter
     def lcidri(self, value: int) -> None:
+        """Set the lcidri property."""
         self._cards[1].set_value("lcidri", value)
 
     @property
@@ -216,6 +226,7 @@ class MatAcousticComplex(KeywordBase):
 
     @lcidki.setter
     def lcidki(self, value: int) -> None:
+        """Set the lcidki property."""
         self._cards[1].set_value("lcidki", value)
 
     @property
@@ -226,5 +237,9 @@ class MatAcousticComplex(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

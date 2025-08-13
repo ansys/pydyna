@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitForming class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitForming(KeywordBase):
     subkeyword = "IMPLICIT_FORMING"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitForming class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -103,8 +105,9 @@ class ControlImplicitForming(KeywordBase):
 
     @ioption.setter
     def ioption(self, value: int) -> None:
+        """Set the ioption property."""
         if value not in [1, 2, None]:
-            raise Exception("""ioption must be `None` or one of {1,2}""")
+            raise Exception("""ioption must be `None` or one of {1,2}.""")
         self._cards[0].set_value("ioption", value)
 
     @property
@@ -115,6 +118,7 @@ class ControlImplicitForming(KeywordBase):
 
     @nsmin.setter
     def nsmin(self, value: int) -> None:
+        """Set the nsmin property."""
         self._cards[0].set_value("nsmin", value)
 
     @property
@@ -125,6 +129,7 @@ class ControlImplicitForming(KeywordBase):
 
     @nsmax.setter
     def nsmax(self, value: int) -> None:
+        """Set the nsmax property."""
         self._cards[0].set_value("nsmax", value)
 
     @property
@@ -135,6 +140,7 @@ class ControlImplicitForming(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -145,6 +151,7 @@ class ControlImplicitForming(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -155,6 +162,7 @@ class ControlImplicitForming(KeywordBase):
 
     @penchk.setter
     def penchk(self, value: float) -> None:
+        """Set the penchk property."""
         self._cards[0].set_value("penchk", value)
 
     @property
@@ -165,5 +173,6 @@ class ControlImplicitForming(KeywordBase):
 
     @dt0.setter
     def dt0(self, value: float) -> None:
+        """Set the dt0 property."""
         self._cards[0].set_value("dt0", value)
 

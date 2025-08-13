@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Eos015 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Eos015(KeywordBase):
     subkeyword = "015"
 
     def __init__(self, **kwargs):
+        """Initialize the Eos015 class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -136,6 +138,7 @@ class Eos015(KeywordBase):
 
     @eosid.setter
     def eosid(self, value: int) -> None:
+        """Set the eosid property."""
         self._cards[0].set_value("eosid", value)
 
     @property
@@ -146,6 +149,7 @@ class Eos015(KeywordBase):
 
     @lcid1.setter
     def lcid1(self, value: int) -> None:
+        """Set the lcid1 property."""
         self._cards[0].set_value("lcid1", value)
 
     @property
@@ -156,6 +160,7 @@ class Eos015(KeywordBase):
 
     @lcid2.setter
     def lcid2(self, value: int) -> None:
+        """Set the lcid2 property."""
         self._cards[0].set_value("lcid2", value)
 
     @property
@@ -166,6 +171,7 @@ class Eos015(KeywordBase):
 
     @lcid3.setter
     def lcid3(self, value: int) -> None:
+        """Set the lcid3 property."""
         self._cards[0].set_value("lcid3", value)
 
     @property
@@ -176,6 +182,7 @@ class Eos015(KeywordBase):
 
     @lcid4.setter
     def lcid4(self, value: int) -> None:
+        """Set the lcid4 property."""
         self._cards[0].set_value("lcid4", value)
 
     @property
@@ -191,8 +198,9 @@ class Eos015(KeywordBase):
 
     @unload.setter
     def unload(self, value: float) -> None:
+        """Set the unload property."""
         if value not in [0.0, 1.0, 2.0, 3.0, None]:
-            raise Exception("""unload must be `None` or one of {0.0,1.0,2.0,3.0}""")
+            raise Exception("""unload must be `None` or one of {0.0,1.0,2.0,3.0}.""")
         self._cards[1].set_value("unload", value)
 
     @property
@@ -203,6 +211,7 @@ class Eos015(KeywordBase):
 
     @et.setter
     def et(self, value: float) -> None:
+        """Set the et property."""
         self._cards[1].set_value("et", value)
 
     @property
@@ -213,6 +222,7 @@ class Eos015(KeywordBase):
 
     @dmpf.setter
     def dmpf(self, value: float) -> None:
+        """Set the dmpf property."""
         self._cards[1].set_value("dmpf", value)
 
     @property
@@ -223,6 +233,7 @@ class Eos015(KeywordBase):
 
     @tfs.setter
     def tfs(self, value: float) -> None:
+        """Set the tfs property."""
         self._cards[1].set_value("tfs", value)
 
     @property
@@ -233,6 +244,7 @@ class Eos015(KeywordBase):
 
     @cfs.setter
     def cfs(self, value: float) -> None:
+        """Set the cfs property."""
         self._cards[1].set_value("cfs", value)
 
     @property
@@ -243,6 +255,7 @@ class Eos015(KeywordBase):
 
     @loffset.setter
     def loffset(self, value: float) -> None:
+        """Set the loffset property."""
         self._cards[1].set_value("loffset", value)
 
     @property
@@ -253,5 +266,6 @@ class Eos015(KeywordBase):
 
     @ivs.setter
     def ivs(self, value: float) -> None:
+        """Set the ivs property."""
         self._cards[1].set_value("ivs", value)
 

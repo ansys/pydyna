@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatAddAirbagPorosityLeakage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatAddAirbagPorosityLeakage class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -126,6 +128,7 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -139,6 +142,7 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     @x2_flc.setter
     def x2_flc(self, value: float) -> None:
+        """Set the x2_flc property."""
         self._cards[0].set_value("x2/flc", value)
 
     @property
@@ -152,6 +156,7 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     @x3_fac.setter
     def x3_fac(self, value: float) -> None:
+        """Set the x3_fac property."""
         self._cards[0].set_value("x3/fac", value)
 
     @property
@@ -163,6 +168,7 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     @ela.setter
     def ela(self, value: float) -> None:
+        """Set the ela property."""
         self._cards[0].set_value("ela", value)
 
     @property
@@ -181,6 +187,7 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     @fvopt.setter
     def fvopt(self, value: float) -> None:
+        """Set the fvopt property."""
         self._cards[0].set_value("fvopt", value)
 
     @property
@@ -191,6 +198,7 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[0].set_value("x0", value)
 
     @property
@@ -201,6 +209,7 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[0].set_value("x1", value)
 
     @property
@@ -211,5 +220,9 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

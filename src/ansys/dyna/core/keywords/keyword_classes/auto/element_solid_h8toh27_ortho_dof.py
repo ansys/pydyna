@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ElementSolidH8Toh27OrthoDof class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
     subkeyword = "SOLID_H8TOH27_ORTHO_DOF"
 
     def __init__(self, **kwargs):
+        """Initialize the ElementSolidH8Toh27OrthoDof class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -247,6 +249,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -257,6 +260,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -267,6 +271,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @n1.setter
     def n1(self, value: int) -> None:
+        """Set the n1 property."""
         self._cards[0].set_value("n1", value)
 
     @property
@@ -277,6 +282,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @n2.setter
     def n2(self, value: int) -> None:
+        """Set the n2 property."""
         self._cards[0].set_value("n2", value)
 
     @property
@@ -287,6 +293,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @n3.setter
     def n3(self, value: int) -> None:
+        """Set the n3 property."""
         self._cards[0].set_value("n3", value)
 
     @property
@@ -297,6 +304,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @n4.setter
     def n4(self, value: int) -> None:
+        """Set the n4 property."""
         self._cards[0].set_value("n4", value)
 
     @property
@@ -307,6 +315,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @n5.setter
     def n5(self, value: int) -> None:
+        """Set the n5 property."""
         self._cards[0].set_value("n5", value)
 
     @property
@@ -317,6 +326,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @n6.setter
     def n6(self, value: int) -> None:
+        """Set the n6 property."""
         self._cards[0].set_value("n6", value)
 
     @property
@@ -327,6 +337,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @n7.setter
     def n7(self, value: int) -> None:
+        """Set the n7 property."""
         self._cards[0].set_value("n7", value)
 
     @property
@@ -337,6 +348,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @n8.setter
     def n8(self, value: int) -> None:
+        """Set the n8 property."""
         self._cards[0].set_value("n8", value)
 
     @property
@@ -347,6 +359,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -357,6 +370,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -367,6 +381,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[1].set_value("a3", value)
 
     @property
@@ -377,6 +392,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[2].set_value("d1", value)
 
     @property
@@ -387,6 +403,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[2].set_value("d2", value)
 
     @property
@@ -397,6 +414,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[2].set_value("d3", value)
 
     @property
@@ -407,6 +425,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @ns1.setter
     def ns1(self, value: int) -> None:
+        """Set the ns1 property."""
         self._cards[3].set_value("ns1", value)
 
     @property
@@ -417,6 +436,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @ns2.setter
     def ns2(self, value: int) -> None:
+        """Set the ns2 property."""
         self._cards[3].set_value("ns2", value)
 
     @property
@@ -427,6 +447,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @ns3.setter
     def ns3(self, value: int) -> None:
+        """Set the ns3 property."""
         self._cards[3].set_value("ns3", value)
 
     @property
@@ -437,6 +458,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @ns4.setter
     def ns4(self, value: int) -> None:
+        """Set the ns4 property."""
         self._cards[3].set_value("ns4", value)
 
     @property
@@ -447,6 +469,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @ns5.setter
     def ns5(self, value: int) -> None:
+        """Set the ns5 property."""
         self._cards[3].set_value("ns5", value)
 
     @property
@@ -457,6 +480,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @ns6.setter
     def ns6(self, value: int) -> None:
+        """Set the ns6 property."""
         self._cards[3].set_value("ns6", value)
 
     @property
@@ -467,6 +491,7 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @ns7.setter
     def ns7(self, value: int) -> None:
+        """Set the ns7 property."""
         self._cards[3].set_value("ns7", value)
 
     @property
@@ -477,5 +502,6 @@ class ElementSolidH8Toh27OrthoDof(KeywordBase):
 
     @ns8.setter
     def ns8(self, value: int) -> None:
+        """Set the ns8 property."""
         self._cards[3].set_value("ns8", value)
 

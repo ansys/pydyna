@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatCompositeFailureSphModel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatCompositeFailureSphModel(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatCompositeFailureSphModel class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -342,6 +344,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -352,6 +355,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -362,6 +366,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @ea.setter
     def ea(self, value: float) -> None:
+        """Set the ea property."""
         self._cards[0].set_value("ea", value)
 
     @property
@@ -372,6 +377,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @eb.setter
     def eb(self, value: float) -> None:
+        """Set the eb property."""
         self._cards[0].set_value("eb", value)
 
     @property
@@ -382,6 +388,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @ec.setter
     def ec(self, value: float) -> None:
+        """Set the ec property."""
         self._cards[0].set_value("ec", value)
 
     @property
@@ -392,6 +399,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @prba.setter
     def prba(self, value: float) -> None:
+        """Set the prba property."""
         self._cards[0].set_value("prba", value)
 
     @property
@@ -402,6 +410,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @prca.setter
     def prca(self, value: float) -> None:
+        """Set the prca property."""
         self._cards[0].set_value("prca", value)
 
     @property
@@ -412,6 +421,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @prcb.setter
     def prcb(self, value: float) -> None:
+        """Set the prcb property."""
         self._cards[0].set_value("prcb", value)
 
     @property
@@ -422,6 +432,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @gab.setter
     def gab(self, value: float) -> None:
+        """Set the gab property."""
         self._cards[1].set_value("gab", value)
 
     @property
@@ -432,6 +443,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @gbc.setter
     def gbc(self, value: float) -> None:
+        """Set the gbc property."""
         self._cards[1].set_value("gbc", value)
 
     @property
@@ -442,6 +454,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @gca.setter
     def gca(self, value: float) -> None:
+        """Set the gca property."""
         self._cards[1].set_value("gca", value)
 
     @property
@@ -452,6 +465,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @kf.setter
     def kf(self, value: float) -> None:
+        """Set the kf property."""
         self._cards[1].set_value("kf", value)
 
     @property
@@ -468,6 +482,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[1].set_value("aopt", value)
 
     @property
@@ -486,8 +501,9 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -4, -3, -2, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}.""")
         self._cards[1].set_value("macf", value)
 
     @property
@@ -498,6 +514,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[2].set_value("xp", value)
 
     @property
@@ -508,6 +525,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[2].set_value("yp", value)
 
     @property
@@ -518,6 +536,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[2].set_value("zp", value)
 
     @property
@@ -528,6 +547,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[2].set_value("a1", value)
 
     @property
@@ -538,6 +558,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[2].set_value("a2", value)
 
     @property
@@ -548,6 +569,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[2].set_value("a3", value)
 
     @property
@@ -558,6 +580,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[3].set_value("v1", value)
 
     @property
@@ -568,6 +591,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[3].set_value("v2", value)
 
     @property
@@ -578,6 +602,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[3].set_value("v3", value)
 
     @property
@@ -588,6 +613,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[3].set_value("d1", value)
 
     @property
@@ -598,6 +624,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[3].set_value("d2", value)
 
     @property
@@ -608,6 +635,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[3].set_value("d3", value)
 
     @property
@@ -618,6 +646,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[3].set_value("beta", value)
 
     @property
@@ -628,6 +657,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @sba.setter
     def sba(self, value: float) -> None:
+        """Set the sba property."""
         self._cards[4].set_value("sba", value)
 
     @property
@@ -638,6 +668,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @sca.setter
     def sca(self, value: float) -> None:
+        """Set the sca property."""
         self._cards[4].set_value("sca", value)
 
     @property
@@ -648,6 +679,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @scb.setter
     def scb(self, value: float) -> None:
+        """Set the scb property."""
         self._cards[4].set_value("scb", value)
 
     @property
@@ -658,6 +690,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @xxc.setter
     def xxc(self, value: float) -> None:
+        """Set the xxc property."""
         self._cards[4].set_value("xxc", value)
 
     @property
@@ -668,6 +701,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @yyc.setter
     def yyc(self, value: float) -> None:
+        """Set the yyc property."""
         self._cards[4].set_value("yyc", value)
 
     @property
@@ -678,6 +712,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @zzc.setter
     def zzc(self, value: float) -> None:
+        """Set the zzc property."""
         self._cards[4].set_value("zzc", value)
 
     @property
@@ -688,6 +723,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @xxt.setter
     def xxt(self, value: float) -> None:
+        """Set the xxt property."""
         self._cards[5].set_value("xxt", value)
 
     @property
@@ -698,6 +734,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @yyt.setter
     def yyt(self, value: float) -> None:
+        """Set the yyt property."""
         self._cards[5].set_value("yyt", value)
 
     @property
@@ -708,6 +745,7 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @zzt.setter
     def zzt(self, value: float) -> None:
+        """Set the zzt property."""
         self._cards[5].set_value("zzt", value)
 
     @property
@@ -718,5 +756,9 @@ class MatCompositeFailureSphModel(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

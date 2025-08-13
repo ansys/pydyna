@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatEnhancedCompositeDamageModel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatEnhancedCompositeDamageModel class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -407,6 +409,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -417,6 +420,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -427,6 +431,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @ea.setter
     def ea(self, value: float) -> None:
+        """Set the ea property."""
         self._cards[0].set_value("ea", value)
 
     @property
@@ -437,6 +442,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @eb.setter
     def eb(self, value: float) -> None:
+        """Set the eb property."""
         self._cards[0].set_value("eb", value)
 
     @property
@@ -447,6 +453,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @_ec_.setter
     def _ec_(self, value: float) -> None:
+        """Set the _ec_ property."""
         self._cards[0].set_value("(ec)", value)
 
     @property
@@ -457,6 +464,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @prba.setter
     def prba(self, value: float) -> None:
+        """Set the prba property."""
         self._cards[0].set_value("prba", value)
 
     @property
@@ -467,6 +475,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @_prca_.setter
     def _prca_(self, value: float) -> None:
+        """Set the _prca_ property."""
         self._cards[0].set_value("(prca)", value)
 
     @property
@@ -477,6 +486,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @_prcb_.setter
     def _prcb_(self, value: float) -> None:
+        """Set the _prcb_ property."""
         self._cards[0].set_value("(prcb)", value)
 
     @property
@@ -487,6 +497,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @gab.setter
     def gab(self, value: float) -> None:
+        """Set the gab property."""
         self._cards[1].set_value("gab", value)
 
     @property
@@ -497,6 +508,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @gbc.setter
     def gbc(self, value: float) -> None:
+        """Set the gbc property."""
         self._cards[1].set_value("gbc", value)
 
     @property
@@ -507,6 +519,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @gca.setter
     def gca(self, value: float) -> None:
+        """Set the gca property."""
         self._cards[1].set_value("gca", value)
 
     @property
@@ -517,6 +530,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @_kf_.setter
     def _kf_(self, value: float) -> None:
+        """Set the _kf_ property."""
         self._cards[1].set_value("(kf)", value)
 
     @property
@@ -533,6 +547,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[1].set_value("aopt", value)
 
     @property
@@ -545,6 +560,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @_2way.setter
     def _2way(self, value: float) -> None:
+        """Set the _2way property."""
         self._cards[1].set_value("2way", value)
 
     @property
@@ -557,6 +573,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @ti.setter
     def ti(self, value: float) -> None:
+        """Set the ti property."""
         self._cards[1].set_value("ti", value)
 
     @property
@@ -567,6 +584,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[2].set_value("xp", value)
 
     @property
@@ -577,6 +595,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[2].set_value("yp", value)
 
     @property
@@ -587,6 +606,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[2].set_value("zp", value)
 
     @property
@@ -597,6 +617,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[2].set_value("a1", value)
 
     @property
@@ -607,6 +628,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[2].set_value("a2", value)
 
     @property
@@ -617,6 +639,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[2].set_value("a3", value)
 
     @property
@@ -627,6 +650,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @mangle.setter
     def mangle(self, value: float) -> None:
+        """Set the mangle property."""
         self._cards[2].set_value("mangle", value)
 
     @property
@@ -637,6 +661,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[3].set_value("v1", value)
 
     @property
@@ -647,6 +672,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[3].set_value("v2", value)
 
     @property
@@ -657,6 +683,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[3].set_value("v3", value)
 
     @property
@@ -667,6 +694,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[3].set_value("d1", value)
 
     @property
@@ -677,6 +705,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[3].set_value("d2", value)
 
     @property
@@ -687,6 +716,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[3].set_value("d3", value)
 
     @property
@@ -697,6 +727,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @dfailm.setter
     def dfailm(self, value: float) -> None:
+        """Set the dfailm property."""
         self._cards[3].set_value("dfailm", value)
 
     @property
@@ -707,6 +738,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @dfails.setter
     def dfails(self, value: float) -> None:
+        """Set the dfails property."""
         self._cards[3].set_value("dfails", value)
 
     @property
@@ -720,6 +752,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @tfail.setter
     def tfail(self, value: float) -> None:
+        """Set the tfail property."""
         self._cards[4].set_value("tfail", value)
 
     @property
@@ -730,6 +763,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @alph.setter
     def alph(self, value: float) -> None:
+        """Set the alph property."""
         self._cards[4].set_value("alph", value)
 
     @property
@@ -740,6 +774,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @soft.setter
     def soft(self, value: float) -> None:
+        """Set the soft property."""
         self._cards[4].set_value("soft", value)
 
     @property
@@ -752,6 +787,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @fbrt.setter
     def fbrt(self, value: float) -> None:
+        """Set the fbrt property."""
         self._cards[4].set_value("fbrt", value)
 
     @property
@@ -762,6 +798,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @ycfac.setter
     def ycfac(self, value: float) -> None:
+        """Set the ycfac property."""
         self._cards[4].set_value("ycfac", value)
 
     @property
@@ -772,6 +809,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @dfailt.setter
     def dfailt(self, value: float) -> None:
+        """Set the dfailt property."""
         self._cards[4].set_value("dfailt", value)
 
     @property
@@ -782,6 +820,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @dfailc.setter
     def dfailc(self, value: float) -> None:
+        """Set the dfailc property."""
         self._cards[4].set_value("dfailc", value)
 
     @property
@@ -792,6 +831,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @efs.setter
     def efs(self, value: float) -> None:
+        """Set the efs property."""
         self._cards[4].set_value("efs", value)
 
     @property
@@ -802,6 +842,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[5].set_value("xc", value)
 
     @property
@@ -812,6 +853,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @xt.setter
     def xt(self, value: float) -> None:
+        """Set the xt property."""
         self._cards[5].set_value("xt", value)
 
     @property
@@ -822,6 +864,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[5].set_value("yc", value)
 
     @property
@@ -832,6 +875,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @yt.setter
     def yt(self, value: float) -> None:
+        """Set the yt property."""
         self._cards[5].set_value("yt", value)
 
     @property
@@ -842,6 +886,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @sc.setter
     def sc(self, value: float) -> None:
+        """Set the sc property."""
         self._cards[5].set_value("sc", value)
 
     @property
@@ -854,8 +899,9 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @crit.setter
     def crit(self, value: float) -> None:
+        """Set the crit property."""
         if value not in [54.0, 55.0, None]:
-            raise Exception("""crit must be `None` or one of {54.0,55.0}""")
+            raise Exception("""crit must be `None` or one of {54.0,55.0}.""")
         self._cards[5].set_value("crit", value)
 
     @property
@@ -866,6 +912,7 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[5].set_value("beta", value)
 
     @property
@@ -876,5 +923,9 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

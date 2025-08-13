@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseExtentBinary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseExtentBinary(KeywordBase):
     subkeyword = "EXTENT_BINARY"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseExtentBinary class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -298,6 +300,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @neiph.setter
     def neiph(self, value: int) -> None:
+        """Set the neiph property."""
         self._cards[0].set_value("neiph", value)
 
     @property
@@ -308,6 +311,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @neips.setter
     def neips(self, value: int) -> None:
+        """Set the neips property."""
         self._cards[0].set_value("neips", value)
 
     @property
@@ -321,6 +325,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @maxint.setter
     def maxint(self, value: int) -> None:
+        """Set the maxint property."""
         self._cards[0].set_value("maxint", value)
 
     @property
@@ -334,6 +339,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @strflg.setter
     def strflg(self, value: int) -> None:
+        """Set the strflg property."""
         self._cards[0].set_value("strflg", value)
 
     @property
@@ -346,8 +352,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @sigflg.setter
     def sigflg(self, value: int) -> None:
+        """Set the sigflg property."""
         if value not in [1, 2, None]:
-            raise Exception("""sigflg must be `None` or one of {1,2}""")
+            raise Exception("""sigflg must be `None` or one of {1,2}.""")
         self._cards[0].set_value("sigflg", value)
 
     @property
@@ -360,8 +367,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @epsflg.setter
     def epsflg(self, value: int) -> None:
+        """Set the epsflg property."""
         if value not in [1, 2, None]:
-            raise Exception("""epsflg must be `None` or one of {1,2}""")
+            raise Exception("""epsflg must be `None` or one of {1,2}.""")
         self._cards[0].set_value("epsflg", value)
 
     @property
@@ -374,8 +382,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @rltflg.setter
     def rltflg(self, value: int) -> None:
+        """Set the rltflg property."""
         if value not in [1, 2, None]:
-            raise Exception("""rltflg must be `None` or one of {1,2}""")
+            raise Exception("""rltflg must be `None` or one of {1,2}.""")
         self._cards[0].set_value("rltflg", value)
 
     @property
@@ -388,8 +397,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @engflg.setter
     def engflg(self, value: int) -> None:
+        """Set the engflg property."""
         if value not in [1, 2, None]:
-            raise Exception("""engflg must be `None` or one of {1,2}""")
+            raise Exception("""engflg must be `None` or one of {1,2}.""")
         self._cards[0].set_value("engflg", value)
 
     @property
@@ -402,8 +412,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @cmpflg.setter
     def cmpflg(self, value: int) -> None:
+        """Set the cmpflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""cmpflg must be `None` or one of {0,1}""")
+            raise Exception("""cmpflg must be `None` or one of {0,1}.""")
         self._cards[1].set_value("cmpflg", value)
 
     @property
@@ -416,8 +427,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @ieverp.setter
     def ieverp(self, value: int) -> None:
+        """Set the ieverp property."""
         if value not in [0, 1, None]:
-            raise Exception("""ieverp must be `None` or one of {0,1}""")
+            raise Exception("""ieverp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ieverp", value)
 
     @property
@@ -428,6 +440,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @beamip.setter
     def beamip(self, value: int) -> None:
+        """Set the beamip property."""
         self._cards[1].set_value("beamip", value)
 
     @property
@@ -444,8 +457,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @dcomp.setter
     def dcomp(self, value: int) -> None:
+        """Set the dcomp property."""
         if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""dcomp must be `None` or one of {1,2,3,4,5,6}""")
+            raise Exception("""dcomp must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[1].set_value("dcomp", value)
 
     @property
@@ -458,8 +472,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @shge.setter
     def shge(self, value: int) -> None:
+        """Set the shge property."""
         if value not in [1, 2, None]:
-            raise Exception("""shge must be `None` or one of {1,2}""")
+            raise Exception("""shge must be `None` or one of {1,2}.""")
         self._cards[1].set_value("shge", value)
 
     @property
@@ -474,8 +489,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @stssz.setter
     def stssz(self, value: int) -> None:
+        """Set the stssz property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""stssz must be `None` or one of {1,2,3}""")
+            raise Exception("""stssz must be `None` or one of {1,2,3}.""")
         self._cards[1].set_value("stssz", value)
 
     @property
@@ -488,8 +504,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @n3thdt.setter
     def n3thdt(self, value: int) -> None:
+        """Set the n3thdt property."""
         if value not in [2, 1, None]:
-            raise Exception("""n3thdt must be `None` or one of {2,1}""")
+            raise Exception("""n3thdt must be `None` or one of {2,1}.""")
         self._cards[1].set_value("n3thdt", value)
 
     @property
@@ -502,8 +519,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @ialemat.setter
     def ialemat(self, value: int) -> None:
+        """Set the ialemat property."""
         if value not in [1, 0, None]:
-            raise Exception("""ialemat must be `None` or one of {1,0}""")
+            raise Exception("""ialemat must be `None` or one of {1,0}.""")
         self._cards[1].set_value("ialemat", value)
 
     @property
@@ -514,8 +532,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @nintsld.setter
     def nintsld(self, value: int) -> None:
+        """Set the nintsld property."""
         if value not in [0, 1, 8, None]:
-            raise Exception("""nintsld must be `None` or one of {0,1,8}""")
+            raise Exception("""nintsld must be `None` or one of {0,1,8}.""")
         self._cards[2].set_value("nintsld", value)
 
     @property
@@ -528,8 +547,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @pkp_sen.setter
     def pkp_sen(self, value: int) -> None:
+        """Set the pkp_sen property."""
         if value not in [0, 1, None]:
-            raise Exception("""pkp_sen must be `None` or one of {0,1}""")
+            raise Exception("""pkp_sen must be `None` or one of {0,1}.""")
         self._cards[2].set_value("pkp_sen", value)
 
     @property
@@ -540,6 +560,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @sclp.setter
     def sclp(self, value: float) -> None:
+        """Set the sclp property."""
         self._cards[2].set_value("sclp", value)
 
     @property
@@ -554,6 +575,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @hydro.setter
     def hydro(self, value: int) -> None:
+        """Set the hydro property."""
         self._cards[2].set_value("hydro", value)
 
     @property
@@ -567,8 +589,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @msscl.setter
     def msscl(self, value: int) -> None:
+        """Set the msscl property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""msscl must be `None` or one of {0,1,2}""")
+            raise Exception("""msscl must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("msscl", value)
 
     @property
@@ -583,8 +606,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @therm.setter
     def therm(self, value: int) -> None:
+        """Set the therm property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""therm must be `None` or one of {0,1,2,3}""")
+            raise Exception("""therm must be `None` or one of {0,1,2,3}.""")
         self._cards[2].set_value("therm", value)
 
     @property
@@ -598,8 +622,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @intout.setter
     def intout(self, value: str) -> None:
+        """Set the intout property."""
         if value not in [" ", "STRESS", "STRAIN", "ALL", None]:
-            raise Exception("""intout must be `None` or one of {" ","STRESS","STRAIN","ALL"}""")
+            raise Exception("""intout must be `None` or one of {" ","STRESS","STRAIN","ALL"}.""")
         self._cards[2].set_value("intout", value)
 
     @property
@@ -616,8 +641,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @nodout.setter
     def nodout(self, value: str) -> None:
+        """Set the nodout property."""
         if value not in [" ", "STRESS", "STRAIN", "ALL", "STRESS_GL", "STRAIN_GL", "ALL_GL", None]:
-            raise Exception("""nodout must be `None` or one of {" ","STRESS","STRAIN","ALL","STRESS_GL","STRAIN_GL","ALL_GL"}""")
+            raise Exception("""nodout must be `None` or one of {" ","STRESS","STRAIN","ALL","STRESS_GL","STRAIN_GL","ALL_GL"}.""")
         self._cards[2].set_value("nodout", value)
 
     @property
@@ -630,8 +656,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @dtdt.setter
     def dtdt(self, value: int) -> None:
+        """Set the dtdt property."""
         if value not in [0, 1, None]:
-            raise Exception("""dtdt must be `None` or one of {0,1}""")
+            raise Exception("""dtdt must be `None` or one of {0,1}.""")
         self._cards[3].set_value("dtdt", value)
 
     @property
@@ -644,8 +671,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @resplt.setter
     def resplt(self, value: int) -> None:
+        """Set the resplt property."""
         if value not in [0, 1, None]:
-            raise Exception("""resplt must be `None` or one of {0,1}""")
+            raise Exception("""resplt must be `None` or one of {0,1}.""")
         self._cards[3].set_value("resplt", value)
 
     @property
@@ -656,6 +684,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @neipb.setter
     def neipb(self, value: int) -> None:
+        """Set the neipb property."""
         self._cards[3].set_value("neipb", value)
 
     @property
@@ -667,8 +696,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @quadsld.setter
     def quadsld(self, value: int) -> None:
+        """Set the quadsld property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""quadsld must be `None` or one of {0,1,2}""")
+            raise Exception("""quadsld must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("quadsld", value)
 
     @property
@@ -680,8 +710,9 @@ class DatabaseExtentBinary(KeywordBase):
 
     @cubsld.setter
     def cubsld(self, value: int) -> None:
+        """Set the cubsld property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""cubsld must be `None` or one of {0,1,2}""")
+            raise Exception("""cubsld must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("cubsld", value)
 
     @property
@@ -694,7 +725,8 @@ class DatabaseExtentBinary(KeywordBase):
 
     @deleres.setter
     def deleres(self, value: int) -> None:
+        """Set the deleres property."""
         if value not in [0, 1, None]:
-            raise Exception("""deleres must be `None` or one of {0,1}""")
+            raise Exception("""deleres must be `None` or one of {0,1}.""")
         self._cards[3].set_value("deleres", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineElementErosionIga class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineElementErosionIga(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineElementErosionIga class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -100,6 +102,7 @@ class DefineElementErosionIga(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -114,8 +117,9 @@ class DefineElementErosionIga(KeywordBase):
 
     @styp.setter
     def styp(self, value: int) -> None:
+        """Set the styp property."""
         if value not in [3, 4, None]:
-            raise Exception("""styp must be `None` or one of {3,4}""")
+            raise Exception("""styp must be `None` or one of {3,4}.""")
         self._cards[0].set_value("styp", value)
 
     @property
@@ -127,6 +131,7 @@ class DefineElementErosionIga(KeywordBase):
 
     @numfip.setter
     def numfip(self, value: float) -> None:
+        """Set the numfip property."""
         self._cards[0].set_value("numfip", value)
 
     @property
@@ -137,6 +142,7 @@ class DefineElementErosionIga(KeywordBase):
 
     @nifp.setter
     def nifp(self, value: int) -> None:
+        """Set the nifp property."""
         self._cards[0].set_value("nifp", value)
 
     @property
@@ -147,5 +153,9 @@ class DefineElementErosionIga(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

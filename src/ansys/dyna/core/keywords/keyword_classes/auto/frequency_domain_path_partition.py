@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainPathPartition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainPathPartition(KeywordBase):
     subkeyword = "DOMAIN_PATH_PARTITION"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainPathPartition class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class FrequencyDomainPathPartition(KeywordBase):
 
     @fbeg.setter
     def fbeg(self, value: float) -> None:
+        """Set the fbeg property."""
         self._cards[0].set_value("fbeg", value)
 
     @property
@@ -78,6 +81,7 @@ class FrequencyDomainPathPartition(KeywordBase):
 
     @fend.setter
     def fend(self, value: float) -> None:
+        """Set the fend property."""
         self._cards[0].set_value("fend", value)
 
     @property
@@ -88,5 +92,6 @@ class FrequencyDomainPathPartition(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 

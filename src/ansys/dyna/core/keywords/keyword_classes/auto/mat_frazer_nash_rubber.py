@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatFrazerNashRubber class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatFrazerNashRubber(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatFrazerNashRubber class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -212,6 +214,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -222,6 +225,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -232,6 +236,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -242,6 +247,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @c100.setter
     def c100(self, value: float) -> None:
+        """Set the c100 property."""
         self._cards[0].set_value("c100", value)
 
     @property
@@ -252,6 +258,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @c200.setter
     def c200(self, value: float) -> None:
+        """Set the c200 property."""
         self._cards[0].set_value("c200", value)
 
     @property
@@ -262,6 +269,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @c300.setter
     def c300(self, value: float) -> None:
+        """Set the c300 property."""
         self._cards[0].set_value("c300", value)
 
     @property
@@ -272,6 +280,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @c400.setter
     def c400(self, value: float) -> None:
+        """Set the c400 property."""
         self._cards[0].set_value("c400", value)
 
     @property
@@ -282,6 +291,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @c110.setter
     def c110(self, value: float) -> None:
+        """Set the c110 property."""
         self._cards[1].set_value("c110", value)
 
     @property
@@ -292,6 +302,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @c210.setter
     def c210(self, value: float) -> None:
+        """Set the c210 property."""
         self._cards[1].set_value("c210", value)
 
     @property
@@ -302,6 +313,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @c010.setter
     def c010(self, value: float) -> None:
+        """Set the c010 property."""
         self._cards[1].set_value("c010", value)
 
     @property
@@ -312,6 +324,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @c020.setter
     def c020(self, value: float) -> None:
+        """Set the c020 property."""
         self._cards[1].set_value("c020", value)
 
     @property
@@ -324,6 +337,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @exit.setter
     def exit(self, value: float) -> None:
+        """Set the exit property."""
         self._cards[1].set_value("exit", value)
 
     @property
@@ -334,6 +348,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @emax.setter
     def emax(self, value: float) -> None:
+        """Set the emax property."""
         self._cards[1].set_value("emax", value)
 
     @property
@@ -344,6 +359,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @emin.setter
     def emin(self, value: float) -> None:
+        """Set the emin property."""
         self._cards[1].set_value("emin", value)
 
     @property
@@ -356,8 +372,9 @@ class MatFrazerNashRubber(KeywordBase):
 
     @ref.setter
     def ref(self, value: float) -> None:
+        """Set the ref property."""
         if value not in [0.0, 1.0, None]:
-            raise Exception("""ref must be `None` or one of {0.0,1.0}""")
+            raise Exception("""ref must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("ref", value)
 
     @property
@@ -368,6 +385,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @sgl.setter
     def sgl(self, value: float) -> None:
+        """Set the sgl property."""
         self._cards[2].set_value("sgl", value)
 
     @property
@@ -378,6 +396,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @sw.setter
     def sw(self, value: float) -> None:
+        """Set the sw property."""
         self._cards[2].set_value("sw", value)
 
     @property
@@ -388,6 +407,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @st.setter
     def st(self, value: float) -> None:
+        """Set the st property."""
         self._cards[2].set_value("st", value)
 
     @property
@@ -398,6 +418,7 @@ class MatFrazerNashRubber(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[2].set_value("lcid", value)
 
     @property
@@ -408,5 +429,9 @@ class MatFrazerNashRubber(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

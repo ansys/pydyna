@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IncludePathRelative class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IncludePathRelative(KeywordBase):
     subkeyword = "PATH_RELATIVE"
 
     def __init__(self, **kwargs):
+        """Initialize the IncludePathRelative class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -56,5 +58,6 @@ class IncludePathRelative(KeywordBase):
 
     @path.setter
     def path(self, value: str) -> None:
+        """Set the path property."""
         self._cards[0].set_value("path", value)
 

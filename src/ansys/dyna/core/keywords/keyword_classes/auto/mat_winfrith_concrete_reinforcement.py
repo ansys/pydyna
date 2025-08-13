@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatWinfrithConcreteReinforcement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatWinfrithConcreteReinforcement class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -111,6 +113,7 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
 
     @eid1_unused.setter
     def eid1_unused(self, value: int) -> None:
+        """Set the eid1_unused property."""
         self._cards[0].set_value("eid1/unused", value)
 
     @property
@@ -122,6 +125,7 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
 
     @eid2_pid.setter
     def eid2_pid(self, value: int) -> None:
+        """Set the eid2_pid property."""
         self._cards[0].set_value("eid2/pid", value)
 
     @property
@@ -136,6 +140,7 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
 
     @inc_axis.setter
     def inc_axis(self, value: int) -> None:
+        """Set the inc_axis property."""
         self._cards[0].set_value("inc/axis", value)
 
     @property
@@ -150,6 +155,7 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
 
     @xr_coor.setter
     def xr_coor(self, value: float) -> None:
+        """Set the xr_coor property."""
         self._cards[0].set_value("xr/coor", value)
 
     @property
@@ -161,6 +167,7 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
 
     @yr_rqa.setter
     def yr_rqa(self, value: float) -> None:
+        """Set the yr_rqa property."""
         self._cards[0].set_value("yr/rqa", value)
 
     @property
@@ -172,6 +179,7 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
 
     @zr_rqb.setter
     def zr_rqb(self, value: float) -> None:
+        """Set the zr_rqb property."""
         self._cards[0].set_value("zr/rqb", value)
 
     @property
@@ -182,5 +190,9 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

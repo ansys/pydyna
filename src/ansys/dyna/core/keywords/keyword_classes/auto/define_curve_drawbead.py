@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCurveDrawbead class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCurveDrawbead(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCurveDrawbead class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -143,6 +145,7 @@ class DefineCurveDrawbead(KeywordBase):
 
     @cid.setter
     def cid(self, value: int) -> None:
+        """Set the cid property."""
         self._cards[0].set_value("cid", value)
 
     @property
@@ -155,8 +158,9 @@ class DefineCurveDrawbead(KeywordBase):
 
     @tcype.setter
     def tcype(self, value: int) -> None:
+        """Set the tcype property."""
         if value not in [1, 2, None]:
-            raise Exception("""tcype must be `None` or one of {1,2}""")
+            raise Exception("""tcype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("tcype", value)
 
     @property
@@ -167,6 +171,7 @@ class DefineCurveDrawbead(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -177,6 +182,7 @@ class DefineCurveDrawbead(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -187,6 +193,7 @@ class DefineCurveDrawbead(KeywordBase):
 
     @blkid.setter
     def blkid(self, value: int) -> None:
+        """Set the blkid property."""
         self._cards[0].set_value("blkid", value)
 
     @property
@@ -197,6 +204,7 @@ class DefineCurveDrawbead(KeywordBase):
 
     @perct.setter
     def perct(self, value: int) -> None:
+        """Set the perct property."""
         self._cards[0].set_value("perct", value)
 
     @property
@@ -207,6 +215,7 @@ class DefineCurveDrawbead(KeywordBase):
 
     @cx.setter
     def cx(self, value: float) -> None:
+        """Set the cx property."""
         self._cards[1].set_value("cx", value)
 
     @property
@@ -217,6 +226,7 @@ class DefineCurveDrawbead(KeywordBase):
 
     @cy.setter
     def cy(self, value: float) -> None:
+        """Set the cy property."""
         self._cards[1].set_value("cy", value)
 
     @property
@@ -227,6 +237,7 @@ class DefineCurveDrawbead(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[2].set_value("filename", value)
 
     @property
@@ -237,5 +248,9 @@ class DefineCurveDrawbead(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

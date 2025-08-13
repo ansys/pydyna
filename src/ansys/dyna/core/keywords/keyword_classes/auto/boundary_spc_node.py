@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundarySpcNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
@@ -36,6 +37,7 @@ class BoundarySpcNode(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the BoundarySpcNode class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -82,12 +84,12 @@ class BoundarySpcNode(KeywordBase):
 
     @property
     def nodes(self):
-        '''Gets the table of nodes'''
+        """Get the table of nodes."""
         return self._cards[0].table
 
     @nodes.setter
     def nodes(self, df):
-        '''sets nodes from the dataframe df'''
+        """Set nodes from the dataframe df"""
         self._cards[0].table = df
 
     @property
@@ -98,7 +100,11 @@ class BoundarySpcNode(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[1].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
 
     @property
     def heading(self) -> typing.Optional[str]:
@@ -108,5 +114,9 @@ class BoundarySpcNode(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[1].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 

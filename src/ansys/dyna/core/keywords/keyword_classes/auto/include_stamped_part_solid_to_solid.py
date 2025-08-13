@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IncludeStampedPartSolidToSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
     subkeyword = "STAMPED_PART_SOLID_TO_SOLID"
 
     def __init__(self, **kwargs):
+        """Initialize the IncludeStampedPartSolidToSolid class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -151,6 +153,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -162,6 +165,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -172,6 +176,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @thick.setter
     def thick(self, value: int) -> None:
+        """Set the thick property."""
         self._cards[1].set_value("thick", value)
 
     @property
@@ -184,6 +189,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @pstrn.setter
     def pstrn(self, value: int) -> None:
+        """Set the pstrn property."""
         self._cards[1].set_value("pstrn", value)
 
     @property
@@ -196,6 +202,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @strain.setter
     def strain(self, value: int) -> None:
+        """Set the strain property."""
         self._cards[1].set_value("strain", value)
 
     @property
@@ -208,6 +215,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @stress.setter
     def stress(self, value: int) -> None:
+        """Set the stress property."""
         self._cards[1].set_value("stress", value)
 
     @property
@@ -218,6 +226,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @n1sorc.setter
     def n1sorc(self, value: int) -> None:
+        """Set the n1sorc property."""
         self._cards[2].set_value("n1sorc", value)
 
     @property
@@ -228,6 +237,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @n2sorc.setter
     def n2sorc(self, value: int) -> None:
+        """Set the n2sorc property."""
         self._cards[2].set_value("n2sorc", value)
 
     @property
@@ -238,6 +248,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @n3sorc.setter
     def n3sorc(self, value: int) -> None:
+        """Set the n3sorc property."""
         self._cards[2].set_value("n3sorc", value)
 
     @property
@@ -248,6 +259,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @n1trgt.setter
     def n1trgt(self, value: int) -> None:
+        """Set the n1trgt property."""
         self._cards[2].set_value("n1trgt", value)
 
     @property
@@ -258,6 +270,7 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @n2trgt.setter
     def n2trgt(self, value: int) -> None:
+        """Set the n2trgt property."""
         self._cards[2].set_value("n2trgt", value)
 
     @property
@@ -268,5 +281,6 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @n3trgt.setter
     def n3trgt(self, value: int) -> None:
+        """Set the n3trgt property."""
         self._cards[2].set_value("n3trgt", value)
 

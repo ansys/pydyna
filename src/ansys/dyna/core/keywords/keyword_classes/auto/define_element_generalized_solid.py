@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineElementGeneralizedSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineElementGeneralizedSolid(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineElementGeneralizedSolid class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -143,6 +145,7 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         self._cards[0].set_value("elform", value)
 
     @property
@@ -153,6 +156,7 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[0].set_value("nip", value)
 
     @property
@@ -163,6 +167,7 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @nmnp.setter
     def nmnp(self, value: int) -> None:
+        """Set the nmnp property."""
         self._cards[0].set_value("nmnp", value)
 
     @property
@@ -175,8 +180,9 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @imass.setter
     def imass(self, value: int) -> None:
+        """Set the imass property."""
         if value not in [0, 1, None]:
-            raise Exception("""imass must be `None` or one of {0,1}""")
+            raise Exception("""imass must be `None` or one of {0,1}.""")
         self._cards[0].set_value("imass", value)
 
     @property
@@ -187,6 +193,7 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @wi.setter
     def wi(self, value: float) -> None:
+        """Set the wi property."""
         self._cards[1].set_value("wi", value)
 
     @property
@@ -197,6 +204,7 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @nki.setter
     def nki(self, value: float) -> None:
+        """Set the nki property."""
         self._cards[2].set_value("nki", value)
 
     @property
@@ -207,6 +215,7 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @dnkidr.setter
     def dnkidr(self, value: float) -> None:
+        """Set the dnkidr property."""
         self._cards[2].set_value("dnkidr", value)
 
     @property
@@ -217,6 +226,7 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @dnkids.setter
     def dnkids(self, value: float) -> None:
+        """Set the dnkids property."""
         self._cards[2].set_value("dnkids", value)
 
     @property
@@ -227,6 +237,7 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @dnkidt.setter
     def dnkidt(self, value: float) -> None:
+        """Set the dnkidt property."""
         self._cards[2].set_value("dnkidt", value)
 
     @property
@@ -237,5 +248,9 @@ class DefineElementGeneralizedSolid(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

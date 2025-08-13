@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryPrescribedMotionSetSegment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryPrescribedMotionSetSegment class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -137,6 +139,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -165,8 +168,9 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [0, 1, 2, 3, 4, -4, 5, 6, 7, 8, -8, 9, -9, 10, -10, 11, -11, 12, None]:
-            raise Exception("""dof must be `None` or one of {0,1,2,3,4,-4,5,6,7,8,-8,9,-9,10,-10,11,-11,12}""")
+            raise Exception("""dof must be `None` or one of {0,1,2,3,4,-4,5,6,7,8,-8,9,-9,10,-10,11,-11,12}.""")
         self._cards[0].set_value("dof", value)
 
     @property
@@ -182,8 +186,9 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
+        """Set the vad property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""vad must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""vad must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("vad", value)
 
     @property
@@ -194,6 +199,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -204,6 +210,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -214,6 +221,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -224,6 +232,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -234,6 +243,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -244,7 +254,11 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[1].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
 
     @property
     def heading(self) -> typing.Optional[str]:
@@ -254,5 +268,9 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[1].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 

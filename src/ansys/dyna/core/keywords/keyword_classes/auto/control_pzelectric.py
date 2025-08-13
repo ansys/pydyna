@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlPzelectric class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlPzelectric(KeywordBase):
     subkeyword = "PZELECTRIC"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlPzelectric class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -105,8 +107,9 @@ class ControlPzelectric(KeywordBase):
 
     @solver.setter
     def solver(self, value: int) -> None:
+        """Set the solver property."""
         if value not in [11, 12, None]:
-            raise Exception("""solver must be `None` or one of {11,12}""")
+            raise Exception("""solver must be `None` or one of {11,12}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -119,8 +122,9 @@ class ControlPzelectric(KeywordBase):
 
     @msgitr.setter
     def msgitr(self, value: int) -> None:
+        """Set the msgitr property."""
         if value not in [0, 1, None]:
-            raise Exception("""msgitr must be `None` or one of {0,1}""")
+            raise Exception("""msgitr must be `None` or one of {0,1}.""")
         self._cards[0].set_value("msgitr", value)
 
     @property
@@ -132,6 +136,7 @@ class ControlPzelectric(KeywordBase):
 
     @maxitr.setter
     def maxitr(self, value: int) -> None:
+        """Set the maxitr property."""
         self._cards[0].set_value("maxitr", value)
 
     @property
@@ -143,6 +148,7 @@ class ControlPzelectric(KeywordBase):
 
     @abstol.setter
     def abstol(self, value: float) -> None:
+        """Set the abstol property."""
         self._cards[0].set_value("abstol", value)
 
     @property
@@ -154,6 +160,7 @@ class ControlPzelectric(KeywordBase):
 
     @reltol.setter
     def reltol(self, value: int) -> None:
+        """Set the reltol property."""
         self._cards[0].set_value("reltol", value)
 
     @property
@@ -165,6 +172,7 @@ class ControlPzelectric(KeywordBase):
 
     @ndtrfk.setter
     def ndtrfk(self, value: int) -> None:
+        """Set the ndtrfk property."""
         self._cards[0].set_value("ndtrfk", value)
 
     @property
@@ -177,5 +185,6 @@ class ControlPzelectric(KeywordBase):
 
     @epzmsg.setter
     def epzmsg(self, value: int) -> None:
+        """Set the epzmsg property."""
         self._cards[0].set_value("epzmsg", value)
 

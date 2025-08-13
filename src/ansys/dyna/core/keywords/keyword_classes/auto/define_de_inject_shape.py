@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeInjectShape class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeInjectShape(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeInjectShape class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -131,6 +133,7 @@ class DefineDeInjectShape(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -141,6 +144,7 @@ class DefineDeInjectShape(KeywordBase):
 
     @nde.setter
     def nde(self, value: int) -> None:
+        """Set the nde property."""
         self._cards[0].set_value("nde", value)
 
     @property
@@ -153,8 +157,9 @@ class DefineDeInjectShape(KeywordBase):
 
     @iauto.setter
     def iauto(self, value: int) -> None:
+        """Set the iauto property."""
         if value not in [0, 1, None]:
-            raise Exception("""iauto must be `None` or one of {0,1}""")
+            raise Exception("""iauto must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iauto", value)
 
     @property
@@ -168,8 +173,9 @@ class DefineDeInjectShape(KeywordBase):
 
     @itype.setter
     def itype(self, value: int) -> None:
+        """Set the itype property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""itype must be `None` or one of {1,2,3}""")
+            raise Exception("""itype must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -180,6 +186,7 @@ class DefineDeInjectShape(KeywordBase):
 
     @x.setter
     def x(self, value: float) -> None:
+        """Set the x property."""
         self._cards[1].set_value("x", value)
 
     @property
@@ -190,6 +197,7 @@ class DefineDeInjectShape(KeywordBase):
 
     @y.setter
     def y(self, value: float) -> None:
+        """Set the y property."""
         self._cards[1].set_value("y", value)
 
     @property
@@ -200,6 +208,7 @@ class DefineDeInjectShape(KeywordBase):
 
     @z.setter
     def z(self, value: float) -> None:
+        """Set the z property."""
         self._cards[1].set_value("z", value)
 
     @property
@@ -210,6 +219,7 @@ class DefineDeInjectShape(KeywordBase):
 
     @r.setter
     def r(self, value: float) -> None:
+        """Set the r property."""
         self._cards[1].set_value("r", value)
 
     @property
@@ -220,5 +230,9 @@ class DefineDeInjectShape(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineDeMeshSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineDeMeshSurface(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineDeMeshSurface class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -133,6 +135,7 @@ class DefineDeMeshSurface(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -144,8 +147,9 @@ class DefineDeMeshSurface(KeywordBase):
 
     @type.setter
     def type(self, value: int) -> None:
+        """Set the type property."""
         if value not in [0, 1, None]:
-            raise Exception("""type must be `None` or one of {0,1}""")
+            raise Exception("""type must be `None` or one of {0,1}.""")
         self._cards[0].set_value("type", value)
 
     @property
@@ -156,6 +160,7 @@ class DefineDeMeshSurface(KeywordBase):
 
     @nquad.setter
     def nquad(self, value: int) -> None:
+        """Set the nquad property."""
         self._cards[0].set_value("nquad", value)
 
     @property
@@ -166,6 +171,7 @@ class DefineDeMeshSurface(KeywordBase):
 
     @despid.setter
     def despid(self, value: int) -> None:
+        """Set the despid property."""
         self._cards[0].set_value("despid", value)
 
     @property
@@ -176,6 +182,7 @@ class DefineDeMeshSurface(KeywordBase):
 
     @descid.setter
     def descid(self, value: int) -> None:
+        """Set the descid property."""
         self._cards[0].set_value("descid", value)
 
     @property
@@ -186,6 +193,7 @@ class DefineDeMeshSurface(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -197,6 +205,7 @@ class DefineDeMeshSurface(KeywordBase):
 
     @rsf.setter
     def rsf(self, value: float) -> None:
+        """Set the rsf property."""
         self._cards[0].set_value("rsf", value)
 
     @property
@@ -209,8 +218,9 @@ class DefineDeMeshSurface(KeywordBase):
 
     @iactive.setter
     def iactive(self, value: int) -> None:
+        """Set the iactive property."""
         if value not in [0, 1, None]:
-            raise Exception("""iactive must be `None` or one of {0,1}""")
+            raise Exception("""iactive must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iactive", value)
 
     @property
@@ -221,5 +231,9 @@ class DefineDeMeshSurface(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseHistorySeatbeltId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseHistorySeatbeltId(KeywordBase):
     subkeyword = "HISTORY_SEATBELT_ID"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseHistorySeatbeltId class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -61,6 +63,7 @@ class DatabaseHistorySeatbeltId(KeywordBase):
 
     @id1.setter
     def id1(self, value: int) -> None:
+        """Set the id1 property."""
         self._cards[0].set_value("id1", value)
 
     @property
@@ -71,5 +74,6 @@ class DatabaseHistorySeatbeltId(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 

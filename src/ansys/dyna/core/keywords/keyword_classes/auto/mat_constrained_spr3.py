@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatConstrainedSpr3 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatConstrainedSpr3(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatConstrainedSpr3 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -229,6 +231,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -239,6 +242,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -255,8 +259,9 @@ class MatConstrainedSpr3(KeywordBase):
 
     @model.setter
     def model(self, value: int) -> None:
+        """Set the model property."""
         if value not in [1, 2, 11, 12, 21, 22, None]:
-            raise Exception("""model must be `None` or one of {1,2,11,12,21,22}""")
+            raise Exception("""model must be `None` or one of {1,2,11,12,21,22}.""")
         self._cards[0].set_value("model", value)
 
     @property
@@ -267,6 +272,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @stiff.setter
     def stiff(self, value: float) -> None:
+        """Set the stiff property."""
         self._cards[1].set_value("stiff", value)
 
     @property
@@ -279,6 +285,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @rn.setter
     def rn(self, value: float) -> None:
+        """Set the rn property."""
         self._cards[1].set_value("rn", value)
 
     @property
@@ -289,6 +296,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @rs.setter
     def rs(self, value: float) -> None:
+        """Set the rs property."""
         self._cards[1].set_value("rs", value)
 
     @property
@@ -299,6 +307,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @alpha1.setter
     def alpha1(self, value: float) -> None:
+        """Set the alpha1 property."""
         self._cards[1].set_value("alpha1", value)
 
     @property
@@ -309,6 +318,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[1].set_value("beta", value)
 
     @property
@@ -319,6 +329,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @lcf.setter
     def lcf(self, value: int) -> None:
+        """Set the lcf property."""
         self._cards[1].set_value("lcf", value)
 
     @property
@@ -329,6 +340,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @lcupf.setter
     def lcupf(self, value: int) -> None:
+        """Set the lcupf property."""
         self._cards[1].set_value("lcupf", value)
 
     @property
@@ -339,6 +351,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @lcupr.setter
     def lcupr(self, value: int) -> None:
+        """Set the lcupr property."""
         self._cards[1].set_value("lcupr", value)
 
     @property
@@ -349,6 +362,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @upfn.setter
     def upfn(self, value: float) -> None:
+        """Set the upfn property."""
         self._cards[2].set_value("upfn", value)
 
     @property
@@ -359,6 +373,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @upfs.setter
     def upfs(self, value: float) -> None:
+        """Set the upfs property."""
         self._cards[2].set_value("upfs", value)
 
     @property
@@ -369,6 +384,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @alpha2.setter
     def alpha2(self, value: float) -> None:
+        """Set the alpha2 property."""
         self._cards[2].set_value("alpha2", value)
 
     @property
@@ -379,6 +395,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @beta2.setter
     def beta2(self, value: float) -> None:
+        """Set the beta2 property."""
         self._cards[2].set_value("beta2", value)
 
     @property
@@ -389,6 +406,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @uprn.setter
     def uprn(self, value: float) -> None:
+        """Set the uprn property."""
         self._cards[2].set_value("uprn", value)
 
     @property
@@ -399,6 +417,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @uprs.setter
     def uprs(self, value: float) -> None:
+        """Set the uprs property."""
         self._cards[2].set_value("uprs", value)
 
     @property
@@ -409,6 +428,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @alpha3.setter
     def alpha3(self, value: float) -> None:
+        """Set the alpha3 property."""
         self._cards[2].set_value("alpha3", value)
 
     @property
@@ -419,6 +439,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @beta3.setter
     def beta3(self, value: float) -> None:
+        """Set the beta3 property."""
         self._cards[2].set_value("beta3", value)
 
     @property
@@ -429,6 +450,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @mrn.setter
     def mrn(self, value: float) -> None:
+        """Set the mrn property."""
         self._cards[3].set_value("mrn", value)
 
     @property
@@ -439,6 +461,7 @@ class MatConstrainedSpr3(KeywordBase):
 
     @mrs.setter
     def mrs(self, value: float) -> None:
+        """Set the mrs property."""
         self._cards[3].set_value("mrs", value)
 
     @property
@@ -449,5 +472,9 @@ class MatConstrainedSpr3(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

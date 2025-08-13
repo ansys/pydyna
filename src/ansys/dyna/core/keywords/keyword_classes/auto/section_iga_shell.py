@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionIgaShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionIgaShell(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionIgaShell class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -225,6 +227,7 @@ class SectionIgaShell(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -241,8 +244,9 @@ class SectionIgaShell(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [0, 1, 2, 3, 5, 6, None]:
-            raise Exception("""elform must be `None` or one of {0,1,2,3,5,6}""")
+            raise Exception("""elform must be `None` or one of {0,1,2,3,5,6}.""")
         self._cards[0].set_value("elform", value)
 
     @property
@@ -253,6 +257,7 @@ class SectionIgaShell(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[0].set_value("shrf", value)
 
     @property
@@ -264,6 +269,7 @@ class SectionIgaShell(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[0].set_value("nip", value)
 
     @property
@@ -277,8 +283,9 @@ class SectionIgaShell(KeywordBase):
 
     @irl.setter
     def irl(self, value: int) -> None:
+        """Set the irl property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""irl must be `None` or one of {0,1,2}""")
+            raise Exception("""irl must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("irl", value)
 
     @property
@@ -292,6 +299,7 @@ class SectionIgaShell(KeywordBase):
 
     @qr_irid.setter
     def qr_irid(self, value: float) -> None:
+        """Set the qr_irid property."""
         self._cards[0].set_value("qr/irid", value)
 
     @property
@@ -304,6 +312,7 @@ class SectionIgaShell(KeywordBase):
 
     @icomp.setter
     def icomp(self, value: int) -> None:
+        """Set the icomp property."""
         self._cards[0].set_value("icomp", value)
 
     @property
@@ -314,6 +323,7 @@ class SectionIgaShell(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 
     @property
@@ -324,6 +334,7 @@ class SectionIgaShell(KeywordBase):
 
     @nloc.setter
     def nloc(self, value: float) -> None:
+        """Set the nloc property."""
         self._cards[1].set_value("nloc", value)
 
     @property
@@ -334,6 +345,7 @@ class SectionIgaShell(KeywordBase):
 
     @b1.setter
     def b1(self, value: float) -> None:
+        """Set the b1 property."""
         self._cards[2].set_value("b1", value)
 
     @property
@@ -344,6 +356,7 @@ class SectionIgaShell(KeywordBase):
 
     @b2.setter
     def b2(self, value: float) -> None:
+        """Set the b2 property."""
         self._cards[2].set_value("b2", value)
 
     @property
@@ -354,6 +367,7 @@ class SectionIgaShell(KeywordBase):
 
     @b3.setter
     def b3(self, value: float) -> None:
+        """Set the b3 property."""
         self._cards[2].set_value("b3", value)
 
     @property
@@ -364,6 +378,7 @@ class SectionIgaShell(KeywordBase):
 
     @b4.setter
     def b4(self, value: float) -> None:
+        """Set the b4 property."""
         self._cards[2].set_value("b4", value)
 
     @property
@@ -374,6 +389,7 @@ class SectionIgaShell(KeywordBase):
 
     @b5.setter
     def b5(self, value: float) -> None:
+        """Set the b5 property."""
         self._cards[2].set_value("b5", value)
 
     @property
@@ -384,6 +400,7 @@ class SectionIgaShell(KeywordBase):
 
     @b6.setter
     def b6(self, value: float) -> None:
+        """Set the b6 property."""
         self._cards[2].set_value("b6", value)
 
     @property
@@ -394,6 +411,7 @@ class SectionIgaShell(KeywordBase):
 
     @b7.setter
     def b7(self, value: float) -> None:
+        """Set the b7 property."""
         self._cards[2].set_value("b7", value)
 
     @property
@@ -404,6 +422,7 @@ class SectionIgaShell(KeywordBase):
 
     @b8.setter
     def b8(self, value: float) -> None:
+        """Set the b8 property."""
         self._cards[2].set_value("b8", value)
 
     @property
@@ -414,5 +433,9 @@ class SectionIgaShell(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

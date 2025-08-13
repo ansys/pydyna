@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat240 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat240(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat240 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -258,6 +260,7 @@ class Mat240(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -268,6 +271,7 @@ class Mat240(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -278,8 +282,9 @@ class Mat240(KeywordBase):
 
     @roflg.setter
     def roflg(self, value: int) -> None:
+        """Set the roflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""roflg must be `None` or one of {0,1}""")
+            raise Exception("""roflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("roflg", value)
 
     @property
@@ -293,6 +298,7 @@ class Mat240(KeywordBase):
 
     @intfail.setter
     def intfail(self, value: float) -> None:
+        """Set the intfail property."""
         self._cards[0].set_value("intfail", value)
 
     @property
@@ -303,6 +309,7 @@ class Mat240(KeywordBase):
 
     @emod.setter
     def emod(self, value: float) -> None:
+        """Set the emod property."""
         self._cards[0].set_value("emod", value)
 
     @property
@@ -313,6 +320,7 @@ class Mat240(KeywordBase):
 
     @gmod.setter
     def gmod(self, value: float) -> None:
+        """Set the gmod property."""
         self._cards[0].set_value("gmod", value)
 
     @property
@@ -323,6 +331,7 @@ class Mat240(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[0].set_value("thick", value)
 
     @property
@@ -337,6 +346,7 @@ class Mat240(KeywordBase):
 
     @inicrt.setter
     def inicrt(self, value: float) -> None:
+        """Set the inicrt property."""
         self._cards[0].set_value("inicrt", value)
 
     @property
@@ -347,6 +357,7 @@ class Mat240(KeywordBase):
 
     @g1c_0.setter
     def g1c_0(self, value: float) -> None:
+        """Set the g1c_0 property."""
         self._cards[1].set_value("g1c_0", value)
 
     @property
@@ -357,6 +368,7 @@ class Mat240(KeywordBase):
 
     @g1c_inf.setter
     def g1c_inf(self, value: float) -> None:
+        """Set the g1c_inf property."""
         self._cards[1].set_value("g1c_inf", value)
 
     @property
@@ -367,6 +379,7 @@ class Mat240(KeywordBase):
 
     @edot_g1.setter
     def edot_g1(self, value: float) -> None:
+        """Set the edot_g1 property."""
         self._cards[1].set_value("edot_g1", value)
 
     @property
@@ -378,6 +391,7 @@ class Mat240(KeywordBase):
 
     @t0.setter
     def t0(self, value: float) -> None:
+        """Set the t0 property."""
         self._cards[1].set_value("t0", value)
 
     @property
@@ -390,6 +404,7 @@ class Mat240(KeywordBase):
 
     @t1.setter
     def t1(self, value: float) -> None:
+        """Set the t1 property."""
         self._cards[1].set_value("t1", value)
 
     @property
@@ -400,6 +415,7 @@ class Mat240(KeywordBase):
 
     @edot_t.setter
     def edot_t(self, value: float) -> None:
+        """Set the edot_t property."""
         self._cards[1].set_value("edot_t", value)
 
     @property
@@ -410,6 +426,7 @@ class Mat240(KeywordBase):
 
     @fg1.setter
     def fg1(self, value: float) -> None:
+        """Set the fg1 property."""
         self._cards[1].set_value("fg1", value)
 
     @property
@@ -420,6 +437,7 @@ class Mat240(KeywordBase):
 
     @lcg1c.setter
     def lcg1c(self, value: int) -> None:
+        """Set the lcg1c property."""
         self._cards[1].set_value("lcg1c", value)
 
     @property
@@ -431,6 +449,7 @@ class Mat240(KeywordBase):
 
     @g2c_0.setter
     def g2c_0(self, value: float) -> None:
+        """Set the g2c_0 property."""
         self._cards[2].set_value("g2c_0", value)
 
     @property
@@ -441,6 +460,7 @@ class Mat240(KeywordBase):
 
     @g2c_inf.setter
     def g2c_inf(self, value: float) -> None:
+        """Set the g2c_inf property."""
         self._cards[2].set_value("g2c_inf", value)
 
     @property
@@ -451,6 +471,7 @@ class Mat240(KeywordBase):
 
     @edot_g2.setter
     def edot_g2(self, value: float) -> None:
+        """Set the edot_g2 property."""
         self._cards[2].set_value("edot_g2", value)
 
     @property
@@ -462,6 +483,7 @@ class Mat240(KeywordBase):
 
     @s0.setter
     def s0(self, value: float) -> None:
+        """Set the s0 property."""
         self._cards[2].set_value("s0", value)
 
     @property
@@ -474,6 +496,7 @@ class Mat240(KeywordBase):
 
     @s1.setter
     def s1(self, value: float) -> None:
+        """Set the s1 property."""
         self._cards[2].set_value("s1", value)
 
     @property
@@ -484,6 +507,7 @@ class Mat240(KeywordBase):
 
     @edot_s.setter
     def edot_s(self, value: float) -> None:
+        """Set the edot_s property."""
         self._cards[2].set_value("edot_s", value)
 
     @property
@@ -494,6 +518,7 @@ class Mat240(KeywordBase):
 
     @fg2.setter
     def fg2(self, value: float) -> None:
+        """Set the fg2 property."""
         self._cards[2].set_value("fg2", value)
 
     @property
@@ -504,6 +529,7 @@ class Mat240(KeywordBase):
 
     @lcg2c.setter
     def lcg2c(self, value: int) -> None:
+        """Set the lcg2c property."""
         self._cards[2].set_value("lcg2c", value)
 
     @property
@@ -517,6 +543,7 @@ class Mat240(KeywordBase):
 
     @rfiltf.setter
     def rfiltf(self, value: float) -> None:
+        """Set the rfiltf property."""
         self._cards[3].set_value("rfiltf", value)
 
     @property
@@ -527,5 +554,9 @@ class Mat240(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

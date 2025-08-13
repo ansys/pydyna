@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatOrthotropicThermalFailure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatOrthotropicThermalFailure class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -346,6 +348,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -356,6 +359,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -366,6 +370,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @ea.setter
     def ea(self, value: float) -> None:
+        """Set the ea property."""
         self._cards[0].set_value("ea", value)
 
     @property
@@ -376,6 +381,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @eb.setter
     def eb(self, value: float) -> None:
+        """Set the eb property."""
         self._cards[0].set_value("eb", value)
 
     @property
@@ -386,6 +392,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @ec.setter
     def ec(self, value: float) -> None:
+        """Set the ec property."""
         self._cards[0].set_value("ec", value)
 
     @property
@@ -396,6 +403,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @prba.setter
     def prba(self, value: float) -> None:
+        """Set the prba property."""
         self._cards[0].set_value("prba", value)
 
     @property
@@ -406,6 +414,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @prca.setter
     def prca(self, value: float) -> None:
+        """Set the prca property."""
         self._cards[0].set_value("prca", value)
 
     @property
@@ -416,6 +425,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @prcb.setter
     def prcb(self, value: float) -> None:
+        """Set the prcb property."""
         self._cards[0].set_value("prcb", value)
 
     @property
@@ -426,6 +436,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @gab.setter
     def gab(self, value: float) -> None:
+        """Set the gab property."""
         self._cards[1].set_value("gab", value)
 
     @property
@@ -436,6 +447,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @gbc.setter
     def gbc(self, value: float) -> None:
+        """Set the gbc property."""
         self._cards[1].set_value("gbc", value)
 
     @property
@@ -446,6 +458,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @gca.setter
     def gca(self, value: float) -> None:
+        """Set the gca property."""
         self._cards[1].set_value("gca", value)
 
     @property
@@ -456,6 +469,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @aa.setter
     def aa(self, value: float) -> None:
+        """Set the aa property."""
         self._cards[1].set_value("aa", value)
 
     @property
@@ -466,6 +480,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @ab.setter
     def ab(self, value: float) -> None:
+        """Set the ab property."""
         self._cards[1].set_value("ab", value)
 
     @property
@@ -476,6 +491,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @ac.setter
     def ac(self, value: float) -> None:
+        """Set the ac property."""
         self._cards[1].set_value("ac", value)
 
     @property
@@ -492,6 +508,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @aopt.setter
     def aopt(self, value: float) -> None:
+        """Set the aopt property."""
         self._cards[1].set_value("aopt", value)
 
     @property
@@ -510,8 +527,9 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @macf.setter
     def macf(self, value: int) -> None:
+        """Set the macf property."""
         if value not in [1, 2, 3, 4, -4, -3, -2, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}""")
+            raise Exception("""macf must be `None` or one of {1,2,3,4,-4,-3,-2}.""")
         self._cards[1].set_value("macf", value)
 
     @property
@@ -522,6 +540,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[2].set_value("xp", value)
 
     @property
@@ -532,6 +551,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[2].set_value("yp", value)
 
     @property
@@ -542,6 +562,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[2].set_value("zp", value)
 
     @property
@@ -552,6 +573,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[2].set_value("a1", value)
 
     @property
@@ -562,6 +584,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[2].set_value("a2", value)
 
     @property
@@ -572,6 +595,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @a3.setter
     def a3(self, value: float) -> None:
+        """Set the a3 property."""
         self._cards[2].set_value("a3", value)
 
     @property
@@ -582,6 +606,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @v1.setter
     def v1(self, value: float) -> None:
+        """Set the v1 property."""
         self._cards[3].set_value("v1", value)
 
     @property
@@ -592,6 +617,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @v2.setter
     def v2(self, value: float) -> None:
+        """Set the v2 property."""
         self._cards[3].set_value("v2", value)
 
     @property
@@ -602,6 +628,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @v3.setter
     def v3(self, value: float) -> None:
+        """Set the v3 property."""
         self._cards[3].set_value("v3", value)
 
     @property
@@ -612,6 +639,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @d1.setter
     def d1(self, value: float) -> None:
+        """Set the d1 property."""
         self._cards[3].set_value("d1", value)
 
     @property
@@ -622,6 +650,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @d2.setter
     def d2(self, value: float) -> None:
+        """Set the d2 property."""
         self._cards[3].set_value("d2", value)
 
     @property
@@ -632,6 +661,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @d3.setter
     def d3(self, value: float) -> None:
+        """Set the d3 property."""
         self._cards[3].set_value("d3", value)
 
     @property
@@ -642,6 +672,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[3].set_value("beta", value)
 
     @property
@@ -654,8 +685,9 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @ref.setter
     def ref(self, value: int) -> None:
+        """Set the ref property."""
         if value not in [0, 1, None]:
-            raise Exception("""ref must be `None` or one of {0,1}""")
+            raise Exception("""ref must be `None` or one of {0,1}.""")
         self._cards[3].set_value("ref", value)
 
     @property
@@ -666,6 +698,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[4].set_value("a1", value)
 
     @property
@@ -676,6 +709,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @a11.setter
     def a11(self, value: float) -> None:
+        """Set the a11 property."""
         self._cards[4].set_value("a11", value)
 
     @property
@@ -686,6 +720,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[4].set_value("a2", value)
 
     @property
@@ -696,6 +731,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @a5.setter
     def a5(self, value: float) -> None:
+        """Set the a5 property."""
         self._cards[4].set_value("a5", value)
 
     @property
@@ -706,6 +742,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @a55.setter
     def a55(self, value: float) -> None:
+        """Set the a55 property."""
         self._cards[4].set_value("a55", value)
 
     @property
@@ -716,6 +753,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @a4.setter
     def a4(self, value: float) -> None:
+        """Set the a4 property."""
         self._cards[4].set_value("a4", value)
 
     @property
@@ -726,6 +764,7 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[4].set_value("nip", value)
 
     @property
@@ -736,5 +775,9 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

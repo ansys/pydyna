@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the LoadHeatExothermicReaction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class LoadHeatExothermicReaction(KeywordBase):
     subkeyword = "HEAT_EXOTHERMIC_REACTION"
 
     def __init__(self, **kwargs):
+        """Initialize the LoadHeatExothermicReaction class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -355,6 +357,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @hsid.setter
     def hsid(self, value: int) -> None:
+        """Set the hsid property."""
         self._cards[0].set_value("hsid", value)
 
     @property
@@ -367,6 +370,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @stype.setter
     def stype(self, value: int) -> None:
+        """Set the stype property."""
         self._cards[0].set_value("stype", value)
 
     @property
@@ -377,6 +381,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @nsid.setter
     def nsid(self, value: int) -> None:
+        """Set the nsid property."""
         self._cards[0].set_value("nsid", value)
 
     @property
@@ -387,6 +392,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @bt.setter
     def bt(self, value: float) -> None:
+        """Set the bt property."""
         self._cards[0].set_value("bt", value)
 
     @property
@@ -397,6 +403,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -407,6 +414,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @tmin.setter
     def tmin(self, value: float) -> None:
+        """Set the tmin property."""
         self._cards[0].set_value("tmin", value)
 
     @property
@@ -417,6 +425,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @tmax.setter
     def tmax(self, value: float) -> None:
+        """Set the tmax property."""
         self._cards[0].set_value("tmax", value)
 
     @property
@@ -427,6 +436,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @toff.setter
     def toff(self, value: float) -> None:
+        """Set the toff property."""
         self._cards[0].set_value("toff", value)
 
     @property
@@ -437,6 +447,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @csei0.setter
     def csei0(self, value: float) -> None:
+        """Set the csei0 property."""
         self._cards[1].set_value("csei0", value)
 
     @property
@@ -447,6 +458,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @asei.setter
     def asei(self, value: float) -> None:
+        """Set the asei property."""
         self._cards[1].set_value("asei", value)
 
     @property
@@ -457,6 +469,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @easei.setter
     def easei(self, value: float) -> None:
+        """Set the easei property."""
         self._cards[1].set_value("easei", value)
 
     @property
@@ -467,6 +480,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @msei.setter
     def msei(self, value: float) -> None:
+        """Set the msei property."""
         self._cards[1].set_value("msei", value)
 
     @property
@@ -477,6 +491,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @hsei.setter
     def hsei(self, value: float) -> None:
+        """Set the hsei property."""
         self._cards[1].set_value("hsei", value)
 
     @property
@@ -487,6 +502,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @wc.setter
     def wc(self, value: float) -> None:
+        """Set the wc property."""
         self._cards[1].set_value("wc", value)
 
     @property
@@ -497,6 +513,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @ru.setter
     def ru(self, value: float) -> None:
+        """Set the ru property."""
         self._cards[1].set_value("ru", value)
 
     @property
@@ -507,6 +524,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @cne0.setter
     def cne0(self, value: float) -> None:
+        """Set the cne0 property."""
         self._cards[2].set_value("cne0", value)
 
     @property
@@ -517,6 +535,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @ane.setter
     def ane(self, value: float) -> None:
+        """Set the ane property."""
         self._cards[2].set_value("ane", value)
 
     @property
@@ -527,6 +546,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @eane.setter
     def eane(self, value: float) -> None:
+        """Set the eane property."""
         self._cards[2].set_value("eane", value)
 
     @property
@@ -537,6 +557,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @mne.setter
     def mne(self, value: float) -> None:
+        """Set the mne property."""
         self._cards[2].set_value("mne", value)
 
     @property
@@ -547,6 +568,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @hne.setter
     def hne(self, value: float) -> None:
+        """Set the hne property."""
         self._cards[2].set_value("hne", value)
 
     @property
@@ -557,6 +579,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @wcne.setter
     def wcne(self, value: float) -> None:
+        """Set the wcne property."""
         self._cards[2].set_value("wcne", value)
 
     @property
@@ -567,6 +590,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @tsei0.setter
     def tsei0(self, value: float) -> None:
+        """Set the tsei0 property."""
         self._cards[2].set_value("tsei0", value)
 
     @property
@@ -577,6 +601,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @tseir.setter
     def tseir(self, value: float) -> None:
+        """Set the tseir property."""
         self._cards[2].set_value("tseir", value)
 
     @property
@@ -587,6 +612,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @alpha0.setter
     def alpha0(self, value: float) -> None:
+        """Set the alpha0 property."""
         self._cards[3].set_value("alpha0", value)
 
     @property
@@ -597,6 +623,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @ape.setter
     def ape(self, value: float) -> None:
+        """Set the ape property."""
         self._cards[3].set_value("ape", value)
 
     @property
@@ -607,6 +634,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @eape.setter
     def eape(self, value: float) -> None:
+        """Set the eape property."""
         self._cards[3].set_value("eape", value)
 
     @property
@@ -617,6 +645,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @mpep1.setter
     def mpep1(self, value: float) -> None:
+        """Set the mpep1 property."""
         self._cards[3].set_value("mpep1", value)
 
     @property
@@ -627,6 +656,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @hpe.setter
     def hpe(self, value: float) -> None:
+        """Set the hpe property."""
         self._cards[3].set_value("hpe", value)
 
     @property
@@ -637,6 +667,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @wpe.setter
     def wpe(self, value: float) -> None:
+        """Set the wpe property."""
         self._cards[3].set_value("wpe", value)
 
     @property
@@ -647,6 +678,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @mpep2.setter
     def mpep2(self, value: float) -> None:
+        """Set the mpep2 property."""
         self._cards[3].set_value("mpep2", value)
 
     @property
@@ -657,6 +689,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @ce0.setter
     def ce0(self, value: float) -> None:
+        """Set the ce0 property."""
         self._cards[4].set_value("ce0", value)
 
     @property
@@ -667,6 +700,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @ae.setter
     def ae(self, value: float) -> None:
+        """Set the ae property."""
         self._cards[4].set_value("ae", value)
 
     @property
@@ -677,6 +711,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @eae.setter
     def eae(self, value: float) -> None:
+        """Set the eae property."""
         self._cards[4].set_value("eae", value)
 
     @property
@@ -687,6 +722,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @me.setter
     def me(self, value: float) -> None:
+        """Set the me property."""
         self._cards[4].set_value("me", value)
 
     @property
@@ -697,6 +733,7 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @he.setter
     def he(self, value: float) -> None:
+        """Set the he property."""
         self._cards[4].set_value("he", value)
 
     @property
@@ -707,5 +744,6 @@ class LoadHeatExothermicReaction(KeywordBase):
 
     @we.setter
     def we(self, value: float) -> None:
+        """Set the we property."""
         self._cards[4].set_value("we", value)
 

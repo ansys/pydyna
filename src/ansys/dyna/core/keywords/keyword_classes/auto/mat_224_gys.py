@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat224Gys class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat224Gys(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat224Gys class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -236,6 +238,7 @@ class Mat224Gys(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -246,6 +249,7 @@ class Mat224Gys(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -258,6 +262,7 @@ class Mat224Gys(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -268,6 +273,7 @@ class Mat224Gys(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -278,6 +284,7 @@ class Mat224Gys(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[0].set_value("cp", value)
 
     @property
@@ -288,6 +295,7 @@ class Mat224Gys(KeywordBase):
 
     @tr.setter
     def tr(self, value: float) -> None:
+        """Set the tr property."""
         self._cards[0].set_value("tr", value)
 
     @property
@@ -300,6 +308,7 @@ class Mat224Gys(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
@@ -311,6 +320,7 @@ class Mat224Gys(KeywordBase):
 
     @numint.setter
     def numint(self, value: float) -> None:
+        """Set the numint property."""
         self._cards[0].set_value("numint", value)
 
     @property
@@ -321,6 +331,7 @@ class Mat224Gys(KeywordBase):
 
     @lck1.setter
     def lck1(self, value: int) -> None:
+        """Set the lck1 property."""
         self._cards[1].set_value("lck1", value)
 
     @property
@@ -331,6 +342,7 @@ class Mat224Gys(KeywordBase):
 
     @lckt.setter
     def lckt(self, value: int) -> None:
+        """Set the lckt property."""
         self._cards[1].set_value("lckt", value)
 
     @property
@@ -341,6 +353,7 @@ class Mat224Gys(KeywordBase):
 
     @lcf.setter
     def lcf(self, value: int) -> None:
+        """Set the lcf property."""
         self._cards[1].set_value("lcf", value)
 
     @property
@@ -351,6 +364,7 @@ class Mat224Gys(KeywordBase):
 
     @lcg.setter
     def lcg(self, value: int) -> None:
+        """Set the lcg property."""
         self._cards[1].set_value("lcg", value)
 
     @property
@@ -361,6 +375,7 @@ class Mat224Gys(KeywordBase):
 
     @lch.setter
     def lch(self, value: int) -> None:
+        """Set the lch property."""
         self._cards[1].set_value("lch", value)
 
     @property
@@ -371,6 +386,7 @@ class Mat224Gys(KeywordBase):
 
     @lci.setter
     def lci(self, value: int) -> None:
+        """Set the lci property."""
         self._cards[1].set_value("lci", value)
 
     @property
@@ -381,6 +397,7 @@ class Mat224Gys(KeywordBase):
 
     @lccr.setter
     def lccr(self, value: int) -> None:
+        """Set the lccr property."""
         self._cards[2].set_value("lccr", value)
 
     @property
@@ -391,6 +408,7 @@ class Mat224Gys(KeywordBase):
 
     @lcct.setter
     def lcct(self, value: int) -> None:
+        """Set the lcct property."""
         self._cards[2].set_value("lcct", value)
 
     @property
@@ -401,6 +419,7 @@ class Mat224Gys(KeywordBase):
 
     @lcsr.setter
     def lcsr(self, value: int) -> None:
+        """Set the lcsr property."""
         self._cards[2].set_value("lcsr", value)
 
     @property
@@ -411,6 +430,7 @@ class Mat224Gys(KeywordBase):
 
     @lcst.setter
     def lcst(self, value: int) -> None:
+        """Set the lcst property."""
         self._cards[2].set_value("lcst", value)
 
     @property
@@ -423,8 +443,9 @@ class Mat224Gys(KeywordBase):
 
     @iflag.setter
     def iflag(self, value: int) -> None:
+        """Set the iflag property."""
         if value not in [0, 1, None]:
-            raise Exception("""iflag must be `None` or one of {0,1}""")
+            raise Exception("""iflag must be `None` or one of {0,1}.""")
         self._cards[2].set_value("iflag", value)
 
     @property
@@ -435,6 +456,7 @@ class Mat224Gys(KeywordBase):
 
     @sfiepm.setter
     def sfiepm(self, value: float) -> None:
+        """Set the sfiepm property."""
         self._cards[2].set_value("sfiepm", value)
 
     @property
@@ -445,6 +467,7 @@ class Mat224Gys(KeywordBase):
 
     @niter.setter
     def niter(self, value: int) -> None:
+        """Set the niter property."""
         self._cards[2].set_value("niter", value)
 
     @property
@@ -455,5 +478,9 @@ class Mat224Gys(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

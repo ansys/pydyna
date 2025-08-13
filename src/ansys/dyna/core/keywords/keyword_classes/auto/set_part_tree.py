@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetPartTree class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetPartTree(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetPartTree class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -147,6 +149,7 @@ class SetPartTree(KeywordBase):
 
     @brid.setter
     def brid(self, value: int) -> None:
+        """Set the brid property."""
         self._cards[0].set_value("brid", value)
 
     @property
@@ -157,6 +160,7 @@ class SetPartTree(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[1].set_value("heading", value)
 
     @property
@@ -169,6 +173,7 @@ class SetPartTree(KeywordBase):
 
     @compi.setter
     def compi(self, value: int) -> None:
+        """Set the compi property."""
         self._cards[2].set_value("compi", value)
 
     @property
@@ -181,6 +186,7 @@ class SetPartTree(KeywordBase):
 
     @compi.setter
     def compi(self, value: int) -> None:
+        """Set the compi property."""
         self._cards[2].set_value("compi", value)
 
     @property
@@ -193,6 +199,7 @@ class SetPartTree(KeywordBase):
 
     @compi.setter
     def compi(self, value: int) -> None:
+        """Set the compi property."""
         self._cards[2].set_value("compi", value)
 
     @property
@@ -205,6 +212,7 @@ class SetPartTree(KeywordBase):
 
     @compi.setter
     def compi(self, value: int) -> None:
+        """Set the compi property."""
         self._cards[2].set_value("compi", value)
 
     @property
@@ -217,6 +225,7 @@ class SetPartTree(KeywordBase):
 
     @compi.setter
     def compi(self, value: int) -> None:
+        """Set the compi property."""
         self._cards[2].set_value("compi", value)
 
     @property
@@ -229,6 +238,7 @@ class SetPartTree(KeywordBase):
 
     @compi.setter
     def compi(self, value: int) -> None:
+        """Set the compi property."""
         self._cards[2].set_value("compi", value)
 
     @property
@@ -241,6 +251,7 @@ class SetPartTree(KeywordBase):
 
     @compi.setter
     def compi(self, value: int) -> None:
+        """Set the compi property."""
         self._cards[2].set_value("compi", value)
 
     @property
@@ -253,6 +264,7 @@ class SetPartTree(KeywordBase):
 
     @compi.setter
     def compi(self, value: int) -> None:
+        """Set the compi property."""
         self._cards[2].set_value("compi", value)
 
     @property
@@ -263,5 +275,9 @@ class SetPartTree(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatHystereticBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatHystereticBeam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatHystereticBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -714,6 +716,7 @@ class MatHystereticBeam(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -724,6 +727,7 @@ class MatHystereticBeam(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -734,6 +738,7 @@ class MatHystereticBeam(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -744,6 +749,7 @@ class MatHystereticBeam(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -757,8 +763,9 @@ class MatHystereticBeam(KeywordBase):
 
     @iax.setter
     def iax(self, value: int) -> None:
+        """Set the iax property."""
         if value not in [1, 2, None]:
-            raise Exception("""iax must be `None` or one of {1,2}""")
+            raise Exception("""iax must be `None` or one of {1,2}.""")
         self._cards[0].set_value("iax", value)
 
     @property
@@ -772,8 +779,9 @@ class MatHystereticBeam(KeywordBase):
 
     @isurf.setter
     def isurf(self, value: int) -> None:
+        """Set the isurf property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""isurf must be `None` or one of {1,2,3}""")
+            raise Exception("""isurf must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("isurf", value)
 
     @property
@@ -788,8 +796,9 @@ class MatHystereticBeam(KeywordBase):
 
     @ihard.setter
     def ihard(self, value: int) -> None:
+        """Set the ihard property."""
         if value not in [2, 1, 3, 4, None]:
-            raise Exception("""ihard must be `None` or one of {2,1,3,4}""")
+            raise Exception("""ihard must be `None` or one of {2,1,3,4}.""")
         self._cards[0].set_value("ihard", value)
 
     @property
@@ -804,8 +813,9 @@ class MatHystereticBeam(KeywordBase):
 
     @ifema.setter
     def ifema(self, value: int) -> None:
+        """Set the ifema property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""ifema must be `None` or one of {0,1,2,3}""")
+            raise Exception("""ifema must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("ifema", value)
 
     @property
@@ -816,6 +826,7 @@ class MatHystereticBeam(KeywordBase):
 
     @lcpms.setter
     def lcpms(self, value: int) -> None:
+        """Set the lcpms property."""
         self._cards[1].set_value("lcpms", value)
 
     @property
@@ -826,6 +837,7 @@ class MatHystereticBeam(KeywordBase):
 
     @sfs.setter
     def sfs(self, value: float) -> None:
+        """Set the sfs property."""
         self._cards[1].set_value("sfs", value)
 
     @property
@@ -836,6 +848,7 @@ class MatHystereticBeam(KeywordBase):
 
     @lcpmt.setter
     def lcpmt(self, value: int) -> None:
+        """Set the lcpmt property."""
         self._cards[1].set_value("lcpmt", value)
 
     @property
@@ -846,6 +859,7 @@ class MatHystereticBeam(KeywordBase):
 
     @sft.setter
     def sft(self, value: float) -> None:
+        """Set the sft property."""
         self._cards[1].set_value("sft", value)
 
     @property
@@ -856,6 +870,7 @@ class MatHystereticBeam(KeywordBase):
 
     @lcat.setter
     def lcat(self, value: int) -> None:
+        """Set the lcat property."""
         self._cards[1].set_value("lcat", value)
 
     @property
@@ -866,6 +881,7 @@ class MatHystereticBeam(KeywordBase):
 
     @sfat.setter
     def sfat(self, value: float) -> None:
+        """Set the sfat property."""
         self._cards[1].set_value("sfat", value)
 
     @property
@@ -876,6 +892,7 @@ class MatHystereticBeam(KeywordBase):
 
     @lcac.setter
     def lcac(self, value: int) -> None:
+        """Set the lcac property."""
         self._cards[1].set_value("lcac", value)
 
     @property
@@ -886,6 +903,7 @@ class MatHystereticBeam(KeywordBase):
 
     @sfac.setter
     def sfac(self, value: float) -> None:
+        """Set the sfac property."""
         self._cards[1].set_value("sfac", value)
 
     @property
@@ -898,6 +916,7 @@ class MatHystereticBeam(KeywordBase):
 
     @alpha.setter
     def alpha(self, value: float) -> None:
+        """Set the alpha property."""
         self._cards[2].set_value("alpha", value)
 
     @property
@@ -910,6 +929,7 @@ class MatHystereticBeam(KeywordBase):
 
     @beta.setter
     def beta(self, value: float) -> None:
+        """Set the beta property."""
         self._cards[2].set_value("beta", value)
 
     @property
@@ -920,6 +940,7 @@ class MatHystereticBeam(KeywordBase):
 
     @gamma.setter
     def gamma(self, value: float) -> None:
+        """Set the gamma property."""
         self._cards[2].set_value("gamma", value)
 
     @property
@@ -930,6 +951,7 @@ class MatHystereticBeam(KeywordBase):
 
     @f0.setter
     def f0(self, value: float) -> None:
+        """Set the f0 property."""
         self._cards[2].set_value("f0", value)
 
     @property
@@ -940,6 +962,7 @@ class MatHystereticBeam(KeywordBase):
 
     @pinm.setter
     def pinm(self, value: float) -> None:
+        """Set the pinm property."""
         self._cards[2].set_value("pinm", value)
 
     @property
@@ -950,6 +973,7 @@ class MatHystereticBeam(KeywordBase):
 
     @pins.setter
     def pins(self, value: float) -> None:
+        """Set the pins property."""
         self._cards[2].set_value("pins", value)
 
     @property
@@ -965,6 +989,7 @@ class MatHystereticBeam(KeywordBase):
 
     @hloc1.setter
     def hloc1(self, value: float) -> None:
+        """Set the hloc1 property."""
         self._cards[2].set_value("hloc1", value)
 
     @property
@@ -980,6 +1005,7 @@ class MatHystereticBeam(KeywordBase):
 
     @hloc2.setter
     def hloc2(self, value: float) -> None:
+        """Set the hloc2 property."""
         self._cards[2].set_value("hloc2", value)
 
     @property
@@ -990,6 +1016,7 @@ class MatHystereticBeam(KeywordBase):
 
     @deltas.setter
     def deltas(self, value: float) -> None:
+        """Set the deltas property."""
         self._cards[3].set_value("deltas", value)
 
     @property
@@ -1000,6 +1027,7 @@ class MatHystereticBeam(KeywordBase):
 
     @kappas.setter
     def kappas(self, value: float) -> None:
+        """Set the kappas property."""
         self._cards[3].set_value("kappas", value)
 
     @property
@@ -1010,6 +1038,7 @@ class MatHystereticBeam(KeywordBase):
 
     @deltat.setter
     def deltat(self, value: float) -> None:
+        """Set the deltat property."""
         self._cards[3].set_value("deltat", value)
 
     @property
@@ -1020,6 +1049,7 @@ class MatHystereticBeam(KeywordBase):
 
     @kappat.setter
     def kappat(self, value: float) -> None:
+        """Set the kappat property."""
         self._cards[3].set_value("kappat", value)
 
     @property
@@ -1030,6 +1060,7 @@ class MatHystereticBeam(KeywordBase):
 
     @lcshs.setter
     def lcshs(self, value: int) -> None:
+        """Set the lcshs property."""
         self._cards[3].set_value("lcshs", value)
 
     @property
@@ -1042,6 +1073,7 @@ class MatHystereticBeam(KeywordBase):
 
     @sfshs.setter
     def sfshs(self, value: float) -> None:
+        """Set the sfshs property."""
         self._cards[3].set_value("sfshs", value)
 
     @property
@@ -1052,6 +1084,7 @@ class MatHystereticBeam(KeywordBase):
 
     @lcsht.setter
     def lcsht(self, value: int) -> None:
+        """Set the lcsht property."""
         self._cards[3].set_value("lcsht", value)
 
     @property
@@ -1064,6 +1097,7 @@ class MatHystereticBeam(KeywordBase):
 
     @sfsht.setter
     def sfsht(self, value: float) -> None:
+        """Set the sfsht property."""
         self._cards[3].set_value("sfsht", value)
 
     @property
@@ -1074,6 +1108,7 @@ class MatHystereticBeam(KeywordBase):
 
     @hardms.setter
     def hardms(self, value: float) -> None:
+        """Set the hardms property."""
         self._cards[4].set_value("hardms", value)
 
     @property
@@ -1084,6 +1119,7 @@ class MatHystereticBeam(KeywordBase):
 
     @gamms.setter
     def gamms(self, value: float) -> None:
+        """Set the gamms property."""
         self._cards[4].set_value("gamms", value)
 
     @property
@@ -1094,6 +1130,7 @@ class MatHystereticBeam(KeywordBase):
 
     @hardmt.setter
     def hardmt(self, value: float) -> None:
+        """Set the hardmt property."""
         self._cards[4].set_value("hardmt", value)
 
     @property
@@ -1104,6 +1141,7 @@ class MatHystereticBeam(KeywordBase):
 
     @gammt.setter
     def gammt(self, value: float) -> None:
+        """Set the gammt property."""
         self._cards[4].set_value("gammt", value)
 
     @property
@@ -1114,6 +1152,7 @@ class MatHystereticBeam(KeywordBase):
 
     @hardat.setter
     def hardat(self, value: float) -> None:
+        """Set the hardat property."""
         self._cards[4].set_value("hardat", value)
 
     @property
@@ -1124,6 +1163,7 @@ class MatHystereticBeam(KeywordBase):
 
     @gamat.setter
     def gamat(self, value: float) -> None:
+        """Set the gamat property."""
         self._cards[4].set_value("gamat", value)
 
     @property
@@ -1134,6 +1174,7 @@ class MatHystereticBeam(KeywordBase):
 
     @hardac.setter
     def hardac(self, value: float) -> None:
+        """Set the hardac property."""
         self._cards[4].set_value("hardac", value)
 
     @property
@@ -1144,6 +1185,7 @@ class MatHystereticBeam(KeywordBase):
 
     @gamac.setter
     def gamac(self, value: float) -> None:
+        """Set the gamac property."""
         self._cards[4].set_value("gamac", value)
 
     @property
@@ -1154,6 +1196,7 @@ class MatHystereticBeam(KeywordBase):
 
     @omgms1.setter
     def omgms1(self, value: float) -> None:
+        """Set the omgms1 property."""
         self._cards[5].set_value("omgms1", value)
 
     @property
@@ -1164,6 +1207,7 @@ class MatHystereticBeam(KeywordBase):
 
     @omgms2.setter
     def omgms2(self, value: float) -> None:
+        """Set the omgms2 property."""
         self._cards[5].set_value("omgms2", value)
 
     @property
@@ -1174,6 +1218,7 @@ class MatHystereticBeam(KeywordBase):
 
     @omgmt1.setter
     def omgmt1(self, value: float) -> None:
+        """Set the omgmt1 property."""
         self._cards[5].set_value("omgmt1", value)
 
     @property
@@ -1184,6 +1229,7 @@ class MatHystereticBeam(KeywordBase):
 
     @omgmt2.setter
     def omgmt2(self, value: float) -> None:
+        """Set the omgmt2 property."""
         self._cards[5].set_value("omgmt2", value)
 
     @property
@@ -1194,6 +1240,7 @@ class MatHystereticBeam(KeywordBase):
 
     @omgat1.setter
     def omgat1(self, value: float) -> None:
+        """Set the omgat1 property."""
         self._cards[5].set_value("omgat1", value)
 
     @property
@@ -1204,6 +1251,7 @@ class MatHystereticBeam(KeywordBase):
 
     @omgat2.setter
     def omgat2(self, value: float) -> None:
+        """Set the omgat2 property."""
         self._cards[5].set_value("omgat2", value)
 
     @property
@@ -1214,6 +1262,7 @@ class MatHystereticBeam(KeywordBase):
 
     @omgac1.setter
     def omgac1(self, value: float) -> None:
+        """Set the omgac1 property."""
         self._cards[5].set_value("omgac1", value)
 
     @property
@@ -1224,6 +1273,7 @@ class MatHystereticBeam(KeywordBase):
 
     @omgac2.setter
     def omgac2(self, value: float) -> None:
+        """Set the omgac2 property."""
         self._cards[5].set_value("omgac2", value)
 
     @property
@@ -1234,6 +1284,7 @@ class MatHystereticBeam(KeywordBase):
 
     @rums.setter
     def rums(self, value: float) -> None:
+        """Set the rums property."""
         self._cards[6].set_value("rums", value)
 
     @property
@@ -1244,6 +1295,7 @@ class MatHystereticBeam(KeywordBase):
 
     @rumt.setter
     def rumt(self, value: float) -> None:
+        """Set the rumt property."""
         self._cards[6].set_value("rumt", value)
 
     @property
@@ -1254,6 +1306,7 @@ class MatHystereticBeam(KeywordBase):
 
     @duat.setter
     def duat(self, value: float) -> None:
+        """Set the duat property."""
         self._cards[6].set_value("duat", value)
 
     @property
@@ -1264,6 +1317,7 @@ class MatHystereticBeam(KeywordBase):
 
     @duac.setter
     def duac(self, value: float) -> None:
+        """Set the duac property."""
         self._cards[6].set_value("duac", value)
 
     @property
@@ -1274,6 +1328,7 @@ class MatHystereticBeam(KeywordBase):
 
     @lam1.setter
     def lam1(self, value: float) -> None:
+        """Set the lam1 property."""
         self._cards[6].set_value("lam1", value)
 
     @property
@@ -1284,6 +1339,7 @@ class MatHystereticBeam(KeywordBase):
 
     @lam2.setter
     def lam2(self, value: float) -> None:
+        """Set the lam2 property."""
         self._cards[6].set_value("lam2", value)
 
     @property
@@ -1294,6 +1350,7 @@ class MatHystereticBeam(KeywordBase):
 
     @soft1.setter
     def soft1(self, value: float) -> None:
+        """Set the soft1 property."""
         self._cards[6].set_value("soft1", value)
 
     @property
@@ -1304,6 +1361,7 @@ class MatHystereticBeam(KeywordBase):
 
     @soft2.setter
     def soft2(self, value: float) -> None:
+        """Set the soft2 property."""
         self._cards[6].set_value("soft2", value)
 
     @property
@@ -1314,6 +1372,7 @@ class MatHystereticBeam(KeywordBase):
 
     @prs1.setter
     def prs1(self, value: float) -> None:
+        """Set the prs1 property."""
         self._cards[7].set_value("prs1", value)
 
     @property
@@ -1324,6 +1383,7 @@ class MatHystereticBeam(KeywordBase):
 
     @prs2.setter
     def prs2(self, value: float) -> None:
+        """Set the prs2 property."""
         self._cards[7].set_value("prs2", value)
 
     @property
@@ -1334,6 +1394,7 @@ class MatHystereticBeam(KeywordBase):
 
     @prs3.setter
     def prs3(self, value: float) -> None:
+        """Set the prs3 property."""
         self._cards[7].set_value("prs3", value)
 
     @property
@@ -1344,6 +1405,7 @@ class MatHystereticBeam(KeywordBase):
 
     @prs4.setter
     def prs4(self, value: float) -> None:
+        """Set the prs4 property."""
         self._cards[7].set_value("prs4", value)
 
     @property
@@ -1354,6 +1416,7 @@ class MatHystereticBeam(KeywordBase):
 
     @prt1.setter
     def prt1(self, value: float) -> None:
+        """Set the prt1 property."""
         self._cards[7].set_value("prt1", value)
 
     @property
@@ -1364,6 +1427,7 @@ class MatHystereticBeam(KeywordBase):
 
     @prt2.setter
     def prt2(self, value: float) -> None:
+        """Set the prt2 property."""
         self._cards[7].set_value("prt2", value)
 
     @property
@@ -1374,6 +1438,7 @@ class MatHystereticBeam(KeywordBase):
 
     @prt3.setter
     def prt3(self, value: float) -> None:
+        """Set the prt3 property."""
         self._cards[7].set_value("prt3", value)
 
     @property
@@ -1384,6 +1449,7 @@ class MatHystereticBeam(KeywordBase):
 
     @prt4.setter
     def prt4(self, value: float) -> None:
+        """Set the prt4 property."""
         self._cards[7].set_value("prt4", value)
 
     @property
@@ -1394,6 +1460,7 @@ class MatHystereticBeam(KeywordBase):
 
     @ts1.setter
     def ts1(self, value: float) -> None:
+        """Set the ts1 property."""
         self._cards[8].set_value("ts1", value)
 
     @property
@@ -1404,6 +1471,7 @@ class MatHystereticBeam(KeywordBase):
 
     @ts2.setter
     def ts2(self, value: float) -> None:
+        """Set the ts2 property."""
         self._cards[8].set_value("ts2", value)
 
     @property
@@ -1414,6 +1482,7 @@ class MatHystereticBeam(KeywordBase):
 
     @ts3.setter
     def ts3(self, value: float) -> None:
+        """Set the ts3 property."""
         self._cards[8].set_value("ts3", value)
 
     @property
@@ -1424,6 +1493,7 @@ class MatHystereticBeam(KeywordBase):
 
     @ts4.setter
     def ts4(self, value: float) -> None:
+        """Set the ts4 property."""
         self._cards[8].set_value("ts4", value)
 
     @property
@@ -1434,6 +1504,7 @@ class MatHystereticBeam(KeywordBase):
 
     @cs1.setter
     def cs1(self, value: float) -> None:
+        """Set the cs1 property."""
         self._cards[8].set_value("cs1", value)
 
     @property
@@ -1444,6 +1515,7 @@ class MatHystereticBeam(KeywordBase):
 
     @cs2.setter
     def cs2(self, value: float) -> None:
+        """Set the cs2 property."""
         self._cards[8].set_value("cs2", value)
 
     @property
@@ -1454,6 +1526,7 @@ class MatHystereticBeam(KeywordBase):
 
     @cs3.setter
     def cs3(self, value: float) -> None:
+        """Set the cs3 property."""
         self._cards[8].set_value("cs3", value)
 
     @property
@@ -1464,6 +1537,7 @@ class MatHystereticBeam(KeywordBase):
 
     @cs4.setter
     def cs4(self, value: float) -> None:
+        """Set the cs4 property."""
         self._cards[8].set_value("cs4", value)
 
     @property
@@ -1474,6 +1548,7 @@ class MatHystereticBeam(KeywordBase):
 
     @ss1.setter
     def ss1(self, value: float) -> None:
+        """Set the ss1 property."""
         self._cards[9].set_value("ss1", value)
 
     @property
@@ -1484,6 +1559,7 @@ class MatHystereticBeam(KeywordBase):
 
     @ss2.setter
     def ss2(self, value: float) -> None:
+        """Set the ss2 property."""
         self._cards[9].set_value("ss2", value)
 
     @property
@@ -1494,6 +1570,7 @@ class MatHystereticBeam(KeywordBase):
 
     @ss3.setter
     def ss3(self, value: float) -> None:
+        """Set the ss3 property."""
         self._cards[9].set_value("ss3", value)
 
     @property
@@ -1504,6 +1581,7 @@ class MatHystereticBeam(KeywordBase):
 
     @ss4.setter
     def ss4(self, value: float) -> None:
+        """Set the ss4 property."""
         self._cards[9].set_value("ss4", value)
 
     @property
@@ -1514,6 +1592,7 @@ class MatHystereticBeam(KeywordBase):
 
     @st1.setter
     def st1(self, value: float) -> None:
+        """Set the st1 property."""
         self._cards[9].set_value("st1", value)
 
     @property
@@ -1524,6 +1603,7 @@ class MatHystereticBeam(KeywordBase):
 
     @st2.setter
     def st2(self, value: float) -> None:
+        """Set the st2 property."""
         self._cards[9].set_value("st2", value)
 
     @property
@@ -1534,6 +1614,7 @@ class MatHystereticBeam(KeywordBase):
 
     @st3.setter
     def st3(self, value: float) -> None:
+        """Set the st3 property."""
         self._cards[9].set_value("st3", value)
 
     @property
@@ -1544,6 +1625,7 @@ class MatHystereticBeam(KeywordBase):
 
     @st4.setter
     def st4(self, value: float) -> None:
+        """Set the st4 property."""
         self._cards[9].set_value("st4", value)
 
     @property
@@ -1554,5 +1636,9 @@ class MatHystereticBeam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[10].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

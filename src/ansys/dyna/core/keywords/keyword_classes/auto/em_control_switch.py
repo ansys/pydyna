@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmControlSwitch class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmControlSwitch(KeywordBase):
     subkeyword = "CONTROL_SWITCH"
 
     def __init__(self, **kwargs):
+        """Initialize the EmControlSwitch class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -71,6 +73,7 @@ class EmControlSwitch(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -83,8 +86,9 @@ class EmControlSwitch(KeywordBase):
 
     @femcomp.setter
     def femcomp(self, value: int) -> None:
+        """Set the femcomp property."""
         if value not in [0, 1, None]:
-            raise Exception("""femcomp must be `None` or one of {0,1}""")
+            raise Exception("""femcomp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("femcomp", value)
 
     @property
@@ -97,7 +101,8 @@ class EmControlSwitch(KeywordBase):
 
     @bemcomp.setter
     def bemcomp(self, value: int) -> None:
+        """Set the bemcomp property."""
         if value not in [0, 1, None]:
-            raise Exception("""bemcomp must be `None` or one of {0,1}""")
+            raise Exception("""bemcomp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("bemcomp", value)
 

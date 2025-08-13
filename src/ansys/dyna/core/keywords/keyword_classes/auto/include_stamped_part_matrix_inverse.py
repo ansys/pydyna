@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IncludeStampedPartMatrixInverse class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
     subkeyword = "STAMPED_PART_MATRIX_INVERSE"
 
     def __init__(self, **kwargs):
+        """Initialize the IncludeStampedPartMatrixInverse class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -336,6 +338,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -346,6 +349,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[1].set_value("pid", value)
 
     @property
@@ -359,8 +363,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @thick.setter
     def thick(self, value: int) -> None:
+        """Set the thick property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""thick must be `None` or one of {0,1,2}""")
+            raise Exception("""thick must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("thick", value)
 
     @property
@@ -374,8 +379,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @pstrn.setter
     def pstrn(self, value: int) -> None:
+        """Set the pstrn property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""pstrn must be `None` or one of {0,1,2}""")
+            raise Exception("""pstrn must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("pstrn", value)
 
     @property
@@ -388,8 +394,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @strain.setter
     def strain(self, value: int) -> None:
+        """Set the strain property."""
         if value not in [0, 1, None]:
-            raise Exception("""strain must be `None` or one of {0,1}""")
+            raise Exception("""strain must be `None` or one of {0,1}.""")
         self._cards[1].set_value("strain", value)
 
     @property
@@ -405,8 +412,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @stress.setter
     def stress(self, value: int) -> None:
+        """Set the stress property."""
         if value not in [0, 1, 2, -1, -3, None]:
-            raise Exception("""stress must be `None` or one of {0,1,2,-1,-3}""")
+            raise Exception("""stress must be `None` or one of {0,1,2,-1,-3}.""")
         self._cards[1].set_value("stress", value)
 
     @property
@@ -420,8 +428,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @incout.setter
     def incout(self, value: int) -> None:
+        """Set the incout property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""incout must be `None` or one of {0,1,2,3}""")
+            raise Exception("""incout must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("incout", value)
 
     @property
@@ -432,6 +441,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @rmax.setter
     def rmax(self, value: float) -> None:
+        """Set the rmax property."""
         self._cards[1].set_value("rmax", value)
 
     @property
@@ -442,6 +452,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @r11.setter
     def r11(self, value: float) -> None:
+        """Set the r11 property."""
         self._cards[2].set_value("r11", value)
 
     @property
@@ -452,6 +463,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @r12.setter
     def r12(self, value: float) -> None:
+        """Set the r12 property."""
         self._cards[2].set_value("r12", value)
 
     @property
@@ -462,6 +474,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @r13.setter
     def r13(self, value: float) -> None:
+        """Set the r13 property."""
         self._cards[2].set_value("r13", value)
 
     @property
@@ -472,6 +485,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[2].set_value("xp", value)
 
     @property
@@ -482,6 +496,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @r21.setter
     def r21(self, value: float) -> None:
+        """Set the r21 property."""
         self._cards[3].set_value("r21", value)
 
     @property
@@ -492,6 +507,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @r22.setter
     def r22(self, value: float) -> None:
+        """Set the r22 property."""
         self._cards[3].set_value("r22", value)
 
     @property
@@ -502,6 +518,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @r23.setter
     def r23(self, value: float) -> None:
+        """Set the r23 property."""
         self._cards[3].set_value("r23", value)
 
     @property
@@ -512,6 +529,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[3].set_value("yp", value)
 
     @property
@@ -522,6 +540,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @r31.setter
     def r31(self, value: float) -> None:
+        """Set the r31 property."""
         self._cards[4].set_value("r31", value)
 
     @property
@@ -532,6 +551,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @r32.setter
     def r32(self, value: float) -> None:
+        """Set the r32 property."""
         self._cards[4].set_value("r32", value)
 
     @property
@@ -542,6 +562,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @r33.setter
     def r33(self, value: float) -> None:
+        """Set the r33 property."""
         self._cards[4].set_value("r33", value)
 
     @property
@@ -552,6 +573,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[4].set_value("zp", value)
 
     @property
@@ -567,8 +589,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @isym.setter
     def isym(self, value: int) -> None:
+        """Set the isym property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""isym must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""isym must be `None` or one of {0,1,2,3,4}.""")
         self._cards[5].set_value("isym", value)
 
     @property
@@ -581,8 +604,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @iafter.setter
     def iafter(self, value: int) -> None:
+        """Set the iafter property."""
         if value not in [0, 1, None]:
-            raise Exception("""iafter must be `None` or one of {0,1}""")
+            raise Exception("""iafter must be `None` or one of {0,1}.""")
         self._cards[5].set_value("iafter", value)
 
     @property
@@ -593,6 +617,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @percele.setter
     def percele(self, value: float) -> None:
+        """Set the percele property."""
         self._cards[5].set_value("percele", value)
 
     @property
@@ -603,6 +628,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @iortho.setter
     def iortho(self, value: int) -> None:
+        """Set the iortho property."""
         self._cards[5].set_value("iortho", value)
 
     @property
@@ -615,6 +641,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @isrocut.setter
     def isrocut(self, value: int) -> None:
+        """Set the isrocut property."""
         self._cards[5].set_value("isrocut", value)
 
     @property
@@ -625,6 +652,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @x01.setter
     def x01(self, value: float) -> None:
+        """Set the x01 property."""
         self._cards[6].set_value("x01", value)
 
     @property
@@ -635,6 +663,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @y01.setter
     def y01(self, value: float) -> None:
+        """Set the y01 property."""
         self._cards[6].set_value("y01", value)
 
     @property
@@ -645,6 +674,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @z01.setter
     def z01(self, value: float) -> None:
+        """Set the z01 property."""
         self._cards[6].set_value("z01", value)
 
     @property
@@ -655,6 +685,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @x02.setter
     def x02(self, value: float) -> None:
+        """Set the x02 property."""
         self._cards[7].set_value("x02", value)
 
     @property
@@ -665,6 +696,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @y02.setter
     def y02(self, value: float) -> None:
+        """Set the y02 property."""
         self._cards[7].set_value("y02", value)
 
     @property
@@ -675,6 +707,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @z02.setter
     def z02(self, value: float) -> None:
+        """Set the z02 property."""
         self._cards[7].set_value("z02", value)
 
     @property
@@ -685,6 +718,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @x03.setter
     def x03(self, value: float) -> None:
+        """Set the x03 property."""
         self._cards[7].set_value("x03", value)
 
     @property
@@ -695,6 +729,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @y03.setter
     def y03(self, value: float) -> None:
+        """Set the y03 property."""
         self._cards[7].set_value("y03", value)
 
     @property
@@ -705,5 +740,6 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
 
     @z03.setter
     def z03(self, value: float) -> None:
+        """Set the z03 property."""
         self._cards[7].set_value("z03", value)
 

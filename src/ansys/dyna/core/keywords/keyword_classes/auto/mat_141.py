@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat141 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat141(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat141 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -136,6 +138,7 @@ class Mat141(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -146,6 +149,7 @@ class Mat141(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -156,6 +160,7 @@ class Mat141(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -166,6 +171,7 @@ class Mat141(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -176,6 +182,7 @@ class Mat141(KeywordBase):
 
     @do.setter
     def do(self, value: float) -> None:
+        """Set the do property."""
         self._cards[0].set_value("do", value)
 
     @property
@@ -186,6 +193,7 @@ class Mat141(KeywordBase):
 
     @n.setter
     def n(self, value: float) -> None:
+        """Set the n property."""
         self._cards[0].set_value("n", value)
 
     @property
@@ -196,6 +204,7 @@ class Mat141(KeywordBase):
 
     @zo.setter
     def zo(self, value: float) -> None:
+        """Set the zo property."""
         self._cards[0].set_value("zo", value)
 
     @property
@@ -206,6 +215,7 @@ class Mat141(KeywordBase):
 
     @q.setter
     def q(self, value: float) -> None:
+        """Set the q property."""
         self._cards[0].set_value("q", value)
 
     @property
@@ -216,6 +226,7 @@ class Mat141(KeywordBase):
 
     @omega.setter
     def omega(self, value: float) -> None:
+        """Set the omega property."""
         self._cards[1].set_value("omega", value)
 
     @property
@@ -226,5 +237,9 @@ class Mat141(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

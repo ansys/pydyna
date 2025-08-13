@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat202 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat202(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat202 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -147,6 +149,7 @@ class Mat202(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -157,6 +160,7 @@ class Mat202(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -167,6 +171,7 @@ class Mat202(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -177,6 +182,7 @@ class Mat202(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -187,6 +193,7 @@ class Mat202(KeywordBase):
 
     @sgy.setter
     def sgy(self, value: float) -> None:
+        """Set the sgy property."""
         self._cards[0].set_value("sgy", value)
 
     @property
@@ -197,6 +204,7 @@ class Mat202(KeywordBase):
 
     @lc_e.setter
     def lc_e(self, value: int) -> None:
+        """Set the lc_e property."""
         self._cards[1].set_value("lc_e", value)
 
     @property
@@ -207,6 +215,7 @@ class Mat202(KeywordBase):
 
     @lc_pr.setter
     def lc_pr(self, value: int) -> None:
+        """Set the lc_pr property."""
         self._cards[1].set_value("lc_pr", value)
 
     @property
@@ -217,6 +226,7 @@ class Mat202(KeywordBase):
 
     @lc_al.setter
     def lc_al(self, value: int) -> None:
+        """Set the lc_al property."""
         self._cards[1].set_value("lc_al", value)
 
     @property
@@ -227,6 +237,7 @@ class Mat202(KeywordBase):
 
     @tbl_ss.setter
     def tbl_ss(self, value: int) -> None:
+        """Set the tbl_ss property."""
         self._cards[1].set_value("tbl_ss", value)
 
     @property
@@ -237,6 +248,7 @@ class Mat202(KeywordBase):
 
     @lc_fs.setter
     def lc_fs(self, value: int) -> None:
+        """Set the lc_fs property."""
         self._cards[1].set_value("lc_fs", value)
 
     @property
@@ -247,5 +259,9 @@ class Mat202(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

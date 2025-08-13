@@ -1,3 +1,8 @@
+ci:
+  autofix_commit_msg: 'chore: auto fixes from pre-commit hooks'
+  autoupdate_commit_msg: 'chore: pre-commit automatic update'
+  autoupdate_schedule: weekly
+
 files: |
     (?x)(
         ^codegen/ |
@@ -39,7 +44,7 @@ repos:
   - id: isort
 
 - repo: https://github.com/PyCQA/flake8
-  rev: 7.2.0
+  rev: 7.3.0
   hooks:
   - id: flake8
 
@@ -50,13 +55,22 @@ repos:
     args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt"]
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v5.0.0
+  rev: v6.0.0
   hooks:
   - id: check-merge-conflict
   - id: debug-statements
+  - id: check-yaml
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.32.1
+  rev: 0.33.2
   hooks:
     - id: check-github-workflows
+
+- repo: https://github.com/ansys/pre-commit-hooks
+  rev: v0.5.2
+  hooks:
+    - id: add-license-headers
+      files: './.*\.(py)'
+      args:
+      - --start_year=2023

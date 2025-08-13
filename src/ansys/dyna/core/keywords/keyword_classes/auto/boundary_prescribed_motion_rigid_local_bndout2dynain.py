@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryPrescribedMotionRigidLocalBndout2Dynain class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryPrescribedMotionRigidLocalBndout2Dynain class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -193,6 +195,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -220,8 +223,9 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @dof.setter
     def dof(self, value: int) -> None:
+        """Set the dof property."""
         if value not in [0, 1, 2, 3, 4, -4, 5, 6, 7, 8, -8, 9, -9, 10, -10, 11, -11, None]:
-            raise Exception("""dof must be `None` or one of {0,1,2,3,4,-4,5,6,7,8,-8,9,-9,10,-10,11,-11}""")
+            raise Exception("""dof must be `None` or one of {0,1,2,3,4,-4,5,6,7,8,-8,9,-9,10,-10,11,-11}.""")
         self._cards[0].set_value("dof", value)
 
     @property
@@ -237,8 +241,9 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @vad.setter
     def vad(self, value: int) -> None:
+        """Set the vad property."""
         if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""vad must be `None` or one of {0,1,2,3,4}""")
+            raise Exception("""vad must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("vad", value)
 
     @property
@@ -249,6 +254,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
 
     @property
@@ -259,6 +265,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @sf.setter
     def sf(self, value: float) -> None:
+        """Set the sf property."""
         self._cards[0].set_value("sf", value)
 
     @property
@@ -269,6 +276,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @vid.setter
     def vid(self, value: int) -> None:
+        """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
@@ -279,6 +287,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -289,6 +298,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -299,6 +309,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @offset1.setter
     def offset1(self, value: float) -> None:
+        """Set the offset1 property."""
         self._cards[1].set_value("offset1", value)
 
     @property
@@ -309,6 +320,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @offset2.setter
     def offset2(self, value: float) -> None:
+        """Set the offset2 property."""
         self._cards[1].set_value("offset2", value)
 
     @property
@@ -319,6 +331,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @lrb.setter
     def lrb(self, value: int) -> None:
+        """Set the lrb property."""
         self._cards[1].set_value("lrb", value)
 
     @property
@@ -329,6 +342,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @node1.setter
     def node1(self, value: int) -> None:
+        """Set the node1 property."""
         self._cards[1].set_value("node1", value)
 
     @property
@@ -339,6 +353,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @node2.setter
     def node2(self, value: int) -> None:
+        """Set the node2 property."""
         self._cards[1].set_value("node2", value)
 
     @property
@@ -353,6 +368,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @prmr.setter
     def prmr(self, value: str) -> None:
+        """Set the prmr property."""
         self._cards[2].set_value("prmr", value)
 
     @property
@@ -363,7 +379,11 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[3].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
 
     @property
     def heading(self) -> typing.Optional[str]:
@@ -373,5 +393,9 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[3].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 

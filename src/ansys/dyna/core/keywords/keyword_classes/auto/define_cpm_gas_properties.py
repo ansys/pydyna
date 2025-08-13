@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineCpmGasProperties class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineCpmGasProperties(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineCpmGasProperties class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -172,6 +174,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -182,6 +185,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @xmm.setter
     def xmm(self, value: float) -> None:
+        """Set the xmm property."""
         self._cards[0].set_value("xmm", value)
 
     @property
@@ -192,6 +196,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @cp0.setter
     def cp0(self, value: float) -> None:
+        """Set the cp0 property."""
         self._cards[0].set_value("cp0", value)
 
     @property
@@ -202,6 +207,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @cp1.setter
     def cp1(self, value: float) -> None:
+        """Set the cp1 property."""
         self._cards[0].set_value("cp1", value)
 
     @property
@@ -212,6 +218,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @cp2.setter
     def cp2(self, value: float) -> None:
+        """Set the cp2 property."""
         self._cards[0].set_value("cp2", value)
 
     @property
@@ -222,6 +229,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @cp3.setter
     def cp3(self, value: float) -> None:
+        """Set the cp3 property."""
         self._cards[0].set_value("cp3", value)
 
     @property
@@ -232,6 +240,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @cp4.setter
     def cp4(self, value: float) -> None:
+        """Set the cp4 property."""
         self._cards[0].set_value("cp4", value)
 
     @property
@@ -242,6 +251,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @mut0.setter
     def mut0(self, value: float) -> None:
+        """Set the mut0 property."""
         self._cards[1].set_value("mut0", value)
 
     @property
@@ -252,6 +262,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @mut1.setter
     def mut1(self, value: float) -> None:
+        """Set the mut1 property."""
         self._cards[1].set_value("mut1", value)
 
     @property
@@ -262,6 +273,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @mut2.setter
     def mut2(self, value: float) -> None:
+        """Set the mut2 property."""
         self._cards[1].set_value("mut2", value)
 
     @property
@@ -272,6 +284,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @mut3.setter
     def mut3(self, value: float) -> None:
+        """Set the mut3 property."""
         self._cards[1].set_value("mut3", value)
 
     @property
@@ -282,6 +295,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @mut4.setter
     def mut4(self, value: float) -> None:
+        """Set the mut4 property."""
         self._cards[1].set_value("mut4", value)
 
     @property
@@ -292,6 +306,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @chm_id.setter
     def chm_id(self, value: int) -> None:
+        """Set the chm_id property."""
         self._cards[1].set_value("chm_id", value)
 
     @property
@@ -305,6 +320,7 @@ class DefineCpmGasProperties(KeywordBase):
 
     @vini.setter
     def vini(self, value: float) -> None:
+        """Set the vini property."""
         self._cards[1].set_value("vini", value)
 
     @property
@@ -315,5 +331,9 @@ class DefineCpmGasProperties(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

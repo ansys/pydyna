@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingPosition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingPosition(KeywordBase):
     subkeyword = "FORMING_POSITION"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingPosition class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -68,6 +70,7 @@ class ControlFormingPosition(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -78,6 +81,7 @@ class ControlFormingPosition(KeywordBase):
 
     @premove.setter
     def premove(self, value: float) -> None:
+        """Set the premove property."""
         self._cards[0].set_value("premove", value)
 
     @property
@@ -88,5 +92,6 @@ class ControlFormingPosition(KeywordBase):
 
     @target.setter
     def target(self, value: int) -> None:
+        """Set the target property."""
         self._cards[0].set_value("target", value)
 

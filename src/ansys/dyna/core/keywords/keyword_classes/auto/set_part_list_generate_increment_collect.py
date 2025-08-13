@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetPartListGenerateIncrementCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetPartListGenerateIncrementCollect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -141,6 +143,7 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -151,6 +154,7 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
 
     @da1.setter
     def da1(self, value: float) -> None:
+        """Set the da1 property."""
         self._cards[0].set_value("da1", value)
 
     @property
@@ -161,6 +165,7 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
 
     @da2.setter
     def da2(self, value: float) -> None:
+        """Set the da2 property."""
         self._cards[0].set_value("da2", value)
 
     @property
@@ -171,6 +176,7 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
 
     @da3.setter
     def da3(self, value: float) -> None:
+        """Set the da3 property."""
         self._cards[0].set_value("da3", value)
 
     @property
@@ -181,6 +187,7 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
 
     @da4.setter
     def da4(self, value: float) -> None:
+        """Set the da4 property."""
         self._cards[0].set_value("da4", value)
 
     @property
@@ -193,8 +200,9 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -205,6 +213,7 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
 
     @bbeg.setter
     def bbeg(self, value: int) -> None:
+        """Set the bbeg property."""
         self._cards[1].set_value("bbeg", value)
 
     @property
@@ -215,6 +224,7 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
 
     @bend.setter
     def bend(self, value: int) -> None:
+        """Set the bend property."""
         self._cards[1].set_value("bend", value)
 
     @property
@@ -225,6 +235,7 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
 
     @incr.setter
     def incr(self, value: int) -> None:
+        """Set the incr property."""
         self._cards[1].set_value("incr", value)
 
     @property
@@ -235,5 +246,9 @@ class SetPartListGenerateIncrementCollect(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

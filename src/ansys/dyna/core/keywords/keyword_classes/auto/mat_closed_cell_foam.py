@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatClosedCellFoam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatClosedCellFoam(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatClosedCellFoam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -144,6 +146,7 @@ class MatClosedCellFoam(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -154,6 +157,7 @@ class MatClosedCellFoam(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -164,6 +168,7 @@ class MatClosedCellFoam(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -174,6 +179,7 @@ class MatClosedCellFoam(KeywordBase):
 
     @a.setter
     def a(self, value: float) -> None:
+        """Set the a property."""
         self._cards[0].set_value("a", value)
 
     @property
@@ -184,6 +190,7 @@ class MatClosedCellFoam(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[0].set_value("b", value)
 
     @property
@@ -194,6 +201,7 @@ class MatClosedCellFoam(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -204,6 +212,7 @@ class MatClosedCellFoam(KeywordBase):
 
     @p0.setter
     def p0(self, value: float) -> None:
+        """Set the p0 property."""
         self._cards[0].set_value("p0", value)
 
     @property
@@ -214,6 +223,7 @@ class MatClosedCellFoam(KeywordBase):
 
     @phi.setter
     def phi(self, value: float) -> None:
+        """Set the phi property."""
         self._cards[0].set_value("phi", value)
 
     @property
@@ -224,6 +234,7 @@ class MatClosedCellFoam(KeywordBase):
 
     @gama0.setter
     def gama0(self, value: float) -> None:
+        """Set the gama0 property."""
         self._cards[1].set_value("gama0", value)
 
     @property
@@ -234,6 +245,7 @@ class MatClosedCellFoam(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -244,5 +256,9 @@ class MatClosedCellFoam(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

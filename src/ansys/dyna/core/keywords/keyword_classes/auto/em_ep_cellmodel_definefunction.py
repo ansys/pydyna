@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmEpCellmodelDefinefunction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
     subkeyword = "EP_CELLMODEL_DEFINEFUNCTION"
 
     def __init__(self, **kwargs):
+        """Initialize the EmEpCellmodelDefinefunction class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -190,6 +192,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -201,6 +204,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @nstate.setter
     def nstate(self, value: int) -> None:
+        """Set the nstate property."""
         self._cards[0].set_value("nstate", value)
 
     @property
@@ -213,8 +217,9 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @fswitch.setter
     def fswitch(self, value: int) -> None:
+        """Set the fswitch property."""
         if value not in [0, 1, None]:
-            raise Exception("""fswitch must be `None` or one of {0,1}""")
+            raise Exception("""fswitch must be `None` or one of {0,1}.""")
         self._cards[0].set_value("fswitch", value)
 
     @property
@@ -225,6 +230,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @dvdt.setter
     def dvdt(self, value: int) -> None:
+        """Set the dvdt property."""
         self._cards[1].set_value("dvdt", value)
 
     @property
@@ -235,6 +241,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @du1dt.setter
     def du1dt(self, value: int) -> None:
+        """Set the du1dt property."""
         self._cards[1].set_value("du1dt", value)
 
     @property
@@ -245,6 +252,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @du2dt.setter
     def du2dt(self, value: int) -> None:
+        """Set the du2dt property."""
         self._cards[1].set_value("du2dt", value)
 
     @property
@@ -255,6 +263,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @du3dt.setter
     def du3dt(self, value: int) -> None:
+        """Set the du3dt property."""
         self._cards[1].set_value("du3dt", value)
 
     @property
@@ -265,6 +274,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @du4dt.setter
     def du4dt(self, value: int) -> None:
+        """Set the du4dt property."""
         self._cards[1].set_value("du4dt", value)
 
     @property
@@ -275,6 +285,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @du5dt.setter
     def du5dt(self, value: int) -> None:
+        """Set the du5dt property."""
         self._cards[1].set_value("du5dt", value)
 
     @property
@@ -285,6 +296,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @du6dt.setter
     def du6dt(self, value: int) -> None:
+        """Set the du6dt property."""
         self._cards[1].set_value("du6dt", value)
 
     @property
@@ -295,6 +307,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @du7dt.setter
     def du7dt(self, value: int) -> None:
+        """Set the du7dt property."""
         self._cards[1].set_value("du7dt", value)
 
     @property
@@ -305,6 +318,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @v0.setter
     def v0(self, value: int) -> None:
+        """Set the v0 property."""
         self._cards[2].set_value("v0", value)
 
     @property
@@ -315,6 +329,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @u1.setter
     def u1(self, value: int) -> None:
+        """Set the u1 property."""
         self._cards[2].set_value("u1", value)
 
     @property
@@ -325,6 +340,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @u2.setter
     def u2(self, value: int) -> None:
+        """Set the u2 property."""
         self._cards[2].set_value("u2", value)
 
     @property
@@ -335,6 +351,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @u3.setter
     def u3(self, value: int) -> None:
+        """Set the u3 property."""
         self._cards[2].set_value("u3", value)
 
     @property
@@ -345,6 +362,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @u4.setter
     def u4(self, value: int) -> None:
+        """Set the u4 property."""
         self._cards[2].set_value("u4", value)
 
     @property
@@ -355,6 +373,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @u5.setter
     def u5(self, value: int) -> None:
+        """Set the u5 property."""
         self._cards[2].set_value("u5", value)
 
     @property
@@ -365,6 +384,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @u6.setter
     def u6(self, value: int) -> None:
+        """Set the u6 property."""
         self._cards[2].set_value("u6", value)
 
     @property
@@ -375,5 +395,6 @@ class EmEpCellmodelDefinefunction(KeywordBase):
 
     @u7.setter
     def u7(self, value: int) -> None:
+        """Set the u7 property."""
         self._cards[2].set_value("u7", value)
 

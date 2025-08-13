@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionBeamAisc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionBeamAisc(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionBeamAisc class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -258,6 +260,7 @@ class SectionBeamAisc(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -268,6 +271,7 @@ class SectionBeamAisc(KeywordBase):
 
     @label.setter
     def label(self, value: str) -> None:
+        """Set the label property."""
         self._cards[0].set_value("label", value)
 
     @property
@@ -278,8 +282,9 @@ class SectionBeamAisc(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [1, 2, 3, 4, 5, 11, 12, None]:
-            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}""")
+            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}.""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -290,6 +295,7 @@ class SectionBeamAisc(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[1].set_value("shrf", value)
 
     @property
@@ -300,6 +306,7 @@ class SectionBeamAisc(KeywordBase):
 
     @nsm.setter
     def nsm(self, value: float) -> None:
+        """Set the nsm property."""
         self._cards[1].set_value("nsm", value)
 
     @property
@@ -316,6 +323,7 @@ class SectionBeamAisc(KeywordBase):
 
     @lfac.setter
     def lfac(self, value: float) -> None:
+        """Set the lfac property."""
         self._cards[1].set_value("lfac", value)
 
     @property
@@ -326,6 +334,7 @@ class SectionBeamAisc(KeywordBase):
 
     @nsloc.setter
     def nsloc(self, value: float) -> None:
+        """Set the nsloc property."""
         self._cards[1].set_value("nsloc", value)
 
     @property
@@ -336,6 +345,7 @@ class SectionBeamAisc(KeywordBase):
 
     @ntloc.setter
     def ntloc(self, value: float) -> None:
+        """Set the ntloc property."""
         self._cards[1].set_value("ntloc", value)
 
     @property
@@ -346,6 +356,7 @@ class SectionBeamAisc(KeywordBase):
 
     @k.setter
     def k(self, value: int) -> None:
+        """Set the k property."""
         self._cards[1].set_value("k", value)
 
     @property
@@ -356,8 +367,9 @@ class SectionBeamAisc(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [1, 2, 3, 4, 5, 11, 12, None]:
-            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}""")
+            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}.""")
         self._cards[2].set_value("elform", value)
 
     @property
@@ -368,6 +380,7 @@ class SectionBeamAisc(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[2].set_value("shrf", value)
 
     @property
@@ -378,6 +391,7 @@ class SectionBeamAisc(KeywordBase):
 
     @nsm.setter
     def nsm(self, value: float) -> None:
+        """Set the nsm property."""
         self._cards[2].set_value("nsm", value)
 
     @property
@@ -388,6 +402,7 @@ class SectionBeamAisc(KeywordBase):
 
     @lfac.setter
     def lfac(self, value: float) -> None:
+        """Set the lfac property."""
         self._cards[2].set_value("lfac", value)
 
     @property
@@ -398,8 +413,9 @@ class SectionBeamAisc(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [1, 2, 3, 4, 5, 11, 12, None]:
-            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}""")
+            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}.""")
         self._cards[3].set_value("elform", value)
 
     @property
@@ -410,6 +426,7 @@ class SectionBeamAisc(KeywordBase):
 
     @lfac.setter
     def lfac(self, value: float) -> None:
+        """Set the lfac property."""
         self._cards[3].set_value("lfac", value)
 
     @property
@@ -420,6 +437,7 @@ class SectionBeamAisc(KeywordBase):
 
     @rampt.setter
     def rampt(self, value: float) -> None:
+        """Set the rampt property."""
         self._cards[3].set_value("rampt", value)
 
     @property
@@ -430,6 +448,7 @@ class SectionBeamAisc(KeywordBase):
 
     @stress.setter
     def stress(self, value: float) -> None:
+        """Set the stress property."""
         self._cards[3].set_value("stress", value)
 
     @property
@@ -440,8 +459,9 @@ class SectionBeamAisc(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         if value not in [1, 2, 3, 4, 5, 11, 12, None]:
-            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}""")
+            raise Exception("""elform must be `None` or one of {1,2,3,4,5,11,12}.""")
         self._cards[4].set_value("elform", value)
 
     @property
@@ -452,6 +472,7 @@ class SectionBeamAisc(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[4].set_value("shrf", value)
 
     @property
@@ -462,6 +483,7 @@ class SectionBeamAisc(KeywordBase):
 
     @nsm.setter
     def nsm(self, value: float) -> None:
+        """Set the nsm property."""
         self._cards[4].set_value("nsm", value)
 
     @property
@@ -472,6 +494,7 @@ class SectionBeamAisc(KeywordBase):
 
     @lfac.setter
     def lfac(self, value: float) -> None:
+        """Set the lfac property."""
         self._cards[4].set_value("lfac", value)
 
     @property
@@ -482,6 +505,7 @@ class SectionBeamAisc(KeywordBase):
 
     @k.setter
     def k(self, value: int) -> None:
+        """Set the k property."""
         self._cards[4].set_value("k", value)
 
     @property
@@ -492,5 +516,9 @@ class SectionBeamAisc(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

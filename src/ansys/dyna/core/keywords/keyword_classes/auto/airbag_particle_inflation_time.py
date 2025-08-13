@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AirbagParticleInflationTime class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagParticleInflationTime(KeywordBase):
     subkeyword = "PARTICLE_INFLATION_TIME"
 
     def __init__(self, **kwargs):
+        """Initialize the AirbagParticleInflationTime class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -751,6 +753,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -761,6 +764,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[0].set_value("title", value)
 
     @property
@@ -771,6 +775,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[1].set_value("birth", value)
 
     @property
@@ -781,6 +786,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[1].set_value("death", value)
 
     @property
@@ -791,6 +797,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @sid1.setter
     def sid1(self, value: int) -> None:
+        """Set the sid1 property."""
         self._cards[2].set_value("sid1", value)
 
     @property
@@ -803,8 +810,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @stype1.setter
     def stype1(self, value: int) -> None:
+        """Set the stype1 property."""
         if value not in [0, 1, None]:
-            raise Exception("""stype1 must be `None` or one of {0,1}""")
+            raise Exception("""stype1 must be `None` or one of {0,1}.""")
         self._cards[2].set_value("stype1", value)
 
     @property
@@ -815,6 +823,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @sid2.setter
     def sid2(self, value: int) -> None:
+        """Set the sid2 property."""
         self._cards[2].set_value("sid2", value)
 
     @property
@@ -828,8 +837,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @stype2.setter
     def stype2(self, value: int) -> None:
+        """Set the stype2 property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""stype2 must be `None` or one of {0,1,2}""")
+            raise Exception("""stype2 must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("stype2", value)
 
     @property
@@ -849,6 +859,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @block.setter
     def block(self, value: int) -> None:
+        """Set the block property."""
         self._cards[2].set_value("block", value)
 
     @property
@@ -859,6 +870,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @npdata.setter
     def npdata(self, value: int) -> None:
+        """Set the npdata property."""
         self._cards[2].set_value("npdata", value)
 
     @property
@@ -871,6 +883,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @fric.setter
     def fric(self, value: float) -> None:
+        """Set the fric property."""
         self._cards[2].set_value("fric", value)
 
     @property
@@ -883,8 +896,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @irdp.setter
     def irdp(self, value: int) -> None:
+        """Set the irdp property."""
         if value not in [0, 1, None]:
-            raise Exception("""irdp must be `None` or one of {0,1}""")
+            raise Exception("""irdp must be `None` or one of {0,1}.""")
         self._cards[2].set_value("irdp", value)
 
     @property
@@ -895,6 +909,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @np.setter
     def np(self, value: int) -> None:
+        """Set the np property."""
         self._cards[3].set_value("np", value)
 
     @property
@@ -909,8 +924,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @unit.setter
     def unit(self, value: int) -> None:
+        """Set the unit property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""unit must be `None` or one of {0,1,2,3}""")
+            raise Exception("""unit must be `None` or one of {0,1,2,3}.""")
         self._cards[3].set_value("unit", value)
 
     @property
@@ -926,8 +942,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @visflg.setter
     def visflg(self, value: int) -> None:
+        """Set the visflg property."""
         if value not in [1, 0, 2, 3, None]:
-            raise Exception("""visflg must be `None` or one of {1,0,2,3}""")
+            raise Exception("""visflg must be `None` or one of {1,0,2,3}.""")
         self._cards[3].set_value("visflg", value)
 
     @property
@@ -938,6 +955,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @tatm.setter
     def tatm(self, value: float) -> None:
+        """Set the tatm property."""
         self._cards[3].set_value("tatm", value)
 
     @property
@@ -948,6 +966,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @patm.setter
     def patm(self, value: float) -> None:
+        """Set the patm property."""
         self._cards[3].set_value("patm", value)
 
     @property
@@ -958,6 +977,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @nvent.setter
     def nvent(self, value: int) -> None:
+        """Set the nvent property."""
         self._cards[3].set_value("nvent", value)
 
     @property
@@ -968,6 +988,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[3].set_value("tend", value)
 
     @property
@@ -978,6 +999,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @tsw.setter
     def tsw(self, value: float) -> None:
+        """Set the tsw property."""
         self._cards[3].set_value("tsw", value)
 
     @property
@@ -988,6 +1010,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @tstop.setter
     def tstop(self, value: float) -> None:
+        """Set the tstop property."""
         self._cards[4].set_value("tstop", value)
 
     @property
@@ -1000,6 +1023,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @tsmth.setter
     def tsmth(self, value: float) -> None:
+        """Set the tsmth property."""
         self._cards[4].set_value("tsmth", value)
 
     @property
@@ -1011,6 +1035,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @occup.setter
     def occup(self, value: float) -> None:
+        """Set the occup property."""
         self._cards[4].set_value("occup", value)
 
     @property
@@ -1024,8 +1049,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @rebl.setter
     def rebl(self, value: int) -> None:
+        """Set the rebl property."""
         if value not in [0, 1, None]:
-            raise Exception("""rebl must be `None` or one of {0,1}""")
+            raise Exception("""rebl must be `None` or one of {0,1}.""")
         self._cards[4].set_value("rebl", value)
 
     @property
@@ -1036,6 +1062,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @sidsv.setter
     def sidsv(self, value: int) -> None:
+        """Set the sidsv property."""
         self._cards[4].set_value("sidsv", value)
 
     @property
@@ -1046,6 +1073,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @psid1.setter
     def psid1(self, value: int) -> None:
+        """Set the psid1 property."""
         self._cards[4].set_value("psid1", value)
 
     @property
@@ -1056,6 +1084,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @tsplit.setter
     def tsplit(self, value: float) -> None:
+        """Set the tsplit property."""
         self._cards[4].set_value("tsplit", value)
 
     @property
@@ -1066,6 +1095,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @sffdc.setter
     def sffdc(self, value: float) -> None:
+        """Set the sffdc property."""
         self._cards[4].set_value("sffdc", value)
 
     @property
@@ -1077,6 +1107,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @sfiair4.setter
     def sfiair4(self, value: float) -> None:
+        """Set the sfiair4 property."""
         self._cards[5].set_value("sfiair4", value)
 
     @property
@@ -1089,8 +1120,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @idfric.setter
     def idfric(self, value: int) -> None:
+        """Set the idfric property."""
         if value not in [0, 1, None]:
-            raise Exception("""idfric must be `None` or one of {0,1}""")
+            raise Exception("""idfric must be `None` or one of {0,1}.""")
         self._cards[5].set_value("idfric", value)
 
     @property
@@ -1101,6 +1133,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @mass.setter
     def mass(self, value: float) -> None:
+        """Set the mass property."""
         self._cards[6].set_value("mass", value)
 
     @property
@@ -1111,6 +1144,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @time.setter
     def time(self, value: float) -> None:
+        """Set the time property."""
         self._cards[6].set_value("time", value)
 
     @property
@@ -1121,6 +1155,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @length.setter
     def length(self, value: float) -> None:
+        """Set the length property."""
         self._cards[6].set_value("length", value)
 
     @property
@@ -1139,6 +1174,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @iair.setter
     def iair(self, value: int) -> None:
+        """Set the iair property."""
         self._cards[7].set_value("iair", value)
 
     @property
@@ -1149,6 +1185,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @ngas.setter
     def ngas(self, value: int) -> None:
+        """Set the ngas property."""
         self._cards[7].set_value("ngas", value)
 
     @property
@@ -1159,6 +1196,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @norif.setter
     def norif(self, value: int) -> None:
+        """Set the norif property."""
         self._cards[7].set_value("norif", value)
 
     @property
@@ -1169,6 +1207,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @nid1.setter
     def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
         self._cards[7].set_value("nid1", value)
 
     @property
@@ -1179,6 +1218,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @nid2.setter
     def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
         self._cards[7].set_value("nid2", value)
 
     @property
@@ -1189,6 +1229,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @nid3.setter
     def nid3(self, value: int) -> None:
+        """Set the nid3 property."""
         self._cards[7].set_value("nid3", value)
 
     @property
@@ -1199,6 +1240,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @chm.setter
     def chm(self, value: int) -> None:
+        """Set the chm property."""
         self._cards[7].set_value("chm", value)
 
     @property
@@ -1211,6 +1253,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @cd_ext.setter
     def cd_ext(self, value: float) -> None:
+        """Set the cd_ext property."""
         self._cards[7].set_value("cd_ext", value)
 
     @property
@@ -1223,6 +1266,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @sidup.setter
     def sidup(self, value: int) -> None:
+        """Set the sidup property."""
         self._cards[8].set_value("sidup", value)
 
     @property
@@ -1235,8 +1279,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @styup.setter
     def styup(self, value: int) -> None:
+        """Set the styup property."""
         if value not in [0, 1, None]:
-            raise Exception("""styup must be `None` or one of {0,1}""")
+            raise Exception("""styup must be `None` or one of {0,1}.""")
         self._cards[8].set_value("styup", value)
 
     @property
@@ -1249,6 +1294,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @pfrac.setter
     def pfrac(self, value: float) -> None:
+        """Set the pfrac property."""
         self._cards[8].set_value("pfrac", value)
 
     @property
@@ -1260,6 +1306,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @linking.setter
     def linking(self, value: int) -> None:
+        """Set the linking property."""
         self._cards[8].set_value("linking", value)
 
     @property
@@ -1270,6 +1317,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @sidh.setter
     def sidh(self, value: int) -> None:
+        """Set the sidh property."""
         self._cards[9].set_value("sidh", value)
 
     @property
@@ -1283,8 +1331,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @stypeh.setter
     def stypeh(self, value: int) -> None:
+        """Set the stypeh property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stypeh must be `None` or one of {0,1,2,3}""")
+            raise Exception("""stypeh must be `None` or one of {0,1,2,3}.""")
         self._cards[9].set_value("stypeh", value)
 
     @property
@@ -1298,6 +1347,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @hconv.setter
     def hconv(self, value: float) -> None:
+        """Set the hconv property."""
         self._cards[9].set_value("hconv", value)
 
     @property
@@ -1308,6 +1358,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @pfric.setter
     def pfric(self, value: float) -> None:
+        """Set the pfric property."""
         self._cards[9].set_value("pfric", value)
 
     @property
@@ -1318,6 +1369,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @sdfblk.setter
     def sdfblk(self, value: float) -> None:
+        """Set the sdfblk property."""
         self._cards[9].set_value("sdfblk", value)
 
     @property
@@ -1328,6 +1380,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @kp.setter
     def kp(self, value: float) -> None:
+        """Set the kp property."""
         self._cards[9].set_value("kp", value)
 
     @property
@@ -1341,8 +1394,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @inip.setter
     def inip(self, value: int) -> None:
+        """Set the inip property."""
         if value not in [0, 1, None]:
-            raise Exception("""inip must be `None` or one of {0,1}""")
+            raise Exception("""inip must be `None` or one of {0,1}.""")
         self._cards[9].set_value("inip", value)
 
     @property
@@ -1353,6 +1407,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @cp.setter
     def cp(self, value: float) -> None:
+        """Set the cp property."""
         self._cards[9].set_value("cp", value)
 
     @property
@@ -1363,6 +1418,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @sid3.setter
     def sid3(self, value: int) -> None:
+        """Set the sid3 property."""
         self._cards[10].set_value("sid3", value)
 
     @property
@@ -1376,8 +1432,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @stype3.setter
     def stype3(self, value: int) -> None:
+        """Set the stype3 property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""stype3 must be `None` or one of {0,1,2}""")
+            raise Exception("""stype3 must be `None` or one of {0,1,2}.""")
         self._cards[10].set_value("stype3", value)
 
     @property
@@ -1389,6 +1446,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @c23.setter
     def c23(self, value: float) -> None:
+        """Set the c23 property."""
         self._cards[10].set_value("c23", value)
 
     @property
@@ -1399,6 +1457,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @lctc23.setter
     def lctc23(self, value: int) -> None:
+        """Set the lctc23 property."""
         self._cards[10].set_value("lctc23", value)
 
     @property
@@ -1409,6 +1468,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @lcpc23.setter
     def lcpc23(self, value: int) -> None:
+        """Set the lcpc23 property."""
         self._cards[10].set_value("lcpc23", value)
 
     @property
@@ -1422,8 +1482,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @enh_v.setter
     def enh_v(self, value: int) -> None:
+        """Set the enh_v property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""enh_v must be `None` or one of {0,1,2}""")
+            raise Exception("""enh_v must be `None` or one of {0,1,2}.""")
         self._cards[10].set_value("enh_v", value)
 
     @property
@@ -1434,6 +1495,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @ppop.setter
     def ppop(self, value: float) -> None:
+        """Set the ppop property."""
         self._cards[10].set_value("ppop", value)
 
     @property
@@ -1444,6 +1506,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @pair.setter
     def pair(self, value: float) -> None:
+        """Set the pair property."""
         self._cards[11].set_value("pair", value)
 
     @property
@@ -1454,6 +1517,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @tair.setter
     def tair(self, value: float) -> None:
+        """Set the tair property."""
         self._cards[11].set_value("tair", value)
 
     @property
@@ -1466,6 +1530,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @xmair.setter
     def xmair(self, value: float) -> None:
+        """Set the xmair property."""
         self._cards[11].set_value("xmair", value)
 
     @property
@@ -1476,6 +1541,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @aair.setter
     def aair(self, value: float) -> None:
+        """Set the aair property."""
         self._cards[11].set_value("aair", value)
 
     @property
@@ -1486,6 +1552,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @bair.setter
     def bair(self, value: float) -> None:
+        """Set the bair property."""
         self._cards[11].set_value("bair", value)
 
     @property
@@ -1496,6 +1563,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @cair.setter
     def cair(self, value: float) -> None:
+        """Set the cair property."""
         self._cards[11].set_value("cair", value)
 
     @property
@@ -1506,6 +1574,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @npair.setter
     def npair(self, value: int) -> None:
+        """Set the npair property."""
         self._cards[11].set_value("npair", value)
 
     @property
@@ -1518,6 +1587,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @nprlx.setter
     def nprlx(self, value: str) -> None:
+        """Set the nprlx property."""
         self._cards[11].set_value("nprlx", value)
 
     @property
@@ -1529,6 +1599,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @lcmi.setter
     def lcmi(self, value: int) -> None:
+        """Set the lcmi property."""
         self._cards[12].set_value("lcmi", value)
 
     @property
@@ -1539,6 +1610,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @lcti.setter
     def lcti(self, value: int) -> None:
+        """Set the lcti property."""
         self._cards[12].set_value("lcti", value)
 
     @property
@@ -1551,6 +1623,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @xmi.setter
     def xmi(self, value: float) -> None:
+        """Set the xmi property."""
         self._cards[12].set_value("xmi", value)
 
     @property
@@ -1561,6 +1634,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @ai.setter
     def ai(self, value: float) -> None:
+        """Set the ai property."""
         self._cards[12].set_value("ai", value)
 
     @property
@@ -1571,6 +1645,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[12].set_value("bi", value)
 
     @property
@@ -1581,6 +1656,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @ci.setter
     def ci(self, value: float) -> None:
+        """Set the ci property."""
         self._cards[12].set_value("ci", value)
 
     @property
@@ -1591,6 +1667,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @infgi.setter
     def infgi(self, value: int) -> None:
+        """Set the infgi property."""
         self._cards[12].set_value("infgi", value)
 
     @property
@@ -1601,6 +1678,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @nidi.setter
     def nidi(self, value: int) -> None:
+        """Set the nidi property."""
         self._cards[13].set_value("nidi", value)
 
     @property
@@ -1611,6 +1689,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @ani.setter
     def ani(self, value: float) -> None:
+        """Set the ani property."""
         self._cards[13].set_value("ani", value)
 
     @property
@@ -1624,6 +1703,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @vdi.setter
     def vdi(self, value: int) -> None:
+        """Set the vdi property."""
         self._cards[13].set_value("vdi", value)
 
     @property
@@ -1634,6 +1714,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @cai.setter
     def cai(self, value: float) -> None:
+        """Set the cai property."""
         self._cards[13].set_value("cai", value)
 
     @property
@@ -1644,6 +1725,7 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @infoi.setter
     def infoi(self, value: int) -> None:
+        """Set the infoi property."""
         self._cards[13].set_value("infoi", value)
 
     @property
@@ -1656,8 +1738,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @imom.setter
     def imom(self, value: int) -> None:
+        """Set the imom property."""
         if value not in [0, 1, None]:
-            raise Exception("""imom must be `None` or one of {0,1}""")
+            raise Exception("""imom must be `None` or one of {0,1}.""")
         self._cards[13].set_value("imom", value)
 
     @property
@@ -1670,8 +1753,9 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @iang.setter
     def iang(self, value: int) -> None:
+        """Set the iang property."""
         if value not in [0, 1, None]:
-            raise Exception("""iang must be `None` or one of {0,1}""")
+            raise Exception("""iang must be `None` or one of {0,1}.""")
         self._cards[13].set_value("iang", value)
 
     @property
@@ -1682,5 +1766,6 @@ class AirbagParticleInflationTime(KeywordBase):
 
     @chm_id.setter
     def chm_id(self, value: int) -> None:
+        """Set the chm_id property."""
         self._cards[13].set_value("chm_id", value)
 

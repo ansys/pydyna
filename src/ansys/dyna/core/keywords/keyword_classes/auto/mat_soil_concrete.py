@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSoilConcrete class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSoilConcrete(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSoilConcrete class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -161,6 +163,7 @@ class MatSoilConcrete(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -171,6 +174,7 @@ class MatSoilConcrete(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -181,6 +185,7 @@ class MatSoilConcrete(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -191,6 +196,7 @@ class MatSoilConcrete(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[0].set_value("k", value)
 
     @property
@@ -201,6 +207,7 @@ class MatSoilConcrete(KeywordBase):
 
     @lcpv.setter
     def lcpv(self, value: int) -> None:
+        """Set the lcpv property."""
         self._cards[0].set_value("lcpv", value)
 
     @property
@@ -213,6 +220,7 @@ class MatSoilConcrete(KeywordBase):
 
     @lcyp.setter
     def lcyp(self, value: int) -> None:
+        """Set the lcyp property."""
         self._cards[0].set_value("lcyp", value)
 
     @property
@@ -223,6 +231,7 @@ class MatSoilConcrete(KeywordBase):
 
     @lcfp.setter
     def lcfp(self, value: int) -> None:
+        """Set the lcfp property."""
         self._cards[0].set_value("lcfp", value)
 
     @property
@@ -233,6 +242,7 @@ class MatSoilConcrete(KeywordBase):
 
     @lcrp.setter
     def lcrp(self, value: int) -> None:
+        """Set the lcrp property."""
         self._cards[0].set_value("lcrp", value)
 
     @property
@@ -243,6 +253,7 @@ class MatSoilConcrete(KeywordBase):
 
     @pc.setter
     def pc(self, value: float) -> None:
+        """Set the pc property."""
         self._cards[1].set_value("pc", value)
 
     @property
@@ -255,8 +266,9 @@ class MatSoilConcrete(KeywordBase):
 
     @out.setter
     def out(self, value: float) -> None:
+        """Set the out property."""
         if value not in [0, 1, None]:
-            raise Exception("""out must be `None` or one of {0,1}""")
+            raise Exception("""out must be `None` or one of {0,1}.""")
         self._cards[1].set_value("out", value)
 
     @property
@@ -267,6 +279,7 @@ class MatSoilConcrete(KeywordBase):
 
     @b.setter
     def b(self, value: float) -> None:
+        """Set the b property."""
         self._cards[1].set_value("b", value)
 
     @property
@@ -280,8 +293,9 @@ class MatSoilConcrete(KeywordBase):
 
     @fail.setter
     def fail(self, value: float) -> None:
+        """Set the fail property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""fail must be `None` or one of {0,1,2}""")
+            raise Exception("""fail must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("fail", value)
 
     @property
@@ -292,5 +306,9 @@ class MatSoilConcrete(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

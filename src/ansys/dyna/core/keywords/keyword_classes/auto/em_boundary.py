@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmBoundary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmBoundary(KeywordBase):
     subkeyword = "BOUNDARY"
 
     def __init__(self, **kwargs):
+        """Initialize the EmBoundary class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -63,6 +65,7 @@ class EmBoundary(KeywordBase):
 
     @ssid.setter
     def ssid(self, value: int) -> None:
+        """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
 
     @property
@@ -74,5 +77,6 @@ class EmBoundary(KeywordBase):
 
     @btype.setter
     def btype(self, value: int) -> None:
+        """Set the btype property."""
         self._cards[0].set_value("btype", value)
 

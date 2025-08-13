@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Contact2DAutomaticSurfaceInContinuumThermal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
     subkeyword = "2D_AUTOMATIC_SURFACE_IN_CONTINUUM_THERMAL"
 
     def __init__(self, **kwargs):
+        """Initialize the Contact2DAutomaticSurfaceInContinuumThermal class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -327,6 +329,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @surfa.setter
     def surfa(self, value: int) -> None:
+        """Set the surfa property."""
         self._cards[0].set_value("surfa", value)
 
     @property
@@ -337,6 +340,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @surfb.setter
     def surfb(self, value: int) -> None:
+        """Set the surfb property."""
         self._cards[0].set_value("surfb", value)
 
     @property
@@ -347,6 +351,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @sfact.setter
     def sfact(self, value: float) -> None:
+        """Set the sfact property."""
         self._cards[0].set_value("sfact", value)
 
     @property
@@ -357,6 +362,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @freq.setter
     def freq(self, value: int) -> None:
+        """Set the freq property."""
         self._cards[0].set_value("freq", value)
 
     @property
@@ -367,6 +373,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[0].set_value("fs", value)
 
     @property
@@ -377,6 +384,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @fd.setter
     def fd(self, value: float) -> None:
+        """Set the fd property."""
         self._cards[0].set_value("fd", value)
 
     @property
@@ -387,6 +395,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @dc.setter
     def dc(self, value: float) -> None:
+        """Set the dc property."""
         self._cards[0].set_value("dc", value)
 
     @property
@@ -397,6 +406,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @tbirth.setter
     def tbirth(self, value: float) -> None:
+        """Set the tbirth property."""
         self._cards[1].set_value("tbirth", value)
 
     @property
@@ -407,6 +417,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @tdeath.setter
     def tdeath(self, value: float) -> None:
+        """Set the tdeath property."""
         self._cards[1].set_value("tdeath", value)
 
     @property
@@ -420,6 +431,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @soa.setter
     def soa(self, value: float) -> None:
+        """Set the soa property."""
         self._cards[1].set_value("soa", value)
 
     @property
@@ -433,6 +445,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @sob.setter
     def sob(self, value: float) -> None:
+        """Set the sob property."""
         self._cards[1].set_value("sob", value)
 
     @property
@@ -446,8 +459,9 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @nda.setter
     def nda(self, value: int) -> None:
+        """Set the nda property."""
         if value not in [0, 1, -1, None]:
-            raise Exception("""nda must be `None` or one of {0,1,-1}""")
+            raise Exception("""nda must be `None` or one of {0,1,-1}.""")
         self._cards[1].set_value("nda", value)
 
     @property
@@ -461,8 +475,9 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @ndb.setter
     def ndb(self, value: int) -> None:
+        """Set the ndb property."""
         if value not in [0, 1, -1, None]:
-            raise Exception("""ndb must be `None` or one of {0,1,-1}""")
+            raise Exception("""ndb must be `None` or one of {0,1,-1}.""")
         self._cards[1].set_value("ndb", value)
 
     @property
@@ -475,8 +490,9 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @cof.setter
     def cof(self, value: int) -> None:
+        """Set the cof property."""
         if value not in [0, 1, None]:
-            raise Exception("""cof must be `None` or one of {0,1}""")
+            raise Exception("""cof must be `None` or one of {0,1}.""")
         self._cards[1].set_value("cof", value)
 
     @property
@@ -489,8 +505,9 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @init.setter
     def init(self, value: int) -> None:
+        """Set the init property."""
         if value not in [0, 1, None]:
-            raise Exception("""init must be `None` or one of {0,1}""")
+            raise Exception("""init must be `None` or one of {0,1}.""")
         self._cards[1].set_value("init", value)
 
     @property
@@ -503,6 +520,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @k.setter
     def k(self, value: float) -> None:
+        """Set the k property."""
         self._cards[2].set_value("k", value)
 
     @property
@@ -514,6 +532,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @rad.setter
     def rad(self, value: float) -> None:
+        """Set the rad property."""
         self._cards[2].set_value("rad", value)
 
     @property
@@ -526,6 +545,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @h.setter
     def h(self, value: float) -> None:
+        """Set the h property."""
         self._cards[2].set_value("h", value)
 
     @property
@@ -536,6 +556,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @lmin.setter
     def lmin(self, value: float) -> None:
+        """Set the lmin property."""
         self._cards[2].set_value("lmin", value)
 
     @property
@@ -546,6 +567,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @lmax.setter
     def lmax(self, value: float) -> None:
+        """Set the lmax property."""
         self._cards[2].set_value("lmax", value)
 
     @property
@@ -557,6 +579,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @chlm.setter
     def chlm(self, value: float) -> None:
+        """Set the chlm property."""
         self._cards[2].set_value("chlm", value)
 
     @property
@@ -569,8 +592,9 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @bc_flag.setter
     def bc_flag(self, value: int) -> None:
+        """Set the bc_flag property."""
         if value not in [0, 1, None]:
-            raise Exception("""bc_flag must be `None` or one of {0,1}""")
+            raise Exception("""bc_flag must be `None` or one of {0,1}.""")
         self._cards[2].set_value("bc_flag", value)
 
     @property
@@ -581,6 +605,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @vc.setter
     def vc(self, value: float) -> None:
+        """Set the vc property."""
         self._cards[3].set_value("vc", value)
 
     @property
@@ -591,6 +616,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @vdc.setter
     def vdc(self, value: float) -> None:
+        """Set the vdc property."""
         self._cards[3].set_value("vdc", value)
 
     @property
@@ -603,8 +629,9 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @ipf.setter
     def ipf(self, value: int) -> None:
+        """Set the ipf property."""
         if value not in [0, 1, None]:
-            raise Exception("""ipf must be `None` or one of {0,1}""")
+            raise Exception("""ipf must be `None` or one of {0,1}.""")
         self._cards[3].set_value("ipf", value)
 
     @property
@@ -617,8 +644,9 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @slide.setter
     def slide(self, value: int) -> None:
+        """Set the slide property."""
         if value not in [0, 1, None]:
-            raise Exception("""slide must be `None` or one of {0,1}""")
+            raise Exception("""slide must be `None` or one of {0,1}.""")
         self._cards[3].set_value("slide", value)
 
     @property
@@ -632,8 +660,9 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @istiff.setter
     def istiff(self, value: int) -> None:
+        """Set the istiff property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""istiff must be `None` or one of {0,1,2}""")
+            raise Exception("""istiff must be `None` or one of {0,1,2}.""")
         self._cards[3].set_value("istiff", value)
 
     @property
@@ -647,6 +676,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @tiedgap.setter
     def tiedgap(self, value: float) -> None:
+        """Set the tiedgap property."""
         self._cards[3].set_value("tiedgap", value)
 
     @property
@@ -659,8 +689,9 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @igapcl.setter
     def igapcl(self, value: int) -> None:
+        """Set the igapcl property."""
         if value not in [0, 1, None]:
-            raise Exception("""igapcl must be `None` or one of {0,1}""")
+            raise Exception("""igapcl must be `None` or one of {0,1}.""")
         self._cards[3].set_value("igapcl", value)
 
     @property
@@ -673,8 +704,9 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @tietyp.setter
     def tietyp(self, value: int) -> None:
+        """Set the tietyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""tietyp must be `None` or one of {0,1}""")
+            raise Exception("""tietyp must be `None` or one of {0,1}.""")
         self._cards[3].set_value("tietyp", value)
 
     @property
@@ -685,6 +717,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @sldsoa.setter
     def sldsoa(self, value: float) -> None:
+        """Set the sldsoa property."""
         self._cards[4].set_value("sldsoa", value)
 
     @property
@@ -695,6 +728,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @sldsob.setter
     def sldsob(self, value: float) -> None:
+        """Set the sldsob property."""
         self._cards[4].set_value("sldsob", value)
 
     @property
@@ -707,5 +741,6 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
 
     @tdpen.setter
     def tdpen(self, value: float) -> None:
+        """Set the tdpen property."""
         self._cards[4].set_value("tdpen", value)
 

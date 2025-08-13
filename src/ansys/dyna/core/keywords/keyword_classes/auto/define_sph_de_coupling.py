@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineSphDeCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSphDeCoupling(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineSphDeCoupling class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -140,6 +142,7 @@ class DefineSphDeCoupling(KeywordBase):
 
     @did.setter
     def did(self, value: int) -> None:
+        """Set the did property."""
         self._cards[0].set_value("did", value)
 
     @property
@@ -150,6 +153,7 @@ class DefineSphDeCoupling(KeywordBase):
 
     @heading.setter
     def heading(self, value: str) -> None:
+        """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
@@ -160,6 +164,7 @@ class DefineSphDeCoupling(KeywordBase):
 
     @sphid.setter
     def sphid(self, value: int) -> None:
+        """Set the sphid property."""
         self._cards[1].set_value("sphid", value)
 
     @property
@@ -170,6 +175,7 @@ class DefineSphDeCoupling(KeywordBase):
 
     @desid.setter
     def desid(self, value: int) -> None:
+        """Set the desid property."""
         self._cards[1].set_value("desid", value)
 
     @property
@@ -182,8 +188,9 @@ class DefineSphDeCoupling(KeywordBase):
 
     @sphtyp.setter
     def sphtyp(self, value: int) -> None:
+        """Set the sphtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sphtyp must be `None` or one of {0,1}""")
+            raise Exception("""sphtyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("sphtyp", value)
 
     @property
@@ -196,8 +203,9 @@ class DefineSphDeCoupling(KeywordBase):
 
     @destyp.setter
     def destyp(self, value: int) -> None:
+        """Set the destyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""destyp must be `None` or one of {0,1}""")
+            raise Exception("""destyp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("destyp", value)
 
     @property
@@ -208,6 +216,7 @@ class DefineSphDeCoupling(KeywordBase):
 
     @pfact.setter
     def pfact(self, value: float) -> None:
+        """Set the pfact property."""
         self._cards[1].set_value("pfact", value)
 
     @property
@@ -218,6 +227,7 @@ class DefineSphDeCoupling(KeywordBase):
 
     @dfact.setter
     def dfact(self, value: float) -> None:
+        """Set the dfact property."""
         self._cards[1].set_value("dfact", value)
 
     @property
@@ -228,6 +238,7 @@ class DefineSphDeCoupling(KeywordBase):
 
     @sphbox.setter
     def sphbox(self, value: int) -> None:
+        """Set the sphbox property."""
         self._cards[1].set_value("sphbox", value)
 
     @property
@@ -238,5 +249,9 @@ class DefineSphDeCoupling(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

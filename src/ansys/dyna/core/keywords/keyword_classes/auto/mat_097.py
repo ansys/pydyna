@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the Mat097 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class Mat097(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the Mat097 class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -143,6 +145,7 @@ class Mat097(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -153,6 +156,7 @@ class Mat097(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -163,6 +167,7 @@ class Mat097(KeywordBase):
 
     @tr.setter
     def tr(self, value: int) -> None:
+        """Set the tr property."""
         self._cards[0].set_value("tr", value)
 
     @property
@@ -173,6 +178,7 @@ class Mat097(KeywordBase):
 
     @ts.setter
     def ts(self, value: int) -> None:
+        """Set the ts property."""
         self._cards[0].set_value("ts", value)
 
     @property
@@ -183,6 +189,7 @@ class Mat097(KeywordBase):
 
     @tt.setter
     def tt(self, value: int) -> None:
+        """Set the tt property."""
         self._cards[0].set_value("tt", value)
 
     @property
@@ -193,6 +200,7 @@ class Mat097(KeywordBase):
 
     @rr.setter
     def rr(self, value: int) -> None:
+        """Set the rr property."""
         self._cards[0].set_value("rr", value)
 
     @property
@@ -203,6 +211,7 @@ class Mat097(KeywordBase):
 
     @rs.setter
     def rs(self, value: int) -> None:
+        """Set the rs property."""
         self._cards[0].set_value("rs", value)
 
     @property
@@ -213,6 +222,7 @@ class Mat097(KeywordBase):
 
     @rt.setter
     def rt(self, value: int) -> None:
+        """Set the rt property."""
         self._cards[0].set_value("rt", value)
 
     @property
@@ -223,6 +233,7 @@ class Mat097(KeywordBase):
 
     @rpst.setter
     def rpst(self, value: float) -> None:
+        """Set the rpst property."""
         self._cards[1].set_value("rpst", value)
 
     @property
@@ -233,6 +244,7 @@ class Mat097(KeywordBase):
 
     @rpsr.setter
     def rpsr(self, value: float) -> None:
+        """Set the rpsr property."""
         self._cards[1].set_value("rpsr", value)
 
     @property
@@ -243,5 +255,9 @@ class Mat097(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

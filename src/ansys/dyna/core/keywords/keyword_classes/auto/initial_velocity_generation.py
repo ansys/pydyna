@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InitialVelocityGeneration class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InitialVelocityGeneration(KeywordBase):
     subkeyword = "VELOCITY_GENERATION"
 
     def __init__(self, **kwargs):
+        """Initialize the InitialVelocityGeneration class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -178,6 +180,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -191,8 +194,9 @@ class InitialVelocityGeneration(KeywordBase):
 
     @styp.setter
     def styp(self, value: int) -> None:
+        """Set the styp property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""styp must be `None` or one of {1,2,3}""")
+            raise Exception("""styp must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("styp", value)
 
     @property
@@ -203,6 +207,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @omega.setter
     def omega(self, value: float) -> None:
+        """Set the omega property."""
         self._cards[0].set_value("omega", value)
 
     @property
@@ -213,6 +218,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -223,6 +229,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -233,6 +240,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -245,8 +253,9 @@ class InitialVelocityGeneration(KeywordBase):
 
     @ivatn.setter
     def ivatn(self, value: int) -> None:
+        """Set the ivatn property."""
         if value not in [0, 1, None]:
-            raise Exception("""ivatn must be `None` or one of {0,1}""")
+            raise Exception("""ivatn must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ivatn", value)
 
     @property
@@ -257,6 +266,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @icid.setter
     def icid(self, value: int) -> None:
+        """Set the icid property."""
         self._cards[0].set_value("icid", value)
 
     @property
@@ -267,6 +277,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @xc.setter
     def xc(self, value: float) -> None:
+        """Set the xc property."""
         self._cards[1].set_value("xc", value)
 
     @property
@@ -277,6 +288,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @yc.setter
     def yc(self, value: float) -> None:
+        """Set the yc property."""
         self._cards[1].set_value("yc", value)
 
     @property
@@ -287,6 +299,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @zc.setter
     def zc(self, value: float) -> None:
+        """Set the zc property."""
         self._cards[1].set_value("zc", value)
 
     @property
@@ -297,6 +310,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @nx.setter
     def nx(self, value: float) -> None:
+        """Set the nx property."""
         self._cards[1].set_value("nx", value)
 
     @property
@@ -307,6 +321,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @ny.setter
     def ny(self, value: float) -> None:
+        """Set the ny property."""
         self._cards[1].set_value("ny", value)
 
     @property
@@ -317,6 +332,7 @@ class InitialVelocityGeneration(KeywordBase):
 
     @nz.setter
     def nz(self, value: float) -> None:
+        """Set the nz property."""
         self._cards[1].set_value("nz", value)
 
     @property
@@ -329,8 +345,9 @@ class InitialVelocityGeneration(KeywordBase):
 
     @phase.setter
     def phase(self, value: int) -> None:
+        """Set the phase property."""
         if value not in [0, 1, None]:
-            raise Exception("""phase must be `None` or one of {0,1}""")
+            raise Exception("""phase must be `None` or one of {0,1}.""")
         self._cards[1].set_value("phase", value)
 
     @property
@@ -342,5 +359,6 @@ class InitialVelocityGeneration(KeywordBase):
 
     @irigid.setter
     def irigid(self, value: int) -> None:
+        """Set the irigid property."""
         self._cards[1].set_value("irigid", value)
 

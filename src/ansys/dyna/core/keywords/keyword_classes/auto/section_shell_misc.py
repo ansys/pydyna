@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SectionShellMisc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SectionShellMisc(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SectionShellMisc class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -417,6 +419,7 @@ class SectionShellMisc(KeywordBase):
 
     @secid.setter
     def secid(self, value: int) -> None:
+        """Set the secid property."""
         self._cards[0].set_value("secid", value)
 
     @property
@@ -481,6 +484,7 @@ class SectionShellMisc(KeywordBase):
 
     @elform.setter
     def elform(self, value: int) -> None:
+        """Set the elform property."""
         self._cards[0].set_value("elform", value)
 
     @property
@@ -492,6 +496,7 @@ class SectionShellMisc(KeywordBase):
 
     @shrf.setter
     def shrf(self, value: float) -> None:
+        """Set the shrf property."""
         self._cards[0].set_value("shrf", value)
 
     @property
@@ -503,6 +508,7 @@ class SectionShellMisc(KeywordBase):
 
     @nip.setter
     def nip(self, value: int) -> None:
+        """Set the nip property."""
         self._cards[0].set_value("nip", value)
 
     @property
@@ -516,8 +522,9 @@ class SectionShellMisc(KeywordBase):
 
     @propt.setter
     def propt(self, value: float) -> None:
+        """Set the propt property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""propt must be `None` or one of {1,2,3}""")
+            raise Exception("""propt must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("propt", value)
 
     @property
@@ -531,6 +538,7 @@ class SectionShellMisc(KeywordBase):
 
     @qr_irid.setter
     def qr_irid(self, value: int) -> None:
+        """Set the qr_irid property."""
         self._cards[0].set_value("qr/irid", value)
 
     @property
@@ -543,8 +551,9 @@ class SectionShellMisc(KeywordBase):
 
     @icomp.setter
     def icomp(self, value: int) -> None:
+        """Set the icomp property."""
         if value not in [0, 1, None]:
-            raise Exception("""icomp must be `None` or one of {0,1}""")
+            raise Exception("""icomp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("icomp", value)
 
     @property
@@ -558,8 +567,9 @@ class SectionShellMisc(KeywordBase):
 
     @setyp.setter
     def setyp(self, value: int) -> None:
+        """Set the setyp property."""
         if value not in [1, 2, 3, None]:
-            raise Exception("""setyp must be `None` or one of {1,2,3}""")
+            raise Exception("""setyp must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("setyp", value)
 
     @property
@@ -570,6 +580,7 @@ class SectionShellMisc(KeywordBase):
 
     @t1.setter
     def t1(self, value: float) -> None:
+        """Set the t1 property."""
         self._cards[1].set_value("t1", value)
 
     @property
@@ -580,6 +591,7 @@ class SectionShellMisc(KeywordBase):
 
     @t2.setter
     def t2(self, value: float) -> None:
+        """Set the t2 property."""
         self._cards[1].set_value("t2", value)
 
     @property
@@ -590,6 +602,7 @@ class SectionShellMisc(KeywordBase):
 
     @t3.setter
     def t3(self, value: float) -> None:
+        """Set the t3 property."""
         self._cards[1].set_value("t3", value)
 
     @property
@@ -600,6 +613,7 @@ class SectionShellMisc(KeywordBase):
 
     @t4.setter
     def t4(self, value: float) -> None:
+        """Set the t4 property."""
         self._cards[1].set_value("t4", value)
 
     @property
@@ -613,6 +627,7 @@ class SectionShellMisc(KeywordBase):
 
     @nloc.setter
     def nloc(self, value: float) -> None:
+        """Set the nloc property."""
         self._cards[1].set_value("nloc", value)
 
     @property
@@ -626,6 +641,7 @@ class SectionShellMisc(KeywordBase):
 
     @marea.setter
     def marea(self, value: float) -> None:
+        """Set the marea property."""
         self._cards[1].set_value("marea", value)
 
     @property
@@ -636,6 +652,7 @@ class SectionShellMisc(KeywordBase):
 
     @thkscl.setter
     def thkscl(self, value: float) -> None:
+        """Set the thkscl property."""
         self._cards[2].set_value("thkscl", value)
 
     @property
@@ -646,6 +663,7 @@ class SectionShellMisc(KeywordBase):
 
     @nipp.setter
     def nipp(self, value: int) -> None:
+        """Set the nipp property."""
         self._cards[3].set_value("nipp", value)
 
     @property
@@ -656,6 +674,7 @@ class SectionShellMisc(KeywordBase):
 
     @nxdof.setter
     def nxdof(self, value: int) -> None:
+        """Set the nxdof property."""
         self._cards[3].set_value("nxdof", value)
 
     @property
@@ -666,8 +685,9 @@ class SectionShellMisc(KeywordBase):
 
     @iunf.setter
     def iunf(self, value: int) -> None:
+        """Set the iunf property."""
         if value not in [0, 1, None]:
-            raise Exception("""iunf must be `None` or one of {0,1}""")
+            raise Exception("""iunf must be `None` or one of {0,1}.""")
         self._cards[3].set_value("iunf", value)
 
     @property
@@ -678,8 +698,9 @@ class SectionShellMisc(KeywordBase):
 
     @ihgf.setter
     def ihgf(self, value: int) -> None:
+        """Set the ihgf property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""ihgf must be `None` or one of {0,1,2,3}""")
+            raise Exception("""ihgf must be `None` or one of {0,1,2,3}.""")
         self._cards[3].set_value("ihgf", value)
 
     @property
@@ -690,8 +711,9 @@ class SectionShellMisc(KeywordBase):
 
     @itaj.setter
     def itaj(self, value: int) -> None:
+        """Set the itaj property."""
         if value not in [0, 1, None]:
-            raise Exception("""itaj must be `None` or one of {0,1}""")
+            raise Exception("""itaj must be `None` or one of {0,1}.""")
         self._cards[3].set_value("itaj", value)
 
     @property
@@ -702,6 +724,7 @@ class SectionShellMisc(KeywordBase):
 
     @lmc.setter
     def lmc(self, value: int) -> None:
+        """Set the lmc property."""
         self._cards[3].set_value("lmc", value)
 
     @property
@@ -712,6 +735,7 @@ class SectionShellMisc(KeywordBase):
 
     @nhsv.setter
     def nhsv(self, value: int) -> None:
+        """Set the nhsv property."""
         self._cards[3].set_value("nhsv", value)
 
     @property
@@ -722,8 +746,9 @@ class SectionShellMisc(KeywordBase):
 
     @iloc.setter
     def iloc(self, value: int) -> None:
+        """Set the iloc property."""
         if value not in [0, 1, None]:
-            raise Exception("""iloc must be `None` or one of {0,1}""")
+            raise Exception("""iloc must be `None` or one of {0,1}.""")
         self._cards[3].set_value("iloc", value)
 
     @property
@@ -734,6 +759,7 @@ class SectionShellMisc(KeywordBase):
 
     @xi.setter
     def xi(self, value: float) -> None:
+        """Set the xi property."""
         self._cards[4].set_value("xi", value)
 
     @property
@@ -744,6 +770,7 @@ class SectionShellMisc(KeywordBase):
 
     @eta.setter
     def eta(self, value: float) -> None:
+        """Set the eta property."""
         self._cards[4].set_value("eta", value)
 
     @property
@@ -754,6 +781,7 @@ class SectionShellMisc(KeywordBase):
 
     @wgt.setter
     def wgt(self, value: float) -> None:
+        """Set the wgt property."""
         self._cards[4].set_value("wgt", value)
 
     @property
@@ -764,6 +792,7 @@ class SectionShellMisc(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[5].set_value("bi", value)
 
     @property
@@ -774,6 +803,7 @@ class SectionShellMisc(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[5].set_value("bi", value)
 
     @property
@@ -784,6 +814,7 @@ class SectionShellMisc(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[5].set_value("bi", value)
 
     @property
@@ -794,6 +825,7 @@ class SectionShellMisc(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[5].set_value("bi", value)
 
     @property
@@ -804,6 +836,7 @@ class SectionShellMisc(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[5].set_value("bi", value)
 
     @property
@@ -814,6 +847,7 @@ class SectionShellMisc(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[5].set_value("bi", value)
 
     @property
@@ -824,6 +858,7 @@ class SectionShellMisc(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[5].set_value("bi", value)
 
     @property
@@ -834,6 +869,7 @@ class SectionShellMisc(KeywordBase):
 
     @bi.setter
     def bi(self, value: float) -> None:
+        """Set the bi property."""
         self._cards[5].set_value("bi", value)
 
     @property
@@ -844,6 +880,7 @@ class SectionShellMisc(KeywordBase):
 
     @pi.setter
     def pi(self, value: float) -> None:
+        """Set the pi property."""
         self._cards[6].set_value("pi", value)
 
     @property
@@ -854,6 +891,7 @@ class SectionShellMisc(KeywordBase):
 
     @pi.setter
     def pi(self, value: float) -> None:
+        """Set the pi property."""
         self._cards[6].set_value("pi", value)
 
     @property
@@ -864,6 +902,7 @@ class SectionShellMisc(KeywordBase):
 
     @pi.setter
     def pi(self, value: float) -> None:
+        """Set the pi property."""
         self._cards[6].set_value("pi", value)
 
     @property
@@ -874,6 +913,7 @@ class SectionShellMisc(KeywordBase):
 
     @pi.setter
     def pi(self, value: float) -> None:
+        """Set the pi property."""
         self._cards[6].set_value("pi", value)
 
     @property
@@ -884,6 +924,7 @@ class SectionShellMisc(KeywordBase):
 
     @pi.setter
     def pi(self, value: float) -> None:
+        """Set the pi property."""
         self._cards[6].set_value("pi", value)
 
     @property
@@ -894,6 +935,7 @@ class SectionShellMisc(KeywordBase):
 
     @pi.setter
     def pi(self, value: float) -> None:
+        """Set the pi property."""
         self._cards[6].set_value("pi", value)
 
     @property
@@ -904,6 +946,7 @@ class SectionShellMisc(KeywordBase):
 
     @pi.setter
     def pi(self, value: float) -> None:
+        """Set the pi property."""
         self._cards[6].set_value("pi", value)
 
     @property
@@ -914,6 +957,7 @@ class SectionShellMisc(KeywordBase):
 
     @pi.setter
     def pi(self, value: float) -> None:
+        """Set the pi property."""
         self._cards[6].set_value("pi", value)
 
     @property
@@ -924,5 +968,9 @@ class SectionShellMisc(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[7].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

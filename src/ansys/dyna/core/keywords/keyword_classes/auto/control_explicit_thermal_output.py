@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlExplicitThermalOutput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlExplicitThermalOutput(KeywordBase):
     subkeyword = "EXPLICIT_THERMAL_OUTPUT"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlExplicitThermalOutput class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -78,6 +80,7 @@ class ControlExplicitThermalOutput(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -90,8 +93,9 @@ class ControlExplicitThermalOutput(KeywordBase):
 
     @dtoutyp.setter
     def dtoutyp(self, value: int) -> None:
+        """Set the dtoutyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""dtoutyp must be `None` or one of {0,1}""")
+            raise Exception("""dtoutyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dtoutyp", value)
 
     @property
@@ -102,6 +106,7 @@ class ControlExplicitThermalOutput(KeywordBase):
 
     @setid.setter
     def setid(self, value: int) -> None:
+        """Set the setid property."""
         self._cards[0].set_value("setid", value)
 
     @property
@@ -116,7 +121,8 @@ class ControlExplicitThermalOutput(KeywordBase):
 
     @setyp.setter
     def setyp(self, value: int) -> None:
+        """Set the setyp property."""
         if value not in [1, 2, 3, 4, None]:
-            raise Exception("""setyp must be `None` or one of {1,2,3,4}""")
+            raise Exception("""setyp must be `None` or one of {1,2,3,4}.""")
         self._cards[0].set_value("setyp", value)
 

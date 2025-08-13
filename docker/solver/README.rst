@@ -1,5 +1,5 @@
 Build the Docker image for the ``solver`` service
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------
 
 You must build the Docker image for the PyDYNA ``solver`` service and then
 run the image as a container.
@@ -9,9 +9,9 @@ Prerequisites
 
 * Ensure that you have cloned the PyDYNA repository locally with these commands:
 
-  .. code:: console
+.. code:: console
 
-   git clone https://github.com/pyansys/pydyna.git
+   git clone https://github.com/ansys/pydyna.git
    cd pydyna
 
   The ``docker`` file in the  ``docker/solver`` directory is used to build the
@@ -31,9 +31,9 @@ Prerequisites
 
   The files in this folder should look similar to this:
 
-  .. code:: bash
+.. code:: bash
 
-     >>> Dockerfile README.rst docker-compose.yml  mppdyna_docker_centos7.zip
+   >>> Dockerfile README.rst docker-compose.yml  mppdyna_docker_centos7.zip
 
 
 Once all prerequisites are met, you can build the Docker image for the ``solver`` service.
@@ -55,16 +55,16 @@ To build the Docker image for the ``solver`` service, perform these steps:
 
    .. code:: bash
 
-       docker images
+      docker images
 
 
    Your output should look similar to this:
 
    .. code:: bash
 
-       >>> REPOSITORY                        TAG                                        IMAGE ID       CREATED          SIZE
-       >>> dyna_solver_v04                   latest                                     defbadbeee8e   16 minutes ago   730MB
-       >>> ......                                                   ......                             ............   ..............   ......
+      >>> REPOSITORY                        TAG                                        IMAGE ID       CREATED          SIZE
+      >>> dyna_solver_v04                   latest                                     defbadbeee8e   16 minutes ago   730MB
+      >>> ......                                                   ......                             ............   ..............   ......
 
 
 Start the container from a ``docker-compose.yml`` file
@@ -90,21 +90,21 @@ Alternatively, you can start the container for the ``pre`` service from a
 
    .. code:: bash
 
-       docker ps
+      docker ps
 	   
    Your output should look similar to this:  
 
    .. code:: bash
 
-       >>> CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS         PORTS                            NAMES
-       >>> be84c95db31d   dyna_solver_v04   "/ansys_inc/server.p…"   18 minutes ago   Up 8 seconds   22/tcp, 0.0.0.0:5000->5000/tcp   mppdyna_docker_centos7_dyna_1
+      >>> CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS         PORTS                            NAMES
+      >>> be84c95db31d   dyna_solver_v04   "/ansys_inc/server.p…"   18 minutes ago   Up 8 seconds   22/tcp, 0.0.0.0:5000->5000/tcp   mppdyna_docker_centos7_dyna_1
 
 Copy files from Docker
 ~~~~~~~~~~~~~~~~~~~~~~
 To copy files back from the ``solver`` container to your host machine use the command below:
 
-  .. code:: bash
+.. code:: bash
 
-     docker cp <containerId>:/file/path/within/container /host/target/path
+   docker cp <containerId>:/file/path/within/container /host/target/path
 
 The path within the container is ``/rundir``.

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlImplicitModesBinary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlImplicitModesBinary(KeywordBase):
     subkeyword = "IMPLICIT_MODES_BINARY"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlImplicitModesBinary class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -117,6 +119,7 @@ class ControlImplicitModesBinary(KeywordBase):
 
     @nsidc.setter
     def nsidc(self, value: int) -> None:
+        """Set the nsidc property."""
         self._cards[0].set_value("nsidc", value)
 
     @property
@@ -128,6 +131,7 @@ class ControlImplicitModesBinary(KeywordBase):
 
     @nsida.setter
     def nsida(self, value: int) -> None:
+        """Set the nsida property."""
         self._cards[0].set_value("nsida", value)
 
     @property
@@ -138,6 +142,7 @@ class ControlImplicitModesBinary(KeywordBase):
 
     @neig.setter
     def neig(self, value: int) -> None:
+        """Set the neig property."""
         self._cards[0].set_value("neig", value)
 
     @property
@@ -148,6 +153,7 @@ class ControlImplicitModesBinary(KeywordBase):
 
     @ibase.setter
     def ibase(self, value: int) -> None:
+        """Set the ibase property."""
         self._cards[0].set_value("ibase", value)
 
     @property
@@ -158,6 +164,7 @@ class ControlImplicitModesBinary(KeywordBase):
 
     @se_mass.setter
     def se_mass(self, value: str) -> None:
+        """Set the se_mass property."""
         self._cards[0].set_value("se_mass", value)
 
     @property
@@ -168,6 +175,7 @@ class ControlImplicitModesBinary(KeywordBase):
 
     @se_damp.setter
     def se_damp(self, value: str) -> None:
+        """Set the se_damp property."""
         self._cards[0].set_value("se_damp", value)
 
     @property
@@ -178,6 +186,7 @@ class ControlImplicitModesBinary(KeywordBase):
 
     @se_stiff.setter
     def se_stiff(self, value: str) -> None:
+        """Set the se_stiff property."""
         self._cards[0].set_value("se_stiff", value)
 
     @property
@@ -188,6 +197,7 @@ class ControlImplicitModesBinary(KeywordBase):
 
     @se_inert.setter
     def se_inert(self, value: str) -> None:
+        """Set the se_inert property."""
         self._cards[0].set_value("se_inert", value)
 
     @property
@@ -198,5 +208,6 @@ class ControlImplicitModesBinary(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[1].set_value("filename", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the AirbagFluidAndGas class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class AirbagFluidAndGas(KeywordBase):
     subkeyword = "FLUID_AND_GAS"
 
     def __init__(self, **kwargs):
+        """Initialize the AirbagFluidAndGas class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -218,6 +220,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -230,8 +233,9 @@ class AirbagFluidAndGas(KeywordBase):
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
+        """Set the sidtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}""")
+            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sidtyp", value)
 
     @property
@@ -245,6 +249,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @rbid.setter
     def rbid(self, value: int) -> None:
+        """Set the rbid property."""
         self._cards[0].set_value("rbid", value)
 
     @property
@@ -255,6 +260,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @vsca.setter
     def vsca(self, value: float) -> None:
+        """Set the vsca property."""
         self._cards[0].set_value("vsca", value)
 
     @property
@@ -265,6 +271,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @psca.setter
     def psca(self, value: float) -> None:
+        """Set the psca property."""
         self._cards[0].set_value("psca", value)
 
     @property
@@ -275,6 +282,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @vini.setter
     def vini(self, value: float) -> None:
+        """Set the vini property."""
         self._cards[0].set_value("vini", value)
 
     @property
@@ -285,6 +293,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @mwd.setter
     def mwd(self, value: float) -> None:
+        """Set the mwd property."""
         self._cards[0].set_value("mwd", value)
 
     @property
@@ -295,6 +304,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @spsf.setter
     def spsf(self, value: float) -> None:
+        """Set the spsf property."""
         self._cards[0].set_value("spsf", value)
 
     @property
@@ -305,6 +315,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @xwini.setter
     def xwini(self, value: float) -> None:
+        """Set the xwini property."""
         self._cards[1].set_value("xwini", value)
 
     @property
@@ -315,6 +326,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @xwadd.setter
     def xwadd(self, value: float) -> None:
+        """Set the xwadd property."""
         self._cards[1].set_value("xwadd", value)
 
     @property
@@ -325,6 +337,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @xw.setter
     def xw(self, value: float) -> None:
+        """Set the xw property."""
         self._cards[1].set_value("xw", value)
 
     @property
@@ -335,6 +348,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[1].set_value("p", value)
 
     @property
@@ -345,6 +359,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @tend.setter
     def tend(self, value: float) -> None:
+        """Set the tend property."""
         self._cards[1].set_value("tend", value)
 
     @property
@@ -355,6 +370,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @rho.setter
     def rho(self, value: float) -> None:
+        """Set the rho property."""
         self._cards[1].set_value("rho", value)
 
     @property
@@ -365,6 +381,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @lcxw.setter
     def lcxw(self, value: int) -> None:
+        """Set the lcxw property."""
         self._cards[1].set_value("lcxw", value)
 
     @property
@@ -375,6 +392,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @lcp.setter
     def lcp(self, value: int) -> None:
+        """Set the lcp property."""
         self._cards[1].set_value("lcp", value)
 
     @property
@@ -388,6 +406,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @gdir.setter
     def gdir(self, value: float) -> None:
+        """Set the gdir property."""
         self._cards[2].set_value("gdir", value)
 
     @property
@@ -398,6 +417,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @nproj.setter
     def nproj(self, value: int) -> None:
+        """Set the nproj property."""
         self._cards[2].set_value("nproj", value)
 
     @property
@@ -408,6 +428,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @idir.setter
     def idir(self, value: int) -> None:
+        """Set the idir property."""
         self._cards[2].set_value("idir", value)
 
     @property
@@ -418,6 +439,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @iidir.setter
     def iidir(self, value: int) -> None:
+        """Set the iidir property."""
         self._cards[2].set_value("iidir", value)
 
     @property
@@ -428,6 +450,7 @@ class AirbagFluidAndGas(KeywordBase):
 
     @kappa.setter
     def kappa(self, value: float) -> None:
+        """Set the kappa property."""
         self._cards[2].set_value("kappa", value)
 
     @property
@@ -438,5 +461,6 @@ class AirbagFluidAndGas(KeywordBase):
 
     @kbm.setter
     def kbm(self, value: float) -> None:
+        """Set the kbm property."""
         self._cards[2].set_value("kbm", value)
 

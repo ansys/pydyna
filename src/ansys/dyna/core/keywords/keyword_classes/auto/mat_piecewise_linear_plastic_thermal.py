@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatPiecewiseLinearPlasticThermal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatPiecewiseLinearPlasticThermal class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -168,6 +170,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -178,6 +181,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -188,6 +192,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -198,6 +203,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -208,6 +214,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[0].set_value("c", value)
 
     @property
@@ -218,6 +225,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[0].set_value("p", value)
 
     @property
@@ -228,6 +236,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @fail.setter
     def fail(self, value: float) -> None:
+        """Set the fail property."""
         self._cards[0].set_value("fail", value)
 
     @property
@@ -238,6 +247,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @tdel.setter
     def tdel(self, value: float) -> None:
+        """Set the tdel property."""
         self._cards[0].set_value("tdel", value)
 
     @property
@@ -248,6 +258,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @tabidc.setter
     def tabidc(self, value: int) -> None:
+        """Set the tabidc property."""
         self._cards[1].set_value("tabidc", value)
 
     @property
@@ -258,6 +269,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @tabidt.setter
     def tabidt(self, value: int) -> None:
+        """Set the tabidt property."""
         self._cards[1].set_value("tabidt", value)
 
     @property
@@ -268,6 +280,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @lalpha.setter
     def lalpha(self, value: int) -> None:
+        """Set the lalpha property."""
         self._cards[1].set_value("lalpha", value)
 
     @property
@@ -278,6 +291,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @alpha	.setter
     def alpha	(self, value: float) -> None:
+        """Set the alpha	 property."""
         self._cards[2].set_value("alpha	", value)
 
     @property
@@ -288,6 +302,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @tref.setter
     def tref(self, value: float) -> None:
+        """Set the tref property."""
         self._cards[2].set_value("tref", value)
 
     @property
@@ -298,5 +313,9 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlFormingParameterRead class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlFormingParameterRead(KeywordBase):
     subkeyword = "FORMING_PARAMETER_READ"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlFormingParameterRead class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -100,6 +102,7 @@ class ControlFormingParameterRead(KeywordBase):
 
     @filename.setter
     def filename(self, value: str) -> None:
+        """Set the filename property."""
         self._cards[0].set_value("filename", value)
 
     @property
@@ -110,6 +113,7 @@ class ControlFormingParameterRead(KeywordBase):
 
     @paraname.setter
     def paraname(self, value: str) -> None:
+        """Set the paraname property."""
         self._cards[1].set_value("paraname", value)
 
     @property
@@ -120,6 +124,7 @@ class ControlFormingParameterRead(KeywordBase):
 
     @imethod.setter
     def imethod(self, value: int) -> None:
+        """Set the imethod property."""
         self._cards[1].set_value("imethod", value)
 
     @property
@@ -130,6 +135,7 @@ class ControlFormingParameterRead(KeywordBase):
 
     @line.setter
     def line(self, value: int) -> None:
+        """Set the line property."""
         self._cards[1].set_value("line", value)
 
     @property
@@ -140,6 +146,7 @@ class ControlFormingParameterRead(KeywordBase):
 
     @nbegpa.setter
     def nbegpa(self, value: int) -> None:
+        """Set the nbegpa property."""
         self._cards[1].set_value("nbegpa", value)
 
     @property
@@ -150,6 +157,7 @@ class ControlFormingParameterRead(KeywordBase):
 
     @nendpa_.setter
     def nendpa_(self, value: int) -> None:
+        """Set the nendpa_ property."""
         self._cards[1].set_value("nendpa ", value)
 
     @property
@@ -160,5 +168,6 @@ class ControlFormingParameterRead(KeywordBase):
 
     @value_.setter
     def value_(self, value: float) -> None:
+        """Set the value_ property."""
         self._cards[1].set_value("value ", value)
 

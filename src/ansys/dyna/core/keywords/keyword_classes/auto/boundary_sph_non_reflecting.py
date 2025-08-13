@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundarySphNonReflecting class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundarySphNonReflecting(KeywordBase):
     subkeyword = "SPH_NON_REFLECTING"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundarySphNonReflecting class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -91,6 +93,7 @@ class BoundarySphNonReflecting(KeywordBase):
 
     @vtx.setter
     def vtx(self, value: float) -> None:
+        """Set the vtx property."""
         self._cards[0].set_value("vtx", value)
 
     @property
@@ -101,6 +104,7 @@ class BoundarySphNonReflecting(KeywordBase):
 
     @vty.setter
     def vty(self, value: float) -> None:
+        """Set the vty property."""
         self._cards[0].set_value("vty", value)
 
     @property
@@ -111,6 +115,7 @@ class BoundarySphNonReflecting(KeywordBase):
 
     @vtz.setter
     def vtz(self, value: float) -> None:
+        """Set the vtz property."""
         self._cards[0].set_value("vtz", value)
 
     @property
@@ -121,6 +126,7 @@ class BoundarySphNonReflecting(KeywordBase):
 
     @vhx.setter
     def vhx(self, value: float) -> None:
+        """Set the vhx property."""
         self._cards[0].set_value("vhx", value)
 
     @property
@@ -131,6 +137,7 @@ class BoundarySphNonReflecting(KeywordBase):
 
     @vhy.setter
     def vhy(self, value: float) -> None:
+        """Set the vhy property."""
         self._cards[0].set_value("vhy", value)
 
     @property
@@ -141,5 +148,6 @@ class BoundarySphNonReflecting(KeywordBase):
 
     @vhz.setter
     def vhz(self, value: float) -> None:
+        """Set the vhz property."""
         self._cards[0].set_value("vhz", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IgaEdgeUvw class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IgaEdgeUvw(KeywordBase):
     subkeyword = "EDGE_UVW"
 
     def __init__(self, **kwargs):
+        """Initialize the IgaEdgeUvw class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -90,6 +92,7 @@ class IgaEdgeUvw(KeywordBase):
 
     @eid.setter
     def eid(self, value: int) -> None:
+        """Set the eid property."""
         self._cards[0].set_value("eid", value)
 
     @property
@@ -100,6 +103,7 @@ class IgaEdgeUvw(KeywordBase):
 
     @exyzid.setter
     def exyzid(self, value: int) -> None:
+        """Set the exyzid property."""
         self._cards[0].set_value("exyzid", value)
 
     @property
@@ -110,6 +114,7 @@ class IgaEdgeUvw(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -122,8 +127,9 @@ class IgaEdgeUvw(KeywordBase):
 
     @sense.setter
     def sense(self, value: int) -> None:
+        """Set the sense property."""
         if value not in [0, 1, None]:
-            raise Exception("""sense must be `None` or one of {0,1}""")
+            raise Exception("""sense must be `None` or one of {0,1}.""")
         self._cards[0].set_value("sense", value)
 
     @property
@@ -134,6 +140,7 @@ class IgaEdgeUvw(KeywordBase):
 
     @rstart.setter
     def rstart(self, value: float) -> None:
+        """Set the rstart property."""
         self._cards[0].set_value("rstart", value)
 
     @property
@@ -144,5 +151,6 @@ class IgaEdgeUvw(KeywordBase):
 
     @rend.setter
     def rend(self, value: float) -> None:
+        """Set the rend property."""
         self._cards[0].set_value("rend", value)
 

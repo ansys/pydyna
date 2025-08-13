@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the EmRotationAxis class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class EmRotationAxis(KeywordBase):
     subkeyword = "ROTATION_AXIS"
 
     def __init__(self, **kwargs):
+        """Initialize the EmRotationAxis class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -96,6 +98,7 @@ class EmRotationAxis(KeywordBase):
 
     @xp.setter
     def xp(self, value: float) -> None:
+        """Set the xp property."""
         self._cards[0].set_value("xp", value)
 
     @property
@@ -106,6 +109,7 @@ class EmRotationAxis(KeywordBase):
 
     @yp.setter
     def yp(self, value: float) -> None:
+        """Set the yp property."""
         self._cards[0].set_value("yp", value)
 
     @property
@@ -116,6 +120,7 @@ class EmRotationAxis(KeywordBase):
 
     @zp.setter
     def zp(self, value: float) -> None:
+        """Set the zp property."""
         self._cards[0].set_value("zp", value)
 
     @property
@@ -126,6 +131,7 @@ class EmRotationAxis(KeywordBase):
 
     @xd.setter
     def xd(self, value: float) -> None:
+        """Set the xd property."""
         self._cards[0].set_value("xd", value)
 
     @property
@@ -136,6 +142,7 @@ class EmRotationAxis(KeywordBase):
 
     @yd.setter
     def yd(self, value: float) -> None:
+        """Set the yd property."""
         self._cards[0].set_value("yd", value)
 
     @property
@@ -146,6 +153,7 @@ class EmRotationAxis(KeywordBase):
 
     @zd.setter
     def zd(self, value: float) -> None:
+        """Set the zd property."""
         self._cards[0].set_value("zd", value)
 
     @property
@@ -156,5 +164,6 @@ class EmRotationAxis(KeywordBase):
 
     @numsec.setter
     def numsec(self, value: int) -> None:
+        """Set the numsec property."""
         self._cards[0].set_value("numsec", value)
 

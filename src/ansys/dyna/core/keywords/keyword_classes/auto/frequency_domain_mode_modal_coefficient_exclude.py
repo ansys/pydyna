@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the FrequencyDomainModeModalCoefficientExclude class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class FrequencyDomainModeModalCoefficientExclude(KeywordBase):
     subkeyword = "DOMAIN_MODE_MODAL_COEFFICIENT_EXCLUDE"
 
     def __init__(self, **kwargs):
+        """Initialize the FrequencyDomainModeModalCoefficientExclude class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -54,5 +56,6 @@ class FrequencyDomainModeModalCoefficientExclude(KeywordBase):
 
     @dskip.setter
     def dskip(self, value: float) -> None:
+        """Set the dskip property."""
         self._cards[0].set_value("dskip", value)
 

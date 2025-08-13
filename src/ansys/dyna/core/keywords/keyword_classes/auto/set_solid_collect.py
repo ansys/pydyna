@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetSolidCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetSolidCollect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetSolidCollect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -144,6 +146,7 @@ class SetSolidCollect(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -156,8 +159,9 @@ class SetSolidCollect(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -168,6 +172,7 @@ class SetSolidCollect(KeywordBase):
 
     @k1.setter
     def k1(self, value: int) -> None:
+        """Set the k1 property."""
         self._cards[1].set_value("k1", value)
 
     @property
@@ -178,6 +183,7 @@ class SetSolidCollect(KeywordBase):
 
     @k2.setter
     def k2(self, value: int) -> None:
+        """Set the k2 property."""
         self._cards[1].set_value("k2", value)
 
     @property
@@ -188,6 +194,7 @@ class SetSolidCollect(KeywordBase):
 
     @k3.setter
     def k3(self, value: int) -> None:
+        """Set the k3 property."""
         self._cards[1].set_value("k3", value)
 
     @property
@@ -198,6 +205,7 @@ class SetSolidCollect(KeywordBase):
 
     @k4.setter
     def k4(self, value: int) -> None:
+        """Set the k4 property."""
         self._cards[1].set_value("k4", value)
 
     @property
@@ -208,6 +216,7 @@ class SetSolidCollect(KeywordBase):
 
     @k5.setter
     def k5(self, value: int) -> None:
+        """Set the k5 property."""
         self._cards[1].set_value("k5", value)
 
     @property
@@ -218,6 +227,7 @@ class SetSolidCollect(KeywordBase):
 
     @k6.setter
     def k6(self, value: int) -> None:
+        """Set the k6 property."""
         self._cards[1].set_value("k6", value)
 
     @property
@@ -228,6 +238,7 @@ class SetSolidCollect(KeywordBase):
 
     @k7.setter
     def k7(self, value: int) -> None:
+        """Set the k7 property."""
         self._cards[1].set_value("k7", value)
 
     @property
@@ -238,6 +249,7 @@ class SetSolidCollect(KeywordBase):
 
     @k8.setter
     def k8(self, value: int) -> None:
+        """Set the k8 property."""
         self._cards[1].set_value("k8", value)
 
     @property
@@ -248,5 +260,9 @@ class SetSolidCollect(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

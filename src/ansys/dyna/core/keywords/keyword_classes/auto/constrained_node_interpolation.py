@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedNodeInterpolation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedNodeInterpolation(KeywordBase):
     subkeyword = "NODE_INTERPOLATION"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedNodeInterpolation class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -121,6 +123,7 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -131,6 +134,7 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     @numcn.setter
     def numcn(self, value: int) -> None:
+        """Set the numcn property."""
         self._cards[0].set_value("numcn", value)
 
     @property
@@ -141,6 +145,7 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     @cn1.setter
     def cn1(self, value: int) -> None:
+        """Set the cn1 property."""
         self._cards[1].set_value("cn1", value)
 
     @property
@@ -151,6 +156,7 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     @w1.setter
     def w1(self, value: float) -> None:
+        """Set the w1 property."""
         self._cards[1].set_value("w1", value)
 
     @property
@@ -161,6 +167,7 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     @cn2.setter
     def cn2(self, value: int) -> None:
+        """Set the cn2 property."""
         self._cards[1].set_value("cn2", value)
 
     @property
@@ -171,6 +178,7 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     @w2.setter
     def w2(self, value: float) -> None:
+        """Set the w2 property."""
         self._cards[1].set_value("w2", value)
 
     @property
@@ -181,6 +189,7 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     @cn3.setter
     def cn3(self, value: int) -> None:
+        """Set the cn3 property."""
         self._cards[1].set_value("cn3", value)
 
     @property
@@ -191,6 +200,7 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     @w3.setter
     def w3(self, value: float) -> None:
+        """Set the w3 property."""
         self._cards[1].set_value("w3", value)
 
     @property
@@ -201,6 +211,7 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     @cn4.setter
     def cn4(self, value: int) -> None:
+        """Set the cn4 property."""
         self._cards[1].set_value("cn4", value)
 
     @property
@@ -211,5 +222,6 @@ class ConstrainedNodeInterpolation(KeywordBase):
 
     @w4.setter
     def w4(self, value: float) -> None:
+        """Set the w4 property."""
         self._cards[1].set_value("w4", value)
 

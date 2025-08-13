@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DatabaseRve class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class DatabaseRve(KeywordBase):
     subkeyword = "RVE"
 
     def __init__(self, **kwargs):
+        """Initialize the DatabaseRve class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -63,6 +65,7 @@ class DatabaseRve(KeywordBase):
 
     @dt.setter
     def dt(self, value: float) -> None:
+        """Set the dt property."""
         self._cards[0].set_value("dt", value)
 
     @property
@@ -75,7 +78,8 @@ class DatabaseRve(KeywordBase):
 
     @bina.setter
     def bina(self, value: int) -> None:
+        """Set the bina property."""
         if value not in [0, 1, None]:
-            raise Exception("""bina must be `None` or one of {0,1}""")
+            raise Exception("""bina must be `None` or one of {0,1}.""")
         self._cards[0].set_value("bina", value)
 

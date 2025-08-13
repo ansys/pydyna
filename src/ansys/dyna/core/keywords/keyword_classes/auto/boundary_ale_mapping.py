@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the BoundaryAleMapping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class BoundaryAleMapping(KeywordBase):
     subkeyword = "ALE_MAPPING"
 
     def __init__(self, **kwargs):
+        """Initialize the BoundaryAleMapping class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -210,6 +212,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @id.setter
     def id(self, value: int) -> None:
+        """Set the id property."""
         self._cards[0].set_value("id", value)
 
     @property
@@ -224,8 +227,9 @@ class BoundaryAleMapping(KeywordBase):
 
     @typ.setter
     def typ(self, value: int) -> None:
+        """Set the typ property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""typ must be `None` or one of {0,1,2,3}""")
+            raise Exception("""typ must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("typ", value)
 
     @property
@@ -236,6 +240,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @ammsid.setter
     def ammsid(self, value: int) -> None:
+        """Set the ammsid property."""
         self._cards[0].set_value("ammsid", value)
 
     @property
@@ -254,6 +259,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @ivoltyp.setter
     def ivoltyp(self, value: int) -> None:
+        """Set the ivoltyp property."""
         self._cards[0].set_value("ivoltyp", value)
 
     @property
@@ -265,6 +271,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @birth.setter
     def birth(self, value: float) -> None:
+        """Set the birth property."""
         self._cards[0].set_value("birth", value)
 
     @property
@@ -276,6 +283,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @death.setter
     def death(self, value: float) -> None:
+        """Set the death property."""
         self._cards[0].set_value("death", value)
 
     @property
@@ -287,6 +295,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @dtout.setter
     def dtout(self, value: float) -> None:
+        """Set the dtout property."""
         self._cards[0].set_value("dtout", value)
 
     @property
@@ -301,8 +310,9 @@ class BoundaryAleMapping(KeywordBase):
 
     @ini.setter
     def ini(self, value: int) -> None:
+        """Set the ini property."""
         if value not in [0, 1, None]:
-            raise Exception("""ini must be `None` or one of {0,1}""")
+            raise Exception("""ini must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ini", value)
 
     @property
@@ -313,6 +323,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[1].set_value("thick", value)
 
     @property
@@ -323,6 +334,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @radius.setter
     def radius(self, value: float) -> None:
+        """Set the radius property."""
         self._cards[1].set_value("radius", value)
 
     @property
@@ -336,6 +348,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @x1.setter
     def x1(self, value: float) -> None:
+        """Set the x1 property."""
         self._cards[1].set_value("x1", value)
 
     @property
@@ -349,6 +362,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @y1.setter
     def y1(self, value: float) -> None:
+        """Set the y1 property."""
         self._cards[1].set_value("y1", value)
 
     @property
@@ -362,6 +376,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @z1.setter
     def z1(self, value: float) -> None:
+        """Set the z1 property."""
         self._cards[1].set_value("z1", value)
 
     @property
@@ -375,6 +390,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @x2.setter
     def x2(self, value: float) -> None:
+        """Set the x2 property."""
         self._cards[1].set_value("x2", value)
 
     @property
@@ -388,6 +404,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @y2.setter
     def y2(self, value: float) -> None:
+        """Set the y2 property."""
         self._cards[1].set_value("y2", value)
 
     @property
@@ -401,6 +418,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @z2.setter
     def z2(self, value: float) -> None:
+        """Set the z2 property."""
         self._cards[1].set_value("z2", value)
 
     @property
@@ -411,6 +429,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @x0.setter
     def x0(self, value: float) -> None:
+        """Set the x0 property."""
         self._cards[2].set_value("x0", value)
 
     @property
@@ -421,6 +440,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @y0.setter
     def y0(self, value: float) -> None:
+        """Set the y0 property."""
         self._cards[2].set_value("y0", value)
 
     @property
@@ -431,6 +451,7 @@ class BoundaryAleMapping(KeywordBase):
 
     @z0.setter
     def z0(self, value: float) -> None:
+        """Set the z0 property."""
         self._cards[2].set_value("z0", value)
 
     @property
@@ -441,5 +462,6 @@ class BoundaryAleMapping(KeywordBase):
 
     @vecid.setter
     def vecid(self, value: int) -> None:
+        """Set the vecid property."""
         self._cards[2].set_value("vecid", value)
 

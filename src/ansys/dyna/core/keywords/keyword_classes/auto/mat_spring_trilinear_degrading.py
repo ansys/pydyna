@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatSpringTrilinearDegrading class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatSpringTrilinearDegrading(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatSpringTrilinearDegrading class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -125,6 +127,7 @@ class MatSpringTrilinearDegrading(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -135,6 +138,7 @@ class MatSpringTrilinearDegrading(KeywordBase):
 
     @defl1.setter
     def defl1(self, value: float) -> None:
+        """Set the defl1 property."""
         self._cards[0].set_value("defl1", value)
 
     @property
@@ -145,6 +149,7 @@ class MatSpringTrilinearDegrading(KeywordBase):
 
     @f1.setter
     def f1(self, value: float) -> None:
+        """Set the f1 property."""
         self._cards[0].set_value("f1", value)
 
     @property
@@ -155,6 +160,7 @@ class MatSpringTrilinearDegrading(KeywordBase):
 
     @defl2.setter
     def defl2(self, value: float) -> None:
+        """Set the defl2 property."""
         self._cards[0].set_value("defl2", value)
 
     @property
@@ -165,6 +171,7 @@ class MatSpringTrilinearDegrading(KeywordBase):
 
     @f2.setter
     def f2(self, value: float) -> None:
+        """Set the f2 property."""
         self._cards[0].set_value("f2", value)
 
     @property
@@ -175,6 +182,7 @@ class MatSpringTrilinearDegrading(KeywordBase):
 
     @defl3.setter
     def defl3(self, value: float) -> None:
+        """Set the defl3 property."""
         self._cards[0].set_value("defl3", value)
 
     @property
@@ -185,6 +193,7 @@ class MatSpringTrilinearDegrading(KeywordBase):
 
     @f3.setter
     def f3(self, value: float) -> None:
+        """Set the f3 property."""
         self._cards[0].set_value("f3", value)
 
     @property
@@ -195,6 +204,7 @@ class MatSpringTrilinearDegrading(KeywordBase):
 
     @fflag.setter
     def fflag(self, value: float) -> None:
+        """Set the fflag property."""
         self._cards[0].set_value("fflag", value)
 
     @property
@@ -205,5 +215,9 @@ class MatSpringTrilinearDegrading(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

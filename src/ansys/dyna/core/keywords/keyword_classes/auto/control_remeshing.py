@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ControlRemeshing class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ControlRemeshing(KeywordBase):
     subkeyword = "REMESHING"
 
     def __init__(self, **kwargs):
+        """Initialize the ControlRemeshing class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -109,6 +111,7 @@ class ControlRemeshing(KeywordBase):
 
     @rmin.setter
     def rmin(self, value: float) -> None:
+        """Set the rmin property."""
         self._cards[0].set_value("rmin", value)
 
     @property
@@ -119,6 +122,7 @@ class ControlRemeshing(KeywordBase):
 
     @rmax.setter
     def rmax(self, value: float) -> None:
+        """Set the rmax property."""
         self._cards[0].set_value("rmax", value)
 
     @property
@@ -129,6 +133,7 @@ class ControlRemeshing(KeywordBase):
 
     @vf_loss.setter
     def vf_loss(self, value: float) -> None:
+        """Set the vf_loss property."""
         self._cards[0].set_value("vf_loss", value)
 
     @property
@@ -139,6 +144,7 @@ class ControlRemeshing(KeywordBase):
 
     @mfrac.setter
     def mfrac(self, value: float) -> None:
+        """Set the mfrac property."""
         self._cards[0].set_value("mfrac", value)
 
     @property
@@ -149,6 +155,7 @@ class ControlRemeshing(KeywordBase):
 
     @dt_min.setter
     def dt_min(self, value: float) -> None:
+        """Set the dt_min property."""
         self._cards[0].set_value("dt_min", value)
 
     @property
@@ -159,6 +166,7 @@ class ControlRemeshing(KeywordBase):
 
     @icurv.setter
     def icurv(self, value: int) -> None:
+        """Set the icurv property."""
         self._cards[0].set_value("icurv", value)
 
     @property
@@ -169,6 +177,7 @@ class ControlRemeshing(KeywordBase):
 
     @iadp10.setter
     def iadp10(self, value: int) -> None:
+        """Set the iadp10 property."""
         self._cards[0].set_value("iadp10", value)
 
     @property
@@ -179,5 +188,6 @@ class ControlRemeshing(KeywordBase):
 
     @sefang.setter
     def sefang(self, value: float) -> None:
+        """Set the sefang property."""
         self._cards[0].set_value("sefang", value)
 

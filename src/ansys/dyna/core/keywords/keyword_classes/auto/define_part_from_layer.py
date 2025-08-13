@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefinePartFromLayer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefinePartFromLayer(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefinePartFromLayer class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -111,6 +113,7 @@ class DefinePartFromLayer(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -121,6 +124,7 @@ class DefinePartFromLayer(KeywordBase):
 
     @layer.setter
     def layer(self, value: int) -> None:
+        """Set the layer property."""
         self._cards[0].set_value("layer", value)
 
     @property
@@ -131,6 +135,7 @@ class DefinePartFromLayer(KeywordBase):
 
     @pidsrc.setter
     def pidsrc(self, value: int) -> None:
+        """Set the pidsrc property."""
         self._cards[0].set_value("pidsrc", value)
 
     @property
@@ -141,6 +146,7 @@ class DefinePartFromLayer(KeywordBase):
 
     @layold.setter
     def layold(self, value: int) -> None:
+        """Set the layold property."""
         self._cards[0].set_value("layold", value)
 
     @property
@@ -151,6 +157,7 @@ class DefinePartFromLayer(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -161,6 +168,7 @@ class DefinePartFromLayer(KeywordBase):
 
     @thick.setter
     def thick(self, value: float) -> None:
+        """Set the thick property."""
         self._cards[0].set_value("thick", value)
 
     @property
@@ -171,5 +179,9 @@ class DefinePartFromLayer(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

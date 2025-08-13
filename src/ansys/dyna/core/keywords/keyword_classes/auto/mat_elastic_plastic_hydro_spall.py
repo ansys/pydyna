@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatElasticPlasticHydroSpall class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatElasticPlasticHydroSpall class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -391,6 +393,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -401,6 +404,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -411,6 +415,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @g.setter
     def g(self, value: float) -> None:
+        """Set the g property."""
         self._cards[0].set_value("g", value)
 
     @property
@@ -421,6 +426,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @sig0.setter
     def sig0(self, value: float) -> None:
+        """Set the sig0 property."""
         self._cards[0].set_value("sig0", value)
 
     @property
@@ -431,6 +437,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eh.setter
     def eh(self, value: float) -> None:
+        """Set the eh property."""
         self._cards[0].set_value("eh", value)
 
     @property
@@ -441,6 +448,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @pc.setter
     def pc(self, value: float) -> None:
+        """Set the pc property."""
         self._cards[0].set_value("pc", value)
 
     @property
@@ -451,6 +459,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @fs.setter
     def fs(self, value: float) -> None:
+        """Set the fs property."""
         self._cards[0].set_value("fs", value)
 
     @property
@@ -461,6 +470,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @charl.setter
     def charl(self, value: float) -> None:
+        """Set the charl property."""
         self._cards[0].set_value("charl", value)
 
     @property
@@ -471,6 +481,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @a1.setter
     def a1(self, value: float) -> None:
+        """Set the a1 property."""
         self._cards[1].set_value("a1", value)
 
     @property
@@ -481,6 +492,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @a2.setter
     def a2(self, value: float) -> None:
+        """Set the a2 property."""
         self._cards[1].set_value("a2", value)
 
     @property
@@ -495,8 +507,9 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @spall.setter
     def spall(self, value: float) -> None:
+        """Set the spall property."""
         if value not in [1.0, 2.0, 3.0, None]:
-            raise Exception("""spall must be `None` or one of {1.0,2.0,3.0}""")
+            raise Exception("""spall must be `None` or one of {1.0,2.0,3.0}.""")
         self._cards[1].set_value("spall", value)
 
     @property
@@ -507,6 +520,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps1.setter
     def eps1(self, value: float) -> None:
+        """Set the eps1 property."""
         self._cards[2].set_value("eps1", value)
 
     @property
@@ -517,6 +531,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps2.setter
     def eps2(self, value: float) -> None:
+        """Set the eps2 property."""
         self._cards[2].set_value("eps2", value)
 
     @property
@@ -527,6 +542,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps3.setter
     def eps3(self, value: float) -> None:
+        """Set the eps3 property."""
         self._cards[2].set_value("eps3", value)
 
     @property
@@ -537,6 +553,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps4.setter
     def eps4(self, value: float) -> None:
+        """Set the eps4 property."""
         self._cards[2].set_value("eps4", value)
 
     @property
@@ -547,6 +564,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps5.setter
     def eps5(self, value: float) -> None:
+        """Set the eps5 property."""
         self._cards[2].set_value("eps5", value)
 
     @property
@@ -557,6 +575,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps6.setter
     def eps6(self, value: float) -> None:
+        """Set the eps6 property."""
         self._cards[2].set_value("eps6", value)
 
     @property
@@ -567,6 +586,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps7.setter
     def eps7(self, value: float) -> None:
+        """Set the eps7 property."""
         self._cards[2].set_value("eps7", value)
 
     @property
@@ -577,6 +597,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps8.setter
     def eps8(self, value: float) -> None:
+        """Set the eps8 property."""
         self._cards[2].set_value("eps8", value)
 
     @property
@@ -587,6 +608,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps9.setter
     def eps9(self, value: float) -> None:
+        """Set the eps9 property."""
         self._cards[3].set_value("eps9", value)
 
     @property
@@ -597,6 +619,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps10.setter
     def eps10(self, value: float) -> None:
+        """Set the eps10 property."""
         self._cards[3].set_value("eps10", value)
 
     @property
@@ -607,6 +630,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps11.setter
     def eps11(self, value: float) -> None:
+        """Set the eps11 property."""
         self._cards[3].set_value("eps11", value)
 
     @property
@@ -617,6 +641,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps12.setter
     def eps12(self, value: float) -> None:
+        """Set the eps12 property."""
         self._cards[3].set_value("eps12", value)
 
     @property
@@ -627,6 +652,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps13.setter
     def eps13(self, value: float) -> None:
+        """Set the eps13 property."""
         self._cards[3].set_value("eps13", value)
 
     @property
@@ -637,6 +663,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps14.setter
     def eps14(self, value: float) -> None:
+        """Set the eps14 property."""
         self._cards[3].set_value("eps14", value)
 
     @property
@@ -647,6 +674,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps15.setter
     def eps15(self, value: float) -> None:
+        """Set the eps15 property."""
         self._cards[3].set_value("eps15", value)
 
     @property
@@ -657,6 +685,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @eps16.setter
     def eps16(self, value: float) -> None:
+        """Set the eps16 property."""
         self._cards[3].set_value("eps16", value)
 
     @property
@@ -667,6 +696,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es1.setter
     def es1(self, value: float) -> None:
+        """Set the es1 property."""
         self._cards[4].set_value("es1", value)
 
     @property
@@ -677,6 +707,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es2.setter
     def es2(self, value: float) -> None:
+        """Set the es2 property."""
         self._cards[4].set_value("es2", value)
 
     @property
@@ -687,6 +718,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es3.setter
     def es3(self, value: float) -> None:
+        """Set the es3 property."""
         self._cards[4].set_value("es3", value)
 
     @property
@@ -697,6 +729,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es4.setter
     def es4(self, value: float) -> None:
+        """Set the es4 property."""
         self._cards[4].set_value("es4", value)
 
     @property
@@ -707,6 +740,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es5.setter
     def es5(self, value: float) -> None:
+        """Set the es5 property."""
         self._cards[4].set_value("es5", value)
 
     @property
@@ -717,6 +751,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es6.setter
     def es6(self, value: float) -> None:
+        """Set the es6 property."""
         self._cards[4].set_value("es6", value)
 
     @property
@@ -727,6 +762,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es7.setter
     def es7(self, value: float) -> None:
+        """Set the es7 property."""
         self._cards[4].set_value("es7", value)
 
     @property
@@ -737,6 +773,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es8.setter
     def es8(self, value: float) -> None:
+        """Set the es8 property."""
         self._cards[4].set_value("es8", value)
 
     @property
@@ -747,6 +784,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es9.setter
     def es9(self, value: float) -> None:
+        """Set the es9 property."""
         self._cards[5].set_value("es9", value)
 
     @property
@@ -757,6 +795,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es10.setter
     def es10(self, value: float) -> None:
+        """Set the es10 property."""
         self._cards[5].set_value("es10", value)
 
     @property
@@ -767,6 +806,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es11.setter
     def es11(self, value: float) -> None:
+        """Set the es11 property."""
         self._cards[5].set_value("es11", value)
 
     @property
@@ -777,6 +817,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es12.setter
     def es12(self, value: float) -> None:
+        """Set the es12 property."""
         self._cards[5].set_value("es12", value)
 
     @property
@@ -787,6 +828,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es13.setter
     def es13(self, value: float) -> None:
+        """Set the es13 property."""
         self._cards[5].set_value("es13", value)
 
     @property
@@ -797,6 +839,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es14.setter
     def es14(self, value: float) -> None:
+        """Set the es14 property."""
         self._cards[5].set_value("es14", value)
 
     @property
@@ -807,6 +850,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es15.setter
     def es15(self, value: float) -> None:
+        """Set the es15 property."""
         self._cards[5].set_value("es15", value)
 
     @property
@@ -817,6 +861,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @es16.setter
     def es16(self, value: float) -> None:
+        """Set the es16 property."""
         self._cards[5].set_value("es16", value)
 
     @property
@@ -827,5 +872,9 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[6].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

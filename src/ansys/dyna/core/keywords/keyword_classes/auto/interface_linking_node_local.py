@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the InterfaceLinkingNodeLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class InterfaceLinkingNodeLocal(KeywordBase):
     subkeyword = "LINKING_NODE_LOCAL"
 
     def __init__(self, **kwargs):
+        """Initialize the InterfaceLinkingNodeLocal class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -116,6 +118,7 @@ class InterfaceLinkingNodeLocal(KeywordBase):
 
     @nid.setter
     def nid(self, value: int) -> None:
+        """Set the nid property."""
         self._cards[0].set_value("nid", value)
 
     @property
@@ -126,6 +129,7 @@ class InterfaceLinkingNodeLocal(KeywordBase):
 
     @ifid.setter
     def ifid(self, value: int) -> None:
+        """Set the ifid property."""
         self._cards[0].set_value("ifid", value)
 
     @property
@@ -136,6 +140,7 @@ class InterfaceLinkingNodeLocal(KeywordBase):
 
     @fx.setter
     def fx(self, value: int) -> None:
+        """Set the fx property."""
         self._cards[0].set_value("fx", value)
 
     @property
@@ -146,6 +151,7 @@ class InterfaceLinkingNodeLocal(KeywordBase):
 
     @fy.setter
     def fy(self, value: int) -> None:
+        """Set the fy property."""
         self._cards[0].set_value("fy", value)
 
     @property
@@ -156,6 +162,7 @@ class InterfaceLinkingNodeLocal(KeywordBase):
 
     @fz.setter
     def fz(self, value: int) -> None:
+        """Set the fz property."""
         self._cards[0].set_value("fz", value)
 
     @property
@@ -166,6 +173,7 @@ class InterfaceLinkingNodeLocal(KeywordBase):
 
     @lcid.setter
     def lcid(self, value: int) -> None:
+        """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
 
     @property
@@ -176,6 +184,7 @@ class InterfaceLinkingNodeLocal(KeywordBase):
 
     @lnid.setter
     def lnid(self, value: int) -> None:
+        """Set the lnid property."""
         self._cards[1].set_value("lnid", value)
 
     @property
@@ -189,8 +198,9 @@ class InterfaceLinkingNodeLocal(KeywordBase):
 
     @usec.setter
     def usec(self, value: int) -> None:
+        """Set the usec property."""
         if value not in [0, 1, None]:
-            raise Exception("""usec must be `None` or one of {0,1}""")
+            raise Exception("""usec must be `None` or one of {0,1}.""")
         self._cards[1].set_value("usec", value)
 
     @property
@@ -204,7 +214,8 @@ class InterfaceLinkingNodeLocal(KeywordBase):
 
     @usen.setter
     def usen(self, value: int) -> None:
+        """Set the usen property."""
         if value not in [0, 1, None]:
-            raise Exception("""usen must be `None` or one of {0,1}""")
+            raise Exception("""usen must be `None` or one of {0,1}.""")
         self._cards[1].set_value("usen", value)
 

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatPlasticityPolymer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatPlasticityPolymer(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatPlasticityPolymer class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -173,6 +175,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -183,6 +186,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -193,6 +197,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @e.setter
     def e(self, value: float) -> None:
+        """Set the e property."""
         self._cards[0].set_value("e", value)
 
     @property
@@ -203,6 +208,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @pr.setter
     def pr(self, value: float) -> None:
+        """Set the pr property."""
         self._cards[0].set_value("pr", value)
 
     @property
@@ -213,6 +219,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @c.setter
     def c(self, value: float) -> None:
+        """Set the c property."""
         self._cards[1].set_value("c", value)
 
     @property
@@ -223,6 +230,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @p.setter
     def p(self, value: float) -> None:
+        """Set the p property."""
         self._cards[1].set_value("p", value)
 
     @property
@@ -233,6 +241,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @lcss.setter
     def lcss(self, value: int) -> None:
+        """Set the lcss property."""
         self._cards[1].set_value("lcss", value)
 
     @property
@@ -243,6 +252,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @lcsr.setter
     def lcsr(self, value: int) -> None:
+        """Set the lcsr property."""
         self._cards[1].set_value("lcsr", value)
 
     @property
@@ -256,8 +266,9 @@ class MatPlasticityPolymer(KeywordBase):
 
     @eftx.setter
     def eftx(self, value: float) -> None:
+        """Set the eftx property."""
         if value not in [0.0, 1.0, 2.0, None]:
-            raise Exception("""eftx must be `None` or one of {0.0,1.0,2.0}""")
+            raise Exception("""eftx must be `None` or one of {0.0,1.0,2.0}.""")
         self._cards[2].set_value("eftx", value)
 
     @property
@@ -268,6 +279,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @damp.setter
     def damp(self, value: float) -> None:
+        """Set the damp property."""
         self._cards[2].set_value("damp", value)
 
     @property
@@ -278,6 +290,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @ratefac.setter
     def ratefac(self, value: float) -> None:
+        """Set the ratefac property."""
         self._cards[2].set_value("ratefac", value)
 
     @property
@@ -288,6 +301,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @lcfail.setter
     def lcfail(self, value: int) -> None:
+        """Set the lcfail property."""
         self._cards[2].set_value("lcfail", value)
 
     @property
@@ -299,6 +313,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @numint.setter
     def numint(self, value: float) -> None:
+        """Set the numint property."""
         self._cards[2].set_value("numint", value)
 
     @property
@@ -309,5 +324,9 @@ class MatPlasticityPolymer(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

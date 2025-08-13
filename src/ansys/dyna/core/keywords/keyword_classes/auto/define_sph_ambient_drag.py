@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the DefineSphAmbientDrag class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class DefineSphAmbientDrag(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the DefineSphAmbientDrag class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -123,6 +125,7 @@ class DefineSphAmbientDrag(KeywordBase):
 
     @icid.setter
     def icid(self, value: int) -> None:
+        """Set the icid property."""
         self._cards[0].set_value("icid", value)
 
     @property
@@ -133,6 +136,7 @@ class DefineSphAmbientDrag(KeywordBase):
 
     @vx.setter
     def vx(self, value: float) -> None:
+        """Set the vx property."""
         self._cards[0].set_value("vx", value)
 
     @property
@@ -143,6 +147,7 @@ class DefineSphAmbientDrag(KeywordBase):
 
     @vy.setter
     def vy(self, value: float) -> None:
+        """Set the vy property."""
         self._cards[0].set_value("vy", value)
 
     @property
@@ -153,6 +158,7 @@ class DefineSphAmbientDrag(KeywordBase):
 
     @vz.setter
     def vz(self, value: float) -> None:
+        """Set the vz property."""
         self._cards[0].set_value("vz", value)
 
     @property
@@ -163,6 +169,7 @@ class DefineSphAmbientDrag(KeywordBase):
 
     @rhoa.setter
     def rhoa(self, value: float) -> None:
+        """Set the rhoa property."""
         self._cards[0].set_value("rhoa", value)
 
     @property
@@ -173,6 +180,7 @@ class DefineSphAmbientDrag(KeywordBase):
 
     @mua.setter
     def mua(self, value: float) -> None:
+        """Set the mua property."""
         self._cards[0].set_value("mua", value)
 
     @property
@@ -183,6 +191,7 @@ class DefineSphAmbientDrag(KeywordBase):
 
     @sftens.setter
     def sftens(self, value: float) -> None:
+        """Set the sftens property."""
         self._cards[0].set_value("sftens", value)
 
     @property
@@ -193,5 +202,9 @@ class DefineSphAmbientDrag(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

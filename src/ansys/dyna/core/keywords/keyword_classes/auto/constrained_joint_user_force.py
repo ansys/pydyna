@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the ConstrainedJointUserForce class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class ConstrainedJointUserForce(KeywordBase):
     subkeyword = "JOINT_USER_FORCE"
 
     def __init__(self, **kwargs):
+        """Initialize the ConstrainedJointUserForce class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -129,6 +131,7 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @fid.setter
     def fid(self, value: int) -> None:
+        """Set the fid property."""
         self._cards[0].set_value("fid", value)
 
     @property
@@ -139,6 +142,7 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @jid.setter
     def jid(self, value: int) -> None:
+        """Set the jid property."""
         self._cards[0].set_value("jid", value)
 
     @property
@@ -149,6 +153,7 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @nhisv.setter
     def nhisv(self, value: int) -> None:
+        """Set the nhisv property."""
         self._cards[0].set_value("nhisv", value)
 
     @property
@@ -159,6 +164,7 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @const1.setter
     def const1(self, value: int) -> None:
+        """Set the const1 property."""
         self._cards[1].set_value("const1", value)
 
     @property
@@ -169,6 +175,7 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @const2.setter
     def const2(self, value: int) -> None:
+        """Set the const2 property."""
         self._cards[1].set_value("const2", value)
 
     @property
@@ -179,6 +186,7 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @const3.setter
     def const3(self, value: int) -> None:
+        """Set the const3 property."""
         self._cards[1].set_value("const3", value)
 
     @property
@@ -189,6 +197,7 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @const4.setter
     def const4(self, value: int) -> None:
+        """Set the const4 property."""
         self._cards[1].set_value("const4", value)
 
     @property
@@ -199,6 +208,7 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @const5.setter
     def const5(self, value: int) -> None:
+        """Set the const5 property."""
         self._cards[1].set_value("const5", value)
 
     @property
@@ -209,6 +219,7 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @const6.setter
     def const6(self, value: int) -> None:
+        """Set the const6 property."""
         self._cards[1].set_value("const6", value)
 
     @property
@@ -219,6 +230,7 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @const7.setter
     def const7(self, value: int) -> None:
+        """Set the const7 property."""
         self._cards[1].set_value("const7", value)
 
     @property
@@ -229,5 +241,6 @@ class ConstrainedJointUserForce(KeywordBase):
 
     @const8.setter
     def const8(self, value: int) -> None:
+        """Set the const8 property."""
         self._cards[1].set_value("const8", value)
 

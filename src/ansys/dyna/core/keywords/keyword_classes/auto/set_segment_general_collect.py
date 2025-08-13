@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the SetSegmentGeneralCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class SetSegmentGeneralCollect(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the SetSegmentGeneralCollect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -191,6 +193,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @sid.setter
     def sid(self, value: int) -> None:
+        """Set the sid property."""
         self._cards[0].set_value("sid", value)
 
     @property
@@ -201,6 +204,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @da1.setter
     def da1(self, value: float) -> None:
+        """Set the da1 property."""
         self._cards[0].set_value("da1", value)
 
     @property
@@ -211,6 +215,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @da2.setter
     def da2(self, value: float) -> None:
+        """Set the da2 property."""
         self._cards[0].set_value("da2", value)
 
     @property
@@ -221,6 +226,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @da3.setter
     def da3(self, value: float) -> None:
+        """Set the da3 property."""
         self._cards[0].set_value("da3", value)
 
     @property
@@ -231,6 +237,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @da4.setter
     def da4(self, value: float) -> None:
+        """Set the da4 property."""
         self._cards[0].set_value("da4", value)
 
     @property
@@ -243,8 +250,9 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @solver.setter
     def solver(self, value: str) -> None:
+        """Set the solver property."""
         if value not in ["MECH", "CESE", "ICFD", None]:
-            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}""")
+            raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -257,6 +265,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @its.setter
     def its(self, value: int) -> None:
+        """Set the its property."""
         self._cards[0].set_value("its", value)
 
     @property
@@ -319,8 +328,9 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @option.setter
     def option(self, value: str) -> None:
+        """Set the option property."""
         if value not in ["ALL", "BOX", "BOX_SHELL", "BOX_SLDIO", "BOX_SOLID", "PART", "PART_IO", "PSLDFi", "SEG", "VOL", "VOL_SHELL", "VOL_SLDIO", "VOL_SOLID", "SET_SHELL", "SET_SOLID", "SET_SLDIO", "SET_SLDFi", "SET_TSHELL", "SET_TSHIO", "SHELL", "DBOX", "DBOX_SHELL", "DBOX_SOLID", "DPART", "DSEG", "DVOL", "DVOL_SHELL", "DVOL_SOLID", "SALECPT", "SALEFAC", None]:
-            raise Exception("""option must be `None` or one of {"ALL","BOX","BOX_SHELL","BOX_SLDIO","BOX_SOLID","PART","PART_IO","PSLDFi","SEG","VOL","VOL_SHELL","VOL_SLDIO","VOL_SOLID","SET_SHELL","SET_SOLID","SET_SLDIO","SET_SLDFi","SET_TSHELL","SET_TSHIO","SHELL","DBOX","DBOX_SHELL","DBOX_SOLID","DPART","DSEG","DVOL","DVOL_SHELL","DVOL_SOLID","SALECPT","SALEFAC"}""")
+            raise Exception("""option must be `None` or one of {"ALL","BOX","BOX_SHELL","BOX_SLDIO","BOX_SOLID","PART","PART_IO","PSLDFi","SEG","VOL","VOL_SHELL","VOL_SLDIO","VOL_SOLID","SET_SHELL","SET_SOLID","SET_SLDIO","SET_SLDFi","SET_TSHELL","SET_TSHIO","SHELL","DBOX","DBOX_SHELL","DBOX_SOLID","DPART","DSEG","DVOL","DVOL_SHELL","DVOL_SOLID","SALECPT","SALEFAC"}.""")
         self._cards[1].set_value("option", value)
 
     @property
@@ -335,6 +345,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @e1.setter
     def e1(self, value: int) -> None:
+        """Set the e1 property."""
         self._cards[1].set_value("e1", value)
 
     @property
@@ -349,6 +360,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @e2.setter
     def e2(self, value: int) -> None:
+        """Set the e2 property."""
         self._cards[1].set_value("e2", value)
 
     @property
@@ -363,6 +375,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @e3.setter
     def e3(self, value: int) -> None:
+        """Set the e3 property."""
         self._cards[1].set_value("e3", value)
 
     @property
@@ -377,6 +390,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @e4.setter
     def e4(self, value: int) -> None:
+        """Set the e4 property."""
         self._cards[1].set_value("e4", value)
 
     @property
@@ -391,6 +405,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @e5.setter
     def e5(self, value: int) -> None:
+        """Set the e5 property."""
         self._cards[1].set_value("e5", value)
 
     @property
@@ -405,6 +420,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @e6.setter
     def e6(self, value: int) -> None:
+        """Set the e6 property."""
         self._cards[1].set_value("e6", value)
 
     @property
@@ -419,6 +435,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @e7.setter
     def e7(self, value: int) -> None:
+        """Set the e7 property."""
         self._cards[1].set_value("e7", value)
 
     @property
@@ -429,5 +446,9 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

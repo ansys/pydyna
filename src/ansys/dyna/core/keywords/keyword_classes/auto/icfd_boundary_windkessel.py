@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the IcfdBoundaryWindkessel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -31,6 +32,7 @@ class IcfdBoundaryWindkessel(KeywordBase):
     subkeyword = "BOUNDARY_WINDKESSEL"
 
     def __init__(self, **kwargs):
+        """Initialize the IcfdBoundaryWindkessel class."""
         super().__init__(**kwargs)
         self._cards = [
             Card(
@@ -93,6 +95,7 @@ class IcfdBoundaryWindkessel(KeywordBase):
 
     @pid.setter
     def pid(self, value: int) -> None:
+        """Set the pid property."""
         self._cards[0].set_value("pid", value)
 
     @property
@@ -107,6 +110,7 @@ class IcfdBoundaryWindkessel(KeywordBase):
 
     @wtype.setter
     def wtype(self, value: int) -> None:
+        """Set the wtype property."""
         self._cards[0].set_value("wtype", value)
 
     @property
@@ -117,6 +121,7 @@ class IcfdBoundaryWindkessel(KeywordBase):
 
     @r1.setter
     def r1(self, value: float) -> None:
+        """Set the r1 property."""
         self._cards[0].set_value("r1", value)
 
     @property
@@ -127,6 +132,7 @@ class IcfdBoundaryWindkessel(KeywordBase):
 
     @c1.setter
     def c1(self, value: float) -> None:
+        """Set the c1 property."""
         self._cards[0].set_value("c1", value)
 
     @property
@@ -137,6 +143,7 @@ class IcfdBoundaryWindkessel(KeywordBase):
 
     @r2.setter
     def r2(self, value: float) -> None:
+        """Set the r2 property."""
         self._cards[0].set_value("r2", value)
 
     @property
@@ -147,5 +154,6 @@ class IcfdBoundaryWindkessel(KeywordBase):
 
     @l1.setter
     def l1(self, value: float) -> None:
+        """Set the l1 property."""
         self._cards[0].set_value("l1", value)
 

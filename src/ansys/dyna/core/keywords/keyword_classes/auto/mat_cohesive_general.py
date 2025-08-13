@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module providing the MatCohesiveGeneral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -35,6 +36,7 @@ class MatCohesiveGeneral(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
+        """Initialize the MatCohesiveGeneral class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
@@ -165,6 +167,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @mid.setter
     def mid(self, value: int) -> None:
+        """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
@@ -175,6 +178,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @ro.setter
     def ro(self, value: float) -> None:
+        """Set the ro property."""
         self._cards[0].set_value("ro", value)
 
     @property
@@ -187,8 +191,9 @@ class MatCohesiveGeneral(KeywordBase):
 
     @roflg.setter
     def roflg(self, value: int) -> None:
+        """Set the roflg property."""
         if value not in [0, 1, None]:
-            raise Exception("""roflg must be `None` or one of {0,1}""")
+            raise Exception("""roflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("roflg", value)
 
     @property
@@ -202,6 +207,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @intfail.setter
     def intfail(self, value: float) -> None:
+        """Set the intfail property."""
         self._cards[0].set_value("intfail", value)
 
     @property
@@ -212,6 +218,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @tes.setter
     def tes(self, value: float) -> None:
+        """Set the tes property."""
         self._cards[0].set_value("tes", value)
 
     @property
@@ -222,6 +229,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @tslc.setter
     def tslc(self, value: int) -> None:
+        """Set the tslc property."""
         self._cards[0].set_value("tslc", value)
 
     @property
@@ -232,6 +240,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @gic.setter
     def gic(self, value: float) -> None:
+        """Set the gic property."""
         self._cards[0].set_value("gic", value)
 
     @property
@@ -242,6 +251,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @giic.setter
     def giic(self, value: float) -> None:
+        """Set the giic property."""
         self._cards[0].set_value("giic", value)
 
     @property
@@ -252,6 +262,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @xmu.setter
     def xmu(self, value: float) -> None:
+        """Set the xmu property."""
         self._cards[1].set_value("xmu", value)
 
     @property
@@ -262,6 +273,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @t.setter
     def t(self, value: float) -> None:
+        """Set the t property."""
         self._cards[1].set_value("t", value)
 
     @property
@@ -272,6 +284,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @s.setter
     def s(self, value: float) -> None:
+        """Set the s property."""
         self._cards[1].set_value("s", value)
 
     @property
@@ -282,6 +295,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @stfsf.setter
     def stfsf(self, value: float) -> None:
+        """Set the stfsf property."""
         self._cards[1].set_value("stfsf", value)
 
     @property
@@ -292,6 +306,7 @@ class MatCohesiveGeneral(KeywordBase):
 
     @tslc2.setter
     def tslc2(self, value: float) -> None:
+        """Set the tslc2 property."""
         self._cards[1].set_value("tslc2", value)
 
     @property
@@ -302,5 +317,9 @@ class MatCohesiveGeneral(KeywordBase):
 
     @title.setter
     def title(self, value: str) -> None:
+        """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
