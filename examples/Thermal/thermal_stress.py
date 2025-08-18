@@ -1,17 +1,32 @@
+# %% [markdown]
+# # Thermal Stress Analysis with Temperature-Dependent Material Properties
+#
+# This notebook demonstrates how to set up and solve a thermal stress problem using LS-DYNA and PyDyna. The workflow includes mesh import, material and section definition with temperature-dependent properties, thermal and mechanical solver setup, initial condition assignment, and input deck export. Each step is explained for clarity and educational use.
+#
+# ## Theory and Background
+#
+# Thermal stress analysis is essential in engineering to predict the response of structures subjected to temperature changes. When a material is heated or cooled, it expands or contracts, generating internal stresses if deformation is constrained. Accurately modeling these effects requires temperature-dependent material properties, such as Young's modulus, Poisson's ratio, thermal expansion coefficient, and yield stress.
+#
+# This example demonstrates:
+# - Importing a mesh and defining a part with empty material/section fields.
+# - Assigning a temperature-dependent elastic-plastic material with thermal isotropic properties.
+# - Setting up a transient thermal analysis and initializing nodal temperatures.
+# - Configuring output requests and saving the input deck for LS-DYNA.
+#
+# This workflow provides a robust foundation for simulating coupled thermal-mechanical problems in research and engineering applications.
+
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
+# SPDX-License-Identifier: MIT
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,20 +35,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Thermal stress example
-======================
+# %% [markdown]
+# ## 1. Perform Required Imports
+# Import all necessary modules and classes for the thermal stress simulation.
 
-This example shows how to create a thermal stress model with the PyDYNA ``pre`` service.
-The executable file for LS-DYNA is ``ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe``.
-
-"""
-
-###############################################################################
-# Perform required imports
-# ~~~~~~~~~~~~~~~~~~~~~~~~
-# Perform the required imports.
-#
+# %%
 import os
 import sys
 
@@ -50,48 +56,38 @@ from ansys.dyna.core.pre.dynamech import (
 )
 from ansys.dyna.core.pre.misc import check_valid_ip
 
-# sphinx_gallery_thumbnail_path = '_static/pre/thermal/thermal.png'
-###############################################################################
-# Start the ``pre`` service
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Before starting the ``pre`` service, you must ensure that the Docker container
-# for this service has been started. For more information, see "Start the Docker
-# container for the ``pre`` service" in https://dyna.docs.pyansys.com/version/stable/index.html.
-#
-# The ``pre`` service can also be started locally, please download the latest version of
-# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it
-# refefring to the README.rst file in this server package.
-#
-# Once the ``pre`` servic is running, you can connect a client to it using
-# the hostname and the port. This example uses the default local host and port
-# (``"localhost"`` and ``"50051"`` respectively).
-#
+# %% [markdown]
+# ## 2. Start the Pre-Service
+# Start the LS-DYNA pre-service (locally or via Docker) and connect to it.
+
+# %%
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 solution = launch_dynapre(ip=hostname)
 
-###############################################################################
-# Start the solution workflow
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# NODES and ELEMENTS are read in from the ``thermal_stress.k`` file. This file also has the
-# *PART* defined in it, but the section and material fields are empty to begin with.
+# %% [markdown]
+# ## 3. Import Mesh and Model Data
+# Read nodes, elements, and part definitions from the input file.
+
+# %%
 fns = []
 path = examples.thermal_stress + os.sep
 fns.append(path + "thermal_stress.k")
 solution.open_files(fns)
 
-###############################################################################
-# Set simulation termination time
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Set the simulation termination time.
-#
+# %% [markdown]
+# ## 4. Set Simulation Termination Time
+# Set the simulation termination time for the analysis.
+
+# %%
 solution.set_termination(3.0)
 
-###############################################################################
-# To invoke the transient thermal solver, set the thermal analysis type for
-# ``CONTROL_SOLUTION`` to 2 by ``ThermalAnalysisType.TRANSIENT``.
-#
+# %% [markdown]
+# ## 5. Configure Thermal and Mechanical Analysis
+# Set up the transient thermal solver and explicit mechanical analysis.
+
+# %%
 ts = DynaMech(analysis=AnalysisType.EXPLICIT)
 solution.add(ts)
 
@@ -102,14 +98,11 @@ ts.add(tanalysis)
 
 ts.set_timestep(timestep_size_for_mass_scaled=0.01)
 
-###############################################################################
-# Define material and section properties
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Define the ``MAT_4`` material, which can have temperature-dependent
-# properties. For the ``MAT_THERMAL_ISOTROPIC`` property, which is associated
-# with the same part, define the specific heat, thermal conductivity, and thermal
-# generation rate.
-#
+# %% [markdown]
+# ## 6. Define Material and Section Properties
+# Assign a temperature-dependent elastic-plastic material and thermal isotropic properties to the part.
+
+# %%
 mat = MatElasticPlasticThermal(
     mass_density=1.0,
     temperatures=(0, 10, 20, 30, 40, 50),
@@ -125,19 +118,23 @@ slab.set_material(mat)
 slab.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
 ts.parts.add(slab)
 
-###############################################################################
-# Set initial conditions
-# ~~~~~~~~~~~~~~~~~~~~~~~
-# Initialize nodes 1 through 8 with a temperature of 10 degrees.
-#
+# %% [markdown]
+# ## 7. Set Initial Conditions
+# Initialize nodal temperatures for the analysis.
+
+# %%
 for i in range(1, 9):
     ts.initialconditions.create_temperature(NodeSet([i]), temperature=10)
 
-###############################################################################
-# Define output frequencies and save input file
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Define output frequencies and save the input file to disk.
-#
+# %% [markdown]
+# ## 8. Define Output Requests and Save Input File
+# Configure output frequencies and save the input deck to disk.
+
+# %%
 solution.set_output_database(glstat=0.03)
 solution.create_database_binary(dt=0.01)
 solution.save_file()
+
+# %% [markdown]
+# ## 9. Conclusion
+# In this example, we demonstrated how to set up a thermal stress simulation with temperature-dependent material properties using LS-DYNA and PyDyna. The workflow included model import, material and section definition, solver setup, initial condition assignment, and output configuration. This approach provides a clear, modular, and scriptable workflow for advanced thermal-mechanical simulations.

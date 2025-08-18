@@ -1,6 +1,7 @@
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
+# SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,26 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# %% [markdown]
+# # Data Definitions for LS-DYNA Electromagnetic Examples
+#
+# This file provides node sets and segment definitions for use in various LS-DYNA electromagnetic (EM)
+# simulation examples. The data is organized for clarity and reusability, supporting workflows such as
+# resistive heating, RLC circuit, and railgun simulations. Each section describes the purpose and
+# structure of the data, enabling users to quickly identify and apply the correct sets for their
+# simulation needs.
+#
+# ---
+
+# %% [markdown]
+# ### 1. Node Sets for Resistive Heating
+# These node sets are used to define temperature boundary conditions and regions of interest in resistive
+# heating simulations. They are referenced in examples such as `em_resistive_heating.py` and related
+# notebooks.
+#
+# - Each list contains node IDs for a specific boundary or region.
+# - Used for applying temperature, voltage, or current boundary conditions.
+# %%
 resistive_heating_tmp = [
     4507,
     4508,
@@ -749,9 +770,25 @@ resistive_heating_tmp = [
     13397,
 ]
 
+# %% [markdown]
+# ### 2. Rogowski Coil Segment Sets
+# These lists define Rogowski coil segments for current measurement in resistive heating and RLC circuit
+# simulations. They are referenced in examples such as `em_resistive_heating.py`, `em_rlc_isopotential.py`,
+# and related notebooks.
+#
+# - Each list contains segment node IDs for a specific Rogowski coil.
+# - Used for defining coils for current measurement or induction.
+# %%
 rogoseg = [[544, 575, 575, 575], [545, 544, 544, 544], [575, 595, 595, 595], [595, 615, 615, 615]]
 
-# em_rlc_isopotential
+# %% [markdown]
+# ### 3. RLC Circuit Rogowski Coil Segments
+# These lists define Rogowski coil segments for RLC circuit simulation examples. They are referenced in
+# `em_rlc_isopotential.py` and similar notebooks.
+#
+# - Each list contains segment node IDs for a specific Rogowski coil in the RLC circuit model.
+# - Used for defining coils for current measurement or circuit analysis.
+# %%
 rlc_rogoseg = [
     [248, 252, 272, 268],
     [252, 256, 276, 272],
@@ -770,3 +807,9 @@ rlc_rogoseg = [
     [296, 300, 320, 316],
     [300, 304, 324, 320],
 ]
+
+# %% [markdown]
+# ### 4. Conclusion
+# This file provides reusable node sets and segment definitions for LS-DYNA electromagnetic simulation
+# examples. By organizing boundary conditions and coil segments in a clear, modular way, it supports
+# efficient setup and extension of multiphysics workflows in research, engineering, and education.

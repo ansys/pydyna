@@ -1,6 +1,7 @@
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
+# SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,19 +21,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Ball plate
-==========
-This example shows how to use the PyDYNA ``pre`` service to create
-a ball plate model. The executable file for LS-DYNA is
-``ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe``.
+# %% [markdown]
+# # Ball Plate Impact Simulation with LS-DYNA Python API
+#
+# This notebook demonstrates how to use the PyDYNA ``pre`` service to create and simulate a ball plate
+# impact scenario. The workflow covers model setup, material and section assignment, boundary and initial
+# conditions, contact definition, and output configuration. Each section provides both code and theoretical
+# context for the simulation steps.
+#
+# ---
 
-"""
-
-###############################################################################
-# Perform required imports
-# ~~~~~~~~~~~~~~~~~~~~~~~~
-# Perform the required imports.
+# %% [markdown]
+# ### 1. Imports and Data Setup
+# Import required modules and LS-DYNA Python API classes. This step ensures all necessary libraries and data
+# are available for the simulation.
+# %%
 import os
 import sys
 
@@ -56,68 +59,43 @@ from ansys.dyna.core.pre.misc import check_valid_ip
 
 # sphinx_gallery_thumbnail_path = '_static/pre/explicit/ball_plate.png'
 
-###############################################################################
-# Start the ``pre`` service
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Before starting the ``pre`` service, you must ensure that the Docker container
-# for this service has been started. For more information, see "Start the Docker
-# container for the ``pre`` service" in https://dyna.docs.pyansys.com/version/stable/index.html.
-#
-# The ``pre`` service can also be started locally, please download the latest version of
-# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it
-# refefring to the README.rst file in this server package.
-#
-# Once the ``pre`` service is running, you can connect a client to it using
-# the host name and port. This code uses the default localhost and port
-# (``"localhost"`` and ``"50051"`` respectively).
-#
+# %% [markdown]
+# ### 2. Start the Pre-Service and Load Model
+# Start the ``pre`` service and load the ball plate model from the input key file. This prepares the solver
+# for launching and loads the geometry and mesh for simulation.
+# %%
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 solution = launch_dynapre(ip=hostname)
-
-###############################################################################
-# Start the solution workflow
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# NODES and ELEMENTS are read in from the ``ball_plate.k`` file. This file
-# also has the *PART* defined in it, but the section and material fields are
-# empty to begin with.
-#
 fns = []
 path = examples.ball_plate + os.sep
 fns.append(path + "ball_plate.k")
 solution.open_files(fns)
 
-###############################################################################
-# Create database and control cards
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# For the D3plots, set simulation termination time, simulation timestep, and
-# output frequency.
-
+# %% [markdown]
+# ### 3. Simulation Control and Output Database
+# Set simulation termination time, timestep, and output frequency. This determines how long the simulation
+# runs and how frequently results are saved for analysis.
+# %%
 solution.set_termination(termination_time=10)
 
 ballplate = DynaMech(AnalysisType.NONE)
 solution.add(ballplate)
 
-###############################################################################
-# Define materials
-# ~~~~~~~~~~~~~~~~
-# The ``dynamaterials`` class is used to define these materials: ``MAT_RIGID``,
-# ``MAT_PIECEWISE_LINEAR_PLASTICITY``,
-
+# %% [markdown]
+# ### 4. Material Definitions
+# Define rigid and piecewise linear plasticity materials for the ball and plate. These properties control
+# the mechanical response of each part during impact.
+# %%
 matrigid = MatRigid(mass_density=7.83e-6, young_modulus=207, poisson_ratio=0.3)
 matplastic = MatPiecewiseLinearPlasticity(mass_density=7.83e-6, young_modulus=207, yield_stress=0.2, tangent_modulus=2)
 
-
-###############################################################################
-# Define section properties and assign materials
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Now that you have materials with the material ID corresponding to
-# the Part ID, you can assign these materials to the
-# parts. You can also define section properties, element
-# formulations, and constraints.
-#
-
+# %% [markdown]
+# ### 5. Section Properties and Part Assignment
+# Assign materials to parts and define section properties, element formulations, and thickness. This step
+# ensures the mesh and material models are correctly associated with the geometry.
+# %%
 plate = ShellPart(1)
 plate.set_element_formulation(ShellFormulation.BELYTSCHKO_TSAY)
 plate.set_material(matplastic)
@@ -130,22 +108,20 @@ ball.set_material(matrigid)
 ball.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
 ballplate.parts.add(ball)
 
-
-###############################################################################
-# Define surface-to-surface contacts
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Define a single-surface contact between a predefined part set.
-
+# %% [markdown]
+# ### 6. Contact Definition
+# Define a single-surface contact between the ball and plate using a predefined part set. This models the
+# interaction and force transfer during impact.
+# %%
 selfcontact = Contact(type=ContactType.AUTOMATIC)
 surf1 = ContactSurface(PartSet([1, 2]))
 selfcontact.set_slave_surface(surf1)
 ballplate.contacts.add(selfcontact)
 
-###############################################################################
-# Define nodal single point constraints.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Constrain the nodes in a list of single point constraints (spc).
-
+# %% [markdown]
+# ### 7. Boundary Conditions
+# Constrain nodes in a list of single point constraints (spc) to fix the plate and prevent rigid body motion.
+# %%
 spc = [
     34,
     35,
@@ -182,32 +158,37 @@ for i in range(272, 290):
     spc.append(i)
 ballplate.boundaryconditions.create_spc(NodeSet(spc), rx=False, ry=False, rz=False)
 
-###############################################################################
-# Define initial condition.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
-# Use the ``create_velocity_node`` method
-# to initialize the velocity components in the desired direction.
+# %% [markdown]
+# ### 8. Initial Conditions
+# Initialize the velocity of all nodes to simulate the impact. This sets the initial downward velocity of the ball.
+# %%
 for i in range(1, 1652):
     ballplate.initialconditions.create_velocity_node(i, trans=Velocity(0, 0, -10))
 
-###############################################################################
-# Define database outputs
-# ~~~~~~~~~~~~~~~~~~~~~~~
-# Define the frequency for the D3PLOT file and write out the input file.
-#
+# %% [markdown]
+# ### 9. Output Requests and File Saving
+# Configure output requests for global statistics, material summary, and element output. Save the model setup
+# for LS-DYNA execution. This enables post-processing and analysis of the simulation results.
+# %%
 solution.set_output_database(glstat=0.1, matsum=0.1, sleout=0.1)
 solution.create_database_binary(dt=1)
 serverpath = solution.save_file()
 
-###############################################################################
-# Download output file
-# ~~~~~~~~~~~~~~~~~~~~
-# Download output file from Docker image for the server to
-# your local ``<working directory>/output/`` location.
-
+# %% [markdown]
+# ### 10. Download Output File
+# Download the output file from the server to the local output directory for further analysis and visualization.
+# %%
 serveroutfile = "/".join((serverpath, "ball_plate.k"))
 downloadpath = os.path.join(os.getcwd(), "output")
 if not os.path.exists(downloadpath):
     os.makedirs(downloadpath)
 downloadfile = os.path.join(downloadpath, "ball_plate.k")
 solution.download(serveroutfile, downloadfile)
+
+# %% [markdown]
+# ### 11. Conclusion
+# This example demonstrated the setup and simulation of a ball plate impact scenario using the LS-DYNA Python
+# API. By defining materials, parts, contact, boundary and initial conditions, and output requests, we modeled
+# the dynamic response of the system under impact loading. The workflow can be extended to more complex
+# geometries, loading conditions, and multiphysics analyses, supporting advanced engineering and research
+# applications.

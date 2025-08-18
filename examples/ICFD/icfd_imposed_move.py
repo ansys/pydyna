@@ -1,6 +1,8 @@
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
+# SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +22,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Imposed move
-============
+# %% [markdown]
+# # Imposed Move Simulation with LS-DYNA Python API
+#
+# This example demonstrates how to impose displacements on fluid nodes using the LS-DYNA Python API.
+# The workflow is organized into clear sections, with explanations and notebook cell markers for educational use.
 
-This example shows how to impose displacements on fluid nodes through the
-use of the ``ICFD_CONTROL_IMPOSED_MOVE`` keyword. The executable file for
-LS-DYNA is ``ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe``.
-"""
-
+# %% [markdown]
+# ## 1. Imports and Data Setup
+# Import required modules and LS-DYNA Python API classes. This step ensures all necessary libraries and data are available for the simulation.
+# %%
 import os
 import sys
 
@@ -47,17 +50,25 @@ from ansys.dyna.core.pre.misc import check_valid_ip
 
 # sphinx_gallery_thumbnail_path = '_static/pre/icfd/imposed_move.png'
 
+# %% [markdown]
+# ## 2. LS-DYNA Executable and File Paths
+# Set up the LS-DYNA server hostname and input file paths. This prepares the solver for launching and loads the model for simulation.
+# %%
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
 solution = launch_dynapre(ip=hostname)
-# Import the initial mesh data(nodes and elements)
 fns = []
 path = examples.imposed_move + os.sep
 fns.append(path + "imposed_move.k")
 solution.open_files(fns)
 solution.set_termination(termination_time=40)
+
+# %% [markdown]
+# ## 3. ICFD Model Setup
+# Create and configure the ICFD model. Set solver parameters for accurate and stable simulation of imposed movement.
+# %%
 icfd = DynaICFD()
 solution.add(icfd)
 
@@ -65,7 +76,10 @@ icfdanalysis = ICFDAnalysis()
 icfdanalysis.set_timestep(0.05)
 icfd.add(icfdanalysis)
 
-# define model
+# %% [markdown]
+# ## 4. Material and Part Definitions
+# Define and assign material properties to the parts. Set up boundary conditions for inflow, outflow, symmetry, and wall, including imposed movement.
+# %%
 mat = MatICFD(flow_density=1.0, dynamic_viscosity=0.005)
 
 part_inflow = ICFDPart(1)
@@ -92,13 +106,25 @@ part_wall.set_boundary_layer(number=3)
 part_wall.set_imposed_move(vy=Curve(func="2*3.14/10*sin(2*3.14/10*TIME+3.14/2)"))
 icfd.parts.add(part_wall)
 
+# %% [markdown]
+# ## 5. Volume and Meshing
+# Define the volume space to be meshed and assign the boundaries.
+# %%
 partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
 partvol.set_material(mat)
 icfd.parts.add(partvol)
-# define the volume space that will be meshed,The boundaries
-# of the volume are the surfaces "spids"
+
 meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
 icfd.add(meshvol)
 
+# %% [markdown]
+# ## 6. Output Requests and Save
+# Configure output requests and save the simulation setup.
+# %%
 solution.create_database_binary(dt=0.5)
 solution.save_file()
+
+# %% [markdown]
+# ## 7. Conclusion
+# In this example, we demonstrated how to impose displacements on fluid nodes using the LS-DYNA Python API.
+# The workflow included model setup, material and part definitions, boundary conditions, and output configuration.

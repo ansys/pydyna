@@ -20,16 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Implicit model
-==============
-This example shows how to create and use an implicit dynamic roof crush model.
+# %%
+# # Implicit Model: Roof Crush Example
+#
+# This notebook demonstrates how to create and use an implicit dynamic roof crush model in LS-DYNA using the PyDyna API. The workflow includes mesh import, material and section assignment, contact and boundary condition setup, and output configuration. Each step is explained in detail for educational purposes.
 
-"""
+# %% [markdown]
+# ## 1. Perform Required Imports
+# Import all necessary modules and data for the simulation.
 
-###############################################################################
-# Perform required imports
-# ~~~~~~~~~~~~~~~~~~~~~~~~
+# %%
 # Perform the required imports.
 #
 import os
@@ -81,9 +81,11 @@ from ansys.dyna.core.pre.dynamech import (
 )
 from ansys.dyna.core.pre.misc import check_valid_ip
 
-###############################################################################
-# Start the ``pre`` service
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# ## 2. Start the Pre-Service
+# Ensure the Docker container or local server for the `pre` service is running. Connect to it using the default hostname and port, or override via command line.
+
+# %%
 # Before starting the ``pre`` service, you must ensure that the Docker container
 # for this service has been started. For more information, see "Start the Docker
 # container for the ``pre`` service" in https://dyna.docs.pyansys.com/version/stable/index.html.
@@ -101,9 +103,11 @@ if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 camry_solution = launch_dynapre(ip=hostname)
 
-###############################################################################
-# Import initial mesh data
-# ~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# ## 3. Import Initial Mesh Data
+# Import the mesh and part data for the vehicle, welds, and platen.
+
+# %%
 # Import the initial mesh data (nodes and elements), which includes the
 # vehicle data, weld data, and platen data.
 #
@@ -118,9 +122,11 @@ fns.append(path + "weld7.k")
 fns.append(path + "xtra_sw.k")
 camry_solution.open_files(fns)
 
-###############################################################################
-# Define global control cards
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# ## 4. Define Global Control Cards
+# Set up the global control cards for a quasi-static implicit dynamic solution, including termination time and output frequency.
+
+# %%
 # Because roof crush is a quasi-static loading case, you must run this model
 # as an implicit dynamic solution. Define the global control cards. From
 # the ``dynasolution`` class, set the termination time and the frequency for
@@ -128,14 +134,18 @@ camry_solution.open_files(fns)
 #
 camry_solution.set_termination(10)
 
-###############################################################################
+# %% [markdown]
+# ## 5. Set Up Implicit Analysis
+# Use the `dynamech` class to define IMPLICIT control cards and configure timestep and dynamic parameters.
+
+# %%
 # Use the implicit analysis methods in the ``dynamech`` class to define
 # the IMPLICIT control cards.
 #
 camry = DynaMech(analysis=AnalysisType.EXPLICIT)
 camry_solution.add(camry)
 
-###############################################################################
+# %%
 # Set the automatic timestep control flag
 # and the optimal equilibrium iteration count per timestep.
 #
@@ -145,12 +155,12 @@ camry.implicitanalysis.set_timestep(
     Optimum_equilibrium_iteration_count=511,
 )
 
-###############################################################################
+# %%
 # Use the ``set_dynamic()`` method to set the IMASS value to 1 and assign the
 # gamma and beta values.
 #
 camry.implicitanalysis.set_dynamic(gamma=0.6, beta=0.38)
-###############################################################################
+# %%
 # If normal modes must be extracted, use the ``set_eigenvalue()`` method.
 # The ``set_solution()`` method defines NSOLVR as 12 (Nolinear with BFGS update).
 #
@@ -159,7 +169,11 @@ camry.implicitanalysis.set_solution(
     iteration_limit=1, stiffness_reformation_limit=50, absolute_convergence_tolerance=-100
 )
 
-###############################################################################
+# %% [markdown]
+# ## 6. Define Materials
+# Define all required material models for the simulation, including rigid, null, spotweld, and various plasticity models.
+
+# %%
 # Define materials
 # ~~~~~~~~~~~~~~~~
 # This model uses four classes of material: ``MAT_NULL``, ``MAT_RIGID,``
@@ -244,7 +258,11 @@ plastic220_410 = MatPiecewiseLinearPlasticity(
     mass_density=7.890e-09, young_modulus=210000, yield_stress=220, tangent_modulus=410
 )
 
-###############################################################################
+# %% [markdown]
+# ## 7. Assign Section and Material Properties
+# Assign the defined materials to the appropriate beam and shell parts using loops and predefined lists from the data file.
+
+# %%
 # Assign section and material properties
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Once all materials are explicitly defined, these material IDs must be cross-referenced
@@ -307,7 +325,11 @@ for spart in shellparts:
     part.set_thickness(spart[2])
     camry.parts.add(part)
 
-###############################################################################
+# %% [markdown]
+# ## 8. Generate Spotwelds and Nodal Rigid Bodies
+# Use node pairs and node sets from the data file to create spotweld and nodal rigid body constraints.
+
+# %%
 # Generate keywords for spotwelds and nodal rigid bodies
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # The ``camry_rc_data.py`` file contains the predefined node pairs and node sets
@@ -320,7 +342,11 @@ for sw in spotweld:
 for cnrb in cnrbs:
     camry.constraints.create_cnrb(nodeset=NodeSet(cnrb))
 
-###############################################################################
+# %% [markdown]
+# ## 9. Define Contacts
+# Set up all required contact definitions: self-contact, platen-to-BIW, and tied spotweld contacts.
+
+# %%
 # Define contacts
 # ~~~~~~~~~~~~~~~
 # There are three contacts defined in this model:
@@ -363,7 +389,11 @@ swcontact.set_slave_surface(spotweldbeam)
 swcontact.set_master_surface(spotweldsurface)
 camry.contacts.add(swcontact)
 
-###############################################################################
+# %% [markdown]
+# ## 10. Define SPCs and Prescribed Motions
+# Apply single-point constraints (SPCs) to the BIW and prescribe motion to the platen using a curve.
+
+# %%
 # Define SPCs
 # ~~~~~~~~~~~
 # You can use the ``boundaryconditions`` class to define both SPCs and
@@ -380,7 +410,11 @@ camry.boundaryconditions.create_imposed_motion(platen, crv, dof=DOF.X_TRANSLATIO
 camry.boundaryconditions.create_imposed_motion(platen, crv, dof=DOF.Y_TRANSLATIONAL, scalefactor=-0.0802216)
 camry.boundaryconditions.create_imposed_motion(platen, crv, dof=DOF.Z_TRANSLATIONAL, scalefactor=-0.0802216)
 
-###############################################################################
+# %% [markdown]
+# ## 11. Define Output Database Cards and Save Input File
+# Set the output frequency for binary and ASCII databases, then save the input file for LS-DYNA.
+
+# %%
 # Define database cards and save input file
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Define the frequency of output for the binary and ASCII database outputs
@@ -398,3 +432,8 @@ camry_solution.set_output_database(
 )
 
 camry_solution.save_file()
+
+# %% [markdown]
+# ## 12. Conclusion
+#
+# This notebook has demonstrated the complete workflow for setting up an implicit dynamic roof crush simulation in LS-DYNA using PyDyna. The process included mesh import, material and section assignment, contact and boundary condition setup, and output configuration. This approach can be adapted for other implicit analyses in LS-DYNA, providing a clear, modular, and scriptable workflow for advanced simulations.

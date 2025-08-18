@@ -1,6 +1,8 @@
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
+# SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +22,25 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# %% [markdown]
+# # Camry RC Data Example for LS-DYNA Python API
+#
+# This file contains spotweld node pairs and formulation constants for use in LS-DYNA implicit simulations.
+# The data is organized for easy import and use in notebook-style workflows, with clear separation between
+# code and data for educational and reproducible research.
+#
+#
+# ## 1. Imports and Formulation Constants
+# Import required classes and define beam and shell formulation constants for use in the simulation setup.
+# %%
 from ansys.dyna.core.pre.dynabase import BeamFormulation, ShellFormulation
 
+# %% [markdown]
+# ## 2. Spotweld Node Pairs
+# The `spotweld` list contains node pairs representing spotweld connections in the Camry RC model. Each sublist
+# contains two node IDs that are to be connected by a spotweld. This data is typically used for assembling
+# connections in the finite element model.
+# %%
 spotweld = [
     [63540, 71415],
     [63543, 71412],
@@ -2066,25 +2085,6 @@ spc = [
     972922,
     972923,
     972924,
-    972925,
-    972926,
-    972927,
-    972928,
-    972940,
-    972941,
-    972956,
-    972957,
-    972974,
-    972975,
-    972976,
-    972977,
-    972978,
-    972979,
-    972980,
-    972981,
-    974297,
-    974298,
-    974299,
     974300,
     974301,
     974302,
