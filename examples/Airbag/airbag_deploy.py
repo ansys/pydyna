@@ -1,17 +1,24 @@
+# %% [markdown]
+# # Airbag Deployment Simulation with LS-DYNA and PyDyna
+#
+# This notebook demonstrates how to set up and solve an airbag deployment problem using LS-DYNA and PyDyna. The workflow includes mesh import, material and section definition, airbag and contact setup, rigid wall definition, and output configuration. Each step is explained for clarity and educational use.
+#
+# ## Theory and Background
+#
+# Airbag deployment simulations are critical in automotive safety engineering. They involve complex interactions between fabric materials, gas dynamics, and contact with rigid and deformable surfaces. LS-DYNA provides specialized airbag models and contact algorithms to capture these phenomena. This example uses the SIMPLE_AIRBAG_MODEL and demonstrates the setup of materials, parts, contacts, and output requests for a typical deployment scenario.
+
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
-#
+# SPDX-License-Identifier: MIT
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,39 +27,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Airbag deploy
--------------
-This example shows how to create an airbag deploy model with the PyDNYA ``pre`` service.
-The executable file for LS-DYNA is ``ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe``.
+# %% [markdown]
+# ## 1. Perform Required Imports
+# Import all necessary modules and classes for the airbag deployment simulation.
 
-"""
-
-###############################################################################
-# Perform required imports
-# ~~~~~~~~~~~~~~~~~~~~~~~~
-# Perform required imports.
-
+# %%
 import os
 import sys
 
 from ansys.dyna.core.pre import examples, launch_dynapre
-
-###############################################################################
-# Start the ``pre`` service
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Before starting the ``pre`` service, you must ensure that the Docker container
-# for this service has been started. For more information, see "Start the Docker
-# container for the ``pre`` service" in https://dyna.docs.pyansys.com/version/stable/index.html.
-#
-# The ``pre`` service can also be started locally, please download the latest version of
-# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it
-# referring to the README.rst file in this server package.
-#
-# Once the ``pre`` service is running, you can connect a client to it using
-# the hostname and port. This example uses the default localhost and port
-# (``"localhost"`` and ``"50051"`` respectively).
-#
 from ansys.dyna.core.pre.dynamaterial import MatFabric, MatRigid
 from ansys.dyna.core.pre.dynamech import (
     Airbag,
@@ -69,48 +52,40 @@ from ansys.dyna.core.pre.dynamech import (
 )
 from ansys.dyna.core.pre.misc import check_valid_ip
 
-# sphinx_gallery_thumbnail_path = '_static/pre/airbag/airbag.png'
+# %% [markdown]
+# ## 2. Start the Pre-Service
+# Start the LS-DYNA pre-service (locally or via Docker) and connect to it.
 
+# %%
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 
-###############################################################################
-# Start the solution workflow
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# The ``DynaSolution`` class is like a workflow orchestrator.
-# It inherits methods from other classes and helps create a complete workflow.
-#
+# %% [markdown]
+# ## 3. Import Mesh and Model Data
+# Read nodes, elements, and part definitions from the input file.
+
+# %%
 airbag_solution = launch_dynapre(ip=hostname)
 fns = []
-# path = sys.path[0] + os.sep + "input" + os.sep + "airbag_deploy" + os.sep
 path = examples.airbag_deploy + os.sep
 fns.append(path + "airbag_deploy.k")
 airbag_solution.open_files(fns)
 
-###############################################################################
-# Create standard explicit control cards
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# The following code uses the ``set_termination`` method to set the termination time
-# to ``0.03`` in *CONTROL_TERMINATION*. The ``DynaMech`` class
-# automatically generates the common control cards used in
-# explicit problems. ``CONTROL_ACCURACY``, ``CONTACT``, ``BULK VISCOCITY``,
-# and ``CONTACT`` are all automatically generated.
-#
-airbag_solution.set_termination(0.03)
+# %% [markdown]
+# ## 4. Set Simulation Termination Time and Add Solution Object
+# Set the simulation termination time and add the DynaMech solution object.
 
+# %%
+airbag_solution.set_termination(0.03)
 airbagdeploy = DynaMech()
 airbag_solution.add(airbagdeploy)
 
-###############################################################################
-# Define a keyword
-# ~~~~~~~~~~~~~~~~
-# Use the ``Airbag`` function in the ``DynaMech`` class to define
-# *AIRBAG_SIMPLE_AIRBAG_MODEL* as a keyword. While LS-DYNA has many different
-# airbag models, PyDYNA currently supports only one: SIMPLE_AIRBAG_MODEL.
-# If you have an urgent need for PyDYNA to support another airbag model, email
-# `pyansys.core@ansys.com <mailto:pyansys.core@ansys.com>`_ with your request.
+# %% [markdown]
+# ## 5. Define Airbag Model
+# Use the Airbag function to define the SIMPLE_AIRBAG_MODEL keyword and set airbag parameters.
 
+# %%
 airbag = Airbag(
     set=PartSet([3]),
     heat_capacity_at_constant_volume=1.736e3,
@@ -123,21 +98,19 @@ airbag = Airbag(
 )
 airbagdeploy.add(airbag)
 
-###############################################################################
-# Generate an infinite planar rigid wall
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# To generate an infinite planar rigidwall, define the coordinates of the heat
-# vector and the tail vector of the plane.
-#
+# %% [markdown]
+# ## 6. Generate an Infinite Planar Rigid Wall
+# Define the coordinates for the rigid wall.
+
+# %%
 rigidwall = RigidwallPlanar(Point(0, 0, 0), Point(0, 1, 0), coulomb_friction_coefficient=0.5)
 airbagdeploy.add(rigidwall)
 
-###############################################################################
-# Define a node-to-surface contact
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Define a node-to-surface contact by passing a master part set and a slave
-# part set.
+# %% [markdown]
+# ## 7. Define Node-to-Surface Contact
+# Set up contact between the airbag and other parts.
 
+# %%
 contact = Contact(category=ContactCategory.NODES_TO_SURFACE)
 contact.set_friction_coefficient(static=0.5, dynamic=0.5)
 surf1 = ContactSurface(PartSet([3]))
@@ -147,18 +120,11 @@ contact.set_slave_surface(surf1)
 contact.set_master_surface(surf2)
 airbagdeploy.contacts.add(contact)
 
-###############################################################################
-# Define material cards
-# ~~~~~~~~~~~~~~~~~~~~~
-# LS-DYNA has over 300 materials that are used for varied applications.
-# While PyDYNA does not yet support all material cards, it does support
-# most commonly used materials, including ``FABRIC``, ``MAT_ELASTIC``,
-# ``PIECEWISE_LINEAR_PLASTICITY``, and ``RIGID``. All supported materials
-# are accessed from the ``dynamaterial`` class. In the following code,
-# ``MAT_RIGID`` is defined as the material  for the cylindrical tube and the
-# bottom plate. ``MAT_FABRIC`` is defined as the material for the airbag volume.
-# Note that ``platemat`` also has constraints defined.
+# %% [markdown]
+# ## 8. Define Material Cards
+# Assign material properties to the plate, cylinder, and airbag parts.
 
+# %%
 platemat = MatRigid(
     mass_density=7.84e-4,
     young_modulus=30e6,
@@ -174,15 +140,11 @@ airbagmat = MatFabric(
     shear_modulus=1.53e6,
 )
 
-###############################################################################
-# Define sectional properties
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# The following code defines the sectional properties of the parts. This example
-# has three shell parts. Each shell part is initialized as ``ShellPart`` with a
-# unique ID and an appropriate shell formulation is assigned. Again,
-# PyDYNA does not yet support all element formulations. You can find the
-# supported formulations in the ``dynabase`` class.
+# %% [markdown]
+# ## 9. Define Sectional Properties
+# Set up shell parts and assign materials and formulations.
 
+# %%
 plate = ShellPart(1)
 plate.set_material(platemat)
 plate.set_element_formulation(ShellFormulation.BELYTSCHKO_TSAY)
@@ -202,15 +164,17 @@ airbagpart.set_thickness(0.015)
 airbagpart.set_integration_points(4)
 airbagdeploy.parts.add(airbagpart)
 
-###############################################################################
-# Define database outputs
-# ~~~~~~~~~~~~~~~~~~~~~~~
-# Use the ``set_output_database()`` and ``create_database_binary()`` methods to define the
-# output frequency of the ASCII and binary D3PLOT files. Then, use the ``save_file()``
-# method to write out the model as an input DYNA key file.
+# %% [markdown]
+# ## 10. Define Database Outputs and Save Input File
+# Configure output frequencies and save the input deck to disk.
 
+# %%
 airbag_solution.set_output_database(
     abstat=2.0e-4, glstat=2.0e-4, matsum=2.0e-4, rcforc=2.0e-4, rbdout=2.0e-4, rwforc=2.0e-4
 )
 airbag_solution.create_database_binary(dt=5e-4, ieverp=1)
 airbag_solution.save_file()
+
+# %% [markdown]
+# ## 11. Conclusion
+# This notebook demonstrated the setup of an airbag deployment simulation using LS-DYNA and PyDyna. The workflow included mesh import, material and section definition, airbag and contact setup, rigid wall definition, and output configuration. This approach provides a clear, modular, and scriptable workflow for advanced safety simulations.

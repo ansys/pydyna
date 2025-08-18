@@ -1,6 +1,8 @@
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
+# SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -32,11 +34,16 @@ a Pythonic environment.
 .. _ls_dyna_knowledge_base: https://lsdyna.ansys.com/knowledge-base/
 """
 
-###############################################################################
-# Perform required imports
-# ~~~~~~~~~~~~~~~~~~~~~~~~
-# Import required packages, including those for the keywords, deck, and solver.
+# %% [markdown]
+# # John Reid Pendulum Example
+#
+# This notebook demonstrates how to use PyDyna to create and solve a pendulum example inspired by John Reid's classic LS-DYNA model. The workflow includes deck and keyword creation, mesh import, boundary and initial conditions, and running the LS-DYNA solver. Each step is explained for clarity and educational use.
 
+# %% [markdown]
+# ## 1. Perform Required Imports
+# Import all necessary modules and classes for the pendulum simulation.
+
+# %%
 import os
 import shutil
 import tempfile
@@ -48,26 +55,26 @@ from ansys.dyna.core import keywords as kwd
 from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
 
+# %% [markdown]
+# ## 2. Download and Prepare Mesh File
+# Download the mesh file for the pendulum example and set up a temporary run directory.
+
+# %%
 mesh_file_name = "nodes.k"
 mesh_file = DownloadManager().download_file(
     mesh_file_name, "ls-dyna", "John_Reid_Pendulum", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pendulum")
 )
-
 rundir = tempfile.TemporaryDirectory()
-
 dynafile = "pendulum.k"
 
-
-###############################################################################
-# Create a deck and keywords
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Create a deck, which is the container for all the keywords.
-# Then, create and append individual keywords to the deck.
+# %% [markdown]
+# ## 3. Create Deck and Keywords
+# Create a deck (container for all keywords), then define and append all necessary keywords for the simulation.
 
 
+# %%
 def write_deck(filepath):
     deck = Deck()
-
     # Append control keywords
     deck.extend(
         [
@@ -77,7 +84,6 @@ def write_deck(filepath):
             kwd.ControlShell(istupd=1, theory=2),
         ]
     )
-
     # Append database keywords
     deck.extend(
         [
@@ -92,19 +98,23 @@ def write_deck(filepath):
             kwd.DatabaseRcforc(dt=0.10),
         ]
     )
-
     # Define contacts
-    deck.extend([kwd.ContactAutomaticSingleSurface(ssid=0, fs=0.08, fd=0.08), kwd.ControlContact(shlthk=2)])
-
+    deck.extend(
+        [
+            kwd.ContactAutomaticSingleSurface(ssid=0, fs=0.08, fd=0.08),
+            kwd.ControlContact(shlthk=2),
+        ]
+    )
     # Define gravity
     curve1 = kwd.DefineCurve(lcid=1)
     curve1.curves = pd.DataFrame({"a1": [0.00, 10000.00], "o1": [1.000, 1.000]})
-
-    deck.extend([kwd.LoadBodyY(lcid=1, sf=0.00981), curve1])
-
+    deck.extend(
+        [
+            kwd.LoadBodyY(lcid=1, sf=0.00981),
+            curve1,
+        ]
+    )
     # Define boundary conditions
-
-    # BoundarySpcNode edited needs to redo code gen
     BoundarySpcNode = kwd.BoundarySpcNode()
     BoundarySpcNode.nodes = pd.DataFrame(
         {
@@ -118,7 +128,6 @@ def write_deck(filepath):
             "dofrz": [0, 0, 0, 0],
         }
     )
-
     deck.extend(
         [
             BoundarySpcNode,
@@ -126,13 +135,10 @@ def write_deck(filepath):
             kwd.DefineBox(boxid=5, xmn=-120.0, xmx=-80.0, ymn=80.0, ymx=120.0, zmn=-30.0, zmx=30.0),
         ]
     )
-
     # Define parts and materials
-
     spherePart = kwd.Part()
     spherePart.parts = pd.DataFrame({"heading": ["sphere1", "sphere2"], "pid": [1, 2], "secid": [1, 2], "mid": [1, 1]})
     beamPart = kwd.Part(heading="Pendulum Wires - Elastic Beams", pid=45, secid=45, mid=45)
-
     deck.extend(
         [
             spherePart,
@@ -147,13 +153,15 @@ def write_deck(filepath):
             kwd.MatElastic(mid=45, ro=7.86e-6, e=210.0, pr=0.30),
         ]
     )
-
     # Define deformable switching
-    deck.extend([kwd.DeformableToRigid(pid=1), kwd.DeformableToRigid(pid=2)])
-
+    deck.extend(
+        [
+            kwd.DeformableToRigid(pid=1),
+            kwd.DeformableToRigid(pid=2),
+        ]
+    )
     # Define nodes and elements
     deck.append(kwd.Include(filename=mesh_file_name))
-
     deck.export_file(filepath)
     return deck
 
@@ -162,21 +170,30 @@ def run_post(filepath):
     pass
 
 
+# %% [markdown]
+# ## 4. Copy Mesh File and Write Deck
+# Copy the mesh file to the run directory and write the deck to file.
+
+# %%
 shutil.copy(mesh_file, os.path.join(rundir.name, mesh_file_name))
 deck = write_deck(os.path.join(rundir.name, dynafile))
 
-###############################################################################
-# View the model
-# ~~~~~~~~~~~~~~
-# You can use the PyVista ``plot`` method in the ``deck`` class to view
-# the model.
+# %% [markdown]
+# ## 5. View the Model
+# Use the PyVista `plot` method in the `deck` class to visualize the model.
 
+# %%
 deck.plot(cwd=rundir.name)
 
-###############################################################################
-# Run the Dyna solver
-# ~~~~~~~~~~~~~~~~~~~
-#
+# %% [markdown]
+# ## 6. Run the LS-DYNA Solver
+# Run the LS-DYNA solver on the generated input file.
 
+# %%
 filepath = run_dyna(dynafile, working_directory=rundir.name)
 run_post(rundir.name)
+
+# %% [markdown]
+# ## 7. Conclusion
+#
+# This notebook has demonstrated the setup and solution of a pendulum example using PyDyna and LS-DYNA. The workflow included deck and keyword creation, mesh import, boundary and initial conditions, and running the solver. This approach can be adapted for other LS-DYNA analyses, providing a clear, modular, and scriptable workflow for advanced simulations.

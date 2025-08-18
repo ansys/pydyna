@@ -1,6 +1,8 @@
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
+# SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,23 +22,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-John Reid pipe example
-----------------------
-This example is inspired by John Reid's "Pipe" example on the
-`LS-DYNA Knowledge Base <_ls_dyna_knowledge_base>`_ site. It shows how
-to use PyDyna to create a keyword file for LS-DYNA and solve it within
-a Pythonic environment.
 
-.. LINKS AND REFERENCES
-.. _ls_dyna_knowledge_base: https://lsdyna.ansys.com/knowledge-base/
-"""
+# %% [markdown]
+# # John Reid Pipe Example
+#
+# This notebook demonstrates how to use PyDyna to create and solve a pipe example inspired by John Reid's classic LS-DYNA model. The workflow includes deck and keyword creation, mesh import, part and material definition, and running the LS-DYNA solver. Each step is explained for clarity and educational use.
 
-###############################################################################
-# Perform required imports
-# ~~~~~~~~~~~~~~~~~~~~~~~~
-# Import required packages, including those for the keywords, deck, and solver.
+# %% [markdown]
+# ## 1. Perform Required Imports
+# Import all necessary modules and classes for the pipe simulation.
 
+# %%
 import os
 import shutil
 import tempfile
@@ -48,26 +44,26 @@ from ansys.dyna.core import keywords as kwd
 from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
 
+# %% [markdown]
+# ## 2. Download and Prepare Mesh File
+# Download the mesh file for the pipe example and set up a temporary run directory.
+
+# %%
 mesh_file_name = "nodes.k"
 mesh_file = DownloadManager().download_file(
     mesh_file_name, "ls-dyna", "John_Reid_Pipe", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pipe")
 )
-
 rundir = tempfile.TemporaryDirectory()
-
 dynafile = "pipe.k"
 
-
-###############################################################################
-# Create a deck and keywords
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Create a deck, which is the container for all the keywords.
-# Then, create and append individual keywords to the deck.
+# %% [markdown]
+# ## 3. Create Deck and Keywords
+# Create a deck (container for all keywords), then define and append all necessary keywords for the simulation.
 
 
+# %%
 def write_deck(filepath):
     deck = Deck()
-
     # Append control keywords
     deck.extend(
         [
@@ -77,7 +73,6 @@ def write_deck(filepath):
             kwd.ControlShell(istupd=1),
         ]
     )
-
     # Append database keywords
     deck.extend(
         [
@@ -91,9 +86,7 @@ def write_deck(filepath):
             kwd.DatabaseRcforc(dt=0.10),
         ]
     )
-
     # Define contacts - sliding interfaces
-
     deck.extend(
         [
             kwd.ContactForceTransducerPenalty(surfa=1, surfatyp=3),
@@ -101,18 +94,14 @@ def write_deck(filepath):
             kwd.SetPartList(sid=3, parts=[1, 2]),
         ]
     )
-
     # Define initial conditions
-
     deck.extend(
         [
             kwd.InitialVelocityGeneration(id=5, omega=-0.082, xc=-78.50, yc=-610.13, zc=5.69, nx=1.0),
             kwd.SetPartList(sid=5, parts=[1, 2]),
         ]
     )
-
     # Define pipe parts and materials
-
     pipe_parts = kwd.Part()
     pipe_parts.parts = pd.DataFrame(
         {
@@ -122,7 +111,6 @@ def write_deck(filepath):
             "mid": [1, 2, 1],
         }
     )
-
     deck.extend(
         [
             pipe_parts,
@@ -134,10 +122,8 @@ def write_deck(filepath):
             kwd.SectionShell(secid=2, elfrom=2, nip=3, t1=11.0, t2=11.0, t3=11.0, t4=11.0),
         ]
     )
-
     # Define bracket parts and materials
     bracket_parts = kwd.Part(heading="Bracket", pid=4, secid=4, mid=4)
-
     deck.extend(
         [
             bracket_parts,
@@ -145,13 +131,19 @@ def write_deck(filepath):
             kwd.SectionSolid(secid=4),
         ]
     )
-
     # Define deformable switching
-    deck.extend([kwd.DeformableToRigid(pid=1), kwd.DeformableToRigid(pid=2)])
-
+    deck.extend(
+        [
+            kwd.DeformableToRigid(pid=1),
+            kwd.DeformableToRigid(pid=2),
+        ]
+    )
     # Define nodes and elements
-    deck.extend([kwd.Include(filename=mesh_file_name)])
-
+    deck.extend(
+        [
+            kwd.Include(filename=mesh_file_name),
+        ]
+    )
     deck.export_file(filepath)
     return deck
 
@@ -160,14 +152,30 @@ def run_post(filepath):
     pass
 
 
+# %% [markdown]
+# ## 4. Copy Mesh File and Write Deck
+# Copy the mesh file to the run directory and write the deck to file.
+
+# %%
 shutil.copy(mesh_file, os.path.join(rundir.name, mesh_file_name))
 deck = write_deck(os.path.join(rundir.name, dynafile))
+
+# %% [markdown]
+# ## 5. View the Model
+# Use the PyVista `plot` method in the `deck` class to visualize the model.
+
+# %%
 deck.plot(cwd=rundir.name, show_edges=True)
 
-###############################################################################
-# Run the Dyna solver
-# ~~~~~~~~~~~~~~~~~~~
-# Run the Dyna solver.
+# %% [markdown]
+# ## 6. Run the LS-DYNA Solver
+# Run the LS-DYNA solver on the generated input file.
 
+# %%
 run_dyna(dynafile, working_directory=rundir.name)
 run_post(rundir.name)
+
+# %% [markdown]
+# ## 7. Conclusion
+#
+# This notebook has demonstrated the setup and solution of a pipe example using PyDyna and LS-DYNA. The workflow included deck and keyword creation, mesh import, part and material definition, and running the solver. This approach can be adapted for other LS-DYNA analyses, providing a clear, modular, and scriptable workflow for advanced simulations.

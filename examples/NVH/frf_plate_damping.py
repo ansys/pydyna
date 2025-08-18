@@ -1,6 +1,8 @@
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
+# SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,20 +22,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-FRF for a rectangular plate
-===========================
-
-This example shows how to set up the keywords for computation of a FRF (frequency response function).
-The executable file for LS-DYNA is ``ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe``.
-
-"""
-
-###############################################################################
-# Perform required imports
-# ~~~~~~~~~~~~~~~~~~~~~~~~
-# Perform the required imports.
+# %% [markdown]
+# # FRF Plate Damping Example
 #
+# This notebook demonstrates how to set up and solve a Frequency Response Function (FRF) plate damping problem using the PyDyna API for LS-DYNA. The workflow includes mesh import, control card setup, frequency domain configuration, material and section definition, and saving the input deck. Each step is explained for clarity and educational use.
+
+# %% [markdown]
+# ## 1. Perform Required Imports
+# Import all necessary modules and classes for the FRF plate damping simulation.
+
+# %%
 import os
 import sys
 
@@ -52,71 +50,60 @@ from ansys.dyna.core.pre.dynanvh import (
 )
 from ansys.dyna.core.pre.misc import check_valid_ip
 
-# sphinx_gallery_thumbnail_path = '_static/pre/nvh/frf_plate_damping.png'
-###############################################################################
-# Start the ``pre`` service
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Before starting the ``pre`` service, you must ensure that the Docker container
-# for this service has been started. For more information, see "Start the Docker
-# container for the ``pre`` service" in https://dyna.docs.pyansys.com/version/stable/index.html.
-#
-# The ``pre`` service can also be started locally, please download the latest version of
-# ansys-pydyna-pre-server.zip package from https://github.com/ansys/pydyna/releases and start it
-# referring to the README.rst file in this server package.
-#
-# Once the ``pre`` service is running, you can connect a client to it using
-# the hostname and port. This example uses the default localhost and port
-# (``"localhost"`` and ``"50051"`` respectively).
-#
+# %% [markdown]
+# ## 2. Start the Pre-Service
+# Ensure the Docker container or local server for the `pre` service is running. Connect to it using the default hostname and port, or override via command line.
+
+# %%
 hostname = "localhost"
 if len(sys.argv) > 1 and check_valid_ip(sys.argv[1]):
     hostname = sys.argv[1]
 solution = launch_dynapre(ip=hostname)
-###############################################################################
-# Import mesh data (nodes and elements)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Import initial mesh data, which includes the predefined *NODE*, *ELEMENT_* and *PART*
-# cards.
-#
+
+# %% [markdown]
+# ## 3. Import Mesh Data
+# Import the mesh data (nodes, elements, and parts) for the FRF plate damping example.
+
+# %%
 fns = []
 path = examples.nvh_frf_plate_damping + os.sep
 fns.append(path + "frf_plate_damping.k")
 solution.open_files(fns)
 
-###############################################################################
-# Define global control cards
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Define the global control cards.
+# %% [markdown]
+# ## 4. Define Global Control Cards
+# Set up the global control cards and add the NVH object to the solution.
 
+# %%
 nvhobj = DynaNVH()
 solution.add(nvhobj)
-###############################################################################
-# Set initial timestep size
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# %% [markdown]
+# ## 5. Set Initial Timestep Size
 # Set the initial timestep size in CONTROL_IMPLICIT_GENERAL.
-#
+
+# %%
 nvhobj.implicitanalysis.set_initial_timestep_size(1.0)
 
-###############################################################################
-# Set number of eigen modes
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
-# Set the number of eigen modes to ``100``.
-#
+# %% [markdown]
+# ## 6. Set Number of Eigen Modes
+# Set the number of eigen modes to 100.
+
+# %%
 nvhobj.implicitanalysis.set_eigenvalue(number_eigenvalues=100)
 
-###############################################################################
-# Define linear solver
-# ~~~~~~~~~~~~~~~~~~~~
-# Define the linear solver by setting NSOLVR to ``1`` in CONTROL_IMPLICIT_SOLUTION.
+# %% [markdown]
+# ## 7. Define Linear Solver
+# Set the linear solver method (NSOLVR) to 1 in CONTROL_IMPLICIT_SOLUTION.
+
+# %%
 nvhobj.implicitanalysis.set_solution(solution_method=1)
 
-###############################################################################
-# Define frequency domain cards
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# *FREQUENCY_DOMAIN_FRF* is used to compute the frequency response function due to
-# nodal excitations. In this case, a base velocity is defined as an input at node 131.
-# The base acceleration response is measured at nodes 131 and 651. The maximum
-# natural frequency employed in FRF is limited to 2000 Hz.
+# %% [markdown]
+# ## 8. Define Frequency Domain Cards
+# Configure the frequency response function (FRF) for nodal excitations and responses.
+
+# %%
 fd = FrequencyDomain()
 crv = Curve(
     x=[1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 200],
@@ -137,11 +124,11 @@ fd.set_frequency_response_function(
 )
 nvhobj.add(fd)
 
-###############################################################################
-# Define material and section properties
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Define the ``MAT_ELASTIC`` material. Set shell formulation to ``SR_HUGHES_LIU``.
-#
+# %% [markdown]
+# ## 9. Define Material and Section Properties
+# Define the elastic material and shell part properties for the plate.
+
+# %%
 matelastic = MatElastic(mass_density=7870, young_modulus=2.07e11, poisson_ratio=0.292)
 
 boxshell = ShellPart(1)
@@ -150,13 +137,18 @@ boxshell.set_element_formulation(ShellFormulation.SR_HUGHES_LIU)
 boxshell.set_thickness(0.002)
 boxshell.set_shear_factor(0.833)
 
-###############################################################################
-# Set printout property and save input deck
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Use the ``set_printout()`` method to set the printout property to ``3``.
-# Save the input deck.
-#
+# %% [markdown]
+# ## 10. Set Printout Property and Save Input Deck
+# Set the printout property and save the input deck for LS-DYNA.
+
+# %%
 boxshell.set_printout(3)
 nvhobj.parts.add(boxshell)
 
 solution.save_file()
+
+# %% [markdown]
+# ## 11. Conclusion
+#
+# This notebook has demonstrated the setup and solution of a frequency response function (FRF) plate damping example using PyDyna and LS-DYNA. The workflow included mesh import, control card setup, frequency domain configuration, material and section definition, and saving the input deck. This approach can be adapted for other NVH analyses, providing a clear, modular, and scriptable workflow for advanced simulations.
+#

@@ -1,6 +1,8 @@
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
+# SPDX-License-Identifier: MIT
+#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,27 +22,48 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Sample interactive client for DynaSolver.
-=========================================
+# !/usr/bin/python3
 
-Commands are read from an optional file, or interactively, and sent to DYNA via gRPC
-"""
+# %% [markdown]
+# # LS-DYNA Solver Client Example
+#
+# This notebook demonstrates how to connect to and control an LS-DYNA solver instance using the PyDyna solver API. The workflow includes handling different deployment environments (local, Kubernetes, Minikube), connecting to the solver, running commands from a file or interactively, and managing the solver session. Each step is explained with theoretical background for educational use.
+#
+# **Background:**
+# The PyDyna solver API provides a Pythonic interface to LS-DYNA's gRPC server, allowing users to automate simulation workflows, manage remote or containerized solver instances, and integrate with cloud or cluster environments. This flexibility is essential for modern CAE workflows and high-throughput simulation.
 
-#!/usr/bin/python3
+# %% [markdown]
+# ## 1. Import Required Modules
+# Import standard Python modules and the PyDyna solver API.
+#
+# The solver API enables programmatic control of LS-DYNA, while standard modules are used for system interaction and command-line argument parsing.
+
+# %%
 import os
 import sys
 
 import ansys.dyna.core.solver as solver
 
+# %% [markdown]
+# ## 2. Define Hostname and Port
+# Set the default hostname and port for the LS-DYNA solver service.
 #
+# These can be overridden by command-line arguments or dynamically determined for Kubernetes/Minikube deployments.
+
+# %%
 hostname = "localhost"
 port = "5000"
 
+# %% [markdown]
+# ## 3. Helper Functions for Kubernetes and Minikube
+# Define functions to retrieve the IP address and port of the LS-DYNA server when running in Kubernetes or Minikube environments.
+#
+# These functions use `kubectl` and `minikube` commands to query the service endpoints, enabling seamless integration with cloud-native deployments.
 
+
+# %%
 def get_from_k8s(service):
-    """Get the port of the DYNA server service when running Kubernetes.
-    locally"""
+    """Get the port of the DYNA server service when running Kubernetes locally."""
     ip = "localhost"  # for local k8s cluster
     f = os.popen("kubectl get service %s" % service, "r")
     f.readline()
@@ -52,8 +75,7 @@ def get_from_k8s(service):
 
 
 def get_from_minikube(service):
-    """Get the IP address and port of the DYNA server service when running
-    under minikube locally."""
+    """Get the IP address and port of the DYNA server service when running under minikube locally."""
     f = os.popen("minikube ip", "r")
     ip = f.readline().strip()
     f.close
@@ -66,18 +88,20 @@ def get_from_minikube(service):
     return (ip, p)
 
 
+# %% [markdown]
+# ## 4. Parse Command-Line Arguments
+# Parse command-line arguments to determine the hostname, port, and optional runfile for batch command execution.
+#
+# This allows the client to be used flexibly in different environments and workflows, including batch and interactive modes.
+
+# %%
 args = sys.argv[1:]
-#
-# Check for special command-line arg ``runfile <filename>`` to pull commands.
-# from
-#
 if "runfile" in args:
     i = args.index("runfile")
     runfile = args[i + 1]
     args = args[:i] + args[i + 2 :]
 else:
     runfile = None
-#
 try:
     hostname = args[0]
 except IndexError:
@@ -88,36 +112,40 @@ try:
 except IndexError:
     port = "5000"
     service = "server"
+
+# %% [markdown]
+# ## 5. Handle Kubernetes and Minikube Environments
+# Dynamically determine the correct hostname and port if running under Kubernetes or Minikube.
 #
-# Special code here for testing on my system with minikube:
-# if run with just "minikube" as the argument, figure out
-# the correct IP address and port to use.  If there is a second
-# argument, it is the name of the "server" service, which defaults to "server"
-#
+# This enables the client to connect to LS-DYNA services deployed in cloud-native environments without manual configuration.
+
+# %%
 if hostname == "minikube":
     (hostname, port) = get_from_minikube(service)
-    print("Using %s:%s" % (hostname, port))
-#
-# Similarly, if running under kubernetes locally, get the hostname
-# and port to use
-#
+    print(f"Using {hostname}:{port}")
 elif hostname == "k8s":
     (hostname, port) = get_from_k8s(service)
-    print("Using %s:%s" % (hostname, port))
+    print(f"Using {hostname}:{port}")
 
+# %% [markdown]
+# ## 6. Connect to the LS-DYNA Solver
+# Open a gRPC connection to the LS-DYNA solver using the specified hostname and port.
 #
-# Open gRPC connection to the server
-#
+# This connection allows you to send commands, upload files, and control the simulation remotely.
+
+# %%
 dyna = solver.DynaSolver(hostname, port)
+
+# %% [markdown]
+# ## 7. Run Commands from File or Interactively
+# If a runfile is specified, execute commands from the file. Otherwise, enter an interactive loop to send commands to the solver.
 #
-# Run commands from the runfile first, if there are any
-#
+# This dual-mode operation supports both automated batch workflows and manual interactive sessions.
+
+# %%
 if runfile:
     dyna.runfile(runfile)
-#
-# If the runfile didn't end with "quit" then process commands from the terminal
-# until we get a "quit" command
-#
+
 while 1:
     # cmdin = input("> ").rstrip()
     # cannot use input() builtin function in Sphinx-Gallery examples
@@ -128,3 +156,8 @@ while 1:
             sys.exit(0)
     except solver.RunningError as err:
         print(err)
+
+# %% [markdown]
+# ## 8. Conclusion
+#
+# This notebook has demonstrated how to connect to and control an LS-DYNA solver instance using the PyDyna solver API. The workflow included handling different deployment environments, connecting to the solver, running commands from a file or interactively, and managing the solver session. This approach can be adapted for cloud, cluster, or local deployments, providing a flexible and scriptable interface for advanced simulation workflows.

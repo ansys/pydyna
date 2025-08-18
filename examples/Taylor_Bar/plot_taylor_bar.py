@@ -1,4 +1,27 @@
+# %% [markdown]
+# # Taylor Bar Impact Simulation and Postprocessing
+#
+# This notebook demonstrates how to set up, run, and post-process a Taylor bar impact simulation using LS-DYNA and PyDyna.
+#
+#
+#
+# The Taylor bar impact test is a classic benchmark in computational solid mechanics. In this test, a cylindrical metal bar is propelled at high velocity against a rigid wall. The resulting deformation and energy dissipation are analyzed to assess the accuracy of material models and numerical methods, especially for large deformation and high strain-rate problems.
+#
+# Taylor bar tests are widely used for:
+# - Validating constitutive models for metals under dynamic loading.
+# - Studying wave propagation, plastic flow, and failure mechanisms.
+# - Benchmarking finite element codes for explicit dynamics.
+#
+# The simulation workflow includes:
+# - Creating an input deck with material, geometry, and boundary conditions.
+# - Running the LS-DYNA solver to simulate the impact event.
+# - Extracting and plotting kinetic energy to analyze the dynamic response and energy dissipation during impact.
+#
+# This approach provides a robust framework for both research and engineering applications in impact dynamics and material characterization.
+
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,25 +43,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Taylor bar example
-------------------
-This example is inspired by the “Taylor Bar” example on the
-`LS-DYNA Knowledge Base <_ls_dyna_knowledge_base>`_ site. It shows how
-to use PyDyna to create a keyword file for LS-DYNA and solve it within
-a Pythonic environment.
+# %% [markdown]
+# ## 1. Perform Required Imports
+# Import all necessary modules and classes for the Taylor bar simulation and postprocessing.
+#
+# PyDyna and DPF (Data Processing Framework) are used for input deck creation, solver control, and result extraction. Matplotlib is used for plotting.
 
-.. LINKS AND REFERENCES
-.. _ls_dyna_knowledge_base: https://lsdyna.ansys.com/knowledge-base/
-"""
-
-###############################################################################
-# Perform required imports
-# ~~~~~~~~~~~~~~~~~~~~~~~~
-# Import required packages, including those for the keywords, deck, and solver.
-
-# sphinx_gallery_thumbnail_number = 1
-
+# %%
 import os
 import pathlib
 import shutil
@@ -52,6 +63,13 @@ from ansys.dyna.core import keywords as kwd
 from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
 
+# %% [markdown]
+# ## 2. Download and Prepare Mesh File
+# Download the mesh file for the Taylor bar example and set up a temporary working directory.
+#
+# The mesh defines the geometry and discretization of the bar. Accurate mesh generation is crucial for capturing the impact response.
+
+# %%
 workdir = tempfile.TemporaryDirectory()
 
 mesh_file_name = "taylor_bar_mesh.k"
@@ -59,16 +77,17 @@ mesh_file = DownloadManager().download_file(
     mesh_file_name, "ls-dyna", "Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar")
 )
 
-###############################################################################
-# Create a deck and keywords
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Create a deck, which is the container for all the keywords.
-# Then, create and append individual keywords to the deck.
+# %% [markdown]
+# ## 3. Create Input Deck and Keywords
+# Define a function to create the LS-DYNA input deck, including material, section, part, initial velocity, boundary conditions, and output requests.
+#
+# The input deck specifies all aspects of the simulation, from material properties to output frequency. Parametric studies can be performed by varying the initial velocity.
 
 
+# %%
 def create_input_deck(initial_velocity):
     deck = Deck()
-    deck.title = "Taylor-Bar Velocity - %s - Unit: t-mm-s" % initial_velocity
+    deck.title = f"Taylor-Bar Velocity - {initial_velocity} - Unit: t-mm-s"
 
     # Define material
     mat_1 = kwd.Mat003(mid=1)
@@ -153,13 +172,20 @@ def create_input_deck(initial_velocity):
     return deck
 
 
+# %% [markdown]
+# ## 4. Write Input Deck to Disk
+# Define a function to write the input deck and mesh file to the working directory.
+#
+# This function enables parametric studies by generating input decks for different initial velocities.
+
+
+# %%
 def write_input_deck(**kwargs):
     initial_velocity = kwargs.get("initial_velocity")
     wd = kwargs.get("wd")
     if not all((initial_velocity, wd)):
         raise Exception("Missing input!")
     deck = create_input_deck(initial_velocity)
-    # Import mesh
     deck.append(kwd.Include(filename=mesh_file_name))
 
     # Write LS-DYNA input deck
@@ -168,23 +194,27 @@ def write_input_deck(**kwargs):
     shutil.copyfile(mesh_file, os.path.join(wd, mesh_file_name))
 
 
-###############################################################################
-# Define the Dyna solver function
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# ## 5. Run the LS-DYNA Solver
+# Define a function to run the LS-DYNA solver in the specified directory.
 #
+# The solver executes the simulation and generates result files for postprocessing.
 
 
+# %%
 def run(directory):
     run_dyna("input.k", working_directory=directory, stream=False)
     assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
 
 
-###############################################################################
-# Define the DPF output function
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# ## 6. Extract Kinetic Energy Using DPF
+# Define a function to extract the global kinetic energy from the simulation results using PyDPF.
 #
+# DPF enables efficient postprocessing of large LS-DYNA result files, allowing for automated extraction and visualization of key quantities.
 
 
+# %%
 def get_global_ke(directory):
     ds = dpf.DataSources()
     result_file = os.path.join(directory, "d3plot")
@@ -202,50 +232,44 @@ def get_global_ke(directory):
     return time_data, ke_data
 
 
-###############################################################################
-# View the model
-# ~~~~~~~~~~~~~~
-# etc etc
+# %% [markdown]
+# ## 7. Visualize the Model
+# Use the PyDyna deck's plot method to visualize the model geometry and setup.
+#
+# Visualization is important for verifying the model setup and understanding the simulation domain.
+
+# %%
 deck_for_graphic = create_input_deck(300e3)
 deck_for_graphic.append(kwd.Include(filename=mesh_file))
 deck_for_graphic.plot()
 
-###############################################################################
-# Run a parametric solve
-# ~~~~~~~~~~~~~~~~~~~~~~
-# etc etc
+# %% [markdown]
+# ## 8. Run a Parametric Study and Plot Results
+# Run the Taylor bar simulation for different initial velocities and plot the global kinetic energy over time.
+#
+# Parametric studies are essential for understanding the sensitivity of the system to initial conditions and for validating numerical models against experimental data.
 
-
-# Define base working directory
-
+# %%
 color = ["b", "r", "g", "y"]
-# Specify different velocities in mm/s
 initial_velocities = [275.0e3, 300.0e3, 325.0e3, 350.0e3]
-
 for index, initial_velocity in enumerate(initial_velocities):
-    # Create a folder for each parameter
-    wd = os.path.join(workdir.name, "tb_vel_%s" % initial_velocity)
+    wd = os.path.join(workdir.name, f"tb_vel_{initial_velocity}")
     pathlib.Path(wd).mkdir(exist_ok=True)
-    # Create LS-Dyna input deck
     write_input_deck(initial_velocity=initial_velocity, wd=wd)
-    # Run Solver
     try:
         run(wd)
-        # Run PyDPF Post
         time_data, ke_data = get_global_ke(wd)
-        # Add series to the plot
-        plt.plot(time_data, ke_data, color[index], label="KE at vel. %s mm/s" % initial_velocity)
-
+        plt.plot(time_data, ke_data, color[index], label=f"KE at vel. {initial_velocity} mm/s")
     except Exception as e:
         print(e)
-    # sphinx_gallery_defer_figures
-
 plt.xlabel("Time (s)")
 plt.ylabel("Energy (mJ)")
 
-###############################################################################
-# Generate graphical output
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
-# etc etc
+# %% [markdown]
+# ## 9. Generate Graphical Output
+# Show the plot of kinetic energy versus time for all simulated velocities.
+#
+# This plot provides insight into the energy dissipation and dynamic response of the Taylor bar during impact.
 
+# %%
 plt.show()

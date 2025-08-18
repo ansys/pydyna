@@ -1,6 +1,7 @@
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
+# SPDX-License-Identifier: MIT
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# %% [markdown]
+# # Railgun Simulation Data for LS-DYNA Python API
+#
+# This file provides node sets and segment definitions for railgun simulation examples using the LS-DYNA Python API.
+# The data is structured for clarity and educational value, matching the style of `em_resistive_heating.py`.
+#
+# Node sets are used for boundary conditions, coil definitions, and current measurement in electromagnetic simulations.
+
+# %% [markdown]
+# ### 1. SPC Node Sets
+# These lists define node sets for railgun simulation boundary conditions.
+# %%
 spc1 = [
     54,
     12,
@@ -376,6 +389,10 @@ spc2 = [
     2660,
 ]
 
+# %% [markdown]
+# ### 2. Inlet and Outlet Node Sets
+# These lists define inlet and outlet node sets for railgun simulation.
+# %%
 inlet = [
     [2661, 2666, 2667, 2662],
     [2666, 2671, 2672, 2667],
@@ -446,6 +463,10 @@ outlet = [
     [6339, 6344, 6345, 6340],
 ]
 
+# %% [markdown]
+# ### 3. Rogowski Coil Segment Sets
+# These lists define Rogowski coil segments for current measurement in railgun simulation.
+# %%
 rogoset = [
     [421, 442, 446, 424],
     [442, 470, 474, 446],
@@ -629,6 +650,10 @@ rogoset = [
     [574, 602, 606, 578],
 ]
 
+# %% [markdown]
+# ### 4. Current Measurement Sets
+# These lists define node sets for current measurement in railgun simulation.
+# %%
 cur = [
     [794, 766, 762, 790],
     [542, 514, 510, 538],
@@ -721,3 +746,11 @@ cur = [
     [790, 762, 758, 786],
     [538, 510, 506, 534],
 ]
+
+# %% [markdown]
+# ### 5. Conclusion
+# This file provides structured node sets and segment definitions for railgun simulation examples using the
+# LS-DYNA Python API. By organizing boundary conditions, coil segments, and measurement sets, it enables
+# efficient setup and analysis of electromagnetic railgun models. These data structures support flexible
+# simulation workflows, allowing users to define, modify, and extend railgun scenarios for research,
+# engineering, and educational purposes.
