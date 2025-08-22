@@ -412,5 +412,19 @@ def get_polydata(deck: Deck, cwd=None):
 
 def plot_deck(deck, **args):
     """Plot the deck."""
+
+    # import this lazily (otherwise this adds over a second to the import time of pyDyna)
+    pv = get_pyvista()
+
     plot_data = get_polydata(deck, args.pop("cwd", ""))
-    return plot_data.plot(**args)
+
+    # set default color if both color and scalars are not specified
+    color = args.pop("color", None)
+    scalars = args.pop("scalars", None)
+
+    if scalars is not None:
+        return plot_data.plot(scalars=scalars, **args)  # User specified scalars
+    elif color is not None:
+        return plot_data.plot(color=color, **args)  # User specified color
+    else:
+        return plot_data.plot(color=pv.global_theme.color, **args)  # Default color
