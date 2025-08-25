@@ -22,5 +22,6 @@
 * [Raphael Heiniger](https://github.com/RaphaelHeiniger)
 * [Revathy Venugopal](https://github.com/Revathyvenugopal162)
 * [Roberto Pastor Muela](https://github.com/RobPasMue)
+* [Ryoma Okamoto](https://github.com/rokamoto26)
 * [wenfengye](https://github.com/wenfengye)
 * [wenhuiuy](https://github.com/wenhuiuy)
