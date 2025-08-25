@@ -1,6 +1,24 @@
+# %% [markdown]
+# # Buckling of Beer Can Simulation with LS-DYNA and PyDyna
+#
+# This notebook demonstrates how to set up and solve a buckling analysis of a beer can using LS-DYNA and 
+# PyDyna. The workflow includes mesh import, material and section definition, boundary conditions, load 
+# application, contact setup, and solver execution. Each step is explained for clarity and educational use.
+#
+# ## Theory and Background
+#
+# Buckling analysis is critical in structural engineering for understanding stability limits of thin-walled 
+# structures under compression. Beer cans represent a classic example of cylindrical shell buckling, where 
+# local imperfections can trigger sudden collapse at loads well below theoretical predictions. LS-DYNA's 
+# implicit solver with contact algorithms captures both material nonlinearity and geometric instabilities 
+# that characterize this phenomenon.
+#
+# This example is inspired by the "Buckling of Beer Can" example on the 
+# [LS-DYNA Knowledge Base](https://lsdyna.ansys.com/knowledge-base/) site. It shows how to use PyDyna to 
+# create a keyword file for LS-DYNA and then solve it from Python.
+
 # Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
-#
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,22 +38,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Buckling of beer can example
-----------------------------
-This example is inspired by the "Buckling of Beer Can" example on the
-`LS-DYNA Knowledge Base <_ls_dyna_knowledge_base>`_ site. It shows how to
-use PyDyna to create a keyword file for LS-DYNA and then solve it from
-Python.
-
-.. LINKS AND REFERENCES
-.. _ls_dyna_knowledge_base: https://lsdyna.ansys.com/knowledge-base/
-"""
-
-###############################################################################
-# Perform required imports
-# ~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# ## 1. Perform Required Imports
 # Import required packages, including those for the keywords, deck, and solver.
+
+# %%
 
 import os
 import shutil
@@ -55,16 +62,20 @@ from ansys.dyna.core.run import MemoryUnit, MpiOption, run_dyna
 rundir = tempfile.TemporaryDirectory()
 mesh_file_name = "mesh.k"
 mesh_file = DownloadManager().download_file(
-    mesh_file_name, "ls-dyna", "Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can")
+    mesh_file_name, 
+    "ls-dyna", 
+    "Buckling_Beer_Can", 
+    destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can")
 )
 
 dynafile = "beer_can.k"
 
-###############################################################################
-# Create a deck and keywords
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Create a deck, which is the container for all the keywords.
-# Then, create and append individual keywords to the deck.
+# %% [markdown]
+# ## 2. Create Deck and Define Keywords
+# Create a deck, which is the container for all the keywords. Then, create and append individual keywords to 
+# the deck including control settings, materials, sections, and boundary conditions.
+
+# %%
 
 
 def write_deck(filepath):
@@ -73,7 +84,9 @@ def write_deck(filepath):
     # Append control keywords
     contact_auto = kwd.ContactAutomaticSingleSurfaceMortar(cid=1)
     contact_auto.options["ID"].active = True
-    contact_auto.heading = "Single-Surface Mortar Contact (The New Explicit/Implicit Standard)"
+    contact_auto.heading = (
+        "Single-Surface Mortar Contact (The New Explicit/Implicit Standard)"
+    )
     deck.extend(
         [
             contact_auto,
@@ -102,16 +115,22 @@ def write_deck(filepath):
     floor_part = kwd.Part(heading="Floor", pid=2, secid=2, mid=1)
 
     # Material keywords
-    mat_elastic = kwd.MatElastic(mid=1, ro=2.59e-4, e=1.0e7, pr=0.33, title="Aluminum")
+    mat_elastic = kwd.MatElastic(
+        mid=1, ro=2.59e-4, e=1.0e7, pr=0.33, title="Aluminum"
+    )
     mat_elastic.options["TITLE"].active = True
 
     # Section keywords
-    can_shell = kwd.SectionShell(secid=1, elform=-16, shrf=0.8333, nip=3, t1=0.002, propt=0.0, title="Beer Can")
+    can_shell = kwd.SectionShell(
+        secid=1, elform=-16, shrf=0.8333, nip=3, t1=0.002, propt=0.0, title="Beer Can"
+    )
     can_shell.options["TITLE"].active = True
 
     floor_shell = kwd.SectionShell(secid=2, elform=-16, shrf=0.833, t1=0.01, propt=0.0)
     floor_shell.options["TITLE"].active = True
-    floor_shell.title = "Floor - Just for Contact (Rigid Wall Would Have Worked Also)"
+    floor_shell.title = (
+        "Floor - Just for Contact (Rigid Wall Would Have Worked Also)"
+    )
 
     deck.extend(
         [
@@ -124,7 +143,9 @@ def write_deck(filepath):
     )
 
     # Load curve
-    load_curve = kwd.DefineCurve(lcid=1, curves=pd.DataFrame({"a1": [0.00, 1.00], "o1": [0.0, 1.000]}))
+    load_curve = kwd.DefineCurve(
+        lcid=1, curves=pd.DataFrame({"a1": [0.00, 1.00], "o1": [0.0, 1.000]})
+    )
     load_curve.options["TITLE"].active = True
     load_curve.title = "Load vs. Time"
     deck.append(load_curve)
@@ -574,18 +595,20 @@ def run_post(filepath):
 shutil.copy(mesh_file, os.path.join(rundir.name, mesh_file_name))
 deck = write_deck(os.path.join(rundir.name, dynafile))
 
-###############################################################################
-# View the model
-# ~~~~~~~~~~~~~~
-# You can use the PyVista ``plot`` method in the ``deck`` class to view
-# the model.
+# %% [markdown]
+# ## 3. View the Model
+# Use the PyVista `plot` method in the `deck` class to view the model geometry and mesh.
+
+# %%
 
 deck.plot(cwd=rundir.name)
 
-###############################################################################
-# Run the Dyna solver
-# ~~~~~~~~~~~~~~~~~~~
-#
+# %% [markdown]
+# ## 4. Run the LS-DYNA Solver
+# Execute the LS-DYNA implicit solver to perform the buckling analysis. The simulation uses MPI for 
+# parallel processing and is configured for the highly nonlinear buckling behavior.
+
+# %%
 
 
 try:
@@ -598,7 +621,15 @@ try:
         memory_unit=MemoryUnit.MB,
     )
 except subprocess.CalledProcessError:
-    # this example doesn't run to completion because it is a highly nonlinear buckling
+    # this example doesn't run to completion because it is a highly nonlinear
+    # buckling simulation
     pass
 
 run_post(rundir.name)
+
+# %% [markdown]
+# ## 5. Conclusion
+# This notebook demonstrated the setup and execution of a beer can buckling simulation using LS-DYNA and 
+# PyDyna. The workflow included mesh import, material and section definition, boundary condition setup, 
+# load application, and solver execution. This approach provides a clear, modular, and scriptable workflow 
+# for advanced structural stability analysis in engineering applications.
