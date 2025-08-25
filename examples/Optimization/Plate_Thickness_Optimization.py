@@ -367,14 +367,31 @@ for iteration in range(0, max_iterations):
         time_data, max_disp_data, min_disp_data = get_plate_displacement(wd)
         reduced_time_data = [t * 1000 for t in time_data]
         # Determine if target displacement is reached
+        # if max(max_disp_data) <= target_displacement:
+        #     print(
+        #         "Final Thickness: %.4s, Max Plate Displacement: %.5s" % (thickness, max(max_disp_data)))
+        #     plt.plot(
+        #         reduced_time_data, max_disp_data, "r",
+        #         label="Max Plate Displacement with %.4s thickness" % thickness
+        #     )
+        #     break
+        # # Add series to the plot
+        # plt.plot(reduced_time_data, max_disp_data, "b")
         if max(max_disp_data) <= target_displacement:
-            print("Final Thickness: %.4s, Max Plate Displacement: %.5s" % (thickness, max(max_disp_data)))
             plt.plot(
-                reduced_time_data, max_disp_data, "r", label="Max Plate Displacement with %.4s thickness" % thickness
+                reduced_time_data,
+                max_disp_data,
+                "r",
+                label="Max Plate Displacement with %.4s thickness" % thickness,
             )
             break
-        # Add series to the plot
-        plt.plot(reduced_time_data, max_disp_data, "b")
+        else:
+            plt.plot(
+                reduced_time_data,
+                max_disp_data,
+                "b",
+                label="Plate Displacement with %.4s thickness" % thickness,
+            )
 
     except Exception as e:
         print(e)
