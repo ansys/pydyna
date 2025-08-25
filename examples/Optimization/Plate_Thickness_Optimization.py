@@ -49,10 +49,12 @@ import pandas as pd
 from ansys.dyna.core import Deck
 from ansys.dyna.core import keywords as kwd
 from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
-from ansys.dyna.core.run.linux_runner import LinuxRunner
+
+# from ansys.dyna.core.run.linux_runner import LinuxRunner
 from ansys.dyna.core.run.local_solver import run_dyna
 from ansys.dyna.core.run.options import MemoryUnit, MpiOption, Precision
-from ansys.dyna.core.run.windows_runner import WindowsRunner
+
+# from ansys.dyna.core.run.windows_runner import WindowsRunner
 
 # sphinx_gallery_thumbnail_path = '_static/pre/opt/plate_thickness.png'
 
@@ -279,11 +281,11 @@ def write_input_deck(**kwargs):
 def run_job(directory):
     # if os.name == "nt":
     #     runner = WindowsRunner(
-    #         ncpu=2, memory=2, precision=Precision.SINGLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
+    #         ncpu=2, memory=2, precision=Precision.SINGLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB # noqa: E501
     #     )
     # elif os.name == "posix":
     #     runner = LinuxRunner(
-    #         ncpu=2, memory=2, precision=Precision.DOUBLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
+    #         ncpu=2, memory=2, precision=Precision.DOUBLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB # noqa: E501
     #     )
     run_dyna(
         "input.k",
