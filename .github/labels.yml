@@ -48,7 +48,7 @@
 
 - name: 'Solver'
   description: Anything related to solver subpackage
-  color: 5802B8
+  color: 7e505b
 
 - name: 'Pre'
   description: Anything related to pre subpackage
