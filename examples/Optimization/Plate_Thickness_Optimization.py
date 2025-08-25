@@ -400,7 +400,11 @@ for iteration in range(0, max_iterations):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-plt.xlabel("Time (e^-3 s)")
+plt.xlabel("Time (ms)")
 plt.ylabel("Displacement (mm)")
-plt.legend()
+
+handles, labels = plt.gca().get_legend_handles_labels()
+if handles:
+    plt.legend()
+
 plt.show()
