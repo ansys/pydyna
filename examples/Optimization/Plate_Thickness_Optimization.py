@@ -352,49 +352,45 @@ def get_plate_displacement(directory):
 # ~~~~~~~~~~~~~~~~~~~~~~
 #
 
-for iteration in range(0, max_iterations):
-    # Define thickness based on iteration
+all_results = []
+
+for iteration in range(max_iterations):
+    # Define thickness for this iteration
     thickness = initial_thickness + thickness_increment * iteration
-    wd = os.path.join(workdir.name, "thickness_%.4s" % thickness)
-    print(wd)
+    wd = os.path.join(workdir.name, f"thickness_{thickness:.4f}")
     pathlib.Path(wd).mkdir(exist_ok=True)
     # Create LS-Dyna input deck with new thickness
     write_input_deck(thickness=thickness, wd=wd)
-    # Run Solver
     try:
+        # Run solver
         run_job(wd)
-        # Run PyDPF Post
+        # Post-process displacement
         time_data, max_disp_data, min_disp_data = get_plate_displacement(wd)
-        reduced_time_data = [t * 1000 for t in time_data]
-        # Determine if target displacement is reached
-        # if max(max_disp_data) <= target_displacement:
-        #     print(
-        #         "Final Thickness: %.4s, Max Plate Displacement: %.5s" % (thickness, max(max_disp_data)))
-        #     plt.plot(
-        #         reduced_time_data, max_disp_data, "r",
-        #         label="Max Plate Displacement with %.4s thickness" % thickness
-        #     )
-        #     break
-        # # Add series to the plot
-        # plt.plot(reduced_time_data, max_disp_data, "b")
+        reduced_time_data = [t * 1000 for t in time_data]  # Convert to ms
+        # Store result
+        all_results.append({
+            "thickness": thickness,
+            "time": reduced_time_data,
+            "max_disp": max_disp_data
+        })
+        # Check if target displacement is reached
         if max(max_disp_data) <= target_displacement:
-            plt.plot(
-                reduced_time_data,
-                max_disp_data,
-                "r",
-                label="Max Plate Displacement with %.4s thickness" % thickness,
-            )
+            print(f"Target displacement reached at thickness {thickness:.4f}")
             break
-        else:
-            plt.plot(
-                reduced_time_data,
-                max_disp_data,
-                "b",
-                label="Plate Displacement with %.4s thickness" % thickness,
-            )
 
     except Exception as e:
-        print(e)
+        print(f"Iteration {iteration} failed:", e)
+
+# Now plot all results
+plt.figure(figsize=(8, 5))
+for res in all_results:
+    thickness = res["thickness"]
+    time_data = res["time"]
+    max_disp_data = res["max_disp"]
+    color = "r" if max(max_disp_data) <= target_displacement else "b"
+    label = f"Thickness {thickness:.4f}"
+    plt.plot(time_data, max_disp_data, color, label=label)
+
 ###############################################################################
 # Generate graphical output
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -402,9 +398,7 @@ for iteration in range(0, max_iterations):
 
 plt.xlabel("Time (ms)")
 plt.ylabel("Displacement (mm)")
-
-handles, labels = plt.gca().get_legend_handles_labels()
-if handles:
-    plt.legend()
-
+plt.legend()
+plt.title("Plate Displacement vs Time for Different Thicknesses")
+plt.grid(True)
 plt.show()
