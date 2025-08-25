@@ -1,20 +1,20 @@
 # %% [markdown]
 # # EM Railgun Simulation Setup with LS-DYNA and PyDyna
 #
-# This notebook demonstrates how to create and set up an electromagnetic (EM) railgun simulation using 
-# LS-DYNA and PyDyna. The workflow includes geometry import, material definition, electromagnetic circuit 
-# setup, boundary conditions, contact definitions, and solver configuration. Each step is explained for 
+# This notebook demonstrates how to create and set up an electromagnetic (EM) railgun simulation using
+# LS-DYNA and PyDyna. The workflow includes geometry import, material definition, electromagnetic circuit
+# setup, boundary conditions, contact definitions, and solver configuration. Each step is explained for
 # clarity and educational use.
 #
 # ## Theory and Background
 #
-# Railguns are electromagnetic launchers that use Lorentz forces to accelerate projectiles to extremely 
-# high velocities. Current flows through parallel rails and a sliding conductor (armature), creating a 
-# magnetic field. The interaction between current and magnetic field generates forces that propel the 
-# projectile. This simulation requires coupled electromagnetic-structural analysis to capture the complex 
+# Railguns are electromagnetic launchers that use Lorentz forces to accelerate projectiles to extremely
+# high velocities. Current flows through parallel rails and a sliding conductor (armature), creating a
+# magnetic field. The interaction between current and magnetic field generates forces that propel the
+# projectile. This simulation requires coupled electromagnetic-structural analysis to capture the complex
 # physics including Joule heating, material deformation, and dynamic contact between components.
 #
-# LS-DYNA's EM solver handles both BEM (Boundary Element Method) and FEM (Finite Element Method) approaches 
+# LS-DYNA's EM solver handles both BEM (Boundary Element Method) and FEM (Finite Element Method) approaches
 # for electromagnetic field calculations, coupled with structural dynamics for comprehensive railgun analysis.
 #
 # **LS-DYNA version compatibility**: ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe
@@ -91,7 +91,7 @@ solution.add(railgun)
 
 # %% [markdown]
 # ## 3. Configure EM Solver Settings
-# Set up the electromagnetic analysis parameters including time step, BEM solver, and FEM solver 
+# Set up the electromagnetic analysis parameters including time step, BEM solver, and FEM solver
 # configurations for optimal performance and accuracy.
 
 # %%
@@ -102,38 +102,27 @@ railgun.analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-
 
 # %% [markdown]
 # ## 4. Define Electromagnetic Circuit
-# Create the circuit definition with imposed current vs time, including current path through segments 
+# Create the circuit definition with imposed current vs time, including current path through segments
 # and inlet/outlet definitions for the railgun current flow.
 
 # %%
 
 circuit = Circuit(
     circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME,
-    loadcurve=Curve(
-        x=[0, 8e-5, 2e-4, 4e-4, 6e-4, 1e-3], 
-        y=[0, 350, 450, 310, 230, 125], 
-        sfo=2e6
-    ),
+    loadcurve=Curve(x=[0, 8e-5, 2e-4, 4e-4, 6e-4, 1e-3], y=[0, 350, 450, 310, 230, 125], sfo=2e6),
 )
-circuit.set_current(
-    current=SegmentSet(cur), 
-    current_inlet=SegmentSet(inlet), 
-    current_outlet=SegmentSet(outlet)
-)
+circuit.set_current(current=SegmentSet(cur), current_inlet=SegmentSet(inlet), current_outlet=SegmentSet(outlet))
 railgun.add(circuit)
 
 # %% [markdown]
 # ## 5. Define Materials with EM Properties
-# Create elastic and rigid materials with electromagnetic properties for the railgun components 
+# Create elastic and rigid materials with electromagnetic properties for the railgun components
 # (conductors with specified conductivity values).
 
 # %%
 
 matelastic = MatElastic(mass_density=2.64e-3, young_modulus=9.7e10, poisson_ratio=0.31)
-matelastic.set_electromagnetic_property(
-    material_type=EMMATTYPE.CONDUCTOR, 
-    initial_conductivity=25
-)
+matelastic.set_electromagnetic_property(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=25)
 
 matrigid = MatRigid(
     mass_density=2.64e-3,
@@ -143,14 +132,11 @@ matrigid = MatRigid(
     translational_constraint=7,
     rotational_constraint=7,
 )
-matrigid.set_electromagnetic_property(
-    material_type=EMMATTYPE.CONDUCTOR, 
-    initial_conductivity=25
-)
+matrigid.set_electromagnetic_property(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=25)
 
 # %% [markdown]
 # ## 6. Create Part Definitions
-# Define the railgun parts including coil and workpieces with appropriate materials and element 
+# Define the railgun parts including coil and workpieces with appropriate materials and element
 # formulations for the electromagnetic-structural coupling.
 
 # %%
@@ -172,7 +158,7 @@ railgun.parts.add(workpiece2)
 
 # %% [markdown]
 # ## 7. Apply Boundary Conditions
-# Set up single point constraints (SPC) to restrict motion of specific nodes in the railgun geometry 
+# Set up single point constraints (SPC) to restrict motion of specific nodes in the railgun geometry
 # for proper constraint of the system.
 
 # %%
@@ -182,7 +168,7 @@ railgun.boundaryconditions.create_spc(NodeSet(spc2), tx=False, ty=False, rz=Fals
 
 # %% [markdown]
 # ## 8. Configure Contact and Output Settings
-# Set up electromagnetic contact definitions, Rogowski coil for current measurement, and output 
+# Set up electromagnetic contact definitions, Rogowski coil for current measurement, and output
 # databases for monitoring energy and field results.
 
 # %%
@@ -204,8 +190,8 @@ solution.save_file()
 
 # %% [markdown]
 # ## 10. Conclusion
-# This notebook demonstrated the complete setup of an electromagnetic railgun simulation using LS-DYNA 
-# and PyDyna. The workflow included geometry loading, material definition with EM properties, circuit 
-# setup with time-dependent current, boundary conditions, contact definitions, and output configuration. 
-# This approach provides a comprehensive framework for analyzing electromagnetic launchers with coupled 
+# This notebook demonstrated the complete setup of an electromagnetic railgun simulation using LS-DYNA
+# and PyDyna. The workflow included geometry loading, material definition with EM properties, circuit
+# setup with time-dependent current, boundary conditions, contact definitions, and output configuration.
+# This approach provides a comprehensive framework for analyzing electromagnetic launchers with coupled
 # field-structure interactions in advanced engineering applications.
