@@ -52,6 +52,7 @@ from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, Downl
 from ansys.dyna.core.run.linux_runner import LinuxRunner
 from ansys.dyna.core.run.options import MemoryUnit, MpiOption, Precision
 from ansys.dyna.core.run.windows_runner import WindowsRunner
+from ansys.dyna.core.run.local_solver import run_dyna
 
 # sphinx_gallery_thumbnail_path = '_static/pre/opt/plate_thickness.png'
 
@@ -276,16 +277,17 @@ def write_input_deck(**kwargs):
 
 
 def run_job(directory):
-    if os.name == "nt":
-        runner = WindowsRunner(
-            ncpu=2, memory=2, precision=Precision.SINGLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
-        )
-    elif os.name == "posix":
-        runner = LinuxRunner(
-            ncpu=2, memory=2, precision=Precision.DOUBLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
-        )
-    runner.set_input("input.k", directory)
-    runner.run()  # Run LS-DYNA simulation
+    # if os.name == "nt":
+    #     runner = WindowsRunner(
+    #         ncpu=2, memory=2, precision=Precision.SINGLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
+    #     )
+    # elif os.name == "posix":
+    #     runner = LinuxRunner(
+    #         ncpu=2, memory=2, precision=Precision.DOUBLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
+    #     )
+    run_dyna("input.k", working_directory=directory, ncpu=2, memory=2, precision=Precision.SINGLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB)
+    # runner.set_input("input.k", directory)  # This line is now redundant
+    # runner.run()  # Run LS-DYNA simulation
     assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
 
 
