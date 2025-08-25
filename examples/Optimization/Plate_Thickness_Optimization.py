@@ -285,7 +285,15 @@ def run_job(directory):
     #     runner = LinuxRunner(
     #         ncpu=2, memory=2, precision=Precision.DOUBLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
     #     )
-    run_dyna("input.k", working_directory=directory, ncpu=2, memory=2, precision=Precision.SINGLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB)
+    run_dyna(
+        "input.k",
+        working_directory=directory,
+        ncpu=2,
+        memory=2,
+        precision=Precision.SINGLE,
+        mpi_option=MpiOption.MPP_INTEL_MPI,
+        memory_unit=MemoryUnit.MB,
+    )
     # runner.set_input("input.k", directory)  # This line is now redundant
     # runner.run()  # Run LS-DYNA simulation
     assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
