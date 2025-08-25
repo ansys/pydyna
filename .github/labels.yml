@@ -28,7 +28,7 @@
 
 - name: 'release'
   description: Anything related to an incoming release
-  color: ffffff
+  color: fe66d1
 
 - name: 'testing'
   description: Anything related to testing
@@ -44,7 +44,7 @@
 
 - name: 'Run'
   description: Anything related to run subpackage
-  color: 5802B8
+  color: 25c1ea
 
 - name: 'Solver'
   description: Anything related to solver subpackage
@@ -52,4 +52,4 @@
 
 - name: 'Pre'
   description: Anything related to pre subpackage
-  color: 5802B8
+  color: 81854c
