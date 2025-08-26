@@ -368,11 +368,7 @@ for iteration in range(max_iterations):
         time_data, max_disp_data, min_disp_data = get_plate_displacement(wd)
         reduced_time_data = [t * 1000 for t in time_data]  # Convert to ms
         # Store result
-        all_results.append({
-            "thickness": thickness,
-            "time": reduced_time_data,
-            "max_disp": max_disp_data
-        })
+        all_results.append({"thickness": thickness, "time": reduced_time_data, "max_disp": max_disp_data})
         # Check if target displacement is reached
         if max(max_disp_data) <= target_displacement:
             print(f"Target displacement reached at thickness {thickness:.4f}")
