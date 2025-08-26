@@ -396,9 +396,17 @@ for res in all_results:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-plt.xlabel("Time (ms)")
-plt.ylabel("Displacement (mm)")
-plt.legend()
-plt.title("Plate Displacement vs Time for Different Thicknesses")
-plt.grid(True)
-plt.show()
+plt.figure(figsize=(8, 5))
+for res in all_results:
+    thickness = res["thickness"]
+    time_data = res["time"]
+    max_disp_data = res["max_disp"]
+    color = "r" if max(max_disp_data) <= target_displacement else "b"
+    label = f"Thickness {thickness:.4f}"
+    plt.plot(time_data, max_disp_data, color, label=label)
+    plt.xlabel("Time (ms)")
+    plt.ylabel("Displacement (mm)")
+    plt.legend()
+    plt.title("Plate Displacement vs Time for Different Thicknesses")
+    plt.grid(True)
+    plt.show()
