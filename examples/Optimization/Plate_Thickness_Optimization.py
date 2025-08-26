@@ -49,9 +49,12 @@ import pandas as pd
 from ansys.dyna.core import Deck
 from ansys.dyna.core import keywords as kwd
 from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
-from ansys.dyna.core.run.linux_runner import LinuxRunner
+
+# from ansys.dyna.core.run.linux_runner import LinuxRunner
+from ansys.dyna.core.run.local_solver import run_dyna
 from ansys.dyna.core.run.options import MemoryUnit, MpiOption, Precision
-from ansys.dyna.core.run.windows_runner import WindowsRunner
+
+# from ansys.dyna.core.run.windows_runner import WindowsRunner
 
 # sphinx_gallery_thumbnail_path = '_static/pre/opt/plate_thickness.png'
 
@@ -276,16 +279,15 @@ def write_input_deck(**kwargs):
 
 
 def run_job(directory):
-    if os.name == "nt":
-        runner = WindowsRunner(
-            ncpu=2, memory=2, precision=Precision.SINGLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
-        )
-    elif os.name == "posix":
-        runner = LinuxRunner(
-            ncpu=2, memory=2, precision=Precision.DOUBLE, mpi_option=MpiOption.MPP_INTEL_MPI, memory_unit=MemoryUnit.MB
-        )
-    runner.set_input("input.k", directory)
-    runner.run()  # Run LS-DYNA simulation
+    run_dyna(
+        "input.k",
+        working_directory=directory,
+        ncpu=2,
+        memory=2,
+        precision=Precision.SINGLE,
+        mpi_option=MpiOption.MPP_INTEL_MPI,
+        memory_unit=MemoryUnit.MB,
+    )
     assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
 
 
@@ -340,38 +342,47 @@ def get_plate_displacement(directory):
 # ~~~~~~~~~~~~~~~~~~~~~~
 #
 
-for iteration in range(0, max_iterations):
-    # Define thickness based on iteration
+all_results = []
+
+for iteration in range(max_iterations):
+    # Define thickness for this iteration
     thickness = initial_thickness + thickness_increment * iteration
-    wd = os.path.join(workdir.name, "thickness_%.4s" % thickness)
-    print(wd)
+    wd = os.path.join(workdir.name, f"thickness_{thickness:.4f}")
     pathlib.Path(wd).mkdir(exist_ok=True)
     # Create LS-Dyna input deck with new thickness
     write_input_deck(thickness=thickness, wd=wd)
-    # Run Solver
     try:
+        # Run solver
         run_job(wd)
-        # Run PyDPF Post
+        # Post-process displacement
         time_data, max_disp_data, min_disp_data = get_plate_displacement(wd)
-        reduced_time_data = [t * 1000 for t in time_data]
-        # Determine if target displacement is reached
+        reduced_time_data = [t * 1000 for t in time_data]  # Convert to ms
+        # Store result
+        all_results.append({"thickness": thickness, "time": reduced_time_data, "max_disp": max_disp_data})
+        # Check if target displacement is reached
         if max(max_disp_data) <= target_displacement:
-            print("Final Thickness: %.4s, Max Plate Displacement: %.5s" % (thickness, max(max_disp_data)))
-            plt.plot(
-                reduced_time_data, max_disp_data, "r", label="Max Plate Displacement with %.4s thickness" % thickness
-            )
+            print(f"Target displacement reached at thickness {thickness:.4f}")
             break
-        # Add series to the plot
-        plt.plot(reduced_time_data, max_disp_data, "b")
 
     except Exception as e:
-        print(e)
+        print(f"Iteration {iteration} failed:", e)
+
 ###############################################################################
 # Generate graphical output
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
-plt.xlabel("Time (e^-3 s)")
+# Now plot all results
+plt.figure(figsize=(8, 5))
+for res in all_results:
+    thickness = res["thickness"]
+    time_data = res["time"]
+    max_disp_data = res["max_disp"]
+    color = "r" if max(max_disp_data) <= target_displacement else "b"
+    label = f"Thickness {thickness:.4f}"
+    plt.plot(time_data, max_disp_data, color=color, label=label)
+plt.xlabel("Time (ms)")
 plt.ylabel("Displacement (mm)")
-plt.legend()
+plt.title("Plate Displacement vs Time for Different Thicknesses")
+plt.grid(True)
 plt.show()
