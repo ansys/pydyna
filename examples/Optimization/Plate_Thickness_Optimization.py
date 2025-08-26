@@ -386,11 +386,11 @@ for res in all_results:
     color = "r" if max(max_disp_data) <= target_displacement else "b"
     label = f"Thickness {thickness:.4f}"
     plt.plot(time_data, max_disp_data, color=color, label=label)
-    plt.xlabel("Time (ms)")
-    plt.ylabel("Displacement (mm)")
-    plt.title("Plate Displacement vs Time for Different Thicknesses")
-    plt.grid(True)
-    plt.show()
+plt.xlabel("Time (ms)")
+plt.ylabel("Displacement (mm)")
+plt.title("Plate Displacement vs Time for Different Thicknesses")
+plt.grid(True)
+plt.show()
 
 ###############################################################################
 # Generate graphical output
