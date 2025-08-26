@@ -395,10 +395,6 @@ for res in all_results:
 
 plt.xlabel("Time (ms)")
 plt.ylabel("Displacement (mm)")
-plt.legend()
 plt.title("Plate Displacement vs Time for Different Thicknesses")
 plt.grid(True)
-
-# Save figure instead of showing
-plt.savefig("plate_displacement.png", dpi=300)
-print("Plot saved as plate_displacement.png")
+plt.show()
