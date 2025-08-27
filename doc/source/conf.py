@@ -112,6 +112,9 @@ html_context = {
     "github_repo": "pydyna",
     "github_version": "main",
     "doc_path": "doc/source",
+    "pyansys_tags": [
+        "Structures"
+    ]
 }
 html_theme_options = {
     "logo": "pyansys",
