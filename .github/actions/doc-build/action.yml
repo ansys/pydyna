@@ -91,6 +91,7 @@ runs:
     - name: Pull PyDyna-run image
       run: |
         docker pull ghcr.io/ansys/pydyna-run:latest
+        docker run -d --name pydyna_run -p 50052:50052 ghcr.io/ansys/pydyna-run:latest && echo "PyDyna-run active on port 50052."
       shell: bash
 
     - name: Build the html documentation
