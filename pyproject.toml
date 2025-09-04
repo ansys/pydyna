@@ -58,7 +58,7 @@ tests = [
     "numpy==2.2.6",
     "pytest==8.4.1",
     "pytest-cov==6.2.1",
-    "joblib==1.5.1",
+    "joblib==1.5.2",
     "pandas==2.3.2",
     "openpyxl==3.1.5",
     "scikit-learn==1.7.1",
@@ -88,7 +88,7 @@ doc = [
 
 
     "ipywidgets==8.1.7",
-    "joblib==1.5.1",
+    "joblib==1.5.2",
     "scikit-learn==1.7.1",
     "ipython==8.37.0",
     "jupyterlab==4.4.6",
