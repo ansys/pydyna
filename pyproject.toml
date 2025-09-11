@@ -83,7 +83,8 @@ doc = [
     "sphinx-autodoc-typehints==3.1.0",
     "ansys-sphinx-theme==1.6.0",
     "pypandoc==1.15",
-    "nbsphinx==0.9.7",
+    "nbsphinx==0.9.6",
+
 
 
 
