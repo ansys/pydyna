@@ -1,0 +1,33 @@
+ansys.dyna.core.pre
+===================
+
+.. py:module:: ansys.dyna.core.pre
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/ansys/dyna/core/pre/dynabase/index
+   /autoapi/ansys/dyna/core/pre/dynadem/index
+   /autoapi/ansys/dyna/core/pre/dynaem/index
+   /autoapi/ansys/dyna/core/pre/dynaicfd/index
+   /autoapi/ansys/dyna/core/pre/dynaiga/index
+   /autoapi/ansys/dyna/core/pre/dynaisph/index
+   /autoapi/ansys/dyna/core/pre/dynalogging/index
+   /autoapi/ansys/dyna/core/pre/dynamaterial/index
+   /autoapi/ansys/dyna/core/pre/dynamech/index
+   /autoapi/ansys/dyna/core/pre/dynanvh/index
+   /autoapi/ansys/dyna/core/pre/dynasale/index
+   /autoapi/ansys/dyna/core/pre/dynasolution/index
+   /autoapi/ansys/dyna/core/pre/errors/index
+   /autoapi/ansys/dyna/core/pre/examples/index
+   /autoapi/ansys/dyna/core/pre/graphics/index
+   /autoapi/ansys/dyna/core/pre/launcher/index
+   /autoapi/ansys/dyna/core/pre/misc/index
+   /autoapi/ansys/dyna/core/pre/model/index
+   /autoapi/ansys/dyna/core/pre/part/index
+
+

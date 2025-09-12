@@ -1,0 +1,29 @@
+ansys.dyna.core.lib.card_set
+============================
+
+.. py:module:: ansys.dyna.core.lib.card_set
+
+.. autoapi-nested-parse::
+
+   Set of cards that act as one card.
+
+   It is a generic card, so it needs to be given a type as an argument.
+   That type is used for each card, and behaves like a keyword.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/card_set/CardSet
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.card_set.CardSet
+
+
