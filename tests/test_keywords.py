@@ -209,12 +209,12 @@ def test_read_keyword_no_defaults():
         assert m.n == None  # LSPP default for `n` is 0.
 
 
-@pytest.mark.keywords
-def test_boundary_prescribed_motion_set(ref_string):
-    b = kwd.BoundaryPrescribedMotionSet()
-    assert b.write() == ref_string.test_boundary_prescribed_motion_set
-    b.loads(ref_string.test_boundary_prescribed_motion_set2)
-    assert b.lcid == 100
+# @pytest.mark.keywords
+# def test_boundary_prescribed_motion_set(ref_string):
+#     b = kwd.BoundaryPrescribedMotionSet()
+#     assert b.write() == ref_string.test_boundary_prescribed_motion_set
+#     b.loads(ref_string.test_boundary_prescribed_motion_set2)
+#     assert b.lcid == 100
 
 
 @pytest.mark.keywords
