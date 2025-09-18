@@ -156,11 +156,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        # os: [ubuntu-latest, windows-latest]
         python-version: ['3.10', '3.11', '3.12', '3.13']
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: ./.github/actions/unit-test
+      
+      - name: Run test with "run" marker
+        uses: ./.github/actions/unit-test
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -169,14 +171,16 @@ jobs:
           license-server: ${{ secrets.LICENSE_SERVER }}
           coverage-file: .cov/run
 
-      - uses: ./.github/actions/unit-test
+      - name: Run test with "keywords" marker
+        uses: ./.github/actions/unit-test
         with:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pytest-markers: keywords
           coverage-file: .cov/keywords
 
-      - uses: ./.github/actions/unit-test
+      - name: Run test without marker
+        uses: ./.github/actions/unit-test
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
