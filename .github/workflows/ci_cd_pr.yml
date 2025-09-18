@@ -169,7 +169,6 @@ jobs:
           docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
           pytest-markers: run
           license-server: ${{ secrets.LICENSE_SERVER }}
-          coverage-file: .cov/run
 
       - name: Run test with "keywords" marker
         uses: ./.github/actions/unit-test
@@ -177,7 +176,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pytest-markers: keywords
-          coverage-file: .cov/keywords
 
       - name: Run test without marker
         uses: ./.github/actions/unit-test
@@ -185,15 +183,6 @@ jobs:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           server-logs: true
-          coverage-file: .cov/unit-test
-
-      - name: Merge coverage files
-        run: |
-          python -m pip install coverage
-          coverage combine .cov/
-          coverage xml -o .cov/xml
-          coverage html -d .cov/html
-        shell: bash
 
       - name: Upload coverage results
         uses: actions/upload-artifact@v4
