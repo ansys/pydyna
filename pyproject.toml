@@ -120,8 +120,6 @@ src_paths = ["doc", "src", "tests"]
 [tool.coverage.run]
 source = ["ansys.dyna.core"]
 omit = [
-    "src/ansys/dyna/core/pre/*",
-    "src/ansys/dyna/core/solver/*",
    "src/ansys/dyna/core/keywords/keyword_classes/auto/*"
 ]
 
