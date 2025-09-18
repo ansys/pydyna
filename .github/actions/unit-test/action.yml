@@ -102,6 +102,13 @@ runs:
         name: server_output_tests.txt
         path: server_output.txt
 
+    - name: Stop container
+      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
+      run: |
+        docker stop kw_server
+        docker rm kw_server
+      shell: bash
+
     # - name: Upload coverage results
     #   if: ${{ inputs.server-logs == 'true' }}
     #   uses: actions/upload-artifact@v4
