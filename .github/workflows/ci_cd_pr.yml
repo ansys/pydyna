@@ -19,6 +19,7 @@ env:
   PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
   PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.PyDynaRunContainer || 'ghcr.io/ansys/pydyna-run:latest'}}
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -183,19 +184,7 @@ jobs:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           server-logs: true
-
-      - name: Upload coverage results
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-html
-          path: .cov/html
-
-      - name: "Upload coverage reports to Codecov"
-        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        with:
-          files: .cov/xml
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
 
 
   build-library:
