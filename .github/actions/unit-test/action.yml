@@ -36,6 +36,12 @@ inputs:
     default: ""
     type: string
 
+  coverage-file:
+    description: Coverage file path
+    required: false
+    default: ".cov/coverage"
+    type: string
+
 runs:
   using: "composite"
   steps:
@@ -72,9 +78,9 @@ runs:
     - name: Run pytest
       run: |
         if [ "${{ inputs.pytest-markers }}" = "" ]; then
-          pytest 
+          export COVERAGE_FILE=${{ inputs.coverage-file }} && pytest
         else
-          pytest -m "${{ inputs.pytest-markers }}"
+          export COVERAGE_FILE=${{ inputs.coverage-file }} && pytest -m "${{ inputs.pytest-markers }}"
         fi
       shell: bash
       env:
@@ -96,17 +102,17 @@ runs:
         name: server_output_tests.txt
         path: server_output.txt
 
-    - name: Upload coverage results
-      if: ${{ inputs.server-logs == 'true' }}
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-html
-        path: .cov/html
-        retention-days: 7
+    # - name: Upload coverage results
+    #   if: ${{ inputs.server-logs == 'true' }}
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: coverage-html
+    #     path: .cov/html
+    #     retention-days: 7
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      with:
-        files: .cov/xml
+    # - name: Upload coverage to Codecov
+    #   uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
+    #   env:
+    #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    #   with:
+    #     files: .cov/xml

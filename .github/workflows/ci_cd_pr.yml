@@ -149,53 +149,61 @@ jobs:
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
-
-  run-testing:
-    name: Test the "run" subpackage
-    runs-on: ubuntu-latest
-    needs: [smoke-tests]
-
-    steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: ./.github/actions/unit-test
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
-          pytest-markers: run
-          license-server: ${{ secrets.LICENSE_SERVER }}
-
-  keyword-testing:
-    name: "Keyword testing"
-    runs-on: ${{ matrix.os }}
-    needs: [smoke-tests]
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: ['3.10', '3.11', '3.12', '3.13']
-    steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - uses: ./.github/actions/unit-test
-        with:
-          python-version: ${{ matrix.python-version }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pytest-markers: keywords
-
   unit-tests:
-    name: "Testing"
-    runs-on: ubuntu-latest
-    needs: [run-testing, keyword-testing]
-    steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: ./.github/actions/unit-test
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          server-logs: true
+  name: "Testing"
+  runs-on: ubuntu-latest
+  needs: [smoke-tests]
+  strategy:
+  fail-fast: false
+  matrix:
+    os: [ubuntu-latest, windows-latest]
+    python-version: ['3.10', '3.11', '3.12', '3.13']
+  steps:
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+    - uses: ./.github/actions/unit-test
+      with:
+        python-version: ${{ env.MAIN_PYTHON_VERSION }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
+        pytest-markers: run
+        license-server: ${{ secrets.LICENSE_SERVER }}
+        coverage-file: .cov/run
+
+    - uses: ./.github/actions/unit-test
+      with:
+        python-version: ${{ matrix.python-version }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        pytest-markers: keywords
+        coverage-file: .cov/keywords
+
+    - uses: ./.github/actions/unit-test
+      with:
+        python-version: ${{ env.MAIN_PYTHON_VERSION }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        server-logs: true
+        coverage-file: .cov/unit-test
+
+    - name: Merge coverage files
+      run: |
+        python -m pip install coverage
+        coverage combine .cov/
+        coverage xml -o .cov/xml
+        coverage html -d .cov/html
+      shell: bash
+
+    - name: Upload coverage results
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-html
+        path: .cov/html
+
+    - name: "Upload coverage reports to Codecov"
+      uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      with:
+        files: .cov/xml
+
 
   build-library:
     name: "Build library"
