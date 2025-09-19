@@ -169,7 +169,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pytest-markers: keywords
-          coverage-file: keywords
 
   run-testing:
     name: Test the "run" subpackage
@@ -223,7 +222,7 @@ jobs:
           # Only include files that exist
           
           files=""
-          for f in .cov/keywords-${{ env.PYTHON_VERSION }} .cov/run-${{ env.PYTHON_VERSION }} .cov/unittests-${{ env.PYTHON_VERSION }}; do
+          for f in .cov/keywords .cov/run .cov/unittests; do
             [ -f "$f" ] && files="$files $f"
           done
           if [ -z "$files" ]; then
