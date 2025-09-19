@@ -31,7 +31,6 @@ extensions = [
     "sphinx_jinja",
     "pyvista.ext.plot_directive",
     "sphinx_design",
-    "ansys_sphinx_theme.extension.autoapi",
 ]
 
 # Intersphinx mapping
@@ -144,10 +143,6 @@ html_static_path = ['_static']
 
 # -- Declare the Jinja context -----------------------------------------------
 BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
-if not BUILD_API:
-    exclude_patterns.append("api")
-    html_theme_options.pop("ansys_sphinx_theme_autoapi")
-    extensions.remove("ansys_sphinx_theme.extension.autoapi")
 
 suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils"]
 
@@ -194,6 +189,45 @@ jinja_contexts = {
     },
 }
 
+import sphinx
+from sphinx.util import logging
+import pathlib
+import sys
+
+def run_autoapi(app):
+    """
+    Run the autoapi script to generate API documentation.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Sphinx application instance containing the all the doc build configuration.
+
+    """
+    logger = logging.getLogger(__name__)
+    logger.info("\nWriting reST files for API documentation...", color="green")
+
+    scritps_dir = pathlib.Path(app.srcdir).parent.parent / "scripts"
+    sys.path.append(str(scritps_dir.resolve()))
+
+    print(scritps_dir)
+
+    from autoapi import autodoc_extensions
+    autodoc_extensions()
+
+    logger.info("Done!\n")
+
+autodoc_default_options = {
+    #'members': 'var1, var2',
+    "member-order": "alphabetical",
+    #'special-members': '__init__',
+    "show-inheritance": True,
+    "undoc-members": True,
+    #'exclude-members': '__weakref__'
+}
+autodoc_class_signature = "separated"
+
+
 def skip_run_subpackage(app, what, name, obj, skip, options):
     """Skip specific members of the 'run' subpackage during documentation generation.
 
@@ -215,4 +249,9 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
 
 def setup(sphinx):
     """Add custom extensions to Sphinx."""
-    sphinx.connect("autoapi-skip-member", skip_run_subpackage)
+    if BUILD_API:
+    # exclude_patterns.append("api")
+    # html_theme_options.pop("ansys_sphinx_theme_autoapi")
+    # extensions.remove("ansys_sphinx_theme.extension.autoapi")
+        sphinx.connect("builder-inited", run_autoapi)
+    # sphinx.connect("autoapi-skip-member", skip_run_subpackage)
