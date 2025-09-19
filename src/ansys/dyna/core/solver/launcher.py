@@ -309,7 +309,7 @@ def launch_dyna(
     ip: str, optional
         You can provide a hostname as an alternative to an IP address.
         Defaults to ``'127.0.0.1'``.
-        
+
     Returns
     -------
     ansys.dyna.core.solver.DynaSolver

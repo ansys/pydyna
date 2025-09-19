@@ -95,9 +95,9 @@ def get_first_row(fields: typing.List[Field], **kwargs) -> typing.Dict[str, typi
 
     Returns
     -------
-    str:    
+    str:
         Dictionary of first row data, or None if not found.
-        
+
     typing.Dict[str, typing.Any] or None
         Dictionary of first row data, or None if not found.
     """

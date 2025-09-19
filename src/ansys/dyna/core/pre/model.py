@@ -39,7 +39,7 @@ class Model:
     ----------
     stub : grpc.ClientStub
         The gRPC client stub for communication with the server.
-        
+
     Returns
     -------
     ansys.dyna.core.pre.Model
@@ -137,11 +137,11 @@ class Model:
 
     def get_init_velocity(self) -> List:
         """Get initial velocity data.
-        
+
         Parameters
         ----------
         nids: list
-        
+
         Returns
         -------
         list
@@ -157,7 +157,7 @@ class Model:
 
     def get_bdy_spc(self) -> List:
         """Get boundary spc data.
-        
+
         Returns
         -------
         list
