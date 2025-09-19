@@ -79,6 +79,7 @@ runs:
       run: |
         if [ "${{ inputs.pytest-markers }}" = "" ]; then
           pytest
+          pytest -m viz
         else
           pytest -m "${{ inputs.pytest-markers }}"
         fi
