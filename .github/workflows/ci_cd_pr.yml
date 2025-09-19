@@ -214,24 +214,18 @@ jobs:
       - name: Download coverage files
         uses: actions/download-artifact@v4
         with:
-            # Download all coverage artifacts
-            pattern: '*-coverage'
-            path: .cov
+          pattern: "coverage-*"
+          path: .cov
 
       - name: Combine coverage files
         run: |
-              pip install coverage codecov
-              # Ensure .cov directory exists
-              mkdir -p .cov
-              files=$(find .cov -type f -name '*.coverage' -o -name 'coverage*' -o -name '*.xml')
-              if [ -z "$files" ]; then
-                echo "No coverage files found to combine."
-                exit 1
-              fi
-              coverage combine $files
-              coverage xml -o .cov/xml
-              coverage html -d .cov/html
-              codecov -f .cov/xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
+          pip install coverage codecov
+          mkdir -p .cov
+          # Combine all the coverage.xml files from subfolders
+          coverage combine $(find .cov -name "xml")
+          coverage xml -o .cov/coverage.xml
+          coverage html -d .cov/html
+          codecov -f .cov/coverage.xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
 
       - name: Upload coverage results
         uses: actions/upload-artifact@v4

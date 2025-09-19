@@ -109,11 +109,11 @@ runs:
         path: server_output.txt
 
     - name: Upload coverage files
-      if: ${{ inputs.coverage-file }} 
+      if: ${{ inputs.coverage-file }}
       uses: actions/upload-artifact@v4
       with:
-          name: coverage-${{ inputs.coverage-file }}-${{ inputs.python-version }}
-          path: .cov/xml
+        name: coverage-${{ inputs.coverage-file }}-${{ inputs.python-version }}
+        path: coverage.xml
 
     - name: Stop container
       if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
