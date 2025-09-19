@@ -54,15 +54,12 @@ class ManualRSTGenerator:
 
         for path in Path(self.module_dir).rglob("*.py"):
             path_resolved = path.resolve()
-            print(path_resolved)
-            print("------------------------------")
             is_autofile = any(
                 auto_path in path_resolved.parents or auto_path == path_resolved for auto_path in auto_file_paths
             )
             is_private_file = path.name.startswith("_") and ("__init__") not in path.name
             is_internal_file = "internal" in path.parts
             if not is_autofile and not is_internal_file and not is_private_file:
-
                 self._generate_rst_for_pymodule(str(path))
 
     def _wrap_python_code_snippets(self, unformatted_docstring: str):
@@ -248,7 +245,6 @@ class ManualRSTGenerator:
 
             write_toc_block(subpackages, "🖿", "subpackage")
             write_toc_block(submodules, "🗎", "submodule")
-            
 
             if any([classes, interfaces, enums, functions]):
                 for def_type, defs in [
@@ -262,25 +258,15 @@ class ManualRSTGenerator:
                         write_line([".. toctree::", "    :titlesonly:", "    :maxdepth: 1", "    :hidden:", ""])
                         for d in defs:
                             write_line([f"     {symbol}{d.name}<{module_name}/{d.name}>"])
-                            
-                            
-
 
             for obj in classes + interfaces:
-                print("------------------------------ class------------------------------")
-                print(obj.name)
                 self._generate_rst_for_pyobj(obj, containing_namespace, module_name, str(out_file_path))
 
             for enum in enums:
-                
-                print("------------------------------ enum------------------------------")
-                print(enum.name)
                 self._generate_rst_for_pyenum(enum, containing_namespace, module_name, str(out_file_path))
                 
 
             for func in functions:
-                print("------------------------------ func------------------------------")
-                print(func.name)
                 self._generate_rst_for_pyfunc(func, containing_namespace, module_name, str(out_file_path))
 
     @staticmethod
@@ -428,7 +414,6 @@ class ManualRSTGenerator:
             props = [m for m in methods if any(getattr(d, "id", None) == "property" for d in m.decorator_list)]
             setters = [m for m in methods if any(getattr(d, "attr", None) == "setter" for d in m.decorator_list)]
             methods = [m for m in methods if m not in props and m not in setters]
-                        
 
             if props or methods:
                 f.write("Overview\n--------\n\n")
@@ -445,7 +430,6 @@ class ManualRSTGenerator:
 
             if props:
                 f.write("Property detail\n---------------\n\n")
-                print("------------------------------ props------------------------------")
                 for p in props:
                     try:
                         ret_type = ManualRSTGenerator._parse_return_type(p.returns)
@@ -458,20 +442,13 @@ class ManualRSTGenerator:
                             f"    :type: {ret_type}\n\n",
                         ]
                     )
-                    print(p.name)
                     write_docstring(f, ast.get_docstring(p), "    ")
 
 
 
             if methods:
                 f.write("Method detail\n-------------\n\n")
-                print("------------------------------ methods------------------------------"
-                      )
                 for m in methods:
-                    # skip some methods in teh list
-                    print(m.name)
-                    if m.name in {"read", "write", "close"}:
-                        continue
                     arg_str = ManualRSTGenerator._parse_args(m)
                     ret_type = ManualRSTGenerator._parse_return_type(m.returns)
                     f.writelines(
@@ -485,7 +462,6 @@ class ManualRSTGenerator:
                     docstring = None
                     if rawdocstring:
                         docstring = NumpyDocString(rawdocstring)
-                        
 
                     if docstring:
                         if "Summary" in docstring:
@@ -514,10 +490,8 @@ class ManualRSTGenerator:
                                     f.write("\n")
                             f.write("\n")
                         f.write("\n")
-                        
-                    print(ret_type)
 
-                    if ret_type and ret_type != ["None"]:
+                    if ret_type:
                         f.write("    :Returns:\n\n")
                         # If multiple return types, output each separately
                         for i in range(len(ret_type)):
@@ -646,7 +620,6 @@ class ManualRSTGenerator:
                 docstring = NumpyDocString(rawdocstring)
 
             if docstring:
-                print(docstring)
                 if "Summary" in docstring:
                     f.write(textwrap.indent("\n".join(docstring["Summary"]), "    ") + "\n\n")
                 if "Extended Summary" in docstring:
@@ -682,7 +655,7 @@ class ManualRSTGenerator:
                             f.write("\n")
                     f.write("\n")
                 f.write("\n")
-                
+
             if ret_type:
                 f.write("    :Returns:\n\n")
                 for i in range(len(ret_type)):
