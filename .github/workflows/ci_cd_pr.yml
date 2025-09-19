@@ -169,7 +169,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pytest-markers: keywords
-          coverage-file: .cov/keywords
+          coverage-file: keywords
 
   run-testing:
     name: Test the "run" subpackage
@@ -187,7 +187,7 @@ jobs:
           docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
           pytest-markers: run
           license-server: ${{ secrets.LICENSE_SERVER }}
-          coverage-file: .cov/run
+          coverage-file: run
 
   unit-tests:
     name: "Testing"
@@ -202,7 +202,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           server-logs: true
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
-          coverage-file: .cov/unittests
+          coverage-file: unittests
 
   upload-coverage:
     name: "Combine coverage"
@@ -211,10 +211,25 @@ jobs:
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
+      - name: Download coverage files
+        uses: actions/download-artifact@v4
+        with:
+          name: keywords-coverage,run-coverage,unittests-coverage
+          path: .cov
+
       - name: Combine coverage files
         run: |
           pip install coverage codecov
-          coverage combine .cov/keywords .cov/run .cov/unittests
+          # Only include files that exist
+          files=""
+          for f in .cov/keywords .cov/run .cov/unittests; do
+            [ -f "$f" ] && files="$files $f"
+          done
+          if [ -z "$files" ]; then
+            echo "No coverage files found to combine."
+            exit 1
+          fi
+          coverage combine $files
           coverage xml -o .cov/xml
           coverage html -d .cov/html
           codecov -f .cov/xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
