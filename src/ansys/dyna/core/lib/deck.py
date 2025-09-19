@@ -71,7 +71,17 @@ class Deck:
         return self._transform_handler
 
     def register_import_handler(self, import_handler: ImportHandler) -> None:
-        """Registers an ImportHandler object"""
+        """Registers an ImportHandler object
+        
+        Parameters
+        ----------
+        import_handler : ImportHandler
+            The import handler to register.
+
+        Returns
+        -------
+        None
+        """
         self._import_handlers.append(import_handler)
 
     @property
@@ -98,6 +108,15 @@ class Deck:
             or a string.
         check : bool, optional
             The default is ``False``.
+            
+        Raises
+        ------
+        TypeError
+            If the keyword is not a ``KeywordBase``, ``EncryptedKeyword``, or a string.
+        
+        Returns
+        -------
+        None
         """
         if not (isinstance(keyword, KeywordBase) or isinstance(keyword, str) or isinstance(keyword, EncryptedKeyword)):
             raise TypeError("Only keywords, encrypted keywords, or strings can be included in a deck.")
@@ -374,8 +393,14 @@ class Deck:
         Parameters
         ----------
         value : str
+            Keyword file as a string.
         context: ImportContext
             the context
+            
+        Returns
+        -------
+        DeckLoaderResult
+            The result of loading the deck.
 
         """
         # import deck_loader only when loading to avoid circular imports
@@ -496,6 +521,11 @@ class Deck:
             The type of keyword to get. For example, "SECTION" returns all section keywords.
             * *filter* (``callable``) --
             The filter to apply to the result. Only keywords which pass the filter will be returned.
+            
+        Returns
+        -------
+        list
+            List of keywords that match the criteria.
 
         """
         if "type" in kwargs:

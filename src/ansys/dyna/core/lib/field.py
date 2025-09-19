@@ -106,7 +106,15 @@ class Field:
             self._value = value
 
     def io_info(self) -> typing.Tuple[str, typing.Type]:
-        """Return the value and type used for io."""
+        """Return the value and type used for io.
+
+        Returns
+        -------
+        str
+            The value to use for io.
+        type
+            The type to use for io.
+        """
         if self._is_flag():
             if self._value.value:
                 return self._value.true_value, str

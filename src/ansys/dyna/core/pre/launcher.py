@@ -281,6 +281,10 @@ def launch_dynapre(
         The default is ``"localhost"``, in which case ``"127.0.0.1"``
         is used.
 
+    Returns
+    -------
+    DynaSolution
+        An instance of DynaSolution.
     """
 
     check_valid_ip(ip)  # double check

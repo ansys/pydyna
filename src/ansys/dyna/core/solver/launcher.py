@@ -301,14 +301,19 @@ def launch_dyna(
 
         * ``241`` : Ansys 24R1
         * ``242`` : Ansys 24R2
-    port : int
+    port: int
         Port to launch DYNA gRPC on.  Final port will be the first
         port available after (or including) this port.  Defaults to
         5000.
 
-    ip : bool, optional
+    ip: str, optional
         You can provide a hostname as an alternative to an IP address.
         Defaults to ``'127.0.0.1'``.
+        
+    Returns
+    -------
+    ansys.dyna.core.solver.DynaSolver
+        An instance of DynaSolver.
 
     Examples
     --------
@@ -359,6 +364,7 @@ class ServerThread:
     """
 
     def __init__(self, threadID, port, ip, server_path):
+        """Initialize the server thread."""
         # threading.Thread.__init__(self)
         self.threadID = threadID
         self.port = port
@@ -367,7 +373,9 @@ class ServerThread:
         self.process = None
 
     def run(self):
+        """Run the server thread."""
         self.process = launch_grpc(ip=self.ip, port=self.port, server_path=self.server_path)
 
     def termination(self):
+        """Terminate the server thread."""
         self.process.termination()

@@ -43,7 +43,20 @@ class CardInterface(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def read(self, buf: typing.TextIO, parameter_set: typing.Optional[ParameterSet]) -> None:
-        """Reads the card data from an input text buffer."""
+        """Reads the card data from an input text buffer.
+        
+        Parameters
+        ----------
+        buf : typing.TextIO
+            Input text buffer to read from.
+        parameter_set : typing.Optional[ParameterSet]
+            Parameter set to use for reading the card. Can be None.
+        
+        Raises
+        ------
+        NotImplementedError
+            If the method is not implemented in the subclass.
+        """
         raise NotImplementedError
 
     @abc.abstractmethod

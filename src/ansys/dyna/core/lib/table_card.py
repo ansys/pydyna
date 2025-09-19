@@ -37,6 +37,19 @@ CHECK_TYPE = True
 
 
 def _check_type(value):
+    """
+    Check if the value is a pandas DataFrame.
+
+    Parameters
+    ----------
+    value : Any
+        Value to check.
+
+    Raises
+    ------
+    TypeError
+        If value is not a pandas DataFrame.
+    """
     global CHECK_TYPE
     if CHECK_TYPE:
         if not isinstance(value, pd.DataFrame):
@@ -44,7 +57,23 @@ def _check_type(value):
 
 
 def try_initialize_table(card, name: str, **kwargs):
-    """card is a TableCard or a TableCardGroup"""
+    """
+    Try to initialize the table for a TableCard or TableCardGroup.
+
+    Parameters
+    ----------
+    card : TableCard or TableCardGroup
+        The card object to initialize.
+    name : str
+        Name of the table.
+    **kwargs
+        Additional keyword arguments.
+
+    Returns
+    -------
+    bool
+        True if initialized, False otherwise.
+    """
     if name is not None:
         data = kwargs.get(name, None)
         if data is not None:
@@ -54,7 +83,24 @@ def try_initialize_table(card, name: str, **kwargs):
 
 
 def get_first_row(fields: typing.List[Field], **kwargs) -> typing.Dict[str, typing.Any]:
-    """Get the first row data from the kwargs."""
+    """
+    Get the first row data from the kwargs.
+
+    Parameters
+    ----------
+    fields : list of Field
+        List of field objects.
+    **kwargs
+        Additional keyword arguments.
+
+    Returns
+    -------
+    str:    
+        Dictionary of first row data, or None if not found.
+        
+    typing.Dict[str, typing.Any] or None
+        Dictionary of first row data, or None if not found.
+    """
     result = dict()
     for field in fields:
         if field.name in kwargs:

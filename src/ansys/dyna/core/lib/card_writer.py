@@ -34,7 +34,25 @@ def write_cards(
     write_format: format_type,
     comment: typing.Optional[bool] = True,
 ) -> bool:
-    """Write the cards. Return whether a superfluous trailing newline was added."""
+    """Write the cards. Return whether a superfluous trailing newline was added.
+    
+    Parameters
+    ----------
+    cards : typing.List[CardInterface]
+        List of cards to write.
+    buf : typing.TextIO
+        The buffer to write to.
+    write_format : format_type
+        The format to write the cards in.
+    comment : typing.Optional[bool], optional
+        Whether to include comments in the output. The default is ``True``.
+    
+    
+    Returns
+    -------
+    bool
+        True if a superfluous trailing newline was added, False otherwise.
+    """
 
     # this code tries its best to avoid adding superfluous trailing newlines, but
     # is not always successful. If one or more empty cards exist at the end of the

@@ -29,7 +29,23 @@ from ansys.dyna.core.lib.parameters import ParameterSet
 
 
 def read_line(buf: typing.TextIO, skip_comment=True) -> typing.Tuple[str, bool]:
-    """Read and return the line, and a flag on whether to stop reading."""
+    """
+    Read and return the line, and a flag on whether to stop reading.
+
+    Parameters
+    ----------
+    buf : typing.TextIO
+        Buffer to read from.
+    skip_comment : bool, optional
+        Whether to skip comment lines (default: True).
+
+    Returns
+    -------
+    line : str or None
+        The line read, or None if at end or keyword.
+    stop : bool
+        True if reading should stop, False otherwise.
+    """
     while True:
         line = buf.readline()
         len_line = len(line)
@@ -47,7 +63,19 @@ def read_line(buf: typing.TextIO, skip_comment=True) -> typing.Tuple[str, bool]:
 
 
 def at_end_of_keyword(buf: typing.TextIO) -> bool:
-    """Return whether the buffer is at the end of the keyword"""
+    """
+    Return whether the buffer is at the end of the keyword.
+
+    Parameters
+    ----------
+    buf : typing.TextIO
+        Buffer to check.
+
+    Returns
+    -------
+    bool
+        True if at the end of the keyword, False otherwise.
+    """
     pos = buf.tell()
     _, end_of_keyword = read_line(buf, True)
     if end_of_keyword:
@@ -57,9 +85,20 @@ def at_end_of_keyword(buf: typing.TextIO) -> bool:
 
 
 def buffer_to_lines(buf: typing.TextIO, max_num_lines: int = -1) -> typing.List[str]:
-    """Read from the buffer into a list of string.
-    buf: buffer to read from
-    max_num_lines: number of lines to read. -1 means no limit
+    """
+    Read from the buffer into a list of strings.
+
+    Parameters
+    ----------
+    buf : typing.TextIO
+        Buffer to read from.
+    max_num_lines : int, optional
+        Number of lines to read. -1 means no limit (default: -1).
+
+    Returns
+    -------
+    list of str
+        List of lines read from the buffer.
     """
     # used by tabular cards (duplicate card, duplicate card group)
     # store all lines until one that starts with * into an array and then call load with it.
@@ -91,6 +130,19 @@ def _is_flag(item_type: typing.Union[type, Flag]):
 
 
 def _expand_spec(spec: typing.List[tuple]) -> typing.List[tuple]:
+    """
+    Expand a spec to include dataclass fields.
+
+    Parameters
+    ----------
+    spec : list of tuple
+        List of (position, width, type) tuples.
+
+    Returns
+    -------
+    list of tuple
+        Expanded list of (position, width, type) tuples.
+    """
     specs = []
     for item in spec:
         position, width, item_type = item
@@ -108,6 +160,21 @@ def _expand_spec(spec: typing.List[tuple]) -> typing.List[tuple]:
 
 
 def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterable:
+    """
+    Contract flat data into dataclass instances or flags as needed.
+
+    Parameters
+    ----------
+    spec : list of tuple
+        List of (position, width, type) tuples.
+    data : list
+        List of data values.
+
+    Returns
+    -------
+    iterable
+        Iterable of contracted data values.
+    """
     iterspec = iter(spec)
     iterdata = iter(data)
     while True:
@@ -125,13 +192,25 @@ def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterab
 
 
 def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> typing.List:
-    """loads a keyword card line with fixed column offsets and width from string
-    spec: list of tuples representing the (offset, width, type) of each field
-    type can be a Flag which represents the True and False value
-    line_data: string with keyword data
+    """
+    Loads a keyword card line with fixed column offsets and width from string.
 
-    Example
+    Parameters
+    ----------
+    spec : list of tuple
+        List of (offset, width, type) for each field.
+    line_data : str
+        String with keyword data.
+    parameter_set : ParameterSet, optional
+        Parameter set for resolving parameters in keyword data.
+
+    Returns
     -------
+    tuple
+        Tuple of parsed values from the line.
+
+    Examples
+    --------
     >>> load_dataline([(0,10, int),(10,10, str)], '         1     hello')
     (1, 'hello')
     """

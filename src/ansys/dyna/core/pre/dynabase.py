@@ -292,7 +292,12 @@ class BaseObj:
         self.subtype = ""
 
     def get_data(self) -> List:
-        """Get the data of the object."""
+        """Get the data of the object.
+        
+        Returns
+        -------
+        None
+        """
         return None
 
 
@@ -2671,14 +2676,29 @@ class RigidwallCylinder(BaseObj):
         self.type = "rigidwall_cylinder"
 
     def set_motion(self, curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0)):
-        """Set the prescribed motion."""
+        """Set the prescribed motion.
+        Parameters
+        ----------
+        curve : Curve
+            The curve to follow.
+        motion : RWMotion
+            The type of motion.
+        dir : Direction
+            The direction of motion.
+        """
         curve.create(self.stub)
         self.lcid = curve.id
         self.motion = motion.value
         self.dir = dir
 
     def get_data(self) -> List:
-        """Get the rigidwall data."""
+        """Get the rigidwall data.
+
+        Returns
+        -------
+        list
+            rigidwall data = [type, tail.x, tail.y, tail.z, head.x, head.y, head.z, radius, length]
+        """
         data = [
             self.type,
             self.tail.x,
@@ -2753,7 +2773,13 @@ class RigidwallSphere(BaseObj):
         self.dir = dir
 
     def get_data(self) -> List:
-        """Get the rigidwall data."""
+        """Get the rigidwall data.
+        
+        Returns
+        -------
+        list
+            rigidwall data = [type, center.x, center.y, center.z, orient.x, orient.y, orient.z, radius]
+        """
         data = [
             self.type,
             self.center.x,
@@ -2815,7 +2841,13 @@ class RigidwallPlanar(BaseObj):
         self.type = "rigidwall_planar"
 
     def get_data(self) -> List:
-        """Get the rigidwall data."""
+        """Get the rigidwall data.
+        
+        Returns
+        -------
+        list
+            rigidwall data = [type, tail.x, tail.y, tail.z, head.x, head.y, head.z]
+        """
         data = [self.type, self.tail.x, self.tail.y, self.tail.z, self.head.x, self.head.y, self.head.z]
         return data
 

@@ -85,7 +85,13 @@ class KeywordBase(Cards):
         return f"{kwd}_{subkwd}"
 
     def get_title(self, format_symbol: str = "") -> str:
-        """Get the title of this keyword."""
+        """Get the title of this keyword.
+        
+        Returns
+        -------
+        str
+            The title of the keyword, including any active options and format symbol.
+        """
         base_title = self._get_base_title()
         titles = [base_title]
         if self.options != None:
@@ -258,7 +264,13 @@ class KeywordBase(Cards):
                 buf.seek(buf.tell() - 1)
 
     def dumps(self) -> str:
-        """Return the string representation of the keyword."""
+        """Return the string representation of the keyword.
+        
+        Returns
+        -------
+        str
+            The string representation of the keyword.
+        """
         warnings.warn("dumps is deprecated - use write instead")
         return self.write()
 
@@ -297,7 +309,10 @@ class KeywordBase(Cards):
     def loads(self, value: str, parameters: ParameterSet = None) -> typing.Any:
         """Load the keyword from string.
 
-        Return `self` to support chaining
+        Returns
+        -------
+        self
+            The keyword object itself.
         """
         # TODO - add a method to load from a buffer.
         s = io.StringIO()
