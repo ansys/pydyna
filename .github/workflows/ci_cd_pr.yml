@@ -213,40 +213,37 @@ jobs:
       - name: Download coverage files
         uses: actions/download-artifact@v4
         with:
-          name: keywords-coverage,run-coverage,unittests-coverage
-          path: .cov
+            # Download all coverage artifacts
+            pattern: '*-coverage'
+            path: .cov
 
       - name: Combine coverage files
         run: |
-          pip install coverage codecov
-          # Only include files that exist
-          
-          files=""
-          for f in keywords-${{ env.PYTHON_VERSION }} run-${{ env.PYTHON_VERSION }} unittests-${{ env.PYTHON_VERSION }}; do
-            [ -f "$f" ] && files="$files $f"
-          done
-          if [ -z "$files" ]; then
-            echo "No coverage files found to combine."
-            exit 1
-          fi
-          coverage combine $files
-          coverage xml -o .cov/xml
-          coverage html -d .cov/html
-          codecov -f .cov/xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
+            pip install coverage codecov
+            # Find all coverage files in .cov directory
+            files=$(find .cov -type f -name '*.coverage' -o -name 'coverage*' -o -name '*.xml')
+            if [ -z "$files" ]; then
+              echo "No coverage files found to combine."
+              exit 1
+            fi
+            coverage combine $files
+            coverage xml -o .cov/xml
+            coverage html -d .cov/html
+            codecov -f .cov/xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
 
       - name: Upload coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-html
-          path: .cov/html
-          retention-days: 7
+            name: coverage-html
+            path: .cov/html
+            retention-days: 7
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
         env:
           CODECOV_TOKEN: ${{ env.CODECOV_TOKEN }}
         with:
-          files: .cov/xml
+            files: .cov/xml
 
   build-library:
     name: "Build library"

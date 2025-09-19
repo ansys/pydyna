@@ -83,11 +83,12 @@ runs:
 
     - name: Run pytest
       run: |
-        if [ "${{ inputs.pytest-markers }}" = "" ]; then
-          export COVERAGE_FILE=.cov/${{ inputs.coverage-file }} && pytest
-        else
-          export COVERAGE_FILE=.cov/${{ inputs.coverage-file }} && pytest -m "${{ inputs.pytest-markers }}"
-        fi
+          mkdir -p .cov
+          if [ "${{ inputs.pytest-markers }}" = "" ]; then
+            export COVERAGE_FILE=.cov/${{ inputs.coverage-file }} && pytest --cov --cov-report=xml:.cov/xml --cov-report=html:.cov/html
+          else
+            export COVERAGE_FILE=.cov/${{ inputs.coverage-file }} && pytest -m "${{ inputs.pytest-markers }}" --cov --cov-report=xml:.cov/xml --cov-report=html:.cov/html
+          fi
       shell: bash
       env:
         PYDYNA_RUN_CONTAINER: ${{ inputs.docker-image }}
@@ -111,8 +112,8 @@ runs:
     - name: Upload coverage files
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ inputs.coverage-file }}-${{ inputs.python-version }}
-        path: .cov/${{ inputs.coverage-file }}
+          name: coverage-${{ inputs.coverage-file }}-${{ inputs.python-version }}
+          path: .cov/xml
 
     - name: Stop container
       if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
@@ -120,21 +121,3 @@ runs:
         docker stop kw_server
         docker rm kw_server
       shell: bash
-
-
-
-    # - name: Upload coverage results
-    #   if: ${{ inputs.server-logs == 'true' && !inputs.pytest-markers }}
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: coverage-html
-    #     path: .cov/html
-    #     retention-days: 7
-
-    # - name: Upload coverage to Codecov
-    #   if: ${{ !inputs.pytest-markers }}
-    #   uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
-    #   env:
-    #     CODECOV_TOKEN: ${{ inputs.codecov-token }}
-    #   with:
-    #     files: .cov/xml
