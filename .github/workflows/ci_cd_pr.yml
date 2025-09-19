@@ -222,7 +222,7 @@ jobs:
           # Only include files that exist
           
           files=""
-          for f in .cov/keywords .cov/run .cov/unittests; do
+          for f in keywords-${{ env.PYTHON_VERSION }} run-${{ env.PYTHON_VERSION }} unittests-${{ env.PYTHON_VERSION }}; do
             [ -f "$f" ] && files="$files $f"
           done
           if [ -z "$files" ]; then

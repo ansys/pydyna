@@ -45,7 +45,7 @@ inputs:
   coverage-file:
     description: Coverage file path
     required: false
-    default: ""
+    default: ".cov/xml"
     type: string
 
 runs:
@@ -109,11 +109,10 @@ runs:
         path: server_output.txt
 
     - name: Upload coverage files
-      if: ${{ !inputs.coverage-file }}
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ inputs.coverage-file }}-coverage
-        path: .cov/${{ inputs.coverage-file }}-${{ inputs.python-version }}
+        name: ${{ inputs.coverage-file }}-${{ inputs.python-version }}
+        path: .cov/${{ inputs.coverage-file }}
 
     - name: Stop container
       if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
