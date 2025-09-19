@@ -220,9 +220,7 @@ jobs:
       - name: Combine coverage files
         run: |
           pip install coverage codecov
-          mkdir -p .cov
-          # Combine all the coverage.xml files from subfolders
-          coverage combine $(find .cov -name "xml")
+          coverage combine .cov/*/coverage.xml
           coverage xml -o .cov/coverage.xml
           coverage html -d .cov/html
           codecov -f .cov/coverage.xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
