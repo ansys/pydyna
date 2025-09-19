@@ -169,6 +169,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pytest-markers: keywords
+          coverage-file: keywords
 
   run-testing:
     name: Test the "run" subpackage
