@@ -83,7 +83,6 @@ runs:
 
     - name: Run pytest
       run: |
-          mkdir -p .cov
           if [ "${{ inputs.pytest-markers }}" = "" ]; then
             export COVERAGE_FILE=.cov/${{ inputs.coverage-file }} && pytest --cov --cov-report=xml:.cov/xml --cov-report=html:.cov/html
           else
