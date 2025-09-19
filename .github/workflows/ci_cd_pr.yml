@@ -169,6 +169,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pytest-markers: keywords
+          coverage-file: .cov/keywords
 
   run-testing:
     name: Test the "run" subpackage
@@ -186,6 +187,7 @@ jobs:
           docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
           pytest-markers: run
           license-server: ${{ secrets.LICENSE_SERVER }}
+          coverage-file: .cov/run
 
   unit-tests:
     name: "Testing"
@@ -200,7 +202,36 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           server-logs: true
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          coverage-file: .cov/unittests
 
+  upload-coverage:
+    name: "Combine coverage"
+    runs-on: ubuntu-latest
+    needs: [keyword-testing, run-testing, unit-tests]
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Combine coverage files
+        run: |
+          pip install coverage codecov
+          coverage combine .cov/keywords .cov/run .cov/unittests
+          coverage xml -o .cov/xml
+          coverage html -d .cov/html
+          codecov -f .cov/xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
+
+      - name: Upload coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: .cov/html
+          retention-days: 7
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
+        env:
+          CODECOV_TOKEN: ${{ env.CODECOV_TOKEN }}
+        with:
+          files: .cov/xml
 
   build-library:
     name: "Build library"
