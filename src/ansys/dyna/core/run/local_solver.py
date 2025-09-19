@@ -66,7 +66,13 @@ def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str
 
 
 def get_runner(**kwargs) -> typing.Any:
-    """Return the runner for the job."""
+    """Return the runner for the job.
+    
+    Returns
+    -------
+    runner : object
+        The runner object, either LinuxRunner, WindowsRunner, or DockerRunner.
+    """
     container = kwargs.get("container", None)
     if container != None:
         if not HAS_DOCKER:

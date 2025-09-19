@@ -95,7 +95,13 @@ class CardSet(CardInterface):
         self._items.append(self._set_type(parent=self._parent, keyword=self._keyword))
 
     def add_item(self, **kwargs) -> int:
-        """Add a card to the set. Return the index of the added card."""
+        """Add a card to the set. Return the index of the added card.
+        
+        Returns
+        -------
+        int
+            The index of the added card.
+        """
         self._items.append(self._set_type(**kwargs, parent=self._parent, keyword=self._keyword))
         return len(self._items) - 1
 

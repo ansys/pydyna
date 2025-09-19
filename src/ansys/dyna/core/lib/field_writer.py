@@ -155,14 +155,20 @@ def write_fields(
         used by TableCard
     format: format_type
         optional - format to write
-
-    >>> s=io.String()
-    >>> fields = [
-    ...     Field("a", int, 0, 10, 1),
-    ...     Field("b", str, 10, 10, "hello")
-    ... ]
-    >>> write_fields(s, fields)
-    >>> s.getvalue()
+        
+    Returns
+    -------
+    None
+        
+    Examples
+    --------
+    s=io.String()
+    fields = [
+        Field("a", int, 0, 10, 1),
+        Field("b", str, 10, 10, "hello")
+    ]
+    write_fields(s, fields)
+    s.getvalue()
     '         1     hello'
     """
     if values != None:
@@ -194,6 +200,12 @@ def write_comment_line(
     format: format_type
         format to write in
 
+    Returns
+    -------
+    None
+
+    Examples
+    --------    
     >>> s=io.String()
     >>> fields = [
     ...     Field("a", int, 0, 10, 1),

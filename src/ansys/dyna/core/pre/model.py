@@ -33,7 +33,19 @@ from ansys.dyna.core.pre.part import Part
 
 
 class Model:
-    """Contains all information about Ansys PyDYNA Model."""
+    """Contains all information about Ansys PyDYNA Model.
+
+    Parameters
+    ----------
+    stub : grpc.ClientStub
+        The gRPC client stub for communication with the server.
+        
+    Returns
+    -------
+    ansys.dyna.core.pre.Model
+        An instance of Model.
+
+    """
 
     def __init__(self, stub):
         """Initialize the model and the parameters."""
@@ -124,7 +136,17 @@ class Model:
         return None
 
     def get_init_velocity(self) -> List:
-        """Get initial velocity data."""
+        """Get initial velocity data.
+        
+        Parameters
+        ----------
+        nids: list
+        
+        Returns
+        -------
+        list
+            node coordinates and velocity,list = [[x1,y1,z1,vx1,vy1,vz1],[x2,y2,z2,vx2,vy2,vz2],...]
+        """
         nids = [i[0] for i in self._init_velocity]
         data = self.stub.GetNodesCoord(GetNodesCoordRequest(nodeids=nids))
         num = 3
@@ -134,8 +156,14 @@ class Model:
         return nlist1 + nlist2
 
     def get_bdy_spc(self) -> List:
-        """Get boundary spc data."""
-        nids = self._bdy_spc
+        """Get boundary spc data.
+        
+        Returns
+        -------
+        list
+            node coordinates and velocity,list = [[x1,y1,z1,vx1,vy1,vz1],[x2,y2,z2,vx2,vy2,vz2],...]
+        """
+        nids = [i[0] for i in self._bdy_spc]
         data = self.stub.GetNodesCoord(GetNodesCoordRequest(nodeids=nids))
         num = 3
         coord = data.coords
@@ -250,6 +278,5 @@ class Model:
         -------
         List[Part]
             List of parts for the model.
-
         """
         return self._parts

@@ -28,9 +28,21 @@ import typing
 
 def write_or_return(buf: typing.Optional[typing.TextIO], func: typing.Callable) -> typing.Optional[str]:
     """Write to buffer or returns a string.
-
+    
     Uses the callable `func` to write. If `buf` is None, then the function will create a string buffer
     before calling `func` and return the result as a string.
+    
+    Parameters
+    ----------
+    buf : typing.Optional[typing.TextIO]
+        The buffer to write to. If None, a string will be returned.
+    func : typing.Callable
+        The function to call to write to the buffer.
+    
+    Returns
+    -------
+    typing.Optional[str]
+        If `buf` is None, then a string is returned. Otherwise, None is returned
     """
     if buf == None:
         to_return = True

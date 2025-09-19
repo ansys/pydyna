@@ -9,6 +9,19 @@ from numpydoc.docscrape import NumpyDocString
 
 
 class ManualRSTGenerator:
+    @staticmethod
+    def get_base_name(base):
+        if hasattr(base, "id"):
+            return base.id
+        elif hasattr(base, "attr"):
+            parts = []
+            while isinstance(base, ast.Attribute):
+                parts.append(base.attr)
+                base = base.value
+            if hasattr(base, "id"):
+                parts.append(base.id)
+            return ".".join(reversed(parts))
+        return None
     """Generates reStructuredText files for Python modules and classes."""
 
     def __init__(self, core_namespace, module_dir, doc_dir):
@@ -41,12 +54,15 @@ class ManualRSTGenerator:
 
         for path in Path(self.module_dir).rglob("*.py"):
             path_resolved = path.resolve()
+            print(path_resolved)
+            print("------------------------------")
             is_autofile = any(
                 auto_path in path_resolved.parents or auto_path == path_resolved for auto_path in auto_file_paths
             )
             is_private_file = path.name.startswith("_") and ("__init__") not in path.name
             is_internal_file = "internal" in path.parts
             if not is_autofile and not is_internal_file and not is_private_file:
+
                 self._generate_rst_for_pymodule(str(path))
 
     def _wrap_python_code_snippets(self, unformatted_docstring: str):
@@ -232,6 +248,7 @@ class ManualRSTGenerator:
 
             write_toc_block(subpackages, "🖿", "subpackage")
             write_toc_block(submodules, "🗎", "submodule")
+            
 
             if any([classes, interfaces, enums, functions]):
                 for def_type, defs in [
@@ -245,12 +262,25 @@ class ManualRSTGenerator:
                         write_line([".. toctree::", "    :titlesonly:", "    :maxdepth: 1", "    :hidden:", ""])
                         for d in defs:
                             write_line([f"     {symbol}{d.name}<{module_name}/{d.name}>"])
+                            
+                            
+
 
             for obj in classes + interfaces:
+                print("------------------------------ class------------------------------")
+                print(obj.name)
                 self._generate_rst_for_pyobj(obj, containing_namespace, module_name, str(out_file_path))
+
             for enum in enums:
+                
+                print("------------------------------ enum------------------------------")
+                print(enum.name)
                 self._generate_rst_for_pyenum(enum, containing_namespace, module_name, str(out_file_path))
+                
+
             for func in functions:
+                print("------------------------------ func------------------------------")
+                print(func.name)
                 self._generate_rst_for_pyfunc(func, containing_namespace, module_name, str(out_file_path))
 
     @staticmethod
@@ -261,18 +291,44 @@ class ManualRSTGenerator:
 
         for i, arg in enumerate(method.args.args):
             arg_str = arg.arg
+            annotation = getattr(arg, "annotation", None)
             if (
-                isinstance(arg.annotation, ast.Subscript)
-                and hasattr(arg.annotation.value, "attr")
-                and arg.annotation.value.attr == "Callable"
+                isinstance(annotation, ast.Subscript)
+                and hasattr(annotation.value, "attr")
+                and annotation.value.attr == "Callable"
             ):
-                formatted_callable_arg_types = (", ").join([elt.id for elt in arg.annotation.slice.dims[0].elts])
-                callable_return_type = arg.annotation.slice.dims[1].id
+                # Defensive: handle ast.Name and ast.Attribute in callable arg types
+                callable_args = []
+                for elt in getattr(annotation.slice.dims[0], "elts", []):
+                    if hasattr(elt, "id"):
+                        callable_args.append(elt.id)
+                    elif hasattr(elt, "attr"):
+                        # ast.Attribute: get full name
+                        parts = []
+                        while isinstance(elt, ast.Attribute):
+                            parts.append(elt.attr)
+                            elt = elt.value
+                        if hasattr(elt, "id"):
+                            parts.append(elt.id)
+                        callable_args.append(".".join(reversed(parts)))
+                formatted_callable_arg_types = ", ".join(callable_args)
+                callable_return_type = getattr(annotation.slice.dims[1], "id", None)
                 arg_str += f": collections.abc.Callable[[{formatted_callable_arg_types}], {callable_return_type}]"
-            elif isinstance(arg.annotation, ast.Subscript):
-                arg_str += f": {(arg.annotation.value.id).lower()}[{ManualRSTGenerator._parse_nested_type(arg.annotation.slice)}]"
-            else:
-                arg_str += f": {ManualRSTGenerator._parse_nested_type(arg.annotation)}"
+            elif isinstance(annotation, ast.Subscript):
+                # Defensive: handle ast.Name and ast.Attribute
+                type_id = getattr(annotation.value, "id", None)
+                if not type_id and hasattr(annotation.value, "attr"):
+                    parts = []
+                    val = annotation.value
+                    while isinstance(val, ast.Attribute):
+                        parts.append(val.attr)
+                        val = val.value
+                    if hasattr(val, "id"):
+                        parts.append(val.id)
+                    type_id = ".".join(reversed(parts))
+                arg_str += f": {type_id.lower() if type_id else ''}[{ManualRSTGenerator._parse_nested_type(annotation.slice)}]"
+            elif annotation is not None:
+                arg_str += f": {ManualRSTGenerator._parse_nested_type(annotation)}"
             if i >= default_offset and defaults:
                 default = defaults[i - default_offset]
                 if isinstance(default, ast.Constant):
@@ -296,13 +352,14 @@ class ManualRSTGenerator:
     @staticmethod
     def _parse_return_type(node):
         if isinstance(node, ast.Constant):
-            return "None"
+            return ["None"]
         if isinstance(node, ast.Subscript):
-            elts = node.slice.elts
-            return [ManualRSTGenerator._parse_nested_type(elt) for elt in elts]
+            elts = getattr(node.slice, "elts", None)
+            if elts:
+                return [ManualRSTGenerator._parse_nested_type(elt) for elt in elts]
         if node:
             return [ManualRSTGenerator._parse_nested_type(node)]
-        return ""
+        return []
 
     def _generate_rst_for_pyobj(self, obj_definition, containing_namespace, module_name, module_rst_file_path):
         """Generate RST file for a Python object (class or interface).
@@ -329,7 +386,7 @@ class ManualRSTGenerator:
         out_dir.mkdir(parents=True, exist_ok=True)
 
         fq_name = f"{containing_namespace}.{module_name}.{obj_definition.name}"
-        base_classes = ", ".join(base.id for base in obj_definition.bases if hasattr(base, "id"))
+        base_classes = ", ".join(filter(None, (ManualRSTGenerator.get_base_name(base) for base in obj_definition.bases)))
 
         def write_docstring(f, docstring, indent="   "):
             if docstring:
@@ -371,6 +428,7 @@ class ManualRSTGenerator:
             props = [m for m in methods if any(getattr(d, "id", None) == "property" for d in m.decorator_list)]
             setters = [m for m in methods if any(getattr(d, "attr", None) == "setter" for d in m.decorator_list)]
             methods = [m for m in methods if m not in props and m not in setters]
+                        
 
             if props or methods:
                 f.write("Overview\n--------\n\n")
@@ -387,8 +445,12 @@ class ManualRSTGenerator:
 
             if props:
                 f.write("Property detail\n---------------\n\n")
+                print("------------------------------ props------------------------------")
                 for p in props:
-                    ret_type = ManualRSTGenerator._parse_return_type(p.returns)
+                    try:
+                        ret_type = ManualRSTGenerator._parse_return_type(p.returns)
+                    except RuntimeError as e:
+                        ret_type = "Unknown"
                     f.writelines(
                         [
                             f".. py:property:: {p.name}\n",
@@ -396,11 +458,20 @@ class ManualRSTGenerator:
                             f"    :type: {ret_type}\n\n",
                         ]
                     )
+                    print(p.name)
                     write_docstring(f, ast.get_docstring(p), "    ")
+
+
 
             if methods:
                 f.write("Method detail\n-------------\n\n")
+                print("------------------------------ methods------------------------------"
+                      )
                 for m in methods:
+                    # skip some methods in teh list
+                    print(m.name)
+                    if m.name in {"read", "write", "close"}:
+                        continue
                     arg_str = ManualRSTGenerator._parse_args(m)
                     ret_type = ManualRSTGenerator._parse_return_type(m.returns)
                     f.writelines(
@@ -414,6 +485,7 @@ class ManualRSTGenerator:
                     docstring = None
                     if rawdocstring:
                         docstring = NumpyDocString(rawdocstring)
+                        
 
                     if docstring:
                         if "Summary" in docstring:
@@ -442,16 +514,22 @@ class ManualRSTGenerator:
                                     f.write("\n")
                             f.write("\n")
                         f.write("\n")
+                        
+                    print(ret_type)
 
-                    if ret_type:
+                    if ret_type and ret_type != ["None"]:
                         f.write("    :Returns:\n\n")
+                        # If multiple return types, output each separately
                         for i in range(len(ret_type)):
-                            if docstring and "Returns" in docstring and len(docstring["Returns"]) >= i:
+                            if docstring and "Returns" in docstring and len(docstring["Returns"]) > i:
                                 ret = docstring["Returns"][i]
-                                f.write(f"        :obj:`~{ret.type}`\n")
+                                # Output each return value as a separate entry
+                                f.write(f"        {ret.name} : :obj:`~{ret.type}`\n")
                                 f.write(textwrap.indent("\n".join(ret.desc), "        ") + "\n")
                                 f.write("\n")
-
+                            else:
+                                # Fallback if no name, just type
+                                f.write(f"        :obj:`~{ret_type[i]}`\n\n")
             f.write("\n")
 
     def _generate_rst_for_pyfunc(self, func_def, namespace, module_name, module_rst_path):
@@ -486,69 +564,69 @@ class ManualRSTGenerator:
                 ]
             )
 
-            # For graphs, insert test image
-            graph_module_list = [
-                "access_graphs",
-                "aircraft_graphs",
-                "antenna_graphs",
-                "area_target_graphs",
-                "chain_graphs",
-                "comm_system_graphs",
-                "coverage_definition_graphs",
-                "facility_graphs",
-                "figure_of_merit_graphs",
-                "ground_vehicle_graphs",
-                "launch_vehicle_graphs",
-                "line_target_graphs",
-                "missile_graphs",
-                "place_graphs",
-                "radar_graphs",
-                "receiver_graphs",
-                "satellite_graphs",
-                "sensor_graphs",
-                "ship_graphs",
-                "target_graphs",
-                "transmitter_graphs",
-                "scenario_graphs",
-            ]
-            # Exclude images for untested graphs to avoid broken links
-            exclude_image_functions = [
-                "tle_teme_residuals_line_chart",
-                "radar_propagation_loss_line_chart",
-                "flight_profile_by_downrange_line_chart",
-                "flight_profile_by_time_line_chart",
-                "angle_between_line_chart",
-                "bentpipe_link_cno_line_chart",
-            ]
-            # Images generated once, but not generated as part of testing
-            shared_image_functions = [
-                "model_area_line_chart",
-                "solar_panel_area_line_chart",
-                "solar_panel_power_line_chart",
-                "obscuration_line_chart",
-            ]
-            # Substitute missing graphs of the same type
-            substitute_graph_key = {
-                "sunlight_intervals_interval_pie_chart_launchvehicle": "sunlight_intervals_interval_pie_chart_satellite",
-                "sunlight_intervals_interval_pie_chart_missile": "sunlight_intervals_interval_pie_chart_satellite",
-            }
-            class_name = module_name.replace("_graphs", "").replace("_", "")
-            if module_name in graph_module_list and func_def.name not in exclude_image_functions:
-                func_module_path = f"{func_def.name}_{class_name}"
-                if func_def.name in shared_image_functions:
-                    graph_image_path = f"/graph_images_temp/{func_def.name}.png"
-                elif func_module_path in substitute_graph_key:
-                    substitute_path = substitute_graph_key[func_module_path]
-                    graph_image_path = f"/graph_images_temp/test_{substitute_path}.png"
-                else:
-                    graph_image_path = f"/graph_images_temp/test_{func_module_path}.png"
-                f.writelines(
-                    [
-                        f".. image:: {graph_image_path}\n",
-                        "  :width: 600\n",
-                        f"  :alt: image of output from {func_def.name}\n\n",
-                    ]
-                )
+            # # For graphs, insert test image
+            # graph_module_list = [
+            #     "access_graphs",
+            #     "aircraft_graphs",
+            #     "antenna_graphs",
+            #     "area_target_graphs",
+            #     "chain_graphs",
+            #     "comm_system_graphs",
+            #     "coverage_definition_graphs",
+            #     "facility_graphs",
+            #     "figure_of_merit_graphs",
+            #     "ground_vehicle_graphs",
+            #     "launch_vehicle_graphs",
+            #     "line_target_graphs",
+            #     "missile_graphs",
+            #     "place_graphs",
+            #     "radar_graphs",
+            #     "receiver_graphs",
+            #     "satellite_graphs",
+            #     "sensor_graphs",
+            #     "ship_graphs",
+            #     "target_graphs",
+            #     "transmitter_graphs",
+            #     "scenario_graphs",
+            # ]
+            # # Exclude images for untested graphs to avoid broken links
+            # exclude_image_functions = [
+            #     "tle_teme_residuals_line_chart",
+            #     "radar_propagation_loss_line_chart",
+            #     "flight_profile_by_downrange_line_chart",
+            #     "flight_profile_by_time_line_chart",
+            #     "angle_between_line_chart",
+            #     "bentpipe_link_cno_line_chart",
+            # ]
+            # # Images generated once, but not generated as part of testing
+            # shared_image_functions = [
+            #     "model_area_line_chart",
+            #     "solar_panel_area_line_chart",
+            #     "solar_panel_power_line_chart",
+            #     "obscuration_line_chart",
+            # ]
+            # # Substitute missing graphs of the same type
+            # substitute_graph_key = {
+            #     "sunlight_intervals_interval_pie_chart_launchvehicle": "sunlight_intervals_interval_pie_chart_satellite",
+            #     "sunlight_intervals_interval_pie_chart_missile": "sunlight_intervals_interval_pie_chart_satellite",
+            # }
+            # class_name = module_name.replace("_graphs", "").replace("_", "")
+            # if module_name in graph_module_list and func_def.name not in exclude_image_functions:
+            #     func_module_path = f"{func_def.name}_{class_name}"
+            #     if func_def.name in shared_image_functions:
+            #         graph_image_path = f"/graph_images_temp/{func_def.name}.png"
+            #     elif func_module_path in substitute_graph_key:
+            #         substitute_path = substitute_graph_key[func_module_path]
+            #         graph_image_path = f"/graph_images_temp/test_{substitute_path}.png"
+            #     else:
+            #         graph_image_path = f"/graph_images_temp/test_{func_module_path}.png"
+            #     f.writelines(
+            #         [
+            #             f".. image:: {graph_image_path}\n",
+            #             "  :width: 600\n",
+            #             f"  :alt: image of output from {func_def.name}\n\n",
+            #         ]
+            #     )
 
             arg_str = ManualRSTGenerator._parse_args(func_def)
             ret_type = ManualRSTGenerator._parse_return_type(func_def.returns)
@@ -568,6 +646,7 @@ class ManualRSTGenerator:
                 docstring = NumpyDocString(rawdocstring)
 
             if docstring:
+                print(docstring)
                 if "Summary" in docstring:
                     f.write(textwrap.indent("\n".join(docstring["Summary"]), "    ") + "\n\n")
                 if "Extended Summary" in docstring:
@@ -603,7 +682,7 @@ class ManualRSTGenerator:
                             f.write("\n")
                     f.write("\n")
                 f.write("\n")
-
+                
             if ret_type:
                 f.write("    :Returns:\n\n")
                 for i in range(len(ret_type)):
