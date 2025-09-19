@@ -45,7 +45,7 @@ inputs:
   coverage-file:
     description: Coverage file path
     required: false
-    default: ".cov/xml"
+    default: ""
     type: string
 
 runs:
@@ -110,6 +110,7 @@ runs:
         path: server_output.txt
 
     - name: Upload coverage files
+      if: ${{ inputs.coverage-file }} 
       uses: actions/upload-artifact@v4
       with:
           name: coverage-${{ inputs.coverage-file }}-${{ inputs.python-version }}
