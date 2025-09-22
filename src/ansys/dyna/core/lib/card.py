@@ -121,7 +121,7 @@ class Card(CardInterface):
     # not needed by subclasses - only used by methods on keyword classes
     def get_value(self, prop: str) -> typing.Any:
         """gets the value of the field in the card.
-        
+
         Returns
         -------
         typing.Any

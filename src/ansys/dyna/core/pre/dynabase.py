@@ -293,7 +293,7 @@ class BaseObj:
 
     def get_data(self) -> List:
         """Get the data of the object.
-        
+
         Returns
         -------
         None
@@ -2774,7 +2774,7 @@ class RigidwallSphere(BaseObj):
 
     def get_data(self) -> List:
         """Get the rigidwall data.
-        
+
         Returns
         -------
         list
@@ -2842,7 +2842,7 @@ class RigidwallPlanar(BaseObj):
 
     def get_data(self) -> List:
         """Get the rigidwall data.
-        
+
         Returns
         -------
         list

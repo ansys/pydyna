@@ -86,7 +86,7 @@ class KeywordBase(Cards):
 
     def get_title(self, format_symbol: str = "") -> str:
         """Get the title of this keyword.
-        
+
         Returns
         -------
         str
@@ -265,7 +265,7 @@ class KeywordBase(Cards):
 
     def dumps(self) -> str:
         """Return the string representation of the keyword.
-        
+
         Returns
         -------
         str
