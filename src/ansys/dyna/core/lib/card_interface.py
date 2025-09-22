@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 import abc
-from typing import Optional, TextIO, Union
+from typing import Optional, TextIO
 
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.parameters import ParameterSet
@@ -74,9 +74,7 @@ class CardInterface(metaclass=abc.ABCMeta):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def write(
-        self, format: Optional[format_type], buf: Optional[TextIO], comment: Optional[bool]
-    ) -> Optional[str]:
+    def write(self, format: Optional[format_type], buf: Optional[TextIO], comment: Optional[bool]) -> Optional[str]:
         """
         Render the card in the dyna keyword format.
 
