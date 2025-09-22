@@ -219,12 +219,12 @@ jobs:
 
       - name: Combine coverage files
         run: |
-          ls -la 
-          pip install coverage codecov
-          coverage combine coverage_files/*/coverage.xml
-          coverage xml -o coverage_files/coverage.xml
-          coverage html -d coverage_files/html
-          codecov -f coverage_files/coverage.xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
+            ls -la 
+            pip install coverage codecov
+            coverage combine coverage_files/*/.coverage
+            coverage xml -o coverage_files/coverage.xml
+            coverage html -d coverage_files/html
+            codecov -f coverage_files/coverage.xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
 
       - name: Upload coverage results
         uses: actions/upload-artifact@v4
