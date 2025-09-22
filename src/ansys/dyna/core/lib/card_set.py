@@ -96,7 +96,7 @@ class CardSet(CardInterface):
 
     def add_item(self, **kwargs) -> int:
         """Add a card to the set. Return the index of the added card.
-        
+
         Returns
         -------
         int

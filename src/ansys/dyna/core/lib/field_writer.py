@@ -155,11 +155,11 @@ def write_fields(
         used by TableCard
     format: format_type
         optional - format to write
-        
+
     Returns
     -------
     None
-        
+
     Examples
     --------
     s=io.String()
@@ -205,7 +205,7 @@ def write_comment_line(
     None
 
     Examples
-    --------    
+    --------
     >>> s=io.String()
     >>> fields = [
     ...     Field("a", int, 0, 10, 1),

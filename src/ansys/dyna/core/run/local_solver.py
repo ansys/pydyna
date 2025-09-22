@@ -67,7 +67,7 @@ def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str
 
 def get_runner(**kwargs) -> typing.Any:
     """Return the runner for the job.
-    
+
     Returns
     -------
     runner : object

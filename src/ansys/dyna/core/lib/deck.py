@@ -72,7 +72,7 @@ class Deck:
 
     def register_import_handler(self, import_handler: ImportHandler) -> None:
         """Registers an ImportHandler object
-        
+
         Parameters
         ----------
         import_handler : ImportHandler
@@ -108,12 +108,12 @@ class Deck:
             or a string.
         check : bool, optional
             The default is ``False``.
-            
+
         Raises
         ------
         TypeError
             If the keyword is not a ``KeywordBase``, ``EncryptedKeyword``, or a string.
-        
+
         Returns
         -------
         None
@@ -396,7 +396,7 @@ class Deck:
             Keyword file as a string.
         context: ImportContext
             the context
-            
+
         Returns
         -------
         DeckLoaderResult
@@ -521,7 +521,7 @@ class Deck:
             The type of keyword to get. For example, "SECTION" returns all section keywords.
             * *filter* (``callable``) --
             The filter to apply to the result. Only keywords which pass the filter will be returned.
-            
+
         Returns
         -------
         list
