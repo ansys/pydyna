@@ -108,12 +108,17 @@ runs:
         name: server_output_tests.txt
         path: server_output.txt
 
+    - name: Rename coverage file
+      if: ${{ inputs.coverage-file }}
+      run: mv .cov/xml .cov/coverage.xml
+      shell: bash
+
     - name: Upload coverage files
       if: ${{ inputs.coverage-file }}
       uses: actions/upload-artifact@v4
       with:
         name: coverage-${{ inputs.coverage-file }}-${{ inputs.python-version }}
-        path: .cov/xml
+        path: .cov/coverage.xml
 
     - name: Stop container
       if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
