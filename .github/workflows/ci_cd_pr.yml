@@ -217,20 +217,20 @@ jobs:
           pattern: "coverage-*"
           path: coverage_files
 
-      # - name: Unzip coverage files
-      #   run: |
-      #     mkdir -p coverage_files_unzipped
-      #     for file in coverage_files/*.zip; do
-      #       unzip -o "$file" -d coverage_files/$(basename "$file" .zip)
-      #     done
-      #   shell: bash
+      - name: Unzip coverage files
+        run: |
+          mkdir -p coverage_files_unzipped
+          for file in coverage_files/*.zip; do
+            unzip -o "$file" -d coverage_files/$(basename "$file" .zip)
+          done
+        shell: bash
 
       - name: Combine coverage files
         run: |
-          ls -la coverage_files
+          ls -la coverage_files_unzipped
           pip install coverage codecov
           # combine all .coverage files no matter how they're named
-          coverage combine coverage_files/*
+          coverage combine coverage_files_unzipped/
           coverage xml -o coverage_files/coverage.xml
           coverage html -d coverage_files/html
           codecov -f coverage_files/coverage.xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
