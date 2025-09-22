@@ -219,7 +219,7 @@ jobs:
 
       - name: Combine coverage files
         run: |
-            ls -la 
+            ls -la coverage_files/*/
             pip install coverage codecov
             coverage combine coverage_files/*/.coverage
             coverage xml -o coverage_files/coverage.xml
