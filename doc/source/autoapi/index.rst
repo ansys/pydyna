@@ -8,7 +8,7 @@ to interact with them programmatically.
    :titlesonly:
    :maxdepth: 3
 
-   api/ansys/dyna/core/keywords.rst
-   api/ansys/dyna/core/lib.rst
-   api/ansys/dyna/core/run.rst
-   api/ansys/dyna/core/solver.rst
+   api/ansys/dyna/core/keywords
+   api/ansys/dyna/core/lib
+   api/ansys/dyna/core/run
+   api/ansys/dyna/core/solver
