@@ -271,12 +271,12 @@ class Model:
         return
 
     @property
-    def parts(self) -> List[Part]:
+    def parts(self) -> list[Part]:
         """Get the list of parts for the model.
 
         Returns
         -------
-        List[Part]
+        list[Part]
             List of parts for the model.
         """
         return self._parts

@@ -241,10 +241,10 @@ class ManualRSTGenerator:
                 if items:
                     write_line([".. toctree::", "    :titlesonly:", "    :maxdepth: 1", "    :hidden:", ""])
                     for item in items:
-                        write_line([f"     {symbol} {item}<{module_name}/{item}>"])
+                        write_line([f"     <span class=\"{symbol}\"></span> {item}<{module_name}/{item}>"])
 
-            write_toc_block(subpackages, "🖿", "subpackage")
-            write_toc_block(submodules, "🗎", "submodule")
+            write_toc_block(subpackages, "nf nf-md-package", "subpackage")
+            write_toc_block(submodules, "nf nf-fa-file", "submodule")
 
             if any([classes, interfaces, enums, functions]):
                 for def_type, defs in [
@@ -254,10 +254,10 @@ class ManualRSTGenerator:
                     ("Functions", functions),
                 ]:
                     if defs:
-                        symbol = {"Interfaces": "", "Classes": "", "Enums": "≔ ", "Functions": ""}[def_type]
+                        symbol = {"Interfaces": "nf nf-cod-symbol_class", "Classes": "nf nf-cod-symbol_class", "Enums": "nf nf-cod-symbol_enum", "Functions": "nf nf-md-function_variant"}[def_type]
                         write_line([".. toctree::", "    :titlesonly:", "    :maxdepth: 1", "    :hidden:", ""])
                         for d in defs:
-                            write_line([f"     {symbol}{d.name}<{module_name}/{d.name}>"])
+                            write_line([f"     <span class=\"{symbol}\"></span> {d.name}<{module_name}/{d.name}>"])
 
             for obj in classes + interfaces:
                 self._generate_rst_for_pyobj(obj, containing_namespace, module_name, str(out_file_path))

@@ -116,7 +116,7 @@ jobs:
 
   doc:
     name: "Documentation build"
-    runs-on: ubuntu-latest
+    runs-on: [public-ubuntu-latest-16-cores]
     needs: [doc-style]
     steps:
       - name: "Checkout project"

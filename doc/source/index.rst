@@ -24,7 +24,7 @@ PyDYNA documentation  |version|
 
       {% if build_api %}
       .. grid-item-card:: :fa:`wrench` API reference
-         :link: autoapi/index
+         :link: api
          :link-type: doc
 
          Explore the API reference documentation for PyDYNA, including
@@ -67,7 +67,7 @@ PyDYNA documentation  |version|
        getting-started
        user-guide/index
        {% if build_api %}
-       autoapi/index
+       api
        {% endif %}
        {% if build_examples %}
        examples/index
