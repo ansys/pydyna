@@ -230,7 +230,7 @@ jobs:
           ls -la coverage_files
           pip install coverage codecov
           # combine all .coverage files no matter how they're named
-          coverage combine coverage_files_unzipped/*
+          coverage combine coverage_files/*
           coverage xml -o coverage_files/coverage.xml
           coverage html -d coverage_files/html
           codecov -f coverage_files/coverage.xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
