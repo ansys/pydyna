@@ -21,17 +21,30 @@
 # SOFTWARE.
 
 import abc
-import typing
+from typing import Optional, TextIO, Union
 
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 
 class CardInterface(metaclass=abc.ABCMeta):
-    """Abstract base class for all the implementations of keyword cards."""
+    """Abstract base class for all implementations of keyword cards."""
 
     @classmethod
     def __subclasshook__(cls, subclass):
+        """
+        Check if a subclass implements the required interface.
+
+        Parameters
+        ----------
+        subclass : type
+            The class to check.
+
+        Returns
+        -------
+        bool
+            True if the subclass implements 'write', 'read', and 'active' methods, otherwise False.
+        """
         return (
             hasattr(subclass, "write")
             and callable(subclass.write)
@@ -42,14 +55,15 @@ class CardInterface(metaclass=abc.ABCMeta):
         )
 
     @abc.abstractmethod
-    def read(self, buf: typing.TextIO, parameter_set: typing.Optional[ParameterSet]) -> None:
-        """Reads the card data from an input text buffer.
+    def read(self, buf: TextIO, parameter_set: Optional[ParameterSet]) -> None:
+        """
+        Read the card data from an input text buffer.
 
         Parameters
         ----------
-        buf : typing.TextIO
+        buf : TextIO
             Input text buffer to read from.
-        parameter_set : typing.Optional[ParameterSet]
+        parameter_set : ParameterSet or None
             Parameter set to use for reading the card. Can be None.
 
         Raises
@@ -61,28 +75,82 @@ class CardInterface(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def write(
-        self, format: typing.Optional[format_type], buf: typing.Optional[typing.TextIO], comment: typing.Optional[bool]
-    ) -> typing.Union[str, None]:
-        """Renders the card in the dyna keyword format.
-        :param buf: Buffer to write to. If None, the output is returned as a string
-        :param format: format_type to use. Default to standard.
+        self, format: Optional[format_type], buf: Optional[TextIO], comment: Optional[bool]
+    ) -> Optional[str]:
+        """
+        Render the card in the dyna keyword format.
+
+        Parameters
+        ----------
+        format : format_type or None
+            Format type to use. Defaults to standard if None.
+        buf : TextIO or None
+            Buffer to write to. If None, the output is returned as a string.
+        comment : bool or None
+            Whether to include comments in the output.
+
+        Returns
+        -------
+        str or None
+            The rendered card as a string, or None if written to buffer.
+
+        Raises
+        ------
+        NotImplementedError
+            If the method is not implemented in the subclass.
         """
         raise NotImplementedError
 
     @property
     @abc.abstractmethod
     def format(self) -> format_type:
-        """Get the card format type."""
+        """
+        Get the card format type.
+
+        Returns
+        -------
+        format_type
+            The format type of the card.
+
+        Raises
+        ------
+        NotImplementedError
+            If the property is not implemented in the subclass.
+        """
         raise NotImplementedError
 
     @format.setter
     @abc.abstractmethod
     def format(self, value: format_type) -> None:
-        """Set the card format type."""
+        """
+        Set the card format type.
+
+        Parameters
+        ----------
+        value : format_type
+            The format type to set.
+
+        Raises
+        ------
+        NotImplementedError
+            If the property setter is not implemented in the subclass.
+        """
         raise NotImplementedError
 
     @property
     @abc.abstractmethod
     def active(self) -> bool:
-        """Return whether the card is active."""
+        """
+        Return whether the card is active.
+
+        Returns
+        -------
+        bool
+            True if the card is active, otherwise False.
+
+        Raises
+        ------
+        NotImplementedError
+            If the property is not implemented in the subclass.
+        """
         raise NotImplementedError

@@ -144,7 +144,7 @@ html_static_path = ['_static']
 # -- Declare the Jinja context -----------------------------------------------
 BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
 
-suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils"]
+suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils", "ref.python", "misc.highlighting_failure"]
 
 BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower() == "true"
 if BUILD_AUTOKEYWORS_API:
@@ -254,3 +254,4 @@ def setup(sphinx):
     # extensions.remove("ansys_sphinx_theme.extension.autoapi")
         sphinx.connect("builder-inited", run_autoapi)
     # sphinx.connect("autoapi-skip-member", skip_run_subpackage)
+    
