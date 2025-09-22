@@ -215,22 +215,22 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: "coverage-*"
-          path: .cov
+          path: coverage_files
 
       - name: Combine coverage files
         run: |
           ls -la 
           pip install coverage codecov
-          coverage combine .cov/*/coverage.xml
-          coverage xml -o .cov/coverage.xml
-          coverage html -d .cov/html
-          codecov -f .cov/coverage.xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
+          coverage combine coverage_files/*/coverage.xml
+          coverage xml -o coverage_files/coverage.xml
+          coverage html -d coverage_files/html
+          codecov -f coverage_files/coverage.xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
 
       - name: Upload coverage results
         uses: actions/upload-artifact@v4
         with:
             name: coverage-html
-            path: .cov/html
+            path: coverage_files/html
             retention-days: 7
 
       - name: Upload coverage to Codecov
@@ -238,7 +238,7 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ env.CODECOV_TOKEN }}
         with:
-            files: .cov/xml
+            files: coverage_files/xml
 
   build-library:
     name: "Build library"
