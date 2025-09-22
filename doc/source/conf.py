@@ -189,7 +189,6 @@ jinja_contexts = {
     },
 }
 
-import sphinx
 from sphinx.util import logging
 import pathlib
 import sys
@@ -207,10 +206,10 @@ def run_autoapi(app):
     logger = logging.getLogger(__name__)
     logger.info("\nWriting reST files for API documentation...", color="green")
 
-    scritps_dir = pathlib.Path(app.srcdir).parent.parent / "scripts"
-    sys.path.append(str(scritps_dir.resolve()))
+    scripts_dir = pathlib.Path(app.srcdir).parent.parent / "scripts"
+    sys.path.append(str(scripts_dir.resolve()))
 
-    print(scritps_dir)
+    print(scripts_dir)
 
     from autoapi import autodoc_extensions
     autodoc_extensions()
