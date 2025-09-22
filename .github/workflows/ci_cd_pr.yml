@@ -217,21 +217,31 @@ jobs:
           pattern: "coverage-*"
           path: coverage_files
 
+      # - name: Unzip coverage files
+      #   run: |
+      #     mkdir -p coverage_files_unzipped
+      #     for file in coverage_files/*.zip; do
+      #       unzip -o "$file" -d coverage_files/$(basename "$file" .zip)
+      #     done
+      #   shell: bash
+
       - name: Combine coverage files
         run: |
-            ls -la coverage_files/*/
-            pip install coverage codecov
-            coverage combine coverage_files/*/.coverage
-            coverage xml -o coverage_files/coverage.xml
-            coverage html -d coverage_files/html
-            codecov -f coverage_files/coverage.xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
+          ls -la coverage_files
+          pip install coverage codecov
+          # combine all .coverage files no matter how they're named
+          coverage combine coverage_files_unzipped/*
+          coverage xml -o coverage_files/coverage.xml
+          coverage html -d coverage_files/html
+          codecov -f coverage_files/coverage.xml -t ${{ env.CODECOV_TOKEN }} || echo "Codecov did not collect coverage reports"
 
       - name: Upload coverage results
         uses: actions/upload-artifact@v4
         with:
-            name: coverage-html
-            path: coverage_files/html
-            retention-days: 7
+          name: coverage-html
+          path: coverage_files/html
+          retention-days: 7
+
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
