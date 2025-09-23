@@ -201,7 +201,7 @@ jobs:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           server-logs: true
-          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          codecov-token: ${{ env.CODECOV_TOKEN }}
           coverage-file: unittests
 
   upload-coverage:
