@@ -124,6 +124,8 @@ runs:
       uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
       env:
         CODECOV_TOKEN: ${{ inputs.codecov-token }}
+      with:
+        flags: ${{ inputs.coverage-file }}
   
     # - name: Upload coverage data file
     #   if: ${{ inputs.coverage-file }}
