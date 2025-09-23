@@ -217,13 +217,13 @@ jobs:
           pattern: "coverage-*"
           path: coverage_files
 
-      # - name: Unzip coverage files
-      #   run: |
-      #     mkdir -p coverage_files_unzipped
-      #     for file in coverage_files/*.zip; do
-      #       unzip -o "$file" -d coverage_files/$(basename "$file" .zip)
-      #     done
-      #   shell: bash
+      - name: Unzip coverage files
+        run: |
+          mkdir -p coverage_files_unzipped
+          for file in coverage_files/*; do
+            unzip -o "$file" -d coverage_files/$(basename "$file" .zip)
+          done
+        shell: bash
 
       - name: Combine coverage files
         run: |
