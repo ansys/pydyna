@@ -180,12 +180,12 @@ Rigid Body Connection Element
                                                             """
 
 
-test_rigid_bodies = """*CONSTRAINED_RIGID_BODIES
+test_constrained_rigid_bodies = """*CONSTRAINED_RIGID_BODIES
 $#    pidl      pidc     iflag
    1234567       123         0
    1234568       124         0"""
 
-   
+
 test_contact_tied_shell_edge_to_surface_id = """*CONTACT_TIED_SHELL_EDGE_TO_SURFACE_ID
 69000005  TIED_TEST3                                                    
   69000268  69000267         2         2                             0         0
