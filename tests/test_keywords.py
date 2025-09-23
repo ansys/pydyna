@@ -834,7 +834,7 @@ def test_constrained_nodal_rigid_body_inertia_title(ref_string):
 def test_constrained_rigid_bodies(ref_string):
     crb = kwd.ConstrainedRigidBodies()
     crb.loads(ref_string.test_constrained_rigid_bodies)
-    assert crb.constrains.shape == (2, 3)
+    assert crb.pairs.shape == (2, 3)
 
 
 @pytest.mark.keywords
