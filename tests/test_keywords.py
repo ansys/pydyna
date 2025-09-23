@@ -831,6 +831,13 @@ def test_constrained_nodal_rigid_body_inertia_title(ref_string):
 
 
 @pytest.mark.keywords
+def test_constrained_rigid_bodies(ref_string):
+    crb = kwd.ConstrainedRigidBodies()
+    crb.loads(ref_string.test_constrained_rigid_bodies)
+    assert ca.constrains.shape == (2, 3)
+
+    
+@pytest.mark.keywords
 def test_mat_piecewise_linear_plasticity_title(ref_string):
     m = kwd.MatPiecewiseLinearPlasticity()
     m.loads(ref_string.test_mat_piecewise_linear_plasticity_title)

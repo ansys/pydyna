@@ -23,6 +23,7 @@
 """Module providing the ConstrainedRigidBodies class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ConstrainedRigidBodies(KeywordBase):
@@ -35,65 +36,25 @@ class ConstrainedRigidBodies(KeywordBase):
         """Initialize the ConstrainedRigidBodies class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
+            TableCard(
                 [
-                    Field(
-                        "pidl",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflag",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
+                    Field("pidl", int, 0, 10, None),
+                    Field("pidc", int, 10, 10, None),
+                    Field("iflag", int, 20, 10, None),
                 ],
+                None,
+                name="pairs",
+                **kwargs,
             ),
         ]
 
     @property
-    def pidl(self) -> typing.Optional[int]:
-        """Get or set the Lead rigid body part ID, see *PART.
-        """ # nopep8
-        return self._cards[0].get_value("pidl")
+    def pairs(self):
+        """Get the table of pairs."""
+        return self._cards[0].table
 
-    @pidl.setter
-    def pidl(self, value: int) -> None:
-        """Set the pidl property."""
-        self._cards[0].set_value("pidl", value)
-
-    @property
-    def pidc(self) -> typing.Optional[int]:
-        """Get or set the Constrained rigid body part ID (see *PART) or constrained rigid body part set ID for the SET keyword option (see *SET_PART)
-        """ # nopep8
-        return self._cards[0].get_value("pidc")
-
-    @pidc.setter
-    def pidc(self, value: int) -> None:
-        """Set the pidc property."""
-        self._cards[0].set_value("pidc", value)
-
-    @property
-    def iflag(self) -> typing.Optional[int]:
-        """Get or set the This flag is meaningful if and only if the inertia properties of the lead part, PIDL, are defined in *PART_‌INERTIA.  See Remark 1.
-        EQ.1:	Update the center - of - gravity, the translational mass,and the inertia matrix of PIDL to reflect its merging with the constrained rigid body(PIDC).
-        EQ.0 : The merged PIDC will not affect the properties defined in * PART_‌INERTIA for PIDL since the properties are assumed to already account for merged parts.If the properties are not defined in a* PART_‌INERTIA definition, the inertia properties of PIDC will be computed from its nodal masses.
-        """ # nopep8
-        return self._cards[0].get_value("iflag")
-
-    @iflag.setter
-    def iflag(self, value: int) -> None:
-        """Set the iflag property."""
-        self._cards[0].set_value("iflag", value)
+    @pairs.setter
+    def pairs(self, df):
+        """Set pairs from the dataframe df"""
+        self._cards[0].table = df
 

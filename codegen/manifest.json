@@ -2149,6 +2149,16 @@
             ]
         }
     },
+    "CONSTRAINED_RIGID_BODIES": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "index": 0,
+                    "property-name": "pairs"
+                }
+            ]
+        }
+    },
     "CONSTRAINED_RIVET":{
         "generation-options": {
             "add-option": [
