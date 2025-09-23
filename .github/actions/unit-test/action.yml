@@ -84,9 +84,9 @@ runs:
     - name: Run pytest
       run: |
           if [ "${{ inputs.pytest-markers }}" = "" ]; then
-            export COVERAGE_FILE=.cov/${{ inputs.coverage-file }} && pytest 
+            pytest -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
           else
-            export COVERAGE_FILE=.cov/${{ inputs.coverage-file }} && pytest -m "${{ inputs.pytest-markers }}"
+            pytest -m "${{ inputs.pytest-markers }}" -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
           fi
       shell: bash
       env:
@@ -124,9 +124,7 @@ runs:
       uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
       env:
         CODECOV_TOKEN: ${{ inputs.codecov-token }}
-      with:
-          files: .cov/${{ inputs.coverage-file }}
-
+  
     - name: Upload coverage data file
       if: ${{ inputs.coverage-file }}
       uses: actions/upload-artifact@v4
