@@ -83,11 +83,11 @@ runs:
 
     - name: Run pytest
       run: |
-          if [ "${{ inputs.pytest-markers }}" = "" ]; then
-            pytest -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
-          else
-            pytest -m "${{ inputs.pytest-markers }}" -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
-          fi
+        if [ "${{ inputs.pytest-markers }}" = "" ]; then
+          pytest -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
+        else
+          pytest -m "${{ inputs.pytest-markers }}" -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
+        fi
       shell: bash
       env:
         PYDYNA_RUN_CONTAINER: ${{ inputs.docker-image }}
