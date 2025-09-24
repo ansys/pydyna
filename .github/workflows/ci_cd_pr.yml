@@ -19,6 +19,7 @@ env:
   PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
   PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.PyDynaRunContainer || 'ghcr.io/ansys/pydyna-run:latest'}}
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -148,13 +149,32 @@ jobs:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
+  
 
+  keyword-testing:
+    name: "Keyword testing for matrix"
+    needs: [smoke-tests]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.10', '3.11', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Run test with "keywords" marker
+        uses: ./.github/actions/unit-test
+        with:
+          python-version: ${{ matrix.python-version }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pytest-markers: keywords
+          coverage-file: keywords
 
   run-testing:
     name: Test the "run" subpackage
     runs-on: ubuntu-latest
     needs: [smoke-tests]
-
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
@@ -166,36 +186,22 @@ jobs:
           docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
           pytest-markers: run
           license-server: ${{ secrets.LICENSE_SERVER }}
-
-  keyword-testing:
-    name: "Keyword testing"
-    runs-on: ${{ matrix.os }}
-    needs: [smoke-tests]
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: ['3.10', '3.11', '3.12', '3.13']
-    steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - uses: ./.github/actions/unit-test
-        with:
-          python-version: ${{ matrix.python-version }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pytest-markers: keywords
+          coverage-file: run
 
   unit-tests:
     name: "Testing"
     runs-on: ubuntu-latest
-    needs: [run-testing, keyword-testing]
+    needs: [keyword-testing, run-testing, codegen-testing]
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: ./.github/actions/unit-test
+      - name: Run test without marker
+        uses: ./.github/actions/unit-test
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           server-logs: true
+          codecov-token: ${{ env.CODECOV_TOKEN }}
+          coverage-file: unittests
 
   build-library:
     name: "Build library"
