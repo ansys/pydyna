@@ -61,7 +61,7 @@ tests = [
     "joblib==1.5.2",
     "pandas==2.3.2",
     "openpyxl==3.1.5",
-    "scikit-learn==1.7.1",
+    "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
     "ipython==8.37.0",
     "pyvista==0.46.3",
@@ -90,7 +90,7 @@ doc = [
 
     "ipywidgets==8.1.7",
     "joblib==1.5.2",
-    "scikit-learn==1.7.1",
+    "scikit-learn==1.7.2",
     "ipython==8.37.0",
     "jupyterlab==4.4.7",
     "sphinx-jinja==2.0.2",
@@ -119,6 +119,9 @@ src_paths = ["doc", "src", "tests"]
 
 [tool.coverage.run]
 source = ["ansys.dyna.core"]
+omit = [
+   "src/ansys/dyna/core/keywords/keyword_classes/auto/*"
+]
 
 [tool.coverage.report]
 show_missing = true
