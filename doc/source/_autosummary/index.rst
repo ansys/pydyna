@@ -8957,13 +8957,6 @@ DefineFrictionSingleSurface
     :members:
 
 
-DefineFunction
-==============
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_function 
-    :members:
-
-
 DefineFunctionTabulated
 =======================
 
@@ -10546,20 +10539,6 @@ ElementShellThicknessOffset
     :members:
 
 
-ElementSolid
-============
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.element_solid 
-    :members:
-
-
-ElementSolidTenNodesFormat
-==========================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.element_solid__ten_nodes_format_ 
-    :members:
-
-
 ElementSolidDof
 ===============
 
@@ -10711,20 +10690,6 @@ ElementSolidNurbsPatch
 ======================
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.element_solid_nurbs_patch 
-    :members:
-
-
-ElementSolidOrtho
-=================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.element_solid_ortho 
-    :members:
-
-
-ElementSolidOrthoTenNodesFormat
-===============================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.element_solid_ortho__ten_nodes_format_ 
     :members:
 
 
@@ -15663,13 +15628,6 @@ Mat106
     :members:
 
 
-Mat107
-======
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_modified_johnson_cook 
-    :members:
-
-
 Mat108
 ======
 
@@ -17217,13 +17175,6 @@ MatAnisotropicElasticPlastic
     :members:
 
 
-MatAnisotropicHyperelastic
-==========================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_295 
-    :members:
-
-
 MatAnisotropicPlastic
 =====================
 
@@ -17445,13 +17396,6 @@ MatCohesiveGeneral
 ==================
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_cohesive_general 
-    :members:
-
-
-MatCohesiveMixedMode
-====================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_138 
     :members:
 
 
@@ -18001,13 +17945,6 @@ MatGeneralNonlinear6DofDiscreteBeam
     :members:
 
 
-MatGeneralSpringDiscreteBeam
-============================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_196 
-    :members:
-
-
 MatGeneralViscoelastic
 ======================
 
@@ -18131,13 +18068,6 @@ MatHydraulicGasDamperDiscreteBeam
 =================================
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_hydraulic_gas_damper_discrete_beam 
-    :members:
-
-
-MatHyperelasticRubber
-=====================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_077_h 
     :members:
 
 
@@ -18299,20 +18229,6 @@ MatKinematicHardeningTransverselyAnisotropicNlp
 ===============================================
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_kinematic_hardening_transversely_anisotropic_nlp 
-    :members:
-
-
-MatLaminatedCompositeFabric
-===========================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_058 
-    :members:
-
-
-MatLaminatedCompositeFabricSolid
-================================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_058_solid 
     :members:
 
 
@@ -18596,13 +18512,6 @@ Mat009
     :members:
 
 
-MatOgdenRubber
-==============
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_077_o 
-    :members:
-
-
 MatOrientedCrack
 ================
 
@@ -18747,13 +18656,6 @@ MatPitzerCrushableFoam
 ======================
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_pitzer_crushable_foam 
-    :members:
-
-
-MatPlasticityCompressionTension
-===============================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_124 
     :members:
 
 
@@ -19216,13 +19118,6 @@ MatSimplifiedRubber
 ===================
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_simplified_rubber 
-    :members:
-
-
-MatSimplifiedRubberFoam
-=======================
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_181 
     :members:
 
 
