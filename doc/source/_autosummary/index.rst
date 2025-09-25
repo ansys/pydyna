@@ -17752,7 +17752,7 @@ MatElasticPlasticHydroSpall
 MatElasticPlasticHydroStochastic
 ================================
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_elastic_plastic_hydro_stochastic 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto 
     :members:
 
 
