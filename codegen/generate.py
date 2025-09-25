@@ -194,6 +194,7 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autod
     env = Environment(loader=get_loader(), trim_blocks=True, lstrip_blocks=True)
     if not os.path.exists(os.path.join(lib_path, "auto")):
         os.mkdir(os.path.join(lib_path, "auto"))
+    # Generate only requested keyword(s)
     keywords_list = get_keywords_to_generate(kwd_name)
     for item in keywords_list:
         name = item["name"]
@@ -204,10 +205,13 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autod
         classname, filename = generate_class(env, lib_path, item)
         autodoc_entries.append((classname, filename))
 
+    # Always rewrite autodoc for all keywords
     if autodoc_output_path:
+        all_keywords = get_keywords_to_generate(None)
+        all_autodoc_entries = [(item["classname"], item["filename"]) for item in all_keywords]
         os.makedirs(autodoc_output_path, exist_ok=True)
         rst_template = env.get_template("autodoc_rst.jinja")
-        combined_rst = rst_template.render(entries=autodoc_entries)
+        combined_rst = rst_template.render(entries=all_autodoc_entries)
         combined_filepath = os.path.join(autodoc_output_path, "index.rst")
         with open(combined_filepath, "w", encoding="utf-8") as f:
             f.write(combined_rst)
