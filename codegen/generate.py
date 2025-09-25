@@ -165,6 +165,26 @@ def add_aliases(kwd_list: typing.List[str]) -> None:
             data_model.add_alias(keyword, keyword_options["alias"])
 
 
+def generate_autodoc_file(autodoc_output_path, all_keywords, env):
+    """Generates the autodoc rst file for all keywords."""
+    autodoc_entries = []
+    for item in all_keywords:
+        keyword = item["name"]
+        if skip_generate_keyword_class(keyword):
+            continue
+        if data_model.is_aliased(keyword):
+            continue
+        fixed_keyword = fix_keyword(keyword)
+        classname = item["options"].get("classname", get_classname(fixed_keyword))
+        autodoc_entries.append((classname, fixed_keyword.lower()))
+    os.makedirs(autodoc_output_path, exist_ok=True)
+    rst_template = env.get_template("autodoc_rst.jinja")
+    combined_rst = rst_template.render(entries=autodoc_entries)
+    combined_filepath = os.path.join(autodoc_output_path, "index.rst")
+    with open(combined_filepath, "w", encoding="utf-8") as f:
+        f.write(combined_rst)
+
+
 def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.List[typing.Dict]:
     """Get keywords to generate. If a kwd name is not none, only generate
     it and its generations."""
@@ -207,14 +227,8 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autod
 
     # Always rewrite autodoc for all keywords
     if autodoc_output_path:
-        all_keywords = get_keywords_to_generate(None)
-        all_autodoc_entries = [(item["classname"], item["filename"]) for item in all_keywords]
-        os.makedirs(autodoc_output_path, exist_ok=True)
-        rst_template = env.get_template("autodoc_rst.jinja")
-        combined_rst = rst_template.render(entries=all_autodoc_entries)
-        combined_filepath = os.path.join(autodoc_output_path, "index.rst")
-        with open(combined_filepath, "w", encoding="utf-8") as f:
-            f.write(combined_rst)
+        all_keywords = get_keywords_to_generate()
+        generate_autodoc_file(autodoc_output_path, all_keywords, env)
     keywords_list.extend(get_undefined_alias_keywords(keywords_list))
     if kwd_name == None:
         generate_entrypoints(env, lib_path, keywords_list)
