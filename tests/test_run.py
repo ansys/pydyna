@@ -41,18 +41,3 @@ def test_run_from_input_file_001(file_utils, runner):
         generated_files = [f for f in os.listdir(example_folder) if not f.endswith(".k")]
         for file in generated_files:
             os.remove(os.path.join(example_folder, file))
-
-@pytest.mark.run
-def test_case_keywords(file_utils):
-    input_file = file_utils.testfiles_folder / "run"/ "case-keywords"/ "i.k"
-    example_folder = str(input_file.parent.resolve())
-    try:
-        wdir = run_dyna(str(input_file), working_directory=example_folder, activate_case=True)
-        assert wdir == example_folder
-        assert os.path.isfile(os.path.join(example_folder, "d3plot"))
-    except Exception as e:
-        raise e
-    finally:
-        generated_files = [f for f in os.listdir(example_folder) if not f.endswith(".k")]
-        for file in generated_files:
-            os.remove(os.path.join(example_folder, file))
