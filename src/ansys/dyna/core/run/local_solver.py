@@ -125,6 +125,10 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
             If True, the stdout of solver is streamed to python's stdout during the solve.
             If False, the solver stdout is printed once after the container exits.
             Defaults to True.
+        activate_case : bool
+            If provided, aappends CASE cammad line for *CASE keywords support
+        case_ids : list[int] or None
+            If provided, appends CASE or CASE=... to the LS-DYNA command line for *CASE support.
 
     Returns
     -------
