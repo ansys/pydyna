@@ -36,6 +36,18 @@ inputs:
     default: ""
     type: string
 
+  codecov-token:
+    description: Token for Codecov upload
+    required: false
+    default: ""
+    type: string
+
+  coverage-file:
+    description: Coverage file path
+    required: false
+    default: ""
+    type: string
+
 runs:
   using: "composite"
   steps:
@@ -72,9 +84,9 @@ runs:
     - name: Run pytest
       run: |
         if [ "${{ inputs.pytest-markers }}" = "" ]; then
-          pytest 
+          pytest -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
         else
-          pytest -m "${{ inputs.pytest-markers }}"
+          pytest -m "${{ inputs.pytest-markers }}" -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
         fi
       shell: bash
       env:
@@ -96,10 +108,16 @@ runs:
         name: server_output_tests.txt
         path: server_output.txt
 
-    - name: Upload coverage results
-      if: ${{ inputs.server-logs == 'true' }}
-      uses: actions/upload-artifact@v4
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
+      env:
+        CODECOV_TOKEN: ${{ inputs.codecov-token }}
       with:
-        name: coverage-html
-        path: .cov/html
-        retention-days: 7
+        flags: ${{ inputs.coverage-file }}
+
+    - name: Stop container
+      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
+      run: |
+        docker stop kw_server
+        docker rm kw_server
+      shell: bash
