@@ -198,9 +198,7 @@ class WindowsRunner(BaseRunner):
         if self.mpi_option == MpiOption.SMP:
             command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem}{case_option}"
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
-            command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}{case_option}'
+            command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}{case_option}'  # noqa: E501
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
-            command = (
-                f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}{case_option}'
-            )
+            command = f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}{case_option}'  # noqa: E501
         return f"{script} && {command} > lsrun.out.txt 2>&1"

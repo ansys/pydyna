@@ -97,8 +97,8 @@ class LinuxRunner(BaseRunner):
             else:
                 case_option = " CASE"
         if self.mpi_option == MpiOption.MPP_INTEL_MPI:
-            args = f"mpirun -np {self.ncpu} {self.solver} i={self.input_file} memory={self.get_memory_string()}{case_option}"
+            args = f"mpirun -np {self.ncpu} {self.solver} i={self.input_file} memory={self.get_memory_string()}{case_option}"  # noqa: E501
             os.system(args)  # nosec: B605
         else:
-            args = f"{self.solver} i={self.input_file} ncpu={self.ncpu} memory={self.get_memory_string()}{case_option}"
+            args = f"{self.solver} i={self.input_file} ncpu={self.ncpu} memory={self.get_memory_string()}{case_option}"  # noqa: E501
             os.system(args)  # nosec: B605
