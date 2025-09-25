@@ -79,10 +79,26 @@ class SeriesCard(CardInterface):
         return dataclasses.make_dataclass(self._name, dataclass_spec)
 
     def __iter__(self) -> typing.Iterable:
+        """
+        Iterate over the data values.
+
+        Returns
+        -------
+        typing.Iterable
+            Iterator over the data values.
+        """
         return iter(self._data)
 
     @property
     def format(self) -> format_type:
+        """
+        Get the format type.
+
+        Returns
+        -------
+        format_type
+            The format type.
+        """
         return self._format_type
 
     @format.setter
@@ -179,6 +195,14 @@ class SeriesCard(CardInterface):
 
     @property
     def active(self) -> bool:
+        """
+        Whether the card is active.
+
+        Returns
+        -------
+        bool
+            True if active, else False.
+        """
         if self._active_func == None:
             return True
         return self._active_func()
@@ -188,6 +212,19 @@ class SeriesCard(CardInterface):
         return math.ceil(self._length_func() / fields_per_card)
 
     def __getitem__(self, index):
+        """
+        Get item(s) by index or slice.
+
+        Parameters
+        ----------
+        index : int or slice
+            Index or slice to retrieve.
+
+        Returns
+        -------
+        Any or list
+            Value(s) at the specified index or slice.
+        """
         err_string = f"get indexer for SeriesCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
         if not isinstance(index, (slice, int)):
             raise TypeError(err_string)
@@ -366,10 +403,26 @@ class SeriesCard(CardInterface):
         return self._write_row(format, start_index, end_index)
 
     def __len__(self) -> int:
+        """
+        Get the number of elements.
+
+        Returns
+        -------
+        int
+            Number of elements.
+        """
         return self._length_func()
 
     @property
     def bounded(self) -> bool:
+        """
+        Whether the card is bounded.
+
+        Returns
+        -------
+        bool
+            True if bounded, else False.
+        """
         return self._bounded
 
     def __repr__(self) -> str:
@@ -381,7 +434,14 @@ class SeriesCard(CardInterface):
 
     @property
     def data(self):
-        """Gets or sets the data list of parameter values"""
+        """
+        Gets or sets the data list of parameter values.
+
+        Returns
+        -------
+        list
+            List of parameter values.
+        """
         return self._data
 
     @data.setter

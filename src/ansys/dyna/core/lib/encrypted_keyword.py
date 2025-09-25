@@ -24,4 +24,6 @@
 
 
 class EncryptedKeyword:
+    """Encrypted keyword representation."""
+
     data: str = None
