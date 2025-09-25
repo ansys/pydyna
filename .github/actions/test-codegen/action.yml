@@ -37,6 +37,13 @@ runs:
           echo "CHANGES=true" >> "$GITHUB_ENV"
         fi
 
+        # Also check doc/source/_autosummary/index.rst
+        if git -C doc/source/_autosummary/ diff --relative --exit-code; then
+          echo "CHANGES=false" >> "$GITHUB_ENV"
+        else
+          echo "CHANGES=true" >> "$GITHUB_ENV"
+        fi
+
     - name: Exit on changes
       if: ${{ env.CHANGES == 'true' }}
       shell: bash

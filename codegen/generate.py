@@ -226,7 +226,7 @@ def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autod
         autodoc_entries.append((classname, filename))
 
     # Always rewrite autodoc for all keywords
-    if autodoc_output_path:
+    if autodoc_output_path and not kwd_name:
         all_keywords = get_keywords_to_generate()
         generate_autodoc_file(autodoc_output_path, all_keywords, env)
     keywords_list.extend(get_undefined_alias_keywords(keywords_list))
