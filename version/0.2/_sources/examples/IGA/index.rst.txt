@@ -1,0 +1,43 @@
+
+
+.. _sphx_glr_examples_IGA:
+
+IGA examples
+~~~~~~~~~~~~~
+
+These examples show how to create Isogeometric Analysis model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to create an IGA input deck. ">
+
+.. only:: html
+
+  .. image:: /examples/IGA/images/thumb/sphx_glr_iga_sample_thumb.png
+    :alt: IGA example
+
+  :ref:`sphx_glr_examples_IGA_iga_sample.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">IGA example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/IGA/iga_sample
+

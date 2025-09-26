@@ -1,0 +1,58 @@
+ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic
+==========================================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic(curve)
+
+   
+   Provides a nonlinear elastic translational and rotational spring with an arbitrary force.
+
+   The arbitrary force is defined as a function of displacement. The moment is defined
+   as a function of rotation.
+
+   :Parameters:
+
+       **curve** : :obj:`Curve`
+           Load curve describing force as a function of displacement or moment as a function of rotation relationship.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: curve
+
+
+   .. py:method:: create(stub)
+
+      
+      Create material spring nonlinear elastic.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
