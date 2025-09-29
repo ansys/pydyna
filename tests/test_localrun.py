@@ -1,6 +1,10 @@
 import pytest
 import os
 from ansys.dyna.core.run.linux_runner import LinuxRunner
+from unittest.mock import patch as mock_patch
+from ansys.dyna.core.run.options import MpiOption, Precision
+
+from unittest.mock import MagicMock
 
 @pytest.fixture
 def patch_ansys_paths(monkeypatch):
@@ -47,13 +51,6 @@ def test_find_solver_latest_install(patch_ansys_paths, always_isfile):
     assert instance.solver == expected_exe
 
 
-# --- CASE command logic test ---
-import subprocess
-from unittest.mock import patch as mock_patch
-from ansys.dyna.core.run.options import MpiOption, Precision
-
-from unittest.mock import MagicMock
-
 @pytest.mark.parametrize("activate_case,case_ids,expected_case", [
     (False, None, ""),  # No CASE
     (True, None, " CASE"),  # CASE only
@@ -71,6 +68,6 @@ def test_linuxrunner_case_command(patch_ansys_paths, always_isfile, activate_cas
     runner.case_ids = case_ids
 
     with mock_patch("subprocess.run") as mock_subproc:
-        mock_subproc.return_value = MagicMock()  # <-- Add this line
+        mock_subproc.return_value = MagicMock()
         runner.run()
     
