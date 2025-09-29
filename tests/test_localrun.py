@@ -4,6 +4,8 @@ from ansys.dyna.core.run.linux_runner import LinuxRunner
 from unittest.mock import patch as mock_patch
 from ansys.dyna.core.run.options import MpiOption, Precision
 
+from ansys.dyna.core.run.windows_runner import WindowsRunner
+
 from unittest.mock import MagicMock
 
 @pytest.fixture
@@ -71,3 +73,35 @@ def test_linuxrunner_case_command(patch_ansys_paths, always_isfile, activate_cas
         mock_subproc.return_value = MagicMock()
         runner.run()
     
+
+@pytest.mark.parametrize("activate_case,case_ids,expected", [
+    (False, None, "CASE not activated"),
+    (True, None, " CASE"),
+    (True, [], " CASE"),
+    (True, [1, 2, 3], " CASE=1,2,3"),
+])
+def test_get_command_line_case_options(tmp_path, activate_case, case_ids, expected):
+    with mock_patch.object(WindowsRunner, '_find_solver', return_value=None):
+        runner = WindowsRunner(
+            ncpu=4,
+            memory=2000,
+            mpi_option=MpiOption.SMP,
+            precision=Precision.DOUBLE,
+            activate_case=activate_case,
+            case_ids=case_ids,
+            version=2024,
+        )
+        runner.solver = 'lsdyna_dp.exe'
+        runner.solver_location = str(tmp_path)
+        runner.input_file = "input.k"
+        runner.working_directory = str(tmp_path)
+        with mock_patch.object(runner, '_get_env_script', return_value='env.bat'):
+            cmd = runner._get_command_line()
+            if not activate_case:
+                assert "CASE" not in cmd
+            elif case_ids and isinstance(case_ids, list) and case_ids:
+                assert f"CASE={','.join(str(cid) for cid in case_ids)}" in cmd
+            else:
+                assert " CASE" in cmd
+            assert "lsdyna_dp.exe" in cmd
+            assert "input.k" in cmd
