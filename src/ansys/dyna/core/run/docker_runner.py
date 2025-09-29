@@ -77,13 +77,13 @@ class DockerRunner(BaseRunner):
         case_option = ""
         if self.activate_case:
             if self.case_ids and isinstance(self.case_ids, list) and self.case_ids:
-                case_option = f" CASE={','.join(str(cid) for cid in self.case_ids)}"
+                case_option = f"CASE={','.join(str(cid) for cid in self.case_ids)}"
             else:
-                case_option = " CASE"
+                case_option = "CASE"
         env = {
             "DYNA_OPTION": self._get_solver_option(),
             "DYNA_NCPU": f"{self.ncpu}",
-            "DYNA_ARGS": f"i={self._input_file} memory={self.get_memory_string()}{case_option}",
+            "DYNA_ARGS": f"i={self._input_file} memory={self.get_memory_string()} {case_option}",
         }
         env.update(self._container_env)
         volumes = [f"{self._working_directory}:/run"]

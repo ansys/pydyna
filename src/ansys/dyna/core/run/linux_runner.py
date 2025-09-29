@@ -93,12 +93,12 @@ class LinuxRunner(BaseRunner):
         case_option = ""
         if self.activate_case:
             if self.case_ids and isinstance(self.case_ids, list) and self.case_ids:
-                case_option = f" CASE={','.join(str(cid) for cid in self.case_ids)}"
+                case_option = f"CASE={','.join(str(cid) for cid in self.case_ids)}"
             else:
-                case_option = " CASE"
+                case_option = "CASE"
         if self.mpi_option == MpiOption.MPP_INTEL_MPI:
-            args = f"mpirun -np {self.ncpu} {self.solver} i={self.input_file} memory={self.get_memory_string()}{case_option}"  # noqa: E501
+            args = f"mpirun -np {self.ncpu} {self.solver} i={self.input_file} memory={self.get_memory_string()} {case_option}"  # noqa: E501
             os.system(args)  # nosec: B605
         else:
-            args = f"{self.solver} i={self.input_file} ncpu={self.ncpu} memory={self.get_memory_string()}{case_option}"  # noqa: E501
+            args = f"{self.solver} i={self.input_file} ncpu={self.ncpu} memory={self.get_memory_string()} {case_option}"  # noqa: E501
             os.system(args)  # nosec: B605

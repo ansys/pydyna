@@ -191,14 +191,14 @@ class WindowsRunner(BaseRunner):
         case_option = ""
         if self.activate_case:
             if self.case_ids and isinstance(self.case_ids, list) and self.case_ids:
-                case_option = f" CASE={','.join(str(cid) for cid in self.case_ids)}"
+                case_option = f"CASE={','.join(str(cid) for cid in self.case_ids)}"
             else:
-                case_option = " CASE"
+                case_option = "CASE"
 
         if self.mpi_option == MpiOption.SMP:
             command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem}{case_option}"
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
-            command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}{case_option}'  # noqa: E501
+            command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem} {case_option}'  # noqa: E501
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
-            command = f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}{case_option}'  # noqa: E501
+            command = f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem} {case_option}'  # noqa: E501
         return f"{script} && {command} > lsrun.out.txt 2>&1"
