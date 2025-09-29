@@ -72,20 +72,23 @@ def test_linuxrunner_case_command(patch_ansys_paths, always_isfile, activate_cas
     with mock_patch("subprocess.run") as mock_subproc:
         mock_subproc.return_value = MagicMock()
         runner.run()
-    
 
+
+# pytest mark for MSMPI, INTELMPI, OPENMPI
+
+@pytest.mark.parametrize("mpi_option", [MpiOption.MPP_INTEL_MPI, MpiOption.MPP_MS_MPI, MpiOption.SMP])
 @pytest.mark.parametrize("activate_case,case_ids,expected", [
     (False, None, "CASE not activated"),
     (True, None, " CASE"),
     (True, [], " CASE"),
     (True, [1, 2, 3], " CASE=1,2,3"),
 ])
-def test_get_command_line_case_options(tmp_path, activate_case, case_ids, expected):
+def test_get_command_line_case_options(tmp_path, activate_case, case_ids, expected, mpi_option):
     with mock_patch.object(WindowsRunner, '_find_solver', return_value=None):
         runner = WindowsRunner(
             ncpu=4,
             memory=2000,
-            mpi_option=MpiOption.SMP,
+            mpi_option=mpi_option,
             precision=Precision.DOUBLE,
             activate_case=activate_case,
             case_ids=case_ids,
@@ -105,3 +108,4 @@ def test_get_command_line_case_options(tmp_path, activate_case, case_ids, expect
                 assert " CASE" in cmd
             assert "lsdyna_dp.exe" in cmd
             assert "input.k" in cmd
+            
