@@ -196,7 +196,7 @@ class WindowsRunner(BaseRunner):
                 case_option = "CASE"
 
         if self.mpi_option == MpiOption.SMP:
-            command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem}{case_option}"
+            command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem} {case_option}"
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
             command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem} {case_option}'  # noqa: E501
         elif self.mpi_option == MpiOption.MPP_MS_MPI:

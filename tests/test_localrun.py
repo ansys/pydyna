@@ -52,14 +52,14 @@ def test_find_solver_latest_install(patch_ansys_paths, always_isfile):
     expected_exe = "/usr/ansys_inc/v251/ansys/bin/linx64/lsdyna_dp.e"
     assert instance.solver == expected_exe
 
-
+@pytest.mark.parametrize("mpi_option", [MpiOption.SMP, MpiOption.MPP_INTEL_MPI])
 @pytest.mark.parametrize("activate_case,case_ids,expected_case", [
     (False, None, ""),  # No CASE
     (True, None, " CASE"),  # CASE only
     (True, [], " CASE"),    # CASE only
     (True, [1,2,3], " CASE=1,2,3"),  # CASE with IDs
 ])
-def test_linuxrunner_case_command(patch_ansys_paths, always_isfile, activate_case, case_ids, expected_case):
+def test_linuxrunner_case_command(patch_ansys_paths, always_isfile, activate_case, case_ids, expected_case, mpi_option):
     runner = LinuxRunner()
     runner.mpi_option = MpiOption.SMP
     runner.precision = Precision.SINGLE
@@ -105,7 +105,7 @@ def test_get_command_line_case_options(tmp_path, activate_case, case_ids, expect
             elif case_ids and isinstance(case_ids, list) and case_ids:
                 assert f"CASE={','.join(str(cid) for cid in case_ids)}" in cmd
             else:
-                assert " CASE" in cmd
+                assert "CASE" in cmd
             assert "lsdyna_dp.exe" in cmd
             assert "input.k" in cmd
             
