@@ -37,7 +37,19 @@ class ParameterSet:
         self._params = dict()
 
     def get(self, param: str) -> typing.Any:
-        """Get a parameter by name."""
+        """
+        Get a parameter by name.
+
+        Parameters
+        ----------
+        param : str
+            Name of the parameter.
+
+        Returns
+        -------
+        typing.Any
+            The value of the parameter.
+        """
         return self._params[param]
 
     def add(self, param: str, value: typing.Any) -> None:

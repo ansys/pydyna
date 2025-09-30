@@ -29,7 +29,19 @@ from ansys.dyna.core import Deck
 
 
 def get_nid_to_index_mapping(nodes) -> typing.Dict:
-    """Given a node id, output the node index as a dict"""
+    """
+    Given a node id, output the node index as a dict.
+
+    Parameters
+    ----------
+    nodes : pd.DataFrame
+        The nodes DataFrame.
+
+    Returns
+    -------
+    dict
+        Mapping from node id to index.
+    """
     mapping = {}
     for idx, node in nodes.iterrows():
         mapping[node["nid"]] = idx
@@ -43,7 +55,19 @@ def merge_keywords(
     Merge mesh keywords.
 
     Given a deck, merges specific keywords (NODE, ELEMENT_SHELL, ELEMENT_BEAM, ELEMENT_SOLID)
-    and returns tham as data frames.
+    and returns them as data frames.
+
+    Parameters
+    ----------
+    deck : Deck
+        The deck object containing mesh keywords.
+
+    Returns
+    -------
+    nodes : pd.DataFrame
+        DataFrame of nodes.
+    df_list : dict
+        Dictionary of element type to DataFrame.
     """
     nodes_temp = [kwd.nodes for kwd in deck.get_kwds_by_type("NODE")]
     nodes = pd.concat(nodes_temp) if len(nodes_temp) else pd.DataFrame()
@@ -60,6 +84,19 @@ def merge_keywords(
 
 
 def process_nodes(nodes_df):
+    """
+    Extract xyz coordinates from nodes DataFrame.
+
+    Parameters
+    ----------
+    nodes_df : pd.DataFrame
+        DataFrame of nodes.
+
+    Returns
+    -------
+    np.ndarray
+        Array of xyz coordinates.
+    """
     nodes_xyz = nodes_df[["x", "y", "z"]]
     return nodes_xyz.to_numpy()
 
@@ -68,16 +105,15 @@ def shell_facet_array(facets: pd.DataFrame) -> np.array:
     """
     Get the shell facet array from the DataFrame.
 
-    Facets are a pandas frame that is a sequence of integers
-    or NAs with max length of 8.
-    valid rows contain 3,4,6, or 8 items consecutive from the
-    left.  we don't plot quadratic edges so 6/8 collapse to 3/4
-    invalid rows are ignored, meaning they return an empty array
-    return an array of length 4 or 5 using the pyvista spec
-    for facets which includes a length prefix
-    [1,2,3]=>[3,1,2,3]
-    [1,2,3,0]=>[3,1,2,3]
-    [1,2,3,NA]=>[3,1,2,3]
+    Parameters
+    ----------
+    facets : pd.DataFrame
+        DataFrame row of facet node ids.
+
+    Returns
+    -------
+    np.ndarray
+        Array of facet node ids with length prefix for PyVista.
     """
     facet_array = np.empty(5, dtype=np.int32)
 
@@ -104,16 +140,15 @@ def solid_array(solids: pd.DataFrame):
     """
     Get the solid array from the DataFrame.
 
-    Solids are a pandas frame that is a sequence of integers
-    or NAs with max length of 28.
-    valid rows contain 3, 4, 6, or 8 items consecutive from the
-    left.  We don't plot quadratic edges so 6/8 collapse to 3/4
-    invalid rows are ignored, meaning they return an empty array
-    return an array of length 4 or 5 using the pyvista spec
-    for facets which includes a length prefix
-    [1,2,3]=>[3,1,2,3]
-    [1,2,3,0]=>[3,1,2,3]
-    [1,2,3,NA]=>[3,1,2,3]
+    Parameters
+    ----------
+    solids : pd.DataFrame
+        DataFrame row of solid node ids.
+
+    Returns
+    -------
+    np.ndarray
+        Array of solid node ids with length prefix for PyVista.
     """
 
     # FACES CREATED BY THE SOLIDS BASED ON MANUAL
@@ -160,16 +195,15 @@ def line_array(lines: pd.DataFrame) -> np.array:
     """
     Convert DataFrame to lines array.
 
-    `lines` is a pandas frame that is a sequence of integers
-    or NAs with max length of 2.
-    valid rows contain 2 items consecutive from the
-    left.
-    invalid rows are ignored, meaning they return an empty array
-    return an array of length 3 using the pyvista spec
-    for facets which includes a length prefix
-    [1,2,]=>[2,1,2]
-    [1,2,3,0]=>[]
-    [1,2,3,NA]=>[]
+    Parameters
+    ----------
+    lines : pd.DataFrame
+        DataFrame row of line node ids.
+
+    Returns
+    -------
+    np.ndarray
+        Array of line node ids with length prefix for PyVista.
     """
     line_array = np.empty(3, dtype=np.int32)
 
@@ -187,10 +221,23 @@ def line_array(lines: pd.DataFrame) -> np.array:
 
 
 def map_facet_nid_to_index(flat_facets: np.array, mapping: typing.Dict) -> np.array:
-    """Convert mapping to numpy array.
+    """
+    Convert mapping to numpy array.
 
     Given a flat list of facets or lines, use the mapping from nid to python index
-    to output the numbering system for pyvista from the numbering from dyna
+    to output the numbering system for PyVista from the numbering from dyna.
+
+    Parameters
+    ----------
+    flat_facets : np.ndarray
+        Flat array of facet or line node ids with length prefix.
+    mapping : dict
+        Mapping from node id to index.
+
+    Returns
+    -------
+    np.ndarray
+        Array of node indices for PyVista.
     """
     # Map the indexes but skip the prefix
     flat_facets_indexed = np.empty(len(flat_facets), dtype=np.int32)
@@ -208,19 +255,25 @@ def map_facet_nid_to_index(flat_facets: np.array, mapping: typing.Dict) -> np.ar
 
 
 def extract_shell_facets(shells: pd.DataFrame, mapping):
-    """Extract shell faces from DataFrame.
+    """
+    Extract shell faces from DataFrame.
 
-    Shells table comes in with the form
-    |  eid  | nid1 | nid2 | nid3 | nid4
-    |  1    | 10   | 11   | 12   |
-    |  20   | 21   | 22   | 23   | 24
+    Parameters
+    ----------
+    shells : pd.DataFrame
+        DataFrame of shell elements.
+    mapping : dict
+        Mapping from node id to index.
 
-    but the array needed for pyvista polydata is
-    of the form where each element is prefixed by the length of the element node list
-    [3,10,11,12,4,21,22,23,24]
-
-    Take individual rows, extract the appropriate nid's and output a flat list of
-    facets for pyvista
+    Returns
+    -------
+    tuple
+        facets : np.ndarray
+            Flat array of shell facet node indices for PyVista.
+        eid : np.ndarray
+            Array of element ids.
+        pid : np.ndarray
+            Array of part ids.
     """
 
     if len(shells) == 0:
@@ -247,21 +300,25 @@ def extract_shell_facets(shells: pd.DataFrame, mapping):
 
 
 def extract_lines(beams: pd.DataFrame, mapping: typing.Dict[int, int]) -> np.ndarray:
-    """Extract lines from DataFrame.
+    """
+    Extract lines from DataFrame.
 
-    Beams table comes in with the form with extra information not supported,
-    |  eid  | nid1 | nid2
-    |  1    | 10   | 11
-    |  20   | 21   | 22
+    Parameters
+    ----------
+    beams : pd.DataFrame
+        DataFrame of beam elements.
+    mapping : dict
+        Mapping from node id to index.
 
-      we only care about nid 1 and 2
-
-    but the array needed for pyvista polydata is the same as in extract facets
-    of the form where each element is prefixed by the length of the element node list
-    [2,10,11,2,21,22]
-
-    Take individual rows, extract the appropriate nid's and output a flat list of
-    facets for pyvista
+    Returns
+    -------
+    tuple
+        lines : np.ndarray
+            Flat array of line node indices for PyVista.
+        eid : np.ndarray
+            Array of element ids.
+        pid : np.ndarray
+            Array of part ids.
     """
     # dont need to do this if there is no beams
     if len(beams) == 0:
@@ -285,6 +342,28 @@ def extract_lines(beams: pd.DataFrame, mapping: typing.Dict[int, int]) -> np.nda
 
 
 def extract_solids(solids: pd.DataFrame, mapping: typing.Dict[int, int]):
+    """
+    Extract solid elements from DataFrame.
+
+    Parameters
+    ----------
+    solids : pd.DataFrame
+        DataFrame of solid elements.
+    mapping : dict
+        Mapping from node id to index.
+
+    Returns
+    -------
+    dict
+        Dictionary keyed by number of nodes (4, 5, 6, 8) with values:
+            [connectivity, element_ids, part_ids]
+            connectivity : np.ndarray
+                Flat array of solid node indices for PyVista.
+            element_ids : np.ndarray
+                Array of element ids.
+            part_ids : np.ndarray
+                Array of part ids.
+    """
     if len(solids) == 0:
         return {}
 
@@ -325,6 +404,14 @@ def extract_solids(solids: pd.DataFrame, mapping: typing.Dict[int, int]):
 
 
 def get_pyvista():
+    """
+    Import pyvista if available.
+
+    Returns
+    -------
+    pyvista module
+        The pyvista module.
+    """
     try:
         import pyvista as pv
     except ImportError:
@@ -333,7 +420,21 @@ def get_pyvista():
 
 
 def get_polydata(deck: Deck, cwd=None):
-    """Create the PolyData Object for plotting from a given deck with nodes and elements."""
+    """
+    Create the PolyData Object for plotting from a given deck with nodes and elements.
+
+    Parameters
+    ----------
+    deck : Deck
+        The deck object containing mesh keywords.
+    cwd : str, optional
+        Current working directory for deck expansion.
+
+    Returns
+    -------
+    pyvista.UnstructuredGrid
+        The PyVista UnstructuredGrid object for plotting.
+    """
 
     # import this lazily (otherwise this adds over a second to the import time of pyDyna)
     pv = get_pyvista()
@@ -411,7 +512,21 @@ def get_polydata(deck: Deck, cwd=None):
 
 
 def plot_deck(deck, **args):
-    """Plot the deck."""
+    """
+    Plot the deck.
+
+    Parameters
+    ----------
+    deck : Deck
+        The deck object containing mesh keywords.
+    **args
+        Additional arguments for PyVista plot.
+
+    Returns
+    -------
+    Any
+        PyVista plot output.
+    """
 
     # import this lazily (otherwise this adds over a second to the import time of pyDyna)
     pv = get_pyvista()

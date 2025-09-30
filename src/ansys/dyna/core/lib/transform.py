@@ -45,6 +45,20 @@ class TransformHandler(ImportHandler):
         self._handlers[identity] = handler
 
     def after_import(self, context: ImportContext, keyword: typing.Union[KeywordBase, str]) -> None:
+        """
+        Perform actions after import.
+
+        Parameters
+        ----------
+        context : ImportContext
+            The import context.
+        keyword : KeywordBase or str
+            The keyword or its name.
+
+        Returns
+        -------
+        None
+        """
         if not isinstance(keyword, KeywordBase):
             return
         if context.xform is None:

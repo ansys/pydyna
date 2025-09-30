@@ -38,16 +38,38 @@ class TextCard(CardInterface):
 
     @property
     def bounded(self) -> bool:
-        """Text cards are always unbounded."""
+        """
+        Text cards are always unbounded.
+
+        Returns
+        -------
+        bool
+            Always False.
+        """
         return False
 
     @property
     def active(self) -> bool:
-        """Text cards are always active."""
+        """
+        Text cards are always active.
+
+        Returns
+        -------
+        bool
+            Always True.
+        """
         return True
 
     @property
     def format(self) -> format_type:
+        """
+        Get the format type.
+
+        Returns
+        -------
+        format_type
+            The format type.
+        """
         return self._format_type
 
     @format.setter
@@ -55,6 +77,19 @@ class TextCard(CardInterface):
         self._format_type = value
 
     def _get_comment(self, format: typing.Optional[format_type]):
+        """
+        Get the comment line for the card.
+
+        Parameters
+        ----------
+        format : format_type, optional
+            The format type.
+
+        Returns
+        -------
+        str
+            The comment line.
+        """
         if format == None:
             format = self._format_type
         if format != format_type.long:
@@ -90,6 +125,14 @@ class TextCard(CardInterface):
 
     @property
     def value(self) -> str:
+        """
+        Get the value of the card.
+
+        Returns
+        -------
+        str
+            The card value as a string.
+        """
         return "\n".join(self._content_lines)
 
     @value.setter
