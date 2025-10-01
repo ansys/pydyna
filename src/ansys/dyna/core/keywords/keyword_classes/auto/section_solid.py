@@ -22,6 +22,8 @@
 
 """Module providing the SectionSolid class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -381,12 +383,12 @@ class SectionSolid(KeywordBase):
         self._cards[1].set_value("nhsv", value)
 
     @property
-    def integration_points(self):
+    def integration_points(self) -> pd.DataFrame:
         """Get the table of integration_points."""
         return self._cards[2].table
 
     @integration_points.setter
-    def integration_points(self, df):
+    def integration_points(self, df: pd.DataFrame):
         """Set integration_points from the dataframe df"""
         self._cards[2].table = df
 

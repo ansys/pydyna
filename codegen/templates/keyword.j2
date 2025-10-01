@@ -4,6 +4,13 @@
 import dataclasses
 {% endif %}
 import typing
+{% if keyword_data.duplicate %}
+import pandas as pd
+
+{% elif keyword_data.duplicate_group %}
+import pandas as pd
+
+{% endif %}
 {# TODO - only do this if there's a keyword without a default #}
 {% if keyword_data.mixin_imports %}
 {% for mixin_import in keyword_data.mixin_imports %}

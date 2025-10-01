@@ -22,6 +22,8 @@
 
 """Module providing the ConstrainedAdaptivity class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -49,12 +51,12 @@ class ConstrainedAdaptivity(KeywordBase):
         ]
 
     @property
-    def constrains(self):
+    def constrains(self) -> pd.DataFrame:
         """Get the table of constrains."""
         return self._cards[0].table
 
     @constrains.setter
-    def constrains(self, df):
+    def constrains(self, df: pd.DataFrame):
         """Set constrains from the dataframe df"""
         self._cards[0].table = df
 

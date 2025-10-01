@@ -22,11 +22,11 @@
 
 """Module providing the Part class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-
-import pandas as pd
 
 class Part(KeywordBase):
     """DYNA PART keyword"""
