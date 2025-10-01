@@ -67,7 +67,7 @@ class CardSet(CardInterface):
     def _items(self, value: typing.List[Cards]) -> None:
         self._base_items = value
 
-    def _initialize(self):
+    def _initialize(self) -> None:
         if self._initialized:
             return
         if self._bounded and self.active:
