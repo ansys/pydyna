@@ -78,7 +78,7 @@ class CardSet(CardInterface):
         self._initialize()
 
     @property
-    def option_specs(self):
+    def option_specs(self) -> typing.List[OptionSpec]:
         return self._option_specs
 
     @property
