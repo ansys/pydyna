@@ -79,7 +79,7 @@ runs:
       shell: bash
 
     - name: Install DPF
-      uses: ansys/pydpf-actions/install-dpf-server@v2.3
+      uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
       with:
         dpf-standalone-TOKEN: ${{ inputs.bot-token }}
         ANSYS_VERSION: "242"
