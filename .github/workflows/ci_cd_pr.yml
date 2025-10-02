@@ -1,7 +1,7 @@
 name: CI
 permissions:
   contents: read
-  
+
 on:
   pull_request:
   workflow_dispatch:
@@ -142,7 +142,7 @@ jobs:
       - name: "Checkout project"
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
-          persist-credentials: false
+          persist-credentials: true
 
       - name: "Build documentation"
         uses: ./.github/actions/doc-build
