@@ -22,6 +22,8 @@
 
 """Module providing the ConstrainedNodalRigidBody class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -115,12 +117,12 @@ class ConstrainedNodalRigidBody(KeywordBase):
         ]
 
     @property
-    def constrained_nodal_rigid_bodies(self):
+    def constrained_nodal_rigid_bodies(self) -> pd.DataFrame:
         """Gets the full table of constrained_nodal_rigid_bodies."""
         return self._cards[0].table
 
     @constrained_nodal_rigid_bodies.setter
-    def constrained_nodal_rigid_bodies(self, df):
+    def constrained_nodal_rigid_bodies(self, df: pd.DataFrame):
         """sets constrained_nodal_rigid_bodies from the dataframe df."""
         self._cards[0].table = df
 

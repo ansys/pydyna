@@ -22,6 +22,8 @@
 
 """Module providing the DefineSdOrientation class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -75,12 +77,12 @@ class DefineSdOrientation(KeywordBase):
         ]
 
     @property
-    def vectors(self):
+    def vectors(self) -> pd.DataFrame:
         """Get the table of vectors."""
         return self._cards[0].table
 
     @vectors.setter
-    def vectors(self, df):
+    def vectors(self, df: pd.DataFrame):
         """Set vectors from the dataframe df"""
         self._cards[0].table = df
 

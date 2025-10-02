@@ -22,6 +22,8 @@
 
 """Module providing the Mat295 class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -1265,12 +1267,12 @@ class Mat295(KeywordBase):
         self._cards[6].set_value("nf", value)
 
     @property
-    def anisotropic_settings(self):
+    def anisotropic_settings(self) -> pd.DataFrame:
         """Gets the full table of anisotropic_settings."""
         return self._cards[7].table
 
     @anisotropic_settings.setter
-    def anisotropic_settings(self, df):
+    def anisotropic_settings(self, df: pd.DataFrame):
         """sets anisotropic_settings from the dataframe df."""
         self._cards[7].table = df
 

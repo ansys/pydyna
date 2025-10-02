@@ -22,6 +22,8 @@
 
 """Module providing the InitialTemperatureSet class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -49,12 +51,12 @@ class InitialTemperatureSet(KeywordBase):
         ]
 
     @property
-    def sets(self):
+    def sets(self) -> pd.DataFrame:
         """Get the table of sets."""
         return self._cards[0].table
 
     @sets.setter
-    def sets(self, df):
+    def sets(self, df: pd.DataFrame):
         """Set sets from the dataframe df"""
         self._cards[0].table = df
 
