@@ -22,6 +22,8 @@
 
 """Module providing the Mat196 class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -247,12 +249,12 @@ class Mat196(KeywordBase):
         self._cards[0].set_value("dospot", value)
 
     @property
-    def springs(self):
+    def springs(self) -> pd.DataFrame:
         """Gets the full table of springs."""
         return self._cards[1].table
 
     @springs.setter
-    def springs(self, df):
+    def springs(self, df: pd.DataFrame):
         """sets springs from the dataframe df."""
         self._cards[1].table = df
 

@@ -22,6 +22,8 @@
 
 """Module providing the SectionShell class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.series_card import SeriesCard
@@ -660,12 +662,12 @@ class SectionShell(KeywordBase):
         self._cards[3].set_value("iloc", value)
 
     @property
-    def integration_points(self):
+    def integration_points(self) -> pd.DataFrame:
         """Get the table of integration_points."""
         return self._cards[4].table
 
     @integration_points.setter
-    def integration_points(self, df):
+    def integration_points(self, df: pd.DataFrame):
         """Set integration_points from the dataframe df"""
         self._cards[4].table = df
 
