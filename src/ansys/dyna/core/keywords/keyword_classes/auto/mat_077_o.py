@@ -22,6 +22,8 @@
 
 """Module providing the Mat077O class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -707,12 +709,12 @@ class Mat077O(KeywordBase):
         self._cards[4].set_value("alpha8", value)
 
     @property
-    def constants(self):
+    def constants(self) -> pd.DataFrame:
         """Get the table of constants."""
         return self._cards[5].table
 
     @constants.setter
-    def constants(self, df):
+    def constants(self, df: pd.DataFrame):
         """Set constants from the dataframe df"""
         self._cards[5].table = df
 

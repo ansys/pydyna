@@ -22,6 +22,8 @@
 
 """Module providing the ControlMppDecompositionTransformation class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -116,12 +118,12 @@ class ControlMppDecompositionTransformation(KeywordBase):
         ]
 
     @property
-    def transformation(self):
+    def transformation(self) -> pd.DataFrame:
         """Gets the full table of transformation."""
         return self._cards[0].table
 
     @transformation.setter
-    def transformation(self, df):
+    def transformation(self, df: pd.DataFrame):
         """sets transformation from the dataframe df."""
         self._cards[0].table = df
 

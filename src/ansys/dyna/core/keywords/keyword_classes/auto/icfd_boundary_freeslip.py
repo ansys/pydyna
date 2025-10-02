@@ -22,6 +22,8 @@
 
 """Module providing the IcfdBoundaryFreeslip class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -47,12 +49,12 @@ class IcfdBoundaryFreeslip(KeywordBase):
         ]
 
     @property
-    def boundaries(self):
+    def boundaries(self) -> pd.DataFrame:
         """Get the table of boundaries."""
         return self._cards[0].table
 
     @boundaries.setter
-    def boundaries(self, df):
+    def boundaries(self, df: pd.DataFrame):
         """Set boundaries from the dataframe df"""
         self._cards[0].table = df
 

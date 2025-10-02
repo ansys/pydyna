@@ -22,6 +22,8 @@
 
 """Module providing the InitialTemperatureNode class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -49,12 +51,12 @@ class InitialTemperatureNode(KeywordBase):
         ]
 
     @property
-    def nodes(self):
+    def nodes(self) -> pd.DataFrame:
         """Get the table of nodes."""
         return self._cards[0].table
 
     @nodes.setter
-    def nodes(self, df):
+    def nodes(self, df: pd.DataFrame):
         """Set nodes from the dataframe df"""
         self._cards[0].table = df
 
