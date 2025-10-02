@@ -88,6 +88,10 @@ runs:
     - name: Run pytest
       env:
         PYTEST_MARKERS: ${{ inputs.pytest-markers }}
+        PYDYNA_RUN_CONTAINER: ${{ inputs.docker-image }}
+        ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
+        ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
+        LSTC_LICENSE: ansys
       run: |
         if [ "$PYTEST_MARKERS" = "" ]; then
           pytest -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
@@ -95,11 +99,6 @@ runs:
           pytest -m "$PYTEST_MARKERS" -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
         fi
       shell: bash
-      env:
-        PYDYNA_RUN_CONTAINER: ${{ inputs.docker-image }}
-        ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
-        ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
-        LSTC_LICENSE: ansys
 
     - name: Extract the server logs
       if: ${{ inputs.server-logs == 'true' }}
