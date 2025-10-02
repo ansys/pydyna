@@ -1,4 +1,8 @@
 name: release
+
+permissions:
+  contents: read
+
 on:
   push:
     tags:
@@ -50,6 +54,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/test-codegen
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -71,6 +77,8 @@ jobs:
     steps:
       - name: "Checkout project"
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
 
       - name: "Build documentation"
         uses: ./.github/actions/doc-build
@@ -111,8 +119,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
 
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/unit-test
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -132,6 +141,8 @@ jobs:
         python-version: ['3.10', '3.11', '3.12', '3.13']
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
 
       - uses: ./.github/actions/unit-test
         with:
@@ -145,6 +156,8 @@ jobs:
     needs: [run-testing, keyword-testing]
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/unit-test
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}

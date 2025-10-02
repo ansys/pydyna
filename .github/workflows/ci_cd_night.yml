@@ -1,5 +1,8 @@
 name: night doc build
 
+permissions:
+  contents: read
+
 on:
   schedule:
     - cron: '0 22 * * *' # 22:00 UTC
@@ -53,6 +56,7 @@ jobs:
           license-server: ${{ env.LICENSE_SERVER }}
           bot-token: ${{ env.BOT_TOKEN }}
           github-actor: ${{ github.actor }}
+          persist-credentials: true
 
   doc-deploy-dev:
     name: "Deploy development documentation"
@@ -65,4 +69,5 @@ jobs:
           token: ${{ env.BOT_TOKEN }}
           bot-user: ${{ env.BOT_USERNAME }}
           bot-email: ${{ env.BOT_EMAIL }}
+          persist-credentials: true
 
