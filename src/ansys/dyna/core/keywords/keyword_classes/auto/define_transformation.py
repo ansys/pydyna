@@ -22,6 +22,8 @@
 
 """Module providing the DefineTransformation class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -98,12 +100,12 @@ class DefineTransformation(KeywordBase):
         self._cards[0].set_value("tranid", value)
 
     @property
-    def transforms(self):
+    def transforms(self) -> pd.DataFrame:
         """Get the table of transforms."""
         return self._cards[1].table
 
     @transforms.setter
-    def transforms(self, df):
+    def transforms(self, df: pd.DataFrame):
         """Set transforms from the dataframe df"""
         self._cards[1].table = df
 

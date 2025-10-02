@@ -22,6 +22,8 @@
 
 """Module providing the ParameterExpressionLocal class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -48,12 +50,12 @@ class ParameterExpressionLocal(KeywordBase):
         ]
 
     @property
-    def parameters(self):
+    def parameters(self) -> pd.DataFrame:
         """Get the table of parameters."""
         return self._cards[0].table
 
     @parameters.setter
-    def parameters(self, df):
+    def parameters(self, df: pd.DataFrame):
         """Set parameters from the dataframe df"""
         self._cards[0].table = df
 

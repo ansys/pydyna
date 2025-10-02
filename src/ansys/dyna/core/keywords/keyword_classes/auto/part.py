@@ -22,6 +22,8 @@
 
 """Module providing the Part class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -109,12 +111,12 @@ class Part(KeywordBase):
         ]
 
     @property
-    def parts(self):
+    def parts(self) -> pd.DataFrame:
         """Gets the full table of parts."""
         return self._cards[0].table
 
     @parts.setter
-    def parts(self, df):
+    def parts(self, df: pd.DataFrame):
         """sets parts from the dataframe df."""
         self._cards[0].table = df
 

@@ -22,6 +22,8 @@
 
 """Module providing the MatSimplifiedRubberFoamWithFailureLogLogInterpolation class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -597,12 +599,12 @@ class MatSimplifiedRubberFoamWithFailureLogLogInterpolation(KeywordBase):
         self._cards[3].set_value("hisout", value)
 
     @property
-    def constants(self):
+    def constants(self) -> pd.DataFrame:
         """Get the table of constants."""
         return self._cards[4].table
 
     @constants.setter
-    def constants(self, df):
+    def constants(self, df: pd.DataFrame):
         """Set constants from the dataframe df"""
         self._cards[4].table = df
 

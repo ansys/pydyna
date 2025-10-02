@@ -125,7 +125,7 @@ class TableCard(Card):
         self._initialized = True
 
     @property
-    def table(self):
+    def table(self) -> pd.DataFrame:
         if not self._initialized:
             self._initialize()
         return self._table
@@ -147,7 +147,7 @@ class TableCard(Card):
         self._initialized = True
 
     @property
-    def format(self):
+    def format(self) -> format_type:
         return self._format_type
 
     @format.setter

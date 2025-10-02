@@ -22,6 +22,8 @@
 
 """Module providing the SetSegment class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -224,12 +226,12 @@ class SetSegment(KeywordBase):
         self._cards[0].set_value("its", value)
 
     @property
-    def segments(self):
+    def segments(self) -> pd.DataFrame:
         """Get the table of segments."""
         return self._cards[1].table
 
     @segments.setter
-    def segments(self, df):
+    def segments(self, df: pd.DataFrame):
         """Set segments from the dataframe df"""
         self._cards[1].table = df
 

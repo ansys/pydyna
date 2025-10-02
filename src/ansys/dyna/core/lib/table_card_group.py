@@ -80,7 +80,7 @@ class TableCardGroup(CardInterface):
         self._initialized = True
 
     @property
-    def table(self):
+    def table(self) -> pd.DataFrame:
         self._initialize()
         return self._table
 
