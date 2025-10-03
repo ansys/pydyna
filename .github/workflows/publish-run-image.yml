@@ -2,7 +2,7 @@ name: Docker images publishing
 
 permissions:
   contents: read
-  packages: write
+  packages: read
 
 on:
   workflow_dispatch:
