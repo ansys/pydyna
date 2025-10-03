@@ -35,11 +35,20 @@ class DockerRunner(BaseRunner):
     """
 
     def __init__(self, **kwargs):
+        """Initialize DockerRunner.
+
+        Parameters
+        ----------
+        case_ids : list[int] or None
+            If provided, appends CASE or CASE=... to the DYNA_ARGS for *CASE support.
+        """
         super().__init__(**kwargs)
         self._client: docker.client.DockerClient = docker.from_env()
         self.__ensure_image(kwargs["container"])
         self._container_env = kwargs.get("container_env", dict())
         self._stream = kwargs.get("stream", True)
+        self.activate_case = kwargs.get("activate_case", False)
+        self.case_ids = kwargs.get("case_ids", None)
 
     def __ensure_image(self, name):
         self._name = name
@@ -64,10 +73,17 @@ class DockerRunner(BaseRunner):
         return solver_option
 
     def run(self) -> None:
+        # CASE option logic
+        case_option = ""
+        if self.activate_case:
+            if self.case_ids and isinstance(self.case_ids, list) and self.case_ids:
+                case_option = f"CASE={','.join(str(cid) for cid in self.case_ids)}"
+            else:
+                case_option = "CASE"
         env = {
             "DYNA_OPTION": self._get_solver_option(),
             "DYNA_NCPU": f"{self.ncpu}",
-            "DYNA_ARGS": f"i={self._input_file} memory={self.get_memory_string()}",
+            "DYNA_ARGS": f"i={self._input_file} memory={self.get_memory_string()} {case_option}",
         }
         env.update(self._container_env)
         volumes = [f"{self._working_directory}:/run"]

@@ -36,9 +36,18 @@ class LinuxRunner(BaseRunner):
     """
 
     def __init__(self, **kwargs):
+        """Initialize LinuxRunner.
+
+        Parameters
+        ----------
+        case_ids : list[int] or None
+            If provided, appends CASE or CASE=... to the LS-DYNA command line for *CASE support.
+        """
         super().__init__(**kwargs)
         self.executable = kwargs.get("executable", None)
         version = kwargs.get("version", None)
+        self.activate_case = kwargs.get("activate_case", False)
+        self.case_ids = kwargs.get("case_ids", None)
         self._find_solver(version, self.executable)
 
     def set_input(self, input_file: str, working_directory: str) -> None:
@@ -80,13 +89,16 @@ class LinuxRunner(BaseRunner):
 
     def run(self) -> None:
         os.chdir(self.working_directory)
+        # CASE option logic
+        case_option = ""
+        if self.activate_case:
+            if self.case_ids and isinstance(self.case_ids, list) and self.case_ids:
+                case_option = f"CASE={','.join(str(cid) for cid in self.case_ids)}"
+            else:
+                case_option = "CASE"
         if self.mpi_option == MpiOption.MPP_INTEL_MPI:
-            args = f"mpirun -np {self.ncpu} {self.solver} i={self.input_file} memory={self.get_memory_string()}"
-            # Excluding bandit warning for subprocess usage
-            # as this is a controlled environment where we run LS-DYNA.
+            args = f"mpirun -np {self.ncpu} {self.solver} i={self.input_file} memory={self.get_memory_string()} {case_option}"  # noqa: E501
             os.system(args)  # nosec: B605
         else:
-            args = f"{self.solver} i={self.input_file} ncpu={self.ncpu} memory={self.get_memory_string()}"
-            # Excluding bandit warning for subprocess usage
-            # as this is a controlled environment where we run LS-DYNA.
+            args = f"{self.solver} i={self.input_file} ncpu={self.ncpu} memory={self.get_memory_string()} {case_option}"  # noqa: E501
             os.system(args)  # nosec: B605

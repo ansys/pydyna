@@ -21,9 +21,10 @@
 # SOFTWARE.
 
 import os
-import pathlib
 
 import pytest
+from ansys.dyna.core.run import run_dyna
+
 
 @pytest.mark.run
 def test_run_from_input_file_001(file_utils, runner):
