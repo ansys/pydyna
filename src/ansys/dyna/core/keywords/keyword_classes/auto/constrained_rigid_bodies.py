@@ -22,6 +22,8 @@
 
 """Module providing the ConstrainedRigidBodies class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -49,12 +51,12 @@ class ConstrainedRigidBodies(KeywordBase):
         ]
 
     @property
-    def pairs(self):
+    def pairs(self) -> pd.DataFrame:
         """Get the table of pairs."""
         return self._cards[0].table
 
     @pairs.setter
-    def pairs(self, df):
+    def pairs(self, df: pd.DataFrame):
         """Set pairs from the dataframe df"""
         self._cards[0].table = df
 
