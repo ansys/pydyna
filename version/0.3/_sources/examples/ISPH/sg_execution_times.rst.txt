@@ -1,0 +1,13 @@
+
+:orphan:
+
+.. _sphx_glr_examples_ISPH_sg_execution_times:
+
+
+Computation times
+=================
+**00:01.044** total execution time for **examples_ISPH** files:
+
++---------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_ISPH_rigidtest.py` (``rigidtest.py``) | 00:01.044 | 0.0 MB |
++---------------------------------------------------------------+-----------+--------+

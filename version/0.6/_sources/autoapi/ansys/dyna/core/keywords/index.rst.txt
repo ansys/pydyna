@@ -1,0 +1,54 @@
+ansys.dyna.core.keywords
+========================
+
+.. py:module:: ansys.dyna.core.keywords
+
+.. autoapi-nested-parse::
+
+   
+   ANSYS Dyna Keywords Module.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/ansys/dyna/core/keywords/keyword_classes/index
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.USER_DATA_PATH
+   ansys.dyna.core.keywords.EXAMPLES_PATH
+
+
+Package Contents
+----------------
+
+.. py:data:: USER_DATA_PATH
+
+.. py:data:: EXAMPLES_PATH
+
