@@ -75,7 +75,7 @@ repos:
       args:
       - --start_year=2023
 
-# - repo: https://github.com/zizmorcore/zizmor-pre-commit
-#   rev: v1.12.1
-#   hooks:
-#     - id: zizmor
+- repo: https://github.com/zizmorcore/zizmor-pre-commit
+  rev: v1.12.1
+  hooks:
+    - id: zizmor

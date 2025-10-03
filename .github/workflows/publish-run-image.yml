@@ -2,6 +2,8 @@ name: Docker images publishing
 
 permissions:
   contents: read
+  packages: write
+  id-token: write
 
 on:
   workflow_dispatch:

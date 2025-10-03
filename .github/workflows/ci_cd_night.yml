@@ -2,7 +2,7 @@ name: night doc build
 
 permissions:
   contents: read
-
+  packages: read
 on:
   schedule:
     - cron: '0 22 * * *' # 22:00 UTC

@@ -2,6 +2,7 @@ name: release
 
 permissions:
   contents: read
+  packages: read
 
 on:
   push:
