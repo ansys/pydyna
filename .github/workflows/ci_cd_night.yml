@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [doc-build]
     steps:
-      - uses: ansys/actions/doc-deploy-dev@123a1f17d71f117e0ba29c53d6a0f602e0d8d902 # v9.0.15
+      - uses: ansys/actions/doc-deploy-dev@c2fa7c93f6883114e0e643599431b33d29f0b13f # v9.0.15
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ env.BOT_TOKEN }}
