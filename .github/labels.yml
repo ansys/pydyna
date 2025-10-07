@@ -10,6 +10,14 @@
   description: Related with project dependencies
   color: fabed4
 
+- name: 'dependencies:pyproject'
+  description: Related with project file dependencies
+  color: fabed4
+
+- name: 'dependencies:ci'
+  description: Related with pipelines dependencies
+  color: fabed4
+
 - name: 'documentation'
   description: Improvements or additions to documentation
   color: 0677ba
