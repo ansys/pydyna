@@ -1,16 +1,19 @@
 version: 2
 updates:
-  - package-ecosystem: "pip" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    insecure-external-code-execution: allow
+  - package-ecosystem: "pip"
+    directory: "/"
     schedule:
-      interval: "weekly"
-    commit-message:
-      prefix: "chore"
+      interval: "daily"
+    cooldown:
+      default-days: 7
+      include:
+        - "*"  # Include all dependencies in cooldown
+      exclude:
+        - "ansys-sphinx-theme"
     labels:
-      - "maintenance"
-      - "dependencies"
-      - "dependabot"
+      - "dependencies:pyproject"
+    commit-message:
+      prefix: "build"
     groups:
       doc:
         patterns:
@@ -19,9 +22,25 @@ updates:
           - "imageio*"
           - "ipython"
           - "numpydoc"
-
+      tests:
+        patterns:
+          - "pytest*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+    cooldown:
+      default-days: 7
+      include:
+        - "*"  # Include all dependencies in cooldown
+      exclude:
+        - "ansys/actions"
+    labels:
+      - "dependencies:ci"
+    commit-message:
+      prefix: "build"
+    groups:
+      actions:
+        patterns:
+          - "*"
