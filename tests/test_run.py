@@ -46,7 +46,9 @@ def test_run_from_input_file_001(file_utils, runner):
 @pytest.mark.run
 def test_case_option(file_utils, runner):
     input_file = file_utils.testfiles_folder / "run"/ "case-keywords" / "projectile.k"
+
     example_folder = str(input_file.parent.resolve())
+    input_file = str(input_file)
     try:
         wdir = runner.run(input_file, working_directory=example_folder, activate_case=True)
         assert wdir == example_folder
