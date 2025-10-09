@@ -48,9 +48,9 @@ def test_case_option(file_utils, runner):
     input_file = file_utils.testfiles_folder / "run"/ "case-keywords" / "projectile.k"
 
     example_folder = str(input_file.parent.resolve())
-    input_file = str(input_file)
+    input_filename = input_file.name  # Use just the filename, not full path
     try:
-        wdir = runner.run(input_file, working_directory=example_folder, activate_case=True)
+        wdir = runner.run(input_filename, working_directory=example_folder, activate_case=True)
         assert wdir == example_folder
         assert os.path.isfile(os.path.join(example_folder, "ZERO_VELOCITY.d3plot"))
         assert os.path.isfile(os.path.join(example_folder, "LOW_VELOCITY.d3plot"))
