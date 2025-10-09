@@ -22,6 +22,8 @@
 
 """Module providing the InitialStrainShell class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.card_set import CardSet
@@ -180,12 +182,12 @@ class InitialStrainShellCardSet(Cards):
         self._cards[0].set_value("ilocal", value)
 
     @property
-    def strains(self):
+    def strains(self) -> pd.DataFrame:
         """Get the table of strains."""
         return self._cards[1].table
 
     @strains.setter
-    def strains(self, df):
+    def strains(self, df: pd.DataFrame):
         """Set strains from the dataframe df"""
         self._cards[1].table = df
 

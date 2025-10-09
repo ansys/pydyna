@@ -22,6 +22,8 @@
 
 """Module providing the ElementShellThickness class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -174,12 +176,12 @@ class ElementShellThickness(KeywordBase):
         ]
 
     @property
-    def elements(self):
+    def elements(self) -> pd.DataFrame:
         """Gets the full table of elements."""
         return self._cards[0].table
 
     @elements.setter
-    def elements(self, df):
+    def elements(self, df: pd.DataFrame):
         """sets elements from the dataframe df."""
         self._cards[0].table = df
 

@@ -22,6 +22,8 @@
 
 """Module providing the DefineCurve class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
@@ -239,12 +241,12 @@ class DefineCurve(KeywordBase):
         self._cards[0].set_value("lcint", value)
 
     @property
-    def curves(self):
+    def curves(self) -> pd.DataFrame:
         """Get the table of curves."""
         return self._cards[1].table
 
     @curves.setter
-    def curves(self, df):
+    def curves(self, df: pd.DataFrame):
         """Set curves from the dataframe df"""
         self._cards[1].table = df
 
