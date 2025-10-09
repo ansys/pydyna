@@ -209,3 +209,4 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
     if container != None and kwargs.get("stream", True) is False:
         return result
     return wdir
+
