@@ -44,14 +44,15 @@ def __make_temp_dir():
     pathlib.Path(job_folder).mkdir(parents=True, exist_ok=True)
     return tempfile.mkdtemp(dir=job_folder)
 
+
 def _check_case_keywords(input: typing.Union[str, Deck], wdir: str) -> bool:
     """Check if input deck contains *CASE keywords.
-    
+
     This function checks for any of the CASE-related keywords:
     - *CASE
     - *CASE_BEGIN_n
     - *CASE_END_n
-    
+
     Returns
     -------
     bool
@@ -88,7 +89,7 @@ def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str
         elif not os.path.isdir(wdir):
             p = pathlib.Path(wdir)
             p.mkdir(parents=True)
-            
+
     needs_case_keywords = _check_case_keywords(input, wdir=wdir)
     if needs_case_keywords:
         if not kwargs.get("activate_case", False):
@@ -103,7 +104,7 @@ def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str
             logging.log(logging.INFO, f"launching the dyna solver in {wdir}")
         input_file = os.path.join(wdir, "input.k")
         input.export_file(input_file)
-        
+
     return wdir, input_file
 
 
