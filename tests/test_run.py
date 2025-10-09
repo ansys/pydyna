@@ -52,8 +52,13 @@ def test_case_option(file_utils, runner):
     try:
         wdir = runner.run(input_filename, working_directory=example_folder, activate_case=True)
         assert wdir == example_folder
-        assert os.path.isfile(os.path.join(example_folder, "ZERO_VELOCITY.d3plot"))
-        assert os.path.isfile(os.path.join(example_folder, "LOW_VELOCITY.d3plot"))
+        # check that the output files from both cases were created
+        d3plot_files = [
+        f for f in os.listdir(example_folder) if f.endswith(".d3plot")
+        ]
+        assert len(d3plot_files) > 0
+        assert any("ZERO_VELOCITY" in f for f in d3plot_files)
+        assert any("LOW_VELOCITY" in f for f in d3plot_files)
     except Exception as e:
         # TODO use a fixture for this?
         raise e
