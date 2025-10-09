@@ -41,3 +41,21 @@ def test_run_from_input_file_001(file_utils, runner):
         generated_files = [f for f in os.listdir(example_folder) if not f.endswith(".k")]
         for file in generated_files:
             os.remove(os.path.join(example_folder, file))
+            
+            
+@pytest.mark.run
+def test_case_option(file_utils, runner):
+    input_file = file_utils.testfiles_folder / "run"/ "case-keywords" / "projectile.k"
+    example_folder = str(input_file.parent.resolve())
+    try:
+        wdir = runner.run(input_file, working_directory=example_folder, activate_case=True)
+        assert wdir == example_folder
+        assert os.path.isfile(os.path.join(example_folder, "ZERO_VELOCITY.d3plot"))
+        assert os.path.isfile(os.path.join(example_folder, "LOW_VELOCITY.d3plot"))
+    except Exception as e:
+        # TODO use a fixture for this?
+        raise e
+    finally:
+        generated_files = [f for f in os.listdir(example_folder) if not f.endswith(".k")]
+        for file in generated_files:
+            os.remove(os.path.join(example_folder, file))
