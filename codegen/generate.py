@@ -53,14 +53,31 @@ def get_loader():
     return FileSystemLoader(str(template_folder.resolve()))
 
 
-def match_wildcard(keyword, wildcard):
-    assert wildcard["type"] == "prefix"
+def is_wildcard_excluded(keyword, wildcard):
     exclusions = wildcard.get("exclusions", [])
+    if len(exclusions) > 0:
+        if wildcard["type"] != "prefix":
+            raise Exception("Exclusions not only allowed for prefix wildcard")
     for exclusion in exclusions:
         if keyword.startswith(exclusion):
-            return False
+            return True
+    return False
+
+
+def match_wildcard_pattern(keyword, pattern, wildcard_type):
+    if wildcard_type == "prefix":
+        return keyword.startswith(pattern)
+    elif wildcard_type == "exact":
+        return keyword == pattern
+    raise Exception("Unexpected wildcard type")
+
+
+def match_wildcard(keyword, wildcard):
+    if is_wildcard_excluded(keyword, wildcard):
+        return False
+    wildcard_type = wildcard["type"]
     for pattern in wildcard["patterns"]:
-        if keyword.startswith(f"{pattern}"):
+        if match_wildcard_pattern(keyword, pattern, wildcard_type):
             return True
     return False
 
