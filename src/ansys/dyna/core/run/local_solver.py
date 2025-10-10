@@ -45,6 +45,40 @@ def __make_temp_dir():
     return tempfile.mkdtemp(dir=job_folder)
 
 
+def _check_case_keywords(input: typing.Union[str, Deck], wdir: str) -> bool:
+    """Check if input deck contains *CASE keywords.
+
+    This function checks for any of the CASE-related keywords:
+    - *CASE
+    - *CASE_BEGIN_n
+    - *CASE_END_n
+
+    Returns
+    -------
+    bool
+        True if any CASE keywords are found, False otherwise.
+    """
+    if isinstance(input, str):
+        try:
+            with open(pathlib.Path(wdir) / input, "r") as f:
+                for line in f:
+                    line = line.strip().upper()
+                    if line.startswith("*CASE") or line.startswith("*CASE_BEGIN") or line.startswith("*CASE_END"):
+                        return True
+            return False
+        except Exception as e:
+            logging.warning(f"Could not read input file {input} to check for CASE keywords: {e}")
+            return False
+    elif isinstance(input, Deck):
+        try:
+            if len(list(input.get_kwds_by_type("CASE"))) > 0:
+                return True
+            return False
+        except Exception as e:
+            logging.warning(f"Could not check Deck for CASE keywords: {e}")
+            return False
+
+
 def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str]:
     """Return the working directory and input file from a launch_dyna input."""
     wdir = kwargs.get("working_directory", None)
@@ -55,13 +89,22 @@ def __prepare(input: typing.Union[str, Deck], **kwargs) -> typing.Tuple[str, str
         elif not os.path.isdir(wdir):
             p = pathlib.Path(wdir)
             p.mkdir(parents=True)
-    else:
+
+    needs_case_keywords = _check_case_keywords(input, wdir=wdir)
+    if needs_case_keywords:
+        if not kwargs.get("activate_case", False):
+            raise UserWarning(
+                "*CASE keyword detected in input file, but `activate_case` is not set to True. "
+                "The solver may fail to run correctly. To enable *CASE support, set `activate_case=True`."
+            )
+    if isinstance(input, Deck):
         # write the deck to a file in the working directory.
         if wdir is None:
             wdir = __make_temp_dir()
             logging.log(logging.INFO, f"launching the dyna solver in {wdir}")
         input_file = os.path.join(wdir, "input.k")
         input.export_file(input_file)
+
     return wdir, input_file
 
 
@@ -85,7 +128,7 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
     ----------
     input : str or object
         Either the path to a dyna keyword file or an instance of
-        ``ansys.dyna.keywords.Deck``.
+        ``ansys.dyna.core.lib.deck.Deck``.
     **kwargs : dict
         mpi_option : int
             The mpi option to use. Choose from the values defined in ``MpiOption``.
@@ -125,6 +168,10 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
             If True, the stdout of solver is streamed to python's stdout during the solve.
             If False, the solver stdout is printed once after the container exits.
             Defaults to True.
+        activate_case : bool
+            If provided, aappends CASE cammad line for *CASE keywords support
+        case_ids : list[int] or None
+            If provided, appends CASE or CASE=... to the LS-DYNA command line for *CASE support.
 
     Returns
     -------
