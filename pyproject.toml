@@ -88,7 +88,7 @@ doc = [
     "joblib==1.5.2",
     "scikit-learn==1.7.2",
     "ipython==8.37.0",
-    "jupyterlab==4.4.7",
+    "jupyterlab==4.4.9",
     "pyvista==0.46.3",
 ]
 
