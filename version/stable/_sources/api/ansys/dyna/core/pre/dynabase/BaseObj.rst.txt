@@ -1,0 +1,59 @@
+ansys.dyna.core.pre.dynabase.BaseObj
+====================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.BaseObj
+
+   
+   Define the base object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: type
+      :value: ''
+
+
+
+   .. py:attribute:: subtype
+      :value: ''
+
+
+
+   .. py:method:: get_data() -> List
+
+      
+      Get the data of the object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
