@@ -33,6 +33,27 @@
             }
         },
         {
+            "type": "exact",
+            "patterns": ["ELEMENT_SHELL_BETA",
+                "ELEMENT_SHELL_THICKNESS",
+                "ELEMENT_SHELL_MCID"
+            ],
+            "generation-options": {
+                "table-card-group": [
+                    {
+                        "indices": [0, 1, 2],
+                        "overall-name": "elements"
+                    }
+                ],
+                "conditional-card": [
+                    {
+                        "index": 2,
+                        "func": "self.elements['n5'].any()"
+                    }
+                ]
+            }
+        },
+        {
             "type": "prefix",
             "patterns": ["BOUNDARY_PRESCRIBED_MOTION_NODE",
                 "BOUNDARY_PRESCRIBED_MOTION_SET",
@@ -1651,22 +1672,6 @@
                 {
                     "index": 0,
                     "property-name": "elements"
-                }
-            ]
-        }
-    },
-    "ELEMENT_SHELL_THICKNESS": {
-        "generation-options": {
-            "table-card-group": [
-                {
-                    "indices": [0, 1, 2],
-                    "overall-name": "elements"
-                }
-            ],
-            "conditional-card": [
-                {
-                    "index": 2,
-                    "func": "self.elements['n5'].any()"
                 }
             ]
         }
