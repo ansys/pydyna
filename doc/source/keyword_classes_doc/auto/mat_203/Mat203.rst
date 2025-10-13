@@ -1,0 +1,1122 @@
+
+
+
+
+
+
+:class:`Mat203`
+===============
+
+
+.. py:class:: mat_203.Mat203(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_203 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat203
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be chosen.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density
+          * - :py:attr:`~ym`
+            - Get or set the Young's Modulus
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's Ratio
+          * - :py:attr:`~sigy`
+            - Get or set the Yield stress
+          * - :py:attr:`~lamda`
+            - Get or set the Slenderness ratio
+          * - :py:attr:`~sbuck`
+            - Get or set the Initial buckling stress (should be positive)
+          * - :py:attr:`~power`
+            - Get or set the Power law for Bauschinger effect (non-dimensional)
+          * - :py:attr:`~fracx`
+            - Get or set the Fraction of reinforcement at this integration point in local x direction
+          * - :py:attr:`~fracy`
+            - Get or set the Fraction of reinforcement at this integration point in local y direction
+          * - :py:attr:`~lcten`
+            - Get or set the Optional curve providing the factor on SIGY versus plastic strain (tension)
+          * - :py:attr:`~lccomp`
+            - Get or set the Optional curve providing the factor on SBUCK versus plastic strain (compression)
+          * - :py:attr:`~aopt`
+            - Get or set the Option for local axis alignment  - see material type 2
+          * - :py:attr:`~ebu`
+            - Get or set the Optional buckling strain (if defined, overrides LAMBDA)
+          * - :py:attr:`~downsl`
+            - Get or set the Initial down-slope of buckling curve as a fraction of YM (dimensionless)
+          * - :py:attr:`~dbar`
+            - Get or set the Reinforcement bar diameter used for dowel action. See remarks.
+          * - :py:attr:`~fcdow`
+            - Get or set the Concrete compressive strength used for dowel action. See notes.  This field has units of stress
+          * - :py:attr:`~lchard`
+            - Get or set the Characteristic length for dowel action (length units)
+          * - :py:attr:`~unitc`
+            - Get or set the Factor to convert model stress units to MPa, e.g. is model units are Newtons and meters, UNITC = 10e-6 , [UNITC] = 1/[STRESS].
+          * - :py:attr:`~unitl`
+            - Get or set the Factor to convert model length units to millimeters, e.g. if model       units are meters, UNITL = 1000, [UNITL] = 1/[LENGTH].
+          * - :py:attr:`~epdam1`
+            - Get or set the Accumulated plastic strain at which hysteretic damage begins
+          * - :py:attr:`~epdam2`
+            - Get or set the Accumulated plastic strain at which hysteretic damage is complete
+          * - :py:attr:`~dresid`
+            - Get or set the Residual factor remaining after hysteretic damage
+          * - :py:attr:`~xp`
+            - Get or set the Coordinates of point p for AOPT = 1 and 4 (see MAT 2)
+          * - :py:attr:`~yp`
+            - Get or set the Coordinates of point p for AOPT = 1 and 4 (see MAT 2)
+          * - :py:attr:`~zp`
+            - Get or set the Coordinates of point p for AOPT = 1 and 4 (see MAT 2)
+          * - :py:attr:`~a1`
+            - Get or set the Components of vector a for AOPT = 2 (see MAT 2)
+          * - :py:attr:`~a2`
+            - Get or set the Components of vector a for AOPT = 2 (see MAT 2)
+          * - :py:attr:`~a3`
+            - Get or set the Components of vector a for AOPT = 2 (see MAT 2)
+          * - :py:attr:`~v1`
+            - Get or set the Components of vector v for AOPT = 3 and 4 (see MAT 2)
+          * - :py:attr:`~v2`
+            - Get or set the Components of vector v for AOPT = 3 and 4 (see MAT 2)
+          * - :py:attr:`~v3`
+            - Get or set the Components of vector v for AOPT = 3 and 4 (see MAT 2)
+          * - :py:attr:`~d1`
+            - Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+          * - :py:attr:`~d2`
+            - Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+          * - :py:attr:`~d3`
+            - Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+          * - :py:attr:`~beta`
+            - Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_203 import Mat203
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be chosen.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ym
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's Modulus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's Ratio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy
+   :type: Optional[float]
+
+
+   
+   Get or set the Yield stress
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lamda
+   :type: Optional[float]
+
+
+   
+   Get or set the Slenderness ratio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sbuck
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial buckling stress (should be positive)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: power
+   :type: float
+
+
+   
+   Get or set the Power law for Bauschinger effect (non-dimensional)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fracx
+   :type: Optional[float]
+
+
+   
+   Get or set the Fraction of reinforcement at this integration point in local x direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fracy
+   :type: Optional[float]
+
+
+   
+   Get or set the Fraction of reinforcement at this integration point in local y direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcten
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional curve providing the factor on SIGY versus plastic strain (tension)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lccomp
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional curve providing the factor on SBUCK versus plastic strain (compression)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aopt
+   :type: Optional[float]
+
+
+   
+   Get or set the Option for local axis alignment  - see material type 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ebu
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional buckling strain (if defined, overrides LAMBDA)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: downsl
+   :type: float
+
+
+   
+   Get or set the Initial down-slope of buckling curve as a fraction of YM (dimensionless)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dbar
+   :type: Optional[float]
+
+
+   
+   Get or set the Reinforcement bar diameter used for dowel action. See remarks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fcdow
+   :type: Optional[float]
+
+
+   
+   Get or set the Concrete compressive strength used for dowel action. See notes.  This field has units of stress
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lchard
+   :type: Optional[float]
+
+
+   
+   Get or set the Characteristic length for dowel action (length units)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: unitc
+   :type: float
+
+
+   
+   Get or set the Factor to convert model stress units to MPa, e.g. is model units are Newtons and meters, UNITC = 10e-6 , [UNITC] = 1/[STRESS].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: unitl
+   :type: float
+
+
+   
+   Get or set the Factor to convert model length units to millimeters, e.g. if model       units are meters, UNITL = 1000, [UNITL] = 1/[LENGTH].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: epdam1
+   :type: Optional[float]
+
+
+   
+   Get or set the Accumulated plastic strain at which hysteretic damage begins
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: epdam2
+   :type: Optional[float]
+
+
+   
+   Get or set the Accumulated plastic strain at which hysteretic damage is complete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dresid
+   :type: Optional[float]
+
+
+   
+   Get or set the Residual factor remaining after hysteretic damage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xp
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of point p for AOPT = 1 and 4 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yp
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of point p for AOPT = 1 and 4 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: zp
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of point p for AOPT = 1 and 4 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3 and 4 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3 and 4 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3 and 4 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '203'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

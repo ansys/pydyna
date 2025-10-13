@@ -1,0 +1,1500 @@
+
+
+
+
+
+
+:class:`Mat072R3`
+=================
+
+
+.. py:class:: mat_072r3.Mat072R3(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_072R3 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat072R3
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~ft`
+            - Get or set the Uniaxial tensile strength
+          * - :py:attr:`~a0`
+            - Get or set the Maximum shear failure surface parameter,   or   for parameter generation
+          * - :py:attr:`~a1`
+            - Get or set the Maximum shear failure surface parameter  .
+          * - :py:attr:`~a2`
+            - Get or set the Maximum shear failure surface parameter  .
+          * - :py:attr:`~b1`
+            - Get or set the Compressive damage scaling parameter,
+          * - :py:attr:`~omega`
+            - Get or set the Fractional dilatancy,
+          * - :py:attr:`~a1f`
+            - Get or set the Residual failure surface coefficient,  .
+          * - :py:attr:`~slambda`
+            - Get or set the stretch factor, s.
+          * - :py:attr:`~nout`
+            - Get or set the Output selector for effective plastic strain (see table).
+          * - :py:attr:`~edrop`
+            - Get or set the Post peak dilatancy decay,
+          * - :py:attr:`~rsize`
+            - Get or set the Unit conversion factor for length (inches/user-unit), e.g. 39.37 if user length unit in meters.
+          * - :py:attr:`~ucf`
+            - Get or set the Unit conversion factor for stress (psi/user-unit), e.g. 145 if   in MPa.
+          * - :py:attr:`~lcrate`
+            - Get or set the Define (load) curve number for strain-rate effects; effective strain rate on abscissa (negative = tension) and strength enhancement on ordinate. If LCRATE is set to= -1, strain rate effects areis automatically included, based on equations provided in Wu, Crawford, Lan, and Magallanes [2014].
+          * - :py:attr:`~locwidth`
+            - Get or set the Three times the maximum aggregate diameter (input in user length units).
+          * - :py:attr:`~npts`
+            - Get or set the Number of points in   versus  damage relation; must be 13 points.
+          * - :py:attr:`~lambda1`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda2`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda3`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda4`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda5`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda6`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda7`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda8`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda09`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda10`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda11`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda12`
+            - Get or set the value of damage function
+          * - :py:attr:`~lambda13`
+            - Get or set the value of damage function
+          * - :py:attr:`~b3`
+            - Get or set the Damage scaling coefficient for triaxial tension
+          * - :py:attr:`~a0y`
+            - Get or set the Initial yield surface cohesion,
+          * - :py:attr:`~a1y`
+            - Get or set the Initial yield surface coefficient,
+          * - :py:attr:`~eta1`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta2`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta3`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta4`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta5`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta6`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta7`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta8`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta09`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta10`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta11`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta12`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~eta13`
+            - Get or set the 1st value of scale factor
+          * - :py:attr:`~b2`
+            - Get or set the Tensile damage scaling exponent
+          * - :py:attr:`~a2f`
+            - Get or set the Residual failure surface coefficient
+          * - :py:attr:`~a2y`
+            - Get or set the Initial yield surface coefficient
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_072r3 import Mat072R3
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ft
+   :type: Optional[float]
+
+
+   
+   Get or set the Uniaxial tensile strength
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a0
+   :type: Optional[float]
+
+
+   
+   Get or set the Maximum shear failure surface parameter,   or   for parameter generation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1
+   :type: Optional[float]
+
+
+   
+   Get or set the Maximum shear failure surface parameter  .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2
+   :type: Optional[float]
+
+
+   
+   Get or set the Maximum shear failure surface parameter  .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b1
+   :type: Optional[float]
+
+
+   
+   Get or set the Compressive damage scaling parameter,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: omega
+   :type: Optional[float]
+
+
+   
+   Get or set the Fractional dilatancy,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1f
+   :type: Optional[float]
+
+
+   
+   Get or set the Residual failure surface coefficient,  .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: slambda
+   :type: Optional[float]
+
+
+   
+   Get or set the stretch factor, s.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nout
+   :type: Optional[float]
+
+
+   
+   Get or set the Output selector for effective plastic strain (see table).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: edrop
+   :type: Optional[float]
+
+
+   
+   Get or set the Post peak dilatancy decay,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rsize
+   :type: Optional[float]
+
+
+   
+   Get or set the Unit conversion factor for length (inches/user-unit), e.g. 39.37 if user length unit in meters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ucf
+   :type: Optional[float]
+
+
+   
+   Get or set the Unit conversion factor for stress (psi/user-unit), e.g. 145 if   in MPa.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcrate
+   :type: Optional[int]
+
+
+   
+   Get or set the Define (load) curve number for strain-rate effects; effective strain rate on abscissa (negative = tension) and strength enhancement on ordinate. If LCRATE is set to= -1, strain rate effects areis automatically included, based on equations provided in Wu, Crawford, Lan, and Magallanes [2014].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: locwidth
+   :type: Optional[float]
+
+
+   
+   Get or set the Three times the maximum aggregate diameter (input in user length units).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: npts
+   :type: Optional[float]
+
+
+   
+   Get or set the Number of points in   versus  damage relation; must be 13 points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda1
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda2
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda3
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda4
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda5
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda6
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda7
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda8
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda09
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda10
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda11
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda12
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lambda13
+   :type: Optional[float]
+
+
+   
+   Get or set the value of damage function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b3
+   :type: Optional[float]
+
+
+   
+   Get or set the Damage scaling coefficient for triaxial tension
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a0y
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial yield surface cohesion,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1y
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial yield surface coefficient,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta1
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta2
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta3
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta4
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta5
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta6
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta7
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta8
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta09
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta10
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta11
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta12
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eta13
+   :type: Optional[float]
+
+
+   
+   Get or set the 1st value of scale factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b2
+   :type: Optional[float]
+
+
+   
+   Get or set the Tensile damage scaling exponent
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2f
+   :type: Optional[float]
+
+
+   
+   Get or set the Residual failure surface coefficient
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2y
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial yield surface coefficient
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '072R3'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

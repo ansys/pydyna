@@ -1,0 +1,555 @@
+
+
+
+
+
+
+:class:`Mat256`
+===============
+
+
+.. py:class:: mat_256.Mat256(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_256 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat256
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number or label must be specified.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~k`
+            - Get or set the Bulk modulus.
+          * - :py:attr:`~g`
+            - Get or set the Shear modulus.
+          * - :py:attr:`~mr`
+            - Get or set the Kinematic hardening parameter.
+          * - :py:attr:`~ll`
+            - Get or set the Kinematic hardening parameter.
+          * - :py:attr:`~nu0`
+            - Get or set the Creep parameter.
+          * - :py:attr:`~m`
+            - Get or set the Creep parameter.
+          * - :py:attr:`~alpha`
+            - Get or set the Creep parameter.
+          * - :py:attr:`~h0`
+            - Get or set the Isotropic hardening parameter.
+          * - :py:attr:`~scv`
+            - Get or set the Isotropic hardening parameter.
+          * - :py:attr:`~b`
+            - Get or set the Isotropic hardening parameter.
+          * - :py:attr:`~ecv`
+            - Get or set the Isotropic hardening parameter.
+          * - :py:attr:`~g0`
+            - Get or set the Isotropic hardening parameter.
+          * - :py:attr:`~s0`
+            - Get or set the Isotropic hardening parameter.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_256 import Mat256
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number or label must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k
+   :type: Optional[float]
+
+
+   
+   Get or set the Bulk modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mr
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ll
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nu0
+   :type: Optional[float]
+
+
+   
+   Get or set the Creep parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m
+   :type: Optional[float]
+
+
+   
+   Get or set the Creep parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha
+   :type: Optional[float]
+
+
+   
+   Get or set the Creep parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: h0
+   :type: Optional[float]
+
+
+   
+   Get or set the Isotropic hardening parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: scv
+   :type: float
+
+
+   
+   Get or set the Isotropic hardening parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b
+   :type: Optional[float]
+
+
+   
+   Get or set the Isotropic hardening parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ecv
+   :type: Optional[float]
+
+
+   
+   Get or set the Isotropic hardening parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g0
+   :type: Optional[float]
+
+
+   
+   Get or set the Isotropic hardening parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s0
+   :type: Optional[float]
+
+
+   
+   Get or set the Isotropic hardening parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '256'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

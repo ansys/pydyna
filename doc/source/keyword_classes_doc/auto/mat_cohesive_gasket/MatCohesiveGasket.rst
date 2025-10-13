@@ -1,0 +1,452 @@
+
+
+
+
+
+
+:class:`MatCohesiveGasket`
+==========================
+
+
+.. py:class:: mat_cohesive_gasket.MatCohesiveGasket(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_COHESIVE_GASKET keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatCohesiveGasket
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number
+          * - :py:attr:`~ro`
+            - Get or set the Mass density
+          * - :py:attr:`~roflg`
+            - Get or set the Flag for whether density is specified per unit area or volume:
+          * - :py:attr:`~intfail`
+            - Get or set the Quadrature rule. Note that this material has no failure
+          * - :py:attr:`~lc`
+            - ..
+          * - :py:attr:`~uc`
+            - Get or set the Table ID defining the unloading curves
+          * - :py:attr:`~eten`
+            - Get or set the Tensile stiffness
+          * - :py:attr:`~etsr`
+            - Get or set the Transverse shear stiffness
+          * - :py:attr:`~emem`
+            - Get or set the Membrane stiffness
+          * - :py:attr:`~pr`
+            - Get or set the Membrane Poisson ratio
+          * - :py:attr:`~ps`
+            - Get or set the Membrane plane stress or plain strain assumption:
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_cohesive_gasket import MatCohesiveGasket
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: roflg
+   :type: int
+
+
+   
+   Get or set the Flag for whether density is specified per unit area or volume:
+   EQ.0:   Density is per unit volume(default).
+   EQ.1 : Density is per unit area for controlling the mass of cohesive elements with an initial volume of zero
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: intfail
+   :type: Optional[int]
+
+
+   
+   Get or set the Quadrature rule. Note that this material has no failure
+   LE.0.0: 2 x 2 Newton - Cotes quadrature.
+   GT.0.0 : 2 x 2 Gaussian quadrature
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc
+   :type: Optional[int]
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: uc
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID defining the unloading curves
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eten
+   :type: Optional[float]
+
+
+   
+   Get or set the Tensile stiffness
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etsr
+   :type: Optional[float]
+
+
+   
+   Get or set the Transverse shear stiffness
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: emem
+   :type: Optional[float]
+
+
+   
+   Get or set the Membrane stiffness
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Membrane Poisson ratio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ps
+   :type: int
+
+
+   
+   Get or set the Membrane plane stress or plain strain assumption:
+   EQ.0:   Plane stress(default)
+   EQ.1 : Plane strain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'COHESIVE_GASKET'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

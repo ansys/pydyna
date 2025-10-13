@@ -1,0 +1,420 @@
+
+
+
+
+
+
+:class:`MatSteelEc3`
+====================
+
+
+.. py:class:: mat_steel_ec3.MatSteelEc3(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_STEEL_EC3 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatSteelEc3
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number or label must be specified.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus - a reasonable value must be provided even if LC_E is also input.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~sgy`
+            - Get or set the Initial yield stress.
+          * - :py:attr:`~lc_e`
+            - Get or set the Optional Load curve ID: Young's Modulus vs Temperature (overrides E      and factors from EC3).
+          * - :py:attr:`~lc_pr`
+            - Get or set the Optional Load curve ID: Poisson's Ratio vs Temperature (overrides PR).
+          * - :py:attr:`~lc_al`
+            - Get or set the Optional Load curve ID: alpha vs temperature (over-rides thermal expansion data from EC3).
+          * - :py:attr:`~tbl_ss`
+            - Get or set the Optional Table ID containing stress-strain curves at different temperatures (overrides curves from EC3).
+          * - :py:attr:`~lc_fs`
+            - Get or set the Optional Load curve ID: failure strain vs temperature.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_steel_ec3 import MatSteelEc3
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number or label must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus - a reasonable value must be provided even if LC_E is also input.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sgy
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial yield stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc_e
+   :type: Optional[int]
+
+
+   
+   Get or set the Optional Load curve ID: Young's Modulus vs Temperature (overrides E      and factors from EC3).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc_pr
+   :type: Optional[int]
+
+
+   
+   Get or set the Optional Load curve ID: Poisson's Ratio vs Temperature (overrides PR).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc_al
+   :type: Optional[int]
+
+
+   
+   Get or set the Optional Load curve ID: alpha vs temperature (over-rides thermal expansion data from EC3).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tbl_ss
+   :type: Optional[int]
+
+
+   
+   Get or set the Optional Table ID containing stress-strain curves at different temperatures (overrides curves from EC3).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc_fs
+   :type: Optional[int]
+
+
+   
+   Get or set the Optional Load curve ID: failure strain vs temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'STEEL_EC3'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

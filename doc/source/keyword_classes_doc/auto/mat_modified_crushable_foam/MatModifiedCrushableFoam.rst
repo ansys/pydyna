@@ -1,0 +1,420 @@
+
+
+
+
+
+
+:class:`MatModifiedCrushableFoam`
+=================================
+
+
+.. py:class:: mat_modified_crushable_foam.MatModifiedCrushableFoam(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_MODIFIED_CRUSHABLE_FOAM keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatModifiedCrushableFoam
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be chosen.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~tid`
+            - Get or set the Table ID defining yield stress versus volumetric strain, y, at different strain rates.
+          * - :py:attr:`~tsc`
+            - Get or set the Tensile stress cutoff. A nonzero, positive value is strongly recommended for realistic behavior.
+          * - :py:attr:`~damp`
+            - Get or set the Rate senitivity via damping coefficient (.05<recommended value<.50).
+          * - :py:attr:`~ncycle`
+            - Get or set the Number of cycles to determine the average volumetric strain rate.
+          * - :py:attr:`~srclmt`
+            - Get or set the Strain rate change limit.
+          * - :py:attr:`~srflag`
+            - Get or set the The strain rate in the table may be the true strain rate (SFLAG=0) or the engineering strain rate (SFLAG=1).
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_modified_crushable_foam import MatModifiedCrushableFoam
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be chosen.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tid
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID defining yield stress versus volumetric strain, y, at different strain rates.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tsc
+   :type: Optional[float]
+
+
+   
+   Get or set the Tensile stress cutoff. A nonzero, positive value is strongly recommended for realistic behavior.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: damp
+   :type: Optional[float]
+
+
+   
+   Get or set the Rate senitivity via damping coefficient (.05<recommended value<.50).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ncycle
+   :type: Optional[float]
+
+
+   
+   Get or set the Number of cycles to determine the average volumetric strain rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: srclmt
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain rate change limit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: srflag
+   :type: Optional[int]
+
+
+   
+   Get or set the The strain rate in the table may be the true strain rate (SFLAG=0) or the engineering strain rate (SFLAG=1).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'MODIFIED_CRUSHABLE_FOAM'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

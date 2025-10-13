@@ -1,0 +1,967 @@
+
+
+
+
+
+
+:class:`MatSprJlr`
+==================
+
+
+.. py:class:: mat_spr_jlr.MatSprJlr(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_SPR_JLR keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatSprJlr
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number or label must be specified.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus, used only for contact stiffness calculation.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio, used only for contact stiffness calculation
+          * - :py:attr:`~helas`
+            - Get or set the SPR head end behaviour flag:
+          * - :py:attr:`~telas`
+            - Get or set the SPR tail end behaviour flag:
+          * - :py:attr:`~lcaxh`
+            - Get or set the Load curve ID, see *DEFINE_CURVE, giving axial force versus
+          * - :py:attr:`~lcshh`
+            - Get or set the Load curve ID, see *DEFINE_CURVE, giving shear force versus
+          * - :py:attr:`~lcbmh`
+            - Get or set the Load curve ID, see *DEFINE_CURVE, giving moment versus
+          * - :py:attr:`~sfaxh`
+            - Get or set the Scale factor on axial force from curve LCAXH.
+          * - :py:attr:`~sfshh`
+            - Get or set the Scale factor on shear force from curve LCSHH.
+          * - :py:attr:`~sfbmh`
+            - Get or set the Scale factor on bending moment from curve LCBMH.
+          * - :py:attr:`~dfakh`
+            - Get or set the Optional displacement to start of softening in axial load (head).
+          * - :py:attr:`~dfshh`
+            - Get or set the Optional displacement to start of softening in shear load (head).
+          * - :py:attr:`~rfbmh`
+            - Get or set the Optional rotation (radians) to start of bending moment softening (head).
+          * - :py:attr:`~dmfaxh`
+            - Get or set the Scale factor on DFAXH.
+          * - :py:attr:`~dmfshh`
+            - Get or set the Scale factor on FFSHH.
+          * - :py:attr:`~dmfbmh`
+            - Get or set the Scale factor on RFBMH.
+          * - :py:attr:`~lcaxt`
+            - Get or set the Load curve ID, see *DEFINE_CURVE, giving axial force versus deformation (tail).
+          * - :py:attr:`~lcsht`
+            - Get or set the Load curve ID, see *DEFINE_CURVE, giving shear force versus deformation (tail).
+          * - :py:attr:`~lcbmt`
+            - Get or set the Load curve ID, see *DEFINE_CURVE, giving moment versus rotation (tail).
+          * - :py:attr:`~sfaxt`
+            - Get or set the Scale factor on axial force from curve LCAXT
+          * - :py:attr:`~sfsht`
+            - Get or set the Scale factor on shear force from curve LCSHT
+          * - :py:attr:`~sbfmt`
+            - Get or set the Scale factor on bending moment from curve LCBMT.
+          * - :py:attr:`~dfaxt`
+            - Get or set the Optional displacement to start of softening in axial load (tail).
+          * - :py:attr:`~dfsht`
+            - Get or set the Optional displacement to start of softening in shear load (tail).
+          * - :py:attr:`~rfbmt`
+            - Get or set the Optional rotation (radians) to start of bending moment softening (tail).
+          * - :py:attr:`~dfmaxt`
+            - Get or set the Scale factor on DFAXT.
+          * - :py:attr:`~dmfsht`
+            - Get or set the Scale factor on FFSHT.
+          * - :py:attr:`~dmfbmt`
+            - Get or set the Scale factor on RFBMT.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_spr_jlr import MatSprJlr
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number or label must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus, used only for contact stiffness calculation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio, used only for contact stiffness calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: helas
+   :type: float
+
+
+   
+   Get or set the SPR head end behaviour flag:
+   EQ.0.0: Nonlinear.
+   EQ.1.0: Elastic (Use first two points on load curves).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: telas
+   :type: float
+
+
+   
+   Get or set the SPR tail end behaviour flag:
+   EQ.0.0: Nonlinear.
+   EQ.1.0: Elastic (Use first two points on load curves).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcaxh
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID, see *DEFINE_CURVE, giving axial force versus
+   deformation (head)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcshh
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID, see *DEFINE_CURVE, giving shear force versus
+   deformation (head).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcbmh
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID, see *DEFINE_CURVE, giving moment versus
+   rotation (head).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfaxh
+   :type: float
+
+
+   
+   Get or set the Scale factor on axial force from curve LCAXH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfshh
+   :type: float
+
+
+   
+   Get or set the Scale factor on shear force from curve LCSHH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfbmh
+   :type: float
+
+
+   
+   Get or set the Scale factor on bending moment from curve LCBMH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dfakh
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional displacement to start of softening in axial load (head).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dfshh
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional displacement to start of softening in shear load (head).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rfbmh
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional rotation (radians) to start of bending moment softening (head).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dmfaxh
+   :type: float
+
+
+   
+   Get or set the Scale factor on DFAXH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dmfshh
+   :type: float
+
+
+   
+   Get or set the Scale factor on FFSHH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dmfbmh
+   :type: float
+
+
+   
+   Get or set the Scale factor on RFBMH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcaxt
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID, see *DEFINE_CURVE, giving axial force versus deformation (tail).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcsht
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID, see *DEFINE_CURVE, giving shear force versus deformation (tail).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcbmt
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID, see *DEFINE_CURVE, giving moment versus rotation (tail).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfaxt
+   :type: float
+
+
+   
+   Get or set the Scale factor on axial force from curve LCAXT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfsht
+   :type: float
+
+
+   
+   Get or set the Scale factor on shear force from curve LCSHT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sbfmt
+   :type: float
+
+
+   
+   Get or set the Scale factor on bending moment from curve LCBMT.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dfaxt
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional displacement to start of softening in axial load (tail).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dfsht
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional displacement to start of softening in shear load (tail).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rfbmt
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional rotation (radians) to start of bending moment softening (tail).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dfmaxt
+   :type: float
+
+
+   
+   Get or set the Scale factor on DFAXT.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dmfsht
+   :type: float
+
+
+   
+   Get or set the Scale factor on FFSHT.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dmfbmt
+   :type: float
+
+
+   
+   Get or set the Scale factor on RFBMT.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'SPR_JLR'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

@@ -1,0 +1,861 @@
+
+
+
+
+
+
+:class:`MatTailoredProperties`
+==============================
+
+
+.. py:class:: mat_tailored_properties.MatTailoredProperties(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_TAILORED_PROPERTIES keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatTailoredProperties
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number or label must be specified.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~fail`
+            - Get or set the Failure flag.
+          * - :py:attr:`~tdel`
+            - Get or set the Minimum time step size for automatic element deletion
+          * - :py:attr:`~lcss`
+            - Get or set the Load curve ID or Table ID (see full description of MAT_024). Load
+          * - :py:attr:`~vp`
+            - Get or set the Formulation for rate effects:
+          * - :py:attr:`~hisvn`
+            - Get or set the Location of history variable in the history array of *INITIAL_STRESS_SHELL that is used to evaluate the 3-D table LCSS
+          * - :py:attr:`~phase`
+            - Get or set the Constant value to evaluate the 3-D table LCSS. Only used if HISVN = 0
+          * - :py:attr:`~eps1`
+            - Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+          * - :py:attr:`~eps2`
+            - Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+          * - :py:attr:`~eps3`
+            - Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+          * - :py:attr:`~eps4`
+            - Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+          * - :py:attr:`~eps5`
+            - Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress
+          * - :py:attr:`~eps6`
+            - Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress
+          * - :py:attr:`~eps7`
+            - Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress
+          * - :py:attr:`~eps8`
+            - Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress
+          * - :py:attr:`~es1`
+            - Get or set the Corresponding yield stress values to EPS1 - EPS8.
+          * - :py:attr:`~es2`
+            - Get or set the Corresponding yield stress values to EPS1 - EPS8.
+          * - :py:attr:`~es3`
+            - Get or set the Corresponding yield stress values to EPS1 - EPS8.
+          * - :py:attr:`~es4`
+            - Get or set the Corresponding yield stress values to EPS1 - EPS8.
+          * - :py:attr:`~es5`
+            - Get or set the Corresponding yield stress values to EPS1 - EPS8
+          * - :py:attr:`~es6`
+            - Get or set the Corresponding yield stress values to EPS1 - EPS8
+          * - :py:attr:`~es7`
+            - Get or set the Corresponding yield stress values to EPS1 - EPS8
+          * - :py:attr:`~es8`
+            - Get or set the Corresponding yield stress values to EPS1 - EPS8
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_tailored_properties import MatTailoredProperties
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number or label must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fail
+   :type: float
+
+
+   
+   Get or set the Failure flag.
+   LT.0.0: User defined failure subroutine, matusr_24 in dyn21.F, is
+   called to determine failure
+   EQ.0.0: Failure is not considered. This option is recommended if failure is not of interest since many calculations will be saved.
+   GT.0.0: Effective plastic strain to failure. When the plastic strain    reaches this value, the element is deleted from the calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tdel
+   :type: Optional[float]
+
+
+   
+   Get or set the Minimum time step size for automatic element deletion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcss
+   :type: int
+
+
+   
+   Get or set the Load curve ID or Table ID (see full description of MAT_024). Load
+   curve for stress vs. plastic strain. 2-D table for stress vs. plastic strain
+   as a function of strain rates. 3-D table for stress vs. plastic strain as a
+   function of strain rates as a function of history variable values (see HISVN).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vp
+   :type: float
+
+
+   
+   Get or set the Formulation for rate effects:
+   EQ.0.0: Scale yield stress (default),
+   EQ.1.0: Viscoplastic formulation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hisvn
+   :type: int
+
+
+   
+   Get or set the Location of history variable in the history array of *INITIAL_STRESS_SHELL that is used to evaluate the 3-D table LCSS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: phase
+   :type: Optional[float]
+
+
+   
+   Get or set the Constant value to evaluate the 3-D table LCSS. Only used if HISVN = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps1
+   :type: Optional[float]
+
+
+   
+   Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps2
+   :type: Optional[float]
+
+
+   
+   Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps3
+   :type: Optional[float]
+
+
+   
+   Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps4
+   :type: Optional[float]
+
+
+   
+   Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps5
+   :type: Optional[float]
+
+
+   
+   Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps6
+   :type: Optional[float]
+
+
+   
+   Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps7
+   :type: Optional[float]
+
+
+   
+   Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps8
+   :type: Optional[float]
+
+
+   
+   Get or set the Effective plastic strain values (optional). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es1
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress values to EPS1 - EPS8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es2
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress values to EPS1 - EPS8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es3
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress values to EPS1 - EPS8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es4
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress values to EPS1 - EPS8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es5
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress values to EPS1 - EPS8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es6
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress values to EPS1 - EPS8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es7
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress values to EPS1 - EPS8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es8
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress values to EPS1 - EPS8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'TAILORED_PROPERTIES'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

@@ -1,0 +1,1850 @@
+
+
+
+
+
+
+:class:`MatConcreteEc2`
+=======================
+
+
+.. py:class:: mat_concrete_ec2.MatConcreteEc2(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_CONCRETE_EC2 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatConcreteEc2
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~fc`
+            - Get or set the Compressive strength of concrete (stress units)
+          * - :py:attr:`~ft`
+            - Get or set the Tensile stress to cause cracking
+          * - :py:attr:`~typec`
+            - Get or set the EQ.1.0: Siliceous (default), Draft EC2 Annex (fire engineering)
+          * - :py:attr:`~unitc`
+            - Get or set the Factor to convert stress units to MPa (see Remarks)
+          * - :py:attr:`~ecuten`
+            - Get or set the Strain to fully open a crack
+          * - :py:attr:`~fcc`
+            - Get or set the Relevant only if TYPEC = 6 or 9.
+          * - :py:attr:`~esoft`
+            - Get or set the Tension stiffening (Slope of stress-strain curve post-cracking in tension)
+          * - :py:attr:`~lchar`
+            - Get or set the Characteristic length at which ESOFT applies; also used as crack spacing in aggregate-interlock calculation
+          * - :py:attr:`~mu`
+            - Get or set the Friction on crack planes (ignored if AGGSZ>0 - see notes)
+          * - :py:attr:`~taumxf`
+            - Get or set the Maximum friction shear stress on crack planes (ignored if AGGSZ>0 - see notes)
+          * - :py:attr:`~taumxc`
+            - Get or set the Maximum through-thickness shear stress after cracking (see notes)
+          * - :py:attr:`~ecragg`
+            - Get or set the Strain parameter for aggregate interlock (ignored if AGGSZ>0 - see notes)
+          * - :py:attr:`~aggsz`
+            - Get or set the Aggregate size (length units)  (used in NS3473 aggregate interlock formula - see notes)
+          * - :py:attr:`~unitl`
+            - Get or set the Factor to convert length units to millimetres (used only if AGGSZ>0  - see notes)
+          * - :py:attr:`~ymreinf`
+            - Get or set the Young's Modulus of reinforcement
+          * - :py:attr:`~prrinf`
+            - Get or set the Poisson's Ratio of reinforcement
+          * - :py:attr:`~sureinf`
+            - Get or set the Ultimate stress of reinforcement
+          * - :py:attr:`~typer`
+            - Get or set the Type of reinforcement for stress-strain-temperature relationships
+          * - :py:attr:`~fracrx`
+            - Get or set the Fraction of reinforcement (x-axis) (e.g. for 1% reinforcement FRACR=0.01)
+          * - :py:attr:`~fracry`
+            - Get or set the Fraction of reinforcement (y-axis) (e.g. for 1% reinforcement FRACR=0.01)
+          * - :py:attr:`~lcrsu`
+            - Get or set the Load curve for TYPER=5, giving non-dimensional factor on SUREINF versus plastic strain (overrides stress-strain relationships from EC2)
+          * - :py:attr:`~lcalps`
+            - Get or set the Optional loadcurve giving thermal expansion coefficient of reinforcement vs temperature - overrides relationship from EC2
+          * - :py:attr:`~aopt`
+            - Get or set the Material axes option:
+          * - :py:attr:`~et36`
+            - Get or set the Young's Modulus of concrete (TYPEC=3 and 6)
+          * - :py:attr:`~prt36_`
+            - Get or set the Poisson's Ratio of concrete (TYPEC=3 and 6)
+          * - :py:attr:`~ecut36`
+            - Get or set the Strain to failure of concrete in compression cu (TYPEC=3 and 6).See under “Compressive response…” in in section Material Behavior of Concretethe below. Default is 0.02 for TYPEC = 3 and 1.1×EC1_6  for TYPEC = 6..
+          * - :py:attr:`~lcalpc`
+            - Get or set the Optional load curve giving thermal expansion coefficient of concrete vs temperature - overrides relationship from EC2
+          * - :py:attr:`~degrad`
+            - Get or set the If non-zero, the compressive strength of concrete parallel to an open crack will be reduced (see notes)
+          * - :py:attr:`~ishchk`
+            - Get or set the Flag = 1 to input data for shear capacity check
+          * - :py:attr:`~unlfac`
+            - Get or set the Stiffness degradation factor after crushing (0.0 to 1.0 ¨C see notes)
+          * - :py:attr:`~xp`
+            - Get or set the Coordinates of point p for AOPT = 1 and 4 (see Mat type 2)
+          * - :py:attr:`~yp`
+            - Get or set the Coordinates of point p for AOPT = 1 and 4 (see Mat type 2)
+          * - :py:attr:`~zp_`
+            - Get or set the Coordinates of point p for AOPT = 1 and 4 (see Mat type 2)
+          * - :py:attr:`~a1`
+            - Get or set the Components of vector a for AOPT = 2 (see Mat type 2)
+          * - :py:attr:`~a2`
+            - Get or set the Components of vector a for AOPT = 2 (see Mat type 2)
+          * - :py:attr:`~a3`
+            - Get or set the Components of vector a for AOPT = 2 (see Mat type 2)
+          * - :py:attr:`~v1`
+            - Get or set the Components of vector v for AOPT = 3 and 4 (see Mat type 2)
+          * - :py:attr:`~v2`
+            - Get or set the Components of vector v for AOPT = 3 and 4 (see Mat type 2)
+          * - :py:attr:`~v3_`
+            - Get or set the Components of vector v for AOPT = 3 and 4 (see Mat type 2)
+          * - :py:attr:`~d1`
+            - Get or set the Components of vector d for AOPT = 2 (see Mat type 2)
+          * - :py:attr:`~d2`
+            - Get or set the Components of vector d for AOPT = 2 (see Mat type 2)
+          * - :py:attr:`~d3`
+            - Get or set the Components of vector d for AOPT = 2 (see Mat type 2)
+          * - :py:attr:`~beta`
+            - Get or set the
+          * - :py:attr:`~typesc`
+            - Get or set the Type of shear capacity check
+          * - :py:attr:`~p_or_f`
+            - Get or set the If BS8110 shear check, percent reinforcement - e.g. if 0.5%, input 0.5. If ACI shear check, ratio (cylinder strength/FC) - defaults to 1
+          * - :py:attr:`~effd_`
+            - Get or set the Effective section depth (length units), used in shear capacity check. This is usually the section depth excluding the cover concrete
+          * - :py:attr:`~gamsc`
+            - Get or set the Load factor used in BS8110 shear capacity check
+          * - :py:attr:`~erodet`
+            - Get or set the Crack-opening strain at which element is deleted; see Remark 7
+          * - :py:attr:`~erodec`
+            - Get or set the Compressive strain used in erosion criteria; see Remark 7.
+          * - :py:attr:`~eroder`
+            - Get or set the Reinforcement plastic strain used in erosion criteria; see Remark 7.
+          * - :py:attr:`~tmpoff`
+            - Get or set the Constant to be added to the model's temperature unit to convert into degrees Celsius, e.g., if the model's temperature unit is degrees Kelvin, set TMPOFF to -273.  Degrees Celsius temperatures are then used throughout the material model, e.g., for LCALPC as well as for the default thermally-sensitive properties.
+          * - :py:attr:`~ec1_6`
+            - Get or set the Strain at maximum compressive stress for Type 6 concrete
+          * - :py:attr:`~ecsp69`
+            - Get or set the Spalling strain in compression for Type 6 concrete
+          * - :py:attr:`~gamce9`
+            - Get or set the Material factor that divides the Youngs Modulus (TYPEC = 9).
+          * - :py:attr:`~phief9`
+            - Get or set the Effective creep ratio (TYPEC = 9).
+          * - :py:attr:`~ft2`
+            - Get or set the Tensile strength used for calculating tensile response.
+          * - :py:attr:`~ftshr`
+            - Get or set the Tensile strength used for calculating post-crack shear response
+          * - :py:attr:`~lcftt`
+            - Get or set the Load curve defining factor on tensile strength versus time.
+          * - :py:attr:`~wro_g`
+            - Get or set the Density times gravity for water pressure in cracks.
+          * - :py:attr:`~zsurf`
+            - Get or set the -coordinate of water surface (for water pressure in cracks)
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_concrete_ec2 import MatConcreteEc2
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fc
+   :type: Optional[float]
+
+
+   
+   Get or set the Compressive strength of concrete (stress units)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ft
+   :type: Optional[float]
+
+
+   
+   Get or set the Tensile stress to cause cracking
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: typec
+   :type: float
+
+
+   
+   Get or set the EQ.1.0: Siliceous (default), Draft EC2 Annex (fire engineering)
+   EQ.2.0: Calcareous, Draft EC2 Annex (fire engineering)
+   EQ.3.0: Non-thermally-sensitive using ET3, ECU3
+   EQ.4.0: Lightweight
+   EQ.5.0: Fiber-reinforced
+   EQ.6.0: Non-thermally-sensitive, Mander algorithm
+   EQ.7.0: Siliceous, EC2 1-2:2004 (fire engineering)
+   EQ.8.0: Calcareous, EC2 1-2:2004 (fire engineering)
+   EQ.9.0: EC2 1-1:2004 (general and buildings)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: unitc
+   :type: float
+
+
+   
+   Get or set the Factor to convert stress units to MPa (see Remarks)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ecuten
+   :type: float
+
+
+   
+   Get or set the Strain to fully open a crack
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fcc
+   :type: Optional[float]
+
+
+   
+   Get or set the Relevant only if TYPEC = 6 or 9.
+   TYPEC.EQ.6:     FCC is the compressive strength of confined concrete used in Mander equations. Default: unconfined properties are assumed (FCC‌ = FC).
+   TYPEC.EQ.9:     FCC is the actual compressive strength. If blank, this will be set equal to
+   the mean compressive strength (fcm in EC2 1-1) as required for serviceability calculations (8MPa greater than FC).
+   For ultimate load calculations the user may set FCC to a factored characteristic compressive strength. See remarks below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: esoft
+   :type: Optional[float]
+
+
+   
+   Get or set the Tension stiffening (Slope of stress-strain curve post-cracking in tension)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lchar
+   :type: Optional[float]
+
+
+   
+   Get or set the Characteristic length at which ESOFT applies; also used as crack spacing in aggregate-interlock calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mu
+   :type: float
+
+
+   
+   Get or set the Friction on crack planes (ignored if AGGSZ>0 - see notes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: taumxf
+   :type: float
+
+
+   
+   Get or set the Maximum friction shear stress on crack planes (ignored if AGGSZ>0 - see notes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: taumxc
+   :type: float
+
+
+   
+   Get or set the Maximum through-thickness shear stress after cracking (see notes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ecragg
+   :type: float
+
+
+   
+   Get or set the Strain parameter for aggregate interlock (ignored if AGGSZ>0 - see notes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aggsz
+   :type: Optional[float]
+
+
+   
+   Get or set the Aggregate size (length units)  (used in NS3473 aggregate interlock formula - see notes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: unitl
+   :type: float
+
+
+   
+   Get or set the Factor to convert length units to millimetres (used only if AGGSZ>0  - see notes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ymreinf
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's Modulus of reinforcement
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: prrinf
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's Ratio of reinforcement
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sureinf
+   :type: Optional[float]
+
+
+   
+   Get or set the Ultimate stress of reinforcement
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: typer
+   :type: float
+
+
+   
+   Get or set the Type of reinforcement for stress-strain-temperature relationships
+   EQ.1.0: Hot rolled reinforcing steel
+   EQ.2.0: Cold worked reinforcing steel (default)
+   EQ.3.0: Quenched and tempered prestressing steel
+   EQ.4.0: Cold worked prestressing steel
+   5.0  Non-thermally-sensitive using loadcurve LCRSU
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fracrx
+   :type: Optional[float]
+
+
+   
+   Get or set the Fraction of reinforcement (x-axis) (e.g. for 1% reinforcement FRACR=0.01)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fracry
+   :type: Optional[float]
+
+
+   
+   Get or set the Fraction of reinforcement (y-axis) (e.g. for 1% reinforcement FRACR=0.01)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcrsu
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve for TYPER=5, giving non-dimensional factor on SUREINF versus plastic strain (overrides stress-strain relationships from EC2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcalps
+   :type: Optional[int]
+
+
+   
+   Get or set the Optional loadcurve giving thermal expansion coefficient of reinforcement vs temperature - overrides relationship from EC2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aopt
+   :type: Optional[float]
+
+
+   
+   Get or set the Material axes option:
+   EQ.0.0: locally orthotropic with material axes determined by
+   element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
+   EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
+   EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
+   BETA, from a line in the plane of the element defined by        the cross product of the vector v with the element normal.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: et36
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's Modulus of concrete (TYPEC=3 and 6)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: prt36_
+   :type: float
+
+
+   
+   Get or set the Poisson's Ratio of concrete (TYPEC=3 and 6)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ecut36
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain to failure of concrete in compression cu (TYPEC=3 and 6).See under “Compressive response…” in in section Material Behavior of Concretethe below. Default is 0.02 for TYPEC = 3 and 1.1×EC1_6  for TYPEC = 6..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcalpc
+   :type: Optional[int]
+
+
+   
+   Get or set the Optional load curve giving thermal expansion coefficient of concrete vs temperature - overrides relationship from EC2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: degrad
+   :type: Optional[float]
+
+
+   
+   Get or set the If non-zero, the compressive strength of concrete parallel to an open crack will be reduced (see notes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ishchk
+   :type: int
+
+
+   
+   Get or set the Flag = 1 to input data for shear capacity check
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: unlfac
+   :type: float
+
+
+   
+   Get or set the Stiffness degradation factor after crushing (0.0 to 1.0 ¨C see notes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xp
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of point p for AOPT = 1 and 4 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yp
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of point p for AOPT = 1 and 4 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: zp_
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of point p for AOPT = 1 and 4 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1
+   :type: float
+
+
+   
+   Get or set the Components of vector a for AOPT = 2 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3 and 4 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3 and 4 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v3_
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3 and 4 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2 (see Mat type 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: typesc
+   :type: float
+
+
+   
+   Get or set the Type of shear capacity check
+   EQ.1.0: BS 8110, no failure even if capacity is exceeded
+   EQ.2.0: ACI 318 - 05M, no failure even if capacity is exceeded
+   EQ.11 : BS 8110, failure occurs if capacity is exceeded
+   EQ.12 : ACI 318 - 05M, failure occurs if capacity is exceeded
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: p_or_f
+   :type: Optional[float]
+
+
+   
+   Get or set the If BS8110 shear check, percent reinforcement - e.g. if 0.5%, input 0.5. If ACI shear check, ratio (cylinder strength/FC) - defaults to 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: effd_
+   :type: Optional[float]
+
+
+   
+   Get or set the Effective section depth (length units), used in shear capacity check. This is usually the section depth excluding the cover concrete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gamsc
+   :type: Optional[float]
+
+
+   
+   Get or set the Load factor used in BS8110 shear capacity check
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: erodet
+   :type: float
+
+
+   
+   Get or set the Crack-opening strain at which element is deleted; see Remark 7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: erodec
+   :type: float
+
+
+   
+   Get or set the Compressive strain used in erosion criteria; see Remark 7.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eroder
+   :type: float
+
+
+   
+   Get or set the Reinforcement plastic strain used in erosion criteria; see Remark 7.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tmpoff
+   :type: Optional[float]
+
+
+   
+   Get or set the Constant to be added to the model's temperature unit to convert into degrees Celsius, e.g., if the model's temperature unit is degrees Kelvin, set TMPOFF to -273.  Degrees Celsius temperatures are then used throughout the material model, e.g., for LCALPC as well as for the default thermally-sensitive properties.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ec1_6
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain at maximum compressive stress for Type 6 concrete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ecsp69
+   :type: Optional[float]
+
+
+   
+   Get or set the Spalling strain in compression for Type 6 concrete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gamce9
+   :type: Optional[float]
+
+
+   
+   Get or set the Material factor that divides the Youngs Modulus (TYPEC = 9).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: phief9
+   :type: Optional[float]
+
+
+   
+   Get or set the Effective creep ratio (TYPEC = 9).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ft2
+   :type: Optional[float]
+
+
+   
+   Get or set the Tensile strength used for calculating tensile response.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ftshr
+   :type: Optional[float]
+
+
+   
+   Get or set the Tensile strength used for calculating post-crack shear response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcftt
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve defining factor on tensile strength versus time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: wro_g
+   :type: Optional[float]
+
+
+   
+   Get or set the Density times gravity for water pressure in cracks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: zsurf
+   :type: Optional[float]
+
+
+   
+   Get or set the -coordinate of water surface (for water pressure in cracks)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'CONCRETE_EC2'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

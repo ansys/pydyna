@@ -1,0 +1,936 @@
+
+
+
+
+
+
+:class:`Mat187`
+===============
+
+
+.. py:class:: mat_187.Mat187(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_187 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat187
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~bulk`
+            - Get or set the Bulk modulus, used by LS-DYNA in the time step calculation
+          * - :py:attr:`~gmod`
+            - Get or set the Shear modulus, used by LS-DYNA in the time step calculation.
+          * - :py:attr:`~emod`
+            - Get or set the Young's modulus
+          * - :py:attr:`~nue`
+            - Get or set the Poisson's ratio
+          * - :py:attr:`~rbcfac`
+            - Get or set the Ratio of yield in biaxial compression vs. yield in uniaxial compression. If nonzero this will activate the use of a multi-linear yield surface. Default is 0.
+          * - :py:attr:`~numint`
+            - Get or set the
+          * - :py:attr:`~lcid_t`
+            - Get or set the Load curve or table ID giving the yield stress as a function of plastic strain, these curves should be obtained from quasi-static and (optionally) dynamic uniaxial tensile tests, this input is mandatory and the material model will not work unless at least one tensile stress-strain curve is given.
+          * - :py:attr:`~lcid_c`
+            - Get or set the Load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static uniaxial compression test, this input is optional.
+          * - :py:attr:`~lcid_s`
+            - Get or set the Load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static shear test, this input is optional
+          * - :py:attr:`~lcid_b`
+            - Get or set the load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static biaxial tensile test, this input is optional.
+          * - :py:attr:`~nuep`
+            - Get or set the plastic Poisson's ratio : an estimated ratio of transversal to longitudinal plastic rate of deformation should be given, a value <0 will result in associated plasticity to the yield surface (the associated plasticity option is implemented only for IQUAD=1).
+          * - :py:attr:`~lcid_p`
+            - Get or set the load curve ID giving the plastic Poisson's ratio as a function of equivalent plastic deformation during uniaxial tensile testing, if the (optional) load curve is given, the constant value in the previous field will be ignored.
+          * - :py:attr:`~incdam`
+            - Get or set the Flag to control the damage evolution as a function of triaxiality. If INCDAM=0 damage evolution is independent of the triaxialty. If INCDAM=1 an incremental formulation is used to compute the damage.
+          * - :py:attr:`~lcid_d`
+            - Get or set the load curve ID giving the damage parameter as a function of equivalent plastic deformation during uniaxial tensile testing, by default this option assumes that effective yield values are used in the load curves LCID-T, LCID-C, LCID-S and LCID-B, if LCID-D is given a negative value, true yield stress values can be used.
+          * - :py:attr:`~epfail`
+            - Get or set the This parameter is the equivalent plastic strain at failure. If EPFAIL is given as a negative integer, a load curve is expected that defines EPFAIL as a function of the plastic strain rate. Default value is 1.0e+5
+          * - :py:attr:`~deprpt`
+            - Get or set the Increment of equivalent plastic strain between failure point and rupture point, stresses will fade out to zero between EPFAIL and EPFAIL+DEPRUPT
+          * - :py:attr:`~lcid_tri`
+            - Get or set the Load curve that specifies a factor that works multiplicatively on the value of DC depending on the triaxiality pressue/sigma_vm.. This option is active only if DC is given as a negative value (see above)..
+          * - :py:attr:`~lcid_lc`
+            - Get or set the Load curve that specifies a factor that works multiplicatively on the value of DC depending on the linear element dimension, this option is active only if DC is given as a negative value (see above).
+          * - :py:attr:`~miter`
+            - Get or set the Maximum number of iterations in the cutting plane algorithm, default is set to 400.
+          * - :py:attr:`~mipds`
+            - Get or set the Maximum number of iterations in the secant iteration performed to enforce plane stress (shell elements only), default set to 10
+          * - :py:attr:`~incfail`
+            - Get or set the Flag to control the failure evolution as a function of triaxiality. If INCFAIL=0 failure evolution is independent of the triaxiality. If INCFAIL=1 an incremental formulation is used to compute the failure value. If INCFAIL=-1 the failure model is deactivated.
+          * - :py:attr:`~iconv`
+            - Get or set the Formulation flag :
+          * - :py:attr:`~asaf`
+            - Get or set the Safety factor, used only if ICONV=1, values between 1 and 2 can improve convergence, however the shear yield will be artificially increased if this option is used, default is set to 1.
+          * - :py:attr:`~nhsv`
+            - Get or set the Number of history variables. Default is 22. Set to 28 if the “instability criterion” should be included in the output (see Remark 5). Note that NEIPS or NEIPH must also be set on *DATABASE_EXTENT_BINARY for the history variable data to be output.
+          * - :py:attr:`~lcemod`
+            - Get or set the Load curve ID defining Young's modulus as function of effective strain rate.
+          * - :py:attr:`~beta`
+            - Get or set the Decay constant in viscoelastic law
+          * - :py:attr:`~filt`
+            - Get or set the Factor for strain rate filtering
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_187 import Mat187
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: bulk
+   :type: Optional[float]
+
+
+   
+   Get or set the Bulk modulus, used by LS-DYNA in the time step calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gmod
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear modulus, used by LS-DYNA in the time step calculation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: emod
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nue
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rbcfac
+   :type: Optional[float]
+
+
+   
+   Get or set the Ratio of yield in biaxial compression vs. yield in uniaxial compression. If nonzero this will activate the use of a multi-linear yield surface. Default is 0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: numint
+   :type: Optional[int]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid_t
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID giving the yield stress as a function of plastic strain, these curves should be obtained from quasi-static and (optionally) dynamic uniaxial tensile tests, this input is mandatory and the material model will not work unless at least one tensile stress-strain curve is given.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid_c
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static uniaxial compression test, this input is optional.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid_s
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static shear test, this input is optional
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid_b
+   :type: Optional[int]
+
+
+   
+   Get or set the load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static biaxial tensile test, this input is optional.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nuep
+   :type: Optional[float]
+
+
+   
+   Get or set the plastic Poisson's ratio : an estimated ratio of transversal to longitudinal plastic rate of deformation should be given, a value <0 will result in associated plasticity to the yield surface (the associated plasticity option is implemented only for IQUAD=1).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid_p
+   :type: Optional[int]
+
+
+   
+   Get or set the load curve ID giving the plastic Poisson's ratio as a function of equivalent plastic deformation during uniaxial tensile testing, if the (optional) load curve is given, the constant value in the previous field will be ignored.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: incdam
+   :type: int
+
+
+   
+   Get or set the Flag to control the damage evolution as a function of triaxiality. If INCDAM=0 damage evolution is independent of the triaxialty. If INCDAM=1 an incremental formulation is used to compute the damage.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid_d
+   :type: Optional[int]
+
+
+   
+   Get or set the load curve ID giving the damage parameter as a function of equivalent plastic deformation during uniaxial tensile testing, by default this option assumes that effective yield values are used in the load curves LCID-T, LCID-C, LCID-S and LCID-B, if LCID-D is given a negative value, true yield stress values can be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: epfail
+   :type: float
+
+
+   
+   Get or set the This parameter is the equivalent plastic strain at failure. If EPFAIL is given as a negative integer, a load curve is expected that defines EPFAIL as a function of the plastic strain rate. Default value is 1.0e+5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: deprpt
+   :type: Optional[float]
+
+
+   
+   Get or set the Increment of equivalent plastic strain between failure point and rupture point, stresses will fade out to zero between EPFAIL and EPFAIL+DEPRUPT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid_tri
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve that specifies a factor that works multiplicatively on the value of DC depending on the triaxiality pressue/sigma_vm.. This option is active only if DC is given as a negative value (see above)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid_lc
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve that specifies a factor that works multiplicatively on the value of DC depending on the linear element dimension, this option is active only if DC is given as a negative value (see above).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: miter
+   :type: Optional[int]
+
+
+   
+   Get or set the Maximum number of iterations in the cutting plane algorithm, default is set to 400.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mipds
+   :type: Optional[int]
+
+
+   
+   Get or set the Maximum number of iterations in the secant iteration performed to enforce plane stress (shell elements only), default set to 10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: incfail
+   :type: int
+
+
+   
+   Get or set the Flag to control the failure evolution as a function of triaxiality. If INCFAIL=0 failure evolution is independent of the triaxiality. If INCFAIL=1 an incremental formulation is used to compute the failure value. If INCFAIL=-1 the failure model is deactivated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: iconv
+   :type: int
+
+
+   
+   Get or set the Formulation flag :
+   ICONV=0 : default
+   ICONV=1 : yield surface is internally modified by increasing the shear yield until a convex yield surface is achieved
+   ICONV=2 : if the plastic Poisson's ratio is smaller than the elastic Poisson's ratio, both are set equal to the smaller value of the two
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: asaf
+   :type: Optional[int]
+
+
+   
+   Get or set the Safety factor, used only if ICONV=1, values between 1 and 2 can improve convergence, however the shear yield will be artificially increased if this option is used, default is set to 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nhsv
+   :type: Optional[int]
+
+
+   
+   Get or set the Number of history variables. Default is 22. Set to 28 if the “instability criterion” should be included in the output (see Remark 5). Note that NEIPS or NEIPH must also be set on *DATABASE_EXTENT_BINARY for the history variable data to be output.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcemod
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining Young's modulus as function of effective strain rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the Decay constant in viscoelastic law
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: filt
+   :type: Optional[float]
+
+
+   
+   Get or set the Factor for strain rate filtering
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '187'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

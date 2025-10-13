@@ -1,0 +1,506 @@
+
+
+
+
+
+
+:class:`MatCohesiveGeneral`
+===========================
+
+
+.. py:class:: mat_cohesive_general.MatCohesiveGeneral(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_COHESIVE_GENERAL keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatCohesiveGeneral
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number or label must be specified.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~roflg`
+            - Get or set the Flag for whether density is specified per unit area or volume:
+          * - :py:attr:`~intfail`
+            - Get or set the The number of integration points required for the cohesive element to be deleted. The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
+          * - :py:attr:`~tes`
+            - Get or set the Type of effective separation parameter (ESP).
+          * - :py:attr:`~tslc`
+            - Get or set the Normalized traction-separation load curve ID. The curve must be normalized in both coordinates and must contain at least three points: (0.0, 0.0), (lambda_0, 1.0), and (1.0, 0.0), which represents the origin, the peak and the complete failure, respectively (see Figure 186.1). A platform can exist in the curve like the tri-linear TSLC (see MAT_185).
+          * - :py:attr:`~gic`
+            - Get or set the Fracture toughness / energy release rate   for mode I.
+          * - :py:attr:`~giic`
+            - Get or set the Fracture toughness / energy release rate   for mode II.
+          * - :py:attr:`~xmu`
+            - Get or set the Exponent that appears in the power failure criterion (TES=1.0) or the Benzeggagh-Kenane failure criterion (TES=2.0). Recommended values for XMU are between 1.0 and 2.0.
+          * - :py:attr:`~t`
+            - Get or set the Peak traction in normal direction (mode I).
+          * - :py:attr:`~s`
+            - Get or set the Peak traction in tangential direction (mode II).
+          * - :py:attr:`~stfsf`
+            - Get or set the Penetration stiffness multiplier for compression. Factor = (1.0+STFSF) is used to scale the compressive stiffness, i.e. no scaling is done with STFSF=0.0 (recommended).
+          * - :py:attr:`~tslc2`
+            - Get or set the Normalized traction-separation load curve ID for Mode II. The curve must be normalized in both coordinates and must contain at least three points: (0.0,0.0), (λ_0,1.0), and (1.0,0.0), which represents the origin, the peak and the complete failure, respectively. If not specified, TSLC is used for Mode II behavior as well
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_cohesive_general import MatCohesiveGeneral
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number or label must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: roflg
+   :type: int
+
+
+   
+   Get or set the Flag for whether density is specified per unit area or volume:
+   EQ.0:   Specified density is per unit volume(default).
+   EQ.1 : Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: intfail
+   :type: Optional[float]
+
+
+   
+   Get or set the The number of integration points required for the cohesive element to be deleted. The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
+   LT.0.0: Employs a Newton - Cotes integration scheme and the element will be deleted when | INTFAIL | integration points have failed.
+   EQ.0.0 : Employs a Newton - Cotes integration scheme and the element will not be deleted even if it satisfies the failure criterion.
+   GT.0.0 : Employs a Gauss integration scheme and the element will be deleted when INTFAIL integration points have failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tes
+   :type: Optional[float]
+
+
+   
+   Get or set the Type of effective separation parameter (ESP).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tslc
+   :type: Optional[int]
+
+
+   
+   Get or set the Normalized traction-separation load curve ID. The curve must be normalized in both coordinates and must contain at least three points: (0.0, 0.0), (lambda_0, 1.0), and (1.0, 0.0), which represents the origin, the peak and the complete failure, respectively (see Figure 186.1). A platform can exist in the curve like the tri-linear TSLC (see MAT_185).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gic
+   :type: Optional[float]
+
+
+   
+   Get or set the Fracture toughness / energy release rate   for mode I.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: giic
+   :type: Optional[float]
+
+
+   
+   Get or set the Fracture toughness / energy release rate   for mode II.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xmu
+   :type: Optional[float]
+
+
+   
+   Get or set the Exponent that appears in the power failure criterion (TES=1.0) or the Benzeggagh-Kenane failure criterion (TES=2.0). Recommended values for XMU are between 1.0 and 2.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t
+   :type: Optional[float]
+
+
+   
+   Get or set the Peak traction in normal direction (mode I).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s
+   :type: Optional[float]
+
+
+   
+   Get or set the Peak traction in tangential direction (mode II).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: stfsf
+   :type: Optional[float]
+
+
+   
+   Get or set the Penetration stiffness multiplier for compression. Factor = (1.0+STFSF) is used to scale the compressive stiffness, i.e. no scaling is done with STFSF=0.0 (recommended).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tslc2
+   :type: Optional[float]
+
+
+   
+   Get or set the Normalized traction-separation load curve ID for Mode II. The curve must be normalized in both coordinates and must contain at least three points: (0.0,0.0), (λ_0,1.0), and (1.0,0.0), which represents the origin, the peak and the complete failure, respectively. If not specified, TSLC is used for Mode II behavior as well
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'COHESIVE_GENERAL'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

@@ -1,0 +1,582 @@
+
+
+
+
+
+
+:class:`Mat296`
+===============
+
+
+.. py:class:: mat_296.Mat296(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_296 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat296
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number or label must be specified.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~ym`
+            - Get or set the Young's Modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~alpha`
+            - Get or set the Coefficient of thermal expansion.
+          * - :py:attr:`~a1`
+            - Get or set the Pre-exponential factor.
+          * - :py:attr:`~ratioqr`
+            - Get or set the Ratio of the activation energy, to the universal gas constant.
+          * - :py:attr:`~xi`
+            - Get or set the Multiplier of stress.
+          * - :py:attr:`~m`
+            - Get or set the Strain rate sensitivity.
+          * - :py:attr:`~s0`
+            - Get or set the Initial value of deformation resistance.
+          * - :py:attr:`~h0`
+            - Get or set the Hardening/softening constant.
+          * - :py:attr:`~a2`
+            - Get or set the Strain rate sensitivity of hardening or softening.
+          * - :py:attr:`~sbar`
+            - Get or set the Coefficient of deformation resistance saturation value.
+          * - :py:attr:`~n`
+            - Get or set the Strain rate sensitivity of deformation resistance saturation value.
+          * - :py:attr:`~lcym`
+            - Get or set the Load curve ID when Young's Modulus is temperature dependent.
+          * - :py:attr:`~tref`
+            - Get or set the Reference temperature, Tref.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_296 import Mat296
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number or label must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ym
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's Modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha
+   :type: Optional[float]
+
+
+   
+   Get or set the Coefficient of thermal expansion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1
+   :type: Optional[float]
+
+
+   
+   Get or set the Pre-exponential factor.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ratioqr
+   :type: Optional[float]
+
+
+   
+   Get or set the Ratio of the activation energy, to the universal gas constant.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xi
+   :type: Optional[float]
+
+
+   
+   Get or set the Multiplier of stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain rate sensitivity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s0
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial value of deformation resistance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: h0
+   :type: Optional[float]
+
+
+   
+   Get or set the Hardening/softening constant.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain rate sensitivity of hardening or softening.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sbar
+   :type: Optional[float]
+
+
+   
+   Get or set the Coefficient of deformation resistance saturation value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain rate sensitivity of deformation resistance saturation value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcym
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID when Young's Modulus is temperature dependent.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tref
+   :type: Optional[float]
+
+
+   
+   Get or set the Reference temperature, Tref.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '296'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

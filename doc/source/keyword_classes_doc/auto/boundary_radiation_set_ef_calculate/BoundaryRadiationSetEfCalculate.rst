@@ -1,0 +1,206 @@
+
+
+
+
+
+
+:class:`BoundaryRadiationSetEfCalculate`
+========================================
+
+
+.. py:class:: boundary_radiation_set_ef_calculate.BoundaryRadiationSetEfCalculate(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA BOUNDARY_RADIATION_SET_EF_CALCULATE keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: BoundaryRadiationSetEfCalculate
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~ssid`
+            - Get or set the Segment set ID, see also *SET_SEGMENT.
+          * - :py:attr:`~nmat`
+            - Get or set the NMAT specifies the material type for the portion of the boundary specified by SSID.  NMAT must be an exchange factor material ID. See the *EF_MATERIAL keyword.
+          * - :py:attr:`~npht`
+            - Get or set the The segments specified by SSID will emit NPHT*NPHOTON photons. See the *EF_CONTROL keyword.
+          * - :py:attr:`~errmax`
+            - Get or set the the convergence error tolerance for the surface.
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from boundary_radiation_set_ef_calculate import BoundaryRadiationSetEfCalculate
+
+Property detail
+---------------
+
+.. py:property:: ssid
+   :type: Optional[int]
+
+
+   
+   Get or set the Segment set ID, see also *SET_SEGMENT.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nmat
+   :type: Optional[int]
+
+
+   
+   Get or set the NMAT specifies the material type for the portion of the boundary specified by SSID.  NMAT must be an exchange factor material ID. See the *EF_MATERIAL keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: npht
+   :type: int
+
+
+   
+   Get or set the The segments specified by SSID will emit NPHT*NPHOTON photons. See the *EF_CONTROL keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: errmax
+   :type: int
+
+
+   
+   Get or set the the convergence error tolerance for the surface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'BOUNDARY'
+
+
+.. py:attribute:: subkeyword
+   :value: 'RADIATION_SET_EF_CALCULATE'
+
+
+
+
+
+

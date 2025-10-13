@@ -1,0 +1,672 @@
+
+
+
+
+
+
+:class:`MatLowDensityViscousFoam`
+=================================
+
+
+.. py:class:: mat_low_density_viscous_foam.MatLowDensityViscousFoam(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_LOW_DENSITY_VISCOUS_FOAM keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatLowDensityViscousFoam
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus.
+          * - :py:attr:`~lcid`
+            - Get or set the Load curve ID, see *DEFINE_CURVE, for nominal stress versus strain.
+          * - :py:attr:`~tc`
+            - Get or set the Tension cut-off stress (default = 1.0E+20).
+          * - :py:attr:`~hu`
+            - Get or set the Hysteretic unloading factor between 0 and 1 (default=1, i.e., no energy dissipation).
+          * - :py:attr:`~beta`
+            - Get or set the beta, decay constant to model creep in unloading.
+          * - :py:attr:`~damp`
+            - Get or set the Viscous coefficient (0.05 < recommended value < 0.50) to model damping effects.
+          * - :py:attr:`~shape`
+            - Get or set the Shape factor for unloading. Active for nonzero values of the hysteretic unloading factor. Values less than one reduces the energy dissipation and greater than one increases dissipation.
+          * - :py:attr:`~fail`
+            - Get or set the Failure option after cutoff stress is reached:
+          * - :py:attr:`~bvflag`
+            - Get or set the Bulk viscosity activation flag:
+          * - :py:attr:`~kcon`
+            - Get or set the Stiffness coefficient for contact interface stiffness. Maximum slope in stress vs. strain curve is used. When the maximum slope is taken for the contact, the time step size for this material is reduced for stability. In some cases dt may be significantly smaller, and defining a reasonable stiffness is recommended.
+          * - :py:attr:`~lcid2`
+            - Get or set the Load curve ID of relaxation curve. If LCID=0 the constants beta-i are determined via a least squares fit.This model ignores the constant stress.
+          * - :py:attr:`~bstart`
+            - Get or set the Fit parameter. In the fit, beta-1 is set to zero, beta-2 is set to BSTART, beta-3 is 10 times beta-k-2 , beta-4 is 100 times greater than beta-3 , and so on.
+          * - :py:attr:`~tramp`
+            - Get or set the Optional ramp time for loading.
+          * - :py:attr:`~nv`
+            - Get or set the Number of terms in fit. Currently, the maximum number is set to 6. Values of 2 are 3 are recommended, since each term used adds significantly to the cost. Caution should be exercised when taking the results from the fit. Preferably, all generated coefficients should be positive. Negative values may lead to unstable results. Once a satisfactory fit has been achieved it is recommended that the coefficients which are written into the output file be input in future runs.
+          * - :py:attr:`~gi`
+            - Get or set the Optional shear relaxation modulus for the i'th term.
+          * - :py:attr:`~betai`
+            - Get or set the Optional decay constant for the i'th term.
+          * - :py:attr:`~ref`
+            - Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the keyword: *INITIAL_FOAM_REFERENC_GEOMETRY. This option is currently restricted to 8-noded solid elements with one point integration.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_low_density_viscous_foam import MatLowDensityViscousFoam
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID, see *DEFINE_CURVE, for nominal stress versus strain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tc
+   :type: float
+
+
+   
+   Get or set the Tension cut-off stress (default = 1.0E+20).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hu
+   :type: float
+
+
+   
+   Get or set the Hysteretic unloading factor between 0 and 1 (default=1, i.e., no energy dissipation).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the beta, decay constant to model creep in unloading.
+   EQ:0 No relaxation (default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: damp
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscous coefficient (0.05 < recommended value < 0.50) to model damping effects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: shape
+   :type: float
+
+
+   
+   Get or set the Shape factor for unloading. Active for nonzero values of the hysteretic unloading factor. Values less than one reduces the energy dissipation and greater than one increases dissipation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fail
+   :type: Optional[float]
+
+
+   
+   Get or set the Failure option after cutoff stress is reached:
+   EQ.0.0: tensile stress remains at cut-off value (default),
+   EQ.1.0: tensile stress is reset to zero.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: bvflag
+   :type: Optional[float]
+
+
+   
+   Get or set the Bulk viscosity activation flag:
+   EQ.0.0: no bulk viscosity (default),
+   EQ.1.0: bulk viscosity active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: kcon
+   :type: Optional[float]
+
+
+   
+   Get or set the Stiffness coefficient for contact interface stiffness. Maximum slope in stress vs. strain curve is used. When the maximum slope is taken for the contact, the time step size for this material is reduced for stability. In some cases dt may be significantly smaller, and defining a reasonable stiffness is recommended.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid2
+   :type: int
+
+
+   
+   Get or set the Load curve ID of relaxation curve. If LCID=0 the constants beta-i are determined via a least squares fit.This model ignores the constant stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: bstart
+   :type: Optional[float]
+
+
+   
+   Get or set the Fit parameter. In the fit, beta-1 is set to zero, beta-2 is set to BSTART, beta-3 is 10 times beta-k-2 , beta-4 is 100 times greater than beta-3 , and so on.
+   EQ.0: BSTART= .01 (default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tramp
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional ramp time for loading.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nv
+   :type: int
+
+
+   
+   Get or set the Number of terms in fit. Currently, the maximum number is set to 6. Values of 2 are 3 are recommended, since each term used adds significantly to the cost. Caution should be exercised when taking the results from the fit. Preferably, all generated coefficients should be positive. Negative values may lead to unstable results. Once a satisfactory fit has been achieved it is recommended that the coefficients which are written into the output file be input in future runs.
+   Default is set to 6.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gi
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional shear relaxation modulus for the i'th term.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: betai
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional decay constant for the i'th term.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ref
+   :type: Optional[float]
+
+
+   
+   Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the keyword: *INITIAL_FOAM_REFERENC_GEOMETRY. This option is currently restricted to 8-noded solid elements with one point integration.
+   EQ.0.0: off (default),
+   EQ.1.0: on.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'LOW_DENSITY_VISCOUS_FOAM'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

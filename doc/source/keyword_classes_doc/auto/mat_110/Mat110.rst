@@ -1,0 +1,693 @@
+
+
+
+
+
+
+:class:`Mat110`
+===============
+
+
+.. py:class:: mat_110.Mat110(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_110 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat110
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Density
+          * - :py:attr:`~g`
+            - Get or set the Shear modulus
+          * - :py:attr:`~a`
+            - Get or set the Intact normalized strength parameter
+          * - :py:attr:`~b`
+            - Get or set the Fractured normalized strength parameter
+          * - :py:attr:`~c`
+            - Get or set the Strength parameter (for strain rate dependence)
+          * - :py:attr:`~m`
+            - Get or set the Fractured strength parameter (pressure exponent)
+          * - :py:attr:`~n`
+            - Get or set the Intact strength parameter (pressure exponent).
+          * - :py:attr:`~epsi`
+            - Get or set the Reference strain rate.
+          * - :py:attr:`~t`
+            - Get or set the Maximum tensile strength.
+          * - :py:attr:`~sfmax`
+            - Get or set the Maximum normalized fractured strength (if Eq.0, defaults to 1e20).
+          * - :py:attr:`~hel`
+            - Get or set the Hugoniot elastic limit.
+          * - :py:attr:`~phel`
+            - Get or set the Pressure component at the Hugoniot elastic limit.
+          * - :py:attr:`~beta`
+            - Get or set the Fraction of elastic energy loss converted to hydrostatic energy.
+          * - :py:attr:`~d1`
+            - Get or set the Parameter for plastic strain to fracture.
+          * - :py:attr:`~d2`
+            - Get or set the Parameter for plastic strain to fracture (exponent).
+          * - :py:attr:`~k1`
+            - Get or set the First pressure coefficient (equivalent to the bulk modulus).
+          * - :py:attr:`~k2`
+            - Get or set the Second pressure coefficient.
+          * - :py:attr:`~k3`
+            - Get or set the Elastic constants (k1 is the bulk modulus).
+          * - :py:attr:`~fs`
+            - Get or set the Failure criteria.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_110 import Mat110
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Density
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear modulus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a
+   :type: Optional[float]
+
+
+   
+   Get or set the Intact normalized strength parameter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b
+   :type: Optional[float]
+
+
+   
+   Get or set the Fractured normalized strength parameter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c
+   :type: Optional[float]
+
+
+   
+   Get or set the Strength parameter (for strain rate dependence)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m
+   :type: Optional[float]
+
+
+   
+   Get or set the Fractured strength parameter (pressure exponent)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n
+   :type: Optional[float]
+
+
+   
+   Get or set the Intact strength parameter (pressure exponent).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: epsi
+   :type: Optional[float]
+
+
+   
+   Get or set the Reference strain rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t
+   :type: Optional[float]
+
+
+   
+   Get or set the Maximum tensile strength.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfmax
+   :type: Optional[float]
+
+
+   
+   Get or set the Maximum normalized fractured strength (if Eq.0, defaults to 1e20).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hel
+   :type: Optional[float]
+
+
+   
+   Get or set the Hugoniot elastic limit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: phel
+   :type: Optional[float]
+
+
+   
+   Get or set the Pressure component at the Hugoniot elastic limit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the Fraction of elastic energy loss converted to hydrostatic energy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d1
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameter for plastic strain to fracture.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d2
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameter for plastic strain to fracture (exponent).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k1
+   :type: Optional[float]
+
+
+   
+   Get or set the First pressure coefficient (equivalent to the bulk modulus).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k2
+   :type: Optional[float]
+
+
+   
+   Get or set the Second pressure coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k3
+   :type: Optional[float]
+
+
+   
+   Get or set the Elastic constants (k1 is the bulk modulus).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fs
+   :type: Optional[float]
+
+
+   
+   Get or set the Failure criteria.
+   FS < 0 fail if p* + t* < 0 (tensile failure).
+   FS = 0 no failure (default).
+   FS> 0 fail if the strain > FS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '110'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

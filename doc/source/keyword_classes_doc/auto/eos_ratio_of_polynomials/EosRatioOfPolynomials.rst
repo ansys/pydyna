@@ -1,0 +1,1043 @@
+
+
+
+
+
+
+:class:`EosRatioOfPolynomials`
+==============================
+
+
+.. py:class:: eos_ratio_of_polynomials.EosRatioOfPolynomials(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA EOS_RATIO_OF_POLYNOMIALS keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: EosRatioOfPolynomials
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~eosid`
+            - Get or set the Equation of state ID.
+          * - :py:attr:`~a10`
+            - Get or set the
+          * - :py:attr:`~a11`
+            - Get or set the
+          * - :py:attr:`~a12`
+            - Get or set the
+          * - :py:attr:`~a13`
+            - Get or set the
+          * - :py:attr:`~a20`
+            - Get or set the
+          * - :py:attr:`~a21`
+            - Get or set the
+          * - :py:attr:`~a22`
+            - Get or set the
+          * - :py:attr:`~a23`
+            - Get or set the
+          * - :py:attr:`~a30`
+            - Get or set the
+          * - :py:attr:`~a31`
+            - Get or set the
+          * - :py:attr:`~a32`
+            - Get or set the
+          * - :py:attr:`~a33`
+            - Get or set the
+          * - :py:attr:`~a40`
+            - Get or set the
+          * - :py:attr:`~a41`
+            - Get or set the
+          * - :py:attr:`~a42`
+            - Get or set the
+          * - :py:attr:`~a43`
+            - Get or set the
+          * - :py:attr:`~a50`
+            - Get or set the
+          * - :py:attr:`~a51`
+            - Get or set the
+          * - :py:attr:`~a52`
+            - Get or set the
+          * - :py:attr:`~a53`
+            - Get or set the
+          * - :py:attr:`~a60`
+            - Get or set the
+          * - :py:attr:`~a61`
+            - Get or set the
+          * - :py:attr:`~a62`
+            - Get or set the
+          * - :py:attr:`~a63`
+            - Get or set the
+          * - :py:attr:`~a70`
+            - Get or set the
+          * - :py:attr:`~a71`
+            - Get or set the
+          * - :py:attr:`~a72`
+            - Get or set the
+          * - :py:attr:`~a73`
+            - Get or set the
+          * - :py:attr:`~a14`
+            - Get or set the
+          * - :py:attr:`~a24`
+            - Get or set the
+          * - :py:attr:`~alph`
+            - Get or set the alpha
+          * - :py:attr:`~beta`
+            - Get or set the beta
+          * - :py:attr:`~e0`
+            - Get or set the Initial internal energy.
+          * - :py:attr:`~v0`
+            - Get or set the Initial relative volume.
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from eos_ratio_of_polynomials import EosRatioOfPolynomials
+
+Property detail
+---------------
+
+.. py:property:: eosid
+   :type: Optional[int]
+
+
+   
+   Get or set the Equation of state ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a10
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a11
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a12
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a13
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a20
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a21
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a22
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a23
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a30
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a31
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a32
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a33
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a40
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a41
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a42
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a43
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a50
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a51
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a52
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a53
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a60
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a61
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a62
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a63
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a70
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a71
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a72
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a73
+   :type: float
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a14
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a24
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alph
+   :type: Optional[float]
+
+
+   
+   Get or set the alpha
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the beta
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e0
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial internal energy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v0
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial relative volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'EOS'
+
+
+.. py:attribute:: subkeyword
+   :value: 'RATIO_OF_POLYNOMIALS'
+
+
+
+
+
+

@@ -1,0 +1,371 @@
+
+
+
+
+
+
+:class:`Mat164`
+===============
+
+
+.. py:class:: mat_164.Mat164(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_164 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat164
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density
+          * - :py:attr:`~bulk`
+            - Get or set the bulk modulus
+          * - :py:attr:`~g0`
+            - Get or set the short-time shear modulus
+          * - :py:attr:`~gi`
+            - Get or set the long-time shear modulus
+          * - :py:attr:`~dc`
+            - Get or set the mazwell decay constant. Kelvin relaxation constant
+          * - :py:attr:`~fo`
+            - Get or set the Formulation option
+          * - :py:attr:`~so`
+            - Get or set the Strain (logarithmic) output option to be plotted as component 7 in LS TAURUS (D3PLOT file) which is the effective plastic strain component.  The maximum values are updated for each element each time step:
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_164 import Mat164
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: bulk
+   :type: Optional[float]
+
+
+   
+   Get or set the bulk modulus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g0
+   :type: Optional[float]
+
+
+   
+   Get or set the short-time shear modulus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gi
+   :type: Optional[float]
+
+
+   
+   Get or set the long-time shear modulus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dc
+   :type: Optional[float]
+
+
+   
+   Get or set the mazwell decay constant. Kelvin relaxation constant
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fo
+   :type: Optional[float]
+
+
+   
+   Get or set the Formulation option
+   EQ.0.0: Maxwell
+   EQ.1.0:Kelvin.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: so
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain (logarithmic) output option to be plotted as component 7 in LS TAURUS (D3PLOT file) which is the effective plastic strain component.  The maximum values are updated for each element each time step:
+   EQ.0.0:  maximum principal strain that occurs during the calculation,
+   EQ.1.0:  maximum magnitude of the principal strain values that occurs during the calculation,
+   EQ.2.0:  maximum effective strain that occurs during the calculation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '164'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

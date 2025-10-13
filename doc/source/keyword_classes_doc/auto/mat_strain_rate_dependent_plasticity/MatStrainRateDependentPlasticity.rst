@@ -1,0 +1,479 @@
+
+
+
+
+
+
+:class:`MatStrainRateDependentPlasticity`
+=========================================
+
+
+.. py:class:: mat_strain_rate_dependent_plasticity.MatStrainRateDependentPlasticity(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_STRAIN_RATE_DEPENDENT_PLASTICITY keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatStrainRateDependentPlasticity
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~vp`
+            - Get or set the Formulation for rate effects:
+          * - :py:attr:`~lc1`
+            - Get or set the Load curve ID defining the yield stress as a function of the effective strain rate.
+          * - :py:attr:`~etan`
+            - Get or set the Plastic hardening modulus.
+          * - :py:attr:`~lc2`
+            - Get or set the Load curve ID defining Young's modulus as a function of the effective strain rate (optional).
+          * - :py:attr:`~lc3`
+            - Get or set the Load curve ID defining tangent modulus as a function of the effective strain rate (optional).
+          * - :py:attr:`~lc4`
+            - Get or set the Load curve ID defining von Mises stress at failure as a function of the effective strain rate (optional).
+          * - :py:attr:`~tdel`
+            - Get or set the Minimum time step size for automatic element deletion. Use for shells only.
+          * - :py:attr:`~rdef`
+            - Get or set the Redefinition of failure curve:
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_strain_rate_dependent_plasticity import MatStrainRateDependentPlasticity
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vp
+   :type: float
+
+
+   
+   Get or set the Formulation for rate effects:
+   EQ.0.0: Scale yield stress (default),
+   EQ.1.0: Viscoplastic formulation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc1
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining the yield stress as a function of the effective strain rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etan
+   :type: Optional[float]
+
+
+   
+   Get or set the Plastic hardening modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc2
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining Young's modulus as a function of the effective strain rate (optional).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc3
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining tangent modulus as a function of the effective strain rate (optional).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc4
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining von Mises stress at failure as a function of the effective strain rate (optional).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tdel
+   :type: Optional[float]
+
+
+   
+   Get or set the Minimum time step size for automatic element deletion. Use for shells only.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rdef
+   :type: float
+
+
+   
+   Get or set the Redefinition of failure curve:
+   EQ.1.0: Effective plastic strain (default),
+   EQ.2.0: Maximum principal stress.
+   EQ.3.0:  Maximum principal stress
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'STRAIN_RATE_DEPENDENT_PLASTICITY'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

@@ -1,0 +1,503 @@
+
+
+
+
+
+
+:class:`MatAcoustic`
+====================
+
+
+.. py:class:: mat_acoustic.MatAcoustic(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_ACOUSTIC keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatAcoustic
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~c`
+            - Get or set the Sound speed.
+          * - :py:attr:`~beta`
+            - Get or set the Damping factor. Recommend values are between 0.1 and 1.0.
+          * - :py:attr:`~cf`
+            - Get or set the Cavitation flag:
+          * - :py:attr:`~atmos`
+            - Get or set the Atmospheric pressure (optional).
+          * - :py:attr:`~grav`
+            - Get or set the Gravitational acceleration constant (optional).
+          * - :py:attr:`~xp`
+            - Get or set the x-coordinate of free surface point.
+          * - :py:attr:`~yp`
+            - Get or set the y-coordinate of free surface point.
+          * - :py:attr:`~zp`
+            - Get or set the z-coordinate of free surface point.
+          * - :py:attr:`~xn`
+            - Get or set the x-direction cosine of free surface normal vector.
+          * - :py:attr:`~yn`
+            - Get or set the y-direction cosine of free surface normal vector.
+          * - :py:attr:`~zn`
+            - Get or set the z-direction cosine of free surface normal vector.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_acoustic import MatAcoustic
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c
+   :type: Optional[float]
+
+
+   
+   Get or set the Sound speed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the Damping factor. Recommend values are between 0.1 and 1.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cf
+   :type: float
+
+
+   
+   Get or set the Cavitation flag:
+   EQ.0.0: off (default),
+   EQ.1.0: on.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: atmos
+   :type: Optional[float]
+
+
+   
+   Get or set the Atmospheric pressure (optional).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: grav
+   :type: Optional[float]
+
+
+   
+   Get or set the Gravitational acceleration constant (optional).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xp
+   :type: Optional[float]
+
+
+   
+   Get or set the x-coordinate of free surface point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yp
+   :type: Optional[float]
+
+
+   
+   Get or set the y-coordinate of free surface point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: zp
+   :type: Optional[float]
+
+
+   
+   Get or set the z-coordinate of free surface point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xn
+   :type: Optional[float]
+
+
+   
+   Get or set the x-direction cosine of free surface normal vector.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yn
+   :type: Optional[float]
+
+
+   
+   Get or set the y-direction cosine of free surface normal vector.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: zn
+   :type: Optional[float]
+
+
+   
+   Get or set the z-direction cosine of free surface normal vector.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'ACOUSTIC'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

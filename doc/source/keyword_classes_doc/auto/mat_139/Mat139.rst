@@ -1,0 +1,3637 @@
+
+
+
+
+
+
+:class:`Mat139`
+===============
+
+
+.. py:class:: mat_139.Mat139(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_139 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat139
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~df`
+            - Get or set the Damping factor, see definition in notes below. A proper control for the timestep has to be maintained by the user!
+          * - :py:attr:`~iaflc`
+            - Get or set the Axial force load curve option:
+          * - :py:attr:`~ytflag`
+            - Get or set the Flag to allow beam to yield in tension:
+          * - :py:attr:`~asoft`
+            - Get or set the Axial elastic softening factor applied once hinge has formed. When a hinge has formed the stiffness is reduced by this factor. If zero, this factor is ignored.
+          * - :py:attr:`~m1`
+            - Get or set the Applied end moment for force versus (strain/change in length) curve. At least one must be defined. A maximum of 8 moments can be defined. The values should be in ascending order.
+          * - :py:attr:`~m2`
+            - Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+          * - :py:attr:`~m3`
+            - Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+          * - :py:attr:`~m4`
+            - Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+          * - :py:attr:`~m5`
+            - Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+          * - :py:attr:`~m6`
+            - Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+          * - :py:attr:`~m7`
+            - Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+          * - :py:attr:`~m8`
+            - Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+          * - :py:attr:`~lc1`
+            - Get or set the Load curve ID (see *DEFINE_CURVE) defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment. Define the same number as end moments. Each curve must contain the same number of points.
+          * - :py:attr:`~lc2`
+            - Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+          * - :py:attr:`~lc3`
+            - Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+          * - :py:attr:`~lc4`
+            - Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+          * - :py:attr:`~lc5`
+            - Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+          * - :py:attr:`~lc6`
+            - Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+          * - :py:attr:`~lc7`
+            - Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+          * - :py:attr:`~lc8`
+            - Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+          * - :py:attr:`~lps1`
+            - Get or set the Load curve ID for plastic moment versus rotation about s-axis at node 1. If zero, this load curve is ignored.
+          * - :py:attr:`~sfs1`
+            - Get or set the Scale factor for plastic moment versus rotation curve about s-axis at node 1. Default = 1.0.
+          * - :py:attr:`~lps2`
+            - Get or set the Load curve ID for plastic moment versus rotation about s-axis at node 2. If zero, this load curve is ignored.
+          * - :py:attr:`~sfs2`
+            - Get or set the Scale factor for plastic moment versus rotation curve about s-axis at node 2. Default = 1.0.
+          * - :py:attr:`~yms1`
+            - Get or set the Yield moment about s-axis at node 1 for interaction calculations (default set to 1.0E+20 to prevent interaction).
+          * - :py:attr:`~yms2`
+            - Get or set the Yield moment about s-axis at node 2 for interaction calculations (default set to YMS1).
+          * - :py:attr:`~lpt1`
+            - Get or set the Load curve ID for plastic moment versus rotation about t-axis at node 1. If zero, this load curve is ignored.
+          * - :py:attr:`~sft1`
+            - Get or set the Scale factor for plastic moment versus rotation curve about t-axis at node 1. Default = 1.0.
+          * - :py:attr:`~lpt2`
+            - Get or set the Load curve ID for plastic moment versus rotation about t-axis at node 2. If zero, this load curve is ignored.
+          * - :py:attr:`~sft2`
+            - Get or set the Scale factor for plastic moment versus rotation curve about t-axis at node 2. Default = 1.0.
+          * - :py:attr:`~ymt1`
+            - Get or set the Yield moment about t-axis at node 1 for interaction calculations (default set to 1.0E+20 to prevent interactions)
+          * - :py:attr:`~ymt2`
+            - Get or set the Yield moment about t-axis at node 2 for interaction calculations (default set to YMT1)
+          * - :py:attr:`~lpr`
+            - Get or set the Load curve ID for plastic torsional moment versus rotation. If zero, this load curve is ignored.
+          * - :py:attr:`~sfr`
+            - Get or set the Scale factor for plastic torsional moment versus rotation (default = 1.0).
+          * - :py:attr:`~ymr`
+            - Get or set the Torsional yield moment for interaction calculations (default set to 1.0E+20 to prevent interaction)
+          * - :py:attr:`~lys1`
+            - Get or set the ID of curve defining yield moment as a function of axial force for the s-axis at node 1.
+          * - :py:attr:`~sys1`
+            - Get or set the Scale factor applied to load curve LYS1.
+          * - :py:attr:`~lys2`
+            - Get or set the ID of curve defining yield moment as a function of axial force for the s-axis at node 2.
+          * - :py:attr:`~sys2`
+            - Get or set the Scale factor applied to load curve LYS2.
+          * - :py:attr:`~lyt1`
+            - Get or set the ID of curve defining yield moment as a function of axial force for the t-axis at node 1.
+          * - :py:attr:`~syt1`
+            - Get or set the Scale factor applied to load curve LYT1.
+          * - :py:attr:`~lyt2`
+            - Get or set the ID of curve defining yield moment as a function of axial force for the t-axis at node 2.
+          * - :py:attr:`~syt2`
+            - Get or set the Scale factor applied to load curve LYT2.
+          * - :py:attr:`~lyr`
+            - Get or set the ID of curve defining yield moment as a function of axial force for the torsional axis.
+          * - :py:attr:`~syr`
+            - Get or set the Scale factor applied to load curve LYR.
+          * - :py:attr:`~hms1_1`
+            - Get or set the Hinge moment for s-axis at node 1.
+          * - :py:attr:`~hms1_2`
+            - Get or set the Hinge moment for s-axis at node 1.
+          * - :py:attr:`~hms1_3`
+            - Get or set the Hinge moment for s-axis at node 1.
+          * - :py:attr:`~hms1_4`
+            - Get or set the Hinge moment for s-axis at node 1.
+          * - :py:attr:`~hms1_5`
+            - Get or set the Hinge moment for s-axis at node 1.
+          * - :py:attr:`~hms1_6`
+            - Get or set the Hinge moment for s-axis at node 1.
+          * - :py:attr:`~hms1_7`
+            - Get or set the Hinge moment for s-axis at node 1.
+          * - :py:attr:`~hms1_8`
+            - Get or set the Hinge moment for s-axis at node 1.
+          * - :py:attr:`~lpms1_1`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_1
+          * - :py:attr:`~lpms1_2`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_2
+          * - :py:attr:`~lpms1_3`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_3
+          * - :py:attr:`~lpms1_4`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_4
+          * - :py:attr:`~lpms1_5`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_5
+          * - :py:attr:`~lpms1_6`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_6
+          * - :py:attr:`~lpms1_7`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_7
+          * - :py:attr:`~lpms1_8`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_8
+          * - :py:attr:`~hms2_1`
+            - Get or set the Hinge moment for s-axis at node 2.
+          * - :py:attr:`~hms2_2`
+            - Get or set the Hinge moment for s-axis at node 2.
+          * - :py:attr:`~hms2_3`
+            - Get or set the Hinge moment for s-axis at node 2.
+          * - :py:attr:`~hms2_4`
+            - Get or set the Hinge moment for s-axis at node 2.
+          * - :py:attr:`~hms2_5`
+            - Get or set the Hinge moment for s-axis at node 2.
+          * - :py:attr:`~hms2_6`
+            - Get or set the Hinge moment for s-axis at node 2.
+          * - :py:attr:`~hms2_7`
+            - Get or set the Hinge moment for s-axis at node 2.
+          * - :py:attr:`~hms2_8`
+            - Get or set the Hinge moment for s-axis at node 2.
+          * - :py:attr:`~lpms2_1`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_1
+          * - :py:attr:`~lpms2_2`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_2
+          * - :py:attr:`~lpms2_3`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_3
+          * - :py:attr:`~lpms2_4`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_4
+          * - :py:attr:`~lpms2_5`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_5
+          * - :py:attr:`~lpms2_6`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_6
+          * - :py:attr:`~lpms2_7`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_7
+          * - :py:attr:`~lpms2_8`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_8
+          * - :py:attr:`~hmt1_1`
+            - Get or set the Hinge moment for t-axis at node 1.
+          * - :py:attr:`~hmt1_2`
+            - Get or set the Hinge moment for t-axis at node 1.
+          * - :py:attr:`~hmt1_3`
+            - Get or set the Hinge moment for t-axis at node 1.
+          * - :py:attr:`~hmt1_4`
+            - Get or set the Hinge moment for t-axis at node 1.
+          * - :py:attr:`~hmt1_5`
+            - Get or set the Hinge moment for t-axis at node 1.
+          * - :py:attr:`~hmt1_6`
+            - Get or set the Hinge moment for t-axis at node 1.
+          * - :py:attr:`~hmt1_7`
+            - Get or set the Hinge moment for t-axis at node 1.
+          * - :py:attr:`~hmt1_8`
+            - Get or set the Hinge moment for t-axis at node 1.
+          * - :py:attr:`~lpmt1_1`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_1
+          * - :py:attr:`~lpmt1_2`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_2
+          * - :py:attr:`~lpmt1_3`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_3
+          * - :py:attr:`~lpmt1_4`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_4
+          * - :py:attr:`~lpmt1_5`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_5
+          * - :py:attr:`~lpmt1_6`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_6
+          * - :py:attr:`~lpmt1_7`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_7
+          * - :py:attr:`~lpmt1_8`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_8
+          * - :py:attr:`~hmt2_1`
+            - Get or set the Hinge moment for t-axis at node 2.
+          * - :py:attr:`~hmt2_2`
+            - Get or set the Hinge moment for t-axis at node 2.
+          * - :py:attr:`~hmt2_3`
+            - Get or set the Hinge moment for t-axis at node 2.
+          * - :py:attr:`~hmt2_4`
+            - Get or set the Hinge moment for t-axis at node 2.
+          * - :py:attr:`~hmt2_5`
+            - Get or set the Hinge moment for t-axis at node 2.
+          * - :py:attr:`~hmt2_6`
+            - Get or set the Hinge moment for t-axis at node 2.
+          * - :py:attr:`~hmt2_7`
+            - Get or set the Hinge moment for t-axis at node 2.
+          * - :py:attr:`~hmt2_8`
+            - Get or set the Hinge moment for t-axis at node 2.
+          * - :py:attr:`~lpmt2_1`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_1
+          * - :py:attr:`~lpmt2_2`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_2
+          * - :py:attr:`~lpmt2_3`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_3
+          * - :py:attr:`~lpmt2_4`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_4
+          * - :py:attr:`~lpmt2_5`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_5
+          * - :py:attr:`~lpmt2_6`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_6
+          * - :py:attr:`~lpmt2_7`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_7
+          * - :py:attr:`~lpmt2_8`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_8
+          * - :py:attr:`~hmr_1`
+            - Get or set the Hinge moment for the torsional axis.
+          * - :py:attr:`~hmr_2`
+            - Get or set the Hinge moment for the torsional axis.
+          * - :py:attr:`~hmr_3`
+            - Get or set the Hinge moment for the torsional axis.
+          * - :py:attr:`~hmr_4`
+            - Get or set the Hinge moment for the torsional axis.
+          * - :py:attr:`~hmr_5`
+            - Get or set the Hinge moment for the torsional axis.
+          * - :py:attr:`~hmr_6`
+            - Get or set the Hinge moment for the torsional axis.
+          * - :py:attr:`~hmr_7`
+            - Get or set the Hinge moment for the torsional axis.
+          * - :py:attr:`~hmr_8`
+            - Get or set the Hinge moment for the torsional axis.
+          * - :py:attr:`~lpmr_1`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_1
+          * - :py:attr:`~lpmr_2`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_2
+          * - :py:attr:`~lpmr_3`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_3
+          * - :py:attr:`~lpmr_4`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_4
+          * - :py:attr:`~lpmr_5`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_5
+          * - :py:attr:`~lpmr_6`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_6
+          * - :py:attr:`~lpmr_7`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_7
+          * - :py:attr:`~lpmr_8`
+            - Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_8
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_139 import Mat139
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: df
+   :type: Optional[float]
+
+
+   
+   Get or set the Damping factor, see definition in notes below. A proper control for the timestep has to be maintained by the user!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: iaflc
+   :type: int
+
+
+   
+   Get or set the Axial force load curve option:
+   EQ.0: axial load curves are force as a function of strain.
+   EQ.1: axial load curves are force as a function of change in length.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ytflag
+   :type: float
+
+
+   
+   Get or set the Flag to allow beam to yield in tension:
+   EQ.0.0: beam does not yield in tension,
+   EQ.1.0: beam can yield in tension.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: asoft
+   :type: Optional[float]
+
+
+   
+   Get or set the Axial elastic softening factor applied once hinge has formed. When a hinge has formed the stiffness is reduced by this factor. If zero, this factor is ignored.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m1
+   :type: Optional[float]
+
+
+   
+   Get or set the Applied end moment for force versus (strain/change in length) curve. At least one must be defined. A maximum of 8 moments can be defined. The values should be in ascending order.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m2
+   :type: Optional[float]
+
+
+   
+   Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m3
+   :type: Optional[float]
+
+
+   
+   Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m4
+   :type: Optional[float]
+
+
+   
+   Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m5
+   :type: Optional[float]
+
+
+   
+   Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m6
+   :type: Optional[float]
+
+
+   
+   Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m7
+   :type: Optional[float]
+
+
+   
+   Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m8
+   :type: Optional[float]
+
+
+   
+   Get or set the Applied end moment for force versus (strain/change in length) curve. The values should be in ascending order.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc1
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID (see *DEFINE_CURVE) defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment. Define the same number as end moments. Each curve must contain the same number of points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc2
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc3
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc4
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc5
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc6
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc7
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lc8
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining axial force versus strain/change in length (see AOPT) for the corresponding applied end moment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lps1
+   :type: int
+
+
+   
+   Get or set the Load curve ID for plastic moment versus rotation about s-axis at node 1. If zero, this load curve is ignored.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfs1
+   :type: float
+
+
+   
+   Get or set the Scale factor for plastic moment versus rotation curve about s-axis at node 1. Default = 1.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lps2
+   :type: int
+
+
+   
+   Get or set the Load curve ID for plastic moment versus rotation about s-axis at node 2. If zero, this load curve is ignored.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfs2
+   :type: float
+
+
+   
+   Get or set the Scale factor for plastic moment versus rotation curve about s-axis at node 2. Default = 1.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yms1
+   :type: float
+
+
+   
+   Get or set the Yield moment about s-axis at node 1 for interaction calculations (default set to 1.0E+20 to prevent interaction).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yms2
+   :type: float
+
+
+   
+   Get or set the Yield moment about s-axis at node 2 for interaction calculations (default set to YMS1).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpt1
+   :type: int
+
+
+   
+   Get or set the Load curve ID for plastic moment versus rotation about t-axis at node 1. If zero, this load curve is ignored.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sft1
+   :type: float
+
+
+   
+   Get or set the Scale factor for plastic moment versus rotation curve about t-axis at node 1. Default = 1.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpt2
+   :type: int
+
+
+   
+   Get or set the Load curve ID for plastic moment versus rotation about t-axis at node 2. If zero, this load curve is ignored.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sft2
+   :type: float
+
+
+   
+   Get or set the Scale factor for plastic moment versus rotation curve about t-axis at node 2. Default = 1.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ymt1
+   :type: float
+
+
+   
+   Get or set the Yield moment about t-axis at node 1 for interaction calculations (default set to 1.0E+20 to prevent interactions)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ymt2
+   :type: float
+
+
+   
+   Get or set the Yield moment about t-axis at node 2 for interaction calculations (default set to YMT1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpr
+   :type: int
+
+
+   
+   Get or set the Load curve ID for plastic torsional moment versus rotation. If zero, this load curve is ignored.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfr
+   :type: float
+
+
+   
+   Get or set the Scale factor for plastic torsional moment versus rotation (default = 1.0).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ymr
+   :type: float
+
+
+   
+   Get or set the Torsional yield moment for interaction calculations (default set to 1.0E+20 to prevent interaction)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lys1
+   :type: int
+
+
+   
+   Get or set the ID of curve defining yield moment as a function of axial force for the s-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sys1
+   :type: float
+
+
+   
+   Get or set the Scale factor applied to load curve LYS1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lys2
+   :type: int
+
+
+   
+   Get or set the ID of curve defining yield moment as a function of axial force for the s-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sys2
+   :type: float
+
+
+   
+   Get or set the Scale factor applied to load curve LYS2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lyt1
+   :type: int
+
+
+   
+   Get or set the ID of curve defining yield moment as a function of axial force for the t-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: syt1
+   :type: float
+
+
+   
+   Get or set the Scale factor applied to load curve LYT1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lyt2
+   :type: int
+
+
+   
+   Get or set the ID of curve defining yield moment as a function of axial force for the t-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: syt2
+   :type: float
+
+
+   
+   Get or set the Scale factor applied to load curve LYT2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lyr
+   :type: int
+
+
+   
+   Get or set the ID of curve defining yield moment as a function of axial force for the torsional axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: syr
+   :type: float
+
+
+   
+   Get or set the Scale factor applied to load curve LYR.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms1_1
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms1_2
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms1_3
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms1_4
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms1_5
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms1_6
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms1_7
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms1_8
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms1_1
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms1_2
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms1_3
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms1_4
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms1_5
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms1_6
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms1_7
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms1_8
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 1 for hinge moment HMS1_8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms2_1
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms2_2
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms2_3
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms2_4
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms2_5
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms2_6
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms2_7
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hms2_8
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for s-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms2_1
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms2_2
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms2_3
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms2_4
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms2_5
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms2_6
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms2_7
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpms2_8
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the s-axis at node 2 for hinge moment HMS2_8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt1_1
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt1_2
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt1_3
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt1_4
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt1_5
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt1_6
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt1_7
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt1_8
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt1_1
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt1_2
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt1_3
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt1_4
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt1_5
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt1_6
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt1_7
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt1_8
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 1 for hinge moment HMT1_8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt2_1
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt2_2
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt2_3
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt2_4
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt2_5
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt2_6
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt2_7
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmt2_8
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for t-axis at node 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt2_1
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt2_2
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt2_3
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt2_4
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt2_5
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt2_6
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt2_7
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmt2_8
+   :type: Optional[int]
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the t-axis at node 2 for hinge moment HMT2_8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmr_1
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for the torsional axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmr_2
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for the torsional axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmr_3
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for the torsional axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmr_4
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for the torsional axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmr_5
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for the torsional axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmr_6
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for the torsional axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmr_7
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for the torsional axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hmr_8
+   :type: Optional[float]
+
+
+   
+   Get or set the Hinge moment for the torsional axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmr_1
+   :type: int
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmr_2
+   :type: int
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmr_3
+   :type: int
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmr_4
+   :type: int
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmr_5
+   :type: int
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmr_6
+   :type: int
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmr_7
+   :type: int
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lpmr_8
+   :type: int
+
+
+   
+   Get or set the ID of curve defining plastic moment as a function of plastic rotation for the torsional axis for hinge moment HMR_8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '139'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

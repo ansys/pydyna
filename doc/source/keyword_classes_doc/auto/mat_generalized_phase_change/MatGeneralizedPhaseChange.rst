@@ -1,0 +1,1841 @@
+
+
+
+
+
+
+:class:`MatGeneralizedPhaseChange`
+==================================
+
+
+.. py:class:: mat_generalized_phase_change.MatGeneralizedPhaseChange(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_GENERALIZED_PHASE_CHANGE keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatGeneralizedPhaseChange
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number or label must be specified.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density 𝜌.
+          * - :py:attr:`~n`
+            - Get or set the Number of phases.
+          * - :py:attr:`~e`
+            - Get or set the Youngs' modulus:
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's modulus:
+          * - :py:attr:`~mix`
+            - Get or set the Load curve ID with initial phase concentrations.
+          * - :py:attr:`~mixr`
+            - Get or set the LCID or TABID for mixture rule. Use a TABID to define a temperature dependency.
+          * - :py:attr:`~tastrt`
+            - Get or set the Temperature start for simple linear annealing.  See Remark 4.
+          * - :py:attr:`~tend`
+            - Get or set the Temperature end for simple linear annealing.  See Remark 4.IF TASTAR.gt.0 and TAEND.eq.0, an enhanced annealing algorithm is used..
+          * - :py:attr:`~cte`
+            - Get or set the Coefficient of thermal expansion:
+          * - :py:attr:`~epsini`
+            - Get or set the Initial plastic strains, uniformly distributed within the whole part
+          * - :py:attr:`~dtemp`
+            - Get or set the Maximum temperature variation within a time step. If exceeded during the analysis, a local sub-cycling is used for the calculation of phase transformations
+          * - :py:attr:`~xastr`
+            - Get or set the Annealing start temperature.
+          * - :py:attr:`~xaend`
+            - Get or set the Annealing end temperature.
+          * - :py:attr:`~xa1pa1`
+            - Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option.  Interpretation of the parameter depends on TASTAR..
+          * - :py:attr:`~xa1pa2`
+            - Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option.  Interpretation of the parameter depends on TASTAR..
+          * - :py:attr:`~xa1pa3`
+            - Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option.  Interpretation of the parameter depends on TASTAR..
+          * - :py:attr:`~xafpa`
+            - Get or set the Scalar parameter of the enhanced annealing option if applicable.  Interpretation of the parameter depends on TASTA.
+          * - :py:attr:`~cteann`
+            - Get or set the Annealing option for thermal expansion.
+          * - :py:attr:`~ptlaw`
+            - Get or set the Table ID to define the phase transformation model as a function of source phase and target phase.  The values in *DEFINE_TABLE are the phase numbers before transformation.  The curves referenced by the table specify transformation model (ordinate) as a function of phase number after transformation.
+          * - :py:attr:`~ptstr`
+            - Get or set the Table ID to define start temperatures for the transformations as
+          * - :py:attr:`~ptend`
+            - Get or set the Table ID to define end temperatures for the transformations as
+          * - :py:attr:`~ptx1`
+            - Get or set the Table ID defining the i-th scalar-valued phase transformation
+          * - :py:attr:`~ptx2`
+            - Get or set the Table ID defining the i-th scalar-valued phase transformation
+          * - :py:attr:`~ptx3`
+            - Get or set the Table ID defining the i-th scalar-valued phase transformation
+          * - :py:attr:`~ptx4`
+            - Get or set the Table ID defining the i-th scalar-valued phase transformation
+          * - :py:attr:`~ptx5`
+            - Get or set the Table ID defining the i-th scalar-valued phase transformation
+          * - :py:attr:`~pttab1`
+            - Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+          * - :py:attr:`~pttab2`
+            - Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+          * - :py:attr:`~pttab3`
+            - Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+          * - :py:attr:`~pttab4`
+            - Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+          * - :py:attr:`~pttab5`
+            - Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+          * - :py:attr:`~pttab6`
+            - Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+          * - :py:attr:`~pttab7`
+            - Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+          * - :py:attr:`~pteps`
+            - Get or set the Table ID containing transformation induced strains as function of
+          * - :py:attr:`~ptrip`
+            - Get or set the Flag for transformation induced plasticity (TRIP). Algorithm active
+          * - :py:attr:`~ptlat`
+            - Get or set the Table ID defining transformation induced heat generation .
+          * - :py:attr:`~postv`
+            - Get or set the Define additional pre-defined history variables that might be useful for post-processing.
+          * - :py:attr:`~nushis`
+            - Get or set the Number of additional user defined history variables.  .
+          * - :py:attr:`~grai`
+            - Get or set the Initial grain size.
+          * - :py:attr:`~t1phas`
+            - Get or set the Lower temperature limit for cooling rate evaluation.  Cooling rate can be used as input for user defined variables.
+          * - :py:attr:`~t2phas`
+            - Get or set the Upper temperature limit for cooling rate evaluation.  Cooling rate can be used as input for user defined variables.
+          * - :py:attr:`~fushi1`
+            - Get or set the Function ID for user defined history variables.
+          * - :py:attr:`~fushi2`
+            - Get or set the Function ID for user defined history variables.
+          * - :py:attr:`~fushi3`
+            - Get or set the Function ID for user defined history variables.
+          * - :py:attr:`~fushi4`
+            - Get or set the Function ID for user defined history variables.
+          * - :py:attr:`~fushi5`
+            - Get or set the Function ID for user defined history variables.
+          * - :py:attr:`~fushi6`
+            - Get or set the Function ID for user defined history variables.
+          * - :py:attr:`~fushi7`
+            - Get or set the Function ID for user defined history variables.
+          * - :py:attr:`~fushi8`
+            - Get or set the Function ID for user defined history variables.
+          * - :py:attr:`~sigy1`
+            - Get or set the Load curve or table ID for hardening of phase i..
+          * - :py:attr:`~sigy2`
+            - Get or set the Load curve or table ID for hardening of phase i..
+          * - :py:attr:`~sigy3`
+            - Get or set the Load curve or table ID for hardening of phase i..
+          * - :py:attr:`~sigy4`
+            - Get or set the Load curve or table ID for hardening of phase i..
+          * - :py:attr:`~sigy5`
+            - Get or set the Load curve or table ID for hardening of phase i..
+          * - :py:attr:`~sigy6`
+            - Get or set the Load curve or table ID for hardening of phase i..
+          * - :py:attr:`~sigy7`
+            - Get or set the Load curve or table ID for hardening of phase i..
+          * - :py:attr:`~sigy8`
+            - Get or set the Load curve or table ID for hardening of phase i..
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_generalized_phase_change import MatGeneralizedPhaseChange
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number or label must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density 𝜌.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n
+   :type: Optional[int]
+
+
+   
+   Get or set the Number of phases.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Youngs' modulus:
+   GT.0.0: constant value is used
+   LT.0.0: LCID or TABID. Temperature dependent Youngs' modulus given by load curve ID = -E or a Table
+   ID = -E. Use TABID to describe temperature dependent modulus for each phase individually.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's modulus:
+   GT.0.0: constant value is used
+   LT.0.0: LCID or TABID. Temperature dependent Posson's ratio given by load curve ID = -E or a Table ID = -E.
+   Use TABID to describe temperature dependent parameter for each phase individually..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mix
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID with initial phase concentrations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mixr
+   :type: Optional[int]
+
+
+   
+   Get or set the LCID or TABID for mixture rule. Use a TABID to define a temperature dependency.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tastrt
+   :type: Optional[float]
+
+
+   
+   Get or set the Temperature start for simple linear annealing.  See Remark 4.
+   IF TASTAR.gt.0 and TAEND.eq.0, an enhanced annealing algorithm is used.In that case, TASTAR is interpreted as anneal optionand an additional card is required.Possible values for the extended anneal option are
+   EQ.1:   linear annealing
+   EQ.2 : JMAK
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tend
+   :type: Optional[float]
+
+
+   
+   Get or set the Temperature end for simple linear annealing.  See Remark 4.IF TASTAR.gt.0 and TAEND.eq.0, an enhanced annealing algorithm is used..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cte
+   :type: Optional[float]
+
+
+   
+   Get or set the Coefficient of thermal expansion:
+   GT.0.0: constant value is used
+   LT.0.0: LCID or TABID. Temperature dependent CTE given  by load curve ID = -CTE or a Table ID = -CTE. Use
+   Table ID to describe temperature dependent CTE for      each phase individually.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: epsini
+   :type: Optional[int]
+
+
+   
+   Get or set the Initial plastic strains, uniformly distributed within the whole part
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dtemp
+   :type: Optional[float]
+
+
+   
+   Get or set the Maximum temperature variation within a time step. If exceeded during the analysis, a local sub-cycling is used for the calculation of phase transformations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xastr
+   :type: Optional[float]
+
+
+   
+   Get or set the Annealing start temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xaend
+   :type: Optional[float]
+
+
+   
+   Get or set the Annealing end temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xa1pa1
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option.  Interpretation of the parameter depends on TASTAR..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xa1pa2
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option.  Interpretation of the parameter depends on TASTAR..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xa1pa3
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option.  Interpretation of the parameter depends on TASTAR..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xafpa
+   :type: Optional[float]
+
+
+   
+   Get or set the Scalar parameter of the enhanced annealing option if applicable.  Interpretation of the parameter depends on TASTA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cteann
+   :type: Optional[float]
+
+
+   
+   Get or set the Annealing option for thermal expansion.
+   LT.0: | CTEAN | defines the upper temperature limit(cut - off temperature) for evaluation of thermal strains.
+   EQ.0 : no modification of thermal strains
+   EQ.1 : XAEND defines the upper temperature limit(cut - off temperature) for evaluation of thermal strains
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ptlaw
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID to define the phase transformation model as a function of source phase and target phase.  The values in *DEFINE_TABLE are the phase numbers before transformation.  The curves referenced by the table specify transformation model (ordinate) as a function of phase number after transformation.
+   LT.0:   transformation model used in heating
+   EQ.0 : no transformation
+   GT.0 : transformation model is used in cooling
+   There is a variety of possible transformation models which can be specified as ordinate values of the curves :
+   EQ.1 : Koinstinen - Marburger
+   EQ.2 : Johnson - Mehl - Avrami - Kolmogorov(JMAK)
+   EQ.3 : Akerstrom(only for cooling)
+   EQ.4 : Oddy(only for heating)
+   EQ.5 : Phase Recovery I(only for heating)
+   EQ.6 : Phase Recovery II(only for heating)
+   EQ.7 : Parabolic Dissolution I(only for heating)
+   EQ.8 : Parabolic Dissolution II(only for heating)
+   EQ.9 : extended Koinstinen - Marburger(only for cooling)
+   EQ.12 : JMAK for both coolingand heating
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ptstr
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID to define start temperatures for the transformations as
+   function of source phase and target phase. The values in
+   *DEFINE_TABLE are the phase numbers before transformation
+   (source phase). The curves referenced by the table specify start
+   temperature (ordinate) versus phase number after transformation (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ptend
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID to define end temperatures for the transformations as
+   function of source phase and target phase. The values in
+   *DEFINE_TABLE are the phase numbers before transformation
+   (source phase). The curves referenced by the table specify end
+   temperature (ordinate) versus phase number after transformation (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ptx1
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID defining the i-th scalar-valued phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE are the phase
+   numbers before transformation (source phase). The curves
+   referenced by the table specify scalar parameter (ordinate) versus
+   phase number after transformation (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ptx2
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID defining the i-th scalar-valued phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE are the phase
+   numbers before transformation (source phase). The curves
+   referenced by the table specify scalar parameter (ordinate) versus
+   phase number after transformation (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ptx3
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID defining the i-th scalar-valued phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE are the phase
+   numbers before transformation (source phase). The curves
+   referenced by the table specify scalar parameter (ordinate) versus
+   phase number after transformation (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ptx4
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID defining the i-th scalar-valued phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE are the phase
+   numbers before transformation (source phase). The curves
+   referenced by the table specify scalar parameter (ordinate) versus
+   phase number after transformation (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ptx5
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID defining the i-th scalar-valued phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE are the phase
+   numbers before transformation (source phase). The curves
+   referenced by the table specify scalar parameter (ordinate) versus
+   phase number after transformation (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pttab1
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE_3D are the
+   phase numbers before transformation (source phase). The values in
+   the 2D tables referenced by *DEFINE_TABLE_3D are the phase
+   number after transformation. The curves referenced by the 2D
+   tables specify tabulated parameter (ordinate) versus either
+   temperature or temperature rate (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pttab2
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE_3D are the
+   phase numbers before transformation (source phase). The values in
+   the 2D tables referenced by *DEFINE_TABLE_3D are the phase
+   number after transformation. The curves referenced by the 2D
+   tables specify tabulated parameter (ordinate) versus either
+   temperature or temperature rate (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pttab3
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE_3D are the
+   phase numbers before transformation (source phase). The values in
+   the 2D tables referenced by *DEFINE_TABLE_3D are the phase
+   number after transformation. The curves referenced by the 2D
+   tables specify tabulated parameter (ordinate) versus either
+   temperature or temperature rate (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pttab4
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE_3D are the
+   phase numbers before transformation (source phase). The values in
+   the 2D tables referenced by *DEFINE_TABLE_3D are the phase
+   number after transformation. The curves referenced by the 2D
+   tables specify tabulated parameter (ordinate) versus either
+   temperature or temperature rate (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pttab5
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE_3D are the
+   phase numbers before transformation (source phase). The values in
+   the 2D tables referenced by *DEFINE_TABLE_3D are the phase
+   number after transformation. The curves referenced by the 2D
+   tables specify tabulated parameter (ordinate) versus either
+   temperature or temperature rate (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pttab6
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE_3D are the
+   phase numbers before transformation (source phase). The values in
+   the 2D tables referenced by *DEFINE_TABLE_3D are the phase
+   number after transformation. The curves referenced by the 2D
+   tables specify tabulated parameter (ordinate) versus either
+   temperature or temperature rate (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pttab7
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
+   parameter as function of source phase and target phase (see
+   description of transformation models below to see which
+   parameters apply). The values in *DEFINE_TABLE_3D are the
+   phase numbers before transformation (source phase). The values in
+   the 2D tables referenced by *DEFINE_TABLE_3D are the phase
+   number after transformation. The curves referenced by the 2D
+   tables specify tabulated parameter (ordinate) versus either
+   temperature or temperature rate (abscissa).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pteps
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID containing transformation induced strains as function of
+   source phase and target phase.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ptrip
+   :type: Optional[int]
+
+
+   
+   Get or set the Flag for transformation induced plasticity (TRIP). Algorithm active
+   for positive value of PTRIP.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ptlat
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID defining transformation induced heat generation .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: postv
+   :type: Optional[int]
+
+
+   
+   Get or set the Define additional pre-defined history variables that might be useful for post-processing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nushis
+   :type: Optional[int]
+
+
+   
+   Get or set the Number of additional user defined history variables.  .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: grai
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial grain size.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t1phas
+   :type: Optional[int]
+
+
+   
+   Get or set the Lower temperature limit for cooling rate evaluation.  Cooling rate can be used as input for user defined variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t2phas
+   :type: Optional[int]
+
+
+   
+   Get or set the Upper temperature limit for cooling rate evaluation.  Cooling rate can be used as input for user defined variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fushi1
+   :type: Optional[int]
+
+
+   
+   Get or set the Function ID for user defined history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fushi2
+   :type: Optional[int]
+
+
+   
+   Get or set the Function ID for user defined history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fushi3
+   :type: Optional[int]
+
+
+   
+   Get or set the Function ID for user defined history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fushi4
+   :type: Optional[int]
+
+
+   
+   Get or set the Function ID for user defined history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fushi5
+   :type: Optional[int]
+
+
+   
+   Get or set the Function ID for user defined history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fushi6
+   :type: Optional[int]
+
+
+   
+   Get or set the Function ID for user defined history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fushi7
+   :type: Optional[int]
+
+
+   
+   Get or set the Function ID for user defined history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fushi8
+   :type: Optional[int]
+
+
+   
+   Get or set the Function ID for user defined history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy1
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID for hardening of phase i..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy2
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID for hardening of phase i..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy3
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID for hardening of phase i..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy4
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID for hardening of phase i..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy5
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID for hardening of phase i..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy6
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID for hardening of phase i..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy7
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID for hardening of phase i..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy8
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve or table ID for hardening of phase i..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'GENERALIZED_PHASE_CHANGE'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+
