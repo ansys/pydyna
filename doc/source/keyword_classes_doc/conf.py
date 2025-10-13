@@ -3,7 +3,6 @@
 import datetime
 import os
 
-import pyvista
 from ansys_sphinx_theme import get_version_match, ansys_favicon
 
 from ansys.dyna.core import __version__
@@ -21,7 +20,7 @@ extensions = [
     'numpydoc',
     # "sphinx_jinja",
     "sphinx_design",
-    # "ansys_sphinx_theme.extension.autoapi",
+    "ansys_sphinx_theme.extension.autoapi",
 ]
 
 # Intersphinx mapping
@@ -119,12 +118,10 @@ html_theme_options = {
     ],
     "collapse_navigation": True,
     "use_edit_page_button": True,
-    # "ansys_sphinx_theme_autoapi": {
-    #     "ignore": [
-    #        "*core/keywords/keyword_classes/auto*",
-    #     ],
-    #     "output": "api",        
-    # },
+    "ansys_sphinx_theme_autoapi": {
+        "output": "api",  
+        "directory": "../../../src/ansys/dyna/core/keywords/keyword_classes/auto",      
+    },
 }
 
 # static path
