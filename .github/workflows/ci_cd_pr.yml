@@ -189,7 +189,7 @@ jobs:
         shell: bash
 
       - name: Upload keyword documentation artifact
-        uses: actions/upload-artifact@v3.2.2
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: keyword-documentation
           path: doc/source/keyword_classes_doc/_build/html/
