@@ -1,0 +1,1163 @@
+
+
+
+
+
+
+:class:`Mat092`
+===============
+
+
+.. py:class:: mat_092.Mat092(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_092 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat092
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass Density
+          * - :py:attr:`~c1`
+            - Get or set the Hyperelastic coefficients
+          * - :py:attr:`~c2`
+            - Get or set the Hyperelastic coefficients
+          * - :py:attr:`~c3`
+            - Get or set the Hyperelastic coefficients
+          * - :py:attr:`~c4`
+            - Get or set the Hyperelastic coefficients
+          * - :py:attr:`~c5`
+            - Get or set the Hyperelastic coefficients
+          * - :py:attr:`~xk`
+            - Get or set the Bulk Modulus
+          * - :py:attr:`~xlam`
+            - Get or set the Stretch ratio at which fibers are straightened
+          * - :py:attr:`~fang`
+            - Get or set the Angle in degrees of a material rotation about the c-axis, available for AOPT = 0 (shells only) and AOPT = 3 (all element types).  This angle may be overridden on the element card; see *ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO
+          * - :py:attr:`~xlam0`
+            - Get or set the Initial fiber stretch (optional)
+          * - :py:attr:`~failsf`
+            - Get or set the Stretch ratio for ligament fibers at failure (applies to shell elements only).  If zero, failure is not considered.
+          * - :py:attr:`~failsm`
+            - Get or set the Stretch ratio for surrounding matrix material at failure (applies to shell elements only).  If zero, failure is not considered
+          * - :py:attr:`~failshr`
+            - Get or set the Shear strain at failure at a material point (applies to shell elements only).  If zero, failure is not considered.  This failure value is independent of FAILSF and FAILSM
+          * - :py:attr:`~aopt`
+            - Get or set the Material axes option (see MAT_‌OPTIONTROPIC_‌ELASTIC particularly the Material Directions section, for details). The fiber direction depends on this coordinate system (see Remark 1).
+          * - :py:attr:`~ax`
+            - Get or set the First material axis point or vector (bricks only)
+          * - :py:attr:`~ay`
+            - Get or set the First material axis point or vector (bricks only)
+          * - :py:attr:`~az`
+            - Get or set the First material axis point or vector (bricks only)
+          * - :py:attr:`~bx`
+            - Get or set the Second material axis point or vector (bricks only)
+          * - :py:attr:`~by`
+            - Get or set the Second material axis point or vector (bricks only)
+          * - :py:attr:`~bz`
+            - Get or set the Second material axis point or vector (bricks only)
+          * - :py:attr:`~la1`
+            - Get or set the Local fiber orientation vector (bricks only)
+          * - :py:attr:`~la2`
+            - Get or set the Local fiber orientation vector (bricks only)
+          * - :py:attr:`~la3`
+            - Get or set the Local fiber orientation vector (bricks only)
+          * - :py:attr:`~macf`
+            - Get or set the Material axes change flag for solid elements:
+          * - :py:attr:`~s1`
+            - Get or set the Factors in the Prony series
+          * - :py:attr:`~s2`
+            - Get or set the Factors in the Prony series
+          * - :py:attr:`~s3`
+            - Get or set the Factors in the Prony series
+          * - :py:attr:`~s4`
+            - Get or set the Factors in the Prony series
+          * - :py:attr:`~s5`
+            - Get or set the Factors in the Prony series
+          * - :py:attr:`~s6`
+            - Get or set the Factors in the Prony series
+          * - :py:attr:`~t1`
+            - Get or set the Characteristic times for Prony series relaxation kernel
+          * - :py:attr:`~t2`
+            - Get or set the Characteristic times for Prony series relaxation kernel
+          * - :py:attr:`~t3`
+            - Get or set the Characteristic times for Prony series relaxation kernel
+          * - :py:attr:`~t4`
+            - Get or set the Characteristic times for Prony series relaxation kernel
+          * - :py:attr:`~t5`
+            - Get or set the Characteristic times for Prony series relaxation kernel
+          * - :py:attr:`~t6`
+            - Get or set the Characteristic times for Prony series relaxation kernel
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_092 import Mat092
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass Density
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c1
+   :type: Optional[float]
+
+
+   
+   Get or set the Hyperelastic coefficients
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c2
+   :type: Optional[float]
+
+
+   
+   Get or set the Hyperelastic coefficients
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c3
+   :type: Optional[float]
+
+
+   
+   Get or set the Hyperelastic coefficients
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c4
+   :type: Optional[float]
+
+
+   
+   Get or set the Hyperelastic coefficients
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c5
+   :type: Optional[float]
+
+
+   
+   Get or set the Hyperelastic coefficients
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xk
+   :type: Optional[float]
+
+
+   
+   Get or set the Bulk Modulus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xlam
+   :type: Optional[float]
+
+
+   
+   Get or set the Stretch ratio at which fibers are straightened
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fang
+   :type: Optional[float]
+
+
+   
+   Get or set the Angle in degrees of a material rotation about the c-axis, available for AOPT = 0 (shells only) and AOPT = 3 (all element types).  This angle may be overridden on the element card; see *ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xlam0
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial fiber stretch (optional)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: failsf
+   :type: Optional[float]
+
+
+   
+   Get or set the Stretch ratio for ligament fibers at failure (applies to shell elements only).  If zero, failure is not considered.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: failsm
+   :type: Optional[float]
+
+
+   
+   Get or set the Stretch ratio for surrounding matrix material at failure (applies to shell elements only).  If zero, failure is not considered
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: failshr
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear strain at failure at a material point (applies to shell elements only).  If zero, failure is not considered.  This failure value is independent of FAILSF and FAILSM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aopt
+   :type: Optional[float]
+
+
+   
+   Get or set the Material axes option (see MAT_‌OPTIONTROPIC_‌ELASTIC particularly the Material Directions section, for details). The fiber direction depends on this coordinate system (see Remark 1).
+   EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle FANG on this keyword or BETA on the * ELEMENT_SHELL_{OPTION} input.
+   EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+   EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
+   EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or with FANG on this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying the angle rotation depending on the value of MACF.
+   EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+   LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ax
+   :type: Optional[float]
+
+
+   
+   Get or set the First material axis point or vector (bricks only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ay
+   :type: Optional[float]
+
+
+   
+   Get or set the First material axis point or vector (bricks only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: az
+   :type: Optional[float]
+
+
+   
+   Get or set the First material axis point or vector (bricks only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: bx
+   :type: Optional[float]
+
+
+   
+   Get or set the Second material axis point or vector (bricks only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: by
+   :type: Optional[float]
+
+
+   
+   Get or set the Second material axis point or vector (bricks only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: bz
+   :type: Optional[float]
+
+
+   
+   Get or set the Second material axis point or vector (bricks only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: la1
+   :type: Optional[float]
+
+
+   
+   Get or set the Local fiber orientation vector (bricks only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: la2
+   :type: Optional[float]
+
+
+   
+   Get or set the Local fiber orientation vector (bricks only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: la3
+   :type: Optional[float]
+
+
+   
+   Get or set the Local fiber orientation vector (bricks only)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: macf
+   :type: int
+
+
+   
+   Get or set the Material axes change flag for solid elements:
+   EQ.1 : No change, default
+   EQ.2 : Switch material axes a and b after BETA or FANG rotation
+   EQ.3 : Switch material axes a and c after BETA or FANG rotation
+   EQ.4 : Switch material axes b and c after BETA or FANG rotation
+   EQ. -4 : Switch material axes b and c before BETA or FANG rotation
+   EQ. -3 : Switch material axes a and c before BETA or FANG rotation
+   EQ. -2 : Switch material axes a and b before BETA or FANG rotation
+   Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.The BETA on * ELEMENT_SOLID_{OPTION} if defined is used for the rotation for all AOPT options.If BETA is not used for the element, then a rotation only occurs for AOPT = 3 where FANG is applied
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s1
+   :type: Optional[float]
+
+
+   
+   Get or set the Factors in the Prony series
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s2
+   :type: Optional[float]
+
+
+   
+   Get or set the Factors in the Prony series
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s3
+   :type: Optional[float]
+
+
+   
+   Get or set the Factors in the Prony series
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s4
+   :type: Optional[float]
+
+
+   
+   Get or set the Factors in the Prony series
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s5
+   :type: Optional[float]
+
+
+   
+   Get or set the Factors in the Prony series
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s6
+   :type: Optional[float]
+
+
+   
+   Get or set the Factors in the Prony series
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t1
+   :type: Optional[float]
+
+
+   
+   Get or set the Characteristic times for Prony series relaxation kernel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t2
+   :type: Optional[float]
+
+
+   
+   Get or set the Characteristic times for Prony series relaxation kernel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t3
+   :type: Optional[float]
+
+
+   
+   Get or set the Characteristic times for Prony series relaxation kernel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t4
+   :type: Optional[float]
+
+
+   
+   Get or set the Characteristic times for Prony series relaxation kernel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t5
+   :type: Optional[float]
+
+
+   
+   Get or set the Characteristic times for Prony series relaxation kernel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t6
+   :type: Optional[float]
+
+
+   
+   Get or set the Characteristic times for Prony series relaxation kernel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '092'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

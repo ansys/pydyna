@@ -1,0 +1,693 @@
+
+
+
+
+
+
+:class:`MatMooneyRivlinRubberPhaseChange`
+=========================================
+
+
+.. py:class:: mat_mooney_rivlin_rubber_phase_change.MatMooneyRivlinRubberPhaseChange(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_MOONEY-RIVLIN_RUBBER_PHASE_CHANGE keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatMooneyRivlinRubberPhaseChange
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number or label not exceeding 8        characters must be specified.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density
+          * - :py:attr:`~pr1`
+            - Get or set the Poisson's ratio (value between 0.49 and 0.5 is recommended, smaller values may not work) where i indicates the phase.
+          * - :py:attr:`~a1`
+            - Get or set the Constant for the i th phase, see literature and equations defined below.
+          * - :py:attr:`~b1`
+            - Get or set the Constant for the i th phase, see literature and equations defined        below.
+          * - :py:attr:`~ref`
+            - Get or set the Use reference geometry to initialize the stress tensor. The reference
+          * - :py:attr:`~sgl1`
+            - Get or set the Specimen gauge length l0 for the i th phase, see Figure M218-1.
+          * - :py:attr:`~sw1`
+            - Get or set the Specimen width for the i th phase, see Figure M218-1.
+          * - :py:attr:`~st1`
+            - Get or set the Specimen thickness for the i th phase, see Figure M218-1.
+          * - :py:attr:`~lcid1`
+            - Get or set the Curve ID for the i th phase, see *DEFINE_CURVE, giving the force versus actual change delta L in the gauge length. See also Figure M218-2
+          * - :py:attr:`~pr2`
+            - Get or set the Poisson's ratio (value between 0.49 and 0.5 is recommended, smaller values may not work) where i indicates the phase
+          * - :py:attr:`~a2`
+            - Get or set the Constant for the i th phase, see literature and equations defined below
+          * - :py:attr:`~b2`
+            - Get or set the Constant for the i th phase, see literature and equations defined        below
+          * - :py:attr:`~x1`
+            - Get or set the Coordinates of a point on the phase transition plane.
+          * - :py:attr:`~y1`
+            - Get or set the Coordinates of a point on the phase transition plane.
+          * - :py:attr:`~z1`
+            - Get or set the Coordinates of a point on the phase transition plane.
+          * - :py:attr:`~x2`
+            - Get or set the Coordinates of a point that defines the exterior normal with the first point.
+          * - :py:attr:`~y2`
+            - Get or set the Coordinates of a point that defines the exterior normal with the first point
+          * - :py:attr:`~z2`
+            - Get or set the Coordinates of a point that defines the exterior normal with the first point
+          * - :py:attr:`~thkfac`
+            - Get or set the Scale factor applied to the shell thickness after the phase transformation.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_mooney_rivlin_rubber_phase_change import MatMooneyRivlinRubberPhaseChange
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number or label not exceeding 8        characters must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr1
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio (value between 0.49 and 0.5 is recommended, smaller values may not work) where i indicates the phase.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1
+   :type: Optional[float]
+
+
+   
+   Get or set the Constant for the i th phase, see literature and equations defined below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b1
+   :type: Optional[float]
+
+
+   
+   Get or set the Constant for the i th phase, see literature and equations defined        below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ref
+   :type: float
+
+
+   
+   Get or set the Use reference geometry to initialize the stress tensor. The reference
+   geometry is defined by the keyword:*INITIAL_FOAM_REFERENCE_GEOMETRY (see there for more details).
+   EQ.0.0: off,
+   EQ.1.0: on.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sgl1
+   :type: Optional[float]
+
+
+   
+   Get or set the Specimen gauge length l0 for the i th phase, see Figure M218-1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sw1
+   :type: Optional[float]
+
+
+   
+   Get or set the Specimen width for the i th phase, see Figure M218-1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: st1
+   :type: Optional[float]
+
+
+   
+   Get or set the Specimen thickness for the i th phase, see Figure M218-1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid1
+   :type: Optional[float]
+
+
+   
+   Get or set the Curve ID for the i th phase, see *DEFINE_CURVE, giving the force versus actual change delta L in the gauge length. See also Figure M218-2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr2
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio (value between 0.49 and 0.5 is recommended, smaller values may not work) where i indicates the phase
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2
+   :type: Optional[float]
+
+
+   
+   Get or set the Constant for the i th phase, see literature and equations defined below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b2
+   :type: Optional[float]
+
+
+   
+   Get or set the Constant for the i th phase, see literature and equations defined        below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: x1
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of a point on the phase transition plane.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: y1
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of a point on the phase transition plane.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: z1
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of a point on the phase transition plane.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: x2
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of a point that defines the exterior normal with the first point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: y2
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of a point that defines the exterior normal with the first point
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: z2
+   :type: Optional[float]
+
+
+   
+   Get or set the Coordinates of a point that defines the exterior normal with the first point
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: thkfac
+   :type: float
+
+
+   
+   Get or set the Scale factor applied to the shell thickness after the phase transformation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'MOONEY-RIVLIN_RUBBER_PHASE_CHANGE'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

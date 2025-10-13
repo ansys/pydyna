@@ -1,0 +1,650 @@
+
+
+
+
+
+
+:class:`Mat025`
+===============
+
+
+.. py:class:: mat_025.Mat025(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_025 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat025
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~bulk`
+            - Get or set the Initial bulk modulus, K.
+          * - :py:attr:`~g`
+            - Get or set the Initial Shear modulus.
+          * - :py:attr:`~alpha`
+            - Get or set the Failure envelope parameter.
+          * - :py:attr:`~theta`
+            - Get or set the Failure envelope linear coefficient.
+          * - :py:attr:`~gamma`
+            - Get or set the Failure envelope exponential coefficient.
+          * - :py:attr:`~beta`
+            - Get or set the Failure envelope exponent.
+          * - :py:attr:`~r`
+            - Get or set the Cap, surface axis ratio.
+          * - :py:attr:`~d`
+            - Get or set the Hardening law exponent.
+          * - :py:attr:`~w`
+            - Get or set the Hardening law coefficient.
+          * - :py:attr:`~x0`
+            - Get or set the Hardening law exponent.
+          * - :py:attr:`~c`
+            - Get or set the Kinematic hardening coefficient.
+          * - :py:attr:`~n`
+            - Get or set the Kinematic hardening parameter.
+          * - :py:attr:`~plot`
+            - Get or set the Save the following variable for plotting in TAURUS.:
+          * - :py:attr:`~ftype`
+            - Get or set the Formulation flag:
+          * - :py:attr:`~vec`
+            - Get or set the Vectorization flag:
+          * - :py:attr:`~toff`
+            - Get or set the Tension Cut Off, TOFF < 0 (positive in compression).
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_025 import Mat025
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: bulk
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial bulk modulus, K.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial Shear modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha
+   :type: Optional[float]
+
+
+   
+   Get or set the Failure envelope parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: theta
+   :type: Optional[float]
+
+
+   
+   Get or set the Failure envelope linear coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gamma
+   :type: Optional[float]
+
+
+   
+   Get or set the Failure envelope exponential coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the Failure envelope exponent.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: r
+   :type: Optional[float]
+
+
+   
+   Get or set the Cap, surface axis ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d
+   :type: Optional[float]
+
+
+   
+   Get or set the Hardening law exponent.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: w
+   :type: Optional[float]
+
+
+   
+   Get or set the Hardening law coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: x0
+   :type: Optional[float]
+
+
+   
+   Get or set the Hardening law exponent.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: plot
+   :type: float
+
+
+   
+   Get or set the Save the following variable for plotting in TAURUS.:
+   EQ.1: hardening parameter,
+   EQ.2: cap -J 1 axis intercept,
+   EQ.3: volumetric plastic strain,
+   EQ.4: first stress invarient,
+   EQ.5: second stress invarient,
+   EQ.6: not used,
+   EQ.7: not used,
+   EQ.8: response mode number,
+   EQ.9: number of iterations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ftype
+   :type: float
+
+
+   
+   Get or set the Formulation flag:
+   EQ.1: soil or concrete (Cap surface may contract) (default),
+   EQ.2: rock (Cap doesn't contract).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vec
+   :type: float
+
+
+   
+   Get or set the Vectorization flag:
+   EQ.0: vectorized (fixed number of iterations) (default),
+   EQ.1: fully iterative,
+   If the vectorized solution is chosen, the stresses might be slightly off the yield surface; however, on vector computers a much more efficient solution is achieved.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: toff
+   :type: Optional[float]
+
+
+   
+   Get or set the Tension Cut Off, TOFF < 0 (positive in compression).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '025'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

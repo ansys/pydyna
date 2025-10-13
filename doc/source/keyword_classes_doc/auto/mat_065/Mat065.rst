@@ -1,0 +1,830 @@
+
+
+
+
+
+
+:class:`Mat065`
+===============
+
+
+.. py:class:: mat_065.Mat065(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_065 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat065
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~g`
+            - Get or set the Shear modulus.
+          * - :py:attr:`~e0`
+            - Get or set the epsilon-0, Factor to normalize strain rate.
+          * - :py:attr:`~n`
+            - Get or set the n, Exponent for bcc metal.
+          * - :py:attr:`~troom`
+            - Get or set the Room temperature.
+          * - :py:attr:`~pc`
+            - Get or set the Pressure cutoff.
+          * - :py:attr:`~spall`
+            - Get or set the Spall Type:
+          * - :py:attr:`~c1`
+            - Get or set the C1, coefficient for flow stress.
+          * - :py:attr:`~c2`
+            - Get or set the C2, coefficient for flow stress.
+          * - :py:attr:`~c3`
+            - Get or set the C3, coefficient for flow stress.
+          * - :py:attr:`~c4`
+            - Get or set the C4, coefficient for flow stress.
+          * - :py:attr:`~c5`
+            - Get or set the C5, coefficient for flow stress.
+          * - :py:attr:`~c6`
+            - Get or set the C6, coefficient for flow stress.
+          * - :py:attr:`~efail`
+            - Get or set the Failure strain for erosion.
+          * - :py:attr:`~vp`
+            - Get or set the Formulation for rate effects:
+          * - :py:attr:`~b1`
+            - Get or set the B1, coefficient for polynomial to represent temperature dependency of flow stress yield.
+          * - :py:attr:`~b2`
+            - Get or set the B2, coefficient for polynomial to represent temperature dependency of flow stress yield.
+          * - :py:attr:`~b3`
+            - Get or set the B3, coefficient for polynomial to represent temperature dependency of flow stress yield.
+          * - :py:attr:`~g1`
+            - Get or set the G1, coefficient for defining heat capacity and temperature dependency of heat capacity.
+          * - :py:attr:`~g2`
+            - Get or set the G2, coefficient for defining heat capacity and temperature dependency of heat capacity.
+          * - :py:attr:`~g3`
+            - Get or set the G3, coefficient for defining heat capacity and temperature dependency of heat capacity.
+          * - :py:attr:`~g4`
+            - Get or set the G4, coefficient for defining heat capacity and temperature dependency of heat capacity.
+          * - :py:attr:`~bulk`
+            - Get or set the Bulk modulus defined for shell elements only. Do not input for solid elements.
+          * - :py:attr:`~m`
+            - Get or set the m, exponent for FCC metal (default = 0.5).  This field is only used when N = 0.0 on Card 1.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_065 import Mat065
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e0
+   :type: Optional[float]
+
+
+   
+   Get or set the epsilon-0, Factor to normalize strain rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n
+   :type: Optional[float]
+
+
+   
+   Get or set the n, Exponent for bcc metal.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: troom
+   :type: Optional[float]
+
+
+   
+   Get or set the Room temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pc
+   :type: Optional[float]
+
+
+   
+   Get or set the Pressure cutoff.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: spall
+   :type: float
+
+
+   
+   Get or set the Spall Type:
+   EQ.1.0: minimum pressure limit,
+   EQ.2.0: maximum principal stress,
+   EQ.3.0: minimum pressure cutoff.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c1
+   :type: Optional[float]
+
+
+   
+   Get or set the C1, coefficient for flow stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c2
+   :type: Optional[float]
+
+
+   
+   Get or set the C2, coefficient for flow stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c3
+   :type: Optional[float]
+
+
+   
+   Get or set the C3, coefficient for flow stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c4
+   :type: Optional[float]
+
+
+   
+   Get or set the C4, coefficient for flow stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c5
+   :type: Optional[float]
+
+
+   
+   Get or set the C5, coefficient for flow stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c6
+   :type: Optional[float]
+
+
+   
+   Get or set the C6, coefficient for flow stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: efail
+   :type: Optional[float]
+
+
+   
+   Get or set the Failure strain for erosion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vp
+   :type: float
+
+
+   
+   Get or set the Formulation for rate effects:
+   EQ.0.0: Scale yield stress (default)
+   EQ.1.0: Viscoplastic formulation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b1
+   :type: Optional[float]
+
+
+   
+   Get or set the B1, coefficient for polynomial to represent temperature dependency of flow stress yield.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b2
+   :type: Optional[float]
+
+
+   
+   Get or set the B2, coefficient for polynomial to represent temperature dependency of flow stress yield.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b3
+   :type: Optional[float]
+
+
+   
+   Get or set the B3, coefficient for polynomial to represent temperature dependency of flow stress yield.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g1
+   :type: Optional[float]
+
+
+   
+   Get or set the G1, coefficient for defining heat capacity and temperature dependency of heat capacity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g2
+   :type: Optional[float]
+
+
+   
+   Get or set the G2, coefficient for defining heat capacity and temperature dependency of heat capacity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g3
+   :type: Optional[float]
+
+
+   
+   Get or set the G3, coefficient for defining heat capacity and temperature dependency of heat capacity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g4
+   :type: Optional[float]
+
+
+   
+   Get or set the G4, coefficient for defining heat capacity and temperature dependency of heat capacity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: bulk
+   :type: Optional[float]
+
+
+   
+   Get or set the Bulk modulus defined for shell elements only. Do not input for solid elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m
+   :type: float
+
+
+   
+   Get or set the m, exponent for FCC metal (default = 0.5).  This field is only used when N = 0.0 on Card 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '065'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

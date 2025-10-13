@@ -1,0 +1,1342 @@
+
+
+
+
+
+
+:class:`Mat214`
+===============
+
+
+.. py:class:: mat_214.Mat214(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_214 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat214
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Continuum equivalent Mass density.
+          * - :py:attr:`~ea`
+            - Get or set the Modulus of elasticity in the longitudinal (warp) direction, which corresponds to the slope of segment AB .
+          * - :py:attr:`~eb`
+            - Get or set the Modulus of elasticity in the transverse (fill) direction, which corre-sponds to the slope of segment of AB.
+          * - :py:attr:`~gab1`
+            - Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+          * - :py:attr:`~gab2`
+            - Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+          * - :py:attr:`~gab3`
+            - Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+          * - :py:attr:`~gbc`
+            - Get or set the Shear modulus in bc direction.
+          * - :py:attr:`~gca`
+            - Get or set the Shear modulus in ca direction.
+          * - :py:attr:`~gamab1`
+            - Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+          * - :py:attr:`~gamab2`
+            - Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+          * - :py:attr:`~aopt`
+            - Get or set the Material axes option.  See *MAT_OPTIONTROPIC_ELAS¬TIC for a more complete description:
+          * - :py:attr:`~xp`
+            - Get or set the Components of vector x.
+          * - :py:attr:`~yp`
+            - Get or set the Components of vector y.
+          * - :py:attr:`~zp`
+            - Get or set the Components of vector z
+          * - :py:attr:`~a1`
+            - Get or set the Components of vector a for AOPT = 2.
+          * - :py:attr:`~a2`
+            - Get or set the Components of vector a for AOPT = 2.
+          * - :py:attr:`~a3`
+            - Get or set the Components of vector a for AOPT = 2..
+          * - :py:attr:`~v1`
+            - Get or set the Components of vector v for AOPT = 3.
+          * - :py:attr:`~v2`
+            - Get or set the Components of vector v for AOPT = 3..
+          * - :py:attr:`~v3`
+            - Get or set the Components of vector v for AOPT = 3..
+          * - :py:attr:`~d1`
+            - Get or set the Components of vector d for AOPT = 2..
+          * - :py:attr:`~d2`
+            - Get or set the Components of vector d for AOPT = 2.
+          * - :py:attr:`~d3`
+            - Get or set the Components of vector d for AOPT = 2.
+          * - :py:attr:`~beta`
+            - Get or set the Material angle in degrees for AOPT = 0 and 3, may be overridden on the element card, see *ELEMENT_SHELL_BETA.
+          * - :py:attr:`~eacrf`
+            - Get or set the Factor for crimp region modulus of elasticity in longitudinal direction
+          * - :py:attr:`~ebcrf`
+            - Get or set the Factor for crimp region modulus of elasticity in transverse direction .
+          * - :py:attr:`~eacrp`
+            - Get or set the Crimp strain in longitudinal direction .
+          * - :py:attr:`~ebcrp`
+            - Get or set the Crimp strain in transverse direction .
+          * - :py:attr:`~easf`
+            - Get or set the Factor for post-peak region modulus of elasticity in longitudinal direction
+          * - :py:attr:`~ebsf`
+            - Get or set the Factor for post-peak region modulus of elasticity in transverse direc-tion.
+          * - :py:attr:`~eunlf`
+            - Get or set the Factor for unloading modulus of elasticity .
+          * - :py:attr:`~ecomf`
+            - Get or set the Factor for compression zone modulus of elasticity .
+          * - :py:attr:`~eamax`
+            - Get or set the Strain at peak stress in longitudinal direction
+          * - :py:attr:`~ebmax`
+            - Get or set the Strain at peak stress in transverse direction
+          * - :py:attr:`~sigpost`
+            - Get or set the Stress value in post-peak region at which nonlinear behavior begins
+          * - :py:attr:`~cce`
+            - Get or set the Strain rate parameter C, Cowper-Symonds factor for modulus. If zero,  rate effects are not considered
+          * - :py:attr:`~pce`
+            - Get or set the Strain rate parameter P, Cowper-Symonds factor for modulus. If zero,  rate effects are not considered.
+          * - :py:attr:`~cse`
+            - Get or set the Strain rate parameter C, Cowper-Symonds factor for stress to peak / failure. If zero, rate effects are not considered.
+          * - :py:attr:`~pse`
+            - Get or set the Strain rate parameter P, Cowper-Symonds factor for stress to peak / failure. If zero, rate effects are not considered.
+          * - :py:attr:`~dfac`
+            - Get or set the Damage factor
+          * - :py:attr:`~emax`
+            - Get or set the Erosion strain of element
+          * - :py:attr:`~eafail`
+            - Get or set the Erosion strain in longitudinal direction
+          * - :py:attr:`~ebfail`
+            - Get or set the Erosion strain in transverse direction .
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_214 import Mat214
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Continuum equivalent Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ea
+   :type: Optional[float]
+
+
+   
+   Get or set the Modulus of elasticity in the longitudinal (warp) direction, which corresponds to the slope of segment AB .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eb
+   :type: Optional[float]
+
+
+   
+   Get or set the Modulus of elasticity in the transverse (fill) direction, which corre-sponds to the slope of segment of AB.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gab1
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gab2
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gab3
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gbc
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear modulus in bc direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gca
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear modulus in ca direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gamab1
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gamab2
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aopt
+   :type: Optional[float]
+
+
+   
+   Get or set the Material axes option.  See *MAT_OPTIONTROPIC_ELAS¬TIC for a more complete description:
+   EQ.0.0: locally orthotropic with material axes determined by ele-ment nodes 1, 2, and 4, as with *DEFINECOORDINATE_NODES, and then rotated about the element normal by an angle BETA.
+   EQ.2.0: globally orthotropic with material axes determined by vec-tors defined below, as with *DEFINE_COORDINATE_VECTOR.
+   EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle, BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
+   LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR).  Available in R3 version of 971 and later.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xp
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector x.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yp
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector y.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: zp
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector z
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the Material angle in degrees for AOPT = 0 and 3, may be overridden on the element card, see *ELEMENT_SHELL_BETA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eacrf
+   :type: Optional[float]
+
+
+   
+   Get or set the Factor for crimp region modulus of elasticity in longitudinal direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ebcrf
+   :type: Optional[float]
+
+
+   
+   Get or set the Factor for crimp region modulus of elasticity in transverse direction .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eacrp
+   :type: Optional[float]
+
+
+   
+   Get or set the Crimp strain in longitudinal direction .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ebcrp
+   :type: Optional[float]
+
+
+   
+   Get or set the Crimp strain in transverse direction .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: easf
+   :type: Optional[float]
+
+
+   
+   Get or set the Factor for post-peak region modulus of elasticity in longitudinal direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ebsf
+   :type: Optional[float]
+
+
+   
+   Get or set the Factor for post-peak region modulus of elasticity in transverse direc-tion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eunlf
+   :type: Optional[float]
+
+
+   
+   Get or set the Factor for unloading modulus of elasticity .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ecomf
+   :type: Optional[float]
+
+
+   
+   Get or set the Factor for compression zone modulus of elasticity .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eamax
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain at peak stress in longitudinal direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ebmax
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain at peak stress in transverse direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigpost
+   :type: Optional[float]
+
+
+   
+   Get or set the Stress value in post-peak region at which nonlinear behavior begins
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cce
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain rate parameter C, Cowper-Symonds factor for modulus. If zero,  rate effects are not considered
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pce
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain rate parameter P, Cowper-Symonds factor for modulus. If zero,  rate effects are not considered.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cse
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain rate parameter C, Cowper-Symonds factor for stress to peak / failure. If zero, rate effects are not considered.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pse
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain rate parameter P, Cowper-Symonds factor for stress to peak / failure. If zero, rate effects are not considered.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dfac
+   :type: Optional[float]
+
+
+   
+   Get or set the Damage factor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: emax
+   :type: Optional[float]
+
+
+   
+   Get or set the Erosion strain of element
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eafail
+   :type: Optional[float]
+
+
+   
+   Get or set the Erosion strain in longitudinal direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ebfail
+   :type: Optional[float]
+
+
+   
+   Get or set the Erosion strain in transverse direction .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '214'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

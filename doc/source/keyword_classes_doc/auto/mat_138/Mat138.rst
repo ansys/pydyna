@@ -1,0 +1,535 @@
+
+
+
+
+
+
+:class:`Mat138`
+===============
+
+
+.. py:class:: mat_138.Mat138(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_138 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat138
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~roflg`
+            - Get or set the Flag stating whether density is specified per unit area or volume:
+          * - :py:attr:`~intfail`
+            - Get or set the The number of integration points required for the cohesive element to be deleted. The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
+          * - :py:attr:`~en`
+            - Get or set the The stiffness normal to the plane of the cohesive element.
+          * - :py:attr:`~et`
+            - Get or set the The stiffness in the plane of the cohesive element
+          * - :py:attr:`~gic`
+            - Get or set the Energy release rate for mode I.
+          * - :py:attr:`~giic`
+            - Get or set the Energy release rate for mode II
+          * - :py:attr:`~xmu`
+            - Get or set the Exponent of the mixed mode criteria (see remarks below)
+          * - :py:attr:`~t`
+            - Get or set the Peak traction in normal direction
+          * - :py:attr:`~s`
+            - Get or set the Peak traction in tangential direction
+          * - :py:attr:`~und`
+            - Get or set the Ultimate displacement in the normal direction
+          * - :py:attr:`~utd`
+            - Get or set the Ultimate displacement in the tangential direction
+          * - :py:attr:`~gamma`
+            - Get or set the Additional exponent for Benzeggagh-Kenane law (default = 1.0)
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_138 import Mat138
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: roflg
+   :type: int
+
+
+   
+   Get or set the Flag stating whether density is specified per unit area or volume:
+   EQ.0:   Specified density is per unit volume(default).
+   EQ.1 : Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: intfail
+   :type: Optional[float]
+
+
+   
+   Get or set the The number of integration points required for the cohesive element to be deleted. The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
+   LT.0.0: Employs a Newton - Cotes integration scheme and the element will be deleted when | INTFAIL | integration points have failed.
+   EQ.0.0 : Employs a Newton - Cotes integration scheme and the element will not be deleted even if it satisfies the failure criterion.
+   GT.0.0 : Employs a Gauss integration scheme and the element will be deleted when INTFAIL integration points have failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: en
+   :type: Optional[float]
+
+
+   
+   Get or set the The stiffness normal to the plane of the cohesive element.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: et
+   :type: Optional[float]
+
+
+   
+   Get or set the The stiffness in the plane of the cohesive element
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gic
+   :type: Optional[float]
+
+
+   
+   Get or set the Energy release rate for mode I.
+   LT.0.0: Load curve ID = (-GIC) which defines energy release rate for mode I as a function of element size.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: giic
+   :type: Optional[float]
+
+
+   
+   Get or set the Energy release rate for mode II
+   LT.0.0: Load curve ID = (-GIIC) which defines energy release rate for mode II as a function of element size.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xmu
+   :type: Optional[float]
+
+
+   
+   Get or set the Exponent of the mixed mode criteria (see remarks below)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t
+   :type: Optional[float]
+
+
+   
+   Get or set the Peak traction in normal direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s
+   :type: Optional[float]
+
+
+   
+   Get or set the Peak traction in tangential direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: und
+   :type: Optional[float]
+
+
+   
+   Get or set the Ultimate displacement in the normal direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: utd
+   :type: Optional[float]
+
+
+   
+   Get or set the Ultimate displacement in the tangential direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gamma
+   :type: float
+
+
+   
+   Get or set the Additional exponent for Benzeggagh-Kenane law (default = 1.0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '138'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

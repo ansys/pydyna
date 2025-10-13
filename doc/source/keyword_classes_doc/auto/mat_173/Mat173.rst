@@ -1,0 +1,1098 @@
+
+
+
+
+
+
+:class:`Mat173`
+===============
+
+
+.. py:class:: mat_173.Mat173(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_173 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat173
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification.  A unique number.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density
+          * - :py:attr:`~gmod`
+            - Get or set the Elastic shear modulus
+          * - :py:attr:`~rnu`
+            - Get or set the Poisson's ratio
+          * - :py:attr:`~phi`
+            - Get or set the Angle of friction (radians)
+          * - :py:attr:`~cval`
+            - Get or set the Cohesion value (shear strength at zero normal stress)
+          * - :py:attr:`~psi`
+            - Get or set the Dilation angle (radians)
+          * - :py:attr:`~novoid_`
+            - Get or set the Voiding behavior flag (see Remarks 8 and 9):
+          * - :py:attr:`~nplanes`
+            - Get or set the Number of joint planes (maximum 6)
+          * - :py:attr:`~extra`
+            - Get or set the Flag to input further data. If EXTRA > 0, then Card 4 is read.
+          * - :py:attr:`~lccpdr`
+            - Get or set the Load curve for extra cohesion for parent material (dynamic relaxation)
+          * - :py:attr:`~lccpt`
+            - Get or set the Load curve for extra cohesion for parent material (transient)
+          * - :py:attr:`~lccjdr`
+            - Get or set the Load curve for extra cohesion for joints (dynamic relaxation)
+          * - :py:attr:`~lccjt`
+            - Get or set the Load curve for extra cohesion for joints (transient)
+          * - :py:attr:`~lcsfac`
+            - Get or set the Load curve giving factor on strength vs. time
+          * - :py:attr:`~gmoddp`
+            - Get or set the Z-coordinate  at which GMOD and CVAL are correct.
+          * - :py:attr:`~gmodgr`
+            - Get or set the Gradient of GMOD versus z-coordinate (usually negative)
+          * - :py:attr:`~lcgmep`
+            - Get or set the Load curve of GMOD versus plastic strain (overrides GMODGR)
+          * - :py:attr:`~lcphiep`
+            - Get or set the Load curve of PHI versus plastic strain
+          * - :py:attr:`~lcpsiep`
+            - Get or set the Load curve of PSI versus plastic strain
+          * - :py:attr:`~lcgmst`
+            - Get or set the (Leave blank)
+          * - :py:attr:`~cvalgr`
+            - Get or set the Gradient of CVAL versus z-coordinate (usually negative)
+          * - :py:attr:`~aniso`
+            - Get or set the Factor applied to elastic shear stiffness in global XZ and YZ planes
+          * - :py:attr:`~lcgmt`
+            - Get or set the Load curve of nondimensional factor on GMOD as a function of time
+          * - :py:attr:`~lccvt`
+            - Get or set the Load curve of nondimensional factor on CVAL as a function of time
+          * - :py:attr:`~lcpht`
+            - Get or set the Load curve of nondimensional factor on PHI as a function of time
+          * - :py:attr:`~epdam1`
+            - Get or set the Plastic strain or volumetric void strain at which damage begins
+          * - :py:attr:`~epdam2`
+            - Get or set the Plastic strain or volumetric void strain at which element is eroded
+          * - :py:attr:`~dip`
+            - Get or set the Angle of the plane in degrees below the horizontal.
+          * - :py:attr:`~dipang`
+            - Get or set the Plan view angle (degrees) of downhill vector drawn on the plane
+          * - :py:attr:`~cplane`
+            - Get or set the Cohesion for shear behavior on plane
+          * - :py:attr:`~frplane`
+            - Get or set the Friction angle for shear behavior on plane (degrees)
+          * - :py:attr:`~tplane`
+            - Get or set the Tensile strength across plane (generally zero or very small)
+          * - :py:attr:`~shrmax`
+            - Get or set the Max shear stress on plane (upper limit, independent of compression)
+          * - :py:attr:`~local`
+            - Get or set the EQ.0: DIP and DIPANG are with respect to the global axes
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_173 import Mat173
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification.  A unique number.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gmod
+   :type: Optional[float]
+
+
+   
+   Get or set the Elastic shear modulus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rnu
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: phi
+   :type: Optional[float]
+
+
+   
+   Get or set the Angle of friction (radians)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cval
+   :type: Optional[float]
+
+
+   
+   Get or set the Cohesion value (shear strength at zero normal stress)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: psi
+   :type: Optional[float]
+
+
+   
+   Get or set the Dilation angle (radians)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: novoid_
+   :type: Optional[int]
+
+
+   
+   Get or set the Voiding behavior flag (see Remarks 8 and 9):
+   EQ.0:   Voiding behavior on
+   EQ.1 : Voiding behavior off.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nplanes
+   :type: Optional[int]
+
+
+   
+   Get or set the Number of joint planes (maximum 6)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: extra
+   :type: Optional[int]
+
+
+   
+   Get or set the Flag to input further data. If EXTRA > 0, then Card 4 is read.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lccpdr
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve for extra cohesion for parent material (dynamic relaxation)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lccpt
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve for extra cohesion for parent material (transient)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lccjdr
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve for extra cohesion for joints (dynamic relaxation)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lccjt
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve for extra cohesion for joints (transient)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcsfac
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve giving factor on strength vs. time
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gmoddp
+   :type: Optional[float]
+
+
+   
+   Get or set the Z-coordinate  at which GMOD and CVAL are correct.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gmodgr
+   :type: Optional[float]
+
+
+   
+   Get or set the Gradient of GMOD versus z-coordinate (usually negative)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcgmep
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve of GMOD versus plastic strain (overrides GMODGR)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcphiep
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve of PHI versus plastic strain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcpsiep
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve of PSI versus plastic strain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcgmst
+   :type: Optional[int]
+
+
+   
+   Get or set the (Leave blank)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cvalgr
+   :type: Optional[float]
+
+
+   
+   Get or set the Gradient of CVAL versus z-coordinate (usually negative)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aniso
+   :type: float
+
+
+   
+   Get or set the Factor applied to elastic shear stiffness in global XZ and YZ planes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcgmt
+   :type: Optional[float]
+
+
+   
+   Get or set the Load curve of nondimensional factor on GMOD as a function of time
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lccvt
+   :type: Optional[float]
+
+
+   
+   Get or set the Load curve of nondimensional factor on CVAL as a function of time
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcpht
+   :type: Optional[float]
+
+
+   
+   Get or set the Load curve of nondimensional factor on PHI as a function of time
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: epdam1
+   :type: float
+
+
+   
+   Get or set the Plastic strain or volumetric void strain at which damage begins
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: epdam2
+   :type: Optional[float]
+
+
+   
+   Get or set the Plastic strain or volumetric void strain at which element is eroded
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dip
+   :type: Optional[float]
+
+
+   
+   Get or set the Angle of the plane in degrees below the horizontal.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dipang
+   :type: Optional[float]
+
+
+   
+   Get or set the Plan view angle (degrees) of downhill vector drawn on the plane
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cplane
+   :type: Optional[float]
+
+
+   
+   Get or set the Cohesion for shear behavior on plane
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: frplane
+   :type: Optional[float]
+
+
+   
+   Get or set the Friction angle for shear behavior on plane (degrees)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tplane
+   :type: Optional[float]
+
+
+   
+   Get or set the Tensile strength across plane (generally zero or very small)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: shrmax
+   :type: float
+
+
+   
+   Get or set the Max shear stress on plane (upper limit, independent of compression)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: local
+   :type: Optional[int]
+
+
+   
+   Get or set the EQ.0: DIP and DIPANG are with respect to the global axes
+   EQ.1: DIP and DIPANG are with respect to the local element axes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '173'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

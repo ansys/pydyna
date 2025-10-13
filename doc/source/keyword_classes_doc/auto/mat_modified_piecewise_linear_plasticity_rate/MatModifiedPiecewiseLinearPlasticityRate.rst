@@ -1,0 +1,1216 @@
+
+
+
+
+
+
+:class:`MatModifiedPiecewiseLinearPlasticityRate`
+=================================================
+
+
+.. py:class:: mat_modified_piecewise_linear_plasticity_rate.MatModifiedPiecewiseLinearPlasticityRate(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_RATE keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatModifiedPiecewiseLinearPlasticityRate
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~sigy`
+            - Get or set the Yield stress.
+          * - :py:attr:`~etan`
+            - Get or set the Tangent modulus, ignored if (LCSS.GT.0) is defined.
+          * - :py:attr:`~fail`
+            - Get or set the Failure flag:
+          * - :py:attr:`~tdel`
+            - Get or set the Minimum time step size for automatic element deletion.
+          * - :py:attr:`~c`
+            - Get or set the Strain rate parameter, C, see formula in keyword manual page 98 (volume two).
+          * - :py:attr:`~p`
+            - Get or set the Strain rate parameter, P, see formula in keyword manual page 98 (volume two).
+          * - :py:attr:`~lcss`
+            - Get or set the Load curve ID or Table ID.
+          * - :py:attr:`~lcsr`
+            - Get or set the Load curve ID defining strain rate scaling effect on yield stress.
+          * - :py:attr:`~vp`
+            - Get or set the Formulation for rate effects (currently not used with this model).
+          * - :py:attr:`~epsthin`
+            - Get or set the Thinning plastic strain at failure. This number should be given as positive number
+          * - :py:attr:`~epsmaj`
+            - Get or set the Major in plane strain at failure.
+          * - :py:attr:`~numint`
+            - Get or set the No. of through thickness integration points which must fail before the element is deleted.(if zero, all points must fail)
+          * - :py:attr:`~eps1`
+            - Get or set the First effective plastic strain value (optional if SIGY is defined). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+          * - :py:attr:`~eps2`
+            - Get or set the Second effective plastic strain value (optional if SIGY is defined). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+          * - :py:attr:`~eps3`
+            - Get or set the Third effective plastic strain value (optional if SIGY is defined).
+          * - :py:attr:`~eps4`
+            - Get or set the Fourth effective plastic strain value (optional if SIGY is defined).
+          * - :py:attr:`~eps5`
+            - Get or set the Fifth effective plastic strain value (optional if SIGY is defined).
+          * - :py:attr:`~eps6`
+            - Get or set the Sixth effective plastic strain value (optional if SIGY is defined).
+          * - :py:attr:`~eps7`
+            - Get or set the Seventh effective plastic strain value (optiona l if SIGY is defined).
+          * - :py:attr:`~eps8`
+            - Get or set the Eighth effective plastic strain value (optional if SIGY is defined).
+          * - :py:attr:`~es1`
+            - Get or set the Corresponding yield stress value to EPS1
+          * - :py:attr:`~es2`
+            - Get or set the Corresponding yield stress value to EPS2
+          * - :py:attr:`~es3`
+            - Get or set the Corresponding yield stress value to EPS3
+          * - :py:attr:`~es4`
+            - Get or set the Corresponding yield stress value to EPS4
+          * - :py:attr:`~es5`
+            - Get or set the Corresponding yield stress value to EPS5
+          * - :py:attr:`~es6`
+            - Get or set the Corresponding yield stress value to EPS6
+          * - :py:attr:`~es7`
+            - Get or set the Corresponding yield stress value to EPS7
+          * - :py:attr:`~es8`
+            - Get or set the Corresponding yield stress value to EPS8
+          * - :py:attr:`~lctsrf`
+            - Get or set the Load curve that defines the thinning plastic strain at failure as a function of the plastic strain rate
+          * - :py:attr:`~eps0`
+            - Get or set the EPS0 parameter for RTCL damage.
+          * - :py:attr:`~triax`
+            - Get or set the RTCL damage triaxiality limit.
+          * - :py:attr:`~ips`
+            - Get or set the Flag to add prestrain when checking for major strain failure (see EPSMAJ above on Card 2) for the PRESTRAIN keyword option:
+          * - :py:attr:`~lcemod`
+            - Get or set the Load curve ID defining Young’s modulus as function of effective strain rate. LCEMOD ≠ 0 activates viscoelasticity. See *MAT_187L for details. The parameters BETA and RFILTF have to be defined too.
+          * - :py:attr:`~beta`
+            - Get or set the Decay constant in viscoelastic law. BETA has the unit [1/time]. If LCEMOD > 0 is used, a non-zero value for BETA is mandatory.
+          * - :py:attr:`~rfiltf`
+            - Get or set the Smoothing factor on the effective strain rate (default is 0.95). The filtered strain rate is used for the viscoelasticity (LCEMOD > 0).
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_modified_piecewise_linear_plasticity_rate import MatModifiedPiecewiseLinearPlasticityRate
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy
+   :type: Optional[float]
+
+
+   
+   Get or set the Yield stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etan
+   :type: Optional[float]
+
+
+   
+   Get or set the Tangent modulus, ignored if (LCSS.GT.0) is defined.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fail
+   :type: float
+
+
+   
+   Get or set the Failure flag:
+   LT.0.0: User defined failure subroutine is called to determine failure
+   EQ.0.0: Failure is not considered. Recommended if failure is not of interest.
+   GT.0.0: Plastic strain to failure. When the plastic strain reaches this value, the element is deleted from the calculation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tdel
+   :type: Optional[float]
+
+
+   
+   Get or set the Minimum time step size for automatic element deletion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain rate parameter, C, see formula in keyword manual page 98 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: p
+   :type: Optional[float]
+
+
+   
+   Get or set the Strain rate parameter, P, see formula in keyword manual page 98 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcss
+   :type: int
+
+
+   
+   Get or set the Load curve ID or Table ID.
+   Load curve ID defining effective stress versus effective plastic strain. If defined EPS1-EPS8 and ES1-ES8 are ignored.
+   The table ID defines for each strain rate value a load curve ID giving the stress versus effective plastic strain for that rate. The stress versus effective plastic strain curve for the lowest value of strain rate is used if the strain rate falls below the minmimum value. Likewise, the stress versus effective plastic strain curve for the highest value of strain rate is used if the strain rate exceeds the maximum value. If defined C, P,curve ID, LCSR, EPS1-EPS8 and ES1-ES8 are ignored.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcsr
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining strain rate scaling effect on yield stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vp
+   :type: float
+
+
+   
+   Get or set the Formulation for rate effects (currently not used with this model).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: epsthin
+   :type: Optional[float]
+
+
+   
+   Get or set the Thinning plastic strain at failure. This number should be given as positive number
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: epsmaj
+   :type: Optional[float]
+
+
+   
+   Get or set the Major in plane strain at failure.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: numint
+   :type: float
+
+
+   
+   Get or set the No. of through thickness integration points which must fail before the element is deleted.(if zero, all points must fail)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps1
+   :type: Optional[float]
+
+
+   
+   Get or set the First effective plastic strain value (optional if SIGY is defined). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+   WARNING: If the first point is nonzero the yield stress is extrapolated to determine the initial yield. If this option is used SIGY and ETAN are ignored and may be input as zero.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps2
+   :type: Optional[float]
+
+
+   
+   Get or set the Second effective plastic strain value (optional if SIGY is defined). At least 2 points should be defined. The first point must be zero corresponding to the initial yield stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps3
+   :type: Optional[float]
+
+
+   
+   Get or set the Third effective plastic strain value (optional if SIGY is defined).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps4
+   :type: Optional[float]
+
+
+   
+   Get or set the Fourth effective plastic strain value (optional if SIGY is defined).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps5
+   :type: Optional[float]
+
+
+   
+   Get or set the Fifth effective plastic strain value (optional if SIGY is defined).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps6
+   :type: Optional[float]
+
+
+   
+   Get or set the Sixth effective plastic strain value (optional if SIGY is defined).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps7
+   :type: Optional[float]
+
+
+   
+   Get or set the Seventh effective plastic strain value (optiona l if SIGY is defined).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps8
+   :type: Optional[float]
+
+
+   
+   Get or set the Eighth effective plastic strain value (optional if SIGY is defined).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es1
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress value to EPS1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es2
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress value to EPS2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es3
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress value to EPS3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es4
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress value to EPS4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es5
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress value to EPS5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es6
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress value to EPS6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es7
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress value to EPS7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: es8
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stress value to EPS8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lctsrf
+   :type: int
+
+
+   
+   Get or set the Load curve that defines the thinning plastic strain at failure as a function of the plastic strain rate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps0
+   :type: float
+
+
+   
+   Get or set the EPS0 parameter for RTCL damage.
+   EQ.0.0: (default) RTCL damage is inactive.
+   GT.0.0: RTCL damage is active
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: triax
+   :type: float
+
+
+   
+   Get or set the RTCL damage triaxiality limit.
+   EQ.0.0: (default) No limit.
+   GT.0.0: Damage does not accumulate when triaxiality exceeds TRIAX.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ips
+   :type: int
+
+
+   
+   Get or set the Flag to add prestrain when checking for major strain failure (see EPSMAJ above on Card 2) for the PRESTRAIN keyword option:
+   EQ.0:   No prestrain added(default)
+   EQ.1 : Initial strain set with * INITIAL_STRAIN_SHELL will be used as a prestrain when checking for major strain failure(VP = 0 and shells only).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcemod
+   :type: int
+
+
+   
+   Get or set the Load curve ID defining Young’s modulus as function of effective strain rate. LCEMOD ≠ 0 activates viscoelasticity. See *MAT_187L for details. The parameters BETA and RFILTF have to be defined too.
+   (If LCEMOD ≠ 0 is used, VP = 1 should be defined and failure options EPSTHIN, EPSMAJ,and RTCL are currently not available.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: float
+
+
+   
+   Get or set the Decay constant in viscoelastic law. BETA has the unit [1/time]. If LCEMOD > 0 is used, a non-zero value for BETA is mandatory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rfiltf
+   :type: float
+
+
+   
+   Get or set the Smoothing factor on the effective strain rate (default is 0.95). The filtered strain rate is used for the viscoelasticity (LCEMOD > 0).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'MODIFIED_PIECEWISE_LINEAR_PLASTICITY_RATE'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

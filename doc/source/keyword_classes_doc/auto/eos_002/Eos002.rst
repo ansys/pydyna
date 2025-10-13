@@ -1,0 +1,314 @@
+
+
+
+
+
+
+:class:`Eos002`
+===============
+
+
+.. py:class:: eos_002.Eos002(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA EOS_002 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Eos002
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~eosid`
+            - Get or set the Equation of state ID.
+          * - :py:attr:`~a`
+            - Get or set the Equation of state coefficient, A.
+          * - :py:attr:`~b`
+            - Get or set the Equation of state coefficient, B.
+          * - :py:attr:`~r1`
+            - Get or set the Equation of state coefficient, R1.
+          * - :py:attr:`~r2`
+            - Get or set the Equation of state coefficient, R2.
+          * - :py:attr:`~omeg`
+            - Get or set the Equation of state coefficient, w.
+          * - :py:attr:`~e0`
+            - Get or set the Detonation energy per unit volume and initial value for E. See equation in Remarks.
+          * - :py:attr:`~vo`
+            - Get or set the Initial realtive volume.
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from eos_002 import Eos002
+
+Property detail
+---------------
+
+.. py:property:: eosid
+   :type: Optional[int]
+
+
+   
+   Get or set the Equation of state ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a
+   :type: Optional[float]
+
+
+   
+   Get or set the Equation of state coefficient, A.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b
+   :type: Optional[float]
+
+
+   
+   Get or set the Equation of state coefficient, B.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: r1
+   :type: Optional[float]
+
+
+   
+   Get or set the Equation of state coefficient, R1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: r2
+   :type: Optional[float]
+
+
+   
+   Get or set the Equation of state coefficient, R2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: omeg
+   :type: Optional[float]
+
+
+   
+   Get or set the Equation of state coefficient, w.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e0
+   :type: Optional[float]
+
+
+   
+   Get or set the Detonation energy per unit volume and initial value for E. See equation in Remarks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vo
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial realtive volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'EOS'
+
+
+.. py:attribute:: subkeyword
+   :value: '002'
+
+
+
+
+
+

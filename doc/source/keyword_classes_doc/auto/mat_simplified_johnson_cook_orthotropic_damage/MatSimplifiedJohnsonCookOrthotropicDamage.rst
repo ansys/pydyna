@@ -1,0 +1,590 @@
+
+
+
+
+
+
+:class:`MatSimplifiedJohnsonCookOrthotropicDamage`
+==================================================
+
+
+.. py:class:: mat_simplified_johnson_cook_orthotropic_damage.MatSimplifiedJohnsonCookOrthotropicDamage(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_SIMPLIFIED_JOHNSON_COOK_ORTHOTROPIC_DAMAGE keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatSimplifiedJohnsonCookOrthotropicDamage
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~vp`
+            - Get or set the Formulation for rate effects
+          * - :py:attr:`~eppfr`
+            - Get or set the Plastic strain at which material ruptures(logrithmic).
+          * - :py:attr:`~lcdm`
+            - Get or set the Load curve ID defining nonlinear damage curve.
+          * - :py:attr:`~numint`
+            - Get or set the Number of through thickness integration points which must fail before the element is deleted. (If zero, all points must fail.) The default of all integration points is not recommended since elements undergoing large strain are often not deleted due to nodal fiber rotations which limit strains at active integration points after most points have failed. Better results are obtained if NUMINT is set to 1 or a number less than one half of the number of through thickness points. For example, if four through thickness points are used, NUMINT should not exceed 2, even for fully integrated shells which have 16 integration points.
+          * - :py:attr:`~a`
+            - Get or set the Input constants.
+          * - :py:attr:`~b`
+            - Get or set the Input constants.
+          * - :py:attr:`~n`
+            - Get or set the Input constants
+          * - :py:attr:`~c`
+            - Get or set the Input constants
+          * - :py:attr:`~psfail`
+            - Get or set the Effective plastic strain at failure.
+          * - :py:attr:`~sigmax`
+            - Get or set the Maximum stress obtainable from work hardening, before rate effects are added(optional). This option is ignored if VP=1.0.
+          * - :py:attr:`~sigsat`
+            - Get or set the Saturation stress which limits the maximum value of effective stress which can develop after rate effects are added.(optional)
+          * - :py:attr:`~epso`
+            - Get or set the Effective plastic strain rate. This value depends on the time units. Typically input 1 for units of seconds, 0.001 for units of milliseconds, 0.000001 for microseconds, etc.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_simplified_johnson_cook_orthotropic_damage import MatSimplifiedJohnsonCookOrthotropicDamage
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vp
+   :type: Optional[float]
+
+
+   
+   Get or set the Formulation for rate effects
+   EQ.0.0: Scale yield stress (Default),
+   EQ.1.0:Viscoplastic formulation.
+   This option only applies to the 4-node shell and 8-node thick shell, if and only if through thickness integration points is used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eppfr
+   :type: float
+
+
+   
+   Get or set the Plastic strain at which material ruptures(logrithmic).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcdm
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining nonlinear damage curve.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: numint
+   :type: Optional[int]
+
+
+   
+   Get or set the Number of through thickness integration points which must fail before the element is deleted. (If zero, all points must fail.) The default of all integration points is not recommended since elements undergoing large strain are often not deleted due to nodal fiber rotations which limit strains at active integration points after most points have failed. Better results are obtained if NUMINT is set to 1 or a number less than one half of the number of through thickness points. For example, if four through thickness points are used, NUMINT should not exceed 2, even for fully integrated shells which have 16 integration points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a
+   :type: Optional[float]
+
+
+   
+   Get or set the Input constants.
+   See Keyword Manual page 280 (volume two) for further information.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b
+   :type: Optional[float]
+
+
+   
+   Get or set the Input constants.
+   See Keyword Manual page 280 (volume two) for further information.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n
+   :type: Optional[float]
+
+
+   
+   Get or set the Input constants
+   See Keyword Manual page 280 (volume two) for further information.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c
+   :type: Optional[float]
+
+
+   
+   Get or set the Input constants
+   See Keyword Manual page 280 (volume two) for further information.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: psfail
+   :type: float
+
+
+   
+   Get or set the Effective plastic strain at failure.
+   EQ.0: Failure is not considered (default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigmax
+   :type: float
+
+
+   
+   Get or set the Maximum stress obtainable from work hardening, before rate effects are added(optional). This option is ignored if VP=1.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigsat
+   :type: float
+
+
+   
+   Get or set the Saturation stress which limits the maximum value of effective stress which can develop after rate effects are added.(optional)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: epso
+   :type: float
+
+
+   
+   Get or set the Effective plastic strain rate. This value depends on the time units. Typically input 1 for units of seconds, 0.001 for units of milliseconds, 0.000001 for microseconds, etc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'SIMPLIFIED_JOHNSON_COOK_ORTHOTROPIC_DAMAGE'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

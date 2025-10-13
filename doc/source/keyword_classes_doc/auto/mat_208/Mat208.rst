@@ -1,0 +1,616 @@
+
+
+
+
+
+
+:class:`Mat208`
+===============
+
+
+.. py:class:: mat_208.Mat208(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_208 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat208
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number or label must be specified.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~kax`
+            - Get or set the Axial elastic stiffness (Force/Length units).
+          * - :py:attr:`~kshr`
+            - Get or set the Shear elastic stiffness (Force/Length units).
+          * - :py:attr:`~fpre`
+            - Get or set the Preload force.
+          * - :py:attr:`~tramp`
+            - Get or set the Time duration during which preload is ramped up.
+          * - :py:attr:`~lcax`
+            - Get or set the Load curve giving axial load as a function of plastic displacement (x-axis = displacement (length units), y-axis = force).
+          * - :py:attr:`~lcshr`
+            - Get or set the Load curve ID or table ID giving lateral load versus displacement (xaxis
+          * - :py:attr:`~fric`
+            - Get or set the Friction coefficient resisting sliding of bolt head/nut (non-dimensional).
+          * - :py:attr:`~clear`
+            - Get or set the Radial clearance (gap between bolt shank and the inner diameter of the   hole) (length units).
+          * - :py:attr:`~dafail`
+            - Get or set the Axial tensile displacement to failure (length units).
+          * - :py:attr:`~drfail`
+            - Get or set the Radial displacement to failure (excludes clearance).
+          * - :py:attr:`~damag`
+            - Get or set the Fraction of above displacements between initiation & completion of failure.
+          * - :py:attr:`~t0pre`
+            - Get or set the Time at which preload application begins.
+          * - :py:attr:`~dacfail`
+            - Get or set the Axial compressive displacement at which failure is initiated (positive value, length units)
+          * - :py:attr:`~axshel`
+            - Get or set the Flag to determine effect on axial response of increase of length of element due to shear displacement. In this context, shear displacement excludes sliding within the clearance gap. See notes.
+          * - :py:attr:`~holshr`
+            - Get or set the Flag for hole enlargement due to shear.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_208 import Mat208
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number or label must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: kax
+   :type: Optional[float]
+
+
+   
+   Get or set the Axial elastic stiffness (Force/Length units).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: kshr
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear elastic stiffness (Force/Length units).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fpre
+   :type: Optional[float]
+
+
+   
+   Get or set the Preload force.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tramp
+   :type: Optional[float]
+
+
+   
+   Get or set the Time duration during which preload is ramped up.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcax
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve giving axial load as a function of plastic displacement (x-axis = displacement (length units), y-axis = force).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcshr
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID or table ID giving lateral load versus displacement (xaxis
+   - displacement (length units), y-axis - force). In the table case, each
+   curve in the table represents lateral load versus displacement at a given
+   (current) axial load, i.e. the values in the table are axial forces.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fric
+   :type: Optional[float]
+
+
+   
+   Get or set the Friction coefficient resisting sliding of bolt head/nut (non-dimensional).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: clear
+   :type: Optional[float]
+
+
+   
+   Get or set the Radial clearance (gap between bolt shank and the inner diameter of the   hole) (length units).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dafail
+   :type: float
+
+
+   
+   Get or set the Axial tensile displacement to failure (length units).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: drfail
+   :type: float
+
+
+   
+   Get or set the Radial displacement to failure (excludes clearance).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: damag
+   :type: float
+
+
+   
+   Get or set the Fraction of above displacements between initiation & completion of failure.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t0pre
+   :type: Optional[float]
+
+
+   
+   Get or set the Time at which preload application begins.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dacfail
+   :type: float
+
+
+   
+   Get or set the Axial compressive displacement at which failure is initiated (positive value, length units)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: axshel
+   :type: int
+
+
+   
+   Get or set the Flag to determine effect on axial response of increase of length of element due to shear displacement. In this context, shear displacement excludes sliding within the clearance gap. See notes.
+   EQ.0:   Shear-induced length increase treated as axial load
+   EQ.1:   Shear-induced length increase is ignored
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: holshr
+   :type: int
+
+
+   
+   Get or set the Flag for hole enlargement due to shear.
+   EQ.0:    Hole does not enlarge due to shear deformation.
+   NE.0 : Shear deformation after bolt contacts the inner diameter of the hole enlarges the hole.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '208'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

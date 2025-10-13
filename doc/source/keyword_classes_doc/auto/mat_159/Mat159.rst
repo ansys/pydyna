@@ -1,0 +1,492 @@
+
+
+
+
+
+
+:class:`Mat159`
+===============
+
+
+.. py:class:: mat_159.Mat159(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_159 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat159
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification, a unique number has to be chosen.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~nplot`
+            - Get or set the Plotting options:
+          * - :py:attr:`~incre`
+            - Get or set the Maximum strain increment for subincrementation.  If left blank, a default value is set during initialization based upon the shear strength and stiffness
+          * - :py:attr:`~irate`
+            - Get or set the Rate effects options:
+          * - :py:attr:`~erode`
+            - Get or set the Elements erode when damage exceeds 0.99 and the maximum principal strain exceeds 1.-ERODE.   For erosion that is independent of strain, set ERODE equal to 1.0.   Erosion does not occur if ERODE is less than 1.0.
+          * - :py:attr:`~recov`
+            - Get or set the The modulus is recovered in compression when RECOV is equal to 0 (default).  The modulus remains at the brittle damage level when RECOV is equal to 1.  Partial recovery is modeled for values of RECOV between 0 and 1.  Two options are available:
+          * - :py:attr:`~itretrc`
+            - Get or set the Cap retraction option:
+          * - :py:attr:`~pred`
+            - Get or set the Pre-existing damage (0   PreD < 1).  If left blank, the default is zero (no pre-existing damage).
+          * - :py:attr:`~fpc`
+            - Get or set the Unconfined compression strength, f 'C.  If left blank, default is 30 MPa.
+          * - :py:attr:`~dagg`
+            - Get or set the Maximum aggregate size, Dagg.   If left blank, default is 19 mm (3/4 inch).
+          * - :py:attr:`~units`
+            - Get or set the Units options:
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_159 import Mat159
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification, a unique number has to be chosen.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nplot
+   :type: int
+
+
+   
+   Get or set the Plotting options:
+   EQ. 1: Maximum of brittle and ductile damage (default).
+   EQ. 2: Maximum of brittle and ductile damage, with recovery of  brittle damage.
+   EQ. 3:  Brittle damage.
+   EQ. 4:  Ductile damage.
+   EQ. 5:    (intersection of cap with shear surface).
+   EQ. 6: X0 (intersection of cap with pressure axis).
+   EQ. 7:   (plastic volume strain).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: incre
+   :type: Optional[float]
+
+
+   
+   Get or set the Maximum strain increment for subincrementation.  If left blank, a default value is set during initialization based upon the shear strength and stiffness
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: irate
+   :type: int
+
+
+   
+   Get or set the Rate effects options:
+   EQ.   0: Rate effects model turned off (default).
+   EQ.   1: Rate effects model turned on.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: erode
+   :type: Optional[float]
+
+
+   
+   Get or set the Elements erode when damage exceeds 0.99 and the maximum principal strain exceeds 1.-ERODE.   For erosion that is independent of strain, set ERODE equal to 1.0.   Erosion does not occur if ERODE is less than 1.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: recov
+   :type: float
+
+
+   
+   Get or set the The modulus is recovered in compression when RECOV is equal to 0 (default).  The modulus remains at the brittle damage level when RECOV is equal to 1.  Partial recovery is modeled for values of RECOV between 0 and 1.  Two options are available:
+   Option 1:  Input a value between 0 and 1.  Recovery is based upon the sign of the pressure invariant only.
+   Option 2:  Input a value between 10 and 11.  Recovery is based upon the sign of both the pressure and volumetric strain.    In this case, RECOV=RECOV-10, and a flag is set to request the volumetric strain check.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: itretrc
+   :type: int
+
+
+   
+   Get or set the Cap retraction option:
+   EQ.0: Cap does not retract (default).
+   EQ.1: Cap retracts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pred
+   :type: Optional[float]
+
+
+   
+   Get or set the Pre-existing damage (0   PreD < 1).  If left blank, the default is zero (no pre-existing damage).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fpc
+   :type: Optional[float]
+
+
+   
+   Get or set the Unconfined compression strength, f 'C.  If left blank, default is 30 MPa.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dagg
+   :type: Optional[float]
+
+
+   
+   Get or set the Maximum aggregate size, Dagg.   If left blank, default is 19 mm (3/4 inch).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: units
+   :type: int
+
+
+   
+   Get or set the Units options:
+   EQ.0: GPa,  mm, msec,  Kg/mm3,  kN
+   EQ.1: MPa, mm,  msec,     g/mm3,  Nt
+   EQ.2: MPa, mm,    sec,  Mg/mm3,  Nt
+   EQ.3: Psi,  inch,    sec,  lb-s2/inch4, lb
+   EQ.4: Pa, m, sec, kg/m3, N.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '159'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

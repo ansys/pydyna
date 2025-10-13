@@ -1,0 +1,125 @@
+
+
+
+
+
+
+:class:`ControlMppDecompositionFileRead`
+========================================
+
+
+.. py:class:: control_mpp_decomposition_file_read.ControlMppDecompositionFileRead(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA CONTROL_MPP_DECOMPOSITION_FILE_READ keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ControlMppDecompositionFileRead
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~filename`
+            - Get or set the Name of a file containing (or to contain ) a decomposition record.
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from control_mpp_decomposition_file_read import ControlMppDecompositionFileRead
+
+Property detail
+---------------
+
+.. py:property:: filename
+   :type: Optional[str]
+
+
+   
+   Get or set the Name of a file containing (or to contain ) a decomposition record.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'CONTROL'
+
+
+.. py:attribute:: subkeyword
+   :value: 'MPP_DECOMPOSITION_FILE_READ'
+
+
+
+
+
+

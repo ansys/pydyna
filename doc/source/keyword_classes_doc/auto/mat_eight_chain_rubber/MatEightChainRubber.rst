@@ -1,0 +1,1670 @@
+
+
+
+
+
+
+:class:`MatEightChainRubber`
+============================
+
+
+.. py:class:: mat_eight_chain_rubber.MatEightChainRubber(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_EIGHT_CHAIN_RUBBER keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatEightChainRubber
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number or label must be specified.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~k`
+            - Get or set the Bulk modulus. To get almost incompressible behavior set this to one or two orders of magnitude higher than MU. Note that the Poisson's ratio should be kept at a realistic value.
+          * - :py:attr:`~mu`
+            - Get or set the Shear modulus.MU is the product of the number of molecular chains        per unit volume (n), Boltzmann's constant (k) and the absolute temperature (T). Thus MU=nkT
+          * - :py:attr:`~n`
+            - Get or set the
+          * - :py:attr:`~mull`
+            - Get or set the Parameter describing which softening algorithm that shall be used.
+          * - :py:attr:`~vispl`
+            - Get or set the Parameter describing which viscoplastic formulation that should be
+          * - :py:attr:`~visel`
+            - Get or set the Option for viscoelastic behavior, see the theory section for details.
+          * - :py:attr:`~yld0`
+            - Get or set the Initial yield stress.
+          * - :py:attr:`~fp`
+            - Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+          * - :py:attr:`~gp`
+            - Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+          * - :py:attr:`~hp`
+            - Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+          * - :py:attr:`~lp`
+            - Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+          * - :py:attr:`~mp`
+            - Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+          * - :py:attr:`~np`
+            - Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+          * - :py:attr:`~pmu`
+            - Get or set the Kinematic hardening parameter. It is usually equal to MU.
+          * - :py:attr:`~m1`
+            - Get or set the Mullins parameters
+          * - :py:attr:`~m2`
+            - Get or set the Mullins parameters
+          * - :py:attr:`~m3`
+            - Get or set the Mullins parameters
+          * - :py:attr:`~m4`
+            - Get or set the Mullins parameters
+          * - :py:attr:`~m5`
+            - Get or set the Mullins parameters
+          * - :py:attr:`~time`
+            - Get or set the A time filter that is used to smoothen out the time derivate of the strain       invariant over a TIME interval. Default is no smoothening but a value   100*TIMESTEP is recommended.
+          * - :py:attr:`~vcon`
+            - Get or set the A material constant for the volumetric part of the strain energy. Default 9.0 but any value can be used to tailor the volumetric response.
+          * - :py:attr:`~q1`
+            - Get or set the Voce hardening parameters.
+          * - :py:attr:`~b1`
+            - Get or set the Voce hardening parameters.
+          * - :py:attr:`~q2`
+            - Get or set the Voce hardening parameters.
+          * - :py:attr:`~b2`
+            - Get or set the Voce hardening parameters.
+          * - :py:attr:`~q3`
+            - Get or set the Voce hardening parameters.
+          * - :py:attr:`~b3`
+            - Get or set the Voce hardening parameters.
+          * - :py:attr:`~q4`
+            - Get or set the Voce hardening parameters.
+          * - :py:attr:`~b4`
+            - Get or set the Voce hardening parameters.
+          * - :py:attr:`~k1`
+            - Get or set the Viscoplastic parameters.
+          * - :py:attr:`~s1`
+            - Get or set the Viscoplastic parameters.
+          * - :py:attr:`~k2`
+            - Get or set the Viscoplastic parameters.
+          * - :py:attr:`~s2`
+            - Get or set the Viscoplastic parameters.
+          * - :py:attr:`~k3`
+            - Get or set the Viscoplastic parameters.
+          * - :py:attr:`~s3`
+            - Get or set the Viscoplastic parameters.
+          * - :py:attr:`~aopt`
+            - Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
+          * - :py:attr:`~macf`
+            - Get or set the Material axes change flag for solid elements:
+          * - :py:attr:`~xp`
+            - Get or set the Define coordinates for point P for AOPT = 1 and 4.
+          * - :py:attr:`~yp`
+            - Get or set the Define coordinates for point P for AOPT = 1 and 4.
+          * - :py:attr:`~zp`
+            - Get or set the Define coordinates for point P for AOPT = 1 and 4.
+          * - :py:attr:`~a1`
+            - Get or set the Define components of vector a for AOPT = 2.
+          * - :py:attr:`~a2`
+            - Get or set the Define components of vector a for AOPT = 2.
+          * - :py:attr:`~a3`
+            - Get or set the Define components of vector a for AOPT = 2.
+          * - :py:attr:`~v1`
+            - Get or set the Define components of vector d for AOPT = 2.
+          * - :py:attr:`~v2`
+            - Get or set the Define components of vector d for AOPT = 2.
+          * - :py:attr:`~v3`
+            - Get or set the Define components of vector d for AOPT = 2.
+          * - :py:attr:`~d1`
+            - Get or set the Define components of vector v for AOPT = 3 and 4.
+          * - :py:attr:`~d2`
+            - Get or set the Define components of vector v for AOPT = 3 and 4.
+          * - :py:attr:`~d3`
+            - Get or set the Define components of vector v for AOPT = 3 and 4.
+          * - :py:attr:`~beta`
+            - Get or set the Material angle in degrees for AOPT = 3. It may be overridden on the element card; see *ELEMENT_‌SOLID_‌ORTHO
+          * - :py:attr:`~taui`
+            - Get or set the Relaxation time. A maximum of 6 values can be used.
+          * - :py:attr:`~betai_gammai`
+            - Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_eight_chain_rubber import MatEightChainRubber
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number or label must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k
+   :type: Optional[float]
+
+
+   
+   Get or set the Bulk modulus. To get almost incompressible behavior set this to one or two orders of magnitude higher than MU. Note that the Poisson's ratio should be kept at a realistic value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mu
+   :type: Optional[float]
+
+
+   
+   Get or set the Shear modulus.MU is the product of the number of molecular chains        per unit volume (n), Boltzmann's constant (k) and the absolute temperature (T). Thus MU=nkT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n
+   :type: int
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mull
+   :type: int
+
+
+   
+   Get or set the Parameter describing which softening algorithm that shall be used.
+   EQ.1: Strain based Mullins effect from Qi and Boyce, see theory section
+   below for details
+   M1 = A (Qi recommends 3.5)
+   M2 = B (Qi recommends 18.0)
+   M3 = Z (Qi recommends 0.7)
+   M4 = vs (between 0 and 1 and less than vss)
+   M5 = vss (between 0 and 1 and greater than vs)
+   EQ.2: Energy based Mullins, a modified version of Roxburgh and Ogden model. M1 > 0, M2 > 0 and M3 > 0 must be set. See Theory section for details.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vispl
+   :type: int
+
+
+   
+   Get or set the Parameter describing which viscoplastic formulation that should be
+   used, see the theory section for details.
+   EQ.0: No viscoplasticity.
+   EQ.1: 2 parameters standard model, K1 and S1 must be set.
+   EQ.¦Â: 6 parameters G'Sells model, K1,K¦Â,K¦Ã,S1,S¦Â and S¦Ã must be set.
+   EQ.3: 4 parameters Strain hardening model, K1,K2,S1,S2 must be set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: visel
+   :type: int
+
+
+   
+   Get or set the Option for viscoelastic behavior, see the theory section for details.
+   EQ.0: No viscoelasticity.
+   EQ.1: Free energy formulation based on Holzapfel and Ogden.
+   EQ.2: Formulation based on stiffness ratios from Simo et al.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yld0
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial yield stress.
+   EQ.0.0: No plasticity
+   GT.0.0: Initial yield stress. Hardening is defined seperataly.
+   LT.0.0: -YLD0 is taken as the load curve ID for the yield stress versus
+   effective plastic strain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fp
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gp
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hp
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lp
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mp
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: np
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameters for Hill's general yield surface. For von mises yield criteria set FP=GP=HP=0.5 and LP=MP=NP=1.5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pmu
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening parameter. It is usually equal to MU.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m1
+   :type: Optional[float]
+
+
+   
+   Get or set the Mullins parameters
+   MULL.EQ.1: M1-M5 are used
+   MULL.EQ.2: M1-M3 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m2
+   :type: Optional[float]
+
+
+   
+   Get or set the Mullins parameters
+   MULL.EQ.1: M1-M5 are used
+   MULL.EQ.2: M1-M3 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m3
+   :type: Optional[float]
+
+
+   
+   Get or set the Mullins parameters
+   MULL.EQ.1: M1-M5 are used
+   MULL.EQ.2: M1-M3 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m4
+   :type: Optional[float]
+
+
+   
+   Get or set the Mullins parameters
+   MULL.EQ.1: M1-M5 are used
+   MULL.EQ.2: M1-M3 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m5
+   :type: Optional[float]
+
+
+   
+   Get or set the Mullins parameters
+   MULL.EQ.1: M1-M5 are used
+   MULL.EQ.2: M1-M3 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: time
+   :type: Optional[float]
+
+
+   
+   Get or set the A time filter that is used to smoothen out the time derivate of the strain       invariant over a TIME interval. Default is no smoothening but a value   100*TIMESTEP is recommended.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vcon
+   :type: float
+
+
+   
+   Get or set the A material constant for the volumetric part of the strain energy. Default 9.0 but any value can be used to tailor the volumetric response.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: q1
+   :type: Optional[float]
+
+
+   
+   Get or set the Voce hardening parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b1
+   :type: Optional[float]
+
+
+   
+   Get or set the Voce hardening parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: q2
+   :type: Optional[float]
+
+
+   
+   Get or set the Voce hardening parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b2
+   :type: Optional[float]
+
+
+   
+   Get or set the Voce hardening parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: q3
+   :type: Optional[float]
+
+
+   
+   Get or set the Voce hardening parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b3
+   :type: Optional[float]
+
+
+   
+   Get or set the Voce hardening parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: q4
+   :type: Optional[float]
+
+
+   
+   Get or set the Voce hardening parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: b4
+   :type: Optional[float]
+
+
+   
+   Get or set the Voce hardening parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k1
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscoplastic parameters.
+   VISPL.EQ.1: K1 and S1 are used.
+   VISPL.EQ.2: K1, S1, K2, S2, K3 and S3 are used.
+   VISPL.EQ.3: K1, S1 and K2 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s1
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscoplastic parameters.
+   VISPL.EQ.1: K1 and S1 are used.
+   VISPL.EQ.2: K1, S1, K2, S2, K3 and S3 are used.
+   VISPL.EQ.3: K1, S1 and K2 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k2
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscoplastic parameters.
+   VISPL.EQ.1: K1 and S1 are used.
+   VISPL.EQ.2: K1, S1, K2, S2, K3 and S3 are used.
+   VISPL.EQ.3: K1, S1 and K2 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s2
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscoplastic parameters.
+   VISPL.EQ.1: K1 and S1 are used.
+   VISPL.EQ.2: K1, S1, K2, S2, K3 and S3 are used.
+   VISPL.EQ.3: K1, S1 and K2 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k3
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscoplastic parameters.
+   VISPL.EQ.1: K1 and S1 are used.
+   VISPL.EQ.2: K1, S1, K2, S2, K3 and S3 are used.
+   VISPL.EQ.3: K1, S1 and K2 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: s3
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscoplastic parameters.
+   VISPL.EQ.1: K1 and S1 are used.
+   VISPL.EQ.2: K1, S1, K2, S2, K3 and S3 are used.
+   VISPL.EQ.3: K1, S1 and K2 are used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aopt
+   :type: float
+
+
+   
+   Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
+   EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.
+   EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+   EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
+   EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+   EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: macf
+   :type: int
+
+
+   
+   Get or set the Material axes change flag for solid elements:
+   EQ. - 4:        Switch material axes b and c before BETA rotation
+   EQ. - 3 : Switch material axes a and c before BETA rotation
+   EQ. - 2 : Switch material axes a and b before BETA rotation
+   EQ.1 : No change, default
+   EQ.2 : Switch material axes a and b after BETA rotation
+   EQ.3 : Switch material axes a and c after BETA rotation
+   EQ.4 : Switch material axes b and c after BETA rotation
+   Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 7 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xp
+   :type: Optional[float]
+
+
+   
+   Get or set the Define coordinates for point P for AOPT = 1 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yp
+   :type: Optional[float]
+
+
+   
+   Get or set the Define coordinates for point P for AOPT = 1 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: zp
+   :type: Optional[float]
+
+
+   
+   Get or set the Define coordinates for point P for AOPT = 1 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector a for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector a for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a3
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector a for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v1
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector d for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v2
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector d for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v3
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector d for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d1
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector v for AOPT = 3 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d2
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector v for AOPT = 3 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d3
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector v for AOPT = 3 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the Material angle in degrees for AOPT = 3. It may be overridden on the element card; see *ELEMENT_‌SOLID_‌ORTHO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: taui
+   :type: Optional[float]
+
+
+   
+   Get or set the Relaxation time. A maximum of 6 values can be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: betai_gammai
+   :type: Optional[float]
+
+
+   
+   Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
+   VISEL.EQ.2: Gamma factors (see Simo).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'EIGHT_CHAIN_RUBBER'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

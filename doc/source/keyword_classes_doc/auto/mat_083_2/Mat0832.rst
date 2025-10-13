@@ -1,0 +1,1086 @@
+
+
+
+
+
+
+:class:`Mat0832`
+================
+
+
+.. py:class:: mat_083_2.Mat0832(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_083_2 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat0832
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus.
+          * - :py:attr:`~kcon`
+            - Get or set the Optional Young's modulus used in the computation of sound speed. This will influence the time step, contact forces, hourglass stabilization forces, and numerical damping(DAMP).
+          * - :py:attr:`~tc`
+            - Get or set the Tension cut-off stress.
+          * - :py:attr:`~fail`
+            - Get or set the Failure option after cutoff stress is reached:
+          * - :py:attr:`~damp`
+            - Get or set the Viscous coefficient (0.05 < recommended value < 0.50) to model damping effects.
+          * - :py:attr:`~tbid`
+            - Get or set the Table ID, see *DEFINE_TABLE, for nominal stress strain data as a function of strain rate. If the table ID is provided, cards 3 and 4 may be left blank and the fit will be done internally.
+          * - :py:attr:`~bvflag`
+            - Get or set the Toggle to turn bulk viscosity off or on (see Remark 1):
+          * - :py:attr:`~sflag`
+            - Get or set the Strain rate flag:
+          * - :py:attr:`~rflag`
+            - Get or set the Strain rate evaluation flag:
+          * - :py:attr:`~tflag`
+            - Get or set the Tensile stress evaluation:
+          * - :py:attr:`~pvid`
+            - Get or set the Optional load curve ID defining pressure versus volumetric strain.
+          * - :py:attr:`~sraf`
+            - Get or set the Strain rate averaging flag.
+          * - :py:attr:`~ref`
+            - Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the kyword.*INITIAL_FROM_REFERENCE_GEOMETRY
+          * - :py:attr:`~hu`
+            - Get or set the Hysteretic unloading factor between 0 and 1 (default=0).
+          * - :py:attr:`~d0`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~n0`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~n1`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~n2`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~n3`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~c0`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~c1`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~c2`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~c3`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~c4`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~c5`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~aij`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~sij`
+            - Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+          * - :py:attr:`~minr`
+            - Get or set the Ratemin, minimum strain rate of interest.
+          * - :py:attr:`~maxr`
+            - Get or set the Ratemax, maximum strain rate of interest.
+          * - :py:attr:`~shape`
+            - Get or set the Shape factor for unloading. Active for nonzero values of the hysteretic unloading factor HU. Values less than one reduces the energy dissipation and greater than one increases dissipation.
+          * - :py:attr:`~expon`
+            - Get or set the Exponent for unloading.  Active for nonzero values of the hysteretic unloading factor HU.  Default is 1.0.
+          * - :py:attr:`~riuld`
+            - Get or set the Flag for rate independent unloading, see Remark 6.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_083_2 import Mat0832
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: kcon
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional Young's modulus used in the computation of sound speed. This will influence the time step, contact forces, hourglass stabilization forces, and numerical damping(DAMP).
+   EQ.0.0: KCON is set equal to the max(E, current tangent to stress-strain curve) if TBID .ne.0. If TBID.eq.0, KCON is set equal to the maximum slope of the stress-strain curve.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tc
+   :type: float
+
+
+   
+   Get or set the Tension cut-off stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fail
+   :type: float
+
+
+   
+   Get or set the Failure option after cutoff stress is reached:
+   EQ.0.0: tensile stress remains at cut-off value (default),
+   EQ.1.0: tensile stress is reset to zero.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: damp
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscous coefficient (0.05 < recommended value < 0.50) to model damping effects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tbid
+   :type: Optional[int]
+
+
+   
+   Get or set the Table ID, see *DEFINE_TABLE, for nominal stress strain data as a function of strain rate. If the table ID is provided, cards 3 and 4 may be left blank and the fit will be done internally.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: bvflag
+   :type: float
+
+
+   
+   Get or set the Toggle to turn bulk viscosity off or on (see Remark 1):
+   LT.1.0: No bulk viscosity(recommended)
+   GE.1.0 : Bulk viscosity active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sflag
+   :type: float
+
+
+   
+   Get or set the Strain rate flag:
+   EQ.0.0: true constant strain rate (default),
+   EQ.1.0: engineering strain rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rflag
+   :type: float
+
+
+   
+   Get or set the Strain rate evaluation flag:
+   EQ.0.0: first principal direction (default),
+   EQ.1.0: principal strain rates for each principal direction,
+   EQ.2.0: volumetric strain rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tflag
+   :type: float
+
+
+   
+   Get or set the Tensile stress evaluation:
+   EQ.0.0: linear in tension (default),
+   EQ.1.0: input via load curves with the tensile response corresponds to negative values of stress and strain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pvid
+   :type: int
+
+
+   
+   Get or set the Optional load curve ID defining pressure versus volumetric strain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sraf
+   :type: float
+
+
+   
+   Get or set the Strain rate averaging flag.
+   EQ.0.0: use weighted running average.
+   EQ.1.0: average the last twelve values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ref
+   :type: float
+
+
+   
+   Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the kyword.*INITIAL_FROM_REFERENCE_GEOMETRY
+   EQ. 0.0: off
+   EQ.1.0: on.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hu
+   :type: float
+
+
+   
+   Get or set the Hysteretic unloading factor between 0 and 1 (default=0).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d0
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n0
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n1
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n2
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n3
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c0
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c1
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c2
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c3
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c4
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c5
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aij
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sij
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, see equation in keyword manual page 245 (volume two).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: minr
+   :type: Optional[float]
+
+
+   
+   Get or set the Ratemin, minimum strain rate of interest.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: maxr
+   :type: Optional[float]
+
+
+   
+   Get or set the Ratemax, maximum strain rate of interest.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: shape
+   :type: Optional[float]
+
+
+   
+   Get or set the Shape factor for unloading. Active for nonzero values of the hysteretic unloading factor HU. Values less than one reduces the energy dissipation and greater than one increases dissipation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: expon
+   :type: float
+
+
+   
+   Get or set the Exponent for unloading.  Active for nonzero values of the hysteretic unloading factor HU.  Default is 1.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: riuld
+   :type: float
+
+
+   
+   Get or set the Flag for rate independent unloading, see Remark 6.
+   EQ.0.0: off,
+   EQ.1.0: on.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '083_2'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

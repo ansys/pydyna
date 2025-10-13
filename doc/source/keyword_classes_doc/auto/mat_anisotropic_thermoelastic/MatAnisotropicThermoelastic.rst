@@ -1,0 +1,1433 @@
+
+
+
+
+
+
+:class:`MatAnisotropicThermoelastic`
+====================================
+
+
+.. py:class:: mat_anisotropic_thermoelastic.MatAnisotropicThermoelastic(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_ANISOTROPIC_THERMOELASTIC keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatAnisotropicThermoelastic
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~ta1`
+            - Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+          * - :py:attr:`~ta2`
+            - Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+          * - :py:attr:`~ta3`
+            - Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+          * - :py:attr:`~ta4`
+            - Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+          * - :py:attr:`~ta5`
+            - Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+          * - :py:attr:`~ta6`
+            - Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+          * - :py:attr:`~c11`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c12`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c13`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c14`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c15`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c16`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c22`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c23`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c24`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c25`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c26`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c33`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c34`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c35`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c36`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c44`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c45`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c46`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c55`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c56`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~c66`
+            - Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+          * - :py:attr:`~tge`
+            - Get or set the Curve ID defining the structural damping coefficient as function of temperature.
+          * - :py:attr:`~tref`
+            - Get or set the Reference temperature for the calculation of thermal loads or the definition of thermal expansion coefficients.
+          * - :py:attr:`~aopt`
+            - Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
+          * - :py:attr:`~xp`
+            - Get or set the Define coordinates of point p for AOPT=1 and 4.
+          * - :py:attr:`~yp`
+            - Get or set the Define coordinates of point p for AOPT=1 and 4.
+          * - :py:attr:`~zp`
+            - Get or set the Define coordinates of point p for AOPT=1 and 4.
+          * - :py:attr:`~a1`
+            - Get or set the Define components of vector a for AOPT=2.
+          * - :py:attr:`~a2`
+            - Get or set the Define components of vector a for AOPT=2.
+          * - :py:attr:`~a3`
+            - Get or set the Define components of vector a for AOPT=2.
+          * - :py:attr:`~macf`
+            - Get or set the Material axes change flag for solid elements:
+          * - :py:attr:`~d1`
+            - Get or set the Define components of vector d for AOPT=2.
+          * - :py:attr:`~d2`
+            - Get or set the Define components of vector d for AOPT=2.
+          * - :py:attr:`~d3`
+            - Get or set the Define components of vector d for AOPT=2.
+          * - :py:attr:`~v1`
+            - Get or set the Define components of vector v for AOPT=3 and 4.
+          * - :py:attr:`~v2`
+            - Get or set the Define components of vector v for AOPT=3 and 4.
+          * - :py:attr:`~v3`
+            - Get or set the Define components of vector v for AOPT=3 and 4.
+          * - :py:attr:`~beta`
+            - Get or set the Material angle in degrees for AOPT=3, may be overwritten on the element card, see *ELEMENT_SHELL_BETA or *ELEMENT_ SOLID_ORTHO.
+          * - :py:attr:`~ref`
+            - Get or set the Use initial geometry to initialize the stress tensor (see MAT_002 for a complete description.).
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_anisotropic_thermoelastic import MatAnisotropicThermoelastic
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ta1
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ta2
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ta3
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ta4
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ta5
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ta6
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the coefficients of thermal expansion for the six components of strain tensor as function of temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c11
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c12
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c13
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c14
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c15
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c16
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c22
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c23
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c24
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c25
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c26
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c33
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c34
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c35
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c36
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c44
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c45
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c46
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c55
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c56
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c66
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve IDs defining the 6x6 symmetric constitutive matrix in material coordinate system as function of temperature. Note that 1 corresponds to the a material direction, 2 to the b material direction, and 3 to the c material direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tge
+   :type: Optional[int]
+
+
+   
+   Get or set the Curve ID defining the structural damping coefficient as function of temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tref
+   :type: Optional[float]
+
+
+   
+   Get or set the Reference temperature for the calculation of thermal loads or the definition of thermal expansion coefficients.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aopt
+   :type: Optional[float]
+
+
+   
+   Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
+   EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.
+   EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+   EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
+   EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+   EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+   LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xp
+   :type: Optional[float]
+
+
+   
+   Get or set the Define coordinates of point p for AOPT=1 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yp
+   :type: Optional[float]
+
+
+   
+   Get or set the Define coordinates of point p for AOPT=1 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: zp
+   :type: Optional[float]
+
+
+   
+   Get or set the Define coordinates of point p for AOPT=1 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector a for AOPT=2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector a for AOPT=2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a3
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector a for AOPT=2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: macf
+   :type: float
+
+
+   
+   Get or set the Material axes change flag for solid elements:
+   EQ. - 4:        Switch material axes b and c before BETA rotation
+   EQ. - 3 : Switch material axes a and c before BETA rotation
+   EQ. - 2 : Switch material axes a and b before BETA rotation
+   EQ.1 : No change, default
+   EQ.2 : Switch material axes a and b after BETA rotation
+   EQ.3 : Switch material axes a and c after BETA rotation
+   EQ.4 : Switch material axes b and c after BETA rotation
+   Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 6 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d1
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector d for AOPT=2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d2
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector d for AOPT=2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d3
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector d for AOPT=2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v1
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector v for AOPT=3 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v2
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector v for AOPT=3 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v3
+   :type: Optional[float]
+
+
+   
+   Get or set the Define components of vector v for AOPT=3 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the Material angle in degrees for AOPT=3, may be overwritten on the element card, see *ELEMENT_SHELL_BETA or *ELEMENT_ SOLID_ORTHO.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ref
+   :type: Optional[float]
+
+
+   
+   Get or set the Use initial geometry to initialize the stress tensor (see MAT_002 for a complete description.).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'ANISOTROPIC_THERMOELASTIC'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

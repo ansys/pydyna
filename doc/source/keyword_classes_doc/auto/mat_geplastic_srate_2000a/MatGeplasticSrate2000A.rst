@@ -1,0 +1,448 @@
+
+
+
+
+
+
+:class:`MatGeplasticSrate2000A`
+===============================
+
+
+.. py:class:: mat_geplastic_srate_2000a.MatGeplasticSrate2000A(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_GEPLASTIC_SRATE_2000A keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatGeplasticSrate2000A
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. An unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's Modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~ratesf`
+            - Get or set the Constant in plastic strain rate equation.
+          * - :py:attr:`~edot0`
+            - Get or set the Reference strain rate.
+          * - :py:attr:`~alpha`
+            - Get or set the Pressure sensitivity factor.
+          * - :py:attr:`~lcss`
+            - Get or set the Load curve ID or Table ID that defines the post yield material behavior. The values of this stress-strain curve are the difference of the yield stress and strain respectively. This means the first values for both stress and strain should be zero. All subsequent values will define softening or hardening.
+          * - :py:attr:`~lcfeps`
+            - Get or set the Load curve ID that defines the plastic failure strain as a function of strain rate.
+          * - :py:attr:`~lcfsig`
+            - Get or set the Load curve ID that defines the Maximum principal failure stress as a function of strain rate.
+          * - :py:attr:`~lce`
+            - Get or set the Load curve ID that defines the Unloading moduli as a function of plastic strain.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_geplastic_srate_2000a import MatGeplasticSrate2000A
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. An unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's Modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ratesf
+   :type: Optional[float]
+
+
+   
+   Get or set the Constant in plastic strain rate equation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: edot0
+   :type: Optional[float]
+
+
+   
+   Get or set the Reference strain rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha
+   :type: Optional[float]
+
+
+   
+   Get or set the Pressure sensitivity factor.
+   Default is set to 0.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcss
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID or Table ID that defines the post yield material behavior. The values of this stress-strain curve are the difference of the yield stress and strain respectively. This means the first values for both stress and strain should be zero. All subsequent values will define softening or hardening.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcfeps
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID that defines the plastic failure strain as a function of strain rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcfsig
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID that defines the Maximum principal failure stress as a function of strain rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lce
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID that defines the Unloading moduli as a function of plastic strain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'GEPLASTIC_SRATE_2000A'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

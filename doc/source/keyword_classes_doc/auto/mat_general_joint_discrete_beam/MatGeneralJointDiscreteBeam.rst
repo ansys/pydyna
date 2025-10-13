@@ -1,0 +1,420 @@
+
+
+
+
+
+
+:class:`MatGeneralJointDiscreteBeam`
+====================================
+
+
+.. py:class:: mat_general_joint_discrete_beam.MatGeneralJointDiscreteBeam(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_GENERAL_JOINT_DISCRETE_BEAM keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatGeneralJointDiscreteBeam
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density, see also volume in *SECTION_BEAM definition..
+          * - :py:attr:`~tr`
+            - Get or set the Translational constraint code along the r-axis(0 => free, 1 => constrained)
+          * - :py:attr:`~ts`
+            - Get or set the Translational constraint code along the s-axis(0 => free, 1 => constrained)
+          * - :py:attr:`~tt`
+            - Get or set the Translational constraint code along the t-axis(0 => free, 1 => constrained)
+          * - :py:attr:`~rr`
+            - Get or set the Rotational constraint code along the r-axis(0 => free, 1 => constrained)
+          * - :py:attr:`~rs`
+            - Get or set the Rotational constraint code along the s-axis(0 => free, 1 => constrained)
+          * - :py:attr:`~rt`
+            - Get or set the Rotational constraint code along the t-axis(0 => free, 1 => constrained)
+          * - :py:attr:`~rpst`
+            - Get or set the Penalty stiffness scale factor for translational constraints.
+          * - :py:attr:`~rpsr`
+            - Get or set the Penalty stiffness scale factor for rotational constraints.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_general_joint_discrete_beam import MatGeneralJointDiscreteBeam
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density, see also volume in *SECTION_BEAM definition..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tr
+   :type: Optional[int]
+
+
+   
+   Get or set the Translational constraint code along the r-axis(0 => free, 1 => constrained)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ts
+   :type: Optional[int]
+
+
+   
+   Get or set the Translational constraint code along the s-axis(0 => free, 1 => constrained)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tt
+   :type: Optional[int]
+
+
+   
+   Get or set the Translational constraint code along the t-axis(0 => free, 1 => constrained)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rr
+   :type: Optional[int]
+
+
+   
+   Get or set the Rotational constraint code along the r-axis(0 => free, 1 => constrained)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rs
+   :type: Optional[int]
+
+
+   
+   Get or set the Rotational constraint code along the s-axis(0 => free, 1 => constrained)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rt
+   :type: Optional[int]
+
+
+   
+   Get or set the Rotational constraint code along the t-axis(0 => free, 1 => constrained)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rpst
+   :type: Optional[float]
+
+
+   
+   Get or set the Penalty stiffness scale factor for translational constraints.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rpsr
+   :type: Optional[float]
+
+
+   
+   Get or set the Penalty stiffness scale factor for rotational constraints.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'GENERAL_JOINT_DISCRETE_BEAM'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``database_cross_section_set.py`` module
+============================================
+
+.. py:module:: database_cross_section_set
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: database_cross_section_set
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~database_cross_section_set.DatabaseCrossSectionSet`
+            - DYNA DATABASE_CROSS_SECTION_SET keyword
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DatabaseCrossSectionSet<database_cross_section_set/DatabaseCrossSectionSet>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module providing the DatabaseCrossSectionSet class.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

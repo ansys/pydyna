@@ -1,0 +1,1398 @@
+
+
+
+
+
+
+:class:`Eos008`
+===============
+
+
+.. py:class:: eos_008.Eos008(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA EOS_008 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Eos008
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~eosid`
+            - Get or set the Equation of state label.
+          * - :py:attr:`~gama`
+            - Get or set the
+          * - :py:attr:`~e0`
+            - Get or set the Initial internal energy.
+          * - :py:attr:`~vo`
+            - Get or set the Initial relative volume.
+          * - :py:attr:`~lcc`
+            - Get or set the Load curve defining tabulated function .  See equation in Remarks.
+          * - :py:attr:`~lct`
+            - Get or set the Load curve defining tabulated function .  See equation in Remarks
+          * - :py:attr:`~lck`
+            - Get or set the Load curve defining tabulated bulk modulus.
+          * - :py:attr:`~lcid`
+            - Get or set the Load curve ID, which can be the ID of *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION, defining the energy deposition rate.
+          * - :py:attr:`~ev1`
+            - Get or set the ln V of first item.
+          * - :py:attr:`~ev2`
+            - Get or set the ln V of second item.
+          * - :py:attr:`~ev3`
+            - Get or set the ln V of third item.
+          * - :py:attr:`~ev4`
+            - Get or set the ln V of fourth item.
+          * - :py:attr:`~ev5`
+            - Get or set the ln V of fifth item.
+          * - :py:attr:`~ev6`
+            - Get or set the ln V of sixth item.
+          * - :py:attr:`~ev7`
+            - Get or set the ln V of seventh item.
+          * - :py:attr:`~ev8`
+            - Get or set the ln V of eighth item.
+          * - :py:attr:`~ev9`
+            - Get or set the ln V of ninth item.
+          * - :py:attr:`~ev10`
+            - Get or set the ln V of tenth item.
+          * - :py:attr:`~c1`
+            - Get or set the
+          * - :py:attr:`~c2`
+            - Get or set the
+          * - :py:attr:`~c3`
+            - Get or set the
+          * - :py:attr:`~c4`
+            - Get or set the
+          * - :py:attr:`~c5`
+            - Get or set the
+          * - :py:attr:`~c6`
+            - Get or set the
+          * - :py:attr:`~c7`
+            - Get or set the
+          * - :py:attr:`~c8`
+            - Get or set the
+          * - :py:attr:`~c9`
+            - Get or set the
+          * - :py:attr:`~c10`
+            - Get or set the
+          * - :py:attr:`~t1`
+            - Get or set the
+          * - :py:attr:`~t2`
+            - Get or set the
+          * - :py:attr:`~t3`
+            - Get or set the
+          * - :py:attr:`~t4`
+            - Get or set the
+          * - :py:attr:`~t5`
+            - Get or set the
+          * - :py:attr:`~t6`
+            - Get or set the
+          * - :py:attr:`~t7`
+            - Get or set the
+          * - :py:attr:`~t8`
+            - Get or set the
+          * - :py:attr:`~t9`
+            - Get or set the
+          * - :py:attr:`~t10`
+            - Get or set the
+          * - :py:attr:`~k1`
+            - Get or set the
+          * - :py:attr:`~k2`
+            - Get or set the
+          * - :py:attr:`~k3`
+            - Get or set the
+          * - :py:attr:`~k4`
+            - Get or set the
+          * - :py:attr:`~k5`
+            - Get or set the
+          * - :py:attr:`~k6`
+            - Get or set the
+          * - :py:attr:`~k7`
+            - Get or set the
+          * - :py:attr:`~k8`
+            - Get or set the
+          * - :py:attr:`~k9`
+            - Get or set the
+          * - :py:attr:`~k10`
+            - Get or set the
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from eos_008 import Eos008
+
+Property detail
+---------------
+
+.. py:property:: eosid
+   :type: Optional[int]
+
+
+   
+   Get or set the Equation of state label.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gama
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e0
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial internal energy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vo
+   :type: Optional[float]
+
+
+   
+   Get or set the Initial relative volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcc
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve defining tabulated function .  See equation in Remarks.
+   The abscissa values of LCC, LCT and LCK must be negative of the volumetric strain in monotonically increasing order, in contrast to the convention in EOS_9.
+   The definition can extend into the tensile regime.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lct
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve defining tabulated function .  See equation in Remarks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lck
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve defining tabulated bulk modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID, which can be the ID of *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION, defining the energy deposition rate.
+   If an energy leak rate is intended, do not specify a negative ordinate in LCID, rather, use the constant(s) in the equation of state, e.g., set GAMMA to a negative value.
+   If *DEFINE_FUNCTION is used, the input of the defined function is time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ev1
+   :type: Optional[float]
+
+
+   
+   Get or set the ln V of first item.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ev2
+   :type: Optional[float]
+
+
+   
+   Get or set the ln V of second item.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ev3
+   :type: Optional[float]
+
+
+   
+   Get or set the ln V of third item.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ev4
+   :type: Optional[float]
+
+
+   
+   Get or set the ln V of fourth item.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ev5
+   :type: Optional[float]
+
+
+   
+   Get or set the ln V of fifth item.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ev6
+   :type: Optional[float]
+
+
+   
+   Get or set the ln V of sixth item.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ev7
+   :type: Optional[float]
+
+
+   
+   Get or set the ln V of seventh item.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ev8
+   :type: Optional[float]
+
+
+   
+   Get or set the ln V of eighth item.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ev9
+   :type: Optional[float]
+
+
+   
+   Get or set the ln V of ninth item.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ev10
+   :type: Optional[float]
+
+
+   
+   Get or set the ln V of tenth item.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c1
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c2
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c3
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c4
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c5
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c6
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c7
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c8
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c9
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c10
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t1
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t2
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t3
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t4
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t5
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t6
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t7
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t8
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t9
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t10
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k1
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k2
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k3
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k4
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k5
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k6
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k7
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k8
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k9
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k10
+   :type: Optional[float]
+
+
+   
+   Get or set the 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'EOS'
+
+
+.. py:attribute:: subkeyword
+   :value: '008'
+
+
+
+
+
+

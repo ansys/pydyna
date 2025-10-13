@@ -1,0 +1,452 @@
+
+
+
+
+
+
+:class:`Mat064`
+===============
+
+
+.. py:class:: mat_064.Mat064(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_064 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat064
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson's ratio.
+          * - :py:attr:`~k`
+            - Get or set the Material constant, k.
+          * - :py:attr:`~m`
+            - Get or set the Strain hardening coefficient, m
+          * - :py:attr:`~n`
+            - Get or set the Strain rate sensitivity coefficient, n.
+          * - :py:attr:`~e0`
+            - Get or set the Initial strain rate (default = 0.0002)
+          * - :py:attr:`~vp`
+            - Get or set the Formulation for rate effects:
+          * - :py:attr:`~eps0`
+            - Get or set the Quasi-static threshold strain rate.  See description under *MAT_‌015.
+          * - :py:attr:`~rfiltf`
+            - Get or set the Smoothing factor on the effective strain rate for solid elements when VP = 0.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_064 import Mat064
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson's ratio.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant, k.
+   LT.0: absolute value of k is taken as the load curve number that defines k as a function of effective plastic strain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m
+   :type: float
+
+
+   
+   Get or set the Strain hardening coefficient, m
+   LT.0: absolute value of m is taken as the load curve number that defines m as a function of effective plastic strain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n
+   :type: float
+
+
+   
+   Get or set the Strain rate sensitivity coefficient, n.
+   LT.0: absolute value of n is taken as the load curve number that defines n as a function of effective plastic strain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e0
+   :type: float
+
+
+   
+   Get or set the Initial strain rate (default = 0.0002)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vp
+   :type: float
+
+
+   
+   Get or set the Formulation for rate effects:
+   EQ.0.0: Scale yield stress (default)
+   EQ.1.0: Viscoplastic formulation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: eps0
+   :type: float
+
+
+   
+   Get or set the Quasi-static threshold strain rate.  See description under *MAT_‌015.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rfiltf
+   :type: float
+
+
+   
+   Get or set the Smoothing factor on the effective strain rate for solid elements when VP = 0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '064'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

@@ -1,0 +1,1343 @@
+
+
+
+
+
+
+:class:`MatLouYoonAnisotropicPlastictiy`
+========================================
+
+
+.. py:class:: mat_lou_yoon_anisotropic_plastictiy.MatLouYoonAnisotropicPlastictiy(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_LOU-YOON_ANISOTROPIC_PLASTICTIY keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatLouYoonAnisotropicPlastictiy
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young's modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson’s ratio
+          * - :py:attr:`~hr`
+            - Get or set the Hardening rules (see section Hardening laws below):
+          * - :py:attr:`~p1`
+            - Get or set the Material parameter:
+          * - :py:attr:`~p2`
+            - Get or set the Material parameter:
+          * - :py:attr:`~iter`
+            - Get or set the Iteration flag for speed:
+          * - :py:attr:`~afr`
+            - Get or set the Flag to use associated flow rule (AFR):
+          * - :py:attr:`~nfunc`
+            - Get or set the Number of Drucker function components. Currently NFUNC is always set to 1
+          * - :py:attr:`~aopt`
+            - Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC for more complete description).
+          * - :py:attr:`~lcid`
+            - Get or set the Load curve ID giving the hardening law for HR = 3
+          * - :py:attr:`~e0`
+            - Get or set the Material parameter:
+          * - :py:attr:`~lcf`
+            - Get or set the Fracture curve:
+          * - :py:attr:`~p3`
+            - Get or set the Material parameter:HR.EQ.5.0:    p, coefficient for exponential hardening(Gosh)HR.EQ.6.0 : n, exponent for exponential hardening law(Hocket - Sherby)
+          * - :py:attr:`~a1`
+            - Get or set the Components of vector a for AOPT = 2.0
+          * - :py:attr:`~a2`
+            - Get or set the Components of vector a for AOPT = 2.0
+          * - :py:attr:`~a3`
+            - Get or set the Components of vector a for AOPT = 2.0
+          * - :py:attr:`~v1`
+            - Get or set the Components of vector v for AOPT = 3.0
+          * - :py:attr:`~v2`
+            - Get or set the Components of vector v for AOPT = 3.0
+          * - :py:attr:`~v3`
+            - Get or set the Components of vector v for AOPT = 3.0
+          * - :py:attr:`~d1`
+            - Get or set the Components of vector d for AOPT = 2.0
+          * - :py:attr:`~d2`
+            - Get or set the Components of vector d for AOPT = 2.0
+          * - :py:attr:`~d3`
+            - Get or set the Components of vector d for AOPT = 2.0
+          * - :py:attr:`~c1`
+            - Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+          * - :py:attr:`~c2`
+            - Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+          * - :py:attr:`~c3`
+            - Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+          * - :py:attr:`~c4`
+            - Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+          * - :py:attr:`~c5`
+            - Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+          * - :py:attr:`~c6`
+            - Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+          * - :py:attr:`~cc`
+            - Get or set the Material constant c in Drucker yield function. c is recommended to be 1.226 for BCC metals and 2 for FCC metals
+          * - :py:attr:`~pc1`
+            - Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+          * - :py:attr:`~pc2`
+            - Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+          * - :py:attr:`~pc3`
+            - Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+          * - :py:attr:`~pc4`
+            - Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+          * - :py:attr:`~pc5`
+            - Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+          * - :py:attr:`~pc6`
+            - Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+          * - :py:attr:`~pcc`
+            - Get or set the Material constant c ̂ in Drucker function for the plastic potential. c ̂ is recommended to be 1.226 for BCC metals and 2 for FCC metals unless calibrated otherwise.
+          * - :py:attr:`~vf1`
+            - Get or set the Components of the fracture criterion included for LCF < 0. See LCF (input on Card 2) for a description.
+          * - :py:attr:`~vf2`
+            - Get or set the Components of the fracture criterion included for LCF < 0. See LCF (input on Card 2) for a description.
+          * - :py:attr:`~vf3`
+            - Get or set the Components of the fracture criterion included for LCF < 0. See LCF (input on Card 2) for a description.
+          * - :py:attr:`~vf4`
+            - Get or set the Components of the fracture criterion included for LCF < 0. See LCF (input on Card 2) for a description.
+          * - :py:attr:`~vf5`
+            - Get or set the Components of the fracture criterion included for LCF < 0. See LCF (input on Card 2) for a description.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_lou_yoon_anisotropic_plastictiy import MatLouYoonAnisotropicPlastictiy
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young's modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson’s ratio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hr
+   :type: float
+
+
+   
+   Get or set the Hardening rules (see section Hardening laws below):
+   EQ.1.0: Linear hardening(default)
+   EQ.2.0 : Exponential hardening(Swift)
+   EQ.3.0 : Load curve
+   EQ.4.0 : Exponential hardening(Voce)
+   EQ.5.0 : Exponential hardening(Gosh)
+   EQ.6.0 : Exponential hardening(Hocken - Sherby)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: p1
+   :type: Optional[float]
+
+
+   
+   Get or set the Material parameter:
+   HR.EQ.1.0:      Tangent modulus
+   HR.EQ.2.0 : q, coefficient for exponential hardening law(Swift)
+   HR.EQ.4.0 : a, coefficient for exponential hardening law(Voce)
+   HR.EQ.5.0 : q, coefficient for exponential hardening law(Gosh)
+   HR.EQ.6.0 : a, coefficient for exponential hardening law(Hocket - Sherby)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: p2
+   :type: Optional[float]
+
+
+   
+   Get or set the Material parameter:
+   HR.EQ.1.0:      Yield stress for the linear hardening law
+   HR.EQ.2.0 : n, coefficient for (Swift) exponential hardening
+   HR.EQ.4.0 : c, coefficient for exponential hardening law(Voce)
+   HR.EQ.5.0 : n, coefficient for exponential hardening law(Gosh)
+   HR.EQ.6.0 : c, coefficient for exponential hardening law(Hocket - Sherby)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: iter
+   :type: float
+
+
+   
+   Get or set the Iteration flag for speed:
+   EQ.0.0: Fully iterative
+   EQ.1.0 : Fixed at three iterations.Generally, ITER = 0.0 is recommended.However, ITER = 1.0 is faster and may give acceptable results in most problems
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: afr
+   :type: Optional[int]
+
+
+   
+   Get or set the Flag to use associated flow rule (AFR):
+   EQ.0:   Use non - AFR.
+   EQ.1 : Use AFR.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nfunc
+   :type: int
+
+
+   
+   Get or set the Number of Drucker function components. Currently NFUNC is always set to 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aopt
+   :type: Optional[float]
+
+
+   
+   Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC for more complete description).
+   EQ.0.0: Locally orthotropic with material axes determined by element nodes.The shells only the material axes are rotated about the normal vector to the surface of the shell by the angle BETA.
+   EQ.2.0 : Globally orthotropic with material axes determined by vectors defined a and d defined below, as with* DEFINED_COORDINATE_VECTOR.
+   EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.The material directions are determined as follows : a is the cross product of v with the normal vector, b is the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element.
+   LT.0.0 : The absolute value of AOPT is a coordinate system ID(CID on * DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM, or *DEFINE_COORDINATE_VECTOR).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcid
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID giving the hardening law for HR = 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e0
+   :type: Optional[float]
+
+
+   
+   Get or set the Material parameter:
+   HR.EQ.2.0:      ε_0, initial yield strain for exponential hardening law(Swift) (default = 0.0)
+   HR.EQ.4.0 : b, coefficient for exponential hardening(Voce)
+   HR.EQ.5.0 : ε_0, initial yield strain for exponential hardening(Gosh), Default = 0.0
+   HR.EQ.6.0 : b, coefficient for exponential hardening law(Hocket - Sherby)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcf
+   :type: int
+
+
+   
+   Get or set the Fracture curve:
+   EQ.0:   No fracture curves(default)
+   GT.0 : Load curve or table ID of customized fracture curve / surface.If referring to a load curve ID, the fracture curve is defined as effective plastic strain as a function of triaxiality.If referring to a table ID, for each load parameter, an effective plastic strain as a function of.triaxiality curve can be defined(only applicable to solids
+   EQ. - 1:        Drucker ductile fracture criterion.Optional Card 7 is needed in this case.VF1, VF2and VF3 in Card 7 will be used as a, band c in the Drucker ductile fracture criterion.See section Fracture criteria for more details.
+   EQ. - 2:        DF2016 fracture criterion.Optional card 7 is needed in this case.VF1, VF2, VF3, VF4and VF5 in Card 7 will be used as C1, C2, C3and C in DF2016 criterion.See section Fracture criteria for more details.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: p3
+   :type: Optional[float]
+
+
+   
+   Get or set the Material parameter:HR.EQ.5.0:    p, coefficient for exponential hardening(Gosh)HR.EQ.6.0 : n, exponent for exponential hardening law(Hocket - Sherby)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector a for AOPT = 2.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector v for AOPT = 3.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of vector d for AOPT = 2.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c1
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c2
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c3
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c4
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c5
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c6
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cc
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant c in Drucker yield function. c is recommended to be 1.226 for BCC metals and 2 for FCC metals
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pc1
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pc2
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pc3
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pc4
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pc5
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pc6
+   :type: Optional[float]
+
+
+   
+   Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pcc
+   :type: Optional[float]
+
+
+   
+   Get or set the Material constant c ̂ in Drucker function for the plastic potential. c ̂ is recommended to be 1.226 for BCC metals and 2 for FCC metals unless calibrated otherwise.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vf1
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of the fracture criterion included for LCF < 0. See LCF (input on Card 2) for a description.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vf2
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of the fracture criterion included for LCF < 0. See LCF (input on Card 2) for a description.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vf3
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of the fracture criterion included for LCF < 0. See LCF (input on Card 2) for a description.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vf4
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of the fracture criterion included for LCF < 0. See LCF (input on Card 2) for a description.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: vf5
+   :type: Optional[float]
+
+
+   
+   Get or set the Components of the fracture criterion included for LCF < 0. See LCF (input on Card 2) for a description.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'LOU-YOON_ANISOTROPIC_PLASTICTIY'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

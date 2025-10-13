@@ -1,0 +1,1206 @@
+
+
+
+
+
+
+:class:`MatTissueDispersed`
+===========================
+
+
+.. py:class:: mat_tissue_dispersed.MatTissueDispersed(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_TISSUE_DISPERSED keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatTissueDispersed
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number must be specified
+          * - :py:attr:`~ro`
+            - Get or set the Mass density
+          * - :py:attr:`~f`
+            - Get or set the Fiber dispersion parameter governs the extent to which the fiber dispersion extends to the third dimension. F = 0 and F = 1 apply to 2D splay
+          * - :py:attr:`~sigma`
+            - Get or set the The parameter SIGMA governs the extent of dispersion, such that as
+          * - :py:attr:`~mu`
+            - Get or set the MU is the isotropic shear modulus that models elastin
+          * - :py:attr:`~kappa`
+            - Get or set the Bulk modulus for the hydrostatic pressure
+          * - :py:attr:`~act`
+            - Get or set the ACT = 1 indicates that an active model will be used that acts in the mean
+          * - :py:attr:`~init`
+            - Get or set the INIT = 1 indicates that the anisotropy eigenvalues will be given by
+          * - :py:attr:`~fid`
+            - Get or set the The passive fiber model number. There are two passive models available: FID = 1 or FID = 2.
+          * - :py:attr:`~orth`
+            - Get or set the ORTH specifies the number (1 or 2) of fibers used. When ORTH = 2
+          * - :py:attr:`~c1`
+            - Get or set the Passive fiber model parameters
+          * - :py:attr:`~c2`
+            - Get or set the Passive fiber model parameters
+          * - :py:attr:`~c3`
+            - Get or set the Passive fiber model parameters
+          * - :py:attr:`~theta`
+            - Get or set the The angle between the mean fiber direction and the fiber families. The
+          * - :py:attr:`~act1`
+            - Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+          * - :py:attr:`~act2`
+            - Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+          * - :py:attr:`~act3`
+            - Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+          * - :py:attr:`~act4`
+            - Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+          * - :py:attr:`~act5`
+            - Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+          * - :py:attr:`~act6`
+            - Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+          * - :py:attr:`~act7`
+            - Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+          * - :py:attr:`~act8`
+            - Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+          * - :py:attr:`~act9`
+            - Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+          * - :py:attr:`~act10`
+            - Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+          * - :py:attr:`~aopt`
+            - Get or set the Material axes option:
+          * - :py:attr:`~beta`
+            - Get or set the Material angle in degrees for AOPT = 3, may be overridden on the ele     ment card *ELEMANT_SOLID_ORTHO
+          * - :py:attr:`~xp`
+            - Get or set the XP, YP and ZP define the coordinates of point P for AOPT=1 and AOPT = 4.
+          * - :py:attr:`~yp`
+            - Get or set the XP, YP and ZP define the coordinates of point P for AOPT=1 and AOPT = 4.
+          * - :py:attr:`~zp`
+            - Get or set the XP, YP and ZP define the coordinates of point P for AOPT=1 and AOPT = 4.
+          * - :py:attr:`~a1`
+            - Get or set the A1, A2 and A3 define the components of vector A for AOPT = 2
+          * - :py:attr:`~a2`
+            - Get or set the A1, A2 and A3 define the components of vector A for AOPT = 2
+          * - :py:attr:`~a3`
+            - Get or set the A1, A2 and A3 define the components of vector A for AOPT = 2
+          * - :py:attr:`~v1`
+            - Get or set the V1, V2 and V3 define components of vector V for AOPT = 3 and AOPT = 4
+          * - :py:attr:`~v2`
+            - Get or set the V1, V2 and V3 define components of vector V for AOPT = 3 and AOPT = 4
+          * - :py:attr:`~v3`
+            - Get or set the V1, V2 and V3 define components of vector V for AOPT = 3 and AOPT = 4
+          * - :py:attr:`~d1`
+            - Get or set the D1, D2 and D3 define components of vector D for AOPT = 2.
+          * - :py:attr:`~d2`
+            - Get or set the D1, D2 and D3 define components of vector D for AOPT = 2.
+          * - :py:attr:`~d3`
+            - Get or set the D1, D2 and D3 define components of vector D for AOPT = 2.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_tissue_dispersed import MatTissueDispersed
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number must be specified
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: f
+   :type: Optional[float]
+
+
+   
+   Get or set the Fiber dispersion parameter governs the extent to which the fiber dispersion extends to the third dimension. F = 0 and F = 1 apply to 2D splay
+   with the normal to the membrane being in the beta and the gama directions,
+   respectively . F = 0.5 applies to 3D splay with transverse isotropy.
+   Splay will be orthotropic whenever F != 0.5. This parameter is ignored if INIT = 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigma
+   :type: Optional[float]
+
+
+   
+   Get or set the The parameter SIGMA governs the extent of dispersion, such that as
+   SIGMA goes to zero, the material symmetry reduces to pure transverse
+   isotropy. Conversely, as SIGMA becomes large, the material symmetry
+   becomes isotropic in the plane. This parameter is ignored if INIT = 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mu
+   :type: Optional[float]
+
+
+   
+   Get or set the MU is the isotropic shear modulus that models elastin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: kappa
+   :type: Optional[float]
+
+
+   
+   Get or set the Bulk modulus for the hydrostatic pressure
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act
+   :type: Optional[int]
+
+
+   
+   Get or set the ACT = 1 indicates that an active model will be used that acts in the mean
+   fiber-direction. The active model, like the passive model, will be dispersed by SIGMA and F, or if INIT = 1, with the
+   *INITIAL_FIELD_SOLID keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: init
+   :type: Optional[int]
+
+
+   
+   Get or set the INIT = 1 indicates that the anisotropy eigenvalues will be given by
+   *INITIAL_FIELD_SOLID variables in the global coordinate system
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fid
+   :type: Optional[int]
+
+
+   
+   Get or set the The passive fiber model number. There are two passive models available: FID = 1 or FID = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: orth
+   :type: Optional[int]
+
+
+   
+   Get or set the ORTH specifies the number (1 or 2) of fibers used. When ORTH = 2
+   two fiber families are used and arranges symmetrically THETA degrees
+   from the mean fiber direction and lying in the tissue plane
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c1
+   :type: Optional[float]
+
+
+   
+   Get or set the Passive fiber model parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c2
+   :type: Optional[float]
+
+
+   
+   Get or set the Passive fiber model parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c3
+   :type: Optional[float]
+
+
+   
+   Get or set the Passive fiber model parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: theta
+   :type: Optional[float]
+
+
+   
+   Get or set the The angle between the mean fiber direction and the fiber families. The
+   parameter is active only if ORTH = 2 and is particularly important in
+   vascular tissues (e.g. arteries)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act1
+   :type: Optional[float]
+
+
+   
+   Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+   dependent load curve that overrides some of the ACTx values. See section 2 below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act2
+   :type: Optional[float]
+
+
+   
+   Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+   dependent load curve that overrides some of the ACTx values. See section 2 below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act3
+   :type: Optional[float]
+
+
+   
+   Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+   dependent load curve that overrides some of the ACTx values. See section 2 below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act4
+   :type: Optional[float]
+
+
+   
+   Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+   dependent load curve that overrides some of the ACTx values. See section 2 below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act5
+   :type: Optional[float]
+
+
+   
+   Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+   dependent load curve that overrides some of the ACTx values. See section 2 below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act6
+   :type: Optional[float]
+
+
+   
+   Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+   dependent load curve that overrides some of the ACTx values. See section 2 below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act7
+   :type: Optional[float]
+
+
+   
+   Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+   dependent load curve that overrides some of the ACTx values. See section 2 below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act8
+   :type: Optional[float]
+
+
+   
+   Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+   dependent load curve that overrides some of the ACTx values. See section 2 below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act9
+   :type: Optional[float]
+
+
+   
+   Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+   dependent load curve that overrides some of the ACTx values. See section 2 below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: act10
+   :type: Optional[float]
+
+
+   
+   Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
+   dependent load curve that overrides some of the ACTx values. See section 2 below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: aopt
+   :type: Optional[float]
+
+
+   
+   Get or set the Material axes option:
+   EQ.0.0: locally orthotropic with material axes determined by
+   element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES.
+   EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
+   EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
+   BETA, from a line in the plane of the element defined by        the cross product of the vector v with the element normal.
+   LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
+   *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: Optional[float]
+
+
+   
+   Get or set the Material angle in degrees for AOPT = 3, may be overridden on the ele     ment card *ELEMANT_SOLID_ORTHO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: xp
+   :type: Optional[float]
+
+
+   
+   Get or set the XP, YP and ZP define the coordinates of point P for AOPT=1 and AOPT = 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: yp
+   :type: Optional[float]
+
+
+   
+   Get or set the XP, YP and ZP define the coordinates of point P for AOPT=1 and AOPT = 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: zp
+   :type: Optional[float]
+
+
+   
+   Get or set the XP, YP and ZP define the coordinates of point P for AOPT=1 and AOPT = 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a1
+   :type: Optional[float]
+
+
+   
+   Get or set the A1, A2 and A3 define the components of vector A for AOPT = 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a2
+   :type: Optional[float]
+
+
+   
+   Get or set the A1, A2 and A3 define the components of vector A for AOPT = 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: a3
+   :type: Optional[float]
+
+
+   
+   Get or set the A1, A2 and A3 define the components of vector A for AOPT = 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v1
+   :type: Optional[float]
+
+
+   
+   Get or set the V1, V2 and V3 define components of vector V for AOPT = 3 and AOPT = 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v2
+   :type: Optional[float]
+
+
+   
+   Get or set the V1, V2 and V3 define components of vector V for AOPT = 3 and AOPT = 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: v3
+   :type: Optional[float]
+
+
+   
+   Get or set the V1, V2 and V3 define components of vector V for AOPT = 3 and AOPT = 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d1
+   :type: Optional[float]
+
+
+   
+   Get or set the D1, D2 and D3 define components of vector D for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d2
+   :type: Optional[float]
+
+
+   
+   Get or set the D1, D2 and D3 define components of vector D for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d3
+   :type: Optional[float]
+
+
+   
+   Get or set the D1, D2 and D3 define components of vector D for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'TISSUE_DISPERSED'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

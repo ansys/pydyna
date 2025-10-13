@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``element_shell_composite.py`` module
+=========================================
+
+.. py:module:: element_shell_composite
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: element_shell_composite
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~element_shell_composite.ElementShellComposite`
+            - DYNA ELEMENT_SHELL_COMPOSITE keyword
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ElementShellComposite<element_shell_composite/ElementShellComposite>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module providing the ElementShellComposite class.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

@@ -1,0 +1,447 @@
+
+
+
+
+
+
+:class:`Mat269`
+===============
+
+
+.. py:class:: mat_269.Mat269(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_269 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat269
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~k`
+            - Get or set the Elastic bulk modulus.
+          * - :py:attr:`~g`
+            - Get or set the Elastic shear modulus.
+          * - :py:attr:`~gv`
+            - Get or set the Viscoelastic shear modulus.
+          * - :py:attr:`~n`
+            - Get or set the Elastic segment number.
+          * - :py:attr:`~nv`
+            - Get or set the Viscoelastic segment number.
+          * - :py:attr:`~c`
+            - Get or set the Inelastic strain exponent, should be less than zero.
+          * - :py:attr:`~m`
+            - Get or set the Inelastic stress exponent.
+          * - :py:attr:`~gam0`
+            - Get or set the .
+          * - :py:attr:`~tauh`
+            - Get or set the Reference Kirchhoff stress.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_269 import Mat269
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k
+   :type: Optional[float]
+
+
+   
+   Get or set the Elastic bulk modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: g
+   :type: Optional[float]
+
+
+   
+   Get or set the Elastic shear modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gv
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscoelastic shear modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: n
+   :type: Optional[float]
+
+
+   
+   Get or set the Elastic segment number.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: nv
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscoelastic segment number.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c
+   :type: Optional[float]
+
+
+   
+   Get or set the Inelastic strain exponent, should be less than zero.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: m
+   :type: Optional[float]
+
+
+   
+   Get or set the Inelastic stress exponent.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gam0
+   :type: Optional[float]
+
+
+   
+   Get or set the .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tauh
+   :type: Optional[float]
+
+
+   
+   Get or set the Reference Kirchhoff stress.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '269'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

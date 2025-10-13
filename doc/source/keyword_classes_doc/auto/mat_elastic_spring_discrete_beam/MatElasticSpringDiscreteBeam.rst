@@ -1,0 +1,504 @@
+
+
+
+
+
+
+:class:`MatElasticSpringDiscreteBeam`
+=====================================
+
+
+.. py:class:: mat_elastic_spring_discrete_beam.MatElasticSpringDiscreteBeam(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_ELASTIC_SPRING_DISCRETE_BEAM keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatElasticSpringDiscreteBeam
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density, see also volume in *SECTION_BEAM definition.
+          * - :py:attr:`~k`
+            - Get or set the Stiffness coefficient.
+          * - :py:attr:`~f0`
+            - Get or set the Optional initial force. This option is inactive if this material is referenced in a part referenced by material type *MAT_ELASTIC_6DOF_SPRING.
+          * - :py:attr:`~d`
+            - Get or set the Viscous damping coefficient.
+          * - :py:attr:`~cdf`
+            - Get or set the Compressive displacement at failure. Input as a positive number. After failure, no forces are carried. This option does not apply to zero length springs.
+          * - :py:attr:`~tdf`
+            - Get or set the Tensile displacement at failure. After failure, no forces are carried.
+          * - :py:attr:`~flcid`
+            - Get or set the Load curve ID, see *DEFINE_CURVE, defining force versus deflection for nonlinear behavior.
+          * - :py:attr:`~hlcid`
+            - Get or set the Load curve ID, see *DEFINE_CURVE, defining force versus relative velocity for nonlinear behavior (optional).
+          * - :py:attr:`~c1`
+            - Get or set the First damping coefficient for nonlinear behavior (optional).
+          * - :py:attr:`~c2`
+            - Get or set the Second damping coefficient for nonlinear behavior (optional).
+          * - :py:attr:`~dle`
+            - Get or set the Factor to scale time units.
+          * - :py:attr:`~glcid`
+            - Get or set the Optional load curve ID, see *DEFINE_CURVE, defining a scale factor versus deflection for load curve ID, HLCID. If zero, a scale factor of unity is assumed.
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_elastic_spring_discrete_beam import MatElasticSpringDiscreteBeam
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density, see also volume in *SECTION_BEAM definition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: k
+   :type: Optional[float]
+
+
+   
+   Get or set the Stiffness coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: f0
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional initial force. This option is inactive if this material is referenced in a part referenced by material type *MAT_ELASTIC_6DOF_SPRING.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: d
+   :type: Optional[float]
+
+
+   
+   Get or set the Viscous damping coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cdf
+   :type: Optional[float]
+
+
+   
+   Get or set the Compressive displacement at failure. Input as a positive number. After failure, no forces are carried. This option does not apply to zero length springs.
+   EQ.0.0: inactive.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tdf
+   :type: Optional[float]
+
+
+   
+   Get or set the Tensile displacement at failure. After failure, no forces are carried.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: flcid
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID, see *DEFINE_CURVE, defining force versus deflection for nonlinear behavior.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hlcid
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID, see *DEFINE_CURVE, defining force versus relative velocity for nonlinear behavior (optional).
+   If the origin of the curve is at (0,0) the force magnitude is identical for a given magnitude of the relative velocity, i.e., only the sign changes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c1
+   :type: Optional[float]
+
+
+   
+   Get or set the First damping coefficient for nonlinear behavior (optional).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: c2
+   :type: Optional[float]
+
+
+   
+   Get or set the Second damping coefficient for nonlinear behavior (optional).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: dle
+   :type: float
+
+
+   
+   Get or set the Factor to scale time units.
+   Default is set to unity (1.0).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: glcid
+   :type: Optional[int]
+
+
+   
+   Get or set the Optional load curve ID, see *DEFINE_CURVE, defining a scale factor versus deflection for load curve ID, HLCID. If zero, a scale factor of unity is assumed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'ELASTIC_SPRING_DISCRETE_BEAM'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

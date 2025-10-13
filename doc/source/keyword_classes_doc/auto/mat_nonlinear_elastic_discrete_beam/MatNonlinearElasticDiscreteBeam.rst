@@ -1,0 +1,1014 @@
+
+
+
+
+
+
+:class:`MatNonlinearElasticDiscreteBeam`
+========================================
+
+
+.. py:class:: mat_nonlinear_elastic_discrete_beam.MatNonlinearElasticDiscreteBeam(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_NONLINEAR_ELASTIC_DISCRETE_BEAM keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatNonlinearElasticDiscreteBeam
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density, see also volume in *SECTION_BEAM definition.
+          * - :py:attr:`~lcidtr`
+            - Get or set the Load curve ID defining translational force resultant along local r-axis versus relative translational displacement.
+          * - :py:attr:`~lcidts`
+            - Get or set the Load curve ID defining translational force resultant along local s-axis versus relative translational displacement.
+          * - :py:attr:`~lcidtt`
+            - Get or set the Load curve ID defining translational force resultant along local t-axis versus relative translational displacement.
+          * - :py:attr:`~lcidrr`
+            - Get or set the Load curve ID defining rotational moment resultant about local r-axis versus relative rotational displacement.
+          * - :py:attr:`~lcidrs`
+            - Get or set the Load curve ID defining rotational moment resultant about local s-axis versus relative rotational displacement.
+          * - :py:attr:`~lcidrt`
+            - Get or set the Load curve ID defining rotational moment resultant about local t-axis versus relative rotational displacement.
+          * - :py:attr:`~lcidtdr`
+            - Get or set the Load curve ID defining translational damping force resultant along local r-axis versus relative translational velocity.
+          * - :py:attr:`~lcidtds`
+            - Get or set the Load curve ID defining translational damping force resultant along local s-axis versus relative translational velocity.
+          * - :py:attr:`~lcidtdt`
+            - Get or set the Load curve ID defining translational damping force resultant along local t-axis versus relative translational velocity.
+          * - :py:attr:`~lcidrdr`
+            - Get or set the Load curve ID defining rotational damping moment resultant about local r-axis versus relative rotational velocity.
+          * - :py:attr:`~lcidrds`
+            - Get or set the Load curve ID defining rotational damping moment resultant about local s-axis versus relative rotational velocity.
+          * - :py:attr:`~lcidrdt`
+            - Get or set the Load curve ID defining rotational damping moment resultant about local t-axis versus relative rotational velocity.
+          * - :py:attr:`~for_`
+            - Get or set the Preload force in r-direction
+          * - :py:attr:`~fos`
+            - Get or set the Preload force in s-direction
+          * - :py:attr:`~fot`
+            - Get or set the Preload force in t-direction
+          * - :py:attr:`~mor`
+            - Get or set the Preload moment about r-axis
+          * - :py:attr:`~mos`
+            - Get or set the Preload moment about s-axis
+          * - :py:attr:`~mot`
+            - Get or set the Preload moment about t-axis
+          * - :py:attr:`~ffailr`
+            - Get or set the Optional failure parameter. If zero, the corresponding force, Fr, is not considered in the failure calculation
+          * - :py:attr:`~ffails`
+            - Get or set the Optional failure parameter. If zero, the corresponding force, Fs, is not considered in the failure calculation
+          * - :py:attr:`~ffailt`
+            - Get or set the Optional failure parameter. If zero, the corresponding force, Ft, is not considered in the failure calculation
+          * - :py:attr:`~mfailr`
+            - Get or set the Optional failure parameter. If zero, the corresponding moment, Mr, is not considered in the failure calculation
+          * - :py:attr:`~mfails`
+            - Get or set the Optional failure parameter. If zero, the corresponding moment, Ms, is not considered in the failure calculation
+          * - :py:attr:`~mfailt`
+            - Get or set the Optional failure parameter. If zero, the corresponding moment, Mt, is not considered in the failure calculation
+          * - :py:attr:`~ufailr`
+            - Get or set the Optional failure parameter. If zero, the corresponding displacement, Ur, is not considered in the failure calculation
+          * - :py:attr:`~ufails`
+            - Get or set the Optional failure parameter. If zero, the corresponding displacement, Us, is not considered in the failure calculation
+          * - :py:attr:`~ufailt`
+            - Get or set the Optional failure parameter. If zero, the corresponding displacement, Ut, is not considered in the failure calculation
+          * - :py:attr:`~tfailr`
+            - Get or set the Optional failure parameter. If zero, the corresponding rotation, Qr, is not considered in the failure calculation
+          * - :py:attr:`~tfails`
+            - Get or set the Optional failure parameter. If zero, the corresponding rotation, Qs, is not considered in the failure calculation
+          * - :py:attr:`~tfailt`
+            - Get or set the Optional failure parameter. If zero, the corresponding rotation, Qt, is not considered in the failure calculation
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_nonlinear_elastic_discrete_beam import MatNonlinearElasticDiscreteBeam
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density, see also volume in *SECTION_BEAM definition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidtr
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining translational force resultant along local r-axis versus relative translational displacement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidts
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining translational force resultant along local s-axis versus relative translational displacement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidtt
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining translational force resultant along local t-axis versus relative translational displacement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidrr
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining rotational moment resultant about local r-axis versus relative rotational displacement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidrs
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining rotational moment resultant about local s-axis versus relative rotational displacement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidrt
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining rotational moment resultant about local t-axis versus relative rotational displacement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidtdr
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining translational damping force resultant along local r-axis versus relative translational velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidtds
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining translational damping force resultant along local s-axis versus relative translational velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidtdt
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining translational damping force resultant along local t-axis versus relative translational velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidrdr
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining rotational damping moment resultant about local r-axis versus relative rotational velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidrds
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining rotational damping moment resultant about local s-axis versus relative rotational velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcidrdt
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID defining rotational damping moment resultant about local t-axis versus relative rotational velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: for_
+   :type: Optional[float]
+
+
+   
+   Get or set the Preload force in r-direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fos
+   :type: Optional[float]
+
+
+   
+   Get or set the Preload force in s-direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: fot
+   :type: Optional[float]
+
+
+   
+   Get or set the Preload force in t-direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mor
+   :type: Optional[float]
+
+
+   
+   Get or set the Preload moment about r-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mos
+   :type: Optional[float]
+
+
+   
+   Get or set the Preload moment about s-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mot
+   :type: Optional[float]
+
+
+   
+   Get or set the Preload moment about t-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ffailr
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding force, Fr, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ffails
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding force, Fs, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ffailt
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding force, Ft, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mfailr
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding moment, Mr, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mfails
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding moment, Ms, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: mfailt
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding moment, Mt, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ufailr
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding displacement, Ur, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ufails
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding displacement, Us, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ufailt
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding displacement, Ut, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tfailr
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding rotation, Qr, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tfails
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding rotation, Qs, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: tfailt
+   :type: Optional[float]
+
+
+   
+   Get or set the Optional failure parameter. If zero, the corresponding rotation, Qt, is not considered in the failure calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'NONLINEAR_ELASTIC_DISCRETE_BEAM'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

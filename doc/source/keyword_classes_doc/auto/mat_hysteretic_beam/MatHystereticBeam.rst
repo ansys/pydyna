@@ -1,0 +1,2342 @@
+
+
+
+
+
+
+:class:`MatHystereticBeam`
+==========================
+
+
+.. py:class:: mat_hysteretic_beam.MatHystereticBeam(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_HYSTERETIC_BEAM keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatHystereticBeam
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~e`
+            - Get or set the Young’s modulus.
+          * - :py:attr:`~pr`
+            - Get or set the Poisson’s ratio
+          * - :py:attr:`~iax`
+            - Get or set the Abscissa definition for axial yield force as a function of inelastic deformation/strain curves (LCAT and LCAC on Card 2):
+          * - :py:attr:`~isurf`
+            - Get or set the Yield surface type for interaction:
+          * - :py:attr:`~ihard`
+            - Get or set the Hardening type during cyclic response
+          * - :py:attr:`~ifema`
+            - Get or set the Flag for input of FEMA thresholds
+          * - :py:attr:`~lcpms`
+            - Get or set the Load curve ID (See *DEFINE_CURVE) giving normalized yield moment as a function of plastic rotation at hinges about the local s-axis. All values are positive
+          * - :py:attr:`~sfs`
+            - Get or set the Representative yield moment for plastic hinges about local the s-axis (scales the normalized moment from LCPMS) .
+          * - :py:attr:`~lcpmt`
+            - Get or set the Load curve ID (See *DEFINE_CURVE) giving normalized yield moment as a function of plastic rotation at hinges about the local t-axis. All values are positive.
+          * - :py:attr:`~sft`
+            - Get or set the Representative yield moment for plastic hinges about local the t-axis (scales the normalized moment from LCPMT)
+          * - :py:attr:`~lcat`
+            - Get or set the Load curve ID (See *DEFINE_‌CURVE) giving normalized axial tensile yield force as a function of inelastic deformation/strain.  See IAX above for definition of deformation/strain.  All values are positive. See *DEFINE_‌CURVE.
+          * - :py:attr:`~sfat`
+            - Get or set the Representative tensile strength (scales the normalized force from LCAT
+          * - :py:attr:`~lcac`
+            - Get or set the Load curve ID (See *DEFINE_‌CURVE) giving normalized axial compressive yield force as a function of inelastic deformation/strain.  See IAX above for definition of deformation/strain.  All values are positive. See *DEFINE_‌CURVE.
+          * - :py:attr:`~sfac`
+            - Get or set the Representative compressive strength (scales the normalized force from LCAC)
+          * - :py:attr:`~alpha`
+            - Get or set the Parameter to define moment-axial yield surface:
+          * - :py:attr:`~beta`
+            - Get or set the Parameter to define moment-axial yield surface:
+          * - :py:attr:`~gamma`
+            - Get or set the Parameter to define yield surface which must not be < 1.1 .
+          * - :py:attr:`~f0`
+            - Get or set the Force at which maximum yield moment is achieved (tensile positive; for reinforced concrete, a negative (compressive) value would be entered)
+          * - :py:attr:`~pinm`
+            - Get or set the Pinching factor for flexural hysteresis (for IHARD = 3 or 4 only).  .
+          * - :py:attr:`~pins`
+            - Get or set the Pinching factor for shear hysteresis (for IHARD = 3 or 4 only).
+          * - :py:attr:`~hloc1`
+            - Get or set the Location of plastic Hinge 1 from Node 1 (see Remark 1):
+          * - :py:attr:`~hloc2`
+            - Get or set the Location of plastic Hinge 2 from Node 2 (see Remark 1):
+          * - :py:attr:`~deltas`
+            - Get or set the Parameter to define the skew for yield surface (ISURF = 3);
+          * - :py:attr:`~kappas`
+            - Get or set the Parameter to define the skew for yield surface (ISURF = 3); .
+          * - :py:attr:`~deltat`
+            - Get or set the Parameter to define the skew for yield surface (ISURF = 3); .
+          * - :py:attr:`~kappat`
+            - Get or set the Parameter to define the skew for yield surface (ISURF = 3);
+          * - :py:attr:`~lcshs`
+            - Get or set the Load curve ID (see *DEFINE_CURVE) giving yield shear force as a function of inelastic shear strain (shear angle) in the local s-direction .
+          * - :py:attr:`~sfshs`
+            - Get or set the Scale factor on yield shear force in the local s-direction (scales the force from LCSHS):
+          * - :py:attr:`~lcsht`
+            - Get or set the Load curve ID (see *DEFINE_CURVE) giving yield shear force as a function of inelastic shear strain (shear angle) in the local t-direction .
+          * - :py:attr:`~sfsht`
+            - Get or set the Scale factor on yield shear force in the local t-direction (scales the force from LCSHS).
+          * - :py:attr:`~hardms`
+            - Get or set the Kinematic hardening modulus for moment about the local s-axis
+          * - :py:attr:`~gamms`
+            - Get or set the Kinematic hardening limit for moment about the local s-axis .
+          * - :py:attr:`~hardmt`
+            - Get or set the Kinematic hardening modulus for moment about the local t-axis.
+          * - :py:attr:`~gammt`
+            - Get or set the Kinematic hardening limit for moment about the local t-axis
+          * - :py:attr:`~hardat`
+            - Get or set the Kinematic hardening modulus for tensile axial force.
+          * - :py:attr:`~gamat`
+            - Get or set the Kinematic hardening limit for tensile axial force
+          * - :py:attr:`~hardac`
+            - Get or set the Kinematic hardening modulus for compressive axial force.
+          * - :py:attr:`~gamac`
+            - Get or set the Kinematic hardening limit for compressive axial force
+          * - :py:attr:`~omgms1`
+            - Get or set the Damage evolution parameter ω_s1 for moment about the local s-axis
+          * - :py:attr:`~omgms2`
+            - Get or set the Damage evolution parameter ω_s2 for moment about the local s-axis.
+          * - :py:attr:`~omgmt1`
+            - Get or set the Damage evolution parameter ω_t1 for moment about the local t-axis.
+          * - :py:attr:`~omgmt2`
+            - Get or set the Damage evolution parameter ω_t2 for moment about the local t-axis
+          * - :py:attr:`~omgat1`
+            - Get or set the Damage evolution parameter ω_at1 for tensile force.
+          * - :py:attr:`~omgat2`
+            - Get or set the Damage evolution parameter ω_at2 for tensile force
+          * - :py:attr:`~omgac1`
+            - Get or set the Damage evolution parameter ω_ac1 for compressive force.
+          * - :py:attr:`~omgac2`
+            - Get or set the Damage evolution parameter ω_ac2 for compressive force
+          * - :py:attr:`~rums`
+            - Get or set the Ultimate plastic rotation about s-axis for damage calculation
+          * - :py:attr:`~rumt`
+            - Get or set the Ultimate plastic rotation about t-axis for damage calculation.
+          * - :py:attr:`~duat`
+            - Get or set the Ultimate tensile plastic deformation/strain for damage calculation.
+          * - :py:attr:`~duac`
+            - Get or set the Ultimate compressive plastic deformation/strain for damage calculation
+          * - :py:attr:`~lam1`
+            - Get or set the Damage evolution parameter.
+          * - :py:attr:`~lam2`
+            - Get or set the Damage evolution parameter
+          * - :py:attr:`~soft1`
+            - Get or set the Threshold index at which softening starts .
+          * - :py:attr:`~soft2`
+            - Get or set the Threshold index at which the element is fully softened and to be removed
+          * - :py:attr:`~prs1`
+            - Get or set the Plastic rotation thresholds 1 to 4 about s-axis
+          * - :py:attr:`~prs2`
+            - Get or set the Plastic rotation thresholds 1 to 4 about s-axis.
+          * - :py:attr:`~prs3`
+            - Get or set the Plastic rotation thresholds 1 to 4 about s-axis.
+          * - :py:attr:`~prs4`
+            - Get or set the Plastic rotation thresholds 1 to 4 about s-axis
+          * - :py:attr:`~prt1`
+            - Get or set the Plastic rotation thresholds 1 to 4 about t-axis.
+          * - :py:attr:`~prt2`
+            - Get or set the Plastic rotation thresholds 1 to 4 about t-axis
+          * - :py:attr:`~prt3`
+            - Get or set the Plastic rotation thresholds 1 to 4 about t-axis.
+          * - :py:attr:`~prt4`
+            - Get or set the Plastic rotation thresholds 1 to 4 about t-axis
+          * - :py:attr:`~ts1`
+            - Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4
+          * - :py:attr:`~ts2`
+            - Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4.
+          * - :py:attr:`~ts3`
+            - Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4.
+          * - :py:attr:`~ts4`
+            - Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4
+          * - :py:attr:`~cs1`
+            - Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4.
+          * - :py:attr:`~cs2`
+            - Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4
+          * - :py:attr:`~cs3`
+            - Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4.
+          * - :py:attr:`~cs4`
+            - Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4
+          * - :py:attr:`~ss1`
+            - Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction
+          * - :py:attr:`~ss2`
+            - Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction.
+          * - :py:attr:`~ss3`
+            - Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction.
+          * - :py:attr:`~ss4`
+            - Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction
+          * - :py:attr:`~st1`
+            - Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction.
+          * - :py:attr:`~st2`
+            - Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction
+          * - :py:attr:`~st3`
+            - Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction.
+          * - :py:attr:`~st4`
+            - Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_hysteretic_beam import MatHystereticBeam
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e
+   :type: Optional[float]
+
+
+   
+   Get or set the Young’s modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr
+   :type: Optional[float]
+
+
+   
+   Get or set the Poisson’s ratio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: iax
+   :type: int
+
+
+   
+   Get or set the Abscissa definition for axial yield force as a function of inelastic deformation/strain curves (LCAT and LCAC on Card 2):
+   EQ.1:   plastic deformation(change in length)
+   EQ.2 : nominal plastic strain, that is,
+   plastic deformation/ initial length.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: isurf
+   :type: int
+
+
+   
+   Get or set the Yield surface type for interaction:
+   EQ.1:   simple power law(default)
+   EQ.2 : power law based on resultant moment
+   EQ.3 : skewed yield surface version of ISURF = 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ihard
+   :type: int
+
+
+   
+   Get or set the Hardening type during cyclic response
+   EQ.1:   cumulative absolute deformation
+   EQ.2:   peak deformation
+   EQ.3 : peak deformation, yield - oriented
+   EQ.4 : peak deformation, peak - oriented
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ifema
+   :type: int
+
+
+   
+   Get or set the Flag for input of FEMA thresholds
+   EQ.0:   no input
+   EQ.1:   input of rotation thresholds only
+   EQ.2 : input of rotation and axial strain thresholds
+   EQ.3 : input of rotation, axial strainand shear strain thresholds
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcpms
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID (See *DEFINE_CURVE) giving normalized yield moment as a function of plastic rotation at hinges about the local s-axis. All values are positive
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfs
+   :type: float
+
+
+   
+   Get or set the Representative yield moment for plastic hinges about local the s-axis (scales the normalized moment from LCPMS) .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcpmt
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID (See *DEFINE_CURVE) giving normalized yield moment as a function of plastic rotation at hinges about the local t-axis. All values are positive.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sft
+   :type: float
+
+
+   
+   Get or set the Representative yield moment for plastic hinges about local the t-axis (scales the normalized moment from LCPMT)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcat
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID (See *DEFINE_‌CURVE) giving normalized axial tensile yield force as a function of inelastic deformation/strain.  See IAX above for definition of deformation/strain.  All values are positive. See *DEFINE_‌CURVE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfat
+   :type: float
+
+
+   
+   Get or set the Representative tensile strength (scales the normalized force from LCAT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcac
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID (See *DEFINE_‌CURVE) giving normalized axial compressive yield force as a function of inelastic deformation/strain.  See IAX above for definition of deformation/strain.  All values are positive. See *DEFINE_‌CURVE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfac
+   :type: float
+
+
+   
+   Get or set the Representative compressive strength (scales the normalized force from LCAC)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha
+   :type: float
+
+
+   
+   Get or set the Parameter to define moment-axial yield surface:
+   GT.0.0: yield surface parameter ALPHA(must not be < 1.1); see Remark 2.
+   LT.0.0: user - defined yield surface for the local s - axis. | ALPHA | is the load curve ID giving the yield locus.The abscissa is the moment about the local s - axis; the ordinate is the axial force(tensile positive).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: beta
+   :type: float
+
+
+   
+   Get or set the Parameter to define moment-axial yield surface:
+   GT.0.0: yield surface parameter BETA(must not be < 1.1); see Remark 2.
+   LT.0.0: user - defined yield surface for the local t - axis. | BETA | is the load curve ID giving the yield locus.Abscissa is moment about the local t - axis; the ordinate is the axial force(tensile positive)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gamma
+   :type: float
+
+
+   
+   Get or set the Parameter to define yield surface which must not be < 1.1 .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: f0
+   :type: Optional[float]
+
+
+   
+   Get or set the Force at which maximum yield moment is achieved (tensile positive; for reinforced concrete, a negative (compressive) value would be entered)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pinm
+   :type: float
+
+
+   
+   Get or set the Pinching factor for flexural hysteresis (for IHARD = 3 or 4 only).  .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pins
+   :type: float
+
+
+   
+   Get or set the Pinching factor for shear hysteresis (for IHARD = 3 or 4 only).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hloc1
+   :type: Optional[float]
+
+
+   
+   Get or set the Location of plastic Hinge 1 from Node 1 (see Remark 1):
+   GE.0.0: HLOC1 is the distance of Hinge 1 to Node 1 divided by element length.
+   LT.0.0.AND.GT. - 1.0 : -HLOC1 is the distance of Hinge 1 to Node 1 divided by element length; deactivate shear yielding.
+   EQ. - 1.0:      deactivate Hinge 1.
+   EQ. - 10.0 : deactivate shear yielding; Hinge 1 is located at Node 1.
+   EQ. - 11.0:     deactivate Hinge 1 and shear yielding.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hloc2
+   :type: Optional[float]
+
+
+   
+   Get or set the Location of plastic Hinge 2 from Node 2 (see Remark 1):
+   GE.0.0: HLOC2 is the distance of Hinge 2 to Node 2 divided by element length.
+   LT.0.0.AND.GT. - 1.0 : HLOC2 is the distance of Hinge 2 to Node 2 divided by element length; deactivate shear yielding.
+   EQ. - 1.0:      deactivate Hinge 2.
+   EQ. - 10.0 : deactivate shear yielding; Hinge 2 is located at Node 2.
+   EQ. - 11.0:     deactivate Hinge 2 and shear yielding.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: deltas
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameter to define the skew for yield surface (ISURF = 3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: kappas
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameter to define the skew for yield surface (ISURF = 3); .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: deltat
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameter to define the skew for yield surface (ISURF = 3); .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: kappat
+   :type: Optional[float]
+
+
+   
+   Get or set the Parameter to define the skew for yield surface (ISURF = 3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcshs
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID (see *DEFINE_CURVE) giving yield shear force as a function of inelastic shear strain (shear angle) in the local s-direction .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfshs
+   :type: float
+
+
+   
+   Get or set the Scale factor on yield shear force in the local s-direction (scales the force from LCSHS):
+   GT.0.0: constant scale factor
+   LT.0.0 : user - defined interaction with axial force. | SFSHS | is the load curve ID giving scale factor as a function of normalized axial force(tensile is positive).The normalization uses SFAT for tensile forceand SFAC for compressive force.For example, point(-1.0,0.5) on the curve defines a scale factor of 0.5 for compressive force of - SFAC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lcsht
+   :type: Optional[int]
+
+
+   
+   Get or set the Load curve ID (see *DEFINE_CURVE) giving yield shear force as a function of inelastic shear strain (shear angle) in the local t-direction .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sfsht
+   :type: float
+
+
+   
+   Get or set the Scale factor on yield shear force in the local t-direction (scales the force from LCSHS).
+   GT.0.0: constant scale factor
+   LT.0.0 : user - defined interaction with axial force. | SFSHT|  is the load curve ID giving scale factor as a function of normalized axial force(tensile is positive).The normalization uses SFAT for tensile forceand SFAC for compressive force.For example, point(-1.0,0.5) on the curve defines a scale factor of 0.5 for compressive force of - SFAC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hardms
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening modulus for moment about the local s-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gamms
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening limit for moment about the local s-axis .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hardmt
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening modulus for moment about the local t-axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gammt
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening limit for moment about the local t-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hardat
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening modulus for tensile axial force.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gamat
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening limit for tensile axial force
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: hardac
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening modulus for compressive axial force.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: gamac
+   :type: Optional[float]
+
+
+   
+   Get or set the Kinematic hardening limit for compressive axial force
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: omgms1
+   :type: Optional[float]
+
+
+   
+   Get or set the Damage evolution parameter ω_s1 for moment about the local s-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: omgms2
+   :type: Optional[float]
+
+
+   
+   Get or set the Damage evolution parameter ω_s2 for moment about the local s-axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: omgmt1
+   :type: float
+
+
+   
+   Get or set the Damage evolution parameter ω_t1 for moment about the local t-axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: omgmt2
+   :type: float
+
+
+   
+   Get or set the Damage evolution parameter ω_t2 for moment about the local t-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: omgat1
+   :type: Optional[float]
+
+
+   
+   Get or set the Damage evolution parameter ω_at1 for tensile force.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: omgat2
+   :type: Optional[float]
+
+
+   
+   Get or set the Damage evolution parameter ω_at2 for tensile force
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: omgac1
+   :type: float
+
+
+   
+   Get or set the Damage evolution parameter ω_ac1 for compressive force.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: omgac2
+   :type: float
+
+
+   
+   Get or set the Damage evolution parameter ω_ac2 for compressive force
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rums
+   :type: float
+
+
+   
+   Get or set the Ultimate plastic rotation about s-axis for damage calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: rumt
+   :type: float
+
+
+   
+   Get or set the Ultimate plastic rotation about t-axis for damage calculation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: duat
+   :type: float
+
+
+   
+   Get or set the Ultimate tensile plastic deformation/strain for damage calculation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: duac
+   :type: float
+
+
+   
+   Get or set the Ultimate compressive plastic deformation/strain for damage calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lam1
+   :type: Optional[float]
+
+
+   
+   Get or set the Damage evolution parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: lam2
+   :type: Optional[float]
+
+
+   
+   Get or set the Damage evolution parameter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: soft1
+   :type: float
+
+
+   
+   Get or set the Threshold index at which softening starts .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: soft2
+   :type: float
+
+
+   
+   Get or set the Threshold index at which the element is fully softened and to be removed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: prs1
+   :type: float
+
+
+   
+   Get or set the Plastic rotation thresholds 1 to 4 about s-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: prs2
+   :type: float
+
+
+   
+   Get or set the Plastic rotation thresholds 1 to 4 about s-axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: prs3
+   :type: float
+
+
+   
+   Get or set the Plastic rotation thresholds 1 to 4 about s-axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: prs4
+   :type: float
+
+
+   
+   Get or set the Plastic rotation thresholds 1 to 4 about s-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: prt1
+   :type: float
+
+
+   
+   Get or set the Plastic rotation thresholds 1 to 4 about t-axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: prt2
+   :type: float
+
+
+   
+   Get or set the Plastic rotation thresholds 1 to 4 about t-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: prt3
+   :type: float
+
+
+   
+   Get or set the Plastic rotation thresholds 1 to 4 about t-axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: prt4
+   :type: float
+
+
+   
+   Get or set the Plastic rotation thresholds 1 to 4 about t-axis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ts1
+   :type: float
+
+
+   
+   Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ts2
+   :type: float
+
+
+   
+   Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ts3
+   :type: float
+
+
+   
+   Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ts4
+   :type: float
+
+
+   
+   Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cs1
+   :type: float
+
+
+   
+   Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cs2
+   :type: float
+
+
+   
+   Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cs3
+   :type: float
+
+
+   
+   Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: cs4
+   :type: float
+
+
+   
+   Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ss1
+   :type: float
+
+
+   
+   Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ss2
+   :type: float
+
+
+   
+   Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ss3
+   :type: float
+
+
+   
+   Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ss4
+   :type: float
+
+
+   
+   Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: st1
+   :type: float
+
+
+   
+   Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: st2
+   :type: float
+
+
+   
+   Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: st3
+   :type: float
+
+
+   
+   Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: st4
+   :type: float
+
+
+   
+   Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: 'HYSTERETIC_BEAM'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+

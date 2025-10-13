@@ -1,0 +1,1500 @@
+
+
+
+
+
+
+:class:`Mat004`
+===============
+
+
+.. py:class:: mat_004.Mat004(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA MAT_004 keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Mat004
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~mid`
+            - Get or set the Material identification. A unique number has to be used.
+          * - :py:attr:`~ro`
+            - Get or set the Mass density.
+          * - :py:attr:`~t1`
+            - Get or set the First temperature. The minimum is 2, the maximum is 8.
+          * - :py:attr:`~t2`
+            - Get or set the Second temperature.
+          * - :py:attr:`~t3`
+            - Get or set the Third temperature.
+          * - :py:attr:`~t4`
+            - Get or set the Fourth temperature.
+          * - :py:attr:`~t5`
+            - Get or set the Fifth temperature.
+          * - :py:attr:`~t6`
+            - Get or set the Sixth temperature.
+          * - :py:attr:`~t7`
+            - Get or set the Seventh temperature.
+          * - :py:attr:`~t8`
+            - Get or set the Eighth temperature.
+          * - :py:attr:`~e1`
+            - Get or set the Corresponding Young's modulus at temperature T1.
+          * - :py:attr:`~e2`
+            - Get or set the Corresponding Young's modulus at temperature T2.
+          * - :py:attr:`~e3`
+            - Get or set the Corresponding Young's modulus at temperature T3.
+          * - :py:attr:`~e4`
+            - Get or set the Corresponding Young's modulus at temperature T4.
+          * - :py:attr:`~e5`
+            - Get or set the Corresponding Young's modulus at temperature T5.
+          * - :py:attr:`~e6`
+            - Get or set the Corresponding Young's modulus at temperature T6.
+          * - :py:attr:`~e7`
+            - Get or set the Corresponding Young's modulus at temperature T7.
+          * - :py:attr:`~e8`
+            - Get or set the Corresponding Young's modulus at temperature T8.
+          * - :py:attr:`~pr1`
+            - Get or set the Corresponding Poisson's ratio at temperature T1.
+          * - :py:attr:`~pr2`
+            - Get or set the Corresponding Poisson's ratio at temperature T2.
+          * - :py:attr:`~pr3`
+            - Get or set the Corresponding Poisson's ratio at temperature T3.
+          * - :py:attr:`~pr4`
+            - Get or set the Corresponding Poisson's ratio at temperature T4.
+          * - :py:attr:`~pr5`
+            - Get or set the Corresponding Poisson's ratio at temperature T5.
+          * - :py:attr:`~pr6`
+            - Get or set the Corresponding Poisson's ratio at temperature T6.
+          * - :py:attr:`~pr7`
+            - Get or set the Corresponding Poisson's ratio at temperature T7.
+          * - :py:attr:`~pr8`
+            - Get or set the Corresponding Poisson's ratio at temperature T8.
+          * - :py:attr:`~alpha1`
+            - Get or set the Corresponding coefficient of thermal expansion at temperature T1 (no defaults).
+          * - :py:attr:`~alpha2`
+            - Get or set the Corresponding coefficient of thermal expansion at temperature T2 (no defaults).
+          * - :py:attr:`~alpha3`
+            - Get or set the Corresponding coefficient of thermal expansion at temperature T3 (no defaults).
+          * - :py:attr:`~alpha4`
+            - Get or set the Corresponding coefficient of thermal expansion at temperature T4 (no defaults).
+          * - :py:attr:`~alpha5`
+            - Get or set the Corresponding coefficient of thermal expansion at temperature T5 (no defaults).
+          * - :py:attr:`~alpha6`
+            - Get or set the Corresponding coefficient of thermal expansion at temperature T6 (no defaults).
+          * - :py:attr:`~alpha7`
+            - Get or set the Corresponding coefficient of thermal expansion at temperature T7 (no defaults).
+          * - :py:attr:`~alpha8`
+            - Get or set the Corresponding coefficient of thermal expansion at temperature T8 (no defaults).
+          * - :py:attr:`~sigy1`
+            - Get or set the Corresponding yield stresse at temperature T1 (no defaults).
+          * - :py:attr:`~sigy2`
+            - Get or set the Corresponding yield stresse at temperature T2 (no defaults).
+          * - :py:attr:`~sigy3`
+            - Get or set the Corresponding yield stresse at temperature T3 (no defaults).
+          * - :py:attr:`~sigy4`
+            - Get or set the Corresponding yield stresse at temperature T4 (no defaults).
+          * - :py:attr:`~sigy5`
+            - Get or set the Corresponding yield stresse at temperature T5 (no defaults).
+          * - :py:attr:`~sigy6`
+            - Get or set the Corresponding yield stresse at temperature T6 (no defaults).
+          * - :py:attr:`~sigy7`
+            - Get or set the Corresponding yield stresse at temperature T7 (no defaults).
+          * - :py:attr:`~sigy8`
+            - Get or set the Corresponding yield stresse at temperature T8 (no defaults).
+          * - :py:attr:`~etan1`
+            - Get or set the Corresponding plastic hardening modulus at temperature T1 (no default).
+          * - :py:attr:`~etan2`
+            - Get or set the Corresponding plastic hardening modulus at temperature T2 (no default).
+          * - :py:attr:`~etan3`
+            - Get or set the Corresponding plastic hardening modulus at temperature T3 (no default).
+          * - :py:attr:`~etan4`
+            - Get or set the Corresponding plastic hardening modulus at temperature T4 (no default).
+          * - :py:attr:`~etan5`
+            - Get or set the Corresponding plastic hardening modulus at temperature T5 (no default).
+          * - :py:attr:`~etan6`
+            - Get or set the Corresponding plastic hardening modulus at temperature T6 (no default).
+          * - :py:attr:`~etan7`
+            - Get or set the Corresponding plastic hardening modulus at temperature T7 (no default).
+          * - :py:attr:`~etan8`
+            - Get or set the Corresponding plastic hardening modulus at temperature T8 (no default).
+          * - :py:attr:`~title`
+            - Get or set the Additional title line
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~keyword`
+            - 
+          * - :py:attr:`~subkeyword`
+            - 
+          * - :py:attr:`~option_specs`
+            - Get the card format type.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from mat_004 import Mat004
+
+Property detail
+---------------
+
+.. py:property:: mid
+   :type: Optional[int]
+
+
+   
+   Get or set the Material identification. A unique number has to be used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: ro
+   :type: Optional[float]
+
+
+   
+   Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t1
+   :type: Optional[float]
+
+
+   
+   Get or set the First temperature. The minimum is 2, the maximum is 8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t2
+   :type: Optional[float]
+
+
+   
+   Get or set the Second temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t3
+   :type: Optional[float]
+
+
+   
+   Get or set the Third temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t4
+   :type: Optional[float]
+
+
+   
+   Get or set the Fourth temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t5
+   :type: Optional[float]
+
+
+   
+   Get or set the Fifth temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t6
+   :type: Optional[float]
+
+
+   
+   Get or set the Sixth temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t7
+   :type: Optional[float]
+
+
+   
+   Get or set the Seventh temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: t8
+   :type: Optional[float]
+
+
+   
+   Get or set the Eighth temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e1
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Young's modulus at temperature T1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e2
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Young's modulus at temperature T2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e3
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Young's modulus at temperature T3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e4
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Young's modulus at temperature T4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e5
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Young's modulus at temperature T5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e6
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Young's modulus at temperature T6.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e7
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Young's modulus at temperature T7.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: e8
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Young's modulus at temperature T8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr1
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Poisson's ratio at temperature T1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr2
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Poisson's ratio at temperature T2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr3
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Poisson's ratio at temperature T3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr4
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Poisson's ratio at temperature T4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr5
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Poisson's ratio at temperature T5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr6
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Poisson's ratio at temperature T6.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr7
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Poisson's ratio at temperature T7.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: pr8
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding Poisson's ratio at temperature T8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha1
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding coefficient of thermal expansion at temperature T1 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha2
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding coefficient of thermal expansion at temperature T2 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha3
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding coefficient of thermal expansion at temperature T3 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha4
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding coefficient of thermal expansion at temperature T4 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha5
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding coefficient of thermal expansion at temperature T5 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha6
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding coefficient of thermal expansion at temperature T6 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha7
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding coefficient of thermal expansion at temperature T7 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: alpha8
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding coefficient of thermal expansion at temperature T8 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy1
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stresse at temperature T1 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy2
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stresse at temperature T2 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy3
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stresse at temperature T3 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy4
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stresse at temperature T4 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy5
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stresse at temperature T5 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy6
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stresse at temperature T6 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy7
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stresse at temperature T7 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: sigy8
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding yield stresse at temperature T8 (no defaults).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etan1
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding plastic hardening modulus at temperature T1 (no default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etan2
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding plastic hardening modulus at temperature T2 (no default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etan3
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding plastic hardening modulus at temperature T3 (no default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etan4
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding plastic hardening modulus at temperature T4 (no default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etan5
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding plastic hardening modulus at temperature T5 (no default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etan6
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding plastic hardening modulus at temperature T6 (no default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etan7
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding plastic hardening modulus at temperature T7 (no default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: etan8
+   :type: Optional[float]
+
+
+   
+   Get or set the Corresponding plastic hardening modulus at temperature T8 (no default).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:property:: title
+   :type: Optional[str]
+
+
+   
+   Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: keyword
+   :value: 'MAT'
+
+
+.. py:attribute:: subkeyword
+   :value: '004'
+
+
+.. py:attribute:: option_specs
+
+   
+   Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+
