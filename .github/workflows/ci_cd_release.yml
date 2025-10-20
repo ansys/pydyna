@@ -1,18 +1,13 @@
 name: release
 
-permissions:
-  contents: read
-  packages: read
-
 on:
   push:
     tags:
       - "v*.*.*"
-    inputs:
-      PyDynaRunContainer:
-        description: 'Run container name'
-        required: false
-        default: ghcr.io/ansys/pydyna-run:latest
+
+permissions:
+  contents: read
+  packages: read
 
 env:
   MAIN_PYTHON_VERSION: '3.13'
