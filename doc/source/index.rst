@@ -66,11 +66,7 @@ PyDYNA documentation  |version|
 
        getting-started
        user-guide/index
-       {% if build_api %}
-       api/index
-       {% endif %}
-       {% if build_examples %}
-       examples/index
-       {% endif %}
+       api.rst
+       examples.rst
        contributing
        changelog

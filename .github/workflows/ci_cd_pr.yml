@@ -185,16 +185,16 @@ jobs:
 
       - name: Build keyword documentation
         run: |
-          cd doc/source/keyword_classes_doc
-          rm -rf api
-          sphinx-build -b html . _build
+          make -C doc html
         shell: bash
+        env:
+          BUILD_EXAMPLES: 'false'
 
       - name: Upload keyword documentation artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: keyword-documentation
-          path: doc/source/keyword_classes_doc/_build/html/
+          path: doc/_build/html/
 
   # smoke-tests:
   #   name: "Build wheelhouse for ${{ matrix.os }} and Python ${{ matrix.python-version }}"

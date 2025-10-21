@@ -131,9 +131,9 @@ html_theme_options = {
     "collapse_navigation": True,
     "use_edit_page_button": True,
     "ansys_sphinx_theme_autoapi": {
-        "ignore": [
-           "*core/keywords/keyword_classes/auto*",
-        ],
+        # "ignore": [
+        #    "*core/keywords/keyword_classes/auto*",
+        # ],
         "output": "api",        
     },
 }
