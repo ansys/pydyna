@@ -54,7 +54,7 @@ codegen = [
     "Jinja2"
 ]
 tests = [
-    "matplotlib==3.10.6",
+    "matplotlib==3.10.7",
     "numpy==2.2.6",
     "pytest==8.4.2",
     "pytest-cov==7.0.0",
@@ -68,7 +68,7 @@ tests = [
 ]
 doc = [
     "recommonmark==0.7.1",
-    "matplotlib==3.10.6",
+    "matplotlib==3.10.7",
     "imageio==2.37.0",
     "imageio-ffmpeg==0.6.0",
     "numpydoc==1.9.0",
