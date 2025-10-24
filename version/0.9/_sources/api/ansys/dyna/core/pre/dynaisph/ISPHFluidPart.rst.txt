@@ -1,0 +1,204 @@
+ansys.dyna.core.pre.dynaisph.ISPHFluidPart
+==========================================
+
+.. py:class:: ansys.dyna.core.pre.dynaisph.ISPHFluidPart(pid, minpoint, length, numdirx, numdiry, numdirz)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Part`
+
+
+   
+   Generates ISPH particles inside a box.
+
+
+   :Parameters:
+
+       **pid** : :class:`python:int`
+           Part ID.
+
+       **minpoint** : :obj:`Point`
+           Minimum x,y,z-coordinate.
+
+       **length** : :obj:`Point`
+           Box length in the x,y,z-direction.
+
+       **numdirx** : :class:`python:int`
+           Number of ISPH particles in the x-direction.
+
+       **numdiry** : :class:`python:int`
+           Number of ISPH particles in the y-direction.
+
+       **numdirz** : :class:`python:int`
+           Number of ISPH particles in the z-direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'ISPHFLUID'
+
+
+
+   .. py:attribute:: minpoint
+
+
+   .. py:attribute:: length
+
+
+   .. py:attribute:: numdirx
+
+
+   .. py:attribute:: numdiry
+
+
+   .. py:attribute:: numdirz
+
+
+   .. py:attribute:: cslh
+      :value: 1.2
+
+
+
+   .. py:attribute:: hmin
+      :value: 0.2
+
+
+
+   .. py:attribute:: hmax
+      :value: 2.0
+
+
+
+   .. py:attribute:: sphini
+      :value: 0
+
+
+
+   .. py:attribute:: massflowplane
+      :value: None
+
+
+
+   .. py:method:: set_smoothing_length(initial, min, max, optional)
+
+      
+      Calculate the smoothing length of the particles.
+
+
+      :Parameters:
+
+          **initial** : :class:`python:float`
+              Constant for calculating the initial smoothing length of the particles.
+
+          **min** : :class:`python:float`
+              Scale factor for the minimum smoothing length.
+
+          **max** : :class:`python:float`
+              Scale factor for the maximum smoothing length.
+
+          **optional** : :class:`python:float`, :obj:`optional`
+              Initial smoothing length, which overrides the true smoothing length.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_particles()
+
+      
+      Create ISPH particles inside the box.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_massflow_plane(surfaces)
+
+      
+      Measure ISPH mass flow rate across a defined plane.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_property()
+
+      
+      Set properties for an ISPH fluid part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

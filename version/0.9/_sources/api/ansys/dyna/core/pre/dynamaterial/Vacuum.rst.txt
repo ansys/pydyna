@@ -1,0 +1,62 @@
+ansys.dyna.core.pre.dynamaterial.Vacuum
+=======================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.Vacuum(estimated_material_density=1e-09)
+
+   
+   Defines a vacuum material.
+
+
+   :Parameters:
+
+       **estimated_material_density** : :class:`python:float`
+           Estimated material density. The default is ``1e-09``.
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: estimated_material_density
+      :value: 1e-09
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a null material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
