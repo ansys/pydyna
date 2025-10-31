@@ -1,0 +1,428 @@
+ansys.dyna.core.pre.dynamech.DynaMech
+=====================================
+
+.. py:class:: ansys.dyna.core.pre.dynamech.DynaMech(analysis=AnalysisType.EXPLICIT)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+
+   
+   Defines a Mechanical analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: casetype
+
+
+   .. py:attribute:: analysis
+      :value: 1
+
+
+
+   .. py:method:: create_control_output(npopt=0, neecho=0)
+
+      
+      Set miscellaneous output parameters.
+
+
+      :Parameters:
+
+          **npopt** : :class:`python:int`, :obj:`optional`
+              Print suppression during the input phase flag for the D3HSP file.
+              The default is ``0``. Options are:
+              
+              - EQ.0: No suppression.
+              - EQ.1: Nodal coordinates, element connectivities, rigid wall definitions,
+                nodal SPCs, initial velocities, initial strains, adaptive constraints, and
+                SPR2/SPR3 constraints are not printed.
+
+          **neecho** : :class:`python:int`, :obj:`optional`
+              Print suppression during the input phase flag for the echo file.
+              The default is ``0``. Options are:
+              
+              - EQ.0: All data is printed.
+              - EQ.1: Nodal printing is suppressed.
+              - EQ.2: Element printing is suppressed.
+              - EQ.3: Both nodal and element printing is suppressed.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_init_velocity(translational=Velocity(0, 0, 0), rotational=RotVelocity(0, 0, 0))
+
+      
+      Define initial nodal point velocities using a nodal set ID.
+
+
+      :Parameters:
+
+          **nsid** : :class:`python:int`
+              Nodal set ID.
+
+          **translational** : :obj:`Velocity`
+              Initial translational velocity in the x,y,z-direction.
+
+          **rotational** : :obj:`RotVelocity`
+              Initial rotational velocity about the x,y,z-axis.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_defineorientation(vid, iop, vector, node1, node2)
+
+      
+      Define orientation vectors for discrete springs and dampers.
+
+
+      :Parameters:
+
+          **vid** : :class:`python:int`
+              Orientation vector ID.
+
+          **iop** : :class:`python:int`
+              Options are:
+              
+              - EQ.0: Deflections/rotations are measured and forces/moments are applied
+                along the following orientation vector.
+              - EQ.1: Deflections/rotations are measured and forces/moments are applied
+                along the axis between the two spring/damper nodes projected onto the plane normal
+                to the following orientation vector.
+              - EQ.2: Deflections/rotations are measured and forces/moments are applied
+                along a vector defined by the following two nodes.
+              - EQ.3: Deflections/rotations are measured and forces/moments are applied
+                along the axis between the two spring/damper nodes projected onto the
+                plane normal to the a vector defined by the following two nodes.
+
+          **vector** : :class:`python:list` [x,y,z]
+              x,y,z : x,y,z-value of the orientation vector.
+
+          **node1** : :class:`python:int`
+              Node 1 ID.
+
+          **node2** : :class:`python:int`
+              Node 2 ID.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_shellset(option, title, sid, eids)
+
+      
+      Define a set of shell elements with optional identical or unique attributes.
+
+
+      :Parameters:
+
+          **option** : :class:`python:str`
+              Available options. Choices are ``<BLANK>``,``LIST``, and ``GENERAL``.
+
+          **title** : :class:`python:str`
+              Title for the shell set.
+
+          **sid** : :class:`python:int`
+              Set ID.
+
+          **eids** : :class:`python:list`
+              List of shell element IDs.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_solidset(title, sid, ki)
+
+      
+      Define a set of solid elements.
+
+
+      :Parameters:
+
+          **title** : :class:`python:str`
+              Title for the set of solid elements.
+
+          **sid** : :class:`python:int`
+              Set ID.
+
+          **ki** : :class:`python:list`
+              Solid element IDs.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_section_solid(title, secid, elform)
+
+      
+      Define section properties for solid continuum and fluid elements.
+
+
+      :Parameters:
+
+          **title** : :class:`python:str`
+              Title for section solid.
+
+          **secid** : :class:`python:int`
+              Section ID. ``SECID`` is referenced on the ``\*PART`` card.
+              A unique number must be specified.
+
+          **elform** : :class:`python:int`
+              Element formulation options.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_section_discrete(secid, dro=0, kd=0, v0=0, cl=0, fd=0, cdl=0, tdl=0)
+
+      
+      Defined spring and damper elements for translation and rotation.
+
+
+      :Parameters:
+
+          **secid** : :class:`python:int`
+              Section ID.
+
+          **dro** : :class:`python:int`, :obj:`optional`
+              Displacement/rotation. The default is ``0``. Options are:
+              
+              - EQ.0: Material describes a translational spring/damper.
+              - EQ.1: Material describes a torsional spring/damper.
+
+          **kd** : :class:`python:float`, :obj:`optional`
+              Dynamic magnification factor. The default is ``0``.
+
+          **v0** : :class:`python:float`, :obj:`optional`
+              Test velocity. The default is ``0``.
+
+          **cl** : :class:`python:float`, :obj:`optional`
+              Clearance. The default is ``0``.
+
+          **fd** : :class:`python:float`, :obj:`optional`
+              Failure deflection. The default is ``0``.
+
+          **cdl** : :class:`python:float`, :obj:`optional`
+              Deflection limit in compression. The default is ``0``.
+
+          **td1** : :class:`python:float`, :obj:`optional`
+              Deflection limit in tension. The default is ``0``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_hourglass(ghid, ihq, qm=0.1, q1=1.5, q2=0.06, qb=1e-09, qw=1e-09)
+
+      
+      Define hourglass and bulk viscosity properties.
+
+
+      :Parameters:
+
+          **ghid** : :class:`python:int`
+              Hourglass ID. A unique number or label must be specified.
+
+          **ihq** : :class:`python:int`
+              Hourglass control type.
+
+          **qm** : :class:`python:float`, :obj:`optional`
+              Hourglass coefficient. The default is ``0.1``.
+
+          **q1** : :class:`python:float`, :obj:`optional`
+              Quadratic bulk viscosity coefficient. The default is ``1.5``.
+
+          **q2** : :class:`python:float`, :obj:`optional`
+              Linear bulk viscosity coefficient. The default is ``0.06``.
+
+          **qb** : :class:`python:float`, :obj:`optional`
+              Hourglass coefficient for shell bending. The default is ``1e-09``.
+
+          **qw** : :class:`python:float`, :obj:`optional`
+              Hourglass coefficient for shell warping. The default is ``1e-09``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_file(defaultsetting=1)
+
+      
+      Save keyword files.
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

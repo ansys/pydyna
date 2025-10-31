@@ -1,0 +1,149 @@
+ansys.dyna.core.pre.dynaem.RandlesCell
+======================================
+
+.. py:class:: ansys.dyna.core.pre.dynaem.RandlesCell(set=None)
+
+   
+   Define parameters for a Randles Cell.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: define_batmac
+      :value: False
+
+
+
+   .. py:attribute:: define_randles_short
+      :value: False
+
+
+
+   .. py:attribute:: define_extra_heat_source
+      :value: False
+
+
+
+   .. py:method:: set_batmac_model(cell_type=RandlesCellType.RANDLES_CELL_1_ORDER, cell_parts=None, area=2, cell_capacity=0, soc_conversion_factor=0, charge_init_state=0, equilibrium_voltage=None, circuit_parameter=None, constant_temperature=0, temperature_from_thermal_solver=False, add_heating_to_thermal_solver=False)
+
+      
+      define the distributed Randles circuit parameters for a Randles cell when using the batmac model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_randles_short(resistances_func=None)
+
+      
+      Define conditions to turn on a Randles short (replace one or several Randles circuits by resistances),
+      and to define the value of the short resistance.
+
+
+      :Parameters:
+
+          **resistances_func** : :obj:`Function`
+              Define the local resistance function of local parameters for the local Randles circuit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_extra_heat_source(heat_source_func=None)
+
+      
+      Add an extra heat source term to the Randles circuit nodes in order to account for thermal runaway
+      situations.
+
+
+      :Parameters:
+
+          **heat_source_func** : :obj:`Function`
+              Define the local heat source function of local parameters for the local Randles circuit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Set parameter for Randles Cell.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
