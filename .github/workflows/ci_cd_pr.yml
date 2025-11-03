@@ -31,49 +31,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  labeler:
-    name: "Labels"
-    permissions:
-      contents: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-       with:
-         persist-credentials: false
-
-     - name: "Update labels"
-       uses: micnncim/action-label-syncer@3abd5ab72fda571e69fffd97bd4e0033dd5f495c # v1.3.0
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-     - name: "Label pull-request"
-       uses: actions/labeler@634933edcd8ababfe52f92936142cc22ac488b1b # v6.0.1
-       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-  changelog-fragment:
-    name: "Create changelog fragment"
-    runs-on: ubuntu-latest
-    needs: labeler
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-
-      - uses: ansys/actions/check-pr-title@c2fa7c93f6883114e0e643599431b33d29f0b13f # v9.0.15
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: ansys/actions/doc-changelog@c2fa7c93f6883114e0e643599431b33d29f0b13f # v9.0.15
-        if: ${{ github.event_name == 'pull_request' }}
-        with:
-          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
-          use-conventional-commits: true
-          use-default-towncrier-config: true
-          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
-          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
-
   actions-security:
     name: Actions Security
     runs-on: ubuntu-latest
@@ -172,7 +129,7 @@ jobs:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
-  
+
 
   keyword-testing:
     name: "Keyword testing for matrix"

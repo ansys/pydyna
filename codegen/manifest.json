@@ -511,6 +511,28 @@
             ]
         }
     },
+    "CONTROL_IMPLICIT_EIGENVALUE": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "index": 1,
+                    "func": "(self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != None or self.mstrscl != 0.001)"
+                },
+                {
+                    "index": 2,
+                    "func": "self.eigmth == 101"
+                },
+                {
+                    "index": 3,
+                    "func": "self.eigmth == 102"
+                },
+                {
+                    "index": 4,
+                    "func": "self.eigmth == 111"
+                }
+            ]
+        }
+    },
     "CONTROL_IMPLICIT_DYNAMICS": {
         "generation-options": {
             "conditional-card": [
