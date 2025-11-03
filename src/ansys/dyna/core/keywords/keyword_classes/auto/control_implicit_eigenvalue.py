@@ -161,6 +161,7 @@ class ControlImplicitEigenvalue(KeywordBase):
                         **kwargs,
                     ),
                 ],
+                lambda: (self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != None or self.mstrscl != 0.001),
             ),
             Card(
                 [
@@ -203,6 +204,7 @@ class ControlImplicitEigenvalue(KeywordBase):
                         **kwargs,
                     ),
                 ],
+                lambda: self.eigmth == 101,
             ),
             Card(
                 [
@@ -253,6 +255,7 @@ class ControlImplicitEigenvalue(KeywordBase):
                         **kwargs,
                     ),
                 ],
+                lambda: self.eigmth == 102,
             ),
             Card(
                 [
@@ -301,6 +304,7 @@ class ControlImplicitEigenvalue(KeywordBase):
                         **kwargs,
                     ),
                 ],
+                lambda: self.eigmth == 111,
             ),
         ]
 
