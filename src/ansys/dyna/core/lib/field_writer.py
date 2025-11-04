@@ -90,6 +90,9 @@ def check_field_type(field_type: type):
 
 
 def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
+    
+    if '&' in str(value): #handle unresolved parameters which have the wrong type
+        field_type = str
     if libmissing.checknull(value):
         holler.write_spaces(buf, width)
     elif field_type == str:

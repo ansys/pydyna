@@ -674,3 +674,35 @@ def test_deck_remove():
 
     """deck should be empty"""
     assert len(deck.all_keywords) == 0
+
+
+@pytest.mark.keywords
+def test_deck_read_parameter_as_string(file_utils):
+    """Test reading a deck with parameters without resolving parameter."""
+    deck = Deck()
+    filename = file_utils.assets_folder / "00_minimal_parameter_test_main.k"
+    deck.import_file(filename) # pass new argument resolve_parameter = True / False)
+    ('before expand')
+    print(deck)
+    assert len(deck.keywords) == 9
+
+    deck = deck.expand(recurse=True) # check if parameter handling works in combination with expanding
+    print('after expand')
+    print(deck)
+    assert len(deck.keywords) == 26
+
+
+@pytest.mark.keywords
+def test_deck_expand_multi_level(file_utils):
+    """Test reading a deck with parameters without resolving parameter."""
+    deck = Deck()
+    filename = file_utils.assets_folder / "00_minimal_expand_test_main.k"
+    deck.import_file(filename)
+    print('before expand')
+    print(deck)
+    assert len(deck.keywords) == 2
+
+    deck = deck.expand(recurse=True)
+    print('after expand')
+    print(deck)
+    assert len(deck.keywords) == 5
