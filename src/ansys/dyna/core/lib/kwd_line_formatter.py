@@ -212,9 +212,14 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
                         value = False
                     raise Exception("Failed to find true or false value in flag")
         elif has_parameter(text_block):
-            if parameter_set is None:
+            resolve_parameters = False # do not resolve parameters and keep &myparam, this needs to be parsed to deck.import_file(file, encoding, resolve_parameter..)
+            if not resolve_parameters:
+                print('not resolve', text_block)
+                value = text_block
+            elif parameter_set is None:
                 raise ValueError("Parameter set must be provided when using parameters in keyword data.")
-            value = get_parameter(text_block, item_type)
+            else:
+                value = get_parameter(text_block, item_type)
         elif item_type is int:
             value = int(float(text_block))
         elif item_type is str:
