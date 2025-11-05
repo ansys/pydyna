@@ -208,6 +208,7 @@ class Deck:
     def _prepare_deck_for_expand(self, keyword: KeywordBase):
         """Prepare deck for expansion by adding import handlers."""
         include_deck = Deck(format=keyword.format)
+        # TODO: don't merge the parameters if "LOCAL" option is used!
         include_deck.parameters = self.parameters
         for import_handler in self._import_handlers:
             include_deck.register_import_handler(import_handler)
@@ -250,7 +251,6 @@ class Deck:
                 include_deck = self._prepare_deck_for_expand(keyword)
                 include_deck._import_file(expand_include_file, encoding, context)
             if recurse:
-                # TODO: merge the parameters if the "LOCAL" option is not used!
                 expanded = include_deck._expand_helper(search_paths, True)
                 keywords.extend(expanded)
             else:
