@@ -21,11 +21,10 @@
 # SOFTWARE.
 
 """Module providing the ParameterLocal class."""
+import dataclasses
 import typing
-import pandas as pd
-
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.table_card import TableCard
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ParameterLocal(KeywordBase):
@@ -34,34 +33,31 @@ class ParameterLocal(KeywordBase):
     keyword = "PARAMETER"
     subkeyword = "LOCAL"
 
+    @dataclasses.dataclass
+    class Parameter:
+        """Dataclass for Parameter."""
+        name: str = None
+        val: str = None
+
     def __init__(self, **kwargs):
         """Initialize the ParameterLocal class."""
         super().__init__(**kwargs)
         self._cards = [
-            TableCard(
-                [
-                    Field("prmr1", str, 0, 10, None),
-                    Field("val1", str, 10, 10, None),
-                    Field("prmr2", str, 20, 10, None),
-                    Field("val2", str, 30, 10, None),
-                    Field("prmr3", str, 40, 10, None),
-                    Field("val3", str, 50, 10, None),
-                    Field("prmr4", str, 60, 10, None),
-                    Field("val4", str, 70, 10, None),
-                ],
+            SeriesCard(
+                "parameters",
+                8,
+                10,
+                self.Parameter,
                 None,
-                name="parameters",
-                **kwargs,
-            ),
+                data = kwargs.get("parameters")),
         ]
 
     @property
-    def parameters(self) -> pd.DataFrame:
-        """Get the table of parameters."""
-        return self._cards[0].table
+    def parameters(self) -> SeriesCard:
+        """Parameters.."""
+        return self._cards[0]
 
     @parameters.setter
-    def parameters(self, df: pd.DataFrame):
-        """Set parameters from the dataframe df"""
-        self._cards[0].table = df
+    def parameters(self, value: typing.List) -> None:
+        self._cards[0].data = value
 
