@@ -82,6 +82,7 @@ class Deck:
     @parameters.setter
     def parameters(self, value: ParameterSet) -> None:
         import copy
+
         self._parameter_set = copy.copy(value)
 
     @property
