@@ -674,3 +674,22 @@ def test_deck_remove():
 
     """deck should be empty"""
     assert len(deck.all_keywords) == 0
+
+
+@pytest.mark.keywords
+def test_deck_expand_nonlocal_parameters(file_utils):
+    """Test reading a deck with parameters without resolving parameter."""
+    deck = Deck()
+    cwd = file_utils.assets_folder / "expand_parameters" / "nonlocal"
+    filename = cwd / "top.k"
+    deck.import_file(filename) # pass new argument resolve_parameter = True / False)
+    assert len(deck.keywords) == 3
+    deck = deck.expand(recurse=True, cwd=cwd)
+    assert len(deck.keywords) == 4
+    sections: list[kwd.SectionSolid] = list(deck.get_kwds_by_type("SECTION"))
+    pm_main_value = deck.parameters.get("pm_main")
+    assert pm_main_value == 100.0
+    assert len(sections) == 3
+    expected_secid_to_elform = {10:100, 20:1, 30:100}
+    for section in sections:
+        assert section.elform == expected_secid_to_elform[section.secid]

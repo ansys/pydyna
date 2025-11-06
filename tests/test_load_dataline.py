@@ -135,3 +135,19 @@ def test_load_dataline_011():
     assert len(res) == 2
     assert res[0] == 1
     assert res[1] == False
+
+@pytest.mark.keywords
+def test_load_dataline_012():
+    """Test loading a data line with parameter type mismatches."""
+    spec = [(0, 10, float), (10, 10, float), (20, 10, float), (30, 10, float), (40, 10, int)]
+    dataline = "                                             &vdct"
+
+    parameter_set = ParameterSet()
+    parameter_set.add("vdct", 1.12)
+    with pytest.raises(TypeError):
+        load_dataline(spec, dataline, parameter_set)
+
+    parameter_set = ParameterSet()
+    parameter_set.add("vdct", 1.0)
+    res = load_dataline(spec, dataline, parameter_set)
+    assert res[4] == 1

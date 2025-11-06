@@ -76,7 +76,14 @@ class Deck:
 
     @property
     def parameters(self) -> ParameterSet:
+        """Deck parameters."""
         return self._parameter_set
+
+    @parameters.setter
+    def parameters(self, value: ParameterSet) -> None:
+        import copy
+
+        self._parameter_set = copy.copy(value)
 
     @property
     def format(self) -> format_type:
@@ -201,6 +208,8 @@ class Deck:
     def _prepare_deck_for_expand(self, keyword: KeywordBase):
         """Prepare deck for expansion by adding import handlers."""
         include_deck = Deck(format=keyword.format)
+        # TODO: don't merge the parameters if "LOCAL" option is used!
+        include_deck.parameters = self.parameters
         for import_handler in self._import_handlers:
             include_deck.register_import_handler(import_handler)
         if keyword.subkeyword == "TRANSFORM":
@@ -242,7 +251,6 @@ class Deck:
                 include_deck = self._prepare_deck_for_expand(keyword)
                 include_deck._import_file(expand_include_file, encoding, context)
             if recurse:
-                # TODO: merge the parameters if the "LOCAL" option is not used!
                 expanded = include_deck._expand_helper(search_paths, True)
                 keywords.extend(expanded)
             else:
@@ -264,6 +272,7 @@ class Deck:
         cwd = cwd or os.getcwd()
         new_deck = Deck(title=self.title)
         new_deck.comment_header = self.comment_header
+        new_deck.parameters = self.parameters
         search_paths = [cwd]
         new_deck.extend(self._expand_helper(search_paths, recurse))
         return new_deck
