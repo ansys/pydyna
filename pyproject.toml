@@ -64,7 +64,7 @@ tests = [
     "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
     "ipython==8.37.0",
-    "pyvista==0.46.3",
+    "pyvista==0.46.4",
 ]
 doc = [
     "recommonmark==0.7.1",
@@ -89,7 +89,7 @@ doc = [
     "scikit-learn==1.7.2",
     "ipython==8.37.0",
     "jupyterlab==4.4.9",
-    "pyvista==0.46.3",
+    "pyvista==0.46.4",
 ]
 
 [tool.flit.module]
