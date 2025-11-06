@@ -56,16 +56,17 @@ def _unpack_param(param: "kwd.Parameter.Parameter") -> typing.Union[type, str, t
     elif type_code == "C":
         t = str
     else:
-        raise Exception(f"Parameter name {param_name} does not name a type")
+        raise Exception(f"Parameter name {name_field} does not name a type")
     val = t(param.val.strip())
     name = name_field[1:].strip()
     return t, name, val
 
 
 def _load_parameters(deck, parameter: "kwd.Parameter"):
+    deck_params = deck.parameters
     for p in parameter.parameters:
         t, name, val = _unpack_param(p)
-        deck.parameters.add(name, val)
+        deck_params.add(name, val)
 
 
 class ParameterHandler(ImportHandler):
@@ -76,6 +77,9 @@ class ParameterHandler(ImportHandler):
         from ansys.dyna.core import keywords as kwd
 
         if isinstance(keyword, kwd.Parameter):
+            keyword: kwd.Parameter = keyword
+            _load_parameters(context.deck, keyword)
+        elif isinstance(keyword, kwd.ParameterLocal):
             _load_parameters(context.deck, keyword)
 
     def on_error(self, error):

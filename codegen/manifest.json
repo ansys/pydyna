@@ -384,10 +384,21 @@
     },
     "PARAMETER_LOCAL": {
         "generation-options": {
-            "table-card": [
+            "series-card": [
                 {
                     "index": 0,
-                    "property-name": "parameters"
+                    "name": "parameters",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "struct",
+                    "struct-info": {
+                        "name": "Parameter",
+                        "fields": [
+                            {"name": "name", "type": "str"},
+                            {"name": "val", "type": "str"}
+                        ]
+                    },
+                    "help": "Parameters."
                 }
             ]
         }

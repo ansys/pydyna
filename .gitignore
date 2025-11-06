@@ -36,6 +36,9 @@ MANIFEST
 *.manifest
 *.spec
 
+# Visual studio code local settings
+.vscode/
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
