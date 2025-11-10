@@ -28,7 +28,7 @@ exclude: |
 repos:
 
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: 25.9.0  # IF VERSION CHANGES --> MODIFY "blacken-docs" MANUALLY AS WELL!!
+  rev: 25.11.0  # IF VERSION CHANGES --> MODIFY "blacken-docs" MANUALLY AS WELL!!
   hooks:
   - id: black
 
@@ -76,6 +76,6 @@ repos:
       - --start_year=2023
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: v1.16.0
+  rev: v1.16.3
   hooks:
     - id: zizmor
