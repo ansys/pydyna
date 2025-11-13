@@ -1,0 +1,152 @@
+ansys.dyna.core.lib.parameters
+==============================
+
+.. py:module:: ansys.dyna.core.lib.parameters
+
+.. autoapi-nested-parse::
+
+   Parameter classes.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.parameters.ParameterSet
+   ansys.dyna.core.lib.parameters.ParameterHandler
+
+
+Module Contents
+---------------
+
+.. py:class:: ParameterSet
+
+   
+   Deck parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: get(param: str) -> Any
+
+      
+      Get a parameter by name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add(param: str, value: Any) -> None
+
+      
+      Add a parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ParameterHandler
+
+   Bases: :py:obj:`ansys.dyna.core.lib.import_handler.ImportHandler`
+
+
+   
+   Base class for import handlers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: after_import(context: ansys.dyna.core.lib.import_handler.ImportContext, keyword: Union[ansys.dyna.core.lib.keyword_base.KeywordBase, str]) -> None
+
+      
+      Event called after a keyword is imported.
+
+      `keyword` is the imported keyword. It could be a string or a keyword object
+
+      Depending on the `context` is a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: on_error(error)
+
+
