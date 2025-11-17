@@ -23,8 +23,8 @@
 import os
 from typing import Optional
 
-from ansys.tools.path import get_dyna_path, get_latest_ansys_installation
-from ansys.tools.path.path import _get_unified_install_base_for_version
+from ansys.tools.common.path import get_dyna_path, get_latest_ansys_installation
+from ansys.tools.common.path.path import _get_unified_install_base_for_version
 
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
