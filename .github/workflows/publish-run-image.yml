@@ -13,9 +13,7 @@ on:
         default: latest
   push:
     tags:
-      - "*"
-    branches:
-      - main
+      - "v*.*.*"
 
 env:
   REGISTRY: ghcr.io
