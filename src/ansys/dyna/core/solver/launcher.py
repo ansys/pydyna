@@ -40,7 +40,7 @@ try:
 except ModuleNotFoundError:  # pragma: no cover
     _HAS_PIM = False
 
-from ansys.tools.path import get_available_ansys_installations, get_latest_ansys_installation
+from ansys.tools.common.path import get_available_ansys_installations, get_latest_ansys_installation
 
 from ansys.dyna.core.solver import DynaSolver
 
