@@ -10,13 +10,13 @@ from unittest.mock import MagicMock
 
 @pytest.fixture
 def patch_ansys_paths(monkeypatch):
-    monkeypatch.setattr("ansys.tools.path.path._read_config_file", lambda: {})
-    monkeypatch.setattr("ansys.tools.path.get_dyna_path", lambda *args, **kwargs: None)
-    monkeypatch.setattr("ansys.tools.path.path._get_unified_install_base_for_version",
+    monkeypatch.setattr("ansys.tools.common.path.path._read_config_file", lambda: {})
+    monkeypatch.setattr("ansys.tools.common.path.get_dyna_path", lambda *args, **kwargs: None)
+    monkeypatch.setattr("ansys.tools.common.path.path._get_unified_install_base_for_version",
                         lambda version, supported_versions=None: ("/opt/ansys/v231", None))
-    monkeypatch.setattr("ansys.tools.path.path.get_available_ansys_installations",
+    monkeypatch.setattr("ansys.tools.common.path.path.get_available_ansys_installations",
                         lambda: {251: '/usr/ansys_inc/v251'})
-    monkeypatch.setattr("ansys.tools.path.path.get_latest_ansys_installation",
+    monkeypatch.setattr("ansys.tools.common.path.path.get_latest_ansys_installation",
                         lambda: (241, "/opt/ansys/v241"))
 
 @pytest.fixture
