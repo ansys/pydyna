@@ -705,6 +705,23 @@ class SectionShell(KeywordBase):
             ),
         ]
 
+    def _ensure_card_set_properties(self):
+        if len(self.sets) != 1:
+            raise LookupError("Cannot get property, there is not exactly one card set!")
+
+    @property
+    def secid(self) -> typing.Optional[int]:
+        """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
+        """ # nopep8
+        self._ensure_card_set_properties()
+        return self.sets[0].secid
+
+    @secid.setter
+    def secid(self, value: int) -> None:
+        """Set the secid property."""
+        self._ensure_card_set_properties()
+        self.sets[0].secid = value
+
     @property
     def sets(self) -> typing.List[SectionShellCardSet]:
         """Gets the list of sets."""
