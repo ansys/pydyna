@@ -26,22 +26,19 @@ import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
+from ansys.dyna.core.lib.card_set import CardSet
+from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
-class SectionShell(KeywordBase):
-    """DYNA SECTION_SHELL keyword"""
-
-    keyword = "SECTION"
-    subkeyword = "SHELL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
-    ]
+class SectionShellCardSet(Cards):
+    """ CardSet."""
 
     def __init__(self, **kwargs):
-        """Initialize the SectionShell class."""
-        super().__init__(**kwargs)
+        """Initialize the SectionShellCardSet CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
             Card(
@@ -275,23 +272,6 @@ class SectionShell(KeywordBase):
                 lambda: self.lmc,
                 lambda: self.elform in [101, 102, 103, 104, 105],
                 data = kwargs.get("pi")),
-            OptionCardSet(
-                option_spec = SectionShell.option_specs[0],
-                cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
-                    ),
-                ],
-                **kwargs
-            ),
         ]
 
     @property
@@ -681,15 +661,69 @@ class SectionShell(KeywordBase):
         self._cards[5].data = value
 
     @property
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
+
+
+class SectionShell(KeywordBase):
+    """DYNA SECTION_SHELL keyword"""
+
+    keyword = "SECTION"
+    subkeyword = "SHELL"
+    option_specs = [
+        OptionSpec("TITLE", -1, 1),
+    ]
+
+    def __init__(self, **kwargs):
+        """Initialize the SectionShell class."""
+        super().__init__(**kwargs)
+        kwargs["parent"] = self
+        kwargs["keyword"] = self
+        kwargs["parent"] = self
+        self._cards = [
+            CardSet(
+                SectionShellCardSet,
+                **kwargs
+            ),
+            OptionCardSet(
+                option_spec = SectionShell.option_specs[0],
+                cards = [
+                    Card(
+                        [
+                            Field(
+                                "title",
+                                str,
+                                0,
+                                80,
+                                kwargs.get("title")
+                            ),
+                        ],
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
+
+    @property
+    def sets(self) -> typing.List[SectionShellCardSet]:
+        """Gets the list of sets."""
+        return self._cards[0].items()
+
+    def add_set(self, **kwargs):
+        """Adds a set to the list of sets."""
+        self._cards[0].add_item(**kwargs)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[6].cards[0].get_value("title")
+        return self._cards[1].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[6].cards[0].set_value("title", value)
+        self._cards[1].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
