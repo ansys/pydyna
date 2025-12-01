@@ -185,7 +185,6 @@ $#    pidl      pidc     iflag
    1234567       123         0
    1234568       124         0"""
 
-
 test_contact_tied_shell_edge_to_surface_id = """*CONTACT_TIED_SHELL_EDGE_TO_SURFACE_ID
 69000005  TIED_TEST3                                                    
   69000268  69000267         2         2                             0         0
@@ -196,6 +195,12 @@ test_contact_tied_shell_edge_to_surface_id = """*CONTACT_TIED_SHELL_EDGE_TO_SURF
                    0        0.        0.                            0.         0
                                                            0         0          
          0         0         1         0                   0         0"""
+
+test_section_shell_one_set = """*SECTION_SHELL
+$#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
+         1         2       1.0         5       1.0         0         0         1
+$#      t1        t2        t3        t4      nloc     marea      idof    edgset
+       1.0       1.0       1.0       1.0       0.0       0.0       0.0         0"""
 
 test_section_solid_title_deck_string = """$
 *KEYWORD

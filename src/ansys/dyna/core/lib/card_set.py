@@ -52,12 +52,17 @@ class CardSet(CardInterface):
         self._length_func = length_func
         self._active_func = active_func
         self._bounded = length_func != None
-        self._parent = kwargs.get("parent", None)
-        self._keyword = kwargs.get("keyword", None)
+        self._parent = kwargs.pop("parent", None)
+        self._keyword = kwargs.pop("keyword", None)
         if option_specs == None:
             option_specs = []
         self._option_specs = option_specs
         self._initialized: bool = False
+        if len(kwargs) > 0 and not self._bounded:
+            # implicit unbounded initializer!
+            self._initialize(**kwargs)
+        kwargs["parent"] = self._parent
+        kwargs["keyword"] = self._keyword
 
     @property
     def _items(self) -> typing.List[Cards]:
@@ -67,15 +72,22 @@ class CardSet(CardInterface):
     def _items(self, value: typing.List[Cards]) -> None:
         self._base_items = value
 
-    def _initialize(self) -> None:
+    def __len__(self) -> int:
+        if not self.active:
+            return 0
+        if self._bounded:
+            return self._length_func()
+        else:
+            return len(self._base_items)
+
+    def _initialize(self, **kwargs) -> None:
         if self._initialized:
             return
-        if self._bounded and self.active:
+        if self._bounded:
             self._initialize_data(self._length_func())
+        elif len(kwargs) > 0:
+            self.add_item(**kwargs)
         self._initialized = True
-
-    def initialize(self):
-        self._initialize()
 
     @property
     def option_specs(self) -> typing.List[OptionSpec]:
@@ -128,8 +140,8 @@ class CardSet(CardInterface):
         :param buf: Buffer to write to. If None, the output is returned as a string
         :param format: format_type to use. Default to standard.
         """
-
         def _write(buf: typing.TextIO):
+            # write each item in the card set
             for item_index, item in enumerate([item for item in self._items]):
                 write_comment = comment and item_index == 0
                 if item_index != 0:

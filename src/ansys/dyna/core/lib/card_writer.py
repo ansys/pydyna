@@ -33,8 +33,8 @@ def write_cards(
     buf: typing.TextIO,
     write_format: format_type,
     comment: typing.Optional[bool] = True,
-) -> bool:
-    """Write the cards. Return whether a superfluous trailing newline was added."""
+):
+    """Write the cards."""
 
     # this code tries its best to avoid adding superfluous trailing newlines, but
     # is not always successful. If one or more empty cards exist at the end of the
@@ -54,4 +54,6 @@ def write_cards(
             buf.write("\n")
             pos = buf.tell()
         card.write(write_format, buf, comment)
-    return pos == buf.tell()
+    superfluous_newline = pos == buf.tell()
+    if superfluous_newline:
+        buf.seek(buf.tell()-1)
