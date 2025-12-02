@@ -1,0 +1,61 @@
+{% if card.duplicate %}
+    @property
+    def {{card.duplicate.name}}(self) -> pd.DataFrame:
+        """Get the {{card.duplicate.name}}."""
+        ensure_card_set_properties(self, False)
+        return self.sets[{{set_index}}].{{card.duplicate.name}}
+
+    @{{card.duplicate.name}}.setter
+    def {{card.duplicate.name}}(self, df: pd.DataFrame):
+        ensure_card_set_properties(self, True)
+        self.sets[{{set_index}}].{{card.duplicate.name}} = df
+
+{% elif card.variable %}
+    @property
+    def {{card.variable.name}}(self) -> SeriesCard:
+        """Gets the {{card.variable.name}}."""
+        ensure_card_set_properties(self, False)
+        return self.sets[{{set_index}}].{{card.variable.name}}
+
+    @{{card.variable.name}}.setter
+    def {{card.variable.name}}(self, value: typing.List) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[{{set_index}}].{{card.variable.name}} = value
+
+{% elif card.set %}
+{% elif card.duplicate_group %}
+    @property
+    def {{card.overall_name}}(self) -> pd.DataFrame:
+        """Get or set the {{card.overall_name}}."""
+        ensure_card_set_properties(self, False)
+        return self.sets[{{set_index}}].{{card.overall_name}}
+
+    @{{card.overall_name}}.setter
+    def {{card.overall_name}}(self, df: pd.DataFrame):
+        ensure_card_set_properties(self, True)
+        self.sets[{{set_index}}].{{card.overall_name}} = df
+
+{% elif card.external %}
+{% else %}
+{% for field in card.fields %}
+{% if field.used %}
+{% if not field.redundant %}
+    @property
+    def {{field.property_name}}(self) -> {%- if field.default is none %} typing.Optional[
+                {%- else %} {% endif %}{{field.type}}{%- if field.default is none %}]{%- endif %}:
+        """Get or set the {{field.property_name}}
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[{{set_index}}].{{field.property_name}}
+
+{% if not field.readonly %}
+    @{{field.property_name}}.setter
+    def {{field.property_name}}(self, value: {{field.type}}) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[{{set_index}}].{{field.property_name}} = value
+
+{% endif %}{# not field.readonly #}
+{% endif %}{# not field.redundant #}
+{% endif %}{# field.used #}
+{% endfor %}
+{% endif %}

@@ -271,7 +271,8 @@ def test_load_segment(ref_string):
 
 @pytest.mark.keywords
 def test_section_shell(ref_string):
-    shell = kwd.SectionShell(secid=1, elfrom=2, t1=1.0, t2=1.0, t3=1.0, t4=1.0, nip=5)
+    shell = kwd.SectionShell(secid=1, elfrom=2, t1=1.0, t2=1.0, t4=1.0, nip=5)
+    shell.t3 = 1.0
     shell_string = shell.write()
     assert shell_string == ref_string.test_section_shell_one_set
     assert shell.sets[0].secid == 1

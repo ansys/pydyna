@@ -184,3 +184,19 @@ class CardSet(CardInterface):
         else:
             self._load_unbounded_from_buffer(buf, parameter_set)
             return True
+
+def ensure_card_set_properties(kwd, for_setter: bool) -> None:
+    """Help with handling card sets.
+
+    For convenience the first card set can be manipulated by the keyword
+    if it is currently empty. Getters, on the other hand, only work if
+    a card set has been added."""
+    num_sets = len(kwd.sets)
+    if num_sets == 0:
+        if for_setter:
+            kwd.add_set()
+            return
+        else:
+            raise LookupError("Cannot get property, there are no sets. Use `add_set()` to add a set!")
+    if num_sets != 1:
+        raise LookupError("Cannot get property, there is not exactly one card set!")

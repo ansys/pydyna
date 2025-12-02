@@ -23,7 +23,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 {% endif %}
 {% if keyword_data.card_sets %}
-from ansys.dyna.core.lib.card_set import CardSet
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 {% endif %}
 {% if keyword_data.duplicate_group %}
@@ -149,6 +149,15 @@ class {{keyword_data.classname}}(KeywordBase):
 {% endif %}{# keyword_data.options #}
         ]
 
+{% if keyword_data.card_sets %}
+{% for card_set in keyword_data.card_sets.sets %}
+{% with set_index = loop.index0 %}
+{% for card in card_set.source_cards %}
+{% include 'keyword/card_set_property_passthrough.j2' %}
+{% endfor %}{# card in card_set.source_cards #}
+{% endwith %}
+{% endfor %}{# card_set in keyword_data.card_sets.sets #}
+{% endif %}{# keyword_data.card_sets #}
 {% for card in keyword_data.cards %}
 {% include 'keyword/card_properties.j2' %}
 {% endfor %}
