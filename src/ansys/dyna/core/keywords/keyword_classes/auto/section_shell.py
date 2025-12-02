@@ -26,22 +26,19 @@ import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
+from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
-class SectionShell(KeywordBase):
-    """DYNA SECTION_SHELL keyword"""
-
-    keyword = "SECTION"
-    subkeyword = "SHELL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
-    ]
+class SectionShellCardSet(Cards):
+    """ CardSet."""
 
     def __init__(self, **kwargs):
-        """Initialize the SectionShell class."""
-        super().__init__(**kwargs)
+        """Initialize the SectionShellCardSet CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
             Card(
@@ -275,23 +272,6 @@ class SectionShell(KeywordBase):
                 lambda: self.lmc,
                 lambda: self.elform in [101, 102, 103, 104, 105],
                 data = kwargs.get("pi")),
-            OptionCardSet(
-                option_spec = SectionShell.option_specs[0],
-                cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
-                    ),
-                ],
-                **kwargs
-            ),
         ]
 
     @property
@@ -681,15 +661,390 @@ class SectionShell(KeywordBase):
         self._cards[5].data = value
 
     @property
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
+
+
+class SectionShell(KeywordBase):
+    """DYNA SECTION_SHELL keyword"""
+
+    keyword = "SECTION"
+    subkeyword = "SHELL"
+    option_specs = [
+        OptionSpec("TITLE", -1, 1),
+    ]
+
+    def __init__(self, **kwargs):
+        """Initialize the SectionShell class."""
+        super().__init__(**kwargs)
+        kwargs["parent"] = self
+        kwargs["keyword"] = self
+        kwargs["parent"] = self
+        self._cards = [
+            CardSet(
+                SectionShellCardSet,
+                **kwargs
+            ),
+            OptionCardSet(
+                option_spec = SectionShell.option_specs[0],
+                cards = [
+                    Card(
+                        [
+                            Field(
+                                "title",
+                                str,
+                                0,
+                                80,
+                                kwargs.get("title")
+                            ),
+                        ],
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
+
+    @property
+    def secid(self) -> typing.Optional[int]:
+        """Get or set the secid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].secid
+
+    @secid.setter
+    def secid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].secid = value
+
+    @property
+    def elform(self) -> int:
+        """Get or set the elform
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].elform
+
+    @elform.setter
+    def elform(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].elform = value
+
+    @property
+    def shrf(self) -> float:
+        """Get or set the shrf
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].shrf
+
+    @shrf.setter
+    def shrf(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].shrf = value
+
+    @property
+    def nip(self) -> int:
+        """Get or set the nip
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nip
+
+    @nip.setter
+    def nip(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nip = value
+
+    @property
+    def propt(self) -> float:
+        """Get or set the propt
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].propt
+
+    @propt.setter
+    def propt(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].propt = value
+
+    @property
+    def qr_irid(self) -> int:
+        """Get or set the qr_irid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].qr_irid
+
+    @qr_irid.setter
+    def qr_irid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].qr_irid = value
+
+    @property
+    def icomp(self) -> int:
+        """Get or set the icomp
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].icomp
+
+    @icomp.setter
+    def icomp(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].icomp = value
+
+    @property
+    def setyp(self) -> int:
+        """Get or set the setyp
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].setyp
+
+    @setyp.setter
+    def setyp(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].setyp = value
+
+    @property
+    def t1(self) -> float:
+        """Get or set the t1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].t1
+
+    @t1.setter
+    def t1(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].t1 = value
+
+    @property
+    def t2(self) -> float:
+        """Get or set the t2
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].t2
+
+    @t2.setter
+    def t2(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].t2 = value
+
+    @property
+    def t3(self) -> float:
+        """Get or set the t3
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].t3
+
+    @t3.setter
+    def t3(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].t3 = value
+
+    @property
+    def t4(self) -> float:
+        """Get or set the t4
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].t4
+
+    @t4.setter
+    def t4(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].t4 = value
+
+    @property
+    def nloc(self) -> float:
+        """Get or set the nloc
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nloc
+
+    @nloc.setter
+    def nloc(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nloc = value
+
+    @property
+    def marea(self) -> float:
+        """Get or set the marea
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].marea
+
+    @marea.setter
+    def marea(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].marea = value
+
+    @property
+    def idof(self) -> float:
+        """Get or set the idof
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].idof
+
+    @idof.setter
+    def idof(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].idof = value
+
+    @property
+    def edgset(self) -> int:
+        """Get or set the edgset
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].edgset
+
+    @edgset.setter
+    def edgset(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].edgset = value
+
+    @property
+    def angle(self) -> SeriesCard:
+        """Gets the angle."""
+        ensure_card_set_properties(self, False)
+        return self.sets[0].angle
+
+    @angle.setter
+    def angle(self, value: typing.List) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].angle = value
+
+    @property
+    def nipp(self) -> int:
+        """Get or set the nipp
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nipp
+
+    @nipp.setter
+    def nipp(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nipp = value
+
+    @property
+    def nxdof(self) -> int:
+        """Get or set the nxdof
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nxdof
+
+    @nxdof.setter
+    def nxdof(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nxdof = value
+
+    @property
+    def iunf(self) -> int:
+        """Get or set the iunf
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].iunf
+
+    @iunf.setter
+    def iunf(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].iunf = value
+
+    @property
+    def ihgf(self) -> int:
+        """Get or set the ihgf
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ihgf
+
+    @ihgf.setter
+    def ihgf(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ihgf = value
+
+    @property
+    def itaj(self) -> int:
+        """Get or set the itaj
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].itaj
+
+    @itaj.setter
+    def itaj(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].itaj = value
+
+    @property
+    def lmc(self) -> int:
+        """Get or set the lmc
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].lmc
+
+    @lmc.setter
+    def lmc(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].lmc = value
+
+    @property
+    def nhsv(self) -> int:
+        """Get or set the nhsv
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nhsv
+
+    @nhsv.setter
+    def nhsv(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nhsv = value
+
+    @property
+    def iloc(self) -> int:
+        """Get or set the iloc
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].iloc
+
+    @iloc.setter
+    def iloc(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].iloc = value
+
+    @property
+    def integration_points(self) -> pd.DataFrame:
+        """Get the integration_points."""
+        ensure_card_set_properties(self, False)
+        return self.sets[0].integration_points
+
+    @integration_points.setter
+    def integration_points(self, df: pd.DataFrame):
+        ensure_card_set_properties(self, True)
+        self.sets[0].integration_points = df
+
+    @property
+    def pi(self) -> SeriesCard:
+        """Gets the pi."""
+        ensure_card_set_properties(self, False)
+        return self.sets[0].pi
+
+    @pi.setter
+    def pi(self, value: typing.List) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].pi = value
+
+    @property
+    def sets(self) -> typing.List[SectionShellCardSet]:
+        """Gets the list of sets."""
+        return self._cards[0].items()
+
+    def add_set(self, **kwargs):
+        """Adds a set to the list of sets."""
+        self._cards[0].add_item(**kwargs)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[6].cards[0].get_value("title")
+        return self._cards[1].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[6].cards[0].set_value("title", value)
+        self._cards[1].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
