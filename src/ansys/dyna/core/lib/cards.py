@@ -156,12 +156,9 @@ class Cards(OptionsInterface):
         buf: typing.TextIO,
         format: format_type,
         comment: typing.Optional[bool] = True,
-    ) -> bool:
-        """Writes the cards to `buf` using `format`.
-        Returns whether a superfluous newline is added
-        """
-        superfluous_newline = write_cards(self._get_all_cards(), buf, format, comment)
-        return superfluous_newline
+    ):
+        """Writes the cards to `buf` using `format`."""
+        write_cards(self._get_all_cards(), buf, format, comment)
 
     def _try_read_options_with_no_title(self, buf: typing.TextIO) -> None:
         # some cards are not active until we read.. how to handle?

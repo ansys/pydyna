@@ -32,9 +32,15 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         """Transform `kwd_data` based on `settings`."""
         card_sets = []
         has_options = False
+        default_target = 0
+
         for card_settings in settings:
             card_set = {"name": card_settings["name"], "source_cards": []}
-
+            target_name = card_settings.get("target-name", "")
+            if target_name == "":
+                default_target = default_target + 1
+                if default_target > 1:
+                    raise Exception("Currently only one card set on the base keyword is supported!")
             for card_index, source_index in enumerate(card_settings["source-indices"]):
                 source_card = kwd_data["cards"][source_index]
                 source_card["source_index"] = source_card["index"]
@@ -64,9 +70,9 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                 "length_func": card_settings.get("length-func", ""),
                 "active_func": card_settings.get("active-func", ""),
             }
-            insertion = gen.insertion.Insertion(
-                card_settings["target-index"], card_settings.get("target-name", ""), card
-            )
+            target_name = card_settings.get("target-name", "")
+            target_index = card_settings["target-index"]
+            insertion = gen.insertion.Insertion(target_index, target_name, card)
             kwd_data["card_insertions"].append(insertion)
             card_sets.append(card_set)
         kwd_data["card_sets"] = {"sets": card_sets, "options": has_options}

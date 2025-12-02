@@ -609,6 +609,13 @@
     },
     "SECTION_SHELL" : {
         "generation-options": {
+            "card-set": [
+                {
+                    "source-indices": [0, 1, 2, 3, 4, 5],
+                    "target-index": 0,
+                    "name": "SectionShellCardSet"
+                }
+            ],
             "reorder-card": {
                 "order": [0, 1, 4, 2, 3, 5]
             },

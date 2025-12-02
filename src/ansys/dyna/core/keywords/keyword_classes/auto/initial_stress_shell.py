@@ -23,7 +23,7 @@
 """Module providing the InitialStressShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.card_set import CardSet
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -422,6 +422,102 @@ class InitialStressShell(KeywordBase):
                 **kwargs
             ),
         ]
+
+    @property
+    def eid(self) -> typing.Optional[int]:
+        """Get or set the eid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].eid
+
+    @eid.setter
+    def eid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].eid = value
+
+    @property
+    def nplane(self) -> int:
+        """Get or set the nplane
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nplane
+
+    @nplane.setter
+    def nplane(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nplane = value
+
+    @property
+    def nthick(self) -> int:
+        """Get or set the nthick
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nthick
+
+    @nthick.setter
+    def nthick(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nthick = value
+
+    @property
+    def nhisv(self) -> int:
+        """Get or set the nhisv
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nhisv
+
+    @nhisv.setter
+    def nhisv(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nhisv = value
+
+    @property
+    def ntensr(self) -> int:
+        """Get or set the ntensr
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ntensr
+
+    @ntensr.setter
+    def ntensr(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ntensr = value
+
+    @property
+    def large(self) -> int:
+        """Get or set the large
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].large
+
+    @large.setter
+    def large(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].large = value
+
+    @property
+    def nthint(self) -> int:
+        """Get or set the nthint
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nthint
+
+    @nthint.setter
+    def nthint(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nthint = value
+
+    @property
+    def nthhsv(self) -> int:
+        """Get or set the nthhsv
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nthhsv
+
+    @nthhsv.setter
+    def nthhsv(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nthhsv = value
 
     @property
     def sets(self) -> typing.List[InitialStressShellCardSet]:

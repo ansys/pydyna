@@ -26,7 +26,7 @@ import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
-from ansys.dyna.core.lib.card_set import CardSet
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -214,6 +214,77 @@ class InitialStrainShell(KeywordBase):
                 **kwargs
             ),
         ]
+
+    @property
+    def eid(self) -> typing.Optional[int]:
+        """Get or set the eid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].eid
+
+    @eid.setter
+    def eid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].eid = value
+
+    @property
+    def nplane(self) -> typing.Optional[int]:
+        """Get or set the nplane
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nplane
+
+    @nplane.setter
+    def nplane(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nplane = value
+
+    @property
+    def nthick(self) -> typing.Optional[int]:
+        """Get or set the nthick
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nthick
+
+    @nthick.setter
+    def nthick(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nthick = value
+
+    @property
+    def large(self) -> int:
+        """Get or set the large
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].large
+
+    @large.setter
+    def large(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].large = value
+
+    @property
+    def ilocal(self) -> int:
+        """Get or set the ilocal
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ilocal
+
+    @ilocal.setter
+    def ilocal(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ilocal = value
+
+    @property
+    def strains(self) -> pd.DataFrame:
+        """Get the strains."""
+        ensure_card_set_properties(self, False)
+        return self.sets[0].strains
+
+    @strains.setter
+    def strains(self, df: pd.DataFrame):
+        ensure_card_set_properties(self, True)
+        self.sets[0].strains = df
 
     @property
     def sets(self) -> typing.List[InitialStrainShellCardSet]:
