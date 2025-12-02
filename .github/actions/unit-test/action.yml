@@ -88,19 +88,23 @@ runs:
     - name: Run pytest
       env:
         PYTEST_MARKERS: ${{ inputs.pytest-markers }}
+        COVERAGE_FILE: ${{ inputs.coverage-file }}
         PYDYNA_RUN_CONTAINER: ${{ inputs.docker-image }}
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         LSTC_LICENSE: ansys
       run: |
-        if [ "$PYTEST_MARKERS" = "" ]; then
-          pytest -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
-        else
-          pytest -m "$PYTEST_MARKERS" -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
+        COVERAGE_ARGS=""
+        if [ -n "$COVERAGE_FILE" ]; then
+          COVERAGE_ARGS="--cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term"
         fi
-      shell: bash
-
-    - name: Extract the server logs
+        
+        if [ "$PYTEST_MARKERS" = "" ]; then
+          pytest -ra $COVERAGE_ARGS -vv
+        else
+          pytest -m "$PYTEST_MARKERS" -ra $COVERAGE_ARGS -vv
+        fi
+      shell: bash    - name: Extract the server logs
       if: ${{ inputs.server-logs == 'true' }}
       run: |
         docker logs kw_server > server_output.txt

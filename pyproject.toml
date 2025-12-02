@@ -111,16 +111,6 @@ line_length = 120
 default_section = "THIRDPARTY"
 src_paths = ["doc", "src", "tests"]
 
-[tool.coverage.run]
-source = ["ansys.dyna.core"]
-omit = [
-   "src/ansys/dyna/core/keywords/keyword_classes/auto/*"
-]
-
-[tool.coverage.report]
-show_missing = true
-
-
 [tool.pytest.ini_options]
 minversion = "7.1"
 addopts = "-ra -vv"
