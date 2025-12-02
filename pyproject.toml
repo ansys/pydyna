@@ -121,6 +121,15 @@ markers = """
     viz: tests that do 3d visualization
     """
 
+[tool.coverage.run]
+source = ["ansys.dyna.core"]
+omit = [
+   "src/ansys/dyna/core/keywords/keyword_classes/auto/*"
+]
+
+[tool.coverage.report]
+show_missing = true
+
 [tool.towncrier]
 directory = "doc/changelog"
 filename = "doc/source/changelog.rst"
