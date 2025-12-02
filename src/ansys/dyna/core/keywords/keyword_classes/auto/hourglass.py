@@ -23,7 +23,7 @@
 """Module providing the Hourglass class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.card_set import CardSet
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -267,6 +267,102 @@ class Hourglass(KeywordBase):
                 **kwargs
             ),
         ]
+
+    @property
+    def hgid(self) -> int:
+        """Get or set the hgid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].hgid
+
+    @hgid.setter
+    def hgid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].hgid = value
+
+    @property
+    def ihq(self) -> int:
+        """Get or set the ihq
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ihq
+
+    @ihq.setter
+    def ihq(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ihq = value
+
+    @property
+    def qm(self) -> float:
+        """Get or set the qm
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].qm
+
+    @qm.setter
+    def qm(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].qm = value
+
+    @property
+    def ibq(self) -> typing.Optional[int]:
+        """Get or set the ibq
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ibq
+
+    @ibq.setter
+    def ibq(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ibq = value
+
+    @property
+    def q1(self) -> float:
+        """Get or set the q1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].q1
+
+    @q1.setter
+    def q1(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].q1 = value
+
+    @property
+    def q2(self) -> float:
+        """Get or set the q2
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].q2
+
+    @q2.setter
+    def q2(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].q2 = value
+
+    @property
+    def qb_vdc(self) -> float:
+        """Get or set the qb_vdc
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].qb_vdc
+
+    @qb_vdc.setter
+    def qb_vdc(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].qb_vdc = value
+
+    @property
+    def qw(self) -> float:
+        """Get or set the qw
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].qw
+
+    @qw.setter
+    def qw(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].qw = value
 
     @property
     def sets(self) -> typing.List[HourglassCardSet]:

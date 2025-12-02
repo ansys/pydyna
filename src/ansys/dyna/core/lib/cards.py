@@ -157,8 +157,7 @@ class Cards(OptionsInterface):
         format: format_type,
         comment: typing.Optional[bool] = True,
     ):
-        """Writes the cards to `buf` using `format`.
-        """
+        """Writes the cards to `buf` using `format`."""
         write_cards(self._get_all_cards(), buf, format, comment)
 
     def _try_read_options_with_no_title(self, buf: typing.TextIO) -> None:

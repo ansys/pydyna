@@ -140,6 +140,7 @@ class CardSet(CardInterface):
         :param buf: Buffer to write to. If None, the output is returned as a string
         :param format: format_type to use. Default to standard.
         """
+
         def _write(buf: typing.TextIO):
             # write each item in the card set
             for item_index, item in enumerate([item for item in self._items]):
@@ -184,6 +185,7 @@ class CardSet(CardInterface):
         else:
             self._load_unbounded_from_buffer(buf, parameter_set)
             return True
+
 
 def ensure_card_set_properties(kwd, for_setter: bool) -> None:
     """Help with handling card sets.

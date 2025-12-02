@@ -249,7 +249,7 @@ class KeywordBase(Cards):
         format = self._get_write_format(format, deck_format)
         Cards.write(self, buf, format)
         if will_return:
-            keyword_string = buf.getvalue()[:buf.tell()]
+            keyword_string = buf.getvalue()[: buf.tell()]
             return keyword_string
 
     def dumps(self) -> str:

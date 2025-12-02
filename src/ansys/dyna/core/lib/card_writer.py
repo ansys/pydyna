@@ -56,4 +56,4 @@ def write_cards(
         card.write(write_format, buf, comment)
     superfluous_newline = pos == buf.tell()
     if superfluous_newline:
-        buf.seek(buf.tell()-1)
+        buf.seek(buf.tell() - 1)
