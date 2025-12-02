@@ -104,7 +104,9 @@ runs:
         else
           pytest -m "$PYTEST_MARKERS" -ra $COVERAGE_ARGS -vv
         fi
-      shell: bash    - name: Extract the server logs
+      shell: bash
+
+    - name: Extract the server logs
       if: ${{ inputs.server-logs == 'true' }}
       run: |
         docker logs kw_server > server_output.txt
