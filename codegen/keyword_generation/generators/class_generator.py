@@ -191,6 +191,17 @@ HANDLERS = collections.OrderedDict(
 )
 
 
+def _get_insertion_index_for_cards(requested_index: int, container):
+    for index, card in enumerate(container):
+        card_index = card.get("source_index", card["index"])
+        if card_index == requested_index:
+            # we are inserting right before this card, store the index
+            return index
+    # insertion index not found, it must be past the end, in which case
+    # the insertion index is treated literally
+    return requested_index
+
+
 def _do_insertions(kwd_data):
     # [(a,b,c)] => insert b into c at index a
     insertion_targets: typing.List[typing.Tuple[int, typing.Dict, typing.List]] = []
@@ -202,24 +213,15 @@ def _do_insertions(kwd_data):
         if insertion_name == "":
             # insert directly into keyword data
             container = kwd_data["cards"]
-            for index, card in enumerate(container):
-                card_index = card.get("source_index", card["index"])
-                if card_index == insertion_index:
-                    # we are inserting right before this card, store the index
-                    insertion_targets.append((index, insertion_card, container))
+            index = _get_insertion_index_for_cards(insertion_index, container)
+            insertion_targets.append((index, insertion_card, container))
         else:
             # insert into another card set
-            card_sets = kwd_data.get("card_sets", {})
-            for card_set in card_sets["sets"]:
+            card_sets = [card_set for card_set in kwd_data["card_sets"]["sets"] if card_set["name"] == insertion_name]
+            for card_set in card_sets:
                 container = card_set["source_cards"]
-                if card_set["name"] == insertion_name:
-                    found = False
-                    for index, card in enumerate(container):
-                        if card["index"] == insertion_index:
-                            found = True
-                            insertion_targets.append((index, insertion_card, container))
-                    if not found:
-                        insertion_targets.append((len(container), insertion_card, container))
+                index = _get_insertion_index_for_cards(insertion_index, container)
+                insertion_targets.append((index, insertion_card, container))
     for index, item, container in insertion_targets:
         container.insert(index, item)
 
