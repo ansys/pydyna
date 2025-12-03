@@ -19,12 +19,78 @@ The codegen system is responsible for generating Python classes and import machi
 4. **Render Templates**: Jinja templates are rendered using the processed context.
 5. **Write Output**: Generated files are written to disk.
 
+### Refactoring
+
+Due to the complexity of the codegen, for any non-trivial refactoring, verify the codegen between independent
+steps. Otherwise, after making many changes, it can be difficult to isolate and fix issues caused by
+early steps.
+
 ### Extending or Customizing
 
 - For changes affecting all keywords, update the codegen templates or handler logic.
 - For keyword-specific customizations, create manual subclasses as described below.
+- To test the generation of a specific keyword, use codegen.py -k SECTION_SHELL (for example).
 
 See `codegen/todo.md` for architectural improvement recommendations.
+
+## Handler System Architecture
+
+### Handler Execution Order
+
+Handlers transform keyword metadata during code generation. **Order matters** because handlers often depend on the output of previous handlers.
+
+**Critical Ordering Principle**: Handlers are registered and executed in a specific order defined in `registry.py`. While the refactored system supports declaring dependencies via the `@handler` decorator, the current implementation uses **explicit registration order** to maintain backward compatibility and ensure reference semantics work correctly.
+
+**Why Not Topological Sort?** The handler system includes infrastructure for dependency-based ordering (topological sort), but uses explicit registration order because handlers that group cards (`card-set`, `table-card-group`) rely on **reference semantics** - they append references to card dictionaries, not copies. Later handlers modify these same objects in-place. A pure dependency-based approach could reorder handlers in ways that break this pattern.
+
+**Note**: Typed dataclasses (`KeywordData`, `Card`, `Field`) are available in `data_model/keyword_data.py` for improved type safety, with backward-compatible `to_dict()`/`from_dict()` methods for gradual migration.
+
+**Standard Handler Order** (as of Dec 2025):
+1. `reorder-card` - Reorders cards; must run first since other handlers use positional indices
+2. `table-card` - Transforms cards into repeatable tables
+3. `override-field` - Modifies field properties
+4. `replace-card` - Replaces entire cards with different definitions
+5. `insert-card` - Inserts new cards at specified positions
+6. `series-card` - Transforms cards into variable-length series
+7. `add-option` - Adds keyword options
+8. `card-set` - Groups cards into reusable sets (uses references, not copies!)
+9. `conditional-card` - Adds conditional logic to cards (modifies cards in-place)
+10. `rename-property` - Renames property accessors
+11. `skip-card` - Marks cards to be skipped
+12. `table-card-group` - Groups multiple cards into repeating units
+13. `external-card-implementation` - Links to externally defined cards
+14. `shared-field` - Creates shared field definitions
+15. `override-subkeyword` - Overrides subkeyword behavior
+
+### Reference Semantics vs. Deep Copies
+
+**CRITICAL**: Most handlers that group or copy cards (e.g., `card-set`, `table-card-group`) use **reference semantics** - they append the actual card dictionaries to their collections, NOT deep copies.
+
+**Why?** Later handlers modify cards in-place. For example:
+- `card-set` (handler #8) creates a card set by appending references to `source_cards`
+- `conditional-card` (handler #9) later sets the `func` property on those same card objects
+- Because they're the same objects, the changes appear in both places
+
+**If you use `copy.deepcopy()`**: Changes made by later handlers won't appear in the card-set, breaking generation.
+
+### Index Handling After Reordering
+
+**The Index System**:
+- Each card has an `index` property indicating its position
+- `reorder-card` reorders the `kwd_data["cards"]` list but does NOT update card indices
+- Subsequent handlers use list positions (e.g., `kwd_data["cards"][3]`) not the card's `index` property
+- When `card-set` copies cards, it stores the original index in `source_index` and assigns new sequential indices
+
+**Example** (SECTION_SHELL):
+```json
+// Original cards: [card0, card1, card2, card3, card4, card5]
+// Reorder: [0, 1, 4, 2, 3, 5]
+// After reorder: [card0, card1, card4, card2, card3, card5]
+//                 pos0   pos1   pos2   pos3   pos4   pos5
+
+// conditional-card with index:3 operates on position 3 (which is original card2)
+// card-set with source-indices:[0,1,2,3,4,5] copies from positions 0-5
+```
 
 ## When Auto-Generated Files Change
 
@@ -40,7 +106,7 @@ If you need to extend or customize a keyword class, follow these steps:
 2. Import and subclass the auto-generated class:
    ```python
    from ansys.dyna.core.keywords.keyword_classes.auto.define_table import DefineTable as _AutoDefineTable
-   
+
    class DefineTable(_AutoDefineTable):
        # Add custom properties, methods, etc.
    ```

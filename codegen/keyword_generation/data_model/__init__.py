@@ -26,6 +26,9 @@ import logging
 import os
 import typing
 
+from keyword_generation.data_model.insertion import Insertion
+from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
+
 logger = logging.getLogger(__name__)
 
 KWDM_INSTANCE = None
@@ -34,8 +37,6 @@ ADDITIONAL_CARDS = None
 
 KWD_TO_ALIAS: typing.Dict[str, str] = {}
 ALIAS_TO_KWD: typing.Dict[str, str] = {}
-
-from .insertion import Insertion
 
 
 def get_card(setting: typing.Dict[str, str]):

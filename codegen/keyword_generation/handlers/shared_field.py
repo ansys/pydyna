@@ -20,12 +20,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Shared Field Handler: Marks fields that appear across multiple cards.
+
+This handler identifies fields with the same name across different cards and marks
+them as shared, preventing duplication and enabling cross-card field references.
+"""
+
 import typing
 
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
 def do_negative_shared_fields(kwd_data: typing.Dict):
+    """
+    Process shared fields with negative indices (option cards).
+
+    Negative indices are used to reference cards in optional groups, which are not
+    available during the main handle() phase. This function runs in post_process
+    after all options are fully defined.
+
+    Args:
+        kwd_data: Complete keyword data dictionary with options populated
+    """
     negative_shared_fields = kwd_data.get("negative_shared_fields", [])
     num_cards = len(kwd_data["cards"])
     options = kwd_data.get("options", [])
@@ -53,6 +71,16 @@ def do_negative_shared_fields(kwd_data: typing.Dict):
 
 
 def handle_shared_field(kwd_data, settings):
+    """
+    Mark fields as shared across multiple cards.
+
+    Processes positive indices immediately (base keyword cards) and defers
+    negative indices (option cards) to post_process phase.
+
+    Args:
+        kwd_data: Complete keyword data dictionary
+        settings: List of shared field configurations
+    """
     # positive card indices are applied in handler
     # negative card indices are marked and handled after transformations (after_handle)
     for setting in settings:
@@ -79,11 +107,76 @@ def handle_shared_field(kwd_data, settings):
             kwd_data["negative_shared_fields"].append(setting)
 
 
+@handler(
+    name="shared-field",
+    dependencies=["reorder-card"],
+    description="Marks fields shared across multiple cards to prevent duplication",
+    input_schema={
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string", "description": "Name of the shared field"},
+                "cards": {
+                    "type": "array",
+                    "items": {"type": "integer"},
+                    "description": "Card indices where field appears (negative for option cards)",
+                },
+            },
+            "required": ["name", "cards"],
+        },
+    },
+    output_description=(
+        "Adds 'card_indices' to first field, marks duplicates as 'redundant', " "may add 'negative_shared_fields'"
+    ),
+)
 class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler):
+    """
+    Marks fields that appear in multiple cards as shared.
+
+    This handler identifies fields with the same name across different cards and
+    marks them appropriately to avoid duplication. The first occurrence gets a
+    'card_indices' list, and subsequent occurrences are marked 'redundant'.
+
+    Supports both positive indices (base keyword cards, processed immediately) and
+    negative indices (option cards, processed in post_process after options exist).
+
+    Input Settings Example:
+        [
+            {
+                "name": "pid",
+                "cards": [0, 1, 2]  # Positive: base cards
+            },
+            {
+                "name": "sid",
+                "cards": [-1, -2]  # Negative: option cards
+            }
+        ]
+
+    Output Modification:
+        For positive indices (immediate):
+        - First field with name gets: field["card_indices"] = [0, 1, 2]
+        - Other fields get: field["redundant"] = True
+
+        For negative indices (deferred to post_process):
+        - Stored in kwd_data["negative_shared_fields"] for later processing
+        - Processed after options are available
+    """
+
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
+        """
+        Mark shared fields, handling positive indices immediately.
+
+        Args:
+            kwd_data: Complete keyword data dictionary
+            settings: List of shared field configurations
+        """
         return handle_shared_field(kwd_data, settings)
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+        """
+        Process deferred negative-index shared fields.
+
+        Runs after all handlers complete to ensure option cards are fully defined.
+        """
         return do_negative_shared_fields(kwd_data)

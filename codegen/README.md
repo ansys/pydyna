@@ -5,6 +5,29 @@ The PyDyna auto-keyword class generator system generates python classes for
 dyna keywords based on specifications in kwd.json, manifest.json, and additional-cards.json
 It is implemented in `codegen/generate.py` and has a command line interface.
 
+## Critical Implementation Notes
+
+### Handler Execution Order
+
+Handlers transform keyword metadata in a specific order defined in `keyword_generation/handlers/registry.py`. **This order is critical** - changing it can break generation. Key constraints:
+
+- `reorder-card` must run first (other handlers use positional indices)
+- `card-set` and `table-card-group` must run before `conditional-card`
+- See `agents/codegen.md` for complete ordering and rationale
+
+### Reference Semantics
+
+Handlers that group cards (e.g., `card-set`, `table-card-group`) append **references** to card dictionaries, not deep copies. This allows later handlers to modify cards in-place, with changes appearing in both the main cards list and the grouped collections.
+
+**Do NOT use `copy.deepcopy()` when grouping cards** - it breaks this pattern.
+
+### Index vs. Position
+
+After `reorder-card` runs:
+- Cards have an `index` property (original index)
+- Handlers use **list positions** `kwd_data["cards"][i]`, not card indices
+- `card-set` stores `source_index` (original) and assigns new sequential indices
+
 ## To use
 It is recommended to use a virtual environment
 

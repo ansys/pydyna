@@ -20,15 +20,89 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Add Option Handler: Creates optional card groups in keywords.
+
+This handler adds optional sections to keywords, allowing cards to be conditionally
+included based on keyword title options (e.g., *KEYWORD_OPTION1_OPTION2).
+"""
+
 import typing
 
 from keyword_generation.data_model import get_card
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
+@handler(
+    name="add-option",
+    dependencies=["reorder-card"],
+    description="Adds optional card groups that appear based on keyword title options",
+    input_schema={
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "option-name": {"type": "string", "description": "Name of the option (e.g., 'ID')"},
+                "card-order": {"type": "integer", "description": "Card ordering priority"},
+                "title-order": {"type": "integer", "description": "Order in keyword title"},
+                "cards": {
+                    "type": "array",
+                    "description": "List of card definitions or references",
+                },
+            },
+            "required": ["option-name", "card-order", "title-order", "cards"],
+        },
+    },
+    output_description="Adds 'options' list to kwd_data with optional card group definitions",
+)
 class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
+    """
+    Adds optional card groups to keywords based on title options.
+
+    This handler enables keywords to have optional sections that are only included
+    when specific options appear in the keyword title. For example, *CONTACT_ID
+    would include ID-specific cards.
+
+    Input Settings Example:
+        [
+            {
+                "option-name": "ID",
+                "card-order": 1,
+                "title-order": 1,
+                "cards": [
+                    {"name": "id_card", "fields": [...]},
+                    "existing_card_reference"
+                ]
+            },
+            {
+                "option-name": "MPP",
+                "card-order": 2,
+                "title-order": 2,
+                "cards": [{...}]
+            }
+        ]
+
+    Output Modification:
+        Adds kwd_data["options"] = [
+            {
+                "name": "ID",
+                "card_order": 1,
+                "title_order": 1,
+                "cards": [...],  # expanded with 'func' for active conditions
+            },
+            ...
+        ]
+    """
+
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
+        """
+        Create optional card groups from settings.
+
+        Args:
+            kwd_data: Complete keyword data dictionary
+            settings: List of option definitions with cards
+        """
 
         def expand(card):
             card = get_card(card)
@@ -49,5 +123,5 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         kwd_data["options"] = new_options
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+        """No post-processing required."""
         pass
