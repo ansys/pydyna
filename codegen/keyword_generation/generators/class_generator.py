@@ -389,9 +389,18 @@ def generate_class(env: Environment, output_manager: OutputManager, item: typing
 
         # Determine domain and create domain subdirectory
         domain = get_keyword_domain(keyword)
+<<<<<<< HEAD
         filename = fixed_keyword.lower() + ".py"
         content = env.get_template("keyword.j2").render(**jinja_variable)
         output_manager.write_auto_file(domain, filename, content)
+=======
+        domain_path = os.path.join(lib_path, "auto", domain)
+        os.makedirs(domain_path, exist_ok=True)
+
+        filename = os.path.join(domain_path, fixed_keyword.lower() + ".py")
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(env.get_template("keyword.j2").render(**jinja_variable))
+>>>>>>> main
         return classname, fixed_keyword.lower()
     except Exception as e:
         print(f"Failure in generating {classname}")
