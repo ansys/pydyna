@@ -1,6 +1,6 @@
-from ansys.dyna.core.keywords.keyword_classes.auto.contact_automatic_single_surface import ContactAutomaticSingleSurface
-from ansys.dyna.core.keywords.keyword_classes.auto.contact_automatic_single_surface_mortar import ContactAutomaticSingleSurfaceMortar
-from ansys.dyna.core.keywords.keyword_classes.auto.contact_automatic_single_surface_tiebreak import ContactAutomaticSingleSurfaceTiebreak
+from ansys.dyna.core.keywords.keyword_classes.auto.contacts.contact_automatic_single_surface import ContactAutomaticSingleSurface
+from ansys.dyna.core.keywords.keyword_classes.auto.contacts.contact_automatic_single_surface_mortar import ContactAutomaticSingleSurfaceMortar
+from ansys.dyna.core.keywords.keyword_classes.auto.contacts.contact_automatic_single_surface_tiebreak import ContactAutomaticSingleSurfaceTiebreak
 import pytest
 from ansys.dyna.core.lib.option_card import Options
 

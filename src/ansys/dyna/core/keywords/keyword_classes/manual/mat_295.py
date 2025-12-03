@@ -22,7 +22,7 @@
 
 import typing
 
-from ansys.dyna.core.keywords.keyword_classes.auto.mat_295 import Mat295 as Parent
+from ansys.dyna.core.keywords.keyword_classes.auto.materials.mat_295 import Mat295 as Parent
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
 
 

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from ansys.dyna.core.keywords.keyword_classes.auto.section_tshell import SectionTShell as Parent
+from ansys.dyna.core.keywords.keyword_classes.auto.sections.section_tshell import SectionTShell as Parent
 
 
 class SectionTShell(Parent):

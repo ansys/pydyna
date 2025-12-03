@@ -26,6 +26,7 @@ import typing
 
 from jinja2 import Environment
 import keyword_generation.data_model as data_model
+from keyword_generation.utils.domain_mapper import get_keyword_domain
 from keyword_generation.handlers.add_option import AddOptionHandler
 from keyword_generation.handlers.card_set import CardSetHandler
 from keyword_generation.handlers.conditional_card import ConditionalCardHandler
@@ -297,7 +298,7 @@ def _handle_keyword_data(kwd_data, settings):
 def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
     transform_link_data = {
         "classname": "DefineTransformation",
-        "modulename": "define_transformation",
+        "modulename": "definitions.define_transformation",
         "keyword_type": "DEFINE",
         "keyword_subtype": "TRANSFORMATION",
         "fields": link_fields,
@@ -385,7 +386,13 @@ def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> typing
     try:
         base_variable = _get_base_variable(classname, keyword, item["options"])
         jinja_variable = _get_jinja_variable(base_variable)
-        filename = os.path.join(lib_path, "auto", fixed_keyword.lower() + ".py")
+        
+        # Determine domain and create domain subdirectory
+        domain = get_keyword_domain(keyword)
+        domain_path = os.path.join(lib_path, "auto", domain)
+        os.makedirs(domain_path, exist_ok=True)
+        
+        filename = os.path.join(domain_path, fixed_keyword.lower() + ".py")
         with open(filename, "w", encoding="utf-8") as f:
             f.write(env.get_template("keyword.j2").render(**jinja_variable))
         return classname, fixed_keyword.lower()

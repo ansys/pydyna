@@ -1,0 +1,89 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Auto-generated imports for rigidwalls domain
+
+from .rigidwall_force_transducer import RigidwallForceTransducer
+from .rigidwall_geometric_cylinder import RigidwallGeometricCylinder
+from .rigidwall_geometric_cylinder_deform import RigidwallGeometricCylinderDeform
+from .rigidwall_geometric_cylinder_deform_display import RigidwallGeometricCylinderDeformDisplay
+from .rigidwall_geometric_cylinder_deform_display_motion import RigidwallGeometricCylinderDeformDisplayMotion
+from .rigidwall_geometric_cylinder_deform_interior import RigidwallGeometricCylinderDeformInterior
+from .rigidwall_geometric_cylinder_deform_interior_display import RigidwallGeometricCylinderDeformInteriorDisplay
+from .rigidwall_geometric_cylinder_deform_interior_motion import RigidwallGeometricCylinderDeformInteriorMotion
+from .rigidwall_geometric_cylinder_deform_interior_motion_display import RigidwallGeometricCylinderDeformInteriorMotionDisplay
+from .rigidwall_geometric_cylinder_deform_motion import RigidwallGeometricCylinderDeformMotion
+from .rigidwall_geometric_cylinder_deform_motion_display import RigidwallGeometricCylinderDeformMotionDisplay
+from .rigidwall_geometric_cylinder_display import RigidwallGeometricCylinderDisplay
+from .rigidwall_geometric_cylinder_interior import RigidwallGeometricCylinderInterior
+from .rigidwall_geometric_cylinder_interior_deform_display import RigidwallGeometricCylinderInteriorDeformDisplay
+from .rigidwall_geometric_cylinder_interior_display import RigidwallGeometricCylinderInteriorDisplay
+from .rigidwall_geometric_cylinder_interior_motion import RigidwallGeometricCylinderInteriorMotion
+from .rigidwall_geometric_cylinder_interior_motion_display import RigidwallGeometricCylinderInteriorMotionDisplay
+from .rigidwall_geometric_cylinder_motion import RigidwallGeometricCylinderMotion
+from .rigidwall_geometric_cylinder_motion_display import RigidwallGeometricCylinderMotionDisplay
+from .rigidwall_geometric_flat import RigidwallGeometricFlat
+from .rigidwall_geometric_flat_display import RigidwallGeometricFlatDisplay
+from .rigidwall_geometric_flat_motion import RigidwallGeometricFlatMotion
+from .rigidwall_geometric_flat_motion_display import RigidwallGeometricFlatMotionDisplay
+from .rigidwall_geometric_prism import RigidwallGeometricPrism
+from .rigidwall_geometric_prism_display import RigidwallGeometricPrismDisplay
+from .rigidwall_geometric_prism_motion import RigidwallGeometricPrismMotion
+from .rigidwall_geometric_prism_motion_display import RigidwallGeometricPrismMotionDisplay
+from .rigidwall_geometric_sphere import RigidwallGeometricSphere
+from .rigidwall_geometric_sphere_display import RigidwallGeometricSphereDisplay
+from .rigidwall_geometric_sphere_motion import RigidwallGeometricSphereMotion
+from .rigidwall_geometric_sphere_motion_display import RigidwallGeometricSphereMotionDisplay
+from .rigidwall_planar import RigidwallPlanar
+from .rigidwall_planar_id import RigidwallPlanarId
+from .rigidwall_planar_finite import RigidwallPlanarFinite
+from .rigidwall_planar_finite_id import RigidwallPlanarFiniteId
+from .rigidwall_planar_finite_display import RigidwallPlanarFiniteDisplay
+from .rigidwall_planar_finite_display_id import RigidwallPlanarFiniteDisplayId
+from .rigidwall_planar_finite_forces import RigidwallPlanarFiniteForces
+from .rigidwall_planar_finite_forces_id import RigidwallPlanarFiniteForcesId
+from .rigidwall_planar_finite_moving import RigidwallPlanarFiniteMoving
+from .rigidwall_planar_finite_moving_id import RigidwallPlanarFiniteMovingId
+from .rigidwall_planar_finite_moving_display import RigidwallPlanarFiniteMovingDisplay
+from .rigidwall_planar_finite_moving_display_id import RigidwallPlanarFiniteMovingDisplayId
+from .rigidwall_planar_finite_moving_forces import RigidwallPlanarFiniteMovingForces
+from .rigidwall_planar_finite_moving_forces_id import RigidwallPlanarFiniteMovingForcesId
+from .rigidwall_planar_finite_moving_forces_display import RigidwallPlanarFiniteMovingForcesDisplay
+from .rigidwall_planar_finite_moving_forces_display_id import RigidwallPlanarFiniteMovingForcesDisplayId
+from .rigidwall_planar_forces import RigidwallPlanarForces
+from .rigidwall_planar_forces_id import RigidwallPlanarForcesId
+from .rigidwall_planar_moving import RigidwallPlanarMoving
+from .rigidwall_planar_moving_id import RigidwallPlanarMovingId
+from .rigidwall_planar_moving_display import RigidwallPlanarMovingDisplay
+from .rigidwall_planar_moving_display_id import RigidwallPlanarMovingDisplayId
+from .rigidwall_planar_moving_forces import RigidwallPlanarMovingForces
+from .rigidwall_planar_moving_forces_id import RigidwallPlanarMovingForcesId
+from .rigidwall_planar_moving_forces_display import RigidwallPlanarMovingForcesDisplay
+from .rigidwall_planar_moving_forces_display_id import RigidwallPlanarMovingForcesDisplayId
+from .rigidwall_planar_ortho import RigidwallPlanarOrtho
+from .rigidwall_planar_ortho_id import RigidwallPlanarOrthoId
+from .rigidwall_planar_ortho_finite import RigidwallPlanarOrthoFinite
+from .rigidwall_planar_ortho_finite_id import RigidwallPlanarOrthoFiniteId
+from .rigidwall_planar_ortho_finite_forces import RigidwallPlanarOrthoFiniteForces
+from .rigidwall_planar_ortho_finite_forces_id import RigidwallPlanarOrthoFiniteForcesId
+from .rigidwall_planar_ortho_forces import RigidwallPlanarOrthoForces
+from .rigidwall_planar_ortho_forces_id import RigidwallPlanarOrthoForcesId
