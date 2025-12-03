@@ -3,12 +3,14 @@
 This file collects architectural and code-level recommendations for improving the codegen system.
 
 ## 1. Data Structures
-- Refactor keyword, card, and field representations to use Python `dataclasses` instead of raw dicts.
-- Add consistent type hints throughout the codebase.
+- Add consistent type hints throughout the codebase (dataclasses are available in `data_model/keyword_data.py` for gradual migration)
 
 ## 2. Handler System
-- Refactor handler registration and invocation to use a strategy pattern or a plugin/hook system for extensibility and clarity.
-- Document each handler's purpose, expected input, and output.
+
+### Further Considerations
+- **Handler Duplication**: `OverrideSubkeywordHandler` and `RenamePropertyHandler` have identical functionality - should consolidate into one handler or document the distinction if intentional.
+- **Post-Processing Phase**: Only `SharedFieldHandler` uses `post_process()` - clarify purpose of this phase. Consider renaming to `finalize()` or merging into `handle()` if the two-phase approach is not broadly needed.
+- **Mutable vs Immutable**: Current design mutates shared `kwd_data` dict via reference semantics (critical for card-set/conditional-card interaction). Consider whether an immutable approach is feasible, though this would require significant architectural changes.
 
 ## 3. Configuration and Manifest Loading
 - Centralize manifest/spec/config loading in a dedicated module or class.
@@ -19,8 +21,6 @@ This file collects architectural and code-level recommendations for improving th
 - Document template variables and expected context structure.
 
 ## 5. Documentation
-- Add docstrings to all public functions and classes.
-- Document the overall flow in `generate.py` and in the README.
 - Consider generating API docs for the codegen system.
 
 ## 6. Testing
@@ -28,7 +28,6 @@ This file collects architectural and code-level recommendations for improving th
 - Ensure all tests validate that generated files remain unchanged.
 
 ## 7. General Simplicity
-- Merge similar handlers or use composition where possible.
 - Reduce code duplication and improve readability.
 
 ## 8. High-Level Design

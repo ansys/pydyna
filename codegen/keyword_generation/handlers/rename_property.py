@@ -20,14 +20,66 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Rename Property Handler: Changes Python property names for fields.
+
+Allows field names (as they appear in keyword files) to map to different
+Python property names in the generated code for improved API clarity.
+"""
+
 import typing
 
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
+@handler(
+    name="rename-property",
+    dependencies=[],
+    description="Renames Python properties for fields to improve API clarity",
+    input_schema={
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "index": {"type": "integer", "description": "Card index"},
+                "name": {"type": "string", "description": "Field name to rename"},
+                "property-name": {"type": "string", "description": "New Python property name"},
+            },
+            "required": ["index", "name", "property-name"],
+        },
+    },
+    output_description="Sets 'property_name' on matching field dicts",
+)
 class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHandler):
+    """
+    Changes Python property names for fields.
+
+    The field name (from keyword file) remains unchanged, but the Python
+    property accessor uses the custom name. Useful for making APIs more
+    Pythonic (e.g., PID -> part_id).
+
+    Input Settings Example:
+        [
+            {
+                "index": 0,
+                "name": "PID",
+                "property-name": "part_id"
+            }
+        ]
+
+    Output Modification:
+        Sets field["property_name"] = "part_id" for matching field
+    """
+
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
+        """
+        Rename Python properties for specified fields.
+
+        Args:
+            kwd_data: Complete keyword data dictionary
+            settings: List of {"index", "name", "property-name"} dicts
+        """
         for setting in settings:
             index = setting["index"]
             name = setting["name"]
@@ -38,5 +90,5 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
                     field["property_name"] = property_name
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+        """No post-processing required."""
         pass

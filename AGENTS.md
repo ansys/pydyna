@@ -3,6 +3,9 @@ Assume an appropriate virtual environment is activated. If it isn't, just abort.
 
 IGNORE THIS LINE FOR NOW: LS-DYNA keywords are described in detail in the manual, try to find them in manuals/ (note - this is intentionally in .gitignore so we don't distrubute them)
 
+## Agent Hints
+Don't try to write to /dev/null, this leads to a prompt that halts execution until the user allows it. I can't find the setting to disable this
+in vscode.
 
 ## Agent Coding Style Preferences
 
@@ -26,6 +29,18 @@ Detailed documentation for common tasks and patterns:
 - **[agents/codegen.md](agents/codegen.md)**: How to work with auto-generated keyword classes and create manual subclasses for customizations.
 
 ## Notes on the Keyword Submodule
+
+### Code Generation Handler System
+
+The keyword class generator uses a **handler pipeline** to transform keyword metadata from the JSON schema into Python classes. See `agents/codegen.md` for detailed documentation.
+
+**Key Principles**:
+1. **Execution order matters** - handlers are executed in registration order (see `registry.py`)
+2. **Reference semantics** - handlers like `card-set` and `table-card-group` use references, not deep copies
+3. **In-place mutations** - later handlers modify cards that earlier handlers referenced
+4. **Index vs. position** - after reordering, use list positions not the card's `index` property
+
+**Common Pitfall**: Using `copy.deepcopy()` when grouping cards breaks the generation because later handlers' modifications won't appear in the groups.
 
 ### Deck Import Handlers
 

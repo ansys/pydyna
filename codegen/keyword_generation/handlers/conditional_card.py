@@ -20,19 +20,70 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Conditional Card Handler: Adds conditional rendering logic to cards.
+
+This handler enables cards to be rendered only when specific conditions are met,
+supporting dynamic card structures based on field values.
+"""
+
 import typing
 
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
+@handler(
+    name="conditional-card",
+    dependencies=[],
+    description="Adds conditional rendering logic to cards based on field values",
+    input_schema={
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "index": {"type": "integer", "description": "Card index to make conditional"},
+                "func": {"type": "string", "description": "Python expression for condition"},
+            },
+            "required": ["index", "func"],
+        },
+    },
+    output_description="Adds 'func' property to card dict containing conditional expression",
+)
 class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
+    """
+    Makes cards conditional based on field values.
+
+    This handler adds a 'func' property to cards that contains a Python expression.
+    The template uses this to generate conditional logic that determines whether
+    the card should be rendered in the output.
+
+    Input Settings Example:
+        [
+            {
+                "index": 1,
+                "func": "self.iauto == 3"
+            }
+        ]
+
+    Output Modification:
+        Adds 'func' key to card dict:
+        card["func"] = "self.iauto == 3"
+    """
+
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
+        """
+        Add conditional logic to specified cards.
+
+        Args:
+            kwd_data: Complete keyword data dictionary
+            settings: List of {"index": int, "func": str} dicts
+        """
         for setting in settings:
             index = setting["index"]
             card = kwd_data["cards"][index]
             card["func"] = setting["func"]
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+        """No post-processing required."""
         pass
