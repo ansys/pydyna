@@ -43,6 +43,7 @@ from keyword_generation.handlers.skip_card import SkipCardHandler
 from keyword_generation.handlers.table_card import TableCardHandler
 from keyword_generation.handlers.table_card_group import TableCardGroupHandler
 from keyword_generation.utils import fix_keyword, get_classname, get_license_header, handle_single_word_keyword
+from keyword_generation.utils.domain_mapper import get_keyword_domain
 
 
 def _get_source_keyword(keyword, settings):
@@ -191,6 +192,17 @@ HANDLERS = collections.OrderedDict(
 )
 
 
+def _get_insertion_index_for_cards(requested_index: int, container):
+    for index, card in enumerate(container):
+        card_index = card.get("source_index", card["index"])
+        if card_index == requested_index:
+            # we are inserting right before this card, store the index
+            return index
+    # insertion index not found, it must be past the end, in which case
+    # the insertion index is treated literally
+    return requested_index
+
+
 def _do_insertions(kwd_data):
     # [(a,b,c)] => insert b into c at index a
     insertion_targets: typing.List[typing.Tuple[int, typing.Dict, typing.List]] = []
@@ -202,24 +214,15 @@ def _do_insertions(kwd_data):
         if insertion_name == "":
             # insert directly into keyword data
             container = kwd_data["cards"]
-            for index, card in enumerate(container):
-                card_index = card.get("source_index", card["index"])
-                if card_index == insertion_index:
-                    # we are inserting right before this card, store the index
-                    insertion_targets.append((index, insertion_card, container))
+            index = _get_insertion_index_for_cards(insertion_index, container)
+            insertion_targets.append((index, insertion_card, container))
         else:
             # insert into another card set
-            card_sets = kwd_data.get("card_sets", {})
-            for card_set in card_sets["sets"]:
+            card_sets = [card_set for card_set in kwd_data["card_sets"]["sets"] if card_set["name"] == insertion_name]
+            for card_set in card_sets:
                 container = card_set["source_cards"]
-                if card_set["name"] == insertion_name:
-                    found = False
-                    for index, card in enumerate(container):
-                        if card["index"] == insertion_index:
-                            found = True
-                            insertion_targets.append((index, insertion_card, container))
-                    if not found:
-                        insertion_targets.append((len(container), insertion_card, container))
+                index = _get_insertion_index_for_cards(insertion_index, container)
+                insertion_targets.append((index, insertion_card, container))
     for index, item, container in insertion_targets:
         container.insert(index, item)
 
@@ -295,7 +298,7 @@ def _handle_keyword_data(kwd_data, settings):
 def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
     transform_link_data = {
         "classname": "DefineTransformation",
-        "modulename": "define_transformation",
+        "modulename": "define.define_transformation",
         "keyword_type": "DEFINE",
         "keyword_subtype": "TRANSFORMATION",
         "fields": link_fields,
@@ -383,7 +386,13 @@ def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> typing
     try:
         base_variable = _get_base_variable(classname, keyword, item["options"])
         jinja_variable = _get_jinja_variable(base_variable)
-        filename = os.path.join(lib_path, "auto", fixed_keyword.lower() + ".py")
+
+        # Determine domain and create domain subdirectory
+        domain = get_keyword_domain(keyword)
+        domain_path = os.path.join(lib_path, "auto", domain)
+        os.makedirs(domain_path, exist_ok=True)
+
+        filename = os.path.join(domain_path, fixed_keyword.lower() + ".py")
         with open(filename, "w", encoding="utf-8") as f:
             f.write(env.get_template("keyword.j2").render(**jinja_variable))
         return classname, fixed_keyword.lower()

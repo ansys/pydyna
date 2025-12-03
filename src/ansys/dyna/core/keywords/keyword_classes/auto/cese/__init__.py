@@ -1,0 +1,121 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Auto-generated imports for cese domain
+
+from .cese_boundary_axisymmetric_msurf import CeseBoundaryAxisymmetricMsurf
+from .cese_boundary_axisymmetric_msurf_set import CeseBoundaryAxisymmetricMsurfSet
+from .cese_boundary_axisymmetric_part import CeseBoundaryAxisymmetricPart
+from .cese_boundary_axisymmetric_part_set import CeseBoundaryAxisymmetricPartSet
+from .cese_boundary_axisymmetric_segment import CeseBoundaryAxisymmetricSegment
+from .cese_boundary_axisymmetric_set import CeseBoundaryAxisymmetricSet
+from .cese_boundary_axis_symmetric_part import CeseBoundaryAxisSymmetricPart
+from .cese_boundary_axis_symmetric_part_set import CeseBoundaryAxisSymmetricPartSet
+from .cese_boundary_axis_symmetric_segment import CeseBoundaryAxisSymmetricSegment
+from .cese_boundary_axis_symmetric_set import CeseBoundaryAxisSymmetricSet
+from .cese_boundary_blast_load_msurf import CeseBoundaryBlastLoadMsurf
+from .cese_boundary_blast_load_msurf_set import CeseBoundaryBlastLoadMsurfSet
+from .cese_boundary_blast_load_segment import CeseBoundaryBlastLoadSegment
+from .cese_boundary_blast_load_set import CeseBoundaryBlastLoadSet
+from .cese_boundary_conj_heat_msurf import CeseBoundaryConjHeatMsurf
+from .cese_boundary_conj_heat_msurf_set import CeseBoundaryConjHeatMsurfSet
+from .cese_boundary_conj_heat_segment import CeseBoundaryConjHeatSegment
+from .cese_boundary_conj_heat_set import CeseBoundaryConjHeatSet
+from .cese_boundary_cyclic_msurf import CeseBoundaryCyclicMsurf
+from .cese_boundary_cyclic_msurf_set import CeseBoundaryCyclicMsurfSet
+from .cese_boundary_cyclic_part import CeseBoundaryCyclicPart
+from .cese_boundary_cyclic_part_set import CeseBoundaryCyclicPartSet
+from .cese_boundary_cyclic_segment import CeseBoundaryCyclicSegment
+from .cese_boundary_cyclic_set import CeseBoundaryCyclicSet
+from .cese_boundary_fsi_part import CeseBoundaryFsiPart
+from .cese_boundary_fsi_part_set import CeseBoundaryFsiPartSet
+from .cese_boundary_fsi_segment import CeseBoundaryFsiSegment
+from .cese_boundary_fsi_set import CeseBoundaryFsiSet
+from .cese_boundary_non_reflective_msurf import CeseBoundaryNonReflectiveMsurf
+from .cese_boundary_non_reflective_msurf_set import CeseBoundaryNonReflectiveMsurfSet
+from .cese_boundary_non_reflective_part import CeseBoundaryNonReflectivePart
+from .cese_boundary_non_reflective_part_set import CeseBoundaryNonReflectivePartSet
+from .cese_boundary_non_reflective_segment import CeseBoundaryNonReflectiveSegment
+from .cese_boundary_non_reflective_set import CeseBoundaryNonReflectiveSet
+from .cese_boundary_prescribed_msurf import CeseBoundaryPrescribedMsurf
+from .cese_boundary_prescribed_msurf_set import CeseBoundaryPrescribedMsurfSet
+from .cese_boundary_prescribed_part import CeseBoundaryPrescribedPart
+from .cese_boundary_prescribed_part_set import CeseBoundaryPrescribedPartSet
+from .cese_boundary_prescribed_segment import CeseBoundaryPrescribedSegment
+from .cese_boundary_prescribed_set import CeseBoundaryPrescribedSet
+from .cese_boundary_reflective_msurf import CeseBoundaryReflectiveMsurf
+from .cese_boundary_reflective_msurf_set import CeseBoundaryReflectiveMsurfSet
+from .cese_boundary_reflective_part import CeseBoundaryReflectivePart
+from .cese_boundary_reflective_part_set import CeseBoundaryReflectivePartSet
+from .cese_boundary_reflective_segment import CeseBoundaryReflectiveSegment
+from .cese_boundary_reflective_set import CeseBoundaryReflectiveSet
+from .cese_boundary_segment import CeseBoundarySegment
+from .cese_boundary_set import CeseBoundarySet
+from .cese_boundary_sliding_msurf import CeseBoundarySlidingMsurf
+from .cese_boundary_sliding_msurf_set import CeseBoundarySlidingMsurfSet
+from .cese_boundary_sliding_part import CeseBoundarySlidingPart
+from .cese_boundary_sliding_part_set import CeseBoundarySlidingPartSet
+from .cese_boundary_sliding_segment import CeseBoundarySlidingSegment
+from .cese_boundary_sliding_set import CeseBoundarySlidingSet
+from .cese_boundary_solid_wall_msurf import CeseBoundarySolidWallMsurf
+from .cese_boundary_solid_wall_msurf_rotate import CeseBoundarySolidWallMsurfRotate
+from .cese_boundary_solid_wall_msurf_set import CeseBoundarySolidWallMsurfSet
+from .cese_boundary_solid_wall_msurf_set_rotate import CeseBoundarySolidWallMsurfSetRotate
+from .cese_boundary_solid_wall_part import CeseBoundarySolidWallPart
+from .cese_boundary_solid_wall_part_rotate import CeseBoundarySolidWallPartRotate
+from .cese_boundary_solid_wall_part_set import CeseBoundarySolidWallPartSet
+from .cese_boundary_solid_wall_part_set_rotate import CeseBoundarySolidWallPartSetRotate
+from .cese_boundary_solid_wall_segment import CeseBoundarySolidWallSegment
+from .cese_boundary_solid_wall_segment_rotate import CeseBoundarySolidWallSegmentRotate
+from .cese_boundary_solid_wall_set import CeseBoundarySolidWallSet
+from .cese_boundary_solid_wall_set_rotate import CeseBoundarySolidWallSetRotate
+from .cese_chemistry_d3plot import CeseChemistryD3Plot
+from .cese_control_limiter import CeseControlLimiter
+from .cese_control_mesh_mov import CeseControlMeshMov
+from .cese_control_solver import CeseControlSolver
+from .cese_control_timestep import CeseControlTimestep
+from .cese_database_elout import CeseDatabaseElout
+from .cese_database_fluxavg import CeseDatabaseFluxavg
+from .cese_database_fsidrag import CeseDatabaseFsidrag
+from .cese_database_pointout import CeseDatabasePointout
+from .cese_database_ssetdrag import CeseDatabaseSsetdrag
+from .cese_define_noninertial import CeseDefineNoninertial
+from .cese_define_point import CeseDefinePoint
+from .cese_drag import CeseDrag
+from .cese_eos_cav_homog_equilib import CeseEosCavHomogEquilib
+from .cese_eos_ideal_gas import CeseEosIdealGas
+from .cese_eos_inflator1 import CeseEosInflator1
+from .cese_eos_inflator2 import CeseEosInflator2
+from .cese_fsi_exclude import CeseFsiExclude
+from .cese_initial import CeseInitial
+from .cese_initial_chemistry import CeseInitialChemistry
+from .cese_initial_chemistry_element import CeseInitialChemistryElement
+from .cese_initial_chemistry_part import CeseInitialChemistryPart
+from .cese_initial_chemistry_set import CeseInitialChemistrySet
+from .cese_initial_element import CeseInitialElement
+from .cese_initial_set import CeseInitialSet
+from .cese_mat_001 import CeseMat001
+from .cese_mat_002 import CeseMat002
+from .cese_mat_gas import CeseMatGas
+from .cese_part import CesePart
+from .cese_surface_mechssid_d3plot import CeseSurfaceMechssidD3Plot
+from .cese_surface_mechvars_d3plot import CeseSurfaceMechvarsD3Plot
