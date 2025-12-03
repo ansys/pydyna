@@ -33,14 +33,14 @@ from output_manager import OutputManager
 logger = logging.getLogger(__name__)
 
 
-def _get_source_keyword(keyword, settings):
+def _get_source_keyword(keyword: str, settings: typing.Dict[str, typing.Any]) -> str:
     """Get the 'source' keyword to look up in LSPP structs.  Usually
      its the keyword that its passed in, but in cases where one LSPP
     keyword is generated into multiple classes - such as for
     LOAD_SEGMENT => (LOAD_SEGMENT, LOAD_SEGMENT_ID) - this could be
     overwritten by the "source-keyword" property.
     """
-    source_keyword = settings.get("source-keyword", keyword)
+    source_keyword: str = settings.get("source-keyword", keyword)
     if source_keyword != keyword:
         logger.debug(f"Using source keyword '{source_keyword}' for '{keyword}'")
     return source_keyword
@@ -159,7 +159,7 @@ def _set_keyword_identity(kwd_data: typing.Dict, keyword_name: str, settings: ty
     kwd_data["title"] = handle_single_word_keyword(keyword_name)
 
 
-def _get_insertion_index_for_cards(requested_index: int, container):
+def _get_insertion_index_for_cards(requested_index: int, container: typing.List[typing.Dict[str, typing.Any]]) -> int:
     for index, card in enumerate(container):
         card_index = card.get("source_index", card["index"])
         if card_index == requested_index:
@@ -170,7 +170,7 @@ def _get_insertion_index_for_cards(requested_index: int, container):
     return requested_index
 
 
-def _do_insertions(kwd_data):
+def _do_insertions(kwd_data: typing.Dict[str, typing.Any]) -> None:
     # [(a,b,c)] => insert b into c at index a
     insertion_targets: typing.List[typing.Tuple[int, typing.Dict, typing.List]] = []
     logger.debug(f"Processing {len(kwd_data['card_insertions'])} card insertions")
@@ -206,7 +206,7 @@ def _do_insertions(kwd_data):
         container.insert(index, item)
 
 
-def _delete_marked_indices(kwd_data):
+def _delete_marked_indices(kwd_data: typing.Dict[str, typing.Any]) -> None:
     marked_indices = []
     for index, card in enumerate(kwd_data["cards"]):
         if "mark_for_removal" in card:
@@ -233,17 +233,17 @@ def _delete_marked_indices(kwd_data):
             del kwd_data["options"]
 
 
-def _add_indices(kwd_data):
+def _add_indices(kwd_data: typing.Dict[str, typing.Any]) -> None:
     # handlers might point to cards by a specific index.
     for index, card in enumerate(kwd_data["cards"]):
         card["index"] = index
 
 
-def _prepare_for_insertion(kwd_data):
+def _prepare_for_insertion(kwd_data: typing.Dict[str, typing.Any]) -> None:
     kwd_data["card_insertions"] = []
 
 
-def _add_option_indices(kwd_data):
+def _add_option_indices(kwd_data: typing.Dict[str, typing.Any]) -> None:
     index = len(kwd_data["cards"])
     for options in kwd_data.get("options", []):
         for card in options["cards"]:
@@ -251,7 +251,7 @@ def _add_option_indices(kwd_data):
         index += 1
 
 
-def _after_handle(kwd_data, registry):
+def _after_handle(kwd_data: typing.Dict[str, typing.Any], registry: typing.Any) -> None:
     # TODO - move these to their respective handler
     _do_insertions(kwd_data)
     _delete_marked_indices(kwd_data)
@@ -259,12 +259,12 @@ def _after_handle(kwd_data, registry):
     registry.post_process_all(kwd_data)
 
 
-def _before_handle(kwd_data):
+def _before_handle(kwd_data: typing.Dict[str, typing.Any]) -> None:
     _add_indices(kwd_data)
     _prepare_for_insertion(kwd_data)
 
 
-def _handle_keyword_data(kwd_data, settings):
+def _handle_keyword_data(kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
     registry = create_default_registry()
     logger.debug(f"Handling keyword data with {len(kwd_data.get('cards', []))} cards")
     _before_handle(kwd_data)
@@ -306,7 +306,7 @@ def _get_links(kwd_data) -> typing.Optional[typing.Dict]:
     return links
 
 
-def _add_links(kwd_data):
+def _add_links(kwd_data: typing.Dict[str, typing.Any]) -> None:
     """Add "links", or properties that link one keyword to another."""
     links = _get_links(kwd_data)
     if links is None:

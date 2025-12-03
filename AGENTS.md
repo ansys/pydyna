@@ -17,6 +17,7 @@ Assume an appropriate virtual environment is activated. If it isn't, just abort.
 
 - Do not use inline comments to explain imports. Instead, use a module-level docstring to indicate the purpose and usage of imported modules. This applies to all agent-generated code, not just codegen modules.
 - There is a line limit of 120 characters, and other linting rules. Use precommit run --all-files to run the linters after makin changes.
+- **Do not mark items in `codegen/todo.md` as "COMPLETED"**. This is a living document of architectural recommendations, not a task tracker. When implementing recommendations, document the implementation in the appropriate `agents/*.md` guide file instead.
 - **Add comprehensive logging**: Use Python's `logging` module extensively throughout the codebase. Add a logger instance (`logger = logging.getLogger(__name__)`) to each module and use it liberally:
   - Use `logger.debug()` for detailed traceability of execution flow, variable values, and decisions
   - Use `logger.info()` for high-level progress updates and successful operations

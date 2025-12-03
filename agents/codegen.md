@@ -49,6 +49,32 @@ Handlers transform keyword metadata during code generation. **Order matters** be
 
 **Note**: Typed dataclasses (`KeywordData`, `Card`, `Field`) are available in `data_model/keyword_data.py` for improved type safety, with backward-compatible `to_dict()`/`from_dict()` methods for gradual migration.
 
+### Type Hints and Metadata Classes
+
+The codegen system uses typed metadata classes to replace `Dict[str, Any]` patterns:
+
+**Metadata Classes** (`data_model/metadata.py`):
+- `DuplicateCardMetadata` - for card["duplicate"] (table cards)
+- `VariableCardMetadata` - for card["variable"] (series cards)
+- `ExternalCardMetadata` - for card["external"] (external implementations)
+- `OptionGroup` - for kwd_data["options"] items
+- `CardSet`, `CardSetsContainer` - for kwd_data["card_sets"]
+- `LinkData` - for kwd_data["links"] items
+- `MixinImport` - for kwd_data["mixin_imports"] items
+- `DataclassDefinition`, `DataclassField` - for kwd_data["dataclasses"] items
+
+All metadata classes include `to_dict()`/`from_dict()` methods for backward compatibility.
+
+**Handler Settings** (`data_model/handler_settings.py`):
+- Each handler has a typed settings dataclass (e.g., `TableCardSettings`, `SeriesCardSettings`)
+- Use these for type-safe configuration instead of raw dicts
+- Convert from manifest.json dicts using `from_dict()` class methods
+
+**Migration Pattern**:
+- `Card` and `KeywordData` use `Union[TypedClass, Dict[str, Any]]` for gradual migration
+- Handlers currently accept `Dict[str, Any]` but can be updated to use typed classes
+- See `handlers/skip_card.py` for example of typed handler signature
+
 **Standard Handler Order** (as of Dec 2025):
 1. `reorder-card` - Reorders cards; must run first since other handlers use positional indices
 2. `table-card` - Transforms cards into repeatable tables

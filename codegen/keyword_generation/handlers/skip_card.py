@@ -27,7 +27,7 @@ Cards marked for deletion are removed from the final keyword structure after
 all handlers have processed.
 """
 
-import typing
+from typing import Any, Dict, List, Union
 
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
@@ -61,21 +61,22 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         Sets card["mark_for_removal"] = 1 for each specified index
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: Dict[str, Any], settings: Union[int, List[int]]) -> None:
         """
         Mark specified cards for removal.
 
         Args:
-            kwd_data: Complete keyword data dictionary
+            kwd_data: Complete keyword data dictionary (will be dict until full migration)
             settings: Either a single int or list of ints representing card indices
         """
-        if type(settings) == int:
-            skipped_card_indices = [settings]
+        if isinstance(settings, int):
+            skipped_card_indices: List[int] = [settings]
         else:
             skipped_card_indices = settings
+
         for index in skipped_card_indices:
             kwd_data["cards"][index]["mark_for_removal"] = 1
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: Dict[str, Any]) -> None:
         """No post-processing required."""
         pass

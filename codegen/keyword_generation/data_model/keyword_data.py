@@ -31,7 +31,18 @@ dictionary-based structures for improved type safety and IDE support.
 from dataclasses import dataclass, field
 import logging
 import typing
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
+
+from .metadata import (
+    CardSetsContainer,
+    DataclassDefinition,
+    DuplicateCardMetadata,
+    ExternalCardMetadata,
+    LinkData,
+    MixinImport,
+    OptionGroup,
+    VariableCardMetadata,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -153,12 +164,12 @@ class Card:
     fields: List[Field] = field(default_factory=list)
     mark_for_removal: Optional[int] = None
     func: Optional[str] = None
-    duplicate: Optional[Dict[str, Any]] = None
-    variable: Optional[Dict[str, Any]] = None
+    duplicate: Optional[Union[DuplicateCardMetadata, Dict[str, Any]]] = None
+    variable: Optional[Union[VariableCardMetadata, Dict[str, Any]]] = None
     set: Optional[Dict[str, Any]] = None
     duplicate_group: bool = False
     sub_cards: Optional[List[Dict[str, Any]]] = None
-    external: Optional[Dict[str, Any]] = None
+    external: Optional[Union[ExternalCardMetadata, Dict[str, Any]]] = None
     source_index: Optional[int] = None
     target_index: Optional[int] = None
     length_func: Optional[str] = None
@@ -176,9 +187,13 @@ class Card:
         if self.func is not None:
             result["func"] = self.func
         if self.duplicate is not None:
-            result["duplicate"] = self.duplicate
+            result["duplicate"] = (
+                self.duplicate.to_dict() if isinstance(self.duplicate, DuplicateCardMetadata) else self.duplicate
+            )
         if self.variable is not None:
-            result["variable"] = self.variable
+            result["variable"] = (
+                self.variable.to_dict() if isinstance(self.variable, VariableCardMetadata) else self.variable
+            )
         if self.set is not None:
             result["set"] = self.set
         if self.duplicate_group:
@@ -186,7 +201,9 @@ class Card:
         if self.sub_cards is not None:
             result["sub_cards"] = self.sub_cards
         if self.external is not None:
-            result["external"] = self.external
+            result["external"] = (
+                self.external.to_dict() if isinstance(self.external, ExternalCardMetadata) else self.external
+            )
         if self.source_index is not None:
             result["source_index"] = self.source_index
         if self.target_index is not None:
@@ -207,17 +224,27 @@ class Card:
             for f in data.get("fields", [])
         ]
         fields: List[Field] = typing.cast(List[Field], fields_raw)
+        # Convert metadata dicts to typed objects
+        duplicate_data = data.get("duplicate")
+        duplicate = (
+            DuplicateCardMetadata.from_dict(duplicate_data) if isinstance(duplicate_data, dict) else duplicate_data
+        )
+        variable_data = data.get("variable")
+        variable = VariableCardMetadata.from_dict(variable_data) if isinstance(variable_data, dict) else variable_data
+        external_data = data.get("external")
+        external = ExternalCardMetadata.from_dict(external_data) if isinstance(external_data, dict) else external_data
+
         return cls(
             index=data["index"],
             fields=fields,
             mark_for_removal=data.get("mark_for_removal"),
             func=data.get("func"),
-            duplicate=data.get("duplicate"),
-            variable=data.get("variable"),
+            duplicate=duplicate,
+            variable=variable,
             set=data.get("set"),
             duplicate_group=data.get("duplicate_group", False),
             sub_cards=data.get("sub_cards"),
-            external=data.get("external"),
+            external=external,
             source_index=data.get("source_index"),
             target_index=data.get("target_index"),
             length_func=data.get("length_func"),
@@ -259,15 +286,15 @@ class KeywordData:
     title: str
     classname: str
     cards: List[Card] = field(default_factory=list)
-    options: Optional[List[Dict[str, Any]]] = None
-    card_sets: Optional[Dict[str, Any]] = None
+    options: Optional[Union[List[OptionGroup], List[Dict[str, Any]]]] = None
+    card_sets: Optional[Union[CardSetsContainer, Dict[str, Any]]] = None
     duplicate: bool = False
     duplicate_group: bool = False
     variable: bool = False
-    dataclasses: Optional[List[Dict[str, Any]]] = None
+    dataclasses: Optional[Union[List[DataclassDefinition], List[Dict[str, Any]]]] = None
     mixins: Optional[List[str]] = None
-    mixin_imports: Optional[List[Dict[str, Any]]] = None
-    links: Optional[List[Dict[str, Any]]] = None
+    mixin_imports: Optional[Union[List[MixinImport], List[Dict[str, Any]]]] = None
+    links: Optional[Union[List[LinkData], List[Dict[str, Any]]]] = None
     negative_shared_fields: Optional[List[Any]] = None
     card_insertions: List[Any] = field(default_factory=list)
 
@@ -290,9 +317,15 @@ class KeywordData:
             "card_insertions": self.card_insertions,
         }
         if self.options is not None:
-            result["options"] = self.options
+            result["options"] = (
+                [o.to_dict() if isinstance(o, OptionGroup) else o for o in self.options]
+                if isinstance(self.options, list)
+                else self.options
+            )
         if self.card_sets is not None:
-            result["card_sets"] = self.card_sets
+            result["card_sets"] = (
+                self.card_sets.to_dict() if isinstance(self.card_sets, CardSetsContainer) else self.card_sets
+            )
         if self.duplicate:
             result["duplicate"] = self.duplicate
         if self.duplicate_group:
@@ -300,13 +333,25 @@ class KeywordData:
         if self.variable:
             result["variable"] = self.variable
         if self.dataclasses is not None:
-            result["dataclasses"] = self.dataclasses
+            result["dataclasses"] = (
+                [d.to_dict() if isinstance(d, DataclassDefinition) else d for d in self.dataclasses]
+                if isinstance(self.dataclasses, list)
+                else self.dataclasses
+            )
         if self.mixins is not None:
             result["mixins"] = self.mixins
         if self.mixin_imports is not None:
-            result["mixin_imports"] = self.mixin_imports
+            result["mixin_imports"] = (
+                [m.to_dict() if isinstance(m, MixinImport) else m for m in self.mixin_imports]
+                if isinstance(self.mixin_imports, list)
+                else self.mixin_imports
+            )
         if self.links is not None:
-            result["links"] = self.links
+            result["links"] = (
+                [link.to_dict() if isinstance(link, LinkData) else link for link in self.links]
+                if isinstance(self.links, list)
+                else self.links
+            )
         if self.negative_shared_fields is not None:
             result["negative_shared_fields"] = self.negative_shared_fields
         return result
@@ -328,21 +373,53 @@ class KeywordData:
         cards_raw = [Card.from_dict(c) if isinstance(c, dict) and "index" in c else c for c in data.get("cards", [])]
         cards: typing.List[Card] = typing.cast(typing.List[Card], cards_raw)
 
+        # Convert metadata dicts to typed objects
+        options_data = data.get("options")
+        options = (
+            [OptionGroup.from_dict(o) if isinstance(o, dict) else o for o in options_data]
+            if isinstance(options_data, list)
+            else options_data
+        )
+
+        card_sets_data = data.get("card_sets")
+        card_sets = CardSetsContainer.from_dict(card_sets_data) if isinstance(card_sets_data, dict) else card_sets_data
+
+        dataclasses_data = data.get("dataclasses")
+        dataclasses = (
+            [DataclassDefinition.from_dict(d) if isinstance(d, dict) else d for d in dataclasses_data]
+            if isinstance(dataclasses_data, list)
+            else dataclasses_data
+        )
+
+        mixin_imports_data = data.get("mixin_imports")
+        mixin_imports = (
+            [MixinImport.from_dict(m) if isinstance(m, dict) else m for m in mixin_imports_data]
+            if isinstance(mixin_imports_data, list)
+            else mixin_imports_data
+        )
+
+        links_data = data.get("links")
+        links = (
+            [LinkData.from_dict(link) if isinstance(link, dict) else link for link in links_data]
+            if isinstance(links_data, list)
+            else links_data
+        )
+
         return cls(
             keyword=data["keyword"],
             subkeyword=data["subkeyword"],
             title=data["title"],
             classname=data["classname"],
             cards=cards,
-            options=data.get("options"),
-            card_sets=data.get("card_sets"),
+            options=options,
+            card_sets=card_sets,
             duplicate=data.get("duplicate", False),
             duplicate_group=data.get("duplicate_group", False),
             variable=data.get("variable", False),
-            dataclasses=data.get("dataclasses"),
+            dataclasses=dataclasses,
             mixins=data.get("mixins"),
-            mixin_imports=data.get("mixin_imports"),
-            links=data.get("links"),
+            mixin_imports=mixin_imports,
+            links=links,
             negative_shared_fields=data.get("negative_shared_fields"),
             card_insertions=data.get("card_insertions", []),
         )

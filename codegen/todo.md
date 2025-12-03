@@ -3,7 +3,7 @@
 This file collects architectural and code-level recommendations for improving the codegen system.
 
 ## 1. Data Structures
-- Add consistent type hints throughout the codebase (dataclasses are available in `data_model/keyword_data.py` for gradual migration)
+- Add consistent type hints throughout the codebase (dataclasses and typed metadata classes are available in `data_model/` for gradual migration - see `agents/codegen.md` for details)
 
 ## 2. Handler System
 
@@ -20,17 +20,14 @@ This file collects architectural and code-level recommendations for improving th
 - Use context objects or dataclasses for template context instead of manual dict updates.
 - Document template variables and expected context structure.
 
-## 5. Documentation
-- Consider generating API docs for the codegen system.
-
-## 6. Testing
+## 5. Testing
 - Add unit tests for handlers, template rendering, and manifest parsing.
 - Ensure all tests validate that generated files remain unchanged.
 
-## 7. General Simplicity
+## 6. General Simplicity
 - Reduce code duplication and improve readability.
 
-## 8. High-Level Design
+## 7. High-Level Design
 - Add a diagram or high-level description of the codegen flow to the documentation.
 
 ---
