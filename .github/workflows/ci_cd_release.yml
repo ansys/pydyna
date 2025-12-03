@@ -6,8 +6,8 @@ on:
       - "v*.*.*"
 
 permissions:
-  contents: read
-  packages: read
+  contents: read  # Needed to checkout code
+  packages: read  # Needed for pulling container images from GHCR
 
 env:
   MAIN_PYTHON_VERSION: '3.13'
@@ -27,8 +27,8 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write  # Needed to commit changelog updates
+      pull-requests: write  # Needed to create pull requests for changelog
     steps:
       - uses: ansys/actions/doc-deploy-changelog@21c9de9bee9692173780696d4a39964f20b9cfa3 # v9.0.15
         with:
