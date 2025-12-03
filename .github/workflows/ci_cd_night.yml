@@ -2,7 +2,7 @@ name: night doc build
 
 permissions:
   contents: read
-  packages: read
+  packages: read  # Needed for pulling container images from GHCR
 on:
   schedule:
     - cron: '0 22 * * *' # 22:00 UTC
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [doc-build]
     steps:
-      - uses: ansys/actions/doc-deploy-dev@21c9de9bee9692173780696d4a39964f20b9cfa3 # v9.0.15
+      - uses: ansys/actions/doc-deploy-dev@46957117ba42d3d075c6cca0f6bbdc1ac2a9af04 # v9.0.15
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ env.BOT_TOKEN }}

@@ -1,0 +1,205 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Auto-generated imports for define domain
+
+from .define_adaptive_solid_to_des import DefineAdaptiveSolidToDes
+from .define_adaptive_solid_to_des_id import DefineAdaptiveSolidToDesId
+from .define_adaptive_solid_to_sph import DefineAdaptiveSolidToSph
+from .define_adaptive_solid_to_sph_id import DefineAdaptiveSolidToSphId
+from .define_alebag_bag import DefineAlebagBag
+from .define_alebag_hole import DefineAlebagHole
+from .define_alebag_inflator import DefineAlebagInflator
+from .define_beam_solid_coupling import DefineBeamSolidCoupling
+from .define_box import DefineBox
+from .define_box_adaptive import DefineBoxAdaptive
+from .define_box_adaptive_local import DefineBoxAdaptiveLocal
+from .define_box_coarsen import DefineBoxCoarsen
+from .define_box_coarsen_local import DefineBoxCoarsenLocal
+from .define_box_drawbead import DefineBoxDrawbead
+from .define_box_drawbead_local import DefineBoxDrawbeadLocal
+from .define_box_local import DefineBoxLocal
+from .define_box_nodes_adaptive import DefineBoxNodesAdaptive
+from .define_box_sph import DefineBoxSph
+from .define_box_sph_local import DefineBoxSphLocal
+from .define_connection_properties import DefineConnectionProperties
+from .define_connection_properties_add import DefineConnectionPropertiesAdd
+from .define_construction_stages import DefineConstructionStages
+from .define_contact_exclusion import DefineContactExclusion
+from .define_contact_volume import DefineContactVolume
+from .define_control_volume import DefineControlVolume
+from .define_control_volume_flow_area import DefineControlVolumeFlowArea
+from .define_control_volume_interaction import DefineControlVolumeInteraction
+from .define_coordinate_node import DefineCoordinateNode
+from .define_coordinate_nodes import DefineCoordinateNodes
+from .define_coordinate_system import DefineCoordinateSystem
+from .define_coordinate_vector import DefineCoordinateVector
+from .define_cpm_bag_interaction import DefineCpmBagInteraction
+from .define_cpm_chamber import DefineCpmChamber
+from .define_cpm_chambers import DefineCpmChambers
+from .define_cpm_gas_properties import DefineCpmGasProperties
+from .define_cpm_npdata import DefineCpmNpdata
+from .define_cpm_vent import DefineCpmVent
+from .define_crashfront import DefineCrashfront
+from .define_curve import DefineCurve
+from .define_curve_3858 import DefineCurve3858
+from .define_curve_5434a import DefineCurve5434A
+from .define_curve_box_adaptivity import DefineCurveBoxAdaptivity
+from .define_curve_compensation_constraint_begin import DefineCurveCompensationConstraintBegin
+from .define_curve_compensation_constraint_end import DefineCurveCompensationConstraintEnd
+from .define_curve_drawbead import DefineCurveDrawbead
+from .define_curve_duplicate import DefineCurveDuplicate
+from .define_curve_entity import DefineCurveEntity
+from .define_curve_feedback import DefineCurveFeedback
+from .define_curve_flc import DefineCurveFlc
+from .define_curve_fld_from_triaxial_limit import DefineCurveFldFromTriaxialLimit
+from .define_curve_function import DefineCurveFunction
+from .define_curve_smooth import DefineCurveSmooth
+from .define_curve_stress import DefineCurveStress
+from .define_curve_triaxial_limit_from_fld import DefineCurveTriaxialLimitFromFld
+from .define_curve_trim import DefineCurveTrim
+from .define_curve_trim_2d import DefineCurveTrim2D
+from .define_curve_trim_3d import DefineCurveTrim3D
+from .define_curve_trim_new import DefineCurveTrimNew
+from .define_death_times_nodes import DefineDeathTimesNodes
+from .define_death_times_rigid import DefineDeathTimesRigid
+from .define_death_times_set import DefineDeathTimesSet
+from .define_de_active_region import DefineDeActiveRegion
+from .define_de_bond import DefineDeBond
+from .define_de_bond_by_part import DefineDeBondByPart
+from .define_de_bond_override import DefineDeBondOverride
+from .define_de_by_part import DefineDeByPart
+from .define_de_cohesive import DefineDeCohesive
+from .define_de_flow_drag import DefineDeFlowDrag
+from .define_de_hbond import DefineDeHbond
+from .define_de_injection import DefineDeInjection
+from .define_de_injection_ellipse import DefineDeInjectionEllipse
+from .define_de_inject_bonded import DefineDeInjectBonded
+from .define_de_inject_bonded_ellipse import DefineDeInjectBondedEllipse
+from .define_de_inject_shape import DefineDeInjectShape
+from .define_de_internal_skip import DefineDeInternalSkip
+from .define_de_massflow_plane import DefineDeMassflowPlane
+from .define_de_mesh_beam import DefineDeMeshBeam
+from .define_de_mesh_surface import DefineDeMeshSurface
+from .define_de_pattern_output import DefineDePatternOutput
+from .define_de_to_beam_coupling import DefineDeToBeamCoupling
+from .define_de_to_surface_coupling import DefineDeToSurfaceCoupling
+from .define_de_to_surface_coupling_transducer import DefineDeToSurfaceCouplingTransducer
+from .define_de_to_surface_tied import DefineDeToSurfaceTied
+from .define_element_death_beam import DefineElementDeathBeam
+from .define_element_death_beam_set import DefineElementDeathBeamSet
+from .define_element_death_shell import DefineElementDeathShell
+from .define_element_death_shell_set import DefineElementDeathShellSet
+from .define_element_death_solid import DefineElementDeathSolid
+from .define_element_death_solid_set import DefineElementDeathSolidSet
+from .define_element_death_thick_shell import DefineElementDeathThickShell
+from .define_element_death_thick_shell_set import DefineElementDeathThickShellSet
+from .define_element_erosion_iga import DefineElementErosionIga
+from .define_element_erosion_shell import DefineElementErosionShell
+from .define_element_erosion_tshell import DefineElementErosionTshell
+from .define_element_generalized_shell import DefineElementGeneralizedShell
+from .define_element_generalized_solid import DefineElementGeneralizedSolid
+from .define_fabric_assemblies import DefineFabricAssemblies
+from .define_fibers import DefineFibers
+from .define_filter import DefineFilter
+from .define_forming_blankmesh import DefineFormingBlankmesh
+from .define_forming_clamp import DefineFormingClamp
+from .define_forming_contact import DefineFormingContact
+from .define_forming_onestep_master import DefineFormingOnestepMaster
+from .define_forming_onestep_primary import DefineFormingOnestepPrimary
+from .define_forming_solid_surface import DefineFormingSolidSurface
+from .define_fp_to_surface_coupling import DefineFpToSurfaceCoupling
+from .define_friction import DefineFriction
+from .define_friction_airbag_single_surface import DefineFrictionAirbagSingleSurface
+from .define_friction_automatic_general import DefineFrictionAutomaticGeneral
+from .define_friction_automatic_nodes_to_surface import DefineFrictionAutomaticNodesToSurface
+from .define_friction_automatic_one_way_surface_to_surface import DefineFrictionAutomaticOneWaySurfaceToSurface
+from .define_friction_automatic_single_surface import DefineFrictionAutomaticSingleSurface
+from .define_friction_automatic_single_surface_mortar import DefineFrictionAutomaticSingleSurfaceMortar
+from .define_friction_automatic_surface_to_surface import DefineFrictionAutomaticSurfaceToSurface
+from .define_friction_automatic_surface_to_surface_mortar import DefineFrictionAutomaticSurfaceToSurfaceMortar
+from .define_friction_eroding_single_surface import DefineFrictionErodingSingleSurface
+from .define_friction_orientation import DefineFrictionOrientation
+from .define_friction_scaling import DefineFrictionScaling
+from .define_friction_single_surface import DefineFrictionSingleSurface
+from .define_function_tabulated import DefineFunctionTabulated
+from .define_ground_motion import DefineGroundMotion
+from .define_haz_properties import DefineHazProperties
+from .define_haz_tailor_welded_blank import DefineHazTailorWeldedBlank
+from .define_hex_spotweld_assembly import DefineHexSpotweldAssembly
+from .define_hex_spotweld_assembly_16 import DefineHexSpotweldAssembly16
+from .define_hex_spotweld_assembly_4 import DefineHexSpotweldAssembly4
+from .define_hex_spotweld_assembly_8 import DefineHexSpotweldAssembly8
+from .define_lance_seed_point_coordinates import DefineLanceSeedPointCoordinates
+from .define_material_histories import DefineMaterialHistories
+from .define_material_histories_names import DefineMaterialHistoriesNames
+from .define_multiscale import DefineMultiscale
+from .define_multi_drawbeads_iges import DefineMultiDrawbeadsIges
+from .define_nurbs_curve import DefineNurbsCurve
+from .define_particle_blast import DefineParticleBlast
+from .define_part_from_layer import DefinePartFromLayer
+from .define_pblast_airgeo import DefinePblastAirgeo
+from .define_pblast_geometry import DefinePblastGeometry
+from .define_plane import DefinePlane
+from .define_porous_ale import DefinePorousAle
+from .define_porous_lagrangian import DefinePorousLagrangian
+from .define_pressure_tube import DefinePressureTube
+from .define_quasar_coupling import DefineQuasarCoupling
+from .define_region import DefineRegion
+from .define_sd_orientation import DefineSdOrientation
+from .define_set_adaptive import DefineSetAdaptive
+from .define_sph_active_region import DefineSphActiveRegion
+from .define_sph_ambient_drag import DefineSphAmbientDrag
+from .define_sph_de_coupling import DefineSphDeCoupling
+from .define_sph_de_coupling_id import DefineSphDeCouplingId
+from .define_sph_injection import DefineSphInjection
+from .define_sph_massflow_plane import DefineSphMassflowPlane
+from .define_sph_mesh_box import DefineSphMeshBox
+from .define_sph_mesh_surface import DefineSphMeshSurface
+from .define_sph_to_sph_coupling import DefineSphToSphCoupling
+from .define_sph_to_sph_coupling_id import DefineSphToSphCouplingId
+from .define_sph_vicinity_sensor import DefineSphVicinitySensor
+from .define_spotweld_failure import DefineSpotweldFailure
+from .define_spotweld_failure_add import DefineSpotweldFailureAdd
+from .define_spotweld_failure_pid import DefineSpotweldFailurePid
+from .define_spotweld_failure_resultants import DefineSpotweldFailureResultants
+from .define_spotweld_multiscale import DefineSpotweldMultiscale
+from .define_spotweld_rupture_parameter import DefineSpotweldRuptureParameter
+from .define_spotweld_rupture_stress import DefineSpotweldRuptureStress
+from .define_staged_construction_part import DefineStagedConstructionPart
+from .define_staged_construction_part_set import DefineStagedConstructionPartSet
+from .define_stochastic_element_shell_variaton import DefineStochasticElementShellVariaton
+from .define_stochastic_element_solid_variaton import DefineStochasticElementSolidVariaton
+from .define_stochastic_variation import DefineStochasticVariation
+from .define_stochastic_variation_properties import DefineStochasticVariationProperties
+from .define_table import DefineTable
+from .define_table_2d import DefineTable2D
+from .define_table_3d import DefineTable3D
+from .define_table_compact import DefineTableCompact
+from .define_table_matrix import DefineTableMatrix
+from .define_target_boundary import DefineTargetBoundary
+from .define_tracer_particles_2d import DefineTracerParticles2D
+from .define_transform import DefineTransform
+from .define_transformation import DefineTransformation
+from .define_trim_seed_point_coordinates import DefineTrimSeedPointCoordinates
+from .define_vector import DefineVector
+from .define_vector_nodes import DefineVectorNodes
