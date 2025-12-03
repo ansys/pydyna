@@ -18,9 +18,8 @@ This file collects architectural and code-level recommendations for improving th
 - Use context objects or dataclasses for template context instead of manual dict updates.
 - Document template variables and expected context structure.
 
-## 5. Output Management
-- Encapsulate file writing and output path logic in a dedicated output manager class.
-- Remove direct file operations from main scripts.
+## 5. Logging
+- Add dedicated logging and update the CLI to set logging levels
 
 ## 6. Documentation
 - Add docstrings to all public functions and classes.
