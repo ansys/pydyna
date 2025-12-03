@@ -26,7 +26,7 @@ import typing
 
 from jinja2 import Environment
 from keyword_generation.utils import get_license_header
-from keyword_generation.utils.domain_mapper import get_keyword_domain, get_all_domains
+from keyword_generation.utils.domain_mapper import get_all_domains, get_keyword_domain
 
 
 def generate_entrypoints(env: Environment, lib_path: str, keywords_list: typing.List[typing.Dict]) -> None:
@@ -41,7 +41,7 @@ def generate_entrypoints(env: Environment, lib_path: str, keywords_list: typing.
 
     # Create domain-organized __init__.py files
     auto_path = pathlib.Path(lib_path) / "auto"
-    
+
     # Group keywords by domain
     keywords_by_domain = {}
     for keyword in keywords_list:
@@ -51,12 +51,12 @@ def generate_entrypoints(env: Environment, lib_path: str, keywords_list: typing.
             if domain not in keywords_by_domain:
                 keywords_by_domain[domain] = []
             keywords_by_domain[domain].append(keyword)
-    
+
     # Create __init__.py for each domain
     for domain in get_all_domains():
         domain_path = auto_path / domain
         domain_path.mkdir(parents=True, exist_ok=True)
-        
+
         domain_keywords = keywords_by_domain.get(domain, [])
         init_content = license_header
         if domain_keywords:
@@ -65,15 +65,15 @@ def generate_entrypoints(env: Environment, lib_path: str, keywords_list: typing.
                 filename = keyword["filename"]
                 classname = keyword["classname"]
                 init_content += f"from .{filename} import {classname}\n"
-        
+
         init_file = domain_path / "__init__.py"
         with open(init_file, "w", encoding="utf-8") as f:
             f.write(init_content)
-    
+
     # Create main auto/__init__.py that imports from all domains
     main_init_content = license_header + "\n# Auto-generated imports from all domains\n\n"
     for domain in get_all_domains():
         main_init_content += f"from .{domain} import *\n"
-    
+
     with open(auto_path / "__init__.py", "w", encoding="utf-8") as f:
         f.write(main_init_content)

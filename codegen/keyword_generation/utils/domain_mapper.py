@@ -73,12 +73,12 @@ KEYWORD_DOMAIN_MAPPING = {
 def get_keyword_domain(keyword_name: str) -> str:
     """
     Categorize a keyword by domain based on its prefix.
-    
+
     Parameters
     ----------
     keyword_name : str
         The keyword name (e.g., "MAT_ELASTIC", "BOUNDARY_SPC_NODE")
-    
+
     Returns
     -------
     str
@@ -87,7 +87,7 @@ def get_keyword_domain(keyword_name: str) -> str:
     for prefix, domain in KEYWORD_DOMAIN_MAPPING.items():
         if keyword_name.startswith(prefix):
             return domain
-    
+
     # Default to miscellaneous if no prefix matches
     return "misc"
 
