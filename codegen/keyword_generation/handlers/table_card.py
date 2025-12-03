@@ -20,14 +20,68 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Table Card Handler: Marks cards that represent 2D tabular data.
+
+Indicates that a card repeats to form a table structure (e.g., integration points).
+The card repeats based on a length function.
+"""
+
 import typing
 
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
+@handler(
+    name="table-card",
+    dependencies=["reorder-card"],
+    description="Marks cards as repeating table structures with dynamic row count",
+    input_schema={
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "index": {"type": "integer"},
+                "property-name": {"type": "string"},
+                "length-func": {"type": "string"},
+                "active-func": {"type": "string"},
+            },
+            "required": ["index", "property-name"],
+        },
+    },
+    output_description="Sets kwd_data['duplicate']=True and adds 'duplicate' dict to card",
+)
 class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
+    """
+    Marks cards as table structures.
+
+    Table cards repeat to form 2D data structures where the number of
+    repetitions is determined dynamically by a length function.
+
+    Input Settings Example:
+        [
+            {
+                "index": 4,
+                "property-name": "integration_points",
+                "length-func": "self.nipp",
+                "active-func": "self.elform in [101, 102, 103]"
+            }
+        ]
+
+    Output Modification:
+        - Sets kwd_data["duplicate"] = True
+        - Adds card["duplicate"] dict with name, length_func, active_func
+    """
+
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
+        """
+        Mark cards as table structures.
+
+        Args:
+            kwd_data: Complete keyword data dictionary
+            settings: List of table card specifications
+        """
         kwd_data["duplicate"] = True
         for card_settings in settings:
             duplicate_card = kwd_data["cards"][card_settings["index"]]
@@ -38,5 +92,5 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             }
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+        """No post-processing required."""
         pass

@@ -20,14 +20,74 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Override Field Handler: Modifies field properties.
+
+Allows fine-grained control over field attributes like type, defaults,
+readonly status, position, width, and valid options.
+"""
+
 import typing
 
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
+@handler(
+    name="override-field",
+    dependencies=["reorder-card"],
+    description="Modifies field properties (type, default, readonly, position, width, options, name)",
+    input_schema={
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "index": {"type": "integer"},
+                "name": {"type": "string"},
+                "readonly": {"type": "boolean"},
+                "type": {"type": "string"},
+                "position": {"type": "integer"},
+                "width": {"type": "integer"},
+                "default": {},
+                "options": {"type": "array"},
+                "new-name": {"type": "string"},
+            },
+            "required": ["index", "name"],
+        },
+    },
+    output_description="Modifies specified field properties in place",
+)
 class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler):
+    """
+    Overrides field properties.
+
+    Allows modifying any aspect of a field's definition including type,
+    position, width, default value, readonly status, valid options, and name.
+
+    Input Settings Example:
+        [
+            {
+                "index": 1,
+                "name": "SECID",
+                "type": "int",
+                "readonly": true,
+                "default": 0,
+                "new-name": "section_id"
+            }
+        ]
+
+    Output Modification:
+        Modifies field dict properties for matching field in specified card
+    """
+
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
+        """
+        Override field properties.
+
+        Args:
+            kwd_data: Complete keyword data dictionary
+            settings: List of field override specifications
+        """
         for setting in settings:
             index = setting["index"]
             name = setting["name"]
@@ -50,5 +110,5 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
                         field["name"] = setting["new-name"]
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+        """No post-processing required."""
         pass

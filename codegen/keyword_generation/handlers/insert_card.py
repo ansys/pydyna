@@ -20,16 +20,68 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Insert Card Handler: Inserts new cards at specified positions.
+
+Queues cards for insertion during the post-handler phase. Actual insertion
+happens after all handlers run via _do_insertions().
+"""
+
 import typing
 
 import keyword_generation.data_model as gen
 from keyword_generation.data_model import get_card
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
+@handler(
+    name="insert-card",
+    dependencies=["reorder-card"],
+    description="Queues new cards for insertion at specified indices",
+    input_schema={
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "index": {"type": "integer"},
+                "card": {"type": "object"},
+            },
+            "required": ["index", "card"],
+        },
+    },
+    output_description="Appends Insertion objects to kwd_data['card_insertions'] list",
+)
 class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
+    """
+    Queues cards for insertion.
+
+    Does not insert cards immediately. Instead, creates Insertion objects
+    that are processed later by _do_insertions() in the generation pipeline.
+
+    Input Settings Example:
+        [
+            {
+                "index": 0,
+                "card": {
+                    "source": "additional-cards",
+                    "card-name": "CONTACT_CARD_1"
+                }
+            }
+        ]
+
+    Output Modification:
+        Appends Insertion(target_index, "", card) to kwd_data["card_insertions"]
+    """
+
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
+        """
+        Queue cards for insertion.
+
+        Args:
+            kwd_data: Complete keyword data dictionary
+            settings: List of {"index", "card"} dicts
+        """
         for card_settings in settings:
             index = card_settings["index"]
             card = get_card(card_settings["card"])
@@ -37,5 +89,5 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             kwd_data["card_insertions"].append(insertion)
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+        """No post-processing required."""
         pass

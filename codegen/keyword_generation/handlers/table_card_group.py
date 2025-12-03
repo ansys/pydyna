@@ -20,15 +20,90 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Table Card Group Handler: Creates duplicate card groups for table-like data.
+
+This handler groups multiple cards together to form a repeating structure,
+commonly used for table or matrix data where multiple related cards repeat as a unit.
+"""
+
 import typing
 
 import keyword_generation.data_model as gen
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
+@handler(
+    name="table-card-group",
+    dependencies=["reorder-card"],
+    description="Creates duplicate card groups for table-like repeating card structures",
+    input_schema={
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "indices": {
+                    "type": "array",
+                    "items": {"type": "integer"},
+                    "description": "Card indices to group together",
+                },
+                "overall-name": {"type": "string", "description": "Name of the duplicate group"},
+                "length-func": {"type": "string", "description": "Function to compute group count"},
+                "active-func": {"type": "string", "description": "Function to determine if group is active"},
+            },
+            "required": ["indices", "overall-name"],
+        },
+    },
+    output_description=(
+        "Sets kwd_data['duplicate_group']=True, adds card insertion with duplicate group, "
+        "marks source cards for removal"
+    ),
+)
 class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHandler):
+    """
+    Groups cards together to form repeating table-like structures.
+
+    This handler creates duplicate card groups where multiple cards are treated
+    as a single repeatable unit. Common use cases include table data where each
+    row consists of multiple cards that must be repeated together.
+
+    CRITICAL: Uses reference semantics (not deep copies). Cards are appended
+    to sub_cards by reference so that later handler modifications (e.g.,
+    conditional-card setting 'func') appear in the group.
+
+    Input Settings Example:
+        [
+            {
+                "indices": [2, 3, 4],
+                "overall-name": "table_row",
+                "length-func": "self.nrows",
+                "active-func": "self.has_table"
+            }
+        ]
+
+    Output Modification:
+        - Sets kwd_data["duplicate_group"] = True
+        - Creates duplicate group structure:
+          {
+              "duplicate_group": True,
+              "sub_cards": [...],  # Cards from indices
+              "overall_name": "table_row",
+              "length_func": "self.nrows",
+              "active_func": "self.has_table"
+          }
+        - Inserts group at minimum index position
+        - Marks all source cards with "mark_for_removal" = 1
+    """
+
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
+        """
+        Create duplicate card groups from card indices.
+
+        Args:
+            kwd_data: Complete keyword data dictionary
+            settings: List of card group definitions
+        """
         kwd_data["duplicate_group"] = True
         for card_settings in settings:
             indices = card_settings["indices"]
@@ -52,5 +127,5 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             kwd_data["card_insertions"].append(insertion)
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+        """No post-processing required."""
         pass

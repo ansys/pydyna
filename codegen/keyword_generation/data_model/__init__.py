@@ -26,6 +26,9 @@ import logging
 import os
 import typing
 
+from keyword_generation.data_model.insertion import Insertion
+from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
+
 logger = logging.getLogger(__name__)
 
 KWDM_INSTANCE = None

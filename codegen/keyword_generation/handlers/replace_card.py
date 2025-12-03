@@ -20,15 +20,67 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Replace Card Handler: Replaces entire cards with alternatives.
+
+Uses cards from additional-cards.json or other sources to completely
+replace existing cards in the keyword structure.
+"""
+
 import typing
 
 from keyword_generation.data_model import get_card
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
+@handler(
+    name="replace-card",
+    dependencies=["reorder-card"],
+    description="Replaces entire cards with alternative definitions from additional-cards.json",
+    input_schema={
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "index": {"type": "integer"},
+                "card": {"type": "object"},
+            },
+            "required": ["index", "card"],
+        },
+    },
+    output_description="Replaces cards at specified indices with loaded card definitions",
+)
 class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
+    """
+    Replaces complete card definitions.
+
+    Loads card from additional-cards.json and replaces the card at the
+    specified index. Useful for substituting standardized card definitions.
+
+    Input Settings Example:
+        [
+            {
+                "index": 1,
+                "card": {
+                    "source": "additional-cards",
+                    "card-name": "BLANK"
+                }
+            }
+        ]
+
+    Output Modification:
+        Replaces kwd_data["cards"][index] with loaded card definition
+    """
+
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
+        """
+        Replace cards with alternatives.
+
+        Args:
+            kwd_data: Complete keyword data dictionary
+            settings: List of {"index", "card"} dicts
+        """
         for card_settings in settings:
             index = card_settings["index"]
             replacement = get_card(card_settings["card"])
@@ -36,5 +88,5 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
             kwd_data["cards"][index] = replacement
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+        """No post-processing required."""
         pass
