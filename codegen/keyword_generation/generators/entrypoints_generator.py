@@ -20,8 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
-import pathlib
 import typing
 
 from jinja2 import Environment
@@ -29,18 +27,13 @@ from keyword_generation.utils import get_license_header
 from keyword_generation.utils.domain_mapper import get_keyword_domain
 
 
-def generate_entrypoints(env: Environment, lib_path: str, keywords_list: typing.List[typing.Dict]) -> None:
+def generate_entrypoints(env: Environment, output_manager, keywords_list: typing.List[typing.Dict]) -> None:
     """use templates to write keywords/type_mapping.py, keywords/__init__.py and domain __init__.py files"""
     license_header = get_license_header()
     keywords_lists = {"license": license_header, "keywords": keywords_list}
-    with open(os.path.join(lib_path, "auto_keywords.py"), "w", encoding="utf-8") as f:
-        f.write(env.get_template("importer.j2").render(**keywords_lists))
-
-    with open(os.path.join(lib_path, "type_mapping.py"), "w", encoding="utf-8") as f:
-        f.write(env.get_template("type-mapping.j2").render(**keywords_lists))
-
-    # Create domain-organized __init__.py files
-    auto_path = pathlib.Path(lib_path) / "auto"
+    # Write auto_keywords.py and type_mapping.py
+    output_manager.write_auto_keywords_file(env.get_template("importer.j2").render(**keywords_lists))
+    output_manager.write_type_mapping_file(env.get_template("type-mapping.j2").render(**keywords_lists))
 
     # Group keywords by domain
     keywords_by_domain = {}
@@ -55,10 +48,7 @@ def generate_entrypoints(env: Environment, lib_path: str, keywords_list: typing.
     # Create __init__.py only for domains that have keywords
     domains_with_keywords = []
     for domain, keywords in keywords_by_domain.items():
-        domain_path = auto_path / domain
-        domain_path.mkdir(parents=True, exist_ok=True)
         domains_with_keywords.append(domain)
-
         init_content = license_header
         if keywords:
             init_content += "\n# Auto-generated imports for " + domain + " domain\n\n"
@@ -66,15 +56,10 @@ def generate_entrypoints(env: Environment, lib_path: str, keywords_list: typing.
                 filename = keyword["filename"]
                 classname = keyword["classname"]
                 init_content += f"from .{filename} import {classname}\n"
-
-        init_file = domain_path / "__init__.py"
-        with open(init_file, "w", encoding="utf-8") as f:
-            f.write(init_content)
+        output_manager.write_domain_init_file(domain, init_content)
 
     # Create main auto/__init__.py that imports only from domains with keywords
     main_init_content = license_header + "\n# Auto-generated imports from all domains\n\n"
     for domain in sorted(domains_with_keywords):
         main_init_content += f"from .{domain} import *\n"
-
-    with open(auto_path / "__init__.py", "w", encoding="utf-8") as f:
-        f.write(main_init_content)
+    output_manager.write_main_init_file(main_init_content)
