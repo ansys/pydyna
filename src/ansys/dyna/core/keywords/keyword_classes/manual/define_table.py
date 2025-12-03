@@ -22,7 +22,7 @@
 
 import typing
 
-from ansys.dyna.core.keywords.keyword_classes.auto.define_table import DefineTable as _AutoDefineTable
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_table import DefineTable as _AutoDefineTable
 
 
 class DefineTable(_AutoDefineTable):
