@@ -110,7 +110,8 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         """
         kwd_data["variable"] = True
         dataclasses = []
-        for card_settings in settings:
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for card_settings in settings_list:
             card_index = card_settings["index"]
             type_name = card_settings["type"]
             variable_card = kwd_data["cards"][card_index]

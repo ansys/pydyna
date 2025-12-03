@@ -105,8 +105,10 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             settings: List of card group definitions
         """
         kwd_data["duplicate_group"] = True
-        for card_settings in settings:
-            indices = card_settings["indices"]
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for card_settings in settings_list:
+            indices_raw = card_settings["indices"]
+            indices: typing.List[int] = typing.cast(typing.List[int], indices_raw)
             # build the card group
             group = {
                 "duplicate_group": True,

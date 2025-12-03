@@ -30,6 +30,7 @@ dictionary-based structures for improved type safety and IDE support.
 
 from dataclasses import dataclass, field
 import logging
+import typing
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
@@ -201,10 +202,11 @@ class Card:
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Card":
         """Create Card from dictionary representation."""
-        fields = [
+        fields_raw = [
             Field.from_dict(f) if isinstance(f, dict) and "name" in f and "type" in f else f
             for f in data.get("fields", [])
         ]
+        fields: List[Field] = typing.cast(List[Field], fields_raw)
         return cls(
             index=data["index"],
             fields=fields,
@@ -323,7 +325,8 @@ class KeywordData:
             KeywordData instance
         """
         logger.debug(f"Creating KeywordData for {data.get('keyword')}.{data.get('subkeyword')}")
-        cards = [Card.from_dict(c) if isinstance(c, dict) and "index" in c else c for c in data.get("cards", [])]
+        cards_raw = [Card.from_dict(c) if isinstance(c, dict) and "index" in c else c for c in data.get("cards", [])]
+        cards: typing.List[Card] = typing.cast(typing.List[Card], cards_raw)
 
         return cls(
             keyword=data["keyword"],

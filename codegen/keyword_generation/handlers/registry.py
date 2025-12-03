@@ -51,7 +51,7 @@ class HandlerRegistry:
         self._handlers: collections.OrderedDict[str, KeywordHandler] = collections.OrderedDict()
         self._metadata: Dict[str, HandlerMetadata] = {}
 
-    def register(self, name: str, handler: KeywordHandler, metadata: HandlerMetadata = None) -> None:
+    def register(self, name: str, handler: KeywordHandler, metadata: typing.Optional[HandlerMetadata] = None) -> None:
         """
         Register a handler with a given name.
 
@@ -64,7 +64,7 @@ class HandlerRegistry:
         if metadata:
             self._metadata[name] = metadata
         elif hasattr(handler.__class__, "_handler_metadata"):
-            self._metadata[name] = handler.__class__._handler_metadata
+            self._metadata[name] = handler.__class__._handler_metadata  # type: ignore[attr-defined]
         logger.debug(f"Registered handler '{name}': {handler.__class__.__name__}")
 
     def _topological_sort(self, handler_names: Set[str]) -> List[str]:

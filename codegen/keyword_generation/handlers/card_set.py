@@ -124,13 +124,16 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         has_options = False
         default_target = 0
 
-        for card_settings in settings:
+        # settings is actually a List[Dict] despite base class signature
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for card_settings in settings_list:
             card_set = {"name": card_settings["name"], "source_cards": []}
             target_name = card_settings.get("target-name", "")
             if target_name == "":
                 default_target = default_target + 1
                 if default_target > 1:
                     raise Exception("Currently only one card set on the base keyword is supported!")
+            card_index = -1  # Initialize to handle empty source-indices case
             for card_index, source_index in enumerate(card_settings["source-indices"]):
                 source_card = kwd_data["cards"][source_index]
                 source_card["source_index"] = source_card["index"]
@@ -162,7 +165,7 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             }
             target_name = card_settings.get("target-name", "")
             target_index = card_settings["target-index"]
-            insertion = gen.insertion.Insertion(target_index, target_name, card)
+            insertion = gen.Insertion(target_index, target_name, card)
             kwd_data["card_insertions"].append(insertion)
             card_sets.append(card_set)
         kwd_data["card_sets"] = {"sets": card_sets, "options": has_options}

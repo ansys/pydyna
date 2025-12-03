@@ -83,7 +83,8 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             settings: List of table card specifications
         """
         kwd_data["duplicate"] = True
-        for card_settings in settings:
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for card_settings in settings_list:
             duplicate_card = kwd_data["cards"][card_settings["index"]]
             duplicate_card["duplicate"] = {
                 "name": card_settings["property-name"],

@@ -31,15 +31,18 @@ from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
 
 logger = logging.getLogger(__name__)
 
-KWDM_INSTANCE = None
-MANIFEST = None
-ADDITIONAL_CARDS = None
+# Global instances - type annotations added for type checking
+KWDM_INSTANCE: typing.Optional[typing.Any] = None  # KWDM type
+MANIFEST: typing.Optional[typing.Dict[str, typing.Any]] = None
+ADDITIONAL_CARDS: typing.Optional[typing.Any] = None  # AdditionalCards type
 
 KWD_TO_ALIAS: typing.Dict[str, str] = {}
 ALIAS_TO_KWD: typing.Dict[str, str] = {}
 
 
 def get_card(setting: typing.Dict[str, str]):
+    assert KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
+    assert ADDITIONAL_CARDS is not None, "ADDITIONAL_CARDS not initialized"
     source = setting["source"]
     if source == "kwd-data":
         data = KWDM_INSTANCE.get_keyword_data_dict(setting["keyword-name"])
@@ -110,14 +113,14 @@ def load(this_folder: str, kwd_file: str, manifest: str, additional_cards: str):
     logger.info(f"Loaded keyword data from: {kwd_file}")
 
     if manifest == "":
-        manifest = this_folder / "manifest.json"
+        manifest = os.path.join(this_folder, "manifest.json")
         MANIFEST = _load_manifest(manifest)
     else:
         MANIFEST = _load_manifest(manifest)
     logger.info(f"Loaded manifest from: {manifest}")
 
     if additional_cards == "":
-        additional_cards = this_folder / "additional-cards.json"
+        additional_cards = os.path.join(this_folder, "additional-cards.json")
         ADDITIONAL_CARDS = AdditionalCards(additional_cards)
     else:
         ADDITIONAL_CARDS = AdditionalCards(additional_cards)

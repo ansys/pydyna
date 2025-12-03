@@ -96,13 +96,13 @@ def _transform_data(data: typing.Dict[str, typing.Any]):
         field_help = "\n".join([l.strip() for l in field_help.split("\n")])
         return field_help
 
-    def fix_field_string_default(field_default: str) -> str:
+    def fix_field_string_default(field_default: str) -> typing.Optional[str]:
         """string defaults need to be wrapped in quotes"""
         if field_default == None:
             return None
         return f'"{field_default}"'
 
-    def fix_field_int_default(field_default) -> int:
+    def fix_field_int_default(field_default) -> typing.Optional[int]:
         """int defaults need to be converted from strings that might be floats"""
         if field_default == None:
             return None
@@ -179,6 +179,12 @@ def _do_insertions(kwd_data):
         insertion_index = insertion.target_index
         insertion_name = insertion.target_class
         insertion_card = insertion.card
+
+        # Validate that insertion has required fields
+        if insertion_index is None or insertion_card is None or insertion_name is None:
+            logger.warning(f"Skipping insertion with missing fields: index={insertion_index}, card={insertion_card}, name={insertion_name}")
+            continue
+
         if insertion_name == "":
             # insert directly into keyword data
             container = kwd_data["cards"]
@@ -313,13 +319,14 @@ def _add_links(kwd_data):
     logger.debug(f"Added {link_count} links to keyword data")
 
 
-def _get_keyword_data(keyword_name, keyword, settings):
+def _get_keyword_data(keyword_name, keyword, settings) -> typing.Dict[str, typing.Any]:
     """Gets the keyword data dict from kwdm.  Transforms it
     based on the generation settings that are passed in, if any,
     and with default transformations that are needed to produce
     valid python code.
     """
     logger.debug(f"Getting keyword data for '{keyword_name}' (source: '{keyword}')")
+    assert data_model.KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
     kwd_data = {"cards": data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)}
 
     _set_keyword_identity(kwd_data, keyword_name, settings)

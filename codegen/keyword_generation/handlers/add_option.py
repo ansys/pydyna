@@ -111,7 +111,9 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             return card
 
         new_options = []
-        for setting in settings:
+        # settings is actually a List[Dict] despite base class signature
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for setting in settings_list:
             cards = [expand(card) for card in setting["cards"]]
             new_option = {
                 "card_order": setting["card-order"],

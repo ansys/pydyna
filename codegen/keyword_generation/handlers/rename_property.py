@@ -80,7 +80,8 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
             kwd_data: Complete keyword data dictionary
             settings: List of {"index", "name", "property-name"} dicts
         """
-        for setting in settings:
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for setting in settings_list:
             index = setting["index"]
             name = setting["name"]
             property_name = setting["property-name"]

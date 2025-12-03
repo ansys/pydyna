@@ -82,13 +82,14 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
 
     def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
         """
-        Override field properties.
+        Override field properties in cards.
 
         Args:
             kwd_data: Complete keyword data dictionary
-            settings: List of field override specifications
+            settings: List of field override definitions
         """
-        for setting in settings:
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for setting in settings_list:
             index = setting["index"]
             name = setting["name"]
             card = kwd_data["cards"][index]

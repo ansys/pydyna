@@ -129,7 +129,7 @@ def handler(
 
         _HANDLER_METADATA[name] = metadata
         # Store metadata on class for easy access
-        cls._handler_metadata = metadata
+        cls._handler_metadata = metadata  # type: ignore[attr-defined]
 
         logger.debug(
             f"Handler '{name}' registered with {len(metadata.dependencies)} dependencies: {metadata.dependencies}"

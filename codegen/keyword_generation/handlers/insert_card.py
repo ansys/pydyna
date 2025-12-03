@@ -82,10 +82,11 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             kwd_data: Complete keyword data dictionary
             settings: List of {"index", "card"} dicts
         """
-        for card_settings in settings:
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for card_settings in settings_list:
             index = card_settings["index"]
             card = get_card(card_settings["card"])
-            insertion = gen.insertion.Insertion(index, "", card)
+            insertion = gen.Insertion(index, "", card)
             kwd_data["card_insertions"].append(insertion)
 
     def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:

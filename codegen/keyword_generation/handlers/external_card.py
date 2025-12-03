@@ -105,7 +105,8 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
         """
         kwd_data["mixins"] = []
         kwd_data["mixin_imports"] = []
-        for setting in settings:
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for setting in settings_list:
             card_name = setting["card"]["card-name"]
             card_index = setting["index"]
             card_source = setting["card"]["source"]
