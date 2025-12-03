@@ -3,6 +3,11 @@ Assume an appropriate virtual environment is activated. If it isn't, just abort.
 
 IGNORE THIS LINE FOR NOW: LS-DYNA keywords are described in detail in the manual, try to find them in manuals/ (note - this is intentionally in .gitignore so we don't distrubute them)
 
+
+## Agent Coding Style Preferences
+
+- Do not use inline comments to explain imports. Instead, use a module-level docstring to indicate the purpose and usage of imported modules. This applies to all agent-generated code, not just codegen modules.
+
 Run `pre-commit run --all-files` after changes
 
 ## Agent Guides
