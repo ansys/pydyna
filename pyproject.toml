@@ -69,7 +69,7 @@ tests = [
 doc = [
     "recommonmark==0.7.1",
     "matplotlib==3.10.7",
-    "imageio==2.37.0",
+    "imageio==2.37.2",
     "imageio-ffmpeg==0.6.0",
     "numpydoc==1.9.0",
     "Sphinx==8.2.1",
@@ -83,12 +83,12 @@ doc = [
     "sphinx-autodoc-typehints==3.1.0",
     "ansys-sphinx-theme[autoapi]==1.6.3",
     "pypandoc==1.16",
-    "nbsphinx==0.9.6",
+    "nbsphinx==0.9.7",
     "ipywidgets==8.1.8",
     "joblib==1.5.2",
     "scikit-learn==1.7.2",
     "ipython==8.37.0",
-    "jupyterlab==4.4.9",
+    "jupyterlab==4.5.0",
     "pyvista==0.46.4",
 ]
 
