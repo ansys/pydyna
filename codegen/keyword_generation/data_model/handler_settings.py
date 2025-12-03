@@ -35,9 +35,9 @@ from typing import Any, Dict, List, Optional
 @dataclass
 class ReorderCardSettings:
     """Settings for reorder-card handler."""
-    
+
     order: List[int]
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ReorderCardSettings":
         """Create from dictionary."""
@@ -47,12 +47,12 @@ class ReorderCardSettings:
 @dataclass
 class TableCardSettings:
     """Settings for table-card handler."""
-    
+
     index: int
     property_name: str
     length_func: Optional[str] = None
     active_func: Optional[str] = None
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TableCardSettings":
         """Create from dictionary."""
@@ -67,11 +67,11 @@ class TableCardSettings:
 @dataclass
 class OverrideFieldSettings:
     """Settings for override-field handler."""
-    
+
     card_index: int
     field_index: int
     properties: Dict[str, Any]
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "OverrideFieldSettings":
         """Create from dictionary."""
@@ -85,10 +85,10 @@ class OverrideFieldSettings:
 @dataclass
 class ReplaceCardSettings:
     """Settings for replace-card handler."""
-    
+
     index: int
     fields: List[Dict[str, Any]]
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ReplaceCardSettings":
         """Create from dictionary."""
@@ -101,11 +101,11 @@ class ReplaceCardSettings:
 @dataclass
 class InsertCardSettings:
     """Settings for insert-card handler."""
-    
+
     index: int
     target_class: str
     card: Dict[str, Any]
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "InsertCardSettings":
         """Create from dictionary."""
@@ -119,7 +119,7 @@ class InsertCardSettings:
 @dataclass
 class SeriesCardSettings:
     """Settings for series-card handler."""
-    
+
     index: int
     name: str
     card_size: int
@@ -129,7 +129,7 @@ class SeriesCardSettings:
     length_func: Optional[str] = None
     active_func: Optional[str] = None
     struct_info: Optional[Dict[str, Any]] = None
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SeriesCardSettings":
         """Create from dictionary."""
@@ -149,13 +149,13 @@ class SeriesCardSettings:
 @dataclass
 class AddOptionSettings:
     """Settings for add-option handler."""
-    
+
     name: str
     card_order: int
     title_order: int
     cards: List[Dict[str, Any]]
     func: Optional[str] = None
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "AddOptionSettings":
         """Create from dictionary."""
@@ -171,13 +171,13 @@ class AddOptionSettings:
 @dataclass
 class CardSetSettings:
     """Settings for card-set handler."""
-    
+
     name: str
     source_indices: List[int]
     length_func: Optional[str] = None
     active_func: Optional[str] = None
     options: Optional[List[Dict[str, Any]]] = None
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "CardSetSettings":
         """Create from dictionary."""
@@ -193,10 +193,10 @@ class CardSetSettings:
 @dataclass
 class ConditionalCardSettings:
     """Settings for conditional-card handler."""
-    
+
     index: int
     func: str
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ConditionalCardSettings":
         """Create from dictionary."""
@@ -209,10 +209,10 @@ class ConditionalCardSettings:
 @dataclass
 class RenamePropertySettings:
     """Settings for rename-property handler."""
-    
+
     old_name: str
     new_name: str
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "RenamePropertySettings":
         """Create from dictionary."""
@@ -225,9 +225,9 @@ class RenamePropertySettings:
 @dataclass
 class SkipCardSettings:
     """Settings for skip-card handler."""
-    
+
     index: int
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SkipCardSettings":
         """Create from dictionary."""
@@ -237,12 +237,12 @@ class SkipCardSettings:
 @dataclass
 class TableCardGroupSettings:
     """Settings for table-card-group handler."""
-    
+
     indices: List[int]
     property_name: str
     length_func: Optional[str] = None
     active_func: Optional[str] = None
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TableCardGroupSettings":
         """Create from dictionary."""
@@ -257,10 +257,10 @@ class TableCardGroupSettings:
 @dataclass
 class ExternalCardSettings:
     """Settings for external-card-implementation handler."""
-    
+
     index: int
     name: str
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ExternalCardSettings":
         """Create from dictionary."""
@@ -273,10 +273,10 @@ class ExternalCardSettings:
 @dataclass
 class SharedFieldSettings:
     """Settings for shared-field handler."""
-    
+
     field_name: str
     card_indices: List[int]
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SharedFieldSettings":
         """Create from dictionary."""
@@ -289,10 +289,10 @@ class SharedFieldSettings:
 @dataclass
 class OverrideSubkeywordSettings:
     """Settings for override-subkeyword handler."""
-    
+
     old_name: str
     new_name: str
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "OverrideSubkeywordSettings":
         """Create from dictionary."""

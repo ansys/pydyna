@@ -121,9 +121,7 @@ class HandlerRegistry:
         logger.debug(f"Topological sort result: {result}")
         return result
 
-    def apply_all(
-        self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any], validate: bool = True
-    ) -> None:
+    def apply_all(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any], validate: bool = True) -> None:
         """
         Apply all registered handlers to keyword data in dependency order.
 
@@ -131,7 +129,7 @@ class HandlerRegistry:
         Only handlers with corresponding settings in the configuration are executed.
 
         Args:
-            kwd_data: The keyword data dictionary to transform
+            kwd_data: The keyword data (dict or KeywordData dataclass) to transform
             settings: Configuration settings containing handler-specific options
             validate: If True, validate settings against handler schemas before execution
         """
@@ -171,7 +169,7 @@ class HandlerRegistry:
             logger.debug(f"Applying handler '{handler_name}'")
             handler.handle(kwd_data, handler_settings)
 
-    def post_process_all(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process_all(self, kwd_data: typing.Any) -> None:
         """
         Run post-processing for all handlers that require it.
 
@@ -179,7 +177,7 @@ class HandlerRegistry:
         in registration order.
 
         Args:
-            kwd_data: The keyword data dictionary to post-process
+            kwd_data: Keyword data (dict or KeywordData dataclass)
         """
         logger.debug(f"Running post-processing for {len(self._handlers)} handlers")
         for handler_name, handler in self._handlers.items():

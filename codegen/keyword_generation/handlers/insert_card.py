@@ -74,7 +74,7 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         Appends Insertion(target_index, "", card) to kwd_data["card_insertions"]
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
         Queue cards for insertion.
 
@@ -87,8 +87,8 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             index = card_settings["index"]
             card = get_card(card_settings["card"])
             insertion = gen.Insertion(index, "", card)
-            kwd_data["card_insertions"].append(insertion)
+            kwd_data.card_insertions.append(insertion)
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""
         pass

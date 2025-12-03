@@ -71,7 +71,7 @@ class OverrideSubkeywordHandler(keyword_generation.handlers.handler_base.Keyword
         Sets field["property_name"] = "part_id" for matching field
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
         Rename Python properties for specified fields.
 
@@ -84,11 +84,11 @@ class OverrideSubkeywordHandler(keyword_generation.handlers.handler_base.Keyword
             index = setting["index"]
             name = setting["name"]
             property_name = setting["property-name"]
-            card = kwd_data["cards"][index]
+            card = kwd_data.cards[index]
             for field in card["fields"]:
                 if field["name"].lower() == name:
                     field["property_name"] = property_name
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""
         pass

@@ -80,7 +80,7 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
         Modifies field dict properties for matching field in specified card
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
         Override field properties in cards.
 
@@ -92,7 +92,7 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
         for setting in settings_list:
             index = setting["index"]
             name = setting["name"]
-            card = kwd_data["cards"][index]
+            card = kwd_data.cards[index]
             for field in card["fields"]:
                 if field["name"].lower() == name:
                     if "readonly" in setting:
@@ -110,6 +110,6 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
                     if "new-name" in setting:
                         field["name"] = setting["new-name"]
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""
         pass

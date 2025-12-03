@@ -27,7 +27,7 @@ Cards marked for deletion are removed from the final keyword structure after
 all handlers have processed.
 """
 
-from typing import Any, Dict, List, Union
+from typing import Any, Dict
 
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
@@ -61,22 +61,28 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         Sets card["mark_for_removal"] = 1 for each specified index
     """
 
-    def handle(self, kwd_data: Dict[str, Any], settings: Union[int, List[int]]) -> None:
+    def handle(self, kwd_data: Any, settings: Dict[str, Any]) -> None:
         """
         Mark specified cards for removal.
 
         Args:
-            kwd_data: Complete keyword data dictionary (will be dict until full migration)
-            settings: Either a single int or list of ints representing card indices
+            kwd_data: KeywordData instance (or dict during transition)
+            settings: Dict from manifest.json with handler config (may contain card indices)
         """
+        # Extract the actual card indices from settings
+        # Settings may be passed differently depending on manifest structure
         if isinstance(settings, int):
-            skipped_card_indices: List[int] = [settings]
-        else:
+            skipped_card_indices = [settings]
+        elif isinstance(settings, list):
             skipped_card_indices = settings
+        else:
+            # If settings is a dict, look for a key that contains the indices
+            # This handles various manifest.json structures
+            skipped_card_indices = settings.get("indices", [])
 
         for index in skipped_card_indices:
-            kwd_data["cards"][index]["mark_for_removal"] = 1
+            kwd_data.cards[index]["mark_for_removal"] = 1
 
-    def post_process(self, kwd_data: Dict[str, Any]) -> None:
+    def post_process(self, kwd_data: Any) -> None:
         """No post-processing required."""
         pass

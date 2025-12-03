@@ -95,7 +95,7 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
         - Adds card["external"] = {"name": "IncludeCard"} to each external card
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
         Configure external card imports and mixins.
 
@@ -103,19 +103,19 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
             kwd_data: Complete keyword data dictionary
             settings: List of external card configurations
         """
-        kwd_data["mixins"] = []
-        kwd_data["mixin_imports"] = []
+        kwd_data.mixins = []
+        kwd_data.mixin_imports = []
         settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
         for setting in settings_list:
             card_name = setting["card"]["card-name"]
             card_index = setting["index"]
             card_source = setting["card"]["source"]
             mixin_name = setting["mixin"]
-            kwd_data["mixins"].append(mixin_name)
-            kwd_data["mixin_imports"].append({"source": card_source, "names": [card_name, mixin_name]})
-            external_card = kwd_data["cards"][card_index]
+            kwd_data.mixins.append(mixin_name)
+            kwd_data.mixin_imports.append({"source": card_source, "names": [card_name, mixin_name]})
+            external_card = kwd_data.cards[card_index]
             external_card["external"] = {"name": card_name}
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""
         pass

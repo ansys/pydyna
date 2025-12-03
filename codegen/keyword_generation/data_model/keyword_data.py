@@ -259,8 +259,15 @@ class KeywordData:
     Represents the complete data structure for a keyword during code generation.
 
     This is the primary data structure that flows through the handler pipeline.
-    Handlers read from and write to this structure to transform keyword definitions
-    into generated Python code.
+    Handlers read from and write to this structure using attribute access
+    (e.g., kwd_data.cards) to transform keyword definitions into generated Python code.
+
+    Design Rationale:
+    - KeywordData uses dataclass attributes for type safety and IDE support
+    - Cards remain as List[Dict] (not List[Card]) because handlers mutate them
+      with dict operations like card["duplicate"] = {...}
+    - Options may be List[OptionGroup] or List[Dict] during transition period
+    - The from_dict/to_dict methods enable conversion at pipeline boundaries
 
     Attributes:
         keyword: Base keyword name (e.g., "SECTION")
@@ -285,7 +292,7 @@ class KeywordData:
     subkeyword: str
     title: str
     classname: str = ""  # Set later by _get_base_variable
-    cards: List[Card] = field(default_factory=list)
+    cards: List[Dict[str, Any]] = field(default_factory=list)  # Keep as dicts for handler mutations
     options: Union[List[OptionGroup], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     card_sets: Optional[Union[CardSetsContainer, Dict[str, Any]]] = None
     duplicate: bool = False
@@ -374,8 +381,8 @@ class KeywordData:
             KeywordData instance
         """
         logger.debug(f"Creating KeywordData for {data.get('keyword')}.{data.get('subkeyword')}")
-        cards_raw = [Card.from_dict(c) if isinstance(c, dict) and "index" in c else c for c in data.get("cards", [])]
-        cards: typing.List[Card] = typing.cast(typing.List[Card], cards_raw)
+        # Keep cards as dicts - handlers modify them directly
+        cards = data.get("cards", [])
 
         # Convert metadata dicts to typed objects
         options_data = data.get("options")

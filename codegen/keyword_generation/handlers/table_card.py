@@ -74,7 +74,7 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         - Adds card["duplicate"] dict with name, length_func, active_func
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
         Mark cards as table structures.
 
@@ -82,16 +82,16 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             kwd_data: Complete keyword data dictionary
             settings: List of table card specifications
         """
-        kwd_data["duplicate"] = True
+        kwd_data.duplicate = True
         settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
         for card_settings in settings_list:
-            duplicate_card = kwd_data["cards"][card_settings["index"]]
+            duplicate_card = kwd_data.cards[card_settings["index"]]
             duplicate_card["duplicate"] = {
                 "name": card_settings["property-name"],
                 "length_func": card_settings.get("length-func", ""),
                 "active_func": card_settings.get("active-func", ""),
             }
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""
         pass

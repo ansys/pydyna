@@ -35,14 +35,14 @@ from typing import Any, Dict, List, Optional
 class DuplicateCardMetadata:
     """
     Metadata for duplicate/table cards (card["duplicate"]).
-    
+
     Used by table-card handler to create repeatable card groups.
     """
-    
+
     name: str
     length_func: Optional[str] = None
     active_func: Optional[str] = None
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for backward compatibility."""
         result = {"name": self.name}
@@ -51,7 +51,7 @@ class DuplicateCardMetadata:
         if self.active_func is not None:
             result["active_func"] = self.active_func
         return result
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "DuplicateCardMetadata":
         """Create from dictionary."""
@@ -66,10 +66,10 @@ class DuplicateCardMetadata:
 class VariableCardMetadata:
     """
     Metadata for variable/series cards (card["variable"]).
-    
+
     Used by series-card handler to create variable-length card series.
     """
-    
+
     name: str
     size: int
     width: int
@@ -77,7 +77,7 @@ class VariableCardMetadata:
     help: str
     length_func: Optional[str] = None
     active_func: Optional[str] = None
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for backward compatibility."""
         result = {
@@ -92,7 +92,7 @@ class VariableCardMetadata:
         if self.active_func is not None:
             result["active_func"] = self.active_func
         return result
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "VariableCardMetadata":
         """Create from dictionary."""
@@ -111,16 +111,16 @@ class VariableCardMetadata:
 class ExternalCardMetadata:
     """
     Metadata for external card implementation (card["external"]).
-    
+
     Used by external-card-implementation handler to reference externally defined cards.
     """
-    
+
     name: str
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for backward compatibility."""
         return {"name": self.name}
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ExternalCardMetadata":
         """Create from dictionary."""
@@ -131,16 +131,16 @@ class ExternalCardMetadata:
 class OptionGroup:
     """
     Represents an option group in kwd_data["options"].
-    
+
     Option groups define keyword options with their card order and activation functions.
     """
-    
+
     name: str
     card_order: int
     title_order: int
     cards: List[Dict[str, Any]]  # List of card dicts, will be typed later
     func: Optional[str] = None
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for backward compatibility."""
         result = {
@@ -152,7 +152,7 @@ class OptionGroup:
         if self.func is not None:
             result["func"] = self.func
         return result
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "OptionGroup":
         """Create from dictionary."""
@@ -169,16 +169,16 @@ class OptionGroup:
 class CardSet:
     """
     Represents a card set in kwd_data["card_sets"]["sets"].
-    
+
     Card sets group related cards that repeat together.
     """
-    
+
     name: str
     source_cards: List[Dict[str, Any]]  # References to card dicts
     options: List[Dict[str, Any]] = field(default_factory=list)
     length_func: Optional[str] = None
     active_func: Optional[str] = None
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for backward compatibility."""
         result = {
@@ -191,7 +191,7 @@ class CardSet:
         if self.active_func is not None:
             result["active_func"] = self.active_func
         return result
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "CardSet":
         """Create from dictionary."""
@@ -208,20 +208,20 @@ class CardSet:
 class CardSetsContainer:
     """
     Container for card sets in kwd_data["card_sets"].
-    
+
     Holds all card sets and whether they have options.
     """
-    
+
     sets: List[CardSet] = field(default_factory=list)
     options: bool = False
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for backward compatibility."""
         return {
             "sets": [s.to_dict() for s in self.sets],
             "options": self.options,
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "CardSetsContainer":
         """Create from dictionary."""
@@ -235,17 +235,17 @@ class CardSetsContainer:
 class LinkData:
     """
     Represents linked keyword relationship in kwd_data["links"].
-    
+
     Links define relationships between keywords (e.g., DEFINE_TABLE -> DEFINE_CURVE).
     """
-    
+
     classname: str
     modulename: str
     keyword_type: str
     keyword_subtype: str
     fields: List[str]
     linkid: str
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for backward compatibility."""
         return {
@@ -256,7 +256,7 @@ class LinkData:
             "fields": self.fields,
             "linkid": self.linkid,
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "LinkData":
         """Create from dictionary."""
@@ -274,20 +274,20 @@ class LinkData:
 class MixinImport:
     """
     Represents a mixin import in kwd_data["mixin_imports"].
-    
+
     Mixin imports specify external classes to import for keyword mixins.
     """
-    
+
     source: str
     names: List[str]
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for backward compatibility."""
         return {
             "source": self.source,
             "names": self.names,
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "MixinImport":
         """Create from dictionary."""
@@ -302,17 +302,17 @@ class DataclassField:
     """
     Represents a field in a custom dataclass definition.
     """
-    
+
     name: str
     type: str
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for backward compatibility."""
         return {
             "name": self.name,
             "type": self.type,
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "DataclassField":
         """Create from dictionary."""
@@ -326,20 +326,20 @@ class DataclassField:
 class DataclassDefinition:
     """
     Represents a custom dataclass definition in kwd_data["dataclasses"].
-    
+
     Used by series-card handler to define custom dataclasses for repeating data.
     """
-    
+
     name: str
     fields: List[DataclassField]
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for backward compatibility."""
         return {
             "name": self.name,
             "fields": [f.to_dict() for f in self.fields],
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "DataclassDefinition":
         """Create from dictionary."""

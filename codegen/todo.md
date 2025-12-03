@@ -23,6 +23,7 @@ This file collects architectural and code-level recommendations for improving th
 ## 5. Testing
 - Add unit tests for handlers, template rendering, and manifest parsing.
 - Ensure all tests validate that generated files remain unchanged.
+- Use the coverage module to confirm that every line of code in the codegen system is necessary
 
 ## 6. General Simplicity
 - Reduce code duplication and improve readability.

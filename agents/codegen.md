@@ -49,6 +49,30 @@ Handlers transform keyword metadata during code generation. **Order matters** be
 
 **Note**: Typed dataclasses (`KeywordData`, `Card`, `Field`) are available in `data_model/keyword_data.py` for improved type safety, with backward-compatible `to_dict()`/`from_dict()` methods for gradual migration.
 
+### Handler Pipeline: Dict vs. DataClass Access
+
+As of Step 3 (December 2025), the handler pipeline has been migrated to use **KeywordData dataclass instances** with attribute access:
+
+**Handler Implementation**:
+- Handlers receive `KeywordData` instances and use attribute access: `kwd_data.cards`, `kwd_data.options`
+- All 15 handlers have been updated from `kwd_data["field"]` to `kwd_data.field`
+
+**Why Cards Stay as Dicts**:
+- `KeywordData.cards` is typed as `List[Dict[str, Any]]` (not `List[Card]`)
+- Handlers add metadata keys dynamically: `card["duplicate"] = {...}`, `card["variable"] = {...}`
+- These keys aren't part of the `Card` dataclass schema, requiring dict mutation
+
+**Conversion Boundaries**:
+- `_before_handle`: Operates on dict (legacy code)
+- Handlers: Receive and modify KeywordData instances
+- `_after_handle`: Receives dict for mutations, KeywordData for `post_process_all()`
+
+**Hybrid Access Patterns**:
+- During transition, some fields (e.g., `options`) may be `OptionGroup` instances or dicts
+- Use `hasattr(option, 'cards')` check: `cards = option.cards if hasattr(option, 'cards') else option["cards"]`
+
+This hybrid approach enables gradual migration to typed structures while maintaining backward compatibility.
+
 ### Type Hints and Metadata Classes
 
 The codegen system uses typed metadata classes to replace `Dict[str, Any]` patterns:

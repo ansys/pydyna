@@ -16,7 +16,10 @@ Assume an appropriate virtual environment is activated. If it isn't, just abort.
 ## Agent Coding Style Preferences
 
 - Do not use inline comments to explain imports. Instead, use a module-level docstring to indicate the purpose and usage of imported modules. This applies to all agent-generated code, not just codegen modules.
-- There is a line limit of 120 characters, and other linting rules. Use precommit run --all-files to run the linters after makin changes.
+- There is a line limit of 120 characters, and other linting rules. Use precommit run --all-files to run the linters after making changes.
+- **Handlers use dataclass attribute access**: All handlers now access `kwd_data.field` instead of `kwd_data["field"]`.
+- **Cards stay as dicts**: While KeywordData is a dataclass, `cards` remains `List[Dict[str, Any]]` because handlers mutate cards with dict operations.
+- **Hybrid access patterns**: During transition, some fields (like `options`) may be dataclass instances or dicts - use `hasattr()` checks for compatibility.
 - **Do not mark items in `codegen/todo.md` as "COMPLETED"**. This is a living document of architectural recommendations, not a task tracker. When implementing recommendations, document the implementation in the appropriate `agents/*.md` guide file instead.
 - **Add comprehensive logging**: Use Python's `logging` module extensively throughout the codebase. Add a logger instance (`logger = logging.getLogger(__name__)`) to each module and use it liberally:
   - Use `logger.debug()` for detailed traceability of execution flow, variable values, and decisions
@@ -54,6 +57,13 @@ The keyword class generator uses a **handler pipeline** to transform keyword met
 Deck registers import handlers (e.g., `DefineTableProcessor`) and runs them during `Deck.loads()` and include expansion. Handlers see keywords as they are imported and should only assume immediate neighbor context unless explicitly coded otherwise.
 
 For detailed guidance on linking keywords, see [agents/linked_keywords.md](agents/linked_keywords.md).
+
+### Shared Field Handler - Negative Indices
+
+**Critical**: The `shared_field` handler's `do_negative_shared_fields` function must search option cards FIRST, regardless of index value. Option cards can have indices that overlap with base card ranges (e.g., option card with index=2 when num_cards=3). The logic should:
+1. Always search all option cards for the target index
+2. Only check base cards if not found in options
+3. Never assume `index >= num_cards` means "must be in options" - this assumption is incorrect.
 
 ### Auto-Generated Keywords
 

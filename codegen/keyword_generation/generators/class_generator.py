@@ -257,12 +257,12 @@ def _add_option_indices(kwd_data: typing.Dict[str, typing.Any]) -> None:
         index += 1
 
 
-def _after_handle(kwd_data: typing.Dict[str, typing.Any], registry: typing.Any) -> None:
+def _after_handle(kwd_data_dict: typing.Dict[str, typing.Any], registry: typing.Any, kwd_data: typing.Any) -> None:
     # TODO - move these to their respective handler
-    _do_insertions(kwd_data)
-    _delete_marked_indices(kwd_data)
-    _add_option_indices(kwd_data)
-    registry.post_process_all(kwd_data)
+    _do_insertions(kwd_data_dict)
+    _delete_marked_indices(kwd_data_dict)
+    _add_option_indices(kwd_data_dict)
+    registry.post_process_all(kwd_data)  # Pass KeywordData instance for post_process
 
 
 def _before_handle(kwd_data: typing.Dict[str, typing.Any]) -> None:
@@ -270,13 +270,53 @@ def _before_handle(kwd_data: typing.Dict[str, typing.Any]) -> None:
     _prepare_for_insertion(kwd_data)
 
 
-def _handle_keyword_data(kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+def _handle_keyword_data(kwd_data: KeywordData, settings: typing.Dict[str, typing.Any]) -> None:
+    """Process keyword data through handler pipeline.
+
+    Conversion strategy at pipeline boundaries:
+    - _before_handle: Receives dict (legacy code)
+    - Handlers: Receive KeywordData instances, use attribute access
+    - _after_handle: Receives dict for mutations, KeywordData for post_process
+
+    This dual dict/KeywordData handling enables gradual migration to typed
+    structures while maintaining compatibility with existing code.
+    """
     registry = create_default_registry()
-    logger.debug(f"Handling keyword data with {len(kwd_data.get('cards', []))} cards")
-    _before_handle(kwd_data)
+
+    # Convert to dict for _before_handle
+    kwd_data_dict = kwd_data.to_dict()
+    logger.debug(f"Handling keyword data with {len(kwd_data_dict.get('cards', []))} cards")
+    _before_handle(kwd_data_dict)
+
+    # Convert back to KeywordData for handlers
+    kwd_data_after_before = KeywordData.from_dict(kwd_data_dict)
+    # Update original instance with changes from _before_handle
+    kwd_data.cards = kwd_data_after_before.cards
+    kwd_data.card_insertions = kwd_data_after_before.card_insertions
+
+    # Run handlers with KeywordData instance
     registry.apply_all(kwd_data, settings)
-    _after_handle(kwd_data, registry)
-    logger.debug(f"Keyword data handling complete, final card count: {len(kwd_data.get('cards', []))}")
+
+    # Convert to dict for _after_handle
+    kwd_data_dict = kwd_data.to_dict()
+    _after_handle(kwd_data_dict, registry, kwd_data)  # Pass both dict and KeywordData
+
+    # Convert back and update all fields
+    kwd_data_after_handle = KeywordData.from_dict(kwd_data_dict)
+    kwd_data.cards = kwd_data_after_handle.cards
+    kwd_data.options = kwd_data_after_handle.options
+    kwd_data.card_sets = kwd_data_after_handle.card_sets
+    kwd_data.duplicate = kwd_data_after_handle.duplicate
+    kwd_data.duplicate_group = kwd_data_after_handle.duplicate_group
+    kwd_data.variable = kwd_data_after_handle.variable
+    kwd_data.dataclasses = kwd_data_after_handle.dataclasses
+    kwd_data.mixins = kwd_data_after_handle.mixins
+    kwd_data.mixin_imports = kwd_data_after_handle.mixin_imports
+    kwd_data.links = kwd_data_after_handle.links
+    kwd_data.negative_shared_fields = kwd_data_after_handle.negative_shared_fields
+    kwd_data.card_insertions = kwd_data_after_handle.card_insertions
+
+    logger.debug(f"Keyword data handling complete, final card count: {len(kwd_data.cards)}")
 
 
 def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
@@ -336,21 +376,26 @@ def _get_keyword_data(keyword_name: str, keyword: str, settings: typing.Dict[str
     """
     logger.debug(f"Getting keyword data for '{keyword_name}' (source: '{keyword}')")
     assert data_model.KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
-    kwd_data = {"cards": data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)}
+    kwd_data_dict = {"cards": data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)}
 
-    _set_keyword_identity(kwd_data, keyword_name, settings)
+    _set_keyword_identity(kwd_data_dict, keyword_name, settings)
 
-    # transformations based on generation settings
+    # Convert to KeywordData early
+    kwd_data = KeywordData.from_dict(kwd_data_dict)
+
+    # transformations based on generation settings - handlers work with KeywordData
     _handle_keyword_data(kwd_data, settings)
 
-    # default transformations to a valid format we need for jinja
-    _transform_data(kwd_data)
+    # default transformations to a valid format we need for jinja - still need dict
+    kwd_data_dict = kwd_data.to_dict()
+    _transform_data(kwd_data_dict)
+    _add_links(kwd_data_dict)
 
-    _add_links(kwd_data)
-    logger.debug(f"Keyword data prepared for '{keyword_name}' with {len(kwd_data.get('cards', []))} cards")
+    # Convert back to KeywordData
+    kwd_data = KeywordData.from_dict(kwd_data_dict)
+    logger.debug(f"Keyword data prepared for '{keyword_name}' with {len(kwd_data.cards)} cards")
 
-    # Convert dict to KeywordData dataclass
-    return KeywordData.from_dict(kwd_data)
+    return kwd_data
 
 
 def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dict) -> typing.Dict:
