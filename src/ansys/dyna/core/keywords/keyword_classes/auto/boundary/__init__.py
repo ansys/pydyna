@@ -1,0 +1,191 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Auto-generated imports for boundary domain
+
+from .boundary_acoustic_coupling import BoundaryAcousticCoupling
+from .boundary_acoustic_coupling_mismatch import BoundaryAcousticCouplingMismatch
+from .boundary_acoustic_coupling_spectral import BoundaryAcousticCouplingSpectral
+from .boundary_acoustic_free_surface import BoundaryAcousticFreeSurface
+from .boundary_acoustic_impedance import BoundaryAcousticImpedance
+from .boundary_acoustic_impedance_complex import BoundaryAcousticImpedanceComplex
+from .boundary_acoustic_impedance_mechanical import BoundaryAcousticImpedanceMechanical
+from .boundary_acoustic_interface import BoundaryAcousticInterface
+from .boundary_acoustic_mapping import BoundaryAcousticMapping
+from .boundary_acoustic_non_reflecting import BoundaryAcousticNonReflecting
+from .boundary_acoustic_prescribed_motion import BoundaryAcousticPrescribedMotion
+from .boundary_acoustic_pressure_spectral import BoundaryAcousticPressureSpectral
+from .boundary_ale_mapping import BoundaryAleMapping
+from .boundary_ambient import BoundaryAmbient
+from .boundary_ambient_eos import BoundaryAmbientEos
+from .boundary_convection_segment import BoundaryConvectionSegment
+from .boundary_convection_set import BoundaryConvectionSet
+from .boundary_coupled import BoundaryCoupled
+from .boundary_cyclic import BoundaryCyclic
+from .boundary_de_non_reflecting import BoundaryDeNonReflecting
+from .boundary_element_method_acoustic import BoundaryElementMethodAcoustic
+from .boundary_element_method_control import BoundaryElementMethodControl
+from .boundary_element_method_flow import BoundaryElementMethodFlow
+from .boundary_element_method_neighbor import BoundaryElementMethodNeighbor
+from .boundary_element_method_symmetry import BoundaryElementMethodSymmetry
+from .boundary_element_method_wake import BoundaryElementMethodWake
+from .boundary_flux_segment import BoundaryFluxSegment
+from .boundary_flux_set import BoundaryFluxSet
+from .boundary_flux_trajectory import BoundaryFluxTrajectory
+from .boundary_free_field_ground_motion_node import BoundaryFreeFieldGroundMotionNode
+from .boundary_free_field_ground_motion_point import BoundaryFreeFieldGroundMotionPoint
+from .boundary_free_field_ground_motion_set import BoundaryFreeFieldGroundMotionSet
+from .boundary_mcol import BoundaryMcol
+from .boundary_non_reflecting import BoundaryNonReflecting
+from .boundary_non_reflecting_2d import BoundaryNonReflecting2D
+from .boundary_pap import BoundaryPap
+from .boundary_pore_fluid_part import BoundaryPoreFluidPart
+from .boundary_pore_fluid_set import BoundaryPoreFluidSet
+from .boundary_precrack import BoundaryPrecrack
+from .boundary_prescribed_accelerometer_rigid import BoundaryPrescribedAccelerometerRigid
+from .boundary_prescribed_final_geometry import BoundaryPrescribedFinalGeometry
+from .boundary_prescribed_motion import BoundaryPrescribedMotion
+from .boundary_prescribed_motion_edge_uvw import BoundaryPrescribedMotionEdgeUvw
+from .boundary_prescribed_motion_face_xyz import BoundaryPrescribedMotionFaceXyz
+from .boundary_prescribed_motion_node import BoundaryPrescribedMotionNode
+from .boundary_prescribed_motion_point_uvw import BoundaryPrescribedMotionPointUvw
+from .boundary_prescribed_motion_rigid import BoundaryPrescribedMotionRigid
+from .boundary_prescribed_motion_rigid_bndout2dynain import BoundaryPrescribedMotionRigidBndout2Dynain
+from .boundary_prescribed_motion_rigid_local import BoundaryPrescribedMotionRigidLocal
+from .boundary_prescribed_motion_rigid_local_bndout2dynain import BoundaryPrescribedMotionRigidLocalBndout2Dynain
+from .boundary_prescribed_motion_set import BoundaryPrescribedMotionSet
+from .boundary_prescribed_motion_set_box import BoundaryPrescribedMotionSetBox
+from .boundary_prescribed_motion_set_edge_uvw import BoundaryPrescribedMotionSetEdgeUvw
+from .boundary_prescribed_motion_set_face_xyz import BoundaryPrescribedMotionSetFaceXyz
+from .boundary_prescribed_motion_set_line import BoundaryPrescribedMotionSetLine
+from .boundary_prescribed_motion_set_point_uvw import BoundaryPrescribedMotionSetPointUvw
+from .boundary_prescribed_motion_set_segment import BoundaryPrescribedMotionSetSegment
+from .boundary_prescribed_orientation_rigid_angles import BoundaryPrescribedOrientationRigidAngles
+from .boundary_prescribed_orientation_rigid_dircos import BoundaryPrescribedOrientationRigidDircos
+from .boundary_prescribed_orientation_rigid_eulerp import BoundaryPrescribedOrientationRigidEulerp
+from .boundary_prescribed_orientation_rigid_vector import BoundaryPrescribedOrientationRigidVector
+from .boundary_pressure_outflow_segment import BoundaryPressureOutflowSegment
+from .boundary_pressure_outflow_set import BoundaryPressureOutflowSet
+from .boundary_pwp_node import BoundaryPwpNode
+from .boundary_pwp_set import BoundaryPwpSet
+from .boundary_pwp_table import BoundaryPwpTable
+from .boundary_pwp_table_set import BoundaryPwpTableSet
+from .boundary_pzepot import BoundaryPzepot
+from .boundary_radiation_enclosure import BoundaryRadiationEnclosure
+from .boundary_radiation_segment import BoundaryRadiationSegment
+from .boundary_radiation_segment_vf_calculate import BoundaryRadiationSegmentVfCalculate
+from .boundary_radiation_segment_vf_read import BoundaryRadiationSegmentVfRead
+from .boundary_radiation_set import BoundaryRadiationSet
+from .boundary_radiation_set_ef_calculate import BoundaryRadiationSetEfCalculate
+from .boundary_radiation_set_ef_read import BoundaryRadiationSetEfRead
+from .boundary_radiation_set_vf_calculate import BoundaryRadiationSetVfCalculate
+from .boundary_radiation_set_vf_read import BoundaryRadiationSetVfRead
+from .boundary_sale_mesh_face import BoundarySaleMeshFace
+from .boundary_sliding_plane import BoundarySlidingPlane
+from .boundary_spc import BoundarySpc
+from .boundary_spc_node import BoundarySpcNode
+from .boundary_spc_node_birth_death import BoundarySpcNodeBirthDeath
+from .boundary_spc_set import BoundarySpcSet
+from .boundary_spc_set_birth_death import BoundarySpcSetBirthDeath
+from .boundary_spc_symmetry_plane import BoundarySpcSymmetryPlane
+from .boundary_spc_symmetry_plane_set import BoundarySpcSymmetryPlaneSet
+from .boundary_sph_flow import BoundarySphFlow
+from .boundary_sph_non_reflecting import BoundarySphNonReflecting
+from .boundary_sph_symmetry_plane import BoundarySphSymmetryPlane
+from .boundary_symmetry_failure import BoundarySymmetryFailure
+from .boundary_temperature_node import BoundaryTemperatureNode
+from .boundary_temperature_periodic_set import BoundaryTemperaturePeriodicSet
+from .boundary_temperature_rsw import BoundaryTemperatureRsw
+from .boundary_temperature_set import BoundaryTemperatureSet
+from .boundary_temperature_trajectory import BoundaryTemperatureTrajectory
+from .boundary_thermal_bulkflow_element import BoundaryThermalBulkflowElement
+from .boundary_thermal_bulkflow_set import BoundaryThermalBulkflowSet
+from .boundary_thermal_bulkflow_set_upwind import BoundaryThermalBulkflowSetUpwind
+from .boundary_thermal_bulknode import BoundaryThermalBulknode
+from .boundary_thermal_weld import BoundaryThermalWeld
+from .boundary_thermal_weld_trajectory import BoundaryThermalWeldTrajectory
+from .boundary_usa_surface import BoundaryUsaSurface
+from .initial_airbag_particle_position import InitialAirbagParticlePosition
+from .initial_ale_mapping import InitialAleMapping
+from .initial_axial_force_beam import InitialAxialForceBeam
+from .initial_contact_wear import InitialContactWear
+from .initial_crashfront import InitialCrashfront
+from .initial_detonation import InitialDetonation
+from .initial_detonation_geometry import InitialDetonationGeometry
+from .initial_fatigue_damage_ratio import InitialFatigueDamageRatio
+from .initial_fatigue_damage_ratio_d3ftg import InitialFatigueDamageRatioD3Ftg
+from .initial_fatigue_damage_ratio_d3plot import InitialFatigueDamageRatioD3Plot
+from .initial_field_solid import InitialFieldSolid
+from .initial_foam_reference_geometry import InitialFoamReferenceGeometry
+from .initial_foam_reference_geometry_ramp import InitialFoamReferenceGeometryRamp
+from .initial_gas_mixture import InitialGasMixture
+from .initial_history_node import InitialHistoryNode
+from .initial_history_node_set import InitialHistoryNodeSet
+from .initial_hydrostatic_ale import InitialHydrostaticAle
+from .initial_ii_eos_ale import InitialIiEosAle
+from .initial_impulse_mine import InitialImpulseMine
+from .initial_internal_dof_solid_type3 import InitialInternalDofSolidType3
+from .initial_internal_dof_solid_type4 import InitialInternalDofSolidType4
+from .initial_lag_mapping import InitialLagMapping
+from .initial_lag_mapping_write import InitialLagMappingWrite
+from .initial_lag_mapping_write3daxi import InitialLagMappingWrite3Daxi
+from .initial_momentum import InitialMomentum
+from .initial_pwp_depth import InitialPwpDepth
+from .initial_pwp_depth_set import InitialPwpDepthSet
+from .initial_pwp_nodal_data import InitialPwpNodalData
+from .initial_solid_volume import InitialSolidVolume
+from .initial_strain_shell import InitialStrainShell
+from .initial_strain_shell_iga import InitialStrainShellIga
+from .initial_strain_shell_nurbs_patch import InitialStrainShellNurbsPatch
+from .initial_strain_shell_set import InitialStrainShellSet
+from .initial_strain_solid import InitialStrainSolid
+from .initial_strain_solid_set import InitialStrainSolidSet
+from .initial_strain_tshell import InitialStrainTshell
+from .initial_stress_beam import InitialStressBeam
+from .initial_stress_depth import InitialStressDepth
+from .initial_stress_depth_set import InitialStressDepthSet
+from .initial_stress_des import InitialStressDes
+from .initial_stress_iga_shell import InitialStressIgaShell
+from .initial_stress_section import InitialStressSection
+from .initial_stress_shell import InitialStressShell
+from .initial_stress_shell_nurbs_patch import InitialStressShellNurbsPatch
+from .initial_stress_shell_set import InitialStressShellSet
+from .initial_stress_solid import InitialStressSolid
+from .initial_stress_solid_nurbs_patch import InitialStressSolidNurbsPatch
+from .initial_stress_solid_set import InitialStressSolidSet
+from .initial_stress_sph import InitialStressSph
+from .initial_stress_tshell import InitialStressTshell
+from .initial_stress_tshell_set import InitialStressTshellSet
+from .initial_temperature_node import InitialTemperatureNode
+from .initial_temperature_set import InitialTemperatureSet
+from .initial_vapor_part import InitialVaporPart
+from .initial_vehicle_kinematics import InitialVehicleKinematics
+from .initial_velocity import InitialVelocity
+from .initial_velocity_generation import InitialVelocityGeneration
+from .initial_velocity_generation_start_time import InitialVelocityGenerationStartTime
+from .initial_velocity_node import InitialVelocityNode
+from .initial_velocity_rigid_body import InitialVelocityRigidBody
+from .initial_void_part import InitialVoidPart
+from .initial_void_set import InitialVoidSet
+from .initial_volume_fraction import InitialVolumeFraction
+from .initial_volume_fraction_geometry import InitialVolumeFractionGeometry
+from .initial_volume_fraction_nalegp import InitialVolumeFractionNalegp

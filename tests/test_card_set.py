@@ -25,16 +25,31 @@
 import io
 
 from ansys.dyna.core.lib.card_set import CardSet
-from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.keywords.keyword_classes.auto.initial_strain_shell import InitialStrainShellCardSet
-from ansys.dyna.core.keywords.keyword_classes.auto.initial_stress_shell import (
+from ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_strain_shell import InitialStrainShellCardSet
+from ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_stress_shell import (
     InitialStressShellCardSet,
     InitialStressShellThicknessLargeCardSet,
 )
 
 import pytest
+
+class Parent(KeywordBase):
+    """Mock keyword to use as the parent for the card sets under test."""
+
+    keyword = "FOO"
+    subkeyword = "BAR"
+    nhisv = 4
+    nplane = 1
+    nthick = 1
+    large = 0
+
+PARENT_REF_STRING = """*FOO_BAR
+$#       t     sigxx     sigyy     sigzz     sigxy     sigyz     sigzx       eps
+       2.0       0.0       0.0       0.0       0.0       0.0       0.0       2.0
+$#    hisv      hisv      hisv      hisv
+       1.0       2.0       3.0          """
 
 def _to_string(cards):
     s = io.StringIO()
@@ -53,30 +68,68 @@ def test_initial_strain_shell_card_set():
 
 
 @pytest.mark.keywords
-def test_initial_stress_shell_card_set(string_utils):
+def test_initial_stress_shell_card_set_bounded():
+    parent = Parent()
+    kwargs = {"parent": parent, "keyword": parent}
+    cs = InitialStressShellThicknessLargeCardSet(t=2, eps=2.0, hisv=[1, 2, 3], **kwargs)
+    card_set = CardSet(
+        InitialStressShellThicknessLargeCardSet,
+        lambda: 1,
+        **kwargs,
+    )
+
+    parent._cards = [card_set]
+    card_set._base_items = [cs]
+    assert len(card_set) == 1
+    assert len(card_set._items) == 1
+    assert card_set._length_func() == 1
+    assert parent.write() == PARENT_REF_STRING
+
+
+@pytest.mark.keywords
+def test_initial_stress_shell_card_set_unbounded():
+    parent = Parent()
+    kwargs = {"parent": parent, "keyword": parent}
+    card_set = CardSet(
+        InitialStressShellThicknessLargeCardSet,
+        **kwargs,
+    )
+    parent._cards = [card_set]
+    card_set.add_item(t=2, eps=2.0, hisv=[1, 2, 3])
+    assert len(card_set) == 1
+    assert parent.write() == PARENT_REF_STRING
+
+
+@pytest.mark.keywords
+def test_initial_stress_shell_card_set_unbounded_implicit_initialize():
+    parent = Parent()
+    kwargs = {"parent": parent, "keyword": parent, "t": 2, "eps": 2.0, "hisv":[1, 2, 3]}
+    card_set = CardSet(
+        InitialStressShellThicknessLargeCardSet,
+        **kwargs,
+    )
+    parent._cards = [card_set]
+    assert len(card_set) == 1
+    assert parent.write() == PARENT_REF_STRING
+
+
+@pytest.mark.keywords
+def test_initial_stress_shell_card_set_to_string():
     ref_string1 = """$#       t     sigxx     sigyy     sigzz     sigxy     sigyz     sigzx       eps
        2.0       0.0       0.0       0.0       0.0       0.0       0.0       2.0
 $#    hisv      hisv      hisv      hisv
        1.0       2.0       3.0          """
-
-    class Parent(KeywordBase):
-        keyword = "FOO"
-        subkeyword = "BAR"
-        nhisv = 4
-        nplane = 1
-        nthick = 1
-        large = 0
 
     parent = Parent()
     cs = InitialStressShellThicknessLargeCardSet(t=2, eps=2.0, hisv=[1, 2, 3], parent=parent, keyword=parent)
     cs_str = _to_string(cs)
     assert cs_str == ref_string1
 
-    ref_string2 = """*FOO_BAR
-$#       t     sigxx     sigyy     sigzz     sigxy     sigyz     sigzx       eps
-       2.0       0.0       0.0       0.0       0.0       0.0       0.0       2.0
-$#    hisv      hisv      hisv      hisv
-       1.0       2.0       3.0          """
+
+@pytest.mark.keywords
+def test_initial_stress_shell_card_set(string_utils):
+    parent = Parent()
+    cs = InitialStressShellThicknessLargeCardSet(t=2, eps=2.0, hisv=[1, 2, 3], parent=parent, keyword=parent)
 
     card_set = CardSet(
         InitialStressShellThicknessLargeCardSet,
@@ -88,12 +141,7 @@ $#    hisv      hisv      hisv      hisv
 
     parent._cards = [card_set]
     card_set._base_items = [cs]
-    assert len(card_set._items) == 1
-    assert _to_string(card_set._items[0]) == ref_string1
-    assert card_set._length_func() == 1
-    assert len(card_set._items) == 1
-    assert len(parent.cards) == 1
-    assert parent.write() == ref_string2
+    assert parent.write() == PARENT_REF_STRING
 
     card_set2 = CardSet(
         InitialStressShellThicknessLargeCardSet,
@@ -102,8 +150,8 @@ $#    hisv      hisv      hisv      hisv
         parent=parent,
         keyword=parent,
     )
-    card_set2.initialize()
-    data_lines = [line for line in ref_string2.splitlines()[1:]]
+
+    data_lines = [line for line in PARENT_REF_STRING.splitlines()[1:]]
     content = "\n".join(data_lines)
     card_set2.read(string_utils.as_buffer(content))
     assert len(card_set2.items()) == 1

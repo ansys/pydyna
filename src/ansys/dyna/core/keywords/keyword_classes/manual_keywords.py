@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 from .manual.define_function import DefineFunction  # noqa: F401
+from .manual.define_table import DefineTable  # noqa: F401
 from .manual.element_solid import ElementSolid  # noqa: F401
 from .manual.element_solid_ortho import ElementSolidOrtho  # noqa: F401
 from .manual.mat_295 import Mat295, MatAnisotropicHyperelastic  # noqa: F401

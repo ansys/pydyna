@@ -1,8 +1,8 @@
 name: Docker images publishing
 
 permissions:
-  contents: read
-  packages: read
+  contents: read  # Needed to checkout code
+  packages: read  # Needed for pulling container images from GHCR
 
 on:
   workflow_dispatch:

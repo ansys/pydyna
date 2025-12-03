@@ -256,6 +256,7 @@ def test_hourglass(ref_string):
     h.add_set(title="hello")
     assert h.write() == ref_string.test_hourglass_title
     h = kwd.Hourglass()
+    assert len(h.sets) == 0
     h.loads(ref_string.test_hourglass_title)
     assert len(h.sets) == 1
 
@@ -266,6 +267,20 @@ def test_load_segment(ref_string):
     assert seg.write() == ref_string.test_load_segment_string
     seg = kwd.LoadSegmentId()
     assert seg.write() == ref_string.test_load_segment_id_string
+
+
+@pytest.mark.keywords
+def test_section_shell(ref_string):
+    shell = kwd.SectionShell(secid=1, elfrom=2, t1=1.0, t2=1.0, t4=1.0, nip=5)
+    shell.t3 = 1.0
+    shell_string = shell.write()
+    assert shell_string == ref_string.test_section_shell_one_set
+    assert shell.sets[0].secid == 1
+    assert shell.secid == 1
+    shell.add_set(secid=2, elform=3, nip=5, marea=1.0)
+    assert shell.write() == ref_string.test_section_shell_two_sets
+    with pytest.raises(LookupError):
+        x = shell.secid
 
 
 @pytest.mark.keywords

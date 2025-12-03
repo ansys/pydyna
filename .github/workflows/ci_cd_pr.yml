@@ -15,8 +15,8 @@ on:
       - main
 
 permissions:
-  contents: read
-  packages: read
+  contents: read  # Needed to checkout code
+  packages: read  # Needed for pulling container images from GHCR
 
 env:
   MAIN_PYTHON_VERSION: '3.13'

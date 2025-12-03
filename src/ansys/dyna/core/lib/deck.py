@@ -30,6 +30,7 @@ import warnings
 from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
+from ansys.dyna.core.lib.import_handlers.define_table_processor import DefineTableProcessor
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.parameters import ParameterHandler, ParameterSet
@@ -47,6 +48,9 @@ class Deck:
         self.title: str = title
         self.format: format_type = kwargs.get("format", format_type.default)
         self._import_handlers: typing.List[ImportHandler] = [ParameterHandler()]
+        # Add the DEFINE_TABLE processor so curves following tables are
+        # automatically linked during import.
+        self._import_handlers.append(DefineTableProcessor())
         self._transform_handler = TransformHandler()
 
     def __add__(self, other):

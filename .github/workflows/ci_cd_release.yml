@@ -6,8 +6,8 @@ on:
       - "v*.*.*"
 
 permissions:
-  contents: read
-  packages: read
+  contents: read  # Needed to checkout code
+  packages: read  # Needed for pulling container images from GHCR
 
 env:
   MAIN_PYTHON_VERSION: '3.13'
@@ -27,8 +27,8 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write  # Needed to commit changelog updates
+      pull-requests: write  # Needed to create pull requests for changelog
     steps:
       - uses: ansys/actions/doc-deploy-changelog@46957117ba42d3d075c6cca0f6bbdc1ac2a9af04 # v9.0.15
         with:
@@ -125,6 +125,7 @@ jobs:
           docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
           pytest-markers: run
           license-server: ${{ secrets.LICENSE_SERVER }}
+          coverage-file: run
 
   keyword-testing:
     name: "Keyword testing"
@@ -145,6 +146,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pytest-markers: keywords
+          coverage-file: keywords
 
   unit-tests:
     name: "Testing"
@@ -159,6 +161,7 @@ jobs:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           server-logs: true
+          coverage-file: unittests
 
 
   build-library:

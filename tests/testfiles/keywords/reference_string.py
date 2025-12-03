@@ -185,7 +185,6 @@ $#    pidl      pidc     iflag
    1234567       123         0
    1234568       124         0"""
 
-
 test_contact_tied_shell_edge_to_surface_id = """*CONTACT_TIED_SHELL_EDGE_TO_SURFACE_ID
 69000005  TIED_TEST3                                                    
   69000268  69000267         2         2                             0         0
@@ -196,6 +195,20 @@ test_contact_tied_shell_edge_to_surface_id = """*CONTACT_TIED_SHELL_EDGE_TO_SURF
                    0        0.        0.                            0.         0
                                                            0         0          
          0         0         1         0                   0         0"""
+
+test_section_shell_one_set = """*SECTION_SHELL
+$#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
+         1         2       1.0         5       1.0         0         0         1
+$#      t1        t2        t3        t4      nloc     marea      idof    edgset
+       1.0       1.0       1.0       1.0       0.0       0.0       0.0         0"""
+
+test_section_shell_two_sets = """*SECTION_SHELL
+$#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
+         1         2       1.0         5       1.0         0         0         1
+$#      t1        t2        t3        t4      nloc     marea      idof    edgset
+       1.0       1.0       1.0       1.0       0.0       0.0       0.0         0
+         2         3       1.0         5       1.0         0         0         1
+       0.0       0.0       0.0       0.0       0.0       1.0       0.0         0"""
 
 test_section_solid_title_deck_string = """$
 *KEYWORD
@@ -1225,6 +1238,60 @@ test_define_table_ref = """*DEFINE_TABLE
                0.001
         0.0099999998
                  0.1"""
+
+
+test_define_table_simple_ref = """*DEFINE_TABLE
+ 10000001
+ 1.0E-6
+ 9.9999997E-5
+ 0.001
+ 0.0099999998
+ 0.1
+*DEFINE_CURVE
+ 10000001
+                 0.0                 1.0
+                 1.0                 2.0
+"""
+
+
+test_define_table_interleaved_ref = """*DEFINE_TABLE
+ 10000001
+ 1.0E-6
+ 9.9999997E-5
+ 0.001
+ 0.0099999998
+ 0.1
+*DEFINE_CURVE
+ 10000001
+                 0.0                 1.0
+                 1.0                 2.0
+*DEFINE_TABLE
+ 20000001
+ 2.0E-6
+ 9.9999997E-5
+ 0.002
+ 0.0099999998
+ 0.2
+*DEFINE_CURVE
+ 20000001
+                 0.0                 3.0
+"""
+
+
+test_define_table_before_ref = """*DEFINE_CURVE
+ 99999999
+                 0.0                 9.0
+*DEFINE_TABLE
+ 10000001
+ 1.0E-6
+ 9.9999997E-5
+ 0.001
+ 0.0099999998
+ 0.1
+*DEFINE_CURVE
+ 10000001
+                 0.0                 1.0
+"""
 
 test_icfd_part_ref = """*ICFD_PART_TITLE
 $#                                                                         title
