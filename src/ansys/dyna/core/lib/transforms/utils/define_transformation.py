@@ -30,7 +30,7 @@ import numpy as np
 import pandas as pd
 import transformations as tfm
 
-from ansys.dyna.core.keywords.keyword_classes.auto.define_transformation import DefineTransformation
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_transformation import DefineTransformation
 
 
 def _get_translation_matrix(a1: float, a2: float, a3: float) -> np.ndarray:

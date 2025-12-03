@@ -1,6 +1,6 @@
-from ansys.dyna.core.keywords.keyword_classes.auto.contact_automatic_single_surface import ContactAutomaticSingleSurface
-from ansys.dyna.core.keywords.keyword_classes.auto.contact_automatic_single_surface_mortar import ContactAutomaticSingleSurfaceMortar
-from ansys.dyna.core.keywords.keyword_classes.auto.contact_automatic_single_surface_tiebreak import ContactAutomaticSingleSurfaceTiebreak
+from ansys.dyna.core.keywords.keyword_classes.auto.contact.contact_automatic_single_surface import ContactAutomaticSingleSurface
+from ansys.dyna.core.keywords.keyword_classes.auto.contact.contact_automatic_single_surface_mortar import ContactAutomaticSingleSurfaceMortar
+from ansys.dyna.core.keywords.keyword_classes.auto.contact.contact_automatic_single_surface_tiebreak import ContactAutomaticSingleSurfaceTiebreak
 import pytest
 from ansys.dyna.core.lib.option_card import Options
 
@@ -53,7 +53,7 @@ def test_contact_option_cascading_activation():
 
         options[option_to_activate].active = True
 
-    
+
         for opt in ["A", "B", "C", "D", "E", "F", "G"]:
             if opt in expected_active:
                 assert options[opt].active is True, f"Option {opt} should be active when {option_to_activate} is activated"
@@ -68,14 +68,14 @@ def test_contact_option_deactivation():
 
     # Activate G (which activates all)
     options["G"].active = True
-    
+
     # Verify all are active
     for opt in ["A", "B", "C", "D", "E", "F", "G"]:
         assert options[opt].active is True
 
     # Deactivate D
     options["D"].active = False
-    
+
     # Only D should be deactivated
     assert options["D"].active is False
     for opt in ["A", "B", "C", "E", "F", "G"]:
@@ -101,21 +101,21 @@ def test_multiple_contact_card_types():
         # Should activate A, B, C but not D, E, F, G
         for opt in ["A", "B", "C"]:
             assert options[opt].active is True, f"Option {opt} should be active for {contact_class.__name__}"
-        
+
         for opt in ["D", "E", "F", "G"]:
             assert options[opt].active is False, f"Option {opt} should not be active for {contact_class.__name__}"
 
 
-@pytest.mark.keywords 
+@pytest.mark.keywords
 def test_contact_card_writing_with_options():
     """Test that contact cards write properly with options activated"""
     keyword = ContactAutomaticSingleSurface()
-   
+
     # Test writing with no options
     output_no_options = keyword.write()
     assert "*CONTACT_AUTOMATIC_SINGLE_SURFACE" in output_no_options
     assert "sofscl" not in output_no_options  # No options should be present
-    
+
     # Activate some options
     keyword.options["A"].active = True
     assert "sofscl" in keyword.write()  # Should include A option
@@ -132,16 +132,16 @@ def test_contact_card_option_persistence():
     """Test that option states persist correctly"""
     keyword = ContactAutomaticSingleSurface()
     options = Options(keyword)
-    
+
     # Set some options
     options["C"].active = True
-    
+
     # Create a new Options interface to the same keyword
     options2 = Options(keyword)
-    
+
     # Check that the options are still active
     assert options2["A"].active is True
-    assert options2["B"].active is True 
+    assert options2["B"].active is True
     assert options2["C"].active is True
     assert options2["D"].active is False
 
@@ -150,14 +150,14 @@ def test_contact_card_option_persistence():
 def test_contact_card_with_parameters_and_options():
     """Test contact card with both parameters and options"""
     keyword = ContactAutomaticSingleSurface()
-    
+
     options = Options(keyword)
     options["B"].active = True
 
-    
+
     assert options["A"].active is True
     assert options["B"].active is True
     assert options["C"].active is False
-    
+
     output = keyword.write()
     assert "*CONTACT_AUTOMATIC_SINGLE_SURFACE" in output

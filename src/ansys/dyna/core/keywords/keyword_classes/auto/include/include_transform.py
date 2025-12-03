@@ -24,7 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.keywords.keyword_classes.auto.define_transformation import DefineTransformation
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_transformation import DefineTransformation
 
 class IncludeTransform(KeywordBase):
     """DYNA INCLUDE_TRANSFORM keyword"""

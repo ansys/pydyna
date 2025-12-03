@@ -1,0 +1,125 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Auto-generated imports for constrained domain
+
+from .constrained_adaptivity import ConstrainedAdaptivity
+from .constrained_beam_in_solid import ConstrainedBeamInSolid
+from .constrained_beam_in_solid_penalty import ConstrainedBeamInSolidPenalty
+from .constrained_butt_weld import ConstrainedButtWeld
+from .constrained_coordinate import ConstrainedCoordinate
+from .constrained_coordinate_local import ConstrainedCoordinateLocal
+from .constrained_euler_in_euler import ConstrainedEulerInEuler
+from .constrained_extra_nodes_node import ConstrainedExtraNodesNode
+from .constrained_extra_nodes_set import ConstrainedExtraNodesSet
+from .constrained_fem_peri_tie import ConstrainedFemPeriTie
+from .constrained_fem_peri_tie_break import ConstrainedFemPeriTieBreak
+from .constrained_generalized_weld_butt import ConstrainedGeneralizedWeldButt
+from .constrained_generalized_weld_combined import ConstrainedGeneralizedWeldCombined
+from .constrained_generalized_weld_cross_fillet import ConstrainedGeneralizedWeldCrossFillet
+from .constrained_generalized_weld_fillet import ConstrainedGeneralizedWeldFillet
+from .constrained_generalized_weld_spot import ConstrainedGeneralizedWeldSpot
+from .constrained_global import ConstrainedGlobal
+from .constrained_immersed_in_spg import ConstrainedImmersedInSpg
+from .constrained_interpolation import ConstrainedInterpolation
+from .constrained_interpolation_local import ConstrainedInterpolationLocal
+from .constrained_interpolation_spotweld import ConstrainedInterpolationSpotweld
+from .constrained_joint_constant_velocity import ConstrainedJointConstantVelocity
+from .constrained_joint_coor_constant_velocity import ConstrainedJointCoorConstantVelocity
+from .constrained_joint_coor_cylindrical import ConstrainedJointCoorCylindrical
+from .constrained_joint_coor_gears import ConstrainedJointCoorGears
+from .constrained_joint_coor_locking import ConstrainedJointCoorLocking
+from .constrained_joint_coor_planar import ConstrainedJointCoorPlanar
+from .constrained_joint_coor_pulley import ConstrainedJointCoorPulley
+from .constrained_joint_coor_rack_and_pinion import ConstrainedJointCoorRackAndPinion
+from .constrained_joint_coor_revolute import ConstrainedJointCoorRevolute
+from .constrained_joint_coor_rotational_motor import ConstrainedJointCoorRotationalMotor
+from .constrained_joint_coor_screw import ConstrainedJointCoorScrew
+from .constrained_joint_coor_spherical import ConstrainedJointCoorSpherical
+from .constrained_joint_coor_translational import ConstrainedJointCoorTranslational
+from .constrained_joint_coor_translational_motor import ConstrainedJointCoorTranslationalMotor
+from .constrained_joint_coor_universal import ConstrainedJointCoorUniversal
+from .constrained_joint_cylindrical import ConstrainedJointCylindrical
+from .constrained_joint_gears import ConstrainedJointGears
+from .constrained_joint_locking import ConstrainedJointLocking
+from .constrained_joint_planar import ConstrainedJointPlanar
+from .constrained_joint_pulley import ConstrainedJointPulley
+from .constrained_joint_rack_and_pinion import ConstrainedJointRackAndPinion
+from .constrained_joint_revolute import ConstrainedJointRevolute
+from .constrained_joint_rotational_motor import ConstrainedJointRotationalMotor
+from .constrained_joint_screw import ConstrainedJointScrew
+from .constrained_joint_spherical import ConstrainedJointSpherical
+from .constrained_joint_stiffness_cylindrical import ConstrainedJointStiffnessCylindrical
+from .constrained_joint_stiffness_flexion_torsion import ConstrainedJointStiffnessFlexionTorsion
+from .constrained_joint_stiffness_general import ConstrainedJointStiffnessGeneral
+from .constrained_joint_stiffness_generalized import ConstrainedJointStiffnessGeneralized
+from .constrained_joint_stiffness_translational import ConstrainedJointStiffnessTranslational
+from .constrained_joint_translational import ConstrainedJointTranslational
+from .constrained_joint_translational_motor import ConstrainedJointTranslationalMotor
+from .constrained_joint_universal import ConstrainedJointUniversal
+from .constrained_joint_user_force import ConstrainedJointUserForce
+from .constrained_lagrange_in_solid import ConstrainedLagrangeInSolid
+from .constrained_lagrange_in_solid_edge import ConstrainedLagrangeInSolidEdge
+from .constrained_lagrange_in_solid_edges import ConstrainedLagrangeInSolidEdges
+from .constrained_linear_global import ConstrainedLinearGlobal
+from .constrained_linear_local import ConstrainedLinearLocal
+from .constrained_local import ConstrainedLocal
+from .constrained_multiple_global import ConstrainedMultipleGlobal
+from .constrained_nodal_rigidbody import ConstrainedNodalRigidbody
+from .constrained_nodal_rigid_body import ConstrainedNodalRigidBody
+from .constrained_nodal_rigid_body_inertia import ConstrainedNodalRigidBodyInertia
+from .constrained_nodal_rigid_body_inertia_override import ConstrainedNodalRigidBodyInertiaOverride
+from .constrained_nodal_rigid_body_inertia_spc import ConstrainedNodalRigidBodyInertiaSpc
+from .constrained_nodal_rigid_body_override import ConstrainedNodalRigidBodyOverride
+from .constrained_nodal_rigid_body_spc import ConstrainedNodalRigidBodySpc
+from .constrained_nodal_rigid_body_spc_inertia import ConstrainedNodalRigidBodySpcInertia
+from .constrained_nodal_rigid_body_spc_inertia_master import ConstrainedNodalRigidBodySpcInertiaMaster
+from .constrained_nodal_rigid_body_spc_inertia_override import ConstrainedNodalRigidBodySpcInertiaOverride
+from .constrained_nodal_rigid_body_spc_override import ConstrainedNodalRigidBodySpcOverride
+from .constrained_node_interpolation import ConstrainedNodeInterpolation
+from .constrained_node_set import ConstrainedNodeSet
+from .constrained_node_to_nurbs_patch import ConstrainedNodeToNurbsPatch
+from .constrained_node_to_nurbs_patch_set import ConstrainedNodeToNurbsPatchSet
+from .constrained_points import ConstrainedPoints
+from .constrained_rigid_bodies import ConstrainedRigidBodies
+from .constrained_rigid_bodies_set import ConstrainedRigidBodiesSet
+from .constrained_rigid_body_insert import ConstrainedRigidBodyInsert
+from .constrained_rigid_body_stoppers import ConstrainedRigidBodyStoppers
+from .constrained_rivet import ConstrainedRivet
+from .constrained_shell_in_solid import ConstrainedShellInSolid
+from .constrained_shell_in_solid_penalty import ConstrainedShellInSolidPenalty
+from .constrained_shell_to_solid import ConstrainedShellToSolid
+from .constrained_soil_pile import ConstrainedSoilPile
+from .constrained_soil_pile_constants import ConstrainedSoilPileConstants
+from .constrained_soil_pile_constants_set import ConstrainedSoilPileConstantsSet
+from .constrained_soil_pile_curves import ConstrainedSoilPileCurves
+from .constrained_soil_pile_curves_set import ConstrainedSoilPileCurvesSet
+from .constrained_soil_pile_set import ConstrainedSoilPileSet
+from .constrained_solid_in_solid import ConstrainedSolidInSolid
+from .constrained_solid_in_solid_penalty import ConstrainedSolidInSolidPenalty
+from .constrained_spline import ConstrainedSpline
+from .constrained_spotweld import ConstrainedSpotweld
+from .constrained_spotweld_filtered_force import ConstrainedSpotweldFilteredForce
+from .constrained_spr2 import ConstrainedSpr2
+from .constrained_tie_break import ConstrainedTieBreak
+from .constrained_tied_nodes import ConstrainedTiedNodes
+from .constrained_tied_nodes_failure import ConstrainedTiedNodesFailure

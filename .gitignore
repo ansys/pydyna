@@ -24,6 +24,7 @@ eggs/
 .lib/
 .lib64/
 parts/
+!src/ansys/dyna/core/keywords/keyword_classes/auto/*/
 sdist/
 var/
 wheels/
