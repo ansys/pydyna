@@ -182,7 +182,10 @@ def _do_insertions(kwd_data):
 
         # Validate that insertion has required fields
         if insertion_index is None or insertion_card is None or insertion_name is None:
-            logger.warning(f"Skipping insertion with missing fields: index={insertion_index}, card={insertion_card}, name={insertion_name}")
+            logger.warning(
+                f"Skipping insertion with missing fields: index={insertion_index}, "
+                f"card={insertion_card}, name={insertion_name}"
+            )
             continue
 
         if insertion_name == "":
