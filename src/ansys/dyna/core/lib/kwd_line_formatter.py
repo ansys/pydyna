@@ -140,7 +140,8 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
     Parameters
     ----------
     spec : list of tuple
-        List of tuples representing the (offset, width, type) of each field. Type can be a Flag which represents the True and False value.
+        List of tuples representing the (offset, width, type) of each field.
+        Type can be a Flag which represents the True and False value.
     line_data : str
         String with keyword data.
     parameter_set : ParameterSet, optional
