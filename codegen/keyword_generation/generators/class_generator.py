@@ -298,7 +298,7 @@ def _handle_keyword_data(kwd_data, settings):
 def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
     transform_link_data = {
         "classname": "DefineTransformation",
-        "modulename": "definitions.define_transformation",
+        "modulename": "define.define_transformation",
         "keyword_type": "DEFINE",
         "keyword_subtype": "TRANSFORMATION",
         "fields": link_fields,

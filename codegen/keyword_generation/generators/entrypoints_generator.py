@@ -52,16 +52,17 @@ def generate_entrypoints(env: Environment, lib_path: str, keywords_list: typing.
                 keywords_by_domain[domain] = []
             keywords_by_domain[domain].append(keyword)
 
-    # Create __init__.py for each domain
-    for domain in get_all_domains():
+    # Create __init__.py only for domains that have keywords
+    domains_with_keywords = []
+    for domain, keywords in keywords_by_domain.items():
         domain_path = auto_path / domain
         domain_path.mkdir(parents=True, exist_ok=True)
+        domains_with_keywords.append(domain)
 
-        domain_keywords = keywords_by_domain.get(domain, [])
         init_content = license_header
-        if domain_keywords:
+        if keywords:
             init_content += "\n# Auto-generated imports for " + domain + " domain\n\n"
-            for keyword in domain_keywords:
+            for keyword in keywords:
                 filename = keyword["filename"]
                 classname = keyword["classname"]
                 init_content += f"from .{filename} import {classname}\n"
@@ -70,9 +71,9 @@ def generate_entrypoints(env: Environment, lib_path: str, keywords_list: typing.
         with open(init_file, "w", encoding="utf-8") as f:
             f.write(init_content)
 
-    # Create main auto/__init__.py that imports from all domains
+    # Create main auto/__init__.py that imports only from domains with keywords
     main_init_content = license_header + "\n# Auto-generated imports from all domains\n\n"
-    for domain in get_all_domains():
+    for domain in sorted(domains_with_keywords):
         main_init_content += f"from .{domain} import *\n"
 
     with open(auto_path / "__init__.py", "w", encoding="utf-8") as f:
