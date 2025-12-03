@@ -21,7 +21,6 @@
 # SOFTWARE.
 
 import collections
-import os
 import typing
 
 from jinja2 import Environment
@@ -44,6 +43,7 @@ from keyword_generation.handlers.table_card import TableCardHandler
 from keyword_generation.handlers.table_card_group import TableCardGroupHandler
 from keyword_generation.utils import fix_keyword, get_classname, get_license_header, handle_single_word_keyword
 from keyword_generation.utils.domain_mapper import get_keyword_domain
+from output_manager import OutputManager
 
 
 def _get_source_keyword(keyword, settings):
@@ -379,7 +379,7 @@ def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dic
     return data
 
 
-def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> typing.Tuple[str, str]:
+def generate_class(env: Environment, output_manager: OutputManager, item: typing.Dict) -> typing.Tuple[str, str]:
     keyword = item["name"]
     fixed_keyword = fix_keyword(keyword)
     classname = item["options"].get("classname", get_classname(fixed_keyword))
@@ -389,12 +389,9 @@ def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> typing
 
         # Determine domain and create domain subdirectory
         domain = get_keyword_domain(keyword)
-        domain_path = os.path.join(lib_path, "auto", domain)
-        os.makedirs(domain_path, exist_ok=True)
-
-        filename = os.path.join(domain_path, fixed_keyword.lower() + ".py")
-        with open(filename, "w", encoding="utf-8") as f:
-            f.write(env.get_template("keyword.j2").render(**jinja_variable))
+        filename = fixed_keyword.lower() + ".py"
+        content = env.get_template("keyword.j2").render(**jinja_variable)
+        output_manager.write_auto_file(domain, filename, content)
         return classname, fixed_keyword.lower()
     except Exception as e:
         print(f"Failure in generating {classname}")
