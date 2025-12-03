@@ -55,7 +55,7 @@ jobs:
       - uses: ./.github/actions/test-codegen
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          
+
   doc-style:
     name: "Documentation style"
     runs-on: ubuntu-latest
