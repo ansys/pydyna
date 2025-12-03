@@ -172,3 +172,4 @@ cython_debug/
 doc/source/examples/
 doc/source/API/_autosummary/
 doc/source/api
+doc/source/sg_execution_times.rst

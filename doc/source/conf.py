@@ -155,8 +155,8 @@ BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower()
 if BUILD_AUTOKEYWORS_API:
     html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
 
-BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
-if BUILD_EXAMPLES is True:
+BUILD_EXAMPLES = os.environ.get("BUILD_EXAMPLES", "true").lower() == "true"
+if BUILD_EXAMPLES:
     # Necessary for pyvista when building the sphinx gallery
     extensions.append("sphinx_gallery.gen_gallery")
     pyvista.BUILDING_GALLERY = True
