@@ -57,7 +57,7 @@
     @{{field.property_name}}.setter
     def {{field.property_name}}(self, value: {{field.type}}) -> None:
         """Set the {{field.property_name}} property."""
-        {% if field.options is defined %}
+        {% if field.options %}
         if value not in [{{ field.options|join(', ')}}, None]:
             raise Exception("""{{field.property_name}} must be `None` or one of {{openbrace}}{{ field.options|join(',')}}{{closebrace}}.""")
         {% endif %}

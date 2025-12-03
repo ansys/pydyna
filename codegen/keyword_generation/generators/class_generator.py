@@ -25,8 +25,14 @@ import typing
 
 from jinja2 import Environment
 import keyword_generation.data_model as data_model
+from keyword_generation.data_model.keyword_data import KeywordData
 from keyword_generation.handlers.registry import create_default_registry
-from keyword_generation.utils import fix_keyword, get_classname, get_license_header, handle_single_word_keyword
+from keyword_generation.utils import (
+    fix_keyword,
+    get_classname,
+    get_license_header,
+    handle_single_word_keyword,
+)
 from keyword_generation.utils.domain_mapper import get_keyword_domain
 from output_manager import OutputManager
 
@@ -322,11 +328,11 @@ def _add_links(kwd_data: typing.Dict[str, typing.Any]) -> None:
     logger.debug(f"Added {link_count} links to keyword data")
 
 
-def _get_keyword_data(keyword_name, keyword, settings) -> typing.Dict[str, typing.Any]:
-    """Gets the keyword data dict from kwdm.  Transforms it
-    based on the generation settings that are passed in, if any,
-    and with default transformations that are needed to produce
-    valid python code.
+def _get_keyword_data(keyword_name: str, keyword: str, settings: typing.Dict[str, typing.Any]) -> KeywordData:
+    """Gets the keyword data from kwdm. Transforms it based on generation settings
+    and default transformations needed to produce valid python code.
+
+    Returns KeywordData dataclass instance instead of dict for type safety.
     """
     logger.debug(f"Getting keyword data for '{keyword_name}' (source: '{keyword}')")
     assert data_model.KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
@@ -342,14 +348,17 @@ def _get_keyword_data(keyword_name, keyword, settings) -> typing.Dict[str, typin
 
     _add_links(kwd_data)
     logger.debug(f"Keyword data prepared for '{keyword_name}' with {len(kwd_data.get('cards', []))} cards")
-    return kwd_data
+
+    # Convert dict to KeywordData dataclass
+    return KeywordData.from_dict(kwd_data)
 
 
 def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dict) -> typing.Dict:
     source_keyword = _get_source_keyword(keyword, keyword_options)
     generation_settings = keyword_options.get("generation-options", {})
     keyword_data = _get_keyword_data(keyword, source_keyword, generation_settings)
-    keyword_data["classname"] = classname
+    # Set classname directly on dataclass instance
+    keyword_data.classname = classname
     alias = data_model.get_alias(keyword)
     alias_subkeyword = None
     if alias:
@@ -357,7 +366,7 @@ def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dic
         alias = get_classname(fix_keyword(alias))
         alias_subkeyword = "_".join(alias_tokens[1:])
     data = {
-        "keyword_data": keyword_data,
+        "keyword_data": keyword_data,  # Now a KeywordData instance, not dict
         "alias": alias,
         "alias_subkeyword": alias_subkeyword,
     }

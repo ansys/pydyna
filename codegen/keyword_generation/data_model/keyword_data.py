@@ -80,7 +80,7 @@ class Field:
     property_name: Optional[str] = None
     property_type: Optional[str] = None
     readonly: bool = False
-    options: Optional[List[Any]] = None
+    options: List[Any] = field(default_factory=list)  # Empty list for templates instead of None
     redundant: bool = False
     card_indices: Optional[List[int]] = None
     link: Optional[int] = None
@@ -103,7 +103,7 @@ class Field:
             result["property_type"] = self.property_type
         if self.readonly:
             result["readonly"] = self.readonly
-        if self.options is not None:
+        if self.options:
             result["options"] = self.options
         if self.redundant:
             result["redundant"] = self.redundant
@@ -129,7 +129,7 @@ class Field:
             property_name=data.get("property_name"),
             property_type=data.get("property_type"),
             readonly=data.get("readonly", False),
-            options=data.get("options"),
+            options=data.get("options", []),  # Default to empty list
             redundant=data.get("redundant", False),
             card_indices=data.get("card_indices"),
             link=data.get("link"),
@@ -284,18 +284,22 @@ class KeywordData:
     keyword: str
     subkeyword: str
     title: str
-    classname: str
+    classname: str = ""  # Set later by _get_base_variable
     cards: List[Card] = field(default_factory=list)
-    options: Optional[Union[List[OptionGroup], List[Dict[str, Any]]]] = None
+    options: Union[List[OptionGroup], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     card_sets: Optional[Union[CardSetsContainer, Dict[str, Any]]] = None
     duplicate: bool = False
     duplicate_group: bool = False
     variable: bool = False
-    dataclasses: Optional[Union[List[DataclassDefinition], List[Dict[str, Any]]]] = None
-    mixins: Optional[List[str]] = None
-    mixin_imports: Optional[Union[List[MixinImport], List[Dict[str, Any]]]] = None
-    links: Optional[Union[List[LinkData], List[Dict[str, Any]]]] = None
-    negative_shared_fields: Optional[List[Any]] = None
+    dataclasses: Union[List[DataclassDefinition], List[Dict[str, Any]]] = field(
+        default_factory=list
+    )  # Empty list for templates
+    mixins: List[str] = field(default_factory=list)  # Empty list for templates
+    mixin_imports: Union[List[MixinImport], List[Dict[str, Any]]] = field(
+        default_factory=list
+    )  # Empty list for templates
+    links: Union[List[LinkData], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
+    negative_shared_fields: List[Any] = field(default_factory=list)  # Empty list for templates
     card_insertions: List[Any] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -316,12 +320,8 @@ class KeywordData:
             "cards": [c.to_dict() if isinstance(c, Card) else c for c in self.cards],
             "card_insertions": self.card_insertions,
         }
-        if self.options is not None:
-            result["options"] = (
-                [o.to_dict() if isinstance(o, OptionGroup) else o for o in self.options]
-                if isinstance(self.options, list)
-                else self.options
-            )
+        if self.options:
+            result["options"] = [o.to_dict() if isinstance(o, OptionGroup) else o for o in self.options]
         if self.card_sets is not None:
             result["card_sets"] = (
                 self.card_sets.to_dict() if isinstance(self.card_sets, CardSetsContainer) else self.card_sets
@@ -332,12 +332,16 @@ class KeywordData:
             result["duplicate_group"] = self.duplicate_group
         if self.variable:
             result["variable"] = self.variable
-        if self.dataclasses is not None:
-            result["dataclasses"] = (
-                [d.to_dict() if isinstance(d, DataclassDefinition) else d for d in self.dataclasses]
-                if isinstance(self.dataclasses, list)
-                else self.dataclasses
-            )
+        if self.dataclasses:
+            result["dataclasses"] = [d.to_dict() if isinstance(d, DataclassDefinition) else d for d in self.dataclasses]
+        if self.mixins:
+            result["mixins"] = self.mixins
+        if self.mixin_imports:
+            result["mixin_imports"] = [m.to_dict() if isinstance(m, MixinImport) else m for m in self.mixin_imports]
+        if self.links:
+            result["links"] = [link.to_dict() if isinstance(link, LinkData) else link for link in self.links]
+        if self.negative_shared_fields:
+            result["negative_shared_fields"] = self.negative_shared_fields
         if self.mixins is not None:
             result["mixins"] = self.mixins
         if self.mixin_imports is not None:
@@ -378,7 +382,7 @@ class KeywordData:
         options = (
             [OptionGroup.from_dict(o) if isinstance(o, dict) else o for o in options_data]
             if isinstance(options_data, list)
-            else options_data
+            else []
         )
 
         card_sets_data = data.get("card_sets")
@@ -388,28 +392,28 @@ class KeywordData:
         dataclasses = (
             [DataclassDefinition.from_dict(d) if isinstance(d, dict) else d for d in dataclasses_data]
             if isinstance(dataclasses_data, list)
-            else dataclasses_data
+            else []
         )
 
         mixin_imports_data = data.get("mixin_imports")
         mixin_imports = (
             [MixinImport.from_dict(m) if isinstance(m, dict) else m for m in mixin_imports_data]
             if isinstance(mixin_imports_data, list)
-            else mixin_imports_data
+            else []
         )
 
         links_data = data.get("links")
         links = (
             [LinkData.from_dict(link) if isinstance(link, dict) else link for link in links_data]
             if isinstance(links_data, list)
-            else links_data
+            else []  # Default to empty list if None
         )
 
         return cls(
             keyword=data["keyword"],
             subkeyword=data["subkeyword"],
             title=data["title"],
-            classname=data["classname"],
+            classname=data.get("classname", ""),  # Optional, set later by generator
             cards=cards,
             options=options,
             card_sets=card_sets,
@@ -417,9 +421,9 @@ class KeywordData:
             duplicate_group=data.get("duplicate_group", False),
             variable=data.get("variable", False),
             dataclasses=dataclasses,
-            mixins=data.get("mixins"),
+            mixins=data.get("mixins", []),
             mixin_imports=mixin_imports,
             links=links,
-            negative_shared_fields=data.get("negative_shared_fields"),
+            negative_shared_fields=data.get("negative_shared_fields", []),
             card_insertions=data.get("card_insertions", []),
         )
