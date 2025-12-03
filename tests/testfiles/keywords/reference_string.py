@@ -1239,6 +1239,60 @@ test_define_table_ref = """*DEFINE_TABLE
         0.0099999998
                  0.1"""
 
+
+test_define_table_simple_ref = """*DEFINE_TABLE
+ 10000001
+ 1.0E-6
+ 9.9999997E-5
+ 0.001
+ 0.0099999998
+ 0.1
+*DEFINE_CURVE
+ 10000001
+                 0.0                 1.0
+                 1.0                 2.0
+"""
+
+
+test_define_table_interleaved_ref = """*DEFINE_TABLE
+ 10000001
+ 1.0E-6
+ 9.9999997E-5
+ 0.001
+ 0.0099999998
+ 0.1
+*DEFINE_CURVE
+ 10000001
+                 0.0                 1.0
+                 1.0                 2.0
+*DEFINE_TABLE
+ 20000001
+ 2.0E-6
+ 9.9999997E-5
+ 0.002
+ 0.0099999998
+ 0.2
+*DEFINE_CURVE
+ 20000001
+                 0.0                 3.0
+"""
+
+
+test_define_table_before_ref = """*DEFINE_CURVE
+ 99999999
+                 0.0                 9.0
+*DEFINE_TABLE
+ 10000001
+ 1.0E-6
+ 9.9999997E-5
+ 0.001
+ 0.0099999998
+ 0.1
+*DEFINE_CURVE
+ 10000001
+                 0.0                 1.0
+"""
+
 test_icfd_part_ref = """*ICFD_PART_TITLE
 $#                                                                         title
 PART TITLE                                                                      
