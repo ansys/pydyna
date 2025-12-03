@@ -20,27 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import collections
 import typing
 
 from jinja2 import Environment
 import keyword_generation.data_model as data_model
-from keyword_generation.handlers.add_option import AddOptionHandler
-from keyword_generation.handlers.card_set import CardSetHandler
-from keyword_generation.handlers.conditional_card import ConditionalCardHandler
-from keyword_generation.handlers.external_card import ExternalCardHandler
-from keyword_generation.handlers.handler_base import KeywordHandler
-from keyword_generation.handlers.insert_card import InsertCardHandler
-from keyword_generation.handlers.override_field import OverrideFieldHandler
-from keyword_generation.handlers.override_subkeyword import OverrideSubkeywordHandler
-from keyword_generation.handlers.rename_property import RenamePropertyHandler
-from keyword_generation.handlers.reorder_card import ReorderCardHandler
-from keyword_generation.handlers.replace_card import ReplaceCardHandler
-from keyword_generation.handlers.series_card import SeriesCardHandler
-from keyword_generation.handlers.shared_field import SharedFieldHandler
-from keyword_generation.handlers.skip_card import SkipCardHandler
-from keyword_generation.handlers.table_card import TableCardHandler
-from keyword_generation.handlers.table_card_group import TableCardGroupHandler
+from keyword_generation.handlers.registry import create_default_registry
 from keyword_generation.utils import fix_keyword, get_classname, get_license_header, handle_single_word_keyword
 from keyword_generation.utils.domain_mapper import get_keyword_domain
 from output_manager import OutputManager
@@ -170,28 +154,6 @@ def _set_keyword_identity(kwd_data: typing.Dict, keyword_name: str, settings: ty
     kwd_data["title"] = handle_single_word_keyword(keyword_name)
 
 
-# functions which return a copy of keyword data after applying the handling specified by the configuration
-HANDLERS = collections.OrderedDict(
-    {
-        "reorder-card": ReorderCardHandler(),
-        "table-card": TableCardHandler(),
-        "override-field": OverrideFieldHandler(),
-        "replace-card": ReplaceCardHandler(),
-        "insert-card": InsertCardHandler(),
-        "series-card": SeriesCardHandler(),
-        "add-option": AddOptionHandler(),
-        "card-set": CardSetHandler(),
-        "conditional-card": ConditionalCardHandler(),
-        "rename-property": RenamePropertyHandler(),
-        "skip-card": SkipCardHandler(),
-        "table-card-group": TableCardGroupHandler(),
-        "external-card-implementation": ExternalCardHandler(),
-        "shared-field": SharedFieldHandler(),
-        "override-subkeyword": OverrideSubkeywordHandler(),
-    }
-)
-
-
 def _get_insertion_index_for_cards(requested_index: int, container):
     for index, card in enumerate(container):
         card_index = card.get("source_index", card["index"])
@@ -268,14 +230,12 @@ def _add_option_indices(kwd_data):
         index += 1
 
 
-def _after_handle(kwd_data):
+def _after_handle(kwd_data, registry):
     # TODO - move these to their respective handler
     _do_insertions(kwd_data)
     _delete_marked_indices(kwd_data)
     _add_option_indices(kwd_data)
-    for handler_name, handler in HANDLERS.items():
-        if isinstance(handler, KeywordHandler):
-            handler.post_process(kwd_data)
+    registry.post_process_all(kwd_data)
 
 
 def _before_handle(kwd_data):
@@ -284,15 +244,10 @@ def _before_handle(kwd_data):
 
 
 def _handle_keyword_data(kwd_data, settings):
+    registry = create_default_registry()
     _before_handle(kwd_data)
-    # we have to iterate in the order of the handlers because right now the order still matters
-    # right now this is only true for reorder_card
-    for handler_name, handler in HANDLERS.items():
-        handler_settings = settings.get(handler_name)
-        if handler_settings == None:
-            continue
-        handler.handle(kwd_data, handler_settings)
-    _after_handle(kwd_data)
+    registry.apply_all(kwd_data, settings)
+    _after_handle(kwd_data, registry)
 
 
 def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
