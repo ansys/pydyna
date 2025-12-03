@@ -1,6 +1,6 @@
 # Codegen Refactor Recommendations
 
-This file collects architectural and code-level recommendations for improving the codegen system. Each item should be addressed individually, with the constraint that the output of `generate.py --clean` followed by `generate.py` must remain unchanged.
+This file collects architectural and code-level recommendations for improving the codegen system.
 
 ## 1. Data Structures
 - Refactor keyword, card, and field representations to use Python `dataclasses` instead of raw dicts.
@@ -31,6 +31,7 @@ This file collects architectural and code-level recommendations for improving th
 - Ensure all tests validate that generated files remain unchanged.
 
 ## 8. General Simplicity
+- Merge similar handlers or use composition where possible.
 - Reduce code duplication and improve readability.
 
 ## 9. High-Level Design
@@ -39,5 +40,5 @@ This file collects architectural and code-level recommendations for improving th
 ---
 
 **Constraint:**
-> Any refactor must not change the output of the generated files. Use `generate.py --clean` and `generate.py` to validate.
+> Any refactor must not change the output of the generated files. Use `generate.py -c` and `generate.py` to validate.
 > Always run pre-commit to confirm, use pre-commit run --all-files
