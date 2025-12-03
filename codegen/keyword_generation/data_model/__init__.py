@@ -38,8 +38,6 @@ ADDITIONAL_CARDS = None
 KWD_TO_ALIAS: typing.Dict[str, str] = {}
 ALIAS_TO_KWD: typing.Dict[str, str] = {}
 
-from .insertion import Insertion
-
 
 def get_card(setting: typing.Dict[str, str]):
     source = setting["source"]
