@@ -18,23 +18,20 @@ This file collects architectural and code-level recommendations for improving th
 - Use context objects or dataclasses for template context instead of manual dict updates.
 - Document template variables and expected context structure.
 
-## 5. Logging
-- Add dedicated logging and update the CLI to set logging levels.
-
-## 6. Documentation
+## 5. Documentation
 - Add docstrings to all public functions and classes.
 - Document the overall flow in `generate.py` and in the README.
 - Consider generating API docs for the codegen system.
 
-## 7. Testing
+## 6. Testing
 - Add unit tests for handlers, template rendering, and manifest parsing.
 - Ensure all tests validate that generated files remain unchanged.
 
-## 8. General Simplicity
+## 7. General Simplicity
 - Merge similar handlers or use composition where possible.
 - Reduce code duplication and improve readability.
 
-## 9. High-Level Design
+## 8. High-Level Design
 - Add a diagram or high-level description of the codegen flow to the documentation.
 
 ---

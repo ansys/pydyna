@@ -4,7 +4,10 @@
 """
 OutputManager: Encapsulates all file and directory operations for codegen output.
 """
+import logging
 import os
+
+logger = logging.getLogger(__name__)
 
 
 class OutputManager:
@@ -17,6 +20,7 @@ class OutputManager:
         self.base_path = base_path
         self.auto_path = os.path.join(base_path, self.AUTO_DIR)
         os.makedirs(self.auto_path, exist_ok=True)
+        logger.debug(f"OutputManager initialized with base_path: {base_path}")
 
     def _write_file(self, rel_path: str, content: str):
         path = os.path.join(self.base_path, rel_path)
@@ -30,12 +34,14 @@ class OutputManager:
         file_path = os.path.join(domain_path, filename)
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(content)
+        logger.debug(f"Wrote auto file: {domain}/{filename}")
 
     def write_autodoc(self, autodoc_output_path: str, content: str):
         os.makedirs(autodoc_output_path, exist_ok=True)
         file_path = os.path.join(autodoc_output_path, self.AUTODOC_INDEX_FILE)
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(content)
+        logger.info(f"Wrote autodoc index to: {file_path}")
 
     def write_auto_keywords_file(self, content: str):
         self._write_file(self.AUTO_KEYWORDS_FILE, content)
@@ -55,9 +61,11 @@ class OutputManager:
         for fname in [self.AUTO_KEYWORDS_FILE, self.TYPE_MAPPING_FILE]:
             try:
                 os.remove(os.path.join(self.base_path, fname))
+                logger.debug(f"Removed file: {fname}")
             except FileNotFoundError:
-                pass
+                logger.debug(f"File not found (skipping): {fname}")
         try:
             shutil.rmtree(self.auto_path)
+            logger.info(f"Removed directory tree: {self.auto_path}")
         except FileNotFoundError:
-            pass
+            logger.debug(f"Directory not found (skipping): {self.auto_path}")
