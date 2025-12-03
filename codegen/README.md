@@ -20,6 +20,35 @@ It is recommended to use a virtual environment
 - To remove all the generated code:
 ``python codegen/generate.py -c``
 
+### Logging
+
+The code generator includes comprehensive logging to help debug and understand the generation process:
+
+- **Control log verbosity** with the `--log-level` or `-l` flag:
+  - `DEBUG`: Detailed traceability of execution flow, variable values, and decisions
+  - `INFO`: High-level progress updates and successful operations (default)
+  - `WARNING`: Only recoverable issues or unexpected conditions
+  - `ERROR`: Only failures and errors
+  - `CRITICAL`: Only critical failures
+
+- **Examples**:
+  ```bash
+  # Generate with detailed debug output
+  python codegen/generate.py -k SECTION_SHELL -l DEBUG
+
+  # Generate with minimal output (warnings and errors only)
+  python codegen/generate.py -l WARNING
+
+  # Generate with high-level progress info (default)
+  python codegen/generate.py -l INFO
+  ```
+
+- **What gets logged**:
+  - **DEBUG**: Card insertions, deletions, wildcard matching, handler execution, template rendering, file operations
+  - **INFO**: Files loaded, keyword counts, generation progress, completion status
+  - **WARNING**: Deprecated features, potential issues
+  - **ERROR**: Generation failures with full stack traces
+
 ## How it works
 The class generator uses Jinja templates to generate three distinct things:
 - Python classes

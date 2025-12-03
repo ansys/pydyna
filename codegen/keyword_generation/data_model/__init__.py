@@ -22,8 +22,11 @@
 
 import copy
 import json
+import logging
 import os
 import typing
+
+logger = logging.getLogger(__name__)
 
 KWDM_INSTANCE = None
 MANIFEST = None
@@ -99,14 +102,22 @@ class KWDM:
 def load(this_folder: str, kwd_file: str, manifest: str, additional_cards: str):
     global KWDM_INSTANCE, MANIFEST, ADDITIONAL_CARDS
     if kwd_file == "":
-        KWDM_INSTANCE = KWDM(os.path.join(this_folder, "kwd.json"))
+        kwd_file = os.path.join(this_folder, "kwd.json")
+        KWDM_INSTANCE = KWDM(kwd_file)
     else:
         KWDM_INSTANCE = KWDM(kwd_file)
+    logger.info(f"Loaded keyword data from: {kwd_file}")
+
     if manifest == "":
-        MANIFEST = _load_manifest(this_folder / "manifest.json")
+        manifest = this_folder / "manifest.json"
+        MANIFEST = _load_manifest(manifest)
     else:
         MANIFEST = _load_manifest(manifest)
+    logger.info(f"Loaded manifest from: {manifest}")
+
     if additional_cards == "":
-        ADDITIONAL_CARDS = AdditionalCards(this_folder / "additional-cards.json")
+        additional_cards = this_folder / "additional-cards.json"
+        ADDITIONAL_CARDS = AdditionalCards(additional_cards)
     else:
         ADDITIONAL_CARDS = AdditionalCards(additional_cards)
+    logger.info(f"Loaded additional cards from: {additional_cards}")

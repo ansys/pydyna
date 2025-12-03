@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import logging
 import typing
 
 from jinja2 import Environment
@@ -28,6 +29,8 @@ from keyword_generation.handlers.registry import create_default_registry
 from keyword_generation.utils import fix_keyword, get_classname, get_license_header, handle_single_word_keyword
 from keyword_generation.utils.domain_mapper import get_keyword_domain
 from output_manager import OutputManager
+
+logger = logging.getLogger(__name__)
 
 
 def _get_source_keyword(keyword, settings):
@@ -38,6 +41,8 @@ def _get_source_keyword(keyword, settings):
     overwritten by the "source-keyword" property.
     """
     source_keyword = settings.get("source-keyword", keyword)
+    if source_keyword != keyword:
+        logger.debug(f"Using source keyword '{source_keyword}' for '{keyword}'")
     return source_keyword
 
 
@@ -168,6 +173,7 @@ def _get_insertion_index_for_cards(requested_index: int, container):
 def _do_insertions(kwd_data):
     # [(a,b,c)] => insert b into c at index a
     insertion_targets: typing.List[typing.Tuple[int, typing.Dict, typing.List]] = []
+    logger.debug(f"Processing {len(kwd_data['card_insertions'])} card insertions")
     for insertion in kwd_data["card_insertions"]:
         insertion: data_model.Insertion = insertion
         insertion_index = insertion.target_index
@@ -177,10 +183,12 @@ def _do_insertions(kwd_data):
             # insert directly into keyword data
             container = kwd_data["cards"]
             index = _get_insertion_index_for_cards(insertion_index, container)
+            logger.debug(f"Inserting card at index {index} into keyword cards")
             insertion_targets.append((index, insertion_card, container))
         else:
             # insert into another card set
             card_sets = [card_set for card_set in kwd_data["card_sets"]["sets"] if card_set["name"] == insertion_name]
+            logger.debug(f"Inserting card into {len(card_sets)} card sets matching '{insertion_name}'")
             for card_set in card_sets:
                 container = card_set["source_cards"]
                 index = _get_insertion_index_for_cards(insertion_index, container)
@@ -196,6 +204,8 @@ def _delete_marked_indices(kwd_data):
             marked_indices.append(index)
     # removal will affect order if we iterate forwards, so iterate backwards
     marked_indices.sort(reverse=True)
+    if marked_indices:
+        logger.debug(f"Deleting {len(marked_indices)} marked cards at indices: {marked_indices}")
     for index in marked_indices:
         del kwd_data["cards"][index]
 
@@ -206,6 +216,8 @@ def _delete_marked_indices(kwd_data):
             if "mark_for_removal" in option:
                 marked_option_indices.append(index)
         marked_option_indices.sort(reverse=True)
+        if marked_option_indices:
+            logger.debug(f"Deleting {len(marked_option_indices)} marked options at indices: {marked_option_indices}")
         for index in marked_option_indices:
             del options_list[index]
         if len(options_list) == 0:
@@ -245,9 +257,11 @@ def _before_handle(kwd_data):
 
 def _handle_keyword_data(kwd_data, settings):
     registry = create_default_registry()
+    logger.debug(f"Handling keyword data with {len(kwd_data.get('cards', []))} cards")
     _before_handle(kwd_data)
     registry.apply_all(kwd_data, settings)
     _after_handle(kwd_data, registry)
+    logger.debug(f"Keyword data handling complete, final card count: {len(kwd_data.get('cards', []))}")
 
 
 def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
@@ -287,12 +301,16 @@ def _add_links(kwd_data):
     """Add "links", or properties that link one keyword to another."""
     links = _get_links(kwd_data)
     if links is None:
+        logger.debug("No links found for this keyword")
         return
     link_data = []
+    link_count = 0
     for link_type, link_fields in links.items():
         if link_type == LinkIdentity.DEFINE_TRANSFORMATION:
             _add_define_transform_link_data(link_data, link_fields)
+            link_count += len(link_fields)
     kwd_data["links"] = link_data
+    logger.debug(f"Added {link_count} links to keyword data")
 
 
 def _get_keyword_data(keyword_name, keyword, settings):
@@ -301,6 +319,7 @@ def _get_keyword_data(keyword_name, keyword, settings):
     and with default transformations that are needed to produce
     valid python code.
     """
+    logger.debug(f"Getting keyword data for '{keyword_name}' (source: '{keyword}')")
     kwd_data = {"cards": data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)}
 
     _set_keyword_identity(kwd_data, keyword_name, settings)
@@ -312,6 +331,7 @@ def _get_keyword_data(keyword_name, keyword, settings):
     _transform_data(kwd_data)
 
     _add_links(kwd_data)
+    logger.debug(f"Keyword data prepared for '{keyword_name}' with {len(kwd_data.get('cards', []))} cards")
     return kwd_data
 
 
@@ -334,10 +354,11 @@ def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dic
     return data
 
 
-def generate_class(env: Environment, output_manager: OutputManager, item: typing.Dict) -> typing.Tuple[str, str]:
+def generate_class(env: Environment, output_manager: OutputManager, item: typing.Dict):
     keyword = item["name"]
     fixed_keyword = fix_keyword(keyword)
     classname = item["options"].get("classname", get_classname(fixed_keyword))
+    logger.debug(f"Starting generation for class '{classname}' from keyword '{keyword}'")
     try:
         base_variable = _get_base_variable(classname, keyword, item["options"])
         jinja_variable = _get_jinja_variable(base_variable)
@@ -345,9 +366,11 @@ def generate_class(env: Environment, output_manager: OutputManager, item: typing
         # Determine domain and create domain subdirectory
         domain = get_keyword_domain(keyword)
         filename = fixed_keyword.lower() + ".py"
+        logger.debug(f"Rendering template for {classname} in domain '{domain}'")
         content = env.get_template("keyword.j2").render(**jinja_variable)
         output_manager.write_auto_file(domain, filename, content)
+        logger.debug(f"Successfully generated class '{classname}'")
         return classname, fixed_keyword.lower()
     except Exception as e:
-        print(f"Failure in generating {classname}")
+        logger.error(f"Failure in generating {classname}", exc_info=True)
         raise e
