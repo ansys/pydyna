@@ -27,8 +27,8 @@ import io
 from ansys.dyna.core.lib.card_set import CardSet
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.keywords.keyword_classes.auto.boundaries.initial_strain_shell import InitialStrainShellCardSet
-from ansys.dyna.core.keywords.keyword_classes.auto.boundaries.initial_stress_shell import (
+from ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_strain_shell import InitialStrainShellCardSet
+from ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_stress_shell import (
     InitialStressShellCardSet,
     InitialStressShellThicknessLargeCardSet,
 )
