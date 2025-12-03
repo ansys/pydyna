@@ -7,6 +7,14 @@ IGNORE THIS LINE FOR NOW: LS-DYNA keywords are described in detail in the manual
 ## Agent Coding Style Preferences
 
 - Do not use inline comments to explain imports. Instead, use a module-level docstring to indicate the purpose and usage of imported modules. This applies to all agent-generated code, not just codegen modules.
+- There is a line limit of 120 characters, and other linting rules. Use precommit run --all-files to run the linters after makin changes.
+- **Add comprehensive logging**: Use Python's `logging` module extensively throughout the codebase. Add a logger instance (`logger = logging.getLogger(__name__)`) to each module and use it liberally:
+  - Use `logger.debug()` for detailed traceability of execution flow, variable values, and decisions
+  - Use `logger.info()` for high-level progress updates and successful operations
+  - Use `logger.warning()` for recoverable issues or unexpected conditions
+  - Use `logger.error()` for failures with `exc_info=True` to include stack traces
+  - Replace any `print()` statements with appropriate logging calls
+  - Log function entry/exit for complex operations, parameter values, counts, and decision points
 
 Run `pre-commit run --all-files` after changes
 
