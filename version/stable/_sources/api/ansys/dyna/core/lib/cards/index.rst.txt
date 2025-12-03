@@ -1,0 +1,26 @@
+ansys.dyna.core.lib.cards
+=========================
+
+.. py:module:: ansys.dyna.core.lib.cards
+
+.. autoapi-nested-parse::
+
+   Base class for cards and I/O.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/cards/Cards
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.cards.Cards
+
+

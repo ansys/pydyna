@@ -1,0 +1,44 @@
+
+
+.. _sphx_glr_examples_ISPH:
+
+ISPH examples
+~~~~~~~~~~~~~
+
+These examples show how to create and use ISPH (incompressible
+smooth particle hydrodynamics) models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This examples show how to use the PyDYNA pre service to create an ISPH model. The executable fi...">
+
+.. only:: html
+
+  .. image:: /examples/ISPH/images/thumb/sphx_glr_rigidtest_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_ISPH_rigidtest.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Rigid test</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/ISPH/rigidtest
+

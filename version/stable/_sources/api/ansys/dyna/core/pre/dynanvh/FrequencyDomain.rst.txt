@@ -1,0 +1,129 @@
+ansys.dyna.core.pre.dynanvh.FrequencyDomain
+===========================================
+
+.. py:class:: ansys.dyna.core.pre.dynanvh.FrequencyDomain
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.BaseObj`
+
+
+   
+   Provides a way of defining and solving frequency domain vibration and acoustic problems.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: defined_frf
+      :value: False
+
+
+
+   .. py:attribute:: type
+      :value: 'frequency_domain'
+
+
+
+   .. py:method:: set_frequency_response_function(excitation_input_set=None, excitation_input_dof=ExcitationDOF.VECTOR, excitation_input_type=ExcitationType.NODAL_FORCE, max_natural_frequency=0, modal_damping_coefficient=0, modal_damping_coefficient_curve=None, modal_damping_coefficient_curve_type=0, response_output_set=None, response_output_dof=ResponseDOF.Y, response_output_type=ResponseType.BASE_VELOCITY, frf_output_min_frequency=0, frf_output_max_frequency=0, frf_output_num_frequency=0)
+
+      
+      Compute frequency response functions due to nodal excitations.
+
+
+      :Parameters:
+
+          **excitation_input_set**
+              ..
+
+          **excitation_input_dof**
+              ..
+
+          **excitation_input_type**
+              ..
+
+          **max_natural_frequency**
+              ..
+
+          **modal_damping_coefficient**
+              ..
+
+          **modal_damping_coefficient_curve**
+              ..
+
+          **modal_damping_coefficient_curve_type**
+              ..
+
+          **response_output_set**
+              ..
+
+          **response_output_dof**
+              ..
+
+          **response_output_type**
+              ..
+
+          **frf_output_min_frequency**
+              ..
+
+          **frf_output_max_frequency**
+              ..
+
+          **frf_output_num_frequency**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Define a frequency domain vibration and acoustic problem.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

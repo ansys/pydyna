@@ -1,0 +1,129 @@
+ansys.dyna.core.pre.dynamech.Airbag
+===================================
+
+.. py:class:: ansys.dyna.core.pre.dynamech.Airbag(set, heat_capacity_at_constant_volume=0, heat_capacity_at_constant_pressure=0, input_gas_temperature=0, input_mass_flow_rate=Curve(x=[], y=[]), shape_factor_for_exit_hole=0, ambient_pressure=0, ambient_density=0)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.BaseObj`
+
+
+   
+   Defines an airbag or control volume.
+
+
+   :Parameters:
+
+       **Set** : :obj:`SegmentSet` or :obj:`PartSet`
+           Set. Options are:
+           
+           - EQ.0: Segment set ID.
+           - EQ.1: Part set ID.
+
+       **heat_capacity_at_constant_volume** : :class:`python:float`, :obj:`optional`
+           Heat capacity at constant volume. The default is ``0``.
+
+       **heat_capacity_at_constant_pressure** : :class:`python:float`, :obj:`optional`
+           Heat capacity at constant pressure. The default is ``0``.
+
+       **input_gas_temperature** : :class:`python:float`, :obj:`optional`
+           Temperature of the input gas. The default is ``0``.
+
+       **input_mass_flow_rate** : :class:`python:int`, :obj:`optional`
+           Load curve ID specifying the input mass flow rate.
+           The default is ``0``.
+
+       **shape_factor_for_exit_hole** : :class:`python:float`, :obj:`optional`
+           Shape factor for exit hole. The default is ``0``.
+
+       **ambient_pressure** : :class:`python:float`, :obj:`optional`
+           Ambient pressure. The default is ``0``.
+
+       **ambient_density** : :class:`python:float`, :obj:`optional`
+           Ambient density. The default is ``0``.
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           ``True`` when successful, ``False`` when failed..
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: cv
+      :value: 0
+
+
+
+   .. py:attribute:: cp
+      :value: 0
+
+
+
+   .. py:attribute:: t
+      :value: 0
+
+
+
+   .. py:attribute:: lcid
+
+
+   .. py:attribute:: mu
+      :value: 0
+
+
+
+   .. py:attribute:: pe
+      :value: 0
+
+
+
+   .. py:attribute:: ro
+      :value: 0
+
+
+
+   .. py:attribute:: sid
+
+
+   .. py:attribute:: type
+      :value: 'airbag'
+
+
+
+   .. py:method:: create()
+
+      
+      Create an airbag.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

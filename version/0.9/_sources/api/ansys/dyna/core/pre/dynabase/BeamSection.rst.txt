@@ -1,0 +1,28 @@
+ansys.dyna.core.pre.dynabase.BeamSection
+========================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.BeamSection(element_formulation, shear_factor=1, cross_section=0, thickness_n1=0, thickness_n2=0)
+
+   
+   Defines cross-sectional properties for beams, trusses, discrete beams, and cable elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: id
+

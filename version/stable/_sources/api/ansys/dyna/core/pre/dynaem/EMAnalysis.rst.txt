@@ -1,0 +1,221 @@
+ansys.dyna.core.pre.dynaem.EMAnalysis
+=====================================
+
+.. py:class:: ansys.dyna.core.pre.dynaem.EMAnalysis(type=EMType.EDDY_CURRENT)
+
+   
+   Enables the EM solver and sets its options.
+
+
+   :Parameters:
+
+       **type** : :class:`python:int`
+           Electromagnetism solver. The default is ``EDDY_CURRENT``. Options are:
+           
+           - EQ.1: Eddy current solver
+           - EQ.2: Induced heating solver
+           - EQ.3: Resistive heating solver
+           - EQ.11: Electrophysiology monodomain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: p_matrix_tol
+      :value: 1e-06
+
+
+
+   .. py:attribute:: q_matrix_tol
+      :value: 1e-06
+
+
+
+   .. py:attribute:: w_matrix_tol
+      :value: 1e-06
+
+
+
+   .. py:attribute:: defined
+      :value: False
+
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 1
+
+
+
+   .. py:attribute:: dimtype
+      :value: 0
+
+
+
+   .. py:attribute:: defined_bem
+      :value: False
+
+
+
+   .. py:attribute:: defined_fem
+      :value: False
+
+
+
+   .. py:method:: set_timestep(timestep)
+
+      
+      Set the EM time step and its evolution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_solver(type=EMType.EDDY_CURRENT, dimtype=EMDimension.SOLVER_3D)
+
+      
+      Set the EM solver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_solver_bem(solver=BEMSOLVER.PCG, relative_tol=1e-06, max_iteration=1000)
+
+      
+      Set the type of linear solver, pre-conditioner, and tolerance for the EM BEM solver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-06, max_iteration=1000)
+
+      
+      Set some parameters for the EM FEM solver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_bem_matrix_tol(p_matrix_tol=1e-06, q_matrix_tol=1e-06, w_matrix_tol=1e-06)
+
+      
+      Set the type of BEM matrices and the way that they are assembled.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create an EM analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

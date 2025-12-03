@@ -1,0 +1,70 @@
+ansys.dyna.core.pre.dynabase.Gravity
+====================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Gravity(dir=GravityOption.DIR_Z, load=Curve(x=[0, 0], y=[0, 0]))
+
+   Bases: :py:obj:`BaseObj`
+
+
+   
+   Defines body force loads using global axes directions.
+
+   Body force loads are due to a prescribed base acceleration or
+   angular velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: dir
+      :value: 'Z'
+
+
+
+   .. py:attribute:: load
+
+
+   .. py:attribute:: type
+      :value: 'gravity'
+
+
+
+   .. py:method:: create()
+
+      
+      Define a body force.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

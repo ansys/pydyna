@@ -1,0 +1,16 @@
+ansys.dyna.core.run
+===================
+
+.. py:module:: ansys.dyna.core.run
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /api/ansys/dyna/core/run/local_solver/index
+   /api/ansys/dyna/core/run/options/index
+
+

@@ -1,0 +1,838 @@
+ansys.dyna.core.pre.dynaisph
+============================
+
+.. py:module:: ansys.dyna.core.pre.dynaisph
+
+.. autoapi-nested-parse::
+
+   ISPH API
+   ==========
+
+   Module for creating an ISPH (incompressible smooth particle hydrodynamics) DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynaisph.DynaISPH
+   ansys.dyna.core.pre.dynaisph.ISPHAnalysis
+   ansys.dyna.core.pre.dynaisph.SPHSection
+   ansys.dyna.core.pre.dynaisph.MassflowPlane
+   ansys.dyna.core.pre.dynaisph.ISPHFluidPart
+   ansys.dyna.core.pre.dynaisph.ISPHStructPart
+
+
+Module Contents
+---------------
+
+.. py:class:: DynaISPH
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+
+   
+   Contains methods for creating a keyword related to ISPH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: isphanalysis
+
+
+   .. py:method:: set_des(num_timestep=1, boxid=0, space_dimension=3, neighbors=150, approximation_theory=0, max_velocty=1000000000000000.0)
+
+      
+      Provide controls related to ISPH.
+
+
+      :Parameters:
+
+          **num_timestep** : :class:`python:int`, :obj:`optional`
+              Number of time steps between particle sorting. The default
+              is ``1``.
+
+          **boxid** : :class:`python:int`, :obj:`optional`
+              Box ID. The default is ``0``. ISPH approximations are computed
+              inside the specified box. When a particle has gone outside this
+              box, it is deactivated.
+
+          **space_dimension** : :class:`python:int`, :obj:`optional`
+              Space dimension for ISPH particles. The default is ``3``. Options
+              are:
+              
+              - EQ.3: 3D problems
+              - EQ.2: 2D plane strain problems
+              - EQ.-2: 2D axisymmetric problems
+
+          **neighbors** : :class:`python:int`, :obj:`optional`
+              Initial number of neighbors per particle. The default is ``150``.
+
+          **approximation_theory** : :class:`python:int`, :obj:`optional`
+              Particle approximation theory. The default is ``0``.
+
+          **max_velocty** : :class:`python:float`, :obj:`optional`
+              Maximum value for velocity for the ISPH particles. The default
+              is ``1000000000000000.0``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ISPHAnalysis(num_timestep=1)
+
+   
+   Provide controls related to ISPH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: num_timestep
+
+
+   .. py:attribute:: box
+      :value: None
+
+
+
+   .. py:attribute:: space_dimension
+      :value: 3
+
+
+
+   .. py:attribute:: neighbors
+      :value: 150
+
+
+
+   .. py:attribute:: approximation_theory
+      :value: 13
+
+
+
+   .. py:attribute:: particle_deactivation
+      :value: 1000000000000000.0
+
+
+
+   .. py:attribute:: velocity_scaling
+      :value: 0
+
+
+
+   .. py:method:: set_num_timestep(num_timestep)
+
+      
+      Set the number of time steps between particle sorting.
+
+
+      :Parameters:
+
+          **num_timestep** : :class:`python:int`, :obj:`optional`
+              Number of time steps between particle sorting. The default
+              is ``1``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_box(box)
+
+      
+      Set the box. ISPH approximations are computed inside a specified box.
+
+
+      :Parameters:
+
+          **box** : :obj:`Box`
+              Box for computing ISHPH approximattions. When a particle has gone
+              outside this box, it is deactivated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_neighbors(neighbors)
+
+      
+      Set the initial number of neighbors per particle.
+
+
+      :Parameters:
+
+          **neighbors** : :class:`python:int`, :obj:`optional`
+              Initial number of neighbors per particle.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_particle_deactivation(deactivation)
+
+      
+      Set the type of BEM matrices and the way they are assembled.
+
+
+      :Parameters:
+
+          **deactivation**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_velocity_scaling(scaling)
+
+      
+      Set the type of BEM matrices and the way they are assembled.
+
+
+      :Parameters:
+
+          **scaling**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create an ISPH analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: SPHSection(cslh=1.2, hmin=0.2, hmax=2.0, sphini=0)
+
+   
+   Defines section properties for ISPH particles.
+
+
+   :Parameters:
+
+       **cslh** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **hmin** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **hmax** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **sphini** : :class:`python:int`, :obj:`optional`
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: ret
+
+
+   .. py:attribute:: id
+
+
+.. py:class:: MassflowPlane(particles, surface)
+
+   
+   Measures ISPH mass flow rate across a defined plane.
+
+
+   :Parameters:
+
+       **particles** : :obj:`NodeSet`, :obj:`PartSet`
+           Node set or part set specifying the ISPH particles to measure.
+
+       **surface** : :obj:`PartSet`
+           Part set ID or part ID defining the surface across which to measure the flow rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: particles
+
+
+   .. py:attribute:: surface
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a mass flow plane.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ISPHFluidPart(pid, minpoint, length, numdirx, numdiry, numdirz)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Part`
+
+
+   
+   Generates ISPH particles inside a box.
+
+
+   :Parameters:
+
+       **pid** : :class:`python:int`
+           Part ID.
+
+       **minpoint** : :obj:`Point`
+           Minimum x,y,z-coordinate.
+
+       **length** : :obj:`Point`
+           Box length in the x,y,z-direction.
+
+       **numdirx** : :class:`python:int`
+           Number of ISPH particles in the x-direction.
+
+       **numdiry** : :class:`python:int`
+           Number of ISPH particles in the y-direction.
+
+       **numdirz** : :class:`python:int`
+           Number of ISPH particles in the z-direction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'ISPHFLUID'
+
+
+
+   .. py:attribute:: minpoint
+
+
+   .. py:attribute:: length
+
+
+   .. py:attribute:: numdirx
+
+
+   .. py:attribute:: numdiry
+
+
+   .. py:attribute:: numdirz
+
+
+   .. py:attribute:: cslh
+      :value: 1.2
+
+
+
+   .. py:attribute:: hmin
+      :value: 0.2
+
+
+
+   .. py:attribute:: hmax
+      :value: 2.0
+
+
+
+   .. py:attribute:: sphini
+      :value: 0
+
+
+
+   .. py:attribute:: massflowplane
+      :value: None
+
+
+
+   .. py:method:: set_smoothing_length(initial, min, max, optional)
+
+      
+      Calculate the smoothing length of the particles.
+
+
+      :Parameters:
+
+          **initial** : :class:`python:float`
+              Constant for calculating the initial smoothing length of the particles.
+
+          **min** : :class:`python:float`
+              Scale factor for the minimum smoothing length.
+
+          **max** : :class:`python:float`
+              Scale factor for the maximum smoothing length.
+
+          **optional** : :class:`python:float`, :obj:`optional`
+              Initial smoothing length, which overrides the true smoothing length.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_particles()
+
+      
+      Create ISPH particles inside the box.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_massflow_plane(surfaces)
+
+      
+      Measure ISPH mass flow rate across a defined plane.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_property()
+
+      
+      Set properties for an ISPH fluid part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ISPHStructPart(pid, couple_partset, space)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Part`
+
+
+   
+   Generates and places ISPH elements on the surface of triangular shell elements.
+
+
+   :Parameters:
+
+       **pid** : :class:`python:int`
+           Part ID.
+
+       **couple_partset** : :obj:`PartSet`
+           Part or part set ID for the region of the mesh to place the ISPH elements on.
+
+       **space** : :class:`python:float`
+           Maximum space between ISPH elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'ISPHSTRUCT'
+
+
+
+   .. py:attribute:: couple_partset
+
+
+   .. py:attribute:: space
+
+
+   .. py:attribute:: cslh
+      :value: 1.2
+
+
+
+   .. py:attribute:: hmin
+      :value: 0.2
+
+
+
+   .. py:attribute:: hmax
+      :value: 2.0
+
+
+
+   .. py:attribute:: sphini
+      :value: 0
+
+
+
+   .. py:method:: set_smoothing_length(initial, min, max, optional)
+
+      
+      Calculate the smoothing length of the particles.
+
+
+      :Parameters:
+
+          **Parameters**
+              ..
+
+          **----------**
+              ..
+
+          **initial** : :class:`python:float`
+              Constant for calculating the initial smoothing length of the particles.
+
+          **min** : :class:`python:float`
+              Scale factor for the minimum smoothing length.
+
+          **max** : :class:`python:float`
+              Scale factor for the maximum smoothing length.
+
+          **optional** : :class:`python:float`, :obj:`optional`
+              Initial smoothing length, which overrides the true smoothing length.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_particles()
+
+      
+      Create ISPH elements on the surface of triangular shell elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_property()
+
+      
+      Set properties for the ISPH structural part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

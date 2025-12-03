@@ -1,0 +1,1065 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ansys.dyna.core.pre.dynamech &#8212; PyDYNA</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/ansys_sphinx_theme.css?v=d2ac875c" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+ 
+<link href="../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../../../../../_static/documentation_options.js?v=70f82a29"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ansys/dyna/core/pre/dynamech';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_modules/ansys/dyna/core/pre/dynamech.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+  <!-- If there is no MeiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+   
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <script>document.write(`<img src="../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark" alt="PyDYNA - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../index.html" class="nav-link">Module code</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../core.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">ansys.dyna.core.pre.dynamech</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ansys.dyna.core.pre.dynamech</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Mechanical API</span>
+<span class="sd">==============</span>
+
+<span class="sd">Module for setting up explicit or implicit analysis.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.dynabase</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa : F403</span>
+
+
+<div class="viewcode-block" id="AnalysisType">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.AnalysisType">[docs]</a>
+<span class="k">class</span> <span class="nc">AnalysisType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="AnalysisType.EXPLICIT">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.AnalysisType.EXPLICIT">[docs]</a>
+    <span class="n">EXPLICIT</span> <span class="o">=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="AnalysisType.IMPLICIT">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.AnalysisType.IMPLICIT">[docs]</a>
+    <span class="n">IMPLICIT</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+<div class="viewcode-block" id="AnalysisType.NONE">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.AnalysisType.NONE">[docs]</a>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">3</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DynaMech">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech">[docs]</a>
+<span class="k">class</span> <span class="nc">DynaMech</span><span class="p">(</span><span class="n">DynaBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines a Mechanical analysis.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">analysis</span><span class="o">=</span><span class="n">AnalysisType</span><span class="o">.</span><span class="n">EXPLICIT</span><span class="p">):</span>
+        <span class="n">DynaBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<div class="viewcode-block" id="DynaMech.casetype">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.casetype">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">casetype</span> <span class="o">=</span> <span class="n">CaseType</span><span class="o">.</span><span class="n">STRUCTURE</span></div>
+
+<div class="viewcode-block" id="DynaMech.analysis">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.analysis">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">analysis</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="DynaMech.create_control_output">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.create_control_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_control_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npopt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">neecho</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set miscellaneous output parameters.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        npopt : int, optional</span>
+<span class="sd">            Print suppression during the input phase flag for the D3HSP file.</span>
+<span class="sd">            The default is ``0``. Options are:</span>
+
+<span class="sd">            - EQ.0: No suppression.</span>
+<span class="sd">            - EQ.1: Nodal coordinates, element connectivities, rigid wall definitions,</span>
+<span class="sd">              nodal SPCs, initial velocities, initial strains, adaptive constraints, and</span>
+<span class="sd">              SPR2/SPR3 constraints are not printed.</span>
+
+<span class="sd">        neecho : int, optional</span>
+<span class="sd">            Print suppression during the input phase flag for the echo file.</span>
+<span class="sd">            The default is ``0``. Options are:</span>
+
+<span class="sd">            - EQ.0: All data is printed.</span>
+<span class="sd">            - EQ.1: Nodal printing is suppressed.</span>
+<span class="sd">            - EQ.2: Element printing is suppressed.</span>
+<span class="sd">            - EQ.3: Both nodal and element printing is suppressed.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateControlOutput</span><span class="p">(</span><span class="n">ControlOutputRequest</span><span class="p">(</span><span class="n">npopt</span><span class="o">=</span><span class="n">npopt</span><span class="p">,</span> <span class="n">neecho</span><span class="o">=</span><span class="n">neecho</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Control Output Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaMech.set_init_velocity">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.set_init_velocity">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_init_velocity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">translational</span><span class="o">=</span><span class="n">Velocity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">rotational</span><span class="o">=</span><span class="n">RotVelocity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define initial nodal point velocities using a nodal set ID.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        nsid : int</span>
+<span class="sd">            Nodal set ID.</span>
+<span class="sd">        translational : Velocity</span>
+<span class="sd">            Initial translational velocity in the x,y,z-direction.</span>
+<span class="sd">        rotational : RotVelocity</span>
+<span class="sd">            Initial rotational velocity about the x,y,z-axis.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">velocity</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">translational</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+            <span class="n">translational</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">translational</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
+            <span class="n">rotational</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+            <span class="n">rotational</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">rotational</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateInitVel</span><span class="p">(</span><span class="n">InitVelRequest</span><span class="p">(</span><span class="n">nsid</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">velocity</span><span class="o">=</span><span class="n">velocity</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Initial velocity Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaMech.create_defineorientation">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.create_defineorientation">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_defineorientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vid</span><span class="p">,</span> <span class="n">iop</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define orientation vectors for discrete springs and dampers.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vid : int</span>
+<span class="sd">            Orientation vector ID.</span>
+<span class="sd">        iop : int</span>
+<span class="sd">            Options are:</span>
+
+<span class="sd">            - EQ.0: Deflections/rotations are measured and forces/moments are applied</span>
+<span class="sd">              along the following orientation vector.</span>
+<span class="sd">            - EQ.1: Deflections/rotations are measured and forces/moments are applied</span>
+<span class="sd">              along the axis between the two spring/damper nodes projected onto the plane normal</span>
+<span class="sd">              to the following orientation vector.</span>
+<span class="sd">            - EQ.2: Deflections/rotations are measured and forces/moments are applied</span>
+<span class="sd">              along a vector defined by the following two nodes.</span>
+<span class="sd">            - EQ.3: Deflections/rotations are measured and forces/moments are applied</span>
+<span class="sd">              along the axis between the two spring/damper nodes projected onto the</span>
+<span class="sd">              plane normal to the a vector defined by the following two nodes.</span>
+<span class="sd">        vector : list [x,y,z]</span>
+<span class="sd">            x,y,z : x,y,z-value of the orientation vector.</span>
+<span class="sd">        node1 : int</span>
+<span class="sd">            Node 1 ID.</span>
+<span class="sd">        node2 : int</span>
+<span class="sd">            Node 2 ID.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateDefineOrientation</span><span class="p">(</span>
+            <span class="n">DefineOrientationRequest</span><span class="p">(</span><span class="n">vid</span><span class="o">=</span><span class="n">vid</span><span class="p">,</span> <span class="n">iop</span><span class="o">=</span><span class="n">iop</span><span class="p">,</span> <span class="n">vector</span><span class="o">=</span><span class="n">vector</span><span class="p">,</span> <span class="n">node1</span><span class="o">=</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="o">=</span><span class="n">node2</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;DefineOrientation Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaMech.create_shellset">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.create_shellset">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_shellset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">eids</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define a set of shell elements with optional identical or unique attributes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        option : string</span>
+<span class="sd">            Available options. Choices are ``&lt;BLANK&gt;``,``LIST``, and ``GENERAL``.</span>
+<span class="sd">        title : string</span>
+<span class="sd">            Title for the shell set.</span>
+<span class="sd">        sid : int</span>
+<span class="sd">            Set ID.</span>
+<span class="sd">        eids : list</span>
+<span class="sd">            List of shell element IDs.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateShellSet</span><span class="p">(</span><span class="n">ShellSetRequest</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="n">option</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">sid</span><span class="o">=</span><span class="n">sid</span><span class="p">,</span> <span class="n">eids</span><span class="o">=</span><span class="n">eids</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Shell Set Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaMech.create_solidset">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.create_solidset">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_solidset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">sid</span><span class="p">,</span> <span class="n">ki</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define a set of solid elements.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : string</span>
+<span class="sd">            Title for the set of solid elements.</span>
+<span class="sd">        sid : int</span>
+<span class="sd">            Set ID.</span>
+<span class="sd">        ki : list</span>
+<span class="sd">            Solid element IDs.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateSolidSet</span><span class="p">(</span><span class="n">SolidSetRequest</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">sid</span><span class="o">=</span><span class="n">sid</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="n">ki</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Solid Set Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaMech.create_section_solid">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.create_section_solid">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_section_solid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">secid</span><span class="p">,</span> <span class="n">elform</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define section properties for solid continuum and fluid elements.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : string</span>
+<span class="sd">            Title for section solid.</span>
+<span class="sd">        secid : int</span>
+<span class="sd">            Section ID. ``SECID`` is referenced on the ``\*PART`` card.</span>
+<span class="sd">            A unique number must be specified.</span>
+<span class="sd">        elform : int</span>
+<span class="sd">            Element formulation options.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateSectionSolid</span><span class="p">(</span><span class="n">SectionSolidRequest</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">secid</span><span class="o">=</span><span class="n">secid</span><span class="p">,</span> <span class="n">elform</span><span class="o">=</span><span class="n">elform</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Section Solid Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaMech.create_section_discrete">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.create_section_discrete">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_section_discrete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">secid</span><span class="p">,</span> <span class="n">dro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">v0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cl</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cdl</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tdl</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Defined spring and damper elements for translation and rotation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        secid : int</span>
+<span class="sd">            Section ID.</span>
+<span class="sd">        dro : int, optional</span>
+<span class="sd">            Displacement/rotation. The default is ``0``. Options are:</span>
+
+<span class="sd">            - EQ.0: Material describes a translational spring/damper.</span>
+<span class="sd">            - EQ.1: Material describes a torsional spring/damper.</span>
+
+<span class="sd">        kd : float, optional</span>
+<span class="sd">            Dynamic magnification factor. The default is ``0``.</span>
+<span class="sd">        v0 : float, optional</span>
+<span class="sd">            Test velocity. The default is ``0``.</span>
+<span class="sd">        cl : float, optional</span>
+<span class="sd">            Clearance. The default is ``0``.</span>
+<span class="sd">        fd : float, optional</span>
+<span class="sd">            Failure deflection. The default is ``0``.</span>
+<span class="sd">        cdl : float, optional</span>
+<span class="sd">            Deflection limit in compression. The default is ``0``.</span>
+<span class="sd">        td1 : float, optional</span>
+<span class="sd">            Deflection limit in tension. The default is ``0``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateSectionDiscrete</span><span class="p">(</span>
+            <span class="n">SectionDiscreteRequest</span><span class="p">(</span><span class="n">secid</span><span class="o">=</span><span class="n">secid</span><span class="p">,</span> <span class="n">dro</span><span class="o">=</span><span class="n">dro</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="n">kd</span><span class="p">,</span> <span class="n">v0</span><span class="o">=</span><span class="n">v0</span><span class="p">,</span> <span class="n">cl</span><span class="o">=</span><span class="n">cl</span><span class="p">,</span> <span class="n">fd</span><span class="o">=</span><span class="n">fd</span><span class="p">,</span> <span class="n">cdl</span><span class="o">=</span><span class="n">cdl</span><span class="p">,</span> <span class="n">tdl</span><span class="o">=</span><span class="n">tdl</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Section Discrete Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaMech.create_hourglass">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.create_hourglass">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_hourglass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ghid</span><span class="p">,</span> <span class="n">ihq</span><span class="p">,</span> <span class="n">qm</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">q1</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">q2</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span> <span class="n">qb</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span> <span class="n">qw</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define hourglass and bulk viscosity properties.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ghid : int</span>
+<span class="sd">            Hourglass ID. A unique number or label must be specified.</span>
+<span class="sd">        ihq : int</span>
+<span class="sd">            Hourglass control type.</span>
+<span class="sd">        qm : float, optional</span>
+<span class="sd">            Hourglass coefficient. The default is ``0.1``.</span>
+<span class="sd">        q1 : float, optional</span>
+<span class="sd">            Quadratic bulk viscosity coefficient. The default is ``1.5``.</span>
+<span class="sd">        q2 : float, optional</span>
+<span class="sd">            Linear bulk viscosity coefficient. The default is ``0.06``.</span>
+<span class="sd">        qb : float, optional</span>
+<span class="sd">            Hourglass coefficient for shell bending. The default is ``1e-09``.</span>
+<span class="sd">        qw : float, optional</span>
+<span class="sd">            Hourglass coefficient for shell warping. The default is ``1e-09``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateHourglass</span><span class="p">(</span><span class="n">HourglassRequest</span><span class="p">(</span><span class="n">ghid</span><span class="o">=</span><span class="n">ghid</span><span class="p">,</span> <span class="n">ihq</span><span class="o">=</span><span class="n">ihq</span><span class="p">,</span> <span class="n">qm</span><span class="o">=</span><span class="n">qm</span><span class="p">,</span> <span class="n">q1</span><span class="o">=</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="o">=</span><span class="n">q2</span><span class="p">,</span> <span class="n">qb</span><span class="o">=</span><span class="n">qb</span><span class="p">,</span> <span class="n">qw</span><span class="o">=</span><span class="n">qw</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Hourglass 1 Created...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DynaMech.save_file">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.DynaMech.save_file">[docs]</a>
+    <span class="k">def</span> <span class="nf">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">defaultsetting</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save keyword files.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` when successful, ``False`` when failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">analysis</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_accuracy</span><span class="p">(</span>
+                <span class="n">objective_stress_updates</span><span class="o">=</span><span class="n">Switch</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                <span class="n">invariant_node_number</span><span class="o">=</span><span class="n">InvariantNode</span><span class="o">.</span><span class="n">ON_FOR_SHELL_TSHELL_SOLID</span><span class="p">,</span>
+                <span class="n">implicit_accuracy_flag</span><span class="o">=</span><span class="n">Switch</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_bulk_viscosity</span><span class="p">(</span><span class="n">bulk_viscosity_type</span><span class="o">=</span><span class="n">BulkViscosity</span><span class="o">.</span><span class="n">COMPUTE_INTERNAL_ENERGY_DISSIPATED</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_energy</span><span class="p">(</span>
+                <span class="n">hourglass_energy</span><span class="o">=</span><span class="n">EnergyFlag</span><span class="o">.</span><span class="n">COMPUTED</span><span class="p">,</span>
+                <span class="n">sliding_interface_energy</span><span class="o">=</span><span class="n">EnergyFlag</span><span class="o">.</span><span class="n">COMPUTED</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_hourglass</span><span class="p">(</span>
+                <span class="n">controltype</span><span class="o">=</span><span class="n">HourglassControl</span><span class="o">.</span><span class="n">FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID</span><span class="p">,</span>
+                <span class="n">coefficient</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">get_num_shellpart</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">create_control_shell</span><span class="p">(</span>
+                    <span class="n">wrpang</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">esort</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">irnxx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">istupd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">theory</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">bwc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">miter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">proj</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">irquad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">analysis</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_accuracy</span><span class="p">(</span>
+                <span class="n">objective_stress_updates</span><span class="o">=</span><span class="n">Switch</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                <span class="n">invariant_node_number</span><span class="o">=</span><span class="n">InvariantNode</span><span class="o">.</span><span class="n">ON_FOR_SHELL_TSHELL_SOLID</span><span class="p">,</span>
+                <span class="n">implicit_accuracy_flag</span><span class="o">=</span><span class="n">Switch</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_bulk_viscosity</span><span class="p">(</span><span class="n">bulk_viscosity_type</span><span class="o">=</span><span class="n">BulkViscosity</span><span class="o">.</span><span class="n">COMPUTE_INTERNAL_ENERGY_DISSIPATED</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_energy</span><span class="p">(</span>
+                <span class="n">hourglass_energy</span><span class="o">=</span><span class="n">EnergyFlag</span><span class="o">.</span><span class="n">COMPUTED</span><span class="p">,</span>
+                <span class="n">sliding_interface_energy</span><span class="o">=</span><span class="n">EnergyFlag</span><span class="o">.</span><span class="n">COMPUTED</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_hourglass</span><span class="p">(</span>
+                <span class="n">controltype</span><span class="o">=</span><span class="n">HourglassControl</span><span class="o">.</span><span class="n">FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID</span><span class="p">,</span>
+                <span class="n">coefficient</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">get_num_shellpart</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">create_control_shell</span><span class="p">(</span>
+                    <span class="n">wrpang</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">esort</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">irnxx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">istupd</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                    <span class="n">theory</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">bwc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">miter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">proj</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">irquad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="n">DynaBase</span><span class="o">.</span><span class="n">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Airbag">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag">[docs]</a>
+<span class="k">class</span> <span class="nc">Airbag</span><span class="p">(</span><span class="n">BaseObj</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines an airbag or control volume.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Set : SegmentSet or PartSet</span>
+<span class="sd">        Set. Options are:</span>
+
+<span class="sd">        - EQ.0: Segment set ID.</span>
+<span class="sd">        - EQ.1: Part set ID.</span>
+
+<span class="sd">    heat_capacity_at_constant_volume : float, optional</span>
+<span class="sd">        Heat capacity at constant volume. The default is ``0``.</span>
+<span class="sd">    heat_capacity_at_constant_pressure : float, optional</span>
+<span class="sd">        Heat capacity at constant pressure. The default is ``0``.</span>
+<span class="sd">    input_gas_temperature : float, optional</span>
+<span class="sd">        Temperature of the input gas. The default is ``0``.</span>
+<span class="sd">    input_mass_flow_rate : int, optional</span>
+<span class="sd">        Load curve ID specifying the input mass flow rate.</span>
+<span class="sd">        The default is ``0``.</span>
+<span class="sd">    shape_factor_for_exit_hole : float, optional</span>
+<span class="sd">        Shape factor for exit hole. The default is ``0``.</span>
+<span class="sd">    ambient_pressure : float, optional</span>
+<span class="sd">        Ambient pressure. The default is ``0``.</span>
+<span class="sd">    ambient_density : float, optional</span>
+<span class="sd">        Ambient density. The default is ``0``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        ``True`` when successful, ``False`` when failed..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">set</span><span class="p">,</span>
+        <span class="n">heat_capacity_at_constant_volume</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">heat_capacity_at_constant_pressure</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">input_gas_temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">input_mass_flow_rate</span><span class="o">=</span><span class="n">Curve</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[],</span> <span class="n">y</span><span class="o">=</span><span class="p">[]),</span>
+        <span class="n">shape_factor_for_exit_hole</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">ambient_pressure</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">ambient_density</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">):</span>
+<div class="viewcode-block" id="Airbag.stub">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.stub">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span> <span class="o">=</span> <span class="n">DynaBase</span><span class="o">.</span><span class="n">get_stub</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Airbag.cv">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.cv">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">heat_capacity_at_constant_volume</span></div>
+
+<div class="viewcode-block" id="Airbag.cp">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.cp">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cp</span> <span class="o">=</span> <span class="n">heat_capacity_at_constant_pressure</span></div>
+
+<div class="viewcode-block" id="Airbag.t">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.t">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">input_gas_temperature</span></div>
+
+<div class="viewcode-block" id="Airbag.lcid">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.lcid">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcid</span> <span class="o">=</span> <span class="n">input_mass_flow_rate</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Airbag.mu">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.mu">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">shape_factor_for_exit_hole</span></div>
+
+<div class="viewcode-block" id="Airbag.pe">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.pe">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pe</span> <span class="o">=</span> <span class="n">ambient_pressure</span></div>
+
+<div class="viewcode-block" id="Airbag.ro">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.ro">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ro</span> <span class="o">=</span> <span class="n">ambient_density</span></div>
+
+<div class="viewcode-block" id="Airbag.sid">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.sid">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sid</span> <span class="o">=</span> <span class="nb">set</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="p">)</span></div>
+
+        <span class="k">if</span> <span class="nb">set</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;SEGMENTSET&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sidtyp</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sidtyp</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="viewcode-block" id="Airbag.type">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.type">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;airbag&quot;</span></div>
+
+
+<div class="viewcode-block" id="Airbag.create">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/pre/dynamech/index.html#ansys.dyna.core.pre.dynamech.Airbag.create">[docs]</a>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an airbag.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">CreateAirbagModel</span><span class="p">(</span>
+            <span class="n">AirbagModelRequest</span><span class="p">(</span>
+                <span class="n">modeltype</span><span class="o">=</span><span class="s2">&quot;SIMPLE_AIRBAG_MODEL&quot;</span><span class="p">,</span>
+                <span class="n">sid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sid</span><span class="p">,</span>
+                <span class="n">sidtyp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sidtyp</span><span class="p">,</span>
+                <span class="n">cv</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="p">,</span>
+                <span class="n">cp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="p">,</span>
+                <span class="n">t</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">,</span>
+                <span class="n">lcid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lcid</span><span class="p">,</span>
+                <span class="n">mu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span>
+                <span class="n">area</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">pe</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pe</span><span class="p">,</span>
+                <span class="n">ro</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ro</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Airbag Model Created...&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<!-- If there is no fix edit button function, use the PyData edit-this-button-->
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.0.7. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

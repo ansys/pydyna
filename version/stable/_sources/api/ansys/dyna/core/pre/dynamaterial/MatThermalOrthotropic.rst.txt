@@ -1,0 +1,69 @@
+ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic
+======================================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic(specific_heat=0, conductivity_x=0, conductivity_y=0, conductivity_z=0)
+
+   
+   Defines orthotropic thermal properties.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: hc
+      :value: 0
+
+
+
+   .. py:attribute:: k1
+      :value: 0
+
+
+
+   .. py:attribute:: k2
+      :value: 0
+
+
+
+   .. py:attribute:: k3
+      :value: 0
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create orthotropic thermal material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

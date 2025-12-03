@@ -1,0 +1,28 @@
+ansys.dyna.core.pre.errors.LockFileException
+============================================
+
+.. py:exception:: ansys.dyna.core.pre.errors.LockFileException(msg=LOCKFILE_MSG)
+
+   Bases: :py:obj:`RuntimeError`
+
+
+   
+   Provides the error raised when the lockfile has not been removed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!

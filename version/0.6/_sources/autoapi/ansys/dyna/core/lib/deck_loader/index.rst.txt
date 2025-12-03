@@ -1,0 +1,84 @@
+ansys.dyna.core.lib.deck_loader
+===============================
+
+.. py:module:: ansys.dyna.core.lib.deck_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.deck_loader.IterState
+   ansys.dyna.core.lib.deck_loader.DeckLoaderResult
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.deck_loader.load_deck
+
+
+Module Contents
+---------------
+
+.. py:class:: IterState
+
+   .. py:attribute:: USERCOMMENT
+      :value: 0
+
+
+
+   .. py:attribute:: KEYWORD_BLOCK
+      :value: 1
+
+
+
+   .. py:attribute:: TITLE
+      :value: 2
+
+
+
+   .. py:attribute:: KEYWORDS
+      :value: 3
+
+
+
+   .. py:attribute:: END
+      :value: 4
+
+
+
+.. py:class:: DeckLoaderResult
+
+   
+   A class containing the result of an attempted deck load.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: add_unprocessed_keyword(name)
+
+
+   .. py:method:: get_summary() -> str
+
+
+.. py:function:: load_deck(deck: ansys.dyna.core.deck.Deck, text: str) -> DeckLoaderResult
+

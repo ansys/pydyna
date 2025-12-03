@@ -1,0 +1,247 @@
+ansys.dyna.core.pre.dynabase.Part
+=================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Part(id)
+
+   
+   Defines the part object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: ''
+
+
+
+   .. py:attribute:: id
+
+
+   .. py:attribute:: secid
+      :value: 0
+
+
+
+   .. py:attribute:: mid
+      :value: 0
+
+
+
+   .. py:attribute:: eosid
+      :value: 0
+
+
+
+   .. py:attribute:: hgid
+      :value: 0
+
+
+
+   .. py:attribute:: grav
+      :value: 0
+
+
+
+   .. py:attribute:: adpopt
+      :value: 0
+
+
+
+   .. py:attribute:: tmid
+      :value: 0
+
+
+
+   .. py:attribute:: formulation
+      :value: 0
+
+
+
+   .. py:attribute:: stiffness_damping
+      :value: 0
+
+
+
+   .. py:attribute:: rigidbody_initial_velocity
+      :value: False
+
+
+
+   .. py:attribute:: translation
+
+
+   .. py:attribute:: rotation
+
+
+   .. py:attribute:: extra_nodes_defined
+      :value: False
+
+
+
+   .. py:method:: set_material(mat, mat_thermal=None)
+
+      
+      Set the material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_element_formulation(formulation)
+
+      
+      Set the element formulation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_stiffness_damping_coefficient(coefficient)
+
+      
+      Set the stiffness damping coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_extra_nodes(nodeset)
+
+      
+      Set extra nodes for the rigid body.
+
+
+      :Parameters:
+
+          **nodeset** : :obj:`NodeSet`
+              Extra nodes list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_rigidbody_initial_velocity(translation=Velocity(0, 0, 0), rotation=RotVelocity(0, 0, 0))
+
+      
+      Set initial translational and rotational velocities for the rigid body.
+
+      Initial translational and rotational velocities are set
+      at the center of gravity for a rigid body or a nodal rigid body.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_property()
+
+      
+      Set properties for the part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,49 @@
+ansys.dyna.core.lib.io_utils
+============================
+
+.. py:module:: ansys.dyna.core.lib.io_utils
+
+.. autoapi-nested-parse::
+
+   Utils for i/o.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.io_utils.write_or_return
+
+
+Module Contents
+---------------
+
+.. py:function:: write_or_return(buf: Optional[TextIO], func: Callable) -> Optional[str]
+
+   
+   Write to buffer or returns a string.
+
+   Uses the callable `func` to write. If `buf` is None, then the function will create a string buffer
+   before calling `func` and return the result as a string.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

@@ -1,0 +1,342 @@
+ansys.dyna.core.pre.dynabase.Contact
+====================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Contact(type=ContactType.NULL, category=ContactCategory.SINGLE_SURFACE_CONTACT, offset=OffsetType.NULL)
+
+   
+   Provide a way of treating interaction between disjoint parts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: rigidwall_penalties_scale_factor
+      :value: 1
+
+
+
+   .. py:attribute:: max_penetration_check_multiplier
+      :value: 4
+
+
+
+   .. py:attribute:: initial_penetrations
+      :value: 0
+
+
+
+   .. py:attribute:: rigidwall_gap_stiffness
+      :value: 0
+
+
+
+   .. py:attribute:: category
+
+
+   .. py:attribute:: type
+
+
+   .. py:attribute:: mortar
+      :value: False
+
+
+
+   .. py:attribute:: ignore
+      :value: 0
+
+
+
+   .. py:attribute:: offset
+      :value: ''
+
+
+
+   .. py:attribute:: static_friction_coeff
+      :value: 0
+
+
+
+   .. py:attribute:: dynamic_friction_coeff
+      :value: 0
+
+
+
+   .. py:attribute:: birth_time
+      :value: 0
+
+
+
+   .. py:attribute:: death_time
+      :value: 1e+20
+
+
+
+   .. py:attribute:: option_tiebreak
+      :value: False
+
+
+
+   .. py:attribute:: optionres
+      :value: 0
+
+
+
+   .. py:attribute:: contact_formulation
+      :value: 0
+
+
+
+   .. py:attribute:: segment_based_contact_option
+      :value: 2
+
+
+
+   .. py:method:: set_mortar()
+
+      
+      Set the mortar contact.
+
+      A mort contact is a segment-to-segment, penalty-based contact.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_tiebreak()
+
+      
+      Set the contact allow for failure.
+
+      A tieback is a special case of this. After failure, the contact
+      usually becomes a normal one-way, two-way, or single surface version.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_friction_coefficient(static=0, dynamic=0)
+
+      
+      Set the coefficient of friction.
+
+
+      :Parameters:
+
+          **static** : :class:`python:float`, :obj:`optional`
+              Static coefficient of friction. The default is ``0``.
+
+          **dynamic** : :class:`python:float`, :obj:`optional`
+              Dynamic coefficient of friction.  The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_active_time(birth_time=0, death_time=1e+20)
+
+      
+      Set the birth and death time to active and deactivate the contact.
+
+
+      :Parameters:
+
+          **birth_time** : :class:`python:int`, :obj:`optional`
+              Time to activate the contact. The default is ``0``.
+
+          **death_time** : :class:`python:float`, :obj:`optional`
+              Time to deactivate the contact. The default is ``1e20``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_initial_penetration()
+
+      
+      Ignore initial penetrations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_slave_surface(surface)
+
+      
+      Set the slave contact interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_master_surface(surface)
+
+      
+      Set the master contact interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_penalty_algorithm(formulation=ContactFormulation.STANDARD_PENALTY, segment_based_contact_option=SBOPT.ASSUME_PLANER_SEGMENTS)
+
+      
+      Set the contact formulation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create a contact.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

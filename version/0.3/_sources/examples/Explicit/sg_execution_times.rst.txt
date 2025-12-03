@@ -1,0 +1,15 @@
+
+:orphan:
+
+.. _sphx_glr_examples_Explicit_sg_execution_times:
+
+
+Computation times
+=================
+**00:03.171** total execution time for **examples_Explicit** files:
+
++-------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_Explicit_ball_plate.py` (``ball_plate.py``)     | 00:02.336 | 0.0 MB |
++-------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_Explicit_belted_dummy.py` (``belted_dummy.py``) | 00:00.835 | 0.0 MB |
++-------------------------------------------------------------------------+-----------+--------+

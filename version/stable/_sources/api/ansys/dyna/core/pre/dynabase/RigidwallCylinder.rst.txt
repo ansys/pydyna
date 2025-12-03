@@ -1,0 +1,152 @@
+ansys.dyna.core.pre.dynabase.RigidwallCylinder
+==============================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.RigidwallCylinder(tail=Point(0, 0, 0), head=Point(0, 0, 0), radius=1, length=10)
+
+   Bases: :py:obj:`BaseObj`
+
+
+   
+   Defines a rigid wall with a cylinder form.
+
+
+   :Parameters:
+
+       **tail** : :obj:`Point`, :obj:`optional`
+           Coordinates of the tail of the normal vector.
+           The default is ``(0, 0, 0)``.
+
+       **head** : :obj:`Point`, :obj:`optional`
+           Coordinates of the head of the normal vector.
+           The default is ``(0, 0, 0)``.
+
+       **radius** : :class:`python:float`, :obj:`optional`
+           Radius of the cylinder. The default is ``1``.
+
+       **length** : :class:`python:float`, :obj:`optional`
+           Length of cylinder. The default is ``10``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: tail
+
+
+   .. py:attribute:: head
+
+
+   .. py:attribute:: radius
+      :value: 1
+
+
+
+   .. py:attribute:: length
+      :value: 10
+
+
+
+   .. py:attribute:: motion
+      :value: -1
+
+
+
+   .. py:attribute:: lcid
+      :value: 0
+
+
+
+   .. py:attribute:: dir
+
+
+   .. py:attribute:: type
+      :value: 'rigidwall_cylinder'
+
+
+
+   .. py:method:: set_motion(curve, motion=RWMotion.VELOCITY, dir=Direction(1, 0, 0))
+
+      
+      Set the prescribed motion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_data() -> List
+
+      
+      Get the rigidwall data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create a rigidwall cylinder.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,198 @@
+ansys.dyna.core.pre.dynasale.DynaSALE
+=====================================
+
+.. py:class:: ansys.dyna.core.pre.dynasale.DynaSALE
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+
+   
+   Sets up the S-ALE simulation process.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: set_termination(endtime)
+
+      
+      Set the time for ending the simulation.
+
+
+      :Parameters:
+
+          **endtime** : :class:`python:float`
+              Time for ending the simulation.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_output_interval(database_plot_interval)
+
+      
+      Request binary output.
+
+
+      :Parameters:
+
+          **database_plot_interval** : :class:`python:float`
+              Time interval between output states.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_analysis_type(num_of_cycle=1, method=AdvectionMethod.DONOR_CELL_WITH_HALF_INDEX_SHIFT, background_pressure=0)
+
+      
+      Set the analysis type.
+
+
+      :Parameters:
+
+          **num_of_cycle** : :class:`python:float`, :obj:`optional`
+              Total time of simulation for the fluid problem. The
+              default is ``1``.
+
+          **method** : :class:`python:float`, :obj:`optional`
+              Time step for the fluid problem. The default is
+              ``DONOR_CELL_WITH_HALF_INDEX_SHIFT``.
+
+          **background_pressure** : :class:`python:int`, :obj:`optional`
+              Reference pressure for computing the internal forces.
+              The default is ``0``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_output_database(matsum=0, glstat=0)
+
+      
+      Obtain output files containing the results.
+
+
+      :Parameters:
+
+          **matsum** : :class:`python:float`, :obj:`optional`
+              Time interval between outputs of part energies. The
+              default is ``0``.
+
+          **glstat** : :class:`python:float`, :obj:`optional`
+              Time interval between outputs of global statistics and energies.
+              The default is ``0``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

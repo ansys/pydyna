@@ -1,0 +1,15 @@
+
+:orphan:
+
+.. _sphx_glr_examples_Airbag_sg_execution_times:
+
+
+Computation times
+=================
+**00:00.845** total execution time for **examples_Airbag** files:
+
++-------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_Airbag_airbag_post.py` (``airbag_post.py``)     | 00:00.667 | 0.0 MB |
++-------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_Airbag_airbag_deploy.py` (``airbag_deploy.py``) | 00:00.178 | 0.0 MB |
++-------------------------------------------------------------------------+-----------+--------+

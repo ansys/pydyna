@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr_examples_IGA_sg_execution_times:
+
+Computation times
+=================
+**00:03.085** total execution time for **examples_IGA** files:
+
++----------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_IGA_iga_sample.py` (``iga_sample.py``) | 00:03.085 | 0.0 MB |
++----------------------------------------------------------------+-----------+--------+

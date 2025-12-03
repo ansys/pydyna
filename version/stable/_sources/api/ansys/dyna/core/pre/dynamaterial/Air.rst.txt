@@ -1,0 +1,99 @@
+ansys.dyna.core.pre.dynamaterial.Air
+====================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.Air(mass_density=0.00128, pressure_cutoff=-1e-09, initial_internal_energy=2.5331e-06, initial_relative_volume=1.0, equation_coefficient=[0, 0, 0, 0, 0.4, 0.4, 0])
+
+   
+   Defines an air material.
+
+
+   :Parameters:
+
+       **name** : :class:`python:str`
+           Material name.
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``0.00128``.
+
+       **pressure_cutoff** : :class:`python:float`, :obj:`optional`
+           pressure cutoff. The default is ``1e-09``.
+
+       **initial_internal_energy** : :class:`python:float`, :obj:`optional`
+           Initial internal energy per unit reference volume.
+           The default is ``2.5331e-06``.
+
+       **initial_relative_volume** : :class:`python:float`, :obj:`optional`
+           Initial relative volume. The default is ``1.0``.
+
+       **equation_coefficient** : :class:`python:list`, :obj:`optional`
+           Six polynomial equation coefficient. The default is
+           ``[0, 0, 0, 0, 0.4, 0.4, 0])``.
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: mass_density
+      :value: 0.00128
+
+
+
+   .. py:attribute:: pressure_cutoff
+      :value: -1e-09
+
+
+
+   .. py:attribute:: initial_internal_energy
+      :value: 2.5331e-06
+
+
+
+   .. py:attribute:: initial_relative_volume
+      :value: 1.0
+
+
+
+   .. py:attribute:: equation_coefficient
+      :value: [0, 0, 0, 0, 0.4, 0.4, 0]
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create an air material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

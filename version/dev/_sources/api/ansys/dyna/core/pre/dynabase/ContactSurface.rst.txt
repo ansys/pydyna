@@ -1,0 +1,125 @@
+ansys.dyna.core.pre.dynabase.ContactSurface
+===========================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ContactSurface(set)
+
+   
+   Defines a contact interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: id
+
+
+   .. py:attribute:: thickness
+      :value: 0
+
+
+
+   .. py:attribute:: penalty_stiffness
+      :value: 1.0
+
+
+
+   .. py:method:: set_contact_region(box)
+
+      
+      Include in the contact definition only those SURFA nodes/segments within a box.
+
+
+      :Parameters:
+
+          **box** : :obj:`Box`
+              Box-shaped volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_contact_thickness(thickness)
+
+      
+      Set the contact thickness for the SURFA surface.
+
+
+      :Parameters:
+
+          **thickness** : :class:`python:float`
+              Contact thickness.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_penalty_stiffness_scale_factor(scalefactor=1.0)
+
+      
+      Set the scale factor on the default surface penalty stiffness.
+
+
+      :Parameters:
+
+          **scalefactor** : :class:`python:int`, :obj:`optional`
+              Scale factor. The default is ``1.0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

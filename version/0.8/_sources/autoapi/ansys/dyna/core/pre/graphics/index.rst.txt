@@ -1,0 +1,16 @@
+ansys.dyna.core.pre.graphics
+============================
+
+.. py:module:: ansys.dyna.core.pre.graphics
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/ansys/dyna/core/pre/graphics/graphics/index
+   /autoapi/ansys/dyna/core/pre/graphics/trame_gui/index
+
+

@@ -1,0 +1,124 @@
+ansys.dyna.core.keywords.keyword_classes.manual.define_function.DefineFunction
+==============================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.define_function.DefineFunction(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA DEFINE_FUNCTION keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword
+      :value: 'DEFINE'
+
+
+
+   .. py:attribute:: subkeyword
+      :value: 'FUNCTION'
+
+
+
+   .. py:property:: fid
+      :type: Optional[int]
+
+
+      
+      Get or set the Function ID.
+
+      Functions, tables (see `*DEFINE_TABLE`), and load curves may not share common ID's.
+      A unique number has to be defined.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: heading
+      :type: Optional[str]
+
+
+      
+      Get or set the An optional descriptive heading.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: function
+      :type: Optional[str]
+
+
+      
+      Get or set the Arithmetic expression involving a combination
+      of independent variables and other functions.
+
+      ,i.e., `f(a,b,c)=a*2+b*c+sqrt(a*c)`
+      where a, b, and c are the independent variables.  The function name, f(a,b,c), must be
+      unique since other functions can then use and reference this function.
+      For example, `g(a,b,c,d)=f(a,b,c)**2+d`.  In this example, two `*DEFINE_ FUNCTION` definitions
+      are needed to define functions f and g.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
