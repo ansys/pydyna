@@ -1,11 +1,17 @@
 See https://deepwiki.com/ansys/pydyna for a description of the codebase
 Assume an appropriate virtual environment is activated. If it isn't, just abort.
 
-IGNORE THIS LINE FOR NOW: LS-DYNA keywords are described in detail in the manual, try to find them in manuals/ (note - this is intentionally in .gitignore so we don't distrubute them)
-
 ## Agent Hints
-Don't try to write to /dev/null, this leads to a prompt that halts execution until the user allows it. I can't find the setting to disable this
-in vscode.
+
+**CRITICAL: Never redirect output to /dev/null on Windows**. This triggers a VS Code security prompt that halts execution. Instead:
+- For commands where you want to suppress output: Use `>$null 2>&1` (PowerShell) or just run the command without redirection
+- For commands where you want to check output: Use `python codegen/generate.py 2>&1 | Out-Null` or capture in a variable
+- For checking if a command succeeded: Just run it normally and check `$?` or `$LASTEXITCODE`
+- Examples:
+  - ❌ BAD: `python codegen/generate.py >/dev/null 2>&1`
+  - ✅ GOOD: `python codegen/generate.py >$null 2>&1`
+  - ✅ GOOD: `python codegen/generate.py` (no redirection)
+  - ✅ GOOD: `$output = python codegen/generate.py 2>&1`
 
 ## Agent Coding Style Preferences
 
