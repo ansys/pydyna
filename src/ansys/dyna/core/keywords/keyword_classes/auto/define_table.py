@@ -40,6 +40,9 @@ class DefineTable(KeywordBase):
         """Initialize the DefineTable class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
+        # list of DefineCurve objects that follow this table in the deck
+        # will be populated by an ImportHandler if registered on the Deck
+        self._linked_curves = []
         self._cards = [
             Card(
                 [
@@ -135,6 +138,15 @@ class DefineTable(KeywordBase):
     @points.setter
     def points(self, value: typing.List) -> None:
         self._cards[1].data = value
+
+    @property
+    def linked_curves(self) -> typing.List[typing.Any]:
+        """List of `DefineCurve` keywords that were linked to this table by an ImportHandler.
+
+        This list is empty unless an import handler that links tables to following
+        curves is registered on the `Deck` before loading.
+        """
+        return self._linked_curves
 
     @property
     def title(self) -> typing.Optional[str]:
