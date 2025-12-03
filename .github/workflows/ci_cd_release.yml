@@ -180,8 +180,8 @@ jobs:
     needs: [changelog-deployment, build-library]
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
-      contents: write
+      id-token: write  # Required to authenticate with PyPI via trusted publishing
+      contents: write  # Required to upload release artifacts
     steps:
       - name: "Download the library artifacts from build-library step"
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
