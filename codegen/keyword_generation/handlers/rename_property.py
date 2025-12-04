@@ -72,7 +72,7 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
         Sets field["property_name"] = "part_id" for matching field
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
         """
         Rename Python properties for specified fields.
 

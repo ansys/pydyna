@@ -27,7 +27,7 @@ Cards marked for deletion are removed from the final keyword structure after
 all handlers have processed.
 """
 
-from typing import Any, Dict
+from typing import Any
 
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
@@ -61,13 +61,13 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         Sets card["mark_for_removal"] = 1 for each specified index
     """
 
-    def handle(self, kwd_data: Any, settings: Dict[str, Any]) -> None:
+    def handle(self, kwd_data: Any, settings: Any) -> None:
         """
         Mark specified cards for removal.
 
         Args:
             kwd_data: KeywordData instance (or dict during transition)
-            settings: Dict from manifest.json with handler config (may contain card indices)
+            settings: Handler config from manifest.json (int, list of ints, or dict with card indices)
         """
         # Extract the actual card indices from settings
         # Settings may be passed differently depending on manifest structure
