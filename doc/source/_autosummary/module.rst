@@ -9,28 +9,28 @@ Module Keywords
 ModuleLoad
 ----------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.module_load 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.module_load
     :members:
 
 
 ModulePath
 ----------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.module_path 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.module_path
     :members:
 
 
 ModulePathRelative
 ------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.module_path_relative 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.module_path_relative
     :members:
 
 
 ModuleUse
 ---------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.module_use 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.module_use
     :members:
 
 

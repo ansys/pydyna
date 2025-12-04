@@ -95,7 +95,7 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         ]
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
         """
         Create optional card groups from settings.
 

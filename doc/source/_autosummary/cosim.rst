@@ -9,14 +9,14 @@ Cosim Keywords
 CosimFmiControl
 ---------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.cosim_fmi_control 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.cosim_fmi_control
     :members:
 
 
 CosimFmiInterface
 -----------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.cosim_fmi_interface 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.cosim_fmi_interface
     :members:
 
 

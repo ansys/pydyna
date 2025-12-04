@@ -102,7 +102,7 @@ def _transform_data(data: KeywordData):
         field_help = "\n".join([l.strip() for l in field_help.split("\n")])
         return field_help
 
-    def fix_field_string_default(field_default: str) -> typing.Optional[str]:
+    def fix_field_string_default(field_default: typing.Optional[str]) -> typing.Optional[str]:
         """string defaults need to be wrapped in quotes"""
         if field_default == None:
             return None

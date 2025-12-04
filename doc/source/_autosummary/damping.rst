@@ -9,63 +9,63 @@ Damping Keywords
 DampingFrequencyRange
 ---------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_frequency_range 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_frequency_range
     :members:
 
 
 DampingFrequencyRangeDeform
 ---------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_frequency_range_deform 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_frequency_range_deform
     :members:
 
 
 DampingGlobal
 -------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_global 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_global
     :members:
 
 
 DampingPartMass
 ---------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_part_mass 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_part_mass
     :members:
 
 
 DampingPartMassSet
 ------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_part_mass_set 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_part_mass_set
     :members:
 
 
 DampingPartStiffness
 --------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_part_stiffness 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_part_stiffness
     :members:
 
 
 DampingPartStiffnessSet
 -----------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_part_stiffness_set 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_part_stiffness_set
     :members:
 
 
 DampingPorosity
 ---------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_porosity 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_porosity
     :members:
 
 
 DampingRelative
 ---------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_relative 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_relative
     :members:
 
 

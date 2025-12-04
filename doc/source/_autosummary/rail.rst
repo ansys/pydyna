@@ -9,14 +9,14 @@ Rail Keywords
 RailTrack
 ---------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.rail_track 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.rail_track
     :members:
 
 
 RailTrain
 ---------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.rail_train 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.rail_train
     :members:
 
 

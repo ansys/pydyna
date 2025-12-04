@@ -152,7 +152,7 @@ html_theme_options = {
         "ignore": [
            "*core/keywords/keyword_classes/auto*",
         ],
-        "output": "api",        
+        "output": "api",
     },
 }
 
@@ -219,8 +219,8 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
     - All modules under 'ansys.dyna.core.run' except 'local_solver' and 'options'.
     - Within 'local_solver', skips all members except the 'run_dyna' function.
     """
-    
-    
+
+
     if name.startswith("ansys.dyna.core.run.") and not (name.startswith("ansys.dyna.core.run.local_solver") or name.startswith("ansys.dyna.core.run.options")):
             skip = True
 

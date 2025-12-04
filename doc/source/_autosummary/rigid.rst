@@ -9,21 +9,21 @@ Rigid Keywords
 RigidDeformableControl
 ----------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.rigid_deformable_control 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.rigid_deformable_control
     :members:
 
 
 RigidDeformableD2R
 ------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.rigid_deformable_d2r 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.rigid_deformable_d2r
     :members:
 
 
 RigidDeformableR2D
 ------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.rigid_deformable_r2d 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.rigid_deformable_r2d
     :members:
 
 

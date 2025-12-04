@@ -9,7 +9,7 @@ Particle Keywords
 ParticleBlast
 -------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.particle_blast 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.particle_blast
     :members:
 
 

@@ -9,21 +9,21 @@ Deformable Keywords
 DeformableToRigid
 -----------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.deformable_to_rigid 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.deformable_to_rigid
     :members:
 
 
 DeformableToRigidAutomatic
 --------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.deformable_to_rigid_automatic 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.deformable_to_rigid_automatic
     :members:
 
 
 DeformableToRigidInertia
 ------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.deformable_to_rigid_inertia 
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.deformable_to_rigid_inertia
     :members:
 
 
