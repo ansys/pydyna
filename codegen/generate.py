@@ -220,10 +220,10 @@ def generate_autodoc_file(autodoc_output_path, all_keywords, env):
 
         # Extract category from filename (e.g., "airbag.airbag_adiabatic_gas_model" -> "airbag")
         filename = fixed_keyword.lower()
-        if '.' in filename:
-            category = filename.split('.')[0]
+        if "." in filename:
+            category = filename.split(".")[0]
         else:
-            category = filename.split('_')[0] if '_' in filename else 'other'
+            category = filename.split("_")[0] if "_" in filename else "other"
 
         if category not in categories:
             categories[category] = []
@@ -236,11 +236,9 @@ def generate_autodoc_file(autodoc_output_path, all_keywords, env):
     output_manager = OutputManager(os.path.dirname(autodoc_output_path))
 
     for category, entries in sorted(categories.items()):
-        category_title = category.replace('_', ' ').title() + " Keywords"
+        category_title = category.replace("_", " ").title() + " Keywords"
         category_rst = category_template.render(
-            category=category,
-            category_title=category_title,
-            entries=sorted(entries)
+            category=category, category_title=category_title, entries=sorted(entries)
         )
         category_filename = f"{category}.rst"
         output_manager.write_autodoc_file(autodoc_output_path, category_filename, category_rst)
@@ -325,7 +323,10 @@ def load_inputs(this_folder, args):
 
 
 def run_codegen(args):
-    logger.debug(f"Running codegen with args: output={args.output}, clean={args.clean}, keyword={args.keyword}, autodoc_only={args.autodoc_only}")
+    logger.debug(
+        f"Running codegen with args: output={args.output}, "
+        f"clean={args.clean}, keyword={args.keyword}, autodoc_only={args.autodoc_only}"
+    )
     output = args.output
     this_folder = get_this_folder()
     autodoc_path = args.autodoc_path
@@ -347,7 +348,7 @@ def run_codegen(args):
         clean(output)
         return
     load_inputs(this_folder, args)
-    
+
     # Handle autodoc-only mode
     if args.autodoc_only:
         logger.info("Generating autodoc files only")
@@ -356,7 +357,7 @@ def run_codegen(args):
         generate_autodoc_file(autodoc_path, all_keywords, env)
         logger.info("Autodoc generation complete")
         return
-    
+
     if args.keyword == "":
         kwd = None
         logger.info("Generating code for all keywords")
