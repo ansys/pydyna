@@ -8,7 +8,6 @@ This file collects architectural and code-level recommendations for improving th
 ## 2. Handler System
 
 ### Further Considerations
-- **Handler Duplication**: `OverrideSubkeywordHandler` and `RenamePropertyHandler` have identical functionality - should consolidate into one handler or document the distinction if intentional.
 - **Post-Processing Phase**: Only `SharedFieldHandler` uses `post_process()` - clarify purpose of this phase. Consider renaming to `finalize()` or merging into `handle()` if the two-phase approach is not broadly needed.
 - **Mutable vs Immutable**: Current design mutates shared `kwd_data` dict via reference semantics (critical for card-set/conditional-card interaction). Consider whether an immutable approach is feasible, though this would require significant architectural changes.
 
@@ -30,14 +29,12 @@ This file collects architectural and code-level recommendations for improving th
 ## 7. High-Level Design
 - Add a diagram or high-level description of the codegen flow to the documentation.
 
-## 8. Maintenance
-- Use beartype to enforce/check type hints, with a CLI option to opt in
-    - Add beartype to the codegen dependencies in pyproject.toml
-- Use the coverage module to confirm that every line of code in the codegen system is necessary
-- Incorporate the above into the codegen agent instructions so this is done every time the codegen is touched
-- Add a validation script that encapsulates all of these and the below constraints
 ---
 
-**Constraint:**
-> Any refactor must not change the output of the generated files. Use `generate.py -c` and `generate.py` to validate.
-> Always run pre-commit to confirm, use pre-commit run --all-files
+**Constraints:**
+
+> **Dead Code Detection**: After any refactoring, run `python codegen/find_dead_code.py --threshold 80` to identify potential dead code. Files with <80% coverage should be reviewed and potentially removed if they're genuinely unused.
+
+> **Output Validation**: Any refactor must not change the output of the generated files. Use `generate.py -c` and `generate.py` to validate.
+
+> **Code Quality**: Always run `pre-commit run --all-files` to confirm linting and formatting standards are met.

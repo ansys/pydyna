@@ -27,6 +27,15 @@ import logging
 import os
 import typing
 
+# Enable beartype runtime type checking for all imports
+try:
+    from beartype.claw import beartype_package, beartype_this_package
+
+    beartype_this_package()  # Enable beartype for this module
+    beartype_package("keyword_generation")  # Enable beartype for keyword_generation package
+except ImportError:
+    pass  # beartype not installed, skip type checking
+
 from jinja2 import Environment, FileSystemLoader
 import keyword_generation.data_model as data_model
 from keyword_generation.generators import generate_class, generate_entrypoints
