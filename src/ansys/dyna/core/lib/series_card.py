@@ -259,11 +259,11 @@ class SeriesCard(CardInterface):
             return self._empty_struture(value)
         return self._check_null_by_type(value, self._type)
 
-    def _read_line(self, size, line):
+    def _read_line(self, size, line, parameter_set: ParameterSet = None):
         num_fields = self._num_fields()
         width = self._get_width()
         read_format = [(i * width * num_fields, width, self._type) for i in range(size)]
-        values = load_dataline(read_format, line)
+        values = load_dataline(read_format, line, parameter_set)
         if len(values) == 0:
             raise ValueError(f"Failed to read any values from line: {line}")
         last_real_index = -1
@@ -276,7 +276,7 @@ class SeriesCard(CardInterface):
         values = values[: last_real_index + 1]
         return values
 
-    def _load_bounded_from_buffer(self, buf: typing.TextIO) -> None:
+    def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
         num_lines = self._num_rows()
         for index in range(num_lines):
             line, exit_loop = read_line(buf)
@@ -284,11 +284,11 @@ class SeriesCard(CardInterface):
                 break
             start, end = self._get_card_range(index)
             size = end - start
-            values = self._read_line(size, line)
+            values = self._read_line(size, line, parameter_set)
             for j, value in zip(range(start, end), values):
                 self[j] = value
 
-    def _load_unbounded_from_buffer(self, buf: typing.TextIO) -> None:
+    def _load_unbounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
         width = self._get_width()
         self._initialize_data(0)
         while True:
@@ -305,16 +305,15 @@ class SeriesCard(CardInterface):
                 print("Trailing spaces, TODO - write a test!")
                 line = line + " " * trailing_spaces
             max_amount = min(size, self._get_fields_per_card())
-            values = self._read_line(max_amount, line)
+            values = self._read_line(max_amount, line, parameter_set)
             self.extend(values)
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
-        # parameter sets are ignored for series cards
         if self.bounded:
-            self._load_bounded_from_buffer(buf)
+            self._load_bounded_from_buffer(buf, parameter_set)
             return False
         else:
-            self._load_unbounded_from_buffer(buf)
+            self._load_unbounded_from_buffer(buf, parameter_set)
             return True
 
     def _get_lines(self, format: typing.Optional[format_type], comment: bool) -> typing.List[str]:
