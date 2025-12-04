@@ -295,7 +295,7 @@ def clean(output):
 
 
 def load_inputs(this_folder, args):
-    return data_model.load(this_folder, args.kwd_file, args.manifest, args.additional_cards)
+    return data_model.load(str(this_folder), args.kwd_file, args.manifest, args.additional_cards)
 
 
 def run_codegen(args):
