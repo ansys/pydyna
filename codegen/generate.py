@@ -29,9 +29,8 @@ import typing
 
 # Enable beartype runtime type checking for all imports
 try:
-    from beartype.claw import beartype_package, beartype_this_package
+    from beartype.claw import beartype_package
 
-    beartype_this_package()  # Enable beartype for this module
     beartype_package("keyword_generation")  # Enable beartype for keyword_generation package
 except ImportError:
     pass  # beartype not installed, skip type checking
