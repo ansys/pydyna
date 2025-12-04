@@ -129,7 +129,7 @@ def handler(
 
         _HANDLER_METADATA[name] = metadata
         # Store metadata on class for easy access
-        cls._handler_metadata = metadata
+        cls._handler_metadata = metadata  # type: ignore[attr-defined]
 
         logger.debug(
             f"Handler '{name}' registered with {len(metadata.dependencies)} dependencies: {metadata.dependencies}"
@@ -223,7 +223,7 @@ class KeywordHandler(metaclass=abc.ABCMeta):
     """
 
     @abc.abstractmethod
-    def handle(self, kwd_data: Dict[str, Any], settings: Dict[str, Any]) -> None:
+    def handle(self, kwd_data: Any, settings: Dict[str, Any]) -> None:
         """
         Transform keyword data based on settings.
 
@@ -232,7 +232,7 @@ class KeywordHandler(metaclass=abc.ABCMeta):
         and modifies kwd_data in place.
 
         Args:
-            kwd_data: Complete keyword data dictionary (see KeywordData dataclass)
+            kwd_data: KeywordData instance (or dict during transition)
             settings: Handler-specific settings from manifest.json "generation-options"
 
         Raises:
@@ -241,7 +241,7 @@ class KeywordHandler(metaclass=abc.ABCMeta):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def post_process(self, kwd_data: Dict[str, Any]) -> None:
+    def post_process(self, kwd_data: Any) -> None:
         """
         Finalization logic that runs after all handlers have executed.
 
@@ -250,7 +250,7 @@ class KeywordHandler(metaclass=abc.ABCMeta):
         this as a no-op (pass).
 
         Args:
-            kwd_data: Complete keyword data dictionary after all handle() calls
+            kwd_data: KeywordData instance (or dict during transition) after all handle() calls
 
         Raises:
             NotImplementedError: Must be implemented by subclass

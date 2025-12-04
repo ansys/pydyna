@@ -95,7 +95,7 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         ]
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
         Create optional card groups from settings.
 
@@ -111,7 +111,9 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             return card
 
         new_options = []
-        for setting in settings:
+        # settings is actually a List[Dict] despite base class signature
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for setting in settings_list:
             cards = [expand(card) for card in setting["cards"]]
             new_option = {
                 "card_order": setting["card-order"],
@@ -120,8 +122,8 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                 "cards": cards,
             }
             new_options.append(new_option)
-        kwd_data["options"] = new_options
+        kwd_data.options = new_options
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""
         pass

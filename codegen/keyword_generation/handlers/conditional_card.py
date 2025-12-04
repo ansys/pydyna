@@ -71,7 +71,7 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
         card["func"] = "self.iauto == 3"
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
         Add conditional logic to specified cards.
 
@@ -79,11 +79,12 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
             kwd_data: Complete keyword data dictionary
             settings: List of {"index": int, "func": str} dicts
         """
-        for setting in settings:
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for setting in settings_list:
             index = setting["index"]
-            card = kwd_data["cards"][index]
+            card = kwd_data.cards[index]
             card["func"] = setting["func"]
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""
         pass
