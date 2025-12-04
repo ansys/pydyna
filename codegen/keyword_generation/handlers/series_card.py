@@ -100,7 +100,7 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         - If struct types used, adds kwd_data["dataclasses"] list with struct definitions
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
         """
         Convert specified cards into variable-length series.
 

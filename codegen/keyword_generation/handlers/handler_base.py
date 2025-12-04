@@ -163,7 +163,7 @@ def get_all_handler_metadata() -> Dict[str, HandlerMetadata]:
     return _HANDLER_METADATA.copy()
 
 
-def validate_handler_settings(handler_name: str, settings: Dict[str, Any]) -> None:
+def validate_handler_settings(handler_name: str, settings: Any) -> None:
     """
     Validate handler settings against its JSON schema.
 
@@ -173,7 +173,7 @@ def validate_handler_settings(handler_name: str, settings: Dict[str, Any]) -> No
 
     Args:
         handler_name: Name of the handler
-        settings: Settings to validate
+        settings: Settings to validate (can be dict, list, int, etc. depending on handler schema)
 
     Raises:
         ValueError: If settings are invalid or handler not found
@@ -223,7 +223,7 @@ class KeywordHandler(metaclass=abc.ABCMeta):
     """
 
     @abc.abstractmethod
-    def handle(self, kwd_data: Any, settings: Dict[str, Any]) -> None:
+    def handle(self, kwd_data: Any, settings: Any) -> None:
         """
         Transform keyword data based on settings.
 
@@ -233,7 +233,7 @@ class KeywordHandler(metaclass=abc.ABCMeta):
 
         Args:
             kwd_data: KeywordData instance (or dict during transition)
-            settings: Handler-specific settings from manifest.json "generation-options"
+            settings: Handler-specific settings from manifest.json "generation-options" (can be dict, list, int, etc.)
 
         Raises:
             NotImplementedError: Must be implemented by subclass
