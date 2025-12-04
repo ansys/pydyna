@@ -98,7 +98,9 @@ def skip_generate_keyword_class(keyword: str) -> bool:
     return False
 
 
-def get_undefined_alias_keywords(keywords_list: typing.List[typing.Dict], subset_domains: typing.Optional[typing.List[str]] = None) -> typing.List[typing.Dict]:
+def get_undefined_alias_keywords(
+    keywords_list: typing.List[typing.Dict], subset_domains: typing.Optional[typing.List[str]] = None
+) -> typing.List[typing.Dict]:
     from keyword_generation.utils.domain_mapper import get_keyword_domain
 
     undefined_aliases: typing.List[typing.Dict] = []
@@ -259,7 +261,9 @@ def generate_autodoc_file(autodoc_output_path, all_keywords, env):
     logger.info(f"Generated index.rst with {len(categories)} category links")
 
 
-def get_keywords_to_generate(kwd_name: typing.Optional[str] = None, subset_domains: typing.Optional[typing.List[str]] = None) -> typing.List[typing.Dict]:
+def get_keywords_to_generate(
+    kwd_name: typing.Optional[str] = None, subset_domains: typing.Optional[typing.List[str]] = None
+) -> typing.List[typing.Dict]:
     """Get keywords to generate. If a kwd name is not none, only generate
     it and its generations. If subset_domains is provided, only generate keywords
     from those domains (e.g., ['boundary', 'contact', 'control'])."""
@@ -292,12 +296,19 @@ def get_keywords_to_generate(kwd_name: typing.Optional[str] = None, subset_domai
     return keywords
 
 
-def generate_classes(lib_path: str, kwd_name: typing.Optional[str] = None, autodoc_output_path: str = "", subset_domains: typing.Optional[typing.List[str]] = None) -> None:
+def generate_classes(
+    lib_path: str,
+    kwd_name: typing.Optional[str] = None,
+    autodoc_output_path: str = "",
+    subset_domains: typing.Optional[typing.List[str]] = None,
+) -> None:
     """Generates the keyword classes, importer, and type-mapper
     if kwd_name is not None, this only generates that particular keyword class
     if subset_domains is not None, only generates keywords from those domains
     """
-    logger.debug(f"Starting class generation with lib_path={lib_path}, kwd_name={kwd_name}, subset_domains={subset_domains}")
+    logger.debug(
+        f"Starting class generation with lib_path={lib_path}, kwd_name={kwd_name}, subset_domains={subset_domains}"
+    )
     if subset_domains:
         logger.info(f"Subset mode: generating only domains {subset_domains}")
     autodoc_entries = []
@@ -394,7 +405,9 @@ def run_codegen(args):
 
     if args.keyword == "":
         kwd = None
-        logger.info("Generating code for all keywords" if not subset_domains else f"Generating subset: {subset_domains}")
+        logger.info(
+            "Generating code for all keywords" if not subset_domains else f"Generating subset: {subset_domains}"
+        )
         generate_classes(output, autodoc_output_path=autodoc_path, subset_domains=subset_domains)
     else:
         kwd = args.keyword
