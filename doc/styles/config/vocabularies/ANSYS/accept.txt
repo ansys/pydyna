@@ -38,13 +38,17 @@ autodoc_typehints
 automodule
 autosummary
 bysource
+Cese
 Cosim
 Dualcese
 Ef
 Icfd
+Iga
 Lso
 Makefile
 pyarrow
+Rigidwall
+Rve
 toctree
 weakref
 
