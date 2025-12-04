@@ -27,7 +27,7 @@ Cards marked for deletion are removed from the final keyword structure after
 all handlers have processed.
 """
 
-from typing import Any, Dict
+from typing import Any
 
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
