@@ -32,7 +32,7 @@ if errorlevel 9009 (
 goto end
 
 :clean
-rmdir /s /q %BUILDDIR% > /NUL 2>&1 
+rmdir /s /q %BUILDDIR% > /NUL 2>&1
 rmdir /s /q %APIDIR% > /NUL 2>&1
 goto end
 

@@ -109,7 +109,7 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         - Marks source cards/options with "mark_for_removal" = 1
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
         """
         Create card sets from source cards and options.
 

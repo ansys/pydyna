@@ -61,7 +61,7 @@ class ReorderCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         Original card at index 0 stays at 0, card at index 4 moves to position 2, etc.
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
         """
         Reorder cards based on the specified index sequence.
 

@@ -95,7 +95,7 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
         - Adds card["external"] = {"name": "IncludeCard"} to each external card
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
         """
         Configure external card imports and mixins.
 

@@ -73,7 +73,7 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         Replaces kwd_data["cards"][index] with loaded card definition
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
         """
         Replace cards with new card definitions.
 
