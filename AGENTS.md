@@ -13,6 +13,15 @@ Assume an appropriate virtual environment is activated. If it isn't, just abort.
   - ✅ GOOD: `python codegen/generate.py` (no redirection)
   - ✅ GOOD: `$output = python codegen/generate.py 2>&1`
 
+**Documentation builds**: To build docs without examples, use:
+```bash
+# Build docs without examples or autokeywords (fast)
+cd doc && BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false ./make.bat html
+
+# Build docs with autokeywords but no examples (slow, ~8+ min for keyword imports alone)
+cd doc && BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=true ./make.bat html
+```
+
 ## Agent Coding Style Preferences
 
 - Do not use inline comments to explain imports. Instead, use a module-level docstring to indicate the purpose and usage of imported modules. This applies to all agent-generated code, not just codegen modules.

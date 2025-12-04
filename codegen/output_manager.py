@@ -43,6 +43,14 @@ class OutputManager:
             f.write(content)
         logger.info(f"Wrote autodoc index to: {file_path}")
 
+    def write_autodoc_file(self, autodoc_output_path: str, filename: str, content: str):
+        """Write an autodoc file (category or index) to the specified path."""
+        os.makedirs(autodoc_output_path, exist_ok=True)
+        file_path = os.path.join(autodoc_output_path, filename)
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        logger.debug(f"Wrote autodoc file: {filename}")
+
     def write_auto_keywords_file(self, content: str):
         self._write_file(self.AUTO_KEYWORDS_FILE, content)
 
