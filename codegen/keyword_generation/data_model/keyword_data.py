@@ -86,35 +86,6 @@ class Field:
     link: Optional[int] = None
     flag: bool = False
 
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert Field to dictionary representation for backward compatibility."""
-        result = {
-            "name": self.name,
-            "type": self.type,
-            "position": self.position,
-            "width": self.width,
-            "default": self.default,
-            "help": self.help,
-            "used": self.used,
-        }
-        if self.property_name is not None:
-            result["property_name"] = self.property_name
-        if self.property_type is not None:
-            result["property_type"] = self.property_type
-        if self.readonly:
-            result["readonly"] = self.readonly
-        if self.options:
-            result["options"] = self.options
-        if self.redundant:
-            result["redundant"] = self.redundant
-        if self.card_indices is not None:
-            result["card_indices"] = self.card_indices
-        if self.link is not None:
-            result["link"] = self.link
-        if self.flag:
-            result["flag"] = self.flag
-        return result
-
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Field":
         """Create Field from dictionary representation."""
@@ -175,46 +146,6 @@ class Card:
     length_func: Optional[str] = None
     active_func: Optional[str] = None
     overall_name: Optional[str] = None
-
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert Card to dictionary representation for backward compatibility."""
-        result = {
-            "index": self.index,
-            "fields": [f.to_dict() if isinstance(f, Field) else f for f in self.fields],
-        }
-        if self.mark_for_removal is not None:
-            result["mark_for_removal"] = self.mark_for_removal
-        if self.func is not None:
-            result["func"] = self.func
-        if self.duplicate is not None:
-            result["duplicate"] = (
-                self.duplicate.to_dict() if isinstance(self.duplicate, DuplicateCardMetadata) else self.duplicate
-            )
-        if self.variable is not None:
-            result["variable"] = (
-                self.variable.to_dict() if isinstance(self.variable, VariableCardMetadata) else self.variable
-            )
-        if self.set is not None:
-            result["set"] = self.set
-        if self.duplicate_group:
-            result["duplicate_group"] = self.duplicate_group
-        if self.sub_cards is not None:
-            result["sub_cards"] = self.sub_cards
-        if self.external is not None:
-            result["external"] = (
-                self.external.to_dict() if isinstance(self.external, ExternalCardMetadata) else self.external
-            )
-        if self.source_index is not None:
-            result["source_index"] = self.source_index
-        if self.target_index is not None:
-            result["target_index"] = self.target_index
-        if self.length_func is not None:
-            result["length_func"] = self.length_func
-        if self.active_func is not None:
-            result["active_func"] = self.active_func
-        if self.overall_name is not None:
-            result["overall_name"] = self.overall_name
-        return result
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Card":
@@ -308,64 +239,6 @@ class KeywordData:
     links: Union[List[LinkData], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     negative_shared_fields: List[Any] = field(default_factory=list)  # Empty list for templates
     card_insertions: List[Any] = field(default_factory=list)
-
-    def to_dict(self) -> Dict[str, Any]:
-        """
-        Convert KeywordData to dictionary representation.
-
-        This maintains backward compatibility with code that expects dict-based structures.
-        Handlers and templates can continue to work with dicts during the transition period.
-
-        Returns:
-            Dictionary representation of the keyword data
-        """
-        result = {
-            "keyword": self.keyword,
-            "subkeyword": self.subkeyword,
-            "title": self.title,
-            "classname": self.classname,
-            "cards": [c.to_dict() if isinstance(c, Card) else c for c in self.cards],
-            "card_insertions": self.card_insertions,
-        }
-        if self.options:
-            result["options"] = [o.to_dict() if isinstance(o, OptionGroup) else o for o in self.options]
-        if self.card_sets is not None:
-            result["card_sets"] = (
-                self.card_sets.to_dict() if isinstance(self.card_sets, CardSetsContainer) else self.card_sets
-            )
-        if self.duplicate:
-            result["duplicate"] = self.duplicate
-        if self.duplicate_group:
-            result["duplicate_group"] = self.duplicate_group
-        if self.variable:
-            result["variable"] = self.variable
-        if self.dataclasses:
-            result["dataclasses"] = [d.to_dict() if isinstance(d, DataclassDefinition) else d for d in self.dataclasses]
-        if self.mixins:
-            result["mixins"] = self.mixins
-        if self.mixin_imports:
-            result["mixin_imports"] = [m.to_dict() if isinstance(m, MixinImport) else m for m in self.mixin_imports]
-        if self.links:
-            result["links"] = [link.to_dict() if isinstance(link, LinkData) else link for link in self.links]
-        if self.negative_shared_fields:
-            result["negative_shared_fields"] = self.negative_shared_fields
-        if self.mixins is not None:
-            result["mixins"] = self.mixins
-        if self.mixin_imports is not None:
-            result["mixin_imports"] = (
-                [m.to_dict() if isinstance(m, MixinImport) else m for m in self.mixin_imports]
-                if isinstance(self.mixin_imports, list)
-                else self.mixin_imports
-            )
-        if self.links is not None:
-            result["links"] = (
-                [link.to_dict() if isinstance(link, LinkData) else link for link in self.links]
-                if isinstance(self.links, list)
-                else self.links
-            )
-        if self.negative_shared_fields is not None:
-            result["negative_shared_fields"] = self.negative_shared_fields
-        return result
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "KeywordData":

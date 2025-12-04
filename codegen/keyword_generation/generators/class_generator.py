@@ -74,7 +74,7 @@ def _get_fields(card: typing.Dict) -> typing.List[typing.Dict[str, typing.Any]]:
     return card["fields"]
 
 
-def _transform_data(data: typing.Dict[str, typing.Any]):
+def _transform_data(data: KeywordData):
     """applies the following transformations to data:
     - lowercase field names (SECID -> secid)
     - python type mapping (integer->int, real->float)
@@ -142,27 +142,31 @@ def _transform_data(data: typing.Dict[str, typing.Any]):
             field["help"] = fix_fieldhelp(field["help"])
 
     index = 0
-    for card in data["cards"]:
+    for card in data.cards:
         fix_card(card)
         card["index"] = index
         index = index + 1
 
-    card_sets = data.get("card_sets", {})
-    for card_set in card_sets.get("sets", []):
-        for card in card_set.get("source_cards", []):
-            fix_card(card)
-        for option in card_set.get("options", []):
-            [fix_card(card) for card in option["cards"]]
+    # card_sets may be CardSetsContainer instance or dict
+    if data.card_sets:
+        sets = (
+            data.card_sets.sets if hasattr(data.card_sets, "sets") else data.card_sets.get("sets", [])
+        )  # type: ignore
+        for card_set in sets:
+            source_cards = (
+                card_set.source_cards if hasattr(card_set, "source_cards") else card_set.get("source_cards", [])
+            )  # type: ignore
+            for card in source_cards:
+                fix_card(card)
+            options = card_set.options if hasattr(card_set, "options") else card_set.get("options", [])  # type: ignore
+            for option in options:
+                cards = option.cards if hasattr(option, "cards") else option["cards"]  # type: ignore
+                [fix_card(card) for card in cards]
 
-    for option in data.get("options", []):
-        [fix_card(card) for card in option["cards"]]
-
-
-def _set_keyword_identity(kwd_data: typing.Dict, keyword_name: str, settings: typing.Dict) -> None:
-    tokens = keyword_name.split("_")
-    kwd_data["keyword"] = tokens[0]
-    kwd_data["subkeyword"] = "_".join(tokens[1:])
-    kwd_data["title"] = handle_single_word_keyword(keyword_name)
+    # options may be OptionGroup instances or dicts
+    for option in data.options or []:
+        cards = option.cards if hasattr(option, "cards") else option["cards"]  # type: ignore
+        [fix_card(card) for card in cards]
 
 
 def _get_insertion_index_for_cards(requested_index: int, container: typing.List[typing.Dict[str, typing.Any]]) -> int:
@@ -176,11 +180,11 @@ def _get_insertion_index_for_cards(requested_index: int, container: typing.List[
     return requested_index
 
 
-def _do_insertions(kwd_data: typing.Dict[str, typing.Any]) -> None:
+def _do_insertions(kwd_data: KeywordData) -> None:
     # [(a,b,c)] => insert b into c at index a
     insertion_targets: typing.List[typing.Tuple[int, typing.Dict, typing.List]] = []
-    logger.debug(f"Processing {len(kwd_data['card_insertions'])} card insertions")
-    for insertion in kwd_data["card_insertions"]:
+    logger.debug(f"Processing {len(kwd_data.card_insertions)} card insertions")
+    for insertion in kwd_data.card_insertions:
         insertion: data_model.Insertion = insertion
         insertion_index = insertion.target_index
         insertion_name = insertion.target_class
@@ -196,25 +200,33 @@ def _do_insertions(kwd_data: typing.Dict[str, typing.Any]) -> None:
 
         if insertion_name == "":
             # insert directly into keyword data
-            container = kwd_data["cards"]
+            container = kwd_data.cards
             index = _get_insertion_index_for_cards(insertion_index, container)
             logger.debug(f"Inserting card at index {index} into keyword cards")
             insertion_targets.append((index, insertion_card, container))
         else:
-            # insert into another card set
-            card_sets = [card_set for card_set in kwd_data["card_sets"]["sets"] if card_set["name"] == insertion_name]
-            logger.debug(f"Inserting card into {len(card_sets)} card sets matching '{insertion_name}'")
-            for card_set in card_sets:
-                container = card_set["source_cards"]
-                index = _get_insertion_index_for_cards(insertion_index, container)
-                insertion_targets.append((index, insertion_card, container))
+            # insert into another card set - may be CardSetsContainer or dict
+            if kwd_data.card_sets:
+                sets = (
+                    kwd_data.card_sets.sets if hasattr(kwd_data.card_sets, "sets") else kwd_data.card_sets["sets"]
+                )  # type: ignore
+                card_sets = [
+                    cs for cs in sets if (cs.name if hasattr(cs, "name") else cs["name"]) == insertion_name
+                ]  # type: ignore
+                logger.debug(f"Inserting card into {len(card_sets)} card sets matching '{insertion_name}'")
+                for card_set in card_sets:
+                    container = (
+                        card_set.source_cards if hasattr(card_set, "source_cards") else card_set["source_cards"]
+                    )  # type: ignore
+                    index = _get_insertion_index_for_cards(insertion_index, container)
+                    insertion_targets.append((index, insertion_card, container))
     for index, item, container in insertion_targets:
         container.insert(index, item)
 
 
-def _delete_marked_indices(kwd_data: typing.Dict[str, typing.Any]) -> None:
+def _delete_marked_indices(kwd_data: KeywordData) -> None:
     marked_indices = []
-    for index, card in enumerate(kwd_data["cards"]):
+    for index, card in enumerate(kwd_data.cards):
         if "mark_for_removal" in card:
             marked_indices.append(index)
     # removal will affect order if we iterate forwards, so iterate backwards
@@ -222,13 +234,15 @@ def _delete_marked_indices(kwd_data: typing.Dict[str, typing.Any]) -> None:
     if marked_indices:
         logger.debug(f"Deleting {len(marked_indices)} marked cards at indices: {marked_indices}")
     for index in marked_indices:
-        del kwd_data["cards"][index]
+        del kwd_data.cards[index]
 
-    options_list = kwd_data.get("options", [])
+    options_list = kwd_data.options or []
     if len(options_list) > 0:
         marked_option_indices = []
         for index, option in enumerate(options_list):
-            if "mark_for_removal" in option:
+            # option may be OptionGroup instance or dict
+            has_mark = hasattr(option, "__getitem__") and "mark_for_removal" in option  # type: ignore
+            if has_mark:
                 marked_option_indices.append(index)
         marked_option_indices.sort(reverse=True)
         if marked_option_indices:
@@ -236,36 +250,38 @@ def _delete_marked_indices(kwd_data: typing.Dict[str, typing.Any]) -> None:
         for index in marked_option_indices:
             del options_list[index]
         if len(options_list) == 0:
-            del kwd_data["options"]
+            kwd_data.options = []  # Set to empty list instead of None
 
 
-def _add_indices(kwd_data: typing.Dict[str, typing.Any]) -> None:
+def _add_indices(kwd_data: KeywordData) -> None:
     # handlers might point to cards by a specific index.
-    for index, card in enumerate(kwd_data["cards"]):
+    for index, card in enumerate(kwd_data.cards):
         card["index"] = index
 
 
-def _prepare_for_insertion(kwd_data: typing.Dict[str, typing.Any]) -> None:
-    kwd_data["card_insertions"] = []
+def _prepare_for_insertion(kwd_data: KeywordData) -> None:
+    kwd_data.card_insertions = []
 
 
-def _add_option_indices(kwd_data: typing.Dict[str, typing.Any]) -> None:
-    index = len(kwd_data["cards"])
-    for options in kwd_data.get("options", []):
-        for card in options["cards"]:
+def _add_option_indices(kwd_data: KeywordData) -> None:
+    index = len(kwd_data.cards)
+    for options in kwd_data.options or []:
+        # options may be OptionGroup instance or dict
+        cards = options.cards if hasattr(options, "cards") else options["cards"]  # type: ignore
+        for card in cards:
             card["index"] = index
         index += 1
 
 
-def _after_handle(kwd_data_dict: typing.Dict[str, typing.Any], registry: typing.Any, kwd_data: typing.Any) -> None:
+def _after_handle(kwd_data: KeywordData, registry: typing.Any) -> None:
     # TODO - move these to their respective handler
-    _do_insertions(kwd_data_dict)
-    _delete_marked_indices(kwd_data_dict)
-    _add_option_indices(kwd_data_dict)
+    _do_insertions(kwd_data)
+    _delete_marked_indices(kwd_data)
+    _add_option_indices(kwd_data)
     registry.post_process_all(kwd_data)  # Pass KeywordData instance for post_process
 
 
-def _before_handle(kwd_data: typing.Dict[str, typing.Any]) -> None:
+def _before_handle(kwd_data: KeywordData) -> None:
     _add_indices(kwd_data)
     _prepare_for_insertion(kwd_data)
 
@@ -273,48 +289,19 @@ def _before_handle(kwd_data: typing.Dict[str, typing.Any]) -> None:
 def _handle_keyword_data(kwd_data: KeywordData, settings: typing.Dict[str, typing.Any]) -> None:
     """Process keyword data through handler pipeline.
 
-    Conversion strategy at pipeline boundaries:
-    - _before_handle: Receives dict (legacy code)
-    - Handlers: Receive KeywordData instances, use attribute access
-    - _after_handle: Receives dict for mutations, KeywordData for post_process
-
-    This dual dict/KeywordData handling enables gradual migration to typed
-    structures while maintaining compatibility with existing code.
+    All pipeline stages now work directly with KeywordData instances using
+    attribute access. No more dict conversions needed!
     """
     registry = create_default_registry()
 
-    # Convert to dict for _before_handle
-    kwd_data_dict = kwd_data.to_dict()
-    logger.debug(f"Handling keyword data with {len(kwd_data_dict.get('cards', []))} cards")
-    _before_handle(kwd_data_dict)
-
-    # Convert back to KeywordData for handlers
-    kwd_data_after_before = KeywordData.from_dict(kwd_data_dict)
-    # Update original instance with changes from _before_handle
-    kwd_data.cards = kwd_data_after_before.cards
-    kwd_data.card_insertions = kwd_data_after_before.card_insertions
+    logger.debug(f"Handling keyword data with {len(kwd_data.cards)} cards")
+    _before_handle(kwd_data)
 
     # Run handlers with KeywordData instance
     registry.apply_all(kwd_data, settings)
 
-    # Convert to dict for _after_handle
-    kwd_data_dict = kwd_data.to_dict()
-    _after_handle(kwd_data_dict, registry, kwd_data)  # Pass both dict and KeywordData
-
-    # Convert back and update all fields
-    kwd_data_after_handle = KeywordData.from_dict(kwd_data_dict)
-    kwd_data.cards = kwd_data_after_handle.cards
-    kwd_data.options = kwd_data_after_handle.options
-    kwd_data.card_sets = kwd_data_after_handle.card_sets
-    kwd_data.duplicate = kwd_data_after_handle.duplicate
-    kwd_data.duplicate_group = kwd_data_after_handle.duplicate_group
-    kwd_data.variable = kwd_data_after_handle.variable
-    kwd_data.dataclasses = kwd_data_after_handle.dataclasses
-    kwd_data.mixins = kwd_data_after_handle.mixins
-    kwd_data.mixin_imports = kwd_data_after_handle.mixin_imports
-    kwd_data.links = kwd_data_after_handle.links
-    kwd_data.negative_shared_fields = kwd_data_after_handle.negative_shared_fields
-    kwd_data.card_insertions = kwd_data_after_handle.card_insertions
+    # After-handle processing
+    _after_handle(kwd_data, registry)
 
     logger.debug(f"Keyword data handling complete, final card count: {len(kwd_data.cards)}")
 
@@ -335,10 +322,10 @@ class LinkIdentity:
     DEFINE_TRANSFORMATION = 40
 
 
-def _get_links(kwd_data) -> typing.Optional[typing.Dict]:
+def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
     links = {LinkIdentity.DEFINE_TRANSFORMATION: []}
     has_link = False
-    for card in kwd_data["cards"]:
+    for card in kwd_data.cards:
         for field in _get_fields(card):
             if "link" not in field:
                 continue
@@ -352,7 +339,7 @@ def _get_links(kwd_data) -> typing.Optional[typing.Dict]:
     return links
 
 
-def _add_links(kwd_data: typing.Dict[str, typing.Any]) -> None:
+def _add_links(kwd_data: KeywordData) -> None:
     """Add "links", or properties that link one keyword to another."""
     links = _get_links(kwd_data)
     if links is None:
@@ -364,7 +351,7 @@ def _add_links(kwd_data: typing.Dict[str, typing.Any]) -> None:
         if link_type == LinkIdentity.DEFINE_TRANSFORMATION:
             _add_define_transform_link_data(link_data, link_fields)
             link_count += len(link_fields)
-    kwd_data["links"] = link_data
+    kwd_data.links = link_data
     logger.debug(f"Added {link_count} links to keyword data")
 
 
@@ -372,27 +359,28 @@ def _get_keyword_data(keyword_name: str, keyword: str, settings: typing.Dict[str
     """Gets the keyword data from kwdm. Transforms it based on generation settings
     and default transformations needed to produce valid python code.
 
-    Returns KeywordData dataclass instance instead of dict for type safety.
+    Returns KeywordData dataclass instance - no more dict conversions!
     """
     logger.debug(f"Getting keyword data for '{keyword_name}' (source: '{keyword}')")
     assert data_model.KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
     kwd_data_dict = {"cards": data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)}
 
-    _set_keyword_identity(kwd_data_dict, keyword_name, settings)
+    # Set keyword identity in dict before converting to KeywordData
+    tokens = keyword_name.split("_")
+    kwd_data_dict["keyword"] = tokens[0]
+    kwd_data_dict["subkeyword"] = "_".join(tokens[1:])
+    kwd_data_dict["title"] = handle_single_word_keyword(keyword_name)
 
-    # Convert to KeywordData early
+    # Convert to KeywordData
     kwd_data = KeywordData.from_dict(kwd_data_dict)
 
     # transformations based on generation settings - handlers work with KeywordData
     _handle_keyword_data(kwd_data, settings)
 
-    # default transformations to a valid format we need for jinja - still need dict
-    kwd_data_dict = kwd_data.to_dict()
-    _transform_data(kwd_data_dict)
-    _add_links(kwd_data_dict)
+    # default transformations to a valid format we need for jinja
+    _transform_data(kwd_data)
+    _add_links(kwd_data)
 
-    # Convert back to KeywordData
-    kwd_data = KeywordData.from_dict(kwd_data_dict)
     logger.debug(f"Keyword data prepared for '{keyword_name}' with {len(kwd_data.cards)} cards")
 
     return kwd_data

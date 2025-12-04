@@ -52,10 +52,10 @@ def do_negative_shared_fields(kwd_data: typing.Any):
     """
     negative_shared_fields = kwd_data.negative_shared_fields
     num_cards = len(kwd_data.cards)
-    options = kwd_data.options
+    options = kwd_data.options or []
 
     option_cards = []
-    for option in kwd_data.options:
+    for option in options:
         # option may be OptionGroup instance or dict (transitional)
         cards = option.cards if hasattr(option, "cards") else option["cards"]
         option_cards.extend(cards)
@@ -67,7 +67,7 @@ def do_negative_shared_fields(kwd_data: typing.Any):
             # Option cards may have ANY index (not necessarily >= num_cards).
             # Example: keyword with 3 base cards + option card at index=2
             found_in_options = False
-            for option in kwd_data.options:
+            for option in options:
                 # option may be OptionGroup instance or dict (transitional)
                 cards = option.cards if hasattr(option, "cards") else option["cards"]
                 for card in cards:
