@@ -96,10 +96,10 @@ class KWDM:
     def get_keywords_list(self) -> typing.List[str]:
         return list(self._data.keys())
 
-    def get_keyword_data_dict(self, name: str) -> typing.Dict:
+    def get_keyword_data_dict(self, name: str) -> typing.List[typing.Dict[str, typing.Any]]:
         return copy.deepcopy(self[name])
 
-    def __getitem__(self, name: str) -> typing.Dict:
+    def __getitem__(self, name: str) -> typing.List[typing.Dict[str, typing.Any]]:
         return self._data[name]
 
 
