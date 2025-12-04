@@ -256,104 +256,60 @@ def discover_handlers() -> Dict[str, HandlerMetadata]:
     return all_metadata
 
 
-def create_default_registry(auto_discover: bool = True) -> HandlerRegistry:
+def create_default_registry() -> HandlerRegistry:
     """
     Create and populate the default handler registry.
 
-    Handlers can be registered either through auto-discovery (default) or
-    manual registration. Auto-discovery scans the handlers package for
+    Handlers are auto-discovered by scanning the handlers package for
     classes decorated with @handler.
-
-    Args:
-        auto_discover: If True, automatically discover and register handlers.
-                      If False, use manual registration (legacy mode).
 
     Returns:
         Configured HandlerRegistry with all standard handlers
     """
-    logger.debug(f"Creating default handler registry (auto_discover={auto_discover})")
+    logger.debug("Creating default handler registry")
     registry = HandlerRegistry()
 
-    if auto_discover:
-        # Auto-discover handlers using decorator metadata
-        handler_metadata = discover_handlers()
+    # Auto-discover handlers using decorator metadata
+    handler_metadata = discover_handlers()
 
-        # Register handlers in explicit order (same as legacy manual registration)
-        # This order is critical - some handlers depend on others having run first
-        handler_order = [
-            "reorder-card",
-            "table-card",
-            "override-field",
-            "replace-card",
-            "insert-card",
-            "series-card",
-            "add-option",
-            "card-set",
-            "conditional-card",
-            "rename-property",
-            "skip-card",
-            "table-card-group",
-            "external-card-implementation",
-            "shared-field",
-            "override-subkeyword",
-        ]
+    # Register handlers in explicit order
+    # This order is critical - some handlers depend on others having run first
+    handler_order = [
+        "reorder-card",
+        "table-card",
+        "override-field",
+        "replace-card",
+        "insert-card",
+        "series-card",
+        "add-option",
+        "card-set",
+        "conditional-card",
+        "rename-property",
+        "skip-card",
+        "table-card-group",
+        "external-card-implementation",
+        "shared-field",
+    ]
 
-        for name in handler_order:
-            if name in handler_metadata:
-                metadata = handler_metadata[name]
-                try:
-                    handler_instance = metadata.handler_class()
-                    registry.register(name, handler_instance, metadata)
-                    logger.debug(f"Auto-registered handler: {name}")
-                except Exception as e:
-                    logger.error(f"Failed to instantiate handler {name}: {e}", exc_info=True)
+    for name in handler_order:
+        if name in handler_metadata:
+            metadata = handler_metadata[name]
+            try:
+                handler_instance = metadata.handler_class()
+                registry.register(name, handler_instance, metadata)
+                logger.debug(f"Auto-registered handler: {name}")
+            except Exception as e:
+                logger.error(f"Failed to instantiate handler {name}: {e}", exc_info=True)
 
-        # Register any handlers not in the explicit order (for extensibility)
-        for name, metadata in handler_metadata.items():
-            if name not in handler_order:
-                try:
-                    handler_instance = metadata.handler_class()
-                    registry.register(name, handler_instance, metadata)
-                    logger.warning(f"Auto-registered handler '{name}' not in explicit order - will run last")
-                except Exception as e:
-                    logger.error(f"Failed to instantiate handler {name}: {e}", exc_info=True)
+    # Register any handlers not in the explicit order (for extensibility)
+    for name, metadata in handler_metadata.items():
+        if name not in handler_order:
+            try:
+                handler_instance = metadata.handler_class()
+                registry.register(name, handler_instance, metadata)
+                logger.warning(f"Auto-registered handler '{name}' not in explicit order - will run last")
+            except Exception as e:
+                logger.error(f"Failed to instantiate handler {name}: {e}", exc_info=True)
 
-        logger.debug(f"Auto-registered {len(registry.get_handler_names())} handlers")
-
-    else:
-        # Legacy manual registration (kept for backward compatibility)
-        from keyword_generation.handlers.add_option import AddOptionHandler
-        from keyword_generation.handlers.card_set import CardSetHandler
-        from keyword_generation.handlers.conditional_card import ConditionalCardHandler
-        from keyword_generation.handlers.external_card import ExternalCardHandler
-        from keyword_generation.handlers.insert_card import InsertCardHandler
-        from keyword_generation.handlers.override_field import OverrideFieldHandler
-        from keyword_generation.handlers.override_subkeyword import OverrideSubkeywordHandler
-        from keyword_generation.handlers.rename_property import RenamePropertyHandler
-        from keyword_generation.handlers.reorder_card import ReorderCardHandler
-        from keyword_generation.handlers.replace_card import ReplaceCardHandler
-        from keyword_generation.handlers.series_card import SeriesCardHandler
-        from keyword_generation.handlers.shared_field import SharedFieldHandler
-        from keyword_generation.handlers.skip_card import SkipCardHandler
-        from keyword_generation.handlers.table_card import TableCardHandler
-        from keyword_generation.handlers.table_card_group import TableCardGroupHandler
-
-        # Register all handlers - order no longer matters due to dependency resolution
-        registry.register("reorder-card", ReorderCardHandler())
-        registry.register("table-card", TableCardHandler())
-        registry.register("override-field", OverrideFieldHandler())
-        registry.register("replace-card", ReplaceCardHandler())
-        registry.register("insert-card", InsertCardHandler())
-        registry.register("series-card", SeriesCardHandler())
-        registry.register("add-option", AddOptionHandler())
-        registry.register("card-set", CardSetHandler())
-        registry.register("conditional-card", ConditionalCardHandler())
-        registry.register("rename-property", RenamePropertyHandler())
-        registry.register("skip-card", SkipCardHandler())
-        registry.register("table-card-group", TableCardGroupHandler())
-        registry.register("external-card-implementation", ExternalCardHandler())
-        registry.register("shared-field", SharedFieldHandler())
-        registry.register("override-subkeyword", OverrideSubkeywordHandler())
-        logger.debug(f"Manually registered {len(registry.get_handler_names())} handlers")
-
+    logger.debug(f"Auto-registered {len(registry.get_handler_names())} handlers")
     return registry

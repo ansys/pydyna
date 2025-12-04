@@ -51,7 +51,9 @@ pim = [
     "ansys-platform-instancemanagement~=1.0",
 ]
 codegen = [
-    "Jinja2"
+    "Jinja2",
+    "beartype",
+    "jsonschema",
 ]
 tests = [
     "matplotlib==3.10.7",
