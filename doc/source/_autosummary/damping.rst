@@ -2,7 +2,7 @@
 
 .. vale off
 
-Damping Keywords
+Damping keywords
 ================
 
 

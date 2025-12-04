@@ -2,7 +2,7 @@
 
 .. vale off
 
-Initial Keywords
+Initial keywords
 ================
 
 

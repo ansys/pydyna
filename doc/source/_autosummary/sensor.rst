@@ -2,7 +2,7 @@
 
 .. vale off
 
-Sensor Keywords
+Sensor keywords
 ===============
 
 

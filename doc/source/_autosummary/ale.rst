@@ -2,7 +2,7 @@
 
 .. vale off
 
-Ale Keywords
+Ale keywords
 ============
 
 

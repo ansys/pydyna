@@ -2,7 +2,7 @@
 
 .. vale off
 
-Battery Keywords
+Battery keywords
 ================
 
 

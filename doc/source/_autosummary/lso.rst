@@ -2,7 +2,7 @@
 
 .. vale off
 
-Lso Keywords
+Lso keywords
 ============
 
 

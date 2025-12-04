@@ -2,7 +2,7 @@
 
 .. vale off
 
-Database Keywords
+Database keywords
 =================
 
 

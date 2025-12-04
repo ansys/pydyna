@@ -2,7 +2,7 @@
 
 .. vale off
 
-Case Keywords
+Case keywords
 =============
 
 

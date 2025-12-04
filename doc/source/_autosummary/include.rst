@@ -2,7 +2,7 @@
 
 .. vale off
 
-Include Keywords
+Include keywords
 ================
 
 

@@ -2,7 +2,7 @@
 
 .. vale off
 
-Control Keywords
+Control keywords
 ================
 
 

@@ -2,7 +2,7 @@
 
 .. vale off
 
-Delete Keywords
+Delete keywords
 ===============
 
 

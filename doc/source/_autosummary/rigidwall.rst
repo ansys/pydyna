@@ -2,7 +2,7 @@
 
 .. vale off
 
-Rigidwall Keywords
+Rigidwall keywords
 ==================
 
 

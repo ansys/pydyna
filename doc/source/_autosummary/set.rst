@@ -2,7 +2,7 @@
 
 .. vale off
 
-Set Keywords
+Set keywords
 ============
 
 

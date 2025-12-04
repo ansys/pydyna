@@ -2,7 +2,7 @@
 
 .. vale off
 
-Boundary Keywords
+Boundary keywords
 =================
 
 

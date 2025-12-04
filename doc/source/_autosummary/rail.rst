@@ -2,7 +2,7 @@
 
 .. vale off
 
-Rail Keywords
+Rail keywords
 =============
 
 

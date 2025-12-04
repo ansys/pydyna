@@ -2,7 +2,7 @@
 
 .. vale off
 
-Cosim Keywords
+Cosim keywords
 ==============
 
 

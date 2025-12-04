@@ -2,7 +2,7 @@
 
 .. vale off
 
-Section Keywords
+Section keywords
 ================
 
 

@@ -2,7 +2,7 @@
 
 .. vale off
 
-Rigid Keywords
+Rigid keywords
 ==============
 
 

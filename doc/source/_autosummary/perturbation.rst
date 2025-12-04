@@ -2,7 +2,7 @@
 
 .. vale off
 
-Perturbation Keywords
+Perturbation keywords
 =====================
 
 

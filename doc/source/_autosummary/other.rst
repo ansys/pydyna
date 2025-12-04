@@ -2,7 +2,7 @@
 
 .. vale off
 
-Other Keywords
+Other keywords
 ==============
 
 

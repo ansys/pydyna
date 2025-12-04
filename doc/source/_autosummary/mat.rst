@@ -2,7 +2,7 @@
 
 .. vale off
 
-Mat Keywords
+Mat keywords
 ============
 
 

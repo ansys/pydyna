@@ -2,7 +2,7 @@
 
 .. vale off
 
-Icfd Keywords
+Icfd keywords
 =============
 
 

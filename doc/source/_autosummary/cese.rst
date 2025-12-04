@@ -2,7 +2,7 @@
 
 .. vale off
 
-Cese Keywords
+Cese keywords
 =============
 
 

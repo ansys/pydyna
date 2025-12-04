@@ -236,7 +236,7 @@ def generate_autodoc_file(autodoc_output_path, all_keywords, env):
     output_manager = OutputManager(os.path.dirname(autodoc_output_path))
 
     for category, entries in sorted(categories.items()):
-        category_title = category.replace("_", " ").title() + " Keywords"
+        category_title = category.replace("_", " ").capitalize() + " keywords"
         category_rst = category_template.render(
             category=category, category_title=category_title, entries=sorted(entries)
         )

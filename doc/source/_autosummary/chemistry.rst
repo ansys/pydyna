@@ -2,7 +2,7 @@
 
 .. vale off
 
-Chemistry Keywords
+Chemistry keywords
 ==================
 
 

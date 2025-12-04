@@ -2,7 +2,7 @@
 
 .. vale off
 
-Interface Keywords
+Interface keywords
 ==================
 
 

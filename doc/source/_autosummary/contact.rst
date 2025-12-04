@@ -2,7 +2,7 @@
 
 .. vale off
 
-Contact Keywords
+Contact keywords
 ================
 
 

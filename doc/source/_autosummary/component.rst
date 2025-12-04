@@ -2,7 +2,7 @@
 
 .. vale off
 
-Component Keywords
+Component keywords
 ==================
 
 

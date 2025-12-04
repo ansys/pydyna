@@ -2,7 +2,7 @@
 
 .. vale off
 
-Frequency Keywords
+Frequency keywords
 ==================
 
 

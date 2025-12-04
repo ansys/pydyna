@@ -2,7 +2,7 @@
 
 .. vale off
 
-Particle Keywords
+Particle keywords
 =================
 
 

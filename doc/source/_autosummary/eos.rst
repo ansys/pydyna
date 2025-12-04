@@ -2,7 +2,7 @@
 
 .. vale off
 
-Eos Keywords
+Eos keywords
 ============
 
 

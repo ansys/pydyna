@@ -2,7 +2,7 @@
 
 .. vale off
 
-Define Keywords
+Define keywords
 ===============
 
 

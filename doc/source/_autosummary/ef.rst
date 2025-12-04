@@ -2,7 +2,7 @@
 
 .. vale off
 
-Ef Keywords
+Ef keywords
 ===========
 
 

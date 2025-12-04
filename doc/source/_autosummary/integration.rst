@@ -2,7 +2,7 @@
 
 .. vale off
 
-Integration Keywords
+Integration keywords
 ====================
 
 

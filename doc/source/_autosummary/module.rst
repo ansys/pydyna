@@ -2,7 +2,7 @@
 
 .. vale off
 
-Module Keywords
+Module keywords
 ===============
 
 

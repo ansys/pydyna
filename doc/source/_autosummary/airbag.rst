@@ -2,7 +2,7 @@
 
 .. vale off
 
-Airbag Keywords
+Airbag keywords
 ===============
 
 

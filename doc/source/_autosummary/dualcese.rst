@@ -2,7 +2,7 @@
 
 .. vale off
 
-Dualcese Keywords
+Dualcese keywords
 =================
 
 

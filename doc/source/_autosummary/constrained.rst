@@ -2,7 +2,7 @@
 
 .. vale off
 
-Constrained Keywords
+Constrained keywords
 ====================
 
 

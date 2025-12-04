@@ -2,7 +2,7 @@
 
 .. vale off
 
-Parameter Keywords
+Parameter keywords
 ==================
 
 

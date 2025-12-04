@@ -2,7 +2,7 @@
 
 .. vale off
 
-Iga Keywords
+Iga keywords
 ============
 
 
