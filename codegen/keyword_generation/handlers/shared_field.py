@@ -33,7 +33,7 @@ import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
 
-def do_negative_shared_fields(kwd_data: typing.Dict):
+def do_negative_shared_fields(kwd_data: typing.Any):
     """
     Process shared fields with negative indices (option cards).
 
@@ -41,27 +41,44 @@ def do_negative_shared_fields(kwd_data: typing.Dict):
     available during the main handle() phase. This function runs in post_process
     after all options are fully defined.
 
+    Critical: Searches option cards FIRST (regardless of index value) because option
+    cards can have indices that overlap with base card ranges. For example, a keyword
+    with 3 base cards and an option card at index=2 would incorrectly trigger the
+    assertion if we checked `index >= num_cards` first.
+
     Args:
-        kwd_data: Complete keyword data dictionary with options populated
+        kwd_data: KeywordData instance with options populated (may be OptionGroup
+                  instances or dicts during transition)
     """
-    negative_shared_fields = kwd_data.get("negative_shared_fields", [])
-    num_cards = len(kwd_data["cards"])
-    options = kwd_data.get("options", [])
+    negative_shared_fields = kwd_data.negative_shared_fields
+    num_cards = len(kwd_data.cards)
+    options = kwd_data.options or []
+
     option_cards = []
-    for options in kwd_data.get("options", []):
-        option_cards.extend(options["cards"])
+    for option in options:
+        # option may be OptionGroup instance or dict (transitional)
+        cards = option.cards if hasattr(option, "cards") else option["cards"]
+        option_cards.extend(cards)
     for setting in negative_shared_fields:
         indices = [-i for i in setting["cards"]]
         fields = []
         for index in indices:
-            if index >= num_cards:
-                for options in kwd_data.get("options", []):
-                    for card in options["cards"]:
-                        if card["index"] == index:
-                            for field in card["fields"]:
-                                if field["name"] == setting["name"]:
-                                    fields.append(field)
-            else:
+            # CRITICAL: Search option cards first, regardless of index value.
+            # Option cards may have ANY index (not necessarily >= num_cards).
+            # Example: keyword with 3 base cards + option card at index=2
+            found_in_options = False
+            for option in options:
+                # option may be OptionGroup instance or dict (transitional)
+                cards = option.cards if hasattr(option, "cards") else option["cards"]
+                for card in cards:
+                    if card["index"] == index:
+                        for field in card["fields"]:
+                            if field["name"] == setting["name"]:
+                                fields.append(field)
+                                found_in_options = True
+
+            # If not found in options, check base cards
+            if not found_in_options and index < num_cards:
                 assert False, "TODO - support negative indices for shared fields for non-options"
         assert len(fields) > 1
         if not setting["applied_card_indices"]:
@@ -92,7 +109,7 @@ def handle_shared_field(kwd_data, settings):
         assert num_positive == 0 or num_positive == len(cards)
         if num_positive > 0:
             fields = []
-            for card in kwd_data["cards"]:
+            for card in kwd_data.cards:
                 for field in card["fields"]:
                     if field["name"] == setting["name"]:
                         fields.append(field)
@@ -102,9 +119,9 @@ def handle_shared_field(kwd_data, settings):
             for field in fields[1:]:
                 field["redundant"] = True
         else:
-            if "negative_shared_fields" not in kwd_data:
-                kwd_data["negative_shared_fields"] = []
-            kwd_data["negative_shared_fields"].append(setting)
+            if len(kwd_data.negative_shared_fields) == 0:
+                kwd_data.negative_shared_fields = []
+            kwd_data.negative_shared_fields.append(setting)
 
 
 @handler(
@@ -163,7 +180,7 @@ class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler
         - Processed after options are available
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
         Mark shared fields, handling positive indices immediately.
 
@@ -173,7 +190,7 @@ class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler
         """
         return handle_shared_field(kwd_data, settings)
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """
         Process deferred negative-index shared fields.
 

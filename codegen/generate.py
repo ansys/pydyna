@@ -140,6 +140,7 @@ def handle_wildcards(keyword_options: typing.Dict, keyword: str) -> None:
         return
     if "wildcards_handled" in keyword_options.keys():
         return
+    assert data_model.MANIFEST is not None, "MANIFEST not initialized"
     for wildcard in data_model.MANIFEST["WILDCARDS"]:
         if match_wildcard(keyword, wildcard):
             merge_options(keyword_options, wildcard["generation-options"])
@@ -150,13 +151,14 @@ def get_keyword_options(keyword: str, wildcards: bool = True) -> typing.Dict:
     """Returns the generation options of the given keyword from the manifest.  If apply_wildcards is True,
     this will return the generataion options of the keyword merged with the generation options of the
     wildard that matches this keyword, if any."""
+    assert data_model.MANIFEST is not None, "MANIFEST not initialized"
     keyword_options = data_model.MANIFEST.get(keyword, {})
     if wildcards:
         handle_wildcards(keyword_options, keyword)
     return keyword_options
 
 
-def get_keyword_item(keyword: str) -> None:
+def get_keyword_item(keyword: str) -> typing.Dict[str, typing.Any]:
     keyword_options = get_keyword_options(keyword)
     fixed_keyword = fix_keyword(keyword).lower()
     classname = keyword_options.get("classname", get_classname(fixed_keyword))
@@ -181,7 +183,7 @@ def get_generations(keyword: str) -> typing.List[typing.Tuple]:
     keyword_options = get_keyword_options(keyword)
     if keyword_options.get("type") != "multiple":
         return [(keyword, keyword_options)]
-    generations = keyword_options.get("generations")
+    generations = keyword_options.get("generations", [])
     result = [(gen["keyword"], gen) for gen in generations]
     return result
 
@@ -220,6 +222,7 @@ def generate_autodoc_file(autodoc_output_path, all_keywords, env):
 def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.List[typing.Dict]:
     """Get keywords to generate. If a kwd name is not none, only generate
     it and its generations."""
+    assert data_model.KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
     keywords = []
     kwd_list = data_model.KWDM_INSTANCE.get_keywords_list()
 

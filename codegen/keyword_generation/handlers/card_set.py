@@ -109,7 +109,7 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         - Marks source cards/options with "mark_for_removal" = 1
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
         Create card sets from source cards and options.
 
@@ -124,15 +124,18 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         has_options = False
         default_target = 0
 
-        for card_settings in settings:
+        # settings is actually a List[Dict] despite base class signature
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for card_settings in settings_list:
             card_set = {"name": card_settings["name"], "source_cards": []}
             target_name = card_settings.get("target-name", "")
             if target_name == "":
                 default_target = default_target + 1
                 if default_target > 1:
                     raise Exception("Currently only one card set on the base keyword is supported!")
+            card_index = -1  # Initialize to handle empty source-indices case
             for card_index, source_index in enumerate(card_settings["source-indices"]):
-                source_card = kwd_data["cards"][source_index]
+                source_card = kwd_data.cards[source_index]
                 source_card["source_index"] = source_card["index"]
                 source_card["index"] = card_index
                 source_card["mark_for_removal"] = 1
@@ -141,7 +144,7 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             if "source-options" in card_settings:
                 has_options = True
                 for option_index in card_settings["source-options"]:
-                    source_option = kwd_data["options"][int(option_index)]
+                    source_option = kwd_data.options[int(option_index)]
                     option = copy.deepcopy(source_option)
                     for card in option["cards"]:
                         card_index += 1
@@ -162,11 +165,11 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             }
             target_name = card_settings.get("target-name", "")
             target_index = card_settings["target-index"]
-            insertion = gen.insertion.Insertion(target_index, target_name, card)
-            kwd_data["card_insertions"].append(insertion)
+            insertion = gen.Insertion(target_index, target_name, card)
+            kwd_data.card_insertions.append(insertion)
             card_sets.append(card_set)
-        kwd_data["card_sets"] = {"sets": card_sets, "options": has_options}
+        kwd_data.card_sets = {"sets": card_sets, "options": has_options}
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""
         pass

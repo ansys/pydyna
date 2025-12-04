@@ -100,7 +100,7 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         - If struct types used, adds kwd_data["dataclasses"] list with struct definitions
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
         Convert specified cards into variable-length series.
 
@@ -108,12 +108,13 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             kwd_data: Complete keyword data dictionary
             settings: List of series card configurations
         """
-        kwd_data["variable"] = True
+        kwd_data.variable = True
         dataclasses = []
-        for card_settings in settings:
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for card_settings in settings_list:
             card_index = card_settings["index"]
             type_name = card_settings["type"]
-            variable_card = kwd_data["cards"][card_index]
+            variable_card = kwd_data.cards[card_index]
             if type_name == "struct":
                 struct_info = card_settings["struct-info"]
                 struct_name = struct_info["name"]
@@ -132,8 +133,8 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
                 "help": card_settings["help"],
             }
         if len(dataclasses) > 0:
-            kwd_data["dataclasses"] = dataclasses
+            kwd_data.dataclasses = dataclasses
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""
         return

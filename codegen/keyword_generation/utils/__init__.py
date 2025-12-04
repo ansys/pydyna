@@ -24,7 +24,7 @@ import pathlib
 import typing
 
 
-def handle_single_word_keyword(keyword: str) -> typing.Tuple[str, bool]:
+def handle_single_word_keyword(keyword: str) -> str:
     tokens = keyword.split("_")
     if len(tokens) == 2 and tokens[0] == tokens[1]:
         return tokens[0]

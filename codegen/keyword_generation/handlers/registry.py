@@ -51,7 +51,7 @@ class HandlerRegistry:
         self._handlers: collections.OrderedDict[str, KeywordHandler] = collections.OrderedDict()
         self._metadata: Dict[str, HandlerMetadata] = {}
 
-    def register(self, name: str, handler: KeywordHandler, metadata: HandlerMetadata = None) -> None:
+    def register(self, name: str, handler: KeywordHandler, metadata: typing.Optional[HandlerMetadata] = None) -> None:
         """
         Register a handler with a given name.
 
@@ -64,7 +64,7 @@ class HandlerRegistry:
         if metadata:
             self._metadata[name] = metadata
         elif hasattr(handler.__class__, "_handler_metadata"):
-            self._metadata[name] = handler.__class__._handler_metadata
+            self._metadata[name] = handler.__class__._handler_metadata  # type: ignore[attr-defined]
         logger.debug(f"Registered handler '{name}': {handler.__class__.__name__}")
 
     def _topological_sort(self, handler_names: Set[str]) -> List[str]:
@@ -121,9 +121,7 @@ class HandlerRegistry:
         logger.debug(f"Topological sort result: {result}")
         return result
 
-    def apply_all(
-        self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any], validate: bool = True
-    ) -> None:
+    def apply_all(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any], validate: bool = True) -> None:
         """
         Apply all registered handlers to keyword data in dependency order.
 
@@ -131,7 +129,7 @@ class HandlerRegistry:
         Only handlers with corresponding settings in the configuration are executed.
 
         Args:
-            kwd_data: The keyword data dictionary to transform
+            kwd_data: The keyword data (dict or KeywordData dataclass) to transform
             settings: Configuration settings containing handler-specific options
             validate: If True, validate settings against handler schemas before execution
         """
@@ -171,7 +169,7 @@ class HandlerRegistry:
             logger.debug(f"Applying handler '{handler_name}'")
             handler.handle(kwd_data, handler_settings)
 
-    def post_process_all(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process_all(self, kwd_data: typing.Any) -> None:
         """
         Run post-processing for all handlers that require it.
 
@@ -179,7 +177,7 @@ class HandlerRegistry:
         in registration order.
 
         Args:
-            kwd_data: The keyword data dictionary to post-process
+            kwd_data: Keyword data (dict or KeywordData dataclass)
         """
         logger.debug(f"Running post-processing for {len(self._handlers)} handlers")
         for handler_name, handler in self._handlers.items():

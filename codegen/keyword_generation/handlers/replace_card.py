@@ -73,20 +73,21 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         Replaces kwd_data["cards"][index] with loaded card definition
     """
 
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.Dict[str, typing.Any]) -> None:
         """
-        Replace cards with alternatives.
+        Replace cards with new card definitions.
 
         Args:
             kwd_data: Complete keyword data dictionary
             settings: List of {"index", "card"} dicts
         """
-        for card_settings in settings:
-            index = card_settings["index"]
-            replacement = get_card(card_settings["card"])
+        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
+        for setting in settings_list:
+            index = setting["index"]
+            replacement = get_card(setting["card"])
             replacement["index"] = index
-            kwd_data["cards"][index] = replacement
+            kwd_data.cards[index] = replacement
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
+    def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""
         pass
