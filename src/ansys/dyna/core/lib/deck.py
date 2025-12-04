@@ -212,8 +212,8 @@ class Deck:
     def _prepare_deck_for_expand(self, keyword: KeywordBase):
         """Prepare deck for expansion by adding import handlers."""
         include_deck = Deck(format=keyword.format)
-        # TODO: don't merge the parameters if "LOCAL" option is used!
-        include_deck.parameters = self.parameters
+        # Create child scope for include to isolate PARAMETER_LOCAL
+        include_deck.parameters = self.parameters.copy_with_child_scope()
         for import_handler in self._import_handlers:
             include_deck.register_import_handler(import_handler)
         if keyword.subkeyword == "TRANSFORM":
@@ -246,13 +246,14 @@ class Deck:
             xform = None
             if keyword.subkeyword == "TRANSFORM":
                 xform = keyword
-            context = ImportContext(xform, self, expand_include_file)
+            include_deck = self._prepare_deck_for_expand(keyword)
+            context = ImportContext(xform, include_deck, expand_include_file)
             try:
-                include_deck = self._prepare_deck_for_expand(keyword)
                 include_deck._import_file(expand_include_file, "utf-8", context)
             except UnicodeDecodeError as e:
                 encoding = self._detect_encoding(expand_include_file)
                 include_deck = self._prepare_deck_for_expand(keyword)
+                context = ImportContext(xform, include_deck, expand_include_file)
                 include_deck._import_file(expand_include_file, encoding, context)
             if recurse:
                 expanded = include_deck._expand_helper(search_paths, True)
