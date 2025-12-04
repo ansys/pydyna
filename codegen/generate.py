@@ -470,7 +470,8 @@ def parse_args():
         "--subset",
         "-s",
         default="",
-        help="Generate only a subset of keyword domains (comma-delimited list, e.g., 'boundary,contact,control'). Useful for fast iteration during optimization work.",
+        help="Generate only a subset of keyword domains (comma-delimited list, e.g., 'boundary,contact,control')."
+        "Useful for fast iteration during optimization work.",
     )
     return parser.parse_args()
 
