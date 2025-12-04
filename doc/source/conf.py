@@ -67,6 +67,24 @@ numpydoc_validation_checks = {
     # separating the parameter name and type",
 }
 
+# Autodoc optimization settings
+autodoc_typehints = 'signature'
+autodoc_member_order = 'bysource'
+autodoc_default_options = {
+    'exclude-members': '__weakref__,__dict__,__module__',
+    'inherited-members': False,
+}
+
+# Mock heavy dependencies to speed up autodoc introspection
+autodoc_mock_imports = [
+    'pandas',
+    'numpy',
+    'pyarrow',
+    'transformations',
+    'pyvista',
+    'ansys.dpf.core',
+]
+
 
 # Favicon
 html_favicon = ansys_favicon

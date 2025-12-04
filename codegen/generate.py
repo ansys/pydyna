@@ -27,6 +27,10 @@ import logging
 import os
 import typing
 
+from beartype.claw import beartype_package
+
+beartype_package("keyword_generation")  # Enable beartype for keyword_generation package
+
 from jinja2 import Environment, FileSystemLoader
 import keyword_generation.data_model as data_model
 from keyword_generation.generators import generate_class, generate_entrypoints
@@ -202,8 +206,9 @@ def add_aliases(kwd_list: typing.List[str]) -> None:
 
 
 def generate_autodoc_file(autodoc_output_path, all_keywords, env):
-    """Generates the autodoc rst file for all keywords."""
-    autodoc_entries = []
+    """Generates the autodoc rst files for all keywords, organized by category."""
+    # Organize keywords by category
+    categories = {}
     for item in all_keywords:
         keyword = item["name"]
         if skip_generate_keyword_class(keyword):
@@ -212,11 +217,40 @@ def generate_autodoc_file(autodoc_output_path, all_keywords, env):
             continue
         fixed_keyword = fix_keyword(keyword)
         classname = item["options"].get("classname", get_classname(fixed_keyword))
-        autodoc_entries.append((classname, fixed_keyword.lower()))
-    rst_template = env.get_template("autodoc_rst.jinja")
-    combined_rst = rst_template.render(entries=autodoc_entries)
+
+        # Extract category from filename (e.g., "airbag.airbag_adiabatic_gas_model" -> "airbag")
+        filename = fixed_keyword.lower()
+        if '.' in filename:
+            category = filename.split('.')[0]
+        else:
+            category = filename.split('_')[0] if '_' in filename else 'other'
+
+        if category not in categories:
+            categories[category] = []
+        categories[category].append((classname, filename))
+
+    logger.info(f"Organized {len(all_keywords)} keywords into {len(categories)} categories")
+
+    # Generate a separate RST file for each category
+    category_template = env.get_template("autodoc_category.jinja")
     output_manager = OutputManager(os.path.dirname(autodoc_output_path))
-    output_manager.write_autodoc(autodoc_output_path, combined_rst)
+
+    for category, entries in sorted(categories.items()):
+        category_title = category.replace('_', ' ').title() + " Keywords"
+        category_rst = category_template.render(
+            category=category,
+            category_title=category_title,
+            entries=sorted(entries)
+        )
+        category_filename = f"{category}.rst"
+        output_manager.write_autodoc_file(autodoc_output_path, category_filename, category_rst)
+        logger.debug(f"Generated category file: {category_filename} with {len(entries)} entries")
+
+    # Generate index file with toctree of all categories
+    index_template = env.get_template("autodoc_index.jinja")
+    index_rst = index_template.render(categories=sorted(categories.keys()))
+    output_manager.write_autodoc_file(autodoc_output_path, "index.rst", index_rst)
+    logger.info(f"Generated index.rst with {len(categories)} category links")
 
 
 def get_keywords_to_generate(kwd_name: typing.Optional[str] = None) -> typing.List[typing.Dict]:
@@ -291,7 +325,7 @@ def load_inputs(this_folder, args):
 
 
 def run_codegen(args):
-    logger.debug(f"Running codegen with args: output={args.output}, clean={args.clean}, keyword={args.keyword}")
+    logger.debug(f"Running codegen with args: output={args.output}, clean={args.clean}, keyword={args.keyword}, autodoc_only={args.autodoc_only}")
     output = args.output
     this_folder = get_this_folder()
     autodoc_path = args.autodoc_path
@@ -313,6 +347,16 @@ def run_codegen(args):
         clean(output)
         return
     load_inputs(this_folder, args)
+    
+    # Handle autodoc-only mode
+    if args.autodoc_only:
+        logger.info("Generating autodoc files only")
+        env = Environment(loader=get_loader(), trim_blocks=True, lstrip_blocks=True)
+        all_keywords = get_keywords_to_generate()
+        generate_autodoc_file(autodoc_path, all_keywords, env)
+        logger.info("Autodoc generation complete")
+        return
+    
     if args.keyword == "":
         kwd = None
         logger.info("Generating code for all keywords")
@@ -340,6 +384,12 @@ def parse_args():
         "-k",
         default="",
         help="optional - keyword for which to generate.  If not set, all keywords are generated.",
+    )
+    parser.add_argument(
+        "--autodoc-only",
+        "-a",
+        action="store_true",
+        help="Generate only the autodoc RST files without generating keyword classes.",
     )
     parser.add_argument(
         "--manifest",
