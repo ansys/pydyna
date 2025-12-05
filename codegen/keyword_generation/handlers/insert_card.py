@@ -28,11 +28,28 @@ happens after all handlers run via _do_insertions().
 """
 
 import typing
+from dataclasses import dataclass
+from typing import Any, Dict
 
 import keyword_generation.data_model as gen
 from keyword_generation.data_model import get_card
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class InsertCardSettings:
+    """Configuration for inserting additional cards."""
+    index: int
+    target_class: str
+    card: Dict[str, Any]
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "InsertCardSettings":
+        return cls(
+            index=data["index"], target_class=data["target-class"],
+            card=data["card"],
+        )
 
 
 @handler(
@@ -74,6 +91,11 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         Appends Insertion(target_index, "", card) to kwd_data["card_insertions"]
     """
 
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+        """Keep dict settings for insert-card - target-class not in manifest."""
+        return settings
+
     def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Queue cards for insertion.
@@ -82,7 +104,8 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             kwd_data: Complete keyword data dictionary
             settings: List of {"index", "card"} dicts
         """
-        for card_settings in settings:
+        typed_settings = self._parse_settings(settings)
+        for card_settings in typed_settings:
             index = card_settings["index"]
             card = get_card(card_settings["card"])
             insertion = gen.Insertion(index, "", card)

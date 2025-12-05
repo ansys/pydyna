@@ -29,10 +29,30 @@ repeated with variable length, optionally including their own sub-options.
 
 import copy
 import typing
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
 import keyword_generation.data_model as gen
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class CardSetSettings:
+    """Configuration for grouping cards into repeatable sets."""
+    name: str
+    source_indices: List[int]
+    length_func: Optional[str] = None
+    active_func: Optional[str] = None
+    options: Optional[List[Dict[str, Any]]] = None
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "CardSetSettings":
+        return cls(
+            name=data["name"], source_indices=data["source-indices"],
+            length_func=data.get("length-func"), active_func=data.get("active-func"),
+            options=data.get("options"),
+        )
 
 
 @handler(
@@ -109,6 +129,11 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         - Marks source cards/options with "mark_for_removal" = 1
     """
 
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+        """Keep dict settings for card-set due to complex optional fields not in CardSetSettings."""
+        return settings
+
     def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Create card sets from source cards and options.
@@ -120,11 +145,12 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         Raises:
             Exception: If more than one default target (empty target-name) is specified
         """
+        typed_settings = self._parse_settings(settings)
         card_sets = []
         has_options = False
         default_target = 0
 
-        for card_settings in settings:
+        for card_settings in typed_settings:
             card_set = {"name": card_settings["name"], "source_cards": []}
             target_name = card_settings.get("target-name", "")
             if target_name == "":

@@ -28,9 +28,22 @@ supporting dynamic card structures based on field values.
 """
 
 import typing
+from dataclasses import dataclass
+from typing import Any, Dict
 
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class ConditionalCardSettings:
+    """Configuration for conditional card inclusion."""
+    index: int
+    func: str
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "ConditionalCardSettings":
+        return cls(index=data["index"], func=data["func"])
 
 
 @handler(
@@ -71,6 +84,11 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
         card["func"] = "self.iauto == 3"
     """
 
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[ConditionalCardSettings]:
+        """Convert dict settings to typed ConditionalCardSettings instances."""
+        return [ConditionalCardSettings.from_dict(s) for s in settings]
+
     def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Add conditional logic to specified cards.
@@ -79,10 +97,12 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
             kwd_data: Complete keyword data dictionary
             settings: List of {"index": int, "func": str} dicts
         """
-        for setting in settings:
-            index = setting["index"]
-            card = kwd_data.cards[index]
-            card["func"] = setting["func"]
+        # Parse settings into typed instances
+        typed_settings = self._parse_settings(settings)
+
+        for setting in typed_settings:
+            card = kwd_data.cards[setting.index]
+            card["func"] = setting.func
 
     def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""

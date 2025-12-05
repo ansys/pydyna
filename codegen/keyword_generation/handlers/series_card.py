@@ -28,9 +28,36 @@ supporting repetitive data structures like multiple loads, materials, or entitie
 """
 
 import typing
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
 import keyword_generation.handlers.handler_base
+from keyword_generation.data_model.metadata import VariableCardMetadata, DataclassDefinition, DataclassField
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class SeriesCardSettings:
+    """Configuration for variable-length card arrays."""
+    index: int
+    name: str
+    card_size: int
+    element_width: int
+    type: str
+    help: str
+    length_func: Optional[str] = None
+    active_func: Optional[str] = None
+    struct_info: Optional[Dict[str, Any]] = None
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "SeriesCardSettings":
+        return cls(
+            index=data["index"], name=data["name"],
+            card_size=data["card-size"], element_width=data["element-width"],
+            type=data["type"], help=data["help"],
+            length_func=data.get("length-func"), active_func=data.get("active-func"),
+            struct_info=data.get("struct-info"),
+        )
 
 
 @handler(
@@ -100,6 +127,11 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         - If struct types used, adds kwd_data["dataclasses"] list with struct definitions
     """
 
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[SeriesCardSettings]:
+        """Convert dict settings to typed SeriesCardSettings instances."""
+        return [SeriesCardSettings.from_dict(s) for s in settings]
+
     def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Convert specified cards into variable-length series.
@@ -108,29 +140,33 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             kwd_data: Complete keyword data dictionary
             settings: List of series card configurations
         """
+        typed_settings = self._parse_settings(settings)
         kwd_data.variable = True
         dataclasses = []
-        for card_settings in settings:
-            card_index = card_settings["index"]
-            type_name = card_settings["type"]
+        for card_settings in typed_settings:
+            card_index = card_settings.index
+            type_name = card_settings.type
             variable_card = kwd_data.cards[card_index]
             if type_name == "struct":
-                struct_info = card_settings["struct-info"]
+                struct_info = card_settings.struct_info
                 struct_name = struct_info["name"]
-                dataclass = {"name": struct_name, "fields": struct_info["fields"]}
+                dataclass = DataclassDefinition(
+                    name=struct_name,
+                    fields=[DataclassField.from_dict(f) for f in struct_info["fields"]]
+                )
                 dataclasses.append(dataclass)
                 type_name = f"self.{struct_name}"
 
             # use abbreviations for some fields to make the jinja template more concise
-            variable_card["variable"] = {
-                "name": card_settings["name"],
-                "size": card_settings["card-size"],
-                "width": card_settings["element-width"],
-                "length_func": card_settings.get("length-func", ""),
-                "active_func": card_settings.get("active-func", ""),
-                "type": type_name,
-                "help": card_settings["help"],
-            }
+            variable_card["variable"] = VariableCardMetadata(
+                name=card_settings.name,
+                size=card_settings.card_size,
+                width=card_settings.element_width,
+                type=type_name,
+                help=card_settings.help,
+                length_func=card_settings.length_func or "",
+                active_func=card_settings.active_func or "",
+            )
         if len(dataclasses) > 0:
             kwd_data.dataclasses = dataclasses
 

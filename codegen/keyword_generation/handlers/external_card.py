@@ -28,9 +28,23 @@ supporting code reuse through mixins and external card references.
 """
 
 import typing
+from dataclasses import dataclass
+from typing import Any, Dict
 
 import keyword_generation.handlers.handler_base
+from keyword_generation.data_model.metadata import ExternalCardMetadata, MixinImport
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class ExternalCardSettings:
+    """Configuration for external card implementation."""
+    index: int
+    name: str
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "ExternalCardSettings":
+        return cls(index=data["index"], name=data["name"])
 
 
 @handler(
@@ -95,6 +109,11 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
         - Adds card["external"] = {"name": "IncludeCard"} to each external card
     """
 
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+        """Keep dict settings for external-card - nested card structure in manifest."""
+        return settings
+
     def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Configure external card imports and mixins.
@@ -103,17 +122,21 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
             kwd_data: Complete keyword data dictionary
             settings: List of external card configurations
         """
+        typed_settings = self._parse_settings(settings)
         kwd_data.mixins = []
         kwd_data.mixin_imports = []
-        for setting in settings:
+        for setting in typed_settings:
             card_name = setting["card"]["card-name"]
             card_index = setting["index"]
             card_source = setting["card"]["source"]
             mixin_name = setting["mixin"]
             kwd_data.mixins.append(mixin_name)
-            kwd_data.mixin_imports.append({"source": card_source, "names": [card_name, mixin_name]})
+            kwd_data.mixin_imports.append(MixinImport(
+                source=card_source,
+                names=[card_name, mixin_name]
+            ))
             external_card = kwd_data.cards[card_index]
-            external_card["external"] = {"name": card_name}
+            external_card["external"] = ExternalCardMetadata(name=card_name)
 
     def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""

@@ -28,9 +28,27 @@ readonly status, position, width, and valid options.
 """
 
 import typing
+from dataclasses import dataclass
+from typing import Any, Dict
 
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class OverrideFieldSettings:
+    """Configuration for field property overrides."""
+    card_index: int
+    field_index: int
+    properties: Dict[str, Any]
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "OverrideFieldSettings":
+        return cls(
+            card_index=data["card-index"],
+            field_index=data["field-index"],
+            properties=data["properties"],
+        )
 
 
 @handler(
@@ -80,6 +98,11 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
         Modifies field dict properties for matching field in specified card
     """
 
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+        """Keep dict settings for override-field due to dynamic property access."""
+        return settings
+
     def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Override field properties in cards.
@@ -88,7 +111,8 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
             kwd_data: Complete keyword data dictionary
             settings: List of field override definitions
         """
-        for setting in settings:
+        typed_settings = self._parse_settings(settings)
+        for setting in typed_settings:
             index = setting["index"]
             name = setting["name"]
             card = kwd_data.cards[index]

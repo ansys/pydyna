@@ -25,7 +25,7 @@ import typing
 
 from jinja2 import Environment
 import keyword_generation.data_model as data_model
-from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
 from keyword_generation.handlers.registry import create_default_registry
 from keyword_generation.utils import (
     fix_keyword,
@@ -65,10 +65,12 @@ def _get_jinja_variable(base_variable: typing.Dict) -> typing.Dict:
     return jinja_variable
 
 
-def _get_fields(card: typing.Dict) -> typing.List[typing.Dict[str, typing.Any]]:
-    if "duplicate_group" in card:
+def _get_fields(card: typing.Union[Card, typing.Dict]) -> typing.Union[typing.List[Field], typing.List[typing.Dict]]:
+    # Check for truthy duplicate_group value, not just attribute presence
+    if card.get("duplicate_group"):
         fields = []
-        for sub_card in card["sub_cards"]:
+        sub_cards = card.get("sub_cards") or []
+        for sub_card in sub_cards:
             fields.extend(sub_card["fields"])
         return fields
     return card["fields"]
@@ -114,10 +116,13 @@ def _transform_data(data: KeywordData):
             return None
         return int(float(field_default))
 
-    def fix_card(card: typing.Dict) -> None:
-        for field in _get_fields(card):
-            if "used" not in field:
-                field["used"] = True
+    def fix_card(card: typing.Union[Card, typing.Dict]) -> None:
+        fields = _get_fields(card)
+        for field in fields:
+            if "used" not in field or not field.get("used"):
+                # Handle unused fields
+                if "used" not in field:
+                    field["used"] = True
             field["type"] = type_mapping[field["type"]]
             if not field["used"]:
                 field["default"] = None
@@ -128,10 +133,10 @@ def _transform_data(data: KeywordData):
                 field["type"] = "bool"
             field_name: str = field["name"]
             fixed_field_name = fix_fieldname(field_name).lower()
-            if not "property_name" in field:
+            if "property_name" not in field or not field.get("property_name"):
                 field["property_name"] = fixed_field_name
             field["name"] = field_name.lower()
-            if not "property_type" in field:
+            if "property_type" not in field or not field.get("property_type"):
                 field["property_type"] = field["type"]
             if field["type"] == "str":
                 if "options" in field:
@@ -169,7 +174,7 @@ def _transform_data(data: KeywordData):
         [fix_card(card) for card in cards]
 
 
-def _get_insertion_index_for_cards(requested_index: int, container: typing.List[typing.Dict[str, typing.Any]]) -> int:
+def _get_insertion_index_for_cards(requested_index: int, container: typing.List[Card]) -> int:
     for index, card in enumerate(container):
         card_index = card.get("source_index", card["index"])
         if card_index == requested_index:
@@ -227,7 +232,8 @@ def _do_insertions(kwd_data: KeywordData) -> None:
 def _delete_marked_indices(kwd_data: KeywordData) -> None:
     marked_indices = []
     for index, card in enumerate(kwd_data.cards):
-        if "mark_for_removal" in card:
+        # Check if mark_for_removal is set to a truthy value (not None, not 0)
+        if card.get("mark_for_removal"):
             marked_indices.append(index)
     # removal will affect order if we iterate forwards, so iterate backwards
     marked_indices.sort(reverse=True)
@@ -240,8 +246,8 @@ def _delete_marked_indices(kwd_data: KeywordData) -> None:
     if len(options_list) > 0:
         marked_option_indices = []
         for index, option in enumerate(options_list):
-            # option may be OptionGroup instance or dict
-            has_mark = hasattr(option, "__getitem__") and "mark_for_removal" in option  # type: ignore
+            # option may be OptionGroup instance or dict - check for truthy mark_for_removal value
+            has_mark = hasattr(option, "get") and option.get("mark_for_removal")  # type: ignore
             if has_mark:
                 marked_option_indices.append(index)
         marked_option_indices.sort(reverse=True)

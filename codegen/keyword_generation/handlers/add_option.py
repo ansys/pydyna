@@ -28,10 +28,30 @@ included based on keyword title options (e.g., *KEYWORD_OPTION1_OPTION2).
 """
 
 import typing
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
 from keyword_generation.data_model import get_card
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class AddOptionSettings:
+    """Configuration for adding keyword options."""
+    name: str
+    card_order: int
+    title_order: int
+    cards: List[Dict[str, Any]]
+    func: Optional[str] = None
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "AddOptionSettings":
+        return cls(
+            name=data["name"], card_order=data["card-order"],
+            title_order=data["title-order"], cards=data["cards"],
+            func=data.get("func"),
+        )
 
 
 @handler(
@@ -95,6 +115,11 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         ]
     """
 
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+        """Keep dict settings for add-option - uses 'option-name' not 'name'."""
+        return settings
+
     def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Create optional card groups from settings.
@@ -103,6 +128,7 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             kwd_data: Complete keyword data dictionary
             settings: List of option definitions with cards
         """
+        typed_settings = self._parse_settings(settings)
 
         def expand(card):
             card = get_card(card)
@@ -111,7 +137,7 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             return card
 
         new_options = []
-        for option_settings in settings:
+        for option_settings in typed_settings:
             cards = [expand(card) for card in option_settings["cards"]]
             new_option = {
                 "card_order": option_settings["card-order"],

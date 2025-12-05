@@ -28,9 +28,21 @@ as reordering affects the index values used by other handlers.
 """
 
 import typing
+from dataclasses import dataclass
+from typing import Any, Dict, List
 
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class ReorderCardSettings:
+    """Configuration for card reordering."""
+    order: List[int]
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "ReorderCardSettings":
+        return cls(order=data["order"])
 
 
 @handler(
@@ -68,6 +80,11 @@ class ReorderCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         Original card at index 0 stays at 0, card at index 4 moves to position 2, etc.
     """
 
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[ReorderCardSettings]:
+        """Convert dict settings to typed ReorderCardSettings instances."""
+        return [ReorderCardSettings.from_dict(s) for s in settings]
+
     def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Reorder cards based on the specified index sequence.
@@ -79,10 +96,12 @@ class ReorderCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         Note: This reorders the list but does NOT update each card's 'index' property.
         Subsequent handlers use list positions (kwd_data["cards"][3]) not card indices.
         """
-        assert len(settings) == 1, f"reorder-card handler expects exactly 1 settings dict, got {len(settings)}"
+        # Parse settings into typed instances
+        typed_settings = self._parse_settings(settings)
+
+        assert len(typed_settings) == 1, f"reorder-card handler expects exactly 1 settings dict, got {len(typed_settings)}"
         # TODO - mark the reorders and let that get settled after the handlers run
-        order = settings[0]["order"]
-        kwd_data.cards = [kwd_data.cards[i] for i in order]
+        kwd_data.cards = [kwd_data.cards[i] for i in typed_settings[0].order]
 
     def post_process(self, kwd_data: typing.Any) -> None:
         """No post-processing required."""

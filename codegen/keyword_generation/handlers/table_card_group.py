@@ -28,10 +28,28 @@ commonly used for table or matrix data where multiple related cards repeat as a 
 """
 
 import typing
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
 import keyword_generation.data_model as gen
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class TableCardGroupSettings:
+    """Configuration for grouping multiple cards into a table."""
+    indices: List[int]
+    property_name: str
+    length_func: Optional[str] = None
+    active_func: Optional[str] = None
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "TableCardGroupSettings":
+        return cls(
+            indices=data["indices"], property_name=data["property-name"],
+            length_func=data.get("length-func"), active_func=data.get("active-func"),
+        )
 
 
 @handler(
@@ -96,6 +114,11 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
         - Marks all source cards with "mark_for_removal" = 1
     """
 
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+        """Keep dict settings for table-card-group - uses 'overall-name' not 'property-name'."""
+        return settings
+
     def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Create duplicate card groups from card indices.
@@ -104,8 +127,9 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             kwd_data: Complete keyword data dictionary
             settings: List of card group definitions
         """
+        typed_settings = self._parse_settings(settings)
         kwd_data.duplicate_group = True
-        for card_settings in settings:
+        for card_settings in typed_settings:
             indices_raw = card_settings["indices"]
             indices: typing.List[int] = typing.cast(typing.List[int], indices_raw)
             # build the card group

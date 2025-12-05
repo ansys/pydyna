@@ -107,6 +107,22 @@ class Field:
             flag=data.get("flag", False),
         )
 
+    def __getitem__(self, key: str) -> Any:
+        """Dict-like access for backward compatibility."""
+        return getattr(self, key)
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        """Dict-like assignment for backward compatibility."""
+        setattr(self, key, value)
+
+    def __contains__(self, key: str) -> bool:
+        """Dict-like 'in' operator for backward compatibility."""
+        return hasattr(self, key)
+
+    def get(self, key: str, default: Any = None) -> Any:
+        """Dict-like get() method for backward compatibility."""
+        return getattr(self, key, default)
+
 
 @dataclass
 class Card:
@@ -166,7 +182,7 @@ class Card:
         external = ExternalCardMetadata.from_dict(external_data) if isinstance(external_data, dict) else external_data
 
         return cls(
-            index=data["index"],
+            index=data.get("index", -1),  # Default to -1, will be set by class_generator
             fields=fields,
             mark_for_removal=data.get("mark_for_removal"),
             func=data.get("func"),
@@ -183,6 +199,22 @@ class Card:
             overall_name=data.get("overall_name"),
         )
 
+    def __getitem__(self, key: str) -> Any:
+        """Dict-like access for backward compatibility during migration."""
+        return getattr(self, key)
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        """Dict-like assignment for backward compatibility during migration."""
+        setattr(self, key, value)
+
+    def __contains__(self, key: str) -> bool:
+        """Dict-like 'in' operator for backward compatibility."""
+        return hasattr(self, key)
+
+    def get(self, key: str, default: Any = None) -> Any:
+        """Dict-like get() method for backward compatibility."""
+        return getattr(self, key, default)
+
 
 @dataclass
 class KeywordData:
@@ -195,8 +227,8 @@ class KeywordData:
 
     Design Rationale:
     - KeywordData uses dataclass attributes for type safety and IDE support
-    - Cards remain as List[Dict] (not List[Card]) because handlers mutate them
-      with dict operations like card["duplicate"] = {...}
+    - Cards are now List[Card] instances with dict-like access (__getitem__/__setitem__)
+      for backward compatibility during the migration from dict-based code
     - Options may be List[OptionGroup] or List[Dict] during transition period
     - The from_dict/to_dict methods enable conversion at pipeline boundaries
 
@@ -223,7 +255,7 @@ class KeywordData:
     subkeyword: str
     title: str
     classname: str = ""  # Set later by _get_base_variable
-    cards: List[Dict[str, Any]] = field(default_factory=list)  # Keep as dicts for handler mutations
+    cards: List[Card] = field(default_factory=list)  # Now using Card dataclass instances
     options: Union[List[OptionGroup], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     card_sets: Optional[Union[CardSetsContainer, Dict[str, Any]]] = None
     duplicate: bool = False
@@ -254,8 +286,9 @@ class KeywordData:
             KeywordData instance
         """
         logger.debug(f"Creating KeywordData for {data.get('keyword')}.{data.get('subkeyword')}")
-        # Keep cards as dicts - handlers modify them directly
-        cards = data.get("cards", [])
+        # Convert cards from dicts to Card instances
+        cards_data = data.get("cards", [])
+        cards = [Card.from_dict(c) if isinstance(c, dict) else c for c in cards_data]
 
         # Convert metadata dicts to typed objects
         options_data = data.get("options")

@@ -28,9 +28,22 @@ them as shared, preventing duplication and enabling cross-card field references.
 """
 
 import typing
+from dataclasses import dataclass
+from typing import Any, Dict, List
 
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class SharedFieldSettings:
+    """Configuration for field sharing across cards."""
+    field_name: str
+    card_indices: List[int]
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "SharedFieldSettings":
+        return cls(field_name=data["field-name"], card_indices=data["card-indices"])
 
 
 def do_negative_shared_fields(kwd_data: typing.Any):
@@ -80,7 +93,10 @@ def do_negative_shared_fields(kwd_data: typing.Any):
             # If not found in options, check base cards
             if not found_in_options and index < num_cards:
                 assert False, "TODO - support negative indices for shared fields for non-options"
-        assert len(fields) > 1
+        if len(fields) <= 1:
+            import logging
+            logging.warning(f"Shared field skipped (insufficient occurrences): keyword={kwd_data.keyword}.{kwd_data.subkeyword}, field={setting['name']}, found {len(fields)} fields, expected >= 2")
+            continue  # Skip this shared field configuration
         if not setting["applied_card_indices"]:
             fields[0]["card_indices"] = indices
         for field in fields[1:]:
@@ -180,6 +196,11 @@ class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler
         - Processed after options are available
     """
 
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+        """Keep dict settings for shared-field - uses 'name' and 'cards' directly."""
+        return settings
+
     def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Mark shared fields, handling positive indices immediately.
@@ -188,7 +209,8 @@ class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler
             kwd_data: Complete keyword data dictionary
             settings: List of shared field configurations
         """
-        return handle_shared_field(kwd_data, settings)
+        typed_settings = self._parse_settings(settings)
+        return handle_shared_field(kwd_data, typed_settings)
 
     def post_process(self, kwd_data: typing.Any) -> None:
         """
