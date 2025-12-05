@@ -29,7 +29,7 @@ import pandas as pd
 from ansys.dyna.core.lib.card import Card, Field
 from ansys.dyna.core.lib.field_writer import write_c_dataframe
 from ansys.dyna.core.lib.format_type import format_type
-from ansys.dyna.core.lib.io_utils import write_or_return
+from ansys.dyna.core.lib.io_utils import is_dataframe, write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 from ansys.dyna.core.lib.parameters import ParameterSet
 
@@ -39,7 +39,7 @@ CHECK_TYPE = True
 def _check_type(value):
     global CHECK_TYPE
     if CHECK_TYPE:
-        if not isinstance(value, pd.DataFrame):
+        if not is_dataframe(value):
             raise TypeError("value must be a DataFrame")
 
 

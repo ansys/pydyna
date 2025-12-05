@@ -41,3 +41,22 @@ def write_or_return(buf: typing.Optional[typing.TextIO], func: typing.Callable) 
     if to_return:
         retval = buf.getvalue()
         return retval
+
+
+def is_dataframe(obj) -> bool:
+    """Check if object is a pandas DataFrame using duck typing.
+
+    Uses duck typing instead of isinstance() for Python 3.13+ compatibility,
+    where pd.DataFrame is no longer a valid type for isinstance checks.
+
+    Parameters
+    ----------
+    obj : Any
+        Object to check.
+
+    Returns
+    -------
+    bool
+        True if obj has DataFrame-like attributes.
+    """
+    return hasattr(obj, "iloc") and hasattr(obj, "columns") and hasattr(obj, "index")

@@ -33,11 +33,17 @@ if typing.TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class ParameterSet:
-    """Deck parameters with scope support.
+def _evaluate_expressions_if_needed():
+    """Lazy import to avoid circular dependency."""
+    from ansys.dyna.core.lib.expression_evaluator import evaluate_parameter_expressions
 
-    Supports hierarchical parameter scopes where child scopes can see parent parameters
-    but local parameters in child scopes don't leak to parents or siblings.
+    return evaluate_parameter_expressions
+
+
+class ParameterSet:
+    """Hierarchical parameter storage for LS-DYNA deck parameters.
+
+    Child scopes see parent parameters but local parameters don't leak upward.
     """
 
     def __init__(self, parent: typing.Optional["ParameterSet"] = None):
@@ -172,6 +178,135 @@ def _load_parameters(deck, parameter: "kwd.Parameter", local: bool = False):
             deck_params.add(name, val)
 
 
+def _load_single_parameter_expression(deck, parameter_expression, local: bool = False):
+    """Load and evaluate a single PARAMETER_EXPRESSION_NOECHO parameter.
+
+    Note: Codegen currently uses Card (not TableCard) for NOECHO variant, limiting it
+    to single parameters. This should be fixed in codegen to match LS-DYNA behavior.
+
+    Parameters
+    ----------
+    deck : Deck
+        Target deck.
+    parameter_expression : ParameterExpressionNoecho
+        Keyword with single expression.
+    local : bool, optional
+        Add as local (True) or global (False) parameter.
+    """
+    prmr = parameter_expression.prmr
+    expression_text = parameter_expression.expression
+
+    if not prmr or len(prmr) < 2:
+        logger.warning(f"Skipping invalid parameter name: '{prmr}'")
+        return
+
+    param_type = prmr[0]  # 'R' or 'I'
+    param_name = prmr[1:].strip()
+
+    if param_type not in ("R", "I"):
+        logger.warning(f"Unknown parameter type '{param_type}' for parameter '{prmr}'")
+        return
+
+    if not expression_text:
+        logger.warning(f"Empty expression for parameter '{prmr}'")
+        return
+
+    logger.debug(f"Found single expression: {param_name} ({param_type}) = {expression_text}")
+
+    # Evaluate the expression
+    from ansys.dyna.core.lib.expression_evaluator import ExpressionEvaluator
+
+    deck_params = deck.parameters
+    evaluator = ExpressionEvaluator(deck_params)
+
+    try:
+        result = evaluator.evaluate(expression_text, param_type)
+
+        # Add to deck parameters
+        if local:
+            logger.debug(f"Adding local parameter: {param_name} = {result}")
+            deck_params.add_local(param_name, result)
+        else:
+            logger.debug(f"Adding global parameter: {param_name} = {result}")
+            deck_params.add(param_name, result)
+
+        logger.info(f"Evaluated parameter '{param_name}' = {result}")
+    except Exception as e:
+        logger.error(f"Failed to evaluate expression for '{param_name}': {e}")
+        raise
+
+
+def _load_parameter_expressions(deck, parameter_expression, local: bool = False):
+    """Load and evaluate PARAMETER_EXPRESSION or PARAMETER_EXPRESSION_LOCAL.
+
+    Parameters
+    ----------
+    deck : Deck
+        Target deck.
+    parameter_expression : ParameterExpression or ParameterExpressionLocal
+        Keyword with expressions.
+    local : bool, optional
+        Add as local (True) or global (False) parameters.
+    """
+    # Extract expressions from the keyword's DataFrame
+    df = parameter_expression.parameters
+
+    if df is None or len(df) == 0:
+        logger.debug("No expressions to evaluate")
+        return
+
+    # Extract expressions from the DataFrame
+    expressions = []
+    for idx in range(len(df)):
+        prmr = str(df.iloc[idx]["prmr"]).strip()
+        expression_text = str(df.iloc[idx]["expression"]).strip()
+
+        # Extract type code and parameter name from prmr field
+        if not prmr or len(prmr) < 2:
+            logger.warning(f"Skipping invalid parameter name: '{prmr}'")
+            continue
+
+        param_type = prmr[0]  # 'R' or 'I'
+        param_name = prmr[1:].strip()
+
+        if param_type not in ("R", "I"):
+            logger.warning(f"Unknown parameter type '{param_type}' for parameter '{prmr}'")
+            continue
+
+        logger.debug(f"Found expression: {param_name} ({param_type}) = {expression_text}")
+        expressions.append((param_type, param_name, expression_text))
+
+    if not expressions:
+        logger.debug("No valid expressions to evaluate")
+        return
+
+    # Evaluate expressions using the expression evaluator
+    deck_params = deck.parameters
+
+    # Import here to avoid circular dependency
+    from ansys.dyna.core.lib.expression_evaluator import DependencyResolver, ExpressionEvaluator
+
+    # Resolve dependency order
+    resolver = DependencyResolver()
+    ordered_expressions = resolver.resolve(expressions)
+
+    # Evaluate in order
+    evaluator = ExpressionEvaluator(deck_params)
+    for param_type, param_name, expression in ordered_expressions:
+        logger.debug(f"Evaluating expression for '{param_name}': {expression}")
+        result = evaluator.evaluate(expression, param_type)
+
+        # Add to deck parameters immediately so later expressions can reference it
+        if local:
+            logger.debug(f"Adding local parameter: {param_name} = {result}")
+            deck_params.add_local(param_name, result)
+        else:
+            logger.debug(f"Adding global parameter: {param_name} = {result}")
+            deck_params.add(param_name, result)
+
+        logger.info(f"Evaluated parameter '{param_name}' = {result}")
+
+
 class ParameterHandler(ImportHandler):
     def __init__(self):
         pass
@@ -186,6 +321,15 @@ class ParameterHandler(ImportHandler):
         elif isinstance(keyword, kwd.ParameterLocal):
             logger.debug(f"Processing PARAMETER_LOCAL keyword with {len(keyword.parameters.data)} parameters")
             _load_parameters(context.deck, keyword, local=True)
+        elif isinstance(keyword, kwd.ParameterExpressionNoecho):
+            # NOECHO variant uses a Card, not a TableCard, so handle it separately
+            logger.debug(f"Processing PARAMETER_EXPRESSION_NOECHO keyword")
+            _load_single_parameter_expression(context.deck, keyword, local=False)
+        elif isinstance(keyword, (kwd.ParameterExpression, kwd.ParameterExpressionLocal)):
+            # Handle PARAMETER_EXPRESSION and PARAMETER_EXPRESSION_LOCAL
+            is_local = isinstance(keyword, kwd.ParameterExpressionLocal)
+            logger.debug(f"Processing {'PARAMETER_EXPRESSION_LOCAL' if is_local else 'PARAMETER_EXPRESSION'} keyword")
+            _load_parameter_expressions(context.deck, keyword, local=is_local)
 
     def on_error(self, error):
         pass
