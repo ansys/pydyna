@@ -26,7 +26,7 @@ import typing
 from jinja2 import Environment
 import keyword_generation.data_model as data_model
 from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
-from keyword_generation.handlers.registry import create_default_registry
+from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry
 from keyword_generation.utils import (
     fix_keyword,
     get_classname,
@@ -282,7 +282,7 @@ def _add_option_indices(kwd_data: KeywordData) -> None:
         index += 1
 
 
-def _after_handle(kwd_data: KeywordData, registry: typing.Any) -> None:
+def _after_handle(kwd_data: KeywordData, registry: HandlerRegistry) -> None:
     # TODO - move these to their respective handler
     _do_insertions(kwd_data)
     _delete_marked_indices(kwd_data)
