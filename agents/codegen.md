@@ -15,6 +15,8 @@ The codegen system is responsible for generating Python classes and import machi
 - **Template Rendering**: Uses Jinja templates to generate Python code for keyword classes, importers, and type mappings. Context for templates is built from processed specifications.
 - **Output Management**: Writes generated files to the appropriate locations, typically under `src/ansys/dyna/core/keywords/keyword_classes/auto/`.
 
+Note: kwd.json is extremely large, so the agent should never attempt to read it in its entirety
+
 ### Typical Flow
 
 1. **Run `generate.py`**: Entry point for code generation. CLI options allow for cleaning (`-C`) and generation.
