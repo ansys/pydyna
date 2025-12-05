@@ -31,7 +31,7 @@ dependencies = [
     "ansys-tools-common>=0.2,<1",
     "hollerith>=0.6.0",
     "numpy>=1",
-    "pandas>=2.0",
+    "pandas>=2.0,<2.3",
     "appdirs>=1.4.4",
     "transformations==2025.1.1",
     "chardet==5.2.0",
