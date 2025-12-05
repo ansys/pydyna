@@ -6,17 +6,10 @@ Many keyword classes in `src/ansys/dyna/core/keywords/keyword_classes/auto/` are
 
 **Objective**: Migrate codegen pipeline from dict-based to strongly-typed dataclass architecture for improved type safety, IDE support, and maintainability.
 
-**Status**: Phase 3 complete ✅ (3173/3188 classes generating successfully)
 
-**Completed Phases**:
-- **Phase 1**: Handler settings → typed dataclasses in individual handler files
-- **Phase 2**: Metadata dicts → typed metadata instances (DuplicateCardMetadata, etc.)
-- **Phase 3**: Cards/Fields → dataclass instances with dict-like backward compatibility
-
-**Next Steps** (Phase 4):
+**Future Improvements**:
 - Update all handler method signatures: `kwd_data: typing.Any` → `kwd_data: KeywordData`
-- Update handler_base.py abstract method signatures
-- Remove Union types once all sources converted
+- Remove Union types once all card/field sources use dataclasses exclusively
 - Enable strict type checking throughout
 
 See sections below for architectural details and migration patterns.
@@ -70,37 +63,8 @@ Handlers transform keyword metadata during code generation. **Order matters** be
 
 **Note**: Typed dataclasses (`KeywordData`, `Card`, `Field`) are available in `data_model/keyword_data.py` for improved type safety, with backward-compatible `to_dict()`/`from_dict()` methods for gradual migration.
 
-### Handler Pipeline: Full Dataclass Migration (December 2025)
-
-**COMPLETED**: The handler pipeline has been fully migrated to typed dataclasses:
-
-**Phase 1 - Handler Settings** ✅:
-- All 14 handlers now use typed settings dataclasses (e.g., `SkipCardSettings`, `TableCardSettings`)
-- Settings classes moved from centralized `handler_settings.py` into individual handler files for encapsulation
-- Each handler has `_parse_settings(settings: List[Dict[str, Any]]) -> List[SettingsDataclass]` method
-- Manifest uses standardized `List[Dict[str, Any]]` format for all handler settings
-
-**Phase 2 - Metadata Classes** ✅:
-- Handlers use typed metadata instances instead of dicts:
-  - `card["duplicate"] = DuplicateCardMetadata(...)` (not `card["duplicate"] = {...}`)
-  - `card["variable"] = VariableCardMetadata(...)`
-  - `card["external"] = ExternalCardMetadata(...)`
-- Metadata classes use attribute access (e.g., `card["duplicate"].name`) for Jinja template compatibility
-- No `to_dict()` methods added - templates directly access dataclass attributes
-
-**Phase 3 - Card and Field Dataclasses** ✅:
-- `KeywordData.cards` changed from `List[Dict[str, Any]]` to `List[Card]`
-- `Card` and `Field` dataclasses include dict-like access methods for backward compatibility:
-  - `__getitem__`, `__setitem__`, `__contains__`, `get()`
-  - Enables gradual migration: `card["index"]` works alongside `card.index`
-- Type hints in `class_generator.py` updated to `Union[Card, Dict]` during transition
-- Full codegen validation: 3173 classes generated successfully
-
-**Phase 4 - Type Enforcement** (NEXT):
-- Update all handler signatures from `kwd_data: typing.Any` to `kwd_data: KeywordData`
-- Update handler_base.py abstract method signatures
-- Enable strict beartype checking throughout
-- Remove Union types once all card/field sources use dataclasses
+### Handler Pipeline: Full Dataclass Migration
+In progress
 
 **Key Benefits**:
 - Full IDE autocomplete and type checking
@@ -134,10 +98,7 @@ The codegen system uses typed metadata classes throughout the pipeline:
 - Type-safe configuration instead of raw dicts
 
 **Migration Status**:
-- ✅ All handlers use typed settings dataclasses
-- ✅ All metadata uses typed classes (no more `Dict[str, Any]` for metadata)
-- ✅ Cards and Fields are dataclass instances with dict-like compatibility
-- ⏳ Handler signatures still use `kwd_data: typing.Any` (Phase 4 next step)
+- Handler signatures still use `kwd_data: typing.Any` (future improvement)
 
 ### Dict-Like Access Pattern for Backward Compatibility
 
@@ -149,19 +110,19 @@ class Card:
     index: int = -1
     fields: List[Field] = field(default_factory=list)
     # ... other attributes ...
-    
+
     def __getitem__(self, key: str) -> Any:
         """Dict-like access: card["index"] → card.index"""
         return getattr(self, key)
-    
+
     def __setitem__(self, key: str, value: Any) -> None:
         """Dict-like assignment: card["index"] = 5 → card.index = 5"""
         setattr(self, key, value)
-    
+
     def __contains__(self, key: str) -> bool:
         """Dict-like membership: "index" in card → hasattr(card, "index")"""
         return hasattr(self, key)
-    
+
     def get(self, key: str, default: Any = None) -> Any:
         """Dict-like get: card.get("index", -1) → getattr(card, "index", -1)"""
         return getattr(self, key, default)
@@ -196,6 +157,9 @@ class Card:
    - Solution: Update type hints progressively, validate with beartype
 5. **Escaped docstrings**: Don't escape triple quotes in f-strings
    - Solution: Use raw strings `"""Docstring"""` not `\"\"\"Docstring\"\"\"`
+6. **Missing optional attributes**: When migrating dicts to dataclasses, ensure ALL dict keys represented as dataclass attributes
+   - Solution: Review source dicts (e.g., `additional-cards.json`) for all possible keys, add as optional attributes with defaults
+   - Example: Field dataclass needs `on` and `off` for flag fields (default `"&"` for MPP2 flags)
 
 **Incremental Migration Pattern**:
 1. Add typed dataclass with `from_dict()` classmethod

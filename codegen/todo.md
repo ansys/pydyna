@@ -3,7 +3,8 @@
 This file collects architectural and code-level recommendations for improving the codegen system.
 
 ## 1. Data Structures
-- Add consistent type hints throughout the codebase (dataclasses and typed metadata classes are available in `data_model/` for gradual migration - see `agents/codegen.md` for details)
+- Typed dataclasses implemented for handlers, metadata, cards, and fields
+- Remove Union types once all sources exclusively use dataclasses
 
 ## 2. Handler System
 
