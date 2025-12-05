@@ -27,11 +27,12 @@ This handler adds optional sections to keywords, allowing cards to be conditiona
 included based on keyword title options (e.g., *KEYWORD_OPTION1_OPTION2).
 """
 
-import typing
 from dataclasses import dataclass
+import typing
 from typing import Any, Dict, List, Optional
 
 from keyword_generation.data_model import get_card
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -39,6 +40,7 @@ from keyword_generation.handlers.handler_base import handler
 @dataclass
 class AddOptionSettings:
     """Configuration for adding keyword options."""
+
     name: str
     card_order: int
     title_order: int
@@ -48,8 +50,10 @@ class AddOptionSettings:
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "AddOptionSettings":
         return cls(
-            name=data["name"], card_order=data["card-order"],
-            title_order=data["title-order"], cards=data["cards"],
+            name=data["name"],
+            card_order=data["card-order"],
+            title_order=data["title-order"],
+            cards=data["cards"],
             func=data.get("func"),
         )
 
@@ -116,11 +120,13 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     """
 
     @classmethod
-    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+    def _parse_settings(
+        cls, settings: typing.List[typing.Dict[str, typing.Any]]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
         """Keep dict settings for add-option - uses 'option-name' not 'name'."""
         return settings
 
-    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Create optional card groups from settings.
 
@@ -148,6 +154,6 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             new_options.append(new_option)
         kwd_data.options = new_options
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass

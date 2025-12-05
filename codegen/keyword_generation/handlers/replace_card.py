@@ -27,11 +27,12 @@ Uses cards from additional-cards.json or other sources to completely
 replace existing cards in the keyword structure.
 """
 
-import typing
 from dataclasses import dataclass
+import typing
 from typing import Any, Dict, List
 
 from keyword_generation.data_model import get_card
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -39,6 +40,7 @@ from keyword_generation.handlers.handler_base import handler
 @dataclass
 class ReplaceCardSettings:
     """Configuration for replacing card fields."""
+
     index: int
     fields: List[Dict[str, Any]]
 
@@ -87,11 +89,13 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
     """
 
     @classmethod
-    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+    def _parse_settings(
+        cls, settings: typing.List[typing.Dict[str, typing.Any]]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
         """Keep dict settings for replace-card - manifest uses 'card' field."""
         return settings
 
-    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Replace cards with new card definitions.
 
@@ -106,6 +110,6 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
             replacement["index"] = index
             kwd_data.cards[index] = replacement
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass

@@ -27,10 +27,11 @@ Allows fine-grained control over field attributes like type, defaults,
 readonly status, position, width, and valid options.
 """
 
-import typing
 from dataclasses import dataclass
+import typing
 from typing import Any, Dict
 
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -38,6 +39,7 @@ from keyword_generation.handlers.handler_base import handler
 @dataclass
 class OverrideFieldSettings:
     """Configuration for field property overrides."""
+
     card_index: int
     field_index: int
     properties: Dict[str, Any]
@@ -99,11 +101,13 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
     """
 
     @classmethod
-    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+    def _parse_settings(
+        cls, settings: typing.List[typing.Dict[str, typing.Any]]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
         """Keep dict settings for override-field due to dynamic property access."""
         return settings
 
-    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Override field properties in cards.
 
@@ -133,6 +137,6 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
                     if "new-name" in setting:
                         field["name"] = setting["new-name"]
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass

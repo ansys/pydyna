@@ -27,18 +27,20 @@ Indicates that a card repeats to form a table structure (e.g., integration point
 The card repeats based on a length function.
 """
 
-import typing
 from dataclasses import dataclass
+import typing
 from typing import Any, Dict, Optional
 
-import keyword_generation.handlers.handler_base
+from keyword_generation.data_model.keyword_data import KeywordData
 from keyword_generation.data_model.metadata import DuplicateCardMetadata
+import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
 
 @dataclass
 class TableCardSettings:
     """Configuration for marking a card as a repeating table structure."""
+
     index: int
     property_name: str
     length_func: Optional[str] = None
@@ -81,7 +83,7 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         """Convert dict settings to typed TableCardSettings instances."""
         return [TableCardSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Mark cards as table structures.
 
@@ -99,6 +101,6 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                 active_func=card_settings.active_func or "",
             )
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass

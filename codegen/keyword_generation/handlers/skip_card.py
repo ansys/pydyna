@@ -27,9 +27,10 @@ Cards marked for deletion are removed from the final keyword structure after
 all handlers have processed.
 """
 
-from typing import Any, Dict, List
 from dataclasses import dataclass
+from typing import Any, Dict, List
 
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -37,6 +38,7 @@ from keyword_generation.handlers.handler_base import handler
 @dataclass
 class SkipCardSettings:
     """Configuration for marking a card for removal."""
+
     index: int
 
     @classmethod
@@ -66,7 +68,7 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         """Convert dict settings to typed SkipCardSettings instances."""
         return [SkipCardSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: Any, settings: List[Dict[str, Any]]) -> None:
+    def handle(self, kwd_data: KeywordData, settings: List[Dict[str, Any]]) -> None:
         """
         Mark specified cards for removal.
 
@@ -81,6 +83,6 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         for setting in typed_settings:
             kwd_data.cards[setting.index]["mark_for_removal"] = 1
 
-    def post_process(self, kwd_data: Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass

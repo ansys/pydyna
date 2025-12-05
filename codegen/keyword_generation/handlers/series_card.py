@@ -27,18 +27,20 @@ This handler enables keywords to contain arrays of cards with dynamic sizing,
 supporting repetitive data structures like multiple loads, materials, or entities.
 """
 
-import typing
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+import typing
+from typing import Any, Dict, Optional
 
+from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.metadata import DataclassDefinition, DataclassField, VariableCardMetadata
 import keyword_generation.handlers.handler_base
-from keyword_generation.data_model.metadata import VariableCardMetadata, DataclassDefinition, DataclassField
 from keyword_generation.handlers.handler_base import handler
 
 
 @dataclass
 class SeriesCardSettings:
     """Configuration for variable-length card arrays."""
+
     index: int
     name: str
     card_size: int
@@ -52,10 +54,14 @@ class SeriesCardSettings:
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SeriesCardSettings":
         return cls(
-            index=data["index"], name=data["name"],
-            card_size=data["card-size"], element_width=data["element-width"],
-            type=data["type"], help=data["help"],
-            length_func=data.get("length-func"), active_func=data.get("active-func"),
+            index=data["index"],
+            name=data["name"],
+            card_size=data["card-size"],
+            element_width=data["element-width"],
+            type=data["type"],
+            help=data["help"],
+            length_func=data.get("length-func"),
+            active_func=data.get("active-func"),
             struct_info=data.get("struct-info"),
         )
 
@@ -132,7 +138,7 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         """Convert dict settings to typed SeriesCardSettings instances."""
         return [SeriesCardSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Convert specified cards into variable-length series.
 
@@ -151,8 +157,7 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
                 struct_info = card_settings.struct_info
                 struct_name = struct_info["name"]
                 dataclass = DataclassDefinition(
-                    name=struct_name,
-                    fields=[DataclassField.from_dict(f) for f in struct_info["fields"]]
+                    name=struct_name, fields=[DataclassField.from_dict(f) for f in struct_info["fields"]]
                 )
                 dataclasses.append(dataclass)
                 type_name = f"self.{struct_name}"
@@ -170,6 +175,6 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         if len(dataclasses) > 0:
             kwd_data.dataclasses = dataclasses
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         return

@@ -27,10 +27,11 @@ This handler enables cards to be rendered only when specific conditions are met,
 supporting dynamic card structures based on field values.
 """
 
-import typing
 from dataclasses import dataclass
+import typing
 from typing import Any, Dict
 
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -38,6 +39,7 @@ from keyword_generation.handlers.handler_base import handler
 @dataclass
 class ConditionalCardSettings:
     """Configuration for conditional card inclusion."""
+
     index: int
     func: str
 
@@ -85,11 +87,13 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
     """
 
     @classmethod
-    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[ConditionalCardSettings]:
+    def _parse_settings(
+        cls, settings: typing.List[typing.Dict[str, typing.Any]]
+    ) -> typing.List[ConditionalCardSettings]:
         """Convert dict settings to typed ConditionalCardSettings instances."""
         return [ConditionalCardSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Add conditional logic to specified cards.
 
@@ -104,6 +108,6 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
             card = kwd_data.cards[setting.index]
             card["func"] = setting.func
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass

@@ -27,12 +27,13 @@ Queues cards for insertion during the post-handler phase. Actual insertion
 happens after all handlers run via _do_insertions().
 """
 
-import typing
 from dataclasses import dataclass
+import typing
 from typing import Any, Dict
 
 import keyword_generation.data_model as gen
 from keyword_generation.data_model import get_card
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -40,6 +41,7 @@ from keyword_generation.handlers.handler_base import handler
 @dataclass
 class InsertCardSettings:
     """Configuration for inserting additional cards."""
+
     index: int
     target_class: str
     card: Dict[str, Any]
@@ -47,7 +49,8 @@ class InsertCardSettings:
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "InsertCardSettings":
         return cls(
-            index=data["index"], target_class=data["target-class"],
+            index=data["index"],
+            target_class=data["target-class"],
             card=data["card"],
         )
 
@@ -92,11 +95,13 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
     """
 
     @classmethod
-    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[typing.Dict[str, typing.Any]]:
+    def _parse_settings(
+        cls, settings: typing.List[typing.Dict[str, typing.Any]]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
         """Keep dict settings for insert-card - target-class not in manifest."""
         return settings
 
-    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Queue cards for insertion.
 
@@ -111,6 +116,6 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             insertion = gen.Insertion(index, "", card)
             kwd_data.card_insertions.append(insertion)
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass

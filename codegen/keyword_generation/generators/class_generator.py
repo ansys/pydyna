@@ -174,7 +174,10 @@ def _transform_data(data: KeywordData):
         [fix_card(card) for card in cards]
 
 
-def _get_insertion_index_for_cards(requested_index: int, container: typing.List[Card]) -> int:
+def _get_insertion_index_for_cards(
+    requested_index: int, container: typing.Union[typing.List[Card], typing.List[typing.Dict]]
+) -> int:
+    """Find insertion index in container, handling both Card instances and dicts during transition."""
     for index, card in enumerate(container):
         card_index = card.get("source_index", card["index"])
         if card_index == requested_index:
