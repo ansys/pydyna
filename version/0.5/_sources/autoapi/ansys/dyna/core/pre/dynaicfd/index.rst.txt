@@ -1,0 +1,2010 @@
+ansys.dyna.core.pre.dynaicfd
+============================
+
+.. py:module:: ansys.dyna.core.pre.dynaicfd
+
+.. autoapi-nested-parse::
+
+   ICFD API
+   ========
+
+   Module for creating an ICFD (incompressible computational fluid dynamics) DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynaicfd.DynaICFD
+   ansys.dyna.core.pre.dynaicfd.ICFD_SurfRemeshMethod
+   ansys.dyna.core.pre.dynaicfd.ICFD_AnalysisType
+   ansys.dyna.core.pre.dynaicfd.ICFD_MessageLevel
+   ansys.dyna.core.pre.dynaicfd.ICFD_CouplingForm
+   ansys.dyna.core.pre.dynaicfd.ICFD_CouplingDirection
+   ansys.dyna.core.pre.dynaicfd.ICFDAnalysis
+   ansys.dyna.core.pre.dynaicfd.Compressible
+   ansys.dyna.core.pre.dynaicfd.MatICFD
+   ansys.dyna.core.pre.dynaicfd.ICFDDOF
+   ansys.dyna.core.pre.dynaicfd.Vel
+   ansys.dyna.core.pre.dynaicfd.ICFDPart
+   ansys.dyna.core.pre.dynaicfd.ICFDVolumePart
+   ansys.dyna.core.pre.dynaicfd.MeshedVolume
+
+
+Module Contents
+---------------
+
+.. py:class:: DynaICFD
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+
+   
+   Contains methods for create a keyword related to an ICFD analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: timestep
+      :value: 0
+
+
+
+   .. py:attribute:: termination
+      :value: 1e+28
+
+
+
+   .. py:method:: set_termination(termination_time)
+
+      
+      Set the total time of the simulation for the fluid problem.
+
+
+      :Parameters:
+
+          **termination_time** : :class:`python:float`
+              Total time of the simulation for the fluid problem.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_control_general(atype=0, mtype=0, dvcl=0, rdvcl=0)
+
+      
+      Specify the type of CFD analysis.
+
+
+      :Parameters:
+
+          **atype** : :class:`python:int`, :obj:`optional`
+              Analysis type. The default is ``0``.
+
+          **mtype** : :class:`python:int`, :obj:`optional`
+              Solving method type. The default is ``0``.
+
+          **dvcl** : :class:`python:int`, :obj:`optional`
+              Flag for divergence cleaning. The default is ``0``.
+
+          **rdvcl** : :class:`python:int`, :obj:`optional`
+              Flag for remeshing divergence cleaning. The default is ``0``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_control_output(msgl)
+
+      
+      Modify default values for screen and file outputs related to the fluid solver only.
+
+
+      :Parameters:
+
+          **msgl** : :class:`python:int`
+              Message level.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_control_turbulence(tmod)
+
+      
+      Modify the default values for the turbulence model.
+
+
+      :Parameters:
+
+          **tmod** : :class:`python:int`
+              Turbulence model to use.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_control_dem_coupling(ctype=0, bt=0, dt=1e+28, sf=1)
+
+      
+      Activate coupling between the ICFD and DEM solvers.
+
+
+      :Parameters:
+
+          **ctype** : :class:`python:int`, :obj:`optional`
+              Coupling direction to the solver. The default is ``0``.
+
+          **bt** : :class:`python:float`, :obj:`optional`
+              Birth time for the DEM coupling. The default is ``0``.
+
+          **dt** : :class:`python:float`, :obj:`optional`
+              Death time for the DEM coupling. The default is ``1e28``.
+
+          **sf** : :class:`python:float`, :obj:`optional`
+              Scale factor to apply to the force transmitted by the fluid to the structure.
+              The default is ``1``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_section_icfd(sid)
+
+      
+      Define a section for the ICFD solver.
+
+
+      :Parameters:
+
+          **sid** : :class:`python:int`
+              Section ID.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_part_icfd(pid, secid, mid)
+
+      
+      Define parts for the ICFD solver.
+
+
+      :Parameters:
+
+          **pid** : :class:`python:int`
+              Part ID for fluid surfaces.
+
+          **secid** : :class:`python:int`
+              Section ID defined with the ``\*ICFD_SECTION`` card.
+
+          **mid** : :class:`python:int`
+              Material ID defined with the ``\*ICFD_MAT`` card.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_solver_tol_mmov(atol=1e-08, rtol=1e-08)
+
+      
+      Change the default tolerance values for the mesh movement algorithm.
+
+
+      :Parameters:
+
+          **atol** : :class:`python:float`, :obj:`optional`
+              Absolute convergence criteria. The default is ``1e-8``.
+
+          **rtol** : :class:`python:float`, :obj:`optional`
+              Relative convergence criteria. The default is ``1e-8``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_initial(velocity=Velocity(0, 0, 0), temperature=0, pressure=0)
+
+      
+      Assign the initial condition to all nodes at once.
+
+
+      :Parameters:
+
+          **velocity** : :obj:`Velocity`, :obj:`optional`
+              Initial velocity. The default is ``(0, 0, 0)``,
+
+          **temperature** : :class:`python:float`, :obj:`optional`
+              Initial temperature. The default is ``0``.
+
+          **pressure** : :class:`python:float`, :obj:`optional`
+              Initial pressure. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_imposed_move(vx=None, vy=None, vz=None)
+
+      
+      Impose a velocity on the whole volume mesh.
+
+
+      :Parameters:
+
+          **vx**
+              ..
+
+          **vy**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ICFD_SurfRemeshMethod
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: LAPLACIAN_SMOOTHING
+      :value: 1
+
+
+
+   .. py:attribute:: CURVATURE_PRESERVING
+      :value: 2
+
+
+
+.. py:class:: ICFD_AnalysisType
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: TURNOFF_ICFD_SOLVER
+
+
+   .. py:attribute:: TRANSIENT_ANALYSIS
+      :value: 0
+
+
+
+   .. py:attribute:: STEADY_STATE_ANALYSIS
+      :value: 1
+
+
+
+.. py:class:: ICFD_MessageLevel
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: TIMESTEP_INFORMATION
+      :value: 0
+
+
+
+   .. py:attribute:: FULL_OUTPUT_INFORMATION
+      :value: 4
+
+
+
+.. py:class:: ICFD_CouplingForm
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: FORCE_BASED_ON_VELOCITY_DRAG_VALUE
+      :value: 0
+
+
+
+   .. py:attribute:: FORCE_USING_FLUID_PRESSURE_GRADIENT
+      :value: 1
+
+
+
+.. py:class:: ICFD_CouplingDirection
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: TWO_WAY_COUPLING
+      :value: 0
+
+
+
+   .. py:attribute:: ONE_WAY_COUPLING_MECHANICS_TRANS_DISPLACEMENT_TO_FLUID
+      :value: 1
+
+
+
+   .. py:attribute:: ONE_WAY_COUPLING_FLUID_TRANS_STRESS_TO_SOLID
+      :value: 2
+
+
+
+   .. py:attribute:: TWO_WAY_WEAK_COUPLING
+      :value: 3
+
+
+
+.. py:class:: ICFDAnalysis
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.BaseObj`
+
+
+   
+   Activates an ICFD analysis and defines associated control parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: defined_timestep
+      :value: False
+
+
+
+   .. py:attribute:: defined_volumemesh
+      :value: False
+
+
+
+   .. py:attribute:: defined_surfmesh
+      :value: False
+
+
+
+   .. py:attribute:: defined_type
+      :value: False
+
+
+
+   .. py:attribute:: defined_output
+      :value: False
+
+
+
+   .. py:attribute:: defined_fsi
+      :value: False
+
+
+
+   .. py:attribute:: defined_steady_state
+      :value: False
+
+
+
+   .. py:attribute:: defined_coupling_dem
+      :value: False
+
+
+
+   .. py:attribute:: defined_mesh_adapt
+      :value: False
+
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'analysis_icfd'
+
+
+
+   .. py:method:: set_type(analysis_type=ICFD_AnalysisType.TRANSIENT_ANALYSIS)
+
+      
+      Set the type of the CFD analysis.
+
+
+      :Parameters:
+
+          **analysis_type** : :obj:`ICFD_AnalysisType`
+              Analysis type. The default is ``TRANSIENT_ANALYSIS``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_output(messagelevel=ICFD_MessageLevel.TIMESTEP_INFORMATION, iteration_interval=0)
+
+      
+      Modify default values for screen and file outputs related to the fluid solver only.
+
+
+      :Parameters:
+
+          **messagelevel** : :obj:`ICFD_MessageLevel`, :obj:`optional`
+              Message level. The default is ``TIMESTEP_INFORMATION``.
+
+          **iteration_interval** : :class:`python:int`, :obj:`optional`
+              Iteration interval to print the output at. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_fsi(couplingdir=ICFD_CouplingDirection.TWO_WAY_COUPLING)
+
+      
+      Modify default values for the fluid-structure interaction coupling algorithm.
+
+
+      :Parameters:
+
+          **couplingdir** : :obj:`ICFD_CouplingDirection`, :obj:`optional`
+              Coupling direction to the solver. The default is ``TWO_WAY_COUPLING``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_steady_state(max_iteration=1000000.0, momentum_tol_limit=0.001, pressure_tol_limit=0.001, temperature_tol_limit=0.001, velocity_relax_param=0.3, pressure_relax_param=0.7)
+
+      
+      Set convergence options for the steady state solver.
+
+
+      :Parameters:
+
+          **max_iteration** : :class:`python:int`, :obj:`optional`
+              Maximum number of iterations to reach convergence. The default is
+              ``1000000.0``.
+
+          **momentum_tol_limit** : :class:`python:float`, :obj:`optional`
+              Tolerance limits for the momentum equations. The default is ``0.001``.
+
+          **pressure_tol_limit** : :class:`python:float`, :obj:`optional`
+              Tolerance limits for the pressure equations. The default is ``0.001``.
+
+          **temperature_tol_limit** : :class:`python:float`, :obj:`optional`
+              Tolerance limits for the temperature equations. The default is ``0.001``.
+
+          **velocity_relax_param** : :class:`python:float`, :obj:`optional`
+              Relaxation parameters for the velocity.  The default is ``0.3``.
+
+          **pressure_relax_param** : :class:`python:float`, :obj:`optional`
+              Relaxation parameters for the pressure.  The default is ``0.7``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_timestep(timestep=0)
+
+      
+      Set the time step for the fluid problem.
+
+
+      :Parameters:
+
+          **dt** : :class:`python:float`, :obj:`optional`
+              Time step for the fluid problem. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_volume_mesh(mesh_growth_scale_factor=1.41)
+
+      
+      Modify the default value for automatic volume mesh generation.
+
+
+      :Parameters:
+
+          **mesh_growth_scale_factor** : :class:`python:float`, :obj:`optional`
+              Maximum mesh size that the volume mesher is allowed to use when generating
+              the volume mesh. The default is ``1.41``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_mesh_adaptivity(min_mesh_size=0, max_mesh_size=0, max_perceptual_error=0, num_iteration=0)
+
+      
+      Activate the adaptive mesh refinement feature.
+
+
+      :Parameters:
+
+          **min_mesh_size** : :class:`python:float`, :obj:`optional`
+              Minimum mesh size for the mesh generator. The default is ``0``.
+
+          **max_mesh_size** : :class:`python:float`, :obj:`optional`
+              Maximum mesh size. The default is ``0``.
+
+          **max_perceptual_error** : :class:`python:float`, :obj:`optional`
+              Maximum perceptual error allowed in the whole domain. The default
+              is ``0``.
+
+          **num_iteration** : :class:`python:int`, :obj:`optional`
+              Number of iterations before a forced remeshing. The default is
+              ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_surface_mesh(remesh_method=ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING)
+
+      
+      Enable automatic surface remeshing.
+
+
+      :Parameters:
+
+          **remesh_method** : :obj:`ICFD_SurfRemeshMethod`, :obj:`optional`
+              Whether to perform a surface remeshing. The default is ``LAPLACIAN_SMOOTHING``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_coupling_dem(coupling_type=0, birth_time=0, death_time=1e+28, scale_factor=1, formulation=ICFD_CouplingForm.FORCE_BASED_ON_VELOCITY_DRAG_VALUE)
+
+      
+      Activate coupling between the ICFD and DEM solvers.
+
+
+      :Parameters:
+
+          **coupling_type** : :class:`python:int`, :obj:`optional`
+              Coupling direction to the solver. The default is ``0``.
+
+          **birth_time** : :class:`python:float`, :obj:`optional`
+              Birth time for the DEM coupling. The default is ``0``.
+
+          **death_time** : :class:`python:float`, :obj:`optional`
+              Death time for the DEM coupling.  The default is ``1e+28``.
+
+          **scale_factor** : :class:`python:float`, :obj:`optional`
+              Scale factor applied to the force transmitted by the fluid to
+              the structure. The default is ``1``.
+
+          **formulation** : :class:`python:int`, :obj:`optional`
+              Type of formulation to use in the coupling. The default is
+              ``FORCE_BASED_ON_VELOCITY_DRAG_VALUE``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create ICFD analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Compressible
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: VACUUM
+      :value: 0
+
+
+
+   .. py:attribute:: FULLY_INCOMPRESSIBLE_FLUID
+      :value: 1
+
+
+
+.. py:class:: MatICFD(flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID, flow_density=0, dynamic_viscosity=0, heat_capacity=0, thermal_conductivity=0, thermal_expansion_coefficient=0)
+
+   
+   Defines physical properties for the fluid material.
+
+
+   :Parameters:
+
+       **flag** : :class:`python:int`
+           Flag for chooseing between fully incompressible, slightly compressible, or barotropic flows.
+           The default is ``FULLY_INCOMPRESSIBLE_FLUID``. Options are:
+           
+           - EQ.0: Vacuum (free surface problems only)
+           - EQ.1: Fully incompressible fluid
+
+       **flow_density** : :class:`python:float`, :obj:`optional`
+           Flow density. The default is ``0``.
+
+       **dynamic_viscosity** : :class:`python:float`, :obj:`optional`
+           Dynamic viscosity. The default is ``0``.
+
+       **heat_capacity**
+           ..
+
+       **thermal_conductivity**
+           ..
+
+       **thremal_expansion_coefficent**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: flag
+
+
+   .. py:attribute:: flow_density
+
+
+   .. py:attribute:: dynamic_viscosity
+
+
+   .. py:attribute:: hc
+
+
+   .. py:attribute:: tc
+
+
+   .. py:attribute:: beta
+
+
+   .. py:method:: create(stub)
+
+      
+      Create an ICFD material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ICFDDOF
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: X
+      :value: 1
+
+
+
+   .. py:attribute:: Y
+      :value: 2
+
+
+
+   .. py:attribute:: Z
+      :value: 3
+
+
+
+.. py:class:: Vel
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: LINEAR_VELOCITY
+      :value: 1
+
+
+
+   .. py:attribute:: ANGULAR_VELOCITY
+      :value: 2
+
+
+
+.. py:class:: ICFDPart(id)
+
+   
+   Defines a part for the ICFD solver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'ICFD'
+
+
+
+   .. py:attribute:: id
+
+
+   .. py:attribute:: secid
+      :value: 1
+
+
+
+   .. py:attribute:: mid
+      :value: 0
+
+
+
+   .. py:method:: set_material(mat)
+
+      
+      Set a material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_prescribed_velocity(motion, dof=ICFDDOF.X, velocity_flag=Vel.LINEAR_VELOCITY)
+
+      
+      Impose the fluid velocity on the boundary.
+
+
+      :Parameters:
+
+          **dof** : :class:`python:int`, :obj:`optional`
+              Applicable degrees of freedom. The default is ``ICFDDOF.X``.
+              Options are:
+              
+              - EQ.1: x-degree of freedom
+              - EQ.2: y-degree of freedom
+              - EQ.3: z-degree of freedom
+              - EQ.4: Normal direction degree of freedom
+
+          **velocity_flag** : :class:`python:int`, :obj:`optional`
+              Velocity flag. The default is ``LINEAR_VELOCITY``. Options are:
+              
+              - EQ.1: Linear velocity
+              - EQ.2: Angular velocity
+              - EQ.3: Parabolic velocity profile
+              - EQ.4: Activates synthetic turbulent field on part
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_prescribed_pressure(pressure)
+
+      
+      Impose a fluid pressure on the boundary.
+
+
+      :Parameters:
+
+          **pressure** : :obj:`Curve`
+              Load curve to describe the pressure value versus time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_prescribed_temperature(temperature)
+
+      
+      Impose a fluid temperature on the boundary.
+
+
+      :Parameters:
+
+          **temperature** : :obj:`Curve`
+              Load curve to describe the temperature value versus time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_free_slip()
+
+      
+      Specify the fluid boundary with a free-slip boundary condition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_non_slip()
+
+      
+      Specify the fluid boundary with a non-slip boundary condition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_fsi()
+
+      
+      Define the fluid surface to consider in contact with the solid surfaces
+      for fluid-structure interaction (FSI) analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: compute_drag_force()
+
+      
+      Enable the computation of drag forces over given surface parts of the model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: compute_flux()
+
+      
+      Enable the computation of the flow rate and average pressure over given parts of the model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: compute_temperature()
+
+      
+      Enable the computation of the average temperature and the heat flux over given parts of the model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_boundary_layer(number=3)
+
+      
+      Define a boundary layer mesh as a refinement on the volume mesh.
+
+
+      :Parameters:
+
+          **number** : :class:`python:int`, :obj:`optional`
+              Number of elements normal to the surface (in the boundary layer).
+              The default is ``3.``
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_boundary_layer_symmetry_condition()
+
+      
+      Specify the part that is to have symmetry conditions for the boundary layer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_imposed_move(vx=None, vy=None, vz=None)
+
+      
+      Impose a velocity on a specific ICFD part.
+
+
+      :Parameters:
+
+          **vx**
+              ..
+
+          **vy**
+              ..
+
+          **vz**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_property()
+
+      
+      Set properties for an ICFD part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ICFDVolumePart(surfaces)
+
+   
+   Assigns material properties to the nodes enclosed by surface ICFD parts.
+
+
+   :Parameters:
+
+       **surfaces** : :class:`python:list`
+           List of part IDs for the surface elements that define the volume mesh.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'ICFDVOLUME'
+
+
+
+   .. py:attribute:: id
+
+
+   .. py:attribute:: secid
+      :value: 1
+
+
+
+   .. py:attribute:: mid
+      :value: 0
+
+
+
+   .. py:attribute:: surfaces
+
+
+   .. py:attribute:: defined_imposed_move
+      :value: False
+
+
+
+   .. py:method:: set_material(mat)
+
+      
+      Set a material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_imposed_move(vx=None, vy=None, vz=None)
+
+      
+      Impose a velocity on a specific ICFD part.
+
+
+      :Parameters:
+
+          **vx**
+              ..
+
+          **vy**
+              ..
+
+          **vz**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create an ICFD volume part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MeshedVolume(surfaces)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.BaseObj`
+
+
+   
+   Defines the volume space to mesh.
+
+
+   :Parameters:
+
+       **surfaces** : :class:`python:list`
+           List of part IDs for the surface elements to use to define the volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: surfaces
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: meshsizeshape
+      :value: []
+
+
+
+   .. py:attribute:: embeded_surf
+      :value: []
+
+
+
+   .. py:attribute:: meshsize_surf
+      :value: []
+
+
+
+   .. py:attribute:: fluid_interfaces
+      :value: []
+
+
+
+   .. py:attribute:: type
+      :value: 'meshedvolume'
+
+
+
+   .. py:method:: embed_shell(embeded)
+
+      
+      Define surfaces that the mesher is to embed inside the volume mesh.
+
+
+      :Parameters:
+
+          **embeded** : :class:`python:list`
+              List of part IDs for the surface elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: meshsize_box(size, min_point, max_point)
+
+      
+      Define a local mesh size in specific zones corresponding to given geometrical shapes.
+
+
+      :Parameters:
+
+          **size** : :class:`python:float`
+              Mesh size to apply in the zone of the shape defined by ``SNAME``.
+
+          **parameter** : :class:`python:list`
+              List of the parameters that define the shape.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_meshsize(surfaces)
+
+      
+      Define the surfaces that the mesher is to use to specify a local mesh size inside the volume.
+
+
+      :Parameters:
+
+          **surfaces** : :class:`python:list`
+              List of part IDs for the surface elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_fluid_interfaces(surfaces)
+
+      
+      Define the surfaces that the mesher is to use to specify fluid interfaces in multi-fluid simulations.
+
+
+      :Parameters:
+
+          **surfaces** : :class:`python:list`
+              List of part IDs for the surface elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create mesh volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

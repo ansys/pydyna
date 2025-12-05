@@ -1,0 +1,402 @@
+ansys.dyna.core.pre.dynaicfd.ICFDAnalysis
+=========================================
+
+.. py:class:: ansys.dyna.core.pre.dynaicfd.ICFDAnalysis
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.BaseObj`
+
+
+   
+   Activates an ICFD analysis and defines associated control parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: defined_timestep
+      :value: False
+
+
+
+   .. py:attribute:: defined_volumemesh
+      :value: False
+
+
+
+   .. py:attribute:: defined_surfmesh
+      :value: False
+
+
+
+   .. py:attribute:: defined_type
+      :value: False
+
+
+
+   .. py:attribute:: defined_output
+      :value: False
+
+
+
+   .. py:attribute:: defined_fsi
+      :value: False
+
+
+
+   .. py:attribute:: defined_steady_state
+      :value: False
+
+
+
+   .. py:attribute:: defined_coupling_dem
+      :value: False
+
+
+
+   .. py:attribute:: defined_mesh_adapt
+      :value: False
+
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'analysis_icfd'
+
+
+
+   .. py:method:: set_type(analysis_type=ICFD_AnalysisType.TRANSIENT_ANALYSIS)
+
+      
+      Set the type of the CFD analysis.
+
+
+      :Parameters:
+
+          **analysis_type** : :obj:`ICFD_AnalysisType`
+              Analysis type. The default is ``TRANSIENT_ANALYSIS``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_output(messagelevel=ICFD_MessageLevel.TIMESTEP_INFORMATION, iteration_interval=0)
+
+      
+      Modify default values for screen and file outputs related to the fluid solver only.
+
+
+      :Parameters:
+
+          **messagelevel** : :obj:`ICFD_MessageLevel`, :obj:`optional`
+              Message level. The default is ``TIMESTEP_INFORMATION``.
+
+          **iteration_interval** : :class:`python:int`, :obj:`optional`
+              Iteration interval to print the output at. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_fsi(couplingdir=ICFD_CouplingDirection.TWO_WAY_COUPLING)
+
+      
+      Modify default values for the fluid-structure interaction coupling algorithm.
+
+
+      :Parameters:
+
+          **couplingdir** : :obj:`ICFD_CouplingDirection`, :obj:`optional`
+              Coupling direction to the solver. The default is ``TWO_WAY_COUPLING``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_steady_state(max_iteration=1000000.0, momentum_tol_limit=0.001, pressure_tol_limit=0.001, temperature_tol_limit=0.001, velocity_relax_param=0.3, pressure_relax_param=0.7)
+
+      
+      Set convergence options for the steady state solver.
+
+
+      :Parameters:
+
+          **max_iteration** : :class:`python:int`, :obj:`optional`
+              Maximum number of iterations to reach convergence. The default is
+              ``1000000.0``.
+
+          **momentum_tol_limit** : :class:`python:float`, :obj:`optional`
+              Tolerance limits for the momentum equations. The default is ``0.001``.
+
+          **pressure_tol_limit** : :class:`python:float`, :obj:`optional`
+              Tolerance limits for the pressure equations. The default is ``0.001``.
+
+          **temperature_tol_limit** : :class:`python:float`, :obj:`optional`
+              Tolerance limits for the temperature equations. The default is ``0.001``.
+
+          **velocity_relax_param** : :class:`python:float`, :obj:`optional`
+              Relaxation parameters for the velocity.  The default is ``0.3``.
+
+          **pressure_relax_param** : :class:`python:float`, :obj:`optional`
+              Relaxation parameters for the pressure.  The default is ``0.7``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_timestep(timestep=0)
+
+      
+      Set the time step for the fluid problem.
+
+
+      :Parameters:
+
+          **dt** : :class:`python:float`, :obj:`optional`
+              Time step for the fluid problem. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_volume_mesh(mesh_growth_scale_factor=1.41)
+
+      
+      Modify the default value for automatic volume mesh generation.
+
+
+      :Parameters:
+
+          **mesh_growth_scale_factor** : :class:`python:float`, :obj:`optional`
+              Maximum mesh size that the volume mesher is allowed to use when generating
+              the volume mesh. The default is ``1.41``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_mesh_adaptivity(min_mesh_size=0, max_mesh_size=0, max_perceptual_error=0, num_iteration=0)
+
+      
+      Activate the adaptive mesh refinement feature.
+
+
+      :Parameters:
+
+          **min_mesh_size** : :class:`python:float`, :obj:`optional`
+              Minimum mesh size for the mesh generator. The default is ``0``.
+
+          **max_mesh_size** : :class:`python:float`, :obj:`optional`
+              Maximum mesh size. The default is ``0``.
+
+          **max_perceptual_error** : :class:`python:float`, :obj:`optional`
+              Maximum perceptual error allowed in the whole domain. The default
+              is ``0``.
+
+          **num_iteration** : :class:`python:int`, :obj:`optional`
+              Number of iterations before a forced remeshing. The default is
+              ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_surface_mesh(remesh_method=ICFD_SurfRemeshMethod.LAPLACIAN_SMOOTHING)
+
+      
+      Enable automatic surface remeshing.
+
+
+      :Parameters:
+
+          **remesh_method** : :obj:`ICFD_SurfRemeshMethod`, :obj:`optional`
+              Whether to perform a surface remeshing. The default is ``LAPLACIAN_SMOOTHING``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_coupling_dem(coupling_type=0, birth_time=0, death_time=1e+28, scale_factor=1, formulation=ICFD_CouplingForm.FORCE_BASED_ON_VELOCITY_DRAG_VALUE)
+
+      
+      Activate coupling between the ICFD and DEM solvers.
+
+
+      :Parameters:
+
+          **coupling_type** : :class:`python:int`, :obj:`optional`
+              Coupling direction to the solver. The default is ``0``.
+
+          **birth_time** : :class:`python:float`, :obj:`optional`
+              Birth time for the DEM coupling. The default is ``0``.
+
+          **death_time** : :class:`python:float`, :obj:`optional`
+              Death time for the DEM coupling.  The default is ``1e+28``.
+
+          **scale_factor** : :class:`python:float`, :obj:`optional`
+              Scale factor applied to the force transmitted by the fluid to
+              the structure. The default is ``1``.
+
+          **formulation** : :class:`python:int`, :obj:`optional`
+              Type of formulation to use in the coupling. The default is
+              ``FORCE_BASED_ON_VELOCITY_DRAG_VALUE``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create ICFD analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
