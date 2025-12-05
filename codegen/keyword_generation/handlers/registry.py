@@ -19,7 +19,7 @@ See agents/codegen.md for detailed documentation on handler ordering and semanti
 import collections
 import logging
 import typing
-from typing import Dict, List, Set
+from typing import Dict
 
 from keyword_generation.data_model.keyword_data import KeywordData
 from keyword_generation.handlers.handler_base import (
@@ -67,60 +67,6 @@ class HandlerRegistry:
         elif hasattr(handler.__class__, "_handler_metadata"):
             self._metadata[name] = handler.__class__._handler_metadata  # type: ignore[attr-defined]
         logger.debug(f"Registered handler '{name}': {handler.__class__.__name__}")
-
-    def _topological_sort(self, handler_names: Set[str]) -> List[str]:
-        """
-        Sort handlers based on dependencies using topological sort.
-
-        Args:
-            handler_names: Set of handler names to sort
-
-        Returns:
-            List of handler names in dependency-respecting order
-
-        Raises:
-            CyclicDependencyError: If circular dependencies are detected
-        """
-        logger.debug(f"Performing topological sort on {len(handler_names)} handlers")
-
-        # Build adjacency list and in-degree count
-        in_degree: Dict[str, int] = {name: 0 for name in handler_names}
-        adjacency: Dict[str, List[str]] = {name: [] for name in handler_names}
-
-        for name in handler_names:
-            metadata = self._metadata.get(name)
-            if metadata:
-                for dep in metadata.dependencies:
-                    if dep in handler_names:
-                        adjacency[dep].append(name)
-                        in_degree[name] += 1
-                    elif dep not in self._handlers:
-                        # Only warn if the dependency handler doesn't exist at all
-                        logger.warning(f"Handler '{name}' depends on '{dep}' which is not registered")
-                    # If dep is in self._handlers but not in handler_names, that's fine
-                    # (it just means the dependency isn't being run this time)
-
-        # Kahn's algorithm for topological sort
-        queue = collections.deque([name for name in handler_names if in_degree[name] == 0])
-        result = []
-
-        while queue:
-            current = queue.popleft()
-            result.append(current)
-
-            for neighbor in adjacency[current]:
-                in_degree[neighbor] -= 1
-                if in_degree[neighbor] == 0:
-                    queue.append(neighbor)
-
-        # Check for cycles
-        if len(result) != len(handler_names):
-            remaining = handler_names - set(result)
-            logger.error(f"Cyclic dependency detected among handlers: {remaining}")
-            raise CyclicDependencyError(f"Cyclic dependency detected among handlers: {remaining}")
-
-        logger.debug(f"Topological sort result: {result}")
-        return result
 
     def apply_all(self, kwd_data: KeywordData, settings: typing.Dict[str, typing.Any], validate: bool = True) -> None:
         """
@@ -195,26 +141,6 @@ class HandlerRegistry:
         """
         return list(self._handlers.keys())
 
-    def get_execution_order(self, settings: typing.Dict[str, typing.Any]) -> List[str]:
-        """
-        Get the execution order for handlers given specific settings.
-
-        This is useful for debugging and understanding handler dependencies.
-
-        Args:
-            settings: Configuration settings to determine which handlers run
-
-        Returns:
-            List of handler names in execution order
-        """
-        handlers_to_run = {name for name in self._handlers.keys() if settings.get(name) is not None}
-        if not handlers_to_run:
-            return []
-        try:
-            return self._topological_sort(handlers_to_run)
-        except CyclicDependencyError:
-            return [name for name in self._handlers.keys() if name in handlers_to_run]
-
 
 def discover_handlers() -> Dict[str, HandlerMetadata]:
     """
@@ -232,7 +158,6 @@ def discover_handlers() -> Dict[str, HandlerMetadata]:
     import keyword_generation.handlers as handlers_package
 
     logger.debug("Discovering handlers in handlers package")
-    discovered = {}
 
     # Get the path to the handlers package
     package_path = handlers_package.__path__
