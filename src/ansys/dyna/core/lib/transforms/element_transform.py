@@ -25,6 +25,7 @@ import warnings
 
 import pandas as pd
 
+from ansys.dyna.core.lib.io_utils import is_dataframe
 from ansys.dyna.core.lib.transform import Transform
 
 
@@ -43,7 +44,7 @@ class TransformElement(Transform):
             warnings.warn(warning)
             return None
         elements = keyword.elements
-        if not isinstance(elements, pd.DataFrame):
+        if not is_dataframe(elements):
             warnings.warn(warning)
             return None
         return elements

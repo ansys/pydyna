@@ -50,3 +50,12 @@ try:
     from .manual.section_tshell import SectionTShell  # noqa: F401
 except ImportError:
     pass
+
+try:
+    from .parameter_expression_custom import (  # noqa: F401
+        ParameterExpression,
+        ParameterExpressionLocal,
+        ParameterExpressionNoecho,
+    )
+except ImportError:
+    pass
