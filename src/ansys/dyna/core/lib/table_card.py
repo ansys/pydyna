@@ -218,11 +218,9 @@ class TableCard(Card):
         return fields
 
     def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
-        read_options = self._get_read_options()
-        read_options["nrows"] = self._num_rows()
-        df = pd.read_fwf(buf, **read_options)
-        self._table = df
-        self._initialized = True
+        # For bounded cards, read all lines and use same logic as unbounded
+        data_lines = buffer_to_lines(buf, self._num_rows())
+        self._load_lines(data_lines, parameter_set)
 
     def _load_unbounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
         data_lines = buffer_to_lines(buf)
@@ -237,13 +235,43 @@ class TableCard(Card):
             self._initialized = True
             self._load_unbounded_from_buffer(buf, parameter_set)
 
-    def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
+    def _has_parameters(self, data_lines: typing.List[str]) -> bool:
+        """Check if any data lines contain parameter references."""
+        return any("&" in line for line in data_lines)
+
+    def _load_lines_with_parameters(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
+        """Load lines using load_dataline for parameter support.
+
+        This method processes each line individually using load_dataline(),
+        which handles parameter substitution. It's used when parameters are
+        detected in the data.
+        """
+        from ansys.dyna.core.lib.kwd_line_formatter import load_dataline
+
         fields = self._get_fields()
-        buffer = io.StringIO()
-        [(buffer.write(line), buffer.write("\n")) for line in data_lines]
-        buffer.seek(0)
-        self._table = self._read_buffer_as_dataframe(buffer, fields, parameter_set)
+        format_spec = [(f.offset, f.width, f.type) for f in fields]
+
+        rows = []
+        for line in data_lines:
+            values = load_dataline(format_spec, line, parameter_set)
+            row_dict = {field.name: value for field, value in zip(fields, values)}
+            rows.append(row_dict)
+
+        self._table = pd.DataFrame(rows)
         self._initialized = True
+
+    def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
+        # Use parameter-aware loading if parameters are present
+        if parameter_set is not None and self._has_parameters(data_lines):
+            self._load_lines_with_parameters(data_lines, parameter_set)
+        else:
+            # Use fast pandas path when no parameters present
+            fields = self._get_fields()
+            buffer = io.StringIO()
+            [(buffer.write(line), buffer.write("\n")) for line in data_lines]
+            buffer.seek(0)
+            self._table = self._read_buffer_as_dataframe(buffer, fields, parameter_set)
+            self._initialized = True
 
     def write(
         self,

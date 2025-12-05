@@ -276,10 +276,10 @@ def test_local_parameter_isolation():
     deck = Deck()
     deck.import_file("top.k")  # Has global param
     deck = deck.expand(recurse=True, cwd=test_dir)
-    
+
     # Global param should be accessible
     assert deck.parameters.get("global_param") == expected_value
-    
+
     # Local param from include should NOT be accessible
     with pytest.raises(KeyError):
         deck.parameters.get("local_param")
@@ -296,15 +296,135 @@ When implementing parameter-related features:
 - [ ] Test visibility: Verify child scopes can see parent params
 - [ ] Add logging: Use `logger.debug()` for parameter operations
 
+## Parameter Substitution in Card Types
+
+All card types now support LS-DYNA parameter substitution (`&parameter` and `-&parameter` syntax). This feature allows keywords to reference parameters defined via `*PARAMETER` or `*PARAMETER_LOCAL` keywords.
+
+### Supported Card Types
+
+**Card** (standard single-line cards):
+- Used for most keyword cards with fixed fields
+- Full parameter support via `load_dataline()`
+- Example: `*SECTION_SHELL` with `&thickness` parameter
+
+**SeriesCard** (arrays/lists):
+- Used for curve data, material properties arrays, etc.
+- Parameters supported in bounded and unbounded modes
+- Implementation: Passes `parameter_set` through to `load_dataline()`
+- Example: `*DEFINE_CURVE` with parametric Y-values
+
+**TableCard** (tabular data):
+- Used for node coordinates, element connectivity, etc.
+- Parameters detected automatically via `_has_parameters()`
+- Smart path selection: Uses fast pandas path when no parameters, falls back to `load_dataline()` when parameters detected
+- Implementation: `_load_lines_with_parameters()` processes line-by-line
+- Example: `*NODE` with parametric coordinates
+
+**TableCardGroup** (multiple interleaved tables):
+- Used for keywords with multiple cards per row
+- Inherits parameter support from TableCard
+- Parameters work across all sub-cards in the group
+
+### Parameter Name Constraints
+
+LS-DYNA parameter names must fit within field widths. For a 10-character field:
+- `&dens` fits (5 chars)
+- `&density` may be truncated (8 chars)
+
+Always verify parameter names fit within the field widths defined in your keyword schema.
+
+### Example Usage
+
+```python
+from ansys.dyna.core.lib.deck import Deck
+
+deck_text = """*KEYWORD
+*PARAMETER
+R_dens   7850.0
+I_nid    1000
+*DEFINE_CURVE
+     &nid
+       0.0       0.0
+     &dens     100.0
+*NODE
+    &nid     &dens       0.0       0.0
+*END"""
+
+deck = Deck()
+deck.loads(deck_text)
+
+# All keywords parse successfully with substituted values
+curve = deck.keywords[0]
+assert curve.lcid == 1000  # From I_nid parameter
+
+node = deck.keywords[1]
+assert node.nodes.table["nid"][0] == 1000
+assert node.nodes.table["x"][0] == 7850.0
+```
+
+### Implementation Details
+
+**SeriesCard** (`src/ansys/dyna/core/lib/series_card.py`):
+- `read()` accepts `parameter_set` and passes to load methods
+- `_read_line()` passes `parameter_set` to `load_dataline()`
+- Works in both bounded and unbounded modes
+
+**TableCard** (`src/ansys/dyna/core/lib/table_card.py`):
+- `_has_parameters()` detects `&` in data lines
+- `_load_lines_with_parameters()` uses `load_dataline()` for each row
+- `_load_lines()` chooses appropriate path based on parameter detection
+- No performance impact when parameters not present
+
+**TableCardGroup** (`src/ansys/dyna/core/lib/table_card_group.py`):
+- Passes `parameter_set` to child `TableCard` instances
+- No special handling needed (inherits from TableCard)
+
+### Testing
+
+See `tests/test_parameter_substitution.py` for comprehensive test coverage including:
+- Bounded and unbounded modes for all card types
+- Negative parameters (`-&param`)
+- Type conversion and validation
+- Error handling for missing/mismatched parameters
+- Mixed parameters and literal values
+- Regression testing for non-parameter cases
+
+### Error Handling
+
+The parameter substitution system provides clear error messages:
+
+- **Missing parameter**: `KeyError` with parameter name
+- **Type mismatch**: `TypeError` explaining the conversion failure
+- **No parameter set**: `ValueError` when `&` found but no `parameter_set` provided
+
+## Implementation Checklist (Extended)
+
+When implementing parameter-related features:
+
+- [ ] Consider scope: Is this global or local?
+- [ ] Check context: Which deck should receive the parameter?
+- [ ] Verify timing: Is parameter defined before use?
+- [ ] Test isolation: Verify parent/sibling isolation for local params
+- [ ] Test visibility: Verify child scopes can see parent params
+- [ ] Add logging: Use `logger.debug()` for parameter operations
+- [ ] Card type support: Ensure parameter_set is passed through card read chains
+- [ ] Field width constraints: Verify parameter names fit in field widths
+
 ## Key Files
 
 - `src/ansys/dyna/core/lib/parameters.py`: ParameterSet class and ParameterHandler
 - `src/ansys/dyna/core/lib/deck.py`: Deck expansion and include processing
 - `src/ansys/dyna/core/lib/deck_loader.py`: Keyword loading and parameter substitution
 - `src/ansys/dyna/core/lib/import_handler.py`: ImportContext and ImportHandler base
+- `src/ansys/dyna/core/lib/kwd_line_formatter.py`: `load_dataline()` with parameter substitution
+- `src/ansys/dyna/core/lib/card.py`: Standard card parameter support
+- `src/ansys/dyna/core/lib/series_card.py`: SeriesCard parameter support
+- `src/ansys/dyna/core/lib/table_card.py`: TableCard parameter support
+- `src/ansys/dyna/core/lib/table_card_group.py`: TableCardGroup parameter support
+- `tests/test_parameter_substitution.py`: Comprehensive parameter substitution tests
 
 ## Related Documentation
 
 - [Codegen Guide](codegen.md): Auto-generated keyword classes
 - [Linked Keywords](linked_keywords.md): Keyword relationships and properties
-- GitHub Issue #641: PARAMETER_LOCAL scoping implementation
+- GitHub Issue #641: Parameter substitution for all card types
