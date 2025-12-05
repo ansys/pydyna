@@ -31,6 +31,7 @@ dependencies = [
     "ansys-tools-common>=0.2,<1",
     "hollerith>=0.6.0",
     "numpy>=1",
+    # pandas 2.3.x has a bug, see https://github.com/ansys/pydyna/issues/985
     "pandas>=2.0,<2.3",
     "appdirs>=1.4.4",
     "transformations==2025.1.1",
@@ -61,7 +62,6 @@ tests = [
     "pytest==9.0.1",
     "pytest-cov==7.0.0",
     "joblib==1.5.2",
-    "pandas==2.3.3",
     "openpyxl==3.1.5",
     "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
