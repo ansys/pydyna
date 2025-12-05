@@ -2552,12 +2552,10 @@
     },
     "CONSTRAINED_NODAL_RIGID_BODY": {
         "generation-options": {
-            "table-card-group": [
+            "table-card": [
                 {
-                    "indices": [
-                        0
-                    ],
-                    "overall-name": "constrained_nodal_rigid_bodies"
+                    "index": 0,
+                    "property-name": "constrained_nodal_rigid_bodies"
                 }
             ]
         }
