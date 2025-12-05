@@ -3,7 +3,8 @@
 
 # You can set these variables from the command line, and also
 # from the environment for the first two.
-SPHINXOPTS    = -j auto
+SPHINXJOBS    ?= auto
+SPHINXOPTS    = -j $(SPHINXJOBS)
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = _build
@@ -24,7 +25,10 @@ keyword_classes:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@echo "⏱️  Starting Sphinx build with -j $(SPHINXJOBS)..."
+	@echo "Build started at $$(date '+%Y-%m-%d %H:%M:%S')"
+	@time $(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@echo "Build finished at $$(date '+%Y-%m-%d %H:%M:%S')"
 
 clean:
 	rm -rf $(BUILDDIR)/*

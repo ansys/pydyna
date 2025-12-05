@@ -8,7 +8,13 @@ from ansys_sphinx_theme import get_version_match, ansys_favicon
 from sphinx.builders.latex import LaTeXBuilder
 from sphinx_gallery.sorting import FileNameSortKey
 
-from ansys.dyna.core import __version__
+# Get version without importing the package (avoids triggering imports during conf.py execution)
+# This allows doc builds to work with subset-generated keywords
+try:
+    from importlib.metadata import version as importlib_version
+    __version__ = importlib_version("ansys-dyna-core")
+except Exception:
+    __version__ = "unknown"
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
@@ -169,9 +175,12 @@ if not BUILD_API:
 
 suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils"]
 
-BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower() == "true"
-if BUILD_AUTOKEYWORS_API:
+BUILD_AUTOKEYWORDS_API = os.environ.get("BUILD_AUTOKEYWORDS_API", "false").lower() == "true"
+
+if BUILD_AUTOKEYWORDS_API:
     html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
+    # Remove the auto-generated keywords from the ignore list
+    html_theme_options["ansys_sphinx_theme_autoapi"]["ignore"] = []
 
 BUILD_EXAMPLES = os.environ.get("BUILD_EXAMPLES", "true").lower() == "true"
 if BUILD_EXAMPLES:
@@ -234,3 +243,77 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
 def setup(sphinx):
     """Add custom extensions to Sphinx."""
     sphinx.connect("autoapi-skip-member", skip_run_subpackage)
+
+    # Add timing instrumentation for performance profiling
+    import time
+    import os
+    from pathlib import Path
+
+    # Create timing log file
+    timing_log = Path(__file__).parent.parent / "_build" / "timing.log"
+    timing_log.parent.mkdir(parents=True, exist_ok=True)
+
+    # Track phase timings
+    phase_times = {}
+
+    def log_time(phase, duration=None):
+        """Log timing information to file."""
+        if duration is None:
+            # Start timing
+            phase_times[phase] = time.time()
+            msg = f"[{time.strftime('%H:%M:%S')}] Starting: {phase}\n"
+        else:
+            # End timing
+            msg = f"[{time.strftime('%H:%M:%S')}] Completed: {phase} ({duration:.2f}s)\n"
+
+        with open(timing_log, "a") as f:
+            f.write(msg)
+        print(msg.strip())
+
+    # Event handlers
+    def on_builder_inited(app):
+        log_time("builder-init")
+        log_time("overall-build")
+
+    def on_env_get_outdated(app, env, added, changed, removed):
+        if "builder-init" in phase_times:
+            log_time("builder-init", time.time() - phase_times["builder-init"])
+        log_time("env-get-outdated")
+        return []
+
+    def on_env_before_read_docs(app, env, docnames):
+        if "env-get-outdated" in phase_times:
+            log_time("env-get-outdated", time.time() - phase_times["env-get-outdated"])
+        log_time("read-docs")
+
+    def on_doctree_resolved(app, doctree, docname):
+        # Only log first and every 100th document to avoid spam
+        if not hasattr(on_doctree_resolved, "count"):
+            on_doctree_resolved.count = 0
+        on_doctree_resolved.count += 1
+        if on_doctree_resolved.count == 1:
+            if "read-docs" in phase_times:
+                log_time("read-docs", time.time() - phase_times["read-docs"])
+            log_time("process-doctrees")
+
+    def on_build_finished(app, exception):
+        if hasattr(on_doctree_resolved, "count"):
+            if "process-doctrees" in phase_times:
+                log_time("process-doctrees", time.time() - phase_times["process-doctrees"])
+        if "overall-build" in phase_times:
+            log_time("overall-build", time.time() - phase_times["overall-build"])
+
+        # Summary
+        with open(timing_log, "a") as f:
+            f.write(f"\n{'='*60}\n")
+            f.write(f"Build completed at {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+            if hasattr(on_doctree_resolved, "count"):
+                f.write(f"Total documents processed: {on_doctree_resolved.count}\n")
+            f.write(f"{'='*60}\n")
+
+    # Connect event handlers
+    sphinx.connect("builder-inited", on_builder_inited)
+    sphinx.connect("env-get-outdated", on_env_get_outdated)
+    sphinx.connect("env-before-read-docs", on_env_before_read_docs)
+    sphinx.connect("doctree-resolved", on_doctree_resolved)
+    sphinx.connect("build-finished", on_build_finished)

@@ -11,6 +11,11 @@ set SOURCEDIR=source
 set BUILDDIR=_build
 set APIDIR=source\api
 
+REM Set parallel build option (use SPHINXJOBS environment variable or default to auto)
+if "%SPHINXJOBS%" == "" (
+	set SPHINXJOBS=auto
+)
+
 if "%1" == "" goto help
 if "%1" == "clean" goto clean
 if "%1" == "pdf" goto pdf
@@ -28,7 +33,12 @@ if errorlevel 9009 (
 	exit /b 1
 )
 
-%SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+echo Starting Sphinx build with -j %SPHINXJOBS%...
+echo Build started at %TIME%
+%SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% -j %SPHINXJOBS% %SPHINXOPTS% %O%
+set BUILD_EXIT_CODE=%ERRORLEVEL%
+echo Build finished at %TIME%
+exit /b %BUILD_EXIT_CODE%
 goto end
 
 :clean
