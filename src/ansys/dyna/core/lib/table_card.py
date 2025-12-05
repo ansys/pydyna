@@ -133,7 +133,8 @@ class TableCard(Card):
     @table.setter
     def table(self, value: pd.DataFrame):
         _check_type(value)
-        self._table = pd.DataFrame()
+        # Build columns dict first to avoid CoW issues in pandas 2.3+
+        columns = {}
         for field in self._fields:
             if field.name in value:
                 field_type = field.type
@@ -141,9 +142,10 @@ class TableCard(Card):
                     field_type = np.float64
                 elif field_type == int:
                     field_type = pd.Int32Dtype()
-                self._table[field.name] = value[field.name].astype(field_type)
+                columns[field.name] = value[field.name].astype(field_type)
             else:
-                self._table[field.name] = self._make_column(field, len(value))
+                columns[field.name] = self._make_column(field, len(value))
+        self._table = pd.DataFrame(columns)
         self._initialized = True
 
     @property
