@@ -95,7 +95,7 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         ]
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Create optional card groups from settings.
 
@@ -111,14 +111,12 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             return card
 
         new_options = []
-        # settings is actually a List[Dict] despite base class signature
-        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
-        for setting in settings_list:
-            cards = [expand(card) for card in setting["cards"]]
+        for option_settings in settings:
+            cards = [expand(card) for card in option_settings["cards"]]
             new_option = {
-                "card_order": setting["card-order"],
-                "title_order": setting["title-order"],
-                "name": setting["option-name"],
+                "card_order": option_settings["card-order"],
+                "title_order": option_settings["title-order"],
+                "name": option_settings["option-name"],
                 "cards": cards,
             }
             new_options.append(new_option)

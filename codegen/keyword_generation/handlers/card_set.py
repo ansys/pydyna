@@ -109,7 +109,7 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         - Marks source cards/options with "mark_for_removal" = 1
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Create card sets from source cards and options.
 
@@ -124,9 +124,7 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         has_options = False
         default_target = 0
 
-        # settings is actually a List[Dict] despite base class signature
-        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
-        for card_settings in settings_list:
+        for card_settings in settings:
             card_set = {"name": card_settings["name"], "source_cards": []}
             target_name = card_settings.get("target-name", "")
             if target_name == "":

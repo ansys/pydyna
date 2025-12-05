@@ -74,7 +74,7 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         - Adds card["duplicate"] dict with name, length_func, active_func
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Mark cards as table structures.
 
@@ -83,8 +83,7 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             settings: List of table card specifications
         """
         kwd_data.duplicate = True
-        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
-        for card_settings in settings_list:
+        for card_settings in settings:
             duplicate_card = kwd_data.cards[card_settings["index"]]
             duplicate_card["duplicate"] = {
                 "name": card_settings["property-name"],

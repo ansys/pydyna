@@ -96,7 +96,7 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
         - Marks all source cards with "mark_for_removal" = 1
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Create duplicate card groups from card indices.
 
@@ -105,8 +105,7 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             settings: List of card group definitions
         """
         kwd_data.duplicate_group = True
-        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
-        for card_settings in settings_list:
+        for card_settings in settings:
             indices_raw = card_settings["indices"]
             indices: typing.List[int] = typing.cast(typing.List[int], indices_raw)
             # build the card group

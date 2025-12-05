@@ -27,7 +27,7 @@ Cards marked for deletion are removed from the final keyword structure after
 all handlers have processed.
 """
 
-from typing import Any
+from typing import Any, Dict, List
 
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
@@ -38,10 +38,12 @@ from keyword_generation.handlers.handler_base import handler
     dependencies=[],
     description="Marks cards for removal from the generated keyword class",
     input_schema={
-        "oneOf": [
-            {"type": "integer", "description": "Single card index to skip"},
-            {"type": "array", "items": {"type": "integer"}, "description": "List of card indices to skip"},
-        ]
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {"index": {"type": "integer"}},
+            "required": ["index"],
+        },
     },
     output_description="Sets 'mark_for_removal' flag on specified cards",
 )
@@ -53,34 +55,25 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     happens later in the generation pipeline via _delete_marked_indices().
 
     Input Settings Example:
-        [0, 1, 2]  # Skip cards at indices 0, 1, and 2
+        [{"index": 0}, {"index": 1}, {"index": 2}]  # Skip cards at indices 0, 1, and 2
         or
-        1  # Skip single card at index 1
+        [{"index": 1}]  # Skip single card at index 1
 
     Output Modification:
         Sets card["mark_for_removal"] = 1 for each specified index
     """
 
-    def handle(self, kwd_data: Any, settings: Any) -> None:
+    def handle(self, kwd_data: Any, settings: List[Dict[str, Any]]) -> None:
         """
         Mark specified cards for removal.
 
         Args:
             kwd_data: KeywordData instance (or dict during transition)
-            settings: Handler config from manifest.json (int, list of ints, or dict with card indices)
+            settings: List of dicts, each containing a single card index to skip
         """
-        # Extract the actual card indices from settings
-        # Settings may be passed differently depending on manifest structure
-        if isinstance(settings, int):
-            skipped_card_indices = [settings]
-        elif isinstance(settings, list):
-            skipped_card_indices = settings
-        else:
-            # If settings is a dict, look for a key that contains the indices
-            # This handles various manifest.json structures
-            skipped_card_indices = settings.get("indices", [])
-
-        for index in skipped_card_indices:
+        # Each dict in settings contains a single 'index' key
+        for setting in settings:
+            index = setting["index"]
             kwd_data.cards[index]["mark_for_removal"] = 1
 
     def post_process(self, kwd_data: Any) -> None:

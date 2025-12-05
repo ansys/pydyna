@@ -180,7 +180,7 @@ class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler
         - Processed after options are available
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
+    def handle(self, kwd_data: typing.Any, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Mark shared fields, handling positive indices immediately.
 
