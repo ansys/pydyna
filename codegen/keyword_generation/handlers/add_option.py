@@ -32,7 +32,7 @@ import typing
 from typing import Any, Dict, List, Optional
 
 from keyword_generation.data_model import get_card
-from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.keyword_data import Card, KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -136,15 +136,15 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         """
         typed_settings = self._parse_settings(settings)
 
-        def expand(card):
-            card = get_card(card)
+        def expand(card: Card):
             if "active" in card:
                 card["func"] = card["active"]
             return card
 
         new_options = []
         for option_settings in typed_settings:
-            cards = [expand(card) for card in option_settings["cards"]]
+            cards = [get_card(card) for card in option_settings["cards"]]
+            cards = [expand(card) for card in cards]
             new_option = {
                 "card_order": option_settings["card-order"],
                 "title_order": option_settings["title-order"],

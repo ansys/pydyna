@@ -40,23 +40,23 @@ KWD_TO_ALIAS: typing.Dict[str, str] = {}
 ALIAS_TO_KWD: typing.Dict[str, str] = {}
 
 
-def get_card(setting: typing.Dict[str, str]) -> typing.Dict[str, typing.List]:
+def get_card(setting: typing.Dict[str, str]) -> Card:
     """
     Get a card from either kwd-data or additional-cards sources.
 
-    Returns a dict (both sources return dicts for now).
+    Returns a Card dataclass instance.
     """
     assert KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
     assert ADDITIONAL_CARDS is not None, "ADDITIONAL_CARDS not initialized"
     source = setting["source"]
     if source == "kwd-data":
         data = KWDM_INSTANCE.get_keyword_data_dict(setting["keyword-name"])
-        card = data[setting["card-index"]]
-        return card
+        card_dict = data[setting["card-index"]]
+        return Card.from_dict(card_dict)
 
     if source == "additional-cards":
-        # Returns dict
-        return ADDITIONAL_CARDS[setting["card-name"]]
+        card_dict = ADDITIONAL_CARDS[setting["card-name"]]
+        return Card.from_dict(card_dict)
 
     raise Exception(f"Unknown card source: {source}")
 

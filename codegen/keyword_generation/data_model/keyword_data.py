@@ -85,6 +85,8 @@ class Field:
     card_indices: Optional[List[int]] = None
     link: Optional[int] = None
     flag: bool = False
+    on: Optional[str] = None  # Value when flag is True
+    off: Optional[str] = None  # Value when flag is False
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Field":
@@ -105,6 +107,8 @@ class Field:
             card_indices=data.get("card_indices"),
             link=data.get("link"),
             flag=data.get("flag", False),
+            on=data.get("on"),
+            off=data.get("off"),
         )
 
     def __getitem__(self, key: str) -> Any:
@@ -162,6 +166,7 @@ class Card:
     length_func: Optional[str] = None
     active_func: Optional[str] = None
     overall_name: Optional[str] = None
+    active: Optional[str] = None  # Activation condition for option cards
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Card":
@@ -197,6 +202,7 @@ class Card:
             length_func=data.get("length_func"),
             active_func=data.get("active_func"),
             overall_name=data.get("overall_name"),
+            active=data.get("active"),
         )
 
     def __getitem__(self, key: str) -> Any:
