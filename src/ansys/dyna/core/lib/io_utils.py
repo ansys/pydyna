@@ -59,4 +59,4 @@ def is_dataframe(obj) -> bool:
     bool
         True if obj has DataFrame-like attributes.
     """
-    return hasattr(obj, 'iloc') and hasattr(obj, 'columns') and hasattr(obj, 'index')
+    return hasattr(obj, "iloc") and hasattr(obj, "columns") and hasattr(obj, "index")
