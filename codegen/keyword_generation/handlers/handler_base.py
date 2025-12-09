@@ -32,6 +32,8 @@ from dataclasses import dataclass, field
 import logging
 from typing import Any, Dict, List, Optional, Set, Type
 
+from keyword_generation.data_model.keyword_data import KeywordData
+
 logger = logging.getLogger(__name__)
 
 
@@ -163,7 +165,7 @@ def get_all_handler_metadata() -> Dict[str, HandlerMetadata]:
     return _HANDLER_METADATA.copy()
 
 
-def validate_handler_settings(handler_name: str, settings: Any) -> None:
+def validate_handler_settings(handler_name: str, settings: List[Dict[str, Any]]) -> None:
     """
     Validate handler settings against its JSON schema.
 
@@ -173,7 +175,7 @@ def validate_handler_settings(handler_name: str, settings: Any) -> None:
 
     Args:
         handler_name: Name of the handler
-        settings: Settings to validate (can be dict, list, int, etc. depending on handler schema)
+        settings: List of setting dictionaries from manifest.json
 
     Raises:
         ValueError: If settings are invalid or handler not found
@@ -223,7 +225,7 @@ class KeywordHandler(metaclass=abc.ABCMeta):
     """
 
     @abc.abstractmethod
-    def handle(self, kwd_data: Any, settings: Any) -> None:
+    def handle(self, kwd_data: KeywordData, settings: List[Dict[str, Any]]) -> None:
         """
         Transform keyword data based on settings.
 
@@ -232,8 +234,8 @@ class KeywordHandler(metaclass=abc.ABCMeta):
         and modifies kwd_data in place.
 
         Args:
-            kwd_data: KeywordData instance (or dict during transition)
-            settings: Handler-specific settings from manifest.json "generation-options" (can be dict, list, int, etc.)
+            kwd_data: KeywordData instance containing keyword metadata, cards, and fields
+            settings: List of handler-specific setting dictionaries from manifest.json "generation-options"
 
         Raises:
             NotImplementedError: Must be implemented by subclass
@@ -241,7 +243,7 @@ class KeywordHandler(metaclass=abc.ABCMeta):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def post_process(self, kwd_data: Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """
         Finalization logic that runs after all handlers have executed.
 
@@ -250,7 +252,7 @@ class KeywordHandler(metaclass=abc.ABCMeta):
         this as a no-op (pass).
 
         Args:
-            kwd_data: KeywordData instance (or dict during transition) after all handle() calls
+            kwd_data: KeywordData instance after all handle() calls
 
         Raises:
             NotImplementedError: Must be implemented by subclass

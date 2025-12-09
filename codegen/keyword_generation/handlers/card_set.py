@@ -28,11 +28,35 @@ repeated with variable length, optionally including their own sub-options.
 """
 
 import copy
+from dataclasses import dataclass
 import typing
+from typing import Any, Dict, List, Optional
 
 import keyword_generation.data_model as gen
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class CardSetSettings:
+    """Configuration for grouping cards into repeatable sets."""
+
+    name: str
+    source_indices: List[int]
+    length_func: Optional[str] = None
+    active_func: Optional[str] = None
+    options: Optional[List[Dict[str, Any]]] = None
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "CardSetSettings":
+        return cls(
+            name=data["name"],
+            source_indices=data["source-indices"],
+            length_func=data.get("length-func"),
+            active_func=data.get("active-func"),
+            options=data.get("options"),
+        )
 
 
 @handler(
@@ -109,7 +133,14 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         - Marks source cards/options with "mark_for_removal" = 1
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
+    @classmethod
+    def _parse_settings(
+        cls, settings: typing.List[typing.Dict[str, typing.Any]]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        """Keep dict settings for card-set due to complex optional fields not in CardSetSettings."""
+        return settings
+
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Create card sets from source cards and options.
 
@@ -120,13 +151,12 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         Raises:
             Exception: If more than one default target (empty target-name) is specified
         """
+        typed_settings = self._parse_settings(settings)
         card_sets = []
         has_options = False
         default_target = 0
 
-        # settings is actually a List[Dict] despite base class signature
-        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
-        for card_settings in settings_list:
+        for card_settings in typed_settings:
             card_set = {"name": card_settings["name"], "source_cards": []}
             target_name = card_settings.get("target-name", "")
             if target_name == "":
@@ -170,6 +200,6 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             card_sets.append(card_set)
         kwd_data.card_sets = {"sets": card_sets, "options": has_options}
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass

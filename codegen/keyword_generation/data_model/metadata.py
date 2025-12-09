@@ -124,6 +124,14 @@ class OptionGroup:
             func=data.get("func"),
         )
 
+    def get_all_cards(self) -> List[Dict[str, Any]]:
+        """Get all cards in this option group.
+
+        Returns:
+            List of cards (may be Card instances or dicts during transition)
+        """
+        return self.cards
+
 
 @dataclass
 class CardSet:
@@ -149,6 +157,24 @@ class CardSet:
             length_func=data.get("length_func"),
             active_func=data.get("active_func"),
         )
+
+    def get_all_cards(self) -> List[Dict[str, Any]]:
+        """Get all cards in this card set, including nested option cards.
+
+        Returns:
+            List of cards from source_cards and all option groups
+        """
+        all_cards = []
+        all_cards.extend(self.source_cards)
+        for option in self.options:
+            # option may be dict with 'cards' key
+            if isinstance(option, dict):
+                all_cards.extend(option.get("cards", []))
+            else:
+                # If option has cards attribute/method
+                if hasattr(option, "cards"):
+                    all_cards.extend(option.cards)
+        return all_cards
 
 
 @dataclass

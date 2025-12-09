@@ -3,7 +3,8 @@
 This file collects architectural and code-level recommendations for improving the codegen system.
 
 ## 1. Data Structures
-- Add consistent type hints throughout the codebase (dataclasses and typed metadata classes are available in `data_model/` for gradual migration - see `agents/codegen.md` for details)
+- Typed dataclasses implemented for handlers, metadata, cards, and fields
+- Remove Union types once all sources exclusively use dataclasses
 
 ## 2. Handler System
 
@@ -30,8 +31,6 @@ This file collects architectural and code-level recommendations for improving th
 - Add a diagram or high-level description of the codegen flow to the documentation.
 
 ## 8. Maintenance
-- Use beartype to enforce/check type hints, with a CLI option to opt in
-    - Add beartype to the codegen dependencies in pyproject.toml
 - Use the coverage module to confirm that every line of code in the codegen system is necessary
 - Incorporate the above into the codegen agent instructions so this is done every time the codegen is touched
 - Add a validation script that encapsulates all of these and the below constraints

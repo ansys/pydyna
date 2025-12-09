@@ -27,10 +27,25 @@ Allows field names (as they appear in keyword files) to map to different
 Python property names in the generated code for improved API clarity.
 """
 
+from dataclasses import dataclass
 import typing
+from typing import Any, Dict
 
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class RenamePropertySettings:
+    """Configuration for renaming card properties."""
+
+    old_name: str
+    new_name: str
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "RenamePropertySettings":
+        return cls(old_name=data["old-name"], new_name=data["new-name"])
 
 
 @handler(
@@ -72,7 +87,14 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
         Sets field["property_name"] = "part_id" for matching field
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
+    @classmethod
+    def _parse_settings(
+        cls, settings: typing.List[typing.Dict[str, typing.Any]]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        """Keep dict settings for rename-property due to schema mismatch."""
+        return settings
+
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Rename Python properties for specified fields.
 
@@ -80,8 +102,9 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
             kwd_data: Complete keyword data dictionary
             settings: List of {"index", "name", "property-name"} dicts
         """
-        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
-        for setting in settings_list:
+        # RenamePropertySettings only has old_name and new_name, no index
+        # Keep using dict for this handler
+        for setting in settings:
             index = setting["index"]
             name = setting["name"]
             property_name = setting["property-name"]
@@ -90,6 +113,6 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
                 if field["name"].lower() == name:
                     field["property_name"] = property_name
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass

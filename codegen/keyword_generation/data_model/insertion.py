@@ -23,9 +23,12 @@
 from dataclasses import dataclass
 import typing
 
+# Avoid circular import by using Any during transition
+# Card instances are dict-compatible via __getitem__/__setitem__
+
 
 @dataclass
 class Insertion:
     target_index: typing.Optional[int] = None
     target_class: typing.Optional[str] = None
-    card: typing.Optional[typing.Dict] = None
+    card: typing.Optional[typing.Any] = None  # Card or Dict during transition

@@ -33,9 +33,12 @@ BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=true ./doc/make.bat html
 
 - Do not use inline comments to explain imports. Instead, use a module-level docstring to indicate the purpose and usage of imported modules. This applies to all agent-generated code, not just codegen modules.
 - There is a line limit of 120 characters, and other linting rules. Use precommit run --all-files to run the linters after making changes.
-- **Handlers use dataclass attribute access**: All handlers now access `kwd_data.field` instead of `kwd_data["field"]`.
-- **Cards stay as dicts**: While KeywordData is a dataclass, `cards` remains `List[Dict[str, Any]]` because handlers mutate cards with dict operations.
-- **Hybrid access patterns**: During transition, some fields (like `options`) may be dataclass instances or dicts - use `hasattr()` checks for compatibility.
+- **Handlers use typed dataclasses** (Dec 2025): All handlers now use:
+  - `kwd_data.field` attribute access (dataclass instances, not dicts)
+  - `KeywordData.cards` is `List[Card]` with dict-like backward compatibility (`card["index"]` or `card.index`)
+  - Typed settings dataclasses in each handler file (e.g., `SkipCardSettings`)
+  - Typed metadata instances (e.g., `DuplicateCardMetadata` not `Dict[str, Any]`)
+- **Dict-like access for compatibility**: Card and Field dataclasses implement `__getitem__`, `__setitem__` to support gradual migration
 - **Do not mark items in `codegen/todo.md` as "COMPLETED"**. This is a living document of architectural recommendations, not a task tracker. When implementing recommendations, document the implementation in the appropriate `agents/*.md` guide file instead.
 - **Add comprehensive logging**: Use Python's `logging` module extensively throughout the codebase. Add a logger instance (`logger = logging.getLogger(__name__)`) to each module and use it liberally:
   - Use `logger.debug()` for detailed traceability of execution flow, variable values, and decisions
