@@ -40,22 +40,28 @@ KWD_TO_ALIAS: typing.Dict[str, str] = {}
 ALIAS_TO_KWD: typing.Dict[str, str] = {}
 
 
-def get_card(setting: typing.Dict[str, str]):
+def get_card(setting: typing.Dict[str, str]) -> Card:
+    """
+    Get a card from either kwd-data or additional-cards sources.
+
+    Returns a Card dataclass instance.
+    """
     assert KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
     assert ADDITIONAL_CARDS is not None, "ADDITIONAL_CARDS not initialized"
     source = setting["source"]
     if source == "kwd-data":
         data = KWDM_INSTANCE.get_keyword_data_dict(setting["keyword-name"])
-        card = data[setting["card-index"]]
-        return card
+        card_dict = data[setting["card-index"]]
+        return Card.from_dict(card_dict)
 
     if source == "additional-cards":
-        return ADDITIONAL_CARDS[setting["card-name"]]
+        card_dict = ADDITIONAL_CARDS[setting["card-name"]]
+        return Card.from_dict(card_dict)
 
-    raise Exception()
+    raise Exception(f"Unknown card source: {source}")
 
 
-def add_alias(keyword: str, alias: str):
+def add_alias(keyword: str, alias: str) -> None:
     KWD_TO_ALIAS[keyword] = alias
     ALIAS_TO_KWD[alias] = keyword
 
@@ -64,34 +70,40 @@ def get_alias(keyword: str) -> typing.Optional[str]:
     return KWD_TO_ALIAS.get(keyword, None)
 
 
-def get_aliased_by(keyword: str):
+def get_aliased_by(keyword: str) -> typing.Optional[str]:
     return ALIAS_TO_KWD.get(keyword, None)
 
 
-def is_aliased(keyword: str):
+def is_aliased(keyword: str) -> bool:
     return keyword in ALIAS_TO_KWD.keys()
 
 
-def _load_manifest(filename) -> typing.Dict:
+def _load_manifest(filename: str) -> typing.Dict[str, typing.Any]:
     with open(filename) as f:
         manifest = json.load(f)
     return manifest
 
 
 class AdditionalCards:
-    def __init__(self, filename):
-        with open(filename) as f:
-            self._cards = json.load(f)
+    """
+    Manages additional card definitions loaded from additional-cards.json.
 
-    def __getitem__(self, name):
-        """return a copy of the additional card, since the client may mutate it."""
+    Keeps cards as dicts for now to avoid breaking template generation logic.
+    """
+
+    def __init__(self, filename: str) -> None:
+        with open(filename) as f:
+            self._cards: typing.Dict[str, typing.Dict[str, typing.Any]] = json.load(f)
+
+    def __getitem__(self, name: str) -> typing.Dict[str, typing.Any]:
+        """Return a copy of the additional card as a dict."""
         return copy.deepcopy(self._cards[name])
 
 
 class KWDM:
-    def __init__(self, filename):
+    def __init__(self, filename: str) -> None:
         with open(filename, encoding="utf-8") as f:
-            self._data: typing.Dict = json.load(f)
+            self._data: typing.Dict[str, typing.Any] = json.load(f)
 
     def get_keywords_list(self) -> typing.List[str]:
         return list(self._data.keys())
@@ -103,7 +115,7 @@ class KWDM:
         return self._data[name]
 
 
-def load(this_folder: str, kwd_file: str, manifest: str, additional_cards: str):
+def load(this_folder: str, kwd_file: str, manifest: str, additional_cards: str) -> None:
     global KWDM_INSTANCE, MANIFEST, ADDITIONAL_CARDS
     if kwd_file == "":
         kwd_file = os.path.join(this_folder, "kwd.json")

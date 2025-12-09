@@ -650,7 +650,7 @@ class Mat278(KeywordBase):
 
     @property
     def ekb(self) -> typing.Optional[float]:
-        """Get or set the Elastic constant of element "b"
+        """Get or set the Elastic constant of element "b" 
         """ # nopep8
         return self._cards[1].get_value("ekb")
 

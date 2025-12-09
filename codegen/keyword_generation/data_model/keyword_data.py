@@ -85,6 +85,8 @@ class Field:
     card_indices: Optional[List[int]] = None
     link: Optional[int] = None
     flag: bool = False
+    on: Optional[str] = None  # Value when flag is True
+    off: Optional[str] = None  # Value when flag is False
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Field":
@@ -105,7 +107,109 @@ class Field:
             card_indices=data.get("card_indices"),
             link=data.get("link"),
             flag=data.get("flag", False),
+            on=data.get("on"),
+            off=data.get("off"),
         )
+
+    def __getitem__(self, key: str) -> Any:
+        """Dict-like access for backward compatibility."""
+        return getattr(self, key)
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        """Dict-like assignment for backward compatibility."""
+        setattr(self, key, value)
+
+    def __contains__(self, key: str) -> bool:
+        """Dict-like 'in' operator for backward compatibility."""
+        return hasattr(self, key)
+
+    def get(self, key: str, default: Any = None) -> Any:
+        """Dict-like get() method for backward compatibility."""
+        return getattr(self, key, default)
+
+    def normalize(self) -> None:
+        """Normalize field data for Python code generation.
+
+        Performs:
+        - Type mapping (integer->int, real->float, string->str)
+        - Field name fixing (uppercase->lowercase, special chars, reserved words)
+        - Property name generation
+        - Default value conversion (string wrapping, int conversion)
+        - Flag type conversion (flag fields become bool)
+        - Help text cleanup
+        """
+        # Set default 'used' flag if not present
+        if not hasattr(self, "used") or self.used is None:
+            self.used = True
+
+        # Type mapping - MUST happen before checking 'used' flag
+        type_mapping = {"integer": "int", "real": "float", "string": "str", "real-integer": "float"}
+        if self.type in type_mapping:
+            self.type = type_mapping[self.type]
+
+        # Handle unused fields - set name to "unused" and skip rest of processing
+        if not self.used:
+            self.default = None
+            self.help = ""
+            self.name = "unused"
+            return
+
+        # Handle flag fields - convert to bool type
+        if self.flag:
+            self.type = "bool"
+
+        # Fix field name to be Python-friendly
+        # Original logic: field["name"] gets lowercased original, property_name gets fixed version
+        field_name = self.name  # Keep original for fixing
+
+        # Create fixed version with character replacements for property_name
+        fixed_name = field_name
+        # Deal with bad characters
+        for bad_char in ["/", "-", " ", "(", ")", ",", ".", "'", "*", "|", "+"]:
+            fixed_name = fixed_name.replace(bad_char, "_")
+        # Deal with reserved keywords
+        if fixed_name.lower() in ["global", "as", "int", "lambda", "for"]:
+            fixed_name = fixed_name + "_"
+        # Deal with names starting with digits
+        if fixed_name and fixed_name[0].isdigit():
+            fixed_name = "_" + fixed_name
+
+        fixed_field_name = fixed_name.lower()
+        self.name = field_name.lower()  # Use original name lowercased, not the fixed version
+
+        # Set property_name if not already set
+        if not self.property_name:
+            self.property_name = fixed_field_name
+
+        # Set property_type if not already set
+        if not self.property_type:
+            self.property_type = self.type
+
+        # Type-specific default handling
+        if self.type == "str":
+            # Wrap string options in quotes
+            if self.options:
+                self.options = [f'"{option}"' for option in self.options]
+            # Wrap string default in quotes
+            if self.default is not None:
+                self.default = f'"{self.default}"'
+        elif self.type == "int":
+            # Convert int defaults from strings (might be floats)
+            if self.default is not None:
+                try:
+                    self.default = int(float(self.default))
+                except (ValueError, TypeError):
+                    # If conversion fails, leave as None
+                    self.default = None
+
+        # Clean up help text (remove leading whitespace from each line)
+        if self.help:
+            lines = self.help.split("\n")
+            cleaned_lines = [line.strip() for line in lines]
+            self.help = "\n".join(cleaned_lines)
+            # Add trailing space if help ends with quote
+            if self.help.endswith('"'):
+                self.help = self.help + " "
 
 
 @dataclass
@@ -146,6 +250,7 @@ class Card:
     length_func: Optional[str] = None
     active_func: Optional[str] = None
     overall_name: Optional[str] = None
+    active: Optional[str] = None  # Activation condition for option cards
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Card":
@@ -166,7 +271,7 @@ class Card:
         external = ExternalCardMetadata.from_dict(external_data) if isinstance(external_data, dict) else external_data
 
         return cls(
-            index=data["index"],
+            index=data.get("index", -1),  # Default to -1, will be set by class_generator
             fields=fields,
             mark_for_removal=data.get("mark_for_removal"),
             func=data.get("func"),
@@ -181,7 +286,44 @@ class Card:
             length_func=data.get("length_func"),
             active_func=data.get("active_func"),
             overall_name=data.get("overall_name"),
+            active=data.get("active"),
         )
+
+    def __getitem__(self, key: str) -> Any:
+        """Dict-like access for backward compatibility during migration."""
+        return getattr(self, key)
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        """Dict-like assignment for backward compatibility during migration."""
+        setattr(self, key, value)
+
+    def __contains__(self, key: str) -> bool:
+        """Dict-like 'in' operator for backward compatibility."""
+        return hasattr(self, key)
+
+    def get(self, key: str, default: Any = None) -> Any:
+        """Dict-like get() method for backward compatibility."""
+        return getattr(self, key, default)
+
+    def get_all_fields(self) -> List[Field]:
+        """Get all fields for this card, handling duplicate_group aggregation.
+
+        For regular cards, returns self.fields directly.
+        For duplicate_group cards, aggregates fields from all sub_cards.
+
+        Returns:
+            List of Field instances
+        """
+        if self.duplicate_group and self.sub_cards:
+            all_fields = []
+            for sub_card in self.sub_cards:
+                # sub_card might be dict or Card during transition
+                if isinstance(sub_card, dict):
+                    all_fields.extend(sub_card.get("fields", []))
+                else:
+                    all_fields.extend(sub_card.fields)
+            return all_fields
+        return self.fields
 
 
 @dataclass
@@ -195,8 +337,8 @@ class KeywordData:
 
     Design Rationale:
     - KeywordData uses dataclass attributes for type safety and IDE support
-    - Cards remain as List[Dict] (not List[Card]) because handlers mutate them
-      with dict operations like card["duplicate"] = {...}
+    - Cards are now List[Card] instances with dict-like access (__getitem__/__setitem__)
+      for backward compatibility during the migration from dict-based code
     - Options may be List[OptionGroup] or List[Dict] during transition period
     - The from_dict/to_dict methods enable conversion at pipeline boundaries
 
@@ -223,7 +365,7 @@ class KeywordData:
     subkeyword: str
     title: str
     classname: str = ""  # Set later by _get_base_variable
-    cards: List[Dict[str, Any]] = field(default_factory=list)  # Keep as dicts for handler mutations
+    cards: List[Card] = field(default_factory=list)  # Now using Card dataclass instances
     options: Union[List[OptionGroup], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     card_sets: Optional[Union[CardSetsContainer, Dict[str, Any]]] = None
     duplicate: bool = False
@@ -254,8 +396,9 @@ class KeywordData:
             KeywordData instance
         """
         logger.debug(f"Creating KeywordData for {data.get('keyword')}.{data.get('subkeyword')}")
-        # Keep cards as dicts - handlers modify them directly
-        cards = data.get("cards", [])
+        # Convert cards from dicts to Card instances
+        cards_data = data.get("cards", [])
+        cards = [Card.from_dict(c) if isinstance(c, dict) else c for c in cards_data]
 
         # Convert metadata dicts to typed objects
         options_data = data.get("options")
@@ -307,3 +450,51 @@ class KeywordData:
             negative_shared_fields=data.get("negative_shared_fields", []),
             card_insertions=data.get("card_insertions", []),
         )
+
+    def get_all_cards(self) -> Union[List[Card], List[Dict[str, Any]], List[Union[Card, Dict[str, Any]]]]:
+        """Get all cards that need transformation, from all nested structures.
+
+        This collects cards from:
+        - Main cards list
+        - Card sets (source_cards and their options)
+        - Top-level options (option cards)
+
+        Returns:
+            Flat list of all Card instances or dicts requiring field transformation.
+            During the transition period, may contain both Card instances and dicts.
+        """
+        all_cards = []
+
+        # Main cards
+        all_cards.extend(self.cards)
+
+        # Cards from card_sets
+        if self.card_sets:
+            # card_sets may be CardSetsContainer or dict during transition
+            if hasattr(self.card_sets, "sets"):
+                sets = self.card_sets.sets
+            else:
+                sets = self.card_sets.get("sets", [])  # type: ignore
+
+            for card_set in sets:
+                # card_set may be CardSet instance or dict
+                if hasattr(card_set, "get_all_cards"):
+                    all_cards.extend(card_set.get_all_cards())
+                else:
+                    # Fallback for dict-based card_set
+                    source_cards = card_set.get("source_cards", [])  # type: ignore
+                    all_cards.extend(source_cards)
+                    options = card_set.get("options", [])  # type: ignore
+                    for option in options:
+                        all_cards.extend(option.get("cards", []))  # type: ignore
+
+        # Top-level options
+        for option in self.options or []:
+            # option may be OptionGroup instance or dict
+            if hasattr(option, "get_all_cards"):
+                all_cards.extend(option.get_all_cards())
+            else:
+                # Fallback for dict-based option
+                all_cards.extend(option.get("cards", []))  # type: ignore
+
+        return all_cards

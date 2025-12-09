@@ -25,7 +25,7 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.table_card_group import TableCardGroup
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -43,58 +43,18 @@ class ConstrainedNodalRigidBody(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            TableCardGroup(
+            TableCard(
                 [
-                    Card(
-                            [
-                                Field(
-                                    "pid",
-                                    int,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "cid",
-                                    int,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "nsid",
-                                    int,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "pnode",
-                                    int,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "iprt",
-                                    int,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "drflag",
-                                    int,
-                                    50,
-                                    10,
-                                ),
-                                Field(
-                                    "rrflag",
-                                    int,
-                                    60,
-                                    10,
-                                ),
-                            ],
-                    ),
+                    Field("pid", int, 0, 10, None),
+                    Field("cid", int, 10, 10, None),
+                    Field("nsid", int, 20, 10, None),
+                    Field("pnode", int, 30, 10, 0),
+                    Field("iprt", int, 40, 10, 0),
+                    Field("drflag", int, 50, 10, 0),
+                    Field("rrflag", int, 60, 10, 0),
                 ],
                 None,
-                None,
-                "constrained_nodal_rigid_bodies",
+                name="constrained_nodal_rigid_bodies",
                 **kwargs,
             ),
             OptionCardSet(
@@ -118,12 +78,12 @@ class ConstrainedNodalRigidBody(KeywordBase):
 
     @property
     def constrained_nodal_rigid_bodies(self) -> pd.DataFrame:
-        """Gets the full table of constrained_nodal_rigid_bodies."""
+        """Get the table of constrained_nodal_rigid_bodies."""
         return self._cards[0].table
 
     @constrained_nodal_rigid_bodies.setter
     def constrained_nodal_rigid_bodies(self, df: pd.DataFrame):
-        """sets constrained_nodal_rigid_bodies from the dataframe df."""
+        """Set constrained_nodal_rigid_bodies from the dataframe df"""
         self._cards[0].table = df
 
     @property

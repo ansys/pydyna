@@ -25,8 +25,8 @@ import typing
 
 from jinja2 import Environment
 import keyword_generation.data_model as data_model
-from keyword_generation.data_model.keyword_data import KeywordData
-from keyword_generation.handlers.registry import create_default_registry
+from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
+from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry
 from keyword_generation.utils import (
     fix_keyword,
     get_classname,
@@ -65,111 +65,127 @@ def _get_jinja_variable(base_variable: typing.Dict) -> typing.Dict:
     return jinja_variable
 
 
-def _get_fields(card: typing.Dict) -> typing.List[typing.Dict[str, typing.Any]]:
-    if "duplicate_group" in card:
-        fields = []
-        for sub_card in card["sub_cards"]:
-            fields.extend(sub_card["fields"])
-        return fields
-    return card["fields"]
-
-
 def _transform_data(data: KeywordData):
-    """applies the following transformations to data:
-    - lowercase field names (SECID -> secid)
-    - python type mapping (integer->int, real->float)
+    """Applies transformations to normalize keyword data for Python code generation.
+
+    Uses polymorphic iteration via KeywordData.get_all_cards() to handle:
+    - Regular cards
+    - Duplicate group cards (table card groups)
+    - Card sets (source cards and their options)
+    - Top-level option cards
+
+    Each field is normalized via Field.normalize() which handles:
+    - Lowercase field names (SECID -> secid)
+    - Python type mapping (integer->int, real->float)
+    - Reserved keyword handling (as -> as_)
+    - Default value conversion
+    - Help text cleanup
+    """
+    # Get all cards from all structures (main cards, card_sets, options)
+    all_cards = data.get_all_cards()
+
+    # Normalize all fields in all cards
+    for card in all_cards:
+        # card may be Card instance or dict during transition
+        if isinstance(card, Card):
+            fields = card.get_all_fields()
+        else:
+            # Fallback for dict-based cards - handle duplicate_group case
+            if card.get("duplicate_group") and card.get("sub_cards"):
+                # For duplicate_group dicts, aggregate fields from all sub_cards
+                fields = []
+                for sub_card in card["sub_cards"]:
+                    fields.extend(sub_card.get("fields", []))
+            else:
+                fields = card.get("fields", [])
+
+        for field in fields:
+            # field may be Field instance or dict during transition
+            if isinstance(field, Field):
+                field.normalize()
+            else:
+                # Fallback: inline the legacy transformation for dict-based fields
+                _normalize_field_dict(field)
+
+    # Assign indices to main cards
+    for index, card in enumerate(data.cards):
+        card["index"] = index
+
+
+def _normalize_field_dict(field: typing.Dict) -> None:
+    """Legacy field normalization for dict-based fields during transition.
+
+    This function preserves the original transformation logic for fields
+    that haven't been converted to Field instances yet. Can be removed
+    once full dataclass migration is complete.
     """
     type_mapping = {"integer": "int", "real": "float", "string": "str", "real-integer": "float"}
 
-    def fix_fieldname(field_name: str) -> str:
-        """returns a python friendly version of field name.
-        For example, nx/ida becomes nx_ida, as becomes as_"""
-        # deal with bad characters
-        for bad_char in ["/", "-", " ", "(", ")", ",", ".", "'", "*", "|", "+"]:
-            field_name = field_name.replace(bad_char, "_")
-        # deal with reserved statements
-        if field_name.lower() in ["global", "as", "int", "lambda", "for"]:
-            field_name = field_name + "_"
-        if field_name[0].isdigit():
-            field_name = "_" + field_name
-        return field_name
+    # Handle unused fields
+    if "used" not in field or not field.get("used"):
+        if "used" not in field:
+            field["used"] = True
 
-    def fix_fieldhelp(field_help: str) -> str:
-        """help is formatted inside a triple quote,"""
-        if field_help.endswith('"'):
-            field_help = field_help + " "
-        # remove any leading whitespace from each line in field_help
-        field_help = "\n".join([l.strip() for l in field_help.split("\n")])
-        return field_help
+    # Type mapping - MUST happen before checking 'used' flag
+    field["type"] = type_mapping[field["type"]]
 
-    def fix_field_string_default(field_default: typing.Optional[str]) -> typing.Optional[str]:
-        """string defaults need to be wrapped in quotes"""
-        if field_default == None:
-            return None
-        return f'"{field_default}"'
+    # If unused, set name to "unused" and skip rest
+    if not field["used"]:
+        field["default"] = None
+        field["help"] = ""
+        field["name"] = "unused"
+        return
 
-    def fix_field_int_default(field_default) -> typing.Optional[int]:
-        """int defaults need to be converted from strings that might be floats"""
-        if field_default == None:
-            return None
-        return int(float(field_default))
+    # Flag fields become bool
+    if field.get("flag", False):
+        field["type"] = "bool"
 
-    def fix_card(card: typing.Dict) -> None:
-        for field in _get_fields(card):
-            if "used" not in field:
-                field["used"] = True
-            field["type"] = type_mapping[field["type"]]
-            if not field["used"]:
+    # Fix field name
+    # Original logic: field["name"] gets lowercased original, property_name gets fixed version
+    field_name: str = field["name"]  # Keep original
+
+    # Create fixed version with character replacements for property_name
+    fixed_name = field_name
+    for bad_char in ["/", "-", " ", "(", ")", ",", ".", "'", "*", "|", "+"]:
+        fixed_name = fixed_name.replace(bad_char, "_")
+    if fixed_name.lower() in ["global", "as", "int", "lambda", "for"]:
+        fixed_name = fixed_name + "_"
+    if fixed_name and fixed_name[0].isdigit():
+        fixed_name = "_" + fixed_name
+
+    fixed_field_name = fixed_name.lower()
+    field["name"] = field_name.lower()  # Use original name lowercased, not the fixed version
+
+    if "property_name" not in field or not field.get("property_name"):
+        field["property_name"] = fixed_field_name
+    if "property_type" not in field or not field.get("property_type"):
+        field["property_type"] = field["type"]
+
+    # Type-specific default handling
+    if field["type"] == "str":
+        if "options" in field:
+            field["options"] = [f'"{option}"' for option in field["options"]]
+        if field["default"] is not None:
+            field["default"] = f'"{field["default"]}"'
+    elif field["type"] == "int":
+        if field["default"] is not None:
+            try:
+                field["default"] = int(float(field["default"]))
+            except (ValueError, TypeError):
+                # If conversion fails, leave as None
                 field["default"] = None
-                field["help"] = ""
-                field["name"] = "unused"
-                continue
-            if field.get("flag", False):
-                field["type"] = "bool"
-            field_name: str = field["name"]
-            fixed_field_name = fix_fieldname(field_name).lower()
-            if not "property_name" in field:
-                field["property_name"] = fixed_field_name
-            field["name"] = field_name.lower()
-            if not "property_type" in field:
-                field["property_type"] = field["type"]
-            if field["type"] == "str":
-                if "options" in field:
-                    field["options"] = [f'"{option}"' for option in field["options"]]
-                field["default"] = fix_field_string_default(field["default"])
-            elif field["type"] == "int":
-                field["default"] = fix_field_int_default(field["default"])
-            field["help"] = fix_fieldhelp(field["help"])
 
-    index = 0
-    for card in data.cards:
-        fix_card(card)
-        card["index"] = index
-        index = index + 1
-
-    # card_sets may be CardSetsContainer instance or dict
-    if data.card_sets:
-        sets = (
-            data.card_sets.sets if hasattr(data.card_sets, "sets") else data.card_sets.get("sets", [])
-        )  # type: ignore
-        for card_set in sets:
-            source_cards = (
-                card_set.source_cards if hasattr(card_set, "source_cards") else card_set.get("source_cards", [])
-            )  # type: ignore
-            for card in source_cards:
-                fix_card(card)
-            options = card_set.options if hasattr(card_set, "options") else card_set.get("options", [])  # type: ignore
-            for option in options:
-                cards = option.cards if hasattr(option, "cards") else option["cards"]  # type: ignore
-                [fix_card(card) for card in cards]
-
-    # options may be OptionGroup instances or dicts
-    for option in data.options or []:
-        cards = option.cards if hasattr(option, "cards") else option["cards"]  # type: ignore
-        [fix_card(card) for card in cards]
+    # Clean up help text
+    if field["help"]:
+        if field["help"].endswith('"'):
+            field["help"] = field["help"] + " "
+        field["help"] = "\n".join([line.strip() for line in field["help"].split("\n")])
 
 
-def _get_insertion_index_for_cards(requested_index: int, container: typing.List[typing.Dict[str, typing.Any]]) -> int:
+def _get_insertion_index_for_cards(
+    requested_index: int, container: typing.Union[typing.List[Card], typing.List[typing.Dict]]
+) -> int:
+    """Find insertion index in container, handling both Card instances and dicts during transition."""
     for index, card in enumerate(container):
         card_index = card.get("source_index", card["index"])
         if card_index == requested_index:
@@ -227,7 +243,8 @@ def _do_insertions(kwd_data: KeywordData) -> None:
 def _delete_marked_indices(kwd_data: KeywordData) -> None:
     marked_indices = []
     for index, card in enumerate(kwd_data.cards):
-        if "mark_for_removal" in card:
+        # Check if mark_for_removal is set to a truthy value (not None, not 0)
+        if card.get("mark_for_removal"):
             marked_indices.append(index)
     # removal will affect order if we iterate forwards, so iterate backwards
     marked_indices.sort(reverse=True)
@@ -240,8 +257,8 @@ def _delete_marked_indices(kwd_data: KeywordData) -> None:
     if len(options_list) > 0:
         marked_option_indices = []
         for index, option in enumerate(options_list):
-            # option may be OptionGroup instance or dict
-            has_mark = hasattr(option, "__getitem__") and "mark_for_removal" in option  # type: ignore
+            # option may be OptionGroup instance or dict - check for truthy mark_for_removal value
+            has_mark = hasattr(option, "get") and option.get("mark_for_removal")  # type: ignore
             if has_mark:
                 marked_option_indices.append(index)
         marked_option_indices.sort(reverse=True)
@@ -273,7 +290,7 @@ def _add_option_indices(kwd_data: KeywordData) -> None:
         index += 1
 
 
-def _after_handle(kwd_data: KeywordData, registry: typing.Any) -> None:
+def _after_handle(kwd_data: KeywordData, registry: HandlerRegistry) -> None:
     # TODO - move these to their respective handler
     _do_insertions(kwd_data)
     _delete_marked_indices(kwd_data)
@@ -326,7 +343,9 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
     links = {LinkIdentity.DEFINE_TRANSFORMATION: []}
     has_link = False
     for card in kwd_data.cards:
-        for field in _get_fields(card):
+        # Use card.get_all_fields() instead of _get_fields helper
+        fields = card.get_all_fields() if isinstance(card, Card) else card.get("fields", [])
+        for field in fields:
             if "link" not in field:
                 continue
             link = field["link"]

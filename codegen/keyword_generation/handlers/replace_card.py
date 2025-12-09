@@ -27,11 +27,26 @@ Uses cards from additional-cards.json or other sources to completely
 replace existing cards in the keyword structure.
 """
 
+from dataclasses import dataclass
 import typing
+from typing import Any, Dict, List
 
 from keyword_generation.data_model import get_card
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class ReplaceCardSettings:
+    """Configuration for replacing card fields."""
+
+    index: int
+    fields: List[Dict[str, Any]]
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "ReplaceCardSettings":
+        return cls(index=data["index"], fields=data["fields"])
 
 
 @handler(
@@ -73,7 +88,14 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         Replaces kwd_data["cards"][index] with loaded card definition
     """
 
-    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
+    @classmethod
+    def _parse_settings(
+        cls, settings: typing.List[typing.Dict[str, typing.Any]]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        """Keep dict settings for replace-card - manifest uses 'card' field."""
+        return settings
+
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Replace cards with new card definitions.
 
@@ -81,13 +103,13 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
             kwd_data: Complete keyword data dictionary
             settings: List of {"index", "card"} dicts
         """
-        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
-        for setting in settings_list:
+        typed_settings = self._parse_settings(settings)
+        for setting in typed_settings:
             index = setting["index"]
             replacement = get_card(setting["card"])
             replacement["index"] = index
             kwd_data.cards[index] = replacement
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass
