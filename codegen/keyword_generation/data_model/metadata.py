@@ -126,7 +126,7 @@ class OptionGroup:
 
     def get_all_cards(self) -> List[Dict[str, Any]]:
         """Get all cards in this option group.
-        
+
         Returns:
             List of cards (may be Card instances or dicts during transition)
         """
@@ -160,7 +160,7 @@ class CardSet:
 
     def get_all_cards(self) -> List[Dict[str, Any]]:
         """Get all cards in this card set, including nested option cards.
-        
+
         Returns:
             List of cards from source_cards and all option groups
         """
