@@ -133,7 +133,7 @@ class TableCard(Card):
     @table.setter
     def table(self, value: pd.DataFrame):
         _check_type(value)
-        # Build columns dict first to avoid CoW issues in pandas 2.3+
+        # Build columns dict first, then create DataFrame (pandas 2.3+ compatibility)
         columns = {}
         for field in self._fields:
             if field.name in value:
