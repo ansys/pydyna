@@ -27,10 +27,23 @@ Cards marked for deletion are removed from the final keyword structure after
 all handlers have processed.
 """
 
-from typing import Any
+from dataclasses import dataclass
+from typing import Any, Dict, List
 
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class SkipCardSettings:
+    """Configuration for marking a card for removal."""
+
+    index: int
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "SkipCardSettings":
+        return cls(index=data["index"])
 
 
 @handler(
@@ -38,51 +51,38 @@ from keyword_generation.handlers.handler_base import handler
     dependencies=[],
     description="Marks cards for removal from the generated keyword class",
     input_schema={
-        "oneOf": [
-            {"type": "integer", "description": "Single card index to skip"},
-            {"type": "array", "items": {"type": "integer"}, "description": "List of card indices to skip"},
-        ]
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {"index": {"type": "integer"}},
+            "required": ["index"],
+        },
     },
     output_description="Sets 'mark_for_removal' flag on specified cards",
 )
 class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
-    """
-    Marks cards to be excluded from code generation.
+    """Marks cards for removal from the generated keyword class."""
 
-    This handler sets a 'mark_for_removal' flag on cards. Actual deletion
-    happens later in the generation pipeline via _delete_marked_indices().
+    @classmethod
+    def _parse_settings(cls, settings: List[Dict[str, Any]]) -> List[SkipCardSettings]:
+        """Convert dict settings to typed SkipCardSettings instances."""
+        return [SkipCardSettings.from_dict(s) for s in settings]
 
-    Input Settings Example:
-        [0, 1, 2]  # Skip cards at indices 0, 1, and 2
-        or
-        1  # Skip single card at index 1
-
-    Output Modification:
-        Sets card["mark_for_removal"] = 1 for each specified index
-    """
-
-    def handle(self, kwd_data: Any, settings: Any) -> None:
+    def handle(self, kwd_data: KeywordData, settings: List[Dict[str, Any]]) -> None:
         """
         Mark specified cards for removal.
 
         Args:
             kwd_data: KeywordData instance (or dict during transition)
-            settings: Handler config from manifest.json (int, list of ints, or dict with card indices)
+            settings: List of dicts, each containing a single card index to skip
         """
-        # Extract the actual card indices from settings
-        # Settings may be passed differently depending on manifest structure
-        if isinstance(settings, int):
-            skipped_card_indices = [settings]
-        elif isinstance(settings, list):
-            skipped_card_indices = settings
-        else:
-            # If settings is a dict, look for a key that contains the indices
-            # This handles various manifest.json structures
-            skipped_card_indices = settings.get("indices", [])
+        # Parse settings into typed instances
+        typed_settings = self._parse_settings(settings)
 
-        for index in skipped_card_indices:
-            kwd_data.cards[index]["mark_for_removal"] = 1
+        # Use attribute access on typed settings
+        for setting in typed_settings:
+            kwd_data.cards[setting.index]["mark_for_removal"] = 1
 
-    def post_process(self, kwd_data: Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass

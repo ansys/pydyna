@@ -27,10 +27,33 @@ Indicates that a card repeats to form a table structure (e.g., integration point
 The card repeats based on a length function.
 """
 
+from dataclasses import dataclass
 import typing
+from typing import Any, Dict, Optional
 
+from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.metadata import DuplicateCardMetadata
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class TableCardSettings:
+    """Configuration for marking a card as a repeating table structure."""
+
+    index: int
+    property_name: str
+    length_func: Optional[str] = None
+    active_func: Optional[str] = None
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "TableCardSettings":
+        return cls(
+            index=data["index"],
+            property_name=data["property-name"],
+            length_func=data.get("length-func"),
+            active_func=data.get("active-func"),
+        )
 
 
 @handler(
@@ -53,28 +76,14 @@ from keyword_generation.handlers.handler_base import handler
     output_description="Sets kwd_data['duplicate']=True and adds 'duplicate' dict to card",
 )
 class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
-    """
-    Marks cards as table structures.
+    """Marks cards as repeating table structures with dynamic row count."""
 
-    Table cards repeat to form 2D data structures where the number of
-    repetitions is determined dynamically by a length function.
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[TableCardSettings]:
+        """Convert dict settings to typed TableCardSettings instances."""
+        return [TableCardSettings.from_dict(s) for s in settings]
 
-    Input Settings Example:
-        [
-            {
-                "index": 4,
-                "property-name": "integration_points",
-                "length-func": "self.nipp",
-                "active-func": "self.elform in [101, 102, 103]"
-            }
-        ]
-
-    Output Modification:
-        - Sets kwd_data["duplicate"] = True
-        - Adds card["duplicate"] dict with name, length_func, active_func
-    """
-
-    def handle(self, kwd_data: typing.Any, settings: typing.Any) -> None:
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
         Mark cards as table structures.
 
@@ -82,16 +91,16 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             kwd_data: Complete keyword data dictionary
             settings: List of table card specifications
         """
+        typed_settings = self._parse_settings(settings)
         kwd_data.duplicate = True
-        settings_list = typing.cast(typing.List[typing.Dict[str, typing.Any]], settings)
-        for card_settings in settings_list:
-            duplicate_card = kwd_data.cards[card_settings["index"]]
-            duplicate_card["duplicate"] = {
-                "name": card_settings["property-name"],
-                "length_func": card_settings.get("length-func", ""),
-                "active_func": card_settings.get("active-func", ""),
-            }
+        for card_settings in typed_settings:
+            duplicate_card = kwd_data.cards[card_settings.index]
+            duplicate_card["duplicate"] = DuplicateCardMetadata(
+                name=card_settings.property_name,
+                length_func=card_settings.length_func or "",
+                active_func=card_settings.active_func or "",
+            )
 
-    def post_process(self, kwd_data: typing.Any) -> None:
+    def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""
         pass
