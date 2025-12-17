@@ -20,21 +20,69 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import typing
+"""
+Skip Card Handler: Marks cards for deletion from generated code.
 
+Cards marked for deletion are removed from the final keyword structure after
+all handlers have processed.
+"""
+
+from dataclasses import dataclass
+from typing import Any, Dict, List
+
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
+@dataclass
+class SkipCardSettings:
+    """Configuration for marking a card for removal."""
+
+    index: int
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "SkipCardSettings":
+        return cls(index=data["index"])
+
+
+@handler(
+    name="skip-card",
+    dependencies=[],
+    description="Marks cards for removal from the generated keyword class",
+    input_schema={
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {"index": {"type": "integer"}},
+            "required": ["index"],
+        },
+    },
+    output_description="Sets 'mark_for_removal' flag on specified cards",
+)
 class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
-        if type(settings) == int:
-            skipped_card_indices = [settings]
-        else:
-            skipped_card_indices = settings
-        for index in skipped_card_indices:
-            kwd_data["cards"][index]["mark_for_removal"] = 1
+    """Marks cards for removal from the generated keyword class."""
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+    @classmethod
+    def _parse_settings(cls, settings: List[Dict[str, Any]]) -> List[SkipCardSettings]:
+        """Convert dict settings to typed SkipCardSettings instances."""
+        return [SkipCardSettings.from_dict(s) for s in settings]
+
+    def handle(self, kwd_data: KeywordData, settings: List[Dict[str, Any]]) -> None:
+        """
+        Mark specified cards for removal.
+
+        Args:
+            kwd_data: KeywordData instance (or dict during transition)
+            settings: List of dicts, each containing a single card index to skip
+        """
+        # Parse settings into typed instances
+        typed_settings = self._parse_settings(settings)
+
+        # Use attribute access on typed settings
+        for setting in typed_settings:
+            kwd_data.cards[setting.index]["mark_for_removal"] = 1
+
+    def post_process(self, kwd_data: KeywordData) -> None:
+        """No post-processing required."""
         pass

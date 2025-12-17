@@ -28,7 +28,7 @@ classifiers = [
 dependencies = [
     "ansys-dpf-core>=0.7.2",
     "ansys-api-dyna==0.4.2",
-    "ansys-tools-path>=0.6.0",
+    "ansys-tools-common>=0.2,<1",
     "hollerith>=0.6.0",
     "numpy>=1",
     "pandas>=2.0",
@@ -51,51 +51,47 @@ pim = [
     "ansys-platform-instancemanagement~=1.0",
 ]
 codegen = [
-    "Jinja2"
+    "Jinja2",
+    "beartype",
+    "jsonschema",
 ]
 tests = [
-    "matplotlib==3.10.6",
+    "matplotlib==3.10.7",
     "numpy==2.2.6",
-    "pytest==8.4.2",
+    "pytest==9.0.2",
     "pytest-cov==7.0.0",
     "joblib==1.5.2",
-    "pandas==2.3.2",
+    "pandas==2.3.3",
     "openpyxl==3.1.5",
     "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
     "ipython==8.37.0",
-    "pyvista==0.46.3",
+    "pyvista==0.46.4",
 ]
 doc = [
     "recommonmark==0.7.1",
-    "matplotlib==3.10.6",
-    "imageio==2.37.0",
+    "matplotlib==3.10.7",
+    "imageio==2.37.2",
     "imageio-ffmpeg==0.6.0",
-    "numpydoc==1.9.0",
-    "Sphinx==8.2.1",
+    "numpydoc==1.10.0",
+    "Sphinx==8.2.3",
     "sphinx-autobuild==2024.10.3",
     "sphinx-design==0.6.1",
     "sphinxcontrib-websupport==2.0.0",
     "pytest-sphinx==0.6.3",
     "sphinx-notfound-page==1.1.0",
     "sphinx-copybutton==0.5.2",
-    "sphinx-gallery==0.19.0",
+    "sphinx-gallery==0.20.0",
     "sphinx-autodoc-typehints==3.1.0",
-    "ansys-sphinx-theme==1.6.1",
-    "pypandoc==1.15",
-    "nbsphinx==0.9.6",
-
-
-
-
-    "ipywidgets==8.1.7",
+    "ansys-sphinx-theme[autoapi]==1.6.4",
+    "pypandoc==1.16.2",
+    "nbsphinx==0.9.8",
+    "ipywidgets==8.1.8",
     "joblib==1.5.2",
     "scikit-learn==1.7.2",
     "ipython==8.37.0",
-    "jupyterlab==4.4.7",
-    "sphinx-jinja==2.0.2",
-    "sphinx-autoapi==3.6.0",
-    "pyvista==0.46.3",
+    "jupyterlab==4.5.0",
+    "pyvista==0.46.4",
 ]
 
 [tool.flit.module]
@@ -117,6 +113,16 @@ line_length = 120
 default_section = "THIRDPARTY"
 src_paths = ["doc", "src", "tests"]
 
+[tool.pytest.ini_options]
+minversion = "7.1"
+addopts = "-ra -vv"
+testpaths = ["tests"]
+markers = """
+    run: tests that exercise the `run` subpackage
+    keywords: tests that exercies the `keyword` subpackage
+    viz: tests that do 3d visualization
+    """
+
 [tool.coverage.run]
 source = ["ansys.dyna.core"]
 omit = [
@@ -125,17 +131,6 @@ omit = [
 
 [tool.coverage.report]
 show_missing = true
-
-
-[tool.pytest.ini_options]
-minversion = "7.1"
-addopts = "-ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv"
-testpaths = ["tests"]
-markers = """
-    run: tests that exercise the `run` subpackage
-    keywords: tests that exercies the `keyword` subpackage
-    viz: tests that do 3d visualization
-    """
 
 [tool.towncrier]
 directory = "doc/changelog"

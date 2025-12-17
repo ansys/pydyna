@@ -20,18 +20,93 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Reorder Card Handler: Changes the order of cards within a keyword.
+
+This handler must run before all other handlers that reference card indices,
+as reordering affects the index values used by other handlers.
+"""
+
+from dataclasses import dataclass
 import typing
+from typing import Any, Dict, List
 
+from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.handler_base import handler
 
 
+@dataclass
+class ReorderCardSettings:
+    """Configuration for card reordering."""
+
+    order: List[int]
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "ReorderCardSettings":
+        return cls(order=data["order"])
+
+
+@handler(
+    name="reorder-card",
+    dependencies=[],
+    description="Reorders cards within a keyword based on specified index sequence",
+    input_schema={
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 1,
+        "items": {
+            "type": "object",
+            "properties": {"order": {"type": "array", "items": {"type": "integer"}}},
+            "required": ["order"],
+        },
+    },
+    output_description="Modifies 'cards' list to match the specified order",
+)
 class ReorderCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
-    def handle(self, kwd_data: typing.Dict[str, typing.Any], settings: typing.Dict[str, typing.Any]) -> None:
-        """Transform `kwd_data` based on `settings`."""
-        # TODO - mark the reorders and let that get settled after the handlers run
-        order = settings["order"]
-        kwd_data["cards"] = [kwd_data["cards"][i] for i in order]
+    """
+    Reorders cards within a keyword definition.
 
-    def post_process(self, kwd_data: typing.Dict[str, typing.Any]) -> None:
-        """Run after all handlers have run."""
+    CRITICAL: This handler affects card indices used by all other handlers.
+    It has no dependencies and should run early in the handler pipeline.
+
+    Input Settings Example:
+        [
+            {
+                "order": [0, 1, 4, 2, 3, 5]
+            }
+        ]
+
+    Output Modification:
+        Reorders kwd_data["cards"] list according to the specified indices.
+        Original card at index 0 stays at 0, card at index 4 moves to position 2, etc.
+    """
+
+    @classmethod
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[ReorderCardSettings]:
+        """Convert dict settings to typed ReorderCardSettings instances."""
+        return [ReorderCardSettings.from_dict(s) for s in settings]
+
+    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+        """
+        Reorder cards based on the specified index sequence.
+
+        Args:
+            kwd_data: Complete keyword data dictionary
+            settings: List containing single dict with "order" key containing list of indices
+
+        Note: This reorders the list but does NOT update each card's 'index' property.
+        Subsequent handlers use list positions (kwd_data["cards"][3]) not card indices.
+        """
+        # Parse settings into typed instances
+        typed_settings = self._parse_settings(settings)
+
+        assert (
+            len(typed_settings) == 1
+        ), f"reorder-card handler expects exactly 1 settings dict, got {len(typed_settings)}"
+        # TODO - mark the reorders and let that get settled after the handlers run
+        kwd_data.cards = [kwd_data.cards[i] for i in typed_settings[0].order]
+
+    def post_process(self, kwd_data: KeywordData) -> None:
+        """No post-processing required."""
         pass

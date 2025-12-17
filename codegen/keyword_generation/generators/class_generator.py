@@ -20,39 +20,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import collections
-import os
+import logging
 import typing
 
 from jinja2 import Environment
 import keyword_generation.data_model as data_model
-from keyword_generation.handlers.add_option import AddOptionHandler
-from keyword_generation.handlers.card_set import CardSetHandler
-from keyword_generation.handlers.conditional_card import ConditionalCardHandler
-from keyword_generation.handlers.external_card import ExternalCardHandler
-from keyword_generation.handlers.handler_base import KeywordHandler
-from keyword_generation.handlers.insert_card import InsertCardHandler
-from keyword_generation.handlers.override_field import OverrideFieldHandler
-from keyword_generation.handlers.override_subkeyword import OverrideSubkeywordHandler
-from keyword_generation.handlers.rename_property import RenamePropertyHandler
-from keyword_generation.handlers.reorder_card import ReorderCardHandler
-from keyword_generation.handlers.replace_card import ReplaceCardHandler
-from keyword_generation.handlers.series_card import SeriesCardHandler
-from keyword_generation.handlers.shared_field import SharedFieldHandler
-from keyword_generation.handlers.skip_card import SkipCardHandler
-from keyword_generation.handlers.table_card import TableCardHandler
-from keyword_generation.handlers.table_card_group import TableCardGroupHandler
-from keyword_generation.utils import fix_keyword, get_classname, get_license_header, handle_single_word_keyword
+from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
+from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry
+from keyword_generation.utils import (
+    fix_keyword,
+    get_classname,
+    get_license_header,
+    handle_single_word_keyword,
+)
+from keyword_generation.utils.domain_mapper import get_keyword_domain
+from output_manager import OutputManager
+
+logger = logging.getLogger(__name__)
 
 
-def _get_source_keyword(keyword, settings):
+def _get_source_keyword(keyword: str, settings: typing.Dict[str, typing.Any]) -> str:
     """Get the 'source' keyword to look up in LSPP structs.  Usually
      its the keyword that its passed in, but in cases where one LSPP
     keyword is generated into multiple classes - such as for
     LOAD_SEGMENT => (LOAD_SEGMENT, LOAD_SEGMENT_ID) - this could be
     overwritten by the "source-keyword" property.
     """
-    source_keyword = settings.get("source-keyword", keyword)
+    source_keyword: str = settings.get("source-keyword", keyword)
+    if source_keyword != keyword:
+        logger.debug(f"Using source keyword '{source_keyword}' for '{keyword}'")
     return source_keyword
 
 
@@ -69,233 +65,268 @@ def _get_jinja_variable(base_variable: typing.Dict) -> typing.Dict:
     return jinja_variable
 
 
-def _get_fields(card: typing.Dict) -> typing.List[typing.Dict[str, typing.Any]]:
-    if "duplicate_group" in card:
-        fields = []
-        for sub_card in card["sub_cards"]:
-            fields.extend(sub_card["fields"])
-        return fields
-    return card["fields"]
+def _transform_data(data: KeywordData):
+    """Applies transformations to normalize keyword data for Python code generation.
+
+    Uses polymorphic iteration via KeywordData.get_all_cards() to handle:
+    - Regular cards
+    - Duplicate group cards (table card groups)
+    - Card sets (source cards and their options)
+    - Top-level option cards
+
+    Each field is normalized via Field.normalize() which handles:
+    - Lowercase field names (SECID -> secid)
+    - Python type mapping (integer->int, real->float)
+    - Reserved keyword handling (as -> as_)
+    - Default value conversion
+    - Help text cleanup
+    """
+    # Get all cards from all structures (main cards, card_sets, options)
+    all_cards = data.get_all_cards()
+
+    # Normalize all fields in all cards
+    for card in all_cards:
+        # card may be Card instance or dict during transition
+        if isinstance(card, Card):
+            fields = card.get_all_fields()
+        else:
+            # Fallback for dict-based cards - handle duplicate_group case
+            if card.get("duplicate_group") and card.get("sub_cards"):
+                # For duplicate_group dicts, aggregate fields from all sub_cards
+                fields = []
+                for sub_card in card["sub_cards"]:
+                    fields.extend(sub_card.get("fields", []))
+            else:
+                fields = card.get("fields", [])
+
+        for field in fields:
+            # field may be Field instance or dict during transition
+            if isinstance(field, Field):
+                field.normalize()
+            else:
+                # Fallback: inline the legacy transformation for dict-based fields
+                _normalize_field_dict(field)
+
+    # Assign indices to main cards
+    for index, card in enumerate(data.cards):
+        card["index"] = index
 
 
-def _transform_data(data: typing.Dict[str, typing.Any]):
-    """applies the following transformations to data:
-    - lowercase field names (SECID -> secid)
-    - python type mapping (integer->int, real->float)
+def _normalize_field_dict(field: typing.Dict) -> None:
+    """Legacy field normalization for dict-based fields during transition.
+
+    This function preserves the original transformation logic for fields
+    that haven't been converted to Field instances yet. Can be removed
+    once full dataclass migration is complete.
     """
     type_mapping = {"integer": "int", "real": "float", "string": "str", "real-integer": "float"}
 
-    def fix_fieldname(field_name: str) -> str:
-        """returns a python friendly version of field name.
-        For example, nx/ida becomes nx_ida, as becomes as_"""
-        # deal with bad characters
-        for bad_char in ["/", "-", " ", "(", ")", ",", ".", "'", "*", "|", "+"]:
-            field_name = field_name.replace(bad_char, "_")
-        # deal with reserved statements
-        if field_name.lower() in ["global", "as", "int", "lambda", "for"]:
-            field_name = field_name + "_"
-        if field_name[0].isdigit():
-            field_name = "_" + field_name
-        return field_name
+    # Handle unused fields
+    if "used" not in field or not field.get("used"):
+        if "used" not in field:
+            field["used"] = True
 
-    def fix_fieldhelp(field_help: str) -> str:
-        """help is formatted inside a triple quote,"""
-        if field_help.endswith('"'):
-            field_help = field_help + " "
-        # remove any leading whitespace from each line in field_help
-        field_help = "\n".join([l.strip() for l in field_help.split("\n")])
-        return field_help
+    # Type mapping - MUST happen before checking 'used' flag
+    field["type"] = type_mapping[field["type"]]
 
-    def fix_field_string_default(field_default: str) -> str:
-        """string defaults need to be wrapped in quotes"""
-        if field_default == None:
-            return None
-        return f'"{field_default}"'
+    # If unused, set name to "unused" and skip rest
+    if not field["used"]:
+        field["default"] = None
+        field["help"] = ""
+        field["name"] = "unused"
+        return
 
-    def fix_field_int_default(field_default) -> int:
-        """int defaults need to be converted from strings that might be floats"""
-        if field_default == None:
-            return None
-        return int(float(field_default))
+    # Flag fields become bool
+    if field.get("flag", False):
+        field["type"] = "bool"
 
-    def fix_card(card: typing.Dict) -> None:
-        for field in _get_fields(card):
-            if "used" not in field:
-                field["used"] = True
-            field["type"] = type_mapping[field["type"]]
-            if not field["used"]:
+    # Fix field name
+    # Original logic: field["name"] gets lowercased original, property_name gets fixed version
+    field_name: str = field["name"]  # Keep original
+
+    # Create fixed version with character replacements for property_name
+    fixed_name = field_name
+    for bad_char in ["/", "-", " ", "(", ")", ",", ".", "'", "*", "|", "+"]:
+        fixed_name = fixed_name.replace(bad_char, "_")
+    if fixed_name.lower() in ["global", "as", "int", "lambda", "for"]:
+        fixed_name = fixed_name + "_"
+    if fixed_name and fixed_name[0].isdigit():
+        fixed_name = "_" + fixed_name
+
+    fixed_field_name = fixed_name.lower()
+    field["name"] = field_name.lower()  # Use original name lowercased, not the fixed version
+
+    if "property_name" not in field or not field.get("property_name"):
+        field["property_name"] = fixed_field_name
+    if "property_type" not in field or not field.get("property_type"):
+        field["property_type"] = field["type"]
+
+    # Type-specific default handling
+    if field["type"] == "str":
+        if "options" in field:
+            field["options"] = [f'"{option}"' for option in field["options"]]
+        if field["default"] is not None:
+            field["default"] = f'"{field["default"]}"'
+    elif field["type"] == "int":
+        if field["default"] is not None:
+            try:
+                field["default"] = int(float(field["default"]))
+            except (ValueError, TypeError):
+                # If conversion fails, leave as None
                 field["default"] = None
-                field["help"] = ""
-                field["name"] = "unused"
-                continue
-            if field.get("flag", False):
-                field["type"] = "bool"
-            field_name: str = field["name"]
-            fixed_field_name = fix_fieldname(field_name).lower()
-            if not "property_name" in field:
-                field["property_name"] = fixed_field_name
-            field["name"] = field_name.lower()
-            if not "property_type" in field:
-                field["property_type"] = field["type"]
-            if field["type"] == "str":
-                if "options" in field:
-                    field["options"] = [f'"{option}"' for option in field["options"]]
-                field["default"] = fix_field_string_default(field["default"])
-            elif field["type"] == "int":
-                field["default"] = fix_field_int_default(field["default"])
-            field["help"] = fix_fieldhelp(field["help"])
 
-    index = 0
-    for card in data["cards"]:
-        fix_card(card)
-        card["index"] = index
-        index = index + 1
-
-    card_sets = data.get("card_sets", {})
-    for card_set in card_sets.get("sets", []):
-        for card in card_set.get("source_cards", []):
-            fix_card(card)
-        for option in card_set.get("options", []):
-            [fix_card(card) for card in option["cards"]]
-
-    for option in data.get("options", []):
-        [fix_card(card) for card in option["cards"]]
+    # Clean up help text
+    if field["help"]:
+        if field["help"].endswith('"'):
+            field["help"] = field["help"] + " "
+        field["help"] = "\n".join([line.strip() for line in field["help"].split("\n")])
 
 
-def _set_keyword_identity(kwd_data: typing.Dict, keyword_name: str, settings: typing.Dict) -> None:
-    tokens = keyword_name.split("_")
-    kwd_data["keyword"] = tokens[0]
-    kwd_data["subkeyword"] = "_".join(tokens[1:])
-    kwd_data["title"] = handle_single_word_keyword(keyword_name)
+def _get_insertion_index_for_cards(
+    requested_index: int, container: typing.Union[typing.List[Card], typing.List[typing.Dict]]
+) -> int:
+    """Find insertion index in container, handling both Card instances and dicts during transition."""
+    for index, card in enumerate(container):
+        card_index = card.get("source_index", card["index"])
+        if card_index == requested_index:
+            # we are inserting right before this card, store the index
+            return index
+    # insertion index not found, it must be past the end, in which case
+    # the insertion index is treated literally
+    return requested_index
 
 
-# functions which return a copy of keyword data after applying the handling specified by the configuration
-HANDLERS = collections.OrderedDict(
-    {
-        "reorder-card": ReorderCardHandler(),
-        "table-card": TableCardHandler(),
-        "override-field": OverrideFieldHandler(),
-        "replace-card": ReplaceCardHandler(),
-        "insert-card": InsertCardHandler(),
-        "series-card": SeriesCardHandler(),
-        "add-option": AddOptionHandler(),
-        "card-set": CardSetHandler(),
-        "conditional-card": ConditionalCardHandler(),
-        "rename-property": RenamePropertyHandler(),
-        "skip-card": SkipCardHandler(),
-        "table-card-group": TableCardGroupHandler(),
-        "external-card-implementation": ExternalCardHandler(),
-        "shared-field": SharedFieldHandler(),
-        "override-subkeyword": OverrideSubkeywordHandler(),
-    }
-)
-
-
-def _do_insertions(kwd_data):
+def _do_insertions(kwd_data: KeywordData) -> None:
     # [(a,b,c)] => insert b into c at index a
     insertion_targets: typing.List[typing.Tuple[int, typing.Dict, typing.List]] = []
-    for insertion in kwd_data["card_insertions"]:
+    logger.debug(f"Processing {len(kwd_data.card_insertions)} card insertions")
+    for insertion in kwd_data.card_insertions:
         insertion: data_model.Insertion = insertion
         insertion_index = insertion.target_index
         insertion_name = insertion.target_class
         insertion_card = insertion.card
+
+        # Validate that insertion has required fields
+        if insertion_index is None or insertion_card is None or insertion_name is None:
+            logger.warning(
+                f"Skipping insertion with missing fields: index={insertion_index}, "
+                f"card={insertion_card}, name={insertion_name}"
+            )
+            continue
+
         if insertion_name == "":
             # insert directly into keyword data
-            container = kwd_data["cards"]
-            for index, card in enumerate(container):
-                card_index = card.get("source_index", card["index"])
-                if card_index == insertion_index:
-                    # we are inserting right before this card, store the index
-                    insertion_targets.append((index, insertion_card, container))
+            container = kwd_data.cards
+            index = _get_insertion_index_for_cards(insertion_index, container)
+            logger.debug(f"Inserting card at index {index} into keyword cards")
+            insertion_targets.append((index, insertion_card, container))
         else:
-            # insert into another card set
-            card_sets = kwd_data.get("card_sets", {})
-            for card_set in card_sets["sets"]:
-                container = card_set["source_cards"]
-                if card_set["name"] == insertion_name:
-                    found = False
-                    for index, card in enumerate(container):
-                        if card["index"] == insertion_index:
-                            found = True
-                            insertion_targets.append((index, insertion_card, container))
-                    if not found:
-                        insertion_targets.append((len(container), insertion_card, container))
+            # insert into another card set - may be CardSetsContainer or dict
+            if kwd_data.card_sets:
+                sets = (
+                    kwd_data.card_sets.sets if hasattr(kwd_data.card_sets, "sets") else kwd_data.card_sets["sets"]
+                )  # type: ignore
+                card_sets = [
+                    cs for cs in sets if (cs.name if hasattr(cs, "name") else cs["name"]) == insertion_name
+                ]  # type: ignore
+                logger.debug(f"Inserting card into {len(card_sets)} card sets matching '{insertion_name}'")
+                for card_set in card_sets:
+                    container = (
+                        card_set.source_cards if hasattr(card_set, "source_cards") else card_set["source_cards"]
+                    )  # type: ignore
+                    index = _get_insertion_index_for_cards(insertion_index, container)
+                    insertion_targets.append((index, insertion_card, container))
     for index, item, container in insertion_targets:
         container.insert(index, item)
 
 
-def _delete_marked_indices(kwd_data):
+def _delete_marked_indices(kwd_data: KeywordData) -> None:
     marked_indices = []
-    for index, card in enumerate(kwd_data["cards"]):
-        if "mark_for_removal" in card:
+    for index, card in enumerate(kwd_data.cards):
+        # Check if mark_for_removal is set to a truthy value (not None, not 0)
+        if card.get("mark_for_removal"):
             marked_indices.append(index)
     # removal will affect order if we iterate forwards, so iterate backwards
     marked_indices.sort(reverse=True)
+    if marked_indices:
+        logger.debug(f"Deleting {len(marked_indices)} marked cards at indices: {marked_indices}")
     for index in marked_indices:
-        del kwd_data["cards"][index]
+        del kwd_data.cards[index]
 
-    options_list = kwd_data.get("options", [])
+    options_list = kwd_data.options or []
     if len(options_list) > 0:
         marked_option_indices = []
         for index, option in enumerate(options_list):
-            if "mark_for_removal" in option:
+            # option may be OptionGroup instance or dict - check for truthy mark_for_removal value
+            has_mark = hasattr(option, "get") and option.get("mark_for_removal")  # type: ignore
+            if has_mark:
                 marked_option_indices.append(index)
         marked_option_indices.sort(reverse=True)
+        if marked_option_indices:
+            logger.debug(f"Deleting {len(marked_option_indices)} marked options at indices: {marked_option_indices}")
         for index in marked_option_indices:
             del options_list[index]
         if len(options_list) == 0:
-            del kwd_data["options"]
+            kwd_data.options = []  # Set to empty list instead of None
 
 
-def _add_indices(kwd_data):
+def _add_indices(kwd_data: KeywordData) -> None:
     # handlers might point to cards by a specific index.
-    for index, card in enumerate(kwd_data["cards"]):
+    for index, card in enumerate(kwd_data.cards):
         card["index"] = index
 
 
-def _prepare_for_insertion(kwd_data):
-    kwd_data["card_insertions"] = []
+def _prepare_for_insertion(kwd_data: KeywordData) -> None:
+    kwd_data.card_insertions = []
 
 
-def _add_option_indices(kwd_data):
-    index = len(kwd_data["cards"])
-    for options in kwd_data.get("options", []):
-        for card in options["cards"]:
+def _add_option_indices(kwd_data: KeywordData) -> None:
+    index = len(kwd_data.cards)
+    for options in kwd_data.options or []:
+        # options may be OptionGroup instance or dict
+        cards = options.cards if hasattr(options, "cards") else options["cards"]  # type: ignore
+        for card in cards:
             card["index"] = index
         index += 1
 
 
-def _after_handle(kwd_data):
+def _after_handle(kwd_data: KeywordData, registry: HandlerRegistry) -> None:
     # TODO - move these to their respective handler
     _do_insertions(kwd_data)
     _delete_marked_indices(kwd_data)
     _add_option_indices(kwd_data)
-    for handler_name, handler in HANDLERS.items():
-        if isinstance(handler, KeywordHandler):
-            handler.post_process(kwd_data)
+    registry.post_process_all(kwd_data)  # Pass KeywordData instance for post_process
 
 
-def _before_handle(kwd_data):
+def _before_handle(kwd_data: KeywordData) -> None:
     _add_indices(kwd_data)
     _prepare_for_insertion(kwd_data)
 
 
-def _handle_keyword_data(kwd_data, settings):
+def _handle_keyword_data(kwd_data: KeywordData, settings: typing.Dict[str, typing.Any]) -> None:
+    """Process keyword data through handler pipeline.
+
+    All pipeline stages now work directly with KeywordData instances using
+    attribute access. No more dict conversions needed!
+    """
+    registry = create_default_registry()
+
+    logger.debug(f"Handling keyword data with {len(kwd_data.cards)} cards")
     _before_handle(kwd_data)
-    # we have to iterate in the order of the handlers because right now the order still matters
-    # right now this is only true for reorder_card
-    for handler_name, handler in HANDLERS.items():
-        handler_settings = settings.get(handler_name)
-        if handler_settings == None:
-            continue
-        handler.handle(kwd_data, handler_settings)
-    _after_handle(kwd_data)
+
+    # Run handlers with KeywordData instance
+    registry.apply_all(kwd_data, settings)
+
+    # After-handle processing
+    _after_handle(kwd_data, registry)
+
+    logger.debug(f"Keyword data handling complete, final card count: {len(kwd_data.cards)}")
 
 
 def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
     transform_link_data = {
         "classname": "DefineTransformation",
-        "modulename": "define_transformation",
+        "modulename": "define.define_transformation",
         "keyword_type": "DEFINE",
         "keyword_subtype": "TRANSFORMATION",
         "fields": link_fields,
@@ -308,11 +339,13 @@ class LinkIdentity:
     DEFINE_TRANSFORMATION = 40
 
 
-def _get_links(kwd_data) -> typing.Optional[typing.Dict]:
+def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
     links = {LinkIdentity.DEFINE_TRANSFORMATION: []}
     has_link = False
-    for card in kwd_data["cards"]:
-        for field in _get_fields(card):
+    for card in kwd_data.cards:
+        # Use card.get_all_fields() instead of _get_fields helper
+        fields = card.get_all_fields() if isinstance(card, Card) else card.get("fields", [])
+        for field in fields:
             if "link" not in field:
                 continue
             link = field["link"]
@@ -325,35 +358,50 @@ def _get_links(kwd_data) -> typing.Optional[typing.Dict]:
     return links
 
 
-def _add_links(kwd_data):
+def _add_links(kwd_data: KeywordData) -> None:
     """Add "links", or properties that link one keyword to another."""
     links = _get_links(kwd_data)
     if links is None:
+        logger.debug("No links found for this keyword")
         return
     link_data = []
+    link_count = 0
     for link_type, link_fields in links.items():
         if link_type == LinkIdentity.DEFINE_TRANSFORMATION:
             _add_define_transform_link_data(link_data, link_fields)
-    kwd_data["links"] = link_data
+            link_count += len(link_fields)
+    kwd_data.links = link_data
+    logger.debug(f"Added {link_count} links to keyword data")
 
 
-def _get_keyword_data(keyword_name, keyword, settings):
-    """Gets the keyword data dict from kwdm.  Transforms it
-    based on the generation settings that are passed in, if any,
-    and with default transformations that are needed to produce
-    valid python code.
+def _get_keyword_data(keyword_name: str, keyword: str, settings: typing.Dict[str, typing.Any]) -> KeywordData:
+    """Gets the keyword data from kwdm. Transforms it based on generation settings
+    and default transformations needed to produce valid python code.
+
+    Returns KeywordData dataclass instance - no more dict conversions!
     """
-    kwd_data = {"cards": data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)}
+    logger.debug(f"Getting keyword data for '{keyword_name}' (source: '{keyword}')")
+    assert data_model.KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
+    kwd_data_dict = {"cards": data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)}
 
-    _set_keyword_identity(kwd_data, keyword_name, settings)
+    # Set keyword identity in dict before converting to KeywordData
+    tokens = keyword_name.split("_")
+    kwd_data_dict["keyword"] = tokens[0]
+    kwd_data_dict["subkeyword"] = "_".join(tokens[1:])
+    kwd_data_dict["title"] = handle_single_word_keyword(keyword_name)
 
-    # transformations based on generation settings
+    # Convert to KeywordData
+    kwd_data = KeywordData.from_dict(kwd_data_dict)
+
+    # transformations based on generation settings - handlers work with KeywordData
     _handle_keyword_data(kwd_data, settings)
 
     # default transformations to a valid format we need for jinja
     _transform_data(kwd_data)
-
     _add_links(kwd_data)
+
+    logger.debug(f"Keyword data prepared for '{keyword_name}' with {len(kwd_data.cards)} cards")
+
     return kwd_data
 
 
@@ -361,7 +409,8 @@ def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dic
     source_keyword = _get_source_keyword(keyword, keyword_options)
     generation_settings = keyword_options.get("generation-options", {})
     keyword_data = _get_keyword_data(keyword, source_keyword, generation_settings)
-    keyword_data["classname"] = classname
+    # Set classname directly on dataclass instance
+    keyword_data.classname = classname
     alias = data_model.get_alias(keyword)
     alias_subkeyword = None
     if alias:
@@ -369,24 +418,30 @@ def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dic
         alias = get_classname(fix_keyword(alias))
         alias_subkeyword = "_".join(alias_tokens[1:])
     data = {
-        "keyword_data": keyword_data,
+        "keyword_data": keyword_data,  # Now a KeywordData instance, not dict
         "alias": alias,
         "alias_subkeyword": alias_subkeyword,
     }
     return data
 
 
-def generate_class(env: Environment, lib_path: str, item: typing.Dict) -> typing.Tuple[str, str]:
+def generate_class(env: Environment, output_manager: OutputManager, item: typing.Dict):
     keyword = item["name"]
     fixed_keyword = fix_keyword(keyword)
     classname = item["options"].get("classname", get_classname(fixed_keyword))
+    logger.debug(f"Starting generation for class '{classname}' from keyword '{keyword}'")
     try:
         base_variable = _get_base_variable(classname, keyword, item["options"])
         jinja_variable = _get_jinja_variable(base_variable)
-        filename = os.path.join(lib_path, "auto", fixed_keyword.lower() + ".py")
-        with open(filename, "w", encoding="utf-8") as f:
-            f.write(env.get_template("keyword.j2").render(**jinja_variable))
+
+        # Determine domain and create domain subdirectory
+        domain = get_keyword_domain(keyword)
+        filename = fixed_keyword.lower() + ".py"
+        logger.debug(f"Rendering template for {classname} in domain '{domain}'")
+        content = env.get_template("keyword.j2").render(**jinja_variable)
+        output_manager.write_auto_file(domain, filename, content)
+        logger.debug(f"Successfully generated class '{classname}'")
         return classname, fixed_keyword.lower()
     except Exception as e:
-        print(f"Failure in generating {classname}")
+        logger.error(f"Failure in generating {classname}", exc_info=True)
         raise e

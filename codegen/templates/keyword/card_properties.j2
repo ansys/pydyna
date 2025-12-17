@@ -1,11 +1,11 @@
 {% if card.duplicate %}
     @property
-    def {{card.duplicate.name}}(self):
+    def {{card.duplicate.name}}(self) -> pd.DataFrame:
         """Get the table of {{card.duplicate.name}}."""
         return self._cards[{{card.index}}].table
 
     @{{card.duplicate.name}}.setter
-    def {{card.duplicate.name}}(self, df):
+    def {{card.duplicate.name}}(self, df: pd.DataFrame):
         """Set {{card.duplicate.name}} from the dataframe df"""
         self._cards[{{card.index}}].table = df
 
@@ -31,12 +31,12 @@
 
 {% elif card.duplicate_group %}
     @property
-    def {{card.overall_name}}(self):
+    def {{card.overall_name}}(self) -> pd.DataFrame:
         """Gets the full table of {{card.overall_name}}."""
         return self._cards[{{card.index}}].table
 
     @{{card.overall_name}}.setter
-    def {{card.overall_name}}(self, df):
+    def {{card.overall_name}}(self, df: pd.DataFrame):
         """sets {{card.overall_name}} from the dataframe df."""
         self._cards[{{card.index}}].table = df
 
@@ -57,7 +57,7 @@
     @{{field.property_name}}.setter
     def {{field.property_name}}(self, value: {{field.type}}) -> None:
         """Set the {{field.property_name}} property."""
-        {% if field.options is defined %}
+        {% if field.options %}
         if value not in [{{ field.options|join(', ')}}, None]:
             raise Exception("""{{field.property_name}} must be `None` or one of {{openbrace}}{{ field.options|join(',')}}{{closebrace}}.""")
         {% endif %}

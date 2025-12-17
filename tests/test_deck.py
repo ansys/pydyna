@@ -674,3 +674,112 @@ def test_deck_remove():
 
     """deck should be empty"""
     assert len(deck.all_keywords) == 0
+
+
+@pytest.mark.keywords
+def test_deck_expand_nonlocal_parameters(file_utils):
+    """Test reading a deck with parameters without resolving parameter."""
+    deck = Deck()
+    cwd = file_utils.assets_folder / "expand_parameters" / "nonlocal"
+    filename = cwd / "top.k"
+    deck.import_file(filename) # pass new argument resolve_parameter = True / False)
+    assert len(deck.keywords) == 3
+    deck = deck.expand(recurse=True, cwd=cwd)
+    assert len(deck.keywords) == 4
+    sections: list[kwd.SectionSolid] = list(deck.get_kwds_by_type("SECTION"))
+    pm_main_value = deck.parameters.get("pm_main")
+    assert pm_main_value == 100.0
+    assert len(sections) == 3
+    expected_secid_to_elform = {10:100, 20:1, 30:100}
+    for section in sections:
+        assert section.elform == expected_secid_to_elform[section.secid]
+
+
+@pytest.mark.keywords
+def test_deck_expand_local_parameters_isolation(file_utils):
+    """Test that PARAMETER_LOCAL parameters are isolated to their definition file.
+    
+    This test demonstrates the BUG where PARAMETER_LOCAL leaks to parent decks.
+    After the fix, local parameters should NOT be accessible outside their definition file.
+    """
+    deck = Deck()
+    cwd = file_utils.assets_folder / "expand_parameters" / "local"
+    filename = cwd / "top.k"
+    deck.import_file(filename)
+    
+    # Before expansion, we should have loaded PARAMETER but not PARAMETER_LOCAL from include
+    # Only gbl should be in the top-level deck's parameters
+    pm_global_value = deck.parameters.get("gbl")
+    assert pm_global_value == 200.0
+    
+    # loc should NOT be accessible from top-level deck before expansion
+    with pytest.raises(KeyError):
+        deck.parameters.get("loc")
+    
+    # Expand the deck
+    deck = deck.expand(recurse=True, cwd=cwd)
+    
+    # After expansion, get all sections
+    sections: list[kwd.SectionSolid] = list(deck.get_kwds_by_type("SECTION"))
+    # FIXED BEHAVIOR: 3 sections (10, 20, 30) - section 40 fails because it can't resolve &loc
+    assert len(sections) == 3
+    
+    # Section 10 uses gbl (200.0) from top-level
+    section_10 = next(s for s in sections if s.secid == 10)
+    assert section_10.elform == 200
+    
+    # Section 20 uses loc (999.0) - substituted during include processing
+    section_20 = next(s for s in sections if s.secid == 20)
+    assert section_20.elform == 999
+    
+    # Section 30 uses gbl (200.0) - global param visible in include
+    section_30 = next(s for s in sections if s.secid == 30)
+    assert section_30.elform == 200
+    
+    # Section 40 tries to use loc from top level - should fail
+    # The substitution happens during loads() before PARAMETER_LOCAL from the include is loaded
+    assert len(deck.string_keywords) == 1  # Section 40
+    
+    # FIXED: After expansion, loc should NOT be in the top-level parameters
+    with pytest.raises(KeyError):
+        deck.parameters.get("loc")
+
+
+@pytest.mark.keywords
+def test_deck_expand_local_parameters_sibling_isolation(file_utils):
+    """Test that PARAMETER_LOCAL parameters don't leak between sibling includes.
+    
+    This test demonstrates the BUG where PARAMETER_LOCAL leaks between sibling includes.
+    After the fix, sibling includes should not see each other's local parameters.
+    """
+    deck = Deck()
+    cwd = file_utils.assets_folder / "expand_parameters" / "local"
+    filename = cwd / "sibling_test_top.k"
+    deck.import_file(filename)
+    
+    # Expand the deck
+    deck = deck.expand(recurse=True, cwd=cwd)
+    
+    # Get all sections
+    sections: list[kwd.SectionSolid] = list(deck.get_kwds_by_type("SECTION"))
+    # FIXED BEHAVIOR: 3 sections (50, 51, 61) - section 60 fails because it can't resolve &aloc
+    assert len(sections) == 3
+    
+    # Section 50 uses aloc (111.0) from sibling_a.k
+    section_50 = next(s for s in sections if s.secid == 50)
+    assert section_50.elform == 111
+    
+    # Section 51 uses shr (100.0) from top
+    section_51 = next(s for s in sections if s.secid == 51)
+    assert section_51.elform == 100
+    
+    # Section 60 - FIXED: Should not be created because aloc is not accessible
+    assert len(deck.string_keywords) == 1  # Section 60 failed to parse
+    
+    # Section 61 uses shr (100.0) from top
+    section_61 = next(s for s in sections if s.secid == 61)
+    assert section_61.elform == 100
+    
+    # FIXED: aloc should NOT be in the top-level parameters after expansion
+    with pytest.raises(KeyError):
+        deck.parameters.get("aloc")

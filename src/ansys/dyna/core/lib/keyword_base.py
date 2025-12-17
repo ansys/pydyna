@@ -247,15 +247,10 @@ class KeywordBase(Cards):
             buf = io.StringIO()
         self._write_header(buf, self._get_symbol(format, deck_format))
         format = self._get_write_format(format, deck_format)
-        superfluous_newline = Cards.write(self, buf, format)
+        Cards.write(self, buf, format)
         if will_return:
-            keyword_string = buf.getvalue()
-            if superfluous_newline:  # remove last character before returning
-                return keyword_string[:-1]
+            keyword_string = buf.getvalue()[: buf.tell()]
             return keyword_string
-        else:
-            if superfluous_newline:
-                buf.seek(buf.tell() - 1)
 
     def dumps(self) -> str:
         """Return the string representation of the keyword."""

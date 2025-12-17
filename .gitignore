@@ -10,6 +10,9 @@ __pycache__/
 # C extensions
 *.so
 
+# keyword manual
+manuals/
+
 # Distribution / packaging
 .Python
 build/
@@ -21,6 +24,7 @@ eggs/
 .lib/
 .lib64/
 parts/
+!src/ansys/dyna/core/keywords/keyword_classes/auto/*/
 sdist/
 var/
 wheels/
@@ -35,6 +39,9 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+
+# Visual studio code local settings
+.vscode/
 
 # Installer logs
 pip-log.txt
@@ -165,3 +172,4 @@ cython_debug/
 doc/source/examples/
 doc/source/API/_autosummary/
 doc/source/api
+doc/source/sg_execution_times.rst

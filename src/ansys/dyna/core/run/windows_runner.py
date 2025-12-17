@@ -30,8 +30,8 @@ from pathlib import Path
 import subprocess  # nosec: B404
 import time
 
-from ansys.tools.path import get_latest_ansys_installation
-from ansys.tools.path.path import _get_unified_install_base_for_version
+from ansys.tools.common.path import get_latest_ansys_installation
+from ansys.tools.common.path.path import _get_unified_install_base_for_version
 
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
@@ -47,10 +47,18 @@ class WindowsRunner(BaseRunner):
     """
 
     def __init__(self, **kwargs):
-        """Initialize WindowsRunner."""
+        """Initialize WindowsRunner.
+
+        Parameters
+        ----------
+        case_ids : list[int] or None
+            If provided, appends CASE or CASE=... to the LS-DYNA command line for *CASE support.
+        """
         super().__init__(**kwargs)
         version = kwargs.get("version", None)
         executable = kwargs.get("executable", None)
+        self.activate_case = kwargs.get("activate_case", False)
+        self.case_ids = kwargs.get("case_ids", None)
         self._find_solver(version, executable)
 
     def set_input(self, input_file: str, working_directory: str) -> None:
@@ -170,7 +178,7 @@ class WindowsRunner(BaseRunner):
             raise RuntimeError(msg) from e
 
     def _get_command_line(self) -> str:
-        """Get the command line to run LS-DYNA."""
+        """Get the command line to run LS-DYNA, including *CASE support."""
         script = f'call "{self._get_env_script()}"'
         ncpu = self.ncpu
         mem = self.get_memory_string()
@@ -179,14 +187,18 @@ class WindowsRunner(BaseRunner):
         if not os.path.isabs(self.working_directory):
             self.working_directory = os.path.abspath(self.working_directory)
 
+        # CASE option logic
+        case_option = ""
+        if self.activate_case:
+            if self.case_ids and isinstance(self.case_ids, list) and self.case_ids:
+                case_option = f"CASE={','.join(str(cid) for cid in self.case_ids)}"
+            else:
+                case_option = "CASE"
+
         if self.mpi_option == MpiOption.SMP:
-            command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem}"
+            command = f"{self.solver} i={input_file} ncpu={ncpu} memory={mem} {case_option}"
         elif self.mpi_option == MpiOption.MPP_INTEL_MPI:
-            # -wdir is used here because sometimes mpiexec does not pass its working directory
-            # to dyna on windows when run from python subprocess
-            command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem}'  # noqa:E501
+            command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem} {case_option}'  # noqa: E501
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
-            command = (
-                f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem}'
-            )
+            command = f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem} {case_option}'  # noqa: E501
         return f"{script} && {command} > lsrun.out.txt 2>&1"

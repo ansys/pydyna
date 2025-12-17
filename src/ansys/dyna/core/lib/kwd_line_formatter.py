@@ -107,6 +107,15 @@ def _expand_spec(spec: typing.List[tuple]) -> typing.List[tuple]:
     return specs
 
 
+def _convert_type(raw_value, item_type):
+    if item_type is int and isinstance(raw_value, float):
+        # ensure that float raw_values are convertible to int
+        if raw_value.is_integer():
+            return int(raw_value)
+        raise ValueError(f"Cannot convert non-integer float: {raw_value}")
+    return item_type(raw_value)
+
+
 def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterable:
     iterspec = iter(spec)
     iterdata = iter(data)
@@ -125,13 +134,26 @@ def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterab
 
 
 def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> typing.List:
-    """loads a keyword card line with fixed column offsets and width from string
-    spec: list of tuples representing the (offset, width, type) of each field
-    type can be a Flag which represents the True and False value
-    line_data: string with keyword data
+    """
+    Loads a keyword card line with fixed column offsets and width from string.
 
-    Example
+    Parameters
+    ----------
+    spec : list of tuple
+        List of tuples representing the (offset, width, type) of each field.
+        Type can be a Flag which represents the True and False value.
+    line_data : str
+        String with keyword data.
+    parameter_set : ParameterSet, optional
+        Optional parameter set.
+
+    Returns
     -------
+    list
+        Parsed values from the keyword card line.
+
+    Examples
+    --------
     >>> load_dataline([(0,10, int),(10,10, str)], '         1     hello')
     (1, 'hello')
     """
@@ -181,9 +203,14 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         if not text_block.startswith("&"):
             raise ValueError(f"Expected parameter to start with '&', got '{text_block}' instead.")
         param_name = text_block[1:]
-        value = parameter_set.get(param_name)
-        if not isinstance(value, item_type):
-            raise TypeError(f"Expected parameter '{param_name}' to be of type {item_type}, got {type(value)} instead.")
+        raw_value = parameter_set.get(param_name)
+
+        try:
+            value = _convert_type(raw_value, item_type)
+        except:
+            raise TypeError(
+                f"Expected parameter '{param_name}' with value {raw_value} not convertible to type {item_type}."
+            )
         if negative:
             value *= -1.0
         return value

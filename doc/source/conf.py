@@ -67,6 +67,24 @@ numpydoc_validation_checks = {
     # separating the parameter name and type",
 }
 
+# Autodoc optimization settings
+autodoc_typehints = 'signature'
+autodoc_member_order = 'bysource'
+autodoc_default_options = {
+    'exclude-members': '__weakref__,__dict__,__module__',
+    'inherited-members': False,
+}
+
+# Mock heavy dependencies to speed up autodoc introspection
+autodoc_mock_imports = [
+    'pandas',
+    'numpy',
+    'pyarrow',
+    'transformations',
+    'pyvista',
+    'ansys.dpf.core',
+]
+
 
 # Favicon
 html_favicon = ansys_favicon
@@ -134,7 +152,7 @@ html_theme_options = {
         "ignore": [
            "*core/keywords/keyword_classes/auto*",
         ],
-        "output": "api",        
+        "output": "api",
     },
 }
 
@@ -155,8 +173,8 @@ BUILD_AUTOKEYWORS_API = os.environ.get("BUILD_AUTOKEYWORS_API", "false").lower()
 if BUILD_AUTOKEYWORS_API:
     html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
 
-BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
-if BUILD_EXAMPLES is True:
+BUILD_EXAMPLES = os.environ.get("BUILD_EXAMPLES", "true").lower() == "true"
+if BUILD_EXAMPLES:
     # Necessary for pyvista when building the sphinx gallery
     extensions.append("sphinx_gallery.gen_gallery")
     pyvista.BUILDING_GALLERY = True
@@ -201,8 +219,8 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
     - All modules under 'ansys.dyna.core.run' except 'local_solver' and 'options'.
     - Within 'local_solver', skips all members except the 'run_dyna' function.
     """
-    
-    
+
+
     if name.startswith("ansys.dyna.core.run.") and not (name.startswith("ansys.dyna.core.run.local_solver") or name.startswith("ansys.dyna.core.run.options")):
             skip = True
 

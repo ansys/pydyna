@@ -5,6 +5,29 @@ The PyDyna auto-keyword class generator system generates python classes for
 dyna keywords based on specifications in kwd.json, manifest.json, and additional-cards.json
 It is implemented in `codegen/generate.py` and has a command line interface.
 
+## Critical Implementation Notes
+
+### Handler Execution Order
+
+Handlers transform keyword metadata in a specific order defined in `keyword_generation/handlers/registry.py`. **This order is critical** - changing it can break generation. Key constraints:
+
+- `reorder-card` must run first (other handlers use positional indices)
+- `card-set` and `table-card-group` must run before `conditional-card`
+- See `agents/codegen.md` for complete ordering and rationale
+
+### Reference Semantics
+
+Handlers that group cards (e.g., `card-set`, `table-card-group`) append **references** to card dictionaries, not deep copies. This allows later handlers to modify cards in-place, with changes appearing in both the main cards list and the grouped collections.
+
+**Do NOT use `copy.deepcopy()` when grouping cards** - it breaks this pattern.
+
+### Index vs. Position
+
+After `reorder-card` runs:
+- Cards have an `index` property (original index)
+- Handlers use **list positions** `kwd_data["cards"][i]`, not card indices
+- `card-set` stores `source_index` (original) and assigns new sequential indices
+
 ## To use
 It is recommended to use a virtual environment
 
@@ -19,6 +42,35 @@ It is recommended to use a virtual environment
 
 - To remove all the generated code:
 ``python codegen/generate.py -c``
+
+### Logging
+
+The code generator includes comprehensive logging to help debug and understand the generation process:
+
+- **Control log verbosity** with the `--log-level` or `-l` flag:
+  - `DEBUG`: Detailed traceability of execution flow, variable values, and decisions
+  - `INFO`: High-level progress updates and successful operations (default)
+  - `WARNING`: Only recoverable issues or unexpected conditions
+  - `ERROR`: Only failures and errors
+  - `CRITICAL`: Only critical failures
+
+- **Examples**:
+  ```bash
+  # Generate with detailed debug output
+  python codegen/generate.py -k SECTION_SHELL -l DEBUG
+
+  # Generate with minimal output (warnings and errors only)
+  python codegen/generate.py -l WARNING
+
+  # Generate with high-level progress info (default)
+  python codegen/generate.py -l INFO
+  ```
+
+- **What gets logged**:
+  - **DEBUG**: Card insertions, deletions, wildcard matching, handler execution, template rendering, file operations
+  - **INFO**: Files loaded, keyword counts, generation progress, completion status
+  - **WARNING**: Deprecated features, potential issues
+  - **ERROR**: Generation failures with full stack traces
 
 ## How it works
 The class generator uses Jinja templates to generate three distinct things:

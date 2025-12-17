@@ -30,6 +30,7 @@ import warnings
 from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
+from ansys.dyna.core.lib.import_handlers.define_table_processor import DefineTableProcessor
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.parameters import ParameterHandler, ParameterSet
@@ -47,6 +48,9 @@ class Deck:
         self.title: str = title
         self.format: format_type = kwargs.get("format", format_type.default)
         self._import_handlers: typing.List[ImportHandler] = [ParameterHandler()]
+        # Add the DEFINE_TABLE processor so curves following tables are
+        # automatically linked during import.
+        self._import_handlers.append(DefineTableProcessor())
         self._transform_handler = TransformHandler()
 
     def __add__(self, other):
@@ -76,7 +80,14 @@ class Deck:
 
     @property
     def parameters(self) -> ParameterSet:
+        """Deck parameters."""
         return self._parameter_set
+
+    @parameters.setter
+    def parameters(self, value: ParameterSet) -> None:
+        import copy
+
+        self._parameter_set = copy.copy(value)
 
     @property
     def format(self) -> format_type:
@@ -201,6 +212,8 @@ class Deck:
     def _prepare_deck_for_expand(self, keyword: KeywordBase):
         """Prepare deck for expansion by adding import handlers."""
         include_deck = Deck(format=keyword.format)
+        # Create child scope for include to isolate PARAMETER_LOCAL
+        include_deck.parameters = self.parameters.copy_with_child_scope()
         for import_handler in self._import_handlers:
             include_deck.register_import_handler(import_handler)
         if keyword.subkeyword == "TRANSFORM":
@@ -233,16 +246,16 @@ class Deck:
             xform = None
             if keyword.subkeyword == "TRANSFORM":
                 xform = keyword
-            context = ImportContext(xform, self, expand_include_file)
+            include_deck = self._prepare_deck_for_expand(keyword)
+            context = ImportContext(xform, include_deck, expand_include_file)
             try:
-                include_deck = self._prepare_deck_for_expand(keyword)
                 include_deck._import_file(expand_include_file, "utf-8", context)
             except UnicodeDecodeError as e:
                 encoding = self._detect_encoding(expand_include_file)
                 include_deck = self._prepare_deck_for_expand(keyword)
+                context = ImportContext(xform, include_deck, expand_include_file)
                 include_deck._import_file(expand_include_file, encoding, context)
             if recurse:
-                # TODO: merge the parameters if the "LOCAL" option is not used!
                 expanded = include_deck._expand_helper(search_paths, True)
                 keywords.extend(expanded)
             else:
@@ -264,6 +277,7 @@ class Deck:
         cwd = cwd or os.getcwd()
         new_deck = Deck(title=self.title)
         new_deck.comment_header = self.comment_header
+        new_deck.parameters = self.parameters
         search_paths = [cwd]
         new_deck.extend(self._expand_helper(search_paths, recurse))
         return new_deck

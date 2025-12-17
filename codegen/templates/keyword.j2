@@ -4,6 +4,13 @@
 import dataclasses
 {% endif %}
 import typing
+{% if keyword_data.duplicate %}
+import pandas as pd
+
+{% elif keyword_data.duplicate_group %}
+import pandas as pd
+
+{% endif %}
 {# TODO - only do this if there's a keyword without a default #}
 {% if keyword_data.mixin_imports %}
 {% for mixin_import in keyword_data.mixin_imports %}
@@ -16,7 +23,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.table_card import TableCard
 {% endif %}
 {% if keyword_data.card_sets %}
-from ansys.dyna.core.lib.card_set import CardSet
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 {% endif %}
 {% if keyword_data.duplicate_group %}
@@ -142,6 +149,17 @@ class {{keyword_data.classname}}(KeywordBase):
 {% endif %}{# keyword_data.options #}
         ]
 
+{% for card in keyword_data.cards %}
+{% if card.set %}
+{% for card_set in keyword_data.card_sets.sets %}
+{% if card_set.name == card.set.name %}
+{% for card in card_set.source_cards %}
+{% include 'keyword/card_set_property_passthrough.j2' %}
+{% endfor %}{# card in card_set.source_cards #}
+{% endif %}{# card_set.name == card.set.name #}
+{% endfor %}{# card_set in keyword_data.card_sets.sets #}
+{% endif %}{# card.set #}
+{% endfor %}{# keyword_data.cards #}
 {% for card in keyword_data.cards %}
 {% include 'keyword/card_properties.j2' %}
 {% endfor %}
