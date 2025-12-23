@@ -141,7 +141,7 @@ class TableCard(Card):
                 if field_type == float:
                     field_type = np.float64
                 elif field_type == int:
-                    field_type = "Int32"  # Use string dtype name for pandas nullable int
+                    field_type = pd.Int32Dtype()
                 columns[field.name] = value[field.name].astype(field_type)
             else:
                 columns[field.name] = self._make_column(field, len(value))
@@ -172,7 +172,7 @@ class TableCard(Card):
         elif field.type == str:
             return [default_value] * length
         elif field.type == int:
-            return pd.array([default_value] * length, dtype="Int32")  # Use pd.array with string dtype
+            return pd.Series([default_value] * length, dtype=pd.Int32Dtype())
         raise Exception("unexpected type")
 
     def _initialize_data(self, length):
