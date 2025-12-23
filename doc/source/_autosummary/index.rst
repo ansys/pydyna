@@ -2,7 +2,7 @@
 
 .. vale off
 
-All Keyword Class Summaries
+All keyword class summaries
 ############################
 
 This section contains auto-generated documentation for all LS-DYNA keyword classes, organized by category for faster parallel documentation builds.
