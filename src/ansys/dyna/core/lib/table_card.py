@@ -142,9 +142,13 @@ class TableCard(Card):
                     field_type = np.float64
                 elif field_type == int:
                     field_type = pd.Int32Dtype()
-                columns[field.name] = value[field.name].astype(
-                    field_type[field.name] if isinstance(field_type, dict) else field_type
-                )
+                    dtype = field_type
+                    # unwrap mapping(s) until we reach a real dtype
+                    while isinstance(dtype, dict):
+                        dtype = dtype[field.name]
+
+                    columns[field.name] = value[field.name].astype(dtype)
+
             else:
                 columns[field.name] = self._make_column(field, len(value))
         self._table = pd.DataFrame(columns)
