@@ -142,7 +142,7 @@ class TableCard(Card):
                     field_type = np.float64
                 elif field_type == int:
                     field_type = pd.Int32Dtype()
-                
+
                 dtype = field_type
                 # unwrap mapping(s) until we reach a real dtype
                 while isinstance(dtype, dict):
