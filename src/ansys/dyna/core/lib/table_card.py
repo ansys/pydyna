@@ -142,7 +142,27 @@ class TableCard(Card):
                     field_type = np.float64
                 elif field_type == int:
                     field_type = pd.Int32Dtype()
-                columns[field.name] = value[field.name].astype(field_type)
+
+                dtype = field_type
+                # unwrap mapping(s) until we reach a real dtype
+                while isinstance(dtype, dict):
+                    dtype = dtype[field.name]
+
+                # Get the series and handle dtype conversion safely
+                series = value[field.name].copy()  # Make a copy to avoid modifying original
+                try:
+                    columns[field.name] = series.astype(dtype)
+                except (KeyError, TypeError) as e:
+                    # If astype fails, try alternative approaches
+                    if isinstance(dtype, type) and hasattr(pd, "array"):
+                        # Try using pd.array for extension dtypes
+                        try:
+                            columns[field.name] = pd.Series(pd.array(series.values, dtype=dtype), name=field.name)
+                        except Exception:
+                            # Fall back to original series if all else fails
+                            columns[field.name] = series
+                    else:
+                        columns[field.name] = series
             else:
                 columns[field.name] = self._make_column(field, len(value))
         self._table = pd.DataFrame(columns)

@@ -3,6 +3,10 @@ Assume an appropriate virtual environment is activated. If it isn't, just abort.
 
 ## Agent Hints
 
+**CRITIAL: Ensure working directory**. Sometimes agents will change working directories as part of tasks and forget to change them back.
+pydyna agent documentation and scripts are often sensitive to working directory, so recommended to check the pwd before each agent operation
+if unsure.
+
 **CRITICAL: Never redirect output to /dev/null on Windows**. This triggers a VS Code security prompt that halts execution. Instead:
 - For commands where you want to suppress output: Use `>$null 2>&1` (PowerShell) or just run the command without redirection
 - For commands where you want to check output: Use `python codegen/generate.py 2>&1 | Out-Null` or capture in a variable
@@ -13,13 +17,16 @@ Assume an appropriate virtual environment is activated. If it isn't, just abort.
   - ✅ GOOD: `python codegen/generate.py` (no redirection)
   - ✅ GOOD: `$output = python codegen/generate.py 2>&1`
 
-**Documentation builds**: To build docs without examples, use:
+**Documentation builds**: To build docs without examples:
+
+Ensure that the python3.13 environment is active, then:
+
 ```bash
 # Build docs without examples or autokeywords (fast)
-cd doc && BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false ./make.bat html
+BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false ./doc/make.bat html
 
 # Build docs with autokeywords but no examples (slow, ~8+ min for keyword imports alone)
-cd doc && BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=true ./make.bat html
+BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=true ./doc/make.bat html
 ```
 
 ## Agent Coding Style Preferences
