@@ -154,7 +154,7 @@ class TableCard(Card):
                     columns[field.name] = series.astype(dtype)
                 except (KeyError, TypeError) as e:
                     # If astype fails, try alternative approaches
-                    if isinstance(dtype, type) and hasattr(pd, 'array'):
+                    if isinstance(dtype, type) and hasattr(pd, "array"):
                         # Try using pd.array for extension dtypes
                         try:
                             columns[field.name] = pd.Series(pd.array(series.values, dtype=dtype), name=field.name)
