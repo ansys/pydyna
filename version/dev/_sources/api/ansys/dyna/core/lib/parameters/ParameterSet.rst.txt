@@ -1,0 +1,158 @@
+ansys.dyna.core.lib.parameters.ParameterSet
+===========================================
+
+.. py:class:: ansys.dyna.core.lib.parameters.ParameterSet(parent: Optional[ParameterSet] = None)
+
+   
+   Hierarchical parameter storage for LS-DYNA deck parameters.
+
+   Child scopes see parent parameters but local parameters don't leak upward.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: get(param: str) -> Any
+
+      
+      Get a parameter by name, checking local then parent scopes.
+
+
+      :Parameters:
+
+          **param** : :class:`python:str`
+              Parameter name to lookup.
+
+
+
+      :Returns:
+
+          :obj:`Any`
+              Parameter value.
+
+
+
+
+      :Raises:
+
+          :obj:`KeyError`
+              If parameter is not found in this scope or any parent scope.
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add(param: str, value: Any) -> None
+
+      
+      Add a parameter to the local scope.
+
+      This method is for global parameters (PARAMETER keyword).
+      They are added to the local scope but will be visible to child scopes.
+
+      :Parameters:
+
+          **param** : :class:`python:str`
+              Parameter name.
+
+          **value** : :obj:`Any`
+              Parameter value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_local(param: str, value: Any) -> None
+
+      
+      Add a parameter to local scope only (PARAMETER_LOCAL).
+
+      Local parameters are only visible within the current scope and child scopes
+      created from it, but won't leak to parent or sibling scopes.
+
+      :Parameters:
+
+          **param** : :class:`python:str`
+              Parameter name.
+
+          **value** : :obj:`Any`
+              Parameter value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: copy_with_child_scope() -> ParameterSet
+
+      
+      Create a new ParameterSet with this as the parent scope.
+
+      The child scope will be able to see parameters from this scope,
+      but parameters added to the child won't leak back to this scope.
+
+
+
+
+      :Returns:
+
+          :obj:`ParameterSet`
+              New ParameterSet with this as parent.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

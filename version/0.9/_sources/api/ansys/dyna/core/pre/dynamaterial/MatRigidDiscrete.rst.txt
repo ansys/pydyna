@@ -1,0 +1,74 @@
+ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete
+=================================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete(mass_density=0, young_modulus=0, poisson_ratio=0.3)
+
+   
+   Defines a rigid material for shells or solids.
+
+
+   :Parameters:
+
+       **mass_density**
+           ..
+
+       **young_modulus**
+           ..
+
+       **poisson_ratio**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+      :value: 0
+
+
+
+   .. py:attribute:: e
+      :value: 0
+
+
+
+   .. py:attribute:: pr
+      :value: 0.3
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a rigid material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
