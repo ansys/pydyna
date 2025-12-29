@@ -60,7 +60,29 @@ def merge_keywords(
 
 
 def process_nodes(nodes_df):
-    nodes_xyz = nodes_df[["x", "y", "z"]]
+    # Check for coordinate columns - they might have different names
+    coord_columns = []
+    for col_set in [['x', 'y', 'z'], ['X', 'Y', 'Z'], ['nx', 'ny', 'nz'], 
+                    ['xcoord', 'ycoord', 'zcoord']]:
+        if all(col in nodes_df.columns for col in col_set):
+            coord_columns = col_set
+            break
+    
+    if not coord_columns:
+        # Try to find any columns that look like coordinates
+        available_cols = list(nodes_df.columns)
+        if len(available_cols) >= 3:
+            # Use first 3 numeric columns as coordinates
+            numeric_cols = [col for col in available_cols 
+                          if nodes_df[col].dtype in ['float64', 'float32', 'int64', 'int32', 'Int32']]
+            if len(numeric_cols) >= 3:
+                coord_columns = numeric_cols[:3]
+    
+    if not coord_columns:
+        raise ValueError(f"Cannot find coordinate columns (x, y, z) in DataFrame. "
+                        f"Available columns: {list(nodes_df.columns)}")
+    
+    nodes_xyz = nodes_df[coord_columns]
     return nodes_xyz.to_numpy()
 
 

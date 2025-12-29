@@ -141,8 +141,16 @@ class TableCard(Card):
                 if field_type == float:
                     field_type = np.float64
                 elif field_type == int:
-                    field_type = pd.Int32Dtype()
-                columns[field.name] = value[field.name].astype(field_type)
+                    field_type = "Int32"  # Use string dtype for pandas nullable integer
+                
+                # Handle Series dtype conversion properly
+                series = value[field.name]
+                if isinstance(field_type, str):
+                    # For string dtype specifications (like "Int32")
+                    columns[field.name] = series.astype(field_type)
+                else:
+                    # For other dtype objects
+                    columns[field.name] = series.astype(field_type)
             else:
                 columns[field.name] = self._make_column(field, len(value))
         self._table = pd.DataFrame(columns)
