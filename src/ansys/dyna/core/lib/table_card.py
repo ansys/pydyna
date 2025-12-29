@@ -141,28 +141,8 @@ class TableCard(Card):
                 if field_type == float:
                     field_type = np.float64
                 elif field_type == int:
-                    field_type = np.int32
-
-                dtype = field_type
-                # unwrap mapping(s) until we reach a real dtype
-                while isinstance(dtype, dict):
-                    dtype = dtype[field.name]
-
-                # Get the series and handle dtype conversion safely
-                series = value[field.name].copy()  # Make a copy to avoid modifying original
-                try:
-                    columns[field.name] = series.astype(dtype)
-                except (KeyError, TypeError) as e:
-                    # If astype fails, try alternative approaches
-                    if isinstance(dtype, type) and hasattr(pd, "array"):
-                        # Try using pd.array for extension dtypes
-                        try:
-                            columns[field.name] = pd.Series(pd.array(series.values, dtype=dtype), name=field.name)
-                        except Exception:
-                            # Fall back to original series if all else fails
-                            columns[field.name] = series
-                    else:
-                        columns[field.name] = series
+                    field_type = pd.Int32Dtype()
+                columns[field.name] = value[field.name].astype(field_type)
             else:
                 columns[field.name] = self._make_column(field, len(value))
         self._table = pd.DataFrame(columns)
@@ -192,7 +172,7 @@ class TableCard(Card):
         elif field.type == str:
             return [default_value] * length
         elif field.type == int:
-            return pd.Series([default_value] * length, dtype=np.int32)
+            return pd.Series([default_value] * length, dtype=pd.Int32Dtype())
         raise Exception("unexpected type")
 
     def _initialize_data(self, length):
@@ -220,7 +200,7 @@ class TableCard(Card):
     def _get_read_options(self):
         fields = self._get_fields()
         colspecs = [(field.offset, field.offset + field.width) for field in fields]
-        type_mapping = {float: np.float64, int: np.int32, str: str}
+        type_mapping = {float: np.float64, int: pd.Int32Dtype(), str: str}
         dtype = {field.name: type_mapping[field.type] for field in fields}
         names = [field.name for field in fields]
         options = {"names": names, "colspecs": colspecs, "dtype": dtype, "comment": "$"}
