@@ -142,7 +142,7 @@ class TableCard(Card):
                     field_type = np.float64
                 elif field_type == int:
                     field_type = "Int32"  # Use string dtype for pandas nullable integer
-                
+
                 # Handle Series dtype conversion properly
                 series = value[field.name]
                 if isinstance(field_type, str):
