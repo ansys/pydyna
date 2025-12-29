@@ -141,7 +141,7 @@ class TableCard(Card):
                 if field_type == float:
                     field_type = np.float64
                 elif field_type == int:
-                    field_type = pd.Int32Dtype()
+                    field_type = np.int32
 
                 dtype = field_type
                 # unwrap mapping(s) until we reach a real dtype
@@ -192,7 +192,7 @@ class TableCard(Card):
         elif field.type == str:
             return [default_value] * length
         elif field.type == int:
-            return pd.Series([default_value] * length, dtype=pd.Int32Dtype())
+            return pd.Series([default_value] * length, dtype=np.int32)
         raise Exception("unexpected type")
 
     def _initialize_data(self, length):
@@ -220,7 +220,7 @@ class TableCard(Card):
     def _get_read_options(self):
         fields = self._get_fields()
         colspecs = [(field.offset, field.offset + field.width) for field in fields]
-        type_mapping = {float: np.float64, int: pd.Int32Dtype(), str: str}
+        type_mapping = {float: np.float64, int: np.int32, str: str}
         dtype = {field.name: type_mapping[field.type] for field in fields}
         names = [field.name for field in fields]
         options = {"names": names, "colspecs": colspecs, "dtype": dtype, "comment": "$"}
