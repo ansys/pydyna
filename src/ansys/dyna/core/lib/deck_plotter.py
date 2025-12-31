@@ -68,6 +68,13 @@ def merge_keywords(
 
 
 def process_nodes(nodes_df):
+    # Handle empty DataFrame case
+    if nodes_df.empty:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.warning("Empty nodes DataFrame provided to process_nodes")
+        return np.empty((0, 3), dtype=np.float64)
+    
     # Check for coordinate columns - they might have different names
     coord_columns = []
     for col_set in [["x", "y", "z"], ["X", "Y", "Z"], ["nx", "ny", "nz"], ["xcoord", "ycoord", "zcoord"]]:
@@ -83,7 +90,7 @@ def process_nodes(nodes_df):
             numeric_cols = [
                 col
                 for col in available_cols
-                if nodes_df[col].dtype in ["float64", "float32", "int64", "int32", "Int32"]
+                if nodes_df[col].dtype in ["float64", "float32", "int64", "int32", "Int32", "Int64"]
             ]
             if len(numeric_cols) >= 3:
                 coord_columns = numeric_cols[:3]
