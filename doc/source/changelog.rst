@@ -7,6 +7,22 @@ This document contains the release notes for the PyDyna project.
 
 .. towncrier release notes start
 
+`0.9.1 <https://github.com/ansys/pydyna/releases/tag/v0.9.1>`_ - December 31, 2025
+==================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Migrating to \`\`ansys-tools-common\`\`
+          - `#951 <https://github.com/ansys/pydyna/pull/951>`_
+
+
 `0.9.0 <https://github.com/ansys/pydyna/releases/tag/v0.9.0>`_ - July 15, 2025
 ==============================================================================
 
