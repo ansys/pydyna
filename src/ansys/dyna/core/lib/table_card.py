@@ -153,7 +153,7 @@ class TableCard(Card):
                     converted_series = series.astype(field_type)
                     if field_type in ["Int32", "Int64"]:
                         # Convert nullable integers back to native int64 for hollerith writer
-                        columns[field.name] = converted_series.astype('int64')
+                        columns[field.name] = converted_series.astype("int64")
                     else:
                         columns[field.name] = converted_series
                 else:

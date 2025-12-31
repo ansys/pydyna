@@ -71,10 +71,11 @@ def process_nodes(nodes_df):
     # Handle empty DataFrame case
     if nodes_df.empty:
         import logging
+
         logger = logging.getLogger(__name__)
         logger.warning("Empty nodes DataFrame provided to process_nodes")
         return np.empty((0, 3), dtype=np.float64)
-    
+
     # Check for coordinate columns - they might have different names
     coord_columns = []
     for col_set in [["x", "y", "z"], ["X", "Y", "Z"], ["nx", "ny", "nz"], ["xcoord", "ycoord", "zcoord"]]:
