@@ -43,6 +43,21 @@ It is recommended to use a virtual environment
 - To remove all the generated code:
 ``python codegen/generate.py -c``
 
+### Output Validation
+
+The CI system automatically validates that generated keyword classes remain unchanged after code generation runs. This ensures that refactoring the codegen system doesn't inadvertently modify the output. To manually validate output locally:
+
+```bash
+# Clean and regenerate to validate output hasn't changed
+python codegen/generate.py -c
+python codegen/generate.py
+git diff src/ansys/dyna/core/keywords/keyword_classes/auto/
+```
+
+If `git diff` shows changes, either:
+1. The codegen logic has a bug that needs fixing
+2. The changes are intentional (e.g., new handlers or template improvements) and should be committed
+
 ### Logging
 
 The code generator includes comprehensive logging to help debug and understand the generation process:
