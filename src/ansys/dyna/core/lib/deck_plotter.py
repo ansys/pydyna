@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -45,20 +45,12 @@ def merge_keywords(
     Given a deck, merges specific keywords (NODE, ELEMENT_SHELL, ELEMENT_BEAM, ELEMENT_SOLID)
     and returns tham as data frames.
     """
-    nodes_temp = [
-        kwd.nodes
-        for kwd in deck.get_kwds_by_type("NODE")
-        if hasattr(kwd, "nodes") and isinstance(kwd.nodes, pd.DataFrame)
-    ]
+    nodes_temp = [kwd.nodes for kwd in deck.get_kwds_by_type("NODE")]
     nodes = pd.concat(nodes_temp) if len(nodes_temp) else pd.DataFrame()
 
     df_list = {}
     for item in ["SHELL", "BEAM", "SOLID"]:
-        matching_elements = [
-            kwd.elements
-            for kwd in deck.get_kwds_by_type("ELEMENT")
-            if kwd.subkeyword == item and hasattr(kwd, "elements") and isinstance(kwd.elements, pd.DataFrame)
-        ]
+        matching_elements = [kwd.elements for kwd in deck.get_kwds_by_type("ELEMENT") if kwd.subkeyword == item]
         df_list[item] = pd.concat(matching_elements) if len(matching_elements) else pd.DataFrame()
 
     return (
@@ -68,40 +60,7 @@ def merge_keywords(
 
 
 def process_nodes(nodes_df):
-    # Handle empty DataFrame case
-    if nodes_df.empty:
-        import logging
-
-        logger = logging.getLogger(__name__)
-        logger.warning("Empty nodes DataFrame provided to process_nodes")
-        return np.empty((0, 3), dtype=np.float64)
-
-    # Check for coordinate columns - they might have different names
-    coord_columns = []
-    for col_set in [["x", "y", "z"], ["X", "Y", "Z"], ["nx", "ny", "nz"], ["xcoord", "ycoord", "zcoord"]]:
-        if all(col in nodes_df.columns for col in col_set):
-            coord_columns = col_set
-            break
-
-    if not coord_columns:
-        # Try to find any columns that look like coordinates
-        available_cols = list(nodes_df.columns)
-        if len(available_cols) >= 3:
-            # Use first 3 numeric columns as coordinates
-            numeric_cols = [
-                col
-                for col in available_cols
-                if nodes_df[col].dtype in ["float64", "float32", "int64", "int32", "Int32", "Int64"]
-            ]
-            if len(numeric_cols) >= 3:
-                coord_columns = numeric_cols[:3]
-
-    if not coord_columns:
-        raise ValueError(
-            f"Cannot find coordinate columns (x, y, z) in DataFrame. " f"Available columns: {list(nodes_df.columns)}"
-        )
-
-    nodes_xyz = nodes_df[coord_columns]
+    nodes_xyz = nodes_df[["x", "y", "z"]]
     return nodes_xyz.to_numpy()
 
 

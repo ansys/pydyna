@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,7 +21,6 @@
 # SOFTWARE.
 
 import io
-import logging
 import typing
 
 import numpy as np
@@ -35,8 +34,6 @@ from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 CHECK_TYPE = True
-
-logger = logging.getLogger(__name__)
 
 
 def _check_type(value):
@@ -144,21 +141,8 @@ class TableCard(Card):
                 if field_type == float:
                     field_type = np.float64
                 elif field_type == int:
-                    field_type = "Int64"  # Use Int64 for better compatibility
-
-                # Handle Series dtype conversion properly
-                series = value[field.name]
-                if isinstance(field_type, str):
-                    # For string dtype specifications, then convert to native types for hollerith compatibility
-                    converted_series = series.astype(field_type)
-                    if field_type in ["Int32", "Int64"]:
-                        # Convert nullable integers back to native int64 for hollerith writer
-                        columns[field.name] = converted_series.astype("int64")
-                    else:
-                        columns[field.name] = converted_series
-                else:
-                    # For other dtype objects
-                    columns[field.name] = series.astype(field_type)
+                    field_type = pd.Int32Dtype()
+                columns[field.name] = value[field.name].astype(field_type)
             else:
                 columns[field.name] = self._make_column(field, len(value))
         self._table = pd.DataFrame(columns)
