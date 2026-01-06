@@ -24,29 +24,6 @@ runs:
       shell: bash
       run: pip install -e .[codegen]
 
-    - name: Generate codegen
+    - name: Run codegen validation
       shell: bash
-      run: |
-        python codegen/generate.py -c
-        python codegen/generate.py
-
-    - name: Run codegen testing
-      shell: bash
-      run: |
-        if git -C src/ansys/dyna/core/keywords/keyword_classes/auto diff --relative --exit-code; then
-          echo "CHANGES=false" >> "$GITHUB_ENV"
-        else
-          echo "CHANGES=true" >> "$GITHUB_ENV"
-        fi
-
-        # Also check doc/source/_autosummary/index.rst
-        if git -C doc/source/_autosummary/ diff --relative --exit-code; then
-          echo "CHANGES=false" >> "$GITHUB_ENV"
-        else
-          echo "CHANGES=true" >> "$GITHUB_ENV"
-        fi
-
-    - name: Exit on changes
-      if: ${{ env.CHANGES == 'true' }}
-      shell: bash
-      run: exit 1
+      run: bash codegen/validate.sh --skip-precommit --skip-deadcode --skip-tests
