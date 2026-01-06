@@ -93,7 +93,16 @@ def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing
     if libmissing.checknull(value):
         holler.write_spaces(buf, width)
     elif field_type == str:
-        holler.write_string(buf, value, width)
+        # Handle string values safely
+        if value is None or pd.isna(value):
+            holler.write_spaces(buf, width)
+        else:
+            try:
+                # Convert to string and handle potential issues
+                str_value = str(value) if value is not None else ""
+                holler.write_string(buf, str_value, width)
+            except (ValueError, TypeError, Exception):
+                holler.write_spaces(buf, width)
     elif field_type == int:
         # Convert pandas nullable integers to regular Python integers
         if value is None or pd.isna(value):
