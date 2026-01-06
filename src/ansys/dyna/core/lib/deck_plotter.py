@@ -45,16 +45,30 @@ def merge_keywords(
     Given a deck, merges specific keywords (NODE, ELEMENT_SHELL, ELEMENT_BEAM, ELEMENT_SOLID)
     and returns tham as data frames.
     """
-    nodes_temp = [kwd.nodes for kwd in deck.get_kwds_by_type("NODE") if hasattr(kwd, "nodes")]
+    nodes_temp = []
+    for kwd in deck.get_kwds_by_type("NODE"):
+        if hasattr(kwd, "nodes"):
+            try:
+                nodes_value = kwd.nodes
+                if isinstance(nodes_value, pd.DataFrame):
+                    nodes_temp.append(nodes_value)
+            except Exception:
+                # Skip keywords where accessing nodes fails
+                pass
     nodes = pd.concat(nodes_temp) if len(nodes_temp) else pd.DataFrame()
 
     df_list = {}
     for item in ["SHELL", "BEAM", "SOLID"]:
-        matching_elements = [
-            kwd.elements
-            for kwd in deck.get_kwds_by_type("ELEMENT")
-            if kwd.subkeyword == item and hasattr(kwd, "elements")
-        ]
+        matching_elements = []
+        for kwd in deck.get_kwds_by_type("ELEMENT"):
+            if kwd.subkeyword == item and hasattr(kwd, "elements"):
+                try:
+                    elements_value = kwd.elements
+                    if isinstance(elements_value, pd.DataFrame):
+                        matching_elements.append(elements_value)
+                except Exception:
+                    # Skip keywords where accessing elements fails
+                    pass
         df_list[item] = pd.concat(matching_elements) if len(matching_elements) else pd.DataFrame()
 
     return (
