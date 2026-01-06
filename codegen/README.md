@@ -183,6 +183,13 @@ Supplements include:
     - Adding option cards ("add-option")
     - A field shared across multiple cards with only one meaning ("shared-field")
 
+## Extending the generation system
+
+In some cases, the generation system can be difficult to extend to support the semantics of a keyword,
+especially if the functionality in the keyword library (ansys/dyna/core/lib) is lacking. In those cases, an
+effective strategy is to hand-write  the keyword, extending the keyword library as needed, and then working
+backwards to update the code-generation system to produce an equivalent keyword, and finally deleting the
+hand-written keyword.
 
 ## Appendix A
 

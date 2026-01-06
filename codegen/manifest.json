@@ -1213,18 +1213,7 @@
                     "index": 6,
                     "func": "self.atype and abs(self.atype) == 1"
                 },
-                {
-                    "index": 7,
-                    "func": "self.atype and abs(self.atype) == 1"
-                },
-                {
-                    "index": 8,
-                    "func": "self.atype and abs(self.atype) == 1 and self.ftype == 1"
-                },
-                {
-                    "index": 9,
-                    "func": "self.atype and abs(self.atype) == 1 and self.ftype == 2"
-                },
+
                 {
                     "index": 10,
                     "func": "self.atype and abs(self.atype) == 1 and self.intype == 1"
@@ -1270,16 +1259,25 @@
                     "func": "self.atype and abs(self.atype) == 1"
                 }
             ],
-            "table-card-group": [
+            "card-set": [
                 {
-                    "indices": [
-                        7,
-                        8,
-                        9
-                    ],
-                    "overall-name": "anisotropic_settings",
+                    "source-indices": [7, 8, 9],
+                    "target-index": 7,
+                    "name": "FiberFamily",
+                    "length-func": "self.nf or 0",
                     "active-func": "self.atype and abs(self.atype) == 1",
-                    "length-func": "self.nf or 0"
+                    "items-name": "fiber_families",
+                    "discriminator": {
+                        "field": "ftype",
+                        "cards-with-field": [1, 2]
+                    },
+                    "internal-conditionals": [
+                        {"index": 1, "func": "self.ftype == 1"},
+                        {"index": 2, "func": "self.ftype == 2"}
+                    ],
+                    "shared-fields": [
+                        {"name": "ftype", "card-indices": [1, 2]}
+                    ]
                 }
             ],
             "shared-field": [

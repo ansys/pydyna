@@ -32,15 +32,37 @@ if typing.TYPE_CHECKING:
 
 @dataclasses.dataclass
 class ImportContext:
-    """Optional transformation to apply, using type `IncludeTransform`"""
+    """Context for keyword import operations.
+
+    Attributes
+    ----------
+    xform : Any, optional
+        Optional transformation to apply, using type `IncludeTransform`.
+    deck : Any, optional
+        Deck into which the import is occurring.
+    path : str, optional
+        Path of file that is importing.
+    keyword_overrides : Dict[str, type], optional
+        Dictionary mapping keyword names (e.g., "*MAT_295") to keyword classes.
+        When a keyword is imported, if its name matches a key in this dictionary,
+        the corresponding class will be used instead of the default from TypeMapping.
+
+        This allows using alternative or legacy keyword implementations when loading
+        keyword files.
+
+        Example
+        -------
+        >>> from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import (
+        ...     Mat295Legacy,
+        ... )
+        >>> context = ImportContext(keyword_overrides={"*MAT_295": Mat295Legacy})
+        >>> deck.loads(data, context=context)
+    """
 
     xform: typing.Any = None
-
-    """Deck into which the import is occurring."""
     deck: typing.Any = None
-
-    """Path of file that is importing."""
     path: str = None
+    keyword_overrides: typing.Dict[str, type] = dataclasses.field(default_factory=dict)
 
 
 class ImportHandler:

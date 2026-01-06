@@ -196,7 +196,6 @@ class InitialStrainShellCardSet(Cards):
         """Get the parent keyword."""
         return self._parent
 
-
 class InitialStrainShell(KeywordBase):
     """DYNA INITIAL_STRAIN_SHELL keyword"""
 
@@ -292,6 +291,6 @@ class InitialStrainShell(KeywordBase):
         return self._cards[0].items()
 
     def add_set(self, **kwargs):
-        """Adds a set to the list of sets."""
+        """Adds a set."""
         self._cards[0].add_item(**kwargs)
 
