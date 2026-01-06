@@ -2011,12 +2011,12 @@
                 {
                     "index": 1,
                     "property-name": "strains",
-                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 0",
+                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
                     "active-func": "self.large == None or self.large == 0"
                 }
             ]
         },
-        "comment": "TODO(1) - self.large==1 has different cards that aren't defined here."
+        "comment": "Per LS-DYNA manual: when nplane=0 or nthick=0, read 2 strain cards (inner and outer integration points). TODO: self.large==1 implies a different card format."
     },
     "INITIAL_STRESS_SHELL": {
         "generation-options": {
@@ -2029,7 +2029,7 @@
                     "target-index": 1,
                     "target-name": "InitialStressShellCardSet",
                     "name": "InitialStressShellThicknessLargeCardSet",
-                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 0",
+                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
                     "active-func": "self.large == None or self.large == 0"
                 },
                 {
@@ -2052,7 +2052,7 @@
                 }
             ]
         },
-        "comment": "TODO(1) - self.large==1 has different cards that aren't defined here."
+        "comment": "Per LS-DYNA manual: when nplane=0 or nthick=0, read 2 stress cards (inner and outer integration points). TODO: self.large==1 has different card format (tracked separately)."
     },
     "INITIAL_TEMPERATURE_NODE": {
         "generation-options": {
