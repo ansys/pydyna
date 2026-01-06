@@ -68,6 +68,9 @@ tests = [
     "ipython==8.37.0",
     "pyvista==0.46.4",
 ]
+dev = [
+    "ansys-dyna-core[tests,codegen]",
+]
 doc = [
     "recommonmark==0.7.1",
     "matplotlib==3.10.8",
@@ -117,10 +120,12 @@ src_paths = ["doc", "src", "tests"]
 minversion = "7.1"
 addopts = "-ra -vv"
 testpaths = ["tests"]
+pythonpath = ["codegen"]
 markers = """
     run: tests that exercise the `run` subpackage
     keywords: tests that exercies the `keyword` subpackage
     viz: tests that do 3d visualization
+    codegen: tests that exercise the codegen system
     """
 
 [tool.coverage.run]

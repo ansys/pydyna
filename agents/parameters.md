@@ -233,12 +233,47 @@ R_density    7850.0
 
 ## Testing Parameter Scoping
 
-Verify:
-1. **Global parameters**: Visible in defining file, includes, and parent
-2. **Local parameters**: Visible in defining file and its includes only
-3. **Isolation**: Local params NOT in parents or sibling includes
+### Test Structure
 
-See `tests/test_deck.py` for existing tests.
+Tests for parameter scoping should verify:
+
+1. **Global parameters are visible everywhere**:
+   - In file where defined
+   - In included files
+   - In files that include the file where defined
+
+2. **Local parameters are properly isolated**:
+   - Accessible in file where defined
+   - Accessible in files included FROM that file
+   - NOT accessible in parent files (isolation from parent)
+   - NOT accessible in sibling includes (isolation from siblings)
+
+### Example Test Fixture Structure
+
+```
+tests/testfiles/keywords/expand_parameters/local/
+├── top.k                     # Parent file with global param
+├── include_with_local.k      # Included file with local param
+├── sibling_test_top.k        # Parent including multiple siblings
+├── sibling_a.k               # First sibling with local param
+└── sibling_b.k               # Second sibling (should not see sibling_a's local)
+```
+
+### Test Pattern for Isolation
+
+```python
+def test_local_parameter_isolation():
+    deck = Deck()
+    deck.import_file("top.k")  # Has global param
+    deck = deck.expand(recurse=True, cwd=test_dir)
+
+    # Global param should be accessible
+    assert deck.parameters.get("global_param") == expected_value
+
+    # Local param from include should NOT be accessible
+    with pytest.raises(KeyError):
+        deck.parameters.get("local_param")
+```
 
 ## Implementation Checklist
 

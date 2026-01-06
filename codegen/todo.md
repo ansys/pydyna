@@ -21,8 +21,8 @@ This file collects architectural and code-level recommendations for improving th
 - Document template variables and expected context structure.
 
 ## 5. Testing
-- Add unit tests for handlers, template rendering, and manifest parsing.
-- Ensure all tests validate that generated files remain unchanged.
+- Handler-specific tests (with fixtures for global state), generator module tests (class/entrypoint generation), config/manifest loading tests, utility module tests
+- Integration/E2E tests deferred to CI which already validates generated output remains unchanged
 
 ## 6. General Simplicity
 - Reduce code duplication and improve readability.

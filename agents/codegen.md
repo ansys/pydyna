@@ -18,6 +18,42 @@ See sections below for architectural details and migration patterns.
 
 The purpose of the codegen system is to generate Python classes for LS-DYNA keywords. These keywords are described in details in the LS-DYNA manual.
 
+## Validation Workflow
+
+After updating the codegen system, use the validation script to ensure all checks pass:
+
+```bash
+# Quick validation (fast iteration during development)
+bash codegen/validate.sh --quick
+
+# Full validation (before committing/pushing)
+bash codegen/validate.sh
+
+# Custom validation (skip specific steps)
+bash codegen/validate.sh --skip-tests       # Skip unit tests
+bash codegen/validate.sh --skip-precommit   # Skip pre-commit hooks
+bash codegen/validate.sh --skip-deadcode    # Skip dead code detection
+
+# For debugging
+bash codegen/validate.sh --verbose
+```
+
+**What the validation script does:**
+1. Cleans and regenerates all keyword classes (`generate.py -c && generate.py`)
+2. Checks for unintended changes via git diff (both auto/ and doc/)
+3. Runs pre-commit hooks (unless `--skip-precommit`)
+4. Detects dead code with coverage analysis (unless `--skip-deadcode`)
+5. Runs codegen unit tests with pytest -m codegen (unless `--skip-tests`)
+
+**Bash aliases** (see `codegen/README.md` for full list):
+```bash
+alias codegen-quick='bash codegen/validate.sh --quick'
+alias codegen-validate='bash codegen/validate.sh'
+alias codegen-check='bash codegen/validate.sh --skip-tests --skip-deadcode'
+```
+
+**CI Integration**: The CI uses the same validation script to ensure local and CI validation are identical.
+
 ## Codegen System: High-Level Design
 
 The codegen system is responsible for generating Python classes and import machinery for LS-DYNA keywords. Its architecture consists of:
