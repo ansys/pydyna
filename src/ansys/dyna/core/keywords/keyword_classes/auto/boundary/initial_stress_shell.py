@@ -293,7 +293,7 @@ class InitialStressShellCardSet(Cards):
             ),
             CardSet(
                 InitialStressShellThicknessLargeCardSet,
-                length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 0,
+                length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == None or self.large == 0,
                 **kwargs
             ),

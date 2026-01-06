@@ -298,3 +298,117 @@ class TestCardSetWithDiscriminator:
         assert items[0].dtype == 2
         assert items[0]._cards[2].get_value("val2") == 3.0
         assert items[0]._cards[2].get_value("val3") == 4.0
+
+
+@pytest.mark.keywords
+class TestInitialStrainShellFix:
+    """Tests for INITIAL_STRAIN_SHELL fix for issue #656.
+
+    When nplane=0 and nthick=0 (or undefined), the keyword should read
+    2 strain cards (inner and outer integration points) per LS-DYNA manual.
+    """
+
+    def test_initial_strain_shell_with_zero_nplane_nthick(self, string_utils):
+        """Test that nplane=0, nthick=0 reads 2 strain cards."""
+        from ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_strain_shell import (
+            InitialStrainShell,
+        )
+
+        kwd = InitialStrainShell()
+        # Data with nplane=0, nthick=0, followed by 2 strain cards
+        data = """*INITIAL_STRAIN_SHELL
+         1         0         0         0                             0
+       0.0       0.0       0.0       0.0       0.0       0.0       0.0
+       1.0       2.0       3.0       4.0       5.0       6.0       7.0
+"""
+        kwd.read(string_utils.as_buffer(data))
+
+        assert len(kwd.sets) == 1
+        strain_set = kwd.sets[0]
+        assert strain_set.eid == 1
+        assert strain_set.nplane == 0
+        assert strain_set.nthick == 0
+        assert strain_set.large == 0
+
+        # Should have read 2 strain cards (inner and outer integration points)
+        strains_df = strain_set.strains
+        assert len(strains_df) == 2
+        # First strain card (all zeros)
+        assert strains_df.iloc[0]["epsxx"] == 0.0
+        assert strains_df.iloc[0]["epsyy"] == 0.0
+        # Second strain card (1.0, 2.0, 3.0, ...)
+        assert strains_df.iloc[1]["epsxx"] == 1.0
+        assert strains_df.iloc[1]["epsyy"] == 2.0
+        assert strains_df.iloc[1]["epszz"] == 3.0
+
+    def test_initial_strain_shell_with_nplane_nthick_product(self, string_utils):
+        """Test that nplane=2, nthick=3 reads 6 strain cards."""
+        from ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_strain_shell import (
+            InitialStrainShell,
+        )
+
+        kwd = InitialStrainShell()
+        # Data with nplane=2, nthick=3, followed by 6 strain cards
+        data = """*INITIAL_STRAIN_SHELL
+         2         2         3         0                             0
+       1.0       1.0       1.0       1.0       1.0       1.0       1.0
+       2.0       2.0       2.0       2.0       2.0       2.0       2.0
+       3.0       3.0       3.0       3.0       3.0       3.0       3.0
+       4.0       4.0       4.0       4.0       4.0       4.0       4.0
+       5.0       5.0       5.0       5.0       5.0       5.0       5.0
+       6.0       6.0       6.0       6.0       6.0       6.0       6.0
+"""
+        kwd.read(string_utils.as_buffer(data))
+
+        assert len(kwd.sets) == 1
+        strain_set = kwd.sets[0]
+        assert strain_set.eid == 2
+        assert strain_set.nplane == 2
+        assert strain_set.nthick == 3
+
+        # Should have read 6 strain cards (2 * 3)
+        strains_df = strain_set.strains
+        assert len(strains_df) == 6
+        # Verify first and last cards
+        assert strains_df.iloc[0]["epsxx"] == 1.0
+        assert strains_df.iloc[5]["epsxx"] == 6.0
+
+    def test_initial_strain_shell_round_trip(self, string_utils):
+        """Test write and read round-trip preserves strain data."""
+        from ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_strain_shell import (
+            InitialStrainShell,
+        )
+        import pandas as pd
+
+        kwd = InitialStrainShell()
+        kwd.add_set(eid=100, nplane=0, nthick=0, large=0, ilocal=0)
+
+        # Set strain data for 2 integration points
+        strain_data = pd.DataFrame(
+            {
+                "epsxx": [0.001, 0.002],
+                "epsyy": [0.003, 0.004],
+                "epszz": [0.005, 0.006],
+                "epsxy": [0.007, 0.008],
+                "epsyz": [0.009, 0.010],
+                "epszx": [0.011, 0.012],
+                "t": [0.0, 1.0],
+            }
+        )
+        kwd.sets[0].strains = strain_data
+
+        # Write to string
+        output = kwd.write()
+
+        # Read back
+        kwd2 = InitialStrainShell()
+        kwd2.read(string_utils.as_buffer(output))
+
+        # Verify data preserved
+        assert len(kwd2.sets) == 1
+        assert kwd2.sets[0].eid == 100
+        strains_df = kwd2.sets[0].strains
+        assert len(strains_df) == 2
+        assert strains_df.iloc[0]["epsxx"] == 0.001
+        assert strains_df.iloc[1]["epsxx"] == 0.002
+        assert strains_df.iloc[1]["t"] == 1.0

@@ -111,7 +111,7 @@ class InitialStrainShellCardSet(Cards):
                     Field("epszx", float, 50, 10, 0.0),
                     Field("t", float, 60, 10, 0.0),
                 ],
-                lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 0,
+                lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 lambda: self.large == None or self.large == 0,
                 name="strains",
                 **kwargs,
