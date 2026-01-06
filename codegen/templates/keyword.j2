@@ -46,50 +46,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.{{link.modulename}} import {{
 
 {% if keyword_data.card_sets %}
 {% for card_set in keyword_data.card_sets.sets %}
-class {{card_set.name}}(Cards):
-    """{{card_set.title}} CardSet."""
-{% if card_set.options %}
-
-    option_specs = [
-{% for option in card_set.options %}
-        OptionSpec("{{option.name}}", {{option.card_order}}, {{option.title_order}}),
-{% endfor %}
-    ]
-{% endif %}
-
-    def __init__(self, **kwargs):
-        """Initialize the {{card_set.name}} CardSet."""
-        super().__init__(kwargs["keyword"])
-        self._parent = kwargs["parent"]
-        kwargs["parent"] = self
-        self._cards = [
-{% for card in card_set.source_cards %}
-{% with parent_name = card_set.name %}
-{% include 'keyword/card.j2' %}
-{% endwith %}
-{% endfor %}
-{% if card_set.options %}
-{% with parent_name = card_set.name %}
-{% with options = card_set.options %}
-{% include 'keyword/options.j2' %}
-{% endwith %}
-{% endwith %}
-{% endif %}{# card_set.options #}
-        ]
-
-{% for card in card_set.source_cards %}
-{% include 'keyword/card_properties.j2' %}
-{% endfor %}{# card in card_set.source_cards #}
-{% if card_set.options %}
-{% for option in card_set.options %}
-{% include 'keyword/option_card_properties.j2' %}
-{% endfor %}{# option in card_set.options #}
-{% endif %}{# card_set.options #}
-    @property
-    def parent(self) -> KeywordBase:
-        """Get the parent keyword."""
-        return self._parent
-
+{% include 'keyword/card_set_class.j2' %}
 
 {% endfor %}{# card_set in keyword_data.card_sets.sets #}
 {% endif %}{# keyword_data.card_sets #}

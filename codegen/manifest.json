@@ -1213,10 +1213,6 @@
                     "index": 6,
                     "func": "self.atype and abs(self.atype) == 1"
                 },
-                {
-                    "index": 7,
-                    "func": "self.atype and abs(self.atype) == 1"
-                },
 
                 {
                     "index": 10,
@@ -1269,7 +1265,19 @@
                     "target-index": 7,
                     "name": "FiberFamily",
                     "length-func": "self.nf or 0",
-                    "active-func": "self.atype and abs(self.atype) == 1"
+                    "active-func": "self.atype and abs(self.atype) == 1",
+                    "items-name": "fiber_families",
+                    "discriminator": {
+                        "field": "ftype",
+                        "cards-with-field": [1, 2]
+                    },
+                    "internal-conditionals": [
+                        {"index": 1, "func": "self.ftype == 1"},
+                        {"index": 2, "func": "self.ftype == 2"}
+                    ],
+                    "shared-fields": [
+                        {"name": "ftype", "card-indices": [1, 2]}
+                    ]
                 }
             ],
             "shared-field": [

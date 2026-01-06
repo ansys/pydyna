@@ -61,7 +61,6 @@ class FiberFamily(Cards):
                         **kwargs,
                     ),
                 ],
-                lambda: self.atype and abs(self.atype) == 1,
             ),
             Card(
                 [
@@ -95,6 +94,7 @@ class FiberFamily(Cards):
                         **kwargs,
                     ),
                 ],
+                lambda: self.ftype == 1,
             ),
             Card(
                 [
@@ -135,8 +135,21 @@ class FiberFamily(Cards):
                         **kwargs,
                     ),
                 ],
+                lambda: self.ftype == 2,
             ),
         ]
+
+    def _read_data(self, buf: typing.TextIO, parameters) -> bool:
+        """Custom read logic to handle ftype-dependent cards."""
+        from ansys.dyna.core.lib.card_set import read_cards_with_discriminator
+
+        return read_cards_with_discriminator(
+            self._cards,
+            buf,
+            parameters,
+            discriminator=self._cards[1]._fields[0],
+            cards_with_field=[1, 2],
+        )
 
     @property
     def theta(self) -> typing.Optional[float]:
@@ -172,21 +185,6 @@ class FiberFamily(Cards):
         self._cards[0].set_value("b", value)
 
     @property
-    def ftype(self) -> int:
-        """Get or set the Type of fiber model:
-        EQ.1:	Holzapfel-Gasser-Ogden [6]
-        EQ.2:	Freed-Doehring [2].
-        """ # nopep8
-        return self._cards[1].get_value("ftype")
-
-    @ftype.setter
-    def ftype(self, value: int) -> None:
-        """Set the ftype property."""
-        if value not in [1, 2, None]:
-            raise Exception("""ftype must be `None` or one of {1,2}.""")
-        self._cards[1].set_value("ftype", value)
-
-    @property
     def fcid(self) -> typing.Optional[int]:
         """Get or set the Curve ID defining the fiber stress versus fiber stretch relation, default if nonzero.
         """ # nopep8
@@ -218,21 +216,6 @@ class FiberFamily(Cards):
     def k2(self, value: float) -> None:
         """Set the k2 property."""
         self._cards[1].set_value("k2", value)
-
-    @property
-    def ftype(self) -> int:
-        """Get or set the Type of fiber model:
-        EQ.1:	Holzapfel-Gasser-Ogden [6]
-        EQ.2:	Freed-Doehring [2].
-        """ # nopep8
-        return self._cards[2].get_value("ftype")
-
-    @ftype.setter
-    def ftype(self, value: int) -> None:
-        """Set the ftype property."""
-        if value not in [1, 2, None]:
-            raise Exception("""ftype must be `None` or one of {1,2}.""")
-        self._cards[2].set_value("ftype", value)
 
     @property
     def flcid(self) -> typing.Optional[int]:
@@ -279,10 +262,22 @@ class FiberFamily(Cards):
         self._cards[2].set_value("h0norm", value)
 
     @property
+    def ftype(self) -> typing.Optional[int]:
+        """Get or set the Type of fiber model:
+EQ.1:	Holzapfel-Gasser-Ogden [6]
+EQ.2:	Freed-Doehring [2].
+        """ # nopep8
+        return self._cards[1].get_value("ftype")
+
+    @ftype.setter
+    def ftype(self, value: int) -> None:
+        self._cards[1].set_value("ftype", value)
+        self._cards[2].set_value("ftype", value)
+
+    @property
     def parent(self) -> KeywordBase:
         """Get the parent keyword."""
         return self._parent
-
 
 class Mat295(KeywordBase):
     """DYNA MAT_295 keyword"""
@@ -1117,18 +1112,6 @@ class Mat295(KeywordBase):
         self.sets[0].b = value
 
     @property
-    def ftype(self) -> int:
-        """Get or set the ftype
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].ftype
-
-    @ftype.setter
-    def ftype(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].ftype = value
-
-    @property
     def fcid(self) -> typing.Optional[int]:
         """Get or set the fcid
         """ # nopep8
@@ -1163,18 +1146,6 @@ class Mat295(KeywordBase):
     def k2(self, value: float) -> None:
         ensure_card_set_properties(self, True)
         self.sets[0].k2 = value
-
-    @property
-    def ftype(self) -> int:
-        """Get or set the ftype
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].ftype
-
-    @ftype.setter
-    def ftype(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].ftype = value
 
     @property
     def flcid(self) -> typing.Optional[int]:
@@ -1579,13 +1550,9 @@ class Mat295(KeywordBase):
         self._cards[6].set_value("nf", value)
 
     @property
-    def sets(self) -> typing.List[FiberFamily]:
-        """Gets the list of sets."""
+    def fiber_families(self) -> typing.List[FiberFamily]:
+        """Gets the list of fiber_families."""
         return self._cards[7].items()
-
-    def add_set(self, **kwargs):
-        """Adds a set to the list of sets."""
-        self._cards[7].add_item(**kwargs)
 
     @property
     def coupling_k1(self) -> typing.Optional[float]:

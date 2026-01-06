@@ -820,10 +820,16 @@ def test_mat_196_read(ref_string):
 
 
 @pytest.mark.keywords
-def test_mat295_read(ref_string):
-    """Round trip test of reading MAT_295."""
+def test_mat295_legacy_read(ref_string):
+    """Round trip test of reading MAT_295 using legacy 0.9.1 API (backward compatibility)."""
+    from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import Mat295Legacy
+
+    import warnings
+
     ref_mat295_string = ref_string.test_mat_295_ref
-    m = kwd.Mat295()
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", DeprecationWarning)
+        m = Mat295Legacy()
     m.loads(ref_mat295_string)
     assert m.ftype == 1
     assert m.rho == 0.001
@@ -835,10 +841,41 @@ def test_mat295_read(ref_string):
 
 
 @pytest.mark.keywords
-def test_mat295_iso_read(ref_string):
-    """Round trip test of reading MAT_295."""
-    m = kwd.Mat295(mid=1, rho=0.01, aopt=2, itype=1, beta=2.0, nu=0.49, mu1=1, alpha1=2)
+def test_mat295_legacy_iso_read(ref_string):
+    """Round trip test of reading MAT_295 ISO using legacy 0.9.1 API (backward compatibility)."""
+    from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import Mat295Legacy
+
+    import warnings
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", DeprecationWarning)
+        m = Mat295Legacy(mid=1, rho=0.01, aopt=2, itype=1, beta=2.0, nu=0.49, mu1=1, alpha1=2)
     assert m.ftype is None
+    assert m.actype is None
+    ref_mat295_string = ref_string.test_mat_295_iso
+    assert m.write() == ref_mat295_string
+
+
+@pytest.mark.keywords
+def test_mat295_read(ref_string):
+    """Round trip test of reading MAT_295 using idiomatic fiber_families API."""
+    ref_mat295_string = ref_string.test_mat_295_ref
+    m = kwd.Mat295()
+    m.loads(ref_mat295_string)
+    assert m.rho == 0.001
+    assert len(m.fiber_families) == 1
+    assert m.fiber_families[0].ftype == 1
+    assert m.actype == 1
+    assert m.l == 1.85
+    assert m.k2 == 1.75  # k2 from itype=3 (Holzapfel-Ogden) card
+    assert m.write() == ref_mat295_string
+
+
+@pytest.mark.keywords
+def test_mat295_iso_read(ref_string):
+    """Round trip test of reading MAT_295 ISO (no fiber families)."""
+    m = kwd.Mat295(mid=1, rho=0.01, aopt=2, itype=1, beta=2.0, nu=0.49, mu1=1, alpha1=2)
+    assert len(m.fiber_families) == 0
     assert m.actype is None
     ref_mat295_string = ref_string.test_mat_295_iso
     assert m.write() == ref_mat295_string

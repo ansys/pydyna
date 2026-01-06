@@ -171,3 +171,130 @@ $#       t     sigxx     sigyy     sigzz     sigxy     sigyz     sigzx       eps
 $#    hisv      hisv      hisv      hisv
        1.0       2.0       3.0          """
     assert _to_string(z) == ref_string3
+
+
+@pytest.mark.keywords
+class TestCardSetWithDiscriminator:
+    """Tests for CardSet items with discriminator fields.
+
+    A discriminator is a field (like ftype) whose value determines which of multiple
+    mutually-exclusive cards should be active. This pattern is used in MAT_295 fiber
+    families where FTYPE=1 means use Holzapfel-Gasser-Ogden model parameters, and
+    FTYPE=2 means use Freed-Doehring model parameters.
+    """
+
+    def test_discriminator_read_with_custom_read_data(self, string_utils):
+        """Test that CardSet correctly delegates to _read_data when present.
+
+        The _read_data method is used when a CardSet item needs peek-ahead logic
+        to determine card activation before reading (discriminator pattern).
+        """
+        from ansys.dyna.core.lib.card import Card, Field
+        from ansys.dyna.core.lib.card_set import read_cards_with_discriminator
+        from ansys.dyna.core.lib.cards import Cards
+
+        class MockDiscriminatorItem(Cards):
+            """Mock CardSet item with _read_data method for discriminator pattern."""
+
+            def __init__(self, **kwargs):
+                super().__init__(kwargs.get("keyword"))
+                self._parent = kwargs.get("parent")
+                self._cards = [
+                    Card(
+                        [
+                            Field("theta", float, 0, 10),
+                            Field("a", float, 10, 10),
+                        ],
+                    ),
+                    Card(
+                        [
+                            Field("dtype", int, 0, 10, 1),
+                            Field("val1", float, 10, 10),
+                        ],
+                        lambda: self.dtype == 1,
+                    ),
+                    Card(
+                        [
+                            Field("dtype", int, 0, 10, 1),
+                            Field("val2", float, 10, 10),
+                            Field("val3", float, 20, 10),
+                        ],
+                        lambda: self.dtype == 2,
+                    ),
+                ]
+
+            @property
+            def dtype(self):
+                return self._cards[1].get_value("dtype")
+
+            def _read_data(self, buf, parameters) -> bool:
+                return read_cards_with_discriminator(
+                    self._cards,
+                    buf,
+                    parameters,
+                    discriminator=self._cards[1]._fields[0],
+                    cards_with_field=[1, 2],
+                )
+
+        parent = Parent()
+        kwargs = {"parent": parent, "keyword": parent}
+        card_set = CardSet(MockDiscriminatorItem, lambda: 1, **kwargs)
+        parent._cards = [card_set]
+
+        # Test reading dtype=1 data
+        data1 = "       1.0       2.0\n         1       3.0"
+        card_set.read(string_utils.as_buffer(data1))
+
+        items = card_set.items()
+        assert len(items) == 1
+        assert items[0]._cards[0].get_value("theta") == 1.0
+        assert items[0]._cards[0].get_value("a") == 2.0
+        assert items[0].dtype == 1
+        assert items[0]._cards[1].get_value("val1") == 3.0
+
+    def test_discriminator_read_alternate_type(self, string_utils):
+        """Test reading with alternate discriminator value."""
+        from ansys.dyna.core.lib.card import Card, Field
+        from ansys.dyna.core.lib.card_set import read_cards_with_discriminator
+        from ansys.dyna.core.lib.cards import Cards
+
+        class MockDiscriminatorItem(Cards):
+            def __init__(self, **kwargs):
+                super().__init__(kwargs.get("keyword"))
+                self._parent = kwargs.get("parent")
+                self._cards = [
+                    Card([Field("theta", float, 0, 10)]),
+                    Card([Field("dtype", int, 0, 10, 1), Field("val1", float, 10, 10)], lambda: self.dtype == 1),
+                    Card(
+                        [Field("dtype", int, 0, 10, 1), Field("val2", float, 10, 10), Field("val3", float, 20, 10)],
+                        lambda: self.dtype == 2,
+                    ),
+                ]
+
+            @property
+            def dtype(self):
+                return self._cards[1].get_value("dtype")
+
+            def _read_data(self, buf, parameters) -> bool:
+                return read_cards_with_discriminator(
+                    self._cards,
+                    buf,
+                    parameters,
+                    discriminator=self._cards[1]._fields[0],
+                    cards_with_field=[1, 2],
+                )
+
+        parent = Parent()
+        kwargs = {"parent": parent, "keyword": parent}
+        card_set = CardSet(MockDiscriminatorItem, lambda: 1, **kwargs)
+        parent._cards = [card_set]
+
+        # Test reading dtype=2 data
+        data2 = "       1.0\n         2       3.0       4.0"
+        card_set.read(string_utils.as_buffer(data2))
+
+        items = card_set.items()
+        assert len(items) == 1
+        assert items[0].dtype == 2
+        assert items[0]._cards[2].get_value("val2") == 3.0
+        assert items[0]._cards[2].get_value("val3") == 4.0

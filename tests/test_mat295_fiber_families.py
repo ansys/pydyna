@@ -1,11 +1,19 @@
 # Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 
-"""Tests for MAT_295 fiber families using CardSet (issue #995)."""
+"""Tests for MAT_295 fiber families using CardSet with discriminator (issue #995).
+
+The MAT_295 keyword uses fiber families with a discriminator field (FTYPE) that
+determines which mutually-exclusive card is active. The manual subclass adds
+before_read support to handle the self-referential conditional pattern.
+"""
 
 import pytest
 
-from ansys.dyna.core.keywords.keyword_classes.manual.mat_295 import Mat295, FiberFamily
+from ansys.dyna.core.keywords.keyword_classes.manual.mat_295 import (
+    Mat295,
+)
+
 from ansys.dyna.core.lib.deck import Deck
 
 
