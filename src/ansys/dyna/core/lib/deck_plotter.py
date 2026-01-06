@@ -102,7 +102,20 @@ def merge_keywords(
 
 
 def process_nodes(nodes_df):
-    nodes_xyz = nodes_df[["x", "y", "z"]]
+    if nodes_df.empty:
+        return np.array([]).reshape(0, 3)
+
+    # Check if required columns exist
+    required_cols = ["x", "y", "z"]
+    available_cols = nodes_df.columns.tolist()
+    missing_cols = [col for col in required_cols if col not in available_cols]
+
+    if missing_cols:
+        # Return empty array if required columns are missing
+        return np.array([]).reshape(0, 3)
+
+    # All required columns exist, safe to access them
+    nodes_xyz = nodes_df[required_cols]
     return nodes_xyz.to_numpy()
 
 
