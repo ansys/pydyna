@@ -50,12 +50,24 @@ def merge_keywords(
         if hasattr(kwd, "nodes"):
             try:
                 nodes_value = kwd.nodes
-                if isinstance(nodes_value, pd.DataFrame):
+                # Explicit type checking to prevent pd.read_fwf from getting through
+                if (
+                    isinstance(nodes_value, pd.DataFrame)
+                    and str(type(nodes_value)) == "<class 'pandas.core.frame.DataFrame'>"
+                    and not callable(nodes_value)
+                ):
                     nodes_temp.append(nodes_value)
             except Exception:
                 # Skip keywords where accessing nodes fails
                 pass
-    nodes = pd.concat(nodes_temp) if len(nodes_temp) else pd.DataFrame()
+
+    # Additional safety check before concatenation
+    filtered_nodes = []
+    for item in nodes_temp:
+        if isinstance(item, pd.DataFrame) and str(type(item)) == "<class 'pandas.core.frame.DataFrame'>":
+            filtered_nodes.append(item)
+
+    nodes = pd.concat(filtered_nodes) if len(filtered_nodes) else pd.DataFrame()
 
     df_list = {}
     for item in ["SHELL", "BEAM", "SOLID"]:
@@ -64,12 +76,24 @@ def merge_keywords(
             if kwd.subkeyword == item and hasattr(kwd, "elements"):
                 try:
                     elements_value = kwd.elements
-                    if isinstance(elements_value, pd.DataFrame):
+                    # Explicit type checking to prevent functions from getting through
+                    if (
+                        isinstance(elements_value, pd.DataFrame)
+                        and str(type(elements_value)) == "<class 'pandas.core.frame.DataFrame'>"
+                        and not callable(elements_value)
+                    ):
                         matching_elements.append(elements_value)
                 except Exception:
                     # Skip keywords where accessing elements fails
                     pass
-        df_list[item] = pd.concat(matching_elements) if len(matching_elements) else pd.DataFrame()
+
+        # Additional safety check before concatenation
+        filtered_elements = []
+        for item_elem in matching_elements:
+            if isinstance(item_elem, pd.DataFrame) and str(type(item_elem)) == "<class 'pandas.core.frame.DataFrame'>":
+                filtered_elements.append(item_elem)
+
+        df_list[item] = pd.concat(filtered_elements) if len(filtered_elements) else pd.DataFrame()
 
     return (
         nodes,
