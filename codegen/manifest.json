@@ -1217,14 +1217,7 @@
                     "index": 7,
                     "func": "self.atype and abs(self.atype) == 1"
                 },
-                {
-                    "index": 8,
-                    "func": "self.atype and abs(self.atype) == 1 and self.ftype == 1"
-                },
-                {
-                    "index": 9,
-                    "func": "self.atype and abs(self.atype) == 1 and self.ftype == 2"
-                },
+
                 {
                     "index": 10,
                     "func": "self.atype and abs(self.atype) == 1 and self.intype == 1"
@@ -1270,16 +1263,13 @@
                     "func": "self.atype and abs(self.atype) == 1"
                 }
             ],
-            "table-card-group": [
+            "card-set": [
                 {
-                    "indices": [
-                        7,
-                        8,
-                        9
-                    ],
-                    "overall-name": "anisotropic_settings",
-                    "active-func": "self.atype and abs(self.atype) == 1",
-                    "length-func": "self.nf or 0"
+                    "source-indices": [7, 8, 9],
+                    "target-index": 7,
+                    "name": "FiberFamily",
+                    "length-func": "self.nf or 0",
+                    "active-func": "self.atype and abs(self.atype) == 1"
                 }
             ],
             "shared-field": [

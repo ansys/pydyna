@@ -22,12 +22,267 @@
 
 """Module providing the Mat295 class."""
 import typing
-import pandas as pd
-
 from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.table_card_group import TableCardGroup
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
+from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+class FiberFamily(Cards):
+    """ CardSet."""
+
+    def __init__(self, **kwargs):
+        """Initialize the FiberFamily CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
+        kwargs["parent"] = self
+        self._cards = [
+            Card(
+                [
+                    Field(
+                        "theta",
+                        float,
+                        0,
+                        10,
+                        **kwargs,
+                    ),
+                    Field(
+                        "a",
+                        float,
+                        10,
+                        10,
+                        **kwargs,
+                    ),
+                    Field(
+                        "b",
+                        float,
+                        20,
+                        10,
+                        **kwargs,
+                    ),
+                ],
+                lambda: self.atype and abs(self.atype) == 1,
+            ),
+            Card(
+                [
+                    Field(
+                        "ftype",
+                        int,
+                        0,
+                        10,
+                        1,
+                        **kwargs,
+                    ),
+                    Field(
+                        "fcid",
+                        int,
+                        10,
+                        10,
+                        **kwargs,
+                    ),
+                    Field(
+                        "k1",
+                        float,
+                        20,
+                        10,
+                        **kwargs,
+                    ),
+                    Field(
+                        "k2",
+                        float,
+                        30,
+                        10,
+                        **kwargs,
+                    ),
+                ],
+            ),
+            Card(
+                [
+                    Field(
+                        "ftype",
+                        int,
+                        0,
+                        10,
+                        1,
+                        **kwargs,
+                    ),
+                    Field(
+                        "flcid",
+                        int,
+                        10,
+                        10,
+                        **kwargs,
+                    ),
+                    Field(
+                        "e",
+                        float,
+                        20,
+                        10,
+                        **kwargs,
+                    ),
+                    Field(
+                        "r0norm",
+                        float,
+                        30,
+                        10,
+                        **kwargs,
+                    ),
+                    Field(
+                        "h0norm",
+                        float,
+                        40,
+                        10,
+                        **kwargs,
+                    ),
+                ],
+            ),
+        ]
+
+    @property
+    def theta(self) -> typing.Optional[float]:
+        """Get or set the Mean fiber family orientation angle with respect to the a material axis in the a-b material plane in degrees.
+        """ # nopep8
+        return self._cards[0].get_value("theta")
+
+    @theta.setter
+    def theta(self, value: float) -> None:
+        """Set the theta property."""
+        self._cards[0].set_value("theta", value)
+
+    @property
+    def a(self) -> typing.Optional[float]:
+        """Get or set the First structure tensor parameter.
+        """ # nopep8
+        return self._cards[0].get_value("a")
+
+    @a.setter
+    def a(self, value: float) -> None:
+        """Set the a property."""
+        self._cards[0].set_value("a", value)
+
+    @property
+    def b(self) -> typing.Optional[float]:
+        """Get or set the Second structure tensor parameter.
+        """ # nopep8
+        return self._cards[0].get_value("b")
+
+    @b.setter
+    def b(self, value: float) -> None:
+        """Set the b property."""
+        self._cards[0].set_value("b", value)
+
+    @property
+    def ftype(self) -> int:
+        """Get or set the Type of fiber model:
+        EQ.1:	Holzapfel-Gasser-Ogden [6]
+        EQ.2:	Freed-Doehring [2].
+        """ # nopep8
+        return self._cards[1].get_value("ftype")
+
+    @ftype.setter
+    def ftype(self, value: int) -> None:
+        """Set the ftype property."""
+        if value not in [1, 2, None]:
+            raise Exception("""ftype must be `None` or one of {1,2}.""")
+        self._cards[1].set_value("ftype", value)
+
+    @property
+    def fcid(self) -> typing.Optional[int]:
+        """Get or set the Curve ID defining the fiber stress versus fiber stretch relation, default if nonzero.
+        """ # nopep8
+        return self._cards[1].get_value("fcid")
+
+    @fcid.setter
+    def fcid(self, value: int) -> None:
+        """Set the fcid property."""
+        self._cards[1].set_value("fcid", value)
+
+    @property
+    def k1(self) -> typing.Optional[float]:
+        """Get or set the Holzapfel-Gasser-Ogden modulus.
+        """ # nopep8
+        return self._cards[1].get_value("k1")
+
+    @k1.setter
+    def k1(self, value: float) -> None:
+        """Set the k1 property."""
+        self._cards[1].set_value("k1", value)
+
+    @property
+    def k2(self) -> typing.Optional[float]:
+        """Get or set the Holzapfel-Gasser-Ogden constant.
+        """ # nopep8
+        return self._cards[1].get_value("k2")
+
+    @k2.setter
+    def k2(self, value: float) -> None:
+        """Set the k2 property."""
+        self._cards[1].set_value("k2", value)
+
+    @property
+    def ftype(self) -> int:
+        """Get or set the Type of fiber model:
+        EQ.1:	Holzapfel-Gasser-Ogden [6]
+        EQ.2:	Freed-Doehring [2].
+        """ # nopep8
+        return self._cards[2].get_value("ftype")
+
+    @ftype.setter
+    def ftype(self, value: int) -> None:
+        """Set the ftype property."""
+        if value not in [1, 2, None]:
+            raise Exception("""ftype must be `None` or one of {1,2}.""")
+        self._cards[2].set_value("ftype", value)
+
+    @property
+    def flcid(self) -> typing.Optional[int]:
+        """Get or set the Curve ID defining the fiber stress versus fiber stretch relation, default if nonzero.
+        """ # nopep8
+        return self._cards[2].get_value("flcid")
+
+    @flcid.setter
+    def flcid(self, value: int) -> None:
+        """Set the flcid property."""
+        self._cards[2].set_value("flcid", value)
+
+    @property
+    def e(self) -> typing.Optional[float]:
+        """Get or set the Fiber modulus.
+        """ # nopep8
+        return self._cards[2].get_value("e")
+
+    @e.setter
+    def e(self, value: float) -> None:
+        """Set the e property."""
+        self._cards[2].set_value("e", value)
+
+    @property
+    def r0norm(self) -> typing.Optional[float]:
+        """Get or set the Initial crimp/coil amplitude normalized with respect to the initial fiber radius (R0/r0).
+        """ # nopep8
+        return self._cards[2].get_value("r0norm")
+
+    @r0norm.setter
+    def r0norm(self, value: float) -> None:
+        """Set the r0norm property."""
+        self._cards[2].set_value("r0norm", value)
+
+    @property
+    def h0norm(self) -> typing.Optional[float]:
+        """Get or set the Initial crimp/coil wavelength normalized with respect to the initial fiber radius (H0/r0).
+        """ # nopep8
+        return self._cards[2].get_value("h0norm")
+
+    @h0norm.setter
+    def h0norm(self, value: float) -> None:
+        """Set the h0norm property."""
+        self._cards[2].set_value("h0norm", value)
+
+    @property
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
+
 
 class Mat295(KeywordBase):
     """DYNA MAT_295 keyword"""
@@ -41,6 +296,8 @@ class Mat295(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the Mat295 class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
+        kwargs["keyword"] = self
         kwargs["parent"] = self
         self._cards = [
             Card(
@@ -302,100 +559,11 @@ class Mat295(KeywordBase):
                 ],
                 lambda: self.atype and abs(self.atype) == 1,
             ),
-            TableCardGroup(
-                [
-                    Card(
-                            [
-                                Field(
-                                    "theta",
-                                    float,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "a",
-                                    float,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "b",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                            ],
-                            lambda: self.atype and abs(self.atype) == 1,
-                    ),
-                    Card(
-                            [
-                                Field(
-                                    "ftype",
-                                    int,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "fcid",
-                                    int,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "k1",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "k2",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                            ],
-                            lambda: self.atype and abs(self.atype) == 1 and self.ftype == 1,
-                    ),
-                    Card(
-                            [
-                                Field(
-                                    "ftype",
-                                    int,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "flcid",
-                                    int,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "e",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "r0norm",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "h0norm",
-                                    float,
-                                    40,
-                                    10,
-                                ),
-                            ],
-                            lambda: self.atype and abs(self.atype) == 1 and self.ftype == 2,
-                    ),
-                ],
-                lambda: self.nf or 0,
-                lambda: self.atype and abs(self.atype) == 1,
-                "anisotropic_settings",
-                **kwargs,
+            CardSet(
+                FiberFamily,
+                length_func = lambda: self.nf or 0,
+                active_func = lambda: self.atype and abs(self.atype) == 1,
+                **kwargs
             ),
             Card(
                 [
@@ -913,6 +1081,150 @@ class Mat295(KeywordBase):
         ]
 
     @property
+    def theta(self) -> typing.Optional[float]:
+        """Get or set the theta
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].theta
+
+    @theta.setter
+    def theta(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].theta = value
+
+    @property
+    def a(self) -> typing.Optional[float]:
+        """Get or set the a
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].a
+
+    @a.setter
+    def a(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].a = value
+
+    @property
+    def b(self) -> typing.Optional[float]:
+        """Get or set the b
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].b
+
+    @b.setter
+    def b(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].b = value
+
+    @property
+    def ftype(self) -> int:
+        """Get or set the ftype
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ftype
+
+    @ftype.setter
+    def ftype(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ftype = value
+
+    @property
+    def fcid(self) -> typing.Optional[int]:
+        """Get or set the fcid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].fcid
+
+    @fcid.setter
+    def fcid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].fcid = value
+
+    @property
+    def k1(self) -> typing.Optional[float]:
+        """Get or set the k1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].k1
+
+    @k1.setter
+    def k1(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].k1 = value
+
+    @property
+    def k2(self) -> typing.Optional[float]:
+        """Get or set the k2
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].k2
+
+    @k2.setter
+    def k2(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].k2 = value
+
+    @property
+    def ftype(self) -> int:
+        """Get or set the ftype
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ftype
+
+    @ftype.setter
+    def ftype(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ftype = value
+
+    @property
+    def flcid(self) -> typing.Optional[int]:
+        """Get or set the flcid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].flcid
+
+    @flcid.setter
+    def flcid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].flcid = value
+
+    @property
+    def e(self) -> typing.Optional[float]:
+        """Get or set the e
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].e
+
+    @e.setter
+    def e(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].e = value
+
+    @property
+    def r0norm(self) -> typing.Optional[float]:
+        """Get or set the r0norm
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].r0norm
+
+    @r0norm.setter
+    def r0norm(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].r0norm = value
+
+    @property
+    def h0norm(self) -> typing.Optional[float]:
+        """Get or set the h0norm
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].h0norm
+
+    @h0norm.setter
+    def h0norm(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].h0norm = value
+
+    @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.  A unique number or label must be specified.
         """ # nopep8
@@ -1267,14 +1579,13 @@ class Mat295(KeywordBase):
         self._cards[6].set_value("nf", value)
 
     @property
-    def anisotropic_settings(self) -> pd.DataFrame:
-        """Gets the full table of anisotropic_settings."""
-        return self._cards[7].table
+    def sets(self) -> typing.List[FiberFamily]:
+        """Gets the list of sets."""
+        return self._cards[7].items()
 
-    @anisotropic_settings.setter
-    def anisotropic_settings(self, df: pd.DataFrame):
-        """sets anisotropic_settings from the dataframe df."""
-        self._cards[7].table = df
+    def add_set(self, **kwargs):
+        """Adds a set to the list of sets."""
+        self._cards[7].add_item(**kwargs)
 
     @property
     def coupling_k1(self) -> typing.Optional[float]:

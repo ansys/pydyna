@@ -152,7 +152,29 @@ class CardSet(CardInterface):
         return write_or_return(buf, _write)
 
     def _read_item_cards(self, buf: typing.TextIO, index: int, parameter_set: ParameterSet) -> bool:
+        """Read cards for a single item in the set.
+
+        If the item has a custom `_read_data` method, use it for reading.
+        This allows CardSet items to implement custom read logic for cases
+        where card activation depends on values within those cards (e.g.,
+        MAT_295 fiber families where ftype determines which card format to use).
+
+        Args:
+            buf: The text buffer to read from.
+            index: The index of the item to read.
+            parameter_set: Optional parameter set for substitution.
+
+        Returns:
+            True if the reader hit the end of the keyword early, False otherwise.
+            Custom `_read_data` methods should also return a boolean with this meaning.
+        """
         item = self._items[index]
+
+        # Check if item has custom read logic
+        if hasattr(item, "_read_data"):
+            return item._read_data(buf, parameter_set)
+
+        # Default: iterate through all cards
         for card in item._get_all_cards():
             ret = card.read(buf, parameter_set)
             if ret:
@@ -174,7 +196,6 @@ class CardSet(CardInterface):
             index += 1
             self._read_item_cards(buf, index, parameter_set)
             if at_end_of_keyword(buf):
-                # the buffer is at the end of the keyword, exit
                 return
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
