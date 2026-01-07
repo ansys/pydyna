@@ -204,7 +204,7 @@ class InitialStrainShellLegacy(KeywordBase):
     """DYNA INITIAL_STRAIN_SHELL keyword (legacy version 0.9.1).
 
     .. deprecated:: 0.10.0
-        Use :class:`~ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_strain_shell.InitialStrainShell` instead.
+        Use :class:`~ansys.dyna.core.keywords.InitialStrainShell` instead.
         This legacy version uses TableCard/DataFrame API which does not support LARGE format.
         The new version uses CardSet API and supports both standard and LARGE formats.
 
