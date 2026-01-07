@@ -28,7 +28,7 @@ runs:
     - name: Create and activate virtual environment
       shell: bash
       run: |
-        uv venv create .venv
+        uv venv .venv
         source .venv/bin/activate
 
     - name: Install library
