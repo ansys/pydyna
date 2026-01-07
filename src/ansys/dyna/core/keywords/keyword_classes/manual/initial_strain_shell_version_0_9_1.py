@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -35,7 +35,7 @@ from ansys.dyna.core.lib.table_card import TableCard
 
 
 class InitialStrainShellLegacyCardSet(Cards):
-    """ CardSet."""
+    """CardSet."""
 
     def __init__(self, **kwargs):
         """Initialize the InitialStrainShellLegacyCardSet CardSet."""
@@ -124,8 +124,7 @@ class InitialStrainShellLegacyCardSet(Cards):
 
     @property
     def eid(self) -> typing.Optional[int]:
-        """Get or set the Shell element ID.
-        """ # nopep8
+        """Get or set the Shell element ID."""  # nopep8
         return self._cards[0].get_value("eid")
 
     @eid.setter
@@ -135,8 +134,7 @@ class InitialStrainShellLegacyCardSet(Cards):
 
     @property
     def nplane(self) -> typing.Optional[int]:
-        """Get or set the Number of in#plane integration points being output.
-        """ # nopep8
+        """Get or set the Number of in#plane integration points being output."""  # nopep8
         return self._cards[0].get_value("nplane")
 
     @nplane.setter
@@ -146,8 +144,7 @@ class InitialStrainShellLegacyCardSet(Cards):
 
     @property
     def nthick(self) -> typing.Optional[int]:
-        """Get or set the Number of integration points through the thickness.
-        """ # nopep8
+        """Get or set the Number of integration points through the thickness."""  # nopep8
         return self._cards[0].get_value("nthick")
 
     @nthick.setter
@@ -160,7 +157,7 @@ class InitialStrainShellLegacyCardSet(Cards):
         """Get or set the Large format flag:
         EQ.0:	off
         EQ.1 : on.Each strain field is twice as long for higher precision.
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("large")
 
     @large.setter
@@ -175,7 +172,7 @@ class InitialStrainShellLegacyCardSet(Cards):
         """Get or set the Flag for coordinate system of strain components:
         EQ.0:	global,
         EQ.1 : local(not supported).
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("ilocal")
 
     @ilocal.setter
@@ -200,6 +197,7 @@ class InitialStrainShellLegacyCardSet(Cards):
         """Get the parent keyword."""
         return self._parent
 
+
 class InitialStrainShellLegacy(KeywordBase):
     """DYNA INITIAL_STRAIN_SHELL keyword (legacy version 0.9.1).
 
@@ -214,7 +212,9 @@ class InitialStrainShellLegacy(KeywordBase):
 
         from ansys.dyna.core.lib.deck import Deck
         from ansys.dyna.core.lib.import_handler import ImportContext
-        from ansys.dyna.core.keywords.keyword_classes.manual.initial_strain_shell_version_0_9_1 import InitialStrainShellLegacy
+        from ansys.dyna.core.keywords.keyword_classes.manual.initial_strain_shell_version_0_9_1 import (
+            InitialStrainShellLegacy,
+        )
 
         deck = Deck()
         context = ImportContext(
@@ -240,16 +240,12 @@ class InitialStrainShellLegacy(KeywordBase):
         kwargs["parent"] = self
         kwargs["keyword"] = self
         self._cards = [
-            CardSet(
-                InitialStrainShellLegacyCardSet,
-                **kwargs
-            ),
+            CardSet(InitialStrainShellLegacyCardSet, **kwargs),
         ]
 
     @property
     def eid(self) -> typing.Optional[int]:
-        """Get or set the eid
-        """ # nopep8
+        """Get or set the eid"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].eid
 
@@ -260,8 +256,7 @@ class InitialStrainShellLegacy(KeywordBase):
 
     @property
     def nplane(self) -> typing.Optional[int]:
-        """Get or set the nplane
-        """ # nopep8
+        """Get or set the nplane"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].nplane
 
@@ -272,8 +267,7 @@ class InitialStrainShellLegacy(KeywordBase):
 
     @property
     def nthick(self) -> typing.Optional[int]:
-        """Get or set the nthick
-        """ # nopep8
+        """Get or set the nthick"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].nthick
 
@@ -284,8 +278,7 @@ class InitialStrainShellLegacy(KeywordBase):
 
     @property
     def large(self) -> int:
-        """Get or set the large
-        """ # nopep8
+        """Get or set the large"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].large
 
@@ -296,8 +289,7 @@ class InitialStrainShellLegacy(KeywordBase):
 
     @property
     def ilocal(self) -> int:
-        """Get or set the ilocal
-        """ # nopep8
+        """Get or set the ilocal"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].ilocal
 
@@ -325,4 +317,3 @@ class InitialStrainShellLegacy(KeywordBase):
     def add_set(self, **kwargs):
         """Adds a set."""
         self._cards[0].add_item(**kwargs)
-

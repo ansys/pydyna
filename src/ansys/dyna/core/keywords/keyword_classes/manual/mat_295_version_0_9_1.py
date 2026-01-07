@@ -60,7 +60,10 @@ class Mat295Legacy(KeywordBase):
 
         from ansys.dyna.core.lib.deck import Deck
         from ansys.dyna.core.lib.import_handler import ImportContext
-        from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import Mat295Legacy, MatAnisotropicHyperelasticLegacy
+        from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import (
+            Mat295Legacy,
+            MatAnisotropicHyperelasticLegacy,
+        )
 
         deck = Deck()
         context = ImportContext(

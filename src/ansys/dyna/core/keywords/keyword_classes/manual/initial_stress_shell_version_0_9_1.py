@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -31,8 +31,9 @@ from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.series_card import SeriesCard  # noqa: F401
 
+
 class InitialStressShellLegacyThicknessLargeCardSet(Cards):
-    """ CardSet."""
+    """CardSet."""
 
     def __init__(self, **kwargs):
         """Initialize the InitialStressShellLegacyThicknessLargeCardSet CardSet."""
@@ -107,19 +108,12 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
                     ),
                 ],
             ),
-            SeriesCard(
-                "hisv",
-                8,
-                10,
-                float,
-                lambda: self.parent.nhisv,
-                data = kwargs.get("hisv")),
+            SeriesCard("hisv", 8, 10, float, lambda: self.parent.nhisv, data=kwargs.get("hisv")),
         ]
 
     @property
     def t(self) -> typing.Optional[float]:
-        """Get or set the Parametric coordinate of through thickness integration point. Between -1 and 1 inclusive.
-        """ # nopep8
+        """Get or set the Parametric coordinate of through thickness integration point. Between -1 and 1 inclusive."""  # nopep8
         return self._cards[0].get_value("t")
 
     @t.setter
@@ -129,8 +123,7 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
 
     @property
     def sigxx(self) -> float:
-        """Get or set the Define the xx stress component (global cartesian system).
-        """ # nopep8
+        """Get or set the Define the xx stress component (global cartesian system)."""  # nopep8
         return self._cards[0].get_value("sigxx")
 
     @sigxx.setter
@@ -140,8 +133,7 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
 
     @property
     def sigyy(self) -> float:
-        """Get or set the Define the yy stress component (global cartesian system).
-        """ # nopep8
+        """Get or set the Define the yy stress component (global cartesian system)."""  # nopep8
         return self._cards[0].get_value("sigyy")
 
     @sigyy.setter
@@ -151,8 +143,7 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
 
     @property
     def sigzz(self) -> float:
-        """Get or set the Define the zz stress component (global cartesian system).
-        """ # nopep8
+        """Get or set the Define the zz stress component (global cartesian system)."""  # nopep8
         return self._cards[0].get_value("sigzz")
 
     @sigzz.setter
@@ -162,8 +153,7 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
 
     @property
     def sigxy(self) -> float:
-        """Get or set the Define the xy stress component (global cartesian system).
-        """ # nopep8
+        """Get or set the Define the xy stress component (global cartesian system)."""  # nopep8
         return self._cards[0].get_value("sigxy")
 
     @sigxy.setter
@@ -173,8 +163,7 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
 
     @property
     def sigyz(self) -> float:
-        """Get or set the Define the yz stress component (global cartesian system).
-        """ # nopep8
+        """Get or set the Define the yz stress component (global cartesian system)."""  # nopep8
         return self._cards[0].get_value("sigyz")
 
     @sigyz.setter
@@ -184,8 +173,7 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
 
     @property
     def sigzx(self) -> float:
-        """Get or set the Define the zx stress component (global cartesian system).
-        """ # nopep8
+        """Get or set the Define the zx stress component (global cartesian system)."""  # nopep8
         return self._cards[0].get_value("sigzx")
 
     @sigzx.setter
@@ -195,8 +183,7 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
 
     @property
     def eps(self) -> float:
-        """Get or set the Effective plastic strain.
-        """ # nopep8
+        """Get or set the Effective plastic strain."""  # nopep8
         return self._cards[0].get_value("eps")
 
     @eps.setter
@@ -218,8 +205,9 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
         """Get the parent keyword."""
         return self._parent
 
+
 class InitialStressShellLegacyCardSet(Cards):
-    """ CardSet."""
+    """CardSet."""
 
     def __init__(self, **kwargs):
         """Initialize the InitialStressShellLegacyCardSet CardSet."""
@@ -296,16 +284,15 @@ class InitialStressShellLegacyCardSet(Cards):
             ),
             CardSet(
                 InitialStressShellLegacyThicknessLargeCardSet,
-                length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
-                active_func = lambda: self.large == None or self.large == 0,
-                **kwargs
+                length_func=lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
+                active_func=lambda: self.large == None or self.large == 0,
+                **kwargs,
             ),
         ]
 
     @property
     def eid(self) -> typing.Optional[int]:
-        """Get or set the Shell element ID.
-        """ # nopep8
+        """Get or set the Shell element ID."""  # nopep8
         return self._cards[0].get_value("eid")
 
     @eid.setter
@@ -315,8 +302,7 @@ class InitialStressShellLegacyCardSet(Cards):
 
     @property
     def nplane(self) -> int:
-        """Get or set the Number of in plane integration points being output.
-        """ # nopep8
+        """Get or set the Number of in plane integration points being output."""  # nopep8
         return self._cards[0].get_value("nplane")
 
     @nplane.setter
@@ -326,8 +312,7 @@ class InitialStressShellLegacyCardSet(Cards):
 
     @property
     def nthick(self) -> int:
-        """Get or set the Number of through thickness integration points.
-        """ # nopep8
+        """Get or set the Number of through thickness integration points."""  # nopep8
         return self._cards[0].get_value("nthick")
 
     @nthick.setter
@@ -337,8 +322,7 @@ class InitialStressShellLegacyCardSet(Cards):
 
     @property
     def nhisv(self) -> int:
-        """Get or set the Number of additional history variables.
-        """ # nopep8
+        """Get or set the Number of additional history variables."""  # nopep8
         return self._cards[0].get_value("nhisv")
 
     @nhisv.setter
@@ -348,8 +332,7 @@ class InitialStressShellLegacyCardSet(Cards):
 
     @property
     def ntensr(self) -> int:
-        """Get or set the Number of components of tensor data taken from the element history variables.
-        """ # nopep8
+        """Get or set the Number of components of tensor data taken from the element history variables."""  # nopep8
         return self._cards[0].get_value("ntensr")
 
     @ntensr.setter
@@ -359,8 +342,7 @@ class InitialStressShellLegacyCardSet(Cards):
 
     @property
     def large(self) -> int:
-        """Get or set the Format size (0:off or 1:on).
-        """ # nopep8
+        """Get or set the Format size (0:off or 1:on)."""  # nopep8
         return self._cards[0].get_value("large")
 
     @large.setter
@@ -372,8 +354,7 @@ class InitialStressShellLegacyCardSet(Cards):
 
     @property
     def nthint(self) -> int:
-        """Get or set the Number of thermal integration points.
-        """ # nopep8
+        """Get or set the Number of thermal integration points."""  # nopep8
         return self._cards[0].get_value("nthint")
 
     @nthint.setter
@@ -383,8 +364,7 @@ class InitialStressShellLegacyCardSet(Cards):
 
     @property
     def nthhsv(self) -> int:
-        """Get or set the Number of thermal history variables per thermal integration point..
-        """ # nopep8
+        """Get or set the Number of thermal history variables per thermal integration point.."""  # nopep8
         return self._cards[0].get_value("nthhsv")
 
     @nthhsv.setter
@@ -402,6 +382,7 @@ class InitialStressShellLegacyCardSet(Cards):
         """Get the parent keyword."""
         return self._parent
 
+
 class InitialStressShellLegacy(KeywordBase):
     """DYNA INITIAL_STRESS_SHELL keyword (legacy version 0.9.1).
 
@@ -416,7 +397,9 @@ class InitialStressShellLegacy(KeywordBase):
 
         from ansys.dyna.core.lib.deck import Deck
         from ansys.dyna.core.lib.import_handler import ImportContext
-        from ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1 import InitialStressShellLegacy
+        from ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1 import (
+            InitialStressShellLegacy,
+        )
 
         deck = Deck()
         context = ImportContext(
@@ -442,16 +425,12 @@ class InitialStressShellLegacy(KeywordBase):
         kwargs["parent"] = self
         kwargs["keyword"] = self
         self._cards = [
-            CardSet(
-                InitialStressShellLegacyCardSet,
-                **kwargs
-            ),
+            CardSet(InitialStressShellLegacyCardSet, **kwargs),
         ]
 
     @property
     def eid(self) -> typing.Optional[int]:
-        """Get or set the eid
-        """ # nopep8
+        """Get or set the eid"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].eid
 
@@ -462,8 +441,7 @@ class InitialStressShellLegacy(KeywordBase):
 
     @property
     def nplane(self) -> int:
-        """Get or set the nplane
-        """ # nopep8
+        """Get or set the nplane"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].nplane
 
@@ -474,8 +452,7 @@ class InitialStressShellLegacy(KeywordBase):
 
     @property
     def nthick(self) -> int:
-        """Get or set the nthick
-        """ # nopep8
+        """Get or set the nthick"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].nthick
 
@@ -486,8 +463,7 @@ class InitialStressShellLegacy(KeywordBase):
 
     @property
     def nhisv(self) -> int:
-        """Get or set the nhisv
-        """ # nopep8
+        """Get or set the nhisv"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].nhisv
 
@@ -498,8 +474,7 @@ class InitialStressShellLegacy(KeywordBase):
 
     @property
     def ntensr(self) -> int:
-        """Get or set the ntensr
-        """ # nopep8
+        """Get or set the ntensr"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].ntensr
 
@@ -510,8 +485,7 @@ class InitialStressShellLegacy(KeywordBase):
 
     @property
     def large(self) -> int:
-        """Get or set the large
-        """ # nopep8
+        """Get or set the large"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].large
 
@@ -522,8 +496,7 @@ class InitialStressShellLegacy(KeywordBase):
 
     @property
     def nthint(self) -> int:
-        """Get or set the nthint
-        """ # nopep8
+        """Get or set the nthint"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].nthint
 
@@ -534,8 +507,7 @@ class InitialStressShellLegacy(KeywordBase):
 
     @property
     def nthhsv(self) -> int:
-        """Get or set the nthhsv
-        """ # nopep8
+        """Get or set the nthhsv"""  # nopep8
         ensure_card_set_properties(self, False)
         return self.sets[0].nthhsv
 
@@ -552,4 +524,3 @@ class InitialStressShellLegacy(KeywordBase):
     def add_set(self, **kwargs):
         """Adds a set."""
         self._cards[0].add_item(**kwargs)
-
