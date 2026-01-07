@@ -62,7 +62,17 @@ class {{keyword_data.classname}}(
 {% else %}
 class {{keyword_data.classname}}(KeywordBase):
 {% endif %}
+{% if keyword_data.renamed_properties %}
+    """DYNA {{keyword_data.title}} keyword
+
+    Fields with renamed properties:
+{% for rp in keyword_data.renamed_properties %}
+        {{rp.field_name}} (Card {{rp.card_index + 1}}) -> {{rp.property_name}}
+{% endfor %}
+    """
+{% else %}
     """DYNA {{keyword_data.title}} keyword"""
+{% endif %}
 
     keyword = "{{keyword_data.keyword}}"
     subkeyword = "{{keyword_data.subkeyword}}"

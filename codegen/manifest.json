@@ -915,12 +915,14 @@
                 {
                     "index": 1,
                     "name": "r",
-                    "property-name": "gas_constant"
+                    "property-name": "gas_constant",
+                    "description": "gas constant"
                 },
                 {
                     "index": 1,
                     "name": "f",
-                    "property-name": "faraday_constant"
+                    "property-name": "faraday_constant",
+                    "description": "Faraday constant"
                 }
             ]
         }

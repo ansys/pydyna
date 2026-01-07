@@ -325,6 +325,19 @@ class Card:
 
 
 @dataclass
+class RenamedProperty:
+    """Tracks a property that was renamed from its original field name.
+
+    Used for generating documentation about field name to property name mappings.
+    """
+
+    field_name: str  # Original field name (e.g., "R")
+    property_name: str  # New property name (e.g., "gas_constant")
+    card_index: int  # 0-based card index
+    description: str = ""  # Description from help text (e.g., "gas constant")
+
+
+@dataclass
 class KeywordData:
     """
     Represents the complete data structure for a keyword during code generation.
@@ -379,6 +392,8 @@ class KeywordData:
     links: Union[List[LinkData], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     negative_shared_fields: List[Any] = field(default_factory=list)  # Empty list for templates
     card_insertions: List[Any] = field(default_factory=list)
+    renamed_properties: List["RenamedProperty"] = field(default_factory=list)  # Tracks renamed fields for docs
+    property_collisions: Dict[str, str] = field(default_factory=dict)  # Maps property_name -> collision note
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "KeywordData":
@@ -447,6 +462,7 @@ class KeywordData:
             links=links,
             negative_shared_fields=data.get("negative_shared_fields", []),
             card_insertions=data.get("card_insertions", []),
+            renamed_properties=data.get("renamed_properties", []),
         )
 
     def get_all_cards(self) -> Union[List[Card], List[Dict[str, Any]], List[Union[Card, Dict[str, Any]]]]:
