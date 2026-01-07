@@ -17,6 +17,7 @@ from ansys.dyna.core.keywords.keyword_classes.manual.mat_295 import (
 from ansys.dyna.core.lib.deck import Deck
 
 
+@pytest.mark.keywords
 class TestMat295FiberFamilies:
     """Test MAT_295 fiber families with different FTYPE values."""
 

@@ -71,6 +71,7 @@ def test_case_option(file_utils, runner):
             os.remove(os.path.join(example_folder, file))
 
 
+@pytest.mark.run
 def test_case_keyword_logging_warning_with_deck():
     deck = Deck()
     deck.extend([
@@ -92,7 +93,8 @@ def test_case_keyword_logging_warning_with_deck():
         
     assert "*CASE keyword detected in input file" in str(exc_info.value)
     assert "activate_case` is not set to True" in str(exc_info.value)
-    
+
+@pytest.mark.run
 def test_case_keyword_logging_warning_with_input_file(file_utils):
     input_file = file_utils.testfiles_folder / "run"/ "case-keywords" / "projectile.k"
     example_folder = str(input_file.parent.resolve())

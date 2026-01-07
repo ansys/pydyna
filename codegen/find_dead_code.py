@@ -46,6 +46,10 @@ def run_coverage_analysis(show_missing: bool = False) -> tuple[int, str]:
     """
     Run coverage analysis on codegen.
 
+    This runs coverage on both:
+    1. The code generation script (generate.py) - tests production code paths
+    2. The test suite (pytest -m codegen) - tests error handling and edge cases
+
     Args:
         show_missing: If True, include missing line numbers in report
 
@@ -54,36 +58,73 @@ def run_coverage_analysis(show_missing: bool = False) -> tuple[int, str]:
     """
     script_dir = Path(__file__).parent
     generate_script = script_dir / "generate.py"
+    project_root = script_dir.parent
+    coverage_file = script_dir / ".coverage"
 
     print("Running coverage analysis on codegen...")
     print("=" * 70)
 
-    # Run coverage
+    # Remove old coverage data
+    if coverage_file.exists():
+        coverage_file.unlink()
+
+    # Step 1: Run coverage on generate.py
+    print("Step 1/2: Running coverage on generate.py...")
     result = subprocess.run(
         [
             sys.executable,
             "-m",
             "coverage",
             "run",
+            f"--data-file={coverage_file}",
             "--source=keyword_generation",
             "--omit=*/templates/*,*/__pycache__/*",
             str(generate_script),
         ],
         capture_output=True,
         text=True,
+        cwd=script_dir,
     )
 
     if result.returncode != 0:
-        print("Error running coverage:")
+        print("Error running coverage on generate.py:")
         print(result.stderr)
         return result.returncode, ""
 
+    # Step 2: Append coverage from test suite
+    print("Step 2/2: Running coverage on test suite...")
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "coverage",
+            "run",
+            "--append",
+            f"--data-file={coverage_file}",
+            "--source=codegen/keyword_generation",
+            "--omit=*/templates/*,*/__pycache__/*",
+            "-m",
+            "pytest",
+            "tests/test_codegen/test_handlers.py",
+            "-m",
+            "codegen",
+            "-q",
+        ],
+        capture_output=True,
+        text=True,
+        cwd=project_root,
+    )
+
+    if result.returncode != 0:
+        print("Warning: Test suite had issues (coverage data still collected)")
+        # Don't fail here - we still want the coverage report
+
     # Generate report
-    report_args = [sys.executable, "-m", "coverage", "report"]
+    report_args = [sys.executable, "-m", "coverage", "report", f"--data-file={coverage_file}"]
     if show_missing:
         report_args.append("--show-missing")
 
-    result = subprocess.run(report_args, capture_output=True, text=True)
+    result = subprocess.run(report_args, capture_output=True, text=True, cwd=script_dir)
 
     return result.returncode, result.stdout
 
@@ -97,13 +138,15 @@ def generate_html_report() -> bool:
     """
     script_dir = Path(__file__).parent
     html_dir = script_dir / "coverage_html"
+    coverage_file = script_dir / ".coverage"
 
     print(f"\nGenerating HTML coverage report in {html_dir}...")
 
     result = subprocess.run(
-        [sys.executable, "-m", "coverage", "html", "-d", str(html_dir)],
+        [sys.executable, "-m", "coverage", "html", f"--data-file={coverage_file}", "-d", str(html_dir)],
         capture_output=True,
         text=True,
+        cwd=script_dir,
     )
 
     if result.returncode != 0:
