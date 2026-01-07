@@ -31,7 +31,7 @@ from dataclasses import dataclass
 import typing
 from typing import Any, Dict
 
-from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.keyword_data import KeywordData, RenamedProperty
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -102,8 +102,6 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
             kwd_data: Complete keyword data dictionary
             settings: List of {"index", "name", "property-name"} dicts
         """
-        # RenamePropertySettings only has old_name and new_name, no index
-        # Keep using dict for this handler
         for setting in settings:
             index = setting["index"]
             name = setting["name"]
@@ -112,7 +110,47 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
             for field in card["fields"]:
                 if field["name"].lower() == name:
                     field["property_name"] = property_name
+                    # Use description from manifest if provided
+                    description = setting.get("description", "")
+                    # Track this rename for class docstring and template lookups
+                    kwd_data.renamed_properties.append(
+                        RenamedProperty(
+                            field_name=name.upper(),
+                            property_name=property_name,
+                            card_index=index,
+                            description=description,
+                        )
+                    )
 
     def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass
+        """Detect field name collisions and add notes to property_collisions map."""
+        if not kwd_data.renamed_properties:
+            return
+
+        # Build a map of original field names to their renamed property info
+        renamed_map = {rp.field_name.lower(): rp for rp in kwd_data.renamed_properties}
+
+        # Find fields that have the same name as a renamed field but are on different cards
+        for card in kwd_data.cards:
+            for field in card["fields"]:
+                field_name_lower = field["name"].lower()
+                # Skip if this field itself was renamed (has a different property_name)
+                property_name = field.get("property_name") or field["name"].lower()
+                if property_name != field_name_lower:
+                    continue
+                # Check if this field's name collides with a renamed property
+                if field_name_lower in renamed_map:
+                    rp = renamed_map[field_name_lower]
+                    # Add a note pointing to the renamed property
+                    # Use description if available, otherwise just field name
+                    if rp.description:
+                        collision_note = (
+                            f"For the {rp.description} {rp.field_name} (Card {rp.card_index + 1}), "
+                            f"use ``{rp.property_name}``."
+                        )
+                    else:
+                        collision_note = (
+                            f"For the {rp.field_name} (Card {rp.card_index + 1}), " f"use ``{rp.property_name}``."
+                        )
+                    # Store in property_collisions map keyed by the property name
+                    kwd_data.property_collisions[property_name] = collision_note
