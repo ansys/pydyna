@@ -57,6 +57,11 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
 
+    - name: set up virtual environment
+      run: |
+        python -m venv .venv
+      shell: bash
+
     - name: Install system dependencies
       run: |
         sudo apt-get update
@@ -75,6 +80,7 @@ runs:
 
     - name: Install python dependencies
       run: |
+        source .venv/bin/activate
         uv pip install .[doc]
         uv pip install docker
       shell: bash
@@ -99,12 +105,14 @@ runs:
 
     - name: LS-DYNA Keyword server activation
       run: |
+        source .venv/bin/activate
         docker pull ghcr.io/ansys/ls-pre:latest
         docker run -d --name kw_server -p 50051:50051 ghcr.io/ansys/ls-pre:latest && echo "Keyword server active on port 50051."
       shell: bash
 
     - name: Pull PyDyna-run image
       run: |
+        source .venv/bin/activate
         docker pull ghcr.io/ansys/pydyna-run:latest
       shell: bash
 
@@ -116,6 +124,7 @@ runs:
         BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
       run: |
+        source .venv/bin/activate
         timeout 7200 xvfb-run uv run --no-sync -- make -C doc html
       shell: bash
 
@@ -129,6 +138,7 @@ runs:
     - name: "Build the pdf documentation"
       shell: bash
       run: |
+        source .venv/bin/activate
         xvfb-run uv run --no-sync -- make -C doc pdf
       env:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
@@ -152,6 +162,7 @@ runs:
     - name: Extract the server logs
       if: always()
       run: |
+        source .venv/bin/activate
         docker logs kw_server > server_output.txt
       shell: bash
 
