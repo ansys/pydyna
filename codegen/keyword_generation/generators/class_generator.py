@@ -70,7 +70,7 @@ def _transform_data(data: KeywordData):
 
     Uses polymorphic iteration via KeywordData.get_all_cards() to handle:
     - Regular cards
-    - Duplicate group cards (table card groups)
+    - Table card groups (repeating card structures)
     - Card sets (source cards and their options)
     - Top-level option cards
 
@@ -90,9 +90,9 @@ def _transform_data(data: KeywordData):
         if isinstance(card, Card):
             fields = card.get_all_fields()
         else:
-            # Fallback for dict-based cards - handle duplicate_group case
-            if card.get("duplicate_group") and card.get("sub_cards"):
-                # For duplicate_group dicts, aggregate fields from all sub_cards
+            # Fallback for dict-based cards - handle table_group case
+            if card.get("table_group") and card.get("sub_cards"):
+                # For table_group dicts, aggregate fields from all sub_cards
                 fields = []
                 for sub_card in card["sub_cards"]:
                     fields.extend(sub_card.get("fields", []))

@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 """
-Table Card Group Handler: Creates duplicate card groups for table-like data.
+Table Card Group Handler: Creates table card groups for table-like data.
 
 This handler groups multiple cards together to form a repeating structure,
 commonly used for table or matrix data where multiple related cards repeat as a unit.
@@ -59,7 +59,7 @@ class TableCardGroupSettings:
 @handler(
     name="table-card-group",
     dependencies=["reorder-card"],
-    description="Creates duplicate card groups for table-like repeating card structures",
+    description="Creates table card groups for table-like repeating card structures",
     input_schema={
         "type": "array",
         "items": {
@@ -70,7 +70,7 @@ class TableCardGroupSettings:
                     "items": {"type": "integer"},
                     "description": "Card indices to group together",
                 },
-                "overall-name": {"type": "string", "description": "Name of the duplicate group"},
+                "overall-name": {"type": "string", "description": "Name of the table card group"},
                 "length-func": {"type": "string", "description": "Function to compute group count"},
                 "active-func": {"type": "string", "description": "Function to determine if group is active"},
             },
@@ -78,7 +78,7 @@ class TableCardGroupSettings:
         },
     },
     output_description=(
-        "Sets kwd_data['duplicate_group']=True, adds card insertion with duplicate group, "
+        "Sets kwd_data['table_group']=True, adds card insertion with table card group, "
         "marks source cards for removal"
     ),
 )
@@ -86,7 +86,7 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
     """
     Groups cards together to form repeating table-like structures.
 
-    This handler creates duplicate card groups where multiple cards are treated
+    This handler creates table card groups where multiple cards are treated
     as a single repeatable unit. Common use cases include table data where each
     row consists of multiple cards that must be repeated together.
 
@@ -105,10 +105,10 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
         ]
 
     Output Modification:
-        - Sets kwd_data["duplicate_group"] = True
-        - Creates duplicate group structure:
+        - Sets kwd_data["table_group"] = True
+        - Creates table card group structure:
           {
-              "duplicate_group": True,
+              "table_group": True,
               "sub_cards": [...],  # Cards from indices
               "overall_name": "table_row",
               "length_func": "self.nrows",
@@ -127,20 +127,20 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
 
     def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
         """
-        Create duplicate card groups from card indices.
+        Create table card groups from card indices.
 
         Args:
             kwd_data: Complete keyword data dictionary
             settings: List of card group definitions
         """
         typed_settings = self._parse_settings(settings)
-        kwd_data.duplicate_group = True
+        kwd_data.table_group = True
         for card_settings in typed_settings:
             indices_raw = card_settings["indices"]
             indices: typing.List[int] = typing.cast(typing.List[int], indices_raw)
             # build the card group
             group = {
-                "duplicate_group": True,
+                "table_group": True,
                 "sub_cards": [],
                 "overall_name": card_settings["overall-name"],
                 "length_func": card_settings.get("length-func", ""),
