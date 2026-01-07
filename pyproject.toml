@@ -33,7 +33,7 @@ dependencies = [
     "numpy>=1",
     "pandas>=2.0",
     "appdirs>=1.4.4",
-    "transformations==2025.1.1",
+    "transformations==2025.8.1",
     "chardet==5.2.0",
     "requests==2.32.5",
 ]
