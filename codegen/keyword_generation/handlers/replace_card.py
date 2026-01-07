@@ -95,7 +95,11 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         """Keep dict settings for replace-card - manifest uses 'card' field."""
         return settings
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Replace cards with new card definitions.
 

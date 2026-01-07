@@ -93,7 +93,11 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
         """Convert dict settings to typed ConditionalCardSettings instances."""
         return [ConditionalCardSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Add conditional logic to specified cards.
 

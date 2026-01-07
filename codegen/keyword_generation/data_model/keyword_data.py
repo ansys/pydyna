@@ -31,7 +31,7 @@ dictionary-based structures for improved type safety and IDE support.
 from dataclasses import dataclass, field
 import logging
 import typing
-from typing import Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 
 from .metadata import (
     CardSetsContainer,
@@ -43,6 +43,9 @@ from .metadata import (
     TableCardMetadata,
     VariableCardMetadata,
 )
+
+if TYPE_CHECKING:
+    from .label_registry import LabelRegistry
 
 logger = logging.getLogger(__name__)
 
@@ -394,6 +397,7 @@ class KeywordData:
     card_insertions: List[Any] = field(default_factory=list)
     renamed_properties: List["RenamedProperty"] = field(default_factory=list)  # Tracks renamed fields for docs
     property_collisions: Dict[str, str] = field(default_factory=dict)  # Maps property_name -> collision note
+    label_registry: Optional["LabelRegistry"] = None  # Initialized after reorder-card handler
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "KeywordData":

@@ -19,9 +19,10 @@ See agents/codegen.md for detailed documentation on handler ordering and semanti
 import collections
 import logging
 import typing
-from typing import Dict
+from typing import Dict, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.label_registry import LabelRegistry
 from keyword_generation.handlers.handler_base import (
     HandlerMetadata,
     KeywordHandler,
@@ -68,17 +69,28 @@ class HandlerRegistry:
             self._metadata[name] = handler.__class__._handler_metadata  # type: ignore[attr-defined]
         logger.debug(f"Registered handler '{name}': {handler.__class__.__name__}")
 
-    def apply_all(self, kwd_data: KeywordData, settings: typing.Dict[str, typing.Any], validate: bool = True) -> None:
+    def apply_all(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.Dict[str, typing.Any],
+        validate: bool = True,
+        initial_labels: Optional[Dict[str, int]] = None,
+    ) -> None:
         """
         Apply all registered handlers to keyword data in dependency order.
 
         Handlers are executed in an order that respects their declared dependencies.
         Only handlers with corresponding settings in the configuration are executed.
 
+        The LabelRegistry is initialized after reorder-card runs (since reorder-card
+        changes card positions). Initial labels from manifest's "labels" section
+        are passed via initial_labels parameter.
+
         Args:
             kwd_data: The keyword data structure to transform
             settings: Configuration settings containing handler-specific options
             validate: If True, validate settings against handler schemas before execution
+            initial_labels: Optional dict mapping label names to card indices from manifest
         """
         # Determine which handlers need to run based on settings
         handlers_to_run = set()
@@ -109,12 +121,37 @@ class HandlerRegistry:
         # instead of topological sort for now
         sorted_names = [name for name in self._handlers.keys() if name in handlers_to_run]
 
+        # Initialize label registry before running handlers
+        # If reorder-card is in settings, we'll reinitialize after it runs
+        # Otherwise, initialize now with the current card order
+        keyword_name = f"{kwd_data.keyword}.{kwd_data.subkeyword}"
+        labels: Optional[LabelRegistry] = None
+
+        # Check if reorder-card will run - if so, delay initialization until after it
+        reorder_will_run = "reorder-card" in handlers_to_run
+
+        if not reorder_will_run:
+            # No reorder-card, initialize labels now with current positions
+            labels = LabelRegistry.from_cards(kwd_data.cards, keyword=keyword_name, initial_labels=initial_labels)
+            kwd_data.label_registry = labels
+            logger.debug(f"Initialized LabelRegistry for {keyword_name} (no reorder-card)")
+
         # Execute handlers in sorted order
         for handler_name in sorted_names:
             handler = self._handlers[handler_name]
             handler_settings = settings[handler_name]
             logger.debug(f"Applying handler '{handler_name}'")
+
+            # Run the handler
             handler.handle(kwd_data, handler_settings)
+
+            # Initialize label registry after reorder-card runs
+            # (reorder-card changes card positions, so we wait until after)
+            if handler_name == "reorder-card":
+                # Now initialize the label registry with post-reorder positions
+                labels = LabelRegistry.from_cards(kwd_data.cards, keyword=keyword_name, initial_labels=initial_labels)
+                kwd_data.label_registry = labels
+                logger.debug(f"Initialized LabelRegistry for {keyword_name} with {len(labels.get_all_labels())} labels")
 
     def post_process_all(self, kwd_data: KeywordData) -> None:
         """
@@ -124,7 +161,7 @@ class HandlerRegistry:
         in registration order.
 
         Args:
-            kwd_data: Keyword data structure
+            kwd_data: Keyword data structure (contains label_registry if initialized)
         """
         logger.debug(f"Running post-processing for {len(self._handlers)} handlers")
         for handler_name, handler in self._handlers.items():

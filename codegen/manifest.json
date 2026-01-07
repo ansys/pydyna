@@ -644,16 +644,28 @@
         }
     },
     "SECTION_BEAM": {
+        "labels": {
+            "main_card": 0,
+            "dimensions_card": 1,
+            "inertia_card": 2,
+            "truss_card": 3,
+            "integrated_thickness_card": 4,
+            "discrete_beam_card": 5,
+            "mat146_discrete_card": 6,
+            "discrete_dof_card": 7,
+            "spotweld_thickness_card": 8,
+            "duplicate_inertia_card": 9
+        },
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 6
+                    "ref": "mat146_discrete_card"
                 },
                 {
-                    "index": 7
+                    "ref": "discrete_dof_card"
                 },
                 {
-                    "index": 9
+                    "ref": "duplicate_inertia_card"
                 }
             ],
             "conditional-card": [
@@ -683,7 +695,7 @@
                 }
             ]
         },
-        "comment": "card 6 is skipped because of the condition for mat 146 - which we can't easily check here.  Maybe that can be handled in a subclass.  card 7 is skipped because its a duplicate of card 4.  card 9 is skipped because its a duplicate of 2"
+        "comment": "card 6 (mat146_discrete_card) is skipped because of the condition for mat 146 - which we cannot easily check here. Maybe that can be handled in a subclass. card 7 (discrete_dof_card) is skipped because its a duplicate of card 4. card 9 (duplicate_inertia_card) is skipped because its a duplicate of card 2"
     },
     "SECTION_SHELL": {
         "generation-options": {
@@ -1215,7 +1227,6 @@
                     "index": 6,
                     "func": "self.atype and abs(self.atype) == 1"
                 },
-
                 {
                     "index": 10,
                     "func": "self.atype and abs(self.atype) == 1 and self.intype == 1"
@@ -1263,7 +1274,11 @@
             ],
             "card-set": [
                 {
-                    "source-indices": [7, 8, 9],
+                    "source-indices": [
+                        7,
+                        8,
+                        9
+                    ],
                     "target-index": 7,
                     "name": "FiberFamily",
                     "length-func": "self.nf or 0",
@@ -1271,14 +1286,29 @@
                     "items-name": "fiber_families",
                     "discriminator": {
                         "field": "ftype",
-                        "cards-with-field": [1, 2]
+                        "cards-with-field": [
+                            1,
+                            2
+                        ]
                     },
                     "internal-conditionals": [
-                        {"index": 1, "func": "self.ftype == 1"},
-                        {"index": 2, "func": "self.ftype == 2"}
+                        {
+                            "index": 1,
+                            "func": "self.ftype == 1"
+                        },
+                        {
+                            "index": 2,
+                            "func": "self.ftype == 2"
+                        }
                     ],
                     "shared-fields": [
-                        {"name": "ftype", "card-indices": [1, 2]}
+                        {
+                            "name": "ftype",
+                            "card-indices": [
+                                1,
+                                2
+                            ]
+                        }
                     ]
                 }
             ],

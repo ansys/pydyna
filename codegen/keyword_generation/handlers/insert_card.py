@@ -124,7 +124,11 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         """Keep dict settings for insert-card - target-class not in manifest."""
         return settings
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Insert cards immediately into keyword data.
 

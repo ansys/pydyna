@@ -83,7 +83,11 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         """Convert dict settings to typed TableCardSettings instances."""
         return [TableCardSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Mark cards as table structures.
 

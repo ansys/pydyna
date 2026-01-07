@@ -107,7 +107,11 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
         """Keep dict settings for override-field due to dynamic property access."""
         return settings
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Override field properties in cards.
 

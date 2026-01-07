@@ -138,7 +138,11 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         """Convert dict settings to typed SeriesCardSettings instances."""
         return [SeriesCardSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Convert specified cards into variable-length series.
 

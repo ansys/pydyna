@@ -125,7 +125,11 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
         """Keep dict settings for table-card-group - uses 'overall-name' not 'property-name'."""
         return settings
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Create table card groups from card indices.
 

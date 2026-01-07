@@ -234,7 +234,11 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         """Keep dict settings for card-set due to complex optional fields not in CardSetSettings."""
         return settings
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Create card sets from source cards and options.
 

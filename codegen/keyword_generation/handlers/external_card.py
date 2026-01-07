@@ -118,7 +118,11 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
         """Keep dict settings for external-card - nested card structure in manifest."""
         return settings
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Configure external card imports and mixins.
 

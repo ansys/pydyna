@@ -303,19 +303,28 @@ def _before_handle(kwd_data: KeywordData) -> None:
     _prepare_for_insertion(kwd_data)
 
 
-def _handle_keyword_data(kwd_data: KeywordData, settings: typing.Dict[str, typing.Any]) -> None:
+def _handle_keyword_data(
+    kwd_data: KeywordData,
+    settings: typing.Dict[str, typing.Any],
+    initial_labels: typing.Optional[typing.Dict[str, int]] = None,
+) -> None:
     """Process keyword data through handler pipeline.
 
     All pipeline stages now work directly with KeywordData instances using
     attribute access. No more dict conversions needed!
+
+    Args:
+        kwd_data: The keyword data to process
+        settings: Handler settings from manifest's "generation-options"
+        initial_labels: Optional label mappings from manifest's "labels" section
     """
     registry = create_default_registry()
 
     logger.debug(f"Handling keyword data with {len(kwd_data.cards)} cards")
     _before_handle(kwd_data)
 
-    # Run handlers with KeywordData instance
-    registry.apply_all(kwd_data, settings)
+    # Run handlers with KeywordData instance, passing initial labels
+    registry.apply_all(kwd_data, settings, initial_labels=initial_labels)
 
     # After-handle processing
     _after_handle(kwd_data, registry)
@@ -374,11 +383,22 @@ def _add_links(kwd_data: KeywordData) -> None:
     logger.debug(f"Added {link_count} links to keyword data")
 
 
-def _get_keyword_data(keyword_name: str, keyword: str, settings: typing.Dict[str, typing.Any]) -> KeywordData:
+def _get_keyword_data(
+    keyword_name: str,
+    keyword: str,
+    settings: typing.Dict[str, typing.Any],
+    initial_labels: typing.Optional[typing.Dict[str, int]] = None,
+) -> KeywordData:
     """Gets the keyword data from kwdm. Transforms it based on generation settings
     and default transformations needed to produce valid python code.
 
     Returns KeywordData dataclass instance - no more dict conversions!
+
+    Args:
+        keyword_name: The keyword name (e.g., "MAT_ELASTIC")
+        keyword: The source keyword to load from kwd.json
+        settings: Handler settings from manifest's "generation-options"
+        initial_labels: Optional label mappings from manifest's "labels" section
     """
     logger.debug(f"Getting keyword data for '{keyword_name}' (source: '{keyword}')")
     assert data_model.KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
@@ -394,7 +414,7 @@ def _get_keyword_data(keyword_name: str, keyword: str, settings: typing.Dict[str
     kwd_data = KeywordData.from_dict(kwd_data_dict)
 
     # transformations based on generation settings - handlers work with KeywordData
-    _handle_keyword_data(kwd_data, settings)
+    _handle_keyword_data(kwd_data, settings, initial_labels=initial_labels)
 
     # default transformations to a valid format we need for jinja
     _transform_data(kwd_data)
@@ -408,7 +428,8 @@ def _get_keyword_data(keyword_name: str, keyword: str, settings: typing.Dict[str
 def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dict) -> typing.Dict:
     source_keyword = _get_source_keyword(keyword, keyword_options)
     generation_settings = keyword_options.get("generation-options", {})
-    keyword_data = _get_keyword_data(keyword, source_keyword, generation_settings)
+    initial_labels = keyword_options.get("labels", None)
+    keyword_data = _get_keyword_data(keyword, source_keyword, generation_settings, initial_labels=initial_labels)
     # Set classname directly on dataclass instance
     keyword_data.classname = classname
     alias = data_model.get_alias(keyword)

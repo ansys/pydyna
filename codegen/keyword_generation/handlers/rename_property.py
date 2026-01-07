@@ -94,7 +94,11 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
         """Keep dict settings for rename-property due to schema mismatch."""
         return settings
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Rename Python properties for specified fields.
 
