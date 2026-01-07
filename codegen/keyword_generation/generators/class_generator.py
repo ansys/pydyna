@@ -59,7 +59,7 @@ def _get_jinja_variable(base_variable: typing.Dict) -> typing.Dict:
             "license": get_license_header(),
             "openbrace": "{",
             "closebrace": "}",
-            "repeated_element_types": {"int": '"Int32"', "float": "np.float64", "str": "str"},
+            "repeated_element_types": {"int": "pd.Int32Dtype()", "float": "np.float64", "str": "str"},
         }
     )
     return jinja_variable

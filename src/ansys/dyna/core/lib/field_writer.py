@@ -93,58 +93,11 @@ def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing
     if libmissing.checknull(value):
         holler.write_spaces(buf, width)
     elif field_type == str:
-        # Handle string values safely
-        if value is None or pd.isna(value):
-            holler.write_spaces(buf, width)
-        else:
-            try:
-                # Convert to string and handle potential issues
-                str_value = str(value) if value is not None else ""
-                holler.write_string(buf, str_value, width)
-            except (ValueError, TypeError, Exception):
-                holler.write_spaces(buf, width)
+        holler.write_string(buf, value, width)
     elif field_type == int:
-        # Convert pandas nullable integers to regular Python integers
-        if value is None or pd.isna(value):
-            holler.write_spaces(buf, width)
-        elif hasattr(value, "item"):  # pandas scalar types have .item() method
-            try:
-                converted_value = int(value.item())
-                holler.write_int(buf, converted_value, width)
-            except (ValueError, TypeError):
-                holler.write_spaces(buf, width)
-        elif hasattr(value, "__int__"):  # fallback for other numeric types
-            try:
-                converted_value = int(value)
-                holler.write_int(buf, converted_value, width)
-            except (ValueError, TypeError):
-                holler.write_spaces(buf, width)
-        else:
-            try:
-                holler.write_int(buf, value, width)
-            except (ValueError, TypeError):
-                holler.write_spaces(buf, width)
+        holler.write_int(buf, value, width)
     elif field_type == float:
-        # Convert pandas nullable floats to regular Python floats
-        if value is None or pd.isna(value):
-            holler.write_spaces(buf, width)
-        elif hasattr(value, "item"):  # pandas scalar types have .item() method
-            try:
-                converted_value = float(value.item())
-                holler.write_float(buf, converted_value, width)
-            except (ValueError, TypeError):
-                holler.write_spaces(buf, width)
-        elif hasattr(value, "__float__"):  # fallback for other numeric types
-            try:
-                converted_value = float(value)
-                holler.write_float(buf, converted_value, width)
-            except (ValueError, TypeError):
-                holler.write_spaces(buf, width)
-        else:
-            try:
-                holler.write_float(buf, value, width)
-            except (ValueError, TypeError):
-                holler.write_spaces(buf, width)
+        holler.write_float(buf, value, width)
 
 
 def write_field(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:

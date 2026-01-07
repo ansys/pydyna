@@ -8,13 +8,7 @@ from ansys_sphinx_theme import get_version_match, ansys_favicon
 from sphinx.builders.latex import LaTeXBuilder
 from sphinx_gallery.sorting import FileNameSortKey
 
-# Get version without importing the package (avoids triggering imports during conf.py execution)
-# This allows doc builds to work with subset-generated keywords
-try:
-    from importlib.metadata import version as importlib_version
-    __version__ = importlib_version("ansys-dyna-core")
-except Exception:
-    __version__ = "unknown"
+from ansys.dyna.core import __version__
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
@@ -247,28 +241,61 @@ def setup(sphinx):
     # Add timing instrumentation for performance profiling
     import time
     import os
+    import logging
     from pathlib import Path
 
     # Create timing log file
     timing_log = Path(__file__).parent.parent / "_build" / "timing.log"
     timing_log.parent.mkdir(parents=True, exist_ok=True)
 
+    # Clear previous log
+    with open(timing_log, "w") as f:
+        f.write(f"Build started at {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write("="*60 + "\n\n")
+
     # Track phase timings
     phase_times = {}
+    autoapi_times = {}
 
-    def log_time(phase, duration=None):
+    def log_time(phase, duration=None, extra_info=""):
         """Log timing information to file."""
         if duration is None:
             # Start timing
             phase_times[phase] = time.time()
-            msg = f"[{time.strftime('%H:%M:%S')}] Starting: {phase}\n"
+            msg = f"[{time.strftime('%H:%M:%S')}] Starting: {phase}{extra_info}\n"
         else:
             # End timing
-            msg = f"[{time.strftime('%H:%M:%S')}] Completed: {phase} ({duration:.2f}s)\n"
+            msg = f"[{time.strftime('%H:%M:%S')}] Completed: {phase} ({duration:.2f}s){extra_info}\n"
 
         with open(timing_log, "a") as f:
             f.write(msg)
         print(msg.strip())
+
+    # Instrument AutoAPI for detailed timing
+    def instrument_autoapi():
+        """Add timing instrumentation to AutoAPI phases."""
+        try:
+            # Try to import and instrument the AutoAPI module
+            from ansys_sphinx_theme.extension import autoapi as autoapi_ext
+            
+            # Store original functions
+            if hasattr(autoapi_ext, 'generate_autoapi_data'):
+                original_generate = autoapi_ext.generate_autoapi_data
+                
+                def timed_generate(*args, **kwargs):
+                    log_time("autoapi-generate")
+                    result = original_generate(*args, **kwargs)
+                    if "autoapi-generate" in phase_times:
+                        log_time("autoapi-generate", time.time() - phase_times["autoapi-generate"])
+                    return result
+                
+                autoapi_ext.generate_autoapi_data = timed_generate
+                
+        except (ImportError, AttributeError):
+            pass  # AutoAPI not installed or different structure
+    
+    # Call instrumentation before Sphinx starts
+    instrument_autoapi()
 
     # Event handlers
     def on_builder_inited(app):

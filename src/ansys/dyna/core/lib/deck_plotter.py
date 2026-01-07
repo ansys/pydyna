@@ -45,28 +45,12 @@ def merge_keywords(
     Given a deck, merges specific keywords (NODE, ELEMENT_SHELL, ELEMENT_BEAM, ELEMENT_SOLID)
     and returns tham as data frames.
     """
-    nodes_temp = []
-    for kwd in deck.get_kwds_by_type("NODE"):
-        if hasattr(kwd, "nodes"):
-            try:
-                nodes_value = kwd.nodes
-                if isinstance(nodes_value, pd.DataFrame):
-                    nodes_temp.append(nodes_value)
-            except:
-                pass
+    nodes_temp = [kwd.nodes for kwd in deck.get_kwds_by_type("NODE")]
     nodes = pd.concat(nodes_temp) if len(nodes_temp) else pd.DataFrame()
 
     df_list = {}
     for item in ["SHELL", "BEAM", "SOLID"]:
-        matching_elements = []
-        for kwd in deck.get_kwds_by_type("ELEMENT"):
-            if kwd.subkeyword == item and hasattr(kwd, "elements"):
-                try:
-                    elements_value = kwd.elements
-                    if isinstance(elements_value, pd.DataFrame):
-                        matching_elements.append(elements_value)
-                except:
-                    pass
+        matching_elements = [kwd.elements for kwd in deck.get_kwds_by_type("ELEMENT") if kwd.subkeyword == item]
         df_list[item] = pd.concat(matching_elements) if len(matching_elements) else pd.DataFrame()
 
     return (
@@ -76,20 +60,7 @@ def merge_keywords(
 
 
 def process_nodes(nodes_df):
-    if nodes_df.empty:
-        return np.array([]).reshape(0, 3)
-
-    # Check if required columns exist
-    required_cols = ["x", "y", "z"]
-    available_cols = nodes_df.columns.tolist()
-    missing_cols = [col for col in required_cols if col not in available_cols]
-
-    if missing_cols:
-        # Return empty array if required columns are missing
-        return np.array([]).reshape(0, 3)
-
-    # All required columns exist, safe to access them
-    nodes_xyz = nodes_df[required_cols]
+    nodes_xyz = nodes_df[["x", "y", "z"]]
     return nodes_xyz.to_numpy()
 
 
