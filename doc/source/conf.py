@@ -272,30 +272,30 @@ def setup(sphinx):
         print(msg.strip())
 
     # Instrument AutoAPI for detailed timing
-    def instrument_autoapi():
-        """Add timing instrumentation to AutoAPI phases."""
-        try:
-            # Try to import and instrument the AutoAPI module
-            from ansys_sphinx_theme.extension import autoapi as autoapi_ext
+    # def instrument_autoapi():
+    #     """Add timing instrumentation to AutoAPI phases."""
+    #     try:
+    #         # Try to import and instrument the AutoAPI module
+    #         from ansys_sphinx_theme.extension import autoapi as autoapi_ext
             
-            # Store original functions
-            if hasattr(autoapi_ext, 'generate_autoapi_data'):
-                original_generate = autoapi_ext.generate_autoapi_data
+    #         # Store original functions
+    #         if hasattr(autoapi_ext, 'generate_autoapi_data'):
+    #             original_generate = autoapi_ext.generate_autoapi_data
                 
-                def timed_generate(*args, **kwargs):
-                    log_time("autoapi-generate")
-                    result = original_generate(*args, **kwargs)
-                    if "autoapi-generate" in phase_times:
-                        log_time("autoapi-generate", time.time() - phase_times["autoapi-generate"])
-                    return result
+    #             def timed_generate(*args, **kwargs):
+    #                 log_time("autoapi-generate")
+    #                 result = original_generate(*args, **kwargs)
+    #                 if "autoapi-generate" in phase_times:
+    #                     log_time("autoapi-generate", time.time() - phase_times["autoapi-generate"])
+    #                 return result
                 
-                autoapi_ext.generate_autoapi_data = timed_generate
+    #             autoapi_ext.generate_autoapi_data = timed_generate
                 
-        except (ImportError, AttributeError):
-            pass  # AutoAPI not installed or different structure
+    #     except (ImportError, AttributeError):
+    #         pass  # AutoAPI not installed or different structure
     
-    # Call instrumentation before Sphinx starts
-    instrument_autoapi()
+    # # Call instrumentation before Sphinx starts
+    # instrument_autoapi()
 
     # Event handlers
     def on_builder_inited(app):
