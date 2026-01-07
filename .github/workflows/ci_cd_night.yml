@@ -36,7 +36,7 @@ jobs:
   doc-build:
     name: "Documentation build"
     runs-on: [public-ubuntu-latest-8-cores]
-    timeout-minutes: 720
+    timeout-minutes: 720  # With caching, incremental builds should be much faster
     steps:
       - name: "Checkout project"
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0

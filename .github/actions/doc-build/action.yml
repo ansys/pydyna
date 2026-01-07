@@ -47,12 +47,15 @@ runs:
       with:
         persist-credentials: true
 
+    - name: Install uv
+      uses: astral-sh/setup-uv@681c641aba71e4a1c380be3ab5e12ad51f415867 # v7.1.6
+      with:
+        enable-cache: true
+
     - name: Set up Python
       uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
       with:
         python-version: ${{ inputs.python-version }}
-        cache: 'pip'
-        cache-dependency-path: 'pyproject.toml'
 
     - name: Install system dependencies
       run: |
@@ -60,10 +63,20 @@ runs:
         sudo apt-get install xvfb pandoc texlive-latex-extra latexmk
       shell: bash
 
+    # - name: Cache Sphinx build artifacts
+    #   uses: actions/cache@v4
+    #   with:
+    #     path: |
+    #       doc/_build
+    #       doc/source/api
+    #     key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/conf.py', 'pyproject.toml') }}
+    #     restore-keys: |
+    #       sphinx-${{ runner.os }}-${{ inputs.python-version }}-
+
     - name: Install python dependencies
       run: |
-        python -m pip install .[doc]
-        python -m pip install docker
+        uv pip install .[doc]
+        uv pip install docker
       shell: bash
 
     - name: Login to GitHub container registry
@@ -100,10 +113,10 @@ runs:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
-        BUILD_AUTOKEYWORS_API: ${{ inputs.build-autokeywords-api }}
+        BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
       run: |
-        timeout 7200 xvfb-run make -C doc html
+        timeout 7200 xvfb-run uv run --no-sync -- make -C doc html
       shell: bash
 
     - name: Upload html documentation
@@ -116,7 +129,7 @@ runs:
     - name: "Build the pdf documentation"
       shell: bash
       run: |
-        xvfb-run make -C doc pdf
+        xvfb-run uv run --no-sync -- make -C doc pdf
       env:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
