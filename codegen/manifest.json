@@ -513,7 +513,7 @@
         "generation-options": {
             "external-card-implementation": [
                 {
-                    "index": 0,
+                    "ref": "include_card",
                     "card": {
                         "source": "include_card",
                         "card-name": "IncludeCard"
@@ -521,13 +521,16 @@
                     "mixin": "IncludeCardMixin"
                 }
             ]
+        },
+        "labels": {
+            "include_card": 0
         }
     },
     "INCLUDE_PATH": {
         "generation-options": {
             "external-card-implementation": [
                 {
-                    "index": 0,
+                    "ref": "include_card",
                     "card": {
                         "source": "include_card",
                         "card-name": "IncludeCard"
@@ -535,6 +538,9 @@
                     "mixin": "IncludeCardMixin"
                 }
             ]
+        },
+        "labels": {
+            "include_card": 0
         }
     },
     "PART_PART": {
@@ -1025,18 +1031,21 @@
         "generation-options": {
             "rename-property": [
                 {
-                    "index": 1,
+                    "ref": "constants_card",
                     "name": "r",
                     "property-name": "gas_constant",
                     "description": "gas constant"
                 },
                 {
-                    "index": 1,
+                    "ref": "constants_card",
                     "name": "f",
                     "property-name": "faraday_constant",
                     "description": "Faraday constant"
                 }
             ]
+        },
+        "labels": {
+            "constants_card": 1
         }
     },
     "MAT_NULL": {
@@ -1322,32 +1331,32 @@
             ],
             "rename-property": [
                 {
-                    "index": 1,
+                    "ref": "title_card",
                     "name": "title",
                     "property-name": "isotropic_title"
                 },
                 {
-                    "index": 6,
+                    "ref": "activation_header_card",
                     "name": "title",
                     "property-name": "anisotropic_title"
                 },
                 {
-                    "index": 11,
+                    "ref": "actype_header_card",
                     "name": "title",
                     "property-name": "active_title"
                 },
                 {
-                    "index": 10,
+                    "ref": "intype_1_k_card",
                     "name": "k1",
                     "property-name": "coupling_k1"
                 },
                 {
-                    "index": 10,
+                    "ref": "intype_1_k_card",
                     "name": "k2",
                     "property-name": "coupling_k2"
                 },
                 {
-                    "index": 20,
+                    "ref": "fiber_vector_card",
                     "name": "beta",
                     "property-name": "material_angle_beta"
                 }

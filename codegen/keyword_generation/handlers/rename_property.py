@@ -25,27 +25,47 @@ Rename Property Handler: Changes Python property names for fields.
 
 Allows field names (as they appear in keyword files) to map to different
 Python property names in the generated code for improved API clarity.
+
+Uses label-based references (ref) for card addressing.
 """
 
 from dataclasses import dataclass
+import logging
 import typing
-from typing import Any, Dict
+from typing import Any, Dict, List, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData, RenamedProperty
+from keyword_generation.data_model.label_registry import LabelRegistry
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
 class RenamePropertySettings:
-    """Configuration for renaming card properties."""
+    """Configuration for renaming a card property.
 
-    old_name: str
-    new_name: str
+    Uses label-based addressing (ref) for card references.
+    """
+
+    name: str  # Field name to rename
+    property_name: str  # New Python property name
+    ref: str  # Label reference for the card
+    description: Optional[str] = None  # Optional description for docs
+
+    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
+        """Resolve ref to card index."""
+        return registry.resolve_index(self.ref, cards)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "RenamePropertySettings":
-        return cls(old_name=data["old-name"], new_name=data["new-name"])
+        return cls(
+            name=data["name"],
+            property_name=data["property-name"],
+            ref=data["ref"],
+            description=data.get("description"),
+        )
 
 
 @handler(
@@ -57,11 +77,12 @@ class RenamePropertySettings:
         "items": {
             "type": "object",
             "properties": {
-                "index": {"type": "integer", "description": "Card index"},
+                "ref": {"type": "string", "description": "Label reference for the card"},
                 "name": {"type": "string", "description": "Field name to rename"},
                 "property-name": {"type": "string", "description": "New Python property name"},
+                "description": {"type": "string", "description": "Optional description for docs"},
             },
-            "required": ["index", "name", "property-name"],
+            "required": ["ref", "name", "property-name"],
         },
     },
     output_description="Sets 'property_name' on matching field dicts",
@@ -74,10 +95,12 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
     property accessor uses the custom name. Useful for making APIs more
     Pythonic (e.g., PID -> part_id).
 
+    Uses label-based references (ref) for card addressing.
+
     Input Settings Example:
         [
             {
-                "index": 0,
+                "ref": "header_card",
                 "name": "PID",
                 "property-name": "part_id"
             }
@@ -90,9 +113,9 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
     @classmethod
     def _parse_settings(
         cls, settings: typing.List[typing.Dict[str, typing.Any]]
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
-        """Keep dict settings for rename-property due to schema mismatch."""
-        return settings
+    ) -> typing.List[RenamePropertySettings]:
+        """Parse dict settings to typed RenamePropertySettings."""
+        return [RenamePropertySettings.from_dict(s) for s in settings]
 
     def handle(
         self,
@@ -103,26 +126,36 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
         Rename Python properties for specified fields.
 
         Args:
-            kwd_data: Complete keyword data dictionary
-            settings: List of {"index", "name", "property-name"} dicts
+            kwd_data: Complete keyword data
+            settings: List of dicts with ref, name, property-name
         """
-        for setting in settings:
-            index = setting["index"]
-            name = setting["name"]
-            property_name = setting["property-name"]
+        # Parse settings to typed dataclasses
+        typed_settings = self._parse_settings(settings)
+
+        # Get registry for label resolution
+        registry = kwd_data.label_registry
+        if registry is None:
+            raise ValueError(
+                "rename-property handler requires a label registry. Ensure labels are defined in manifest."
+            )
+
+        for setting in typed_settings:
+            index = setting.resolve_index(registry, kwd_data.cards)
+            name = setting.name
+            property_name = setting.property_name
+            logger.debug(f"Renaming field '{name}' on card {index} to property '{property_name}'")
+
             card = kwd_data.cards[index]
             for field in card["fields"]:
-                if field["name"].lower() == name:
+                if field["name"].lower() == name.lower():
                     field["property_name"] = property_name
-                    # Use description from manifest if provided
-                    description = setting.get("description", "")
                     # Track this rename for class docstring and template lookups
                     kwd_data.renamed_properties.append(
                         RenamedProperty(
                             field_name=name.upper(),
                             property_name=property_name,
                             card_index=index,
-                            description=description,
+                            description=setting.description or "",
                         )
                     )
 
