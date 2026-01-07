@@ -154,6 +154,30 @@ class LabelRegistry:
                 "The card may have been removed."
             )
 
+    def update_reference(self, label: str, card: Any) -> None:
+        """
+        Update an existing label to point to a new card object.
+
+        Use this when a card is replaced (not mutated) and the label
+        needs to track the new object. Typically used by replace-card handler.
+
+        Args:
+            label: The label to update (must already exist)
+            card: The new card object to associate with the label
+
+        Raises:
+            UndefinedLabelError: If label not found
+        """
+        if label not in self._labels:
+            available = ", ".join(sorted(self._labels.keys())[:10])
+            raise UndefinedLabelError(
+                f"Cannot update undefined label '{label}' for keyword '{self._keyword}'. "
+                f"Available labels: {available}{'...' if len(self._labels) > 10 else ''}"
+            )
+        old_card = self._labels[label]
+        self._labels[label] = card
+        logger.debug(f"Updated label '{label}' reference from {id(old_card)} to {id(card)}")
+
     def has_label(self, label: str) -> bool:
         """Check if a label is registered."""
         return label in self._labels

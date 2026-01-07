@@ -56,10 +56,10 @@
             "generation-options": {
                 "table-card-group": [
                     {
-                        "indices": [
-                            0,
-                            1,
-                            2
+                        "refs": [
+                            "elements_card",
+                            "elements_n5_n6_n7_n8_card",
+                            "elements_n5_card"
                         ],
                         "overall-name": "elements"
                     }
@@ -72,6 +72,8 @@
                 ]
             },
             "labels": {
+                "elements_card": 0,
+                "elements_n5_n6_n7_n8_card": 1,
                 "elements_n5_card": 2
             }
         },
@@ -548,16 +550,17 @@
             ],
             "table-card-group": [
                 {
-                    "indices": [
-                        0,
-                        1
+                    "refs": [
+                        "heading_card",
+                        "part_data_card"
                     ],
                     "overall-name": "parts"
                 }
             ]
         },
         "labels": {
-            "heading_card": 0
+            "heading_card": 0,
+            "part_data_card": 1
         }
     },
     "HOURGLASS_HOURGLASS": {
@@ -841,15 +844,16 @@
             ],
             "table-card-group": [
                 {
-                    "indices": [
-                        0,
-                        1
+                    "refs": [
+                        "transformation_card",
+                        "extended_vector_card"
                     ],
                     "overall-name": "transformation"
                 }
             ]
         },
         "labels": {
+            "transformation_card": 0,
             "extended_vector_card": 1
         }
     },
@@ -927,14 +931,19 @@
         "generation-options": {
             "table-card-group": [
                 {
-                    "indices": [
-                        0,
-                        1,
-                        2
+                    "refs": [
+                        "element_card_1",
+                        "element_card_2",
+                        "element_card_3"
                     ],
                     "overall-name": "elements"
                 }
             ]
+        },
+        "labels": {
+            "element_card_1": 0,
+            "element_card_2": 1,
+            "element_card_3": 2
         }
     },
     "SECTION_SOLID": {
@@ -1273,13 +1282,17 @@
         "generation-options": {
             "table-card-group": [
                 {
-                    "indices": [
-                        1,
-                        2
+                    "refs": [
+                        "spring_stiffness_card",
+                        "spring_damping_card"
                     ],
                     "overall-name": "springs"
                 }
             ]
+        },
+        "labels": {
+            "spring_stiffness_card": 1,
+            "spring_damping_card": 2
         }
     },
     "MAT_295": {
@@ -3235,13 +3248,17 @@
         "generation-options": {
             "table-card-group": [
                 {
-                    "indices": [
-                        0,
-                        1
+                    "refs": [
+                        "element_base_card",
+                        "element_nodes_card"
                     ],
                     "overall-name": "elements"
                 }
             ]
+        },
+        "labels": {
+            "element_base_card": 0,
+            "element_nodes_card": 1
         }
     },
     "LOAD_NODE_POINT": {
