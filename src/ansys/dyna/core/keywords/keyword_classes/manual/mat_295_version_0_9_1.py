@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,267 +20,34 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module providing the Mat295 class."""
+"""Legacy MAT_295 implementation from pydyna v0.9.1.
+
+This module contains the legacy implementation of MAT_295 that uses a TableCardGroup
+for anisotropic settings. It has a known limitation: all fiber families must use
+the same FTYPE value, preventing mixed fiber models (e.g., one Holzapfel-Gasser-Ogden
+and one Freed-Doehring fiber family).
+
+This legacy class is preserved for backward compatibility. Users who depend on the
+old DataFrame-based API (mat.anisotropic_settings) can register this class with
+their Deck instance using ImportContext.keyword_overrides.
+"""
+# flake8: noqa: E501
+# This file is a snapshot of the auto-generated Mat295 class from pydyna v0.9.1
+# Line length violations are inherited from the original auto-generated file.
 import typing
-from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
-from ansys.dyna.core.lib.cards import Cards
-from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
+import warnings
+
+import pandas as pd  # noqa: F401
+
+from ansys.dyna.core.lib.card import Card, Field, Flag  # noqa: F401
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.kwd_line_formatter import read_line
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
+from ansys.dyna.core.lib.table_card_group import TableCardGroup
 
-class FiberFamily(Cards):
-    """ CardSet."""
 
-    def __init__(self, **kwargs):
-        """Initialize the FiberFamily CardSet."""
-        super().__init__(kwargs["keyword"])
-        self._parent = kwargs["parent"]
-        kwargs["parent"] = self
-        self._cards = [
-            Card(
-                [
-                    Field(
-                        "theta",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ftype",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.ftype == 1,
-            ),
-            Card(
-                [
-                    Field(
-                        "ftype",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r0norm",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h0norm",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.ftype == 2,
-            ),
-        ]
-
-    def _read_data(self, buf: typing.TextIO, parameters) -> bool:
-        """Custom read logic to handle ftype-dependent cards."""
-        from ansys.dyna.core.lib.card_set import read_cards_with_discriminator
-
-        return read_cards_with_discriminator(
-            self._cards,
-            buf,
-            parameters,
-            discriminator=self._cards[1]._fields[0],
-            cards_with_field=[1, 2],
-        )
-
-    @property
-    def theta(self) -> typing.Optional[float]:
-        """Get or set the Mean fiber family orientation angle with respect to the a material axis in the a-b material plane in degrees.
-        """ # nopep8
-        return self._cards[0].get_value("theta")
-
-    @theta.setter
-    def theta(self, value: float) -> None:
-        """Set the theta property."""
-        self._cards[0].set_value("theta", value)
-
-    @property
-    def a(self) -> typing.Optional[float]:
-        """Get or set the First structure tensor parameter.
-        """ # nopep8
-        return self._cards[0].get_value("a")
-
-    @a.setter
-    def a(self, value: float) -> None:
-        """Set the a property."""
-        self._cards[0].set_value("a", value)
-
-    @property
-    def b(self) -> typing.Optional[float]:
-        """Get or set the Second structure tensor parameter.
-        """ # nopep8
-        return self._cards[0].get_value("b")
-
-    @b.setter
-    def b(self, value: float) -> None:
-        """Set the b property."""
-        self._cards[0].set_value("b", value)
-
-    @property
-    def fcid(self) -> typing.Optional[int]:
-        """Get or set the Curve ID defining the fiber stress versus fiber stretch relation, default if nonzero.
-        """ # nopep8
-        return self._cards[1].get_value("fcid")
-
-    @fcid.setter
-    def fcid(self, value: int) -> None:
-        """Set the fcid property."""
-        self._cards[1].set_value("fcid", value)
-
-    @property
-    def k1(self) -> typing.Optional[float]:
-        """Get or set the Holzapfel-Gasser-Ogden modulus.
-        """ # nopep8
-        return self._cards[1].get_value("k1")
-
-    @k1.setter
-    def k1(self, value: float) -> None:
-        """Set the k1 property."""
-        self._cards[1].set_value("k1", value)
-
-    @property
-    def k2(self) -> typing.Optional[float]:
-        """Get or set the Holzapfel-Gasser-Ogden constant.
-        """ # nopep8
-        return self._cards[1].get_value("k2")
-
-    @k2.setter
-    def k2(self, value: float) -> None:
-        """Set the k2 property."""
-        self._cards[1].set_value("k2", value)
-
-    @property
-    def flcid(self) -> typing.Optional[int]:
-        """Get or set the Curve ID defining the fiber stress versus fiber stretch relation, default if nonzero.
-        """ # nopep8
-        return self._cards[2].get_value("flcid")
-
-    @flcid.setter
-    def flcid(self, value: int) -> None:
-        """Set the flcid property."""
-        self._cards[2].set_value("flcid", value)
-
-    @property
-    def e(self) -> typing.Optional[float]:
-        """Get or set the Fiber modulus.
-        """ # nopep8
-        return self._cards[2].get_value("e")
-
-    @e.setter
-    def e(self, value: float) -> None:
-        """Set the e property."""
-        self._cards[2].set_value("e", value)
-
-    @property
-    def r0norm(self) -> typing.Optional[float]:
-        """Get or set the Initial crimp/coil amplitude normalized with respect to the initial fiber radius (R0/r0).
-        """ # nopep8
-        return self._cards[2].get_value("r0norm")
-
-    @r0norm.setter
-    def r0norm(self, value: float) -> None:
-        """Set the r0norm property."""
-        self._cards[2].set_value("r0norm", value)
-
-    @property
-    def h0norm(self) -> typing.Optional[float]:
-        """Get or set the Initial crimp/coil wavelength normalized with respect to the initial fiber radius (H0/r0).
-        """ # nopep8
-        return self._cards[2].get_value("h0norm")
-
-    @h0norm.setter
-    def h0norm(self, value: float) -> None:
-        """Set the h0norm property."""
-        self._cards[2].set_value("h0norm", value)
-
-    @property
-    def ftype(self) -> typing.Optional[int]:
-        """Get or set the Type of fiber model:
-EQ.1:	Holzapfel-Gasser-Ogden [6]
-EQ.2:	Freed-Doehring [2].
-        """ # nopep8
-        return self._cards[1].get_value("ftype")
-
-    @ftype.setter
-    def ftype(self, value: int) -> None:
-        self._cards[1].set_value("ftype", value)
-        self._cards[2].set_value("ftype", value)
-
-    @property
-    def parent(self) -> KeywordBase:
-        """Get the parent keyword."""
-        return self._parent
-
-class Mat295(KeywordBase):
-    """DYNA MAT_295 keyword"""
+class Mat295Legacy(KeywordBase):
+    """Legacy DYNA MAT_295 keyword implementation from pydyna v0.9.1."""
 
     keyword = "MAT"
     subkeyword = "295"
@@ -289,10 +56,16 @@ class Mat295(KeywordBase):
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the Mat295 class."""
+        """Initialize the Mat295Legacy class."""
+        warnings.warn(
+            "Mat295Legacy is deprecated and will be removed in a future version. "
+            "This legacy class has a known limitation: all fiber families must use the same FTYPE. "
+            "Use Mat295 instead, which supports per-fiber FTYPE values via the fiber_families API.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         super().__init__(**kwargs)
-        kwargs["parent"] = self
-        kwargs["keyword"] = self
+        self._ftype = None
         kwargs["parent"] = self
         self._cards = [
             Card(
@@ -554,11 +327,100 @@ class Mat295(KeywordBase):
                 ],
                 lambda: self.atype and abs(self.atype) == 1,
             ),
-            CardSet(
-                FiberFamily,
-                length_func = lambda: self.nf or 0,
-                active_func = lambda: self.atype and abs(self.atype) == 1,
-                **kwargs
+            TableCardGroup(
+                [
+                    Card(
+                        [
+                            Field(
+                                "theta",
+                                float,
+                                0,
+                                10,
+                            ),
+                            Field(
+                                "a",
+                                float,
+                                10,
+                                10,
+                            ),
+                            Field(
+                                "b",
+                                float,
+                                20,
+                                10,
+                            ),
+                        ],
+                        lambda: self.atype and abs(self.atype) == 1,
+                    ),
+                    Card(
+                        [
+                            Field(
+                                "ftype",
+                                int,
+                                0,
+                                10,
+                            ),
+                            Field(
+                                "fcid",
+                                int,
+                                10,
+                                10,
+                            ),
+                            Field(
+                                "k1",
+                                float,
+                                20,
+                                10,
+                            ),
+                            Field(
+                                "k2",
+                                float,
+                                30,
+                                10,
+                            ),
+                        ],
+                        lambda: self.atype and abs(self.atype) == 1 and self.ftype == 1,
+                    ),
+                    Card(
+                        [
+                            Field(
+                                "ftype",
+                                int,
+                                0,
+                                10,
+                            ),
+                            Field(
+                                "flcid",
+                                int,
+                                10,
+                                10,
+                            ),
+                            Field(
+                                "e",
+                                float,
+                                20,
+                                10,
+                            ),
+                            Field(
+                                "r0norm",
+                                float,
+                                30,
+                                10,
+                            ),
+                            Field(
+                                "h0norm",
+                                float,
+                                40,
+                                10,
+                            ),
+                        ],
+                        lambda: self.atype and abs(self.atype) == 1 and self.ftype == 2,
+                    ),
+                ],
+                lambda: self.nf or 0,
+                lambda: self.atype and abs(self.atype) == 1,
+                "anisotropic_settings",
+                **kwargs,
             ),
             Card(
                 [
@@ -644,7 +506,7 @@ class Mat295(KeywordBase):
                         **kwargs,
                     ),
                 ],
-                lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2,3,4,5],
+                lambda: self.atype and abs(self.atype) == 1 and self.actype in [1, 2, 3, 4, 5],
             ),
             Card(
                 [
@@ -705,7 +567,7 @@ class Mat295(KeywordBase):
                         **kwargs,
                     ),
                 ],
-                lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2],
+                lambda: self.atype and abs(self.atype) == 1 and self.actype in [1, 2],
             ),
             Card(
                 [
@@ -1057,148 +919,55 @@ class Mat295(KeywordBase):
                 lambda: self.atype and abs(self.atype) == 1,
             ),
             OptionCardSet(
-                option_spec = Mat295.option_specs[0],
-                cards = [
+                option_spec=Mat295Legacy.option_specs[0],
+                cards=[
                     Card(
                         [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
+                            Field("title", str, 0, 80, kwargs.get("title")),
                         ],
                     ),
                 ],
-                **kwargs
+                **kwargs,
             ),
         ]
 
-    @property
-    def theta(self) -> typing.Optional[float]:
-        """Get or set the theta
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].theta
+    def before_read(self, buf: typing.TextIO) -> None:
+        """Peek into the buffer before reading to detect optional modules.
 
-    @theta.setter
-    def theta(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].theta = value
+        This method scans the keyword content to detect ANISO and ACTIVE modules,
+        setting the appropriate type flags so the conditional cards become active.
 
-    @property
-    def a(self) -> typing.Optional[float]:
-        """Get or set the a
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].a
-
-    @a.setter
-    def a(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].a = value
-
-    @property
-    def b(self) -> typing.Optional[float]:
-        """Get or set the b
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].b
-
-    @b.setter
-    def b(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].b = value
+        Note: This implementation sets ftype globally, meaning all fiber families
+        will use the same fiber model type. This is a known limitation of this
+        legacy implementation.
+        """
+        pos = buf.tell()
+        while True:
+            line, end = read_line(buf)
+            if end:
+                break
+            if line.startswith("ANISO"):
+                # set atype to 1 so that the ANISO card is active
+                self.atype = 1
+                # set ftype to 1 so that the second row of the anisotropic_settings card is read
+                self.ftype = 1
+            elif line.startswith("ACTIVE"):
+                # set actype to 1 so that the ACTIVE card is active
+                self.actype = 1
+        buf.seek(pos)
 
     @property
-    def fcid(self) -> typing.Optional[int]:
-        """Get or set the fcid
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].fcid
+    def ftype(self) -> typing.Optional[int]:
+        """Fiber model type (global for all fiber families in this legacy implementation)."""
+        return self._ftype
 
-    @fcid.setter
-    def fcid(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].fcid = value
-
-    @property
-    def k1(self) -> typing.Optional[float]:
-        """Get or set the k1
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].k1
-
-    @k1.setter
-    def k1(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].k1 = value
-
-    @property
-    def k2(self) -> typing.Optional[float]:
-        """Get or set the k2
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].k2
-
-    @k2.setter
-    def k2(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].k2 = value
-
-    @property
-    def flcid(self) -> typing.Optional[int]:
-        """Get or set the flcid
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].flcid
-
-    @flcid.setter
-    def flcid(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].flcid = value
-
-    @property
-    def e(self) -> typing.Optional[float]:
-        """Get or set the e
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].e
-
-    @e.setter
-    def e(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].e = value
-
-    @property
-    def r0norm(self) -> typing.Optional[float]:
-        """Get or set the r0norm
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].r0norm
-
-    @r0norm.setter
-    def r0norm(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].r0norm = value
-
-    @property
-    def h0norm(self) -> typing.Optional[float]:
-        """Get or set the h0norm
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].h0norm
-
-    @h0norm.setter
-    def h0norm(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].h0norm = value
+    @ftype.setter
+    def ftype(self, value: int) -> None:
+        self._ftype = value
 
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number or label must be specified.
-        """ # nopep8
+        """Get or set the Material identification.  A unique number or label must be specified."""  # nopep8
         return self._cards[0].get_value("mid")
 
     @mid.setter
@@ -1208,8 +977,7 @@ class Mat295(KeywordBase):
 
     @property
     def rho(self) -> typing.Optional[float]:
-        """Get or set the Mass density.
-        """ # nopep8
+        """Get or set the Mass density."""  # nopep8
         return self._cards[0].get_value("rho")
 
     @rho.setter
@@ -1220,13 +988,13 @@ class Mat295(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see *MAT_002 for a more complete description):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes.The a - direction is from node 1 to node 2 of the element.The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2,and 4. For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.0.0:	Locally orthotropic with material axes determined by element nodes.The a - direction is from node 1 to node 2 of the element.The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2, and 4. For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in space and the global location of the element center; this is the a - direction.This option is for solid elements only.
         EQ.2.0:	Globally orthotropic with material axes determined by vectors a and d input below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a, and c is the normal vector.Then a and b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on MACF.
+        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v, and an originating point, P, which define the centerline axis.This option is for solid elements only.
         LT.0.0 : | AOPT | is a coordinate system ID(see * DEFINE_COORDINATE_OPTION).
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("aopt")
 
     @aopt.setter
@@ -1236,8 +1004,7 @@ class Mat295(KeywordBase):
 
     @property
     def isotropic_title(self) -> str:
-        """Get or set the Module title.
-        """ # nopep8
+        """Get or set the Module title."""  # nopep8
         return self._cards[1].get_value("title")
 
     @property
@@ -1246,7 +1013,7 @@ class Mat295(KeywordBase):
         EQ.-1/+1:	compressible/nearly-incompressible Ogden [12] (see notes 1-3)
         EQ.-2:	Yeoh [13]
         EQ.-3/+3:	compressible/nearly-incompressible Holzapfel-Ogden [1], [7].
-        """ # nopep8
+        """  # nopep8
         return self._cards[1].get_value("itype")
 
     @itype.setter
@@ -1256,8 +1023,7 @@ class Mat295(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Volumetric response function coefficient.
-        """ # nopep8
+        """Get or set the Volumetric response function coefficient."""  # nopep8
         return self._cards[1].get_value("beta")
 
     @beta.setter
@@ -1267,8 +1033,7 @@ class Mat295(KeywordBase):
 
     @property
     def nu(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio (see remark 3).
-        """ # nopep8
+        """Get or set the Poisson's ratio (see remark 3)."""  # nopep8
         return self._cards[1].get_value("nu")
 
     @nu.setter
@@ -1278,8 +1043,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu1(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden moduli, with i = 1,…,8."""  # nopep8
         return self._cards[2].get_value("mu1")
 
     @mu1.setter
@@ -1289,8 +1053,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu2(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden moduli, with i = 1,…,8."""  # nopep8
         return self._cards[2].get_value("mu2")
 
     @mu2.setter
@@ -1300,8 +1063,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu3(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden moduli, with i = 1,…,8."""  # nopep8
         return self._cards[2].get_value("mu3")
 
     @mu3.setter
@@ -1311,8 +1073,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu4(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden moduli, with i = 1,…,8."""  # nopep8
         return self._cards[2].get_value("mu4")
 
     @mu4.setter
@@ -1322,8 +1083,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu5(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden moduli, with i = 1,…,8."""  # nopep8
         return self._cards[2].get_value("mu5")
 
     @mu5.setter
@@ -1333,8 +1093,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu6(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden moduli, with i = 1,…,8."""  # nopep8
         return self._cards[2].get_value("mu6")
 
     @mu6.setter
@@ -1344,8 +1103,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu7(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden moduli, with i = 1,…,8."""  # nopep8
         return self._cards[2].get_value("mu7")
 
     @mu7.setter
@@ -1355,8 +1113,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu8(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden moduli, with i = 1,…,8."""  # nopep8
         return self._cards[2].get_value("mu8")
 
     @mu8.setter
@@ -1366,8 +1123,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha1(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden constants, with i = 1,…,8."""  # nopep8
         return self._cards[3].get_value("alpha1")
 
     @alpha1.setter
@@ -1377,8 +1133,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha2(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden constants, with i = 1,…,8."""  # nopep8
         return self._cards[3].get_value("alpha2")
 
     @alpha2.setter
@@ -1388,8 +1143,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha3(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden constants, with i = 1,…,8."""  # nopep8
         return self._cards[3].get_value("alpha3")
 
     @alpha3.setter
@@ -1399,8 +1153,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha4(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden constants, with i = 1,…,8."""  # nopep8
         return self._cards[3].get_value("alpha4")
 
     @alpha4.setter
@@ -1410,8 +1163,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha5(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden constants, with i = 1,…,8."""  # nopep8
         return self._cards[3].get_value("alpha5")
 
     @alpha5.setter
@@ -1421,8 +1173,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha6(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden constants, with i = 1,…,8."""  # nopep8
         return self._cards[3].get_value("alpha6")
 
     @alpha6.setter
@@ -1432,8 +1183,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha7(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden constants, with i = 1,…,8."""  # nopep8
         return self._cards[3].get_value("alpha7")
 
     @alpha7.setter
@@ -1443,8 +1193,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha8(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
-        """ # nopep8
+        """Get or set the Ogden constants, with i = 1,…,8."""  # nopep8
         return self._cards[3].get_value("alpha8")
 
     @alpha8.setter
@@ -1454,8 +1203,7 @@ class Mat295(KeywordBase):
 
     @property
     def c1(self) -> typing.Optional[float]:
-        """Get or set the Yeoh moduli, with i = 1,2,3.
-        """ # nopep8
+        """Get or set the Yeoh moduli, with i = 1,2,3."""  # nopep8
         return self._cards[4].get_value("c1")
 
     @c1.setter
@@ -1465,8 +1213,7 @@ class Mat295(KeywordBase):
 
     @property
     def c2(self) -> typing.Optional[float]:
-        """Get or set the Yeoh moduli, with i = 1,2,3.
-        """ # nopep8
+        """Get or set the Yeoh moduli, with i = 1,2,3."""  # nopep8
         return self._cards[4].get_value("c2")
 
     @c2.setter
@@ -1476,8 +1223,7 @@ class Mat295(KeywordBase):
 
     @property
     def c3(self) -> typing.Optional[float]:
-        """Get or set the Yeoh moduli, with i = 1,2,3.
-        """ # nopep8
+        """Get or set the Yeoh moduli, with i = 1,2,3."""  # nopep8
         return self._cards[4].get_value("c3")
 
     @c3.setter
@@ -1487,8 +1233,7 @@ class Mat295(KeywordBase):
 
     @property
     def k1(self) -> typing.Optional[float]:
-        """Get or set the Holzapfel-Ogden modulus.
-        """ # nopep8
+        """Get or set the Holzapfel-Ogden modulus."""  # nopep8
         return self._cards[5].get_value("k1")
 
     @k1.setter
@@ -1498,8 +1243,7 @@ class Mat295(KeywordBase):
 
     @property
     def k2(self) -> typing.Optional[float]:
-        """Get or set the Holzapfel-Ogden constant.
-        """ # nopep8
+        """Get or set the Holzapfel-Ogden constant."""  # nopep8
         return self._cards[5].get_value("k2")
 
     @k2.setter
@@ -1509,15 +1253,14 @@ class Mat295(KeywordBase):
 
     @property
     def anisotropic_title(self) -> str:
-        """Get or set the Module title.
-        """ # nopep8
+        """Get or set the Module title."""  # nopep8
         return self._cards[6].get_value("title")
 
     @property
     def atype(self) -> typing.Optional[int]:
         """Get or set the Type of anisotropic model:
         EQ.-1/+1:	general structure tensor-based, see Holzapfel et al. [8] (see remark 4 and note 4)
-        """ # nopep8
+        """  # nopep8
         return self._cards[6].get_value("atype")
 
     @atype.setter
@@ -1530,7 +1273,7 @@ class Mat295(KeywordBase):
         """Get or set the Type of interaction between the fiber families (see remarks 5 and 6):
         EQ.0:	none
         EQ.1:	Holzapfel-Ogden [1], [5].
-        """ # nopep8
+        """  # nopep8
         return self._cards[6].get_value("intype")
 
     @intype.setter
@@ -1540,8 +1283,7 @@ class Mat295(KeywordBase):
 
     @property
     def nf(self) -> typing.Optional[int]:
-        """Get or set the Number of fiber families (see remark 4).
-        """ # nopep8
+        """Get or set the Number of fiber families (see remark 4)."""  # nopep8
         return self._cards[6].get_value("nf")
 
     @nf.setter
@@ -1550,14 +1292,18 @@ class Mat295(KeywordBase):
         self._cards[6].set_value("nf", value)
 
     @property
-    def fiber_families(self) -> typing.List[FiberFamily]:
-        """Gets the list of fiber_families."""
-        return self._cards[7].items()
+    def anisotropic_settings(self) -> pd.DataFrame:
+        """Gets the full table of anisotropic_settings."""
+        return self._cards[7].table
+
+    @anisotropic_settings.setter
+    def anisotropic_settings(self, df: pd.DataFrame):
+        """sets anisotropic_settings from the dataframe df."""
+        self._cards[7].table = df
 
     @property
     def coupling_k1(self) -> typing.Optional[float]:
-        """Get or set the Coupling modulus between the fiber and sheet directions
-        """ # nopep8
+        """Get or set the Coupling modulus between the fiber and sheet directions"""  # nopep8
         return self._cards[8].get_value("k1")
 
     @coupling_k1.setter
@@ -1567,8 +1313,7 @@ class Mat295(KeywordBase):
 
     @property
     def coupling_k2(self) -> typing.Optional[float]:
-        """Get or set the Coupling constant between the fiber and sheet directions
-        """ # nopep8
+        """Get or set the Coupling constant between the fiber and sheet directions"""  # nopep8
         return self._cards[8].get_value("k2")
 
     @coupling_k2.setter
@@ -1578,8 +1323,7 @@ class Mat295(KeywordBase):
 
     @property
     def active_title(self) -> str:
-        """Get or set the Module title.
-        """ # nopep8
+        """Get or set the Module title."""  # nopep8
         return self._cards[9].get_value("title")
 
     @property
@@ -1590,7 +1334,7 @@ class Mat295(KeywordBase):
         EQ.3:	Hunter-Nash-Sands	[9]
         EQ.4:	Hunter-Nash-Sands [9] and Hunter-McCulloch-ter Keurs [10].
         EQ.5: Martins-Pato-Pires [14]
-        """ # nopep8
+        """  # nopep8
         return self._cards[9].get_value("actype")
 
     @actype.setter
@@ -1600,8 +1344,7 @@ class Mat295(KeywordBase):
 
     @property
     def acdir(self) -> int:
-        """Get or set the Direction of active tension: GT.0:	Active tension develops along the mean orientation of the ACDIRth fiber family.
-        """ # nopep8
+        """Get or set the Direction of active tension: GT.0:	Active tension develops along the mean orientation of the ACDIRth fiber family."""  # nopep8
         return self._cards[9].get_value("acdir")
 
     @acdir.setter
@@ -1611,8 +1354,7 @@ class Mat295(KeywordBase):
 
     @property
     def acid(self) -> typing.Optional[int]:
-        """Get or set the Activation curve ID (takes priority over T0 for ACTYPE = 1, 2, 3, or 4 when defined, see Remark 8
-        """ # nopep8
+        """Get or set the Activation curve ID (takes priority over T0 for ACTYPE = 1, 2, 3, or 4 when defined, see Remark 8"""  # nopep8
         return self._cards[9].get_value("acid")
 
     @acid.setter
@@ -1622,8 +1364,7 @@ class Mat295(KeywordBase):
 
     @property
     def acthr(self) -> float:
-        """Get or set the (De/re)activation threshold (see Remark 8)
-        """ # nopep8
+        """Get or set the (De/re)activation threshold (see Remark 8)"""  # nopep8
         return self._cards[9].get_value("acthr")
 
     @acthr.setter
@@ -1633,8 +1374,7 @@ class Mat295(KeywordBase):
 
     @property
     def sf(self) -> float:
-        """Get or set the Active stress scaling factor in the fiber direction (see Remark 9)
-        """ # nopep8
+        """Get or set the Active stress scaling factor in the fiber direction (see Remark 9)"""  # nopep8
         return self._cards[9].get_value("sf")
 
     @sf.setter
@@ -1644,8 +1384,7 @@ class Mat295(KeywordBase):
 
     @property
     def ss(self) -> float:
-        """Get or set the Active stress scaling factor in the transverse sheet direction (see Remark 9)
-        """ # nopep8
+        """Get or set the Active stress scaling factor in the transverse sheet direction (see Remark 9)"""  # nopep8
         return self._cards[9].get_value("ss")
 
     @ss.setter
@@ -1655,8 +1394,7 @@ class Mat295(KeywordBase):
 
     @property
     def sn(self) -> float:
-        """Get or set the Active stress scaling factor in the transverse normal direction (see Remark 9)
-        """ # nopep8
+        """Get or set the Active stress scaling factor in the transverse normal direction (see Remark 9)"""  # nopep8
         return self._cards[9].get_value("sn")
 
     @sn.setter
@@ -1666,8 +1404,7 @@ class Mat295(KeywordBase):
 
     @property
     def t0(self) -> typing.Optional[float]:
-        """Get or set the Starting time of active stress development.
-        """ # nopep8
+        """Get or set the Starting time of active stress development."""  # nopep8
         return self._cards[10].get_value("t0")
 
     @t0.setter
@@ -1679,8 +1416,7 @@ class Mat295(KeywordBase):
 
     @property
     def ca2ion(self) -> typing.Optional[float]:
-        """Get or set the Intercellular calcium ion concentration
-        """ # nopep8
+        """Get or set the Intercellular calcium ion concentration"""  # nopep8
         return self._cards[10].get_value("ca2ion")
 
     @ca2ion.setter
@@ -1691,8 +1427,7 @@ class Mat295(KeywordBase):
 
     @property
     def ca2ionm(self) -> typing.Optional[float]:
-        """Get or set the Maximum intercellular calcium ion concentration.
-        """ # nopep8
+        """Get or set the Maximum intercellular calcium ion concentration."""  # nopep8
         return self._cards[10].get_value("ca2ionm")
 
     @ca2ionm.setter
@@ -1702,8 +1437,7 @@ class Mat295(KeywordBase):
 
     @property
     def n(self) -> typing.Optional[float]:
-        """Get or set the Hill coefficient.
-        """ # nopep8
+        """Get or set the Hill coefficient."""  # nopep8
         return self._cards[10].get_value("n")
 
     @n.setter
@@ -1715,8 +1449,7 @@ class Mat295(KeywordBase):
 
     @property
     def taumax(self) -> typing.Optional[float]:
-        """Get or set the Peak isometric tension under maximum activation.
-        """ # nopep8
+        """Get or set the Peak isometric tension under maximum activation."""  # nopep8
         return self._cards[10].get_value("taumax")
 
     @taumax.setter
@@ -1726,8 +1459,7 @@ class Mat295(KeywordBase):
 
     @property
     def stf(self) -> typing.Optional[float]:
-        """Get or set the Transverse fiber stress scaling factor.
-        """ # nopep8
+        """Get or set the Transverse fiber stress scaling factor."""  # nopep8
         return self._cards[10].get_value("stf")
 
     @stf.setter
@@ -1737,8 +1469,7 @@ class Mat295(KeywordBase):
 
     @property
     def b(self) -> typing.Optional[float]:
-        """Get or set the Shape coefficient.
-        """ # nopep8
+        """Get or set the Shape coefficient."""  # nopep8
         return self._cards[10].get_value("b")
 
     @b.setter
@@ -1748,8 +1479,7 @@ class Mat295(KeywordBase):
 
     @property
     def l0(self) -> typing.Optional[float]:
-        """Get or set the Sarcomere length with no active tension.
-        """ # nopep8
+        """Get or set the Sarcomere length with no active tension."""  # nopep8
         return self._cards[10].get_value("l0")
 
     @l0.setter
@@ -1759,8 +1489,7 @@ class Mat295(KeywordBase):
 
     @property
     def l(self) -> typing.Optional[float]:
-        """Get or set the Reference (stress-free) sarcomere length.
-        """ # nopep8
+        """Get or set the Reference (stress-free) sarcomere length."""  # nopep8
         return self._cards[11].get_value("l")
 
     @l.setter
@@ -1773,8 +1502,7 @@ class Mat295(KeywordBase):
 
     @property
     def dtmax(self) -> typing.Optional[float]:
-        """Get or set the Time to peak tension.
-        """ # nopep8
+        """Get or set the Time to peak tension."""  # nopep8
         return self._cards[11].get_value("dtmax")
 
     @dtmax.setter
@@ -1784,8 +1512,7 @@ class Mat295(KeywordBase):
 
     @property
     def mr(self) -> typing.Optional[float]:
-        """Get or set the Slope of linear relaxation versus sarcomere length relation.
-        """ # nopep8
+        """Get or set the Slope of linear relaxation versus sarcomere length relation."""  # nopep8
         return self._cards[11].get_value("mr")
 
     @mr.setter
@@ -1795,8 +1522,7 @@ class Mat295(KeywordBase):
 
     @property
     def tr(self) -> typing.Optional[float]:
-        """Get or set the Time intercept of linear relaxation versus sarcomere length relation.
-        """ # nopep8
+        """Get or set the Time intercept of linear relaxation versus sarcomere length relation."""  # nopep8
         return self._cards[11].get_value("tr")
 
     @tr.setter
@@ -1806,8 +1532,7 @@ class Mat295(KeywordBase):
 
     @property
     def eta(self) -> typing.Optional[float]:
-        """Get or set the Scaling parameter.
-        """ # nopep8
+        """Get or set the Scaling parameter."""  # nopep8
         return self._cards[12].get_value("eta")
 
     @eta.setter
@@ -1819,8 +1544,7 @@ class Mat295(KeywordBase):
 
     @property
     def ca2ion50(self) -> typing.Optional[float]:
-        """Get or set the Intercellular calcium ion concentration at half of peak isometric tension.
-        """ # nopep8
+        """Get or set the Intercellular calcium ion concentration at half of peak isometric tension."""  # nopep8
         return self._cards[13].get_value("ca2ion50")
 
     @ca2ion50.setter
@@ -1831,8 +1555,7 @@ class Mat295(KeywordBase):
 
     @property
     def sigmax(self) -> typing.Optional[float]:
-        """Get or set the Peak isometric tension under maximum activation.
-        """ # nopep8
+        """Get or set the Peak isometric tension under maximum activation."""  # nopep8
         return self._cards[13].get_value("sigmax")
 
     @sigmax.setter
@@ -1843,8 +1566,7 @@ class Mat295(KeywordBase):
 
     @property
     def f(self) -> typing.Optional[float]:
-        """Get or set the Transverse fiber stress scaling factor.
-        """ # nopep8
+        """Get or set the Transverse fiber stress scaling factor."""  # nopep8
         return self._cards[13].get_value("f")
 
     @f.setter
@@ -1855,8 +1577,7 @@ class Mat295(KeywordBase):
 
     @property
     def ca2ionmax(self) -> typing.Optional[float]:
-        """Get or set the Maximum intercellular calcium ion concentration.
-        """ # nopep8
+        """Get or set the Maximum intercellular calcium ion concentration."""  # nopep8
         return self._cards[14].get_value("ca2ionmax")
 
     @ca2ionmax.setter
@@ -1866,8 +1587,7 @@ class Mat295(KeywordBase):
 
     @property
     def ca2ion0(self) -> typing.Optional[float]:
-        """Get or set the Intercellular calcium ion concentration at rest.
-        """ # nopep8
+        """Get or set the Intercellular calcium ion concentration at rest."""  # nopep8
         return self._cards[14].get_value("ca2ion0")
 
     @ca2ion0.setter
@@ -1877,8 +1597,7 @@ class Mat295(KeywordBase):
 
     @property
     def tca(self) -> typing.Optional[float]:
-        """Get or set the Shape coefficient.
-        """ # nopep8
+        """Get or set the Shape coefficient."""  # nopep8
         return self._cards[14].get_value("tca")
 
     @tca.setter
@@ -1888,8 +1607,7 @@ class Mat295(KeywordBase):
 
     @property
     def fseid(self) -> typing.Optional[int]:
-        """Get or set the Serial stress function ID
-        """ # nopep8
+        """Get or set the Serial stress function ID"""  # nopep8
         return self._cards[16].get_value("fseid")
 
     @fseid.setter
@@ -1899,8 +1617,7 @@ class Mat295(KeywordBase):
 
     @property
     def flid(self) -> typing.Optional[int]:
-        """Get or set the Normalized force-contractile stretch curve ID
-        """ # nopep8
+        """Get or set the Normalized force-contractile stretch curve ID"""  # nopep8
         return self._cards[16].get_value("flid")
 
     @flid.setter
@@ -1910,8 +1627,7 @@ class Mat295(KeywordBase):
 
     @property
     def fvid(self) -> typing.Optional[int]:
-        """Get or set the Normalized force-contractile stretch rate curve ID
-        """ # nopep8
+        """Get or set the Normalized force-contractile stretch rate curve ID"""  # nopep8
         return self._cards[16].get_value("fvid")
 
     @fvid.setter
@@ -1921,8 +1637,7 @@ class Mat295(KeywordBase):
 
     @property
     def alphaid(self) -> typing.Optional[int]:
-        """Get or set the Activation curve ID
-        """ # nopep8
+        """Get or set the Activation curve ID"""  # nopep8
         return self._cards[16].get_value("alphaid")
 
     @alphaid.setter
@@ -1932,8 +1647,7 @@ class Mat295(KeywordBase):
 
     @property
     def xp(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of point  for AOPT = 1 and 4.
-        """ # nopep8
+        """Get or set the Coordinates of point  for AOPT = 1 and 4."""  # nopep8
         return self._cards[17].get_value("xp")
 
     @xp.setter
@@ -1943,8 +1657,7 @@ class Mat295(KeywordBase):
 
     @property
     def yp(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of point  for AOPT = 1 and 4.
-        """ # nopep8
+        """Get or set the Coordinates of point  for AOPT = 1 and 4."""  # nopep8
         return self._cards[17].get_value("yp")
 
     @yp.setter
@@ -1954,8 +1667,7 @@ class Mat295(KeywordBase):
 
     @property
     def zp(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of point  for AOPT = 1 and 4.
-        """ # nopep8
+        """Get or set the Coordinates of point  for AOPT = 1 and 4."""  # nopep8
         return self._cards[17].get_value("zp")
 
     @zp.setter
@@ -1965,8 +1677,7 @@ class Mat295(KeywordBase):
 
     @property
     def a1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector  for AOPT = 2.
-        """ # nopep8
+        """Get or set the Components of vector  for AOPT = 2."""  # nopep8
         return self._cards[17].get_value("a1")
 
     @a1.setter
@@ -1976,8 +1687,7 @@ class Mat295(KeywordBase):
 
     @property
     def a2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector  for AOPT = 2.
-        """ # nopep8
+        """Get or set the Components of vector  for AOPT = 2."""  # nopep8
         return self._cards[17].get_value("a2")
 
     @a2.setter
@@ -1987,8 +1697,7 @@ class Mat295(KeywordBase):
 
     @property
     def a3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector  for AOPT = 2.
-        """ # nopep8
+        """Get or set the Components of vector  for AOPT = 2."""  # nopep8
         return self._cards[17].get_value("a3")
 
     @a3.setter
@@ -2003,7 +1712,7 @@ class Mat295(KeywordBase):
         EQ.2:	switch material axes a and b
         EQ.3:	switch material axes a and c
         EQ.4:	switch material axes b and c.
-        """ # nopep8
+        """  # nopep8
         return self._cards[17].get_value("macf")
 
     @macf.setter
@@ -2015,8 +1724,7 @@ class Mat295(KeywordBase):
 
     @property
     def v1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector  for AOPT = 3 and 4.
-        """ # nopep8
+        """Get or set the Components of vector  for AOPT = 3 and 4."""  # nopep8
         return self._cards[18].get_value("v1")
 
     @v1.setter
@@ -2026,8 +1734,7 @@ class Mat295(KeywordBase):
 
     @property
     def v2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector  for AOPT = 3 and 4.
-        """ # nopep8
+        """Get or set the Components of vector  for AOPT = 3 and 4."""  # nopep8
         return self._cards[18].get_value("v2")
 
     @v2.setter
@@ -2037,8 +1744,7 @@ class Mat295(KeywordBase):
 
     @property
     def v3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector  for AOPT = 3 and 4.
-        """ # nopep8
+        """Get or set the Components of vector  for AOPT = 3 and 4."""  # nopep8
         return self._cards[18].get_value("v3")
 
     @v3.setter
@@ -2048,8 +1754,7 @@ class Mat295(KeywordBase):
 
     @property
     def d1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector  for AOPT = 2.
-        """ # nopep8
+        """Get or set the Components of vector  for AOPT = 2."""  # nopep8
         return self._cards[18].get_value("d1")
 
     @d1.setter
@@ -2059,8 +1764,7 @@ class Mat295(KeywordBase):
 
     @property
     def d2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector  for AOPT = 2.
-        """ # nopep8
+        """Get or set the Components of vector  for AOPT = 2."""  # nopep8
         return self._cards[18].get_value("d2")
 
     @d2.setter
@@ -2070,8 +1774,7 @@ class Mat295(KeywordBase):
 
     @property
     def d3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector  for AOPT = 2.
-        """ # nopep8
+        """Get or set the Components of vector  for AOPT = 2."""  # nopep8
         return self._cards[18].get_value("d3")
 
     @d3.setter
@@ -2084,7 +1787,7 @@ class Mat295(KeywordBase):
         """Get or set the Material angle in degrees for AOPT = 0 (shells and thick shells only) and AOPT = 3 (all element types).
         This angle may be overridden on the element card;
         see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
-        """ # nopep8
+        """  # nopep8
         return self._cards[18].get_value("beta")
 
     @material_angle_beta.setter
@@ -2098,7 +1801,7 @@ class Mat295(KeywordBase):
         *INITIAL_FOAM_REFERENCE_GEOMETRY.
         EQ.0.0:	off
         EQ.1.0:	on.
-        """ # nopep8
+        """  # nopep8
         return self._cards[18].get_value("ref")
 
     @ref.setter
@@ -2108,8 +1811,7 @@ class Mat295(KeywordBase):
 
     @property
     def title(self) -> typing.Optional[str]:
-        """Get or set the Additional title line
-        """ # nopep8
+        """Get or set the Additional title line"""  # nopep8
         return self._cards[19].cards[0].get_value("title")
 
     @title.setter
@@ -2121,6 +1823,7 @@ class Mat295(KeywordBase):
             self.activate_option("TITLE")
 
 
-class MatAnisotropicHyperelastic(Mat295):
-    """Alias for MAT keyword."""
+class MatAnisotropicHyperelasticLegacy(Mat295Legacy):
+    """Legacy alias for MAT_ANISOTROPIC_HYPERELASTIC keyword."""
+
     subkeyword = "ANISOTROPIC_HYPERELASTIC"

@@ -1213,18 +1213,7 @@
                     "index": 6,
                     "func": "self.atype and abs(self.atype) == 1"
                 },
-                {
-                    "index": 7,
-                    "func": "self.atype and abs(self.atype) == 1"
-                },
-                {
-                    "index": 8,
-                    "func": "self.atype and abs(self.atype) == 1 and self.ftype == 1"
-                },
-                {
-                    "index": 9,
-                    "func": "self.atype and abs(self.atype) == 1 and self.ftype == 2"
-                },
+
                 {
                     "index": 10,
                     "func": "self.atype and abs(self.atype) == 1 and self.intype == 1"
@@ -1270,16 +1259,25 @@
                     "func": "self.atype and abs(self.atype) == 1"
                 }
             ],
-            "table-card-group": [
+            "card-set": [
                 {
-                    "indices": [
-                        7,
-                        8,
-                        9
-                    ],
-                    "overall-name": "anisotropic_settings",
+                    "source-indices": [7, 8, 9],
+                    "target-index": 7,
+                    "name": "FiberFamily",
+                    "length-func": "self.nf or 0",
                     "active-func": "self.atype and abs(self.atype) == 1",
-                    "length-func": "self.nf or 0"
+                    "items-name": "fiber_families",
+                    "discriminator": {
+                        "field": "ftype",
+                        "cards-with-field": [1, 2]
+                    },
+                    "internal-conditionals": [
+                        {"index": 1, "func": "self.ftype == 1"},
+                        {"index": 2, "func": "self.ftype == 2"}
+                    ],
+                    "shared-fields": [
+                        {"name": "ftype", "card-indices": [1, 2]}
+                    ]
                 }
             ],
             "shared-field": [
@@ -2013,12 +2011,12 @@
                 {
                     "index": 1,
                     "property-name": "strains",
-                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 0",
+                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
                     "active-func": "self.large == None or self.large == 0"
                 }
             ]
         },
-        "comment": "TODO(1) - self.large==1 has different cards that aren't defined here."
+        "comment": "Per LS-DYNA manual: when nplane=0 or nthick=0, read 2 strain cards (inner and outer integration points). TODO: self.large==1 implies a different card format."
     },
     "INITIAL_STRESS_SHELL": {
         "generation-options": {
@@ -2031,7 +2029,7 @@
                     "target-index": 1,
                     "target-name": "InitialStressShellCardSet",
                     "name": "InitialStressShellThicknessLargeCardSet",
-                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 0",
+                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
                     "active-func": "self.large == None or self.large == 0"
                 },
                 {
@@ -2054,7 +2052,7 @@
                 }
             ]
         },
-        "comment": "TODO(1) - self.large==1 has different cards that aren't defined here."
+        "comment": "Per LS-DYNA manual: when nplane=0 or nthick=0, read 2 stress cards (inner and outer integration points). TODO: self.large==1 has different card format (tracked separately)."
     },
     "INITIAL_TEMPERATURE_NODE": {
         "generation-options": {

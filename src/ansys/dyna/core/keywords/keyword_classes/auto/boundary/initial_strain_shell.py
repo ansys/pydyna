@@ -111,7 +111,7 @@ class InitialStrainShellCardSet(Cards):
                     Field("epszx", float, 50, 10, 0.0),
                     Field("t", float, 60, 10, 0.0),
                 ],
-                lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 0,
+                lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 lambda: self.large == None or self.large == 0,
                 name="strains",
                 **kwargs,
@@ -195,7 +195,6 @@ class InitialStrainShellCardSet(Cards):
     def parent(self) -> KeywordBase:
         """Get the parent keyword."""
         return self._parent
-
 
 class InitialStrainShell(KeywordBase):
     """DYNA INITIAL_STRAIN_SHELL keyword"""
@@ -292,6 +291,6 @@ class InitialStrainShell(KeywordBase):
         return self._cards[0].items()
 
     def add_set(self, **kwargs):
-        """Adds a set to the list of sets."""
+        """Adds a set."""
         self._cards[0].add_item(**kwargs)
 

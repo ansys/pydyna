@@ -2,6 +2,7 @@
 
 ## Project Lead
 
+* [Mohamed Koubaa](https://github.com/koubaa)
 * [Srikanth Adya](https://github.com/kanthadya)
 * [Zhanqun Zhang](https://github.com/zhangzhanqun)
 
@@ -17,7 +18,6 @@
 * [Kerry McAdams](https://github.com/klmcadams)
 * [Maxime Rey](https://github.com/MaxJPRey)
 * [Maxjrey](https://github.com/Maxjrey)
-* [Mohamed Koubaa](https://github.com/koubaa)
 * [Ramsobhan Kokkiligadda](https://github.com/rs-bh-n)
 * [Raphael Heiniger](https://github.com/RaphaelHeiniger)
 * [Revathy Venugopal](https://github.com/Revathyvenugopal162)

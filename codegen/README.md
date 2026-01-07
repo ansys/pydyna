@@ -43,6 +43,77 @@ It is recommended to use a virtual environment
 - To remove all the generated code:
 ``python codegen/generate.py -c``
 
+### Validation Script
+
+A comprehensive validation script is provided to encapsulate the complete testing workflow used by both developers and CI:
+
+```bash
+# Full validation (clean, generate, git diff, pre-commit, dead code, unit tests)
+bash codegen/validate.sh
+
+# Quick validation for fast iteration (clean, generate, git diff only)
+bash codegen/validate.sh --quick
+
+# Custom validation (skip specific steps)
+bash codegen/validate.sh --skip-tests --skip-deadcode
+bash codegen/validate.sh --skip-precommit
+
+# Adjust dead code coverage threshold
+bash codegen/validate.sh --coverage-threshold 90
+
+# Verbose output for debugging
+bash codegen/validate.sh --verbose
+```
+
+**Bash Aliases (add to `~/.bashrc` or `~/.bash_profile`):**
+
+```bash
+# Navigate to pydyna root (adjust path as needed)
+alias pydyna='cd /c/AnsysDev/code/pyansys/pydyna'
+
+# Codegen shortcuts
+alias codegen-validate='bash codegen/validate.sh'
+alias codegen-quick='bash codegen/validate.sh --quick'
+alias codegen-full='bash codegen/validate.sh'
+alias codegen-clean='python codegen/generate.py -c && python codegen/generate.py'
+alias codegen-test='pytest -m codegen'
+
+# Common workflows
+alias codegen-check='bash codegen/validate.sh --skip-tests --skip-deadcode'
+alias codegen-dev='python codegen/generate.py -l DEBUG'
+```
+
+**Usage Examples:**
+
+```bash
+# Quick iteration while developing handlers
+codegen-quick
+
+# Full validation before pushing
+codegen-validate
+
+# Check output without running tests
+codegen-check
+
+# Generate with debug logging
+codegen-dev -k SECTION_SHELL
+```
+
+### Output Validation
+
+The CI system automatically validates that generated keyword classes remain unchanged after code generation runs. This ensures that refactoring the codegen system doesn't inadvertently modify the output. To manually validate output locally:
+
+```bash
+# Clean and regenerate to validate output hasn't changed
+python codegen/generate.py -c
+python codegen/generate.py
+git diff src/ansys/dyna/core/keywords/keyword_classes/auto/
+```
+
+If `git diff` shows changes, either:
+1. The codegen logic has a bug that needs fixing
+2. The changes are intentional (e.g., new handlers or template improvements) and should be committed
+
 ### Logging
 
 The code generator includes comprehensive logging to help debug and understand the generation process:
@@ -112,6 +183,13 @@ Supplements include:
     - Adding option cards ("add-option")
     - A field shared across multiple cards with only one meaning ("shared-field")
 
+## Extending the generation system
+
+In some cases, the generation system can be difficult to extend to support the semantics of a keyword,
+especially if the functionality in the keyword library (ansys/dyna/core/lib) is lacking. In those cases, an
+effective strategy is to hand-write  the keyword, extending the keyword library as needed, and then working
+backwards to update the code-generation system to produce an equivalent keyword, and finally deleting the
+hand-written keyword.
 
 ## Appendix A
 

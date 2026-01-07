@@ -33,9 +33,76 @@ import typing
 from typing import Any, Dict, List, Optional
 
 import keyword_generation.data_model as gen
-from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.keyword_data import Field, KeywordData
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+
+@dataclass
+class DiscriminatorConfig:
+    """Configuration for a discriminator field that determines which card variant to use.
+
+    A discriminator is a field whose value determines which of multiple mutually-exclusive
+    cards should be active. This is used for patterns like MAT_295 fiber families where
+    FTYPE=1 means use card format A, FTYPE=2 means use card format B.
+
+    The field position, width, and default value are obtained from the Field object at
+    runtime, so only the field name and which cards contain it need to be specified.
+    """
+
+    field: str  # Field name (e.g., "ftype")
+    cards_with_field: List[int] = None  # Card indices containing this field
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "DiscriminatorConfig":
+        return cls(
+            field=data["field"],
+            cards_with_field=data.get("cards-with-field"),
+        )
+
+
+@dataclass
+class InternalConditional:
+    """Configuration for a conditional on a card within a CardSet.
+
+    Unlike regular conditional-card which references the parent keyword's fields,
+    internal conditionals reference fields within the CardSet item itself (self.ftype, etc).
+    """
+
+    index: int  # Card index within the card set (0-based after mapping)
+    func: str  # Conditional function (e.g., "self.ftype == 1")
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "InternalConditional":
+        return cls(
+            index=data["index"],
+            func=data["func"],
+        )
+
+
+@dataclass
+class SharedFieldConfig:
+    """Configuration for a field shared across multiple mutually-exclusive cards.
+
+    When the same field (like ftype) appears in multiple cards, we need
+    property accessors that read from the active card and set on all cards.
+    This is distinct from the shared_field handler which handles fields
+    shared across base/option cards.
+    """
+
+    name: str  # Field name (e.g., "ftype")
+    card_indices: List[int]  # Card indices containing this field
+    source_index: Optional[int] = None  # Card index to use for metadata (type, help); defaults to first
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "SharedFieldConfig":
+        card_indices = data["card-indices"]
+        source_index = data.get("source-index", card_indices[0] if card_indices else 0)
+        return cls(
+            name=data["name"],
+            card_indices=card_indices,
+            source_index=source_index,
+        )
 
 
 @dataclass
@@ -47,15 +114,42 @@ class CardSetSettings:
     length_func: Optional[str] = None
     active_func: Optional[str] = None
     options: Optional[List[Dict[str, Any]]] = None
+    discriminator: Optional[DiscriminatorConfig] = None
+    internal_conditionals: Optional[List[InternalConditional]] = None
+    shared_fields: Optional[List[SharedFieldConfig]] = None
+    item_name: Optional[str] = None  # Singular name for items (e.g., "fiber_family")
+    items_name: Optional[str] = None  # Plural name for items (e.g., "fiber_families")
+
+    @property
+    def bounded(self) -> bool:
+        """CardSet is bounded if length_func is defined (size controlled externally)."""
+        return self.length_func is not None
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "CardSetSettings":
+        discriminator = None
+        if "discriminator" in data:
+            discriminator = DiscriminatorConfig.from_dict(data["discriminator"])
+
+        internal_conditionals = None
+        if "internal-conditionals" in data:
+            internal_conditionals = [InternalConditional.from_dict(c) for c in data["internal-conditionals"]]
+
+        shared_fields = None
+        if "shared-fields" in data:
+            shared_fields = [SharedFieldConfig.from_dict(f) for f in data["shared-fields"]]
+
         return cls(
             name=data["name"],
             source_indices=data["source-indices"],
             length_func=data.get("length-func"),
             active_func=data.get("active-func"),
             options=data.get("options"),
+            discriminator=discriminator,
+            internal_conditionals=internal_conditionals,
+            shared_fields=shared_fields,
+            item_name=data.get("item-name"),
+            items_name=data.get("items-name"),
         )
 
 
@@ -185,13 +279,84 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                         card_set["options"].extend([option])
                     source_option["mark_for_removal"] = 1
 
+            # Add discriminator configuration if present
+            if "discriminator" in card_settings:
+                disc_config = DiscriminatorConfig.from_dict(card_settings["discriminator"])
+                card_set["discriminator"] = {
+                    "field": disc_config.field,
+                    "cards_with_field": disc_config.cards_with_field,
+                }
+
+            # Add internal conditionals if present
+            if "internal-conditionals" in card_settings:
+                internal_conds = [InternalConditional.from_dict(c) for c in card_settings["internal-conditionals"]]
+                card_set["internal_conditionals"] = [{"index": c.index, "func": c.func} for c in internal_conds]
+                # Apply conditionals to the source cards
+                for cond in internal_conds:
+                    if cond.index < len(card_set["source_cards"]):
+                        card_set["source_cards"][cond.index]["func"] = cond.func
+
+            # Add shared fields if present (fields shared across mutually-exclusive cards)
+            if "shared-fields" in card_settings:
+                shared = [SharedFieldConfig.from_dict(f) for f in card_settings["shared-fields"]]
+                shared_fields_data = []
+                for shared_field in shared:
+                    # Get metadata from source_index card, mark all as redundant
+                    field_type = "int"
+                    field_help = shared_field.name
+                    for card_idx in shared_field.card_indices:
+                        if card_idx < len(card_set["source_cards"]):
+                            source_card = card_set["source_cards"][card_idx]
+                            for field in source_card.get("fields", []):
+                                if field.get("name", "").lower() == shared_field.name.lower():
+                                    # TODO: Type normalization should happen earlier in pipeline
+                                    if isinstance(field, Field):
+                                        field.normalize()
+                                        if card_idx == shared_field.source_index:
+                                            field_type = field.type
+                                            field_help = field.help or shared_field.name
+                                        field.redundant = True
+                                    else:
+                                        from keyword_generation.generators.class_generator import (
+                                            _normalize_field_dict,
+                                        )
+
+                                        _normalize_field_dict(field)
+                                        if card_idx == shared_field.source_index:
+                                            field_type = field.get("type", "int")
+                                            field_help = field.get("help", shared_field.name)
+                                        field["redundant"] = True
+                    shared_fields_data.append(
+                        {
+                            "name": shared_field.name,
+                            "card_indices": shared_field.card_indices,
+                            "type": field_type,
+                            "help": field_help,
+                        }
+                    )
+                card_set["shared_fields"] = shared_fields_data
+
+            # Bounded is inferred from length-func: if set, CardSet size is controlled externally
+            is_bounded = bool(card_settings.get("length-func"))
+            card_set["bounded"] = is_bounded
+
+            # Set item names with defaults
+            item_name = card_settings.get("item-name", "set")
+            items_name = card_settings.get("items-name", "sets")
+            card_set["item_name"] = item_name
+            card_set["items_name"] = items_name
+
+            length_func = card_settings.get("length-func", "")
             card = {
                 "set": {"name": card_settings["name"]},
                 "fields": [],
                 "index": card_settings["target-index"],
                 "target_index": card_settings["target-index"],
-                "length_func": card_settings.get("length-func", ""),
+                "length_func": length_func,
                 "active_func": card_settings.get("active-func", ""),
+                "bounded": is_bounded,
+                "item_name": item_name,
+                "items_name": items_name,
             }
             target_name = card_settings.get("target-name", "")
             target_index = card_settings["target-index"]

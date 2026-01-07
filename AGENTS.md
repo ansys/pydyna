@@ -3,19 +3,17 @@ Assume an appropriate virtual environment is activated. If it isn't, just abort.
 
 ## Agent Hints
 
-**CRITIAL: Ensure working directory**. Sometimes agents will change working directories as part of tasks and forget to change them back.
-pydyna agent documentation and scripts are often sensitive to working directory, so recommended to check the pwd before each agent operation
-if unsure.
-
-**CRITICAL: Never redirect output to /dev/null on Windows**. This triggers a VS Code security prompt that halts execution. Instead:
-- For commands where you want to suppress output: Use `>$null 2>&1` (PowerShell) or just run the command without redirection
-- For commands where you want to check output: Use `python codegen/generate.py 2>&1 | Out-Null` or capture in a variable
+**CRITICAL: Shell-specific output redirection**:
+- **In PowerShell**: Use `>$null 2>&1` (never use `/dev/null` - triggers VS Code security prompt)
+- **In Bash**: Use `>/dev/null 2>&1` (standard Unix redirection)
+- For commands where you want to suppress output: Use appropriate shell redirection or just run without redirection
+- For commands where you want to check output: Capture in a variable or use `| Out-Null` (PowerShell)
 - For checking if a command succeeded: Just run it normally and check `$?` or `$LASTEXITCODE`
 - Examples:
-  - ❌ BAD: `python codegen/generate.py >/dev/null 2>&1`
-  - ✅ GOOD: `python codegen/generate.py >$null 2>&1`
-  - ✅ GOOD: `python codegen/generate.py` (no redirection)
-  - ✅ GOOD: `$output = python codegen/generate.py 2>&1`
+  - ❌ BAD (PowerShell): `python codegen/generate.py >/dev/null 2>&1`
+  - ✅ GOOD (PowerShell): `python codegen/generate.py >$null 2>&1`
+  - ✅ GOOD (Bash): `python codegen/generate.py >/dev/null 2>&1`
+  - ✅ GOOD (Any): `python codegen/generate.py` (no redirection)
 
 **Documentation builds**: To build docs without examples:
 
@@ -54,8 +52,8 @@ Run `pre-commit run --all-files` after changes
 
 Detailed documentation for common tasks and patterns:
 
+- **[agents/codegen.md](agents/codegen.md)**: **CODE GENERATION SYSTEM** - Complete guide for working with the codegen pipeline, handlers, validation workflow, auto-generated classes, and manual subclasses.
 - **[agents/linked_keywords.md](agents/linked_keywords.md)**: How to expose relationships between keywords (e.g., DefineTable → DefineCurve) using properties and import handlers.
-- **[agents/codegen.md](agents/codegen.md)**: How to work with auto-generated keyword classes and create manual subclasses for customizations.
 
 ## Notes on the Keyword Submodule
 

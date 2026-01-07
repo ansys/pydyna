@@ -21,13 +21,15 @@
 
 {% elif card.set %}
     @property
-    def sets(self) -> typing.List[{{card.set.name}}]:
-        """Gets the list of sets."""
+    def {{card.items_name}}(self) -> typing.List[{{card.set.name}}]:
+        """Gets the list of {{card.items_name}}."""
         return self._cards[{{card.target_index}}].items()
+{% if not card.bounded %}
 
-    def add_set(self, **kwargs):
-        """Adds a set to the list of sets."""
+    def add_{{card.item_name}}(self, **kwargs):
+        """Adds a {{card.item_name}}."""
         self._cards[{{card.target_index}}].add_item(**kwargs)
+{% endif %}
 
 {% elif card.duplicate_group %}
     @property

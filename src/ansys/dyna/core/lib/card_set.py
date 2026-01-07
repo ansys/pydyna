@@ -152,7 +152,29 @@ class CardSet(CardInterface):
         return write_or_return(buf, _write)
 
     def _read_item_cards(self, buf: typing.TextIO, index: int, parameter_set: ParameterSet) -> bool:
+        """Read cards for a single item in the set.
+
+        If the item has a custom `_read_data` method, use it for reading.
+        This allows CardSet items to implement custom read logic for cases
+        where card activation depends on values within those cards (e.g.,
+        MAT_295 fiber families where ftype determines which card format to use).
+
+        Args:
+            buf: The text buffer to read from.
+            index: The index of the item to read.
+            parameter_set: Optional parameter set for substitution.
+
+        Returns:
+            True if the reader hit the end of the keyword early, False otherwise.
+            Custom `_read_data` methods should also return a boolean with this meaning.
+        """
         item = self._items[index]
+
+        # Check if item has custom read logic
+        if hasattr(item, "_read_data"):
+            return item._read_data(buf, parameter_set)
+
+        # Default: iterate through all cards
         for card in item._get_all_cards():
             ret = card.read(buf, parameter_set)
             if ret:
@@ -174,7 +196,6 @@ class CardSet(CardInterface):
             index += 1
             self._read_item_cards(buf, index, parameter_set)
             if at_end_of_keyword(buf):
-                # the buffer is at the end of the keyword, exit
                 return
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
@@ -185,6 +206,68 @@ class CardSet(CardInterface):
         else:
             self._load_unbounded_from_buffer(buf, parameter_set)
             return True
+
+
+def read_cards_with_discriminator(
+    cards: typing.List,
+    buf: typing.TextIO,
+    parameters,
+    discriminator: "Field",
+    cards_with_field: typing.List[int],
+) -> bool:
+    """Read cards where a discriminator field determines which card variant to use.
+
+    This handles the "chicken-and-egg" problem where card conditionals depend on a
+    field value that is IN those very cards. The solution:
+    1. Read non-discriminator cards first (cards before the first discriminator card)
+    2. Peek at next line to extract the discriminator field value
+    3. Set the field on all cards that have it (so conditionals evaluate correctly)
+    4. Read remaining cards (only active ones will consume data)
+
+    Args:
+        cards: List of Card objects in the CardSet item
+        buf: Text buffer to read from
+        parameters: Parameter set for substitution
+        discriminator: Field instance with name, offset, width, and default value
+        cards_with_field: List of card indices that contain the discriminator field
+
+    Returns:
+        True if the reader hit end of keyword early, False otherwise.
+    """
+    from ansys.dyna.core.lib.kwd_line_formatter import read_line
+
+    first_discriminator_card = min(cards_with_field)
+
+    # Read non-discriminator cards first
+    for i, card in enumerate(cards):
+        if i >= first_discriminator_card:
+            break
+        card.read(buf, parameters)
+
+    # Peek at next line to determine discriminator value
+    pos = buf.tell()
+    line, _ = read_line(buf)
+    buf.seek(pos)
+
+    # Parse discriminator field value using Field's offset and width
+    default_val = discriminator.value if discriminator.value is not None else 1
+    try:
+        end_pos = discriminator.offset + discriminator.width
+        field_str = line[discriminator.offset : end_pos].strip()
+        field_val = int(field_str) if field_str else default_val
+    except (ValueError, IndexError):
+        field_val = default_val
+
+    # Set field on all cards that have it so conditionals work
+    for card_idx in cards_with_field:
+        cards[card_idx].set_value(discriminator.name, field_val)
+
+    # Read remaining cards (only active ones will consume data)
+    for i, card in enumerate(cards):
+        if i >= first_discriminator_card:
+            card.read(buf, parameters)
+
+    return False
 
 
 def ensure_card_set_properties(kwd, for_setter: bool) -> None:

@@ -215,7 +215,6 @@ class InitialStressShellThicknessLargeCardSet(Cards):
         """Get the parent keyword."""
         return self._parent
 
-
 class InitialStressShellCardSet(Cards):
     """ CardSet."""
 
@@ -294,7 +293,7 @@ class InitialStressShellCardSet(Cards):
             ),
             CardSet(
                 InitialStressShellThicknessLargeCardSet,
-                length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 0,
+                length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == None or self.large == 0,
                 **kwargs
             ),
@@ -395,15 +394,10 @@ class InitialStressShellCardSet(Cards):
         """Gets the list of sets."""
         return self._cards[1].items()
 
-    def add_set(self, **kwargs):
-        """Adds a set to the list of sets."""
-        self._cards[1].add_item(**kwargs)
-
     @property
     def parent(self) -> KeywordBase:
         """Get the parent keyword."""
         return self._parent
-
 
 class InitialStressShell(KeywordBase):
     """DYNA INITIAL_STRESS_SHELL keyword"""
@@ -525,6 +519,6 @@ class InitialStressShell(KeywordBase):
         return self._cards[0].items()
 
     def add_set(self, **kwargs):
-        """Adds a set to the list of sets."""
+        """Adds a set."""
         self._cards[0].add_item(**kwargs)
 
