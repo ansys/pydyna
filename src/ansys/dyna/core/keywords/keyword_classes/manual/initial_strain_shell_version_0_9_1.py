@@ -241,7 +241,7 @@ class InitialStrainShellLegacy(KeywordBase):
         kwargs["keyword"] = self
         self._cards = [
             CardSet(
-                InitialStrainShellCardSet,
+                InitialStrainShellLegacyCardSet,
                 **kwargs
             ),
         ]
