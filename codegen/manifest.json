@@ -1997,29 +1997,83 @@
     },
     "INITIAL_STRAIN_SHELL": {
         "generation-options": {
+            "insert-card": [
+                {
+                    "index": 2,
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "INITIAL_STRAIN_SHELL_LARGE"
+                    }
+                },
+                {
+                    "index": 4,
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "INITIAL_STRAIN_SHELL_LARGE_CARD2"
+                    }
+                }
+            ],
             "card-set": [
                 {
                     "source-indices": [
-                        0,
                         1
+                    ],
+                    "target-index": 1,
+                    "target-name": "InitialStrainShellCardSet",
+                    "name": "InitialStrainShellLargeCardSet",
+                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
+                    "active-func": "self.large == None or self.large == 0",
+                    "item-name": "strain",
+                    "items-name": "strains"
+                },
+                {
+                    "source-indices": [
+                        2,
+                        3
+                    ],
+                    "target-index": 2,
+                    "target-name": "InitialStrainShellCardSet",
+                    "name": "InitialStrainShellLargeCardSetLarge",
+                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
+                    "active-func": "self.large == 1",
+                    "item-name": "large_strain",
+                    "items-name": "large_strains"
+                },
+                {
+                    "source-indices": [
+                        0
                     ],
                     "target-index": 0,
                     "name": "InitialStrainShellCardSet"
                 }
-            ],
-            "table-card": [
-                {
-                    "index": 1,
-                    "property-name": "strains",
-                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
-                    "active-func": "self.large == None or self.large == 0"
-                }
             ]
-        },
-        "comment": "Per LS-DYNA manual: when nplane=0 or nthick=0, read 2 strain cards (inner and outer integration points). TODO: self.large==1 implies a different card format."
+        }
     },
     "INITIAL_STRESS_SHELL": {
         "generation-options": {
+            "insert-card": [
+                {
+                    "index": 3,
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "INITIAL_STRESS_SHELL_LARGE_CARD1"
+                    }
+                },
+                {
+                    "index": 6,
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "INITIAL_STRESS_SHELL_LARGE_CARD2"
+                    }
+                },
+                {
+                    "index": 4,
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "INITIAL_STRESS_SHELL_LARGE_HISV"
+                    }
+                }
+            ],
             "card-set": [
                 {
                     "source-indices": [
@@ -2030,7 +2084,23 @@
                     "target-name": "InitialStressShellCardSet",
                     "name": "InitialStressShellThicknessLargeCardSet",
                     "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
-                    "active-func": "self.large == None or self.large == 0"
+                    "active-func": "self.large == None or self.large == 0",
+                    "item-name": "set",
+                    "items-name": "sets"
+                },
+                {
+                    "source-indices": [
+                        3,
+                        4,
+                        5
+                    ],
+                    "target-index": 2,
+                    "target-name": "InitialStressShellCardSet",
+                    "name": "InitialStressShellThicknessLargeCardSetLarge",
+                    "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
+                    "active-func": "self.large == 1",
+                    "item-name": "large_set",
+                    "items-name": "large_sets"
                 },
                 {
                     "source-indices": [
@@ -2048,11 +2118,21 @@
                     "element-width": 10,
                     "type": "float",
                     "help": "dynamic array of history variables",
-                    "length-func": "self.parent.nhisv"
+                    "length-func": "self.parent.nhisv",
+                    "active-func": "self.parent.large == None or self.parent.large == 0"
+                },
+                {
+                    "index": 5,
+                    "name": "hisv",
+                    "card-size": 5,
+                    "element-width": 20,
+                    "type": "float",
+                    "help": "dynamic array of history variables",
+                    "length-func": "self.parent.nhisv",
+                    "active-func": "self.parent.large == 1"
                 }
             ]
-        },
-        "comment": "Per LS-DYNA manual: when nplane=0 or nthick=0, read 2 stress cards (inner and outer integration points). TODO: self.large==1 has different card format (tracked separately)."
+        }
     },
     "INITIAL_TEMPERATURE_NODE": {
         "generation-options": {

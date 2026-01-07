@@ -110,6 +110,7 @@ class InitialStressShellThicknessLargeCardSet(Cards):
                 10,
                 float,
                 lambda: self.parent.nhisv,
+                lambda: self.parent.large == None or self.parent.large == 0,
                 data = kwargs.get("hisv")),
         ]
 
@@ -215,6 +216,198 @@ class InitialStressShellThicknessLargeCardSet(Cards):
         """Get the parent keyword."""
         return self._parent
 
+class InitialStressShellThicknessLargeCardSetLarge(Cards):
+    """ CardSet."""
+
+    def __init__(self, **kwargs):
+        """Initialize the InitialStressShellThicknessLargeCardSetLarge CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
+        kwargs["parent"] = self
+        self._cards = [
+            Card(
+                [
+                    Field(
+                        "t",
+                        float,
+                        0,
+                        20,
+                        **kwargs,
+                    ),
+                    Field(
+                        "sigxx",
+                        float,
+                        20,
+                        20,
+                        0.0,
+                        **kwargs,
+                    ),
+                    Field(
+                        "sigyy",
+                        float,
+                        40,
+                        20,
+                        0.0,
+                        **kwargs,
+                    ),
+                    Field(
+                        "sigzz",
+                        float,
+                        60,
+                        20,
+                        0.0,
+                        **kwargs,
+                    ),
+                    Field(
+                        "sigxy",
+                        float,
+                        80,
+                        20,
+                        0.0,
+                        **kwargs,
+                    ),
+                ],
+            ),
+            Card(
+                [
+                    Field(
+                        "sigyz",
+                        float,
+                        0,
+                        20,
+                        0.0,
+                        **kwargs,
+                    ),
+                    Field(
+                        "sigzx",
+                        float,
+                        20,
+                        20,
+                        0.0,
+                        **kwargs,
+                    ),
+                    Field(
+                        "eps",
+                        float,
+                        40,
+                        20,
+                        0.0,
+                        **kwargs,
+                    ),
+                ],
+            ),
+            SeriesCard(
+                "hisv",
+                5,
+                20,
+                float,
+                lambda: self.parent.nhisv,
+                lambda: self.parent.large == 1,
+                data = kwargs.get("hisv")),
+        ]
+
+    @property
+    def t(self) -> typing.Optional[float]:
+        """Get or set the Parametric coordinate of through thickness integration point. Between -1 and 1 inclusive.
+        """ # nopep8
+        return self._cards[0].get_value("t")
+
+    @t.setter
+    def t(self, value: float) -> None:
+        """Set the t property."""
+        self._cards[0].set_value("t", value)
+
+    @property
+    def sigxx(self) -> float:
+        """Get or set the Define the xx stress component (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("sigxx")
+
+    @sigxx.setter
+    def sigxx(self, value: float) -> None:
+        """Set the sigxx property."""
+        self._cards[0].set_value("sigxx", value)
+
+    @property
+    def sigyy(self) -> float:
+        """Get or set the Define the yy stress component (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("sigyy")
+
+    @sigyy.setter
+    def sigyy(self, value: float) -> None:
+        """Set the sigyy property."""
+        self._cards[0].set_value("sigyy", value)
+
+    @property
+    def sigzz(self) -> float:
+        """Get or set the Define the zz stress component (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("sigzz")
+
+    @sigzz.setter
+    def sigzz(self, value: float) -> None:
+        """Set the sigzz property."""
+        self._cards[0].set_value("sigzz", value)
+
+    @property
+    def sigxy(self) -> float:
+        """Get or set the Define the xy stress component (global cartesian system).
+        """ # nopep8
+        return self._cards[0].get_value("sigxy")
+
+    @sigxy.setter
+    def sigxy(self, value: float) -> None:
+        """Set the sigxy property."""
+        self._cards[0].set_value("sigxy", value)
+
+    @property
+    def sigyz(self) -> float:
+        """Get or set the Define the yz stress component (global cartesian system).
+        """ # nopep8
+        return self._cards[1].get_value("sigyz")
+
+    @sigyz.setter
+    def sigyz(self, value: float) -> None:
+        """Set the sigyz property."""
+        self._cards[1].set_value("sigyz", value)
+
+    @property
+    def sigzx(self) -> float:
+        """Get or set the Define the zx stress component (global cartesian system).
+        """ # nopep8
+        return self._cards[1].get_value("sigzx")
+
+    @sigzx.setter
+    def sigzx(self, value: float) -> None:
+        """Set the sigzx property."""
+        self._cards[1].set_value("sigzx", value)
+
+    @property
+    def eps(self) -> float:
+        """Get or set the Effective plastic strain.
+        """ # nopep8
+        return self._cards[1].get_value("eps")
+
+    @eps.setter
+    def eps(self, value: float) -> None:
+        """Set the eps property."""
+        self._cards[1].set_value("eps", value)
+
+    @property
+    def hisv(self) -> SeriesCard:
+        """dynamic array of history variables."""
+        return self._cards[2]
+
+    @hisv.setter
+    def hisv(self, value: typing.List) -> None:
+        self._cards[2].data = value
+
+    @property
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
+
 class InitialStressShellCardSet(Cards):
     """ CardSet."""
 
@@ -295,6 +488,12 @@ class InitialStressShellCardSet(Cards):
                 InitialStressShellThicknessLargeCardSet,
                 length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == None or self.large == 0,
+                **kwargs
+            ),
+            CardSet(
+                InitialStressShellThicknessLargeCardSetLarge,
+                length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
+                active_func = lambda: self.large == 1,
                 **kwargs
             ),
         ]
@@ -393,6 +592,11 @@ class InitialStressShellCardSet(Cards):
     def sets(self) -> typing.List[InitialStressShellThicknessLargeCardSet]:
         """Gets the list of sets."""
         return self._cards[1].items()
+
+    @property
+    def large_sets(self) -> typing.List[InitialStressShellThicknessLargeCardSetLarge]:
+        """Gets the list of large_sets."""
+        return self._cards[2].items()
 
     @property
     def parent(self) -> KeywordBase:
