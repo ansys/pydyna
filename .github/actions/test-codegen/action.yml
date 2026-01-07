@@ -30,7 +30,6 @@ runs:
       run: |
         python -m venv .venv
   
-
     - name: Install library
       shell: bash
       run: |
