@@ -395,9 +395,9 @@ class KeywordData:
     links: Union[List[LinkData], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     negative_shared_fields: List[Any] = field(default_factory=list)  # Empty list for templates
     card_insertions: List[Any] = field(default_factory=list)
+    label_registry: Optional["LabelRegistry"] = None  # Initialized before handlers run
     renamed_properties: List["RenamedProperty"] = field(default_factory=list)  # Tracks renamed fields for docs
     property_collisions: Dict[str, str] = field(default_factory=dict)  # Maps property_name -> collision note
-    label_registry: Optional["LabelRegistry"] = None  # Initialized after reorder-card handler
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "KeywordData":
