@@ -924,6 +924,7 @@ def test_mat_simplified_rubber_foam_with_failure_log_log_interpolation_read(ref_
     )
 
 
+@pytest.mark.keywords
 def test_mat_196_read(ref_string):
     m = kwd.Mat196()
     m_alias = kwd.MatGeneralSpringDiscreteBeam()
