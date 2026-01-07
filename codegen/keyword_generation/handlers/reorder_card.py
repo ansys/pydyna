@@ -98,10 +98,9 @@ class ReorderCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         Args:
             kwd_data: Complete keyword data dictionary
             settings: List containing single dict with "order" key containing list of indices
-            labels: Not used - reorder-card runs before label initialization
 
         Note: This reorders the list but does NOT update each card's 'index' property.
-        Subsequent handlers use list positions (kwd_data["cards"][3]) not card indices.
+        Labels track card objects by reference, so they remain valid after reordering.
         """
         # Parse settings into typed instances
         typed_settings = self._parse_settings(settings)
