@@ -226,7 +226,7 @@ def create_default_registry() -> HandlerRegistry:
     # This order is critical - some handlers depend on others having run first
     handler_order = [
         "reorder-card",
-        "skip-card",  # Must run before insert-card so indices refer to original cards
+        "skip-card",  # Must run before insert-card so refs resolve to original cards
         "insert-card",  # Moved before table-card so inserted cards can be referenced
         "table-card",
         "override-field",

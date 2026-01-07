@@ -93,7 +93,7 @@ class ReplaceCardSettings:
             "required": ["ref", "card"],
         },
     },
-    output_description="Replaces cards at specified indices with loaded card definitions",
+    output_description="Replaces cards at specified label references with loaded card definitions",
 )
 class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     """
