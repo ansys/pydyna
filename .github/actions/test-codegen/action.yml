@@ -25,16 +25,20 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
 
-    - name: Create and activate virtual environment
+    - name: "Create a virtual environment"
       shell: bash
       run: |
-        uv venv .venv
-        source .venv/bin/activate
+        python -m venv .venv
+  
 
     - name: Install library
       shell: bash
-      run: uv pip install -e .[codegen]
+      run: |
+        source .venv/bin/activate
+        uv pip install -e .[codegen]
 
     - name: Run codegen validation
       shell: bash
-      run: bash codegen/validate.sh --skip-precommit --skip-deadcode --skip-tests
+      run: |
+        source .venv/bin/activate
+        bash codegen/validate.sh --skip-precommit --skip-deadcode --skip-tests
