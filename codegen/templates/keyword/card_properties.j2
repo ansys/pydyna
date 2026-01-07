@@ -1,12 +1,12 @@
-{% if card.duplicate %}
+{% if card.table %}
     @property
-    def {{card.duplicate.name}}(self) -> pd.DataFrame:
-        """Get the table of {{card.duplicate.name}}."""
+    def {{card.table.name}}(self) -> pd.DataFrame:
+        """Get the table of {{card.table.name}}."""
         return self._cards[{{card.index}}].table
 
-    @{{card.duplicate.name}}.setter
-    def {{card.duplicate.name}}(self, df: pd.DataFrame):
-        """Set {{card.duplicate.name}} from the dataframe df"""
+    @{{card.table.name}}.setter
+    def {{card.table.name}}(self, df: pd.DataFrame):
+        """Set {{card.table.name}} from the dataframe df"""
         self._cards[{{card.index}}].table = df
 
 {% elif card.variable %}
@@ -23,7 +23,7 @@
     @property
     def {{card.items_name}}(self) -> typing.List[{{card.set.name}}]:
         """Gets the list of {{card.items_name}}."""
-        return self._cards[{{card.target_index}}].items()
+        return self._cards[{{card.index}}].items()
 {% if not card.bounded %}
 
     def add_{{card.item_name}}(self, **kwargs):
@@ -31,7 +31,7 @@
         self._cards[{{card.target_index}}].add_item(**kwargs)
 {% endif %}
 
-{% elif card.duplicate_group %}
+{% elif card.table_group %}
     @property
     def {{card.overall_name}}(self) -> pd.DataFrame:
         """Gets the full table of {{card.overall_name}}."""

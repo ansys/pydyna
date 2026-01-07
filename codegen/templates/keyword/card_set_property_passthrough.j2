@@ -1,14 +1,14 @@
-{% if card.duplicate %}
+{% if card.table %}
     @property
-    def {{card.duplicate.name}}(self) -> pd.DataFrame:
-        """Get the {{card.duplicate.name}}."""
+    def {{card.table.name}}(self) -> pd.DataFrame:
+        """Get the {{card.table.name}}."""
         ensure_card_set_properties(self, False)
-        return self.sets[0].{{card.duplicate.name}}
+        return self.sets[0].{{card.table.name}}
 
-    @{{card.duplicate.name}}.setter
-    def {{card.duplicate.name}}(self, df: pd.DataFrame):
+    @{{card.table.name}}.setter
+    def {{card.table.name}}(self, df: pd.DataFrame):
         ensure_card_set_properties(self, True)
-        self.sets[0].{{card.duplicate.name}} = df
+        self.sets[0].{{card.table.name}} = df
 
 {% elif card.variable %}
     @property
@@ -23,7 +23,7 @@
         self.sets[0].{{card.variable.name}} = value
 
 {% elif card.set %}
-{% elif card.duplicate_group %}
+{% elif card.table_group %}
     @property
     def {{card.overall_name}}(self) -> pd.DataFrame:
         """Get or set the {{card.overall_name}}."""

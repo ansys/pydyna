@@ -32,9 +32,9 @@ from typing import Any, Dict, List, Optional
 
 
 @dataclass
-class DuplicateCardMetadata:
+class TableCardMetadata:
     """
-    Metadata for duplicate/table cards (card['duplicate']).
+    Metadata for table cards (card['table']).
 
     Used by table-card handler to create repeatable card groups.
     """
@@ -44,7 +44,7 @@ class DuplicateCardMetadata:
     active_func: Optional[str] = None
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "DuplicateCardMetadata":
+    def from_dict(cls, data: Dict[str, Any]) -> "TableCardMetadata":
         """Create from dictionary."""
         return cls(
             name=data["name"],

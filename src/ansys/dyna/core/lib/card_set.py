@@ -199,6 +199,8 @@ class CardSet(CardInterface):
                 return
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
+        if not self.active:
+            return False
         self._initialize()
         if self.bounded:
             self._load_bounded_from_buffer(buf, parameter_set)
