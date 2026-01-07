@@ -142,6 +142,7 @@ def test_extract_shell_facets():
     )
 
 
+@pytest.mark.keywords
 @pytest.mark.viz
 def test_get_polydata(file_utils):
     deck = Deck()

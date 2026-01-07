@@ -8,6 +8,8 @@ from ansys.dyna.core.run.windows_runner import WindowsRunner
 
 from unittest.mock import MagicMock
 
+pytestmark = pytest.mark.run
+
 @pytest.fixture
 def patch_ansys_paths(monkeypatch):
     monkeypatch.setattr("ansys.tools.common.path.path._read_config_file", lambda: {})
