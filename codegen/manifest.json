@@ -750,7 +750,7 @@
                 }
             ]
         },
-        "comment": "a mix of conditional, variable length, and duplicate cards"
+        "comment": "a mix of conditional, variable length, and table cards"
     },
     "CONTROL_MPP_DECOMPOSITION_TRANSFORMATION": {
         "generation-options": {

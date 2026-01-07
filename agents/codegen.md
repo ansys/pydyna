@@ -113,7 +113,7 @@ In progress
 The codegen system uses typed metadata classes throughout the pipeline:
 
 **Metadata Classes** (`data_model/metadata.py`):
-- `DuplicateCardMetadata` - for card["duplicate"] (table cards)
+- `TableCardMetadata` - for card["table"] (table cards)
 - `VariableCardMetadata` - for card["variable"] (series cards)
 - `ExternalCardMetadata` - for card["external"] (external implementations)
 - `OptionGroup` - for kwd_data.options items
@@ -167,7 +167,7 @@ class Card:
 **Why This Approach?**
 - Existing code using `card["index"]` continues to work
 - New code can use `card.index` for IDE autocomplete
-- Handlers can dynamically add metadata: `card["duplicate"] = DuplicateCardMetadata(...)`
+- Handlers can dynamically add metadata: `card["table"] = TableCardMetadata(...)`
 - Type hints can use `Union[Card, Dict]` during transition, then migrate to `Card` only
 
 **Trade-offs**:
