@@ -32,58 +32,23 @@ from keyword_generation.handlers.skip_card import SkipCardHandler, SkipCardSetti
 class TestSkipCardSettings:
     """Test SkipCardSettings dataclass functionality."""
 
-    def test_settings_with_index(self):
-        """Test creating settings with index."""
-        settings = SkipCardSettings(index=5)
-        assert settings.index == 5
-        assert settings.ref is None
-
     def test_settings_with_ref(self):
         """Test creating settings with ref."""
         settings = SkipCardSettings(ref="my_card")
-        assert settings.index is None
         assert settings.ref == "my_card"
-
-    def test_settings_neither_raises(self):
-        """Test that settings with neither index nor ref raises."""
-        with pytest.raises(ValueError, match="requires either"):
-            SkipCardSettings()
-
-    def test_settings_both_raises(self):
-        """Test that settings with both index and ref raises."""
-        with pytest.raises(ValueError, match="cannot have both"):
-            SkipCardSettings(index=3, ref="my_card")
-
-    def test_from_dict_with_index(self):
-        """Test from_dict with index key."""
-        settings = SkipCardSettings.from_dict({"index": 7})
-        assert settings.index == 7
-        assert settings.ref is None
 
     def test_from_dict_with_ref(self):
         """Test from_dict with ref key."""
         settings = SkipCardSettings.from_dict({"ref": "data_card"})
-        assert settings.index is None
         assert settings.ref == "data_card"
 
-    def test_resolve_index_with_index(self):
-        """Test resolve_index when index is set."""
-        settings = SkipCardSettings(index=4)
-        assert settings.resolve_index(None) == 4
-
     def test_resolve_index_with_ref(self):
-        """Test resolve_index when ref is set."""
+        """Test resolve_index resolves label to index."""
         registry = LabelRegistry(_keyword="TEST.KW")
         registry.register("target_card", CardAddress(path=[6], entity_type="card"))
 
         settings = SkipCardSettings(ref="target_card")
         assert settings.resolve_index(registry) == 6
-
-    def test_resolve_index_with_ref_no_registry_raises(self):
-        """Test resolve_index with ref but no registry raises."""
-        settings = SkipCardSettings(ref="target_card")
-        with pytest.raises(ValueError, match="without LabelRegistry"):
-            settings.resolve_index(None)
 
 
 class TestSkipCardHandler:
@@ -110,18 +75,6 @@ class TestSkipCardHandler:
         """Create a SkipCardHandler instance."""
         return SkipCardHandler()
 
-    def test_handle_with_index(self, handler, sample_kwd_data):
-        """Test marking cards for removal using index."""
-        settings = [{"index": 1}, {"index": 3}]
-
-        handler.handle(sample_kwd_data, settings)
-
-        assert sample_kwd_data.cards[0].get("mark_for_removal") != 1
-        assert sample_kwd_data.cards[1]["mark_for_removal"] == 1
-        assert sample_kwd_data.cards[2].get("mark_for_removal") != 1
-        assert sample_kwd_data.cards[3]["mark_for_removal"] == 1
-        assert sample_kwd_data.cards[4].get("mark_for_removal") != 1
-
     def test_handle_with_ref(self, handler, sample_kwd_data):
         """Test marking cards for removal using label reference."""
         # Set up label registry
@@ -139,20 +92,6 @@ class TestSkipCardHandler:
         assert sample_kwd_data.cards[2].get("mark_for_removal") != 1
         assert sample_kwd_data.cards[3]["mark_for_removal"] == 1
         assert sample_kwd_data.cards[4].get("mark_for_removal") != 1
-
-    def test_handle_mixed_index_and_ref(self, handler, sample_kwd_data):
-        """Test marking cards using a mix of index and ref."""
-        registry = LabelRegistry(_keyword="SECTION.BEAM")
-        registry.register("vol_card", CardAddress(path=[3], entity_type="card"))
-        sample_kwd_data.label_registry = registry
-
-        # Mix of index-based and ref-based
-        settings = [{"index": 1}, {"ref": "vol_card"}]
-
-        handler.handle(sample_kwd_data, settings)
-
-        assert sample_kwd_data.cards[1]["mark_for_removal"] == 1
-        assert sample_kwd_data.cards[3]["mark_for_removal"] == 1
 
     def test_handle_with_from_cards_registry(self, handler, sample_kwd_data):
         """Test with registry created via from_cards factory."""
@@ -186,6 +125,13 @@ class TestSkipCardHandler:
         with pytest.raises(Exception):  # UndefinedLabelError
             handler.handle(sample_kwd_data, settings)
 
+    def test_handle_without_registry_raises(self, handler, sample_kwd_data):
+        """Test that handler raises if no registry is set."""
+        settings = [{"ref": "some_card"}]
+
+        with pytest.raises(ValueError, match="requires label_registry"):
+            handler.handle(sample_kwd_data, settings)
+
     def test_post_process_noop(self, handler, sample_kwd_data):
         """Test that post_process is a no-op."""
         # Should not raise or change anything
@@ -195,8 +141,8 @@ class TestSkipCardHandler:
 class TestSkipCardIntegration:
     """Integration tests for skip-card with the full handler pipeline."""
 
-    def test_skip_card_preserves_behavior_with_indices(self):
-        """Test that index-based skip-card works same as before labels."""
+    def test_skip_card_with_labels(self):
+        """Test skip-card with label-based references."""
         kwd_data = KeywordData(
             keyword="TEST",
             subkeyword="KW",
@@ -206,49 +152,18 @@ class TestSkipCardIntegration:
             ],
         )
 
+        # Set up registry
+        registry = LabelRegistry.from_cards(
+            kwd_data.cards,
+            keyword="TEST.KW",
+            initial_labels={"skip_a": 1, "skip_b": 3},
+        )
+        kwd_data.label_registry = registry
+
         handler = SkipCardHandler()
-        settings = [{"index": 1}, {"index": 3}]
+        settings = [{"ref": "skip_a"}, {"ref": "skip_b"}]
         handler.handle(kwd_data, settings)
 
         # Verify the expected cards are marked
         marked_indices = [i for i, c in enumerate(kwd_data.cards) if c.get("mark_for_removal") == 1]
         assert marked_indices == [1, 3]
-
-    def test_skip_card_label_equivalent_to_index(self):
-        """Test that ref-based and index-based produce identical results."""
-        # Create two identical KeywordData instances
-        def make_kwd_data():
-            return KeywordData(
-                keyword="TEST",
-                subkeyword="KW",
-                title="*TEST_KW",
-                cards=[
-                    Card(index=i, fields=[Field(name=f"f{i}", type="int", position=0, width=10)]) for i in range(5)
-                ],
-            )
-
-        kwd_index = make_kwd_data()
-        kwd_label = make_kwd_data()
-
-        # Set up registry for label-based
-        registry = LabelRegistry.from_cards(
-            kwd_label.cards,
-            keyword="TEST.KW",
-            initial_labels={"skip_a": 1, "skip_b": 3},
-        )
-        kwd_label.label_registry = registry
-
-        handler = SkipCardHandler()
-
-        # Index-based
-        handler.handle(kwd_index, [{"index": 1}, {"index": 3}])
-
-        # Label-based
-        handler.handle(kwd_label, [{"ref": "skip_a"}, {"ref": "skip_b"}])
-
-        # Results should be identical
-        for i in range(5):
-            assert kwd_index.cards[i].get("mark_for_removal") == kwd_label.cards[i].get("mark_for_removal"), (
-                f"Card {i} differs: index={kwd_index.cards[i].get('mark_for_removal')}, "
-                f"label={kwd_label.cards[i].get('mark_for_removal')}"
-            )

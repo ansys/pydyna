@@ -37,10 +37,13 @@
             "generation-options": {
                 "conditional-card": [
                     {
-                        "index": 1,
-                        "func": "abs(self.dof) in [9, 10, 11] or self.vad==4"
+                        "func": "abs(self.dof) in [9, 10, 11] or self.vad==4",
+                        "ref": "dof_vad_conditional_card"
                     }
                 ]
+            },
+            "labels": {
+                "dof_vad_conditional_card": 1
             }
         },
         {
@@ -63,10 +66,13 @@
                 ],
                 "conditional-card": [
                     {
-                        "index": 2,
-                        "func": "self.elements['n5'].any()"
+                        "func": "self.elements['n5'].any()",
+                        "ref": "elements_n5_card"
                     }
                 ]
+            },
+            "labels": {
+                "elements_n5_card": 2
             }
         },
         {
@@ -365,7 +371,7 @@
             ],
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ],
             "override-field": [
@@ -375,6 +381,9 @@
                     "new-name": "ncoup"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "DEFINE_TABLE": {
@@ -568,58 +577,75 @@
             ],
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "surface_card"
                 },
                 {
-                    "index": 1
+                    "ref": "friction_card"
                 },
                 {
-                    "index": 2
+                    "ref": "scale_factor_card"
                 }
             ]
         },
-        "comment": "CONTACT_AUTOMATIC_SINGLE_SURFACE is basically defined by hand... everything is overridden."
+        "comment": "CONTACT_AUTOMATIC_SINGLE_SURFACE is basically defined by hand... everything is overridden.",
+        "labels": {
+            "surface_card": 0,
+            "friction_card": 1,
+            "scale_factor_card": 2
+        }
     },
     "CONTROL_IMPLICIT_AUTO": {
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "self.iauto == 3"
+                    "func": "self.iauto == 3",
+                    "ref": "step_size_limits_card"
                 }
             ]
+        },
+        "labels": {
+            "step_size_limits_card": 1
         }
     },
     "CONTROL_IMPLICIT_EIGENVALUE": {
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "(self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != None or self.mstrscl != 0.001)"
+                    "func": "(self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != None or self.mstrscl != 0.001)",
+                    "ref": "solid_beam_shell_options_card"
                 },
                 {
-                    "index": 2,
-                    "func": "self.eigmth == 101"
+                    "func": "self.eigmth == 101",
+                    "ref": "eigmth_101_params_card"
                 },
                 {
-                    "index": 3,
-                    "func": "self.eigmth == 102"
+                    "func": "self.eigmth == 102",
+                    "ref": "eigmth_102_params_card"
                 },
                 {
-                    "index": 4,
-                    "func": "self.eigmth == 111"
+                    "func": "self.eigmth == 111",
+                    "ref": "eigmth_111_params_card"
                 }
             ]
+        },
+        "labels": {
+            "solid_beam_shell_options_card": 1,
+            "eigmth_101_params_card": 2,
+            "eigmth_102_params_card": 3,
+            "eigmth_111_params_card": 4
         }
     },
     "CONTROL_IMPLICIT_DYNAMICS": {
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "self.alpha <= -1"
+                    "func": "self.alpha <= -1",
+                    "ref": "panel_orientation_card"
                 }
             ]
+        },
+        "labels": {
+            "panel_orientation_card": 1
         }
     },
     "CONTROL_IMPLICIT_SOLVER": {
@@ -637,10 +663,13 @@
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 2,
-                    "func": "self.dnorm < 0"
+                    "func": "self.dnorm < 0",
+                    "ref": "tolerance_override_card"
                 }
             ]
+        },
+        "labels": {
+            "tolerance_override_card": 2
         }
     },
     "SECTION_BEAM": {
@@ -670,28 +699,28 @@
             ],
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "self.elform in [1,11]"
+                    "func": "self.elform in [1,11]",
+                    "ref": "dimensions_card"
                 },
                 {
-                    "index": 2,
-                    "func": "self.elform in [2,12,13]"
+                    "func": "self.elform in [2,12,13]",
+                    "ref": "inertia_card"
                 },
                 {
-                    "index": 3,
-                    "func": "self.elform == 3"
+                    "func": "self.elform == 3",
+                    "ref": "truss_card"
                 },
                 {
-                    "index": 4,
-                    "func": "self.elform in [4,5]"
+                    "func": "self.elform in [4,5]",
+                    "ref": "integrated_thickness_card"
                 },
                 {
-                    "index": 5,
-                    "func": "self.elform == 6"
+                    "func": "self.elform == 6",
+                    "ref": "discrete_beam_card"
                 },
                 {
-                    "index": 8,
-                    "func": "self.elform == 9"
+                    "func": "self.elform == 9",
+                    "ref": "spotweld_thickness_card"
                 }
             ]
         },
@@ -749,8 +778,8 @@
             ],
             "conditional-card": [
                 {
-                    "index": 3,
-                    "func": "self.elform in [101, 102, 103, 104, 105]"
+                    "func": "self.elform in [101, 102, 103, 104, 105]",
+                    "ref": "user_integration_card"
                 }
             ],
             "table-card": [
@@ -762,14 +791,17 @@
                 }
             ]
         },
-        "comment": "a mix of conditional, variable length, and table cards"
+        "comment": "a mix of conditional, variable length, and table cards",
+        "labels": {
+            "user_integration_card": 3
+        }
     },
     "CONTROL_MPP_DECOMPOSITION_TRANSFORMATION": {
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT']"
+                    "func": "not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT']",
+                    "ref": "extended_vector_card"
                 }
             ],
             "table-card-group": [
@@ -781,6 +813,9 @@
                     "overall-name": "transformation"
                 }
             ]
+        },
+        "labels": {
+            "extended_vector_card": 1
         }
     },
     "CONTROL_REFERENCE_CONFIGURAION": {
@@ -814,16 +849,16 @@
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "self.type==0"
+                    "func": "self.type==0",
+                    "ref": "box_type_card"
                 },
                 {
-                    "index": 2,
-                    "func": "self.type==1"
+                    "func": "self.type==1",
+                    "ref": "cylinder_type_card"
                 },
                 {
-                    "index": 3,
-                    "func": "self.type==2"
+                    "func": "self.type==2",
+                    "ref": "sphere_type_card"
                 }
             ],
             "shared-field": [
@@ -843,7 +878,12 @@
                 }
             ]
         },
-        "comment": "some union properties are needed"
+        "comment": "some union properties are needed",
+        "labels": {
+            "box_type_card": 1,
+            "cylinder_type_card": 2,
+            "sphere_type_card": 3
+        }
     },
     "ELEMENT_SOLID_ORTHO": {
         "generation-options": {
@@ -871,8 +911,8 @@
             ],
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "self.elform in [101, 102, 103, 104, 105]"
+                    "func": "self.elform in [101, 102, 103, 104, 105]",
+                    "ref": "user_element_card"
                 }
             ],
             "override-field": [
@@ -909,6 +949,9 @@
                     "help": "dynamic array of LMC property parameters."
                 }
             ]
+        },
+        "labels": {
+            "user_element_card": 1
         }
     },
     "DEFINE_CURVE": {
@@ -981,16 +1024,16 @@
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "self.pr and self.pr < 0"
+                    "func": "self.pr and self.pr < 0",
+                    "ref": "hysteresis_card"
                 },
                 {
-                    "index": 2,
-                    "func": "self.n > 0"
+                    "func": "self.n > 0",
+                    "ref": "ogden_parameters_card"
                 },
                 {
-                    "index": 3,
-                    "func": "self.n == 0"
+                    "func": "self.n == 0",
+                    "ref": "mooney_rivlin_card"
                 }
             ],
             "table-card": [
@@ -999,6 +1042,11 @@
                     "property-name": "constants"
                 }
             ]
+        },
+        "labels": {
+            "hysteresis_card": 1,
+            "ogden_parameters_card": 2,
+            "mooney_rivlin_card": 3
         }
     },
     "MAT_077_O": {
@@ -1006,20 +1054,20 @@
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "self.pr and self.pr < 0"
+                    "func": "self.pr and self.pr < 0",
+                    "ref": "hysteresis_card"
                 },
                 {
-                    "index": 2,
-                    "func": "self.n > 0"
+                    "func": "self.n > 0",
+                    "ref": "ogden_parameters_card"
                 },
                 {
-                    "index": 3,
-                    "func": "self.n == 0 or self.n == -1"
+                    "func": "self.n == 0 or self.n == -1",
+                    "ref": "mu_parameters_card"
                 },
                 {
-                    "index": 4,
-                    "func": "self.n == 0 or self.n == -1"
+                    "func": "self.n == 0 or self.n == -1",
+                    "ref": "alpha_parameters_card"
                 }
             ],
             "table-card": [
@@ -1046,6 +1094,12 @@
                     ]
                 }
             ]
+        },
+        "labels": {
+            "hysteresis_card": 1,
+            "ogden_parameters_card": 2,
+            "mu_parameters_card": 3,
+            "alpha_parameters_card": 4
         }
     },
     "MAT_MODIFIED_JOHNSON_COOK": {
@@ -1076,7 +1130,7 @@
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 2
+                    "ref": "ogden_card"
                 }
             ],
             "table-card": [
@@ -1085,6 +1139,9 @@
                     "property-name": "constants"
                 }
             ]
+        },
+        "labels": {
+            "ogden_card": 2
         }
     },
     "MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE": {
@@ -1208,68 +1265,68 @@
             ],
             "conditional-card": [
                 {
-                    "index": 2,
-                    "func": "self.itype and abs(self.itype) == 1"
+                    "func": "self.itype and abs(self.itype) == 1",
+                    "ref": "ogden_mu_card"
                 },
                 {
-                    "index": 3,
-                    "func": "self.itype and abs(self.itype) == 1"
+                    "func": "self.itype and abs(self.itype) == 1",
+                    "ref": "ogden_alpha_card"
                 },
                 {
-                    "index": 4,
-                    "func": "self.itype and abs(self.itype) == 2"
+                    "func": "self.itype and abs(self.itype) == 2",
+                    "ref": "polynomial_c_card"
                 },
                 {
-                    "index": 5,
-                    "func": "self.itype and abs(self.itype) == 3"
+                    "func": "self.itype and abs(self.itype) == 3",
+                    "ref": "yeoh_k_card"
                 },
                 {
-                    "index": 6,
-                    "func": "self.atype and abs(self.atype) == 1"
+                    "func": "self.atype and abs(self.atype) == 1",
+                    "ref": "activation_header_card"
                 },
                 {
-                    "index": 10,
-                    "func": "self.atype and abs(self.atype) == 1 and self.intype == 1"
+                    "func": "self.atype and abs(self.atype) == 1 and self.intype == 1",
+                    "ref": "intype_1_k_card"
                 },
                 {
-                    "index": 11,
-                    "func": "self.atype and abs(self.atype) == 1 and self.actype in [1,2,3,4,5]"
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype in [1,2,3,4,5]",
+                    "ref": "actype_header_card"
                 },
                 {
-                    "index": 12,
-                    "func": "self.atype and abs(self.atype) == 1 and self.actype in [1,2]"
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype in [1,2]",
+                    "ref": "actype_1_2_calcium_card"
                 },
                 {
-                    "index": 13,
-                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 1"
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 1",
+                    "ref": "actype_1_kinetics_card"
                 },
                 {
-                    "index": 14,
-                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 2"
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 2",
+                    "ref": "actype_2_kinetics_card"
                 },
                 {
-                    "index": 15,
-                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 3"
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 3",
+                    "ref": "actype_3_calcium_card"
                 },
                 {
-                    "index": 16,
-                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 4"
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 4",
+                    "ref": "actype_4_calcium_card"
                 },
                 {
-                    "index": 17,
-                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 4"
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 4",
+                    "ref": "actype_4_kinetics_card"
                 },
                 {
-                    "index": 18,
-                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 5"
+                    "func": "self.atype and abs(self.atype) == 1 and self.actype == 5",
+                    "ref": "actype_5_ids_card"
                 },
                 {
-                    "index": 19,
-                    "func": "self.atype and abs(self.atype) == 1"
+                    "func": "self.atype and abs(self.atype) == 1",
+                    "ref": "fiber_position_card"
                 },
                 {
-                    "index": 20,
-                    "func": "self.atype and abs(self.atype) == 1"
+                    "func": "self.atype and abs(self.atype) == 1",
+                    "ref": "fiber_vector_card"
                 }
             ],
             "card-set": [
@@ -1376,15 +1433,36 @@
                 }
             ]
         },
-        "comment": "union properties (issue #34), ftype there makes the lambdas work in the duplicate card entries"
+        "comment": "union properties (issue #34), ftype there makes the lambdas work in the duplicate card entries",
+        "labels": {
+            "ogden_mu_card": 2,
+            "ogden_alpha_card": 3,
+            "polynomial_c_card": 4,
+            "yeoh_k_card": 5,
+            "activation_header_card": 6,
+            "intype_1_k_card": 10,
+            "actype_header_card": 11,
+            "actype_1_2_calcium_card": 12,
+            "actype_1_kinetics_card": 13,
+            "actype_2_kinetics_card": 14,
+            "actype_3_calcium_card": 15,
+            "actype_4_calcium_card": 16,
+            "actype_4_kinetics_card": 17,
+            "actype_5_ids_card": 18,
+            "fiber_position_card": 19,
+            "fiber_vector_card": 20
+        }
     },
     "ALE_COUPLING_NODAL_CONSTRAINT": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "RIGIDWALL_PLANAR": {
@@ -1395,9 +1473,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1414,9 +1495,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1433,9 +1517,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1452,9 +1539,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1471,9 +1561,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1490,9 +1583,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1509,9 +1605,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1528,9 +1627,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1547,9 +1649,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1566,9 +1671,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1585,9 +1693,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1604,9 +1715,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1623,9 +1737,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1642,9 +1759,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1661,9 +1781,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1680,9 +1803,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1699,9 +1825,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1718,9 +1847,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1737,9 +1869,12 @@
                 "generation-options": {
                     "skip-card": [
                         {
-                            "index": 0
+                            "ref": "id_title_card"
                         }
                     ]
+                },
+                "labels": {
+                    "id_title_card": 0
                 }
             },
             {
@@ -1752,279 +1887,372 @@
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_FLUID_AND_GAS": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_HYBRID": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_HYBRID_JETTING": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_HYBRID_JETTING_CM": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_HYBRID_CHEMKIN": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_LINEAR_FLUID": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_LOAD_CURVE": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE_DECOMPOSITION": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE_DECOMPOSITION_INFLATION_SEGMENT": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE_DECOMPOSITION_MOLEFRACTION_SEGMENT": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE_DECOMPOSITION_SEGMENT": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE_INFLATION": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE_INFLATION_SEGMENT": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE_MOLEFRACTION": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_PARTICLE_MOLEFRACTION_SEGMENT": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_SIMPLE_AIRBAG_MODEL": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_SIMPLE_PRESSURE_VOLUME": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_WANG_NEFSKE": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_WANG_NEFSKE_POP": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_WANG_NEFSKE_JETTING": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_WANG_NEFSKE_JETTING_CM": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_WANG_NEFSKE_JETTING_POP": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_WANG_NEFSKE_JETTING_POP_CM": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_CM": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_POP": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "AIRBAG_WANG_NEFSKE_MULTIPLE_JETTING_POP_CM": {
         "generation-options": {
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "id_title_card"
                 }
             ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "INITIAL_STRAIN_SHELL": {
@@ -2284,10 +2512,13 @@
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 2,
-                    "func": "self.nsidex > 0"
+                    "func": "self.nsidex > 0",
+                    "ref": "extended_velocity_card"
                 }
             ]
+        },
+        "labels": {
+            "extended_velocity_card": 2
         }
     },
     "SET_NODE_INTERSECT": {
@@ -2674,10 +2905,13 @@
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 4,
-                    "func": "self.ircs and self.ircs == 1"
+                    "func": "self.ircs and self.ircs == 1",
+                    "ref": "local_coords_card"
                 }
             ]
+        },
+        "labels": {
+            "local_coords_card": 4
         }
     },
     "CONSTRAINED_RIGID_BODIES": {
@@ -2707,9 +2941,12 @@
             ],
             "skip-card": [
                 {
-                    "index": 0
+                    "ref": "rid_card"
                 }
             ]
+        },
+        "labels": {
+            "rid_card": 0
         }
     },
     "MESH_VOLUME": {
@@ -2744,24 +2981,24 @@
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "self.tmod==1"
+                    "func": "self.tmod==1",
+                    "ref": "tmod_1_params_card"
                 },
                 {
-                    "index": 2,
-                    "func": "self.tmod==2 or self.tmod==3"
+                    "func": "self.tmod==2 or self.tmod==3",
+                    "ref": "tmod_2_3_params_card"
                 },
                 {
-                    "index": 3,
-                    "func": "self.tmod==4"
+                    "func": "self.tmod==4",
+                    "ref": "tmod_4_cs_card"
                 },
                 {
-                    "index": 4,
-                    "func": "self.tmod==4"
+                    "func": "self.tmod==4",
+                    "ref": "tmod_4_coefficients_card"
                 },
                 {
-                    "index": 5,
-                    "func": "self.tmod==5"
+                    "func": "self.tmod==5",
+                    "ref": "tmod_5_params_card"
                 }
             ],
             "shared-field": [
@@ -2773,6 +3010,13 @@
                     ]
                 }
             ]
+        },
+        "labels": {
+            "tmod_1_params_card": 1,
+            "tmod_2_3_params_card": 2,
+            "tmod_4_cs_card": 3,
+            "tmod_4_coefficients_card": 4,
+            "tmod_5_params_card": 5
         }
     },
     "ELEMENT_SOLID (ten nodes format)": {
@@ -2802,40 +3046,52 @@
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 1,
-                    "func": "self.contype == 6"
+                    "func": "self.contype == 6",
+                    "ref": "rlc_circuit_card"
                 }
             ]
+        },
+        "labels": {
+            "rlc_circuit_card": 1
         }
     },
     "EM_RANDLES_BATMAC": {
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 3,
-                    "func": "self.rdltype > 1"
+                    "func": "self.rdltype > 1",
+                    "ref": "temperature_coefficients_card"
                 }
             ]
+        },
+        "labels": {
+            "temperature_coefficients_card": 3
         }
     },
     "EM_RANDLES_SOLID": {
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 3,
-                    "func": "self.rdltype > 1"
+                    "func": "self.rdltype > 1",
+                    "ref": "temperature_coefficients_card"
                 }
             ]
+        },
+        "labels": {
+            "temperature_coefficients_card": 3
         }
     },
     "EM_RANDLES_TSHELL": {
         "generation-options": {
             "conditional-card": [
                 {
-                    "index": 3,
-                    "func": "self.rdltype > 1"
+                    "func": "self.rdltype > 1",
+                    "ref": "temperature_coefficients_card"
                 }
             ]
+        },
+        "labels": {
+            "temperature_coefficients_card": 3
         }
     }
 }

@@ -26,6 +26,7 @@ import pytest
 
 from keyword_generation.data_model.label_registry import (
     CardAddress,
+    DuplicateIndexError,
     DuplicateLabelError,
     LabelRegistry,
     UndefinedLabelError,
@@ -238,6 +239,16 @@ class TestLabelRegistryFromCards:
         initial_labels = {"bad_card": 999}
 
         with pytest.raises(ValueError, match="Invalid index 999"):
+            LabelRegistry.from_cards(sample_cards, keyword="TEST.KW", initial_labels=initial_labels)
+
+    def test_from_cards_duplicate_index_raises(self, sample_cards):
+        """Test that multiple labels for same index raises DuplicateIndexError."""
+        initial_labels = {
+            "label_one": 1,
+            "label_two": 1,  # Same index as label_one
+        }
+
+        with pytest.raises(DuplicateIndexError, match="Index 1 has multiple labels"):
             LabelRegistry.from_cards(sample_cards, keyword="TEST.KW", initial_labels=initial_labels)
 
 

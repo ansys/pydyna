@@ -65,6 +65,12 @@ class UndefinedLabelError(LabelError):
     pass
 
 
+class DuplicateIndexError(LabelError):
+    """Raised when multiple labels point to the same card index."""
+
+    pass
+
+
 @dataclass
 class CardAddress:
     """
@@ -293,13 +299,22 @@ class LabelRegistry:
         registry = cls(_keyword=keyword)
 
         # First, register explicit labels from manifest
+        # Also check that each index only has one label
         if initial_labels:
+            index_to_label: Dict[int, str] = {}
             for label, index in initial_labels.items():
                 if index < 0 or index >= len(cards):
                     raise ValueError(
                         f"Invalid index {index} for label '{label}' in keyword '{keyword}'. "
                         f"Card list has {len(cards)} cards."
                     )
+                if index in index_to_label:
+                    raise DuplicateIndexError(
+                        f"Index {index} has multiple labels in keyword '{keyword}': "
+                        f"'{index_to_label[index]}' and '{label}'. "
+                        f"Each card index must have exactly one label."
+                    )
+                index_to_label[index] = label
                 registry.register(label, CardAddress(path=[index], entity_type="card"))
                 logger.debug(f"Registered explicit label '{label}' → index {index}")
 

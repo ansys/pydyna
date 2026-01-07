@@ -26,14 +26,13 @@ Skip Card Handler: Marks cards for deletion from generated code.
 Cards marked for deletion are removed from the final keyword structure after
 all handlers have processed.
 
-Supports both legacy index-based and new label-based card references:
-- Legacy: {"index": 6}
-- Label-based: {"ref": "discrete_beam_dof_card"}
+Uses label-based card references:
+    {"ref": "id_title_card"}
 """
 
 from dataclasses import dataclass
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from keyword_generation.data_model.keyword_data import KeywordData
 from keyword_generation.data_model.label_registry import LabelRegistry
@@ -45,50 +44,27 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class SkipCardSettings:
-    """Configuration for marking a card for removal.
+    """Configuration for marking a card for removal."""
 
-    Supports hybrid referencing:
-    - index: Legacy integer index (direct position in cards list)
-    - ref: Label-based reference (resolved via LabelRegistry)
-
-    Only one of index or ref should be provided.
-    """
-
-    index: Optional[int] = None
-    ref: Optional[str] = None
-
-    def __post_init__(self):
-        """Validate that exactly one reference type is provided."""
-        if self.index is None and self.ref is None:
-            raise ValueError("SkipCardSettings requires either 'index' or 'ref'")
-        if self.index is not None and self.ref is not None:
-            raise ValueError("SkipCardSettings cannot have both 'index' and 'ref'")
+    ref: str
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SkipCardSettings":
-        return cls(index=data.get("index"), ref=data.get("ref"))
+        return cls(ref=data["ref"])
 
-    def resolve_index(self, registry: Optional[LabelRegistry]) -> int:
-        """Resolve to a concrete card index.
+    def resolve_index(self, registry: LabelRegistry) -> int:
+        """Resolve label to a concrete card index.
 
         Args:
             registry: LabelRegistry for resolving label references.
-                      Required if using ref-based settings.
 
         Returns:
             Integer index into kwd_data.cards
 
         Raises:
-            ValueError: If ref is used but registry is None
             UndefinedLabelError: If ref label is not found
         """
-        if self.index is not None:
-            return self.index
-        if self.ref is not None:
-            if registry is None:
-                raise ValueError(f"Cannot resolve ref '{self.ref}' without LabelRegistry")
-            return registry.resolve_index(self.ref)
-        raise ValueError("SkipCardSettings has neither index nor ref")
+        return registry.resolve_index(self.ref)
 
 
 @handler(
@@ -100,10 +76,9 @@ class SkipCardSettings:
         "items": {
             "type": "object",
             "properties": {
-                "index": {"type": "integer"},
-                "ref": {"type": "string"},
+                "ref": {"type": "string", "description": "Label reference to card to skip"},
             },
-            "oneOf": [{"required": ["index"]}, {"required": ["ref"]}],
+            "required": ["ref"],
         },
     },
     output_description="Sets 'mark_for_removal' flag on specified cards",
@@ -120,20 +95,19 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         """
         Mark specified cards for removal.
 
-        Supports both legacy index-based and label-based references:
-        - {"index": 6} - direct index reference
-        - {"ref": "discrete_beam_card"} - label reference (resolved via kwd_data.label_registry)
-
         Args:
             kwd_data: KeywordData instance containing cards and label_registry
-            settings: List of dicts, each containing either 'index' or 'ref'
+            settings: List of dicts with 'ref' key for label reference
         """
         typed_settings = self._parse_settings(settings)
         registry = kwd_data.label_registry
 
+        if registry is None:
+            raise ValueError("skip-card handler requires label_registry to be initialized")
+
         for setting in typed_settings:
             index = setting.resolve_index(registry)
-            logger.debug(f"Marking card {index} for removal " f"(ref={setting.ref}, index={setting.index})")
+            logger.debug(f"Marking card {index} for removal (ref={setting.ref})")
             kwd_data.cards[index]["mark_for_removal"] = 1
 
     def post_process(self, kwd_data: KeywordData) -> None:
