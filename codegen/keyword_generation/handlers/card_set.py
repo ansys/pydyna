@@ -20,22 +20,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Card Set Handler: Creates reusable card collections with dynamic sizing.
+"""Card Set Handler: Creates reusable card collections with dynamic sizing.
 
 This handler enables keywords to define card sets - groups of cards that can be
 repeated with variable length, optionally including their own sub-options.
+
+Uses label-based references (source-refs, target-ref) for all card addressing.
 """
 
 import copy
 from dataclasses import dataclass
+import logging
 import typing
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 import keyword_generation.data_model as gen
 from keyword_generation.data_model.keyword_data import Field, KeywordData
+from keyword_generation.data_model.label_registry import LabelRegistry
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+if TYPE_CHECKING:
+    from keyword_generation.data_model.label_registry import LabelRegistry
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -107,10 +115,14 @@ class SharedFieldConfig:
 
 @dataclass
 class CardSetSettings:
-    """Configuration for grouping cards into repeatable sets."""
+    """Configuration for grouping cards into repeatable sets.
+
+    Uses label-based addressing (source-refs, target-ref) for all references.
+    """
 
     name: str
-    source_indices: List[int]
+    source_refs: List[str] = None  # Label references for source cards
+    target_ref: str = None  # Label reference for target insertion point
     length_func: Optional[str] = None
     active_func: Optional[str] = None
     options: Optional[List[Dict[str, Any]]] = None
@@ -124,6 +136,18 @@ class CardSetSettings:
     def bounded(self) -> bool:
         """CardSet is bounded if length_func is defined (size controlled externally)."""
         return self.length_func is not None
+
+    def resolve_source_indices(self, registry: "LabelRegistry", cards: List[Any]) -> List[int]:
+        """Resolve source references to indices."""
+        if not self.source_refs:
+            raise ValueError(f"CardSetSettings '{self.name}' must have source-refs")
+        return [registry.resolve_index(ref, cards) for ref in self.source_refs]
+
+    def resolve_target_index(self, registry: "LabelRegistry", cards: List[Any]) -> int:
+        """Resolve target reference to index."""
+        if not self.target_ref:
+            raise ValueError(f"CardSetSettings '{self.name}' must have target-ref")
+        return registry.resolve_index(self.target_ref, cards)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "CardSetSettings":
@@ -141,7 +165,8 @@ class CardSetSettings:
 
         return cls(
             name=data["name"],
-            source_indices=data["source-indices"],
+            source_refs=data.get("source-refs"),
+            target_ref=data.get("target-ref"),
             length_func=data.get("length-func"),
             active_func=data.get("active-func"),
             options=data.get("options"),
@@ -163,22 +188,22 @@ class CardSetSettings:
             "type": "object",
             "properties": {
                 "name": {"type": "string", "description": "Name of the card set"},
-                "source-indices": {
+                "source-refs": {
                     "type": "array",
-                    "items": {"type": "integer"},
-                    "description": "Card indices to include in the set",
+                    "items": {"type": "string"},
+                    "description": "Label references for cards to include",
                 },
                 "source-options": {
                     "type": "array",
                     "items": {"type": "integer"},
                     "description": "Option indices to include in the set",
                 },
-                "target-index": {"type": "integer", "description": "Where to insert the set card"},
+                "target-ref": {"type": "string", "description": "Label reference for insertion point"},
                 "target-name": {"type": "string", "description": "Target option name (if inserting in option)"},
                 "length-func": {"type": "string", "description": "Function to compute set length"},
                 "active-func": {"type": "string", "description": "Function to determine if set is active"},
             },
-            "required": ["name", "source-indices", "target-index"],
+            "required": ["name"],
         },
     },
     output_description="Adds 'card_sets' dict and card insertions, marks source cards for removal",
@@ -191,6 +216,8 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     a reusable set that can be repeated. Card sets can include their own options
     and are dynamically sized at runtime.
 
+    Uses label-based references (source-refs, target-ref) for all card addressing.
+
     CRITICAL IMPLEMENTATION NOTES:
     1. **Reference Semantics**: This handler MUST append card references (not copies)
        to source_cards. Later handlers (e.g., conditional-card) modify these same
@@ -198,7 +225,7 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
        the card-set's source_cards list. Using deepcopy breaks this behavior.
 
     2. **Handler Ordering**: This handler traditionally runs BEFORE conditional-card,
-       series-card, and table-card. The source-indices refer to positions AFTER
+       series-card, and table-card. The source refs/indices refer to positions AFTER
        reorder-card has run but BEFORE transformations are applied. Later handlers
        modify the cards in-place via shared references.
 
@@ -210,9 +237,9 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         [
             {
                 "name": "LoadSet",
-                "source-indices": [1, 2, 3],
+                "source-refs": ["load_card_1", "load_card_2", "load_card_3"],
                 "source-options": [0],  # Include option 0 in the set
-                "target-index": 1,
+                "target-ref": "load_card_1",
                 "target-name": "",  # Empty = base keyword
                 "length-func": "len(self.load_sets)",
                 "active-func": "self.nsets > 0"
@@ -243,35 +270,48 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         Create card sets from source cards and options.
 
         Args:
-            kwd_data: Complete keyword data dictionary
+            kwd_data: Complete keyword data
             settings: List of card set definitions
 
         Raises:
             Exception: If more than one default target (empty target-name) is specified
+            ValueError: If label registry is not available when using refs
         """
-        typed_settings = self._parse_settings(settings)
+        # Get registry for label resolution
+        registry = kwd_data.label_registry
+        if registry is None:
+            raise ValueError("card-set handler requires a label registry. Ensure labels are defined in manifest.")
+
         card_sets = []
         has_options = False
         default_target = 0
 
-        for card_settings in typed_settings:
-            card_set = {"name": card_settings["name"], "source_cards": []}
-            target_name = card_settings.get("target-name", "")
+        for card_settings_dict in settings:
+            # Parse into typed settings
+            card_settings = CardSetSettings.from_dict(card_settings_dict)
+
+            card_set = {"name": card_settings.name, "source_cards": []}
+            target_name = card_settings_dict.get("target-name", "")
             if target_name == "":
                 default_target = default_target + 1
                 if default_target > 1:
                     raise Exception("Currently only one card set on the base keyword is supported!")
-            card_index = -1  # Initialize to handle empty source-indices case
-            for card_index, source_index in enumerate(card_settings["source-indices"]):
+
+            # Resolve source indices from refs
+            source_indices = card_settings.resolve_source_indices(registry, kwd_data.cards)
+            logger.debug(f"CardSet '{card_settings.name}': resolved source indices = {source_indices}")
+
+            card_index = -1  # Initialize to handle empty source case
+            for card_index, source_index in enumerate(source_indices):
                 source_card = kwd_data.cards[source_index]
                 source_card["source_index"] = source_card["index"]
                 source_card["index"] = card_index
                 source_card["mark_for_removal"] = 1
                 card_set["source_cards"].append(source_card)
 
-            if "source-options" in card_settings:
+            if "source-options" in card_settings_dict:
                 has_options = True
-                for option_index in card_settings["source-options"]:
+                for option_index in card_settings_dict["source-options"]:
                     source_option = kwd_data.options[int(option_index)]
                     option = copy.deepcopy(source_option)
                     for card in option["cards"]:
@@ -284,27 +324,26 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                     source_option["mark_for_removal"] = 1
 
             # Add discriminator configuration if present
-            if "discriminator" in card_settings:
-                disc_config = DiscriminatorConfig.from_dict(card_settings["discriminator"])
+            if card_settings.discriminator:
                 card_set["discriminator"] = {
-                    "field": disc_config.field,
-                    "cards_with_field": disc_config.cards_with_field,
+                    "field": card_settings.discriminator.field,
+                    "cards_with_field": card_settings.discriminator.cards_with_field,
                 }
 
             # Add internal conditionals if present
-            if "internal-conditionals" in card_settings:
-                internal_conds = [InternalConditional.from_dict(c) for c in card_settings["internal-conditionals"]]
-                card_set["internal_conditionals"] = [{"index": c.index, "func": c.func} for c in internal_conds]
+            if card_settings.internal_conditionals:
+                card_set["internal_conditionals"] = [
+                    {"index": c.index, "func": c.func} for c in card_settings.internal_conditionals
+                ]
                 # Apply conditionals to the source cards
-                for cond in internal_conds:
+                for cond in card_settings.internal_conditionals:
                     if cond.index < len(card_set["source_cards"]):
                         card_set["source_cards"][cond.index]["func"] = cond.func
 
             # Add shared fields if present (fields shared across mutually-exclusive cards)
-            if "shared-fields" in card_settings:
-                shared = [SharedFieldConfig.from_dict(f) for f in card_settings["shared-fields"]]
+            if card_settings.shared_fields:
                 shared_fields_data = []
-                for shared_field in shared:
+                for shared_field in card_settings.shared_fields:
                     # Get metadata from source_index card, mark all as redundant
                     field_type = "int"
                     field_help = shared_field.name
@@ -341,29 +380,32 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                 card_set["shared_fields"] = shared_fields_data
 
             # Bounded is inferred from length-func: if set, CardSet size is controlled externally
-            is_bounded = bool(card_settings.get("length-func"))
+            is_bounded = card_settings.bounded
             card_set["bounded"] = is_bounded
 
             # Set item names with defaults
-            item_name = card_settings.get("item-name", "set")
-            items_name = card_settings.get("items-name", "sets")
+            item_name = card_settings.item_name or "set"
+            items_name = card_settings.items_name or "sets"
             card_set["item_name"] = item_name
             card_set["items_name"] = items_name
 
-            length_func = card_settings.get("length-func", "")
+            # Resolve target index from ref
+            target_index = card_settings.resolve_target_index(registry, kwd_data.cards)
+            logger.debug(f"CardSet '{card_settings.name}': resolved target index = {target_index}")
+
+            length_func = card_settings.length_func or ""
             card = {
-                "set": {"name": card_settings["name"]},
+                "set": {"name": card_settings.name},
                 "fields": [],
-                "index": card_settings["target-index"],
-                "target_index": card_settings["target-index"],
+                "index": target_index,
+                "target_index": target_index,
                 "length_func": length_func,
-                "active_func": card_settings.get("active-func", ""),
+                "active_func": card_settings.active_func or "",
                 "bounded": is_bounded,
                 "item_name": item_name,
                 "items_name": items_name,
             }
-            target_name = card_settings.get("target-name", "")
-            target_index = card_settings["target-index"]
+            target_name = card_settings_dict.get("target-name", "")
             insertion = gen.Insertion(target_index, target_name, card)
             kwd_data.card_insertions.append(insertion)
             card_sets.append(card_set)

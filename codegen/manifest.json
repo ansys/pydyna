@@ -567,16 +567,19 @@
         "generation-options": {
             "card-set": [
                 {
-                    "source-indices": [
-                        0
+                    "source-refs": [
+                        "hourglass_card"
                     ],
                     "source-options": [
                         0
                     ],
-                    "target-index": 0,
+                    "target-ref": "hourglass_card",
                     "name": "HourglassCardSet"
                 }
             ]
+        },
+        "labels": {
+            "hourglass_card": 0
         }
     },
     "CONTACT_AUTOMATIC_SINGLE_SURFACE": {
@@ -765,15 +768,15 @@
         "generation-options": {
             "card-set": [
                 {
-                    "source-indices": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
+                    "source-refs": [
+                        "shell_card_1",
+                        "shell_card_2",
+                        "angle_card",
+                        "user_integration_card",
+                        "integration_points_card",
+                        "pi_card"
                     ],
-                    "target-index": 0,
+                    "target-ref": "shell_card_1",
                     "name": "SectionShellCardSet"
                 }
             ],
@@ -828,6 +831,8 @@
         },
         "comment": "a mix of conditional, variable length, and table cards",
         "labels": {
+            "shell_card_1": 0,
+            "shell_card_2": 1,
             "user_integration_card": 2,
             "integration_points_card": 3,
             "angle_card": 4,
@@ -1415,12 +1420,12 @@
             ],
             "card-set": [
                 {
-                    "source-indices": [
-                        7,
-                        8,
-                        9
+                    "source-refs": [
+                        "fiber_header_card",
+                        "fiber_type1_card",
+                        "fiber_type2_card"
                     ],
-                    "target-index": 7,
+                    "target-ref": "fiber_header_card",
                     "name": "FiberFamily",
                     "length-func": "self.nf or 0",
                     "active-func": "self.atype and abs(self.atype) == 1",
@@ -1524,6 +1529,9 @@
             "polynomial_c_card": 4,
             "yeoh_k_card": 5,
             "activation_header_card": 6,
+            "fiber_header_card": 7,
+            "fiber_type1_card": 8,
+            "fiber_type2_card": 9,
             "intype_1_k_card": 10,
             "actype_header_card": 11,
             "actype_1_2_calcium_card": 12,
@@ -2362,10 +2370,10 @@
             ],
             "card-set": [
                 {
-                    "source-indices": [
-                        1
+                    "source-refs": [
+                        "strain_card_1"
                     ],
-                    "target-index": 1,
+                    "target-ref": "strain_card_1",
                     "target-name": "InitialStrainShellCardSet",
                     "name": "InitialStrainShellLargeCardSet",
                     "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
@@ -2374,11 +2382,11 @@
                     "items-name": "strains"
                 },
                 {
-                    "source-indices": [
-                        2,
-                        3
+                    "source-refs": [
+                        "large_strain_card",
+                        "large_strain_card_2"
                     ],
-                    "target-index": 2,
+                    "target-ref": "large_strain_card",
                     "target-name": "InitialStrainShellCardSet",
                     "name": "InitialStrainShellLargeCardSetLarge",
                     "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
@@ -2387,10 +2395,10 @@
                     "items-name": "large_strains"
                 },
                 {
-                    "source-indices": [
-                        0
+                    "source-refs": [
+                        "strain_card_0"
                     ],
-                    "target-index": 0,
+                    "target-ref": "strain_card_0",
                     "name": "InitialStrainShellCardSet"
                 }
             ]
@@ -2430,11 +2438,11 @@
             ],
             "card-set": [
                 {
-                    "source-indices": [
-                        1,
-                        2
+                    "source-refs": [
+                        "stress_card",
+                        "hisv_card"
                     ],
-                    "target-index": 1,
+                    "target-ref": "stress_card",
                     "target-name": "InitialStressShellCardSet",
                     "name": "InitialStressShellThicknessLargeCardSet",
                     "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
@@ -2443,12 +2451,12 @@
                     "items-name": "sets"
                 },
                 {
-                    "source-indices": [
-                        3,
-                        4,
-                        5
+                    "source-refs": [
+                        "large_stress_card_1",
+                        "large_stress_card_2",
+                        "large_hisv_card"
                     ],
-                    "target-index": 2,
+                    "target-ref": "hisv_card",
                     "target-name": "InitialStressShellCardSet",
                     "name": "InitialStressShellThicknessLargeCardSetLarge",
                     "length-func": "self.nplane * self.nthick if (self.nplane and self.nthick) else 2",
@@ -2457,10 +2465,10 @@
                     "items-name": "large_sets"
                 },
                 {
-                    "source-indices": [
-                        0
+                    "source-refs": [
+                        "element_card"
                     ],
-                    "target-index": 0,
+                    "target-ref": "element_card",
                     "name": "InitialStressShellCardSet"
                 }
             ],
