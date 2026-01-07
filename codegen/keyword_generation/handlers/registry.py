@@ -10,9 +10,11 @@ proper lifecycle management.
 
 IMPORTANT: Handler execution order is critical. The registry maintains a specific
 ordering (defined in create_default_registry) that ensures handlers run in the
-correct sequence. For example, reorder-card must run before handlers that use
-positional indices, and card-set must run before conditional-card to allow
+correct sequence. For example, card-set must run before conditional-card to allow
 conditional-card to modify cards via shared references.
+
+Labels are stored as object references (not indices), so handlers can freely
+reorder, insert, or remove cards without invalidating previously registered labels.
 
 See agents/codegen.md for detailed documentation on handler ordering and semantics.
 """
@@ -82,9 +84,9 @@ class HandlerRegistry:
         Handlers are executed in an order that respects their declared dependencies.
         Only handlers with corresponding settings in the configuration are executed.
 
-        The LabelRegistry is initialized after reorder-card runs (since reorder-card
-        changes card positions). Initial labels from manifest's "labels" section
-        are passed via initial_labels parameter.
+        The LabelRegistry is initialized before handlers run, mapping label names to
+        card objects. Since labels reference objects (not indices), the registry
+        remains valid even after handlers reorder or insert cards.
 
         Args:
             kwd_data: The keyword data structure to transform
@@ -121,20 +123,13 @@ class HandlerRegistry:
         # instead of topological sort for now
         sorted_names = [name for name in self._handlers.keys() if name in handlers_to_run]
 
-        # Initialize label registry before running handlers
-        # If reorder-card is in settings, we'll reinitialize after it runs
-        # Otherwise, initialize now with the current card order
+        # Initialize label registry before running any handlers.
+        # Since labels reference card objects (not indices), the registry remains valid
+        # even after handlers reorder, insert, or remove cards.
         keyword_name = f"{kwd_data.keyword}.{kwd_data.subkeyword}"
-        labels: Optional[LabelRegistry] = None
-
-        # Check if reorder-card will run - if so, delay initialization until after it
-        reorder_will_run = "reorder-card" in handlers_to_run
-
-        if not reorder_will_run:
-            # No reorder-card, initialize labels now with current positions
-            labels = LabelRegistry.from_cards(kwd_data.cards, keyword=keyword_name, initial_labels=initial_labels)
-            kwd_data.label_registry = labels
-            logger.debug(f"Initialized LabelRegistry for {keyword_name} (no reorder-card)")
+        labels = LabelRegistry.from_cards(kwd_data.cards, keyword=keyword_name, initial_labels=initial_labels)
+        kwd_data.label_registry = labels
+        logger.debug(f"Initialized LabelRegistry for {keyword_name} with {len(labels.get_all_labels())} labels")
 
         # Execute handlers in sorted order
         for handler_name in sorted_names:
@@ -144,14 +139,6 @@ class HandlerRegistry:
 
             # Run the handler
             handler.handle(kwd_data, handler_settings)
-
-            # Initialize label registry after reorder-card runs
-            # (reorder-card changes card positions, so we wait until after)
-            if handler_name == "reorder-card":
-                # Now initialize the label registry with post-reorder positions
-                labels = LabelRegistry.from_cards(kwd_data.cards, keyword=keyword_name, initial_labels=initial_labels)
-                kwd_data.label_registry = labels
-                logger.debug(f"Initialized LabelRegistry for {keyword_name} with {len(labels.get_all_labels())} labels")
 
     def post_process_all(self, kwd_data: KeywordData) -> None:
         """

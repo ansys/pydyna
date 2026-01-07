@@ -25,23 +25,44 @@ Series Card Handler: Creates variable-length card arrays in keywords.
 
 This handler enables keywords to contain arrays of cards with dynamic sizing,
 supporting repetitive data structures like multiple loads, materials, or entities.
+
+Uses label-based card references:
+    {"ref": "data_card", "name": "data_array", "card-size": 1, ...}
+
+Labels must be defined in the keyword's labels section or auto-generated.
 """
 
 from dataclasses import dataclass
+import logging
 import typing
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.label_registry import LabelRegistry
 from keyword_generation.data_model.metadata import DataclassDefinition, DataclassField, VariableCardMetadata
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
+logger = logging.getLogger(__name__)
+
 
 @dataclass
 class SeriesCardSettings:
-    """Configuration for variable-length card arrays."""
+    """Configuration for variable-length card arrays.
 
-    index: int
+    Attributes:
+        ref: Label-based reference (resolved via LabelRegistry)
+        name: Property name for the array
+        card_size: Number of cards per element
+        element_width: Width of each element in columns
+        type: Element type (primitive or 'struct')
+        help: Help text for the array
+        length_func: Optional Python expression for array length
+        active_func: Optional Python expression for conditional activation
+        struct_info: Optional dataclass definition for struct types
+    """
+
+    ref: str
     name: str
     card_size: int
     element_width: int
@@ -53,8 +74,19 @@ class SeriesCardSettings:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SeriesCardSettings":
+        """Create settings from dict.
+
+        Args:
+            data: Dict with 'ref', 'name', 'card-size', 'element-width', 'type', 'help', etc.
+
+        Returns:
+            SeriesCardSettings instance
+
+        Raises:
+            KeyError: If required keys are missing
+        """
         return cls(
-            index=data["index"],
+            ref=data["ref"],
             name=data["name"],
             card_size=data["card-size"],
             element_width=data["element-width"],
@@ -64,6 +96,21 @@ class SeriesCardSettings:
             active_func=data.get("active-func"),
             struct_info=data.get("struct-info"),
         )
+
+    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
+        """Resolve the label reference to a concrete card index.
+
+        Args:
+            registry: LabelRegistry for resolving label references
+            cards: The cards list to search for the card object.
+
+        Returns:
+            Integer index into kwd_data.cards
+
+        Raises:
+            UndefinedLabelError: If ref label is not found
+        """
+        return registry.resolve_index(self.ref, cards)
 
 
 @handler(
@@ -75,7 +122,7 @@ class SeriesCardSettings:
         "items": {
             "type": "object",
             "properties": {
-                "index": {"type": "integer", "description": "Card index to make variable"},
+                "ref": {"type": "string", "description": "Card label reference"},
                 "name": {"type": "string", "description": "Variable array name"},
                 "card-size": {"type": "integer", "description": "Number of cards per element"},
                 "element-width": {"type": "integer", "description": "Width of each element"},
@@ -88,7 +135,7 @@ class SeriesCardSettings:
                     "description": "Dataclass definition for struct types",
                 },
             },
-            "required": ["index", "name", "card-size", "element-width", "type", "help"],
+            "required": ["ref", "name", "card-size", "element-width", "type", "help"],
         },
     },
     output_description="Sets kwd_data['variable']=True, adds 'variable' dict to cards, may add 'dataclasses' list",
@@ -104,7 +151,7 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
     Input Settings Example:
         [
             {
-                "index": 1,
+                "ref": "loads_card",
                 "name": "loads",
                 "card-size": 1,
                 "element-width": 8,
@@ -114,7 +161,7 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
                 "active-func": "self.nloads > 0"
             },
             {
-                "index": 2,
+                "ref": "properties_card",
                 "name": "properties",
                 "card-size": 2,
                 "element-width": 8,
@@ -131,6 +178,10 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         - Sets kwd_data["variable"] = True
         - Adds card["variable"] dict with: name, size, width, type, help, length_func, active_func
         - If struct types used, adds kwd_data["dataclasses"] list with struct definitions
+
+    Requires:
+        - LabelRegistry must be available on kwd_data.label_registry
+        - Labels must be defined in the manifest 'labels' section
     """
 
     @classmethod
@@ -147,14 +198,28 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         Convert specified cards into variable-length series.
 
         Args:
-            kwd_data: Complete keyword data dictionary
-            settings: List of series card configurations
+            kwd_data: KeywordData instance containing cards and label_registry
+            settings: List of dicts with 'ref', 'name', 'card-size', etc.
+
+        Raises:
+            ValueError: If label_registry is not available on kwd_data
+            UndefinedLabelError: If a referenced label is not defined
         """
         typed_settings = self._parse_settings(settings)
+        registry = kwd_data.label_registry
+        if registry is None:
+            raise ValueError(
+                "SeriesCardHandler requires LabelRegistry on kwd_data.label_registry. "
+                "Ensure labels are defined in the manifest."
+            )
+
         kwd_data.variable = True
         dataclasses = []
         for card_settings in typed_settings:
-            card_index = card_settings.index
+            card_index = card_settings.resolve_index(registry, kwd_data.cards)
+            logger.debug(
+                f"Creating series '{card_settings.name}' at index {card_index} " f"(ref='{card_settings.ref}')"
+            )
             type_name = card_settings.type
             variable_card = kwd_data.cards[card_index]
             if type_name == "struct":

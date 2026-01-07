@@ -20,58 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Tests for LabelRegistry and CardAddress classes."""
+"""Tests for LabelRegistry - object-reference based card labeling."""
 
 import pytest
 
 from keyword_generation.data_model.label_registry import (
-    CardAddress,
-    DuplicateIndexError,
+    CardNotFoundError,
     DuplicateLabelError,
     LabelRegistry,
     UndefinedLabelError,
-    resolve_setting_index,
-    resolve_setting_indices,
 )
-from keyword_generation.data_model.keyword_data import Card, Field
-
-
-class TestCardAddress:
-    """Test CardAddress dataclass functionality."""
-
-    def test_card_address_creation(self):
-        """Test basic CardAddress creation."""
-        addr = CardAddress(path=[3], entity_type="card")
-        assert addr.path == [3]
-        assert addr.entity_type == "card"
-        assert addr.root_index == 3
-        assert not addr.is_nested
-
-    def test_card_address_nested(self):
-        """Test nested CardAddress with multiple path elements."""
-        addr = CardAddress(path=[3, 0, 2], entity_type="card")
-        assert addr.path == [3, 0, 2]
-        assert addr.root_index == 3
-        assert addr.is_nested
-
-    def test_card_address_empty_path_raises(self):
-        """Test that empty path raises ValueError."""
-        with pytest.raises(ValueError, match="path cannot be empty"):
-            CardAddress(path=[], entity_type="card")
-
-    def test_card_address_shifted(self):
-        """Test shifting a CardAddress root index."""
-        addr = CardAddress(path=[3, 1], entity_type="card")
-        shifted = addr.shifted(2)
-        assert shifted.path == [5, 1]
-        assert shifted.entity_type == "card"
-        # Original unchanged
-        assert addr.path == [3, 1]
-
-    def test_card_address_label_assignment(self):
-        """Test label assignment in __post_init__ or manual."""
-        addr = CardAddress(path=[3], entity_type="card", label="stress_card")
-        assert addr.label == "stress_card"
 
 
 class TestLabelRegistry:
@@ -79,223 +37,187 @@ class TestLabelRegistry:
 
     def test_registry_creation(self):
         """Test basic registry creation."""
-        registry = LabelRegistry()
-        assert len(registry.get_all_labels()) == 0
+        registry = LabelRegistry(_keyword="TEST")
+        assert registry._keyword == "TEST"
+        assert len(registry._labels) == 0
 
     def test_register_and_resolve(self):
-        """Test registering and resolving a label."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
-        addr = CardAddress(path=[5], entity_type="card")
-        registry.register("stress_card", addr)
+        """Test registering a card and resolving it."""
+        registry = LabelRegistry(_keyword="TEST")
+        card = {"fields": [{"name": "test"}]}
 
-        resolved = registry.resolve("stress_card")
-        assert resolved.path == [5]
-        assert resolved.label == "stress_card"
+        registry.register("my_card", card)
 
-    def test_resolve_index_with_label(self):
-        """Test resolve_index with a string label."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
-        registry.register("main_card", CardAddress(path=[2], entity_type="card"))
+        resolved = registry.resolve("my_card")
+        assert resolved is card
 
-        index = registry.resolve_index("main_card")
-        assert index == 2
+    def test_resolve_index(self):
+        """Test resolving a label to an index in a cards list."""
+        registry = LabelRegistry(_keyword="TEST")
+        card0 = {"fields": [{"name": "a"}]}
+        card1 = {"fields": [{"name": "b"}]}
+        card2 = {"fields": [{"name": "c"}]}
+        cards = [card0, card1, card2]
 
-    def test_resolve_index_with_int(self):
-        """Test resolve_index passes through integer indices."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
-        index = registry.resolve_index(7)
-        assert index == 7
+        registry.register("card_b", card1)
 
-    def test_resolve_index_nested_raises(self):
-        """Test resolve_index raises for nested addresses."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
-        registry.register("nested_card", CardAddress(path=[3, 0, 2], entity_type="card"))
+        index = registry.resolve_index("card_b", cards)
+        assert index == 1
 
-        with pytest.raises(ValueError, match="nested address"):
-            registry.resolve_index("nested_card")
+    def test_resolve_index_after_insert(self):
+        """Test that resolve_index finds correct position after insertion."""
+        registry = LabelRegistry(_keyword="TEST")
+        card0 = {"fields": [{"name": "a"}]}
+        card1 = {"fields": [{"name": "b"}]}
+        card2 = {"fields": [{"name": "c"}]}
+        cards = [card0, card1, card2]
 
-    def test_resolve_undefined_label_raises(self):
-        """Test resolving undefined label raises UndefinedLabelError."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
+        # Register label for card1 (currently at index 1)
+        registry.register("card_b", card1)
+        assert registry.resolve_index("card_b", cards) == 1
 
-        with pytest.raises(UndefinedLabelError, match="Undefined label 'nonexistent'"):
-            registry.resolve("nonexistent")
+        # Insert a new card at the beginning
+        new_card = {"fields": [{"name": "new"}]}
+        cards.insert(0, new_card)
+
+        # card_b should now be at index 2
+        assert registry.resolve_index("card_b", cards) == 2
+
+    def test_resolve_index_after_remove(self):
+        """Test that resolve_index finds correct position after removal."""
+        registry = LabelRegistry(_keyword="TEST")
+        card0 = {"fields": [{"name": "a"}]}
+        card1 = {"fields": [{"name": "b"}]}
+        card2 = {"fields": [{"name": "c"}]}
+        cards = [card0, card1, card2]
+
+        # Register label for card2 (currently at index 2)
+        registry.register("card_c", card2)
+        assert registry.resolve_index("card_c", cards) == 2
+
+        # Remove card0
+        cards.remove(card0)
+
+        # card_c should now be at index 1
+        assert registry.resolve_index("card_c", cards) == 1
 
     def test_duplicate_label_raises(self):
-        """Test registering duplicate label raises DuplicateLabelError."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
-        registry.register("my_card", CardAddress(path=[1], entity_type="card"))
+        """Test that registering duplicate label raises error."""
+        registry = LabelRegistry(_keyword="TEST")
+        card1 = {"fields": [{"name": "a"}]}
+        card2 = {"fields": [{"name": "b"}]}
+
+        registry.register("my_card", card1)
 
         with pytest.raises(DuplicateLabelError, match="already registered"):
-            registry.register("my_card", CardAddress(path=[2], entity_type="card"))
+            registry.register("my_card", card2)
+
+    def test_undefined_label_raises(self):
+        """Test that resolving undefined label raises error."""
+        registry = LabelRegistry(_keyword="TEST")
+
+        with pytest.raises(UndefinedLabelError, match="Undefined label"):
+            registry.resolve("nonexistent")
+
+    def test_card_not_found_raises(self):
+        """Test that resolving index for removed card raises error."""
+        registry = LabelRegistry(_keyword="TEST")
+        card = {"fields": [{"name": "a"}]}
+        other_card = {"fields": [{"name": "b"}]}
+        cards = [other_card]  # card is NOT in the list
+
+        registry.register("my_card", card)
+
+        with pytest.raises(CardNotFoundError, match="not found in cards list"):
+            registry.resolve_index("my_card", cards)
 
     def test_has_label(self):
-        """Test has_label check."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
-        registry.register("exists", CardAddress(path=[0], entity_type="card"))
+        """Test has_label method."""
+        registry = LabelRegistry(_keyword="TEST")
+        card = {"fields": [{"name": "a"}]}
 
-        assert registry.has_label("exists")
-        assert not registry.has_label("does_not_exist")
+        assert not registry.has_label("my_card")
+        registry.register("my_card", card)
+        assert registry.has_label("my_card")
 
     def test_get_all_labels(self):
-        """Test retrieving all registered labels."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
-        registry.register("card_a", CardAddress(path=[0], entity_type="card"))
-        registry.register("card_b", CardAddress(path=[1], entity_type="card"))
+        """Test get_all_labels returns copy."""
+        registry = LabelRegistry(_keyword="TEST")
+        card1 = {"fields": [{"name": "a"}]}
+        card2 = {"fields": [{"name": "b"}]}
+
+        registry.register("card_a", card1)
+        registry.register("card_b", card2)
 
         labels = registry.get_all_labels()
-        assert "card_a" in labels
-        assert "card_b" in labels
         assert len(labels) == 2
+        assert labels["card_a"] is card1
+        assert labels["card_b"] is card2
+
+        # Verify it's a copy
+        labels["card_c"] = {"new": True}
+        assert not registry.has_label("card_c")
 
     def test_label_format_validation(self):
-        """Test label format validation."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
+        """Test that invalid label formats are rejected."""
+        registry = LabelRegistry(_keyword="TEST")
+        card = {"fields": [{"name": "a"}]}
 
         # Valid labels
-        registry.register("simple_label", CardAddress(path=[0], entity_type="card"))
-        registry.register("nested/path", CardAddress(path=[1], entity_type="card"))
-        registry.register("with_numbers_123", CardAddress(path=[2], entity_type="card"))
+        registry.register("card_0", card)
+        registry.register("_private", {"fields": []})
+        registry.register("CamelCase", {"fields": []})
 
-        # Invalid labels should raise
-        with pytest.raises(ValueError, match="cannot be empty"):
-            registry.register("", CardAddress(path=[3], entity_type="card"))
+        # Invalid labels
+        with pytest.raises(ValueError, match="Invalid label format"):
+            registry.register("123start", {"fields": []})
 
         with pytest.raises(ValueError, match="Invalid label format"):
-            registry.register("has spaces", CardAddress(path=[4], entity_type="card"))
+            registry.register("has space", {"fields": []})
 
-    def test_update_after_insert(self):
-        """Test updating addresses after card insertion."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
-        registry.register("card_a", CardAddress(path=[0], entity_type="card"))
-        registry.register("card_b", CardAddress(path=[2], entity_type="card"))
-        registry.register("card_c", CardAddress(path=[4], entity_type="card"))
-
-        # Insert at position 1 - should shift card_b and card_c
-        registry.update_after_insert(insert_position=1, count=1)
-
-        assert registry.resolve_index("card_a") == 0  # Unchanged
-        assert registry.resolve_index("card_b") == 3  # Shifted by 1
-        assert registry.resolve_index("card_c") == 5  # Shifted by 1
-
-    def test_update_after_insert_multiple(self):
-        """Test updating addresses after inserting multiple cards."""
-        registry = LabelRegistry(_keyword="TEST.KEYWORD")
-        registry.register("card_a", CardAddress(path=[1], entity_type="card"))
-        registry.register("card_b", CardAddress(path=[3], entity_type="card"))
-
-        # Insert 2 cards at position 2
-        registry.update_after_insert(insert_position=2, count=2)
-
-        assert registry.resolve_index("card_a") == 1  # Unchanged (before insert)
-        assert registry.resolve_index("card_b") == 5  # Shifted by 2
+        with pytest.raises(ValueError, match="cannot be empty"):
+            registry.register("", {"fields": []})
 
 
 class TestLabelRegistryFromCards:
     """Test LabelRegistry.from_cards factory method."""
 
-    @pytest.fixture
-    def sample_cards(self):
-        """Create sample cards for testing."""
-        return [
-            Card(index=0, fields=[Field(name="f0", type="int", position=0, width=10)]),
-            Card(index=1, fields=[Field(name="f1", type="int", position=0, width=10)]),
-            Card(index=2, fields=[Field(name="f2", type="int", position=0, width=10)]),
-        ]
+    def test_from_cards_with_initial_labels(self):
+        """Test creating registry from cards with initial labels."""
+        card0 = {"fields": [{"name": "a"}]}
+        card1 = {"fields": [{"name": "b"}]}
+        card2 = {"fields": [{"name": "c"}]}
+        cards = [card0, card1, card2]
 
-    def test_from_cards_auto_labels(self, sample_cards):
-        """Test auto-generated labels from card list."""
-        registry = LabelRegistry.from_cards(sample_cards, keyword="TEST.KW")
-
-        assert registry.has_label("card_0")
-        assert registry.has_label("card_1")
-        assert registry.has_label("card_2")
-        assert registry.resolve_index("card_0") == 0
-        assert registry.resolve_index("card_1") == 1
-        assert registry.resolve_index("card_2") == 2
-
-    def test_from_cards_with_initial_labels(self, sample_cards):
-        """Test explicit labels override auto-generated ones."""
         initial_labels = {
-            "main_card": 0,
-            "data_card": 2,
-        }
-        registry = LabelRegistry.from_cards(sample_cards, keyword="TEST.KW", initial_labels=initial_labels)
-
-        # Explicit labels work
-        assert registry.resolve_index("main_card") == 0
-        assert registry.resolve_index("data_card") == 2
-
-        # Auto-generated label for card without explicit label
-        assert registry.has_label("card_1")
-        assert registry.resolve_index("card_1") == 1
-
-        # Auto-generated labels should NOT exist for explicitly labeled cards
-        assert not registry.has_label("card_0")
-        assert not registry.has_label("card_2")
-
-    def test_from_cards_invalid_index_raises(self, sample_cards):
-        """Test that invalid indices in initial_labels raise error."""
-        initial_labels = {"bad_card": 999}
-
-        with pytest.raises(ValueError, match="Invalid index 999"):
-            LabelRegistry.from_cards(sample_cards, keyword="TEST.KW", initial_labels=initial_labels)
-
-    def test_from_cards_duplicate_index_raises(self, sample_cards):
-        """Test that multiple labels for same index raises DuplicateIndexError."""
-        initial_labels = {
-            "label_one": 1,
-            "label_two": 1,  # Same index as label_one
+            "first_card": 0,
+            "middle_card": 1,
         }
 
-        with pytest.raises(DuplicateIndexError, match="Index 1 has multiple labels"):
-            LabelRegistry.from_cards(sample_cards, keyword="TEST.KW", initial_labels=initial_labels)
+        registry = LabelRegistry.from_cards(cards, keyword="TEST", initial_labels=initial_labels)
 
+        # Verify labels resolve to correct cards
+        assert registry.resolve("first_card") is card0
+        assert registry.resolve("middle_card") is card1
 
-class TestResolveSettingHelpers:
-    """Test the resolve_setting_index and resolve_setting_indices helper functions."""
+        # Verify index resolution works
+        assert registry.resolve_index("first_card", cards) == 0
+        assert registry.resolve_index("middle_card", cards) == 1
 
-    @pytest.fixture
-    def registry(self):
-        """Create a registry with some labels."""
-        reg = LabelRegistry(_keyword="TEST.KW")
-        reg.register("card_a", CardAddress(path=[0], entity_type="card"))
-        reg.register("card_b", CardAddress(path=[3], entity_type="card"))
-        reg.register("card_c", CardAddress(path=[5], entity_type="card"))
-        return reg
+    def test_from_cards_empty_labels(self):
+        """Test creating registry with no initial labels."""
+        card0 = {"fields": [{"name": "a"}]}
+        cards = [card0]
 
-    def test_resolve_setting_index_with_ref(self, registry):
-        """Test resolve_setting_index using ref key."""
-        setting = {"ref": "card_b", "func": "some_func"}
-        index = resolve_setting_index(setting, registry)
-        assert index == 3
+        registry = LabelRegistry.from_cards(cards, keyword="TEST")
 
-    def test_resolve_setting_index_with_index(self, registry):
-        """Test resolve_setting_index using index key."""
-        setting = {"index": 7, "func": "some_func"}
-        index = resolve_setting_index(setting, registry)
-        assert index == 7
+        # No labels should be registered
+        assert len(registry.get_all_labels()) == 0
 
-    def test_resolve_setting_index_missing_both_raises(self, registry):
-        """Test resolve_setting_index raises when neither ref nor index provided."""
-        setting = {"func": "some_func"}
-        with pytest.raises(ValueError, match="must contain either"):
-            resolve_setting_index(setting, registry)
+    def test_from_cards_invalid_index_raises(self):
+        """Test that invalid index in initial_labels raises error."""
+        card0 = {"fields": [{"name": "a"}]}
+        cards = [card0]
 
-    def test_resolve_setting_indices_with_refs(self, registry):
-        """Test resolve_setting_indices using refs key."""
-        setting = {"refs": ["card_a", "card_c"]}
-        indices = resolve_setting_indices(setting, registry)
-        assert indices == [0, 5]
-
-    def test_resolve_setting_indices_with_indices(self, registry):
-        """Test resolve_setting_indices using indices key."""
-        setting = {"indices": [1, 4, 7]}
-        indices = resolve_setting_indices(setting, registry)
-        assert indices == [1, 4, 7]
-
-    def test_resolve_setting_indices_missing_both_raises(self, registry):
-        """Test resolve_setting_indices raises when neither refs nor indices provided."""
-        setting = {"other": "value"}
-        with pytest.raises(ValueError, match="must contain either"):
-            resolve_setting_indices(setting, registry)
+        with pytest.raises(ValueError, match="Invalid index"):
+            LabelRegistry.from_cards(cards, keyword="TEST", initial_labels={"bad": 5})

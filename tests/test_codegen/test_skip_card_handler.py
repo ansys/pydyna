@@ -25,7 +25,7 @@
 import pytest
 
 from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
-from keyword_generation.data_model.label_registry import CardAddress, LabelRegistry
+from keyword_generation.data_model.label_registry import LabelRegistry
 from keyword_generation.handlers.skip_card import SkipCardHandler, SkipCardSettings
 
 
@@ -43,12 +43,19 @@ class TestSkipCardSettings:
         assert settings.ref == "data_card"
 
     def test_resolve_index_with_ref(self):
-        """Test resolve_index resolves label to index."""
+        """Test resolve_index resolves label to index via object reference."""
+        # Create cards to register
+        cards = [
+            Card(index=i, fields=[Field(name=f"f{i}", type="int", position=0, width=10)]) for i in range(7)
+        ]
+
+        # Registry stores object references
         registry = LabelRegistry(_keyword="TEST.KW")
-        registry.register("target_card", CardAddress(path=[6], entity_type="card"))
+        registry.register("target_card", cards[6])
 
         settings = SkipCardSettings(ref="target_card")
-        assert settings.resolve_index(registry) == 6
+        # resolve_index now takes the cards list to find the index dynamically
+        assert settings.resolve_index(registry, cards) == 6
 
 
 class TestSkipCardHandler:
@@ -77,31 +84,34 @@ class TestSkipCardHandler:
 
     def test_handle_with_ref(self, handler, sample_kwd_data):
         """Test marking cards for removal using label reference."""
-        # Set up label registry
+        cards = sample_kwd_data.cards
+
+        # Set up label registry with object references
         registry = LabelRegistry(_keyword="SECTION.BEAM")
-        registry.register("dimensions_card", CardAddress(path=[1], entity_type="card"))
-        registry.register("discrete_beam_card", CardAddress(path=[3], entity_type="card"))
+        registry.register("dimensions_card", cards[1])
+        registry.register("discrete_beam_card", cards[3])
         sample_kwd_data.label_registry = registry
 
         settings = [{"ref": "dimensions_card"}, {"ref": "discrete_beam_card"}]
 
         handler.handle(sample_kwd_data, settings)
 
-        assert sample_kwd_data.cards[0].get("mark_for_removal") != 1
-        assert sample_kwd_data.cards[1]["mark_for_removal"] == 1
-        assert sample_kwd_data.cards[2].get("mark_for_removal") != 1
-        assert sample_kwd_data.cards[3]["mark_for_removal"] == 1
-        assert sample_kwd_data.cards[4].get("mark_for_removal") != 1
+        assert cards[0].get("mark_for_removal") != 1
+        assert cards[1]["mark_for_removal"] == 1
+        assert cards[2].get("mark_for_removal") != 1
+        assert cards[3]["mark_for_removal"] == 1
+        assert cards[4].get("mark_for_removal") != 1
 
     def test_handle_with_from_cards_registry(self, handler, sample_kwd_data):
         """Test with registry created via from_cards factory."""
+        cards = sample_kwd_data.cards
         initial_labels = {
             "main_card": 0,
             "skip_me": 2,
             "also_skip": 4,
         }
         registry = LabelRegistry.from_cards(
-            sample_kwd_data.cards, keyword="SECTION.BEAM", initial_labels=initial_labels
+            cards, keyword="SECTION.BEAM", initial_labels=initial_labels
         )
         sample_kwd_data.label_registry = registry
 
@@ -109,11 +119,11 @@ class TestSkipCardHandler:
 
         handler.handle(sample_kwd_data, settings)
 
-        assert sample_kwd_data.cards[0].get("mark_for_removal") != 1
-        assert sample_kwd_data.cards[1].get("mark_for_removal") != 1
-        assert sample_kwd_data.cards[2]["mark_for_removal"] == 1
-        assert sample_kwd_data.cards[3].get("mark_for_removal") != 1
-        assert sample_kwd_data.cards[4]["mark_for_removal"] == 1
+        assert cards[0].get("mark_for_removal") != 1
+        assert cards[1].get("mark_for_removal") != 1
+        assert cards[2]["mark_for_removal"] == 1
+        assert cards[3].get("mark_for_removal") != 1
+        assert cards[4]["mark_for_removal"] == 1
 
     def test_handle_undefined_ref_raises(self, handler, sample_kwd_data):
         """Test that undefined label reference raises error."""
@@ -151,10 +161,11 @@ class TestSkipCardIntegration:
                 Card(index=i, fields=[Field(name=f"f{i}", type="int", position=0, width=10)]) for i in range(5)
             ],
         )
+        cards = kwd_data.cards
 
-        # Set up registry
+        # Set up registry with object references
         registry = LabelRegistry.from_cards(
-            kwd_data.cards,
+            cards,
             keyword="TEST.KW",
             initial_labels={"skip_a": 1, "skip_b": 3},
         )
@@ -165,5 +176,5 @@ class TestSkipCardIntegration:
         handler.handle(kwd_data, settings)
 
         # Verify the expected cards are marked
-        marked_indices = [i for i, c in enumerate(kwd_data.cards) if c.get("mark_for_removal") == 1]
+        marked_indices = [i for i, c in enumerate(cards) if c.get("mark_for_removal") == 1]
         assert marked_indices == [1, 3]

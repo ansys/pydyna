@@ -29,7 +29,7 @@ from keyword_generation.handlers.conditional_card import (
     ConditionalCardSettings,
 )
 from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
-from keyword_generation.data_model.label_registry import CardAddress, LabelRegistry, UndefinedLabelError
+from keyword_generation.data_model.label_registry import LabelRegistry, UndefinedLabelError
 
 
 class TestConditionalCardSettings:
@@ -61,11 +61,15 @@ class TestConditionalCardSettings:
             ConditionalCardSettings.from_dict(data)
 
     def test_resolve_index_with_ref(self):
-        """Test resolving ref to index via registry."""
+        """Test resolving ref to index via registry with object references."""
+        cards = [
+            Card(index=i, fields=[Field(name=f"f{i}", type="int", position=0, width=10)]) for i in range(3)
+        ]
         registry = LabelRegistry(_keyword="TEST.KW")
-        registry.register("my_card", CardAddress(path=[2], entity_type="card"))
+        registry.register("my_card", cards[2])  # Object reference
         settings = ConditionalCardSettings(ref="my_card", func="self.value == 1")
-        assert settings.resolve_index(registry) == 2
+        # resolve_index now takes cards list
+        assert settings.resolve_index(registry, cards) == 2
 
 
 class TestConditionalCardHandler:
@@ -92,21 +96,23 @@ class TestConditionalCardHandler:
 
     def test_handle_with_ref(self, handler, sample_kwd_data):
         """Test handler adds func to card using ref."""
+        cards = sample_kwd_data.cards
         registry = LabelRegistry(_keyword="CONTROL_IMPLICIT.AUTO")
-        registry.register("target_card", CardAddress(path=[1], entity_type="card"))
+        registry.register("target_card", cards[1])  # Object reference
         sample_kwd_data.label_registry = registry
 
         handler.handle(sample_kwd_data, [{"ref": "target_card", "func": "self.iauto == 3"}])
 
-        assert sample_kwd_data.cards[1]["func"] == "self.iauto == 3"
-        assert sample_kwd_data.cards[0].func is None
-        assert sample_kwd_data.cards[2].func is None
+        assert cards[1]["func"] == "self.iauto == 3"
+        assert cards[0].func is None
+        assert cards[2].func is None
 
     def test_handle_multiple_refs(self, handler, sample_kwd_data):
         """Test handler with multiple ref-based settings."""
+        cards = sample_kwd_data.cards
         registry = LabelRegistry(_keyword="CONTROL_IMPLICIT.AUTO")
-        registry.register("card_a", CardAddress(path=[0], entity_type="card"))
-        registry.register("card_b", CardAddress(path=[2], entity_type="card"))
+        registry.register("card_a", cards[0])
+        registry.register("card_b", cards[2])
         sample_kwd_data.label_registry = registry
 
         handler.handle(
@@ -117,9 +123,9 @@ class TestConditionalCardHandler:
             ],
         )
 
-        assert sample_kwd_data.cards[0]["func"] == "self.type == 0"
-        assert sample_kwd_data.cards[1].func is None
-        assert sample_kwd_data.cards[2]["func"] == "self.type == 2"
+        assert cards[0]["func"] == "self.type == 0"
+        assert cards[1].func is None
+        assert cards[2]["func"] == "self.type == 2"
 
     def test_handle_with_from_cards_registry(self, handler):
         """Test handler with registry created from LabelRegistry.from_cards."""
@@ -128,7 +134,7 @@ class TestConditionalCardHandler:
             Card(index=1, fields=[Field(name="conditional", type="float", position=0, width=10)]),
         ]
         initial_labels = {"my_target": 1}
-        registry = LabelRegistry.from_cards("TEST.KW", cards, initial_labels=initial_labels)
+        registry = LabelRegistry.from_cards(cards, keyword="TEST.KW", initial_labels=initial_labels)
         kwd_data = KeywordData(
             keyword="TEST",
             subkeyword="KW",
@@ -139,12 +145,13 @@ class TestConditionalCardHandler:
 
         handler.handle(kwd_data, [{"ref": "my_target", "func": "self.value > 0"}])
 
-        assert kwd_data.cards[1]["func"] == "self.value > 0"
+        assert cards[1]["func"] == "self.value > 0"
 
     def test_handle_undefined_ref_raises(self, handler, sample_kwd_data):
         """Test that undefined ref raises UndefinedLabelError."""
+        cards = sample_kwd_data.cards
         registry = LabelRegistry(_keyword="CONTROL_IMPLICIT.AUTO")
-        registry.register("other_card", CardAddress(path=[0], entity_type="card"))
+        registry.register("other_card", cards[0])
         sample_kwd_data.label_registry = registry
 
         with pytest.raises(UndefinedLabelError):
@@ -188,7 +195,7 @@ class TestConditionalCardIntegration:
             "elform_2_13_properties": 2,
             "elform_3_cable": 3,
         }
-        registry = LabelRegistry.from_cards("SECTION.BEAM", cards, initial_labels=labels)
+        registry = LabelRegistry.from_cards(cards, keyword="SECTION.BEAM", initial_labels=labels)
         kwd_data = KeywordData(
             keyword="SECTION",
             subkeyword="BEAM",
@@ -207,7 +214,7 @@ class TestConditionalCardIntegration:
             ],
         )
 
-        assert kwd_data.cards[1]["func"] == "self.elform in [1,11]"
-        assert kwd_data.cards[2]["func"] == "self.elform in [2,12,13]"
-        assert kwd_data.cards[3]["func"] == "self.elform == 3"
-        assert kwd_data.cards[0].func is None
+        assert cards[1]["func"] == "self.elform in [1,11]"
+        assert cards[2]["func"] == "self.elform in [2,12,13]"
+        assert cards[3]["func"] == "self.elform == 3"
+        assert cards[0].func is None

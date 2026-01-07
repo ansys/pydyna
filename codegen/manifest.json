@@ -159,20 +159,24 @@
             "generation-options": {
                 "replace-card": [
                     {
-                        "index": 1,
                         "card": {
                             "source": "additional-cards",
                             "card-name": "BLANK"
-                        }
+                        },
+                        "ref": "blank_card_1"
                     },
                     {
-                        "index": 2,
                         "card": {
                             "source": "additional-cards",
                             "card-name": "BLANK"
-                        }
+                        },
+                        "ref": "blank_card_2"
                     }
                 ]
+            },
+            "labels": {
+                "blank_card_1": 1,
+                "blank_card_2": 2
             }
         },
         {
@@ -376,45 +380,51 @@
             ],
             "override-field": [
                 {
-                    "index": 1,
                     "name": "ncoup ",
-                    "new-name": "ncoup"
+                    "new-name": "ncoup",
+                    "ref": "ncoup_card"
                 }
             ]
         },
         "labels": {
-            "id_title_card": 0
+            "id_title_card": 0,
+            "ncoup_card": 1
         }
     },
     "DEFINE_TABLE": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "points",
                     "card-size": 1,
                     "element-width": 20,
                     "type": "float",
-                    "help": "Interpolation points for subsequent DEFINE_CURVE keywords."
+                    "help": "Interpolation points for subsequent DEFINE_CURVE keywords.",
+                    "ref": "points_card"
                 }
             ]
+        },
+        "labels": {
+            "points_card": 1
         }
     },
     "DEFINE_TRANSFORMATION": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 1,
-                    "property-name": "transforms"
+                    "property-name": "transforms",
+                    "ref": "transforms_card"
                 }
             ]
+        },
+        "labels": {
+            "transforms_card": 1
         }
     },
     "PARAMETER_PARAMETER": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 0,
                     "name": "parameters",
                     "card-size": 8,
                     "element-width": 10,
@@ -432,16 +442,19 @@
                             }
                         ]
                     },
-                    "help": "Parameters."
+                    "help": "Parameters.",
+                    "ref": "parameters_card"
                 }
             ]
+        },
+        "labels": {
+            "parameters_card": 0
         }
     },
     "PARAMETER_LOCAL": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 0,
                     "name": "parameters",
                     "card-size": 8,
                     "element-width": 10,
@@ -459,29 +472,39 @@
                             }
                         ]
                     },
-                    "help": "Parameters."
+                    "help": "Parameters.",
+                    "ref": "parameters_card"
                 }
             ]
+        },
+        "labels": {
+            "parameters_card": 0
         }
     },
     "PARAMETER_EXPRESSION": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "parameters"
+                    "property-name": "parameters",
+                    "ref": "parameters_card"
                 }
             ]
+        },
+        "labels": {
+            "parameters_card": 0
         }
     },
     "PARAMETER_EXPRESSION_LOCAL": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "parameters"
+                    "property-name": "parameters",
+                    "ref": "parameters_card"
                 }
             ]
+        },
+        "labels": {
+            "parameters_card": 0
         }
     },
     "INCLUDE_INCLUDE": {
@@ -516,11 +539,11 @@
         "generation-options": {
             "replace-card": [
                 {
-                    "index": 0,
                     "card": {
                         "source": "additional-cards",
                         "card-name": "HEADING"
-                    }
+                    },
+                    "ref": "heading_card"
                 }
             ],
             "table-card-group": [
@@ -532,6 +555,9 @@
                     "overall-name": "parts"
                 }
             ]
+        },
+        "labels": {
+            "heading_card": 0
         }
     },
     "HOURGLASS_HOURGLASS": {
@@ -554,25 +580,28 @@
         "generation-options": {
             "insert-card": [
                 {
-                    "index": 0,
+                    "before": "surface_card",
                     "card": {
                         "source": "additional-cards",
                         "card-name": "CONTACT_CARD_1"
-                    }
+                    },
+                    "label": "contact_card_1"
                 },
                 {
-                    "index": 1,
+                    "after": "contact_card_1",
                     "card": {
                         "source": "additional-cards",
                         "card-name": "CONTACT_CARD_2"
-                    }
+                    },
+                    "label": "contact_card_2"
                 },
                 {
-                    "index": 2,
+                    "after": "contact_card_2",
                     "card": {
                         "source": "additional-cards",
                         "card-name": "CONTACT_CARD_3"
-                    }
+                    },
+                    "label": "contact_card_3"
                 }
             ],
             "skip-card": [
@@ -652,11 +681,14 @@
         "generation-options": {
             "override-field": [
                 {
-                    "index": 2,
                     "name": "absmem",
-                    "position": 20
+                    "position": 20,
+                    "ref": "absmem_card"
                 }
             ]
+        },
+        "labels": {
+            "absmem_card": 2
         }
     },
     "CONTROL_IMPLICIT_SOLUTION": {
@@ -756,24 +788,24 @@
             ],
             "series-card": [
                 {
-                    "index": 2,
                     "name": "angle",
                     "card-size": 8,
                     "element-width": 10,
                     "length-func": "self.nip",
                     "active-func": "self.icomp == 1",
                     "type": "float",
-                    "help": "dynamic array of beta-i: material angle at ith-integration point."
+                    "help": "dynamic array of beta-i: material angle at ith-integration point.",
+                    "ref": "angle_card"
                 },
                 {
-                    "index": 5,
                     "name": "pi",
                     "card-size": 8,
                     "element-width": 10,
                     "length-func": "self.lmc",
                     "active-func": "self.elform in [101, 102, 103, 104, 105]",
                     "type": "float",
-                    "help": "dynamic array of LMC property parameters."
+                    "help": "dynamic array of LMC property parameters.",
+                    "ref": "pi_card"
                 }
             ],
             "conditional-card": [
@@ -784,16 +816,19 @@
             ],
             "table-card": [
                 {
-                    "index": 4,
                     "property-name": "integration_points",
                     "length-func": "self.nipp",
-                    "active-func": "self.elform in [101, 102, 103, 104, 105]"
+                    "active-func": "self.elform in [101, 102, 103, 104, 105]",
+                    "ref": "integration_points_card"
                 }
             ]
         },
         "comment": "a mix of conditional, variable length, and table cards",
         "labels": {
-            "user_integration_card": 3
+            "user_integration_card": 2,
+            "integration_points_card": 3,
+            "angle_card": 4,
+            "pi_card": 5
         }
     },
     "CONTROL_MPP_DECOMPOSITION_TRANSFORMATION": {
@@ -832,18 +867,21 @@
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "bi",
                     "card-size": 8,
                     "element-width": 10,
                     "length-func": "self.nip",
                     "active-func": "self.icomp == 1",
                     "type": "float",
-                    "help": "dynamic array of beta-i: material angle at ith-integration point."
+                    "help": "dynamic array of beta-i: material angle at ith-integration point.",
+                    "ref": "bi_card"
                 }
             ]
         },
-        "comment": "error handling in subclass"
+        "comment": "error handling in subclass",
+        "labels": {
+            "bi_card": 1
+        }
     },
     "DEFINE_CONTACT_VOLUME": {
         "generation-options": {
@@ -903,10 +941,10 @@
         "generation-options": {
             "table-card": [
                 {
-                    "index": 2,
                     "property-name": "integration_points",
                     "length-func": "self.nip",
-                    "active-func": "self.nip and self.elform in [101, 102, 103, 104, 105]"
+                    "active-func": "self.nip and self.elform in [101, 102, 103, 104, 105]",
+                    "ref": "integration_points_card"
                 }
             ],
             "conditional-card": [
@@ -917,51 +955,56 @@
             ],
             "override-field": [
                 {
-                    "index": 1,
                     "name": "nip",
-                    "default": 0
+                    "default": 0,
+                    "ref": "user_element_card"
                 },
                 {
-                    "index": 1,
                     "name": "nxdof",
-                    "default": 0
+                    "default": 0,
+                    "ref": "user_element_card"
                 },
                 {
-                    "index": 1,
                     "name": "lmc",
-                    "default": 0
+                    "default": 0,
+                    "ref": "user_element_card"
                 },
                 {
-                    "index": 1,
                     "name": "nhsv",
-                    "default": 0
+                    "default": 0,
+                    "ref": "user_element_card"
                 }
             ],
             "series-card": [
                 {
-                    "index": 3,
                     "name": "pi",
                     "card-size": 8,
                     "element-width": 10,
                     "length-func": "self.lmc",
                     "active-func": "self.elform in [101, 102, 103, 104, 105]",
                     "type": "float",
-                    "help": "dynamic array of LMC property parameters."
+                    "help": "dynamic array of LMC property parameters.",
+                    "ref": "pi_card"
                 }
             ]
         },
         "labels": {
-            "user_element_card": 1
+            "user_element_card": 1,
+            "integration_points_card": 2,
+            "pi_card": 3
         }
     },
     "DEFINE_CURVE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 1,
-                    "property-name": "curves"
+                    "property-name": "curves",
+                    "ref": "curves_card"
                 }
             ]
+        },
+        "labels": {
+            "curves_card": 1
         }
     },
     "EM_EP_CELLMODEL_TENTUSSCHER": {
@@ -1000,11 +1043,14 @@
         "generation-options": {
             "override-field": [
                 {
-                    "index": 8,
                     "name": "lcefs",
-                    "position": 50
+                    "position": 50,
+                    "ref": "lcefs_card"
                 }
             ]
+        },
+        "labels": {
+            "lcefs_card": 8
         }
     },
     "MAT_058_SOLID": {
@@ -1012,11 +1058,14 @@
         "generation-options": {
             "override-field": [
                 {
-                    "index": 11,
                     "name": "lcefs",
-                    "position": 50
+                    "position": 50,
+                    "ref": "lcefs_card"
                 }
             ]
+        },
+        "labels": {
+            "lcefs_card": 11
         }
     },
     "MAT_077_H": {
@@ -1038,15 +1087,16 @@
             ],
             "table-card": [
                 {
-                    "index": 4,
-                    "property-name": "constants"
+                    "property-name": "constants",
+                    "ref": "constants_card"
                 }
             ]
         },
         "labels": {
             "hysteresis_card": 1,
             "ogden_parameters_card": 2,
-            "mooney_rivlin_card": 3
+            "mooney_rivlin_card": 3,
+            "constants_card": 4
         }
     },
     "MAT_077_O": {
@@ -1072,13 +1122,12 @@
             ],
             "table-card": [
                 {
-                    "index": 5,
-                    "property-name": "constants"
+                    "property-name": "constants",
+                    "ref": "constants_card"
                 }
             ],
             "override-field": [
                 {
-                    "index": 0,
                     "name": "n",
                     "options": [
                         "-1",
@@ -1091,7 +1140,8 @@
                         "6",
                         "7",
                         "8"
-                    ]
+                    ],
+                    "ref": "n_card"
                 }
             ]
         },
@@ -1099,7 +1149,9 @@
             "hysteresis_card": 1,
             "ogden_parameters_card": 2,
             "mu_parameters_card": 3,
-            "alpha_parameters_card": 4
+            "alpha_parameters_card": 4,
+            "constants_card": 5,
+            "n_card": 0
         }
     },
     "MAT_MODIFIED_JOHNSON_COOK": {
@@ -1119,10 +1171,13 @@
         "generation-options": {
             "table-card": [
                 {
-                    "index": 4,
-                    "property-name": "constants"
+                    "property-name": "constants",
+                    "ref": "constants_card"
                 }
             ]
+        },
+        "labels": {
+            "constants_card": 4
         }
     },
     "MAT_181": {
@@ -1135,53 +1190,66 @@
             ],
             "table-card": [
                 {
-                    "index": 4,
-                    "property-name": "constants"
+                    "property-name": "constants",
+                    "ref": "constants_card"
                 }
             ]
         },
         "labels": {
-            "ogden_card": 2
+            "ogden_card": 2,
+            "constants_card": 4
         }
     },
     "MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 4,
-                    "property-name": "constants"
+                    "property-name": "constants",
+                    "ref": "constants_card"
                 }
             ]
+        },
+        "labels": {
+            "constants_card": 4
         }
     },
     "MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 3,
-                    "property-name": "constants"
+                    "property-name": "constants",
+                    "ref": "constants_card"
                 }
             ]
+        },
+        "labels": {
+            "constants_card": 3
         }
     },
     "MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE_LOG_LOG_INTERPOLATION": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 4,
-                    "property-name": "constants"
+                    "property-name": "constants",
+                    "ref": "constants_card"
                 }
             ]
+        },
+        "labels": {
+            "constants_card": 4
         }
     },
     "MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION_WITH_FAILURE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 4,
-                    "property-name": "constants"
+                    "property-name": "constants",
+                    "ref": "constants_card"
                 }
             ]
+        },
+        "labels": {
+            "constants_card": 4
         }
     },
     "MAT_138": {
@@ -1189,12 +1257,15 @@
         "generation-options": {
             "override-field": [
                 {
-                    "index": 0,
                     "name": "roflg",
                     "type": "integer",
-                    "default": 0
+                    "default": 0,
+                    "ref": "roflg_card"
                 }
             ]
+        },
+        "labels": {
+            "roflg_card": 0
         }
     },
     "MAT_196": {
@@ -1216,19 +1287,19 @@
         "generation-options": {
             "override-field": [
                 {
-                    "index": 1,
                     "name": "title",
-                    "readonly": true
+                    "readonly": true,
+                    "ref": "title_card"
                 },
                 {
-                    "index": 6,
                     "name": "title",
-                    "readonly": true
+                    "readonly": true,
+                    "ref": "activation_header_card"
                 },
                 {
-                    "index": 11,
                     "name": "title",
-                    "readonly": true
+                    "readonly": true,
+                    "ref": "actype_header_card"
                 }
             ],
             "rename-property": [
@@ -1450,7 +1521,8 @@
             "actype_4_kinetics_card": 17,
             "actype_5_ids_card": 18,
             "fiber_position_card": 19,
-            "fiber_vector_card": 20
+            "fiber_vector_card": 20,
+            "title_card": 1
         }
     },
     "ALE_COUPLING_NODAL_CONSTRAINT": {
@@ -2259,18 +2331,20 @@
         "generation-options": {
             "insert-card": [
                 {
-                    "index": 2,
+                    "after": "strain_card_1",
                     "card": {
                         "source": "additional-cards",
                         "card-name": "INITIAL_STRAIN_SHELL_LARGE"
-                    }
+                    },
+                    "label": "large_strain_card"
                 },
                 {
-                    "index": 4,
+                    "after": "large_strain_card",
                     "card": {
                         "source": "additional-cards",
                         "card-name": "INITIAL_STRAIN_SHELL_LARGE_CARD2"
-                    }
+                    },
+                    "label": "large_strain_card_2"
                 }
             ],
             "card-set": [
@@ -2307,31 +2381,38 @@
                     "name": "InitialStrainShellCardSet"
                 }
             ]
+        },
+        "labels": {
+            "strain_card_0": 0,
+            "strain_card_1": 1
         }
     },
     "INITIAL_STRESS_SHELL": {
         "generation-options": {
             "insert-card": [
                 {
-                    "index": 3,
+                    "after": "hisv_card",
                     "card": {
                         "source": "additional-cards",
                         "card-name": "INITIAL_STRESS_SHELL_LARGE_CARD1"
-                    }
+                    },
+                    "label": "large_stress_card_1"
                 },
                 {
-                    "index": 6,
+                    "after": "large_stress_card_1",
                     "card": {
                         "source": "additional-cards",
                         "card-name": "INITIAL_STRESS_SHELL_LARGE_CARD2"
-                    }
+                    },
+                    "label": "large_stress_card_2"
                 },
                 {
-                    "index": 4,
+                    "after": "large_stress_card_2",
                     "card": {
                         "source": "additional-cards",
                         "card-name": "INITIAL_STRESS_SHELL_LARGE_HISV"
-                    }
+                    },
+                    "label": "large_hisv_card"
                 }
             ],
             "card-set": [
@@ -2372,140 +2453,178 @@
             ],
             "series-card": [
                 {
-                    "index": 2,
                     "name": "hisv",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "float",
                     "help": "dynamic array of history variables",
                     "length-func": "self.parent.nhisv",
-                    "active-func": "self.parent.large == None or self.parent.large == 0"
+                    "active-func": "self.parent.large == None or self.parent.large == 0",
+                    "ref": "hisv_card"
                 },
                 {
-                    "index": 5,
                     "name": "hisv",
                     "card-size": 5,
                     "element-width": 20,
                     "type": "float",
                     "help": "dynamic array of history variables",
                     "length-func": "self.parent.nhisv",
-                    "active-func": "self.parent.large == 1"
+                    "active-func": "self.parent.large == 1",
+                    "ref": "large_hisv_card"
                 }
             ]
+        },
+        "labels": {
+            "hisv_card": 2,
+            "element_card": 0,
+            "stress_card": 1
         }
     },
     "INITIAL_TEMPERATURE_NODE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "nodes"
+                    "property-name": "nodes",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 0
         }
     },
     "INITIAL_TEMPERATURE_SET": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "sets"
+                    "property-name": "sets",
+                    "ref": "sets_card"
                 }
             ]
+        },
+        "labels": {
+            "sets_card": 0
         }
     },
     "ELEMENT_SHELL": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "elements"
+                    "property-name": "elements",
+                    "ref": "elements_card"
                 }
             ]
+        },
+        "labels": {
+            "elements_card": 0
         }
     },
     "ELEMENT_SOLID": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "elements"
+                    "property-name": "elements",
+                    "ref": "elements_card"
                 }
             ]
+        },
+        "labels": {
+            "elements_card": 0
         }
     },
     "NODE_NODE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "nodes"
+                    "property-name": "nodes",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 0
         }
     },
     "SET_SEGMENT": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 1,
-                    "property-name": "segments"
+                    "property-name": "segments",
+                    "ref": "segments_card"
                 }
             ]
+        },
+        "labels": {
+            "segments_card": 1
         }
     },
     "DEFINE_SD_ORIENTATION": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "vectors"
+                    "property-name": "vectors",
+                    "ref": "vectors_card"
                 }
             ]
+        },
+        "labels": {
+            "vectors_card": 0
         }
     },
     "ELEMENT_BEAM": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "elements"
+                    "property-name": "elements",
+                    "ref": "elements_card"
                 }
             ]
+        },
+        "labels": {
+            "elements_card": 0
         }
     },
     "ELEMENT_DISCRETE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "elements"
+                    "property-name": "elements",
+                    "ref": "elements_card"
                 }
             ]
+        },
+        "labels": {
+            "elements_card": 0
         }
     },
     "BOUNDARY_SPC_NODE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "nodes"
+                    "property-name": "nodes",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 0
         }
     },
     "SET_NODE_ADD": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "nodes",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of node ids."
+                    "help": "dynamic array of node ids.",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 1
         }
     },
     "INITIAL_VELOCITY": {
@@ -2525,14 +2644,17 @@
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "nodes",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of node ids."
+                    "help": "dynamic array of node ids.",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 1
         }
     },
     "SET_NODE_LIST": {
@@ -2540,91 +2662,108 @@
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "nodes",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of node ids."
+                    "help": "dynamic array of node ids.",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 1
         }
     },
     "SET_SEGMENT_ADD": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "sets",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of set segment ids."
+                    "help": "dynamic array of set segment ids.",
+                    "ref": "sets_card"
                 }
             ]
+        },
+        "labels": {
+            "sets_card": 1
         }
     },
     "SET_PART_ADD": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "parts",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of part set ids."
+                    "help": "dynamic array of part set ids.",
+                    "ref": "parts_card"
                 }
             ]
+        },
+        "labels": {
+            "parts_card": 1
         }
     },
     "SET_PART": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "parts",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of part ids."
+                    "help": "dynamic array of part ids.",
+                    "ref": "parts_card"
                 }
             ]
+        },
+        "labels": {
+            "parts_card": 1
         }
     },
     "SET_PART_LIST": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "parts",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of part ids."
+                    "help": "dynamic array of part ids.",
+                    "ref": "parts_card"
                 }
             ]
+        },
+        "labels": {
+            "parts_card": 1
         }
     },
     "SET_PART_LIST_COLLECT": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "parts",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of part ids."
+                    "help": "dynamic array of part ids.",
+                    "ref": "parts_card"
                 }
             ]
+        },
+        "labels": {
+            "parts_card": 1
         }
     },
     "SET_PART_LIST_GENERATE": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "block_ranges",
                     "card-size": 8,
                     "element-width": 10,
@@ -2642,197 +2781,249 @@
                             }
                         ]
                     },
-                    "help": "Block ranges."
+                    "help": "Block ranges.",
+                    "ref": "block_ranges_card"
                 }
             ]
+        },
+        "labels": {
+            "block_ranges_card": 1
         }
     },
     "SET_BEAM": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "element",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of beam element ids."
+                    "help": "dynamic array of beam element ids.",
+                    "ref": "element_card"
                 }
             ]
+        },
+        "labels": {
+            "element_card": 1
         }
     },
     "SET_BEAM_ADD": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "beams",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of beam set ids."
+                    "help": "dynamic array of beam set ids.",
+                    "ref": "beams_card"
                 }
             ]
+        },
+        "labels": {
+            "beams_card": 1
         }
     },
     "SET_BEAM_INTERSECT": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "beams",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of beam set ids."
+                    "help": "dynamic array of beam set ids.",
+                    "ref": "beams_card"
                 }
             ]
+        },
+        "labels": {
+            "beams_card": 1
         }
     },
     "SET_BOX": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "box",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of box set ids."
+                    "help": "dynamic array of box set ids.",
+                    "ref": "box_card"
                 }
             ]
+        },
+        "labels": {
+            "box_card": 1
         }
     },
     "SET_SHELL_ADD": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "shells",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of shell set ids."
+                    "help": "dynamic array of shell set ids.",
+                    "ref": "shells_card"
                 }
             ]
+        },
+        "labels": {
+            "shells_card": 1
         }
     },
     "SET_SHELL_INTERSECT": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "shells",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of shell set ids."
+                    "help": "dynamic array of shell set ids.",
+                    "ref": "shells_card"
                 }
             ]
+        },
+        "labels": {
+            "shells_card": 1
         }
     },
     "SET_SHELL_LIST": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "shells",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "static array of shell ids"
+                    "help": "static array of shell ids",
+                    "ref": "shells_card"
                 }
             ]
+        },
+        "labels": {
+            "shells_card": 1
         }
     },
     "MESH_NODE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "nodes"
+                    "property-name": "nodes",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 0
         }
     },
     "MESH_SURFACE_NODE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "nodes"
+                    "property-name": "nodes",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 0
         }
     },
     "MESH_SURFACE_ELEMENT": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "elements"
+                    "property-name": "elements",
+                    "ref": "elements_card"
                 }
             ]
+        },
+        "labels": {
+            "elements_card": 0
         }
     },
     "ICFD_DATABASE_FLUX": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "boundaries"
+                    "property-name": "boundaries",
+                    "ref": "boundaries_card"
                 }
             ]
+        },
+        "labels": {
+            "boundaries_card": 0
         }
     },
     "ICFD_BOUNDARY_FREESLIP": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "boundaries"
+                    "property-name": "boundaries",
+                    "ref": "boundaries_card"
                 }
             ]
+        },
+        "labels": {
+            "boundaries_card": 0
         }
     },
     "ICFD_BOUNDARY_NONSLIP": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "boundaries"
+                    "property-name": "boundaries",
+                    "ref": "boundaries_card"
                 }
             ]
+        },
+        "labels": {
+            "boundaries_card": 0
         }
     },
     "ICFD_BOUNDARY_FSI": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "boundaries"
+                    "property-name": "boundaries",
+                    "ref": "boundaries_card"
                 }
             ]
+        },
+        "labels": {
+            "boundaries_card": 0
         }
     },
     "ICFD_BOUNDARY_FSI_EXCLUDE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "boundaries"
+                    "property-name": "boundaries",
+                    "ref": "boundaries_card"
                 }
             ]
+        },
+        "labels": {
+            "boundaries_card": 0
         }
     },
     "ICFD_BOUNDARY_PRESCRIBED_PRE": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "boundaries"
+                    "property-name": "boundaries",
+                    "ref": "boundaries_card"
                 }
             ]
+        },
+        "labels": {
+            "boundaries_card": 0
         }
     },
     "ICFD_PART": {
@@ -2852,10 +3043,13 @@
             ],
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "nodes"
+                    "property-name": "nodes",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 0
         }
     },
     "ICFD_PART_VOL": {
@@ -2875,30 +3069,39 @@
             ],
             "table-card": [
                 {
-                    "index": 1,
-                    "property-name": "nodes"
+                    "property-name": "nodes",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 1
         }
     },
     "CONSTRAINED_ADAPTIVITY": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "constrains"
+                    "property-name": "constrains",
+                    "ref": "constrains_card"
                 }
             ]
+        },
+        "labels": {
+            "constrains_card": 0
         }
     },
     "CONSTRAINED_NODAL_RIGID_BODY": {
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "constrained_nodal_rigid_bodies"
+                    "property-name": "constrained_nodal_rigid_bodies",
+                    "ref": "constrained_nodal_rigid_bodies_card"
                 }
             ]
+        },
+        "labels": {
+            "constrained_nodal_rigid_bodies_card": 0
         }
     },
     "CONSTRAINED_NODAL_RIGID_BODY_INERTIA": {
@@ -2918,10 +3121,13 @@
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "pairs"
+                    "property-name": "pairs",
+                    "ref": "pairs_card"
                 }
             ]
+        },
+        "labels": {
+            "pairs_card": 0
         }
     },
     "CONSTRAINED_RIVET": {
@@ -2953,28 +3159,34 @@
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "elements",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of surface element ids."
+                    "help": "dynamic array of surface element ids.",
+                    "ref": "elements_card"
                 }
             ]
+        },
+        "labels": {
+            "elements_card": 1
         }
     },
     "MESH_EMBEDSHELL": {
         "generation-options": {
             "series-card": [
                 {
-                    "index": 1,
                     "name": "elements",
                     "card-size": 8,
                     "element-width": 10,
                     "type": "int",
-                    "help": "dynamic array of surface element ids."
+                    "help": "dynamic array of surface element ids.",
+                    "ref": "elements_card"
                 }
             ]
+        },
+        "labels": {
+            "elements_card": 1
         }
     },
     "ICFD_CONTROL_TURBULENCE": {
@@ -3036,10 +3248,13 @@
         "generation-options": {
             "table-card": [
                 {
-                    "index": 0,
-                    "property-name": "nodes"
+                    "property-name": "nodes",
+                    "ref": "nodes_card"
                 }
             ]
+        },
+        "labels": {
+            "nodes_card": 0
         }
     },
     "EM_ISOPOTENTIAL_CONNECT": {

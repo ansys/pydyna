@@ -52,11 +52,12 @@ class SkipCardSettings:
     def from_dict(cls, data: Dict[str, Any]) -> "SkipCardSettings":
         return cls(ref=data["ref"])
 
-    def resolve_index(self, registry: LabelRegistry) -> int:
+    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
         """Resolve label to a concrete card index.
 
         Args:
             registry: LabelRegistry for resolving label references.
+            cards: The cards list to search for the card object.
 
         Returns:
             Integer index into kwd_data.cards
@@ -64,7 +65,7 @@ class SkipCardSettings:
         Raises:
             UndefinedLabelError: If ref label is not found
         """
-        return registry.resolve_index(self.ref)
+        return registry.resolve_index(self.ref, cards)
 
 
 @handler(
@@ -106,7 +107,7 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             raise ValueError("skip-card handler requires label_registry to be initialized")
 
         for setting in typed_settings:
-            index = setting.resolve_index(registry)
+            index = setting.resolve_index(registry, kwd_data.cards)
             logger.debug(f"Marking card {index} for removal (ref={setting.ref})")
             kwd_data.cards[index]["mark_for_removal"] = 1
 

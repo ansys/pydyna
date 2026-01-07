@@ -71,11 +71,12 @@ class ConditionalCardSettings:
         """
         return cls(ref=data["ref"], func=data["func"])
 
-    def resolve_index(self, registry: LabelRegistry) -> int:
+    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
         """Resolve the label reference to a concrete card index.
 
         Args:
             registry: LabelRegistry for resolving label references
+            cards: The cards list to search for the card object.
 
         Returns:
             Integer index into kwd_data.cards
@@ -83,7 +84,7 @@ class ConditionalCardSettings:
         Raises:
             UndefinedLabelError: If ref label is not found
         """
-        return registry.resolve_index(self.ref)
+        return registry.resolve_index(self.ref, cards)
 
 
 @handler(
@@ -153,7 +154,7 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
             )
 
         for setting in typed_settings:
-            index = setting.resolve_index(registry)
+            index = setting.resolve_index(registry, kwd_data.cards)
             logger.debug(f"Adding conditional func to card {index} (ref='{setting.ref}'): {setting.func}")
             card = kwd_data.cards[index]
             card["func"] = setting.func
