@@ -32,16 +32,13 @@ import copy
 from dataclasses import dataclass
 import logging
 import typing
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 import keyword_generation.data_model as gen
-from keyword_generation.data_model.keyword_data import Field, KeywordData
+from keyword_generation.data_model.keyword_data import KeywordData
 from keyword_generation.data_model.label_registry import LabelRegistry
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
-
-if TYPE_CHECKING:
-    from keyword_generation.data_model.label_registry import LabelRegistry
 
 logger = logging.getLogger(__name__)
 
@@ -137,13 +134,13 @@ class CardSetSettings:
         """CardSet is bounded if length_func is defined (size controlled externally)."""
         return self.length_func is not None
 
-    def resolve_source_indices(self, registry: "LabelRegistry", cards: List[Any]) -> List[int]:
+    def resolve_source_indices(self, registry: LabelRegistry, cards: List[Any]) -> List[int]:
         """Resolve source references to indices."""
         if not self.source_refs:
             raise ValueError(f"CardSetSettings '{self.name}' must have source-refs")
         return [registry.resolve_index(ref, cards) for ref in self.source_refs]
 
-    def resolve_target_index(self, registry: "LabelRegistry", cards: List[Any]) -> int:
+    def resolve_target_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
         """Resolve target reference to index."""
         if not self.target_ref:
             raise ValueError(f"CardSetSettings '{self.name}' must have target-ref")
@@ -352,23 +349,11 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                             source_card = card_set["source_cards"][card_idx]
                             for field in source_card.get("fields", []):
                                 if field.get("name", "").lower() == shared_field.name.lower():
-                                    # TODO: Type normalization should happen earlier in pipeline
-                                    if isinstance(field, Field):
-                                        field.normalize()
-                                        if card_idx == shared_field.source_index:
-                                            field_type = field.type
-                                            field_help = field.help or shared_field.name
-                                        field.redundant = True
-                                    else:
-                                        from keyword_generation.generators.class_generator import (
-                                            _normalize_field_dict,
-                                        )
-
-                                        _normalize_field_dict(field)
-                                        if card_idx == shared_field.source_index:
-                                            field_type = field.get("type", "int")
-                                            field_help = field.get("help", shared_field.name)
-                                        field["redundant"] = True
+                                    field.normalize()
+                                    if card_idx == shared_field.source_index:
+                                        field_type = field.type
+                                        field_help = field.help or shared_field.name
+                                    field.redundant = True
                     shared_fields_data.append(
                         {
                             "name": shared_field.name,
