@@ -29,12 +29,11 @@ from keyword_generation.data_model.keyword_data import Card, KeywordData
 from keyword_generation.generators.template_context import KeywordTemplateContext
 from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry
 from keyword_generation.utils import (
-    fix_keyword,
-    get_classname,
     get_license_header,
     handle_single_word_keyword,
 )
 from keyword_generation.utils.domain_mapper import get_keyword_domain
+from keyword_generation.utils.keyword_utils import KeywordNames
 from output_manager import OutputManager
 
 logger = logging.getLogger(__name__)
@@ -81,7 +80,7 @@ def _create_template_context(
     alias_subkeyword = None
     if alias:
         alias_tokens = alias.split("_")
-        alias = get_classname(fix_keyword(alias))
+        alias = KeywordNames.from_keyword(alias).classname
         alias_subkeyword = "_".join(alias_tokens[1:])
 
     return KeywordTemplateContext(
@@ -390,8 +389,8 @@ def generate_class(env: Environment, output_manager: OutputManager, item: typing
         Tuple of (classname, filename_stem) for the generated class
     """
     keyword = item["name"]
-    fixed_keyword = fix_keyword(keyword)
-    classname = item["options"].get("classname", get_classname(fixed_keyword))
+    names = KeywordNames.from_keyword(keyword)
+    classname = item["options"].get("classname", names.classname)
     logger.debug(f"Starting generation for class '{classname}' from keyword '{keyword}'")
     try:
         # Create structured template context
@@ -400,12 +399,12 @@ def generate_class(env: Environment, output_manager: OutputManager, item: typing
 
         # Determine domain and create domain subdirectory
         domain = get_keyword_domain(keyword)
-        filename = fixed_keyword.lower() + ".py"
+        filename = names.filename + ".py"
         logger.debug(f"Rendering template for {classname} in domain '{domain}'")
         content = env.get_template("keyword.j2").render(**context.to_dict())
         output_manager.write_auto_file(domain, filename, content)
         logger.debug(f"Successfully generated class '{classname}'")
-        return classname, fixed_keyword.lower()
+        return classname, names.filename
     except Exception as e:
         logger.error(f"Failure in generating {classname}", exc_info=True)
         raise e
