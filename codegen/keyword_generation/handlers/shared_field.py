@@ -210,7 +210,11 @@ class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler
         """Keep dict settings for shared-field - uses 'name' and 'cards' directly."""
         return settings
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Mark shared fields, handling positive indices immediately.
 

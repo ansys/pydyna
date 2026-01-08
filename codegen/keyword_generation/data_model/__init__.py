@@ -28,6 +28,13 @@ import typing
 
 from keyword_generation.data_model.insertion import Insertion
 from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
+from keyword_generation.data_model.label_registry import (
+    CardNotFoundError,
+    DuplicateLabelError,
+    LabelError,
+    LabelRegistry,
+    UndefinedLabelError,
+)
 
 logger = logging.getLogger(__name__)
 
