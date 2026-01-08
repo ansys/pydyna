@@ -111,3 +111,74 @@ alias codegen-test='pytest -m codegen'
 alias codegen-check='bash codegen/validate.sh --skip-tests --skip-deadcode'
 alias codegen-dev='python codegen/generate.py -l DEBUG'
 ```
+
+## Agent Guide: Adding Optional Keyword Features
+
+When keywords need optional features (like `_ID` suffix for RIGIDWALL keywords), **prefer options over multiple class generation**.
+
+### Prefer: `add-option` (Single Class with Options)
+
+Creates one class with optional behavior controlled by setting properties:
+
+```json
+{
+    "type": "prefix",
+    "patterns": ["RIGIDWALL_GEOMETRIC", "RIGIDWALL_PLANAR"],
+    "generation-options": {
+        "skip-card": [{"ref": "id_title_card"}],
+        "add-option": [{
+            "card-order": -2,
+            "title-order": 1,
+            "cards": [{"source": "additional-cards", "card-name": "ID_TITLE"}],
+            "option-name": "ID"
+        }]
+    },
+    "labels": {"id_title_card": 0}
+}
+```
+
+**Result**: `RigidwallGeometricFlat` class where setting `wall.id = 1` activates the ID option and writes `*RIGIDWALL_GEOMETRIC_FLAT_ID`.
+
+### Avoid: `type: multiple` (Duplicate Classes)
+
+Creates separate classes for each variant:
+
+```json
+"RIGIDWALL_GEOMETRIC_FLAT": {
+    "type": "multiple",
+    "generations": [
+        {"keyword": "RIGIDWALL_GEOMETRIC_FLAT", ...},
+        {"keyword": "RIGIDWALL_GEOMETRIC_FLAT_ID", ...}
+    ]
+}
+```
+
+**Problem**: Duplicates class count, requires explicit entries for each keyword variant.
+
+### Key Concepts
+
+1. **`add-option`** adds optional cards that activate when properties are set
+   - `title-order`: Position in keyword title suffix (1 = first, e.g., `_ID`)
+   - `card-order`: Position in card list (-2 = before all base cards)
+   - `cards`: List of card definitions (from `additional-cards.json` or `kwd-data`)
+
+2. **`skip-card`** removes cards from base generation (use with `add-option` to replace existing cards with optional versions)
+   - Requires a `ref` to a label defined in the `labels` section
+   - `labels` map names to card indices (0-based)
+
+3. **Wildcards** apply settings to multiple keywords matching a pattern
+   - `type: prefix` matches keywords starting with the pattern
+   - Can include `labels` for use with `skip-card` refs
+   - If a card already exists in `kwd.json`, add it to `additional-cards.json` and reference it
+
+4. **Debugging**: Use `-k KEYWORD_NAME --log-level DEBUG` to trace handler execution for a specific keyword
+
+### When to Use Each Approach
+
+| Scenario | Approach |
+|----------|----------|
+| Optional suffix that modifies title (`_ID`, `_TITLE`) | `add-option` with `title-order` |
+| Optional card(s) that don't change title | `add-option` with `card-order` only |
+| Completely different card structures | `type: multiple` |
+| Keyword has existing card that should become optional | `skip-card` + `add-option` |
+
