@@ -89,7 +89,6 @@ class ConditionalCardSettings:
 
 @handler(
     name="conditional-card",
-    dependencies=[],
     description="Adds conditional rendering logic to cards based on field values",
     input_schema={
         "type": "array",

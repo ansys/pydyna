@@ -94,7 +94,6 @@ class InsertCardSettings:
 
 @handler(
     name="insert-card",
-    dependencies=["reorder-card"],
     description="Inserts new cards using label-based positioning",
     input_schema={
         "type": "array",

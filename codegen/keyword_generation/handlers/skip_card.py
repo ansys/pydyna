@@ -70,7 +70,6 @@ class SkipCardSettings:
 
 @handler(
     name="skip-card",
-    dependencies=[],
     description="Marks cards for removal from the generated keyword class",
     input_schema={
         "type": "array",
