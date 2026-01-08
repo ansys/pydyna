@@ -65,6 +65,7 @@ runs:
       uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
       with:
         python-version: ${{ inputs.python-version }}
+        cache: 'pip'
 
     - name: Create virtual environment
       shell: bash
