@@ -34,7 +34,9 @@ beartype_package("keyword_generation")  # Enable beartype for keyword_generation
 from jinja2 import Environment, FileSystemLoader
 import keyword_generation.data_model as data_model
 from keyword_generation.generators import generate_class, generate_entrypoints
+from keyword_generation.generators.template_context import DocTemplateContext
 from keyword_generation.utils import fix_keyword, get_classname, get_this_folder, handle_single_word_keyword
+from keyword_generation.utils.domain_mapper import get_keyword_domain
 from output_manager import OutputManager
 
 logger = logging.getLogger(__name__)
@@ -101,7 +103,6 @@ def skip_generate_keyword_class(keyword: str) -> bool:
 def get_undefined_alias_keywords(
     keywords_list: typing.List[typing.Dict], subset_domains: typing.Optional[typing.List[str]] = None
 ) -> typing.List[typing.Dict]:
-    from keyword_generation.utils.domain_mapper import get_keyword_domain
 
     config = data_model.get_config()
     undefined_aliases: typing.List[typing.Dict] = []
@@ -254,6 +255,8 @@ def generate_autodoc_file(autodoc_output_path, all_keywords, env):
 
     for category, entries in sorted(categories.items()):
         category_title = category.replace("_", " ").capitalize() + " keywords"
+        # Use structured context for category rendering
+        # Note: category_title and entries are still passed directly for template compatibility
         category_rst = category_template.render(
             category=category, category_title=category_title, entries=sorted(entries)
         )
@@ -263,7 +266,8 @@ def generate_autodoc_file(autodoc_output_path, all_keywords, env):
 
     # Generate index file with toctree of all categories
     index_template = env.get_template("autodoc_index.jinja")
-    index_rst = index_template.render(categories=sorted(categories.keys()))
+    context = DocTemplateContext(categories=sorted(categories.keys()))
+    index_rst = index_template.render(**context.to_dict())
     output_manager.write_autodoc_file(autodoc_output_path, "index.rst", index_rst)
     logger.info(f"Generated index.rst with {len(categories)} category links")
 
@@ -280,9 +284,6 @@ def get_keywords_to_generate(
 
     # first get all aliases
     add_aliases(kwd_list)
-
-    # Import domain mapper to properly determine keyword domain
-    from keyword_generation.utils.domain_mapper import get_keyword_domain
 
     # then get keywords to generate
     for keyword in kwd_list:
