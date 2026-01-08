@@ -66,7 +66,7 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
 
-    - name: "Create a virtual environment"
+    - name: Create virtual environment
       shell: bash
       run: |
         python -m venv .venv
@@ -87,7 +87,11 @@ runs:
       env:
         DOCKER_IMAGE: ${{ inputs.docker-image }}
       run: |
-        source .venv/bin/activate
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          .venv\Scripts\Activate.ps1
+        else
+          source .venv/bin/activate
+        fi
         uv pip install docker
         docker pull "$DOCKER_IMAGE"
         docker run -d --name kw_server -p 50051:50051 "$DOCKER_IMAGE" && echo "Keyword server active on port 50051."
@@ -95,7 +99,11 @@ runs:
 
     - name: Install test dependencies
       run: |
-        source .venv/bin/activate
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          .venv\Scripts\Activate.ps1
+        else
+          source .venv/bin/activate
+        fi
         uv pip install -e .[tests]
       shell: bash
 
@@ -108,7 +116,11 @@ runs:
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         LSTC_LICENSE: ansys
       run: |
-        source .venv/bin/activate
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          .venv\Scripts\Activate.ps1
+        else
+          source .venv/bin/activate
+        fi
         COVERAGE_ARGS=""
         if [ -n "$COVERAGE_FILE" ]; then
           COVERAGE_ARGS="--cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term"
@@ -124,7 +136,11 @@ runs:
     - name: Extract the server logs
       if: ${{ inputs.server-logs == 'true' }}
       run: |
-        source .venv/bin/activate
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          .venv\Scripts\Activate.ps1
+        else
+          source .venv/bin/activate
+        fi
         docker logs kw_server > server_output.txt
       shell: bash
 
@@ -145,7 +161,11 @@ runs:
     - name: Stop container
       if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
       run: |
-        source .venv/bin/activate
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          .venv\Scripts\Activate.ps1
+        else
+          source .venv/bin/activate
+        fi
         docker stop kw_server
         docker rm kw_server
       shell: bash
