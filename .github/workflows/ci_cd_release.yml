@@ -161,7 +161,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           server-logs: true
           coverage-file: unittests
-          pytest-markers: "not codegen and not keywords and not run and not viz"
+          pytest-markers: "not codegen and not keywords and not run"
 
 
   build-library:

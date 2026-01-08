@@ -134,12 +134,6 @@ def perf_003() -> None:
     print(f"expanded deck in {elapsed} seconds:")
 
 
-def perf_004() -> None:
-    deck = Deck()
-    action = lambda: deck.import_file(r"C:\Users\mkoubaa\Downloads\slow1.key")
-    _profile(action)
-
-
 if __name__ == "__main__":
     """system to run these outside of pytest for experimentation purposes"""
     import sys
