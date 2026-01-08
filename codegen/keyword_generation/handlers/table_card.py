@@ -38,8 +38,8 @@ from typing import Any, Dict, List, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData
 from keyword_generation.data_model.metadata import TableCardMetadata
-import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
+import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)

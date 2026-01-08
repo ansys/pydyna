@@ -48,6 +48,7 @@ class KeywordNames:
         fixed_keyword: Normalized keyword (e.g., "SECTION_SHELL_TITLE")
         domain: Keyword domain (e.g., "section", "contact", "mat")
     """
+
     keyword: str
     classname: str
     filename: str

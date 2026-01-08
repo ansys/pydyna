@@ -293,6 +293,7 @@ To eliminate code duplication across handlers, the system provides shared base c
 @dataclass
 class LabelRefSettings:
     """Base class for handler settings that use label-based card references."""
+
     ref: str  # Label reference to the card
 
     def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
@@ -324,8 +325,13 @@ Replaces duplicated `_parse_settings()` methods in all handlers.
 def find_field_in_card(card: Card, field_name: str) -> Optional[Field]:
     """Find a field by name (case-insensitive) in a card."""
 
-def modify_field_in_cards(cards: List[Card], indices: List[int],
-                          field_name: str, modifications: Dict[str, Any]) -> None:
+
+def modify_field_in_cards(
+    cards: List[Card],
+    indices: List[int],
+    field_name: str,
+    modifications: Dict[str, Any],
+) -> None:
     """Apply field modifications to multiple cards."""
 ```
 
@@ -340,6 +346,7 @@ def modify_field_in_cards(cards: List[Card], indices: List[int],
 @dataclass
 class KeywordNames:
     """Consolidated keyword name transformations."""
+
     original: str
     fixed: str
     classname: str
@@ -349,8 +356,8 @@ class KeywordNames:
     def from_keyword(cls, keyword: str) -> "KeywordNames":
         """Generate all name variants from a keyword."""
 
-def filter_keywords_by_domain(keywords: List[str],
-                              domains: List[str]) -> List[str]:
+
+def filter_keywords_by_domain(keywords: List[str], domains: List[str]) -> List[str]:
     """Filter keywords by domain (e.g., 'contact', 'define')."""
 ```
 

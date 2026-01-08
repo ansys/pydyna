@@ -35,8 +35,8 @@ from typing import Any, Dict, List, Optional
 import keyword_generation.data_model as gen
 from keyword_generation.data_model.keyword_data import Card, KeywordData
 from keyword_generation.data_model.label_registry import LabelRegistry
-import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.base_settings import parse_settings_list
+import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)

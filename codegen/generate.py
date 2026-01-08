@@ -36,7 +36,7 @@ import keyword_generation.data_model as data_model
 from keyword_generation.generators import generate_class, generate_entrypoints
 from keyword_generation.generators.template_context import DocTemplateContext
 from keyword_generation.utils import get_this_folder, handle_single_word_keyword
-from keyword_generation.utils.keyword_utils import filter_keywords_by_domain, KeywordNames
+from keyword_generation.utils.keyword_utils import KeywordNames, filter_keywords_by_domain
 from output_manager import OutputManager
 
 logger = logging.getLogger(__name__)

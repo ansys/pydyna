@@ -35,8 +35,8 @@ import typing
 from typing import Any, Dict, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData, RenamedProperty
-import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
+import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)

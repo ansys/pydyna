@@ -44,6 +44,7 @@ class LabelRefSettings:
     Attributes:
         ref: Label reference to a card (e.g., "header_card", "data_card")
     """
+
     ref: str
 
     def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
@@ -118,8 +119,7 @@ def find_field_in_card(card: Any, field_name: str, case_sensitive: bool = False)
     return None
 
 
-def modify_field_in_cards(kwd_data: Any, card_index: int, field_name: str,
-                          modifications: Dict[str, Any]) -> bool:
+def modify_field_in_cards(kwd_data: Any, card_index: int, field_name: str, modifications: Dict[str, Any]) -> bool:
     """
     Find and modify a field in a specific card.
 
