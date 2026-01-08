@@ -39,13 +39,6 @@ After `reorder-card`:
 - Cards have an `index` property (original index)
 - Handlers use **list positions** `kwd_data.cards[i]`, not card indices
 
-### Dataclass Migration Status
-
-- **Fields**: ✅ Fully migrated to `Field` instances
-- **Cards**: ⚠️ Partially migrated - `table_card_group` handler still creates dict-based cards
-
-Once `table_card_group` is updated, dict-like fallback methods can be removed.
-
 ## Modifying Auto-Generated Files
 
 Files in `src/ansys/dyna/core/keywords/keyword_classes/auto/` are auto-generated. Don't modify directly.
@@ -64,13 +57,8 @@ Due to codegen complexity, verify between independent steps:
 
 ## Common Pitfalls
 
-1. **Missing index field**: Cards from kwd.json don't have `index` initially
-   - Solution: `Card.from_dict()` uses `data.get("index", -1)`
-2. **None sub_cards**: Some cards have `sub_cards: None` instead of empty list
-   - Solution: Add None checks: `if card["sub_cards"]:`
-3. **Union types during transition**: Type hints need `Union[Card, Dict]` until all sources converted
-4. **Missing optional attributes**: Ensure ALL dict keys represented as dataclass attributes
-   - Review source dicts (e.g., `additional-cards.json`) for all possible keys
+1. **Missing index field**: Cards from kwd.json don't have `index` initially - it's assigned by the generator
+2. **None sub_cards**: Some cards have `sub_cards: None` instead of empty list - add None checks
 
 ## Handler Order Reference
 

@@ -33,7 +33,7 @@ import typing
 from typing import Any, Dict, List, Optional
 
 import keyword_generation.data_model as gen
-from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.keyword_data import Card, KeywordData
 from keyword_generation.data_model.label_registry import LabelRegistry
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
@@ -169,18 +169,23 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
                 f"table-card-group '{card_settings.property_name}': refs {card_settings.refs} -> indices {indices}"
             )
 
-            # Build the card group (using reference semantics)
-            group = {
-                "table_group": True,
-                "sub_cards": [],
-                "overall_name": card_settings.property_name,
-                "length_func": card_settings.length_func or "",
-                "active_func": card_settings.active_func or "",
-            }
+            # Collect sub_cards using reference semantics
+            sub_cards: List[Card] = []
             for index in indices:
                 sub_card = kwd_data.cards[index]
-                sub_card["mark_for_removal"] = 1
-                group["sub_cards"].append(sub_card)
+                sub_card.mark_for_removal = 1
+                sub_cards.append(sub_card)
+
+            # Build the card group as a Card instance
+            group = Card(
+                index=-1,  # Will be set during insertion
+                fields=[],  # No direct fields, sub_cards hold the fields
+                table_group=True,
+                sub_cards=sub_cards,
+                overall_name=card_settings.property_name,
+                length_func=card_settings.length_func or "",
+                active_func=card_settings.active_func or "",
+            )
 
             # Mark all source cards for removal and insert group at minimum position
             insertion = gen.Insertion(min(indices), "", group)

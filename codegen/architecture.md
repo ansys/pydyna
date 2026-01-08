@@ -53,10 +53,6 @@ Card definitions referenced by `insert-card` and `replace-card` handlers.
 
 ## Data Structures
 
-### Dataclass Architecture
-
-The pipeline uses strongly-typed dataclasses for type safety and IDE support.
-
 **Core classes** (`data_model/keyword_data.py`):
 - `KeywordData` - Top-level keyword specification
 - `Card` - Individual card with fields and metadata
@@ -67,23 +63,6 @@ The pipeline uses strongly-typed dataclasses for type safety and IDE support.
 - `VariableCardMetadata` - for series cards
 - `ExternalCardMetadata` - for external implementations
 - `OptionGroup`, `CardSet`, `LinkData`, `MixinImport`, `DataclassDefinition`
-
-**Migration status**:
-- Fields: ✅ Fully migrated to `Field` instances
-- Cards: ⚠️ Mostly migrated, except `table_card_group` handler creates dict-based cards
-
-### Dict-Like Access (Backward Compatibility)
-
-`Card` and `Field` implement dict-like access for gradual migration:
-
-```python
-card["index"]      # → card.index
-card["index"] = 5  # → card.index = 5
-"index" in card    # → hasattr(card, "index")
-card.get("key", default)
-```
-
-This allows existing code using `card["index"]` to work while new code uses `card.index`.
 
 ### Label Registry
 
@@ -245,10 +224,14 @@ For keyword-specific customizations:
 
 1. Create file under `keyword_classes/manual/`:
    ```python
-   from ansys.dyna.core.keywords.keyword_classes.auto.define_table import DefineTable as _Auto
+   from ansys.dyna.core.keywords.keyword_classes.auto.define_table import (
+       DefineTable as _Auto,
+   )
+
 
    class DefineTable(_Auto):
        # Add custom properties, methods
+       pass
    ```
 
 2. Export from `manual_keywords.py`:

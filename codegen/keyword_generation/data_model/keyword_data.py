@@ -246,7 +246,7 @@ class Card:
     variable: Optional[Union[VariableCardMetadata, Dict[str, Any]]] = None
     set: Optional[Dict[str, Any]] = None
     table_group: bool = False
-    sub_cards: Optional[List[Dict[str, Any]]] = None
+    sub_cards: Optional[List["Card"]] = None
     external: Optional[Union[ExternalCardMetadata, Dict[str, Any]]] = None
     source_index: Optional[int] = None
     target_index: Optional[int] = None
@@ -270,6 +270,11 @@ class Card:
         variable = VariableCardMetadata.from_dict(variable_data) if isinstance(variable_data, dict) else variable_data
         external_data = data.get("external")
         external = ExternalCardMetadata.from_dict(external_data) if isinstance(external_data, dict) else external_data
+        # Convert sub_cards from dicts to Card instances
+        sub_cards_data = data.get("sub_cards")
+        sub_cards = (
+            [cls.from_dict(sc) if isinstance(sc, dict) else sc for sc in sub_cards_data] if sub_cards_data else None
+        )
 
         return cls(
             index=data.get("index", -1),  # Default to -1, will be set by class_generator
@@ -280,7 +285,7 @@ class Card:
             variable=variable,
             set=data.get("set"),
             table_group=data.get("table_group", False),
-            sub_cards=data.get("sub_cards"),
+            sub_cards=sub_cards,
             external=external,
             source_index=data.get("source_index"),
             target_index=data.get("target_index"),
@@ -318,11 +323,7 @@ class Card:
         if self.table_group and self.sub_cards:
             all_fields = []
             for sub_card in self.sub_cards:
-                # sub_card might be dict or Card during transition
-                if isinstance(sub_card, dict):
-                    all_fields.extend(sub_card.get("fields", []))
-                else:
-                    all_fields.extend(sub_card.fields)
+                all_fields.extend(sub_card.fields)
             return all_fields
         return self.fields
 
