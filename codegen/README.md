@@ -1,6 +1,7 @@
 # Auto-keyword Class Generator
 
 The PyDyna keyword class generator produces Python classes for LS-DYNA keywords based on specifications in `kwd.json`, `manifest.json`, and `additional-cards.json`.
+**⚠️ `kwd.json` is machine-generated from the LS-DYNA manual and MUST NOT be manually modified.**
 
 For architecture details, see [architecture.md](architecture.md).
 
