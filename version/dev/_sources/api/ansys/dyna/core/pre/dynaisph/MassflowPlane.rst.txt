@@ -1,0 +1,123 @@
+
+
+
+
+
+
+:class:`MassflowPlane`
+======================
+
+
+.. py:class:: ansys.dyna.core.pre.dynaisph.MassflowPlane(particles, surface)
+
+   
+   Measures ISPH mass flow rate across a defined plane.
+
+
+   :Parameters:
+
+       **particles** : :obj:`NodeSet`, :obj:`PartSet`
+           Node set or part set specifying the ISPH particles to measure.
+
+       **surface** : :obj:`PartSet`
+           Part set ID or part ID defining the surface across which to measure the flow rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MassflowPlane
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create a mass flow plane.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~particles`
+            - 
+          * - :py:attr:`~surface`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynaisph import MassflowPlane
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: particles
+
+.. py:attribute:: surface
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub)
+
+   
+   Create a mass flow plane.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

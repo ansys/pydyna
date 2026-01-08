@@ -1,0 +1,111 @@
+
+
+
+
+
+
+The ``dynasolver.py`` module
+============================
+
+.. py:module:: ansys.dyna.core.solver.dynasolver
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynasolver
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.solver.dynasolver.DynaSolver`
+            - Provides the gRPC client-side of Ansys LS-DYNA.
+
+
+
+
+    .. tab-item:: Exceptions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.solver.dynasolver.RunningError`
+            - Documentation missing.
+
+
+          * - :py:obj:`~ansys.dyna.core.solver.dynasolver.NotFound`
+            - Documentation missing.
+
+
+          * - :py:obj:`~ansys.dyna.core.solver.dynasolver.UnexpectedResponse`
+            - Documentation missing.
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DynaSolver</api/ansys/dyna/core/solver/dynasolver/DynaSolver>
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-lightning_bolt"></span> RunningError</api/ansys/dyna/core/solver/dynasolver/RunningError>
+    <span class="nf nf-md-lightning_bolt"></span> NotFound</api/ansys/dyna/core/solver/dynasolver/NotFound>
+    <span class="nf nf-md-lightning_bolt"></span> UnexpectedResponse</api/ansys/dyna/core/solver/dynasolver/UnexpectedResponse>
+
+
+
+
+
+
+
+Description
+-----------
+
+Dyna solver
+===========
+
+Module for defining the PyDNYA ``solver`` service.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

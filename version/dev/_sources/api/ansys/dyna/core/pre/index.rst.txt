@@ -1,0 +1,172 @@
+
+
+
+
+
+
+The ``pre`` package
+=======================
+
+.. py:module:: ansys.dyna.core.pre
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: pre
+.. tab-set::
+
+    .. tab-item:: Subpackages
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.examples`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.graphics`
+            - 
+
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase`
+            - Base
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynadem`
+            - DEM API
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaem`
+            - EM API
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd`
+            - ICFD API
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaiga`
+            - IGA API
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaisph`
+            - ISPH API
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynalogging`
+            - Logging module supplying a general framework for logging in the PyDYNA
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamaterial`
+            - Material API
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamech`
+            - Mechanical API
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynanvh`
+            - NVH API
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynasale`
+            - Airbag API
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynasolution`
+            - Solution
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.errors`
+            - Module containing PyDYNA-specific errors.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.launcher`
+            - Module for launching the pre service locally.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.misc`
+            - Module providing miscellaneous functions and methods.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.model`
+            - Module containing the managing logic of the PyDYNA model.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.part`
+            - Module containing the ``Part`` class.
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-package"></span> examples</api/ansys/dyna/core/pre/examples/index>
+    <span class="nf nf-md-package"></span> graphics</api/ansys/dyna/core/pre/graphics/index>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> dynabase</api/ansys/dyna/core/pre/dynabase/index>
+    <span class="nf nf-fa-file"></span> dynadem</api/ansys/dyna/core/pre/dynadem/index>
+    <span class="nf nf-fa-file"></span> dynaem</api/ansys/dyna/core/pre/dynaem/index>
+    <span class="nf nf-fa-file"></span> dynaicfd</api/ansys/dyna/core/pre/dynaicfd/index>
+    <span class="nf nf-fa-file"></span> dynaiga</api/ansys/dyna/core/pre/dynaiga/index>
+    <span class="nf nf-fa-file"></span> dynaisph</api/ansys/dyna/core/pre/dynaisph/index>
+    <span class="nf nf-fa-file"></span> dynalogging</api/ansys/dyna/core/pre/dynalogging/index>
+    <span class="nf nf-fa-file"></span> dynamaterial</api/ansys/dyna/core/pre/dynamaterial/index>
+    <span class="nf nf-fa-file"></span> dynamech</api/ansys/dyna/core/pre/dynamech/index>
+    <span class="nf nf-fa-file"></span> dynanvh</api/ansys/dyna/core/pre/dynanvh/index>
+    <span class="nf nf-fa-file"></span> dynasale</api/ansys/dyna/core/pre/dynasale/index>
+    <span class="nf nf-fa-file"></span> dynasolution</api/ansys/dyna/core/pre/dynasolution/index>
+    <span class="nf nf-fa-file"></span> errors</api/ansys/dyna/core/pre/errors/index>
+    <span class="nf nf-fa-file"></span> launcher</api/ansys/dyna/core/pre/launcher/index>
+    <span class="nf nf-fa-file"></span> misc</api/ansys/dyna/core/pre/misc/index>
+    <span class="nf nf-fa-file"></span> model</api/ansys/dyna/core/pre/model/index>
+    <span class="nf nf-fa-file"></span> part</api/ansys/dyna/core/pre/part/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

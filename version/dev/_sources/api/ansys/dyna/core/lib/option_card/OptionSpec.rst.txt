@@ -1,0 +1,85 @@
+
+
+
+
+
+
+:class:`OptionSpec`
+===================
+
+
+.. py:class:: ansys.dyna.core.lib.option_card.OptionSpec(name: str, card_order: int, title_order: int)
+
+
+
+.. py:currentmodule:: OptionSpec
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~name`
+            - 
+          * - :py:attr:`~card_order`
+            - 
+          * - :py:attr:`~title_order`
+            - 
+
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__repr__`
+            - 
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.option_card import OptionSpec
+
+Property detail
+---------------
+
+.. py:property:: name
+   :type: str
+
+
+.. py:property:: card_order
+   :type: int
+
+
+.. py:property:: title_order
+   :type: int
+
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: __repr__() -> str
+
+
+
+

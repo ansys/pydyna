@@ -1,0 +1,115 @@
+ansys.dyna.core.pre.dynaisph.DynaISPH
+=====================================
+
+.. py:class:: ansys.dyna.core.pre.dynaisph.DynaISPH
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+
+   
+   Contains methods for creating a keyword related to ISPH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: isphanalysis
+
+
+   .. py:method:: set_des(num_timestep=1, boxid=0, space_dimension=3, neighbors=150, approximation_theory=0, max_velocty=1000000000000000.0)
+
+      
+      Provide controls related to ISPH.
+
+
+      :Parameters:
+
+          **num_timestep** : :class:`python:int`, :obj:`optional`
+              Number of time steps between particle sorting. The default
+              is ``1``.
+
+          **boxid** : :class:`python:int`, :obj:`optional`
+              Box ID. The default is ``0``. ISPH approximations are computed
+              inside the specified box. When a particle has gone outside this
+              box, it is deactivated.
+
+          **space_dimension** : :class:`python:int`, :obj:`optional`
+              Space dimension for ISPH particles. The default is ``3``. Options
+              are:
+              
+              - EQ.3: 3D problems
+              - EQ.2: 2D plane strain problems
+              - EQ.-2: 2D axisymmetric problems
+
+          **neighbors** : :class:`python:int`, :obj:`optional`
+              Initial number of neighbors per particle. The default is ``150``.
+
+          **approximation_theory** : :class:`python:int`, :obj:`optional`
+              Particle approximation theory. The default is ``0``.
+
+          **max_velocty** : :class:`python:float`, :obj:`optional`
+              Maximum value for velocity for the ISPH particles. The default
+              is ``1000000000000000.0``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

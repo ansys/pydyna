@@ -1,0 +1,104 @@
+
+
+
+
+
+
+The ``parameter_expression_custom.py`` module
+=============================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: parameter_expression_custom
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom.ParameterExpression`
+            - PARAMETER_EXPRESSION with custom loads() that preserves expression text.
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom.ParameterExpressionLocal`
+            - PARAMETER_EXPRESSION_LOCAL keyword with custom loading that preserves expression text.
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom.ParameterExpressionNoecho`
+            - PARAMETER_EXPRESSION_NOECHO keyword with custom loading that preserves expression text.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ParameterExpression</api/ansys/dyna/core/keywords/keyword_classes/parameter_expression_custom/ParameterExpression>
+    <span class="nf nf-cod-symbol_class"></span> ParameterExpressionLocal</api/ansys/dyna/core/keywords/keyword_classes/parameter_expression_custom/ParameterExpressionLocal>
+    <span class="nf nf-cod-symbol_class"></span> ParameterExpressionNoecho</api/ansys/dyna/core/keywords/keyword_classes/parameter_expression_custom/ParameterExpressionNoecho>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Custom ParameterExpression classes that prevent premature parameter substitution.
+
+Expression strings contain &param references that are expression operands, not
+parameter substitutions. These custom classes override loads() to pass parameters=None,
+preventing substitution during keyword parsing. Expressions are evaluated later by
+ParameterHandler.after_import().
+
+Import Strategy:
+- Imported in manual_keywords.py (not auto/parameter/__init__.py)
+- Import order: auto_keywords.py → manual_keywords.py (custom classes win)
+- Never modify auto-generated files (codegen overwrites them)
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

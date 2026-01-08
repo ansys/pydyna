@@ -1,0 +1,131 @@
+
+
+
+
+
+
+:class:`ExpressionEvaluator`
+============================
+
+
+.. py:class:: ansys.dyna.core.lib.expression_evaluator.ExpressionEvaluator(parameter_set: ansys.dyna.core.lib.parameters.ParameterSet)
+
+   
+   Safe evaluator for LS-DYNA parameter expressions using AST.
+
+   Only allows whitelisted mathematical operations and functions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ExpressionEvaluator
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~evaluate`
+            - Evaluate an expression and return the result with appropriate type.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~parameter_set`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.expression_evaluator import ExpressionEvaluator
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: parameter_set
+
+
+
+Method detail
+-------------
+
+.. py:method:: evaluate(expression: str, param_type: str) -> Union[int, float]
+
+   
+   Evaluate an expression and return the result with appropriate type.
+
+
+   :Parameters:
+
+       **expression** : :class:`python:str`
+           Expression string to evaluate (e.g., "a+b*2").
+
+       **param_type** : :class:`python:str`
+           Parameter type code ('R' for real/float, 'I' for integer).
+
+
+
+   :Returns:
+
+       :class:`python:int` or :class:`python:float`
+           Evaluated result with type matching param_type.
+
+
+
+
+   :Raises:
+
+       :obj:`ValueError`
+           If expression is invalid or contains unsupported operations.
+
+       :obj:`KeyError`
+           If expression references undefined parameters.
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

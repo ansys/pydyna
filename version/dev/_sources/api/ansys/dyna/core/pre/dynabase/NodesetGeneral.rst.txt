@@ -1,0 +1,126 @@
+
+
+
+
+
+
+:class:`NodesetGeneral`
+=======================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.NodesetGeneral(settype=SetType.SHELL, setids=[])
+
+   Bases: :py:obj:`BaseSet`
+
+
+   
+   Includes nodal points of element sets.
+
+   Element sets are defined by ``SET_XXXX_LIST``,
+   where ``XXXX`` can be ``SHELL``, ``SOLID``, ``BEAM``,
+   ``TSHELL`` or ``DISCRETE``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: NodesetGeneral
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create a node set.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~settype`
+            - 
+          * - :py:attr:`~setids`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import NodesetGeneral
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: settype
+   :value: 'SET_SHELL'
+
+
+.. py:attribute:: setids
+   :value: []
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub)
+
+   
+   Create a node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

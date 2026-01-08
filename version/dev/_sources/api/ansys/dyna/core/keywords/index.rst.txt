@@ -1,0 +1,119 @@
+
+
+
+
+
+
+The ``keywords`` package
+============================
+
+.. py:module:: ansys.dyna.core.keywords
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: keywords
+.. tab-set::
+
+    .. tab-item:: Subpackages
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes`
+            - 
+
+
+
+
+
+
+
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~USER_DATA_PATH`
+            - 
+
+
+          * - :py:obj:`~EXAMPLES_PATH`
+            - 
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-package"></span> keyword_classes</api/ansys/dyna/core/keywords/keyword_classes/index>
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+
+ANSYS Dyna Keywords Module.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: USER_DATA_PATH
+   :value: b'.'
+
+
+.. py:data:: EXAMPLES_PATH
+
+
+

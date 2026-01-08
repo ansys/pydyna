@@ -1,0 +1,327 @@
+
+
+
+
+
+
+:class:`Part`
+=============
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Part(id)
+
+   
+   Defines the part object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Part
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_material`
+            - Set the material.
+          * - :py:attr:`~set_element_formulation`
+            - Set the element formulation.
+          * - :py:attr:`~set_stiffness_damping_coefficient`
+            - Set the stiffness damping coefficient.
+          * - :py:attr:`~set_extra_nodes`
+            - Set extra nodes for the rigid body.
+          * - :py:attr:`~set_rigidbody_initial_velocity`
+            - Set initial translational and rotational velocities for the rigid body.
+          * - :py:attr:`~set_property`
+            - Set properties for the part.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~stub`
+            - 
+          * - :py:attr:`~type`
+            - 
+          * - :py:attr:`~id`
+            - 
+          * - :py:attr:`~secid`
+            - 
+          * - :py:attr:`~mid`
+            - 
+          * - :py:attr:`~eosid`
+            - 
+          * - :py:attr:`~hgid`
+            - 
+          * - :py:attr:`~grav`
+            - 
+          * - :py:attr:`~adpopt`
+            - 
+          * - :py:attr:`~tmid`
+            - 
+          * - :py:attr:`~formulation`
+            - 
+          * - :py:attr:`~stiffness_damping`
+            - 
+          * - :py:attr:`~rigidbody_initial_velocity`
+            - 
+          * - :py:attr:`~translation`
+            - 
+          * - :py:attr:`~rotation`
+            - 
+          * - :py:attr:`~extra_nodes_defined`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import Part
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: stub
+
+.. py:attribute:: type
+   :value: ''
+
+
+.. py:attribute:: id
+
+.. py:attribute:: secid
+   :value: 0
+
+
+.. py:attribute:: mid
+   :value: 0
+
+
+.. py:attribute:: eosid
+   :value: 0
+
+
+.. py:attribute:: hgid
+   :value: 0
+
+
+.. py:attribute:: grav
+   :value: 0
+
+
+.. py:attribute:: adpopt
+   :value: 0
+
+
+.. py:attribute:: tmid
+   :value: 0
+
+
+.. py:attribute:: formulation
+   :value: 0
+
+
+.. py:attribute:: stiffness_damping
+   :value: 0
+
+
+.. py:attribute:: rigidbody_initial_velocity
+   :value: False
+
+
+.. py:attribute:: translation
+
+.. py:attribute:: rotation
+
+.. py:attribute:: extra_nodes_defined
+   :value: False
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: set_material(mat, mat_thermal=None)
+
+   
+   Set the material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: set_element_formulation(formulation)
+
+   
+   Set the element formulation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: set_stiffness_damping_coefficient(coefficient)
+
+   
+   Set the stiffness damping coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: set_extra_nodes(nodeset)
+
+   
+   Set extra nodes for the rigid body.
+
+
+   :Parameters:
+
+       **nodeset** : :obj:`NodeSet`
+           Extra nodes list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: set_rigidbody_initial_velocity(translation=Velocity(0, 0, 0), rotation=RotVelocity(0, 0, 0))
+
+   
+   Set initial translational and rotational velocities for the rigid body.
+
+   Initial translational and rotational velocities are set
+   at the center of gravity for a rigid body or a nodal rigid body.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: set_property()
+
+   
+   Set properties for the part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

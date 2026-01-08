@@ -1,0 +1,97 @@
+
+
+
+
+
+
+The ``node_transform.py`` module
+================================
+
+.. py:module:: ansys.dyna.core.lib.transforms.node_transform
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: node_transform
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.transforms.node_transform.TransformNode`
+            - 
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~apply_rigid_transform`
+            - 
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> TransformNode</api/ansys/dyna/core/lib/transforms/node_transform/TransformNode>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Transformation handler for *NODE.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: apply_rigid_transform(mtx: numpy.ndarray, nodes: pandas.DataFrame) -> None
+
+
+

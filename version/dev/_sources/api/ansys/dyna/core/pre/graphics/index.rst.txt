@@ -1,0 +1,74 @@
+
+
+
+
+
+
+The ``graphics`` package
+============================
+
+.. py:module:: ansys.dyna.core.pre.graphics
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: graphics
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.graphics.graphics`
+            - Module for graphics-related implementations.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.graphics.trame_gui`
+            - Module for the trame visualizer.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> graphics</api/ansys/dyna/core/pre/graphics/graphics/index>
+    <span class="nf nf-fa-file"></span> trame_gui</api/ansys/dyna/core/pre/graphics/trame_gui/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

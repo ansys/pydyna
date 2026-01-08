@@ -1,0 +1,171 @@
+
+
+
+
+
+
+The ``expression_evaluator.py`` module
+======================================
+
+.. py:module:: ansys.dyna.core.lib.expression_evaluator
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: expression_evaluator
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.expression_evaluator.ExpressionEvaluator`
+            - Safe evaluator for LS-DYNA parameter expressions using AST.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.expression_evaluator.DependencyResolver`
+            - Resolves expression dependencies using topological sort (Kahn's algorithm).
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~evaluate_parameter_expressions`
+            - Evaluate PARAMETER_EXPRESSION keywords and add results to parameter set.
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~logger`
+            - 
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~LSDYNA_FUNCTIONS`
+            - 
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ExpressionEvaluator</api/ansys/dyna/core/lib/expression_evaluator/ExpressionEvaluator>
+    <span class="nf nf-cod-symbol_class"></span> DependencyResolver</api/ansys/dyna/core/lib/expression_evaluator/DependencyResolver>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Expression evaluator for LS-DYNA PARAMETER_EXPRESSION keywords.
+
+Provides AST-based safe evaluation of arithmetic expressions with:
+- Dependency resolution via topological sort (Kahn's algorithm)
+- LS-DYNA function support (sin, cos, sqrt, abs, etc.)
+- Parameter reference handling (param, &param, -&param)
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: evaluate_parameter_expressions(parameter_set: ansys.dyna.core.lib.parameters.ParameterSet, expressions: List[Tuple[str, str, str]]) -> None
+
+   
+   Evaluate PARAMETER_EXPRESSION keywords and add results to parameter set.
+
+   Resolves dependencies, evaluates in order, adds results to parameter_set.
+
+   :Parameters:
+
+       **parameter_set** : :obj:`ParameterSet`
+           Target parameter set.
+
+       **expressions** : :class:`python:list` :obj:`of` :class:`python:tuple`
+           (param_type, param_name, expression) tuples.
+
+
+
+
+
+
+
+   :Raises:
+
+       :obj:`ValueError`
+           If circular dependencies or invalid expressions.
+
+       :obj:`KeyError`
+           If undefined parameter referenced.
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: LSDYNA_FUNCTIONS
+
+.. py:data:: logger
+
+
+

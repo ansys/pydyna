@@ -1,0 +1,77 @@
+
+
+
+
+
+
+The ``define_transformation.py`` module
+=======================================
+
+.. py:module:: ansys.dyna.core.lib.transforms.utils.define_transformation
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: define_transformation
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~get_transform_matrix`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Algorithms to compute 4x4 transformation matrices from a ``*DEFINE_TRANSFORMATION`` keyword.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: get_transform_matrix(kwd: Optional[ansys.dyna.core.keywords.keyword_classes.auto.define.define_transformation.DefineTransformation]) -> Optional[numpy.ndarray]
+
+
+

@@ -1,0 +1,227 @@
+
+
+
+
+
+
+The ``lib`` package
+=======================
+
+.. py:module:: ansys.dyna.core.lib
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: lib
+.. tab-set::
+
+    .. tab-item:: Subpackages
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.cards_`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.transforms`
+            - 
+
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.array`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.card`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.card_interface`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.card_set`
+            - Set of cards that act as one card.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.card_writer`
+            - Function to write cards.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.cards`
+            - Base class for cards and I/O.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.config`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.deck`
+            - Module provides a collection of keywords that can read and write to a keyword file.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.deck_loader`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.deck_plotter`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.domain_mapper`
+            - Maps keywords to logical domains based on their prefix.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.encrypted_keyword`
+            - Module provides an encrypted keyword class.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.expression_evaluator`
+            - Expression evaluator for LS-DYNA PARAMETER_EXPRESSION keywords.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.field`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.field_writer`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.format_type`
+            - Format type for dyna keywords.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.import_handler`
+            - Import handler used by the import deck feature
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.io_utils`
+            - Utils for i/o.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.keyword_base`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.keyword_collection`
+            - Provides a chainable collection wrapper for filtering keywords.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.kwd_line_formatter`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.option_card`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.parameters`
+            - Parameter classes.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.series_card`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.table_card`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.table_card_group`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.text_card`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.transform`
+            - Transformation handler for ``INCLUDE_TRANSFORM``.
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-package"></span> cards_</api/ansys/dyna/core/lib/cards_/index>
+    <span class="nf nf-md-package"></span> transforms</api/ansys/dyna/core/lib/transforms/index>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> array</api/ansys/dyna/core/lib/array/index>
+    <span class="nf nf-fa-file"></span> card</api/ansys/dyna/core/lib/card/index>
+    <span class="nf nf-fa-file"></span> card_interface</api/ansys/dyna/core/lib/card_interface/index>
+    <span class="nf nf-fa-file"></span> card_set</api/ansys/dyna/core/lib/card_set/index>
+    <span class="nf nf-fa-file"></span> card_writer</api/ansys/dyna/core/lib/card_writer/index>
+    <span class="nf nf-fa-file"></span> cards</api/ansys/dyna/core/lib/cards/index>
+    <span class="nf nf-fa-file"></span> config</api/ansys/dyna/core/lib/config/index>
+    <span class="nf nf-fa-file"></span> deck</api/ansys/dyna/core/lib/deck/index>
+    <span class="nf nf-fa-file"></span> deck_loader</api/ansys/dyna/core/lib/deck_loader/index>
+    <span class="nf nf-fa-file"></span> deck_plotter</api/ansys/dyna/core/lib/deck_plotter/index>
+    <span class="nf nf-fa-file"></span> domain_mapper</api/ansys/dyna/core/lib/domain_mapper/index>
+    <span class="nf nf-fa-file"></span> encrypted_keyword</api/ansys/dyna/core/lib/encrypted_keyword/index>
+    <span class="nf nf-fa-file"></span> expression_evaluator</api/ansys/dyna/core/lib/expression_evaluator/index>
+    <span class="nf nf-fa-file"></span> field</api/ansys/dyna/core/lib/field/index>
+    <span class="nf nf-fa-file"></span> field_writer</api/ansys/dyna/core/lib/field_writer/index>
+    <span class="nf nf-fa-file"></span> format_type</api/ansys/dyna/core/lib/format_type/index>
+    <span class="nf nf-fa-file"></span> import_handler</api/ansys/dyna/core/lib/import_handler/index>
+    <span class="nf nf-fa-file"></span> io_utils</api/ansys/dyna/core/lib/io_utils/index>
+    <span class="nf nf-fa-file"></span> keyword_base</api/ansys/dyna/core/lib/keyword_base/index>
+    <span class="nf nf-fa-file"></span> keyword_collection</api/ansys/dyna/core/lib/keyword_collection/index>
+    <span class="nf nf-fa-file"></span> kwd_line_formatter</api/ansys/dyna/core/lib/kwd_line_formatter/index>
+    <span class="nf nf-fa-file"></span> option_card</api/ansys/dyna/core/lib/option_card/index>
+    <span class="nf nf-fa-file"></span> parameters</api/ansys/dyna/core/lib/parameters/index>
+    <span class="nf nf-fa-file"></span> series_card</api/ansys/dyna/core/lib/series_card/index>
+    <span class="nf nf-fa-file"></span> table_card</api/ansys/dyna/core/lib/table_card/index>
+    <span class="nf nf-fa-file"></span> table_card_group</api/ansys/dyna/core/lib/table_card_group/index>
+    <span class="nf nf-fa-file"></span> text_card</api/ansys/dyna/core/lib/text_card/index>
+    <span class="nf nf-fa-file"></span> transform</api/ansys/dyna/core/lib/transform/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

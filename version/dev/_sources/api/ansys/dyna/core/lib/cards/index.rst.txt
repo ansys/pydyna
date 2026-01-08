@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``cards.py`` module
+=======================
+
+.. py:module:: ansys.dyna.core.lib.cards
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: cards
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.cards.Cards`
+            - Abstract base class for option card api interface.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Cards</api/ansys/dyna/core/lib/cards/Cards>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Base class for cards and I/O.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

@@ -1,0 +1,109 @@
+
+
+
+
+
+
+The ``manual`` package
+==========================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: manual
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.define_function`
+            - Module to define function.
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.define_table`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.element_solid`
+            - Contains the ElementSolid class.
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.initial_strain_shell_version_0_9_1`
+            - Legacy INITIAL_STRAIN_SHELL implementation (version 0.9.1).
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1`
+            - Legacy INITIAL_STRESS_SHELL implementation (version 0.9.1).
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.mat_295`
+            - Manual MAT_295 subclass with before_read support.
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1`
+            - Legacy MAT_295 implementation from pydyna v0.9.1.
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.section_tshell`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> define_function</api/ansys/dyna/core/keywords/keyword_classes/manual/define_function/index>
+    <span class="nf nf-fa-file"></span> define_table</api/ansys/dyna/core/keywords/keyword_classes/manual/define_table/index>
+    <span class="nf nf-fa-file"></span> element_solid</api/ansys/dyna/core/keywords/keyword_classes/manual/element_solid/index>
+    <span class="nf nf-fa-file"></span> element_solid_ortho</api/ansys/dyna/core/keywords/keyword_classes/manual/element_solid_ortho/index>
+    <span class="nf nf-fa-file"></span> initial_strain_shell_version_0_9_1</api/ansys/dyna/core/keywords/keyword_classes/manual/initial_strain_shell_version_0_9_1/index>
+    <span class="nf nf-fa-file"></span> initial_stress_shell_version_0_9_1</api/ansys/dyna/core/keywords/keyword_classes/manual/initial_stress_shell_version_0_9_1/index>
+    <span class="nf nf-fa-file"></span> mat_295</api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295/index>
+    <span class="nf nf-fa-file"></span> mat_295_version_0_9_1</api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295_version_0_9_1/index>
+    <span class="nf nf-fa-file"></span> section_tshell</api/ansys/dyna/core/keywords/keyword_classes/manual/section_tshell/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

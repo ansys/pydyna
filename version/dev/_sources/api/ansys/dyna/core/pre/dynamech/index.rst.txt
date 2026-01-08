@@ -1,0 +1,97 @@
+
+
+
+
+
+
+The ``dynamech.py`` module
+==========================
+
+.. py:module:: ansys.dyna.core.pre.dynamech
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynamech
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamech.AnalysisType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamech.DynaMech`
+            - Defines a Mechanical analysis.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynamech.Airbag`
+            - Defines an airbag or control volume.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> AnalysisType</api/ansys/dyna/core/pre/dynamech/AnalysisType>
+    <span class="nf nf-cod-symbol_class"></span> DynaMech</api/ansys/dyna/core/pre/dynamech/DynaMech>
+    <span class="nf nf-cod-symbol_class"></span> Airbag</api/ansys/dyna/core/pre/dynamech/Airbag>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Mechanical API
+==============
+
+Module for setting up explicit or implicit analysis.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

@@ -1,0 +1,167 @@
+
+
+
+
+
+
+The ``card_set.py`` module
+==========================
+
+.. py:module:: ansys.dyna.core.lib.card_set
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: card_set
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.card_set.CardSet`
+            - Abstract base class for all the implementations of keyword cards.
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~read_cards_with_discriminator`
+            - Read cards where a discriminator field determines which card variant to use.
+
+
+          * - :py:obj:`~ensure_card_set_properties`
+            - Help with handling card sets.
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> CardSet</api/ansys/dyna/core/lib/card_set/CardSet>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Set of cards that act as one card.
+
+It is a generic card, so it needs to be given a type as an argument.
+That type is used for each card, and behaves like a keyword.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: read_cards_with_discriminator(cards: List, buf: TextIO, parameters, discriminator: Field, cards_with_field: List[int]) -> bool
+
+   
+   Read cards where a discriminator field determines which card variant to use.
+
+   This handles the "chicken-and-egg" problem where card conditionals depend on a
+   field value that is IN those very cards. The solution:
+   1. Read non-discriminator cards first (cards before the first discriminator card)
+   2. Peek at next line to extract the discriminator field value
+   3. Set the field on all cards that have it (so conditionals evaluate correctly)
+   4. Read remaining cards (only active ones will consume data)
+
+   Args:
+       cards: List of Card objects in the CardSet item
+       buf: Text buffer to read from
+       parameters: Parameter set for substitution
+       discriminator: Field instance with name, offset, width, and default value
+       cards_with_field: List of card indices that contain the discriminator field
+
+   Returns:
+       True if the reader hit end of keyword early, False otherwise.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: ensure_card_set_properties(kwd, for_setter: bool) -> None
+
+   
+   Help with handling card sets.
+
+   For convenience the first card set can be manipulated by the keyword
+   if it is currently empty. Getters, on the other hand, only work if
+   a card set has been added.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+

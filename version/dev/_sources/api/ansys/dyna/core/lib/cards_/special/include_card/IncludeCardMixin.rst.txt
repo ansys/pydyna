@@ -1,0 +1,80 @@
+
+
+
+
+
+
+:class:`IncludeCardMixin`
+=========================
+
+
+.. py:class:: ansys.dyna.core.lib.cards_.special.include_card.IncludeCardMixin
+
+
+.. py:currentmodule:: IncludeCardMixin
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+   .. tab-item:: Properties
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~filename`
+            - Get or set the File name of file to be included in this keyword file.
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.cards_.special.include_card import IncludeCardMixin
+
+Property detail
+---------------
+
+.. py:property:: filename
+   :type: Optional[str]
+
+
+   
+   Get or set the File name of file to be included in this keyword file.
+   Maximum 80 characters. If the STAMPED_PART option is active, this is the
+   DYNAIN file containing the results from metal stamping.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+
+

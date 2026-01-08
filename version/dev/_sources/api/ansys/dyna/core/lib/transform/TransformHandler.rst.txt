@@ -1,0 +1,111 @@
+
+
+
+
+
+
+:class:`TransformHandler`
+=========================
+
+
+.. py:class:: ansys.dyna.core.lib.transform.TransformHandler
+
+   Bases: :py:obj:`ansys.dyna.core.lib.import_handler.ImportHandler`
+
+
+   
+   Base class for import handlers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: TransformHandler
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~register_transform_handler`
+            - 
+          * - :py:attr:`~after_import`
+            - Event called after a keyword is imported.
+          * - :py:attr:`~on_error`
+            - 
+
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.transform import TransformHandler
+
+
+
+Method detail
+-------------
+
+.. py:method:: register_transform_handler(identity: Union[str, Tuple[str, str]], handler: ansys.dyna.core.lib.transforms.base_transform.Transform) -> None
+
+.. py:method:: after_import(context: ansys.dyna.core.lib.import_handler.ImportContext, keyword: Union[ansys.dyna.core.lib.keyword_base.KeywordBase, str]) -> None
+
+   
+   Event called after a keyword is imported.
+
+   `keyword` is the imported keyword. It could be a string or a keyword object
+
+   Depending on the `context` is a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: on_error(error)
+
+
+
+

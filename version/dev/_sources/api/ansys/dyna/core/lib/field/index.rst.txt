@@ -1,0 +1,97 @@
+
+
+
+
+
+
+The ``field.py`` module
+=======================
+
+.. py:module:: ansys.dyna.core.lib.field
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: field
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.field.Flag`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.field.Field`
+            - 
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~to_long`
+            - 
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Flag</api/ansys/dyna/core/lib/field/Flag>
+    <span class="nf nf-cod-symbol_class"></span> Field</api/ansys/dyna/core/lib/field/Field>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: to_long(field: Field, offset: int) -> Field
+
+
+

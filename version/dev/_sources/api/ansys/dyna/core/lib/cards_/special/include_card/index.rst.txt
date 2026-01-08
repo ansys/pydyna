@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``include_card.py`` module
+==============================
+
+.. py:module:: ansys.dyna.core.lib.cards_.special.include_card
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: include_card
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.cards_.special.include_card.IncludeCard`
+            - Abstract base class for all the implementations of keyword cards.
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.cards_.special.include_card.IncludeCardMixin`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> IncludeCard</api/ansys/dyna/core/lib/cards_/special/include_card/IncludeCard>
+    <span class="nf nf-cod-symbol_class"></span> IncludeCardMixin</api/ansys/dyna/core/lib/cards_/special/include_card/IncludeCardMixin>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

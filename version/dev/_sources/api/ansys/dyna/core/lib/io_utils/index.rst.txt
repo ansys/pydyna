@@ -1,0 +1,137 @@
+
+
+
+
+
+
+The ``io_utils.py`` module
+==========================
+
+.. py:module:: ansys.dyna.core.lib.io_utils
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: io_utils
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~write_or_return`
+            - Write to buffer or returns a string.
+
+
+          * - :py:obj:`~is_dataframe`
+            - Check if object is a pandas DataFrame using duck typing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Utils for i/o.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: write_or_return(buf: Optional[TextIO], func: Callable) -> Optional[str]
+
+   
+   Write to buffer or returns a string.
+
+   Uses the callable `func` to write. If `buf` is None, then the function will create a string buffer
+   before calling `func` and return the result as a string.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: is_dataframe(obj) -> bool
+
+   
+   Check if object is a pandas DataFrame using duck typing.
+
+   Uses duck typing instead of isinstance() for Python 3.13+ compatibility,
+   where pd.DataFrame is no longer a valid type for isinstance checks.
+
+   :Parameters:
+
+       **obj** : :obj:`Any`
+           Object to check.
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           True if obj has DataFrame-like attributes.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+

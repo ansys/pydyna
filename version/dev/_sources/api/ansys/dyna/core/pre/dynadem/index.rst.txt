@@ -1,0 +1,90 @@
+
+
+
+
+
+
+The ``dynadem.py`` module
+=========================
+
+.. py:module:: ansys.dyna.core.pre.dynadem
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynadem
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynadem.DynaDEM`
+            - Contains methods for creating a keyword related to a discrete element method.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynadem.DEMAnalysis`
+            - Activates DEM analysis and defines associated control parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DynaDEM</api/ansys/dyna/core/pre/dynadem/DynaDEM>
+    <span class="nf nf-cod-symbol_class"></span> DEMAnalysis</api/ansys/dyna/core/pre/dynadem/DEMAnalysis>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+DEM API
+=======
+
+Module for creating a DEM DYNA input deck.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

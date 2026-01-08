@@ -1,0 +1,101 @@
+
+
+
+
+
+
+:class:`ParameterExpressionNoecho`
+==================================
+
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom.ParameterExpressionNoecho(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.keywords.keyword_classes.auto.parameter.parameter_expression_noecho.ParameterExpressionNoecho`
+
+
+   
+   PARAMETER_EXPRESSION_NOECHO keyword with custom loading that preserves expression text.
+
+   Overrides loads() to prevent parameter substitution in expression strings.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ParameterExpressionNoecho
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~loads`
+            - Load keyword data without parameter substitution.
+
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom import ParameterExpressionNoecho
+
+
+
+Method detail
+-------------
+
+.. py:method:: loads(data: str, parameters: Optional[ansys.dyna.core.lib.parameters.ParameterSet] = None) -> None
+
+   
+   Load keyword data without parameter substitution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

@@ -1,0 +1,126 @@
+
+
+
+
+
+
+:class:`ServerThread`
+=====================
+
+
+.. py:class:: ansys.dyna.core.solver.launcher.ServerThread(threadID, port, ip, server_path)
+
+   
+   Provides server thread properties.
+
+
+   :Parameters:
+
+       **threadID**
+           ..
+
+       **port**
+           ..
+
+       **ip**
+           ..
+
+       **server_path**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ServerThread
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~run`
+            - 
+          * - :py:attr:`~termination`
+            - 
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~threadID`
+            - 
+          * - :py:attr:`~port`
+            - 
+          * - :py:attr:`~ip`
+            - 
+          * - :py:attr:`~server_path`
+            - 
+          * - :py:attr:`~process`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.solver.launcher import ServerThread
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: threadID
+
+.. py:attribute:: port
+
+.. py:attribute:: ip
+
+.. py:attribute:: server_path
+
+.. py:attribute:: process
+   :value: None
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: run()
+
+.. py:method:: termination()
+
+
+
+

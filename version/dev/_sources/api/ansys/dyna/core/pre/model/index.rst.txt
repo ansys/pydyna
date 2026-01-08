@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``model.py`` module
+=======================
+
+.. py:module:: ansys.dyna.core.pre.model
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: model
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.model.Model`
+            - Contains all information about Ansys PyDYNA Model.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Model</api/ansys/dyna/core/pre/model/Model>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module containing the managing logic of the PyDYNA model.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

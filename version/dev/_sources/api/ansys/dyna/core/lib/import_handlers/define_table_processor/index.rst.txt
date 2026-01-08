@@ -1,0 +1,73 @@
+
+
+
+
+
+
+The ``define_table_processor.py`` module
+========================================
+
+.. py:module:: ansys.dyna.core.lib.import_handlers.define_table_processor
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: define_table_processor
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor`
+            - Import handler that links `DefineCurve` keywords to their parent `DefineTable`.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DefineTableProcessor</api/ansys/dyna/core/lib/import_handlers/define_table_processor/DefineTableProcessor>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

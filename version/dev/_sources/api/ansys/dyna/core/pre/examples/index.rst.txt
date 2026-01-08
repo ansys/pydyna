@@ -1,0 +1,74 @@
+
+
+
+
+
+
+The ``examples`` package
+============================
+
+.. py:module:: ansys.dyna.core.pre.examples
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: examples
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.examples.download_utilities`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.examples.examples`
+            - Result Files Examples
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> download_utilities</api/ansys/dyna/core/pre/examples/download_utilities/index>
+    <span class="nf nf-fa-file"></span> examples</api/ansys/dyna/core/pre/examples/examples/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

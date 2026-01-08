@@ -1,0 +1,208 @@
+
+
+
+
+
+
+:class:`ICFDVolumePart`
+=======================
+
+
+.. py:class:: ansys.dyna.core.pre.dynaicfd.ICFDVolumePart(surfaces)
+
+   
+   Assigns material properties to the nodes enclosed by surface ICFD parts.
+
+
+   :Parameters:
+
+       **surfaces** : :class:`python:list`
+           List of part IDs for the surface elements that define the volume mesh.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ICFDVolumePart
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_material`
+            - Set a material.
+          * - :py:attr:`~set_imposed_move`
+            - Impose a velocity on a specific ICFD part.
+          * - :py:attr:`~create`
+            - Create an ICFD volume part.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~stub`
+            - 
+          * - :py:attr:`~type`
+            - 
+          * - :py:attr:`~id`
+            - 
+          * - :py:attr:`~secid`
+            - 
+          * - :py:attr:`~mid`
+            - 
+          * - :py:attr:`~surfaces`
+            - 
+          * - :py:attr:`~defined_imposed_move`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynaicfd import ICFDVolumePart
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: stub
+
+.. py:attribute:: type
+   :value: 'ICFDVOLUME'
+
+
+.. py:attribute:: id
+
+.. py:attribute:: secid
+   :value: 1
+
+
+.. py:attribute:: mid
+   :value: 0
+
+
+.. py:attribute:: surfaces
+
+.. py:attribute:: defined_imposed_move
+   :value: False
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: set_material(mat)
+
+   
+   Set a material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: set_imposed_move(vx=None, vy=None, vz=None)
+
+   
+   Impose a velocity on a specific ICFD part.
+
+
+   :Parameters:
+
+       **vx**
+           ..
+
+       **vy**
+           ..
+
+       **vz**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: create()
+
+   
+   Create an ICFD volume part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

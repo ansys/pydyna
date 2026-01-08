@@ -1,0 +1,83 @@
+
+
+
+
+
+
+The ``dynaiga.py`` module
+=========================
+
+.. py:module:: ansys.dyna.core.pre.dynaiga
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynaiga
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaiga.DynaIGA`
+            - Contains methods for creating a keyword related to IGA.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DynaIGA</api/ansys/dyna/core/pre/dynaiga/DynaIGA>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+IGA API
+==========
+
+Module for creating an IGA DYNA input deck.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

@@ -1,0 +1,102 @@
+
+
+
+
+
+
+:class:`InstanceFilter`
+=======================
+
+
+.. py:class:: ansys.dyna.core.solver.dynalogging.InstanceFilter(name='')
+
+   Bases: :py:obj:`logging.Filter`
+
+
+   
+   Ensures that the ``instance_name`` record always exists.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: InstanceFilter
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~filter`
+            - Determine if the specified record is to be logged.
+
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.solver.dynalogging import InstanceFilter
+
+
+
+Method detail
+-------------
+
+.. py:method:: filter(record)
+
+   
+   Determine if the specified record is to be logged.
+
+   Returns True if the record should be logged, or False otherwise.
+   If deemed appropriate, the record may be modified in-place.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

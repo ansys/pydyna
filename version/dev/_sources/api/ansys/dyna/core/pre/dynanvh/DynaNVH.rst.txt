@@ -1,0 +1,104 @@
+
+
+
+
+
+
+:class:`DynaNVH`
+================
+
+
+.. py:class:: ansys.dyna.core.pre.dynanvh.DynaNVH
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+
+   
+   Contains methods for creating a keyword related to NVH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: DynaNVH
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~save_file`
+            - Save keyword files.
+
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynanvh import DynaNVH
+
+
+
+Method detail
+-------------
+
+.. py:method:: save_file()
+
+   
+   Save keyword files.
+
+
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

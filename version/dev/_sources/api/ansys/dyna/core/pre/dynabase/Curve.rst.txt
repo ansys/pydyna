@@ -1,0 +1,139 @@
+
+
+
+
+
+
+:class:`Curve`
+==============
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Curve(sfo=1, x=[], y=[], func=None, title='')
+
+   
+   Defines a curve as a function of time.
+
+   For example, ``load (ordinate value)``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Curve
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create a curve.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~sfo`
+            - 
+          * - :py:attr:`~abscissa`
+            - 
+          * - :py:attr:`~ordinate`
+            - 
+          * - :py:attr:`~func`
+            - 
+          * - :py:attr:`~title`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import Curve
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: sfo
+   :value: 1
+
+
+.. py:attribute:: abscissa
+   :value: []
+
+
+.. py:attribute:: ordinate
+   :value: []
+
+
+.. py:attribute:: func
+   :value: None
+
+
+.. py:attribute:: title
+   :value: ''
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub=None)
+
+   
+   Create a curve.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

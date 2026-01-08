@@ -1,0 +1,73 @@
+
+
+
+
+
+
+The ``element_solid_ortho.py`` module
+=====================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: element_solid_ortho
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho.ElementSolidOrtho`
+            - DYNA ELEMENT_SOLID_ORTHO keyword
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ElementSolidOrtho</api/ansys/dyna/core/keywords/keyword_classes/manual/element_solid_ortho/ElementSolidOrtho>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

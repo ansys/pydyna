@@ -1,0 +1,168 @@
+
+
+
+
+
+
+The ``grpc_tags.py`` module
+===========================
+
+.. py:module:: ansys.dyna.core.solver.grpc_tags
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: grpc_tags
+.. tab-set::
+
+
+
+
+
+
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~SWITCH`
+            - 
+
+
+          * - :py:obj:`~RUN`
+            - 
+
+
+          * - :py:obj:`~CWD`
+            - 
+
+
+          * - :py:obj:`~PAUSE`
+            - 
+
+
+          * - :py:obj:`~TIME`
+            - 
+
+
+          * - :py:obj:`~RESUME`
+            - 
+
+
+          * - :py:obj:`~REQUIRES_SYNC`
+            - 
+
+
+          * - :py:obj:`~NODE`
+            - 
+
+
+          * - :py:obj:`~SETLC`
+            - 
+
+
+          * - :py:obj:`~ACK`
+            - 
+
+
+          * - :py:obj:`~NOTRUNNING`
+            - 
+
+
+          * - :py:obj:`~RUNNING`
+            - 
+
+
+          * - :py:obj:`~NOTFOUND`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: SWITCH
+   :value: 1
+
+
+.. py:data:: RUN
+   :value: 2
+
+
+.. py:data:: CWD
+   :value: 3
+
+
+.. py:data:: PAUSE
+   :value: 4
+
+
+.. py:data:: TIME
+   :value: 5
+
+
+.. py:data:: RESUME
+   :value: 6
+
+
+.. py:data:: REQUIRES_SYNC
+   :value: 1000
+
+
+.. py:data:: NODE
+   :value: 1001
+
+
+.. py:data:: SETLC
+   :value: 1002
+
+
+.. py:data:: ACK
+   :value: 0
+
+
+.. py:data:: NOTRUNNING
+   :value: 1
+
+
+.. py:data:: RUNNING
+   :value: 2
+
+
+.. py:data:: NOTFOUND
+   :value: 3
+
+
+
+

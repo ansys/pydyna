@@ -1,0 +1,209 @@
+
+
+
+
+
+
+:class:`InitialCondition`
+=========================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.InitialCondition
+
+   
+   Provides a way of initializing velocities and detonation points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: InitialCondition
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~assign_model`
+            - 
+          * - :py:attr:`~create_velocity`
+            - Create initial velocities for rotating and/or translating bodies.
+          * - :py:attr:`~create_velocity_node`
+            - Define initial nodal point velocities for a node.
+          * - :py:attr:`~create_temperature`
+            - Create an initial nodal point temperature.
+          * - :py:attr:`~create`
+            - Create an initial condition.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~stub`
+            - 
+          * - :py:attr:`~velocitylist`
+            - 
+          * - :py:attr:`~velocitynodelist`
+            - 
+          * - :py:attr:`~temperaturelist`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import InitialCondition
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: stub
+
+.. py:attribute:: velocitylist
+   :value: []
+
+
+.. py:attribute:: velocitynodelist
+   :value: []
+
+
+.. py:attribute:: temperaturelist
+   :value: []
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: assign_model(model)
+
+.. py:method:: create_velocity(velocityset, angular_velocity=0, velocity=Velocity(0, 0, 0), direction=Direction(0, 0, 0), stime=0)
+
+   
+   Create initial velocities for rotating and/or translating bodies.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: create_velocity_node(nodeid, trans=Velocity(0, 0, 0), rot=RotVelocity(0, 0, 0))
+
+   
+   Define initial nodal point velocities for a node.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: create_temperature(nodeset=None, temperature=0)
+
+   
+   Create an initial nodal point temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: create()
+
+   
+   Create an initial condition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

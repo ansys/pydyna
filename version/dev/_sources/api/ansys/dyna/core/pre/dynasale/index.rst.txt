@@ -1,0 +1,111 @@
+
+
+
+
+
+
+The ``dynasale.py`` module
+==========================
+
+.. py:module:: ansys.dyna.core.pre.dynasale
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynasale
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynasale.AdvectionMethod`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynasale.FillDirection`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynasale.ControlPoint`
+            - Provides spacing information for generating a 3D S-ALE mesh.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynasale.StructuredMesh`
+            - Generates a structured 2D or 3D mesh and invokes the S-ALE solver.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynasale.DynaSALE`
+            - Sets up the S-ALE simulation process.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> AdvectionMethod</api/ansys/dyna/core/pre/dynasale/AdvectionMethod>
+    <span class="nf nf-cod-symbol_class"></span> FillDirection</api/ansys/dyna/core/pre/dynasale/FillDirection>
+    <span class="nf nf-cod-symbol_class"></span> ControlPoint</api/ansys/dyna/core/pre/dynasale/ControlPoint>
+    <span class="nf nf-cod-symbol_class"></span> StructuredMesh</api/ansys/dyna/core/pre/dynasale/StructuredMesh>
+    <span class="nf nf-cod-symbol_class"></span> DynaSALE</api/ansys/dyna/core/pre/dynasale/DynaSALE>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Airbag API
+==========
+
+Module for creating a S-ALE (Structured ALE) DYNA input deck.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

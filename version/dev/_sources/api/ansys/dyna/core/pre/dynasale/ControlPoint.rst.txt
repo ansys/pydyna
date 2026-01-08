@@ -1,0 +1,94 @@
+
+
+
+
+
+
+:class:`ControlPoint`
+=====================
+
+
+.. py:class:: ansys.dyna.core.pre.dynasale.ControlPoint(number, position, ratio)
+
+   
+   Provides spacing information for generating a 3D S-ALE mesh.
+
+
+   :Parameters:
+
+       **number** : :class:`python:int`
+           Control point node number.
+
+       **position** : :class:`python:float`
+           Control point position.
+
+       **ratio** : :class:`python:float`
+           Ratio for progressive mesh spacing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ControlPoint
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~number`
+            - 
+          * - :py:attr:`~position`
+            - 
+          * - :py:attr:`~ratio`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynasale import ControlPoint
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: number
+
+.. py:attribute:: position
+
+.. py:attribute:: ratio
+
+
+
+
+

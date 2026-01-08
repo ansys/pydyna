@@ -1,0 +1,58 @@
+
+
+
+
+
+
+:class:`ReadOnlyValue`
+======================
+
+
+.. py:class:: ansys.dyna.core.lib.field.Field.ReadOnlyValue
+
+
+.. py:currentmodule:: ReadOnlyValue
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~value`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.lib.field.Field import ReadOnlyValue
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: value
+   :type:  Any
+   :value: None
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+
+
+
+
+
+
+The ``utils`` package
+=========================
+
+.. py:module:: ansys.dyna.core.lib.transforms.utils
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: utils
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.transforms.utils.define_transformation`
+            - Algorithms to compute 4x4 transformation matrices from a ``*DEFINE_TRANSFORMATION`` keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> define_transformation</api/ansys/dyna/core/lib/transforms/utils/define_transformation/index>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

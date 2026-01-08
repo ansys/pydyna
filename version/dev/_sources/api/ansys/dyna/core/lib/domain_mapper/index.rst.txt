@@ -1,0 +1,162 @@
+
+
+
+
+
+
+The ``domain_mapper.py`` module
+===============================
+
+.. py:module:: ansys.dyna.core.lib.domain_mapper
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: domain_mapper
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~by_domain`
+            - Categorize a keyword by domain based on its prefix.
+
+
+          * - :py:obj:`~get_all_domains`
+            - Get a sorted list of all unique domains.
+
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~KEYWORD_DOMAIN_MAPPING`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Maps keywords to logical domains based on their prefix.
+
+This module is duplicated from codegen/keyword_generation/utils/domain_mapper.py
+to enable runtime categorization of keywords without requiring codegen dependencies.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: by_domain(keyword: Union[ansys.dyna.core.lib.keyword_base.KeywordBase, str]) -> str
+
+   
+   Categorize a keyword by domain based on its prefix.
+
+   This function can be used as a key function for splitting decks by domain.
+
+   :Parameters:
+
+       **keyword** : :obj:`Union`\[:obj:`KeywordBase`, :class:`python:str`]
+           The keyword to categorize (either a KeywordBase object or raw string).
+
+
+
+   :Returns:
+
+       :class:`python:str`
+           The domain name (e.g., "mat", "section", "control", "other").
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   >>> from ansys.dyna.core.lib.deck import Deck
+   >>> from ansys.dyna.core.lib.domain_mapper import by_domain
+   >>> deck = Deck()
+   >>> # ... populate deck ...
+   >>> decks_by_domain = deck.split(by_domain)
+   >>> mat_deck = decks_by_domain["mat"]
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_all_domains() -> List[str]
+
+   
+   Get a sorted list of all unique domains.
+
+
+
+
+
+   :Returns:
+
+       :obj:`List`\[:class:`python:str`]
+           A sorted list of all domain names.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: KEYWORD_DOMAIN_MAPPING
+
+
+

@@ -1,0 +1,49 @@
+
+
+
+
+
+
+:class:`PydynaRuntimeError`
+===========================
+
+
+.. py:exception:: ansys.dyna.core.pre.errors.PydynaRuntimeError
+
+   Bases: :py:obj:`RuntimeError`
+
+
+   
+   Provides the error raised when PyDYNA passes an error.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.errors import PydynaRuntimeError
+
+
+
+
+

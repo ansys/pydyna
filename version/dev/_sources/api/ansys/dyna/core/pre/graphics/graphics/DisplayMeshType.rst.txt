@@ -1,0 +1,105 @@
+
+
+
+
+
+
+:class:`DisplayMeshType`
+========================
+
+
+.. py:class:: ansys.dyna.core.pre.graphics.graphics.DisplayMeshType
+
+   Bases: :py:obj:`enum.IntEnum`
+
+
+   
+   Contains the mesh types to display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: DisplayMeshType
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~FACE`
+            - 
+          * - :py:attr:`~BEAM`
+            - 
+          * - :py:attr:`~CYLINDER`
+            - 
+          * - :py:attr:`~SPHERE`
+            - 
+          * - :py:attr:`~PLANAR`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.graphics.graphics import DisplayMeshType
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: FACE
+   :value: 0
+
+
+.. py:attribute:: BEAM
+   :value: 1
+
+
+.. py:attribute:: CYLINDER
+   :value: 2
+
+
+.. py:attribute:: SPHERE
+   :value: 3
+
+
+.. py:attribute:: PLANAR
+   :value: 4
+
+
+
+
+
+

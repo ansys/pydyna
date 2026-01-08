@@ -1,0 +1,43 @@
+
+
+.. _sphx_glr_examples_EM:
+
+EM examples
+~~~~~~~~~~~~
+
+These examples show how to create electromagnetic model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to create an EM Railgun input deck. ">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_railgun_thumb.png
+    :alt: Railgun example
+
+  :ref:`sphx_glr_examples_EM_em_railgun.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Railgun example</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/EM/em_railgun
+

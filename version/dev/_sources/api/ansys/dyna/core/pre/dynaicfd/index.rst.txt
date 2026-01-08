@@ -1,0 +1,187 @@
+
+
+
+
+
+
+The ``dynaicfd.py`` module
+==========================
+
+.. py:module:: ansys.dyna.core.pre.dynaicfd
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynaicfd
+.. tab-set::
+
+
+
+    .. tab-item:: Interfaces
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.ICFD_SurfRemeshMethod`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.ICFD_AnalysisType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.ICFD_MessageLevel`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.ICFD_CouplingForm`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.ICFD_CouplingDirection`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.ICFDAnalysis`
+            - Activates an ICFD analysis and defines associated control parameters.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.ICFDDOF`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.ICFDPart`
+            - Defines a part for the ICFD solver.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.ICFDVolumePart`
+            - Assigns material properties to the nodes enclosed by surface ICFD parts.
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.DynaICFD`
+            - Contains methods for create a keyword related to an ICFD analysis.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.Compressible`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.MatICFD`
+            - Defines physical properties for the fluid material.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.Vel`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynaicfd.MeshedVolume`
+            - Defines the volume space to mesh.
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_interface"></span> ICFD_SurfRemeshMethod</api/ansys/dyna/core/pre/dynaicfd/ICFD_SurfRemeshMethod>
+    <span class="nf nf-cod-symbol_interface"></span> ICFD_AnalysisType</api/ansys/dyna/core/pre/dynaicfd/ICFD_AnalysisType>
+    <span class="nf nf-cod-symbol_interface"></span> ICFD_MessageLevel</api/ansys/dyna/core/pre/dynaicfd/ICFD_MessageLevel>
+    <span class="nf nf-cod-symbol_interface"></span> ICFD_CouplingForm</api/ansys/dyna/core/pre/dynaicfd/ICFD_CouplingForm>
+    <span class="nf nf-cod-symbol_interface"></span> ICFD_CouplingDirection</api/ansys/dyna/core/pre/dynaicfd/ICFD_CouplingDirection>
+    <span class="nf nf-cod-symbol_interface"></span> ICFDAnalysis</api/ansys/dyna/core/pre/dynaicfd/ICFDAnalysis>
+    <span class="nf nf-cod-symbol_interface"></span> ICFDDOF</api/ansys/dyna/core/pre/dynaicfd/ICFDDOF>
+    <span class="nf nf-cod-symbol_interface"></span> ICFDPart</api/ansys/dyna/core/pre/dynaicfd/ICFDPart>
+    <span class="nf nf-cod-symbol_interface"></span> ICFDVolumePart</api/ansys/dyna/core/pre/dynaicfd/ICFDVolumePart>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> DynaICFD</api/ansys/dyna/core/pre/dynaicfd/DynaICFD>
+    <span class="nf nf-cod-symbol_class"></span> Compressible</api/ansys/dyna/core/pre/dynaicfd/Compressible>
+    <span class="nf nf-cod-symbol_class"></span> MatICFD</api/ansys/dyna/core/pre/dynaicfd/MatICFD>
+    <span class="nf nf-cod-symbol_class"></span> Vel</api/ansys/dyna/core/pre/dynaicfd/Vel>
+    <span class="nf nf-cod-symbol_class"></span> MeshedVolume</api/ansys/dyna/core/pre/dynaicfd/MeshedVolume>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+ICFD API
+========
+
+Module for creating an ICFD (incompressible computational fluid dynamics) DYNA input deck.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

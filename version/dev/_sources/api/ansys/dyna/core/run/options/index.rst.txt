@@ -1,0 +1,94 @@
+
+
+
+
+
+
+The ``options.py`` module
+=========================
+
+.. py:module:: ansys.dyna.core.run.options
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: options
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.run.options.MpiOption`
+            - MPI option to configure the LS-DYNA execution command line
+
+
+          * - :py:obj:`~ansys.dyna.core.run.options.Precision`
+            - Precision for LS-DYNA
+
+
+          * - :py:obj:`~ansys.dyna.core.run.options.MemoryUnit`
+            - Memory unit for LS-DYNA command line.  Only MB and GB are currently supported.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> MpiOption</api/ansys/dyna/core/run/options/MpiOption>
+    <span class="nf nf-cod-symbol_class"></span> Precision</api/ansys/dyna/core/run/options/Precision>
+    <span class="nf nf-cod-symbol_class"></span> MemoryUnit</api/ansys/dyna/core/run/options/MemoryUnit>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Options to run LS-DYNA.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

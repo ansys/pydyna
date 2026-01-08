@@ -1,0 +1,90 @@
+
+
+
+
+
+
+:class:`Velocity`
+=================
+
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Velocity(x=0, y=0, z=0)
+
+   
+   Defines a translational velocity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Velocity
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~x`
+            - 
+          * - :py:attr:`~y`
+            - 
+          * - :py:attr:`~z`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynabase import Velocity
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: x
+   :value: 0
+
+
+.. py:attribute:: y
+   :value: 0
+
+
+.. py:attribute:: z
+   :value: 0
+
+
+
+
+
+

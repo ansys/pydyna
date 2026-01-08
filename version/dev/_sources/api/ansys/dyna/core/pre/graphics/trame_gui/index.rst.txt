@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``trame_gui.py`` module
+===========================
+
+.. py:module:: ansys.dyna.core.pre.graphics.trame_gui
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: trame_gui
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.graphics.trame_gui.TrameVisualizer`
+            - Defines the view layout for the Trame visualizer.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> TrameVisualizer</api/ansys/dyna/core/pre/graphics/trame_gui/TrameVisualizer>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for the trame visualizer.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

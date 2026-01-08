@@ -1,0 +1,97 @@
+
+
+
+
+
+
+The ``keyword_collection.py`` module
+====================================
+
+.. py:module:: ansys.dyna.core.lib.keyword_collection
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: keyword_collection
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.keyword_collection.KeywordCollection`
+            - A lazy, chainable wrapper around keyword iterables.
+
+
+
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~logger`
+            - 
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> KeywordCollection</api/ansys/dyna/core/lib/keyword_collection/KeywordCollection>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Provides a chainable collection wrapper for filtering keywords.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: logger
+
+
+

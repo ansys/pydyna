@@ -1,0 +1,73 @@
+
+
+
+
+
+
+The ``text_card.py`` module
+===========================
+
+.. py:module:: ansys.dyna.core.lib.text_card
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: text_card
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.text_card.TextCard`
+            - Abstract base class for all the implementations of keyword cards.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> TextCard</api/ansys/dyna/core/lib/text_card/TextCard>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

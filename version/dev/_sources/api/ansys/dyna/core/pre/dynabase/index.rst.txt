@@ -1,0 +1,578 @@
+
+
+
+
+
+
+The ``dynabase.py`` module
+==========================
+
+.. py:module:: ansys.dyna.core.pre.dynabase
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: dynabase
+.. tab-set::
+
+
+
+    .. tab-item:: Interfaces
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.IGASection`
+            - Defines section properties for isogeometric shell elements.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.IGAPart`
+            - Defines an isogeometric shell part.
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Box`
+            - Defines a box-shaped volume.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Curve`
+            - Defines a curve as a function of time.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Function`
+            - Defines a function that can be referenced by a limited number of keyword options.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Table2D`
+            - Define a table,a curve ID is specified for each value defined in the table.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Point`
+            - Defines a point.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Direction`
+            - Defines a direction.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Transform`
+            - Defines a transformation.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Velocity`
+            - Defines a translational velocity.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.RotVelocity`
+            - Defines a rotational velocity.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.BaseObj`
+            - Define the base object.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.DynaBase`
+            - Contains methods for creating a general LS-DYNA keyword.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.BaseSet`
+            - Defines the base class for all set classes.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.NodeSet`
+            - Defines a nodal set with some identical or unique attributes.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.NodesetGeneral`
+            - Includes nodal points of element sets.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.NodeSetBox`
+            - include the nodes inside boxes.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.PartSet`
+            - Defines a set of parts with optional attributes.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.SegmentSet`
+            - Defines a set of segments with optional identical or unique attributes.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.BeamSection`
+            - Defines cross-sectional properties for beams, trusses, discrete beams, and cable elements.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ShellSection`
+            - Defines section properties for shell elements.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Part`
+            - Defines the part object.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.BeamPart`
+            - Defines a beam part.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ShellPart`
+            - Defines a shell part.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.SolidPart`
+            - Defines a solid part.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.DiscretePart`
+            - Defines a discrete part.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Parts`
+            - Stores the part list.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ImplicitAnalysis`
+            - Activates implicit analysis and defines associated control parameters.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ThermalAnalysis`
+            - Activates thermal analysis and defines associated control parameters.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ContactSurface`
+            - Defines a contact interface.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Contact`
+            - Provide a way of treating interaction between disjoint parts.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ContactGroup`
+            - Create a contact group.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Constraint`
+            - Provides a way of constraining degrees of freedom to move together in some way.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.BoundaryCondition`
+            - Provides a way of defining imposed motions on boundary nodes.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.InitialCondition`
+            - Provides a way of initializing velocities and detonation points.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.RigidwallCylinder`
+            - Defines a rigid wall with a cylinder form.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.RigidwallSphere`
+            - Defines a rigid wall with a sphere form.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.RigidwallPlanar`
+            - Defines planar rigid walls with either finite or infinite size.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Gravity`
+            - Defines body force loads using global axes directions.
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Motion`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.RWMotion`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.DOF`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Switch`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.InvariantNode`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.EnergyFlag`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.HourglassControl`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.BulkViscosity`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.CaseType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.OutputEcho`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ParameterType`
+            - Contains the parameter types.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.SetType`
+            - Contains the enums for setting types.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.BeamFormulation`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ShellFormulation`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.IGAFormulation`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.SolidFormulation`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.HourglassType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.DRO`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.AnalysisType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.TimestepCtrol`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.Integration`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ThermalAnalysisType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ThermalAnalysisTimestep`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ContactCategory`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ContactType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.OffsetType`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.ContactFormulation`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.SBOPT`
+            - Create a collection of name/value pairs.
+
+
+          * - :py:obj:`~ansys.dyna.core.pre.dynabase.GravityOption`
+            - Create a collection of name/value pairs.
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_interface"></span> IGASection</api/ansys/dyna/core/pre/dynabase/IGASection>
+    <span class="nf nf-cod-symbol_interface"></span> IGAPart</api/ansys/dyna/core/pre/dynabase/IGAPart>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Box</api/ansys/dyna/core/pre/dynabase/Box>
+    <span class="nf nf-cod-symbol_class"></span> Curve</api/ansys/dyna/core/pre/dynabase/Curve>
+    <span class="nf nf-cod-symbol_class"></span> Function</api/ansys/dyna/core/pre/dynabase/Function>
+    <span class="nf nf-cod-symbol_class"></span> Table2D</api/ansys/dyna/core/pre/dynabase/Table2D>
+    <span class="nf nf-cod-symbol_class"></span> Point</api/ansys/dyna/core/pre/dynabase/Point>
+    <span class="nf nf-cod-symbol_class"></span> Direction</api/ansys/dyna/core/pre/dynabase/Direction>
+    <span class="nf nf-cod-symbol_class"></span> Transform</api/ansys/dyna/core/pre/dynabase/Transform>
+    <span class="nf nf-cod-symbol_class"></span> Velocity</api/ansys/dyna/core/pre/dynabase/Velocity>
+    <span class="nf nf-cod-symbol_class"></span> RotVelocity</api/ansys/dyna/core/pre/dynabase/RotVelocity>
+    <span class="nf nf-cod-symbol_class"></span> BaseObj</api/ansys/dyna/core/pre/dynabase/BaseObj>
+    <span class="nf nf-cod-symbol_class"></span> DynaBase</api/ansys/dyna/core/pre/dynabase/DynaBase>
+    <span class="nf nf-cod-symbol_class"></span> BaseSet</api/ansys/dyna/core/pre/dynabase/BaseSet>
+    <span class="nf nf-cod-symbol_class"></span> NodeSet</api/ansys/dyna/core/pre/dynabase/NodeSet>
+    <span class="nf nf-cod-symbol_class"></span> NodesetGeneral</api/ansys/dyna/core/pre/dynabase/NodesetGeneral>
+    <span class="nf nf-cod-symbol_class"></span> NodeSetBox</api/ansys/dyna/core/pre/dynabase/NodeSetBox>
+    <span class="nf nf-cod-symbol_class"></span> PartSet</api/ansys/dyna/core/pre/dynabase/PartSet>
+    <span class="nf nf-cod-symbol_class"></span> SegmentSet</api/ansys/dyna/core/pre/dynabase/SegmentSet>
+    <span class="nf nf-cod-symbol_class"></span> BeamSection</api/ansys/dyna/core/pre/dynabase/BeamSection>
+    <span class="nf nf-cod-symbol_class"></span> ShellSection</api/ansys/dyna/core/pre/dynabase/ShellSection>
+    <span class="nf nf-cod-symbol_class"></span> Part</api/ansys/dyna/core/pre/dynabase/Part>
+    <span class="nf nf-cod-symbol_class"></span> BeamPart</api/ansys/dyna/core/pre/dynabase/BeamPart>
+    <span class="nf nf-cod-symbol_class"></span> ShellPart</api/ansys/dyna/core/pre/dynabase/ShellPart>
+    <span class="nf nf-cod-symbol_class"></span> SolidPart</api/ansys/dyna/core/pre/dynabase/SolidPart>
+    <span class="nf nf-cod-symbol_class"></span> DiscretePart</api/ansys/dyna/core/pre/dynabase/DiscretePart>
+    <span class="nf nf-cod-symbol_class"></span> Parts</api/ansys/dyna/core/pre/dynabase/Parts>
+    <span class="nf nf-cod-symbol_class"></span> ImplicitAnalysis</api/ansys/dyna/core/pre/dynabase/ImplicitAnalysis>
+    <span class="nf nf-cod-symbol_class"></span> ThermalAnalysis</api/ansys/dyna/core/pre/dynabase/ThermalAnalysis>
+    <span class="nf nf-cod-symbol_class"></span> ContactSurface</api/ansys/dyna/core/pre/dynabase/ContactSurface>
+    <span class="nf nf-cod-symbol_class"></span> Contact</api/ansys/dyna/core/pre/dynabase/Contact>
+    <span class="nf nf-cod-symbol_class"></span> ContactGroup</api/ansys/dyna/core/pre/dynabase/ContactGroup>
+    <span class="nf nf-cod-symbol_class"></span> Constraint</api/ansys/dyna/core/pre/dynabase/Constraint>
+    <span class="nf nf-cod-symbol_class"></span> BoundaryCondition</api/ansys/dyna/core/pre/dynabase/BoundaryCondition>
+    <span class="nf nf-cod-symbol_class"></span> InitialCondition</api/ansys/dyna/core/pre/dynabase/InitialCondition>
+    <span class="nf nf-cod-symbol_class"></span> RigidwallCylinder</api/ansys/dyna/core/pre/dynabase/RigidwallCylinder>
+    <span class="nf nf-cod-symbol_class"></span> RigidwallSphere</api/ansys/dyna/core/pre/dynabase/RigidwallSphere>
+    <span class="nf nf-cod-symbol_class"></span> RigidwallPlanar</api/ansys/dyna/core/pre/dynabase/RigidwallPlanar>
+    <span class="nf nf-cod-symbol_class"></span> Gravity</api/ansys/dyna/core/pre/dynabase/Gravity>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> Motion</api/ansys/dyna/core/pre/dynabase/Motion>
+    <span class="nf nf-cod-symbol_enum"></span> RWMotion</api/ansys/dyna/core/pre/dynabase/RWMotion>
+    <span class="nf nf-cod-symbol_enum"></span> DOF</api/ansys/dyna/core/pre/dynabase/DOF>
+    <span class="nf nf-cod-symbol_enum"></span> Switch</api/ansys/dyna/core/pre/dynabase/Switch>
+    <span class="nf nf-cod-symbol_enum"></span> InvariantNode</api/ansys/dyna/core/pre/dynabase/InvariantNode>
+    <span class="nf nf-cod-symbol_enum"></span> EnergyFlag</api/ansys/dyna/core/pre/dynabase/EnergyFlag>
+    <span class="nf nf-cod-symbol_enum"></span> HourglassControl</api/ansys/dyna/core/pre/dynabase/HourglassControl>
+    <span class="nf nf-cod-symbol_enum"></span> BulkViscosity</api/ansys/dyna/core/pre/dynabase/BulkViscosity>
+    <span class="nf nf-cod-symbol_enum"></span> CaseType</api/ansys/dyna/core/pre/dynabase/CaseType>
+    <span class="nf nf-cod-symbol_enum"></span> OutputEcho</api/ansys/dyna/core/pre/dynabase/OutputEcho>
+    <span class="nf nf-cod-symbol_enum"></span> ParameterType</api/ansys/dyna/core/pre/dynabase/ParameterType>
+    <span class="nf nf-cod-symbol_enum"></span> SetType</api/ansys/dyna/core/pre/dynabase/SetType>
+    <span class="nf nf-cod-symbol_enum"></span> BeamFormulation</api/ansys/dyna/core/pre/dynabase/BeamFormulation>
+    <span class="nf nf-cod-symbol_enum"></span> ShellFormulation</api/ansys/dyna/core/pre/dynabase/ShellFormulation>
+    <span class="nf nf-cod-symbol_enum"></span> IGAFormulation</api/ansys/dyna/core/pre/dynabase/IGAFormulation>
+    <span class="nf nf-cod-symbol_enum"></span> SolidFormulation</api/ansys/dyna/core/pre/dynabase/SolidFormulation>
+    <span class="nf nf-cod-symbol_enum"></span> HourglassType</api/ansys/dyna/core/pre/dynabase/HourglassType>
+    <span class="nf nf-cod-symbol_enum"></span> DRO</api/ansys/dyna/core/pre/dynabase/DRO>
+    <span class="nf nf-cod-symbol_enum"></span> AnalysisType</api/ansys/dyna/core/pre/dynabase/AnalysisType>
+    <span class="nf nf-cod-symbol_enum"></span> TimestepCtrol</api/ansys/dyna/core/pre/dynabase/TimestepCtrol>
+    <span class="nf nf-cod-symbol_enum"></span> Integration</api/ansys/dyna/core/pre/dynabase/Integration>
+    <span class="nf nf-cod-symbol_enum"></span> ThermalAnalysisType</api/ansys/dyna/core/pre/dynabase/ThermalAnalysisType>
+    <span class="nf nf-cod-symbol_enum"></span> ThermalAnalysisTimestep</api/ansys/dyna/core/pre/dynabase/ThermalAnalysisTimestep>
+    <span class="nf nf-cod-symbol_enum"></span> ContactCategory</api/ansys/dyna/core/pre/dynabase/ContactCategory>
+    <span class="nf nf-cod-symbol_enum"></span> ContactType</api/ansys/dyna/core/pre/dynabase/ContactType>
+    <span class="nf nf-cod-symbol_enum"></span> OffsetType</api/ansys/dyna/core/pre/dynabase/OffsetType>
+    <span class="nf nf-cod-symbol_enum"></span> ContactFormulation</api/ansys/dyna/core/pre/dynabase/ContactFormulation>
+    <span class="nf nf-cod-symbol_enum"></span> SBOPT</api/ansys/dyna/core/pre/dynabase/SBOPT>
+    <span class="nf nf-cod-symbol_enum"></span> GravityOption</api/ansys/dyna/core/pre/dynabase/GravityOption>
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Base
+====
+
+Module for creating a DYNA input deck.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

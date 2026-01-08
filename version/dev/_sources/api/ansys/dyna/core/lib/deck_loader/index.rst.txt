@@ -1,0 +1,103 @@
+
+
+
+
+
+
+The ``deck_loader.py`` module
+=============================
+
+.. py:module:: ansys.dyna.core.lib.deck_loader
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: deck_loader
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.deck_loader.IterState`
+            - 
+
+
+          * - :py:obj:`~ansys.dyna.core.lib.deck_loader.DeckLoaderResult`
+            - A class containing the result of an attempted deck load.
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~load_deck`
+            - 
+
+
+          * - :py:obj:`~load_deck_from_buffer`
+            - 
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> IterState</api/ansys/dyna/core/lib/deck_loader/IterState>
+    <span class="nf nf-cod-symbol_class"></span> DeckLoaderResult</api/ansys/dyna/core/lib/deck_loader/DeckLoaderResult>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: load_deck(deck: ansys.dyna.core.deck.Deck, text: str, context: Optional[ansys.dyna.core.lib.import_handler.ImportContext], import_handlers: List[ansys.dyna.core.lib.import_handler.ImportHandler]) -> DeckLoaderResult
+
+.. py:function:: load_deck_from_buffer(deck: ansys.dyna.core.deck.Deck, buffer: TextIO, context: Optional[ansys.dyna.core.lib.import_handler.ImportContext], import_handlers: List[ansys.dyna.core.lib.import_handler.ImportHandler]) -> DeckLoaderResult
+
+
+

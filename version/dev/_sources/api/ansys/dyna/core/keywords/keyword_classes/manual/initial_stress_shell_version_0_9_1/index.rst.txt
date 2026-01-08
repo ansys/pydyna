@@ -1,0 +1,94 @@
+
+
+
+
+
+
+The ``initial_stress_shell_version_0_9_1.py`` module
+====================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: initial_stress_shell_version_0_9_1
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacyThicknessLargeCardSet`
+            - CardSet.
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacyCardSet`
+            - CardSet.
+
+
+          * - :py:obj:`~ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacy`
+            - DYNA INITIAL_STRESS_SHELL keyword (legacy version 0.9.1).
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> InitialStressShellLegacyThicknessLargeCardSet</api/ansys/dyna/core/keywords/keyword_classes/manual/initial_stress_shell_version_0_9_1/InitialStressShellLegacyThicknessLargeCardSet>
+    <span class="nf nf-cod-symbol_class"></span> InitialStressShellLegacyCardSet</api/ansys/dyna/core/keywords/keyword_classes/manual/initial_stress_shell_version_0_9_1/InitialStressShellLegacyCardSet>
+    <span class="nf nf-cod-symbol_class"></span> InitialStressShellLegacy</api/ansys/dyna/core/keywords/keyword_classes/manual/initial_stress_shell_version_0_9_1/InitialStressShellLegacy>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Legacy INITIAL_STRESS_SHELL implementation (version 0.9.1).
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

@@ -1,0 +1,138 @@
+
+
+
+
+
+
+:class:`MatThermalIsotropic`
+============================
+
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic(density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0)
+
+   
+   Defines isotropic thermal properties.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MatThermalIsotropic
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~create`
+            - Create isotropic thermal material.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~tro`
+            - 
+          * - :py:attr:`~tgrlc`
+            - 
+          * - :py:attr:`~tgmult`
+            - 
+          * - :py:attr:`~hc`
+            - 
+          * - :py:attr:`~tc`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.dyna.core.pre.dynamaterial import MatThermalIsotropic
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: tro
+   :value: 0
+
+
+.. py:attribute:: tgrlc
+   :value: 0
+
+
+.. py:attribute:: tgmult
+   :value: 0
+
+
+.. py:attribute:: hc
+   :value: 0
+
+
+.. py:attribute:: tc
+   :value: 0
+
+
+
+
+Method detail
+-------------
+
+.. py:method:: create(stub)
+
+   
+   Create isotropic thermal material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+

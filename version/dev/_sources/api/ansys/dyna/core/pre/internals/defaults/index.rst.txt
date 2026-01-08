@@ -1,0 +1,315 @@
+
+
+
+
+
+
+The ``defaults.py`` module
+==========================
+
+.. py:module:: ansys.dyna.core.pre.internals.defaults
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: defaults
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ip`
+            - Get the default IP address used throughout the library.
+
+
+          * - :py:obj:`~port`
+            - Get the default port used throughout the library.
+
+
+          * - :py:obj:`~connection_timeout`
+            - Get the default connection timeout used throughout the library.
+
+
+          * - :py:obj:`~print_communicator_stats`
+            - Get the flag to decide whether to print communicator stats(INTERNAL ONLY).
+
+
+          * - :py:obj:`~max_message_length`
+            - Get the maximum message length for a grpc channel.
+
+
+          * - :py:obj:`~get_examples_path`
+            - Get the client-side default container path.
+
+
+          * - :py:obj:`~get_examples_path_for_containers`
+            - Get the server-side default container path in case of containers.
+
+
+          * - :py:obj:`~get_output_path`
+            - Get the client-side output directory used by containers.
+
+
+          * - :py:obj:`~get_output_path_for_containers`
+            - Get the server-side output directory used by containers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Default configuration for PyDYNA pre.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: ip()
+
+   
+   Get the default IP address used throughout the library.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: port()
+
+   
+   Get the default port used throughout the library.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: connection_timeout()
+
+   
+   Get the default connection timeout used throughout the library.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: print_communicator_stats()
+
+   
+   Get the flag to decide whether to print communicator stats(INTERNAL ONLY).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: max_message_length()
+
+   
+   Get the maximum message length for a grpc channel.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_examples_path()
+
+   
+   Get the client-side default container path.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_examples_path_for_containers()
+
+   
+   Get the server-side default container path in case of containers.
+
+   In case of a container, the user data directory is mounted within the container image.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_output_path()
+
+   
+   Get the client-side output directory used by containers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_output_path_for_containers()
+
+   
+   Get the server-side output directory used by containers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
