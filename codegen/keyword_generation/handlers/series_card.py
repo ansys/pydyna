@@ -35,11 +35,11 @@ Labels must be defined in the keyword's labels section or auto-generated.
 from dataclasses import dataclass
 import logging
 import typing
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData
-from keyword_generation.data_model.label_registry import LabelRegistry
 from keyword_generation.data_model.metadata import DataclassDefinition, DataclassField, VariableCardMetadata
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -47,7 +47,7 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class SeriesCardSettings:
+class SeriesCardSettings(LabelRefSettings):
     """Configuration for variable-length card arrays.
 
     Attributes:
@@ -62,7 +62,6 @@ class SeriesCardSettings:
         struct_info: Optional dataclass definition for struct types
     """
 
-    ref: str
     name: str
     card_size: int
     element_width: int
@@ -96,21 +95,6 @@ class SeriesCardSettings:
             active_func=data.get("active-func"),
             struct_info=data.get("struct-info"),
         )
-
-    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
-        """Resolve the label reference to a concrete card index.
-
-        Args:
-            registry: LabelRegistry for resolving label references
-            cards: The cards list to search for the card object.
-
-        Returns:
-            Integer index into kwd_data.cards
-
-        Raises:
-            UndefinedLabelError: If ref label is not found
-        """
-        return registry.resolve_index(self.ref, cards)
 
 
 @handler(
@@ -183,11 +167,6 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         - Labels must be defined in the manifest 'labels' section
     """
 
-    @classmethod
-    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[SeriesCardSettings]:
-        """Convert dict settings to typed SeriesCardSettings instances."""
-        return [SeriesCardSettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -204,7 +183,7 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             ValueError: If label_registry is not available on kwd_data
             UndefinedLabelError: If a referenced label is not defined
         """
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(SeriesCardSettings, settings)
         registry = kwd_data.label_registry
         if registry is None:
             raise ValueError(
@@ -242,7 +221,3 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             )
         if len(dataclasses) > 0:
             kwd_data.dataclasses = dataclasses
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        return

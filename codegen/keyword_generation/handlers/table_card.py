@@ -37,8 +37,8 @@ import logging
 from typing import Any, Dict, List, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData
-from keyword_generation.data_model.label_registry import LabelRegistry
 from keyword_generation.data_model.metadata import TableCardMetadata
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -46,7 +46,7 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class TableCardSettings:
+class TableCardSettings(LabelRefSettings):
     """Configuration for marking a card as a repeating table structure.
 
     Attributes:
@@ -56,7 +56,6 @@ class TableCardSettings:
         active_func: Optional Python expression for conditional activation
     """
 
-    ref: str
     property_name: str
     length_func: Optional[str] = None
     active_func: Optional[str] = None
@@ -80,21 +79,6 @@ class TableCardSettings:
             length_func=data.get("length-func"),
             active_func=data.get("active-func"),
         )
-
-    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
-        """Resolve the label reference to a concrete card index.
-
-        Args:
-            registry: LabelRegistry for resolving label references
-            cards: The cards list to search for the card object.
-
-        Returns:
-            Integer index into kwd_data.cards
-
-        Raises:
-            UndefinedLabelError: If ref label is not found
-        """
-        return registry.resolve_index(self.ref, cards)
 
 
 @handler(
@@ -131,11 +115,6 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         - Labels must be defined in the manifest 'labels' section
     """
 
-    @classmethod
-    def _parse_settings(cls, settings: List[Dict[str, Any]]) -> List[TableCardSettings]:
-        """Convert dict settings to typed TableCardSettings instances."""
-        return [TableCardSettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -152,7 +131,7 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             ValueError: If label_registry is not available on kwd_data
             UndefinedLabelError: If a referenced label is not defined
         """
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(TableCardSettings, settings)
         registry = kwd_data.label_registry
         if registry is None:
             raise ValueError(
@@ -173,7 +152,3 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                 length_func=card_settings.length_func or "",
                 active_func=card_settings.active_func or "",
             )
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

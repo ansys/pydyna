@@ -4,22 +4,130 @@ This document describes the internal architecture of the PyDyna keyword class ge
 
 ## Overview
 
-The codegen system generates Python classes for LS-DYNA keywords. It consists of:
+The codegen system generates Python classes for LS-DYNA keywords. It transforms keyword metadata from JSON schema files into ~3,173 fully-featured Python classes that provide a Pythonic API for LSDYNA keywords across multiple engineering domains (contact, boundary, define, section, mat, part, load, icfd, em, etc.).
+
+### High-Level Flow Diagram
+
+```
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│  kwd.json    │     │ manifest     │     │ additional-  │
+│  (250MB)     │────▶│  .json       │────▶│ cards.json   │
+│ Keyword defs │     │ Settings     │     │ Extra cards  │
+└──────────────┘     └──────────────┘     └──────────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │  generate.py    │
+                    │  (Entry Point)  │
+                    │  - Load config  │
+                    │  - Setup Jinja  │
+                    │  - Orchestrate  │
+                    └────────┬────────┘
+                             │
+                             ▼
+            ┌────────────────────────────────┐
+            │   For Each Keyword (~3,173)    │
+            └────────────────────────────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ class_generator │
+                    │ .py             │
+                    │ 1. Load data    │
+                    │ 2. Run handlers │
+                    │ 3. Render       │
+                    └────────┬────────┘
+                             │
+            ┌────────────────┼────────────────┐
+            │                │                │
+            ▼                ▼                ▼
+    ┌───────────────┐  ┌──────────┐  ┌──────────────┐
+    │ Handler       │  │ KeywordData│  │ Jinja2       │
+    │ Pipeline      │  │ Transform│  │ Templates    │
+    │ (14 handlers) │  │          │  │ (keyword.j2) │
+    └───────┬───────┘  └────┬─────┘  └──────┬───────┘
+            │               │               │
+            └───────────────┴───────────────┘
+                            │
+                            ▼
+                  ┌──────────────────┐
+                  │  Python Classes  │
+                  │  src/.../auto/   │
+                  │  - contact/      │
+                  │  - define/       │
+                  │  - section/      │
+                  │  - mat/          │
+                  │  - etc.          │
+                  └──────────────────┘
+```
+
+### Handler Pipeline Architecture
+
+The handler system uses **mutable reference semantics** (by design) where handlers modify `KeywordData` in place:
+
+```
+┌────────────────────────────────────────────────────────┐
+│                 Handler Pipeline                       │
+├────────────────────────────────────────────────────────┤
+│                                                        │
+│  ┌──────────────┐   ┌──────────────┐                 │
+│  │ Pre-Process  │   │ Main Handlers│                 │
+│  │ - Add indices│──▶│ (14 handlers)│                 │
+│  │ - Prep insert│   │ In order:    │                 │
+│  └──────────────┘   │ 1. reorder   │                 │
+│                      │ 2. insert    │                 │
+│                      │ 3. card-set  │──┐              │
+│                      │ 4. conditional  │ Shared       │
+│                      │ 5. table-group│◀┘ References!  │
+│                      │ 6. shared-fld│                 │
+│                      │ 7. rename-prop│                │
+│                      │ ... etc       │                 │
+│                      └───────┬───────┘                 │
+│                              │                        │
+│                              ▼                        │
+│                      ┌──────────────┐                 │
+│                      │Post-Process  │                 │
+│                      │ 2 handlers:  │                 │
+│                      │ - shared-fld │                 │
+│                      │ - rename-prop│                 │
+│                      └───────┬───────┘                 │
+│                              │                        │
+│                              ▼                        │
+│                      ┌──────────────┐                 │
+│                      │  Cleanup     │                 │
+│                      │ - Insertions │                 │
+│                      │ - Deletions  │                 │
+│                      │ - Reindex    │                 │
+│                      └──────────────┘                 │
+│                                                        │
+└────────────────────────────────────────────────────────┘
+```
+
+**Critical Design**: Handlers like `card-set` append card **references** (not copies), so later handlers' modifications (e.g., `conditional-card` adding `func`) automatically appear everywhere the card is referenced.
+
+### Key Components
+
+The codegen system consists of:
 
 - **Specification Loading**: Reads keyword/card/field definitions from JSON manifest files (`kwd.json`, `manifest.json`, `additional-cards.json`)
-- **Handler Pipeline**: Transforms loaded specifications through a series of handlers
-- **Template Rendering**: Uses Jinja templates to generate Python code
+- **Handler Pipeline**: Transforms loaded specifications through 14 specialized handlers
+- **Template Rendering**: Uses Jinja templates with typed context objects to generate Python code
 - **Output Management**: Writes generated files to `src/ansys/dyna/core/keywords/keyword_classes/auto/`
 
 ### Generation Flow
 
 1. **Run `generate.py`**: Entry point for code generation
-2. **Load Specs**: Manifest and keyword definitions are loaded and validated
-3. **Apply Handlers**: Each handler processes the data, adding relationships, defaults, or other logic
-4. **Render Templates**: Jinja templates are rendered using the processed context
-5. **Write Output**: Generated files are written to disk
+2. **Load Specs**: Manifest (`manifest.json`) and keyword definitions (`kwd.json`) are loaded and validated
+3. **Initialize Label Registry**: Labels mapped to card objects for position-independent referencing
+4. **Apply Handler Pipeline**: Each of 14 handlers processes the data sequentially in registration order
+   - Handlers mutate `KeywordData` in place using reference semantics
+   - Later handlers see and modify objects created by earlier handlers
+5. **Post-Processing**: 2 handlers finalize operations requiring complete transformed data
+6. **Cleanup**: Apply card insertions, delete marked cards, reindex
+7. **Render Templates**: Jinja templates rendered using typed `TemplateContext` objects
+8. **Write Output**: Generated files written to disk organized by domain subdirectories
 
-Note: `kwd.json` is extremely large and should never be read in its entirety.
+Note: `kwd.json` is extremely large (~250MB) and should never be read in its entirety.
 
 ## Input Files
 
@@ -175,6 +283,85 @@ class TableCardSettings:
 ```
 
 Settings are validated at parse time via `_parse_settings()`.
+
+### Handler Base Utilities (Jan 2026 Refactoring)
+
+To eliminate code duplication across handlers, the system provides shared base classes and utilities in `handlers/base_settings.py`:
+
+**`LabelRefSettings` Base Class**:
+```python
+@dataclass
+class LabelRefSettings:
+    """Base class for handler settings that use label-based card references."""
+
+    ref: str  # Label reference to the card
+
+    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
+        """Resolve the label reference to a concrete card index."""
+        return registry.resolve_index(self.ref, cards)
+```
+
+Handlers that use label-based references inherit from `LabelRefSettings`:
+- `conditional_card.py` - ConditionalCardSettings
+- `skip_card.py` - SkipCardSettings
+- `replace_card.py` - ReplaceCardSettings
+- `override_field.py` - OverrideFieldSettings
+- `rename_property.py` - RenamePropertySettings
+- `external_card.py` - ExternalCardSettings
+- `series_card.py` - SeriesCardSettings
+- `table_card.py` - TableCardSettings
+
+**`parse_settings_list()` Utility**:
+```python
+def parse_settings_list(settings_class, settings: List[Dict[str, Any]]) -> List[Any]:
+    """Generic settings parser - eliminates duplicated _parse_settings methods."""
+    return [settings_class.from_dict(s) for s in settings]
+```
+
+Replaces duplicated `_parse_settings()` methods in all handlers.
+
+**Field Utilities**:
+```python
+def find_field_in_card(card: Card, field_name: str) -> Optional[Field]:
+    """Find a field by name (case-insensitive) in a card."""
+
+
+def modify_field_in_cards(
+    cards: List[Card],
+    indices: List[int],
+    field_name: str,
+    modifications: Dict[str, Any],
+) -> None:
+    """Apply field modifications to multiple cards."""
+```
+
+**Benefits**:
+- ~150+ lines of duplicate code eliminated
+- Consistent error handling and validation
+- Single source of truth for common patterns
+- Easier to maintain and extend
+
+**Keyword Utilities** (`utils/keyword_utils.py`):
+```python
+@dataclass
+class KeywordNames:
+    """Consolidated keyword name transformations."""
+
+    original: str
+    fixed: str
+    classname: str
+    filename: str
+
+    @classmethod
+    def from_keyword(cls, keyword: str) -> "KeywordNames":
+        """Generate all name variants from a keyword."""
+
+
+def filter_keywords_by_domain(keywords: List[str], domains: List[str]) -> List[str]:
+    """Filter keywords by domain (e.g., 'contact', 'define')."""
+```
+
+Eliminates repetitive name processing logic in `generate.py`.
 
 ## Testing
 

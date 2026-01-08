@@ -32,10 +32,10 @@ Uses label-based references (ref) for card addressing.
 from dataclasses import dataclass
 import logging
 import typing
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData, RenamedProperty
-from keyword_generation.data_model.label_registry import LabelRegistry
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -43,7 +43,7 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class RenamePropertySettings:
+class RenamePropertySettings(LabelRefSettings):
     """Configuration for renaming a card property.
 
     Uses label-based addressing (ref) for card references.
@@ -51,12 +51,7 @@ class RenamePropertySettings:
 
     name: str  # Field name to rename
     property_name: str  # New Python property name
-    ref: str  # Label reference for the card
     description: Optional[str] = None  # Optional description for docs
-
-    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
-        """Resolve ref to card index."""
-        return registry.resolve_index(self.ref, cards)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "RenamePropertySettings":
@@ -109,13 +104,6 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
         Sets field["property_name"] = "part_id" for matching field
     """
 
-    @classmethod
-    def _parse_settings(
-        cls, settings: typing.List[typing.Dict[str, typing.Any]]
-    ) -> typing.List[RenamePropertySettings]:
-        """Parse dict settings to typed RenamePropertySettings."""
-        return [RenamePropertySettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -129,7 +117,7 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
             settings: List of dicts with ref, name, property-name
         """
         # Parse settings to typed dataclasses
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(RenamePropertySettings, settings)
 
         # Get registry for label resolution
         registry = kwd_data.label_registry

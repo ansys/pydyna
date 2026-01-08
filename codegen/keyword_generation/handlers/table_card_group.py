@@ -35,6 +35,7 @@ from typing import Any, Dict, List, Optional
 import keyword_generation.data_model as gen
 from keyword_generation.data_model.keyword_data import Card, KeywordData
 from keyword_generation.data_model.label_registry import LabelRegistry
+from keyword_generation.handlers.base_settings import parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -132,13 +133,6 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
         - Marks all source cards with "mark_for_removal" = 1
     """
 
-    @classmethod
-    def _parse_settings(
-        cls, settings: typing.List[typing.Dict[str, typing.Any]]
-    ) -> typing.List[TableCardGroupSettings]:
-        """Parse dict settings into typed TableCardGroupSettings."""
-        return [TableCardGroupSettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -158,7 +152,7 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             raise ValueError("table-card-group handler requires label_registry to be initialized")
 
         registry = kwd_data.label_registry
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(TableCardGroupSettings, settings)
         kwd_data.table_group = True
 
         for card_settings in typed_settings:
@@ -195,7 +189,3 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             insertion = gen.Insertion(min(indices), "", group)
             kwd_data.card_insertions.append(insertion)
             logger.debug(f"Created table card group at position {min(indices)}")
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass
