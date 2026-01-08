@@ -143,72 +143,72 @@ def benchmark_camry_expand():
     """Benchmark deck expansion for the Camry roof crush model."""
     # Path to Camry model
     camry_path = Path("src/ansys/dyna/core/pre/examples/implicit/camry_rc/Camry_RC_main.k")
-    
+
     if not camry_path.exists():
         print(f"ERROR: Camry model not found at {camry_path}")
         print("Make sure you're running from the pydyna root directory.")
         return
-    
+
     camry_dir = camry_path.parent
-    
+
     print("="*70)
     print("DECK EXPAND BENCHMARK - Camry Model")
     print("="*70)
     print()
-    
+
     # Load the deck
     deck = Deck()
-    
+
     print("Loading deck...")
     t_start = time.perf_counter()
     with open(camry_path, 'r') as f:
         deck.loads(f.read())
     t_load = time.perf_counter() - t_start
     print(f"  Load time: {t_load*1000:8.2f} ms")
-    
+
     # Count keywords before expansion
     n_keywords_before = len(deck)
     print(f"  Keywords in main file: {n_keywords_before:,}")
     print()
-    
+
     # Expand the deck (this is what we're benchmarking)
     print("Expanding deck (processing includes)...")
     t_start = time.perf_counter()
     flat_deck = deck.expand(cwd=str(camry_dir), recurse=True)
     t_expand = time.perf_counter() - t_start
-    
+
     print(f"  Expand time: {t_expand*1000:8.2f} ms ({t_expand:.2f} seconds)")
     print()
-    
+
     # Count keywords after expansion
     n_keywords_after = len(flat_deck)
     print(f"  Keywords after expansion: {n_keywords_after:,}")
     print(f"  Expansion ratio: {n_keywords_after/n_keywords_before:.1f}x")
     print()
-    
+
     # Count specific keyword types
     nodes = list(flat_deck.get_kwds_by_type("NODE"))
     shells = [kwd for kwd in flat_deck.get_kwds_by_type("ELEMENT") if kwd.subkeyword == "SHELL"]
     beams = [kwd for kwd in flat_deck.get_kwds_by_type("ELEMENT") if kwd.subkeyword == "BEAM"]
     solids = [kwd for kwd in flat_deck.get_kwds_by_type("ELEMENT") if kwd.subkeyword == "SOLID"]
-    
+
     n_nodes = sum(len(kwd.nodes) for kwd in nodes) if nodes else 0
     n_shells = sum(len(kwd.elements) for kwd in shells) if shells else 0
     n_beams = sum(len(kwd.elements) for kwd in beams) if beams else 0
     n_solids = sum(len(kwd.elements) for kwd in solids) if solids else 0
-    
+
     print("Model contents:")
     print(f"  Nodes:  {n_nodes:>10,}")
     print(f"  Shells: {n_shells:>10,}")
     print(f"  Beams:  {n_beams:>10,}")
     print(f"  Solids: {n_solids:>10,}")
     print()
-    
+
     # Analysis
     print("="*70)
     print("ANALYSIS")
     print("="*70)
-    
+
     if t_expand > 10.0:
         print(f"WARNING: Expand took {t_expand:.1f} seconds")
         print()
@@ -222,7 +222,7 @@ def benchmark_camry_expand():
         print("  4. String operations (path resolution, text processing)")
     else:
         print(f"OK: Expand took {t_expand:.2f} seconds")
-    
+
     print()
     print("To profile in detail, run:")
     print("  python benchmarks/bench_deck_expand.py --profile")
@@ -231,7 +231,7 @@ def benchmark_camry_expand():
 
 if __name__ == "__main__":
     import sys
-    
+
     # Parse command line args
     if len(sys.argv) > 1 and sys.argv[1] == "--profile":
         PROFILER = 1
@@ -241,5 +241,5 @@ if __name__ == "__main__":
         PROFILER = 2
         print("Running with simple timing...")
         print()
-    
+
     _profile(benchmark_camry_expand)
