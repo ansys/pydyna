@@ -25,6 +25,25 @@ Handler base classes and metadata system for keyword code generation.
 
 This module provides the abstract base class for all handlers and the decorator-based
 metadata system for handler registration and documentation.
+
+ARCHITECTURAL NOTE - Mutable Reference Semantics:
+    The handler system uses mutable reference semantics where handlers modify kwd_data
+    and its nested structures (cards, fields, options) in place. This design is intentional
+    and critical for handlers like card-set and table-card-group, which group cards by
+    appending references (not copies) so that later handlers' modifications automatically
+    appear in all places where the card is referenced.
+
+    Example: card-set groups cards into a reusable set, then conditional-card adds 'func'
+    properties to those same card objects. Because card-set stored references (not copies),
+    the conditional properties appear both in the main cards list AND in the card-set.
+
+    An immutable approach would require significant architectural changes:
+    - Handlers would return new data instead of mutating in place
+    - Card references would need to be resolved in a separate phase
+    - Complex dependency tracking between handlers
+
+    The current mutable design is simpler, more performant, and works correctly for this
+    use case (code generation that runs once during development, not in production loops).
 """
 
 import abc
