@@ -11,14 +11,10 @@ This file collects architectural and code-level recommendations for improving th
 - Use context objects for template context instead of manual dict updates.
 - Document template variables and expected context structure.
 
-## 3. Testing
-- Handler-specific tests (with fixtures for global state), generator module tests (class/entrypoint generation), config/manifest loading tests, utility module tests
-- Integration/E2E tests deferred to CI which already validates generated output remains unchanged
-
-## 4. General Simplicity
+## 3. General Simplicity
 - Reduce code duplication and improve readability.
 
-## 5. High-Level Design
+## 4. High-Level Design
 - Add a diagram or high-level description of the codegen flow to the documentation.
 ---
 
