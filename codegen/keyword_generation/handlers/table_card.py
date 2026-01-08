@@ -32,7 +32,7 @@ import typing
 from typing import Any, Dict, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData
-from keyword_generation.data_model.metadata import DuplicateCardMetadata
+from keyword_generation.data_model.metadata import TableCardMetadata
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -73,7 +73,7 @@ class TableCardSettings:
             "required": ["index", "property-name"],
         },
     },
-    output_description="Sets kwd_data['duplicate']=True and adds 'duplicate' dict to card",
+    output_description="Sets kwd_data['table']=True and adds 'table' dict to card",
 )
 class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     """Marks cards as repeating table structures with dynamic row count."""
@@ -92,10 +92,10 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             settings: List of table card specifications
         """
         typed_settings = self._parse_settings(settings)
-        kwd_data.duplicate = True
+        kwd_data.table = True
         for card_settings in typed_settings:
-            duplicate_card = kwd_data.cards[card_settings.index]
-            duplicate_card["duplicate"] = DuplicateCardMetadata(
+            table_card = kwd_data.cards[card_settings.index]
+            table_card["table"] = TableCardMetadata(
                 name=card_settings.property_name,
                 length_func=card_settings.length_func or "",
                 active_func=card_settings.active_func or "",

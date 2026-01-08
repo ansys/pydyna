@@ -29,25 +29,25 @@
 {% endif %}{# keyword_data.card_sets #}
                 **kwargs
             ),
-{% elif card.duplicate %}
+{% elif card.table %}
             TableCard(
                 [
 {% for field in card.fields %}
                     Field("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {{field.default}}),
 {% endfor %}{# field in card.fields #}
                 ],
-{% if card.duplicate.length_func %}
-                lambda: {{card.duplicate.length_func}},
-{% else %}{# card.duplicate.length_func #}
+{% if card.table.length_func %}
+                lambda: {{card.table.length_func}},
+{% else %}{# card.table.length_func #}
                 None,
 {% endif %}
-{% if card.duplicate.active_func %}
-                lambda: {{card.duplicate.active_func}},
+{% if card.table.active_func %}
+                lambda: {{card.table.active_func}},
 {% endif %}
-                name="{{card.duplicate.name}}",
+                name="{{card.table.name}}",
                 **kwargs,
             ),
-{% elif card.duplicate_group %}
+{% elif card.table_group %}
             TableCardGroup(
                 [
 {% for sub_card in card.sub_cards %}

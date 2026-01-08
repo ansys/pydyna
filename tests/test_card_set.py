@@ -331,15 +331,15 @@ class TestInitialStrainShellFix:
         assert strain_set.large == 0
 
         # Should have read 2 strain cards (inner and outer integration points)
-        strains_df = strain_set.strains
-        assert len(strains_df) == 2
+        strains_list = strain_set.strains
+        assert len(strains_list) == 2
         # First strain card (all zeros)
-        assert strains_df.iloc[0]["epsxx"] == 0.0
-        assert strains_df.iloc[0]["epsyy"] == 0.0
+        assert strains_list[0].epsxx == 0.0
+        assert strains_list[0].epsyy == 0.0
         # Second strain card (1.0, 2.0, 3.0, ...)
-        assert strains_df.iloc[1]["epsxx"] == 1.0
-        assert strains_df.iloc[1]["epsyy"] == 2.0
-        assert strains_df.iloc[1]["epszz"] == 3.0
+        assert strains_list[1].epsxx == 1.0
+        assert strains_list[1].epsyy == 2.0
+        assert strains_list[1].epszz == 3.0
 
     def test_initial_strain_shell_with_nplane_nthick_product(self, string_utils):
         """Test that nplane=2, nthick=3 reads 6 strain cards."""
@@ -367,35 +367,37 @@ class TestInitialStrainShellFix:
         assert strain_set.nthick == 3
 
         # Should have read 6 strain cards (2 * 3)
-        strains_df = strain_set.strains
-        assert len(strains_df) == 6
+        strains_list = strain_set.strains
+        assert len(strains_list) == 6
         # Verify first and last cards
-        assert strains_df.iloc[0]["epsxx"] == 1.0
-        assert strains_df.iloc[5]["epsxx"] == 6.0
+        assert strains_list[0].epsxx == 1.0
+        assert strains_list[5].epsxx == 6.0
 
     def test_initial_strain_shell_round_trip(self, string_utils):
         """Test write and read round-trip preserves strain data."""
         from ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_strain_shell import (
             InitialStrainShell,
         )
-        import pandas as pd
 
         kwd = InitialStrainShell()
         kwd.add_set(eid=100, nplane=0, nthick=0, large=0, ilocal=0)
 
-        # Set strain data for 2 integration points
-        strain_data = pd.DataFrame(
-            {
-                "epsxx": [0.001, 0.002],
-                "epsyy": [0.003, 0.004],
-                "epszz": [0.005, 0.006],
-                "epsxy": [0.007, 0.008],
-                "epsyz": [0.009, 0.010],
-                "epszx": [0.011, 0.012],
-                "t": [0.0, 1.0],
-            }
-        )
-        kwd.sets[0].strains = strain_data
+        # Set strain data for 2 integration points using the new CardSet API
+        kwd.sets[0].strains[0].epsxx = 0.001
+        kwd.sets[0].strains[0].epsyy = 0.003
+        kwd.sets[0].strains[0].epszz = 0.005
+        kwd.sets[0].strains[0].epsxy = 0.007
+        kwd.sets[0].strains[0].epsyz = 0.009
+        kwd.sets[0].strains[0].epszx = 0.011
+        kwd.sets[0].strains[0].t = 0.0
+
+        kwd.sets[0].strains[1].epsxx = 0.002
+        kwd.sets[0].strains[1].epsyy = 0.004
+        kwd.sets[0].strains[1].epszz = 0.006
+        kwd.sets[0].strains[1].epsxy = 0.008
+        kwd.sets[0].strains[1].epsyz = 0.010
+        kwd.sets[0].strains[1].epszx = 0.012
+        kwd.sets[0].strains[1].t = 1.0
 
         # Write to string
         output = kwd.write()
@@ -407,8 +409,8 @@ class TestInitialStrainShellFix:
         # Verify data preserved
         assert len(kwd2.sets) == 1
         assert kwd2.sets[0].eid == 100
-        strains_df = kwd2.sets[0].strains
-        assert len(strains_df) == 2
-        assert strains_df.iloc[0]["epsxx"] == 0.001
-        assert strains_df.iloc[1]["epsxx"] == 0.002
-        assert strains_df.iloc[1]["t"] == 1.0
+        strains_list = kwd2.sets[0].strains
+        assert len(strains_list) == 2
+        assert strains_list[0].epsxx == 0.001
+        assert strains_list[1].epsxx == 0.002
+        assert strains_list[1].t == 1.0

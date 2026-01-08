@@ -36,11 +36,11 @@ from typing import Any, Dict, List, Optional, Union
 from .metadata import (
     CardSetsContainer,
     DataclassDefinition,
-    DuplicateCardMetadata,
     ExternalCardMetadata,
     LinkData,
     MixinImport,
     OptionGroup,
+    TableCardMetadata,
     VariableCardMetadata,
 )
 
@@ -222,10 +222,10 @@ class Card:
         fields: List of Field objects
         mark_for_removal: Card removal marker (used by handlers)
         func: Conditional function string (for conditional cards)
-        duplicate: Table card metadata
+        table: Table card metadata
         variable: Series card metadata
         set: Card set placeholder metadata
-        duplicate_group: Table card group flag
+        table_group: Table card group flag
         sub_cards: Sub-cards for card groups
         external: External card implementation metadata
         source_index: Original position (for card sets)
@@ -239,10 +239,10 @@ class Card:
     fields: List[Field] = field(default_factory=list)
     mark_for_removal: Optional[int] = None
     func: Optional[str] = None
-    duplicate: Optional[Union[DuplicateCardMetadata, Dict[str, Any]]] = None
+    table: Optional[Union[TableCardMetadata, Dict[str, Any]]] = None
     variable: Optional[Union[VariableCardMetadata, Dict[str, Any]]] = None
     set: Optional[Dict[str, Any]] = None
-    duplicate_group: bool = False
+    table_group: bool = False
     sub_cards: Optional[List[Dict[str, Any]]] = None
     external: Optional[Union[ExternalCardMetadata, Dict[str, Any]]] = None
     source_index: Optional[int] = None
@@ -261,10 +261,8 @@ class Card:
         ]
         fields: List[Field] = typing.cast(List[Field], fields_raw)
         # Convert metadata dicts to typed objects
-        duplicate_data = data.get("duplicate")
-        duplicate = (
-            DuplicateCardMetadata.from_dict(duplicate_data) if isinstance(duplicate_data, dict) else duplicate_data
-        )
+        table_data = data.get("table")
+        table = TableCardMetadata.from_dict(table_data) if isinstance(table_data, dict) else table_data
         variable_data = data.get("variable")
         variable = VariableCardMetadata.from_dict(variable_data) if isinstance(variable_data, dict) else variable_data
         external_data = data.get("external")
@@ -275,10 +273,10 @@ class Card:
             fields=fields,
             mark_for_removal=data.get("mark_for_removal"),
             func=data.get("func"),
-            duplicate=duplicate,
+            table=table,
             variable=variable,
             set=data.get("set"),
-            duplicate_group=data.get("duplicate_group", False),
+            table_group=data.get("table_group", False),
             sub_cards=data.get("sub_cards"),
             external=external,
             source_index=data.get("source_index"),
@@ -306,15 +304,15 @@ class Card:
         return getattr(self, key, default)
 
     def get_all_fields(self) -> List[Field]:
-        """Get all fields for this card, handling duplicate_group aggregation.
+        """Get all fields for this card, handling table_group aggregation.
 
         For regular cards, returns self.fields directly.
-        For duplicate_group cards, aggregates fields from all sub_cards.
+        For table_group cards, aggregates fields from all sub_cards.
 
         Returns:
             List of Field instances
         """
-        if self.duplicate_group and self.sub_cards:
+        if self.table_group and self.sub_cards:
             all_fields = []
             for sub_card in self.sub_cards:
                 # sub_card might be dict or Card during transition
@@ -324,6 +322,19 @@ class Card:
                     all_fields.extend(sub_card.fields)
             return all_fields
         return self.fields
+
+
+@dataclass
+class RenamedProperty:
+    """Tracks a property that was renamed from its original field name.
+
+    Used for generating documentation about field name to property name mappings.
+    """
+
+    field_name: str  # Original field name (e.g., "R")
+    property_name: str  # New property name (e.g., "gas_constant")
+    card_index: int  # 0-based card index
+    description: str = ""  # Description from help text (e.g., "gas constant")
 
 
 @dataclass
@@ -350,8 +361,8 @@ class KeywordData:
         cards: List of Card objects
         options: Optional card groups (added by AddOptionHandler)
         card_sets: Card set metadata (added by CardSetHandler)
-        duplicate: Table card flag (added by TableCardHandler)
-        duplicate_group: Table card group flag (added by TableCardGroupHandler)
+        table: Table card flag (added by TableCardHandler)
+        table_group: Table card group flag (added by TableCardGroupHandler)
         variable: Series card flag (added by SeriesCardHandler)
         dataclasses: Custom dataclass definitions (added by SeriesCardHandler)
         mixins: Mixin class names (added by ExternalCardHandler)
@@ -368,8 +379,8 @@ class KeywordData:
     cards: List[Card] = field(default_factory=list)  # Now using Card dataclass instances
     options: Union[List[OptionGroup], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     card_sets: Optional[Union[CardSetsContainer, Dict[str, Any]]] = None
-    duplicate: bool = False
-    duplicate_group: bool = False
+    table: bool = False
+    table_group: bool = False
     variable: bool = False
     dataclasses: Union[List[DataclassDefinition], List[Dict[str, Any]]] = field(
         default_factory=list
@@ -381,6 +392,8 @@ class KeywordData:
     links: Union[List[LinkData], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     negative_shared_fields: List[Any] = field(default_factory=list)  # Empty list for templates
     card_insertions: List[Any] = field(default_factory=list)
+    renamed_properties: List["RenamedProperty"] = field(default_factory=list)  # Tracks renamed fields for docs
+    property_collisions: Dict[str, str] = field(default_factory=dict)  # Maps property_name -> collision note
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "KeywordData":
@@ -440,8 +453,8 @@ class KeywordData:
             cards=cards,
             options=options,
             card_sets=card_sets,
-            duplicate=data.get("duplicate", False),
-            duplicate_group=data.get("duplicate_group", False),
+            table=data.get("table", False),
+            table_group=data.get("table_group", False),
             variable=data.get("variable", False),
             dataclasses=dataclasses,
             mixins=data.get("mixins", []),
@@ -449,6 +462,7 @@ class KeywordData:
             links=links,
             negative_shared_fields=data.get("negative_shared_fields", []),
             card_insertions=data.get("card_insertions", []),
+            renamed_properties=data.get("renamed_properties", []),
         )
 
     def get_all_cards(self) -> Union[List[Card], List[Dict[str, Any]], List[Union[Card, Dict[str, Any]]]]:

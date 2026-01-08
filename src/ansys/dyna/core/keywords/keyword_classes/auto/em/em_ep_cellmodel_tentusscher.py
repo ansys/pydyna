@@ -26,7 +26,12 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class EmEpCellmodelTentusscher(KeywordBase):
-    """DYNA EM_EP_CELLMODEL_TENTUSSCHER keyword"""
+    """DYNA EM_EP_CELLMODEL_TENTUSSCHER keyword
+
+    Fields with renamed properties:
+        R (Card 2) -> gas_constant
+        F (Card 2) -> faraday_constant
+    """
 
     keyword = "EM"
     subkeyword = "EP_CELLMODEL_TENTUSSCHER"
@@ -587,6 +592,8 @@ class EmEpCellmodelTentusscher(KeywordBase):
     @property
     def gas_constant(self) -> typing.Optional[float]:
         """Get or set the Gas constant.
+
+        Note: Location in manual: card:2, field: R
         """ # nopep8
         return self._cards[1].get_value("r")
 
@@ -609,6 +616,8 @@ class EmEpCellmodelTentusscher(KeywordBase):
     @property
     def faraday_constant(self) -> typing.Optional[float]:
         """Get or set the Faraday constant .
+
+        Note: Location in manual: card:2, field: F
         """ # nopep8
         return self._cards[1].get_value("f")
 
@@ -1280,6 +1289,8 @@ class EmEpCellmodelTentusscher(KeywordBase):
     @property
     def f(self) -> typing.Optional[float]:
         """Get or set the Initial value of f in component L_type_Ca_current_f_gate.
+
+        Note: For the Faraday constant F (Card 2), use ``faraday_constant``.
         """ # nopep8
         return self._cards[11].get_value("f")
 
@@ -1324,6 +1335,8 @@ class EmEpCellmodelTentusscher(KeywordBase):
     @property
     def r(self) -> typing.Optional[float]:
         """Get or set the Initial value of r in component transient_outward_current_r_gate.
+
+        Note: For the gas constant R (Card 2), use ``gas_constant``.
         """ # nopep8
         return self._cards[12].get_value("r")
 

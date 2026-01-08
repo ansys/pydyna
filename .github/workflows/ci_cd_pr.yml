@@ -184,6 +184,7 @@ jobs:
           server-logs: true
           codecov-token: ${{ env.CODECOV_TOKEN }}
           coverage-file: unittests
+          pytest-markers: "not codegen and not keywords and not run and not viz"
 
   build-library:
     name: "Build library"

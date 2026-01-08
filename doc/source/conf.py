@@ -170,8 +170,11 @@ if not BUILD_API:
 suppress_warnings = ["autoapi.python_import_resolution", "config.cache", "docutils"]
 
 BUILD_AUTOKEYWORDS_API = os.environ.get("BUILD_AUTOKEYWORDS_API", "false").lower() == "true"
+
 if BUILD_AUTOKEYWORDS_API:
     html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
+    # Remove the auto-generated keywords from the ignore list
+    html_theme_options["ansys_sphinx_theme_autoapi"]["ignore"] = []
 
 BUILD_EXAMPLES = os.environ.get("BUILD_EXAMPLES", "true").lower() == "true"
 if BUILD_EXAMPLES:
@@ -234,3 +237,110 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
 def setup(sphinx):
     """Add custom extensions to Sphinx."""
     sphinx.connect("autoapi-skip-member", skip_run_subpackage)
+
+    # Add timing instrumentation for performance profiling
+    import time
+    import os
+    import logging
+    from pathlib import Path
+
+    # Create timing log file
+    timing_log = Path(__file__).parent.parent / "_build" / "timing.log"
+    timing_log.parent.mkdir(parents=True, exist_ok=True)
+
+    # Clear previous log
+    with open(timing_log, "w") as f:
+        f.write(f"Build started at {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write("="*60 + "\n\n")
+
+    # Track phase timings
+    phase_times = {}
+    autoapi_times = {}
+
+    def log_time(phase, duration=None, extra_info=""):
+        """Log timing information to file."""
+        if duration is None:
+            # Start timing
+            phase_times[phase] = time.time()
+            msg = f"[{time.strftime('%H:%M:%S')}] Starting: {phase}{extra_info}\n"
+        else:
+            # End timing
+            msg = f"[{time.strftime('%H:%M:%S')}] Completed: {phase} ({duration:.2f}s){extra_info}\n"
+
+        with open(timing_log, "a") as f:
+            f.write(msg)
+        print(msg.strip())
+
+    # Instrument AutoAPI for detailed timing
+    # def instrument_autoapi():
+    #     """Add timing instrumentation to AutoAPI phases."""
+    #     try:
+    #         # Try to import and instrument the AutoAPI module
+    #         from ansys_sphinx_theme.extension import autoapi as autoapi_ext
+            
+    #         # Store original functions
+    #         if hasattr(autoapi_ext, 'generate_autoapi_data'):
+    #             original_generate = autoapi_ext.generate_autoapi_data
+                
+    #             def timed_generate(*args, **kwargs):
+    #                 log_time("autoapi-generate")
+    #                 result = original_generate(*args, **kwargs)
+    #                 if "autoapi-generate" in phase_times:
+    #                     log_time("autoapi-generate", time.time() - phase_times["autoapi-generate"])
+    #                 return result
+                
+    #             autoapi_ext.generate_autoapi_data = timed_generate
+                
+    #     except (ImportError, AttributeError):
+    #         pass  # AutoAPI not installed or different structure
+    
+    # # Call instrumentation before Sphinx starts
+    # instrument_autoapi()
+
+    # Event handlers
+    def on_builder_inited(app):
+        log_time("builder-init")
+        log_time("overall-build")
+
+    def on_env_get_outdated(app, env, added, changed, removed):
+        if "builder-init" in phase_times:
+            log_time("builder-init", time.time() - phase_times["builder-init"])
+        log_time("env-get-outdated")
+        return []
+
+    def on_env_before_read_docs(app, env, docnames):
+        if "env-get-outdated" in phase_times:
+            log_time("env-get-outdated", time.time() - phase_times["env-get-outdated"])
+        log_time("read-docs")
+
+    def on_doctree_resolved(app, doctree, docname):
+        # Only log first and every 100th document to avoid spam
+        if not hasattr(on_doctree_resolved, "count"):
+            on_doctree_resolved.count = 0
+        on_doctree_resolved.count += 1
+        if on_doctree_resolved.count == 1:
+            if "read-docs" in phase_times:
+                log_time("read-docs", time.time() - phase_times["read-docs"])
+            log_time("process-doctrees")
+
+    def on_build_finished(app, exception):
+        if hasattr(on_doctree_resolved, "count"):
+            if "process-doctrees" in phase_times:
+                log_time("process-doctrees", time.time() - phase_times["process-doctrees"])
+        if "overall-build" in phase_times:
+            log_time("overall-build", time.time() - phase_times["overall-build"])
+
+        # Summary
+        with open(timing_log, "a") as f:
+            f.write(f"\n{'='*60}\n")
+            f.write(f"Build completed at {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+            if hasattr(on_doctree_resolved, "count"):
+                f.write(f"Total documents processed: {on_doctree_resolved.count}\n")
+            f.write(f"{'='*60}\n")
+
+    # Connect event handlers
+    sphinx.connect("builder-inited", on_builder_inited)
+    sphinx.connect("env-get-outdated", on_env_get_outdated)
+    sphinx.connect("env-before-read-docs", on_env_before_read_docs)
+    sphinx.connect("doctree-resolved", on_doctree_resolved)
+    sphinx.connect("build-finished", on_build_finished)

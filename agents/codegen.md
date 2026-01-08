@@ -113,7 +113,7 @@ In progress
 The codegen system uses typed metadata classes throughout the pipeline:
 
 **Metadata Classes** (`data_model/metadata.py`):
-- `DuplicateCardMetadata` - for card["duplicate"] (table cards)
+- `TableCardMetadata` - for card["table"] (table cards)
 - `VariableCardMetadata` - for card["variable"] (series cards)
 - `ExternalCardMetadata` - for card["external"] (external implementations)
 - `OptionGroup` - for kwd_data.options items
@@ -167,7 +167,7 @@ class Card:
 **Why This Approach?**
 - Existing code using `card["index"]` continues to work
 - New code can use `card.index` for IDE autocomplete
-- Handlers can dynamically add metadata: `card["duplicate"] = DuplicateCardMetadata(...)`
+- Handlers can dynamically add metadata: `card["table"] = TableCardMetadata(...)`
 - Type hints can use `Union[Card, Dict]` during transition, then migrate to `Card` only
 
 **Trade-offs**:
@@ -208,22 +208,21 @@ class Card:
 - CONSTRAINED.BEAM_IN_SOLID has manifest data issue (shared-field with 0 occurrences)
   - Handled gracefully with warning instead of assertion failure
 
-**Standard Handler Order** (as of Dec 2025):
+**Standard Handler Order** (as of Jan 2026):
 1. `reorder-card` - Reorders cards; must run first since other handlers use positional indices
-2. `table-card` - Transforms cards into repeatable tables
-3. `override-field` - Modifies field properties
-4. `replace-card` - Replaces entire cards with different definitions
-5. `insert-card` - Inserts new cards at specified positions
-6. `series-card` - Transforms cards into variable-length series
-7. `add-option` - Adds keyword options
-8. `card-set` - Groups cards into reusable sets (uses references, not copies!)
-9. `conditional-card` - Adds conditional logic to cards (modifies cards in-place)
-10. `rename-property` - Renames property accessors
-11. `skip-card` - Marks cards to be skipped
+2. `skip-card` - Marks cards to be skipped; runs before insert-card so indices refer to original cards
+3. `insert-card` - Inserts new cards at specified positions (see Index Computation below)
+4. `table-card` - Transforms cards into repeatable tables
+5. `override-field` - Modifies field properties
+6. `replace-card` - Replaces entire cards with different definitions
+7. `series-card` - Transforms cards into variable-length series
+8. `add-option` - Adds keyword options
+9. `card-set` - Groups cards into reusable sets (uses references, not copies!)
+10. `conditional-card` - Adds conditional logic to cards (modifies cards in-place)
+11. `rename-property` - Renames property accessors
 12. `table-card-group` - Groups multiple cards into repeating units
 13. `external-card-implementation` - Links to externally defined cards
 14. `shared-field` - Creates shared field definitions
-15. `override-subkeyword` - Overrides subkeyword behavior
 
 ### Reference Semantics vs. Deep Copies
 
@@ -254,6 +253,44 @@ class Card:
 // conditional-card with index:3 operates on position 3 (which is original card2)
 // card-set with source-indices:[0,1,2,3,4,5] copies from positions 0-5
 ```
+
+### Insert-Card Index Computation
+
+The `insert-card` handler processes insertions in **reverse index order** to preserve index validity. However, Python's `list.insert(i, x)` has special behavior: if `i >= len(list)`, it appends to the end. This creates a non-intuitive mapping between specified indices and final positions.
+
+**The Problem**: With 3 original cards [A, B, C], if you want to insert X, Y, Z to get final positions [A, B, C, X, Y, Z]:
+
+```python
+# Naive approach - specify indices [3, 4, 5]:
+# Reverse sort: [5, 4, 3]
+# Insert @5 (appends): [A, B, C, Z]      # Z intended for position 5
+# Insert @4 (appends): [A, B, C, Z, Y]   # Y intended for position 4  
+# Insert @3:           [A, B, C, X, Z, Y] # X at position 3
+# Result: X@3, Z@4, Y@5 - WRONG ORDER!
+```
+
+**The Solution**: Calculate indices that account for reverse processing and append behavior:
+
+```python
+# Correct approach - specify indices [3, 6, 4]:
+# Reverse sort: [6, 4, 3]
+# Insert @6 (appends): [A, B, C, Y]      # Y (for final pos 4)
+# Insert @4 (appends): [A, B, C, Y, Z]   # Z (for final pos 5)
+# Insert @3:           [A, B, C, X, Y, Z] # X (for final pos 3)
+# Result: X@3, Y@4, Z@5 - CORRECT!
+```
+
+**Index Calculation Rule**: To insert N cards starting at position P into a list of length L:
+1. First card: use index P (will be inserted at position P)
+2. Second card: use index > L so it appends, will be pushed to P+1 by first insertion
+3. Continue: each subsequent card uses a higher out-of-range index
+
+**Real Example** (INITIAL_STRESS_SHELL LARGE format):
+- Original cards: [0:main, 1:stress, 2:hisv] (3 cards)
+- Want to insert: LARGE_CARD1@3, LARGE_CARD2@4, LARGE_HISV@5
+- Manifest specifies: `[{index:3, card:CARD1}, {index:6, card:CARD2}, {index:4, card:HISV}]`
+- Processing: @6→CARD2 appends, @4→HISV appends, @3→CARD1 inserts
+- Final: [main, stress, hisv, CARD1, CARD2, HISV] with positions 0-5
 
 ## When Auto-Generated Files Change
 

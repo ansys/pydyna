@@ -5,6 +5,7 @@ from unittest.mock import MagicMock, patch
 import ansys.dyna.core.run.windows_runner as windows_runner
 from ansys.dyna.core.run.options import MpiOption, Precision
 
+pytestmark = pytest.mark.run
 
 @pytest.fixture
 def tmp_workdir(tmp_path):
