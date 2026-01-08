@@ -221,25 +221,36 @@ def map_facet_nid_to_index(flat_facets: np.array, mapping: np.ndarray) -> np.arr
 
 
 def extract_shell_facets(shells: pd.DataFrame, mapping: np.ndarray):
-    """Extract shell faces from DataFrame (optimized vectorized version).
+    """Extract shell faces from DataFrame - returns triangles and quads separately.
 
     Shells table comes in with the form
     |  eid  | nid1 | nid2 | nid3 | nid4
     |  1    | 10   | 11   | 12   |
     |  20   | 21   | 22   | 23   | 24
 
-    but the array needed for pyvista polydata is
-    of the form where each element is prefixed by the length of the element node list
-    [3,10,11,12,4,21,22,23,24]
-
-    Take individual rows, extract the appropriate nid's and output a flat list of
-    facets for pyvista
+    Returns triangles and quads in separate arrays (already prefixed with count):
+    - Triangles: [3, n1, n2, n3, 3, n1, n2, n3, ...]
+    - Quads: [4, n1, n2, n3, n4, 4, n1, n2, n3, n4, ...]
 
     Elements with fewer than 3 valid nodes are skipped.
+
+    Returns
+    -------
+    tuple
+        (triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids)
     """
 
+    empty_return = (
+        np.empty((0), dtype=np.int32),
+        np.empty((0), dtype=np.int32),
+        np.empty((0), dtype=np.int32),
+        np.empty((0), dtype=np.int32),
+        np.empty((0), dtype=np.int32),
+        np.empty((0), dtype=np.int32),
+    )
+
     if len(shells) == 0:
-        return np.empty((0), dtype=np.int32), np.empty((0), dtype=np.int32), np.empty((0), dtype=np.int32)
+        return empty_return
 
     # Extract columns as numpy arrays (much faster than itertuples)
     eids = shells["eid"].values.astype(np.int32)
@@ -256,108 +267,48 @@ def extract_shell_facets(shells: pd.DataFrame, mapping: np.ndarray):
     pids = pids[valid_mask]
 
     if len(nodes) == 0:
-        return np.empty((0), dtype=np.int32), np.empty((0), dtype=np.int32), np.empty((0), dtype=np.int32)
+        return empty_return
 
-    # Determine element type (3 or 4 nodes) by finding first zero/NaN in each row
-    # A quad has n4 > 0, a triangle has n4 == 0 or NaN
+    # Determine element type (3 or 4 nodes)
     is_quad = (nodes[:, 3] > 0) & ~np.isnan(nodes[:, 3])
+    tri_mask = ~is_quad
 
-    n_tris = np.sum(~is_quad)
+    n_tris = np.sum(tri_mask)
     n_quads = np.sum(is_quad)
 
-    # Pre-allocate output arrays
-    total_size = n_tris * 4 + n_quads * 5
-    facets = np.empty(total_size, dtype=np.int32)
-
-    # Process triangles
-    tri_mask = ~is_quad
+    # Process triangles - fully vectorized
     if n_tris > 0:
         tri_nodes = nodes[tri_mask, :3].astype(np.int32)
-        tri_start = 0
-        for i in range(n_tris):
-            facets[tri_start] = 3
-            facets[tri_start + 1 : tri_start + 4] = mapping[tri_nodes[i]]
-            tri_start += 4
+        tri_mapped = mapping[tri_nodes.ravel()].reshape(n_tris, 3)
 
-    # Process quads
+        triangles = np.empty((n_tris, 4), dtype=np.int32)
+        triangles[:, 0] = 3
+        triangles[:, 1:4] = tri_mapped
+        triangles = triangles.ravel()
+
+        tri_eids = eids[tri_mask]
+        tri_pids = pids[tri_mask]
+    else:
+        triangles = np.empty((0), dtype=np.int32)
+        tri_eids = np.empty((0), dtype=np.int32)
+        tri_pids = np.empty((0), dtype=np.int32)
+
+    # Process quads - fully vectorized
     if n_quads > 0:
         quad_nodes = nodes[is_quad, :4].astype(np.int32)
-        quad_start = n_tris * 4
-        for i in range(n_quads):
-            facets[quad_start] = 4
-            facets[quad_start + 1 : quad_start + 5] = mapping[quad_nodes[i]]
-            quad_start += 5
+        quad_mapped = mapping[quad_nodes.ravel()].reshape(n_quads, 4)
 
-    # Reorder eids/pids to match facet order (triangles first, then quads)
-    reordered_eids = np.concatenate([eids[tri_mask], eids[is_quad]])
-    reordered_pids = np.concatenate([pids[tri_mask], pids[is_quad]])
+        quads = np.empty((n_quads, 5), dtype=np.int32)
+        quads[:, 0] = 4
+        quads[:, 1:5] = quad_mapped
+        quads = quads.ravel()
 
-    return facets, reordered_eids, reordered_pids
-
-
-def separate_triangles_and_quads(facets: np.ndarray, eids: np.ndarray, pids: np.ndarray):
-    """
-    Separate mixed triangle and quad facets into separate arrays (optimized).
-
-    The input facets array has variable-length entries:
-    - Triangles: [3, n1, n2, n3]
-    - Quads: [4, n1, n2, n3, n4]
-
-    Returns separate arrays for triangles and quads with their corresponding eids and pids.
-    """
-    if len(facets) == 0:
-        return (
-            np.empty((0), dtype=np.int32),
-            np.empty((0), dtype=np.int32),
-            np.empty((0), dtype=np.int32),
-            np.empty((0), dtype=np.int32),
-            np.empty((0), dtype=np.int32),
-            np.empty((0), dtype=np.int32),
-        )
-
-    # Find all element start positions by scanning once
-    element_starts = []
-    element_counts = []
-    i = 0
-    while i < len(facets):
-        count = facets[i]
-        if count == 3 or count == 4:
-            element_starts.append(i)
-            element_counts.append(count)
-            i += count + 1
-        else:
-            i += 1
-
-    element_starts = np.array(element_starts, dtype=np.int32)
-    element_counts = np.array(element_counts, dtype=np.int32)
-
-    # Separate triangles and quads using boolean masks
-    is_tri = element_counts == 3
-    is_quad = element_counts == 4
-
-    tri_starts = element_starts[is_tri]
-    quad_starts = element_starts[is_quad]
-
-    n_tris = len(tri_starts)
-    n_quads = len(quad_starts)
-
-    # Pre-allocate output arrays
-    triangles = np.empty(n_tris * 4, dtype=np.int32)
-    quads = np.empty(n_quads * 5, dtype=np.int32)
-
-    # Extract triangles
-    for idx, start in enumerate(tri_starts):
-        triangles[idx * 4 : idx * 4 + 4] = facets[start : start + 4]
-
-    # Extract quads
-    for idx, start in enumerate(quad_starts):
-        quads[idx * 5 : idx * 5 + 5] = facets[start : start + 5]
-
-    # Extract eids/pids using boolean indexing
-    tri_eids = eids[is_tri].astype(np.int32)
-    tri_pids = pids[is_tri].astype(np.int32)
-    quad_eids = eids[is_quad].astype(np.int32)
-    quad_pids = pids[is_quad].astype(np.int32)
+        quad_eids = eids[is_quad]
+        quad_pids = pids[is_quad]
+    else:
+        quads = np.empty((0), dtype=np.int32)
+        quad_eids = np.empty((0), dtype=np.int32)
+        quad_pids = np.empty((0), dtype=np.int32)
 
     return triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids
 
@@ -525,13 +476,8 @@ def get_polydata(deck: Deck, cwd=None, extract_surface=True):
 
     mapping = get_nid_to_index_mapping(nodes_df)
 
-    # get the node information, element_ids and part_ids
-    facets, shell_eids, shell_pids = extract_shell_facets(shells_df, mapping)
-
-    # Separate triangles and quads
-    triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids = separate_triangles_and_quads(
-        facets, shell_eids, shell_pids
-    )
+    # Extract shell facets - returns triangles and quads separately
+    triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids = extract_shell_facets(shells_df, mapping)
 
     lines, line_eids, line_pids = extract_lines(beams_df, mapping)
     solids_info = extract_solids(solids_df, mapping)

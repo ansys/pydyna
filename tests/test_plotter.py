@@ -36,6 +36,7 @@ from ansys.dyna.core.lib.deck_plotter import (
 
 
 @pytest.mark.keywords
+@pytest.mark.viz
 def test_shell_facet_array():
     na = pd.Int32Dtype().na_value
     test_1_pddf = pd.DataFrame(
@@ -76,6 +77,7 @@ def test_shell_facet_array():
 
 
 @pytest.mark.keywords
+@pytest.mark.viz
 def test_line_array():
     na = pd.Int32Dtype().na_value
     test_1_pddf = pd.DataFrame(
@@ -93,6 +95,7 @@ def test_line_array():
 
 
 @pytest.mark.keywords
+@pytest.mark.viz
 def test_facet_nid_to_index():
     # Create array-based mapping: mapping[nid] = index
     mapping = np.array([-1, 2, 3, 4, 5], dtype=np.int32)  # indices 0-4, mapping[1]=2, mapping[2]=3, etc.
@@ -106,6 +109,7 @@ def test_facet_nid_to_index():
 
 
 @pytest.mark.keywords
+@pytest.mark.viz
 def test_extract_shell_facets():
     test_1_pddf = pd.DataFrame(
         {
@@ -121,31 +125,26 @@ def test_extract_shell_facets():
     mapping1 = np.array([-1, 1, 2, 3, 4], dtype=np.int32)  # mapping[1]=1, mapping[2]=2, etc.
     mapping2 = np.array([-1, 2, 3, 4, 5], dtype=np.int32)  # mapping[1]=2, mapping[2]=3, etc.
 
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, mapping1)[0],
-        [3, 1, 2, 3, 4, 2, 3, 4, 1],
-    )
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, mapping1)[1],
-        np.array([1,3]),
-    )
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, mapping1)[2],
-        np.array([1,3]),
-    )
+    # extract_shell_facets now returns (triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids)
+    # Test with mapping1: element 1 is triangle [3,1,2,3], element 3 is quad [4,2,3,4,1]
+    tris1, tri_eids1, tri_pids1, quads1, quad_eids1, quad_pids1 = extract_shell_facets(test_1_pddf, mapping1)
 
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, mapping2)[0],
-        [3, 2, 3, 4, 4, 3, 4, 5, 2],
-    )
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, mapping2)[1],
-        np.array([1,3]),
-    )
-    numpy.testing.assert_allclose(
-        extract_shell_facets(test_1_pddf, mapping2)[2],
-        np.array([1,3]),
-    )
+    numpy.testing.assert_allclose(tris1, [3, 1, 2, 3])
+    numpy.testing.assert_allclose(tri_eids1, [1])
+    numpy.testing.assert_allclose(tri_pids1, [1])
+    numpy.testing.assert_allclose(quads1, [4, 2, 3, 4, 1])
+    numpy.testing.assert_allclose(quad_eids1, [3])
+    numpy.testing.assert_allclose(quad_pids1, [3])
+
+    # Test with mapping2
+    tris2, tri_eids2, tri_pids2, quads2, quad_eids2, quad_pids2 = extract_shell_facets(test_1_pddf, mapping2)
+
+    numpy.testing.assert_allclose(tris2, [3, 2, 3, 4])
+    numpy.testing.assert_allclose(tri_eids2, [1])
+    numpy.testing.assert_allclose(tri_pids2, [1])
+    numpy.testing.assert_allclose(quads2, [4, 3, 4, 5, 2])
+    numpy.testing.assert_allclose(quad_eids2, [3])
+    numpy.testing.assert_allclose(quad_pids2, [3])
 
 
 def extract_faces_and_lines_from_grid(grid):

@@ -17,7 +17,6 @@ from ansys.dyna.core.lib.deck_plotter import (
     map_facet_nid_to_index,
     extract_shell_facets,
     extract_solids,
-    separate_triangles_and_quads,
 )
 
 
@@ -185,7 +184,7 @@ def run_benchmark_2_map_facet():
 
 
 def run_benchmark_3_shell_facets():
-    """Benchmark 3: extract_shell_facets"""
+    """Benchmark 3: extract_shell_facets (now returns tri/quad separately)"""
     print_benchmark_header("extract_shell_facets", "50K, 200K, 500K shells")
 
     for n_shells in [50_000, 200_000, 500_000]:
@@ -195,10 +194,12 @@ def run_benchmark_3_shell_facets():
         mapping_array[0] = -1
 
         time_prod, result_prod = time_function(extract_shell_facets, shells_df, mapping_array)
-        facets_prod, eids_prod, pids_prod = result_prod
+        # extract_shell_facets now returns (triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids)
+        triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids = result_prod
 
         print(f"\n  {n_shells:,} shells:")
         print(f"    Time: {time_prod*1000:8.2f} ms")
+        print(f"    Output: {len(triangles)//4:,} tris, {len(quads)//5:,} quads")
         print(f"    Bottleneck: {'NONE' if time_prod < 0.05 else 'MINOR' if time_prod < 0.5 else 'SIGNIFICANT'}")
 
 
@@ -220,40 +221,6 @@ def run_benchmark_4_solids():
         print(f"    Bottleneck: {'NONE' if time_prod < 0.01 else 'MINOR' if time_prod < 0.1 else 'SIGNIFICANT'}")
 
 
-def run_benchmark_5_separate_tris_quads():
-    """Benchmark 5: separate_triangles_and_quads"""
-    print_benchmark_header("separate_triangles_and_quads", "50K, 200K, 500K elements")
-
-    for n_elements in [50_000, 200_000, 500_000]:
-        # Generate mixed facets (70% quads, 30% tris)
-        n_tris = int(n_elements * 0.3)
-        n_quads = n_elements - n_tris
-
-        # Build facet array
-        tri_size = n_tris * 4  # [3, n1, n2, n3]
-        quad_size = n_quads * 5  # [4, n1, n2, n3, n4]
-        total_size = tri_size + quad_size
-
-        facets = np.zeros(total_size, dtype=np.int32)
-        eids = np.arange(1, n_elements + 1, dtype=np.int32)
-        pids = np.ones(n_elements, dtype=np.int32)
-
-        # Fill triangles first, then quads
-        pos = 0
-        for i in range(n_tris):
-            facets[pos] = 3
-            facets[pos+1:pos+4] = np.random.randint(0, 100000, size=3)
-            pos += 4
-        for i in range(n_quads):
-            facets[pos] = 4
-            facets[pos+1:pos+5] = np.random.randint(0, 100000, size=4)
-            pos += 5
-
-        time_prod, result_prod = time_function(separate_triangles_and_quads, facets, eids, pids)
-
-        print(f"\n  {n_elements:,} elements ({n_tris:,} tris, {n_quads:,} quads):")
-        print(f"    Time: {time_prod*1000:8.2f} ms")
-        print(f"    Bottleneck: {'NONE' if time_prod < 0.05 else 'MINOR' if time_prod < 0.5 else 'SIGNIFICANT'}")
 def main():
     """Run all performance profiling benchmarks."""
     print("\n" + "="*70)
@@ -266,15 +233,12 @@ def main():
     run_benchmark_2_map_facet()
     run_benchmark_3_shell_facets()
     run_benchmark_4_solids()
-    run_benchmark_5_separate_tris_quads()
 
     print("\n" + "="*70)
     print("PROFILING COMPLETE")
     print("="*70)
-    print("\nNext steps:")
-    print("  - Review 'Bottleneck' indicators above")
-    print("  - SIGNIFICANT bottlenecks need optimization")
-    print("  - When optimizing, add comparison benchmarks to measure impact")
+    print("\nNote: extract_shell_facets now returns triangles and quads separately,")
+    print("eliminating the need for separate_triangles_and_quads (deleted).")
     print("="*70 + "\n")
 
 
