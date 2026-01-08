@@ -88,22 +88,24 @@ runs:
         DOCKER_IMAGE: ${{ inputs.docker-image }}
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          .venv\Scripts\Activate.ps1
+          source .venv/Scripts/activate
         else
           source .venv/bin/activate
         fi
         uv pip install docker
         docker pull "$DOCKER_IMAGE"
         docker run -d --name kw_server -p 50051:50051 "$DOCKER_IMAGE" && echo "Keyword server active on port 50051."
+      shell: bash
 
     - name: Install test dependencies
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          .venv\Scripts\Activate.ps1
+          source .venv/Scripts/activate
         else
           source .venv/bin/activate
         fi
         uv pip install -e .[tests]
+      shell: bash
 
     - name: Run pytest
       env:
@@ -115,7 +117,7 @@ runs:
         LSTC_LICENSE: ansys
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          .venv\Scripts\Activate.ps1
+          source .venv/Scripts/activate
         else
           source .venv/bin/activate
         fi
@@ -129,16 +131,18 @@ runs:
         else
           pytest -m "$PYTEST_MARKERS" -ra $COVERAGE_ARGS -vv
         fi
+      shell: bash
 
     - name: Extract the server logs
       if: ${{ inputs.server-logs == 'true' }}
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          .venv\Scripts\Activate.ps1
+          source .venv/Scripts/activate
         else
           source .venv/bin/activate
         fi
         docker logs kw_server > server_output.txt
+      shell: bash
 
     - name: Upload the server logs
       if: ${{ inputs.server-logs == 'true' }}
@@ -158,9 +162,10 @@ runs:
       if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
       run: |
         if [ "$RUNNER_OS" = "Windows" ]; then
-          .venv\Scripts\Activate.ps1
+          source .venv/Scripts/activate
         else
           source .venv/bin/activate
         fi
         docker stop kw_server
         docker rm kw_server
+      shell: bash
