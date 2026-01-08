@@ -31,9 +31,8 @@ This file collects architectural and code-level recommendations for improving th
 ---
 
 **Constraints:**
-
-> **Dead Code Detection**: After any refactoring, run `python codegen/find_dead_code.py --threshold 80` to identify potential dead code. Files with <80% coverage should be reviewed and potentially removed if they're genuinely unused.
-
-> **Output Validation**: Any refactor must not change the output of the generated files. Use `generate.py -c` and `generate.py` to validate.
-
-> **Code Quality**: Always run `pre-commit run --all-files` to confirm linting and formatting standards are met.
+- Validate the codegen after all refactoring
+```bash
+bash codegen/validate.sh --quick  # Fast iteration
+bash codegen/validate.sh          # Full validation before commit
+```
