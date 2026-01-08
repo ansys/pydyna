@@ -71,7 +71,7 @@ runs:
         password: ${{ inputs.github-token }}
 
     - name: Pull and start LS-DYNA keyword server
-      if: ${{ inputs.docker-image != '' && !contains(inputs.pytest-markers, 'keywords') }}
+      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
       env:
         DOCKER_IMAGE: ${{ inputs.docker-image }}
       run: |
@@ -127,7 +127,7 @@ runs:
         flags: ${{ inputs.coverage-file }}
 
     - name: Stop container
-      if: ${{ inputs.docker-image != '' && !contains(inputs.pytest-markers, 'keywords') }}
+      if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
       run: |
         docker stop kw_server
         docker rm kw_server
