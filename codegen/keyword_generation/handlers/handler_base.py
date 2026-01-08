@@ -233,8 +233,13 @@ class KeywordHandler(metaclass=abc.ABCMeta):
         keyword data structure and handler-specific settings from manifest.json,
         and modifies kwd_data in place.
 
+        Handlers can access kwd_data.label_registry for position-independent card
+        referencing. Note that label_registry may be None for handlers that run
+        before reorder-card (when card positions aren't finalized yet).
+
         Args:
-            kwd_data: KeywordData instance containing keyword metadata, cards, and fields
+            kwd_data: KeywordData instance containing keyword metadata, cards, fields,
+                      and label_registry for card referencing
             settings: List of handler-specific setting dictionaries from manifest.json "generation-options"
 
         Raises:
@@ -250,6 +255,8 @@ class KeywordHandler(metaclass=abc.ABCMeta):
         This phase is useful for cleanup, validation, or transformations that
         depend on the combined effects of all handlers. Most handlers leave
         this as a no-op (pass).
+
+        Handlers can access kwd_data.label_registry if needed.
 
         Args:
             kwd_data: KeywordData instance after all handle() calls

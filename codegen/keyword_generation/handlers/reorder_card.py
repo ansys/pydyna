@@ -78,8 +78,8 @@ class ReorderCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         ]
 
     Output Modification:
-        Reorders kwd_data["cards"] list according to the specified indices.
-        Original card at index 0 stays at 0, card at index 4 moves to position 2, etc.
+        Reorders kwd_data.cards list according to the specified positions.
+        The "order" list specifies which original card goes to each position.
     """
 
     @classmethod
@@ -87,16 +87,20 @@ class ReorderCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         """Convert dict settings to typed ReorderCardSettings instances."""
         return [ReorderCardSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
-        Reorder cards based on the specified index sequence.
+        Reorder cards based on the specified position sequence.
 
         Args:
-            kwd_data: Complete keyword data dictionary
-            settings: List containing single dict with "order" key containing list of indices
+            kwd_data: Complete keyword data
+            settings: List containing single dict with "order" key (list of positions)
 
         Note: This reorders the list but does NOT update each card's 'index' property.
-        Subsequent handlers use list positions (kwd_data["cards"][3]) not card indices.
+        Labels track card objects by reference, so they remain valid after reordering.
         """
         # Parse settings into typed instances
         typed_settings = self._parse_settings(settings)

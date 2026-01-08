@@ -158,6 +158,12 @@ def handle_wildcards(keyword_options: typing.Dict, keyword: str) -> None:
     for wildcard in data_model.MANIFEST["WILDCARDS"]:
         if match_wildcard(keyword, wildcard):
             merge_options(keyword_options, wildcard["generation-options"])
+            # Also merge labels from wildcard if present
+            if "labels" in wildcard:
+                kwd_labels = keyword_options.setdefault("labels", {})
+                for label, index in wildcard["labels"].items():
+                    if label not in kwd_labels:
+                        kwd_labels[label] = index
     keyword_options["wildcards_handled"] = True
 
 

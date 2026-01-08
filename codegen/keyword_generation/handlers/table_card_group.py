@@ -28,20 +28,31 @@ commonly used for table or matrix data where multiple related cards repeat as a 
 """
 
 from dataclasses import dataclass
+import logging
 import typing
 from typing import Any, Dict, List, Optional
 
 import keyword_generation.data_model as gen
 from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.label_registry import LabelRegistry
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
 class TableCardGroupSettings:
-    """Configuration for grouping multiple cards into a table."""
+    """Configuration for grouping multiple cards into a table.
 
-    indices: List[int]
+    Attributes:
+        refs: List of label references for cards to group
+        property_name: Name of the table card group property
+        length_func: Optional function to compute group count
+        active_func: Optional function to determine if group is active
+    """
+
+    refs: List[str]
     property_name: str
     length_func: Optional[str] = None
     active_func: Optional[str] = None
@@ -49,11 +60,15 @@ class TableCardGroupSettings:
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TableCardGroupSettings":
         return cls(
-            indices=data["indices"],
-            property_name=data["property-name"],
+            refs=data["refs"],
+            property_name=data["overall-name"],
             length_func=data.get("length-func"),
             active_func=data.get("active-func"),
         )
+
+    def resolve_indices(self, registry: LabelRegistry, cards: List[Any]) -> List[int]:
+        """Resolve label refs to card indices."""
+        return [registry.resolve_index(ref, cards) for ref in self.refs]
 
 
 @handler(
@@ -65,16 +80,16 @@ class TableCardGroupSettings:
         "items": {
             "type": "object",
             "properties": {
-                "indices": {
+                "refs": {
                     "type": "array",
-                    "items": {"type": "integer"},
-                    "description": "Card indices to group together",
+                    "items": {"type": "string"},
+                    "description": "Label references for cards to group together",
                 },
                 "overall-name": {"type": "string", "description": "Name of the table card group"},
                 "length-func": {"type": "string", "description": "Function to compute group count"},
                 "active-func": {"type": "string", "description": "Function to determine if group is active"},
             },
-            "required": ["indices", "overall-name"],
+            "required": ["refs", "overall-name"],
         },
     },
     output_description=(
@@ -97,7 +112,7 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
     Input Settings Example:
         [
             {
-                "indices": [2, 3, 4],
+                "refs": ["row_card_1", "row_card_2", "row_card_3"],
                 "overall-name": "table_row",
                 "length-func": "self.nrows",
                 "active-func": "self.has_table"
@@ -109,7 +124,7 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
         - Creates table card group structure:
           {
               "table_group": True,
-              "sub_cards": [...],  # Cards from indices
+              "sub_cards": [...],  # Cards from refs
               "overall_name": "table_row",
               "length_func": "self.nrows",
               "active_func": "self.has_table"
@@ -121,41 +136,56 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
     @classmethod
     def _parse_settings(
         cls, settings: typing.List[typing.Dict[str, typing.Any]]
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
-        """Keep dict settings for table-card-group - uses 'overall-name' not 'property-name'."""
-        return settings
+    ) -> typing.List[TableCardGroupSettings]:
+        """Parse dict settings into typed TableCardGroupSettings."""
+        return [TableCardGroupSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
-        Create table card groups from card indices.
+        Create table card groups from card label refs.
 
         Args:
             kwd_data: Complete keyword data dictionary
             settings: List of card group definitions
+
+        Raises:
+            ValueError: If label_registry is not initialized
         """
+        if kwd_data.label_registry is None:
+            raise ValueError("table-card-group handler requires label_registry to be initialized")
+
+        registry = kwd_data.label_registry
         typed_settings = self._parse_settings(settings)
         kwd_data.table_group = True
+
         for card_settings in typed_settings:
-            indices_raw = card_settings["indices"]
-            indices: typing.List[int] = typing.cast(typing.List[int], indices_raw)
-            # build the card group
+            # Resolve refs to indices
+            indices = card_settings.resolve_indices(registry, kwd_data.cards)
+            logger.debug(
+                f"table-card-group '{card_settings.property_name}': refs {card_settings.refs} -> indices {indices}"
+            )
+
+            # Build the card group (using reference semantics)
             group = {
                 "table_group": True,
                 "sub_cards": [],
-                "overall_name": card_settings["overall-name"],
-                "length_func": card_settings.get("length-func", ""),
-                "active_func": card_settings.get("active-func", ""),
+                "overall_name": card_settings.property_name,
+                "length_func": card_settings.length_func or "",
+                "active_func": card_settings.active_func or "",
             }
             for index in indices:
                 sub_card = kwd_data.cards[index]
                 sub_card["mark_for_removal"] = 1
                 group["sub_cards"].append(sub_card)
-            # remove all the sub-cards
-            indices.sort(reverse=True)
-            for index in indices:
-                kwd_data.cards[index]["mark_for_removal"] = 1
+
+            # Mark all source cards for removal and insert group at minimum position
             insertion = gen.Insertion(min(indices), "", group)
             kwd_data.card_insertions.append(insertion)
+            logger.debug(f"Created table card group at position {min(indices)}")
 
     def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""

@@ -25,27 +25,66 @@ Conditional Card Handler: Adds conditional rendering logic to cards.
 
 This handler enables cards to be rendered only when specific conditions are met,
 supporting dynamic card structures based on field values.
+
+Uses label-based card references:
+    {"ref": "thickness_card", "func": "self.elform == 1"}
+
+Labels must be defined in the keyword's labels section or auto-generated.
 """
 
 from dataclasses import dataclass
-import typing
-from typing import Any, Dict
+import logging
+from typing import Any, Dict, List
 
 from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.label_registry import LabelRegistry
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
 class ConditionalCardSettings:
-    """Configuration for conditional card inclusion."""
+    """Configuration for conditional card inclusion.
 
-    index: int
+    Attributes:
+        ref: Label-based reference (resolved via LabelRegistry)
+        func: Python expression that determines if the card should be rendered
+    """
+
+    ref: str
     func: str
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ConditionalCardSettings":
-        return cls(index=data["index"], func=data["func"])
+        """Create settings from dict.
+
+        Args:
+            data: Dict with 'ref' and 'func' keys
+
+        Returns:
+            ConditionalCardSettings instance
+
+        Raises:
+            KeyError: If 'ref' or 'func' is missing
+        """
+        return cls(ref=data["ref"], func=data["func"])
+
+    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
+        """Resolve the label reference to a concrete card index.
+
+        Args:
+            registry: LabelRegistry for resolving label references
+            cards: The cards list to search for the card object.
+
+        Returns:
+            Integer index into kwd_data.cards
+
+        Raises:
+            UndefinedLabelError: If ref label is not found
+        """
+        return registry.resolve_index(self.ref, cards)
 
 
 @handler(
@@ -57,10 +96,10 @@ class ConditionalCardSettings:
         "items": {
             "type": "object",
             "properties": {
-                "index": {"type": "integer", "description": "Card index to make conditional"},
+                "ref": {"type": "string", "description": "Card label reference"},
                 "func": {"type": "string", "description": "Python expression for condition"},
             },
-            "required": ["index", "func"],
+            "required": ["ref", "func"],
         },
     },
     output_description="Adds 'func' property to card dict containing conditional expression",
@@ -74,38 +113,50 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
     the card should be rendered in the output.
 
     Input Settings Example:
-        [
-            {
-                "index": 1,
-                "func": "self.iauto == 3"
-            }
-        ]
+        [{"ref": "thickness_card", "func": "self.iauto == 3"}]
 
     Output Modification:
         Adds 'func' key to card dict:
         card["func"] = "self.iauto == 3"
+
+    Requires:
+        - LabelRegistry must be available on kwd_data.label_registry
+        - Labels must be defined in the manifest 'labels' section
     """
 
     @classmethod
-    def _parse_settings(
-        cls, settings: typing.List[typing.Dict[str, typing.Any]]
-    ) -> typing.List[ConditionalCardSettings]:
+    def _parse_settings(cls, settings: List[Dict[str, Any]]) -> List[ConditionalCardSettings]:
         """Convert dict settings to typed ConditionalCardSettings instances."""
         return [ConditionalCardSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: List[Dict[str, Any]],
+    ) -> None:
         """
         Add conditional logic to specified cards.
 
         Args:
-            kwd_data: Complete keyword data dictionary
-            settings: List of {"index": int, "func": str} dicts
+            kwd_data: KeywordData instance containing cards and label_registry
+            settings: List of dicts with 'ref' and 'func' keys
+
+        Raises:
+            ValueError: If label_registry is not available on kwd_data
+            UndefinedLabelError: If a referenced label is not defined
         """
-        # Parse settings into typed instances
         typed_settings = self._parse_settings(settings)
+        registry = kwd_data.label_registry
+        if registry is None:
+            raise ValueError(
+                "ConditionalCardHandler requires LabelRegistry on kwd_data.label_registry. "
+                "Ensure labels are defined in the manifest."
+            )
 
         for setting in typed_settings:
-            card = kwd_data.cards[setting.index]
+            index = setting.resolve_index(registry, kwd_data.cards)
+            logger.debug(f"Adding conditional func to card {index} (ref='{setting.ref}'): {setting.func}")
+            card = kwd_data.cards[index]
             card["func"] = setting.func
 
     def post_process(self, kwd_data: KeywordData) -> None:
