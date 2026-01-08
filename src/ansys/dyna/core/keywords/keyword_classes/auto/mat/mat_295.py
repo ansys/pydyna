@@ -198,6 +198,8 @@ class FiberFamily(Cards):
     @property
     def k1(self) -> typing.Optional[float]:
         """Get or set the Holzapfel-Gasser-Ogden modulus.
+
+        Note: For the K1 (Card 11), use ``coupling_k1``.
         """ # nopep8
         return self._cards[1].get_value("k1")
 
@@ -209,6 +211,8 @@ class FiberFamily(Cards):
     @property
     def k2(self) -> typing.Optional[float]:
         """Get or set the Holzapfel-Gasser-Ogden constant.
+
+        Note: For the K2 (Card 11), use ``coupling_k2``.
         """ # nopep8
         return self._cards[1].get_value("k2")
 
@@ -280,7 +284,16 @@ EQ.2:	Freed-Doehring [2].
         return self._parent
 
 class Mat295(KeywordBase):
-    """DYNA MAT_295 keyword"""
+    """DYNA MAT_295 keyword
+
+    Fields with renamed properties:
+        TITLE (Card 2) -> isotropic_title
+        TITLE (Card 7) -> anisotropic_title
+        TITLE (Card 12) -> active_title
+        K1 (Card 11) -> coupling_k1
+        K2 (Card 11) -> coupling_k2
+        BETA (Card 21) -> material_angle_beta
+    """
 
     keyword = "MAT"
     subkeyword = "295"
@@ -1237,6 +1250,8 @@ class Mat295(KeywordBase):
     @property
     def isotropic_title(self) -> str:
         """Get or set the Module title.
+
+        Note: Location in manual: card:2, field: TITLE
         """ # nopep8
         return self._cards[1].get_value("title")
 
@@ -1257,6 +1272,8 @@ class Mat295(KeywordBase):
     @property
     def beta(self) -> typing.Optional[float]:
         """Get or set the Volumetric response function coefficient.
+
+        Note: For the BETA (Card 21), use ``material_angle_beta``.
         """ # nopep8
         return self._cards[1].get_value("beta")
 
@@ -1488,6 +1505,8 @@ class Mat295(KeywordBase):
     @property
     def k1(self) -> typing.Optional[float]:
         """Get or set the Holzapfel-Ogden modulus.
+
+        Note: For the K1 (Card 11), use ``coupling_k1``.
         """ # nopep8
         return self._cards[5].get_value("k1")
 
@@ -1499,6 +1518,8 @@ class Mat295(KeywordBase):
     @property
     def k2(self) -> typing.Optional[float]:
         """Get or set the Holzapfel-Ogden constant.
+
+        Note: For the K2 (Card 11), use ``coupling_k2``.
         """ # nopep8
         return self._cards[5].get_value("k2")
 
@@ -1510,6 +1531,8 @@ class Mat295(KeywordBase):
     @property
     def anisotropic_title(self) -> str:
         """Get or set the Module title.
+
+        Note: Location in manual: card:7, field: TITLE
         """ # nopep8
         return self._cards[6].get_value("title")
 
@@ -1557,6 +1580,8 @@ class Mat295(KeywordBase):
     @property
     def coupling_k1(self) -> typing.Optional[float]:
         """Get or set the Coupling modulus between the fiber and sheet directions
+
+        Note: Location in manual: card:11, field: K1
         """ # nopep8
         return self._cards[8].get_value("k1")
 
@@ -1568,6 +1593,8 @@ class Mat295(KeywordBase):
     @property
     def coupling_k2(self) -> typing.Optional[float]:
         """Get or set the Coupling constant between the fiber and sheet directions
+
+        Note: Location in manual: card:11, field: K2
         """ # nopep8
         return self._cards[8].get_value("k2")
 
@@ -1579,6 +1606,8 @@ class Mat295(KeywordBase):
     @property
     def active_title(self) -> str:
         """Get or set the Module title.
+
+        Note: Location in manual: card:12, field: TITLE
         """ # nopep8
         return self._cards[9].get_value("title")
 
@@ -2082,8 +2111,10 @@ class Mat295(KeywordBase):
     @property
     def material_angle_beta(self) -> typing.Optional[float]:
         """Get or set the Material angle in degrees for AOPT = 0 (shells and thick shells only) and AOPT = 3 (all element types).
-        This angle may be overridden on the element card;
-        see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
+This angle may be overridden on the element card;
+see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
+
+        Note: Location in manual: card:21, field: BETA
         """ # nopep8
         return self._cards[18].get_value("beta")
 

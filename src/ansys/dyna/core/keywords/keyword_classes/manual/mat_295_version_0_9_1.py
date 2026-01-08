@@ -47,7 +47,34 @@ from ansys.dyna.core.lib.table_card_group import TableCardGroup
 
 
 class Mat295Legacy(KeywordBase):
-    """Legacy DYNA MAT_295 keyword implementation from pydyna v0.9.1."""
+    """Legacy DYNA MAT_295 keyword implementation from pydyna v0.9.1.
+
+    .. deprecated:: 0.10.0
+        Use :class:`~ansys.dyna.core.keywords.Mat295` instead.
+        This legacy version uses TableCardGroup/DataFrame API which does not support multiple fiber families.
+        The new version uses CardSet API with proper support for mixed fiber types.
+
+    To use this legacy class when loading decks:
+
+    .. code-block:: python
+
+        from ansys.dyna.core.lib.deck import Deck
+        from ansys.dyna.core.lib.import_handler import ImportContext
+        from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import (
+            Mat295Legacy,
+            MatAnisotropicHyperelasticLegacy,
+        )
+
+        deck = Deck()
+        context = ImportContext(
+            deck=deck,
+            keyword_overrides={
+                "*MAT_ANISOTROPIC_HYPERELASTIC": MatAnisotropicHyperelasticLegacy,
+                "*MAT_295": Mat295Legacy,
+            },
+        )
+        deck.loads(data, context=context)
+    """
 
     keyword = "MAT"
     subkeyword = "295"
@@ -1824,6 +1851,6 @@ class Mat295Legacy(KeywordBase):
 
 
 class MatAnisotropicHyperelasticLegacy(Mat295Legacy):
-    """Legacy alias for MAT_ANISOTROPIC_HYPERELASTIC keyword."""
+    """Legacy MAT_ANISOTROPIC_HYPERELASTIC keyword."""
 
     subkeyword = "ANISOTROPIC_HYPERELASTIC"

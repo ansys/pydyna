@@ -15,13 +15,16 @@ Assume an appropriate virtual environment is activated. If it isn't, just abort.
   - ✅ GOOD (Bash): `python codegen/generate.py >/dev/null 2>&1`
   - ✅ GOOD (Any): `python codegen/generate.py` (no redirection)
 
-**Documentation builds**: To build docs without examples, use:
+**Documentation builds**: To build docs without examples:
+
+Ensure that the python3.13 environment is active, then:
+
 ```bash
 # Build docs without examples or autokeywords (fast)
-cd doc && BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false ./make.bat html
+BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false ./doc/make.bat html
 
 # Build docs with autokeywords but no examples (slow, ~8+ min for keyword imports alone)
-cd doc && BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=true ./make.bat html
+BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=true ./doc/make.bat html
 ```
 
 ## Agent Coding Style Preferences

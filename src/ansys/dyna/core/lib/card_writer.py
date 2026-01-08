@@ -57,3 +57,4 @@ def write_cards(
     superfluous_newline = pos == buf.tell()
     if superfluous_newline:
         buf.seek(buf.tell() - 1)
+        buf.truncate()  # Required for StringIO - seek alone doesn't remove content

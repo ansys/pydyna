@@ -103,6 +103,16 @@ The first legacy keyword is `Mat295Legacy` in `mat_295_version_0_9_1.py`. This p
 
 The new `Mat295` class will use a `CardSet` for `fiber_families`, allowing each fiber family to have its own `ftype`.
 
+## Example: INITIAL_STRAIN_SHELL and INITIAL_STRESS_SHELL
+
+`InitialStrainShellLegacy` and `InitialStressShellLegacy` (in `initial_strain_shell_version_0_9_1.py` and `initial_stress_shell_version_0_9_1.py`) preserve the `TableCard`/DataFrame API that does not support the LARGE format option.
+
+The old API exposed strains/stresses via a `strains`/`stresses` property that returned a pandas DataFrame.
+
+The new API uses CardSet with individual element cards, supporting both standard and LARGE formats. Users can access data through:
+- Individual properties on each set item
+- The list-based `sets` property
+
 ## File Naming Convention
 
 Use the pattern: `{keyword_name}_version_{major}_{minor}_{patch}.py`
