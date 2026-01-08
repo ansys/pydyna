@@ -31,7 +31,7 @@ dictionary-based structures for improved type safety and IDE support.
 from dataclasses import dataclass, field
 import logging
 import typing
-from typing import Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 
 from .metadata import (
     CardSetsContainer,
@@ -43,6 +43,9 @@ from .metadata import (
     TableCardMetadata,
     VariableCardMetadata,
 )
+
+if TYPE_CHECKING:
+    from .label_registry import LabelRegistry
 
 logger = logging.getLogger(__name__)
 
@@ -243,7 +246,7 @@ class Card:
     variable: Optional[Union[VariableCardMetadata, Dict[str, Any]]] = None
     set: Optional[Dict[str, Any]] = None
     table_group: bool = False
-    sub_cards: Optional[List[Dict[str, Any]]] = None
+    sub_cards: Optional[List["Card"]] = None
     external: Optional[Union[ExternalCardMetadata, Dict[str, Any]]] = None
     source_index: Optional[int] = None
     target_index: Optional[int] = None
@@ -267,6 +270,11 @@ class Card:
         variable = VariableCardMetadata.from_dict(variable_data) if isinstance(variable_data, dict) else variable_data
         external_data = data.get("external")
         external = ExternalCardMetadata.from_dict(external_data) if isinstance(external_data, dict) else external_data
+        # Convert sub_cards from dicts to Card instances
+        sub_cards_data = data.get("sub_cards")
+        sub_cards = (
+            [cls.from_dict(sc) if isinstance(sc, dict) else sc for sc in sub_cards_data] if sub_cards_data else None
+        )
 
         return cls(
             index=data.get("index", -1),  # Default to -1, will be set by class_generator
@@ -277,7 +285,7 @@ class Card:
             variable=variable,
             set=data.get("set"),
             table_group=data.get("table_group", False),
-            sub_cards=data.get("sub_cards"),
+            sub_cards=sub_cards,
             external=external,
             source_index=data.get("source_index"),
             target_index=data.get("target_index"),
@@ -315,13 +323,22 @@ class Card:
         if self.table_group and self.sub_cards:
             all_fields = []
             for sub_card in self.sub_cards:
-                # sub_card might be dict or Card during transition
-                if isinstance(sub_card, dict):
-                    all_fields.extend(sub_card.get("fields", []))
-                else:
-                    all_fields.extend(sub_card.fields)
+                all_fields.extend(sub_card.fields)
             return all_fields
         return self.fields
+
+
+@dataclass
+class RenamedProperty:
+    """Tracks a property that was renamed from its original field name.
+
+    Used for generating documentation about field name to property name mappings.
+    """
+
+    field_name: str  # Original field name (e.g., "R")
+    property_name: str  # New property name (e.g., "gas_constant")
+    card_index: int  # 0-based card index
+    description: str = ""  # Description from help text (e.g., "gas constant")
 
 
 @dataclass
@@ -379,6 +396,9 @@ class KeywordData:
     links: Union[List[LinkData], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     negative_shared_fields: List[Any] = field(default_factory=list)  # Empty list for templates
     card_insertions: List[Any] = field(default_factory=list)
+    label_registry: Optional["LabelRegistry"] = None  # Initialized before handlers run
+    renamed_properties: List["RenamedProperty"] = field(default_factory=list)  # Tracks renamed fields for docs
+    property_collisions: Dict[str, str] = field(default_factory=dict)  # Maps property_name -> collision note
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "KeywordData":
@@ -447,6 +467,7 @@ class KeywordData:
             links=links,
             negative_shared_fields=data.get("negative_shared_fields", []),
             card_insertions=data.get("card_insertions", []),
+            renamed_properties=data.get("renamed_properties", []),
         )
 
     def get_all_cards(self) -> Union[List[Card], List[Dict[str, Any]], List[Union[Card, Dict[str, Any]]]]:

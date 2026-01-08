@@ -25,40 +25,59 @@ External Card Handler: Integrates externally-defined card implementations.
 
 This handler enables keywords to reuse card implementations from other modules,
 supporting code reuse through mixins and external card references.
+
+Uses label-based references (ref) for card addressing.
 """
 
 from dataclasses import dataclass
+import logging
 import typing
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.label_registry import LabelRegistry
 from keyword_generation.data_model.metadata import ExternalCardMetadata, MixinImport
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
+logger = logging.getLogger(__name__)
+
 
 @dataclass
 class ExternalCardSettings:
-    """Configuration for external card implementation."""
+    """Configuration for external card implementation.
 
-    index: int
-    name: str
+    Uses label-based addressing (ref) for card references.
+    """
+
+    ref: str  # Label reference for the card
+    card_source: str  # Module to import from
+    card_name: str  # External card class name
+    mixin_name: str  # Mixin class name to add to keyword
+
+    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
+        """Resolve ref to card index."""
+        return registry.resolve_index(self.ref, cards)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ExternalCardSettings":
-        return cls(index=data["index"], name=data["name"])
+        return cls(
+            ref=data["ref"],
+            card_source=data["card"]["source"],
+            card_name=data["card"]["card-name"],
+            mixin_name=data["mixin"],
+        )
 
 
 @handler(
     name="external-card-implementation",
-    dependencies=["reorder-card"],
     description="Integrates externally-defined cards and mixins into keyword classes",
     input_schema={
         "type": "array",
         "items": {
             "type": "object",
             "properties": {
-                "index": {"type": "integer", "description": "Card index to replace with external card"},
+                "ref": {"type": "string", "description": "Label reference for the card"},
                 "card": {
                     "type": "object",
                     "properties": {
@@ -69,7 +88,7 @@ class ExternalCardSettings:
                 },
                 "mixin": {"type": "string", "description": "Mixin class name to add to keyword"},
             },
-            "required": ["index", "card", "mixin"],
+            "required": ["ref", "card", "mixin"],
         },
     },
     output_description="Adds 'mixins' and 'mixin_imports' lists, adds 'external' dict to cards",
@@ -82,10 +101,12 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
     from other modules. It sets up the necessary imports and mixins to integrate
     external cards into the generated keyword class.
 
+    Uses label-based references (ref) for card addressing.
+
     Input Settings Example:
         [
             {
-                "index": 0,
+                "ref": "include_card",
                 "card": {
                     "source": "include_card",
                     "card-name": "IncludeCard"
@@ -93,7 +114,7 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
                 "mixin": "IncludeCardMixin"
             },
             {
-                "index": 1,
+                "ref": "title_card",
                 "card": {
                     "source": "common_cards",
                     "card-name": "TitleCard"
@@ -112,13 +133,15 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
     """
 
     @classmethod
-    def _parse_settings(
-        cls, settings: typing.List[typing.Dict[str, typing.Any]]
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
-        """Keep dict settings for external-card - nested card structure in manifest."""
-        return settings
+    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[ExternalCardSettings]:
+        """Parse dict settings into typed ExternalCardSettings objects."""
+        return [ExternalCardSettings.from_dict(s) for s in settings]
 
-    def handle(self, kwd_data: KeywordData, settings: typing.List[typing.Dict[str, typing.Any]]) -> None:
+    def handle(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.List[typing.Dict[str, typing.Any]],
+    ) -> None:
         """
         Configure external card imports and mixins.
 
@@ -127,17 +150,31 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
             settings: List of external card configurations
         """
         typed_settings = self._parse_settings(settings)
+
+        registry = kwd_data.label_registry
+        if registry is None:
+            raise ValueError(
+                "ExternalCardHandler requires LabelRegistry on kwd_data.label_registry. "
+                "Ensure 'labels' are defined in manifest for this keyword."
+            )
+
         kwd_data.mixins = []
         kwd_data.mixin_imports = []
         for setting in typed_settings:
-            card_name = setting["card"]["card-name"]
-            card_index = setting["index"]
-            card_source = setting["card"]["source"]
-            mixin_name = setting["mixin"]
-            kwd_data.mixins.append(mixin_name)
-            kwd_data.mixin_imports.append(MixinImport(source=card_source, names=[card_name, mixin_name]))
+            card_index = setting.resolve_index(registry, kwd_data.cards)
+            logger.debug(
+                "Processing external card: ref=%s -> index=%d, card=%s, mixin=%s",
+                setting.ref,
+                card_index,
+                setting.card_name,
+                setting.mixin_name,
+            )
+            kwd_data.mixins.append(setting.mixin_name)
+            kwd_data.mixin_imports.append(
+                MixinImport(source=setting.card_source, names=[setting.card_name, setting.mixin_name])
+            )
             external_card = kwd_data.cards[card_index]
-            external_card["external"] = ExternalCardMetadata(name=card_name)
+            external_card["external"] = ExternalCardMetadata(name=setting.card_name)
 
     def post_process(self, kwd_data: KeywordData) -> None:
         """No post-processing required."""

@@ -5,23 +5,25 @@
 Handler Registry: Manages registration and execution of keyword data handlers.
 
 This module provides a centralized registry for all keyword transformation handlers,
-ensuring they are executed in the correct order (based on dependencies) and with
-proper lifecycle management.
+ensuring they are executed in the correct order and with proper lifecycle management.
 
-IMPORTANT: Handler execution order is critical. The registry maintains a specific
+IMPORTANT: Handler execution order is critical. The registry maintains an explicit
 ordering (defined in create_default_registry) that ensures handlers run in the
-correct sequence. For example, reorder-card must run before handlers that use
-positional indices, and card-set must run before conditional-card to allow
+correct sequence. For example, card-set must run before conditional-card to allow
 conditional-card to modify cards via shared references.
+
+Labels are stored as object references (not indices), so handlers can freely
+reorder, insert, or remove cards without invalidating previously registered labels.
 
 See agents/codegen.md for detailed documentation on handler ordering and semantics.
 """
 import collections
 import logging
 import typing
-from typing import Dict
+from typing import Dict, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData
+from keyword_generation.data_model.label_registry import LabelRegistry
 from keyword_generation.handlers.handler_base import (
     HandlerMetadata,
     KeywordHandler,
@@ -32,19 +34,13 @@ from keyword_generation.handlers.handler_base import (
 logger = logging.getLogger(__name__)
 
 
-class CyclicDependencyError(Exception):
-    """Raised when handlers have circular dependencies."""
-
-    pass
-
-
 class HandlerRegistry:
     """
     Registry for keyword transformation handlers.
 
     Manages the registration, ordering, and execution of handlers that transform
-    keyword data during code generation. Handlers are automatically ordered based
-    on their declared dependencies using topological sorting.
+    keyword data during code generation. Handlers are executed in explicit
+    registration order as defined in create_default_registry().
     """
 
     def __init__(self):
@@ -68,17 +64,28 @@ class HandlerRegistry:
             self._metadata[name] = handler.__class__._handler_metadata  # type: ignore[attr-defined]
         logger.debug(f"Registered handler '{name}': {handler.__class__.__name__}")
 
-    def apply_all(self, kwd_data: KeywordData, settings: typing.Dict[str, typing.Any], validate: bool = True) -> None:
+    def apply_all(
+        self,
+        kwd_data: KeywordData,
+        settings: typing.Dict[str, typing.Any],
+        validate: bool = True,
+        initial_labels: Optional[Dict[str, int]] = None,
+    ) -> None:
         """
-        Apply all registered handlers to keyword data in dependency order.
+        Apply all registered handlers to keyword data in registration order.
 
-        Handlers are executed in an order that respects their declared dependencies.
+        Handlers are executed in explicit registration order (defined in create_default_registry).
         Only handlers with corresponding settings in the configuration are executed.
+
+        The LabelRegistry is initialized before handlers run, mapping label names to
+        card objects. Since labels reference objects (not indices), the registry
+        remains valid even after handlers reorder or insert cards.
 
         Args:
             kwd_data: The keyword data structure to transform
             settings: Configuration settings containing handler-specific options
             validate: If True, validate settings against handler schemas before execution
+            initial_labels: Optional dict mapping label names to card indices from manifest
         """
         # Determine which handlers need to run based on settings
         handlers_to_run = set()
@@ -109,11 +116,21 @@ class HandlerRegistry:
         # instead of topological sort for now
         sorted_names = [name for name in self._handlers.keys() if name in handlers_to_run]
 
+        # Initialize label registry before running any handlers.
+        # Since labels reference card objects (not indices), the registry remains valid
+        # even after handlers reorder, insert, or remove cards.
+        keyword_name = f"{kwd_data.keyword}.{kwd_data.subkeyword}"
+        labels = LabelRegistry.from_cards(kwd_data.cards, keyword=keyword_name, initial_labels=initial_labels)
+        kwd_data.label_registry = labels
+        logger.debug(f"Initialized LabelRegistry for {keyword_name} with {len(labels.get_all_labels())} labels")
+
         # Execute handlers in sorted order
         for handler_name in sorted_names:
             handler = self._handlers[handler_name]
             handler_settings = settings[handler_name]
             logger.debug(f"Applying handler '{handler_name}'")
+
+            # Run the handler
             handler.handle(kwd_data, handler_settings)
 
     def post_process_all(self, kwd_data: KeywordData) -> None:
@@ -124,7 +141,7 @@ class HandlerRegistry:
         in registration order.
 
         Args:
-            kwd_data: Keyword data structure
+            kwd_data: Keyword data structure (contains label_registry if initialized)
         """
         logger.debug(f"Running post-processing for {len(self._handlers)} handlers")
         for handler_name, handler in self._handlers.items():
@@ -202,7 +219,7 @@ def create_default_registry() -> HandlerRegistry:
     # This order is critical - some handlers depend on others having run first
     handler_order = [
         "reorder-card",
-        "skip-card",  # Must run before insert-card so indices refer to original cards
+        "skip-card",  # Must run before insert-card so refs resolve to original cards
         "insert-card",  # Moved before table-card so inserted cards can be referenced
         "table-card",
         "override-field",

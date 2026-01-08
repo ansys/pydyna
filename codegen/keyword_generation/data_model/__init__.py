@@ -20,120 +20,85 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import copy
-import json
+"""Data model module for keyword generation.
+
+Provides access to keyword metadata, manifest configuration, and additional cards
+through the KeywordDataModel class.
+"""
+
 import logging
-import os
 import typing
 
 from keyword_generation.data_model.insertion import Insertion
 from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
+from keyword_generation.data_model.label_registry import (
+    CardNotFoundError,
+    DuplicateLabelError,
+    LabelError,
+    LabelRegistry,
+    UndefinedLabelError,
+)
+from keyword_generation.keyword_data_model import KeywordDataModel
 
 logger = logging.getLogger(__name__)
 
-# Global instances - type annotations added for type checking
-KWDM_INSTANCE: typing.Optional[typing.Any] = None  # KWDM type
-MANIFEST: typing.Optional[typing.Dict[str, typing.Any]] = None
-ADDITIONAL_CARDS: typing.Optional[typing.Any] = None  # AdditionalCards type
+# Global keyword data model instance
+_MODEL: typing.Optional[KeywordDataModel] = None
 
-KWD_TO_ALIAS: typing.Dict[str, str] = {}
-ALIAS_TO_KWD: typing.Dict[str, str] = {}
+
+def get_config() -> KeywordDataModel:
+    """Get the current keyword data model instance.
+
+    Returns:
+        KeywordDataModel instance
+
+    Raises:
+        RuntimeError: If configuration has not been loaded yet
+    """
+    if _MODEL is None:
+        raise RuntimeError("Configuration not loaded. Call load() first.")
+    return _MODEL
 
 
 def get_card(setting: typing.Dict[str, str]) -> Card:
-    """
-    Get a card from either kwd-data or additional-cards sources.
-
-    Returns a Card dataclass instance.
-    """
-    assert KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
-    assert ADDITIONAL_CARDS is not None, "ADDITIONAL_CARDS not initialized"
-    source = setting["source"]
-    if source == "kwd-data":
-        data = KWDM_INSTANCE.get_keyword_data_dict(setting["keyword-name"])
-        card_dict = data[setting["card-index"]]
-        return Card.from_dict(card_dict)
-
-    if source == "additional-cards":
-        card_dict = ADDITIONAL_CARDS[setting["card-name"]]
-        return Card.from_dict(card_dict)
-
-    raise Exception(f"Unknown card source: {source}")
+    """Get a card from either kwd-data or additional-cards sources."""
+    return get_config().get_card(setting)
 
 
 def add_alias(keyword: str, alias: str) -> None:
-    KWD_TO_ALIAS[keyword] = alias
-    ALIAS_TO_KWD[alias] = keyword
+    """Register a keyword alias."""
+    get_config().add_alias(keyword, alias)
 
 
 def get_alias(keyword: str) -> typing.Optional[str]:
-    return KWD_TO_ALIAS.get(keyword, None)
+    """Get alias for a keyword."""
+    return get_config().get_alias(keyword)
 
 
 def get_aliased_by(keyword: str) -> typing.Optional[str]:
-    return ALIAS_TO_KWD.get(keyword, None)
+    """Get original keyword name for alias."""
+    return get_config().get_aliased_by(keyword)
 
 
 def is_aliased(keyword: str) -> bool:
-    return keyword in ALIAS_TO_KWD.keys()
-
-
-def _load_manifest(filename: str) -> typing.Dict[str, typing.Any]:
-    with open(filename) as f:
-        manifest = json.load(f)
-    return manifest
-
-
-class AdditionalCards:
-    """
-    Manages additional card definitions loaded from additional-cards.json.
-
-    Keeps cards as dicts for now to avoid breaking template generation logic.
-    """
-
-    def __init__(self, filename: str) -> None:
-        with open(filename) as f:
-            self._cards: typing.Dict[str, typing.Dict[str, typing.Any]] = json.load(f)
-
-    def __getitem__(self, name: str) -> typing.Dict[str, typing.Any]:
-        """Return a copy of the additional card as a dict."""
-        return copy.deepcopy(self._cards[name])
-
-
-class KWDM:
-    def __init__(self, filename: str) -> None:
-        with open(filename, encoding="utf-8") as f:
-            self._data: typing.Dict[str, typing.Any] = json.load(f)
-
-    def get_keywords_list(self) -> typing.List[str]:
-        return list(self._data.keys())
-
-    def get_keyword_data_dict(self, name: str) -> typing.List[typing.Dict[str, typing.Any]]:
-        return copy.deepcopy(self[name])
-
-    def __getitem__(self, name: str) -> typing.List[typing.Dict[str, typing.Any]]:
-        return self._data[name]
+    """Check if keyword is an alias."""
+    return get_config().is_aliased(keyword)
 
 
 def load(this_folder: str, kwd_file: str, manifest: str, additional_cards: str) -> None:
-    global KWDM_INSTANCE, MANIFEST, ADDITIONAL_CARDS
-    if kwd_file == "":
-        kwd_file = os.path.join(this_folder, "kwd.json")
-        KWDM_INSTANCE = KWDM(kwd_file)
-    else:
-        KWDM_INSTANCE = KWDM(kwd_file)
-    logger.info(f"Loaded keyword data from: {kwd_file}")
+    """Load all configuration files.
 
-    if manifest == "":
-        manifest = os.path.join(this_folder, "manifest.json")
-        MANIFEST = _load_manifest(manifest)
-    else:
-        MANIFEST = _load_manifest(manifest)
-    logger.info(f"Loaded manifest from: {manifest}")
+    Args:
+        this_folder: Base directory containing config files
+        kwd_file: Path to kwd.json (or empty string for default)
+        manifest: Path to manifest.json (or empty string for default)
+        additional_cards: Path to additional-cards.json (or empty string for default)
+    """
+    global _MODEL
 
-    if additional_cards == "":
-        additional_cards = os.path.join(this_folder, "additional-cards.json")
-        ADDITIONAL_CARDS = AdditionalCards(additional_cards)
-    else:
-        ADDITIONAL_CARDS = AdditionalCards(additional_cards)
-    logger.info(f"Loaded additional cards from: {additional_cards}")
+    _MODEL = KeywordDataModel(
+        codegen_dir=this_folder,
+        kwd_file=kwd_file,
+        manifest_file=manifest,
+        additional_cards_file=additional_cards,
+    )

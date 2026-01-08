@@ -92,7 +92,7 @@ class TestHandlerRegistry:
         for name, meta in metadata.items():
             assert hasattr(meta, "name")
             assert hasattr(meta, "handler_class")
-            assert hasattr(meta, "dependencies")
+            assert hasattr(meta, "phase")
             assert meta.name == name
 
     def test_apply_all_with_no_settings(self, sample_keyword_data):

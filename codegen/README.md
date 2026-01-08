@@ -1,206 +1,113 @@
-# Auto-keyword class generator system
+# Auto-keyword Class Generator
 
-## What it is
-The PyDyna auto-keyword class generator system generates python classes for
-dyna keywords based on specifications in kwd.json, manifest.json, and additional-cards.json
-It is implemented in `codegen/generate.py` and has a command line interface.
+The PyDyna keyword class generator produces Python classes for LS-DYNA keywords based on specifications in `kwd.json`, `manifest.json`, and `additional-cards.json`.
 
-## Critical Implementation Notes
+For architecture details, see [architecture.md](architecture.md).
 
-### Handler Execution Order
+## Installation
 
-Handlers transform keyword metadata in a specific order defined in `keyword_generation/handlers/registry.py`. **This order is critical** - changing it can break generation. Key constraints:
+```bash
+pip install .[codegen]
+```
 
-- `reorder-card` must run first (other handlers use positional indices)
-- `card-set` and `table-card-group` must run before `conditional-card`
-- See `agents/codegen.md` for complete ordering and rationale
+## Basic Usage
 
-### Reference Semantics
+```bash
+# Generate all keyword classes
+python codegen/generate.py
 
-Handlers that group cards (e.g., `card-set`, `table-card-group`) append **references** to card dictionaries, not deep copies. This allows later handlers to modify cards in-place, with changes appearing in both the main cards list and the grouped collections.
+# Generate to a specific output directory
+python codegen/generate.py -o /path/to/keyword_classes
 
-**Do NOT use `copy.deepcopy()` when grouping cards** - it breaks this pattern.
+# Generate a single keyword (for testing)
+python codegen/generate.py -k SECTION_SHELL
 
-### Index vs. Position
+# Clean all generated code
+python codegen/generate.py -c
+```
 
-After `reorder-card` runs:
-- Cards have an `index` property (original index)
-- Handlers use **list positions** `kwd_data["cards"][i]`, not card indices
-- `card-set` stores `source_index` (original) and assigns new sequential indices
+## Validation
 
-## To use
-It is recommended to use a virtual environment
+**Key Principle**: If generated code doesn't change, tests don't need to run. The codegen system's correctness is validated by confirming that output remains unchanged.
 
-- Install dependencies:
-``pip install .[codegen]``
+### When to Run What
 
-- To run the code generation system for all classes:
-``python codegen/generate.py -o /path/to/keyword_classes``
+| Scenario | Validation Required |
+|----------|---------------------|
+| Refactoring codegen internals | `generate.py` + `git diff` (no changes = success) |
+| Adding new handler/feature | `generate.py` + `git diff` + review intentional changes + run keywords tests|
+| Changing generated output intentionally | `generate.py` + `git diff` + commit changes + run keywords tests |
+| Modifying runtime keyword behavior | Run tests (`pytest tests/ -m keywords`) |
 
-- To run the code generation system for a single keyword, e.g. SECTION_SHELL:
-``python codegen/generate.py -k SECTION_SHELL``
-
-- To remove all the generated code:
-``python codegen/generate.py -c``
+Note: only keywords tests are required because the codegen does not affect the "run", "pre", or "solver" modules.
 
 ### Validation Script
 
-A comprehensive validation script is provided to encapsulate the complete testing workflow used by both developers and CI:
-
 ```bash
-# Full validation (clean, generate, git diff, pre-commit, dead code, unit tests)
-bash codegen/validate.sh
-
 # Quick validation for fast iteration (clean, generate, git diff only)
+# This is sufficient for most codegen refactoring work
 bash codegen/validate.sh --quick
 
-# Custom validation (skip specific steps)
-bash codegen/validate.sh --skip-tests --skip-deadcode
-bash codegen/validate.sh --skip-precommit
+# Full validation (includes pre-commit, dead code, unit tests)
+# Use before committing or when generated output intentionally changes
+bash codegen/validate.sh
 
-# Adjust dead code coverage threshold
+# Custom validation
+bash codegen/validate.sh --skip-tests       # Skip unit tests
+bash codegen/validate.sh --skip-precommit   # Skip pre-commit hooks
+bash codegen/validate.sh --skip-deadcode    # Skip dead code detection
+
+# Adjust coverage threshold
 bash codegen/validate.sh --coverage-threshold 90
 
-# Verbose output for debugging
+# Verbose output
 bash codegen/validate.sh --verbose
 ```
 
-**Bash Aliases (add to `~/.bashrc` or `~/.bash_profile`):**
+### Manual Output Validation
 
 ```bash
-# Navigate to pydyna root (adjust path as needed)
-alias pydyna='cd /c/AnsysDev/code/pyansys/pydyna'
-
-# Codegen shortcuts
-alias codegen-validate='bash codegen/validate.sh'
-alias codegen-quick='bash codegen/validate.sh --quick'
-alias codegen-full='bash codegen/validate.sh'
-alias codegen-clean='python codegen/generate.py -c && python codegen/generate.py'
-alias codegen-test='pytest -m codegen'
-
-# Common workflows
-alias codegen-check='bash codegen/validate.sh --skip-tests --skip-deadcode'
-alias codegen-dev='python codegen/generate.py -l DEBUG'
-```
-
-**Usage Examples:**
-
-```bash
-# Quick iteration while developing handlers
-codegen-quick
-
-# Full validation before pushing
-codegen-validate
-
-# Check output without running tests
-codegen-check
-
-# Generate with debug logging
-codegen-dev -k SECTION_SHELL
-```
-
-### Output Validation
-
-The CI system automatically validates that generated keyword classes remain unchanged after code generation runs. This ensures that refactoring the codegen system doesn't inadvertently modify the output. To manually validate output locally:
-
-```bash
-# Clean and regenerate to validate output hasn't changed
 python codegen/generate.py -c
 python codegen/generate.py
 git diff src/ansys/dyna/core/keywords/keyword_classes/auto/
 ```
 
-If `git diff` shows changes, either:
-1. The codegen logic has a bug that needs fixing
-2. The changes are intentional (e.g., new handlers or template improvements) and should be committed
+If `git diff` shows changes:
+1. The codegen logic has a bug that needs fixing, OR
+2. The changes are intentional and should be committed
 
-### Logging
+## Logging
 
-The code generator includes comprehensive logging to help debug and understand the generation process:
+Control verbosity with `--log-level` or `-l`:
 
-- **Control log verbosity** with the `--log-level` or `-l` flag:
-  - `DEBUG`: Detailed traceability of execution flow, variable values, and decisions
-  - `INFO`: High-level progress updates and successful operations (default)
-  - `WARNING`: Only recoverable issues or unexpected conditions
-  - `ERROR`: Only failures and errors
-  - `CRITICAL`: Only critical failures
+```bash
+# Detailed debug output
+python codegen/generate.py -k SECTION_SHELL -l DEBUG
 
-- **Examples**:
-  ```bash
-  # Generate with detailed debug output
-  python codegen/generate.py -k SECTION_SHELL -l DEBUG
+# Minimal output (warnings and errors only)
+python codegen/generate.py -l WARNING
 
-  # Generate with minimal output (warnings and errors only)
-  python codegen/generate.py -l WARNING
+# Default (INFO level)
+python codegen/generate.py -l INFO
+```
 
-  # Generate with high-level progress info (default)
-  python codegen/generate.py -l INFO
-  ```
+**Log levels**:
+- `DEBUG`: Execution flow, variable values, handler decisions, card insertions/deletions, wildcard matching, template rendering, file operations
+- `INFO`: Progress updates, completion status, files loaded, keyword counts (default)
+- `WARNING`: Recoverable issues, deprecated features
+- `ERROR`: Failures with stack traces
+- `CRITICAL`: Critical failures
 
-- **What gets logged**:
-  - **DEBUG**: Card insertions, deletions, wildcard matching, handler execution, template rendering, file operations
-  - **INFO**: Files loaded, keyword counts, generation progress, completion status
-  - **WARNING**: Deprecated features, potential issues
-  - **ERROR**: Generation failures with full stack traces
+## Bash Aliases
 
-## How it works
-The class generator uses Jinja templates to generate three distinct things:
-- Python classes
-- Import machinery
-- keyword to type mapping
+Add to `~/.bashrc` or `~/.bash_profile`:
 
-The python classes are what users of PyDyna interact with directly. The import machinery produces
-`auto_keywords.py`, which contains a list of import statements that import classes from the
-Python files where they are defined. The keyword to type mapping produces a dictionary mapping the
-keyword name with the python class that defines it.
-
-The primary specification for keywords is found in `kwd.json`. It contains basic definitions
-for most keywords, including their cards and fields (which are defined by offset, name, default
-value, option, width, and helpstring). `kwd.json` must not be modified by hand, it is
-produced by machine in a process that is external to PyDyna.
-
-While this specification is expansive, providing definitions for thousands of keywords, not all
-information pertaining to a keyword can be found there. In addition, there are some errors in that
-specification. Due to this, `manifest.json` and `additional-cards.json` contain that information
-that either supplements or corrects the information in `kwd.json`.
-
-Corrections include:
-    - fixing the order of cards ("reorder-card")
-    - skipping an unnecessary card ("skip-card")
-    - changing the name of a subkeyword ("override-subkeyword")
-    - changing the definition of a field ("override-field")
-    - replacing a card ("replace-card")
-    - inserting a card ("insert-card")
-    - changing the name of a python property ("rename-property")
-
-Supplements include:
-    - adding aliases - see `Appendix A - Aliasing`
-    - cards that repeat, handled as a two dimensional table ("table-card")
-    - A field represented as a one-dimensional array that repeat across cards ("series-card")
-    - A set of adjacent cards with their own specification. These may repeat ("card-set")
-    - A card that is only active under a condition ("conditional-card")
-    - A set of adjacent cards that repeat, handled as a two dimensional table ("table-card-group")
-    - Adding option cards ("add-option")
-    - A field shared across multiple cards with only one meaning ("shared-field")
-
-## Extending the generation system
-
-In some cases, the generation system can be difficult to extend to support the semantics of a keyword,
-especially if the functionality in the keyword library (ansys/dyna/core/lib) is lacking. In those cases, an
-effective strategy is to hand-write  the keyword, extending the keyword library as needed, and then working
-backwards to update the code-generation system to produce an equivalent keyword, and finally deleting the
-hand-written keyword.
-
-## Appendix A
-
-### Aliasing
-
-In some cases, two keywords are defined in exactly the same way and have the same meaning. This is called
-an alias. Examples of this are `MAT_058` and `MAT_LAMINATED_COMPOSITE_FABRIC`. In such cases, the class
-generator will generate two classes, but one of the classes will alias the behavior of the other, the only
-difference being the name of the keyword. In the case of `MAT_058` and its alias, both keywords are defined
-in `kwd.json`, so one of them will be ignored by the code generator. It is possible for only one of the two
-keywords to be defined in `kwd.json`, such as is the case for `SET_NODE` and `SET_NODE_LIST`. In that case,
-the class generator will produce the same effect, except that it does not need to ignore anything in
-`kwd.json`.
-
+```bash
+alias pydyna='cd /c/AnsysDev/code/pyansys/pydyna'
+alias codegen-validate='bash codegen/validate.sh'
+alias codegen-quick='bash codegen/validate.sh --quick'
+alias codegen-clean='python codegen/generate.py -c && python codegen/generate.py'
+alias codegen-test='pytest -m codegen'
+alias codegen-check='bash codegen/validate.sh --skip-tests --skip-deadcode'
+alias codegen-dev='python codegen/generate.py -l DEBUG'
+```

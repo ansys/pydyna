@@ -33,6 +33,7 @@ from ansys.dyna.core.lib.import_handler import ImportContext, ImportHandler
 from ansys.dyna.core.lib.import_handlers.define_table_processor import DefineTableProcessor
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_collection import KeywordCollection
 from ansys.dyna.core.lib.parameters import ParameterHandler, ParameterSet
 from ansys.dyna.core.lib.transform import TransformHandler
 
@@ -185,9 +186,31 @@ class Deck:
         return [kw for kw in self._keywords if isinstance(kw, EncryptedKeyword)]
 
     @property
-    def keywords(self):
-        """List of processed keywords."""
-        return [kw for kw in self._keywords if isinstance(kw, KeywordBase)]
+    def keywords(self) -> KeywordCollection:
+        """Get all processed keywords as a KeywordCollection.
+
+        This provides access to the fluent filtering API for all keywords
+        in the deck. The collection supports indexing, iteration, and
+        comparison with lists for backward compatibility.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all KeywordBase instances in the deck.
+
+        Examples
+        --------
+        >>> # Access by index (backward compatible)
+        >>> first = deck.keywords[0]
+        >>> # Iterate (backward compatible)
+        >>> for kwd in deck.keywords:
+        ...     print(kwd.keyword)
+        >>> # Filter with fluent API
+        >>> high_id_sections = deck.keywords.where(
+        ...     lambda k: k.keyword == "SECTION" and k.secid > 100
+        ... )
+        """
+        return KeywordCollection([kw for kw in self._keywords if isinstance(kw, KeywordBase)])
 
     def extend(self, kwlist: list) -> None:
         """Add a list of keywords to the deck.
@@ -609,6 +632,246 @@ class Deck:
 
         output = "\n".join(content_lines)
         return output
+
+    def __getitem__(self, key: typing.Union[str, typing.Tuple[str, str]]) -> KeywordCollection:
+        """Get keywords by type using dict-like access.
+
+        Parameters
+        ----------
+        key : Union[str, Tuple[str, str]]
+            Either a keyword type (e.g., "SECTION") or a tuple of (type, subtype)
+            (e.g., ("SECTION", "SHELL")).
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of matching keywords.
+
+        Examples
+        --------
+        >>> sections = deck["SECTION"]
+        >>> shells = deck["SECTION", "SHELL"]
+        """
+        if isinstance(key, tuple):
+            if len(key) != 2:
+                raise ValueError("Tuple key must have exactly 2 elements (type, subtype)")
+            keyword_type, subkeyword = key
+            return KeywordCollection(self.get_kwds_by_full_type(keyword_type, subkeyword))
+        else:
+            return KeywordCollection(self.get_kwds_by_type(key))
+
+    def __iter__(self) -> typing.Iterator[typing.Union[KeywordBase, str, EncryptedKeyword]]:
+        """Iterate over all keywords in the deck.
+
+        Returns
+        -------
+        Iterator[Union[KeywordBase, str, EncryptedKeyword]]
+            An iterator over all keywords.
+
+        Examples
+        --------
+        >>> for kwd in deck:
+        ...     if isinstance(kwd, KeywordBase):
+        ...         print(kwd.keyword)
+        """
+        return iter(self._keywords)
+
+    def __len__(self) -> int:
+        """Get the number of keywords in the deck.
+
+        Returns
+        -------
+        int
+            The total number of keywords (including strings and encrypted).
+
+        Examples
+        --------
+        >>> num_keywords = len(deck)
+        """
+        return len(self._keywords)
+
+    @property
+    def sections(self) -> KeywordCollection:
+        """Get all SECTION_* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all section keywords.
+
+        Examples
+        --------
+        >>> shells = deck.sections.by_subtype("SHELL")
+        """
+        return self["SECTION"]
+
+    @property
+    def materials(self) -> KeywordCollection:
+        """Get all MAT_* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all material keywords.
+
+        Examples
+        --------
+        >>> elastic_mats = deck.materials.by_subtype("ELASTIC")
+        """
+        return self["MAT"]
+
+    @property
+    def elements(self) -> KeywordCollection:
+        """Get all ELEMENT_* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all element keywords.
+
+        Examples
+        --------
+        >>> solid_elements = deck.elements.by_subtype("SOLID")
+        """
+        return self["ELEMENT"]
+
+    @property
+    def nodes(self) -> KeywordCollection:
+        """Get all NODE keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all node keywords.
+
+        Examples
+        --------
+        >>> all_nodes = deck.nodes.to_list()
+        """
+        return self["NODE"]
+
+    @property
+    def parts(self) -> KeywordCollection:
+        """Get all PART* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all part keywords.
+
+        Examples
+        --------
+        >>> parts = deck.parts.to_list()
+        """
+        return self["PART"]
+
+    @property
+    def sets(self) -> KeywordCollection:
+        """Get all SET_* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all set keywords.
+
+        Examples
+        --------
+        >>> node_sets = deck.sets.by_subtype("NODE")
+        """
+        return self["SET"]
+
+    @property
+    def defines(self) -> KeywordCollection:
+        """Get all DEFINE_* keywords.
+
+        Returns
+        -------
+        KeywordCollection
+            A collection of all define keywords.
+
+        Examples
+        --------
+        >>> curves = deck.defines.by_subtype("CURVE")
+        """
+        return self["DEFINE"]
+
+    def split(
+        self, key_func: typing.Callable[[typing.Union[KeywordBase, str, EncryptedKeyword]], typing.Any]
+    ) -> typing.Dict[typing.Any, "Deck"]:
+        """Split the deck into multiple decks based on a key function.
+
+        The key function is called on each keyword and should return a value
+        that will be used to group keywords. Keywords with the same return value
+        will be placed in the same deck.
+
+        Parameters
+        ----------
+        key_func : Callable[[Union[KeywordBase, str, EncryptedKeyword]], Any]
+            A function that takes a keyword and returns a grouping key.
+
+        Returns
+        -------
+        Dict[Any, Deck]
+            A dictionary mapping keys to Deck instances.
+
+        Examples
+        --------
+        >>> # Split by keyword type
+        >>> decks_by_type = deck.split(lambda k: k.keyword if isinstance(k, KeywordBase) else "string")
+        >>> section_deck = decks_by_type["SECTION"]
+
+        >>> # Split by domain using the domain mapper
+        >>> from ansys.dyna.core.lib.domain_mapper import by_domain
+        >>> decks_by_domain = deck.split(by_domain)
+        >>> mat_deck = decks_by_domain["mat"]
+
+        >>> # Custom splitting logic
+        >>> def by_id_range(kwd):
+        ...     if isinstance(kwd, KeywordBase) and hasattr(kwd, 'secid'):
+        ...         if kwd.secid < 100:
+        ...             return "low"
+        ...         else:
+        ...             return "high"
+        ...     return "other"
+        >>> decks = deck.split(by_id_range)
+        """
+        result: typing.Dict[typing.Any, Deck] = {}
+        for keyword in self._keywords:
+            key = key_func(keyword)
+            if key not in result:
+                result[key] = Deck(format=self.format)
+                result[key].parameters = self.parameters
+            # Clear deck association if it's a KeywordBase
+            if isinstance(keyword, KeywordBase):
+                keyword.deck = None
+            result[key].append(keyword)
+        return result
+
+    def split_by_domain(self) -> typing.Dict[str, "Deck"]:
+        """Split the deck by keyword domain (mat, section, control, etc.).
+
+        This is a convenience method that uses the domain mapper to categorize
+        keywords. For custom splitting logic, use the `split()` method directly.
+
+        Returns
+        -------
+        Dict[str, Deck]
+            A dictionary mapping domain names to Deck instances.
+
+        Examples
+        --------
+        >>> decks = deck.split_by_domain()
+        >>> mat_deck = decks["mat"]
+        >>> control_deck = decks["control"]
+        >>> section_deck = decks["section"]
+
+        See Also
+        --------
+        split : Generic splitting method with custom key function.
+        """
+        from ansys.dyna.core.lib.domain_mapper import by_domain
+
+        return self.split(by_domain)
 
     def plot(self, **args):
         """Plot the node and element of the mesh using PyVista.

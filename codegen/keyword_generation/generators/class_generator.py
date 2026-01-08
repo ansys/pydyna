@@ -25,7 +25,7 @@ import typing
 
 from jinja2 import Environment
 import keyword_generation.data_model as data_model
-from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
+from keyword_generation.data_model.keyword_data import Card, KeywordData
 from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry
 from keyword_generation.utils import (
     fix_keyword,
@@ -100,86 +100,11 @@ def _transform_data(data: KeywordData):
                 fields = card.get("fields", [])
 
         for field in fields:
-            # field may be Field instance or dict during transition
-            if isinstance(field, Field):
-                field.normalize()
-            else:
-                # Fallback: inline the legacy transformation for dict-based fields
-                _normalize_field_dict(field)
+            field.normalize()
 
     # Assign indices to main cards
     for index, card in enumerate(data.cards):
         card["index"] = index
-
-
-def _normalize_field_dict(field: typing.Dict) -> None:
-    """Legacy field normalization for dict-based fields during transition.
-
-    This function preserves the original transformation logic for fields
-    that haven't been converted to Field instances yet. Can be removed
-    once full dataclass migration is complete.
-    """
-    type_mapping = {"integer": "int", "real": "float", "string": "str", "real-integer": "float"}
-
-    # Handle unused fields
-    if "used" not in field or not field.get("used"):
-        if "used" not in field:
-            field["used"] = True
-
-    # Type mapping - MUST happen before checking 'used' flag
-    field["type"] = type_mapping[field["type"]]
-
-    # If unused, set name to "unused" and skip rest
-    if not field["used"]:
-        field["default"] = None
-        field["help"] = ""
-        field["name"] = "unused"
-        return
-
-    # Flag fields become bool
-    if field.get("flag", False):
-        field["type"] = "bool"
-
-    # Fix field name
-    # Original logic: field["name"] gets lowercased original, property_name gets fixed version
-    field_name: str = field["name"]  # Keep original
-
-    # Create fixed version with character replacements for property_name
-    fixed_name = field_name
-    for bad_char in ["/", "-", " ", "(", ")", ",", ".", "'", "*", "|", "+"]:
-        fixed_name = fixed_name.replace(bad_char, "_")
-    if fixed_name.lower() in ["global", "as", "int", "lambda", "for"]:
-        fixed_name = fixed_name + "_"
-    if fixed_name and fixed_name[0].isdigit():
-        fixed_name = "_" + fixed_name
-
-    fixed_field_name = fixed_name.lower()
-    field["name"] = field_name.lower()  # Use original name lowercased, not the fixed version
-
-    if "property_name" not in field or not field.get("property_name"):
-        field["property_name"] = fixed_field_name
-    if "property_type" not in field or not field.get("property_type"):
-        field["property_type"] = field["type"]
-
-    # Type-specific default handling
-    if field["type"] == "str":
-        if "options" in field:
-            field["options"] = [f'"{option}"' for option in field["options"]]
-        if field["default"] is not None:
-            field["default"] = f'"{field["default"]}"'
-    elif field["type"] == "int":
-        if field["default"] is not None:
-            try:
-                field["default"] = int(float(field["default"]))
-            except (ValueError, TypeError):
-                # If conversion fails, leave as None
-                field["default"] = None
-
-    # Clean up help text
-    if field["help"]:
-        if field["help"].endswith('"'):
-            field["help"] = field["help"] + " "
-        field["help"] = "\n".join([line.strip() for line in field["help"].split("\n")])
 
 
 def _get_insertion_index_for_cards(
@@ -303,19 +228,28 @@ def _before_handle(kwd_data: KeywordData) -> None:
     _prepare_for_insertion(kwd_data)
 
 
-def _handle_keyword_data(kwd_data: KeywordData, settings: typing.Dict[str, typing.Any]) -> None:
+def _handle_keyword_data(
+    kwd_data: KeywordData,
+    settings: typing.Dict[str, typing.Any],
+    initial_labels: typing.Optional[typing.Dict[str, int]] = None,
+) -> None:
     """Process keyword data through handler pipeline.
 
     All pipeline stages now work directly with KeywordData instances using
     attribute access. No more dict conversions needed!
+
+    Args:
+        kwd_data: The keyword data to process
+        settings: Handler settings from manifest's "generation-options"
+        initial_labels: Optional label mappings from manifest's "labels" section
     """
     registry = create_default_registry()
 
     logger.debug(f"Handling keyword data with {len(kwd_data.cards)} cards")
     _before_handle(kwd_data)
 
-    # Run handlers with KeywordData instance
-    registry.apply_all(kwd_data, settings)
+    # Run handlers with KeywordData instance, passing initial labels
+    registry.apply_all(kwd_data, settings, initial_labels=initial_labels)
 
     # After-handle processing
     _after_handle(kwd_data, registry)
@@ -374,15 +308,26 @@ def _add_links(kwd_data: KeywordData) -> None:
     logger.debug(f"Added {link_count} links to keyword data")
 
 
-def _get_keyword_data(keyword_name: str, keyword: str, settings: typing.Dict[str, typing.Any]) -> KeywordData:
+def _get_keyword_data(
+    keyword_name: str,
+    keyword: str,
+    settings: typing.Dict[str, typing.Any],
+    initial_labels: typing.Optional[typing.Dict[str, int]] = None,
+) -> KeywordData:
     """Gets the keyword data from kwdm. Transforms it based on generation settings
     and default transformations needed to produce valid python code.
 
     Returns KeywordData dataclass instance - no more dict conversions!
+
+    Args:
+        keyword_name: The keyword name (e.g., "MAT_ELASTIC")
+        keyword: The source keyword to load from kwd.json
+        settings: Handler settings from manifest's "generation-options"
+        initial_labels: Optional label mappings from manifest's "labels" section
     """
     logger.debug(f"Getting keyword data for '{keyword_name}' (source: '{keyword}')")
-    assert data_model.KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
-    kwd_data_dict = {"cards": data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)}
+    config = data_model.get_config()
+    kwd_data_dict = {"cards": config.keyword_data.get_keyword_data_dict(keyword)}
 
     # Set keyword identity in dict before converting to KeywordData
     tokens = keyword_name.split("_")
@@ -394,7 +339,7 @@ def _get_keyword_data(keyword_name: str, keyword: str, settings: typing.Dict[str
     kwd_data = KeywordData.from_dict(kwd_data_dict)
 
     # transformations based on generation settings - handlers work with KeywordData
-    _handle_keyword_data(kwd_data, settings)
+    _handle_keyword_data(kwd_data, settings, initial_labels=initial_labels)
 
     # default transformations to a valid format we need for jinja
     _transform_data(kwd_data)
@@ -408,7 +353,8 @@ def _get_keyword_data(keyword_name: str, keyword: str, settings: typing.Dict[str
 def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dict) -> typing.Dict:
     source_keyword = _get_source_keyword(keyword, keyword_options)
     generation_settings = keyword_options.get("generation-options", {})
-    keyword_data = _get_keyword_data(keyword, source_keyword, generation_settings)
+    initial_labels = keyword_options.get("labels", None)
+    keyword_data = _get_keyword_data(keyword, source_keyword, generation_settings, initial_labels=initial_labels)
     # Set classname directly on dataclass instance
     keyword_data.classname = classname
     alias = data_model.get_alias(keyword)
