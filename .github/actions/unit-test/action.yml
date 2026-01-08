@@ -66,6 +66,8 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
         cache: 'pip'
+        cache-dependency-path: 'pyproject.toml'
+
 
     - name: Create virtual environment
       shell: bash

@@ -56,6 +56,8 @@ runs:
       uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
       with:
         python-version: ${{ inputs.python-version }}
+        cache: 'pip'
+        cache-dependency-path: 'pyproject.toml'
 
     - name: set up virtual environment
       run: |
@@ -68,15 +70,16 @@ runs:
         sudo apt-get install xvfb pandoc texlive-latex-extra latexmk
       shell: bash
 
-    # - name: Cache Sphinx build artifacts
-    #   uses: actions/cache@v4
-    #   with:
-    #     path: |
-    #       doc/_build
-    #       doc/source/api
-    #     key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/conf.py', 'pyproject.toml') }}
-    #     restore-keys: |
-    #       sphinx-${{ runner.os }}-${{ inputs.python-version }}-
+    - name: Cache Sphinx build artifacts
+      if: ${{ inputs.build-autokeywords-api != 'True' }}
+      uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb #v5.0.1
+      with:
+        path: |
+          doc/_build
+          doc/source/api
+        key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/**/*.rst', 'doc/source/conf.py', 'pyproject.toml') }}
+        restore-keys: |
+          sphinx-${{ runner.os }}-${{ inputs.python-version }}-
 
     - name: Install python dependencies
       run: |
@@ -125,7 +128,7 @@ runs:
         LSTC_LICENSE: ansys
       run: |
         source .venv/bin/activate
-        timeout 7200 xvfb-run uv run --no-sync -- make -C doc html
+        timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
       shell: bash
 
     - name: Upload html documentation
