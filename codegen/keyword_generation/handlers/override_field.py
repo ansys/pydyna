@@ -202,7 +202,3 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
                         field["options"] = props["options"]
                     if "new-name" in props:
                         field["name"] = props["new-name"]
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

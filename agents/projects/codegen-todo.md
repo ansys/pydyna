@@ -4,7 +4,6 @@ This file collects architectural and code-level recommendations for improving th
 
 ## 1. Handler System
 
-- **Post-Processing Phase**: Only `SharedFieldHandler` uses `post_process()` - clarify purpose of this phase. Consider renaming to `finalize()` or merging into `handle()` if the two-phase approach is not broadly needed.
 - **Mutable vs Immutable**: Current design mutates shared `kwd_data` via reference semantics (critical for card-set/conditional-card interaction). Consider whether an immutable approach is feasible, though this would require significant architectural changes.
 
 ## 2. Jinja Template Usage

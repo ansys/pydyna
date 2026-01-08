@@ -195,7 +195,3 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             insertion = gen.Insertion(min(indices), "", group)
             kwd_data.card_insertions.append(insertion)
             logger.debug(f"Created table card group at position {min(indices)}")
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

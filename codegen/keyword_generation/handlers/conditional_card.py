@@ -157,7 +157,3 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
             logger.debug(f"Adding conditional func to card {index} (ref='{setting.ref}'): {setting.func}")
             card = kwd_data.cards[index]
             card["func"] = setting.func
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

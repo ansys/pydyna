@@ -135,10 +135,19 @@ class HandlerRegistry:
 
     def post_process_all(self, kwd_data: KeywordData) -> None:
         """
-        Run post-processing for all handlers that require it.
+        Run post-processing for all registered handlers.
 
-        Post-processing runs for all registered handlers (not just those with settings)
-        in registration order.
+        Post-processing is an optional finalization phase that runs after all handlers
+        have completed their main processing. Handlers only need to override post_process
+        if they require operations that depend on the combined effects of all handlers.
+
+        Currently used by:
+        - shared-field: Processes deferred negative-index shared fields after options exist
+        - rename-property: Detects property name collisions after all renames complete
+
+        Runs for all registered handlers (not just those with settings) in registration
+        order. Handlers with no post-processing needs use the default no-op implementation
+        from the base class.
 
         Args:
             kwd_data: Keyword data structure (contains label_registry if initialized)

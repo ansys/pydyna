@@ -173,7 +173,3 @@ class TableCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                 length_func=card_settings.length_func or "",
                 active_func=card_settings.active_func or "",
             )
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

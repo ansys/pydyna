@@ -158,7 +158,3 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
             # Update the label registry to point to the new card object
             # This is necessary because we're replacing the card instance, not mutating it
             registry.update_reference(card_settings.ref, replacement)
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

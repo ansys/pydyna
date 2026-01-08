@@ -213,7 +213,11 @@ class KeywordHandler(metaclass=abc.ABCMeta):
 
     Subclasses must implement:
         - handle(): Main transformation logic
-        - post_process(): Optional finalization logic (runs after all handlers)
+
+    Subclasses may optionally override:
+        - post_process(): Finalization logic (runs after all handlers complete)
+          Default implementation is a no-op. Only override if you need to perform
+          operations that depend on the combined effects of all handlers.
 
     Subclasses should use the @handler decorator to provide metadata including
     name, dependencies, and documentation.
@@ -242,21 +246,26 @@ class KeywordHandler(metaclass=abc.ABCMeta):
         """
         raise NotImplementedError
 
-    @abc.abstractmethod
     def post_process(self, kwd_data: KeywordData) -> None:
         """
-        Finalization logic that runs after all handlers have executed.
+        Optional finalization logic that runs after all handlers have executed.
 
         This phase is useful for cleanup, validation, or transformations that
-        depend on the combined effects of all handlers. Most handlers leave
-        this as a no-op (pass).
+        depend on the combined effects of all handlers. The default implementation
+        is a no-op.
+
+        Override this method only if your handler needs to:
+        - Process data that depends on other handlers' modifications
+        - Perform validation that requires the complete transformed structure
+        - Clean up or finalize state after all transformations
+
+        Current handlers using post_process:
+        - shared-field: Processes deferred negative-index shared fields after options exist
+        - rename-property: Detects property name collisions after all renames complete
 
         Handlers can access kwd_data.label_registry if needed.
 
         Args:
             kwd_data: KeywordData instance after all handle() calls
-
-        Raises:
-            NotImplementedError: Must be implemented by subclass
         """
-        raise NotImplementedError
+        pass

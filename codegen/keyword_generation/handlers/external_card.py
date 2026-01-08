@@ -175,7 +175,3 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
             )
             external_card = kwd_data.cards[card_index]
             external_card["external"] = ExternalCardMetadata(name=setting.card_name)
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

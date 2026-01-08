@@ -210,7 +210,3 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
 
             # Register the label for this card (pointing to the object, not index)
             registry.register(card_settings.label, card)
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

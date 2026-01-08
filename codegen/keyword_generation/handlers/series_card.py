@@ -242,7 +242,3 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             )
         if len(dataclasses) > 0:
             kwd_data.dataclasses = dataclasses
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        return

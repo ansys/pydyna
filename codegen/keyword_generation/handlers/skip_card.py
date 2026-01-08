@@ -109,7 +109,3 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             index = setting.resolve_index(registry, kwd_data.cards)
             logger.debug(f"Marking card {index} for removal (ref={setting.ref})")
             kwd_data.cards[index]["mark_for_removal"] = 1
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass
