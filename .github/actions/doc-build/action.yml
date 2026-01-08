@@ -77,6 +77,7 @@ runs:
         path: |
           doc/_build
           doc/source/api
+          doc/source/examples/
         key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/**/*.rst', 'doc/source/conf.py', 'pyproject.toml') }}
         restore-keys: |
           sphinx-${{ runner.os }}-${{ inputs.python-version }}-
