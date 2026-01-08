@@ -39,7 +39,7 @@ def generate_entrypoints(env: Environment, output_manager, keywords_list: typing
     """
     license_header = get_license_header()
     context = EntrypointTemplateContext(license=license_header, keywords=keywords_list)
-    
+
     # Write auto_keywords.py and type_mapping.py using structured context
     output_manager.write_auto_keywords_file(env.get_template("importer.j2").render(**context.to_dict()))
     output_manager.write_type_mapping_file(env.get_template("type-mapping.j2").render(**context.to_dict()))

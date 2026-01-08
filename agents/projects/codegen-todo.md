@@ -3,14 +3,10 @@
 This file collects architectural and code-level recommendations for improving the codegen system.
 
 
-## 1. Jinja Template Usage
-- Use context objects for template context instead of manual dict updates.
-- Document template variables and expected context structure.
-
-## 2. General Simplicity
+## 1. General Simplicity
 - Reduce code duplication and improve readability.
 
-## 3. High-Level Design
+## 2. High-Level Design
 - Add a diagram or high-level description of the codegen flow to the documentation.
 ---
 
