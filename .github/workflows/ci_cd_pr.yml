@@ -149,7 +149,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pytest-markers: keywords
+          pytest-markers: "keywords and viz"
           coverage-file: keywords
 
   run-testing:
