@@ -326,8 +326,8 @@ def _get_keyword_data(
         initial_labels: Optional label mappings from manifest's "labels" section
     """
     logger.debug(f"Getting keyword data for '{keyword_name}' (source: '{keyword}')")
-    assert data_model.KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
-    kwd_data_dict = {"cards": data_model.KWDM_INSTANCE.get_keyword_data_dict(keyword)}
+    config = data_model.get_config()
+    kwd_data_dict = {"cards": config.keyword_data.get_keyword_data_dict(keyword)}
 
     # Set keyword identity in dict before converting to KeywordData
     tokens = keyword_name.split("_")

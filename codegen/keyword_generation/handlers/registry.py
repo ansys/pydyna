@@ -5,10 +5,9 @@
 Handler Registry: Manages registration and execution of keyword data handlers.
 
 This module provides a centralized registry for all keyword transformation handlers,
-ensuring they are executed in the correct order (based on dependencies) and with
-proper lifecycle management.
+ensuring they are executed in the correct order and with proper lifecycle management.
 
-IMPORTANT: Handler execution order is critical. The registry maintains a specific
+IMPORTANT: Handler execution order is critical. The registry maintains an explicit
 ordering (defined in create_default_registry) that ensures handlers run in the
 correct sequence. For example, card-set must run before conditional-card to allow
 conditional-card to modify cards via shared references.
@@ -35,19 +34,13 @@ from keyword_generation.handlers.handler_base import (
 logger = logging.getLogger(__name__)
 
 
-class CyclicDependencyError(Exception):
-    """Raised when handlers have circular dependencies."""
-
-    pass
-
-
 class HandlerRegistry:
     """
     Registry for keyword transformation handlers.
 
     Manages the registration, ordering, and execution of handlers that transform
-    keyword data during code generation. Handlers are automatically ordered based
-    on their declared dependencies using topological sorting.
+    keyword data during code generation. Handlers are executed in explicit
+    registration order as defined in create_default_registry().
     """
 
     def __init__(self):
@@ -79,9 +72,9 @@ class HandlerRegistry:
         initial_labels: Optional[Dict[str, int]] = None,
     ) -> None:
         """
-        Apply all registered handlers to keyword data in dependency order.
+        Apply all registered handlers to keyword data in registration order.
 
-        Handlers are executed in an order that respects their declared dependencies.
+        Handlers are executed in explicit registration order (defined in create_default_registry).
         Only handlers with corresponding settings in the configuration are executed.
 
         The LabelRegistry is initialized before handlers run, mapping label names to

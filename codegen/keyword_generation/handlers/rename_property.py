@@ -70,7 +70,6 @@ class RenamePropertySettings:
 
 @handler(
     name="rename-property",
-    dependencies=[],
     description="Renames Python properties for fields to improve API clarity",
     input_schema={
         "type": "array",

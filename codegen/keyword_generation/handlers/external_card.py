@@ -71,7 +71,6 @@ class ExternalCardSettings:
 
 @handler(
     name="external-card-implementation",
-    dependencies=["reorder-card"],
     description="Integrates externally-defined cards and mixins into keyword classes",
     input_schema={
         "type": "array",

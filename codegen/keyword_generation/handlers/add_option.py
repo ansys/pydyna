@@ -60,7 +60,6 @@ class AddOptionSettings:
 
 @handler(
     name="add-option",
-    dependencies=["reorder-card"],
     description="Adds optional card groups that appear based on keyword title options",
     input_schema={
         "type": "array",

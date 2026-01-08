@@ -49,7 +49,6 @@ class ReorderCardSettings:
 
 @handler(
     name="reorder-card",
-    dependencies=[],
     description="Reorders cards within a keyword based on specified index sequence",
     input_schema={
         "type": "array",

@@ -115,7 +115,6 @@ class SeriesCardSettings:
 
 @handler(
     name="series-card",
-    dependencies=["reorder-card"],
     description="Creates variable-length card arrays for repetitive data structures",
     input_schema={
         "type": "array",

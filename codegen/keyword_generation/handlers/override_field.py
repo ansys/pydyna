@@ -98,7 +98,6 @@ class OverrideFieldSettings:
 
 @handler(
     name="override-field",
-    dependencies=["reorder-card"],
     description="Modifies field properties (type, default, readonly, position, width, options, name)",
     input_schema={
         "type": "array",

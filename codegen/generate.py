@@ -103,8 +103,9 @@ def get_undefined_alias_keywords(
 ) -> typing.List[typing.Dict]:
     from keyword_generation.utils.domain_mapper import get_keyword_domain
 
+    config = data_model.get_config()
     undefined_aliases: typing.List[typing.Dict] = []
-    for alias, kwd in data_model.ALIAS_TO_KWD.items():
+    for alias, kwd in config.get_aliases().items():
         if alias not in [kwd["name"] for kwd in keywords_list]:
             # Filter by subset domains if specified
             if subset_domains:
@@ -154,8 +155,8 @@ def handle_wildcards(keyword_options: typing.Dict, keyword: str) -> None:
         return
     if "wildcards_handled" in keyword_options.keys():
         return
-    assert data_model.MANIFEST is not None, "MANIFEST not initialized"
-    for wildcard in data_model.MANIFEST["WILDCARDS"]:
+    config = data_model.get_config()
+    for wildcard in config.manifest["WILDCARDS"]:
         if match_wildcard(keyword, wildcard):
             merge_options(keyword_options, wildcard["generation-options"])
             # Also merge labels from wildcard if present
@@ -171,8 +172,8 @@ def get_keyword_options(keyword: str, wildcards: bool = True) -> typing.Dict:
     """Returns the generation options of the given keyword from the manifest.  If apply_wildcards is True,
     this will return the generataion options of the keyword merged with the generation options of the
     wildard that matches this keyword, if any."""
-    assert data_model.MANIFEST is not None, "MANIFEST not initialized"
-    keyword_options = data_model.MANIFEST.get(keyword, {})
+    config = data_model.get_config()
+    keyword_options = config.manifest.get(keyword, {})
     if wildcards:
         handle_wildcards(keyword_options, keyword)
     return keyword_options
@@ -273,9 +274,9 @@ def get_keywords_to_generate(
     """Get keywords to generate. If a kwd name is not none, only generate
     it and its generations. If subset_domains is provided, only generate keywords
     from those domains (e.g., ['boundary', 'contact', 'control'])."""
-    assert data_model.KWDM_INSTANCE is not None, "KWDM_INSTANCE not initialized"
+    config = data_model.get_config()
     keywords = []
-    kwd_list = data_model.KWDM_INSTANCE.get_keywords_list()
+    kwd_list = config.keyword_data.get_keywords_list()
 
     # first get all aliases
     add_aliases(kwd_list)
