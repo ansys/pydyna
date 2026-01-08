@@ -24,10 +24,6 @@ This file collects architectural and code-level recommendations for improving th
 
 ## 6. High-Level Design
 - Add a diagram or high-level description of the codegen flow to the documentation.
-
-## 7. Maintenance
-- Use the coverage module to confirm that every line of code in the codegen system is necessary
-- Incorporate the above into the codegen agent instructions so this is done every time the codegen is touched
 ---
 
 **Constraints:**
