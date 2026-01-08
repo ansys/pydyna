@@ -168,6 +168,11 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
                 f"table-card-group '{card_settings.property_name}': refs {card_settings.refs} -> indices {indices}"
             )
 
+            # Skip empty refs
+            if not indices:
+                logger.debug(f"table-card-group '{card_settings.property_name}': skipping empty refs")
+                continue
+
             # Collect sub_cards using reference semantics
             sub_cards: List[Card] = []
             for index in indices:
