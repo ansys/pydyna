@@ -234,16 +234,76 @@ def extract_shell_facets(shells: pd.DataFrame, mapping):
     idx = 0
     for row in shells.itertuples(index=False):
         array = shell_facet_array(row[2:])
-        facet_with_prefix.append(array)
-        eid.append(row[0])
-        pid.append(row[1])
+        if len(array) > 0:  # Only add if valid facet
+            facet_with_prefix.append(array)
+            eid.append(row[0])
+            pid.append(row[1])
         idx += 1
 
     # Convert list to np.ndarray
-    flat_facets = np.concatenate(facet_with_prefix, axis=0)
+    flat_facets = np.concatenate(facet_with_prefix, axis=0) if facet_with_prefix else np.empty((0), dtype=int)
     flat_facets_indexed = map_facet_nid_to_index(flat_facets, mapping)
 
     return flat_facets_indexed, np.array(eid), np.array(pid)
+
+
+def separate_triangles_and_quads(facets: np.ndarray, eids: np.ndarray, pids: np.ndarray):
+    """
+    Separate mixed triangle and quad facets into separate arrays.
+    
+    The input facets array has variable-length entries:
+    - Triangles: [3, n1, n2, n3]
+    - Quads: [4, n1, n2, n3, n4]
+    
+    Returns separate arrays for triangles and quads with their corresponding eids and pids.
+    """
+    if len(facets) == 0:
+        return (
+            np.empty((0), dtype=int),
+            np.empty((0), dtype=int),
+            np.empty((0), dtype=int),
+            np.empty((0), dtype=int),
+            np.empty((0), dtype=int),
+            np.empty((0), dtype=int),
+        )
+    
+    triangles = []
+    quads = []
+    tri_eids = []
+    tri_pids = []
+    quad_eids = []
+    quad_pids = []
+    
+    i = 0
+    element_idx = 0
+    while i < len(facets):
+        count = facets[i]
+        if count == 3:
+            # Triangle: [3, n1, n2, n3]
+            triangles.extend(facets[i:i+4])
+            tri_eids.append(eids[element_idx])
+            tri_pids.append(pids[element_idx])
+            i += 4
+        elif count == 4:
+            # Quad: [4, n1, n2, n3, n4]
+            quads.extend(facets[i:i+5])
+            quad_eids.append(eids[element_idx])
+            quad_pids.append(pids[element_idx])
+            i += 5
+        else:
+            # Should not happen, but skip invalid entries
+            i += 1
+            continue
+        element_idx += 1
+    
+    return (
+        np.array(triangles, dtype=int),
+        np.array(tri_eids, dtype=int),
+        np.array(tri_pids, dtype=int),
+        np.array(quads, dtype=int),
+        np.array(quad_eids, dtype=int),
+        np.array(quad_pids, dtype=int),
+    )
 
 
 def extract_lines(beams: pd.DataFrame, mapping: typing.Dict[int, int]) -> np.ndarray:
@@ -273,12 +333,14 @@ def extract_lines(beams: pd.DataFrame, mapping: typing.Dict[int, int]) -> np.nda
     pid = []
 
     for row in beams.itertuples(index=False):
-        line_with_prefix.append(line_array(row[2:]))
-        eid.append(row[0])
-        pid.append(row[1])
+        array = line_array(row[2:])
+        if len(array) > 0:  # Only add if valid line
+            line_with_prefix.append(array)
+            eid.append(row[0])
+            pid.append(row[1])
 
     # Convert list to np.ndarray
-    flat_lines = np.concatenate(line_with_prefix, axis=0)
+    flat_lines = np.concatenate(line_with_prefix, axis=0) if line_with_prefix else np.empty((0), dtype=int)
     flat_lines_indexed = map_facet_nid_to_index(flat_lines, mapping)
 
     return flat_lines_indexed, np.array(eid), np.array(pid)
@@ -332,8 +394,25 @@ def get_pyvista():
     return pv
 
 
-def get_polydata(deck: Deck, cwd=None):
-    """Create the PolyData Object for plotting from a given deck with nodes and elements."""
+def get_polydata(deck: Deck, cwd=None, extract_surface=True):
+    """Create the PolyData Object for plotting from a given deck with nodes and elements.
+    
+    Parameters
+    ----------
+    deck : Deck
+        The deck to plot
+    cwd : str, optional
+        Current working directory for expanding includes
+    extract_surface : bool, default=True
+        If True, extract only the exterior surface for solid elements.
+        This dramatically improves performance for large solid meshes with no visual difference,
+        since only the surface is visible anyway. Set to False to include all cells.
+    
+    Returns
+    -------
+    pyvista.UnstructuredGrid
+        UnstructuredGrid containing the mesh for visualization
+    """
 
     # import this lazily (otherwise this adds over a second to the import time of pyDyna)
     pv = get_pyvista()
@@ -360,14 +439,27 @@ def get_polydata(deck: Deck, cwd=None):
 
     # get the node information, element_ids and part_ids
     facets, shell_eids, shell_pids = extract_shell_facets(shells_df, mapping)
+    
+    # Separate triangles and quads
+    triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids = separate_triangles_and_quads(
+        facets, shell_eids, shell_pids
+    )
+    
     lines, line_eids, line_pids = extract_lines(beams_df, mapping)
     solids_info = extract_solids(solids_df, mapping)
 
     # celltype_dict for beam and shell
     celltype_dict = {
-        pv.CellType.LINE: lines.reshape([-1, 3])[:, 1:],
-        pv.CellType.QUAD: facets.reshape([-1, 5])[:, 1:],
+        pv.CellType.LINE: lines.reshape([-1, 3])[:, 1:] if len(lines) > 0 else np.empty((0, 2), dtype=int),
     }
+    
+    # Add triangles if present
+    if len(triangles) > 0:
+        celltype_dict[pv.CellType.TRIANGLE] = triangles.reshape([-1, 4])[:, 1:]
+    
+    # Add quads if present
+    if len(quads) > 0:
+        celltype_dict[pv.CellType.QUAD] = quads.reshape([-1, 5])[:, 1:]
 
     # dict of cell types for node counts
     solid_celltype = {
@@ -403,9 +495,24 @@ def get_polydata(deck: Deck, cwd=None):
     # Create UnstructuredGrid
     plot_data = pv.UnstructuredGrid(celltype_dict, nodes_list)
 
-    # Mapping part_ids and element_ids
-    plot_data.cell_data["part_ids"] = np.concatenate((line_pids, shell_pids, solids_pids), axis=0)
-    plot_data.cell_data["element_ids"] = np.concatenate((line_eids, shell_eids, solids_eids), axis=0)
+    # Combine shell metadata (triangles and quads)
+    shell_pids_combined = np.concatenate((tri_pids, quad_pids), axis=0)
+    shell_eids_combined = np.concatenate((tri_eids, quad_eids), axis=0)
+    
+    # Extract only the exterior surface for performance if solids are present
+    # This dramatically speeds up plotting with no visual difference since only surface is visible
+    has_solids = len(solids_info) > 0 and any(len(v[0]) > 0 for v in solids_info.values())
+    if extract_surface and has_solids:
+        # Add cell data before extraction (extract_surface preserves cell_data for extracted cells)
+        plot_data.cell_data["part_ids"] = np.concatenate((line_pids, shell_pids_combined, solids_pids), axis=0)
+        plot_data.cell_data["element_ids"] = np.concatenate((line_eids, shell_eids_combined, solids_eids), axis=0)
+        
+        # Extract surface - removes interior solid cells
+        plot_data = plot_data.extract_surface()
+    else:
+        # Add cell data without surface extraction
+        plot_data.cell_data["part_ids"] = np.concatenate((line_pids, shell_pids_combined, solids_pids), axis=0)
+        plot_data.cell_data["element_ids"] = np.concatenate((line_eids, shell_eids_combined, solids_eids), axis=0)
 
     return plot_data
 
