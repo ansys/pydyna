@@ -47,6 +47,7 @@ from typing import Any, Dict, List
 from keyword_generation.data_model import get_card
 from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.base_settings import parse_settings_list
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)
@@ -157,11 +158,6 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         - Registers labels in kwd_data.label_registry for inserted cards
     """
 
-    @classmethod
-    def _parse_settings(cls, settings: List[Dict[str, Any]]) -> List[InsertCardSettings]:
-        """Convert dict settings to typed InsertCardSettings instances."""
-        return [InsertCardSettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -181,7 +177,7 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             raise InsertCardError("LabelRegistry must be initialized before insert-card handler runs")
 
         registry = kwd_data.label_registry
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(InsertCardSettings, settings)
 
         # Process in manifest order - each insertion can reference previous ones
         for card_settings in typed_settings:

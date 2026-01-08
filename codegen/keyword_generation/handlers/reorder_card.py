@@ -33,6 +33,7 @@ from typing import Any, Dict, List
 
 from keyword_generation.data_model.keyword_data import KeywordData
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.base_settings import parse_settings_list
 from keyword_generation.handlers.handler_base import handler
 
 
@@ -81,11 +82,6 @@ class ReorderCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         The "order" list specifies which original card goes to each position.
     """
 
-    @classmethod
-    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[ReorderCardSettings]:
-        """Convert dict settings to typed ReorderCardSettings instances."""
-        return [ReorderCardSettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -102,7 +98,7 @@ class ReorderCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         Labels track card objects by reference, so they remain valid after reordering.
         """
         # Parse settings into typed instances
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(ReorderCardSettings, settings)
 
         assert (
             len(typed_settings) == 1

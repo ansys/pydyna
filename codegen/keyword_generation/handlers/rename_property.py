@@ -32,18 +32,18 @@ Uses label-based references (ref) for card addressing.
 from dataclasses import dataclass
 import logging
 import typing
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData, RenamedProperty
-from keyword_generation.data_model.label_registry import LabelRegistry
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.base_settings import LabelRefSettings
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass
-class RenamePropertySettings:
+class RenamePropertySettings(LabelRefSettings):
     """Configuration for renaming a card property.
 
     Uses label-based addressing (ref) for card references.
@@ -51,12 +51,7 @@ class RenamePropertySettings:
 
     name: str  # Field name to rename
     property_name: str  # New Python property name
-    ref: str  # Label reference for the card
     description: Optional[str] = None  # Optional description for docs
-
-    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
-        """Resolve ref to card index."""
-        return registry.resolve_index(self.ref, cards)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "RenamePropertySettings":

@@ -32,32 +32,27 @@ Uses label-based references (ref) for card addressing.
 from dataclasses import dataclass
 import logging
 import typing
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from keyword_generation.data_model.keyword_data import KeywordData
-from keyword_generation.data_model.label_registry import LabelRegistry
 from keyword_generation.data_model.metadata import ExternalCardMetadata, MixinImport
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.base_settings import LabelRefSettings
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass
-class ExternalCardSettings:
+class ExternalCardSettings(LabelRefSettings):
     """Configuration for external card implementation.
 
     Uses label-based addressing (ref) for card references.
     """
 
-    ref: str  # Label reference for the card
     card_source: str  # Module to import from
     card_name: str  # External card class name
     mixin_name: str  # Mixin class name to add to keyword
-
-    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
-        """Resolve ref to card index."""
-        return registry.resolve_index(self.ref, cards)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ExternalCardSettings":

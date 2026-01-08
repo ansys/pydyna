@@ -284,6 +284,78 @@ class TableCardSettings:
 
 Settings are validated at parse time via `_parse_settings()`.
 
+### Handler Base Utilities (Jan 2026 Refactoring)
+
+To eliminate code duplication across handlers, the system provides shared base classes and utilities in `handlers/base_settings.py`:
+
+**`LabelRefSettings` Base Class**:
+```python
+@dataclass
+class LabelRefSettings:
+    """Base class for handler settings that use label-based card references."""
+    ref: str  # Label reference to the card
+
+    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
+        """Resolve the label reference to a concrete card index."""
+        return registry.resolve_index(self.ref, cards)
+```
+
+Handlers that use label-based references inherit from `LabelRefSettings`:
+- `conditional_card.py` - ConditionalCardSettings
+- `skip_card.py` - SkipCardSettings
+- `replace_card.py` - ReplaceCardSettings
+- `override_field.py` - OverrideFieldSettings
+- `rename_property.py` - RenamePropertySettings
+- `external_card.py` - ExternalCardSettings
+- `series_card.py` - SeriesCardSettings
+- `table_card.py` - TableCardSettings
+
+**`parse_settings_list()` Utility**:
+```python
+def parse_settings_list(settings_class, settings: List[Dict[str, Any]]) -> List[Any]:
+    """Generic settings parser - eliminates duplicated _parse_settings methods."""
+    return [settings_class.from_dict(s) for s in settings]
+```
+
+Replaces duplicated `_parse_settings()` methods in all handlers.
+
+**Field Utilities**:
+```python
+def find_field_in_card(card: Card, field_name: str) -> Optional[Field]:
+    """Find a field by name (case-insensitive) in a card."""
+
+def modify_field_in_cards(cards: List[Card], indices: List[int],
+                          field_name: str, modifications: Dict[str, Any]) -> None:
+    """Apply field modifications to multiple cards."""
+```
+
+**Benefits**:
+- ~150+ lines of duplicate code eliminated
+- Consistent error handling and validation
+- Single source of truth for common patterns
+- Easier to maintain and extend
+
+**Keyword Utilities** (`utils/keyword_utils.py`):
+```python
+@dataclass
+class KeywordNames:
+    """Consolidated keyword name transformations."""
+    original: str
+    fixed: str
+    classname: str
+    filename: str
+
+    @classmethod
+    def from_keyword(cls, keyword: str) -> "KeywordNames":
+        """Generate all name variants from a keyword."""
+
+def filter_keywords_by_domain(keywords: List[str],
+                              domains: List[str]) -> List[str]:
+    """Filter keywords by domain (e.g., 'contact', 'define')."""
+```
+
+Eliminates repetitive name processing logic in `generate.py`.
+
 ## Testing
 
 ### Validation Workflow
