@@ -36,7 +36,7 @@ import keyword_generation.data_model as data_model
 from keyword_generation.generators import generate_class, generate_entrypoints
 from keyword_generation.generators.template_context import DocTemplateContext
 from keyword_generation.utils import fix_keyword, get_classname, get_this_folder, handle_single_word_keyword
-from keyword_generation.utils.domain_mapper import get_keyword_domain
+from keyword_generation.utils.keyword_utils import filter_keywords_by_domain
 from output_manager import OutputManager
 
 logger = logging.getLogger(__name__)
@@ -109,10 +109,8 @@ def get_undefined_alias_keywords(
     for alias, kwd in config.get_aliases().items():
         if alias not in [kwd["name"] for kwd in keywords_list]:
             # Filter by subset domains if specified
-            if subset_domains:
-                domain = get_keyword_domain(alias)
-                if domain not in subset_domains:
-                    continue
+            if subset_domains and not filter_keywords_by_domain([alias], subset_domains):
+                continue
 
             fixed_keyword = fix_keyword(alias).lower()
             classname = get_classname(fixed_keyword)
@@ -291,10 +289,8 @@ def get_keywords_to_generate(
             continue
 
         # Filter by subset domains if specified
-        if subset_domains:
-            domain = get_keyword_domain(keyword)
-            if domain not in subset_domains:
-                continue
+        if subset_domains and not filter_keywords_by_domain([keyword], subset_domains):
+            continue
 
         for keyword, keyword_options in get_generations(keyword):
             item = get_keyword_item(keyword)

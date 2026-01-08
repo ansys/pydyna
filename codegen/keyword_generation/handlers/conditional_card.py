@@ -37,23 +37,22 @@ import logging
 from typing import Any, Dict, List
 
 from keyword_generation.data_model.keyword_data import KeywordData
-from keyword_generation.data_model.label_registry import LabelRegistry
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass
-class ConditionalCardSettings:
+class ConditionalCardSettings(LabelRefSettings):
     """Configuration for conditional card inclusion.
 
     Attributes:
-        ref: Label-based reference (resolved via LabelRegistry)
+        ref: Label-based reference (inherited from LabelRefSettings)
         func: Python expression that determines if the card should be rendered
     """
 
-    ref: str
     func: str
 
     @classmethod
@@ -70,21 +69,6 @@ class ConditionalCardSettings:
             KeyError: If 'ref' or 'func' is missing
         """
         return cls(ref=data["ref"], func=data["func"])
-
-    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
-        """Resolve the label reference to a concrete card index.
-
-        Args:
-            registry: LabelRegistry for resolving label references
-            cards: The cards list to search for the card object.
-
-        Returns:
-            Integer index into kwd_data.cards
-
-        Raises:
-            UndefinedLabelError: If ref label is not found
-        """
-        return registry.resolve_index(self.ref, cards)
 
 
 @handler(
@@ -123,11 +107,6 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
         - Labels must be defined in the manifest 'labels' section
     """
 
-    @classmethod
-    def _parse_settings(cls, settings: List[Dict[str, Any]]) -> List[ConditionalCardSettings]:
-        """Convert dict settings to typed ConditionalCardSettings instances."""
-        return [ConditionalCardSettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -144,7 +123,7 @@ class ConditionalCardHandler(keyword_generation.handlers.handler_base.KeywordHan
             ValueError: If label_registry is not available on kwd_data
             UndefinedLabelError: If a referenced label is not defined
         """
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(ConditionalCardSettings, settings)
         registry = kwd_data.label_registry
         if registry is None:
             raise ValueError(

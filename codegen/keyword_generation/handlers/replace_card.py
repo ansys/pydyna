@@ -35,19 +35,19 @@ Labels must be defined in the keyword's labels section or auto-generated.
 from dataclasses import dataclass
 import logging
 import typing
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from keyword_generation.data_model import get_card
 from keyword_generation.data_model.keyword_data import KeywordData
-from keyword_generation.data_model.label_registry import LabelRegistry
 import keyword_generation.handlers.handler_base
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass
-class ReplaceCardSettings:
+class ReplaceCardSettings(LabelRefSettings):
     """Configuration for replacing card fields.
 
     Attributes:
@@ -55,7 +55,6 @@ class ReplaceCardSettings:
         card: Dict with 'source' and 'card-name' for loading replacement
     """
 
-    ref: str
     card: Dict[str, Any]
 
     @classmethod
@@ -72,10 +71,6 @@ class ReplaceCardSettings:
             KeyError: If 'ref' or 'card' is missing
         """
         return cls(ref=data["ref"], card=data["card"])
-
-    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
-        """Resolve the label reference to a concrete card index."""
-        return registry.resolve_index(self.ref, cards)
 
 
 @handler(
@@ -120,11 +115,6 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         - Labels must be defined in the manifest 'labels' section
     """
 
-    @classmethod
-    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[ReplaceCardSettings]:
-        """Convert dict settings to typed ReplaceCardSettings instances."""
-        return [ReplaceCardSettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -141,7 +131,7 @@ class ReplaceCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
             ValueError: If label_registry is not available on kwd_data
             UndefinedLabelError: If a referenced label is not defined
         """
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(ReplaceCardSettings, settings)
         registry = kwd_data.label_registry
         if registry is None:
             raise ValueError(
