@@ -18,8 +18,8 @@ This file collects architectural and code-level recommendations for improving th
 2. **Keyword Name Processing** ✅ **DONE**
    - Created `KeywordNames` dataclass in `utils/keyword_utils.py`
    - Consolidates all name transformations (original, fixed, classname, filename)
+   - **Fully integrated** into `generate.py` (replaced all `fix_keyword`/`get_classname` patterns)
    - **Eliminated**: ~40-50 lines of repetitive name processing
-   - **Note**: Not yet fully integrated into all locations - can be adopted incrementally
 
 3. **Subset Domain Filtering** ✅ **DONE**
    - Created `filter_keywords_by_domain()` utility in `utils/keyword_utils.py`
@@ -37,7 +37,7 @@ This file collects architectural and code-level recommendations for improving th
    - **Recommendation**: Apply incrementally as handlers are modified
 
 ### Summary:
-- **Lines eliminated**: ~150-170 lines of duplicate code
+- **Lines eliminated**: ~190-220 lines of duplicate code
 - **Files created**: 2 new utility modules (`base_settings.py`, `keyword_utils.py`)
 - **Handlers refactored**: 10 of 14 (71%)
 - **Validation**: ✅ All changes validated - zero impact on generated code
@@ -46,7 +46,6 @@ This file collects architectural and code-level recommendations for improving th
 ### Remaining Opportunities:
 - Apply field utilities to handlers with field iteration patterns
 - Standardize registry validation across all handlers
-- Fully integrate `KeywordNames` dataclass throughout `generate.py`
 - Consider extracting common patterns from `shared_field` and `add_option` handlers
 
 **Status**: Major refactoring complete. Remaining work is optional polish that can be done incrementally.
