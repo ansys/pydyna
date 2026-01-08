@@ -46,7 +46,10 @@ BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=true ./doc/make.bat html
   - Replace any `print()` statements with appropriate logging calls
   - Log function entry/exit for complex operations, parameter values, counts, and decision points
 
-Run `pre-commit run --all-files` after changes
+**Codegen validation**: When modifying the codegen system:
+- **If generated code doesn't change, tests don't need to run.** The metric is: `python codegen/generate.py` + `git diff src/.../auto/` shows no changes.
+- Only run keyword tests when generated output intentionally changes or when modifying runtime keyword behavior.
+- Use `bash codegen/validate.sh --quick` for fast iteration (generates + diffs only) and `bash codegen/validate.sh` for full validation.
 
 ## Agent Guides
 

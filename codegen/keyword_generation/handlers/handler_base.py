@@ -24,13 +24,13 @@
 Handler base classes and metadata system for keyword code generation.
 
 This module provides the abstract base class for all handlers and the decorator-based
-metadata system for handler registration, dependency management, and documentation.
+metadata system for handler registration and documentation.
 """
 
 import abc
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 import logging
-from typing import Any, Dict, List, Optional, Set, Type
+from typing import Any, Dict, List, Optional, Type
 
 from keyword_generation.data_model.keyword_data import KeywordData
 
@@ -45,7 +45,6 @@ class HandlerMetadata:
     Attributes:
         name: Handler name (used as key in manifest.json configuration)
         handler_class: The handler class itself
-        dependencies: Set of handler names that must run before this handler
         phase: Execution phase ('handle' or 'post_process')
         description: Human-readable description of handler's purpose
         input_schema: JSON schema describing expected settings structure (optional)
@@ -54,7 +53,6 @@ class HandlerMetadata:
 
     name: str
     handler_class: Type["KeywordHandler"]
-    dependencies: Set[str] = field(default_factory=set)
     phase: str = "handle"
     description: str = ""
     input_schema: Optional[Dict[str, Any]] = None
@@ -67,7 +65,6 @@ _HANDLER_METADATA: Dict[str, HandlerMetadata] = {}
 
 def handler(
     name: str,
-    dependencies: Optional[List[str]] = None,
     phase: str = "handle",
     description: str = "",
     input_schema: Optional[Dict[str, Any]] = None,
@@ -78,13 +75,15 @@ def handler(
 
     This decorator captures essential information about each handler, enabling:
     - Automatic handler discovery and registration
-    - Dependency-based execution ordering
     - Runtime validation of configuration settings
     - Comprehensive documentation of handler behavior
 
+    Note: Handler execution order is determined by explicit registration order in
+    create_default_registry(), not by declared dependencies. This ensures predictable
+    behavior since handlers use reference semantics with shared data structures.
+
     Args:
         name: Handler name matching the key in manifest.json "generation-options"
-        dependencies: List of handler names that must execute before this handler
         phase: Execution phase - 'handle' (main processing) or 'post_process' (finalization)
         description: Clear explanation of what this handler does
         input_schema: JSON Schema dict describing the expected settings structure
@@ -96,7 +95,6 @@ def handler(
     Example:
         @handler(
             name="conditional-card",
-            dependencies=[],
             description="Adds conditional logic to cards based on field values",
             input_schema={
                 "type": "array",
@@ -122,7 +120,6 @@ def handler(
         metadata = HandlerMetadata(
             name=name,
             handler_class=cls,
-            dependencies=set(dependencies or []),
             phase=phase,
             description=description,
             input_schema=input_schema,
@@ -133,9 +130,7 @@ def handler(
         # Store metadata on class for easy access
         cls._handler_metadata = metadata  # type: ignore[attr-defined]
 
-        logger.debug(
-            f"Handler '{name}' registered with {len(metadata.dependencies)} dependencies: {metadata.dependencies}"
-        )
+        logger.debug(f"Handler '{name}' registered (phase={phase})")
 
         return cls
 

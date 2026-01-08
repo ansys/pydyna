@@ -73,7 +73,6 @@ class TableCardGroupSettings:
 
 @handler(
     name="table-card-group",
-    dependencies=["reorder-card"],
     description="Creates table card groups for table-like repeating card structures",
     input_schema={
         "type": "array",

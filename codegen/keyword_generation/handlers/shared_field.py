@@ -149,7 +149,6 @@ def handle_shared_field(kwd_data, settings):
 
 @handler(
     name="shared-field",
-    dependencies=["reorder-card"],
     description="Marks fields shared across multiple cards to prevent duplication",
     input_schema={
         "type": "array",

@@ -177,7 +177,6 @@ class CardSetSettings:
 
 @handler(
     name="card-set",
-    dependencies=["reorder-card", "add-option", "series-card", "table-card", "conditional-card"],
     description="Creates reusable card sets with dynamic sizing and optional sub-options",
     input_schema={
         "type": "array",

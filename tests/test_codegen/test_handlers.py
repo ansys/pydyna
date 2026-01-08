@@ -57,7 +57,6 @@ class TestHandlerMetadata:
 
         assert metadata.name == "test-handler"
         assert metadata.handler_class == DummyHandler
-        assert metadata.dependencies == set()
         assert metadata.phase == "handle"
         assert metadata.description == ""
         assert metadata.input_schema is None
@@ -77,7 +76,6 @@ class TestHandlerMetadata:
         metadata = HandlerMetadata(
             name="test-handler",
             handler_class=DummyHandler,
-            dependencies={"dep1", "dep2"},
             phase="post_process",
             description="Test description",
             input_schema=schema,
@@ -86,7 +84,6 @@ class TestHandlerMetadata:
 
         assert metadata.name == "test-handler"
         assert metadata.handler_class == DummyHandler
-        assert metadata.dependencies == {"dep1", "dep2"}
         assert metadata.phase == "post_process"
         assert metadata.description == "Test description"
         assert metadata.input_schema == schema
@@ -116,26 +113,6 @@ class TestHandlerDecorator:
         assert metadata.name == "test-decorator-handler"
         assert metadata.handler_class == TestDecoratorHandler
         assert metadata.description == "Test handler"
-
-    def test_handler_decorator_with_dependencies(self):
-        """Test handler decorator with dependencies."""
-        _HANDLER_METADATA.pop("test-deps-handler", None)
-
-        @handler(
-            name="test-deps-handler",
-            dependencies=["dep1", "dep2"],
-            phase="post_process",
-        )
-        class TestDepsHandler(KeywordHandler):
-            def handle(self, kwd_data, settings):
-                pass
-
-            def post_process(self, kwd_data):
-                pass
-
-        metadata = _HANDLER_METADATA["test-deps-handler"]
-        assert metadata.dependencies == {"dep1", "dep2"}
-        assert metadata.phase == "post_process"
 
     def test_handler_decorator_with_schema(self):
         """Test handler decorator with input schema."""

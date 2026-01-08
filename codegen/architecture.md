@@ -78,7 +78,7 @@ The `LabelRegistry` (`data_model/label_registry.py`) provides stable named refer
 
 Handlers are executed in a specific order defined in `handlers/registry.py`. **Order is critical.**
 
-**Why Explicit Order?** While the handler system includes infrastructure for dependency-based ordering (topological sort via the `@handler` decorator), the current implementation uses **explicit registration order** to maintain backward compatibility and ensure reference semantics work correctly. Handlers that group cards (`card-set`, `table-card-group`) rely on **reference semantics** - they append references to card objects, not copies. Later handlers modify these same objects in-place. A pure dependency-based approach could reorder handlers in ways that break this pattern.
+**Why Explicit Order?** The handler system uses **explicit registration order** to ensure reference semantics work correctly. Handlers that group cards (`card-set`, `table-card-group`) rely on **reference semantics** - they append references to card objects, not copies. Later handlers modify these same objects in-place, so the order must be carefully controlled.
 
 **Standard order** (Jan 2026):
 1. `reorder-card` - Reorders cards; must run first

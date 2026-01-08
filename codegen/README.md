@@ -28,14 +28,29 @@ python codegen/generate.py -c
 
 ## Validation
 
-A comprehensive validation script encapsulates the testing workflow:
+**Key Principle**: If generated code doesn't change, tests don't need to run. The codegen system's correctness is validated by confirming that output remains unchanged.
+
+### When to Run What
+
+| Scenario | Validation Required |
+|----------|---------------------|
+| Refactoring codegen internals | `generate.py` + `git diff` (no changes = success) |
+| Adding new handler/feature | `generate.py` + `git diff` + review intentional changes + run keywords tests|
+| Changing generated output intentionally | `generate.py` + `git diff` + commit changes + run keywords tests |
+| Modifying runtime keyword behavior | Run tests (`pytest tests/ -m keywords`) |
+
+Note: only keywords tests are required because the codegen does not affect the "run", "pre", or "solver" modules.
+
+### Validation Script
 
 ```bash
-# Full validation (clean, generate, git diff, pre-commit, dead code, unit tests)
-bash codegen/validate.sh
-
 # Quick validation for fast iteration (clean, generate, git diff only)
+# This is sufficient for most codegen refactoring work
 bash codegen/validate.sh --quick
+
+# Full validation (includes pre-commit, dead code, unit tests)
+# Use before committing or when generated output intentionally changes
+bash codegen/validate.sh
 
 # Custom validation
 bash codegen/validate.sh --skip-tests       # Skip unit tests
