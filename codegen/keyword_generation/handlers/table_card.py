@@ -99,7 +99,6 @@ class TableCardSettings:
 
 @handler(
     name="table-card",
-    dependencies=["reorder-card"],
     description="Marks cards as repeating table structures with dynamic row count",
     input_schema={
         "type": "array",

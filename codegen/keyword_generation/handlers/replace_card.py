@@ -80,7 +80,6 @@ class ReplaceCardSettings:
 
 @handler(
     name="replace-card",
-    dependencies=["reorder-card"],
     description="Replaces entire cards with alternative definitions from additional-cards.json",
     input_schema={
         "type": "array",
