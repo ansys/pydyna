@@ -1625,3 +1625,47 @@ $#     mu1       mu2       mu3       mu4       mu5       mu6       mu7       mu8
        1.0                                                                      
 $#  alpha1    alpha2    alpha3    alpha4    alpha5    alpha6    alpha7    alpha8
        2.0                                                                      """
+
+test_reference_kwd = """*PART
+$# title
+mypart 1
+$#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
+         1        10       100           
+$
+$# title
+mypart 2
+$#     pid     secid       mid     eosid      hgid      grav    adpopt      tmid
+         1        10       200           
+$
+*SECTION_SHELL
+$#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
+        10         1     0.833         3
+$#      t1        t2        t3        t4      nloc     marea      idof    edgset
+       1.0       1.0       1.0       1.0
+*MAT_ELASTIC_TITLE
+$# title
+mymaterial referenced in part 1
+$#     mid        ro         e        pr        da        db         k
+       100      7850  2.10E+11    0.3000                                      
+$
+*MAT_PIECEWISE_LINEAR_PLASTICITY_TITLE
+$# title
+mymaterial referenced in part 2
+$#     mid        ro         e        pr      sigy      etan      fail      tdel
+       200      7850  2.10E+11    0.3000     250.0   1.0E+06                             
+$#       c         p      lcss      lcsr        vp
+                          3000  
+$#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
+
+$#     es1       es2       es3       es4       es5       es6       es7       es8
+
+$
+*DEFINE_CURVE_TITLE
+$# title
+mycurve referenced in mat 200
+$#    lcid      sidr       sfa       sfo      offa      offo    dattyp
+      3000         0       1.0       1.0       0.0       0.0
+$#                a1                  o1
+                 0.0               250.0
+                 1.0               500.0
+$"""

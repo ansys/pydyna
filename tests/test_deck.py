@@ -783,3 +783,57 @@ def test_deck_expand_local_parameters_sibling_isolation(file_utils):
     # FIXED: aloc should NOT be in the top-level parameters after expansion
     with pytest.raises(KeyError):
         deck.parameters.get("aloc")
+
+
+@pytest.mark.keywords
+def test_reference_kwd(ref_string):
+    """Test keyword reference linking functionality."""
+    deck = Deck()
+    deck.loads(ref_string.test_reference_kwd)
+    
+    # Verify deck loaded correctly
+    assert len(deck.keywords) == 5  # PART, SECTION_SHELL, 2x MAT, DEFINE_CURVE
+    
+    # Get the PART keyword (first keyword)
+    part = deck.keywords[0]
+    assert part.keyword == "PART"
+    assert part.subkeyword == "PART"
+    
+    # Test direct references (SECTION and MAT) with level=1
+    refs_direct = part.get_referenced_keywords(level=1)
+    print(f"\nDirect references (level=1): {len(refs_direct)}")
+    for ref in refs_direct:
+        print(f"  - {ref.keyword} {ref.subkeyword}")
+    
+    # Should find 1 SECTION and 2 MAT keywords
+    section_refs = [kwd for kwd in refs_direct if kwd.keyword == "SECTION"]
+    mat_refs = [kwd for kwd in refs_direct if kwd.keyword == "MAT"]
+    assert len(section_refs) == 1
+    assert len(mat_refs) == 2
+    
+    # Test unlimited recursion (default)
+    refs_all = part.get_referenced_keywords()
+    print(f"\nAll downstream references (unlimited): {len(refs_all)}")
+    for ref in refs_all:
+        print(f"  - {ref.keyword} {ref.subkeyword}")
+    
+    # Should find 1 SECTION, 2 MAT, and 1 DEFINE_CURVE
+    all_sections = [kwd for kwd in refs_all if kwd.keyword == "SECTION"]
+    all_mats = [kwd for kwd in refs_all if kwd.keyword == "MAT"]
+    all_curves = [kwd for kwd in refs_all if kwd.keyword == "DEFINE" and kwd.subkeyword == "CURVE"]
+    assert len(all_sections) == 1
+    assert len(all_mats) == 2
+    assert len(all_curves) == 1
+    assert all_curves[0].lcid == 3000
+    
+    # Test individual material references
+    mat_200 = [mat for mat in all_mats if hasattr(mat, 'mid') and mat.mid == 200][0]
+    mat_refs_level1 = mat_200.get_referenced_keywords(level=1)
+    print(f"\nMAT 200 direct references (level=1): {len(mat_refs_level1)}")
+    for ref in mat_refs_level1:
+        print(f"  - {ref.keyword} {ref.subkeyword}")
+    
+    # MAT 200 should reference DEFINE_CURVE (lcss=3000)
+    curve_refs = [kwd for kwd in mat_refs_level1 if kwd.keyword == "DEFINE" and kwd.subkeyword == "CURVE"]
+    assert len(curve_refs) == 1
+    assert curve_refs[0].lcid == 3000
