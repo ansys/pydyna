@@ -40,7 +40,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest]
-        python-version: ['3.10', '3.11', '3.12', '3.13']  # Full matrix for nightly/weekly
+        python-version: ['3.10', '3.11', '3.12', '3.13']  # Full matrix for nightly
     steps:
       - uses: ansys/actions/build-wheelhouse@eb7d0fc873deeee6d4740774675ce1741cb6f154 # v9.0.15
         with:
@@ -56,7 +56,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: ['3.10', '3.11', '3.12', '3.13']  # Full matrix for nightly/weekly
+        python-version: ['3.10', '3.11', '3.12', '3.13']  # Full matrix for nightly
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
