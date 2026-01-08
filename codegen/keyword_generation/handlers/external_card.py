@@ -37,7 +37,7 @@ from typing import Any, Dict
 from keyword_generation.data_model.keyword_data import KeywordData
 from keyword_generation.data_model.metadata import ExternalCardMetadata, MixinImport
 import keyword_generation.handlers.handler_base
-from keyword_generation.handlers.base_settings import LabelRefSettings
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)
@@ -127,11 +127,6 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
         - Adds card["external"] = {"name": "IncludeCard"} to each external card
     """
 
-    @classmethod
-    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[ExternalCardSettings]:
-        """Parse dict settings into typed ExternalCardSettings objects."""
-        return [ExternalCardSettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -144,7 +139,7 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
             kwd_data: Complete keyword data dictionary
             settings: List of external card configurations
         """
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(ExternalCardSettings, settings)
 
         registry = kwd_data.label_registry
         if registry is None:

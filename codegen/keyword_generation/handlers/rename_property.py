@@ -36,7 +36,7 @@ from typing import Any, Dict, Optional
 
 from keyword_generation.data_model.keyword_data import KeywordData, RenamedProperty
 import keyword_generation.handlers.handler_base
-from keyword_generation.handlers.base_settings import LabelRefSettings
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)
@@ -104,13 +104,6 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
         Sets field["property_name"] = "part_id" for matching field
     """
 
-    @classmethod
-    def _parse_settings(
-        cls, settings: typing.List[typing.Dict[str, typing.Any]]
-    ) -> typing.List[RenamePropertySettings]:
-        """Parse dict settings to typed RenamePropertySettings."""
-        return [RenamePropertySettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -124,7 +117,7 @@ class RenamePropertyHandler(keyword_generation.handlers.handler_base.KeywordHand
             settings: List of dicts with ref, name, property-name
         """
         # Parse settings to typed dataclasses
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(RenamePropertySettings, settings)
 
         # Get registry for label resolution
         registry = kwd_data.label_registry

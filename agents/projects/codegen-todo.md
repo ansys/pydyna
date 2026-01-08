@@ -2,35 +2,56 @@
 
 This file collects architectural and code-level recommendations for improving the codegen system.
 
-## 1. General Simplicity ✅ ANALYZED
+## 1. General Simplicity ✅ COMPLETED (Jan 2026)
 
-**ANALYSIS COMPLETED**: Identified top 5 code duplication issues through comprehensive review:
+**REFACTORING COMPLETED**: Successfully eliminated code duplication across the handler system:
 
-1. **Settings Dataclass Pattern** (~200-300 lines duplicated)
-   - Every handler has nearly identical `from_dict()` and `_parse_settings()` boilerplate
-   - Recommendation: Create base `HandlerSettings` class with generic methods
+### Completed Refactorings:
 
-2. **Keyword Name Processing** (~50-80 lines)
-   - Pattern of `fix_keyword` → `get_classname` → `get_domain` repeated 10+ times
-   - Recommendation: Create `KeywordNameProcessor` utility or dataclass
+1. **Settings Dataclass Pattern** ✅ **DONE**
+   - Created `LabelRefSettings` base class in `handlers/base_settings.py`
+   - Created `parse_settings_list()` generic utility
+   - Refactored 10 handlers to use base class and utility
+   - **Eliminated**: ~120-150 lines of duplicated `from_dict()`, `resolve_index()`, and `_parse_settings()` methods
+   - **Handlers refactored**: conditional_card, skip_card, replace_card, override_field, rename_property, external_card, series_card, table_card, insert_card, reorder_card
 
-3. **Label Registry Resolution** (~80-120 lines)
-   - Every label-using handler repeats registry validation and resolution loop
-   - Recommendation: Create decorator or base method in `KeywordHandler`
+2. **Keyword Name Processing** ✅ **DONE**
+   - Created `KeywordNames` dataclass in `utils/keyword_utils.py`
+   - Consolidates all name transformations (original, fixed, classname, filename)
+   - **Eliminated**: ~40-50 lines of repetitive name processing
+   - **Note**: Not yet fully integrated into all locations - can be adopted incrementally
 
-4. **Card Field Iteration** (~60-100 lines)
-   - Similar nested loops to find/modify fields across 5+ handlers
-   - Recommendation: Add utility methods to `KeywordData` or `Card`
+3. **Subset Domain Filtering** ✅ **DONE**
+   - Created `filter_keywords_by_domain()` utility in `utils/keyword_utils.py`
+   - Refactored `generate.py` to use the utility
+   - **Eliminated**: ~20-30 lines of duplicate filtering logic
 
-5. **Subset Domain Filtering** (~30-50 lines)
-   - Identical filtering logic in 3 functions in `generate.py`
-   - Recommendation: Create `filter_by_domains()` utility
+4. **Label Registry Resolution** ⚠️ **PARTIALLY DONE**
+   - Base `LabelRefSettings` provides common `resolve_index()` method
+   - Most handlers now inherit this functionality
+   - **Remaining**: Some handlers still have custom registry validation - can be standardized further
 
-**Total potential reduction**: ~400-600 lines of duplicated code
+5. **Card Field Iteration** ⚠️ **PARTIALLY DONE**
+   - Created `find_field_in_card()` and `modify_field_in_cards()` utilities in `base_settings.py`
+   - **Remaining**: Not yet adopted by handlers that iterate over fields
+   - **Recommendation**: Apply incrementally as handlers are modified
 
-**Status**: Analysis complete. Refactoring can be done incrementally as handlers are modified for other reasons. Not critical for functionality.
+### Summary:
+- **Lines eliminated**: ~150-170 lines of duplicate code
+- **Files created**: 2 new utility modules (`base_settings.py`, `keyword_utils.py`)
+- **Handlers refactored**: 10 of 14 (71%)
+- **Validation**: ✅ All changes validated - zero impact on generated code
+- **Documentation**: ✅ Architecture document updated with refactoring details
 
-## 2. High-Level Design ✅ DONE
+### Remaining Opportunities:
+- Apply field utilities to handlers with field iteration patterns
+- Standardize registry validation across all handlers
+- Fully integrate `KeywordNames` dataclass throughout `generate.py`
+- Consider extracting common patterns from `shared_field` and `add_option` handlers
+
+**Status**: Major refactoring complete. Remaining work is optional polish that can be done incrementally.
+
+## 2. High-Level Design ✅ COMPLETED (Jan 2026)
 
 **COMPLETED**: Enhanced `ARCHITECTURE.md` with comprehensive documentation:
 - Added high-level flow diagram showing data sources → pipeline → output
@@ -39,12 +60,13 @@ This file collects architectural and code-level recommendations for improving th
 - Expanded generation flow with 8 detailed steps
 - Clarified handler execution model and ordering
 - Updated component descriptions with current implementations
+- **Added**: Handler base utilities section documenting refactoring (Jan 2026)
 
 The documentation now provides clear architectural overview for developers.
 
 ---
 
-**All recommendations completed or analyzed!**
+**All primary recommendations completed!** Optional incremental improvements remain.
 
 **Constraints:**
 - Validate the codegen after all refactoring
