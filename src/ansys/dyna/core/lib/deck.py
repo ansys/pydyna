@@ -876,11 +876,51 @@ class Deck:
     def plot(self, **args):
         """Plot the node and element of the mesh using PyVista.
 
+        Automatically detects Jupyter notebook environments and configures
+        appropriate rendering backend for display.
+
         Parameters
         ----------
-        **args :
-            Keyword arguments. Use * *cwd* (``int``) if the deck and include files are in
+        cwd : str, optional
+            Current working directory if the deck and include files are in
             a separate directory.
+        jupyter_backend : str, optional
+            Jupyter backend to use. Options are:
+
+            - ``'static'`` - Static image (default for notebooks)
+            - ``'server'`` - Interactive with server backend
+            - ``'trame'`` - Interactive with Trame (requires pyvista[trame])
+            - ``None`` - Disable Jupyter mode, use default windowing
+            - ``'auto'`` - Automatically detect (default)
+        color : str, optional
+            Color of the mesh.
+        scalars : str, optional
+            Name of scalars to color by (e.g., 'part_ids', 'element_ids').
+        **args :
+            Additional keyword arguments passed to PyVista's plot method.
+
+        Returns
+        -------
+        Depends on backend
+            Camera position or plot object depending on the backend used.
+
+        Examples
+        --------
+        Plot a deck in a regular Python script:
+
+        >>> deck.plot()
+
+        Plot with a specific working directory:
+
+        >>> deck.plot(cwd='/path/to/includes')
+
+        Plot in a Jupyter notebook with interactive backend:
+
+        >>> deck.plot(jupyter_backend='server')
+
+        Color by part IDs:
+
+        >>> deck.plot(scalars='part_ids')
         """
         from ansys.dyna.core.lib.deck_plotter import plot_deck
 

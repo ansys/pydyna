@@ -28,9 +28,11 @@ from ansys.dyna.core import Deck
 from ansys.dyna.core.lib.deck_plotter import (
     extract_shell_facets,
     get_polydata,
+    is_jupyter_environment,
     line_array,
     map_facet_nid_to_index,
     np,
+    plot_deck,
     shell_facet_array,
 )
 
@@ -372,3 +374,53 @@ def test_cell_data_preserved():
 
     # All elements should have part_id=1 (from our test mesh)
     assert all(pid == 1 for pid in grid.cell_data["part_ids"])
+
+
+@pytest.mark.keywords
+def test_jupyter_environment_detection():
+    """Test that is_jupyter_environment() returns False in test environment."""
+    # In normal pytest environment, this should return False
+    assert is_jupyter_environment() is False
+
+
+@pytest.mark.keywords
+def test_plot_deck_jupyter_backend_handling():
+    """Test that plot_deck correctly handles jupyter_backend parameter."""
+    from unittest.mock import MagicMock, patch
+
+    # Create a simple test deck
+    deck = create_test_hex_mesh(2, 2, 2)
+
+    # Mock PyVista to avoid actual plotting
+    with patch('ansys.dyna.core.lib.deck_plotter.get_pyvista') as mock_pv:
+        mock_pv_module = MagicMock()
+        mock_pv.return_value = mock_pv_module
+        mock_pv_module.global_theme.color = 'white'
+
+        # Mock the UnstructuredGrid and its plot method
+        with patch('ansys.dyna.core.lib.deck_plotter.get_polydata') as mock_polydata:
+            mock_grid = MagicMock()
+            mock_polydata.return_value = mock_grid
+
+            # Test 1: jupyter_backend='auto' in non-Jupyter environment should not add jupyter_backend
+            plot_deck(deck, jupyter_backend='auto')
+            # Check that plot was called without jupyter_backend (since we're not in Jupyter)
+            call_kwargs = mock_grid.plot.call_args[1]
+            assert 'jupyter_backend' not in call_kwargs or call_kwargs.get('jupyter_backend') is None
+
+            # Reset mock
+            mock_grid.plot.reset_mock()
+
+            # Test 2: explicit jupyter_backend='static' should be passed through
+            plot_deck(deck, jupyter_backend='static')
+            call_kwargs = mock_grid.plot.call_args[1]
+            assert call_kwargs.get('jupyter_backend') == 'static'
+
+            # Reset mock
+            mock_grid.plot.reset_mock()
+
+            # Test 3: jupyter_backend=None should not add the parameter
+            plot_deck(deck, jupyter_backend=None)
+            call_kwargs = mock_grid.plot.call_args[1]
+            assert 'jupyter_backend' not in call_kwargs
+
