@@ -433,6 +433,28 @@ def get_pyvista():
     return pv
 
 
+def is_jupyter_environment():
+    """Check if code is running in a Jupyter notebook environment.
+
+    Returns
+    -------
+    bool
+        True if running in Jupyter notebook/lab, False otherwise.
+    """
+    try:
+        from IPython import get_ipython
+
+        ipython = get_ipython()
+        if ipython is None:
+            return False
+        # Check for notebook or lab kernels
+        if "IPKernelApp" in ipython.config:
+            return True
+    except (ImportError, AttributeError):
+        pass
+    return False
+
+
 def get_polydata(deck: Deck, cwd=None, extract_surface=True):
     """Create the PolyData Object for plotting from a given deck with nodes and elements.
 
@@ -552,7 +574,30 @@ def get_polydata(deck: Deck, cwd=None, extract_surface=True):
 
 
 def plot_deck(deck, **args):
-    """Plot the deck."""
+    """Plot the deck with automatic Jupyter notebook support.
+
+    Parameters
+    ----------
+    deck : Deck
+        The deck to plot
+    cwd : str, optional
+        Current working directory for expanding includes
+    jupyter_backend : str, optional
+        Jupyter backend to use. Options are 'static', 'server', 'trame', or None.
+        If not specified, automatically detects Jupyter environment and uses 'static'.
+        Set to None to disable Jupyter mode explicitly.
+    color : str, optional
+        Color of the mesh
+    scalars : str, optional
+        Scalars to color by (e.g., 'part_ids', 'element_ids')
+    **args :
+        Additional keyword arguments passed to pyvista.plot()
+
+    Returns
+    -------
+    pyvista plot or camera position
+        Depends on the plotting backend used
+    """
 
     # import this lazily (otherwise this adds over a second to the import time of pyDyna)
     pv = get_pyvista()
@@ -562,6 +607,18 @@ def plot_deck(deck, **args):
     # set default color if both color and scalars are not specified
     color = args.pop("color", None)
     scalars = args.pop("scalars", None)
+
+    # Handle Jupyter backend - auto-detect if not specified
+    jupyter_backend = args.pop("jupyter_backend", "auto")
+    if jupyter_backend == "auto":
+        if is_jupyter_environment():
+            jupyter_backend = "static"  # Default to static for simplicity
+        else:
+            jupyter_backend = None
+
+    # Add jupyter_backend to args if specified
+    if jupyter_backend is not None:
+        args["jupyter_backend"] = jupyter_backend
 
     if scalars is not None:
         return plot_data.plot(scalars=scalars, **args)  # User specified scalars
