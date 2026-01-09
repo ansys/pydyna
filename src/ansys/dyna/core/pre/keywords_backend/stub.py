@@ -573,3 +573,46 @@ class KeywordsStub:
             ncyclfem=getattr(request, "ncylbem", 3),
         )
         return type("Response", (), {"success": True})()
+
+    # =========================================================================
+    # ICFD (Incompressible CFD) Methods
+    # =========================================================================
+
+    def ICFDCreateSection(self, request):
+        """Create ICFD_SECTION keyword."""
+        self._backend.create_icfd_section(sid=request.sid)
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateControlTime(self, request):
+        """Create ICFD_CONTROL_TIME keyword."""
+        self._backend.create_icfd_control_time(
+            ttm=request.tim,
+            dt=getattr(request, "dt", 0.0),
+            cfl=getattr(request, "cfl", 1.0),
+            lcidsf=getattr(request, "lcidsf", 0),
+            dtmin=getattr(request, "dtmin", 0.0),
+            dtmax=getattr(request, "dtmax", 0.0),
+            dtinit=getattr(request, "dtinit", 0.0),
+            tdeath=getattr(request, "tdeath", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreatePartVol(self, request):
+        """Create ICFD_PART_VOL keyword."""
+        pid = self._backend.next_id("icfd_part_vol")
+        self._backend.create_icfd_part_vol(
+            pid=pid,
+            secid=request.secid,
+            mid=getattr(request, "mid", 0),
+            spids=list(request.spids) if request.spids else None,
+        )
+        return type("Response", (), {"id": pid})()
+
+    def MESHCreateVolume(self, request):
+        """Create MESH_VOLUME keyword."""
+        volid = self._backend.next_id("mesh_volume")
+        self._backend.create_mesh_volume(
+            volid=volid,
+            pids=list(request.pids) if request.pids else None,
+        )
+        return type("Response", (), {"id": volid})()

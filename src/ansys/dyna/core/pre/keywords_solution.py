@@ -161,6 +161,8 @@ class KeywordsDynaSolution:
             ``True`` when successful, ``False`` when failed.
         """
         KeywordsDynaSolution.termination_time = termination_time
+        # Also set on DynaSolution for compatibility with classes that reference it directly
+        DynaSolution.termination_time = termination_time
         self._backend.create_termination(termination_time)
         logger.info(f"Setting termination time to {termination_time}")
         return True

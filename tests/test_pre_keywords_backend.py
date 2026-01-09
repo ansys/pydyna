@@ -755,10 +755,47 @@ class TestReferenceFileComparison:
         pytest.fail("Not implemented")
 
 
-    @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_cylinder_flow(self, initial_files_dir, pre_reference_dir):
         """test_cylinder_flow.k - ICFD cylinder flow."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaicfd import (
+            DynaICFD,
+            ICFDAnalysis,
+            ICFDVolumePart,
+            MeshedVolume,
+        )
+
+        initial_file = os.path.join(initial_files_dir, "icfd", "test_cylinder_flow.k")
+        reference_file = os.path.join(pre_reference_dir, "test_cylinder_flow.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            icfd = DynaICFD()
+            solution.add(icfd)
+            solution.set_termination(termination_time=100)
+
+            icfdanalysis = ICFDAnalysis()
+            icfdanalysis.set_timestep()
+            icfd.add(icfdanalysis)
+
+            partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
+            icfd.parts.add(partvol)
+
+            meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
+            icfd.add(meshvol)
+
+            solution.create_database_binary(dt=1)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_cylinder_flow.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_dam_break(self, initial_files_dir, pre_reference_dir):
