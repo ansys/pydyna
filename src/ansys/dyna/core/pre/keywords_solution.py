@@ -34,7 +34,8 @@ import shutil
 from typing import List, Optional
 
 from ansys.dyna.core.lib.deck import Deck
-from ansys.dyna.core.pre.keywords_backend import KeywordsBackend
+from ansys.dyna.core.pre.dynasolution import DynaSolution
+from ansys.dyna.core.pre.keywords_backend import KeywordsBackend, KeywordsStub
 from ansys.dyna.core.pre.model import Model
 
 logger = logging.getLogger(__name__)
@@ -62,6 +63,7 @@ class KeywordsDynaSolution:
         logger.info("Initializing KeywordsDynaSolution")
 
         self._backend = KeywordsBackend()
+        self._stub_adapter = KeywordsStub(self._backend)
         self._working_dir = working_dir or os.getcwd()
         self._backend.set_working_dir(self._working_dir)
 
@@ -71,9 +73,14 @@ class KeywordsDynaSolution:
         self._default_model: Optional[Model] = None
         self._loaded_files: List[str] = []
 
-        # Store a reference for compatibility
-        KeywordsDynaSolution.stub = self._backend
+        # Store a reference for compatibility with DynaBase and other pre modules
+        # Both KeywordsDynaSolution and DynaSolution.stub need to be set
+        KeywordsDynaSolution.stub = self._stub_adapter
         KeywordsDynaSolution.termination_time = 0
+
+        # CRITICAL: Also set on DynaSolution so that DynaBase, DynaMech etc. can find it
+        DynaSolution.stub = self._stub_adapter
+        DynaSolution.termination_time = 0
 
         # PIM client attributes (not used in keywords backend)
         self.pim_client = None

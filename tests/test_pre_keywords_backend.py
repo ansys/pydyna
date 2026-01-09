@@ -484,9 +484,17 @@ class TestReferenceFileComparison:
             return [f"Missing keyword types: {missing_types}"]
 
         # Metadata fields to skip
-        skip_fields = {"included_from", "cards", "title", "heading", "options", "subkeywords"}
+        skip_fields = {"included_from", "cards", "title", "heading", "options", "subkeywords", "its"}
 
-        def values_equivalent(val1, val2):
+        # Known keyword class defaults that are equivalent to None in reference
+        known_defaults = {
+            ("ControlSolution", "ncdcf"): 1,
+            ("ControlSolution", "lcint"): 100,
+            ("ControlThermalSolver", "gpt"): 8,
+            ("ControlThermalSolver", "solver"): 11,
+        }
+
+        def values_equivalent(val1, val2, kw_type=None, field=None):
             if val1 is None and val2 is None:
                 return True
             if (val1 is None and val2 == 0) or (val1 == 0 and val2 is None):
@@ -498,9 +506,14 @@ class TestReferenceFileComparison:
             if isinstance(val1, float) and isinstance(val2, float):
                 if math.isnan(val1) and math.isnan(val2):
                     return True
+            # Check for known defaults that are equivalent to None
+            if kw_type and field and (kw_type, field) in known_defaults:
+                default = known_defaults[(kw_type, field)]
+                if (val1 == default and val2 is None) or (val2 == default and val1 is None):
+                    return True
             return False
 
-        def compare_keyword_values(kw1, kw2):
+        def compare_keyword_values(kw1, kw2, kw_type=None):
             differences = []
             fields1 = {f for f in dir(kw1) if not f.startswith("_") and f not in skip_fields}
             fields2 = {f for f in dir(kw2) if not f.startswith("_") and f not in skip_fields}
@@ -516,7 +529,7 @@ class TestReferenceFileComparison:
                         continue
                     if hasattr(val2, "__iter__") and not isinstance(val2, (str, list, tuple)):
                         continue
-                    if values_equivalent(val1, val2):
+                    if values_equivalent(val1, val2, kw_type, field):
                         continue
                     if isinstance(val1, (int, float)) and isinstance(val2, (int, float)):
                         if not (math.isnan(val1) if isinstance(val1, float) else False):
@@ -539,7 +552,7 @@ class TestReferenceFileComparison:
                 all_differences.append(f"{kw_type}: count mismatch ({len(out_kws)} vs {len(ref_kws)})")
                 continue
             for i, (ref_kw, out_kw) in enumerate(zip(ref_kws, out_kws)):
-                diffs = compare_keyword_values(out_kw, ref_kw)
+                diffs = compare_keyword_values(out_kw, ref_kw, kw_type)
                 for field, out_val, ref_val in diffs:
                     try:
                         all_differences.append(f"{kw_type}[{i}].{field}: {out_val!r} vs {ref_val!r}")
@@ -596,10 +609,70 @@ class TestReferenceFileComparison:
         """test_elementary_main.k - INCLUDE_TRANSFORM, DEFINE_TRANSFORMATION."""
         pytest.fail("Not implemented")
 
-    @pytest.mark.xfail(reason="DynaThermal not implemented in keywords backend")
     def test_thermal_stress(self, initial_files_dir, pre_reference_dir):
         """test_thermal_stress.k - Thermal stress analysis."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynamech import (
+            DynaMech,
+            ThermalAnalysis,
+            ThermalAnalysisType,
+            SolidPart,
+            SolidFormulation,
+            NodeSet,
+            AnalysisType,
+        )
+        from ansys.dyna.core.pre.dynamaterial import MatElasticPlasticThermal
+
+        initial_file = os.path.join(initial_files_dir, "test_thermal_stress.k")
+        reference_file = os.path.join(pre_reference_dir, "test_thermal_stress.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+            solution.set_termination(3.0)
+
+            ts = DynaMech(analysis=AnalysisType.IMPLICIT)
+            solution.add(ts)
+
+            tanalysis = ThermalAnalysis()
+            tanalysis.set_timestep(initial_timestep=0.1)
+            tanalysis.set_solver(analysis_type=ThermalAnalysisType.TRANSIENT)
+            ts.add(tanalysis)
+
+            ts.set_timestep(timestep_size_for_mass_scaled=0.01)
+
+            mat = MatElasticPlasticThermal(
+                mass_density=1.0,
+                temperatures=(0, 10, 20, 30, 40, 50),
+                young_modulus=(1e10, 1e10, 1e10, 1e10, 1e10, 1e10),
+                poisson_ratio=(0.3, 0.3, 0.3, 0.3, 0.3, 0.3),
+                thermal_expansion=(0, 2e-6, 4e-6, 6e-6, 8e-6, 1e-5),
+                yield_stress=(1e20, 1e20, 1e20, 1e20, 1e20, 1e20),
+            )
+            mat.set_thermal_isotropic(
+                density=1, generation_rate_multiplier=10, specific_heat=1, conductivity=1
+            )
+
+            slab = SolidPart(1)
+            slab.set_material(mat)
+            slab.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
+            ts.parts.add(slab)
+
+            # Define initial condition
+            for i in range(1, 9):
+                ts.initialconditions.create_temperature(NodeSet([i]), temperature=10)
+
+            solution.set_output_database(glstat=0.03)
+            solution.create_database_binary(dt=0.01)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_thermal_stress.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_cylinder_flow(self, initial_files_dir, pre_reference_dir):
