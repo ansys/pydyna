@@ -241,6 +241,18 @@ class TableCard(Card):
         """Check if any data lines contain parameter references."""
         return any("&" in line for line in data_lines)
 
+    def _has_csv_format(self, data_lines: typing.List[str]) -> bool:
+        """Check if any data lines use comma-delimited format.
+
+        Uses the same detection logic as load_dataline to avoid false positives
+        on lines that contain commas but aren't CSV format (e.g., expressions
+        like min(1,2,3) in PARAMETER_EXPRESSION).
+        """
+        from ansys.dyna.core.lib.kwd_line_formatter import _is_comma_delimited
+
+        num_fields = len(self._fields)
+        return any(_is_comma_delimited(line, num_fields) for line in data_lines)
+
     def _load_lines_with_parameters(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
         """Load lines using load_dataline for parameter support.
 
@@ -263,11 +275,14 @@ class TableCard(Card):
         self._initialized = True
 
     def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
-        # Use parameter-aware loading if parameters are present
-        if parameter_set is not None and self._has_parameters(data_lines):
+        # Use parameter-aware loading if parameters or CSV format is present
+        # CSV format must go through load_dataline since pd.read_fwf doesn't support it
+        has_params = parameter_set is not None and self._has_parameters(data_lines)
+        has_csv = self._has_csv_format(data_lines)
+        if has_params or has_csv:
             self._load_lines_with_parameters(data_lines, parameter_set)
         else:
-            # Use fast pandas path when no parameters present
+            # Use fast pandas path when no parameters present and all lines are fixed-width
             fields = self._get_fields()
             buffer = io.StringIO()
             [(buffer.write(line), buffer.write("\n")) for line in data_lines]

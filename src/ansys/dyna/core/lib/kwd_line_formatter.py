@@ -21,11 +21,15 @@
 # SOFTWARE.
 
 import dataclasses
+import logging
 import typing
 import warnings
 
+from ansys.dyna.core.lib import config
 from ansys.dyna.core.lib.field import Flag
 from ansys.dyna.core.lib.parameters import ParameterSet
+
+logger = logging.getLogger(__name__)
 
 
 def read_line(buf: typing.TextIO, skip_comment=True) -> typing.Tuple[str, bool]:
@@ -133,9 +137,236 @@ def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterab
             return
 
 
+def _is_comma_delimited(line_data: str, num_fields: int = None) -> bool:
+    """Detect if a line uses comma-delimited (free) format.
+
+    LS-DYNA allows comma-delimited format as an alternative to fixed-width.
+    Detection is based on these rules:
+    1. Line must contain commas outside of parentheses (not function calls)
+    2. If expected field count is known, CSV field count should match
+    3. Otherwise, use heuristics based on structure
+
+    Parameters
+    ----------
+    line_data : str
+        The line to check.
+    num_fields : int, optional
+        Expected number of fields if known. Helps disambiguate.
+
+    Returns
+    -------
+    bool
+        True if the line appears to be comma-delimited.
+    """
+    if not config.csv_autodetect_enabled():
+        return False
+
+    if "," not in line_data:
+        return False
+
+    # Check if commas are inside parentheses (function calls like min(1,2,3))
+    # If so, this is NOT CSV format - it's an expression
+    paren_depth = 0
+    has_top_level_comma = False
+    for char in line_data:
+        if char == "(":
+            paren_depth += 1
+        elif char == ")":
+            paren_depth = max(0, paren_depth - 1)
+        elif char == "," and paren_depth == 0:
+            has_top_level_comma = True
+            break
+
+    if not has_top_level_comma:
+        return False
+
+    # Count comma-separated fields (at top level)
+    csv_fields = line_data.split(",")
+    num_csv_fields = len(csv_fields)
+
+    # If we know expected field count, check if CSV count matches
+    if num_fields is not None:
+        # If CSV field count matches expected (within ±1), likely CSV
+        if num_csv_fields >= num_fields - 1 and num_csv_fields <= num_fields + 2:
+            # Additional check: first field shouldn't have many leading spaces
+            # (which would indicate fixed-width format with embedded commas)
+            first_field = csv_fields[0]
+            leading_spaces = len(first_field) - len(first_field.lstrip())
+            if leading_spaces < 6:
+                return True
+
+    # Without field count hint, be more conservative
+    # Only trigger for lines that look clearly like CSV (3+ short fields)
+    if num_csv_fields >= 3:
+        first_field = csv_fields[0]
+        leading_spaces = len(first_field) - len(first_field.lstrip())
+        if leading_spaces < 6:
+            return True
+
+    return False
+
+
+def _parse_csv_value(
+    text_block: str,
+    item_type: type,
+    parameter_set: typing.Optional[ParameterSet],
+    get_none_value: typing.Callable,
+    get_parameter: typing.Callable,
+) -> typing.Any:
+    """Parse a single CSV field value.
+
+    Parameters
+    ----------
+    text_block : str
+        The text value from the CSV field (already stripped of surrounding whitespace).
+    item_type : type
+        The expected type for this field (int, float, str, or Flag).
+    parameter_set : ParameterSet, optional
+        Parameter set for resolving parameter references.
+    get_none_value : callable
+        Function to get the appropriate None/default value for the type.
+    get_parameter : callable
+        Function to resolve parameter references.
+
+    Returns
+    -------
+    Any
+        The parsed value.
+    """
+    # Check for empty/blank value
+    if text_block == "" or text_block.isspace():
+        return get_none_value(item_type)
+
+    text_block = text_block.strip()
+
+    # Check for parameter reference
+    if "&" in text_block:
+        if parameter_set is None:
+            raise ValueError("Parameter set must be provided when using parameters in keyword data.")
+        return get_parameter(text_block, item_type)
+
+    # Handle Flag type
+    if _is_flag(item_type):
+        flag: Flag = item_type
+        if flag.true_value and flag.true_value in text_block:
+            return True
+        if flag.false_value and flag.false_value in text_block:
+            return False
+        if len(flag.false_value) == 0:
+            warnings.warn("value detected in field where false value was an empty string")
+            return False
+        raise Exception("Failed to find true or false value in flag")
+
+    # Parse by type
+    if item_type is int:
+        return int(float(text_block))
+    elif item_type is str:
+        return text_block
+    elif item_type is float:
+        return float(text_block)
+    else:
+        raise Exception(f"Unexpected type in CSV field: {item_type}")
+
+
+def _load_dataline_csv(
+    spec: typing.List[tuple], line_data: str, parameter_set: typing.Optional[ParameterSet] = None
+) -> typing.Tuple:
+    """Load a comma-delimited (free format) keyword card line.
+
+    LS-DYNA allows comma-separated values as an alternative to fixed-width format.
+    Field positions/widths from the spec are ignored; fields are matched by order.
+
+    Parameters
+    ----------
+    spec : list of tuple
+        List of tuples representing the (offset, width, type) of each field.
+    line_data : str
+        Comma-separated string with keyword data.
+    parameter_set : ParameterSet, optional
+        Optional parameter set for resolving parameter references.
+
+    Returns
+    -------
+    tuple
+        Parsed values from the keyword card line.
+    """
+    logger.debug("Parsing comma-delimited line: %r", line_data)
+
+    def get_none_value(item_type):
+        if item_type is float:
+            return float("nan")
+        if _is_flag(item_type):
+            if len(item_type.false_value) == 0:
+                return False
+            if len(item_type.true_value) == 0:
+                return True
+            raise Exception(
+                "No input data for flag. Expected true or false value because neither uses `no input` as a value!"
+            )
+        return None
+
+    def get_parameter(text_block: str, item_type: type) -> typing.Any:
+        text_block = text_block.strip()
+        negative = False
+        if text_block.startswith("-&"):
+            negative = True
+            text_block = text_block[1:]
+
+        if not text_block.startswith("&"):
+            raise ValueError(f"Expected parameter to start with '&', got '{text_block}' instead.")
+        param_name = text_block[1:]
+        raw_value = parameter_set.get(param_name)
+
+        try:
+            value = _convert_type(raw_value, item_type)
+        except Exception:
+            raise TypeError(
+                f"Expected parameter '{param_name}' with value {raw_value} not convertible to type {item_type}."
+            )
+        if negative:
+            value *= -1.0
+        return value
+
+    expanded_spec = _expand_spec(spec)
+    csv_fields = line_data.split(",")
+    num_spec_fields = len(expanded_spec)
+    num_csv_fields = len(csv_fields)
+
+    if num_csv_fields > num_spec_fields:
+        logger.warning(
+            "CSV line has %d fields but spec expects %d; extra fields will be ignored",
+            num_csv_fields,
+            num_spec_fields,
+        )
+    elif num_csv_fields < num_spec_fields:
+        logger.debug(
+            "CSV line has %d fields but spec expects %d; missing fields will use defaults",
+            num_csv_fields,
+            num_spec_fields,
+        )
+
+    data = []
+    for i, item_spec in enumerate(expanded_spec):
+        _, _, item_type = item_spec
+        if i < num_csv_fields:
+            text_block = csv_fields[i]
+            value = _parse_csv_value(text_block, item_type, parameter_set, get_none_value, get_parameter)
+        else:
+            value = get_none_value(item_type)
+        data.append(value)
+
+    data = list(_contract_data(spec, data))
+    logger.debug("Parsed CSV values: %r", data)
+    return tuple(data)
+
+
 def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> typing.List:
     """
-    Loads a keyword card line with fixed column offsets and width from string.
+    Loads a keyword card line from string, auto-detecting fixed-width or comma-delimited format.
+
+    LS-DYNA supports both fixed-width format and comma-delimited (free) format. This function
+    automatically detects which format is used based on the presence of commas in the line.
+    Per the LS-DYNA manual, formats can be mixed within a deck but not within a single card.
 
     Parameters
     ----------
@@ -143,7 +374,7 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         List of tuples representing the (offset, width, type) of each field.
         Type can be a Flag which represents the True and False value.
     line_data : str
-        String with keyword data.
+        String with keyword data (fixed-width or comma-delimited).
     parameter_set : ParameterSet, optional
         Optional parameter set.
 
@@ -156,7 +387,17 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
     --------
     >>> load_dataline([(0,10, int),(10,10, str)], '         1     hello')
     (1, 'hello')
+    >>> load_dataline([(0,10, int),(10,10, str)], '1,hello')
+    (1, 'hello')
     """
+    # Auto-detect comma-delimited format, passing field count as hint
+    num_fields = len(spec)
+    if _is_comma_delimited(line_data, num_fields):
+        logger.debug("Detected comma-delimited format for line")
+        return _load_dataline_csv(spec, line_data, parameter_set)
+
+    # Fixed-width format parsing (original implementation)
+    logger.debug("Using fixed-width format for line")
 
     def seek_text_block(line_data: str, position: int, width: int) -> str:
         """Returns the text block from the line at the given position and width
@@ -257,3 +498,23 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         warnings.warn(warning_message)
     data = list(_contract_data(spec, data))
     return tuple(data)
+
+
+def load_dataline_with_format(
+    spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None
+) -> typing.Tuple[typing.List, str]:
+    """
+    Like load_dataline, but also returns the detected format.
+
+    Returns
+    -------
+    tuple
+        A tuple of (values, format) where format is 'csv' or 'fixed'.
+    """
+    from ansys.dyna.core.lib.format_type import card_format
+
+    num_fields = len(spec)
+    is_csv = _is_comma_delimited(line_data, num_fields)
+    values = load_dataline(spec, line_data, parameter_set)
+    detected_format = card_format.csv if is_csv else card_format.fixed
+    return values, detected_format

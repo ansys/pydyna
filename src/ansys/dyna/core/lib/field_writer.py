@@ -23,6 +23,7 @@
 import copy
 import dataclasses
 import io
+import logging
 import typing
 
 import hollerith as holler
@@ -31,6 +32,8 @@ import pandas._libs.missing as libmissing
 
 from ansys.dyna.core.lib.field import Field, to_long
 from ansys.dyna.core.lib.format_type import format_type
+
+logger = logging.getLogger(__name__)
 
 
 def _write_string_right(value, width):
@@ -213,3 +216,108 @@ def write_comment_line(
     buf.seek(pos)
     buf.write("$#")
     buf.seek(endpos)
+
+
+def _format_csv_value(value: typing.Any, field_type: type) -> str:
+    """Format a single value for CSV output.
+
+    Parameters
+    ----------
+    value : Any
+        The value to format.
+    field_type : type
+        The type of the field (int, float, str).
+
+    Returns
+    -------
+    str
+        The formatted string representation.
+    """
+    if libmissing.checknull(value):
+        return ""
+    if field_type == int:
+        return str(int(value))
+    if field_type == float:
+        # Use repr for floats to preserve precision, but strip unnecessary trailing zeros
+        formatted = repr(float(value))
+        return formatted
+    if field_type == str:
+        return str(value)
+    return str(value)
+
+
+def write_fields_csv(
+    buf: typing.IO[typing.AnyStr],
+    fields: typing.List[Field],
+    values: typing.Optional[typing.List[typing.Any]] = None,
+) -> None:
+    """Write `fields` representing a line of a keyword to `buf` in comma-delimited format.
+
+    This produces LS-DYNA compatible comma-delimited (free format) output.
+
+    Parameters
+    ----------
+    buf : IO
+        Buffer to write to.
+    fields : List[Field]
+        Fields to write.
+    values : List[Any], optional
+        List of values for the fields. If not set, use the value property of each field.
+
+    Examples
+    --------
+    >>> s = io.StringIO()
+    >>> fields = [
+    ...     Field("a", int, 0, 10, value=1),
+    ...     Field("b", str, 10, 10, value="hello")
+    ... ]
+    >>> write_fields_csv(s, fields)
+    >>> s.getvalue()
+    '1,hello'
+    """
+    logger.debug("Writing %d fields in CSV format", len(fields))
+
+    if values is not None:
+        fields = copy.deepcopy(fields)
+        for field, value in zip(fields, values):
+            field.value = value
+
+    csv_values = []
+    for field in fields:
+        if field.type is None:
+            csv_values.append("")
+        else:
+            field_value, field_type = field.io_info()
+            csv_values.append(_format_csv_value(field_value, field_type))
+
+    buf.write(",".join(csv_values))
+
+
+def write_c_dataframe_csv(
+    buf: typing.IO[typing.AnyStr],
+    fields: typing.List[Field],
+    table: pd.DataFrame,
+) -> None:
+    """Write a DataFrame to `buf` in comma-delimited format.
+
+    Parameters
+    ----------
+    buf : IO
+        Buffer to write to.
+    fields : List[Field]
+        Field definitions for the columns.
+    table : pd.DataFrame
+        The data to write.
+    """
+    logger.debug("Writing DataFrame with %d rows in CSV format", len(table))
+
+    for row_idx in range(len(table)):
+        csv_values = []
+        for field in fields:
+            if field.name in table.columns:
+                value = table[field.name].iloc[row_idx]
+                csv_values.append(_format_csv_value(value, field.type))
+            else:
+                csv_values.append("")
+        buf.write(",".join(csv_values))
+        buf.write("\n")
