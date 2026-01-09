@@ -699,6 +699,113 @@ class KeywordsBackend:
         logger.debug("Created CONTROL_THERMAL_TIMESTEP")
         return True
 
+    def create_control_shell(
+        self,
+        wrpang: float = 20.0,
+        esort: int = 0,
+        irnxx: int = -1,
+        istupd: int = 0,
+        theory: int = 2,
+        bwc: int = 2,
+        miter: int = 1,
+        proj: int = 0,
+        irquad: int = 0,
+    ) -> bool:
+        """Create a CONTROL_SHELL keyword.
+
+        Parameters
+        ----------
+        wrpang : float
+            Shell element warpage angle in degrees.
+        esort : int
+            Sorting of triangular shell elements.
+        irnxx : int
+            Shell normal update option.
+        istupd : int
+            Shell thickness change option.
+        theory : int
+            Default shell formulation.
+        bwc : int
+            Warping stiffness for Belytschko-Tsay shells.
+        miter : int
+            Plane stress plasticity option.
+        proj : int
+            Projection method for warping stiffness.
+        irquad : int
+            In-plane integration rule for eight-node quadratic shell.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlShell()
+        kw.wrpang = wrpang
+        kw.esort = esort
+        kw.irnxx = irnxx
+        kw.istupd = istupd
+        # theory=0 means use default, which the keyword class doesn't accept
+        # so we only set it if non-zero
+        if theory != 0:
+            kw.theory = theory
+        kw.bwc = bwc
+        kw.miter = miter
+        kw.proj = proj
+        # irquad=0 means use default, which the keyword class doesn't accept
+        if irquad != 0:
+            kw.irquad = irquad
+
+        self._deck.append(kw)
+        logger.debug("Created CONTROL_SHELL")
+        return True
+
+    def create_control_contact(
+        self,
+        rwpnal: float = 0.0,
+        shlthk: int = 0,
+        orien: int = 1,
+        ssthk: int = 0,
+        ignore: int = 0,
+        igactc: int = 0,
+    ) -> bool:
+        """Create a CONTROL_CONTACT keyword.
+
+        Parameters
+        ----------
+        rwpnal : float
+            Scale factor for rigid wall penalties.
+        shlthk : int
+            Shell thickness offset flag.
+        orien : int
+            Automatic reorientation flag.
+        ssthk : int
+            Default contact thickness flag.
+        ignore : int
+            Ignore initial penetrations flag.
+        igactc : int
+            Isogeometric shells for contact flag.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlContact()
+        kw.rwpnal = rwpnal
+        kw.shlthk = shlthk
+        kw.orien = orien
+        kw.ssthk = ssthk
+        kw.ignore = ignore
+        kw.igactc = igactc
+
+        self._deck.append(kw)
+        logger.debug("Created CONTROL_CONTACT")
+        return True
+
     def create_initial_temperature(
         self,
         option: str = "SET",
@@ -1444,6 +1551,33 @@ class KeywordsStub:
             q1=request.q1,
             q2=request.q2,
             bulk_type=request.type,
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateControlShell(self, request):
+        """Create control shell keyword."""
+        self._backend.create_control_shell(
+            wrpang=request.wrpang,
+            esort=request.esort,
+            irnxx=request.irnxx,
+            istupd=request.istupd,
+            theory=request.theory,
+            bwc=request.bwc,
+            miter=request.miter,
+            proj=request.proj,
+            irquad=request.irquad,
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateControlContact(self, request):
+        """Create control contact keyword."""
+        self._backend.create_control_contact(
+            rwpnal=request.rwpnal,
+            shlthk=request.shlthk,
+            orien=request.orien,
+            ssthk=request.ssthk,
+            ignore=request.ignore,
+            igactc=request.igactc,
         )
         return type("Response", (), {"success": True})()
 

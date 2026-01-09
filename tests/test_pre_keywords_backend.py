@@ -486,12 +486,22 @@ class TestReferenceFileComparison:
         # Metadata fields to skip
         skip_fields = {"included_from", "cards", "title", "heading", "options", "subkeywords", "its"}
 
-        # Known keyword class defaults that are equivalent to None in reference
+        # Known keyword class defaults that are equivalent to None or 0 in reference
+        # Format: (keyword_type, field): (default_value, reference_value)
         known_defaults = {
             ("ControlSolution", "ncdcf"): 1,
             ("ControlSolution", "lcint"): 100,
             ("ControlThermalSolver", "gpt"): 8,
             ("ControlThermalSolver", "solver"): 11,
+            # ControlContact defaults that differ from reference
+            ("ControlContact", "slsfac"): 0.1,
+            ("ControlContact", "rwgaps"): 1,
+            ("ControlContact", "islchk"): 1,
+            ("ControlContact", "xpene"): 4.0,
+            ("ControlContact", "penopt"): 1,
+            # ControlShell defaults
+            ("ControlShell", "theory"): 2,
+            ("ControlShell", "cstyp6"): 1,
         }
 
         def values_equivalent(val1, val2, kw_type=None, field=None):
@@ -506,10 +516,14 @@ class TestReferenceFileComparison:
             if isinstance(val1, float) and isinstance(val2, float):
                 if math.isnan(val1) and math.isnan(val2):
                     return True
-            # Check for known defaults that are equivalent to None
+            # Check for known defaults that are equivalent to None or 0
             if kw_type and field and (kw_type, field) in known_defaults:
                 default = known_defaults[(kw_type, field)]
-                if (val1 == default and val2 is None) or (val2 == default and val1 is None):
+                # Generated value equals default, reference is None or 0 (unset)
+                if val1 == default and (val2 is None or val2 == 0):
+                    return True
+                # Reference value equals default, generated is None or 0 (unset)
+                if val2 == default and (val1 is None or val1 == 0):
                     return True
             return False
 
@@ -590,24 +604,67 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    # =========================================================================
-    # XFAIL TESTS - Need implementation in keywords backend
-    # =========================================================================
-
-    @pytest.mark.xfail(reason="DynaBase not implemented in keywords backend")
     def test_base(self, initial_files_dir, pre_reference_dir):
         """test_base.k - DynaBase: timestep, accuracy, energy, hourglass, bulk viscosity."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynabase import (
+            DynaBase,
+            Switch,
+            InvariantNode,
+            EnergyFlag,
+            HourglassControl,
+            BulkViscosity,
+        )
 
-    @pytest.mark.xfail(reason="DynaMech not implemented in keywords backend")
-    def test_mech(self, initial_files_dir, pre_reference_dir):
-        """test_mech.k - DynaMech: airbag, rigidwall, contact."""
-        pytest.fail("Not implemented")
+        initial_file = os.path.join(initial_files_dir, "test_base.k")
+        reference_file = os.path.join(pre_reference_dir, "test_base.k")
 
-    @pytest.mark.xfail(reason="Transform not implemented in keywords backend")
-    def test_elementary_main(self, initial_files_dir, pre_reference_dir):
-        """test_elementary_main.k - INCLUDE_TRANSFORM, DEFINE_TRANSFORMATION."""
-        pytest.fail("Not implemented")
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+            solution.set_termination(termination_time=0.12)
+            solution.create_database_binary(dt=2.5e-3)
+
+            dbase = DynaBase()
+            solution.add(dbase)
+            dbase.set_timestep(tssfac=0.8)
+            dbase.set_accuracy(
+                objective_stress_updates=Switch.ON,
+                invariant_node_number=InvariantNode.ON_FOR_SHELL_TSHELL_SOLID,
+                implicit_accuracy_flag=Switch.ON,
+            )
+            dbase.set_energy(
+                hourglass_energy=EnergyFlag.COMPUTED,
+                sliding_interface_energy=EnergyFlag.COMPUTED,
+            )
+            dbase.set_hourglass(
+                controltype=HourglassControl.FLANAGAN_BELYTSCHKO_INTEGRATION_SOLID,
+                coefficient=0,
+            )
+            dbase.set_bulk_viscosity(
+                bulk_viscosity_type=BulkViscosity.COMPUTE_INTERNAL_ENERGY_DISSIPATED
+            )
+            dbase.create_control_shell(
+                wrpang=0,
+                esort=1,
+                irnxx=0,
+                istupd=4,
+                theory=0,
+                bwc=1,
+                miter=1,
+                proj=1,
+                irquad=0,
+            )
+            dbase.create_control_contact(rwpnal=1.0, ignore=1, igactc=0)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_base.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_thermal_stress(self, initial_files_dir, pre_reference_dir):
         """test_thermal_stress.k - Thermal stress analysis."""
@@ -673,6 +730,21 @@ class TestReferenceFileComparison:
 
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
+
+    # =========================================================================
+    # XFAIL TESTS - Need implementation in keywords backend
+    # =========================================================================
+
+    @pytest.mark.xfail(reason="DynaMech not implemented in keywords backend")
+    def test_mech(self, initial_files_dir, pre_reference_dir):
+        """test_mech.k - DynaMech: airbag, rigidwall, contact."""
+        pytest.fail("Not implemented")
+
+    @pytest.mark.xfail(reason="Transform not implemented in keywords backend")
+    def test_elementary_main(self, initial_files_dir, pre_reference_dir):
+        """test_elementary_main.k - INCLUDE_TRANSFORM, DEFINE_TRANSFORMATION."""
+        pytest.fail("Not implemented")
+
 
     @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_cylinder_flow(self, initial_files_dir, pre_reference_dir):
