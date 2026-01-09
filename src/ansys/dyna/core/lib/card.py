@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.field import Field, Flag, to_long  # noqa: F401
 from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields, write_fields_csv
 from ansys.dyna.core.lib.format_type import card_format, format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
-from ansys.dyna.core.lib.kwd_line_formatter import load_dataline_with_format, read_line
+from ansys.dyna.core.lib.kwd_line_formatter import FormatSpec, load_dataline_with_format, read_line
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 
@@ -38,6 +38,8 @@ class Card(CardInterface):
         self._active_func = active_func
         self._format_type = format
         self._card_format = card_format.fixed
+        # Cached FormatSpec for standard and long formats
+        self._format_spec_cache: typing.Dict[format_type, FormatSpec] = {}
 
     @property
     def format(self):
@@ -78,9 +80,16 @@ class Card(CardInterface):
     def _load(self, data_line: str, parameter_set: ParameterSet) -> None:
         """loads the card data from a list of strings"""
         fields = self._fields
-        if self.format == format_type.long:
+        current_format = self.format
+        if current_format == format_type.long:
             fields = self._convert_fields_to_long_format()
-        format_spec = self._get_format_spec(fields)
+
+        # Use cached FormatSpec to avoid recomputing hash each time
+        format_spec = self._format_spec_cache.get(current_format)
+        if format_spec is None:
+            format_spec = FormatSpec.from_fields(fields)
+            self._format_spec_cache[current_format] = format_spec
+
         values, detected_format = load_dataline_with_format(format_spec, data_line, parameter_set)
         self._card_format = detected_format
         num_fields = len(fields)
