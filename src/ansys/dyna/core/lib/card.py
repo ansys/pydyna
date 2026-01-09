@@ -229,8 +229,9 @@ class Card(CardInterface):
         """Create a Card from FieldSchema tuples with kwargs defaults (lspp_defaults).
 
         This is like from_field_schemas but applies lspp_defaults logic:
-        each field's value is looked up in kwargs by field name, falling back
-        to the schema default.
+        - If use_lspp_defaults() is True: look up value in kwargs by field name,
+          falling back to the schema default.
+        - If use_lspp_defaults() is False: all fields are None.
 
         Parameters
         ----------
@@ -248,8 +249,13 @@ class Card(CardInterface):
         Card
             A new Card instance.
         """
-        # Build values list from kwargs, falling back to schema defaults
-        values = [kwargs.get(fs.name, fs.default) for fs in field_schemas]
+        from ansys.dyna.core.lib.config import use_lspp_defaults
+
+        # Build values list: respect use_lspp_defaults() setting
+        if use_lspp_defaults():
+            values = [kwargs.get(fs.name, fs.default) for fs in field_schemas]
+        else:
+            values = [None] * len(field_schemas)
         return cls.from_field_schemas(field_schemas, values, active_func, format)
 
     @property
