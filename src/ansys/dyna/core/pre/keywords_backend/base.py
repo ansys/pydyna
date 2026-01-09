@@ -56,6 +56,21 @@ class IdGenerator:
         self._counters[category] += 1
         return self._counters[category]
 
+    def ensure_min_id(self, category: str, min_id: int) -> None:
+        """Ensure the counter is at least the given value.
+
+        Parameters
+        ----------
+        category : str
+            The category of ID.
+        min_id : int
+            The minimum value the counter should be at.
+        """
+        if category not in self._counters:
+            self._counters[category] = min_id
+        else:
+            self._counters[category] = max(self._counters[category], min_id)
+
     def reset(self, category: Optional[str] = None) -> None:
         """Reset ID counters.
 
@@ -214,3 +229,15 @@ class KeywordsBackendBase:
             The next available ID.
         """
         return self._id_generator.next_id(category)
+
+    def ensure_min_id(self, category: str, min_id: int) -> None:
+        """Ensure the ID counter is at least the given value.
+
+        Parameters
+        ----------
+        category : str
+            The category of ID.
+        min_id : int
+            The minimum value the counter should be at.
+        """
+        self._id_generator.ensure_min_id(category, min_id)

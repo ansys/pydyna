@@ -802,10 +802,76 @@ class TestReferenceFileComparison:
         """test_dam_break.k - ICFD dam break simulation."""
         pytest.fail("Not implemented")
 
-    @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_driven_cavity(self, initial_files_dir, pre_reference_dir):
         """test_driven_cavity.k - ICFD driven cavity flow."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaicfd import (
+            DynaICFD,
+            ICFDAnalysis,
+            ICFDPart,
+            ICFDVolumePart,
+            MeshedVolume,
+            MatICFD,
+            Curve,
+            ICFDDOF,
+            ICFD_AnalysisType,
+            ICFD_MessageLevel,
+        )
+
+        initial_file = os.path.join(initial_files_dir, "icfd", "test_driven_cavity.k")
+        reference_file = os.path.join(pre_reference_dir, "test_driven_cavity.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            icfd = DynaICFD()
+            solution.add(icfd)
+
+            icfdanalysis = ICFDAnalysis()
+            icfdanalysis.set_type(analysis_type=ICFD_AnalysisType.STEADY_STATE_ANALYSIS)
+            icfdanalysis.set_output(
+                messagelevel=ICFD_MessageLevel.FULL_OUTPUT_INFORMATION, iteration_interval=250
+            )
+            icfdanalysis.set_steady_state(
+                max_iteration=2500,
+                momentum_tol_limit=1e-8,
+                pressure_tol_limit=1e-8,
+                velocity_relax_param=1,
+                pressure_relax_param=1,
+            )
+            icfd.add(icfdanalysis)
+
+            # Define model
+            mat = MatICFD(flow_density=1, dynamic_viscosity=0.001)
+
+            part1 = ICFDPart(1)
+            part1.set_material(mat)
+            part1.set_prescribed_velocity(dof=ICFDDOF.X, motion=Curve(x=[0, 10000], y=[1, 1]))
+            icfd.parts.add(part1)
+
+            part2 = ICFDPart(2)
+            part2.set_material(mat)
+            part2.set_non_slip()
+            icfd.parts.add(part2)
+
+            partvol = ICFDVolumePart(surfaces=[1, 2])
+            partvol.set_material(mat)
+            icfd.parts.add(partvol)
+
+            meshvol = MeshedVolume(surfaces=[1, 2])
+            icfd.add(meshvol)
+
+            solution.create_database_binary(dt=250)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_driven_cavity.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_free_convection_flow(self, initial_files_dir, pre_reference_dir):

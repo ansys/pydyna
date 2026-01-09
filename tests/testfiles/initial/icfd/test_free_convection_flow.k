@@ -15,7 +15,7 @@ $#     pid     secid       mid
 *ICFD_PART
 $#     pid     secid       mid 
          4         0         0
-*mesh_surface_element
+*MESH_SURFACE_ELEMENT
        1       3       1       9       0       0       0       0       0       0
        2       2       1      58       0       0       0       0       0       0
        3       4       5     107       0       0       0       0       0       0
@@ -216,7 +216,7 @@ $#     pid     secid       mid
      198       1     202     203       0       0       0       0       0       0
      199       1     203     204       0       0       0       0       0       0
      200       1     204       2       0       0       0       0       0       0
-*mesh_surface_NODE
+*MESH_SURFACE_NODE
        1        1.000000        1.000000           0.000       0       0
        2           0.000        1.000000           0.000       0       0
        4        1.000000           0.000           0.000       0       0

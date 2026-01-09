@@ -599,7 +599,8 @@ class KeywordsStub:
 
     def ICFDCreatePartVol(self, request):
         """Create ICFD_PART_VOL keyword."""
-        pid = self._backend.next_id("icfd_part_vol")
+        # Use "icfd_part" category to share IDs with regular ICFD parts
+        pid = self._backend.next_id("icfd_part")
         self._backend.create_icfd_part_vol(
             pid=pid,
             secid=request.secid,
@@ -616,3 +617,85 @@ class KeywordsStub:
             pids=list(request.pids) if request.pids else None,
         )
         return type("Response", (), {"id": volid})()
+
+    def ICFDCreateControlGeneral(self, request):
+        """Create ICFD_CONTROL_GENERAL keyword."""
+        self._backend.create_icfd_control_general(
+            atype=getattr(request, "atype", 0),
+            mtype=getattr(request, "mtype", 0),
+            dvcl=getattr(request, "dvcl", 0),
+            rdvcl=getattr(request, "rdvcl", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateControlOutput(self, request):
+        """Create ICFD_CONTROL_OUTPUT keyword."""
+        self._backend.create_icfd_control_output(
+            msgl=getattr(request, "msgl", 0),
+            itout=getattr(request, "itout", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateControlSteady(self, request):
+        """Create ICFD_CONTROL_STEADY keyword."""
+        self._backend.create_icfd_control_steady(
+            its=getattr(request, "its", 1000000),
+            tol1=getattr(request, "tol1", 0.001),
+            tol2=getattr(request, "tol2", 0.001),
+            tol3=getattr(request, "tol3", 0.001),
+            rel1=getattr(request, "rel1", 0.3),
+            rel2=getattr(request, "rel2", 0.7),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateMat(self, request):
+        """Create ICFD_MAT keyword."""
+        mid = self._backend.next_id("icfd_mat")
+        self._backend.create_icfd_mat(
+            mid=mid,
+            flg=getattr(request, "flg", 1),
+            ro=getattr(request, "ro", 0.0),
+            vis=getattr(request, "vis", 0.0),
+        )
+        return type("Response", (), {"id": mid})()
+
+    def ICFDCreatePart(self, request):
+        """Create ICFD_PART keyword."""
+        # Track the part ID to keep the counter in sync with ICFDPartVol
+        pid = request.pid
+        self._backend.ensure_min_id("icfd_part", pid)
+        self._backend.create_icfd_part(
+            pid=pid,
+            secid=request.secid,
+            mid=getattr(request, "mid", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def SetICFDPartProperty(self, request):
+        """Set ICFD_PART properties (secid and mid)."""
+        # Track the part ID to keep the counter in sync with ICFDPartVol
+        self._backend.ensure_min_id("icfd_part", request.pid)
+        self._backend.set_icfd_part_property(
+            pid=request.pid,
+            secid=request.secid,
+            mid=request.mid,
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateBdyNonSlip(self, request):
+        """Create ICFD_BOUNDARY_NONSLIP keyword."""
+        self._backend.create_icfd_boundary_nonslip(pid=request.pid)
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateBdyPrescribedVel(self, request):
+        """Create ICFD_BOUNDARY_PRESCRIBED_VEL keyword."""
+        self._backend.create_icfd_boundary_prescribed_vel(
+            pid=request.pid,
+            dof=getattr(request, "dof", 1),
+            vad=getattr(request, "vad", 1),
+            lcid=getattr(request, "lcid", 0),
+            sf=getattr(request, "sf", 1.0),
+            death=getattr(request, "death", 0.0),
+            birth=getattr(request, "birth", 0.0),
+        )
+        return type("Response", (), {"success": True})()

@@ -434,7 +434,7 @@ $#   nid               x               y               z      tc      rc
      204        4.030127        5.248178             0.0       0       0
      205        4.020105         5.24919             0.0       0       0
      206        4.010051        5.249798             0.0       0       0
-*mesh_surface_element
+*MESH_SURFACE_ELEMENT
 $#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
    10000       5   10000   10001       0       0       0       0       0       0
    10001       5   10001   10002       0       0       0       0       0       0
@@ -676,7 +676,7 @@ $#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
    10237       5   10237   10238       0       0       0       0       0       0
    10238       5   10238   10239       0       0       0       0       0       0
    10239       5   10239   10000       0       0       0       0       0       0
-*mesh_surface_NODE
+*MESH_SURFACE_NODE
 $#   nid               x               y               z      tc      rc  
    10000             3.0             4.0             0.0       0       0
    10001             3.0            4.05             0.0       0       0

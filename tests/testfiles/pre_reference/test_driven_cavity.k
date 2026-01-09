@@ -23,8 +23,8 @@ $#     pid       dof       vad      lcid        sf       vid     death     birth
 $#   atype     mtype      dvcl     rdvcl     solcl         -       idr
          1         0         0         0         0                   0
 *ICFD_CONTROL_OUTPUT
-$#    msgl      outl     dtout   lsppout         -     itout
-         4         0       0.0         0                 250
+$#    msgl      outl     dtout   lsppout    unused     itout
+         4         0       0.0         1                 250
 *ICFD_CONTROL_STEADY
 $#     its      tol1      tol2      tol3      rel1      rel2      urel     order
       25001.00000E-81.00000E-8     0.001       1.0       1.0       1.0         0

@@ -12,7 +12,7 @@ $#     pid     secid       mid
 *ICFD_PART
 $#     pid     secid       mid 
          3         0         0
-*mesh_surface_element
+*MESH_SURFACE_ELEMENT
 $#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
        1       1       1       2       0       0       0       0       0       0
        2       1       2       3       0       0       0       0       0       0
@@ -254,7 +254,7 @@ $#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
      238       3     245     246       0       0       0       0       0       0
      239       3     246     247       0       0       0       0       0       0
      240       3     247      22       0       0       0       0       0       0
-*mesh_surface_NODE
+*MESH_SURFACE_NODE
 $#   nid               x               y               z      tc      rc  
        1             0.0             0.0             0.0       0       0
        2             0.0            0.25             0.0       0       0

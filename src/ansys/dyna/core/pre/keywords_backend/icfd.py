@@ -171,6 +171,291 @@ class ICFDKeywordsMixin:
         logger.info(f"Created ICFD_PART_VOL keyword with pid={pid}")
         return pid
 
+    def create_icfd_control_general(
+        self,
+        atype: int = 0,
+        mtype: int = 0,
+        dvcl: int = 0,
+        rdvcl: int = 0,
+    ) -> None:
+        """Create ICFD_CONTROL_GENERAL keyword.
+
+        Parameters
+        ----------
+        atype : int, optional
+            Analysis type. 0=Transient, 1=Steady state, -1=Turn off ICFD. Default is 0.
+        mtype : int, optional
+            Solving method type. Default is 0.
+        dvcl : int, optional
+            Flag for divergence cleaning. Default is 0.
+        rdvcl : int, optional
+            Flag for remeshing divergence cleaning. Default is 0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(
+            f"Creating ICFD_CONTROL_GENERAL: atype={atype}, mtype={mtype}, "
+            f"dvcl={dvcl}, rdvcl={rdvcl}"
+        )
+
+        kw = keywords.IcfdControlGeneral()
+        kw.atype = atype
+        kw.mtype = mtype
+        kw.dvcl = dvcl
+        kw.rdvcl = rdvcl
+
+        self._deck.append(kw)
+        logger.info("Created ICFD_CONTROL_GENERAL keyword")
+
+    def create_icfd_control_output(
+        self,
+        msgl: int = 0,
+        itout: int = 0,
+    ) -> None:
+        """Create ICFD_CONTROL_OUTPUT keyword.
+
+        Parameters
+        ----------
+        msgl : int, optional
+            Message level. 0=timestep info, 4=full output. Default is 0.
+        itout : int, optional
+            Iteration interval to print output. Default is 0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_CONTROL_OUTPUT: msgl={msgl}, itout={itout}")
+
+        kw = keywords.IcfdControlOutput()
+        kw.msgl = msgl
+        kw.itout = itout
+        # Leave lsppout at default (None → blank in output)
+
+        self._deck.append(kw)
+        logger.info("Created ICFD_CONTROL_OUTPUT keyword")
+
+    def create_icfd_control_steady(
+        self,
+        its: int = 1000000,
+        tol1: float = 0.001,
+        tol2: float = 0.001,
+        tol3: float = 0.001,
+        rel1: float = 0.3,
+        rel2: float = 0.7,
+    ) -> None:
+        """Create ICFD_CONTROL_STEADY keyword.
+
+        Parameters
+        ----------
+        its : int, optional
+            Maximum number of iterations. Default is 1000000.
+        tol1 : float, optional
+            Momentum tolerance limit. Default is 0.001.
+        tol2 : float, optional
+            Pressure tolerance limit. Default is 0.001.
+        tol3 : float, optional
+            Temperature tolerance limit. Default is 0.001.
+        rel1 : float, optional
+            Velocity relaxation parameter. Default is 0.3.
+        rel2 : float, optional
+            Pressure relaxation parameter. Default is 0.7.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(
+            f"Creating ICFD_CONTROL_STEADY: its={its}, tol1={tol1}, tol2={tol2}, "
+            f"tol3={tol3}, rel1={rel1}, rel2={rel2}"
+        )
+
+        kw = keywords.IcfdControlSteady()
+        kw.its = its
+        kw.tol1 = tol1
+        kw.tol2 = tol2
+        kw.tol3 = tol3
+        kw.rel1 = rel1
+        kw.rel2 = rel2
+
+        self._deck.append(kw)
+        logger.info("Created ICFD_CONTROL_STEADY keyword")
+
+    def create_icfd_mat(
+        self,
+        mid: int,
+        flg: int = 1,
+        ro: float = 0.0,
+        vis: float = 0.0,
+    ) -> int:
+        """Create ICFD_MAT keyword.
+
+        Parameters
+        ----------
+        mid : int
+            Material identification.
+        flg : int, optional
+            Flag for compressibility. 1=fully incompressible. Default is 1.
+        ro : float, optional
+            Flow density. Default is 0.0.
+        vis : float, optional
+            Dynamic viscosity. Default is 0.0.
+
+        Returns
+        -------
+        int
+            The material ID assigned.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_MAT: mid={mid}, flg={flg}, ro={ro}, vis={vis}")
+
+        kw = keywords.IcfdMat()
+        kw.mid = mid
+        kw.flg = flg
+        kw.ro = ro
+        kw.vis = vis
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_MAT keyword with mid={mid}")
+        return mid
+
+    def create_icfd_part(
+        self,
+        pid: int,
+        secid: int,
+        mid: int = 0,
+    ) -> int:
+        """Create ICFD_PART keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part identification.
+        secid : int
+            Section ID from *ICFD_SECTION.
+        mid : int, optional
+            Material ID from *ICFD_MAT. Default is 0.
+
+        Returns
+        -------
+        int
+            The part ID assigned.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_PART: pid={pid}, secid={secid}, mid={mid}")
+
+        kw = keywords.IcfdPart()
+        # ICFD_PART uses a table card for pid/secid/mid
+        df = pd.DataFrame(
+            [[pid, secid, mid]],
+            columns=["pid", "secid", "mid"],
+        )
+        kw.nodes = df
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_PART keyword with pid={pid}")
+        return pid
+
+    def set_icfd_part_property(
+        self,
+        pid: int,
+        secid: int,
+        mid: int,
+    ) -> None:
+        """Update ICFD_PART with section and material IDs.
+
+        Finds the existing ICFD_PART with the given pid and updates its secid and mid.
+
+        Parameters
+        ----------
+        pid : int
+            Part identification to update.
+        secid : int
+            Section ID from *ICFD_SECTION.
+        mid : int
+            Material ID from *ICFD_MAT.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Setting ICFD_PART property: pid={pid}, secid={secid}, mid={mid}")
+
+        # Find and update the ICFD_PART with this pid
+        for kw in self._deck:
+            if isinstance(kw, keywords.IcfdPart):
+                df = kw.nodes
+                if len(df) > 0 and df.iloc[0]["pid"] == pid:
+                    df.iloc[0, df.columns.get_loc("secid")] = secid
+                    df.iloc[0, df.columns.get_loc("mid")] = mid
+                    kw.nodes = df
+                    logger.info(f"Updated ICFD_PART pid={pid} with secid={secid}, mid={mid}")
+                    return
+
+        logger.warning(f"ICFD_PART with pid={pid} not found, cannot update property")
+
+    def create_icfd_boundary_nonslip(self, pid: int) -> None:
+        """Create ICFD_BOUNDARY_NONSLIP keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part identification for the non-slip boundary.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_BOUNDARY_NONSLIP: pid={pid}")
+
+        kw = keywords.IcfdBoundaryNonslip()
+        kw.pid = pid
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_BOUNDARY_NONSLIP keyword with pid={pid}")
+
+    def create_icfd_boundary_prescribed_vel(
+        self,
+        pid: int,
+        dof: int = 1,
+        vad: int = 1,
+        lcid: int = 0,
+        sf: float = 1.0,
+        death: float = 0.0,
+        birth: float = 0.0,
+    ) -> None:
+        """Create ICFD_BOUNDARY_PRESCRIBED_VEL keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part identification for the prescribed velocity boundary.
+        dof : int, optional
+            Degree of freedom. 1=x, 2=y, 3=z, 4=normal. Default is 1.
+        vad : int, optional
+            Velocity flag. 1=linear, 2=angular. Default is 1.
+        lcid : int, optional
+            Load curve ID. Default is 0.
+        sf : float, optional
+            Scale factor. Default is 1.0.
+        death : float, optional
+            Death time. Default is 0.0.
+        birth : float, optional
+            Birth time. Default is 0.0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(
+            f"Creating ICFD_BOUNDARY_PRESCRIBED_VEL: pid={pid}, dof={dof}, vad={vad}, "
+            f"lcid={lcid}, sf={sf}, death={death}, birth={birth}"
+        )
+
+        kw = keywords.IcfdBoundaryPrescribedVel()
+        kw.pid = pid
+        kw.dof = dof
+        kw.vad = vad
+        kw.lcid = lcid
+        kw.sf = sf
+        kw.death = death
+        kw.birth = birth
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_BOUNDARY_PRESCRIBED_VEL keyword with pid={pid}")
+
     def create_mesh_volume(
         self,
         volid: int,
