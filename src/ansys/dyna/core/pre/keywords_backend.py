@@ -29,10 +29,9 @@ This backend uses the Deck class to build keyword files locally without
 requiring a gRPC server connection.
 """
 
+from dataclasses import dataclass, field
 import logging
 import os
-from dataclasses import dataclass, field
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from ansys.dyna.core.lib.deck import Deck
@@ -343,9 +342,7 @@ class KeywordsBackend:
         """
         from ansys.dyna.core.keywords import keywords
 
-        self._db_ascii_settings.append(
-            {"type": db_type, "dt": dt, "binary": binary, "lcur": lcur, "ioopt": ioopt}
-        )
+        self._db_ascii_settings.append({"type": db_type, "dt": dt, "binary": binary, "lcur": lcur, "ioopt": ioopt})
 
         # Map database types to keyword classes
         db_type_map = {
@@ -532,9 +529,7 @@ class KeywordsBackend:
         logger.debug("Created CONTROL_HOURGLASS")
         return True
 
-    def create_control_bulk_viscosity(
-        self, q1: float = 1.5, q2: float = 0.06, bulk_type: int = 1
-    ) -> bool:
+    def create_control_bulk_viscosity(self, q1: float = 1.5, q2: float = 0.06, bulk_type: int = 1) -> bool:
         """Create a CONTROL_BULK_VISCOSITY keyword.
 
         Parameters

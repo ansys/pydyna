@@ -37,9 +37,9 @@ Example usage:
     solution = launch_dynapre()  # Uses keywords backend
 """
 
+from enum import Enum
 import logging
 import os
-from enum import Enum
 from typing import Optional
 
 logger = logging.getLogger(__name__)

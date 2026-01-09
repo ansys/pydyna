@@ -41,9 +41,8 @@ Examples to generate reference decks for:
 import argparse
 import logging
 import os
-import shutil
-import sys
 from pathlib import Path
+import sys
 
 # Configure logging
 logging.basicConfig(
@@ -136,8 +135,34 @@ def generate_ball_plate_deck(hostname: str, output_dir: Path) -> bool:
 
         # Define SPCs
         spc = [
-            34, 35, 51, 52, 68, 69, 85, 86, 102, 103, 119, 120, 136, 137, 153, 154,
-            170, 171, 187, 188, 204, 205, 221, 222, 238, 239, 255, 256,
+            34,
+            35,
+            51,
+            52,
+            68,
+            69,
+            85,
+            86,
+            102,
+            103,
+            119,
+            120,
+            136,
+            137,
+            153,
+            154,
+            170,
+            171,
+            187,
+            188,
+            204,
+            205,
+            221,
+            222,
+            238,
+            239,
+            255,
+            256,
         ]
         for i in range(1, 19):
             spc.append(i)
@@ -178,9 +203,7 @@ EXAMPLE_GENERATORS = {
 
 def main():
     """Main entry point for the reference deck generation script."""
-    parser = argparse.ArgumentParser(
-        description="Generate reference decks from pre examples for testing."
-    )
+    parser = argparse.ArgumentParser(description="Generate reference decks from pre examples for testing.")
     parser.add_argument(
         "--output-dir",
         type=Path,
