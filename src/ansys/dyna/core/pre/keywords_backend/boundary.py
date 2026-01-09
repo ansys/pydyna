@@ -1,0 +1,121 @@
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Boundary condition keyword creation methods for the keywords backend."""
+
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+class BoundaryKeywordsMixin:
+    """Mixin class providing boundary condition keyword creation methods."""
+
+    def create_boundary_spc_node(
+        self,
+        nid: int,
+        dofx: int = 0,
+        dofy: int = 0,
+        dofz: int = 0,
+        dofrx: int = 0,
+        dofry: int = 0,
+        dofrz: int = 0,
+    ) -> bool:
+        """Create a BOUNDARY_SPC_NODE keyword.
+
+        Parameters
+        ----------
+        nid : int
+            Node ID.
+        dofx, dofy, dofz : int
+            Translational DOF constraints (0=free, 1=constrained).
+        dofrx, dofry, dofrz : int
+            Rotational DOF constraints (0=free, 1=constrained).
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.BoundarySpcNode()
+        kw.nid = nid
+        kw.dofx = dofx
+        kw.dofy = dofy
+        kw.dofz = dofz
+        kw.dofrx = dofrx
+        kw.dofry = dofry
+        kw.dofrz = dofrz
+
+        self._deck.append(kw)
+        logger.debug(f"Created BOUNDARY_SPC_NODE for nid={nid}")
+        return True
+
+    def create_boundary_prescribed_motion_rigid(
+        self,
+        pid: int,
+        dof: int = 1,
+        vad: int = 2,
+        lcid: int = 0,
+        sf: float = 1.0,
+        death: float = 0.0,
+        birth: float = 0.0,
+    ) -> bool:
+        """Create a BOUNDARY_PRESCRIBED_MOTION_RIGID keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part ID.
+        dof : int
+            Degree of freedom.
+        vad : int
+            Velocity/acceleration/displacement flag.
+        lcid : int
+            Load curve ID.
+        sf : float
+            Scale factor.
+        death : float
+            Death time.
+        birth : float
+            Birth time.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.BoundaryPrescribedMotionRigid()
+        kw.pid = pid
+        kw.dof = dof
+        kw.vad = vad
+        kw.lcid = lcid
+        kw.sf = sf
+        kw.death = death
+        kw.birth = birth
+
+        self._deck.append(kw)
+        logger.debug(f"Created BOUNDARY_PRESCRIBED_MOTION_RIGID with pid={pid}, dof={dof}")
+        return True
