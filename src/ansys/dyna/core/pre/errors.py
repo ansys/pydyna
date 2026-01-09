@@ -67,3 +67,64 @@ class KwserverDidNotStart(RuntimeError):
 
     def __init__(self, msg=""):
         RuntimeError.__init__(self, msg)
+
+
+class ValidationError(Exception):
+    """Base class for validation errors in PyDYNA."""
+
+    def __init__(self, msg="", keyword=None, severity="error"):
+        """Initialize a validation error.
+
+        Parameters
+        ----------
+        msg : str
+            Error message describing the validation failure.
+        keyword : KeywordBase, optional
+            The keyword that failed validation.
+        severity : str
+            Severity level: "error", "warning", or "info".
+        """
+        self.keyword = keyword
+        self.severity = severity
+        super().__init__(msg)
+
+
+class RequiredFieldError(ValidationError):
+    """Error raised when a required field is missing or None."""
+
+    def __init__(self, keyword, field_name):
+        """Initialize a required field error.
+
+        Parameters
+        ----------
+        keyword : KeywordBase
+            The keyword missing the required field.
+        field_name : str
+            Name of the required field.
+        """
+        kwd_type = type(keyword).__name__
+        msg = f"{kwd_type} requires field '{field_name}' but it is None or missing"
+        super().__init__(msg, keyword=keyword, severity="error")
+        self.field_name = field_name
+
+
+class DuplicateIDError(ValidationError):
+    """Error raised when duplicate IDs are found."""
+
+    def __init__(self, keyword_type, field_name, duplicate_values):
+        """Initialize a duplicate ID error.
+
+        Parameters
+        ----------
+        keyword_type : str
+            Type of keyword with duplicates.
+        field_name : str
+            Name of the field with duplicate values.
+        duplicate_values : list
+            List of duplicate values found.
+        """
+        msg = f"Keywords of type '{keyword_type}' have duplicate {field_name} values: {duplicate_values}"
+        super().__init__(msg, keyword=None, severity="error")
+        self.keyword_type = keyword_type
+        self.field_name = field_name
+        self.duplicate_values = duplicate_values

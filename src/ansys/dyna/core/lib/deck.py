@@ -21,7 +21,6 @@
 # SOFTWARE.
 """Module provides a collection of keywords that can read and write to a keyword file."""
 
-import collections
 import os
 import typing
 from typing import Union
@@ -36,9 +35,10 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_collection import KeywordCollection
 from ansys.dyna.core.lib.parameters import ParameterHandler, ParameterSet
 from ansys.dyna.core.lib.transform import TransformHandler
+from ansys.dyna.core.lib.validation_mixin import ValidationMixin
 
 
-class Deck:
+class Deck(ValidationMixin):
     """Provides a collection of keywords that can read and write to a keyword file."""
 
     def __init__(self, title: str = None, **kwargs):
@@ -53,6 +53,7 @@ class Deck:
         # automatically linked during import.
         self._import_handlers.append(DefineTableProcessor())
         self._transform_handler = TransformHandler()
+        self._init_validation()  # Initialize validation mixin
 
     def __add__(self, other):
         """Add two decks together."""
@@ -376,6 +377,7 @@ class Deck:
         self,
         buf: typing.Optional[typing.TextIO] = None,
         format: typing.Optional[format_type] = None,
+        validate: bool = False,
     ):
         """Write the card in the dyna keyword format.
 
@@ -386,7 +388,14 @@ class Deck:
             in which case the output is returned as a string.
         format : optional
             Format to write in. The default is ``None``.
+        validate : bool, optional
+            If True, validate the deck before writing. The default is False.
+            Validation uses registered validators and raises ValidationError if errors are found.
         """
+        if validate:
+            result = self.validate()
+            result.raise_if_errors()
+
         if format is None:
             format = self._format_type
 
@@ -426,29 +435,7 @@ class Deck:
         result = load_deck(self, value, context, self._import_handlers)
         return result
 
-    def _check_unique(self, type: str, field: str) -> None:
-        """Check that all keywords of a given type have a unique field value."""
-        ids = []
-        for kwd in self.get_kwds_by_type(type):
-            if not hasattr(kwd, field):
-                raise Exception(f"kwd of type {type} does not have field {field}.")
-            ids.append(getattr(kwd, field))
-        duplicates = [id for id, count in collections.Counter(ids).items() if count > 1]
-        if len(duplicates) > 0:
-            raise Exception(f"kwds of type {type} have the following duplicate {field} values: {duplicates}")
-
-    def _check_valid(self) -> None:
-        """Check that all keywords are valid."""
-        for kwd in self._keywords:
-            is_valid, msg = kwd._is_valid()
-            if not is_valid:
-                raise Exception(f"{kwd} is not valid due to {msg}")
-
-    def validate(self) -> None:
-        """Validate the collection of keywords."""
-        # TODO - globally unique keywords (like CONTROL_TIME_STEP) are unique
-        self._check_unique("SECTION", "secid")
-        self._check_valid()
+    # Validation methods are provided by ValidationMixin
 
     def get_kwds_by_type(self, str_type: str) -> typing.Iterator[KeywordBase]:
         """Get all keywords for a given type.
@@ -567,21 +554,30 @@ class Deck:
         context = ImportContext(None, self, path)
         self._import_file(path, encoding, context)
 
-    def export_file(self, path: str, encoding="utf-8") -> None:
+    def export_file(self, path: str, encoding="utf-8", validate: bool = False) -> None:
         """Export the keyword file to a new keyword file.
 
         Parameters
         ----------
         path : str
             Full path for the new keyword file.
+        encoding : str, optional
+            String encoding for the file. The default is "utf-8".
+        validate : bool, optional
+            If True, validate the deck before export. The default is False.
+            Validation uses registered validators and raises ValidationError if errors are found.
+
+        Examples
+        --------
+        >>> deck.export_file("output.k", validate=True)  # Validate before export
         """
         with open(path, "w+", encoding=encoding) as f:
             if os.name == "nt":
-                self.write(f)
+                self.write(f, validate=validate)
             else:
                 # TODO - on linux writing to the buffer can insert a spurious newline
                 #        this is less performant but more correct until that is fixed
-                contents = self.write()
+                contents = self.write(validate=validate)
                 f.write(contents)
 
     @property
