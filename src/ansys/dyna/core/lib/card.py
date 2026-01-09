@@ -25,21 +25,232 @@ import typing
 
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.field import Field, Flag, to_long  # noqa: F401
+from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields, write_fields_csv
 from ansys.dyna.core.lib.format_type import card_format, format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import FormatSpec, load_dataline_with_format, read_line
 from ansys.dyna.core.lib.parameters import ParameterSet
 
+# Module-level cache for CardSchema objects, keyed by field signature tuple
+_schema_cache: typing.Dict[tuple, CardSchema] = {}
+
+# Module-level cache for FormatSpec objects, keyed by (signature, format_type)
+_format_spec_cache: typing.Dict[typing.Tuple, FormatSpec] = {}
+
+# Module-level cache for from_field_schemas: id(tuple) -> (CardSchema, signature)
+_field_schemas_cache: typing.Dict[int, typing.Tuple[CardSchema, tuple]] = {}
+
+
+def _field_signature(field: Field) -> tuple:
+    """Create a hashable signature for a Field's schema (not its value)."""
+    if field._is_flag():
+        flag = field._value
+        return (field.name, field.type, field.offset, field.width, "FLAG", flag.true_value, flag.false_value)
+    return (field.name, field.type, field.offset, field.width)
+
+
+def _get_cached_schema(fields: typing.List[Field]) -> typing.Tuple[CardSchema, tuple]:
+    """Get or create a cached CardSchema from fields.
+
+    Uses a fast signature-based cache key to avoid creating FieldSchema
+    objects just for cache lookup.
+
+    Returns
+    -------
+    tuple
+        (CardSchema, signature) where signature is the cache key.
+    """
+    # Create a fast hashable key from field signatures
+    signature = tuple(_field_signature(f) for f in fields)
+    cached = _schema_cache.get(signature)
+    if cached is not None:
+        return cached, signature
+
+    # Cache miss - create FieldSchema objects and CardSchema
+    field_schemas = tuple(FieldSchema.from_field(f) for f in fields)
+    name_to_index = {fs.name: i for i, fs in enumerate(field_schemas)}
+    schema = CardSchema(fields=field_schemas, name_to_index=name_to_index)
+    _schema_cache[signature] = schema
+    return schema, signature
+
+
+def _get_cached_format_spec(signature: tuple, schema: CardSchema, fmt: format_type) -> FormatSpec:
+    """Get or create a cached FormatSpec from schema and format type.
+
+    Parameters
+    ----------
+    signature : tuple
+        The hashable signature for this schema (from _get_cached_schema).
+    schema : CardSchema
+        The card schema.
+    fmt : format_type
+        The format type (standard or long).
+
+    Returns
+    -------
+    FormatSpec
+        Cached or newly created FormatSpec.
+    """
+    cache_key = (signature, fmt)
+    cached = _format_spec_cache.get(cache_key)
+    if cached is not None:
+        return cached
+
+    # Build format spec items from schema
+    if fmt == format_type.long:
+        # Convert to long format widths
+        items = []
+        offset = 0
+        for fs in schema.fields:
+            width = max(fs.width, 20)
+            if fs.is_flag():
+                item_type = fs.default  # The Flag instance
+            else:
+                item_type = fs.type
+            items.append((offset, width, item_type))
+            offset += width
+    else:
+        # Standard format
+        items = []
+        for fs in schema.fields:
+            if fs.is_flag():
+                item_type = fs.default  # The Flag instance
+            else:
+                item_type = fs.type
+            items.append((fs.offset, fs.width, item_type))
+
+    format_spec = FormatSpec.from_list(items)
+    _format_spec_cache[cache_key] = format_spec
+    return format_spec
+
 
 class Card(CardInterface):
+    """A Card represents a single line of data in a keyword.
+
+    This implementation separates schema (shared) from values (per-instance)
+    for memory efficiency and faster loading of keywords with many cards.
+    """
+
     def __init__(self, fields: typing.List[Field], active_func=None, format=format_type.default):
-        self._fields = fields
+        """Initialize a Card from a list of Field objects.
+
+        Parameters
+        ----------
+        fields : List[Field]
+            The fields defining this card's structure and initial values.
+        active_func : callable, optional
+            A function returning bool to determine if card is active.
+        format : format_type, optional
+            The format type (default, standard, or long).
+        """
+        # Get or create cached schema (and keep signature for format spec lookups)
+        self._schema, self._signature = _get_cached_schema(fields)
+
+        # Store values per-instance (extracted from fields)
+        self._values: typing.List[typing.Any] = [None] * len(fields)
+        for i, field in enumerate(fields):
+            self._values[i] = field.value
+
         self._active_func = active_func
         self._format_type = format
         self._card_format = card_format.fixed
-        # Cached FormatSpec for standard and long formats
-        self._format_spec_cache: typing.Dict[format_type, FormatSpec] = {}
+
+    @classmethod
+    def from_field_schemas(
+        cls,
+        field_schemas: typing.Tuple[FieldSchema, ...],
+        values: typing.Optional[typing.List[typing.Any]] = None,
+        active_func=None,
+        format=format_type.default,
+    ) -> "Card":
+        """Create a Card directly from FieldSchema tuples (no Field objects).
+
+        This is the fast path for creating Cards when the schema is already
+        defined at the class level. It avoids creating Field objects entirely.
+
+        Parameters
+        ----------
+        field_schemas : Tuple[FieldSchema, ...]
+            Tuple of FieldSchema (should be defined at class level for reuse).
+        values : List[Any], optional
+            Initial values for each field. If None, uses defaults from schema.
+        active_func : callable, optional
+            A function returning bool to determine if card is active.
+        format : format_type, optional
+            The format type (default, standard, or long).
+
+        Returns
+        -------
+        Card
+            A new Card instance.
+        """
+        instance = cls.__new__(cls)
+
+        # Build CardSchema and signature from field_schemas tuple
+        # Use the tuple's id as a cache key for the derived structures
+        cache_key = id(field_schemas)
+        cached = _field_schemas_cache.get(cache_key)
+        if cached is not None:
+            schema, signature = cached
+        else:
+            name_to_index = {fs.name: i for i, fs in enumerate(field_schemas)}
+            schema = CardSchema(field_schemas, name_to_index)
+            signature = tuple(
+                (fs.name, fs.type, fs.offset, fs.width, fs.default.true_value, fs.default.false_value)
+                if fs.is_flag()
+                else (fs.name, fs.type, fs.offset, fs.width)
+                for fs in field_schemas
+            )
+            _field_schemas_cache[cache_key] = (schema, signature)
+
+        instance._schema = schema
+        instance._signature = signature
+
+        # Initialize values from provided list or from schema defaults
+        if values is not None:
+            instance._values = list(values)
+        else:
+            instance._values = [fs.default for fs in field_schemas]
+
+        instance._active_func = active_func
+        instance._format_type = format
+        instance._card_format = card_format.fixed
+        return instance
+
+    @classmethod
+    def from_field_schemas_with_defaults(
+        cls,
+        field_schemas: typing.Tuple[FieldSchema, ...],
+        active_func=None,
+        format=format_type.default,
+        **kwargs,
+    ) -> "Card":
+        """Create a Card from FieldSchema tuples with kwargs defaults (lspp_defaults).
+
+        This is like from_field_schemas but applies lspp_defaults logic:
+        each field's value is looked up in kwargs by field name, falling back
+        to the schema default.
+
+        Parameters
+        ----------
+        field_schemas : Tuple[FieldSchema, ...]
+            Tuple of FieldSchema (should be defined at class level for reuse).
+        active_func : callable, optional
+            A function returning bool to determine if card is active.
+        format : format_type, optional
+            The format type (default, standard, or long).
+        **kwargs
+            Field values by name (lspp_defaults style).
+
+        Returns
+        -------
+        Card
+            A new Card instance.
+        """
+        # Build values list from kwargs, falling back to schema defaults
+        values = [kwargs.get(fs.name, fs.default) for fs in field_schemas]
+        return cls.from_field_schemas(field_schemas, values, active_func, format)
 
     @property
     def format(self):
@@ -49,12 +260,32 @@ class Card(CardInterface):
     def format(self, value: format_type) -> None:
         self._format_type = value
 
+    @property
+    def _fields(self) -> typing.List[Field]:
+        """Lazily create Field objects from schema + values.
+
+        This property creates Field objects on-demand for operations
+        that need them (like write). For read operations, we use
+        schema + values directly.
+        """
+        return self._schema.to_fields(self._values)
+
     def _convert_fields_to_long_format(self) -> typing.List[Field]:
+        """Convert fields to long format (20-char minimum width)."""
         fields = []
         offset = 0
-        for field in self._fields:
-            new_field = to_long(field, offset)
-            offset += new_field.width
+        for fs, value in zip(self._schema.fields, self._values):
+            new_width = max(fs.width, 20)
+            new_field = Field(fs.name, fs.type, offset, new_width, value)
+            if fs.is_flag():
+                # Reconstruct flag field
+                flag = Flag(
+                    value=value,
+                    true_value=fs.default.true_value,
+                    false_value=fs.default.false_value,
+                )
+                new_field = Field(fs.name, fs.type, offset, new_width, flag)
+            offset += new_width
             fields.append(new_field)
         return fields
 
@@ -67,34 +298,20 @@ class Card(CardInterface):
         self._load(line, parameter_set)
         return False
 
-    def _get_format_spec(self, fields):
-        format_spec = []
-        for field in fields:
-            if field._is_flag():
-                field_type = field._value
-            else:
-                field_type = field.type
-            format_spec.append((field.offset, field.width, field_type))
-        return format_spec
-
     def _load(self, data_line: str, parameter_set: ParameterSet) -> None:
-        """loads the card data from a list of strings"""
-        fields = self._fields
-        current_format = self.format
-        if current_format == format_type.long:
-            fields = self._convert_fields_to_long_format()
+        """Load card data from a string line.
 
-        # Use cached FormatSpec to avoid recomputing hash each time
-        format_spec = self._format_spec_cache.get(current_format)
-        if format_spec is None:
-            format_spec = FormatSpec.from_fields(fields)
-            self._format_spec_cache[current_format] = format_spec
+        Uses cached FormatSpec for efficient parsing.
+        """
+        current_format = self.format
+        format_spec = _get_cached_format_spec(self._signature, self._schema, current_format)
 
         values, detected_format = load_dataline_with_format(format_spec, data_line, parameter_set)
         self._card_format = detected_format
-        num_fields = len(fields)
-        for field_index in range(num_fields):
-            self._fields[field_index].value = values[field_index]
+
+        # Update values directly (no Field objects needed)
+        for i in range(len(self._schema)):
+            self._values[i] = values[i]
 
     def write(
         self,
@@ -129,21 +346,26 @@ class Card(CardInterface):
 
         def _write(buf: typing.TextIO):
             if self.active:
+                # Create fields lazily for write
+                fields = self._fields
+                if format == format_type.long:
+                    fields = self._convert_fields_to_long_format()
+
                 if output_format == card_format.csv:
                     # CSV format: no comment line, comma-separated values
-                    write_fields_csv(buf, self._fields)
+                    write_fields_csv(buf, fields)
                 else:
                     # Fixed-width format (default)
                     if comment:
-                        write_comment_line(buf, self._fields, format)
+                        write_comment_line(buf, fields, format)
                         buf.write("\n")
-                    write_fields(buf, self._fields, None, format)
+                    write_fields(buf, fields, None, format)
 
         return write_or_return(buf, _write)
 
     @property
     def active(self) -> bool:
-        if self._active_func == None:
+        if self._active_func is None:
             return True
         return True if self._active_func() else False
 
@@ -154,20 +376,42 @@ class Card(CardInterface):
         return s.getvalue()
 
     def _get_field_by_name(self, prop: str) -> Field:
-        return [f for f in self._fields if f.name == prop][0]
+        """Get a Field object by name. Creates Field lazily."""
+        idx = self._schema.get_index(prop)
+        fs = self._schema.fields[idx]
+        return fs.to_field(self._values[idx])
 
-    # not needed by subclasses - only used by methods on keyword classes
     def get_value(self, prop: str) -> typing.Any:
-        """gets the value of the field in the card"""
-        field = self._get_field_by_name(prop)
-        return field.value
+        """Get the value of a field by name.
+
+        Parameters
+        ----------
+        prop : str
+            The field name.
+
+        Returns
+        -------
+        Any
+            The field value.
+        """
+        idx = self._schema.get_index(prop)
+        return self._values[idx]
 
     def set_value(self, prop: str, value: typing.Any) -> None:
-        """sets the value of the field in the card"""
-        self._get_field_by_name(prop).value = value
+        """Set the value of a field by name.
+
+        Parameters
+        ----------
+        prop : str
+            The field name.
+        value : Any
+            The value to set.
+        """
+        idx = self._schema.get_index(prop)
+        self._values[idx] = value
 
     def __repr__(self) -> str:
-        """Returns a console-friendly representation of the desired parameters for the card"""
+        """Returns a console-friendly representation of the card."""
         content_lines = []
         content_lines.append(self._get_comment(self._format_type))
         output = "\n".join(content_lines)

@@ -1,0 +1,33 @@
+            TableCardGroup(
+                [
+{% for sub_card in card.sub_cards %}
+                    Card(
+                            [
+{% for field in sub_card.fields %}
+                                Field(
+                                    "{{field.name}}",
+                                    {{field.type}},
+                                    {{field.position}},
+                                    {{field.width}},
+                                ),
+{% endfor %}
+                            ],
+{% if sub_card.func %}
+                            lambda: {{sub_card.func}},
+{% endif %}
+                    ),
+{% endfor %}
+                ],
+{% if card.length_func %}
+                lambda: {{card.length_func}},
+{% else %}
+                None,
+{% endif %}
+{% if card.active_func %}
+                lambda: {{card.active_func}},
+{% else %}
+                None,
+{% endif %}
+                "{{card.overall_name}}",
+                **kwargs,
+            ),

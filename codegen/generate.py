@@ -371,7 +371,7 @@ def load_inputs(this_folder, args):
 def run_codegen(args):
     logger.debug(
         f"Running codegen with args: output={args.output}, "
-        f"clean={args.clean}, keyword={args.keyword}, autodoc_only={args.autodoc_only}"
+        f"clean={args.clean}, keywords={args.keyword}, autodoc_only={args.autodoc_only}"
     )
     output = args.output
     this_folder = get_this_folder()
@@ -416,16 +416,16 @@ def run_codegen(args):
         subset_domains = [d.strip() for d in args.subset.split(",")]
         logger.info(f"Subset mode enabled: generating only {subset_domains} domains")
 
-    if args.keyword == "":
-        kwd = None
+    if not args.keyword:
         logger.info(
             "Generating code for all keywords" if not subset_domains else f"Generating subset: {subset_domains}"
         )
         generate_classes(output, autodoc_output_path=autodoc_path, subset_domains=subset_domains)
     else:
-        kwd = args.keyword
-        logger.info(f"Generating code for {kwd}")
-        generate_classes(output, kwd, autodoc_output_path=autodoc_path, subset_domains=subset_domains)
+        keywords = args.keyword
+        logger.info(f"Generating code for {len(keywords)} keyword(s): {keywords}")
+        for kwd in keywords:
+            generate_classes(output, kwd, autodoc_output_path=autodoc_path, subset_domains=subset_domains)
 
 
 def parse_args():
@@ -443,8 +443,10 @@ def parse_args():
     parser.add_argument(
         "--keyword",
         "-k",
-        default="",
-        help="optional - keyword for which to generate.  If not set, all keywords are generated.",
+        action="append",
+        default=None,
+        help="Keyword(s) to generate. Can be specified multiple times (e.g., -k SECTION_SHELL -k MAT_001)."
+        " If not set, all keywords are generated.",
     )
     parser.add_argument(
         "--autodoc-only",

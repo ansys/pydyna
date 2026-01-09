@@ -1,0 +1,26 @@
+{# Legacy Card creation with Field objects - used for top-level keyword cards #}
+            Card(
+                [
+{% for field in card.fields %}
+                    Field(
+                        "{{field.name}}",
+                        {{field.type}},
+                        {{field.position}},
+                        {{field.width}},
+{% if field.default is not none %}
+{% if field.readonly %}
+                        Field.ReadOnlyValue({{field.default}}),
+{% else %}
+                        {{field.default}},
+{% endif %}
+                        **kwargs,
+{% else %}
+                        **kwargs,
+{% endif %}
+                    ),
+{% endfor %}
+                ],
+{% if card.func %}
+                lambda: {{card.func}},
+{% endif %}
+            ),

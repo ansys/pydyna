@@ -1,5 +1,16 @@
 {# Template for generating CardSet item classes (e.g., FiberFamily, InitialStressShellCardSet) #}
 {# Context: card_set - the card set configuration dict #}
+{# Generate schema definitions for regular Cards (not SeriesCard, CardSet, TableCard, etc.) #}
+{% for card in card_set.source_cards %}
+{% if not card.variable and not card.set and not card.table and not card.table_group and not card.external %}
+_{{card_set.name | upper}}_CARD{{loop.index0}} = (
+{% for field in card.fields %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endfor %}
+)
+
+{% endif %}
+{% endfor %}
 class {{card_set.name}}(Cards):
     """{{card_set.title}} CardSet."""
 {% if card_set.options %}
@@ -18,7 +29,7 @@ class {{card_set.name}}(Cards):
         kwargs["parent"] = self
         self._cards = [
 {% for card in card_set.source_cards %}
-{% with parent_name = card_set.name %}
+{% with parent_name = card_set.name, card_index = loop.index0 %}
 {% include 'keyword/card.j2' %}
 {% endwith %}
 {% endfor %}

@@ -1,0 +1,15 @@
+            CardSet(
+                {{card.set.name}},
+{% if card.length_func %}
+                length_func = lambda: {{card.length_func}},
+{% endif %}
+{% if card.active_func %}
+                active_func = lambda: {{card.active_func}},
+{% endif %}
+{% if keyword_data.card_sets %}
+{% if keyword_data.card_sets.options %}
+                option_specs = {{card.set.name}}.option_specs,
+{% endif %}
+{% endif %}
+                **kwargs
+            ),
