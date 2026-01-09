@@ -268,6 +268,7 @@ class ServerThread(threading.Thread):
 def launch_dynapre(
     port=50051,
     ip="localhost",
+    backend=None,
 ) -> DynaSolution:
     """
     Start the pre service locally.
@@ -280,9 +281,39 @@ def launch_dynapre(
         IP address or host name of the PyDYNA instance to connect to.
         The default is ``"localhost"``, in which case ``"127.0.0.1"``
         is used.
+    backend : str, optional
+        Backend to use. Options are "grpc" (default) or "keywords".
+        Can also be set via the PYDYNA_PRE_BACKEND environment variable.
+        When set to "keywords", a local keywords-based backend is used
+        that doesn't require a gRPC server.
 
+    Returns
+    -------
+    DynaSolution or KeywordsDynaSolution
+        A solution instance. The type depends on the backend selected.
     """
+    from ansys.dyna.core.pre.backend_config import BackendType, get_backend_type, is_keywords_backend
 
+    # Determine backend type
+    if backend is not None:
+        if backend.lower() == "keywords":
+            use_keywords_backend = True
+        elif backend.lower() == "grpc":
+            use_keywords_backend = False
+        else:
+            LOG.warning(f"Unknown backend '{backend}', using environment/default")
+            use_keywords_backend = is_keywords_backend()
+    else:
+        use_keywords_backend = is_keywords_backend()
+
+    # Use keywords backend if requested
+    if use_keywords_backend:
+        LOG.info("Using keywords backend for pre module")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+
+        return KeywordsDynaSolution()
+
+    # Otherwise use gRPC backend
     check_valid_ip(ip)  # double check
 
     if port is None:
