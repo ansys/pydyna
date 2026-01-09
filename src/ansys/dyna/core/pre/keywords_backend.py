@@ -417,9 +417,12 @@ class KeywordsBackend:
         kw.sfo = sfo
         kw.title = title
 
-        # Add curve points
-        for a, o in zip(abscissa, ordinate):
-            kw.curves.append([a, o])
+        # Add curve points - build DataFrame properly (append removed in pandas 2.0)
+        import pandas as pd
+
+        curve_data = [[a, o] for a, o in zip(abscissa, ordinate)]
+        if curve_data:
+            kw.curves = pd.DataFrame(curve_data, columns=["a1", "o1"])
 
         self._deck.append(kw)
         logger.debug(f"Created DEFINE_CURVE with id={curve_id}")
@@ -1030,6 +1033,7 @@ class KeywordsBackend:
         elform: int = 2,
         shrf: float = 1.0,
         nip: int = 2,
+        propt: float = 1.0,
         t1: float = 0.0,
         t2: float = 0.0,
         t3: float = 0.0,
@@ -1047,6 +1051,8 @@ class KeywordsBackend:
             Shear correction factor.
         nip : int
             Number of integration points.
+        propt : float
+            Printout option.
         t1, t2, t3, t4 : float
             Shell thickness at nodes.
 
@@ -1062,6 +1068,7 @@ class KeywordsBackend:
         kw.elform = elform
         kw.shrf = shrf
         kw.nip = nip
+        kw.propt = propt
         kw.t1 = t1
         kw.t2 = t2
         kw.t3 = t3
@@ -1826,6 +1833,214 @@ class KeywordsBackend:
         logger.debug(f"Created SET_SEGMENT with sid={sid}, {len(segments)} segments")
         return True
 
+    def create_em_solver_fem(
+        self,
+        reltol: float = 1e-6,
+        maxite: int = 1000,
+        stype: int = 1,
+        precon: int = 1,
+        uselast: int = 1,
+        ncyclfem: int = 3,
+    ) -> bool:
+        """Create an EM_SOLVER_FEM keyword.
+
+        Parameters
+        ----------
+        reltol : float
+            Relative tolerance.
+        maxite : int
+            Maximum iterations.
+        stype : int
+            Solver type.
+        precon : int
+            Preconditioner type.
+        uselast : int
+            Use last solution flag.
+        ncyclfem : int
+            Number of cycles.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmSolverFem()
+        kw.reltol = reltol
+        kw.maxite = maxite
+        kw.stype = stype
+        kw.precon = precon
+        kw.uselast = uselast
+        kw.ncyclfem = ncyclfem
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_SOLVER_FEM with stype={stype}, reltol={reltol}")
+        return True
+
+    def create_em_mat_004(
+        self,
+        mid: int,
+        mtype: int = 0,
+        sigma: float = 0.0,
+        eosid: int = 0,
+        nele: int = 0,
+        murel: float = 0.0,
+        eosmu: int = 0,
+        deatht: float = 0.0,
+    ) -> bool:
+        """Create an EM_MAT_004 keyword (2D resistive heating material).
+
+        Parameters
+        ----------
+        mid : int
+            Material ID.
+        mtype : int
+            Material type.
+        sigma : float
+            Electrical conductivity.
+        eosid : int
+            Equation of state ID.
+        nele : int
+            Number of elements.
+        murel : float
+            Relative permeability.
+        eosmu : int
+            EOS for permeability.
+        deatht : float
+            Death time.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmMat004()
+        kw.mid = mid
+        kw.mtype = mtype
+        kw.sigma = sigma
+        kw.eosid = eosid
+        kw.nele = nele
+        kw.murel = murel
+        kw.eosmu = eosmu
+        kw.deatht = deatht
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_MAT_004 with mid={mid}, mtype={mtype}")
+        return True
+
+    def create_initial_temperature_set(
+        self,
+        nsid: int = 0,
+        temp: float = 0.0,
+    ) -> bool:
+        """Create an INITIAL_TEMPERATURE_SET keyword.
+
+        Parameters
+        ----------
+        nsid : int
+            Node set ID (0 for all nodes).
+        temp : float
+            Initial temperature.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.InitialTemperatureSet()
+        kw.nsid = nsid
+        kw.temp = temp
+
+        self._deck.append(kw)
+        logger.debug(f"Created INITIAL_TEMPERATURE_SET with nsid={nsid}, temp={temp}")
+        return True
+
+    def create_boundary_prescribed_motion_rigid(
+        self,
+        pid: int,
+        dof: int = 1,
+        vad: int = 2,
+        lcid: int = 0,
+        sf: float = 1.0,
+        death: float = 0.0,
+        birth: float = 0.0,
+    ) -> bool:
+        """Create a BOUNDARY_PRESCRIBED_MOTION_RIGID keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part ID.
+        dof : int
+            Degree of freedom.
+        vad : int
+            Velocity/acceleration/displacement flag.
+        lcid : int
+            Load curve ID.
+        sf : float
+            Scale factor.
+        death : float
+            Death time.
+        birth : float
+            Birth time.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.BoundaryPrescribedMotionRigid()
+        kw.pid = pid
+        kw.dof = dof
+        kw.vad = vad
+        kw.lcid = lcid
+        kw.sf = sf
+        kw.death = death
+        kw.birth = birth
+
+        self._deck.append(kw)
+        logger.debug(f"Created BOUNDARY_PRESCRIBED_MOTION_RIGID with pid={pid}, dof={dof}")
+        return True
+
+    def create_set_part_list(
+        self,
+        sid: int,
+        parts: List[int],
+    ) -> bool:
+        """Create a SET_PART_LIST keyword.
+
+        Parameters
+        ----------
+        sid : int
+            Set ID.
+        parts : List[int]
+            List of part IDs.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.SetPartList()
+        kw.sid = sid
+
+        # Add parts to the set
+        for pid in parts:
+            kw.parts.append(pid)
+
+        self._deck.append(kw)
+        logger.debug(f"Created SET_PART_LIST with sid={sid}, {len(parts)} parts")
+        return True
+
 
 class KeywordsStub:
     """Stub class that mimics the gRPC stub interface for keywords backend.
@@ -2036,20 +2251,42 @@ class KeywordsStub:
 
     def CreateMatThermalIsotropic(self, request):
         """Create MAT_THERMAL_ISOTROPIC keyword."""
+        # Get material ID - either from request or generate new one
+        tmid = getattr(request, "mid", None) or self._backend.next_id("thermal_material")
         self._backend.create_mat_thermal_isotropic(
-            tmid=request.mid,
+            tmid=tmid,
             ro=request.tro,
             tgrlc=request.tgrlc,
             tgmult=request.tgmult,
             hc=request.hc,
             tc=request.tc,
         )
-        return type("Response", (), {"success": True})()
+        return type("Response", (), {"mid": tmid})()
 
     def CreateSectionSolid(self, request):
         """Create SECTION_SOLID keyword."""
         secid = self._backend.next_id("section")
         self._backend.create_section_solid(secid=secid, elform=request.elform)
+        return type("Response", (), {"id": secid})()
+
+    def CreateSectionShell(self, request):
+        """Create SECTION_SHELL keyword."""
+        secid = self._backend.next_id("section")
+        # propt must be 1, 2, 3, or None - convert 0 to None
+        propt = getattr(request, "propt", 1)
+        if propt == 0:
+            propt = None
+        self._backend.create_section_shell(
+            secid=secid,
+            elform=request.elform,
+            shrf=getattr(request, "shrf", 1.0),
+            nip=getattr(request, "nip", 5),
+            propt=propt,
+            t1=getattr(request, "t1", 0),
+            t2=getattr(request, "t2", 0),
+            t3=getattr(request, "t3", 0),
+            t4=getattr(request, "t4", 0),
+        )
         return type("Response", (), {"id": secid})()
 
     def SetPartProperty(self, request):
@@ -2230,3 +2467,77 @@ class KeywordsStub:
             setid=request.setid,
         )
         return type("Response", (), {"id": isoid})()
+
+    def CreateEMSolverFem(self, request):
+        """Create EM_SOLVER_FEM keyword."""
+        self._backend.create_em_solver_fem(
+            reltol=request.reltol,
+            maxite=request.maxite,
+            stype=request.stype,
+            precon=getattr(request, "precon", 1),
+            uselast=getattr(request, "uselast", 1),
+            ncyclfem=getattr(request, "ncylbem", 3),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateEMMat004(self, request):
+        """Create EM_MAT_004 keyword for 2D resistive heating."""
+        self._backend.create_em_mat_004(
+            mid=request.mid,
+            mtype=request.mtype,
+            sigma=request.sigma,
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateInitTemperatureSet(self, request):
+        """Create INITIAL_TEMPERATURE_SET keyword."""
+        self._backend.create_initial_temperature_set(
+            nsid=getattr(request, "nsid", 0),
+            temp=request.temp,
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateBoundaryPrescribedMotionRigid(self, request):
+        """Create BOUNDARY_PRESCRIBED_MOTION_RIGID keyword."""
+        self._backend.create_boundary_prescribed_motion_rigid(
+            pid=request.pid,
+            dof=request.dof,
+            vad=request.vad,
+            lcid=request.lcid,
+            sf=getattr(request, "sf", 1.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateBdyPrescribedMotion(self, request):
+        """Create BOUNDARY_PRESCRIBED_MOTION keyword based on option type."""
+        option = getattr(request, "option", "")
+        if option == "RIGID":
+            self._backend.create_boundary_prescribed_motion_rigid(
+                pid=request.typeid,
+                dof=request.dof,
+                vad=request.vad,
+                lcid=request.lcid,
+                sf=getattr(request, "sf", 1.0),
+                death=getattr(request, "death", 0.0),
+                birth=getattr(request, "birth", 0.0),
+            )
+        # For SET option, we'd need a different backend method
+        return type("Response", (), {"success": True})()
+
+    def CreatePartSet(self, request):
+        """Create SET_PART_LIST keyword."""
+        sid = self._backend.next_id("partset")
+        # Handle both 'entities' (from newer API) and 'pids' (from older API)
+        parts = []
+        if hasattr(request, "entities") and request.entities:
+            parts = list(request.entities)
+        elif hasattr(request, "pids") and request.pids:
+            # pids can be a protobuf repeated container, single int, or list
+            try:
+                # Try to iterate over it (handles lists and protobuf containers)
+                parts = [int(p) for p in request.pids]
+            except TypeError:
+                # Single value
+                parts = [int(request.pids)]
+        self._backend.create_set_part_list(sid=sid, parts=parts)
+        return type("Response", (), {"id": sid})()

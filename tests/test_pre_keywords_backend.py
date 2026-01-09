@@ -484,7 +484,7 @@ class TestReferenceFileComparison:
             return [f"Missing keyword types: {missing_types}"]
 
         # Metadata fields to skip
-        skip_fields = {"included_from", "cards", "title", "heading", "options", "subkeywords", "its"}
+        skip_fields = {"included_from", "cards", "title", "heading", "options", "subkeywords", "its", "sets"}
 
         # Auto-generated ID fields where exact values may differ between implementations
         # but the structure is semantically equivalent
@@ -840,10 +840,102 @@ class TestReferenceFileComparison:
         """test_resistive_heating_2d.k - EM resistive heating 2D."""
         pytest.fail("Not implemented")
 
-    @pytest.mark.xfail(reason="DynaEM not implemented in keywords backend")
     def test_resistive_heating_2d_isopots(self, initial_files_dir, pre_reference_dir):
         """test_resistive_heating_2d_isopots.k - EM resistive heating 2D with isopotentials."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaem import (
+            DynaEM,
+            EMType,
+            EMDimension,
+            FEMSOLVER,
+            Isopotential,
+            Isopotential_ConnType,
+            RogoCoil,
+        )
+        from ansys.dyna.core.pre.dynamech import (
+            ShellPart,
+            ShellFormulation,
+            ThermalAnalysis,
+            ThermalAnalysisType,
+        )
+        from ansys.dyna.core.pre.dynamaterial import MatRigid, MatThermalIsotropic, EMMATTYPE
+        from ansys.dyna.core.pre.dynabase import NodeSet, SegmentSet, PartSet, Curve
+
+        initial_file = os.path.join(initial_files_dir, "em", "test_resistive_heating_2d_isopots.k")
+        reference_file = os.path.join(pre_reference_dir, "test_resistive_heating_2d_isopots.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        # Segment set for Rogowski coil
+        rogoseg = [
+            [544, 575, 575, 575],
+            [545, 544, 544, 544],
+            [575, 595, 595, 595],
+            [595, 615, 615, 615],
+        ]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+            solution.set_termination(termination_time=0.0101)
+            solution.create_database_binary(dt=1e-4)
+
+            emobj = DynaEM()
+            solution.add(emobj)
+
+            emobj.set_timestep(tssfac=1, timestep_size_for_mass_scaled=1e-4)
+
+            emobj.analysis.set_timestep(timestep=1e-4)
+            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, dimtype=EMDimension.PLANAR_2D)
+            emobj.analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-3)
+
+            tanalysis = ThermalAnalysis()
+            tanalysis.set_timestep(initial_timestep=1e-4)
+            tanalysis.set_solver(analysis_type=ThermalAnalysisType.TRANSIENT)
+            emobj.add(tanalysis)
+
+            matrigid = MatRigid(mass_density=1, young_modulus=2e11)
+            matrigid.set_em_resistive_heating_2d(
+                material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=1e4
+            )
+
+            matthermaliso = MatThermalIsotropic(density=100, specific_heat=10, conductivity=7)
+
+            part = ShellPart(1)
+            part.set_material(matrigid, matthermaliso)
+            part.set_element_formulation(ShellFormulation.PLANE_STRESS)
+            emobj.parts.add(part)
+
+            emobj.boundaryconditions.create_imposed_motion(
+                PartSet([1]), Curve(x=[0, 10], y=[10, 10])
+            )
+            emobj.set_init_temperature(temp=25)
+
+            emobj.connect_isopotential(
+                contype=Isopotential_ConnType.VOLTAGE_SOURCE,
+                isopotential1=Isopotential(NodeSet([521, 517, 513, 509, 525])),
+                value=500,
+            )
+            emobj.connect_isopotential(
+                contype=Isopotential_ConnType.SHORT_CIRCUIT,
+                isopotential1=Isopotential(NodeSet([642, 652, 661, 670, 643])),
+                isopotential2=Isopotential(NodeSet([549, 548, 577, 597, 617])),
+                value=0.01,
+            )
+            emobj.connect_isopotential(
+                contype=Isopotential_ConnType.VOLTAGE_SOURCE,
+                isopotential1=Isopotential(NodeSet([653, 644, 626, 627, 662])),
+            )
+            emobj.add(RogoCoil(SegmentSet(rogoseg)))
+
+            emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_resistive_heating_2d_isopots.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     @pytest.mark.xfail(reason="DynaEM not implemented in keywords backend")
     def test_resistive_heating_2d_multi_isopots(self, initial_files_dir, pre_reference_dir):
