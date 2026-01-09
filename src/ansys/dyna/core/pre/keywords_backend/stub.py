@@ -699,3 +699,43 @@ class KeywordsStub:
             birth=getattr(request, "birth", 0.0),
         )
         return type("Response", (), {"success": True})()
+
+    def ICFDCreateBdyFreeSlip(self, request):
+        """Create ICFD_BOUNDARY_FREESLIP keyword."""
+        self._backend.create_icfd_boundary_freeslip(pid=request.pid)
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateBdyPrescribedPre(self, request):
+        """Create ICFD_BOUNDARY_PRESCRIBED_PRE keyword."""
+        self._backend.create_icfd_boundary_prescribed_pre(
+            pid=request.pid,
+            lcid=getattr(request, "lcid", 0),
+            sf=getattr(request, "sf", 0.0),
+            death=getattr(request, "death", 0.0),
+            birth=getattr(request, "birth", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateControlAdapt(self, request):
+        """Create ICFD_CONTROL_ADAPT keyword."""
+        self._backend.create_icfd_control_adapt(
+            minh=getattr(request, "minh", 0.0),
+            maxh=getattr(request, "maxh", 0.0),
+            err=getattr(request, "err", 1.0),
+            nit=getattr(request, "nit", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateDBDrag(self, request):
+        """Create ICFD_DATABASE_DRAG keyword."""
+        self._backend.create_icfd_database_drag(pid=request.pid)
+        return type("Response", (), {"success": True})()
+
+    def MESHCreateBl(self, request):
+        """Create MESH_BL keyword."""
+        self._backend.create_mesh_bl(
+            pid=request.pid,
+            nelth=getattr(request, "nelth", 0),
+        )
+        return type("Response", (), {"success": True})()
+

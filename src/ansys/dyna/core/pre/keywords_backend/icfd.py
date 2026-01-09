@@ -456,6 +456,144 @@ class ICFDKeywordsMixin:
         self._deck.append(kw)
         logger.info(f"Created ICFD_BOUNDARY_PRESCRIBED_VEL keyword with pid={pid}")
 
+    def create_icfd_boundary_freeslip(self, pid: int) -> None:
+        """Create ICFD_BOUNDARY_FREESLIP keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part identification for the free-slip boundary.
+        """
+        import pandas as pd
+
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_BOUNDARY_FREESLIP: pid={pid}")
+
+        kw = keywords.IcfdBoundaryFreeslip()
+        kw.boundaries = pd.DataFrame({"pid": [pid]})
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_BOUNDARY_FREESLIP keyword with pid={pid}")
+
+    def create_icfd_boundary_prescribed_pre(
+        self,
+        pid: int,
+        lcid: int = 0,
+        sf: float = 0.0,
+        death: float = 0.0,
+        birth: float = 0.0,
+    ) -> None:
+        """Create ICFD_BOUNDARY_PRESCRIBED_PRE keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part identification for the prescribed pressure boundary.
+        lcid : int, optional
+            Load curve ID for pressure. Default is 0.
+        sf : float, optional
+            Scale factor for pressure. Default is 0.0.
+        death : float, optional
+            Death time. Default is 0.0.
+        birth : float, optional
+            Birth time. Default is 0.0.
+        """
+        import pandas as pd
+
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(
+            f"Creating ICFD_BOUNDARY_PRESCRIBED_PRE: pid={pid}, lcid={lcid}, "
+            f"sf={sf}, death={death}, birth={birth}"
+        )
+
+        kw = keywords.IcfdBoundaryPrescribedPre()
+        kw.boundaries = pd.DataFrame(
+            {"pid": [pid], "lcid": [lcid], "sf": [sf], "death": [death], "birth": [birth]}
+        )
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_BOUNDARY_PRESCRIBED_PRE keyword with pid={pid}")
+
+    def create_icfd_control_adapt(
+        self,
+        minh: float = 0.0,
+        maxh: float = 0.0,
+        err: float = 1.0,
+        nit: int = 0,
+    ) -> None:
+        """Create ICFD_CONTROL_ADAPT keyword.
+
+        Parameters
+        ----------
+        minh : float, optional
+            Minimum mesh size. Default is 0.0.
+        maxh : float, optional
+            Maximum mesh size. Default is 0.0.
+        err : float, optional
+            Maximum perceptual error. Default is 1.0.
+        nit : int, optional
+            Number of iterations before forced remeshing. Default is 0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_CONTROL_ADAPT: minh={minh}, maxh={maxh}, err={err}, nit={nit}")
+
+        kw = keywords.IcfdControlAdapt()
+        kw.minh = minh
+        kw.maxh = maxh
+        kw.err = err
+        kw.nit = nit
+
+        self._deck.append(kw)
+        logger.info("Created ICFD_CONTROL_ADAPT keyword")
+
+    def create_icfd_database_drag(self, pid: int) -> None:
+        """Create ICFD_DATABASE_DRAG keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part identification for drag computation.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_DATABASE_DRAG: pid={pid}")
+
+        kw = keywords.IcfdDatabaseDrag()
+        kw.pid = pid
+        # Don't set divi - leave as None (reference files have it blank)
+        kw.divi = None
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_DATABASE_DRAG keyword with pid={pid}")
+
+    def create_mesh_bl(
+        self,
+        pid: int,
+        nelth: int = 0,
+    ) -> None:
+        """Create MESH_BL keyword for boundary layer mesh.
+
+        Parameters
+        ----------
+        pid : int
+            Part identification for boundary layer.
+        nelth : int, optional
+            Number of elements in boundary layer minus one. Default is 0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating MESH_BL: pid={pid}, nelth={nelth}")
+
+        kw = keywords.MeshBl()
+        kw.pid = pid
+        kw.nelth = nelth
+
+        self._deck.append(kw)
+        logger.info(f"Created MESH_BL keyword with pid={pid}")
+
     def create_mesh_volume(
         self,
         volid: int,

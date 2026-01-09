@@ -883,10 +883,95 @@ class TestReferenceFileComparison:
         """test_internal_3d_flow.k - ICFD 3D internal flow."""
         pytest.fail("Not implemented")
 
-    @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_mesh_adaptivity(self, initial_files_dir, pre_reference_dir):
-        """test_mesh_adaptivity.k - ICFD mesh adaptivity."""
-        pytest.fail("Not implemented")
+        """test_mesh_adaptivity.k - ICFD mesh adaptivity with cylinder flow."""
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaicfd import (
+            DynaICFD,
+            ICFDAnalysis,
+            ICFDPart,
+            ICFDVolumePart,
+            MeshedVolume,
+            MatICFD,
+            Curve,
+            ICFDDOF,
+        )
+
+        initial_file = os.path.join(initial_files_dir, "icfd", "test_mesh_adaptivity.k")
+        reference_file = os.path.join(pre_reference_dir, "test_mesh_adaptivity.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            icfd = DynaICFD()
+            solution.add(icfd)
+
+            # Set termination time
+            solution.set_termination(termination_time=40.0)
+
+            # Set mesh adaptivity and timestep
+            icfdanalysis = ICFDAnalysis()
+            icfdanalysis.set_timestep(timestep=0)
+            icfdanalysis.set_mesh_adaptivity(
+                min_mesh_size=0.02, max_mesh_size=0.2, max_perceptual_error=2.0, num_iteration=10
+            )
+            icfd.add(icfdanalysis)
+
+            # Part 1: Inlet with prescribed velocity
+            mat1 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part1 = ICFDPart(1)
+            part1.set_material(mat1)
+            part1.set_prescribed_velocity(dof=ICFDDOF.X, motion=Curve(x=[0, 10000], y=[1, 1]))
+            part1.set_prescribed_velocity(dof=ICFDDOF.Y, motion=Curve(x=[0, 10000], y=[0, 0]))
+            icfd.parts.add(part1)
+
+            # Part 2: Outlet with prescribed pressure
+            mat2 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part2 = ICFDPart(2)
+            part2.set_material(mat2)
+            part2.set_prescribed_pressure(pressure=Curve(x=[0, 10000], y=[0, 0]))
+            icfd.parts.add(part2)
+
+            # Part 3: Free slip boundary (walls)
+            mat3 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part3 = ICFDPart(3)
+            part3.set_material(mat3)
+            part3.set_free_slip()
+            icfd.parts.add(part3)
+
+            # Part 4: Non-slip boundary (cylinder) with boundary layer mesh and drag
+            mat4 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part4 = ICFDPart(4)
+            part4.set_material(mat4)
+            part4.set_non_slip()
+            part4.set_boundary_layer(number=2)
+            part4.compute_drag_force()
+            icfd.parts.add(part4)
+
+            # Volume part enclosing the surfaces - needs its own material (mid=5)
+            # Note: ICFDVolumePart.set_material() doesn't call create(), so we must
+            # explicitly create the material first
+            mat5 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            mat5.create(None)  # Create ICFD_MAT mid=5 (stub arg unused, uses self.stub)
+            partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
+            partvol.set_material(mat5)
+            icfd.parts.add(partvol)
+
+            # Define mesh volume
+            meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
+            icfd.add(meshvol)
+
+            solution.create_database_binary(dt=0.5)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_mesh_adaptivity.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_mesh_morphing(self, initial_files_dir, pre_reference_dir):
