@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.field import Field, Flag, to_long  # noqa: F401
 from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields, write_fields_csv
 from ansys.dyna.core.lib.format_type import card_format, format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
-from ansys.dyna.core.lib.kwd_line_formatter import load_dataline, load_dataline_with_format, read_line
+from ansys.dyna.core.lib.kwd_line_formatter import load_dataline_with_format, read_line
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 
