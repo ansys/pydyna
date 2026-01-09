@@ -23,17 +23,26 @@
 import typing
 
 from jinja2 import Environment
+from keyword_generation.generators.template_context import EntrypointTemplateContext
 from keyword_generation.utils import get_license_header
 from keyword_generation.utils.domain_mapper import get_keyword_domain
 
 
 def generate_entrypoints(env: Environment, output_manager, keywords_list: typing.List[typing.Dict]) -> None:
-    """use templates to write keywords/type_mapping.py, keywords/__init__.py and domain __init__.py files"""
+    """
+    Generate entrypoint files using templates: auto_keywords.py and type_mapping.py
+
+    Args:
+        env: Jinja2 environment with loaded templates
+        output_manager: Handles writing output files
+        keywords_list: List of keyword metadata dicts
+    """
     license_header = get_license_header()
-    keywords_lists = {"license": license_header, "keywords": keywords_list}
-    # Write auto_keywords.py and type_mapping.py
-    output_manager.write_auto_keywords_file(env.get_template("importer.j2").render(**keywords_lists))
-    output_manager.write_type_mapping_file(env.get_template("type-mapping.j2").render(**keywords_lists))
+    context = EntrypointTemplateContext(license=license_header, keywords=keywords_list)
+
+    # Write auto_keywords.py and type_mapping.py using structured context
+    output_manager.write_auto_keywords_file(env.get_template("importer.j2").render(**context.to_dict()))
+    output_manager.write_type_mapping_file(env.get_template("type-mapping.j2").render(**context.to_dict()))
 
     # Group keywords by domain
     keywords_by_domain = {}

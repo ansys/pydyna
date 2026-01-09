@@ -128,7 +128,7 @@ runs:
         if [ -n "$COVERAGE_FILE" ]; then
           COVERAGE_ARGS="--cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term"
         fi
-        
+
         if [ "$PYTEST_MARKERS" = "" ]; then
           pytest -ra $COVERAGE_ARGS -vv
         else

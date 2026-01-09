@@ -329,6 +329,36 @@
                     }
                 ]
             }
+        },
+        {
+            "type": "prefix",
+            "patterns": [
+                "RIGIDWALL_GEOMETRIC",
+                "RIGIDWALL_PLANAR"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": -2,
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "ID_TITLE"
+                            }
+                        ],
+                        "option-name": "ID"
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
         }
     ],
     "CONSTRAINED_BEAM_IN_SOLID": {

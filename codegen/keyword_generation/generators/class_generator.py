@@ -26,14 +26,14 @@ import typing
 from jinja2 import Environment
 import keyword_generation.data_model as data_model
 from keyword_generation.data_model.keyword_data import Card, KeywordData
+from keyword_generation.generators.template_context import KeywordTemplateContext
 from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry
 from keyword_generation.utils import (
-    fix_keyword,
-    get_classname,
     get_license_header,
     handle_single_word_keyword,
 )
 from keyword_generation.utils.domain_mapper import get_keyword_domain
+from keyword_generation.utils.keyword_utils import KeywordNames
 from output_manager import OutputManager
 
 logger = logging.getLogger(__name__)
@@ -52,17 +52,43 @@ def _get_source_keyword(keyword: str, settings: typing.Dict[str, typing.Any]) ->
     return source_keyword
 
 
-def _get_jinja_variable(base_variable: typing.Dict) -> typing.Dict:
-    jinja_variable = base_variable.copy()
-    jinja_variable.update(
-        {
-            "license": get_license_header(),
-            "openbrace": "{",
-            "closebrace": "}",
-            "repeated_element_types": {"int": "pd.Int32Dtype()", "float": "np.float64", "str": "str"},
-        }
+def _create_template_context(
+    classname: str, keyword: str, keyword_options: typing.Dict, license: str
+) -> KeywordTemplateContext:
+    """
+    Create a structured template context object for keyword rendering.
+
+    This replaces the old _get_jinja_variable dict building with a typed context object.
+
+    Args:
+        classname: Python class name for the keyword
+        keyword: Full keyword string (e.g., "SECTION_SHELL_TITLE")
+        keyword_options: Keyword configuration from manifest.json
+        license: License header text
+
+    Returns:
+        KeywordTemplateContext instance ready for template rendering
+    """
+    source_keyword = _get_source_keyword(keyword, keyword_options)
+    generation_settings = keyword_options.get("generation-options", {})
+    initial_labels = keyword_options.get("labels", None)
+    keyword_data = _get_keyword_data(keyword, source_keyword, generation_settings, initial_labels=initial_labels)
+    keyword_data.classname = classname
+
+    # Determine alias if present
+    alias = data_model.get_alias(keyword)
+    alias_subkeyword = None
+    if alias:
+        alias_tokens = alias.split("_")
+        alias = KeywordNames.from_keyword(alias).classname
+        alias_subkeyword = "_".join(alias_tokens[1:])
+
+    return KeywordTemplateContext(
+        license=license,
+        keyword_data=keyword_data,
+        alias=alias,
+        alias_subkeyword=alias_subkeyword,
     )
-    return jinja_variable
 
 
 def _transform_data(data: KeywordData):
@@ -350,44 +376,35 @@ def _get_keyword_data(
     return kwd_data
 
 
-def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dict) -> typing.Dict:
-    source_keyword = _get_source_keyword(keyword, keyword_options)
-    generation_settings = keyword_options.get("generation-options", {})
-    initial_labels = keyword_options.get("labels", None)
-    keyword_data = _get_keyword_data(keyword, source_keyword, generation_settings, initial_labels=initial_labels)
-    # Set classname directly on dataclass instance
-    keyword_data.classname = classname
-    alias = data_model.get_alias(keyword)
-    alias_subkeyword = None
-    if alias:
-        alias_tokens = alias.split("_")
-        alias = get_classname(fix_keyword(alias))
-        alias_subkeyword = "_".join(alias_tokens[1:])
-    data = {
-        "keyword_data": keyword_data,  # Now a KeywordData instance, not dict
-        "alias": alias,
-        "alias_subkeyword": alias_subkeyword,
-    }
-    return data
-
-
 def generate_class(env: Environment, output_manager: OutputManager, item: typing.Dict):
+    """
+    Generate a Python keyword class from manifest configuration.
+
+    Args:
+        env: Jinja2 environment with loaded templates
+        output_manager: Handles writing output files to appropriate directories
+        item: Keyword configuration dict with 'name' and 'options' keys
+
+    Returns:
+        Tuple of (classname, filename_stem) for the generated class
+    """
     keyword = item["name"]
-    fixed_keyword = fix_keyword(keyword)
-    classname = item["options"].get("classname", get_classname(fixed_keyword))
+    names = KeywordNames.from_keyword(keyword)
+    classname = item["options"].get("classname", names.classname)
     logger.debug(f"Starting generation for class '{classname}' from keyword '{keyword}'")
     try:
-        base_variable = _get_base_variable(classname, keyword, item["options"])
-        jinja_variable = _get_jinja_variable(base_variable)
+        # Create structured template context
+        license = get_license_header()
+        context = _create_template_context(classname, keyword, item["options"], license)
 
         # Determine domain and create domain subdirectory
         domain = get_keyword_domain(keyword)
-        filename = fixed_keyword.lower() + ".py"
+        filename = names.filename + ".py"
         logger.debug(f"Rendering template for {classname} in domain '{domain}'")
-        content = env.get_template("keyword.j2").render(**jinja_variable)
+        content = env.get_template("keyword.j2").render(**context.to_dict())
         output_manager.write_auto_file(domain, filename, content)
         logger.debug(f"Successfully generated class '{classname}'")
-        return classname, fixed_keyword.lower()
+        return classname, names.filename
     except Exception as e:
         logger.error(f"Failure in generating {classname}", exc_info=True)
         raise e

@@ -25,6 +25,25 @@ Handler base classes and metadata system for keyword code generation.
 
 This module provides the abstract base class for all handlers and the decorator-based
 metadata system for handler registration and documentation.
+
+ARCHITECTURAL NOTE - Mutable Reference Semantics:
+    The handler system uses mutable reference semantics where handlers modify kwd_data
+    and its nested structures (cards, fields, options) in place. This design is intentional
+    and critical for handlers like card-set and table-card-group, which group cards by
+    appending references (not copies) so that later handlers' modifications automatically
+    appear in all places where the card is referenced.
+
+    Example: card-set groups cards into a reusable set, then conditional-card adds 'func'
+    properties to those same card objects. Because card-set stored references (not copies),
+    the conditional properties appear both in the main cards list AND in the card-set.
+
+    An immutable approach would require significant architectural changes:
+    - Handlers would return new data instead of mutating in place
+    - Card references would need to be resolved in a separate phase
+    - Complex dependency tracking between handlers
+
+    The current mutable design is simpler, more performant, and works correctly for this
+    use case (code generation that runs once during development, not in production loops).
 """
 
 import abc
@@ -213,7 +232,11 @@ class KeywordHandler(metaclass=abc.ABCMeta):
 
     Subclasses must implement:
         - handle(): Main transformation logic
-        - post_process(): Optional finalization logic (runs after all handlers)
+
+    Subclasses may optionally override:
+        - post_process(): Finalization logic (runs after all handlers complete)
+          Default implementation is a no-op. Only override if you need to perform
+          operations that depend on the combined effects of all handlers.
 
     Subclasses should use the @handler decorator to provide metadata including
     name, dependencies, and documentation.
@@ -242,21 +265,26 @@ class KeywordHandler(metaclass=abc.ABCMeta):
         """
         raise NotImplementedError
 
-    @abc.abstractmethod
     def post_process(self, kwd_data: KeywordData) -> None:
         """
-        Finalization logic that runs after all handlers have executed.
+        Optional finalization logic that runs after all handlers have executed.
 
         This phase is useful for cleanup, validation, or transformations that
-        depend on the combined effects of all handlers. Most handlers leave
-        this as a no-op (pass).
+        depend on the combined effects of all handlers. The default implementation
+        is a no-op.
+
+        Override this method only if your handler needs to:
+        - Process data that depends on other handlers' modifications
+        - Perform validation that requires the complete transformed structure
+        - Clean up or finalize state after all transformations
+
+        Current handlers using post_process:
+        - shared-field: Processes deferred negative-index shared fields after options exist
+        - rename-property: Detects property name collisions after all renames complete
 
         Handlers can access kwd_data.label_registry if needed.
 
         Args:
             kwd_data: KeywordData instance after all handle() calls
-
-        Raises:
-            NotImplementedError: Must be implemented by subclass
         """
-        raise NotImplementedError
+        pass
