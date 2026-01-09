@@ -25,10 +25,10 @@ import typing
 
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.field import Field, Flag, to_long  # noqa: F401
-from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields
-from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields, write_fields_csv
+from ansys.dyna.core.lib.format_type import card_format, format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
-from ansys.dyna.core.lib.kwd_line_formatter import load_dataline, read_line
+from ansys.dyna.core.lib.kwd_line_formatter import load_dataline_with_format, read_line
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 
@@ -37,6 +37,7 @@ class Card(CardInterface):
         self._fields = fields
         self._active_func = active_func
         self._format_type = format
+        self._card_format = card_format.fixed
 
     @property
     def format(self):
@@ -80,7 +81,8 @@ class Card(CardInterface):
         if self.format == format_type.long:
             fields = self._convert_fields_to_long_format()
         format_spec = self._get_format_spec(fields)
-        values = load_dataline(format_spec, data_line, parameter_set)
+        values, detected_format = load_dataline_with_format(format_spec, data_line, parameter_set)
+        self._card_format = detected_format
         num_fields = len(fields)
         for field_index in range(num_fields):
             self._fields[field_index].value = values[field_index]
@@ -90,16 +92,43 @@ class Card(CardInterface):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        output_format: typing.Optional[str] = None,
     ) -> typing.Union[str, None]:
-        if format == None:
+        """Write the card to a buffer or return as string.
+
+        Parameters
+        ----------
+        format : format_type, optional
+            Field width format (default, standard, or long).
+        buf : TextIO, optional
+            Buffer to write to. If None, returns the output as a string.
+        comment : bool, optional
+            Whether to include the comment line with field names. Default is True.
+        output_format : str, optional
+            Card serialization format: card_format.fixed or card_format.csv.
+            If None (default), uses fixed unless the card was originally read as csv.
+
+        Returns
+        -------
+        str or None
+            The card as a string if buf is None, otherwise None.
+        """
+        if format is None:
             format = self._format_type
+        if output_format is None:
+            output_format = self._card_format
 
         def _write(buf: typing.TextIO):
             if self.active:
-                if comment:
-                    write_comment_line(buf, self._fields, format)
-                    buf.write("\n")
-                write_fields(buf, self._fields, None, format)
+                if output_format == card_format.csv:
+                    # CSV format: no comment line, comma-separated values
+                    write_fields_csv(buf, self._fields)
+                else:
+                    # Fixed-width format (default)
+                    if comment:
+                        write_comment_line(buf, self._fields, format)
+                        buf.write("\n")
+                    write_fields(buf, self._fields, None, format)
 
         return write_or_return(buf, _write)
 

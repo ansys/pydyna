@@ -23,10 +23,16 @@
 from contextlib import contextmanager
 
 USE_LSPP_DEFAULTS = True
+ENABLE_CSV_AUTODETECT = True
 
 
 def use_lspp_defaults():
     return USE_LSPP_DEFAULTS
+
+
+def csv_autodetect_enabled():
+    """Return whether CSV format auto-detection is enabled."""
+    return ENABLE_CSV_AUTODETECT
 
 
 @contextmanager
@@ -37,3 +43,24 @@ def disable_lspp_defaults():
         yield
     finally:
         USE_LSPP_DEFAULTS = True
+
+
+@contextmanager
+def disable_csv_autodetect():
+    """Context manager to temporarily disable CSV format auto-detection.
+
+    By default, pydyna auto-detects comma-delimited (CSV) format in keyword card data.
+    Use this context manager if CSV detection causes issues with specific files.
+
+    Examples
+    --------
+    >>> from ansys.dyna.core.lib.config import disable_csv_autodetect
+    >>> with disable_csv_autodetect():
+    ...     deck.loads(content)  # CSV detection disabled
+    """
+    global ENABLE_CSV_AUTODETECT
+    ENABLE_CSV_AUTODETECT = False
+    try:
+        yield
+    finally:
+        ENABLE_CSV_AUTODETECT = True
