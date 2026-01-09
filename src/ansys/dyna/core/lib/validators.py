@@ -28,7 +28,12 @@ from enum import Enum
 import logging
 from typing import TYPE_CHECKING, Callable, List
 
-from ansys.dyna.core.pre.errors import DuplicateIDError, RequiredFieldError, ValidationError
+from ansys.dyna.core.pre.errors import (
+    DuplicateIDError,
+    DuplicateKeywordError,
+    RequiredFieldError,
+    ValidationError,
+)
 
 if TYPE_CHECKING:
     from ansys.dyna.core.lib.deck import Deck
@@ -338,6 +343,88 @@ class KeywordValidator(Validator):
         logger.debug(f"{self.get_name()} checked {checked_count} keywords")
 
 
+# Keywords that should appear at most once in a deck.
+# This list covers common CONTROL keywords and other singleton keywords.
+# Users can write custom validators if additional keywords need uniqueness checks.
+GLOBALLY_UNIQUE_KEYWORDS = frozenset(
+    [
+        ("CONTROL", "ACCURACY"),
+        ("CONTROL", "BULK_VISCOSITY"),
+        ("CONTROL", "CONTACT"),
+        ("CONTROL", "CPU"),
+        ("CONTROL", "DYNAMIC_RELAXATION"),
+        ("CONTROL", "ENERGY"),
+        ("CONTROL", "HOURGLASS"),
+        ("CONTROL", "IMPLICIT_AUTO"),
+        ("CONTROL", "IMPLICIT_DYNAMICS"),
+        ("CONTROL", "IMPLICIT_GENERAL"),
+        ("CONTROL", "IMPLICIT_SOLUTION"),
+        ("CONTROL", "IMPLICIT_SOLVER"),
+        ("CONTROL", "OUTPUT"),
+        ("CONTROL", "PARALLEL"),
+        ("CONTROL", "SHELL"),
+        ("CONTROL", "SOLID"),
+        ("CONTROL", "SOLUTION"),
+        ("CONTROL", "TERMINATION"),
+        ("CONTROL", "THERMAL_SOLVER"),
+        ("CONTROL", "THERMAL_TIMESTEP"),
+        ("CONTROL", "TIMESTEP"),
+    ]
+)
+
+
+class GloballyUniqueKeywordValidator(Validator):
+    """Validator that checks for keywords that should appear at most once in a deck."""
+
+    def __init__(self, severity: ValidationSeverity = ValidationSeverity.ERROR):
+        """Initialize the globally unique keyword validator.
+
+        Parameters
+        ----------
+        severity : ValidationSeverity
+            Severity level for violations.
+        """
+        super().__init__(severity)
+
+    def get_name(self) -> str:
+        """Get the name of this validator."""
+        return "GloballyUniqueKeyword"
+
+    def validate(self, deck: "Deck", result: ValidationResult) -> None:
+        """Validate that globally unique keywords appear at most once.
+
+        Parameters
+        ----------
+        deck : Deck
+            The deck to validate.
+        result : ValidationResult
+            Result object to accumulate validation errors.
+        """
+        logger.debug(f"Running {self.get_name()} validator")
+        keyword_counts: dict = {}
+
+        for kwd in deck._keywords:
+            if isinstance(kwd, str):
+                continue
+            key = (getattr(kwd, "keyword", None), getattr(kwd, "subkeyword", None))
+            if key in GLOBALLY_UNIQUE_KEYWORDS:
+                keyword_counts[key] = keyword_counts.get(key, 0) + 1
+
+        duplicates_found = 0
+        for (keyword_type, subkeyword), count in keyword_counts.items():
+            if count > 1:
+                duplicates_found += 1
+                error = DuplicateKeywordError(keyword_type, subkeyword, count)
+                error.severity = self.severity.value
+                result.add_error(error)
+                logger.warning(f"Globally unique keyword validation failed: {error}")
+
+        logger.debug(
+            f"{self.get_name()} checked {len(keyword_counts)} unique keyword types, "
+            f"found {duplicates_found} duplicates"
+        )
+
+
 class CustomValidator(Validator):
     """Validator that wraps a custom validation function."""
 
@@ -504,6 +591,9 @@ class ValidatorRegistry:
 
         # Unique ID validators
         self.register(UniqueIDValidator("SECTION", "secid", ValidationSeverity.ERROR))
+
+        # Globally unique keyword validator (e.g., CONTROL_TIMESTEP should appear at most once)
+        self.register(GloballyUniqueKeywordValidator(ValidationSeverity.ERROR))
 
         # Note: We don't enforce unique lcid for DEFINE_CURVE because multiple curves
         # can legally share the same ID in some LS-DYNA workflows

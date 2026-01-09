@@ -28,16 +28,23 @@ from pathlib import Path
 import pytest
 
 from ansys.dyna.core.keywords.keyword_classes.auto import DefineCurve, SectionShell
+from ansys.dyna.core.keywords.keyword_classes.auto.control.control_timestep import ControlTimestep
 from ansys.dyna.core.lib.deck import Deck
 from ansys.dyna.core.lib.validators import (
     CustomValidator,
+    GloballyUniqueKeywordValidator,
     RequiredFieldValidator,
     UniqueIDValidator,
     ValidationResult,
     ValidationSeverity,
     ValidatorRegistry,
 )
-from ansys.dyna.core.pre.errors import DuplicateIDError, RequiredFieldError, ValidationError
+from ansys.dyna.core.pre.errors import (
+    DuplicateIDError,
+    DuplicateKeywordError,
+    RequiredFieldError,
+    ValidationError,
+)
 
 
 class TestValidationResult:
@@ -601,3 +608,114 @@ class TestValidationIntegration:
         # Should have warning about missing material
         assert result.is_valid  # Warnings don't fail validation
         assert result.has_warnings()
+
+
+class TestGloballyUniqueKeywordValidator:
+    """Test GloballyUniqueKeywordValidator class."""
+
+    def test_single_instance_passes(self):
+        """Test validation passes when globally unique keyword appears once."""
+        deck = Deck()
+        deck.clear_validators()
+
+        timestep = ControlTimestep()
+        deck.append(timestep)
+
+        validator = GloballyUniqueKeywordValidator()
+        result = ValidationResult()
+        validator.validate(deck, result)
+
+        assert result.is_valid
+        assert not result.has_errors()
+
+    def test_duplicate_keyword_fails(self):
+        """Test validation fails when globally unique keyword appears multiple times."""
+        deck = Deck()
+        deck.clear_validators()
+
+        timestep1 = ControlTimestep()
+        timestep2 = ControlTimestep()
+        deck.append(timestep1)
+        deck.append(timestep2)
+
+        validator = GloballyUniqueKeywordValidator()
+        result = ValidationResult()
+        validator.validate(deck, result)
+
+        assert not result.is_valid
+        assert result.has_errors()
+        assert len(result.errors) == 1
+        assert isinstance(result.errors[0], DuplicateKeywordError)
+        assert "CONTROL_TIMESTEP" in str(result.errors[0])
+        assert "2 times" in str(result.errors[0])
+
+    def test_multiple_duplicates(self):
+        """Test detection of multiple different duplicate keywords."""
+        deck = Deck()
+        deck.clear_validators()
+
+        # Add 3 CONTROL_TIMESTEP keywords
+        deck.append(ControlTimestep())
+        deck.append(ControlTimestep())
+        deck.append(ControlTimestep())
+
+        validator = GloballyUniqueKeywordValidator()
+        result = ValidationResult()
+        validator.validate(deck, result)
+
+        assert not result.is_valid
+        assert len(result.errors) == 1
+        error = result.errors[0]
+        assert error.count == 3
+
+    def test_non_unique_keywords_ignored(self):
+        """Test that non-globally-unique keywords are not flagged."""
+        deck = Deck()
+        deck.clear_validators()
+
+        # Multiple SECTION_SHELL keywords are allowed
+        section1 = SectionShell()
+        section1.secid = 1
+        section2 = SectionShell()
+        section2.secid = 2
+        deck.append(section1)
+        deck.append(section2)
+
+        validator = GloballyUniqueKeywordValidator()
+        result = ValidationResult()
+        validator.validate(deck, result)
+
+        assert result.is_valid
+        assert not result.has_errors()
+
+    def test_warning_severity(self):
+        """Test globally unique keyword validator with warning severity."""
+        deck = Deck()
+        deck.clear_validators()
+
+        deck.append(ControlTimestep())
+        deck.append(ControlTimestep())
+
+        validator = GloballyUniqueKeywordValidator(ValidationSeverity.WARNING)
+        result = ValidationResult()
+        validator.validate(deck, result)
+
+        assert result.is_valid  # Warnings don't affect validity
+        assert result.has_warnings()
+        assert len(result.warnings) == 1
+
+    def test_default_validators_include_globally_unique(self):
+        """Test that default validators include globally unique keyword check."""
+        deck = Deck()
+
+        deck.append(ControlTimestep())
+        deck.append(ControlTimestep())
+
+        result = deck.validate()
+
+        assert not result.is_valid
+        # Should have error about duplicate CONTROL_TIMESTEP
+        found_duplicate_error = any(
+            isinstance(e, DuplicateKeywordError) for e in result.errors
+        )
+        assert found_duplicate_error
