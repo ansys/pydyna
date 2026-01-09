@@ -203,11 +203,17 @@ class TableCard(Card):
         type_mapping = {float: np.float64, int: pd.Int32Dtype(), str: str}
         dtype = {field.name: type_mapping[field.type] for field in fields}
         names = [field.name for field in fields]
-        options = {"names": names, "colspecs": colspecs, "dtype": dtype, "comment": "$"}
+        # Comment lines are already filtered by buffer_to_lines/read_line before
+        # data reaches this point, so we can skip pandas comment checking entirely.
+        # This provides ~30-40% speedup for large files (see GitHub issue #592)
+        options = {"names": names, "colspecs": colspecs, "dtype": dtype, "comment": None}
         return options
 
     def _read_buffer_as_dataframe(
-        self, buffer: typing.TextIO, fields: typing.Iterable[Field], parameter_set: ParameterSet
+        self,
+        buffer: typing.TextIO,
+        fields: typing.Iterable[Field],
+        parameter_set: ParameterSet,
     ) -> pd.DataFrame:
         read_options = self._get_read_options()
         df = pd.read_fwf(buffer, **read_options)

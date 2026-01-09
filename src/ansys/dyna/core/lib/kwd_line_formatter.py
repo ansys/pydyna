@@ -94,21 +94,164 @@ def _is_flag(item_type: typing.Union[type, Flag]):
     return False
 
 
+class FormatSpec:
+    """Immutable, hashable specification for parsing fixed-width data lines.
+
+    This class wraps the format specification (list of offset, width, type tuples)
+    and caches computed properties like expanded spec and dataclass detection.
+
+    Using a class instead of raw tuples allows functools.lru_cache to work
+    efficiently on functions that take specs as arguments.
+    """
+
+    __slots__ = ("_items", "_hash", "_expanded", "_has_dataclass")
+
+    def __init__(
+        self,
+        items: typing.Tuple[typing.Tuple[int, int, type], ...],
+        _precomputed_hash: typing.Optional[int] = None,
+    ):
+        """Initialize FormatSpec from a tuple of (offset, width, type) tuples.
+
+        Parameters
+        ----------
+        items : tuple of tuples
+            Each inner tuple is (offset, width, type) where type can be
+            int, float, str, Flag, or a dataclass.
+        _precomputed_hash : int, optional
+            Pre-computed hash value to avoid recomputation. Internal use only.
+        """
+        self._items = items
+        # Use pre-computed hash if provided, otherwise compute
+        self._hash = _precomputed_hash if _precomputed_hash is not None else self._compute_hash(items)
+        # Lazily computed
+        self._expanded: typing.Optional[typing.Tuple] = None
+        self._has_dataclass: typing.Optional[bool] = None
+
+    @staticmethod
+    def _compute_hash(items: tuple) -> int:
+        """Compute hash for items, handling unhashable Flag objects."""
+        hashable_items = []
+        for offset, width, item_type in items:
+            if isinstance(item_type, Flag):
+                # Convert Flag to a hashable tuple representation
+                hashable_type = ("Flag", item_type.value, item_type.true_value, item_type.false_value)
+            else:
+                hashable_type = item_type
+            hashable_items.append((offset, width, hashable_type))
+        return hash(tuple(hashable_items))
+
+    # Class-level cache for FormatSpec instances
+    _cache: typing.ClassVar[typing.Dict[int, "FormatSpec"]] = {}
+
+    @classmethod
+    def from_list(cls, spec_list: typing.List[tuple]) -> "FormatSpec":
+        """Create FormatSpec from a list of (offset, width, type) tuples.
+
+        Results are cached by hash to avoid creating duplicate FormatSpec objects.
+        """
+        items = tuple(spec_list)
+        cache_key = cls._compute_hash(items)
+        cached = cls._cache.get(cache_key)
+        if cached is not None and cached._items == items:
+            return cached
+        # Pass pre-computed hash to avoid recomputing in __init__
+        instance = cls(items, _precomputed_hash=cache_key)
+        cls._cache[cache_key] = instance
+        return instance
+
+    @classmethod
+    def from_fields(cls, fields) -> "FormatSpec":
+        """Create FormatSpec from a list of Field objects."""
+        items = []
+        for field in fields:
+            if field._is_flag():
+                field_type = field._value
+            else:
+                field_type = field.type
+            items.append((field.offset, field.width, field_type))
+        return cls.from_list(items)
+
+    def __hash__(self) -> int:
+        return self._hash
+
+    def __eq__(self, other) -> bool:
+        if not isinstance(other, FormatSpec):
+            return False
+        return self._items == other._items
+
+    def __iter__(self):
+        return iter(self._items)
+
+    def __len__(self) -> int:
+        return len(self._items)
+
+    @property
+    def expanded(self) -> typing.Tuple:
+        """Get expanded spec, unpacking any dataclass fields."""
+        if self._expanded is None:
+            self._compute_expanded()
+        return self._expanded
+
+    @property
+    def has_dataclass(self) -> bool:
+        """Check if any field type is a dataclass."""
+        if self._has_dataclass is None:
+            self._compute_expanded()
+        return self._has_dataclass
+
+    def _compute_expanded(self) -> None:
+        """Compute expanded spec and has_dataclass flag."""
+        specs = []
+        has_dc = False
+        for position, width, item_type in self._items:
+            if _is_flag(item_type):
+                specs.append((position, width, item_type))
+            elif dataclasses.is_dataclass(item_type):
+                has_dc = True
+                offset = position
+                for field in dataclasses.fields(item_type):
+                    specs.append((offset, width, field.type))
+                    offset = offset + width
+            else:
+                specs.append((position, width, item_type))
+        self._expanded = tuple(specs)
+        self._has_dataclass = has_dc
+
+    def contract_data(self, data: typing.List) -> typing.Tuple:
+        """Contract expanded data back, packing dataclass fields into instances."""
+        if not self.has_dataclass:
+            # Fast path: no dataclasses, just return as tuple
+            return tuple(data)
+
+        result = []
+        iterdata = iter(data)
+        for _, _, item_type in self._items:
+            if _is_flag(item_type):
+                result.append(next(iterdata))
+            elif dataclasses.is_dataclass(item_type):
+                args = [next(iterdata) for _ in dataclasses.fields(item_type)]
+                result.append(item_type(*args))
+            else:
+                result.append(next(iterdata))
+        return tuple(result)
+
+
+# Legacy functions for backward compatibility - delegate to FormatSpec
 def _expand_spec(spec: typing.List[tuple]) -> typing.List[tuple]:
-    specs = []
-    for item in spec:
-        position, width, item_type = item
-        if _is_flag(item_type):
-            specs.append(item)
-        elif dataclasses.is_dataclass(item_type):
-            offset = position
-            for field in dataclasses.fields(item_type):
-                item_spec = (offset, width, field.type)
-                offset = offset + width
-                specs.append(item_spec)
-        else:
-            specs.append(item)
-    return specs
+    """Expand spec, handling dataclass types by unpacking their fields.
+
+    DEPRECATED: Use FormatSpec.expanded instead for better performance.
+    """
+    return list(FormatSpec.from_list(spec).expanded)
+
+
+def _spec_has_dataclass(spec: typing.List[tuple]) -> bool:
+    """Check if spec contains any dataclass types.
+
+    DEPRECATED: Use FormatSpec.has_dataclass instead for better performance.
+    """
+    return FormatSpec.from_list(spec).has_dataclass
 
 
 def _convert_type(raw_value, item_type):
@@ -121,20 +264,11 @@ def _convert_type(raw_value, item_type):
 
 
 def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterable:
-    iterspec = iter(spec)
-    iterdata = iter(data)
-    while True:
-        try:
-            _, _, item_type = next(iterspec)
-            if _is_flag(item_type):
-                yield next(iterdata)
-            elif dataclasses.is_dataclass(item_type):
-                args = [next(iterdata) for f in dataclasses.fields(item_type)]
-                yield item_type(*args)
-            else:
-                yield next(iterdata)
-        except StopIteration:
-            return
+    """Contract expanded data back, packing dataclass fields.
+
+    DEPRECATED: Use FormatSpec.contract_data() instead for better performance.
+    """
+    return FormatSpec.from_list(spec).contract_data(data)
 
 
 def _is_comma_delimited(line_data: str, num_fields: int = None) -> bool:
@@ -360,6 +494,51 @@ def _load_dataline_csv(
     return tuple(data)
 
 
+# Module-level helper functions for load_dataline (moved out of function for performance)
+def seek_text_block(line_data: str, position: int, width: int) -> typing.Tuple[int, str]:
+    """Returns the text block from the line at the given position and width.
+
+    If the position is past the end, it will return an empty string.
+    """
+    end_position = position + width
+    text_block = line_data[position:end_position]
+    return end_position, text_block
+
+
+def has_value(text_block: str) -> bool:
+    """Given a text block - determine if a keyword value exists.
+
+    If its an empty string (i.e. the seek_text_block returned an empty
+    string) then there is no value. If its just whitespace, then
+    the keyword file did not include data for that field.
+    """
+    if text_block == "":
+        return False
+    if text_block.isspace():
+        return False
+    return True
+
+
+def _get_none_value(item_type):
+    """Get the appropriate None/default value for a field type."""
+    if item_type is float:
+        return float("nan")
+    if _is_flag(item_type):
+        if len(item_type.false_value) == 0:
+            return False
+        if len(item_type.true_value) == 0:
+            return True
+        raise Exception(
+            "No input data for flag. Expected true or false value because neither uses `no input` as a value!"
+        )
+    return None
+
+
+def _has_parameter(text_block: str) -> bool:
+    """Check if a text block contains a parameter reference."""
+    return "&" in text_block
+
+
 def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> typing.List:
     """
     Loads a keyword card line from string, auto-detecting fixed-width or comma-delimited format.
@@ -399,41 +578,6 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
     # Fixed-width format parsing (original implementation)
     logger.debug("Using fixed-width format for line")
 
-    def seek_text_block(line_data: str, position: int, width: int) -> str:
-        """Returns the text block from the line at the given position and width
-        If the position is past the end, it will return an empty string"""
-        end_position = position + width
-        text_block = line_data[position:end_position]
-        return end_position, text_block
-
-    def has_value(text_block: str) -> bool:
-        """Given a text block - determine if a keyword value exists.
-        if its an empty string (i.e. the seek_text_block returned an empty
-        string) then there is no value.  If its just whitespace, then
-        the keyword file did not include data for that field.
-        """
-        if text_block == "":
-            return False
-        if text_block.isspace():
-            return False
-        return True
-
-    def get_none_value(item_type):
-        if item_type is float:
-            return float("nan")
-        if _is_flag(item_type):
-            if len(item_type.false_value) == 0:
-                return False
-            if len(item_type.true_value) == 0:
-                return True
-            raise Exception(
-                "No input data for flag. Expected true or false value because neither uses `no input` as a value!"
-            )
-        return None
-
-    def has_parameter(text_block: str) -> bool:
-        return "&" in text_block
-
     def get_parameter(text_block: str, item_type: type) -> typing.Any:
         text_block = text_block.strip()
         negative = False
@@ -463,7 +607,7 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
         position, width, item_type = item_spec
         end_position, text_block = seek_text_block(line_data, position, width)
         if not has_value(text_block):
-            value = get_none_value(item_type)
+            value = _get_none_value(item_type)
         elif _is_flag(item_type):
             flag: Flag = item_type
             true_value = flag.true_value
@@ -479,7 +623,7 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
                     if false_value in text_block:
                         value = False
                     raise Exception("Failed to find true or false value in flag")
-        elif has_parameter(text_block):
+        elif _has_parameter(text_block):
             if parameter_set is None:
                 raise ValueError("Parameter set must be provided when using parameters in keyword data.")
             value = get_parameter(text_block, item_type)
