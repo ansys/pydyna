@@ -31,7 +31,6 @@ This allows running pre examples without requiring a gRPC server.
 import logging
 import os
 import shutil
-from pathlib import Path
 from typing import List, Optional
 
 from ansys.dyna.core.lib.deck import Deck

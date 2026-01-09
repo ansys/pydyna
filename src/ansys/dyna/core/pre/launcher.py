@@ -292,7 +292,7 @@ def launch_dynapre(
     DynaSolution or KeywordsDynaSolution
         A solution instance. The type depends on the backend selected.
     """
-    from ansys.dyna.core.pre.backend_config import BackendType, get_backend_type, is_keywords_backend
+    from ansys.dyna.core.pre.backend_config import is_keywords_backend
 
     # Determine backend type
     if backend is not None:

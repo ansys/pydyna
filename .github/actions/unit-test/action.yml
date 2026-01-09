@@ -154,6 +154,15 @@ runs:
         name: server_output_tests.txt
         path: server_output.txt
 
+    - name: Upload pre test output files
+      if: ${{ inputs.server-logs == 'true' }}
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      with:
+        name: pre-test-output
+        path: tests/testfiles/output/**/*.k
+        retention-days: 30
+        if-no-files-found: ignore
+
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
       env:
