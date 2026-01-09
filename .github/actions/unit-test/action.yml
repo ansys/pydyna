@@ -56,12 +56,23 @@ runs:
       with:
           persist-credentials: false
 
+    - name: Install uv
+      uses: astral-sh/setup-uv@681c641aba71e4a1c380be3ab5e12ad51f415867 # v7.1.6
+      with:
+        enable-cache: true
+
     - name: Set up Python
       uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
       with:
         python-version: ${{ inputs.python-version }}
         cache: 'pip'
         cache-dependency-path: 'pyproject.toml'
+
+
+    - name: Create virtual environment
+      shell: bash
+      run: |
+        python -m venv .venv
 
     - name: Login to GitHub container registry
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
@@ -70,19 +81,33 @@ runs:
         username: ${{ github.actor }}
         password: ${{ inputs.github-token }}
 
+    # - name: Set up Docker Buildx for caching
+    #   if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
+    #   uses: docker/setup-buildx-action@v3
+
     - name: Pull and start LS-DYNA keyword server
       if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
       env:
         DOCKER_IMAGE: ${{ inputs.docker-image }}
       run: |
-        python -m pip install docker
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          source .venv/Scripts/activate
+        else
+          source .venv/bin/activate
+        fi
+        uv pip install docker
         docker pull "$DOCKER_IMAGE"
         docker run -d --name kw_server -p 50051:50051 "$DOCKER_IMAGE" && echo "Keyword server active on port 50051."
       shell: bash
 
     - name: Install test dependencies
       run: |
-        pip install -e .[tests]
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          source .venv/Scripts/activate
+        else
+          source .venv/bin/activate
+        fi
+        uv pip install -e .[tests]
       shell: bash
 
     - name: Run pytest
@@ -94,6 +119,11 @@ runs:
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         LSTC_LICENSE: ansys
       run: |
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          source .venv/Scripts/activate
+        else
+          source .venv/bin/activate
+        fi
         COVERAGE_ARGS=""
         if [ -n "$COVERAGE_FILE" ]; then
           COVERAGE_ARGS="--cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term"
@@ -109,6 +139,11 @@ runs:
     - name: Extract the server logs
       if: ${{ inputs.server-logs == 'true' }}
       run: |
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          source .venv/Scripts/activate
+        else
+          source .venv/bin/activate
+        fi
         docker logs kw_server > server_output.txt
       shell: bash
 
@@ -129,6 +164,11 @@ runs:
     - name: Stop container
       if: ${{ inputs.docker-image != '' && inputs.pytest-markers != 'keywords' }}
       run: |
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          source .venv/Scripts/activate
+        else
+          source .venv/bin/activate
+        fi
         docker stop kw_server
         docker rm kw_server
       shell: bash
