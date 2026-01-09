@@ -128,3 +128,26 @@ class DuplicateIDError(ValidationError):
         self.keyword_type = keyword_type
         self.field_name = field_name
         self.duplicate_values = duplicate_values
+
+
+class DuplicateKeywordError(ValidationError):
+    """Error raised when a globally unique keyword appears more than once."""
+
+    def __init__(self, keyword_type, subkeyword, count):
+        """Initialize a duplicate keyword error.
+
+        Parameters
+        ----------
+        keyword_type : str
+            Main keyword type (e.g., "CONTROL").
+        subkeyword : str
+            Sub-keyword type (e.g., "TIMESTEP").
+        count : int
+            Number of times the keyword appears.
+        """
+        full_name = f"{keyword_type}_{subkeyword}" if subkeyword else keyword_type
+        msg = f"Keyword '{full_name}' appears {count} times but should appear at most once"
+        super().__init__(msg, keyword=None, severity="error")
+        self.keyword_type = keyword_type
+        self.subkeyword = subkeyword
+        self.count = count
