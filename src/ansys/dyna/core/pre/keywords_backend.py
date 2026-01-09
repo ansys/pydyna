@@ -1456,6 +1456,376 @@ class KeywordsBackend:
         logger.debug(f"Created INITIAL_VELOCITY_NODE for nid={nid}")
         return True
 
+    # =========================================================================
+    # EM (Electromagnetic) Methods
+    # =========================================================================
+
+    def create_em_control(
+        self,
+        emsol: int = 0,
+        numls: int = 100,
+        macrodt: float = 0.0,
+        dimtype: int = 0,
+        nperio: int = 2,
+        ncylfem: int = 5000,
+        ncylbem: int = 5000,
+    ) -> bool:
+        """Create an EM_CONTROL keyword.
+
+        Parameters
+        ----------
+        emsol : int
+            EM solver type.
+        numls : int
+            Number of local EM steps.
+        macrodt : float
+            Macro time step.
+        dimtype : int
+            Problem dimension type.
+        nperio : int
+            Number of periods.
+        ncylfem : int
+            FEM recalculation cycles.
+        ncylbem : int
+            BEM recalculation cycles.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmControl()
+        kw.emsol = emsol
+        kw.numls = numls
+        kw.macrodt = macrodt
+        kw.dimtype = dimtype
+        kw.nperio = nperio
+        kw.ncylfem = ncylfem
+        kw.ncylbem = ncylbem
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_CONTROL with emsol={emsol}")
+        return True
+
+    def create_em_timestep(
+        self,
+        tstype: int = 1,
+        dtconst: float = 0.0,
+        factor: float = 1.0,
+        rlcsf: int = 25,
+    ) -> bool:
+        """Create an EM_CONTROL_TIMESTEP keyword.
+
+        Parameters
+        ----------
+        tstype : int
+            Time step type.
+        dtconst : float
+            Constant time step value.
+        factor : float
+            Time step factor.
+        rlcsf : int
+            RLC sub-cycling factor.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmControlTimestep()
+        kw.tstype = tstype
+        kw.dtcons = dtconst
+        kw.factor = factor
+        kw.rlcsf = rlcsf
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_CONTROL_TIMESTEP with tstype={tstype}, dtcons={dtconst}")
+        return True
+
+    def create_em_output(
+        self,
+        mats: int = 0,
+        matf: int = 0,
+        sols: int = 0,
+        solf: int = 0,
+    ) -> bool:
+        """Create an EM_OUTPUT keyword.
+
+        Parameters
+        ----------
+        mats : int
+            Matrix output level to screen.
+        matf : int
+            Matrix output level to file.
+        sols : int
+            Solver output level to screen.
+        solf : int
+            Solver output level to file.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmOutput()
+        kw.mats = mats
+        kw.matf = matf
+        kw.sols = sols
+        kw.solf = solf
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_OUTPUT with mats={mats}, matf={matf}, sols={sols}, solf={solf}")
+        return True
+
+    def create_em_mat_001(
+        self,
+        mid: int,
+        mtype: int = 0,
+        sigma: float = 0.0,
+    ) -> bool:
+        """Create an EM_MAT_001 keyword.
+
+        Parameters
+        ----------
+        mid : int
+            Material ID.
+        mtype : int
+            Material type.
+        sigma : float
+            Electrical conductivity.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmMat001()
+        kw.mid = mid
+        kw.mtype = mtype
+        kw.sigma = sigma
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_MAT_001 with mid={mid}, mtype={mtype}")
+        return True
+
+    def create_em_isopotential(
+        self,
+        settype: int = 1,
+        setid: int = 0,
+        rdltype: int = 0,
+    ) -> int:
+        """Create an EM_ISOPOTENTIAL keyword.
+
+        Parameters
+        ----------
+        settype : int
+            Set type (1=segment, 2=node).
+        setid : int
+            Set ID.
+        rdltype : int
+            Randles layer type.
+
+        Returns
+        -------
+        int
+            Isopotential ID.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        isoid = self.next_id("isopotential")
+
+        kw = keywords.EmIsopotential()
+        kw.isoid = isoid
+        kw.settype = settype
+        kw.setid = setid
+        kw.rdltype = rdltype
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_ISOPOTENTIAL with isoid={isoid}, settype={settype}, setid={setid}")
+        return isoid
+
+    def create_em_isopotential_connect(
+        self,
+        contype: int = 1,
+        isoid1: int = 0,
+        isoid2: int = 0,
+        val: float = 0.0,
+        lcid: int = 0,
+        l: float = 0.0,
+        c: float = 0.0,
+        v0: float = 0.0,
+    ) -> int:
+        """Create an EM_ISOPOTENTIAL_CONNECT keyword.
+
+        Parameters
+        ----------
+        contype : int
+            Connection type.
+        isoid1 : int
+            First isopotential ID.
+        isoid2 : int
+            Second isopotential ID.
+        val : float
+            Value (resistance, voltage, or current).
+        lcid : int
+            Load curve ID.
+        l : float
+            Inductance (for RLC circuit).
+        c : float
+            Capacitance (for RLC circuit).
+        v0 : float
+            Initial voltage (for RLC circuit).
+
+        Returns
+        -------
+        int
+            Connection ID.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        conid = self.next_id("isopotential_connect")
+
+        kw = keywords.EmIsopotentialConnect()
+        kw.conid = conid
+        kw.contype = contype
+        kw.isoid1 = isoid1
+        kw.isoid2 = isoid2
+        kw.val = val
+        kw.lcid_rdlid = lcid
+        # For RLC circuits (contype=6), set the second card values
+        if contype == 6:
+            kw.l = l
+            kw.c = c
+            kw.v0 = v0
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_ISOPOTENTIAL_CONNECT with conid={conid}, contype={contype}")
+        return conid
+
+    def create_em_isopotential_rogo(
+        self,
+        isoid: int,
+        settype: int = 1,
+        setid: int = 0,
+    ) -> bool:
+        """Create an EM_ISOPOTENTIAL_ROGO keyword.
+
+        Parameters
+        ----------
+        isoid : int
+            Isopotential ID for Rogowski coil.
+        settype : int
+            Set type (1=segment, 2=node).
+        setid : int
+            Set ID.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmIsopotentialRogo()
+        kw.isoid = isoid
+        kw.settype = settype
+        kw.setid = setid
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_ISOPOTENTIAL_ROGO with isoid={isoid}, setid={setid}")
+        return True
+
+    def create_em_circuit_rogo(
+        self,
+        settype: int = 1,
+        setid: int = 0,
+        curtyp: int = 1,
+    ) -> int:
+        """Create an EM_CIRCUIT_ROGO keyword (for backward compatibility).
+
+        Parameters
+        ----------
+        settype : int
+            Set type (1=segment, 2=node).
+        setid : int
+            Set ID.
+        curtyp : int
+            Current type.
+
+        Returns
+        -------
+        int
+            Rogowski coil ID.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        rogid = self.next_id("rogo")
+
+        kw = keywords.EmCircuitRogo()
+        kw.rogid = rogid
+        kw.settype = settype
+        kw.setid = setid
+        kw.curtyp = curtyp
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_CIRCUIT_ROGO with rogid={rogid}, setid={setid}")
+        return rogid
+
+    def create_set_segment(
+        self,
+        sid: int,
+        segments: List[tuple],
+        solver: str = "MECH",
+    ) -> bool:
+        """Create a SET_SEGMENT keyword.
+
+        Parameters
+        ----------
+        sid : int
+            Set ID.
+        segments : List[tuple]
+            List of segment tuples (n1, n2, n3, n4).
+        solver : str
+            Solver type.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        import pandas as pd
+
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.SetSegment()
+        kw.sid = sid
+        kw.solver = solver
+
+        # Build rows for the dataframe
+        rows = []
+        for seg in segments:
+            if len(seg) >= 4:
+                rows.append({"n1": seg[0], "n2": seg[1], "n3": seg[2], "n4": seg[3]})
+            elif len(seg) == 3:
+                # Triangle - n4 = n3
+                rows.append({"n1": seg[0], "n2": seg[1], "n3": seg[2], "n4": seg[2]})
+
+        if rows:
+            new_df = pd.DataFrame(rows)
+            kw.segments = pd.concat([kw.segments, new_df], ignore_index=True)
+
+        self._deck.append(kw)
+        logger.debug(f"Created SET_SEGMENT with sid={sid}, {len(segments)} segments")
+        return True
+
 
 class KeywordsStub:
     """Stub class that mimics the gRPC stub interface for keywords backend.
@@ -1728,3 +2098,135 @@ class KeywordsStub:
 
         self._backend._deck.append(kw)
         return type("Response", (), {"id": hgid})()
+
+    # =========================================================================
+    # EM (Electromagnetic) Stub Methods
+    # =========================================================================
+
+    def CreateEMControl(self, request):
+        """Create EM_CONTROL keyword."""
+        self._backend.create_em_control(
+            emsol=request.emsol,
+            numls=request.numls,
+            macrodt=request.macrodt,
+            dimtype=getattr(request, "dimtype", 0),
+            nperio=getattr(request, "nperio", 2),
+            ncylfem=request.ncylfem,
+            ncylbem=request.ncylbem,
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateEMTimestep(self, request):
+        """Create EM_CONTROL_TIMESTEP keyword."""
+        self._backend.create_em_timestep(
+            tstype=request.tstype,
+            dtconst=request.dtconst,
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateEMOutput(self, request):
+        """Create EM_OUTPUT keyword."""
+        self._backend.create_em_output(
+            mats=request.mats,
+            matf=request.matf,
+            sols=request.sols,
+            solf=request.solf,
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateEMMat001(self, request):
+        """Create EM_MAT_001 keyword."""
+        self._backend.create_em_mat_001(
+            mid=request.mid,
+            mtype=request.mtype,
+            sigma=request.sigma,
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateEMIsopotential(self, request):
+        """Create EM_ISOPOTENTIAL keyword."""
+        isoid = self._backend.create_em_isopotential(
+            settype=request.settype,
+            setid=request.setid,
+            rdltype=getattr(request, "rdltype", 0),
+        )
+        return type("Response", (), {"id": isoid})()
+
+    def CreateEMIsopotentialConnect(self, request):
+        """Create EM_ISOPOTENTIAL_CONNECT keyword."""
+        conid = self._backend.create_em_isopotential_connect(
+            contype=request.contype,
+            isoid1=request.isoid1,
+            isoid2=request.isoid2,
+            val=request.val,
+            lcid=getattr(request, "lcid", 0),
+            l=getattr(request, "l", 0),
+            c=getattr(request, "c", 0),
+            v0=getattr(request, "v0", 0),
+        )
+        return type("Response", (), {"id": conid})()
+
+    def CreateEMCircuitRogo(self, request):
+        """Create EM_CIRCUIT_ROGO keyword (maps to EM_ISOPOTENTIAL_ROGO)."""
+        # The old API uses CreateEMCircuitRogo but we use EM_ISOPOTENTIAL_ROGO
+        # First, create an isopotential and then the rogo connection
+        isoid = self._backend.create_em_isopotential(
+            settype=request.settype,
+            setid=request.setid,
+            rdltype=0,
+        )
+        self._backend.create_em_isopotential_rogo(
+            isoid=isoid,
+            settype=request.settype,
+            setid=request.setid,
+        )
+        return type("Response", (), {"id": isoid})()
+
+    def CreateSegmentSet(self, request):
+        """Create SET_SEGMENT keyword."""
+        sid = self._backend.next_id("segmentset")
+        # Request has n1, n2, n3, n4 arrays - combine them into segments
+        n1 = list(request.n1) if request.n1 else []
+        n2 = list(request.n2) if request.n2 else []
+        n3 = list(request.n3) if request.n3 else []
+        n4 = list(request.n4) if request.n4 else []
+        segments = list(zip(n1, n2, n3, n4))
+        self._backend.create_set_segment(sid=sid, segments=segments, solver="MECH")
+        return type("Response", (), {"id": sid})()
+
+    def CreateMatRigid(self, request):
+        """Create MAT_RIGID keyword."""
+        from ansys.dyna.core.keywords import keywords
+
+        mid = self._backend.next_id("material")
+
+        kw = keywords.MatRigid()
+        kw.mid = mid
+        kw.ro = request.ro
+        kw.e = request.e
+        kw.pr = request.pr
+        kw.cmo = getattr(request, "cmo", 0)
+        kw.con1 = getattr(request, "con1", 0)
+        kw.con2 = getattr(request, "con2", 0)
+
+        self._backend._deck.append(kw)
+        return type("Response", (), {"mid": mid})()
+
+    def CreateEMMat(self, request):
+        """Create EM_MAT_001 keyword for material EM properties."""
+        self._backend.create_em_mat_001(
+            mid=request.mid,
+            mtype=request.mtype,
+            sigma=request.sigma,
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateEMIsopotentialRogo(self, request):
+        """Create EM_ISOPOTENTIAL_ROGO keyword."""
+        isoid = self._backend.next_id("isopotential")
+        self._backend.create_em_isopotential_rogo(
+            isoid=isoid,
+            settype=request.settype,
+            setid=request.setid,
+        )
+        return type("Response", (), {"id": isoid})()
