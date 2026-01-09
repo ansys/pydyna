@@ -244,5 +244,5 @@ class LabelRegistry:
                 registry.register(label, card)
                 logger.debug(f"Registered explicit label '{label}' -> card at index {index}")
 
-        logger.info(f"Initialized LabelRegistry for '{keyword}' with {len(registry._labels)} labels")
+        logger.debug(f"Initialized LabelRegistry for '{keyword}' with {len(registry._labels)} labels")
         return registry

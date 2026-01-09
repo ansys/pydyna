@@ -245,6 +245,15 @@ def generate_autodoc_file(autodoc_output_path, all_keywords, env):
             categories[category] = []
         categories[category].append((classname, filename))
 
+        # Add alias entry if this keyword has an alias
+        alias_keyword = data_model.get_alias(keyword)
+        if alias_keyword:
+            alias_names = KeywordNames.from_keyword(alias_keyword)
+            alias_classname = alias_names.classname
+            # Add alias to same category, pointing to same filename
+            categories[category].append((alias_classname, filename))
+            logger.debug(f"Added alias entry: {alias_classname} -> {filename}")
+
     logger.info(f"Organized {len(all_keywords)} keywords into {len(categories)} categories")
 
     # Generate a separate RST file for each category

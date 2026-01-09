@@ -373,7 +373,7 @@ def test_initial_strain_shell(ref_string):
 @pytest.mark.keywords
 def test_initial_strain_shell_large_format():
     """Test INITIAL_STRAIN_SHELL with LARGE format (width=20 fields).
-    
+
     LARGE=1 format splits strain data across 2 cards:
     - Card 1: EPSXX, EPSYY, EPSZZ, EPSXY, EPSYZ (5 fields × 20 chars = 100 chars)
     - Card 2: EPSZX, T (2 fields × 20 chars = 40 chars)
@@ -397,13 +397,13 @@ def test_initial_strain_shell_large_format():
     # Check that large=1 is set in header
     assert 'INITIAL_STRAIN_SHELL' in output
     eid_line_idx = next(i for i, l in enumerate(lines) if l.strip().startswith('1'))
-    
+
     # Card 1: EPSXX, EPSYY, EPSZZ, EPSXY, EPSYZ (5 fields, 100 chars)
     card1_idx = eid_line_idx + 1
     card1 = lines[card1_idx]
     assert len(card1) == 100, f"Card 1 should be 100 chars, got {len(card1)}: '{card1}'"
     assert '0.0012345' in card1 or '1.2345' in card1  # EPSXX
-    
+
     # Card 2: EPSZX, T (2 fields, 40 chars)
     card2_idx = eid_line_idx + 2
     card2 = lines[card2_idx]
@@ -472,7 +472,7 @@ def test_initial_stress_shell(ref_string):
 @pytest.mark.keywords
 def test_initial_stress_shell_large_format():
     """Test INITIAL_STRESS_SHELL with LARGE format (width=20 fields).
-    
+
     LARGE=1 format splits stress data across 2 cards:
     - Card 1: T, SIGXX, SIGYY, SIGZZ, SIGXY (5 fields × 20 chars = 100 chars)
     - Card 2: SIGYZ, SIGZX, EPS (3 fields × 20 chars = 60 chars)
@@ -522,7 +522,7 @@ def test_initial_stress_shell_large_format():
     hisv_card1 = lines[hisv_card1_idx]
     assert len(hisv_card1) == 100, f"HISV card 1 should be 100 chars, got {len(hisv_card1)}: '{hisv_card1}'"
     assert '10.0' in hisv_card1 or '10.1' in hisv_card1  # Check for HISV value (allow fp precision)
-    
+
     # Test round-trip: read back what we wrote
     i2 = kwd.InitialStressShell()
     i2.loads(output)
@@ -933,6 +933,26 @@ def test_mat_196_read(ref_string):
     assert (m.springs["dof"] == m_alias.springs["dof"]).all() == True
     assert m.write() == ref_string.test_mat_196_ref_out
     assert m_alias.write() == ref_string.test_mat_general_spring_discrete_beam_ref_out
+
+
+@pytest.mark.keywords
+def test_mat_023_temperature_points(ref_string):
+    """Test MAT_023 (MAT_TEMPERATURE_DEPENDENT_ORTHOTROPIC) with multiple temperature points."""
+    m = kwd.Mat023()
+    m.loads(ref_string.test_mat_023_ref_in)
+
+    # Verify basic properties
+    assert m.mid == 1
+    assert m.aopt == 2.0
+    assert m.macf == 1
+
+    # Verify temperature_points table has 3 rows (3 temperature points)
+    assert len(m.temperature_points) == 3
+    assert list(m.temperature_points["ti"]) == [20.0, 100.0, 200.0]
+    assert list(m.temperature_points["eai"]) == [210000.0, 200000.0, 180000.0]
+
+    # Round-trip test
+    assert m.write() == ref_string.test_mat_023_ref_out
 
 
 @pytest.mark.keywords
