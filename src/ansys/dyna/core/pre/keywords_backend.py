@@ -307,6 +307,9 @@ class KeywordsBackend:
         extent_kw.ieverp = ieverp
         extent_kw.dcomp = dcomp
         extent_kw.nintsld = nintsld
+        # Match pre server defaults
+        extent_kw.ialemat = 0
+        extent_kw.sclp = float("nan")  # Leave unset like pre server
 
         self._deck.append(extent_kw)
         logger.debug("Created DATABASE_EXTENT_BINARY")
