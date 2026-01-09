@@ -22,7 +22,10 @@
 
 """Module providing the Mat023 class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -180,104 +183,99 @@ class Mat023(KeywordBase):
                     ),
                 ],
             ),
-            Card(
+            TableCardGroup(
                 [
-                    Field(
-                        "eai",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
+                    Card(
+                            [
+                                Field(
+                                    "eai",
+                                    float,
+                                    0,
+                                    10,
+                                ),
+                                Field(
+                                    "ebi",
+                                    float,
+                                    10,
+                                    10,
+                                ),
+                                Field(
+                                    "eci",
+                                    float,
+                                    20,
+                                    10,
+                                ),
+                                Field(
+                                    "prabi",
+                                    float,
+                                    30,
+                                    10,
+                                ),
+                                Field(
+                                    "prcai",
+                                    float,
+                                    40,
+                                    10,
+                                ),
+                                Field(
+                                    "prcbi",
+                                    float,
+                                    50,
+                                    10,
+                                ),
+                            ],
                     ),
-                    Field(
-                        "ebi",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eci",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prabi",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prcai",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prcbi",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
+                    Card(
+                            [
+                                Field(
+                                    "aai",
+                                    float,
+                                    0,
+                                    10,
+                                ),
+                                Field(
+                                    "abi",
+                                    float,
+                                    10,
+                                    10,
+                                ),
+                                Field(
+                                    "aci",
+                                    float,
+                                    20,
+                                    10,
+                                ),
+                                Field(
+                                    "gabi",
+                                    float,
+                                    30,
+                                    10,
+                                ),
+                                Field(
+                                    "gbci",
+                                    float,
+                                    40,
+                                    10,
+                                ),
+                                Field(
+                                    "gcai",
+                                    float,
+                                    50,
+                                    10,
+                                ),
+                                Field(
+                                    "ti",
+                                    float,
+                                    60,
+                                    10,
+                                ),
+                            ],
                     ),
                 ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aai",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "abi",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aci",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gabi",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gbci",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gcai",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ti",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
+                None,
+                None,
+                "temperature_points",
+                **kwargs,
             ),
             OptionCardSet(
                 option_spec = Mat023.option_specs[0],
@@ -517,159 +515,30 @@ class Mat023(KeywordBase):
         self._cards[2].set_value("beta", value)
 
     @property
-    def eai(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus in a-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("eai")
+    def temperature_points(self) -> pd.DataFrame:
+        """Gets the full table of temperature_points."""
+        return self._cards[3].table
 
-    @eai.setter
-    def eai(self, value: float) -> None:
-        """Set the eai property."""
-        self._cards[3].set_value("eai", value)
-
-    @property
-    def ebi(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus in b-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("ebi")
-
-    @ebi.setter
-    def ebi(self, value: float) -> None:
-        """Set the ebi property."""
-        self._cards[3].set_value("ebi", value)
-
-    @property
-    def eci(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus in c-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("eci")
-
-    @eci.setter
-    def eci(self, value: float) -> None:
-        """Set the eci property."""
-        self._cards[3].set_value("eci", value)
-
-    @property
-    def prabi(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio ba at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("prabi")
-
-    @prabi.setter
-    def prabi(self, value: float) -> None:
-        """Set the prabi property."""
-        self._cards[3].set_value("prabi", value)
-
-    @property
-    def prcai(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio ca at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("prcai")
-
-    @prcai.setter
-    def prcai(self, value: float) -> None:
-        """Set the prcai property."""
-        self._cards[3].set_value("prcai", value)
-
-    @property
-    def prcbi(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio cb at temperature Ti.
-        """ # nopep8
-        return self._cards[3].get_value("prcbi")
-
-    @prcbi.setter
-    def prcbi(self, value: float) -> None:
-        """Set the prcbi property."""
-        self._cards[3].set_value("prcbi", value)
-
-    @property
-    def aai(self) -> typing.Optional[float]:
-        """Get or set the Coefficient of thermal expansion in a-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("aai")
-
-    @aai.setter
-    def aai(self, value: float) -> None:
-        """Set the aai property."""
-        self._cards[4].set_value("aai", value)
-
-    @property
-    def abi(self) -> typing.Optional[float]:
-        """Get or set the Coefficient of thermal expansion in b-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("abi")
-
-    @abi.setter
-    def abi(self, value: float) -> None:
-        """Set the abi property."""
-        self._cards[4].set_value("abi", value)
-
-    @property
-    def aci(self) -> typing.Optional[float]:
-        """Get or set the Coefficient of thermal expansion in c-direction at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("aci")
-
-    @aci.setter
-    def aci(self, value: float) -> None:
-        """Set the aci property."""
-        self._cards[4].set_value("aci", value)
-
-    @property
-    def gabi(self) -> typing.Optional[float]:
-        """Get or set the Shear modulus ab at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("gabi")
-
-    @gabi.setter
-    def gabi(self, value: float) -> None:
-        """Set the gabi property."""
-        self._cards[4].set_value("gabi", value)
-
-    @property
-    def gbci(self) -> typing.Optional[float]:
-        """Get or set the Shear modulus bc at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("gbci")
-
-    @gbci.setter
-    def gbci(self, value: float) -> None:
-        """Set the gbci property."""
-        self._cards[4].set_value("gbci", value)
-
-    @property
-    def gcai(self) -> typing.Optional[float]:
-        """Get or set the Shear modulus ca at temperature Ti.
-        """ # nopep8
-        return self._cards[4].get_value("gcai")
-
-    @gcai.setter
-    def gcai(self, value: float) -> None:
-        """Set the gcai property."""
-        self._cards[4].set_value("gcai", value)
-
-    @property
-    def ti(self) -> typing.Optional[float]:
-        """Get or set the i'th temperature.
-        """ # nopep8
-        return self._cards[4].get_value("ti")
-
-    @ti.setter
-    def ti(self, value: float) -> None:
-        """Set the ti property."""
-        self._cards[4].set_value("ti", value)
+    @temperature_points.setter
+    def temperature_points(self, df: pd.DataFrame):
+        """sets temperature_points from the dataframe df."""
+        self._cards[3].table = df
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[5].cards[0].get_value("title")
+        return self._cards[4].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[5].cards[0].set_value("title", value)
+        self._cards[4].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
 
+
+class MatTemperatureDependentOrthotropic(Mat023):
+    """Alias for MAT keyword."""
+    subkeyword = "TEMPERATURE_DEPENDENT_ORTHOTROPIC"

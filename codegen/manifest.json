@@ -1339,6 +1339,24 @@
             "spring_damping_card": 2
         }
     },
+    "MAT_023": {
+        "alias": "MAT_TEMPERATURE_DEPENDENT_ORTHOTROPIC",
+        "generation-options": {
+            "table-card-group": [
+                {
+                    "refs": [
+                        "temperature_card_1",
+                        "temperature_card_2"
+                    ],
+                    "overall-name": "temperature_points"
+                }
+            ]
+        },
+        "labels": {
+            "temperature_card_1": 3,
+            "temperature_card_2": 4
+        }
+    },
     "MAT_295": {
         "alias": "MAT_ANISOTROPIC_HYPERELASTIC",
         "generation-options": {
