@@ -647,3 +647,103 @@ class ControlKeywordsMixin:
         self._deck.append(kw)
         logger.debug(f"Created CONTROL_IMPLICIT_EIGENVALUE: neig={neig}, eigmth={eigmth}")
         return True
+
+    def create_control_termination(
+        self,
+        endtim: float = 0.0,
+        endcyc: int = 0,
+        dtmin: float = 0.0,
+        endeng: float = 0.0,
+        endmas: float = 1.0e8,
+        nosol: int = 0,
+    ) -> bool:
+        """Create a CONTROL_TERMINATION keyword with all parameters.
+
+        Parameters
+        ----------
+        endtim : float, optional
+            Termination time. Default is 0.0.
+        endcyc : int, optional
+            Termination cycle. Default is 0.
+        dtmin : float, optional
+            Minimum time step. Default is 0.0.
+        endeng : float, optional
+            Energy ratio for termination. Default is 0.0.
+        endmas : float, optional
+            Mass increase for termination. Default is 1.0e8.
+        nosol : int, optional
+            Flag to stop solution. Default is 0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        self._termination_time = endtim
+
+        kw = keywords.ControlTermination()
+        kw.endtim = endtim
+        kw.endcyc = endcyc
+        kw.dtmin = dtmin
+        kw.endeng = endeng
+        kw.endmas = endmas
+        kw.nosol = nosol
+
+        self._deck.append(kw)
+        logger.debug(f"Created CONTROL_TERMINATION: endtim={endtim}, endcyc={endcyc}")
+        return True
+
+    def create_control_timestep(
+        self,
+        dtinit: float = 0.0,
+        tssfac: float = 1.0,
+        isdo: int = 0,
+        tslimt: float = 0.0,
+        dt2ms: float = 0.0,
+        lctm: int = 0,
+        erode: int = 0,
+        ms1st: int = 0,
+    ) -> bool:
+        """Create a CONTROL_TIMESTEP keyword.
+
+        Parameters
+        ----------
+        dtinit : float, optional
+            Initial time step. Default is 0.0.
+        tssfac : float, optional
+            Scale factor for time step. Default is 1.0.
+        isdo : int, optional
+            Time step control flag. Default is 0.
+        tslimt : float, optional
+            Time step size limit. Default is 0.0.
+        dt2ms : float, optional
+            Mass scaling time step. Default is 0.0.
+        lctm : int, optional
+            Load curve for time step multiplier. Default is 0.
+        erode : int, optional
+            Erosion flag. Default is 0.
+        ms1st : int, optional
+            Mass scaling first cycle. Default is 0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlTimestep()
+        kw.dtinit = dtinit
+        kw.tssfac = tssfac
+        kw.isdo = isdo
+        kw.tslimt = tslimt
+        kw.dt2ms = dt2ms
+        kw.lctm = lctm
+        kw.erode = erode
+        kw.ms1st = ms1st
+
+        self._deck.append(kw)
+        logger.debug(f"Created CONTROL_TIMESTEP: dtinit={dtinit}, tssfac={tssfac}")
+        return True

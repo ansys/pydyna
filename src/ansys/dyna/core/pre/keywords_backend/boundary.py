@@ -81,7 +81,10 @@ class BoundaryKeywordsMixin:
         death: float = 0.0,
         birth: float = 0.0,
     ) -> bool:
-        """Create a BOUNDARY_PRESCRIBED_MOTION_RIGID keyword.
+        """Create or add to a BOUNDARY_PRESCRIBED_MOTION_RIGID keyword.
+
+        If a BOUNDARY_PRESCRIBED_MOTION_RIGID keyword already exists, this will
+        add a new entry to it. Otherwise, creates a new keyword.
 
         Parameters
         ----------
@@ -107,17 +110,46 @@ class BoundaryKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        kw = keywords.BoundaryPrescribedMotionRigid()
-        kw.pid = pid
-        kw.dof = dof
-        kw.vad = vad
-        kw.lcid = lcid
-        kw.sf = sf
-        kw.death = death
-        kw.birth = birth
+        # Look for existing BOUNDARY_PRESCRIBED_MOTION_RIGID keyword
+        existing_kw = None
+        for kw in self._deck:
+            if hasattr(kw, "keyword") and kw.keyword == "*BOUNDARY_PRESCRIBED_MOTION_RIGID":
+                existing_kw = kw
+                break
 
-        self._deck.append(kw)
-        logger.debug(f"Created BOUNDARY_PRESCRIBED_MOTION_RIGID with pid={pid}, dof={dof}")
+        if existing_kw is not None:
+            # Add entry to existing keyword using duplicate card mechanism
+            # The keyword uses a duplicate card structure - we add via the table
+            import pandas as pd
+
+            new_row = {
+                "pid": pid,
+                "dof": dof,
+                "vad": vad,
+                "lcid": lcid,
+                "sf": sf,
+                "vid": 0,
+                "death": death,
+                "birth": birth,
+            }
+            if hasattr(existing_kw, "motions") and existing_kw.motions is not None:
+                existing_kw.motions = pd.concat([existing_kw.motions, pd.DataFrame([new_row])], ignore_index=True)
+            else:
+                existing_kw.motions = pd.DataFrame([new_row])
+            logger.debug(f"Added entry to existing BOUNDARY_PRESCRIBED_MOTION_RIGID: pid={pid}, dof={dof}")
+        else:
+            # Create new keyword
+            kw = keywords.BoundaryPrescribedMotionRigid()
+            kw.pid = pid
+            kw.dof = dof
+            kw.vad = vad
+            kw.lcid = lcid
+            kw.sf = sf
+            kw.death = death
+            kw.birth = birth
+
+            self._deck.append(kw)
+            logger.debug(f"Created BOUNDARY_PRESCRIBED_MOTION_RIGID with pid={pid}, dof={dof}")
         return True
 
     def create_boundary_spc_set(

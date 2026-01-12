@@ -96,7 +96,7 @@ class SetKeywordsMixin:
         logger.debug(f"Created SET_NODE_LIST with sid={sid}")
         return True
 
-    def create_set_part_list(self, sid: int, parts: List[int]) -> bool:
+    def create_set_part_list(self, sid: int, parts: List[int], solver: str = "MECH") -> bool:
         """Create a SET_PART_LIST keyword.
 
         Parameters
@@ -105,6 +105,8 @@ class SetKeywordsMixin:
             Set ID.
         parts : List[int]
             List of part IDs.
+        solver : str, optional
+            Solver type. Default is "MECH".
 
         Returns
         -------
@@ -115,6 +117,7 @@ class SetKeywordsMixin:
 
         kw = keywords.SetPartList()
         kw.sid = sid
+        kw.solver = solver
 
         # Add parts to the set
         for pid in parts:

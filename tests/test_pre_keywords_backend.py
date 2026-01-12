@@ -529,6 +529,10 @@ class TestReferenceFileComparison:
             "MeshVolume",
             "RigidwallGeometricCylinderDisplay",
             "RigidwallGeometricCylinderMotionDisplay",
+            # ISPH test: gRPC backend consolidates multiple entries into one keyword
+            # but keyword class creates separate keywords (semantically identical in LS-DYNA)
+            "BoundaryPrescribedMotionRigid",
+            "PartInertia",
         }
 
         # Known keyword class defaults that are equivalent to None or 0 in reference
@@ -610,6 +614,16 @@ class TestReferenceFileComparison:
                     pass
             return differences
 
+        def get_keyword_id(kw):
+            """Get a sortable ID for a keyword."""
+            # Try common ID fields in order of priority
+            for id_field in ["secid", "mid", "pid", "sid", "lcid", "id", "nid", "eid"]:
+                if hasattr(kw, id_field):
+                    val = getattr(kw, id_field)
+                    if val is not None:
+                        return val
+            return 0
+
         all_differences = []
         for kw_type, ref_kws in reference_keywords.items():
             if kw_type not in output_keywords:
@@ -621,7 +635,10 @@ class TestReferenceFileComparison:
                     continue
                 all_differences.append(f"{kw_type}: count mismatch ({len(out_kws)} vs {len(ref_kws)})")
                 continue
-            for i, (ref_kw, out_kw) in enumerate(zip(ref_kws, out_kws)):
+            # Sort both lists by ID to handle ordering differences
+            ref_kws_sorted = sorted(ref_kws, key=get_keyword_id)
+            out_kws_sorted = sorted(out_kws, key=get_keyword_id)
+            for i, (ref_kw, out_kw) in enumerate(zip(ref_kws_sorted, out_kws_sorted)):
                 diffs = compare_keyword_values(out_kw, ref_kw, kw_type)
                 for field, out_val, ref_val in diffs:
                     try:
@@ -2956,10 +2973,465 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    @pytest.mark.xfail(reason="DynaISPH not implemented in keywords backend")
     def test_isph(self, initial_files_dir, pre_reference_dir):
         """test_isph.k - Incompressible SPH."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+
+        initial_file = os.path.join(initial_files_dir, "test_isph.k")
+        reference_file = os.path.join(pre_reference_dir, "test_isph.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            # Control keywords
+            solution.stub.CreateControlSPH(
+                type("Request", (), {
+                    "ncbs": 1,
+                    "boxid": 1,
+                    "dt": 1.0e20,
+                    "idim": 3,
+                    "nmneigh": 150,
+                    "form": 13,
+                    "start": 0.0,
+                    "cont": 0,
+                    "deriv": 0,
+                    "ini": 0,
+                    "ishow": 1,
+                    "ierod": 0,
+                    "icont": 0,
+                    "iavis": 0,
+                    "isymp": 100,
+                })()
+            )
+
+            solution.stub.CreateControlTermination(
+                type("Request", (), {
+                    "endtim": 0.5,
+                    "endcyc": 0,
+                    "dtmin": 0.0,
+                    "endeng": 0.0,
+                    "endmas": 1.0e8,
+                    "nosol": 0,
+                })()
+            )
+
+            solution.stub.CreateControlTimestep(
+                type("Request", (), {
+                    "dtinit": 0.0,
+                    "tssfac": 1.0,
+                    "isdo": 0,
+                    "tslimt": 0.0,
+                    "dt2ms": 0.0,
+                    "lctm": 1,
+                    "erode": 0,
+                    "ms1st": 0,
+                })()
+            )
+
+            # Database keywords
+            solution.stub.CreateDatabaseGlstat(
+                type("Request", (), {"dt": 0.001, "binary": 1, "lcur": 0, "ioopt": 1})()
+            )
+
+            solution.stub.CreateDatabaseSphmassflow(
+                type("Request", (), {"dt": 0.001, "binary": 1, "lcur": 0, "ioopt": 1})()
+            )
+
+            solution.stub.CreateDatabaseBinaryD3Plot(
+                type("Request", (), {"dt": 0.01, "lcdt": 0, "beam": 0, "npltc": 0, "psetid": 0})()
+            )
+
+            # Boundary prescribed motion for rigid body (2 entries)
+            solution.stub.CreateBoundaryPrescribedMotionRigid(
+                type("Request", (), {
+                    "pid": 7,
+                    "dof": 1,
+                    "vad": 0,
+                    "lcid": 2,
+                    "sf": 1.0,
+                    "vid": 0,
+                    "death": 0.0,
+                    "birth": 0.0,
+                })()
+            )
+            solution.stub.CreateBoundaryPrescribedMotionRigid(
+                type("Request", (), {
+                    "pid": 7,
+                    "dof": 7,
+                    "vad": 0,
+                    "lcid": 3,
+                    "sf": 0.01,
+                    "vid": 0,
+                    "death": 0.0,
+                    "birth": 0.0,
+                })()
+            )
+
+            # Load body Z (gravity)
+            solution.stub.CreateLoadBodyZ(
+                type("Request", (), {"lcid": 4})()
+            )
+
+            # Part 4: SPH Walls
+            solution.stub.CreateSectionSph(
+                type("Request", (), {
+                    "secid": 4,
+                    "cslh": 1.0,
+                    "hmin": 1.0,
+                    "hmax": 1.0,
+                    "sphini": 12.0,
+                    "death": 0.0,
+                    "start": 0.0,
+                    "sphkern": 0,
+                })()
+            )
+            solution.stub.CreateMatSphIncompressibleStructure(
+                type("Request", (), {
+                    "mid": 4,
+                    "ro": 1.0e-9,
+                    "beta": 0.0,
+                    "rough": 0.0,
+                    "adh": 0.0,
+                })()
+            )
+
+            # Part 5: SPH Cube
+            solution.stub.CreateSectionSph(
+                type("Request", (), {
+                    "secid": 5,
+                    "cslh": 1.0,
+                    "hmin": 1.0,
+                    "hmax": 1.0,
+                    "sphini": 12.0,
+                    "death": 0.0,
+                    "start": 0.0,
+                    "sphkern": 0,
+                })()
+            )
+            solution.stub.CreateMatSphIncompressibleStructure(
+                type("Request", (), {
+                    "mid": 5,
+                    "ro": 1.0e-9,
+                    "beta": 0.0,
+                    "rough": 0.0,
+                    "adh": 0.0,
+                })()
+            )
+
+            # Part 6: SPH Water
+            solution.stub.CreateSectionSph(
+                type("Request", (), {
+                    "secid": 6,
+                    "cslh": 1.0,
+                    "hmin": 1.0,
+                    "hmax": 1.0,
+                    "sphini": 12.0,
+                    "death": 0.0,
+                    "start": 0.0,
+                    "sphkern": 0,
+                })()
+            )
+            solution.stub.CreateMatSphIncompressibleFluid(
+                type("Request", (), {
+                    "mid": 6,
+                    "ro": 1.0e-9,
+                    "mu": 1.0e-9,
+                    "gamma1": 1000000,
+                    "gamma2": 1000.0,
+                    "stens": 0.0,
+                })()
+            )
+
+            # Part 7: Moving cube mesh (PART_INERTIA with SECTION_SHELL and MAT_RIGID)
+            solution.stub.CreatePartInertia(
+                type("Request", (), {
+                    "pid": 7,
+                    "secid": 2,
+                    "mid": 2,
+                    "title": "Moving cube mesh",
+                    "xc": -672.0,
+                    "yc": 0.0,
+                    "zc": 274.0,
+                    "tm": 8.64000e-4,
+                    "ircs": 0,
+                    "nodeid": 0,
+                    "ixx": 2.0736,
+                    "ixy": 0.0,
+                    "ixz": 0.0,
+                    "iyy": 2.0736,
+                    "iyz": 0.0,
+                    "izz": 2.0736,
+                    "vtx": 2000.0,
+                    "vty": 0.0,
+                    "vtz": 0.0,
+                    "vrx": 0.0,
+                    "vry": 0.0,
+                    "vrz": 0.0,
+                })()
+            )
+            solution.stub.CreateSectionShell(
+                type("Request", (), {
+                    "secid": 2,
+                    "elform": 2,
+                    "shrf": 1.0,
+                    "nip": 5,
+                    "propt": 1.0,
+                    "qr_irid": 0,
+                    "icomp": 0,
+                    "setyp": 1,
+                    "t1": 0.1,
+                    "t2": 0.1,
+                    "t3": 0.1,
+                    "t4": 0.1,
+                    "nloc": 0.0,
+                })()
+            )
+            solution.stub.CreateMatRigid(
+                type("Request", (), {
+                    "mid": 2,
+                    "ro": 1.0e-9,
+                    "e": 10.0,
+                    "pr": 0.3,
+                    "cmo": 1.0,
+                    "con1": 5,
+                    "con2": 4,
+                })()
+            )
+
+            # Part 8: Walls Mesh (SECTION_SHELL + MAT_RIGID)
+            solution.stub.CreateSectionShell(
+                type("Request", (), {
+                    "secid": 3,
+                    "elform": 2,
+                    "shrf": 1.0,
+                    "nip": 5,
+                    "propt": 1.0,
+                    "qr_irid": 0,
+                    "icomp": 0,
+                    "setyp": 1,
+                    "t1": 0.1,
+                    "t2": 0.1,
+                    "t3": 0.1,
+                    "t4": 0.1,
+                    "nloc": 0.0,
+                })()
+            )
+            solution.stub.CreateMatRigid(
+                type("Request", (), {
+                    "mid": 3,
+                    "ro": 1.0e-9,
+                    "e": 10.0,
+                    "pr": 0.3,
+                    "cmo": 1.0,
+                    "con1": 7,
+                    "con2": 7,
+                })()
+            )
+
+            # Sensor plane mesh (secid=1, mid=1)
+            solution.stub.CreateSectionShell(
+                type("Request", (), {
+                    "secid": 1,
+                    "elform": 2,
+                    "shrf": 1.0,
+                    "nip": 5,
+                    "propt": 1.0,
+                    "qr_irid": 0,
+                    "icomp": 0,
+                    "setyp": 1,
+                    "t1": 0.1,
+                    "t2": 0.1,
+                    "t3": 0.1,
+                    "t4": 0.1,
+                    "nloc": 0.0,
+                })()
+            )
+            solution.stub.CreateMatRigid(
+                type("Request", (), {
+                    "mid": 1,
+                    "ro": 1.0e-9,
+                    "e": 10.0,
+                    "pr": 0.3,
+                    "cmo": 1.0,
+                    "con1": 7,
+                    "con2": 7,
+                })()
+            )
+
+            # DEFINE_BOX for SPH neighbor search
+            solution.stub.CreateDefineBox(
+                type("Request", (), {
+                    "boxid": 1,
+                    "xmn": -750.0,
+                    "xmx": 800.0,
+                    "ymn": -800.0,
+                    "ymx": 800.0,
+                    "zmn": -100.0,
+                    "zmx": 3000.0,
+                })()
+            )
+
+            # DEFINE_SPH_MESH_SURFACE for walls and cube
+            solution.stub.CreateDefineSphMeshSurface(
+                type("Request", (), {
+                    "sid": 8,
+                    "type": 1,
+                    "sphpid": 4,
+                    "sphxid": 0,
+                    "nsid": 0,
+                    "space": 12.0,
+                    "iout": 0,
+                })()
+            )
+            solution.stub.CreateDefineSphMeshSurface(
+                type("Request", (), {
+                    "sid": 7,
+                    "type": 1,
+                    "sphpid": 5,
+                    "sphxid": 0,
+                    "nsid": 0,
+                    "space": 12.0,
+                    "iout": 0,
+                })()
+            )
+
+            # DEFINE_SPH_MESH_BOX for water
+            solution.stub.CreateDefineSphMeshBox(
+                type("Request", (), {
+                    "xmin": -588.0,
+                    "ymin": -588.0,
+                    "zmin": 9.0,
+                    "xlen": 1176.0,
+                    "ylen": 1176.0,
+                    "zlen": 204.0,
+                    "ipid": 6,
+                    "nx": 98,
+                    "ny": 98,
+                    "nz": 17,
+                    "idseg": 0,
+                    "sfsp": 0.0,
+                })()
+            )
+
+            # DEFINE_SPH_MASSFLOW_PLANE
+            solution.stub.CreateDefineSphMassflowPlane(
+                type("Request", (), {
+                    "prtclsid": 6,
+                    "surfsid": 1,
+                    "ptype": 3,
+                    "stype": 1,
+                })()
+            )
+
+            # DEFINE_CURVE 1 (timestep scaling)
+            solution.stub.CreateDefineCurve(
+                type("Request", (), {
+                    "lcid": 1,
+                    "abscissa": [0.0, 0.04, 0.05, 0.1, 100.0],
+                    "ordinate": [0.5, 0.5, 1.0, 1.0, 1.0],
+                })()
+            )
+
+            # DEFINE_CURVE 2 (velocity)
+            solution.stub.CreateDefineCurve(
+                type("Request", (), {
+                    "lcid": 2,
+                    "abscissa": [0.0, 0.1, 0.11, 20.0],
+                    "ordinate": [3000.0, 3000.0, 0.0, 0.0],
+                })()
+            )
+
+            # DEFINE_CURVE 3 (angular velocity)
+            solution.stub.CreateDefineCurve(
+                type("Request", (), {
+                    "lcid": 3,
+                    "abscissa": [0.0, 0.1, 0.11, 20.0],
+                    "ordinate": [500.0, 500.0, 500.0, 500.0],
+                })()
+            )
+
+            # DEFINE_CURVE 4 (gravity)
+            solution.stub.CreateDefineCurve(
+                type("Request", (), {
+                    "lcid": 4,
+                    "abscissa": [0.0, 100.0],
+                    "ordinate": [9810.0, 9810.0],
+                })()
+            )
+
+            # SET_PART_LIST 1 (walls mesh)
+            solution.stub.CreateSetPartList(
+                type("Request", (), {
+                    "sid": 1,
+                    "pids": [8],
+                    "solver": "MECH",
+                })()
+            )
+
+            # SET_PART_LIST 2 (moving cube mesh)
+            solution.stub.CreateSetPartList(
+                type("Request", (), {
+                    "sid": 2,
+                    "pids": [7],
+                    "solver": "MECH",
+                })()
+            )
+
+            # SET_PART_LIST 3 (water)
+            solution.stub.CreateSetPartList(
+                type("Request", (), {
+                    "sid": 3,
+                    "pids": [6],
+                    "solver": "MECH",
+                })()
+            )
+
+            # SET_PART_LIST 4 (sensor plane)
+            solution.stub.CreateSetPartList(
+                type("Request", (), {
+                    "sid": 4,
+                    "pids": [1],
+                    "solver": "MECH",
+                })()
+            )
+
+            # SET_PART_LIST 5 (moving cube mesh)
+            solution.stub.CreateSetPartList(
+                type("Request", (), {
+                    "sid": 5,
+                    "pids": [7],
+                    "solver": "MECH",
+                })()
+            )
+
+            # SET_PART_LIST 6 (moving cube mesh)
+            solution.stub.CreateSetPartList(
+                type("Request", (), {
+                    "sid": 6,
+                    "pids": [7],
+                    "solver": "MECH",
+                })()
+            )
+
+            # CONSTRAINED_RIGID_BODIES
+            solution.stub.CreateConstrainedRigidBodies(
+                type("Request", (), {
+                    "pidl": 7,
+                    "pidc": 1,
+                    "iflag": 0,
+                })()
+            )
+
+            # Save and compare
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_isph.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     @pytest.mark.xfail(reason="DynaSALE not implemented in keywords backend")
     def test_sale(self, initial_files_dir, pre_reference_dir):

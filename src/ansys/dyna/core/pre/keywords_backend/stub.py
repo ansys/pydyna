@@ -129,10 +129,11 @@ class KeywordsStub:
     def CreateDefineCurve(self, request):
         """Create define curve keyword."""
         curve_id = self._backend.create_define_curve(
-            sfo=request.sfo,
+            sfo=getattr(request, "sfo", 1.0),
             abscissa=list(request.abscissa),
             ordinate=list(request.ordinate),
-            title=request.title,
+            title=getattr(request, "title", ""),
+            lcid=getattr(request, "lcid", None),
         )
         return type("Response", (), {"id": curve_id})()
 
@@ -234,6 +235,32 @@ class KeywordsStub:
     def CreateControlThermalNonlinear(self, request):
         """Create control thermal nonlinear keyword (stub)."""
         # TODO: Implement CONTROL_THERMAL_NONLINEAR when needed
+        return type("Response", (), {"success": True})()
+
+    def CreateControlTermination(self, request):
+        """Create CONTROL_TERMINATION keyword."""
+        self._backend.create_control_termination(
+            endtim=getattr(request, "endtim", 0.0),
+            endcyc=getattr(request, "endcyc", 0),
+            dtmin=getattr(request, "dtmin", 0.0),
+            endeng=getattr(request, "endeng", 0.0),
+            endmas=getattr(request, "endmas", 1.0e8),
+            nosol=getattr(request, "nosol", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateControlTimestep(self, request):
+        """Create CONTROL_TIMESTEP keyword."""
+        self._backend.create_control_timestep(
+            dtinit=getattr(request, "dtinit", 0.0),
+            tssfac=getattr(request, "tssfac", 1.0),
+            isdo=getattr(request, "isdo", 0),
+            tslimt=getattr(request, "tslimt", 0.0),
+            dt2ms=getattr(request, "dt2ms", 0.0),
+            lctm=getattr(request, "lctm", 0),
+            erode=getattr(request, "erode", 0),
+            ms1st=getattr(request, "ms1st", 0),
+        )
         return type("Response", (), {"success": True})()
 
     # =========================================================================
@@ -865,6 +892,17 @@ class KeywordsStub:
         )
         return type("Response", (), {"success": True})()
 
+    def CreateDatabaseBinaryD3Plot(self, request):
+        """Create DATABASE_BINARY_D3PLOT keyword."""
+        self._backend.create_database_binary_d3plot(
+            dt=getattr(request, "dt", 0.0),
+            lcdt=getattr(request, "lcdt", 0),
+            beam=getattr(request, "beam", 0),
+            npltc=getattr(request, "npltc", 0),
+            psetid=getattr(request, "psetid", 0),
+        )
+        return type("Response", (), {"success": True})()
+
     def CreateBoundarySpcSet(self, request):
         """Create BOUNDARY_SPC_SET keyword."""
         self._backend.create_boundary_spc_set(
@@ -1018,4 +1056,192 @@ class KeywordsStub:
         else:
             logger.warning(f"LOAD_BODY_{option} not yet implemented")
 
+        return type("Response", (), {"success": True})()
+
+    # SPH (Smoothed Particle Hydrodynamics) Keywords
+    def CreateControlSPH(self, request):
+        """Create CONTROL_SPH keyword."""
+        self._backend.create_control_sph(
+            ncbs=getattr(request, "ncbs", 1),
+            boxid=getattr(request, "boxid", 0),
+            dt=getattr(request, "dt", 1.0e20),
+            idim=getattr(request, "idim", 3),
+            nmneigh=getattr(request, "nmneigh", 150),
+            form=getattr(request, "form", 13),
+            start=getattr(request, "start", 0.0),
+            maxv=getattr(request, "maxv", 1.0e15),
+            cont=getattr(request, "cont", 0),
+            deriv=getattr(request, "deriv", 0),
+            ini=getattr(request, "ini", 0),
+            ishow=getattr(request, "ishow", 1),
+            ierod=getattr(request, "ierod", 0),
+            icont=getattr(request, "icont", 0),
+            iavis=getattr(request, "iavis", 0),
+            isymp=getattr(request, "isymp", 100),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateDatabaseSphmassflow(self, request):
+        """Create DATABASE_SPHMASSFLOW keyword."""
+        self._backend.create_database_sphmassflow(
+            dt=getattr(request, "dt", 0.0),
+            binary=getattr(request, "binary", 1),
+            lcur=getattr(request, "lcur", 0),
+            ioopt=getattr(request, "ioopt", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateSectionSph(self, request):
+        """Create SECTION_SPH keyword."""
+        self._backend.create_section_sph(
+            secid=request.secid,
+            cslh=getattr(request, "cslh", 1.0),
+            hmin=getattr(request, "hmin", 1.0),
+            hmax=getattr(request, "hmax", 1.0),
+            sphini=getattr(request, "sphini", 0.0),
+            death=getattr(request, "death", 0.0),
+            start=getattr(request, "start", 0.0),
+            sphkern=getattr(request, "sphkern", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateMatSphIncompressibleStructure(self, request):
+        """Create MAT_SPH_INCOMPRESSIBLE_STRUCTURE keyword."""
+        self._backend.create_mat_sph_incompressible_structure(
+            mid=request.mid,
+            ro=getattr(request, "ro", 1.0e-9),
+            beta=getattr(request, "beta", 0.0),
+            rough=getattr(request, "rough", 0.0),
+            adh=getattr(request, "adh", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateMatSphIncompressibleFluid(self, request):
+        """Create MAT_SPH_INCOMPRESSIBLE_FLUID keyword."""
+        self._backend.create_mat_sph_incompressible_fluid(
+            mid=request.mid,
+            ro=getattr(request, "ro", 1.0e-9),
+            mu=getattr(request, "mu", 1.0e-9),
+            gamma1=getattr(request, "gamma1", 1000000),
+            gamma2=getattr(request, "gamma2", 1000.0),
+            stens=getattr(request, "stens", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateDefineBox(self, request):
+        """Create DEFINE_BOX keyword."""
+        self._backend.create_define_box(
+            boxid=request.boxid,
+            xmn=getattr(request, "xmn", 0.0),
+            xmx=getattr(request, "xmx", 0.0),
+            ymn=getattr(request, "ymn", 0.0),
+            ymx=getattr(request, "ymx", 0.0),
+            zmn=getattr(request, "zmn", 0.0),
+            zmx=getattr(request, "zmx", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateDefineSphMeshSurface(self, request):
+        """Create DEFINE_SPH_MESH_SURFACE keyword."""
+        self._backend.create_define_sph_mesh_surface(
+            sid=request.sid,
+            type_=getattr(request, "type", 1),
+            sphpid=getattr(request, "sphpid", 0),
+            sphxid=getattr(request, "sphxid", 0),
+            nsid=getattr(request, "nsid", 0),
+            space=getattr(request, "space", 0.0),
+            iout=getattr(request, "iout", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateDefineSphMeshBox(self, request):
+        """Create DEFINE_SPH_MESH_BOX keyword."""
+        self._backend.create_define_sph_mesh_box(
+            xmin=getattr(request, "xmin", 0.0),
+            ymin=getattr(request, "ymin", 0.0),
+            zmin=getattr(request, "zmin", 0.0),
+            xlen=getattr(request, "xlen", 0.0),
+            ylen=getattr(request, "ylen", 0.0),
+            zlen=getattr(request, "zlen", 0.0),
+            ipid=request.ipid,
+            nx=getattr(request, "nx", 1),
+            ny=getattr(request, "ny", 1),
+            nz=getattr(request, "nz", 1),
+            idseg=getattr(request, "idseg", 0),
+            sfsp=getattr(request, "sfsp", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateDefineSphMassflowPlane(self, request):
+        """Create DEFINE_SPH_MASSFLOW_PLANE keyword."""
+        self._backend.create_define_sph_massflow_plane(
+            prtclsid=request.prtclsid,
+            surfsid=getattr(request, "surfsid", 0),
+            ptype=getattr(request, "ptype", 0),
+            stype=getattr(request, "stype", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateLoadBodyZ(self, request):
+        """Create LOAD_BODY_Z keyword."""
+        self._backend.create_load_body_z(lcid=getattr(request, "lcid", 0))
+        return type("Response", (), {"success": True})()
+
+    def CreatePartInertia(self, request):
+        """Create PART_INERTIA keyword."""
+        self._backend.create_part_inertia(
+            pid=request.pid,
+            secid=getattr(request, "secid", 0),
+            mid=getattr(request, "mid", 0),
+            title=getattr(request, "title", ""),
+            xc=getattr(request, "xc", 0.0),
+            yc=getattr(request, "yc", 0.0),
+            zc=getattr(request, "zc", 0.0),
+            tm=getattr(request, "tm", 0.0),
+            ircs=getattr(request, "ircs", 0),
+            nodeid=getattr(request, "nodeid", 0),
+            ixx=getattr(request, "ixx", 0.0),
+            ixy=getattr(request, "ixy", 0.0),
+            ixz=getattr(request, "ixz", 0.0),
+            iyy=getattr(request, "iyy", 0.0),
+            iyz=getattr(request, "iyz", 0.0),
+            izz=getattr(request, "izz", 0.0),
+            vtx=getattr(request, "vtx", 0.0),
+            vty=getattr(request, "vty", 0.0),
+            vtz=getattr(request, "vtz", 0.0),
+            vrx=getattr(request, "vrx", 0.0),
+            vry=getattr(request, "vry", 0.0),
+            vrz=getattr(request, "vrz", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateMatRigid(self, request):
+        """Create MAT_RIGID keyword."""
+        self._backend.create_mat_rigid(
+            mid=request.mid,
+            ro=getattr(request, "ro", 0.0),
+            e=getattr(request, "e", 0.0),
+            pr=getattr(request, "pr", 0.0),
+            cmo=getattr(request, "cmo", 0.0),
+            con1=getattr(request, "con1", 0),
+            con2=getattr(request, "con2", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateConstrainedRigidBodies(self, request):
+        """Create CONSTRAINED_RIGID_BODIES keyword."""
+        self._backend.create_constrained_rigid_bodies(
+            pidl=request.pidl,
+            pidc=request.pidc,
+            iflag=getattr(request, "iflag", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateSetPartList(self, request):
+        """Create SET_PART_LIST keyword."""
+        self._backend.create_set_part_list(
+            sid=request.sid,
+            parts=list(request.pids) if hasattr(request, "pids") else [],
+            solver=getattr(request, "solver", "MECH"),
+        )
         return type("Response", (), {"success": True})()

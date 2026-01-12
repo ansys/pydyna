@@ -132,6 +132,18 @@ class MaterialKeywordsMixin:
         ro: float,
         e: float,
         pr: float,
+        n: float = 0.0,
+        couple: float = 0.0,
+        m: float = 0.0,
+        cmo: float = 0.0,
+        con1: int = 0,
+        con2: int = 0,
+        a1: float = 0.0,
+        a2: float = 0.0,
+        a3: float = 0.0,
+        v1: float = 0.0,
+        v2: float = 0.0,
+        v3: float = 0.0,
     ) -> bool:
         """Create a MAT_RIGID keyword.
 
@@ -145,6 +157,22 @@ class MaterialKeywordsMixin:
             Young's modulus.
         pr : float
             Poisson's ratio.
+        n : float, optional
+            Unused parameter. Default is 0.0.
+        couple : float, optional
+            Coupling flag. Default is 0.0.
+        m : float, optional
+            Unused parameter. Default is 0.0.
+        cmo : float, optional
+            Center of mass constraint option. Default is 0.0.
+        con1 : int, optional
+            Translational constraint parameter. Default is 0.
+        con2 : int, optional
+            Rotational constraint parameter. Default is 0.
+        a1, a2, a3 : float, optional
+            Direction vector or local coordinate origin. Default is 0.0.
+        v1, v2, v3 : float, optional
+            Direction vector for local x-axis. Default is 0.0.
 
         Returns
         -------
@@ -158,6 +186,18 @@ class MaterialKeywordsMixin:
         kw.ro = ro
         kw.e = e
         kw.pr = pr
+        kw.n = n
+        kw.couple = couple
+        kw.m = m
+        kw.cmo = cmo
+        kw.con1 = con1
+        kw.con2 = con2
+        kw.a1 = a1
+        kw.a2 = a2
+        kw.a3 = a3
+        kw.v1 = v1
+        kw.v2 = v2
+        kw.v3 = v3
 
         self._deck.append(kw)
         logger.debug(f"Created MAT_RIGID with mid={mid}")

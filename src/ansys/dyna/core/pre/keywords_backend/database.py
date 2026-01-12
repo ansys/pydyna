@@ -230,3 +230,44 @@ class DatabaseKeywordsMixin:
         self._deck.append(kw)
         logger.debug(f"Created DATABASE_MATSUM with dt={dt}")
         return True
+
+    def create_database_binary_d3plot(
+        self,
+        dt: float = 0.0,
+        lcdt: int = 0,
+        beam: int = 0,
+        npltc: int = 0,
+        psetid: int = 0,
+    ) -> bool:
+        """Create a DATABASE_BINARY_D3PLOT keyword.
+
+        Parameters
+        ----------
+        dt : float, optional
+            Time interval between outputs. Default is 0.0.
+        lcdt : int, optional
+            Load curve for output time. Default is 0.
+        beam : int, optional
+            Beam element data flag. Default is 0.
+        npltc : int, optional
+            Number of plot states. Default is 0.
+        psetid : int, optional
+            Part set ID. Default is 0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.DatabaseBinaryD3Plot()
+        kw.dt = dt
+        kw.lcdt = lcdt
+        kw.beam = beam
+        kw.npltc = npltc
+        kw.psetid = psetid
+
+        self._deck.append(kw)
+        logger.debug(f"Created DATABASE_BINARY_D3PLOT with dt={dt}")
+        return True

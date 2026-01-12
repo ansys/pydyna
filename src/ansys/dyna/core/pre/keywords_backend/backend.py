@@ -41,6 +41,7 @@ from ansys.dyna.core.pre.keywords_backend.material import MaterialKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.misc import MiscKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.section import SectionKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.set import SetKeywordsMixin
+from ansys.dyna.core.pre.keywords_backend.sph import SPHKeywordsMixin
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +59,7 @@ class KeywordsBackend(
     ICFDKeywordsMixin,
     FrequencyKeywordsMixin,
     MiscKeywordsMixin,
+    SPHKeywordsMixin,
 ):
     """Keywords-based backend for the pre module.
 
@@ -77,6 +79,7 @@ class KeywordsBackend(
     - ICFDKeywordsMixin: ICFD_* and MESH_* keywords
     - FrequencyKeywordsMixin: FREQUENCY_DOMAIN_* keywords
     - MiscKeywordsMixin: DEFINE_CURVE, PART, CONTACT, etc.
+    - SPHKeywordsMixin: SPH/ISPH keywords including SECTION_SPH, MAT_SPH_*, DEFINE_SPH_*
     """
 
     def __init__(self):
