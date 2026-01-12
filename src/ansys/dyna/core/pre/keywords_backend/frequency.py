@@ -38,6 +38,8 @@ class FrequencyKeywordsMixin:
         vad1: int = 1,
         fnmax: float = 0.0,
         dampf: float = 0.0,
+        lcdam: int = 0,
+        lctyp: int = 0,
         n2: int = 0,
         n2typ: int = 1,
         dof2: int = 1,
@@ -62,6 +64,10 @@ class FrequencyKeywordsMixin:
             Maximum natural frequency. Default is 0.0.
         dampf : float, optional
             Modal damping factor. Default is 0.0.
+        lcdam : int, optional
+            Load curve ID for modal damping vs. frequency. Default is 0.
+        lctyp : int, optional
+            Load curve type for damping curve. Default is 0.
         n2 : int, optional
             Output node/set ID. Default is 0.
         n2typ : int, optional
@@ -91,6 +97,8 @@ class FrequencyKeywordsMixin:
         kw.vad1 = vad1
         kw.fnmax = fnmax
         kw.dampf = dampf
+        kw.lcdam = lcdam
+        kw.lctyp = lctyp
         kw.n2 = n2
         kw.n2typ = n2typ
         kw.dof2 = dof2

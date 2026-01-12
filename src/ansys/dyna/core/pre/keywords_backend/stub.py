@@ -335,7 +335,8 @@ class KeywordsStub:
 
     def CreateSectionSolid(self, request):
         """Create SECTION_SOLID keyword."""
-        secid = request.secid if hasattr(request, "secid") else self._backend.next_id("section")
+        # Protobuf defaults int to 0 when not set, so treat 0 as "not provided"
+        secid = request.secid if getattr(request, "secid", 0) != 0 else self._backend.next_id("section")
         self._backend.create_section_solid(secid=secid, elform=request.elform)
         return type("Response", (), {"id": secid})()
 
@@ -887,6 +888,8 @@ class KeywordsStub:
             vad1=getattr(request, "vad1", 1),
             fnmax=getattr(request, "fnmax", 0.0),
             dampf=getattr(request, "dampf", 0.0),
+            lcdam=getattr(request, "lcdam", 0),
+            lctyp=getattr(request, "lctyp", 0),
             n2=getattr(request, "n2", 0),
             n2typ=getattr(request, "n2typ", 1),
             dof2=getattr(request, "dof2", 1),
@@ -1016,4 +1019,3 @@ class KeywordsStub:
             logger.warning(f"LOAD_BODY_{option} not yet implemented")
 
         return type("Response", (), {"success": True})()
-

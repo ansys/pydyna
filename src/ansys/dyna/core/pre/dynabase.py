@@ -307,10 +307,16 @@ class ParameterType(Enum):
 class DynaBase:
     """Contains methods for creating a general LS-DYNA keyword."""
 
+    # Class-level backend reference (set when using keywords backend)
+    _backend = None
+
     def __init__(self):
         self.stub = DynaSolution.get_stub()
         self.mainname = ""
         DynaBase.stub = self.stub
+        # Get backend reference if using keywords backend
+        self._backend = DynaSolution._backend
+        DynaBase._backend = self._backend
         self.implicitanalysis = ImplicitAnalysis(initial_timestep_size=0.1)
         self.parts = Parts()
         self.boundaryconditions = BoundaryCondition()
@@ -363,9 +369,20 @@ class DynaBase:
             cid = 0
         else:
             cid = max_timestep.create(self.stub)
-        ret = self.stub.CreateTimestep(
-            TimestepRequest(tssfac=tssfac, isdo=isdo, dt2ms=timestep_size_for_mass_scaled, lctm=cid)
-        )
+        if self._backend is not None:
+            # Use keywords backend directly
+            self._backend.create_control_timestep(
+                tssfac=tssfac,
+                isdo=isdo,
+                dt2ms=timestep_size_for_mass_scaled,
+                lctm=cid,
+            )
+            ret = True
+        else:
+            # Fall back to gRPC stub
+            ret = self.stub.CreateTimestep(
+                TimestepRequest(tssfac=tssfac, isdo=isdo, dt2ms=timestep_size_for_mass_scaled, lctm=cid)
+            )
         logging.info("Timestep Created...")
         return ret
 
@@ -402,15 +419,26 @@ class DynaBase:
         """
         ret = True
         if not self.have_accuracy:
-            ret = self.stub.CreateControlAccuracy(
-                ControlAccuracyRequest(
+            if self._backend is not None:
+                # Use keywords backend directly
+                self._backend.create_control_accuracy(
                     osu=objective_stress_updates.value,
                     inn=invariant_node_number.value,
                     pidosu=partsetid_for_objective_stress_updates,
                     iacc=implicit_accuracy_flag.value,
                     exacc=explicit_accuracy_flag.value,
                 )
-            )
+            else:
+                # Fall back to gRPC stub
+                ret = self.stub.CreateControlAccuracy(
+                    ControlAccuracyRequest(
+                        osu=objective_stress_updates.value,
+                        inn=invariant_node_number.value,
+                        pidosu=partsetid_for_objective_stress_updates,
+                        iacc=implicit_accuracy_flag.value,
+                        exacc=explicit_accuracy_flag.value,
+                    )
+                )
             self.have_accuracy = True
             logging.info("Control Accuracy Created...")
         return ret
@@ -460,15 +488,26 @@ class DynaBase:
         """
         ret = True
         if not self.have_energy:
-            ret = self.stub.CreateControlEnergy(
-                ControlEnergyRequest(
+            if self._backend is not None:
+                # Use keywords backend directly
+                self._backend.create_control_energy(
                     hgen=hourglass_energy.value,
                     rwen=rigidwall_energy.value,
                     slnten=sliding_interface_energy.value,
                     rylen=rayleigh_energy.value,
                     irgen=initial_reference_geometry_energy.value,
                 )
-            )
+            else:
+                # Fall back to gRPC stub
+                ret = self.stub.CreateControlEnergy(
+                    ControlEnergyRequest(
+                        hgen=hourglass_energy.value,
+                        rwen=rigidwall_energy.value,
+                        slnten=sliding_interface_energy.value,
+                        rylen=rayleigh_energy.value,
+                        irgen=initial_reference_geometry_energy.value,
+                    )
+                )
             self.have_energy = True
             logging.info("Control Energy Created...")
         return ret
@@ -528,7 +567,15 @@ class DynaBase:
         """
         ret = True
         if not self.have_hourglass:
-            ret = self.stub.CreateControlHourgalss(ControlHourglassRequest(ihq=controltype.value, qh=coefficient))
+            if self._backend is not None:
+                # Use keywords backend directly
+                self._backend.create_control_hourglass(
+                    ihq=controltype.value,
+                    qh=coefficient,
+                )
+            else:
+                # Fall back to gRPC stub
+                ret = self.stub.CreateControlHourgalss(ControlHourglassRequest(ihq=controltype.value, qh=coefficient))
             self.have_hourglass = True
             logging.info("Control Hourglass Created...")
         return ret
@@ -557,13 +604,22 @@ class DynaBase:
         """
         ret = True
         if not self.have_bulk_viscosity:
-            ret = self.stub.CreateControlBulkViscosity(
-                ControlBulkViscosityRequest(
+            if self._backend is not None:
+                # Use keywords backend directly
+                self._backend.create_control_bulk_viscosity(
                     q1=quadratic_viscosity_coeff,
                     q2=linear_viscosity_coeff,
-                    type=bulk_viscosity_type.value,
+                    bulk_type=bulk_viscosity_type.value,
                 )
-            )
+            else:
+                # Fall back to gRPC stub
+                ret = self.stub.CreateControlBulkViscosity(
+                    ControlBulkViscosityRequest(
+                        q1=quadratic_viscosity_coeff,
+                        q2=linear_viscosity_coeff,
+                        type=bulk_viscosity_type.value,
+                    )
+                )
             self.have_bulk_viscosity = True
             logging.info("Control Bulk Viscosity Created...")
         return ret

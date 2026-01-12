@@ -82,6 +82,9 @@ class KeywordsDynaSolution:
         DynaSolution.stub = self._stub_adapter
         DynaSolution.termination_time = 0
 
+        # Set the backend directly so pre classes can use it without going through stub
+        DynaSolution._backend = self._backend
+
         # PIM client attributes (not used in keywords backend)
         self.pim_client = None
         self.remote_instance = None

@@ -1932,10 +1932,89 @@ class TestReferenceFileComparison:
         """test_resistive_heating.k - EM resistive heating 3D."""
         pytest.fail("Not implemented")
 
-    @pytest.mark.xfail(reason="DynaEM not implemented in keywords backend")
     def test_resistive_heating_2d(self, initial_files_dir, pre_reference_dir):
         """test_resistive_heating_2d.k - EM resistive heating 2D."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaem import (
+            DynaEM,
+            EMType,
+            EMDimension,
+            FEMSOLVER,
+            Isopotential,
+            Isopotential_ConnType,
+        )
+        from ansys.dyna.core.pre.dynamech import (
+            ShellPart,
+            ShellFormulation,
+            ThermalAnalysis,
+            ThermalAnalysisType,
+        )
+        from ansys.dyna.core.pre.dynamaterial import MatRigid, MatThermalIsotropic, EMMATTYPE
+        from ansys.dyna.core.pre.dynabase import NodeSet, PartSet, Curve
+
+        initial_file = os.path.join(initial_files_dir, "em", "test_resistive_heating_2d.k")
+        reference_file = os.path.join(pre_reference_dir, "test_resistive_heating_2d.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+            solution.set_termination(termination_time=0.0101)
+            solution.create_database_binary(dt=1e-4)
+
+            emobj = DynaEM()
+            solution.add(emobj)
+
+            emobj.set_timestep(tssfac=1, timestep_size_for_mass_scaled=1e-4)
+
+            emobj.analysis.set_timestep(timestep=1e-4)
+            # Note: Reference file has dimtype=0 (3D) despite being a "2D" test
+            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, dimtype=EMDimension.SOLVER_3D)
+            emobj.analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-3)
+
+            tanalysis = ThermalAnalysis()
+            tanalysis.set_timestep(initial_timestep=1e-4)
+            tanalysis.set_solver(analysis_type=ThermalAnalysisType.TRANSIENT)
+            emobj.add(tanalysis)
+
+            matrigid = MatRigid(mass_density=1, young_modulus=2e11)
+            matrigid.set_em_resistive_heating_2d(
+                material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=1e4
+            )
+
+            matthermaliso = MatThermalIsotropic(density=100, specific_heat=10, conductivity=7)
+
+            part = ShellPart(1)
+            part.set_material(matrigid, matthermaliso)
+            part.set_element_formulation(ShellFormulation.PLANE_STRESS)
+            emobj.parts.add(part)
+
+            emobj.boundaryconditions.create_imposed_motion(
+                PartSet([1]), Curve(x=[0, 10], y=[10, 10])
+            )
+            emobj.set_init_temperature(temp=25)
+
+            # Isopotential 1: Voltage source at 500V
+            emobj.connect_isopotential(
+                contype=Isopotential_ConnType.VOLTAGE_SOURCE,
+                isopotential1=Isopotential(NodeSet([521, 517, 513, 509, 525])),
+                value=500,
+            )
+            # Isopotential 2: Ground (0V)
+            emobj.connect_isopotential(
+                contype=Isopotential_ConnType.VOLTAGE_SOURCE,
+                isopotential1=Isopotential(NodeSet([585, 605, 625, 564, 565])),
+            )
+
+            emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_resistive_heating_2d.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_resistive_heating_2d_isopots(self, initial_files_dir, pre_reference_dir):
         """test_resistive_heating_2d_isopots.k - EM resistive heating 2D with isopotentials."""
@@ -2156,7 +2235,7 @@ class TestReferenceFileComparison:
         """test_dem.k - DEM particle simulation with CONTROL_DISCRETE_ELEMENT."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
 
-        initial_file = os.path.join(initial_files_dir, "dem", "test_dem.k")
+        initial_file = os.path.join(initial_files_dir, "test_dem.k")
         reference_file = os.path.join(pre_reference_dir, "test_dem.k")
 
         if not os.path.exists(initial_file) or not os.path.exists(reference_file):
@@ -2323,10 +2402,124 @@ class TestReferenceFileComparison:
         """test_sale.k - SALE (Simplified ALE)."""
         pytest.fail("Not implemented")
 
-    @pytest.mark.xfail(reason="DynaNVH not implemented in keywords backend")
     def test_frf_plate_damping(self, initial_files_dir, pre_reference_dir):
-        """test_frf_plate_damping.k - NVH FRF plate with damping."""
-        pytest.fail("Not implemented")
+        """test_frf_plate_damping.k - NVH FRF plate with damping curve."""
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+
+        initial_file = os.path.join(initial_files_dir, "nvh", "test_frf_plate_damping.k")
+        reference_file = os.path.join(pre_reference_dir, "test_frf_plate_damping.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            # Control keywords
+            solution.stub.CreateControlImplicitEigenvalue(
+                type("Request", (), {
+                    "neig": 100,
+                    "center": 0.0,
+                    "eigmth": 2,
+                    "shfscl": 0.0
+                })()
+            )
+
+            solution.stub.CreateControlImplicitGeneral(
+                type("Request", (), {
+                    "imflag": 1,
+                    "dt0": 1.0,
+                    "imform": 2,
+                    "nsbs": 1,
+                    "igs": 2,
+                })()
+            )
+
+            # CONTROL_IMPLICIT_SOLUTION
+            solution._backend.create_control_implicit_solution(
+                nsolvr=1,
+                ilimit=11,
+                maxref=55,
+                dctol=1.0,
+                ectol=0.01,
+                rctol=1.0e10,
+                lstol=0.9,
+                nlprint=3,
+            )
+
+            # DEFINE_CURVE for damping vs. frequency (lcid=1)
+            damping_freqs = [1.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 200.0]
+            damping_vals = [0.0, 0.0, 0.0045, 0.00713, 0.00386, 0.00328, 0.0034, 0.00624, 0.00072, 0.00083, 0.0, 0.0]
+            solution._backend.create_define_curve(
+                sfo=1.0,
+                abscissa=damping_freqs,
+                ordinate=damping_vals,
+            )
+
+            # SET_NODE_LIST for input node (sid=1, node 131)
+            solution._backend.create_set_node_list_with_solver(sid=1, nodes=[131], solver="MECH")
+
+            # SET_NODE_LIST for output nodes (sid=2, nodes 131 and 651)
+            solution._backend.create_set_node_list_with_solver(sid=2, nodes=[131, 651], solver="MECH")
+
+            # SECTION_SHELL (secid=1, elform=6, shrf=0.833, nip=5, propt=3.0)
+            solution._backend.create_section_shell(
+                secid=1,
+                elform=6,
+                shrf=0.833,
+                nip=5,
+                propt=3.0,
+                t1=0.002,
+                t2=0.002,
+                t3=0.002,
+                t4=0.002,
+            )
+
+            # MAT_ELASTIC (mid=1, ro=7870.0, e=2.07e11, pr=0.292)
+            solution._backend.create_mat_elastic(
+                mid=1,
+                ro=7870.0,
+                e=2.07e11,
+                pr=0.292,
+            )
+
+            # Update PART to reference secid=1 and mid=1
+            from ansys.dyna.core.keywords import keywords
+            for kw in solution._backend._deck:
+                if isinstance(kw, keywords.Part):
+                    for idx in range(len(kw.parts)):
+                        pid = kw.parts.iloc[idx]["pid"]
+                        if pid == 1:
+                            kw.parts.at[idx, "secid"] = 1
+                            kw.parts.at[idx, "mid"] = 1
+
+            # FREQUENCY_DOMAIN_FRF with damping curve
+            solution.stub.CreateFrequencyDomainFrf(
+                type("Request", (), {
+                    "n1": 131,
+                    "n1typ": 0,
+                    "dof1": 0,
+                    "vad1": 3,
+                    "fnmax": 2000.0,
+                    "dampf": 0.0,
+                    "lcdam": 1,
+                    "lctyp": 1,
+                    "n2": 2,
+                    "n2typ": 1,
+                    "dof2": 3,
+                    "vad2": 1,
+                    "fmin": 1.0,
+                    "fmax": 400.0,
+                    "nfreq": 400,
+                })()
+            )
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_frf_plate_damping.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_frf_solid(self, initial_files_dir, pre_reference_dir):
         """test_frf_solid.k - NVH FRF analysis with implicit eigenvalue solver."""

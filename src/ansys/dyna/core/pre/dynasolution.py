@@ -85,6 +85,10 @@ class DynaSolution:
        Port. the default is ``"50051"``.
     """
 
+    # Class-level backend reference for keywords backend support
+    # When using KeywordsDynaSolution, this is set to the KeywordsBackend instance
+    _backend = None
+
     def __init__(self, hostname="localhost", port="50051", channel=None, server_path=""):
         # launch server
         # check_valid_ip(hostname)  # double check

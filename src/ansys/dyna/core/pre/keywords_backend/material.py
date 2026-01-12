@@ -163,6 +163,43 @@ class MaterialKeywordsMixin:
         logger.debug(f"Created MAT_RIGID with mid={mid}")
         return True
 
+    def create_mat_elastic(
+        self,
+        mid: int,
+        ro: float,
+        e: float,
+        pr: float,
+    ) -> bool:
+        """Create a MAT_ELASTIC keyword.
+
+        Parameters
+        ----------
+        mid : int
+            Material ID.
+        ro : float
+            Mass density.
+        e : float
+            Young's modulus.
+        pr : float
+            Poisson's ratio.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.MatElastic()
+        kw.mid = mid
+        kw.ro = ro
+        kw.e = e
+        kw.pr = pr
+
+        self._deck.append(kw)
+        logger.debug(f"Created MAT_ELASTIC with mid={mid}")
+        return True
+
     def create_mat_piecewise_linear_plasticity(
         self,
         mid: int,
