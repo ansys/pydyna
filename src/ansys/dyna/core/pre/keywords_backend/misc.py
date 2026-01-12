@@ -68,7 +68,8 @@ class MiscKeywordsMixin:
         if ordinate is None:
             ordinate = []
 
-        curve_id = lcid if lcid is not None else self.next_id("curve")
+        # Treat lcid=0 as "not specified" since 0 is the protobuf default
+        curve_id = lcid if lcid else self.next_id("curve")
 
         kw = keywords.DefineCurve()
         kw.lcid = curve_id

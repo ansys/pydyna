@@ -318,7 +318,8 @@ class KeywordsStub:
         """Create MAT_RIGID keyword."""
         from ansys.dyna.core.keywords import keywords
 
-        mid = self._backend.next_id("material")
+        # Use request mid if provided and non-zero, otherwise auto-generate
+        mid = getattr(request, "mid", 0) or self._backend.next_id("material")
 
         kw = keywords.MatRigid()
         kw.mid = mid
@@ -1212,19 +1213,6 @@ class KeywordsStub:
             vrx=getattr(request, "vrx", 0.0),
             vry=getattr(request, "vry", 0.0),
             vrz=getattr(request, "vrz", 0.0),
-        )
-        return type("Response", (), {"success": True})()
-
-    def CreateMatRigid(self, request):
-        """Create MAT_RIGID keyword."""
-        self._backend.create_mat_rigid(
-            mid=request.mid,
-            ro=getattr(request, "ro", 0.0),
-            e=getattr(request, "e", 0.0),
-            pr=getattr(request, "pr", 0.0),
-            cmo=getattr(request, "cmo", 0.0),
-            con1=getattr(request, "con1", 0),
-            con2=getattr(request, "con2", 0),
         )
         return type("Response", (), {"success": True})()
 
