@@ -813,6 +813,40 @@ class KeywordsStub:
         )
         return type("Response", (), {"success": True})()
 
+    def ICFDCreateControlMesh(self, request):
+        """Create ICFD_CONTROL_MESH keyword."""
+        self._backend.create_icfd_control_mesh(
+            mgsf=getattr(request, "mgsf", 1.41),
+            mstrat=getattr(request, "mstrat", 0),
+            struct2d=getattr(request, "struct2d", 0),
+            nrmsh=getattr(request, "nrmsh", 0),
+            aver=getattr(request, "aver", 14),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateControlSurfMesh(self, request):
+        """Create ICFD_CONTROL_SURFMESH keyword."""
+        self._backend.create_icfd_control_surfmesh(
+            rsrf=getattr(request, "rsrf", 0),
+            sadapt=getattr(request, "sadapt", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateDBFlux(self, request):
+        """Create ICFD_DATABASE_FLUX keyword."""
+        self._backend.create_icfd_database_flux(
+            pid=getattr(request, "pid", 0),
+            dtout=getattr(request, "dtout", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def MESHCreateBlSym(self, request):
+        """Create MESH_BL_SYM keyword."""
+        self._backend.create_mesh_bl_sym(
+            pid=getattr(request, "pid", 0),
+        )
+        return type("Response", (), {"success": True})()
+
     def MESHCreateSizeShape(self, request):
         """Create MESH_SIZE_SHAPE keyword."""
         self._backend.create_mesh_size_shape(

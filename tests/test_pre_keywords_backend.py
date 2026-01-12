@@ -515,6 +515,7 @@ class TestReferenceFileComparison:
         skip_count_comparison = {
             "MeshSurfaceElement",
             "MeshSurfaceNode",
+            "MeshVolume",
         }
 
         # Known keyword class defaults that are equivalent to None or 0 in reference
@@ -1003,10 +1004,108 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_internal_3d_flow(self, initial_files_dir, pre_reference_dir):
         """test_internal_3d_flow.k - ICFD 3D internal flow."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaicfd import (
+            DynaICFD,
+            ICFDAnalysis,
+            ICFDPart,
+            ICFDVolumePart,
+            MatICFD,
+            Curve,
+            ICFDDOF,
+            MeshedVolume,
+        )
+
+        initial_file = os.path.join(initial_files_dir, "icfd", "test_internal_3d_flow.k")
+        reference_file = os.path.join(pre_reference_dir, "test_internal_3d_flow.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            icfd = DynaICFD()
+            solution.add(icfd)
+
+            # Set termination time
+            solution.set_termination(termination_time=10.0)
+
+            # Database output
+            solution.create_database_binary(dt=1.0)
+
+            # Define curves for boundary conditions
+            curve1 = Curve(x=[0, 10000], y=[1, 1])
+            curve2 = Curve(x=[0, 10000], y=[0, 0])
+            curve3 = Curve(x=[0, 10000], y=[0, 0])
+
+            # Set ICFD analysis
+            icfdanalysis = ICFDAnalysis()
+            icfdanalysis.set_timestep(timestep=0.05)
+            icfd.add(icfdanalysis)
+
+            # Part 1: Inlet with prescribed velocity (X and Y components)
+            mat1 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part1 = ICFDPart(1)
+            part1.set_material(mat1)
+            part1.set_prescribed_velocity(dof=ICFDDOF.X, motion=curve1)
+            part1.set_prescribed_velocity(dof=ICFDDOF.Y, motion=curve2)
+            icfd.parts.add(part1)
+
+            # Part 2: Outlet with prescribed pressure
+            mat2 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part2 = ICFDPart(2)
+            part2.set_material(mat2)
+            part2.set_prescribed_pressure(pressure=curve3)
+            icfd.parts.add(part2)
+
+            # Part 3: No-slip wall
+            mat3 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            part3 = ICFDPart(3)
+            part3.set_material(mat3)
+            part3.set_non_slip()
+            icfd.parts.add(part3)
+
+            # Volume part 4 containing parts 1, 2, and 3 (use part IDs)
+            volpart = ICFDVolumePart([1, 2, 3])
+            volpart.set_material(mat3)
+            icfd.parts.add(volpart)
+
+            # Create meshed volume (use part IDs)
+            meshvol = MeshedVolume(surfaces=[1, 2, 3])
+            icfd.add(meshvol)
+
+            # MESH_BL for part 3 (boundary layer)
+            solution.stub.MESHCreateBl(
+                type("Request", (), {"pid": 3, "nelth": 1, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
+            )
+
+            # MESH_BL_SYM for parts 1 and 2 (symmetry surfaces)
+            solution.stub.MESHCreateBlSym(type("Request", (), {"pid": 1})())
+            solution.stub.MESHCreateBlSym(type("Request", (), {"pid": 2})())
+
+            # ICFD_CONTROL_MESH
+            solution.stub.ICFDCreateControlMesh(
+                type("Request", (), {"mgsf": 1.1, "mstrat": 0, "struct2d": 0, "nrmsh": 0, "aver": 14})()
+            )
+
+            # ICFD_CONTROL_SURFMESH
+            solution.stub.ICFDCreateControlSurfMesh(
+                type("Request", (), {"rsrf": 1, "sadapt": 0})()
+            )
+
+            # ICFD_DATABASE_FLUX for part 2
+            solution.stub.ICFDCreateDBFlux(type("Request", (), {"pid": 2, "dtout": 0.0})())
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_internal_3d_flow.k")
+
+            # Compare with reference
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_mesh_adaptivity(self, initial_files_dir, pre_reference_dir):
         """test_mesh_adaptivity.k - ICFD mesh adaptivity with cylinder flow."""

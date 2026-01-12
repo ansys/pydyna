@@ -811,6 +811,109 @@ class ICFDKeywordsMixin:
         self._deck.append(kw)
         logger.info("Created ICFD_INITIAL keyword")
 
+    def create_icfd_control_mesh(
+        self,
+        mgsf: float = 1.41,
+        mstrat: int = 0,
+        struct2d: int = 0,
+        nrmsh: int = 0,
+        aver: int = 14,
+    ) -> None:
+        """Create ICFD_CONTROL_MESH keyword.
+
+        Parameters
+        ----------
+        mgsf : float, optional
+            Mesh Growth Scale Factor. Values between 1 and 2 are allowed.
+            Default is 1.41.
+        mstrat : int, optional
+            Mesh strategy. Default is 0.
+        struct2d : int, optional
+            2D structured mesh flag. Default is 0.
+        nrmsh : int, optional
+            Number of remeshing operations. Default is 0.
+        aver : int, optional
+            Averaging parameter. Default is 14.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_CONTROL_MESH: mgsf={mgsf}, mstrat={mstrat}, struct2d={struct2d}, nrmsh={nrmsh}, aver={aver}")
+
+        kw = keywords.IcfdControlMesh()
+        kw.mgsf = mgsf
+        kw.mstrat = mstrat
+        kw.twodstruc = struct2d
+        kw.nrmsh = nrmsh
+        kw.aver = aver
+
+        self._deck.append(kw)
+        logger.info("Created ICFD_CONTROL_MESH keyword")
+
+    def create_icfd_control_surfmesh(
+        self,
+        rsrf: int = 0,
+        sadapt: int = 0,
+    ) -> None:
+        """Create ICFD_CONTROL_SURFMESH keyword.
+
+        Parameters
+        ----------
+        rsrf : int, optional
+            Remesh surface flag. Default is 0.
+        sadapt : int, optional
+            Surface adaptation flag. Default is 0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_CONTROL_SURFMESH: rsrf={rsrf}, sadapt={sadapt}")
+
+        kw = keywords.IcfdControlSurfmesh()
+        kw.rsrf = rsrf
+        kw.sadapt = sadapt
+
+        self._deck.append(kw)
+        logger.info("Created ICFD_CONTROL_SURFMESH keyword")
+
+    def create_icfd_database_flux(self, pid: int, dtout: float = 0.0) -> None:
+        """Create ICFD_DATABASE_FLUX keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part ID for flux output.
+        dtout : float, optional
+            Time interval for flux output. Default is 0.0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_DATABASE_FLUX: pid={pid}, dtout={dtout}")
+
+        kw = keywords.IcfdDatabaseFlux()
+        # IcfdDatabaseFlux uses a TableCard for boundaries
+        boundaries_data = pd.DataFrame([{"pid": pid, "dtout": dtout}])
+        kw.boundaries = boundaries_data
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_DATABASE_FLUX keyword for pid={pid}")
+
+    def create_mesh_bl_sym(self, pid: int) -> None:
+        """Create MESH_BL_SYM keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part ID for boundary layer symmetry surface.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating MESH_BL_SYM: pid={pid}")
+
+        kw = keywords.MeshBlSym()
+        kw.pid1 = pid
+
+        self._deck.append(kw)
+        logger.info(f"Created MESH_BL_SYM keyword for pid={pid}")
+
     def create_mesh_size_shape(
         self,
         sname: str = "BOX",
