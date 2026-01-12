@@ -27,7 +27,7 @@ exclude: |
     )
 repos:
 
-- repo: https://github.com/charliermarsh/ruff-pre-commit
+- repo: https://github.com/astral-sh/ruff-pre-commit
   rev: 6ce4b4fc349b8881cbce40207dac3bf78824a88e # v0.14.11
   hooks:
     - id: ruff-check
