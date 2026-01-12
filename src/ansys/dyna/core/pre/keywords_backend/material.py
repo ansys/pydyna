@@ -207,3 +207,40 @@ class MaterialKeywordsMixin:
         self._deck.append(kw)
         logger.debug(f"Created MAT_PIECEWISE_LINEAR_PLASTICITY with mid={mid}")
         return True
+
+    def create_mat_rigid_discrete(
+        self,
+        mid: int,
+        ro: float = 0.0,
+        e: float = 0.0,
+        pr: float = 0.0,
+    ) -> bool:
+        """Create a MAT_RIGID_DISCRETE keyword.
+
+        Parameters
+        ----------
+        mid : int
+            Material identification.
+        ro : float, optional
+            Mass density. Default is 0.0.
+        e : float, optional
+            Young's modulus. Default is 0.0.
+        pr : float, optional
+            Poisson's ratio. Default is 0.0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.MatRigidDiscrete()
+        kw.mid = mid
+        kw.ro = ro
+        kw.e = e
+        kw.pr = pr
+
+        self._deck.append(kw)
+        logger.debug(f"Created MAT_RIGID_DISCRETE with mid={mid}")
+        return True

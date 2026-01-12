@@ -305,6 +305,17 @@ class KeywordsStub:
         self._backend._deck.append(kw)
         return type("Response", (), {"mid": mid})()
 
+    def CreateMatRigidDiscrete(self, request):
+        """Create MAT_RIGID_DISCRETE keyword."""
+        mid = self._backend.next_id("material")
+        self._backend.create_mat_rigid_discrete(
+            mid=mid,
+            ro=getattr(request, "ro", 0.0),
+            e=getattr(request, "e", 0.0),
+            pr=getattr(request, "pr", 0.0),
+        )
+        return type("Response", (), {"mid": mid})()
+
     # =========================================================================
     # Section Methods
     # =========================================================================

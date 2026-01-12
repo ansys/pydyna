@@ -729,20 +729,31 @@ class ICFDKeywordsMixin:
         msize : float, optional
             Mesh size. Default is 0.0.
         parameter : list of float, optional
-            Parameters defining the shape. Default is None.
+            Parameters defining the shape. For BOX: [pminx, pminy, pminz, pmaxx, pmaxy, pmaxz].
+            Default is None.
         """
         from ansys.dyna.core.keywords import keywords
 
-        logger.debug(f"Creating MESH_SIZE_SHAPE: sname={sname}, msize={msize}")
+        logger.debug(f"Creating MESH_SIZE_SHAPE: sname={sname}, msize={msize}, parameter={parameter}")
 
         kw = keywords.MeshSizeShape()
         kw.sname = sname
         kw.force = force
         kw.method = method
-        kw.msize = msize
-        # Set parameters if provided
-        if parameter and hasattr(kw, 'parameters'):
-            kw.parameters = parameter
+        kw.bt = 0.0
+        kw.dt = 0.0
+
+        # Set msize and parameters based on shape type
+        if sname == "BOX" and parameter and len(parameter) >= 6:
+            kw.msize = msize
+            kw.pminx = parameter[0]
+            kw.pminy = parameter[1]
+            kw.pminz = parameter[2]
+            kw.pmaxx = parameter[3]
+            kw.pmaxy = parameter[4]
+            kw.pmaxz = parameter[5]
+        else:
+            kw.msize = msize
 
         self._deck.append(kw)
         logger.info(f"Created MESH_SIZE_SHAPE keyword with sname={sname}")
