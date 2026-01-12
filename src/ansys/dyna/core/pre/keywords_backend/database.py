@@ -156,3 +156,77 @@ class DatabaseKeywordsMixin:
         else:
             logger.warning(f"Unknown database type: {db_type}")
             return False
+
+    def create_database_glstat(
+        self,
+        dt: float = 0.0,
+        binary: int = 1,
+        lcur: int = 0,
+        ioopt: int = 0,
+    ) -> bool:
+        """Create a DATABASE_GLSTAT keyword.
+
+        Parameters
+        ----------
+        dt : float, optional
+            Time interval between outputs. Default is 0.0.
+        binary : int, optional
+            Binary file flag. Default is 1.
+        lcur : int, optional
+            Load curve ID. Default is 0.
+        ioopt : int, optional
+            Output option. Default is 0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.DatabaseGlstat()
+        kw.dt = dt
+        kw.binary = binary
+        kw.lcur = lcur
+        kw.ioopt = ioopt
+
+        self._deck.append(kw)
+        logger.debug(f"Created DATABASE_GLSTAT with dt={dt}")
+        return True
+
+    def create_database_matsum(
+        self,
+        dt: float = 0.0,
+        binary: int = 1,
+        lcur: int = 0,
+        ioopt: int = 0,
+    ) -> bool:
+        """Create a DATABASE_MATSUM keyword.
+
+        Parameters
+        ----------
+        dt : float, optional
+            Time interval between outputs. Default is 0.0.
+        binary : int, optional
+            Binary file flag. Default is 1.
+        lcur : int, optional
+            Load curve ID. Default is 0.
+        ioopt : int, optional
+            Output option. Default is 0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.DatabaseMatsum()
+        kw.dt = dt
+        kw.binary = binary
+        kw.lcur = lcur
+        kw.ioopt = ioopt
+
+        self._deck.append(kw)
+        logger.debug(f"Created DATABASE_MATSUM with dt={dt}")
+        return True

@@ -34,6 +34,7 @@ from ansys.dyna.core.pre.keywords_backend.boundary import BoundaryKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.control import ControlKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.database import DatabaseKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.em import EMKeywordsMixin
+from ansys.dyna.core.pre.keywords_backend.frequency import FrequencyKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.icfd import ICFDKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.initial import InitialKeywordsMixin
 from ansys.dyna.core.pre.keywords_backend.material import MaterialKeywordsMixin
@@ -55,6 +56,7 @@ class KeywordsBackend(
     BoundaryKeywordsMixin,
     EMKeywordsMixin,
     ICFDKeywordsMixin,
+    FrequencyKeywordsMixin,
     MiscKeywordsMixin,
 ):
     """Keywords-based backend for the pre module.
@@ -73,6 +75,7 @@ class KeywordsBackend(
     - BoundaryKeywordsMixin: BOUNDARY_* keywords
     - EMKeywordsMixin: EM_* keywords
     - ICFDKeywordsMixin: ICFD_* and MESH_* keywords
+    - FrequencyKeywordsMixin: FREQUENCY_DOMAIN_* keywords
     - MiscKeywordsMixin: DEFINE_CURVE, PART, CONTACT, etc.
     """
 

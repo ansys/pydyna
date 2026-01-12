@@ -171,6 +171,7 @@ class MaterialKeywordsMixin:
         pr: float = 0.3,
         sigy: float = 0.0,
         etan: float = 0.0,
+        fail: float = 0.0,
     ) -> bool:
         """Create a MAT_PIECEWISE_LINEAR_PLASTICITY keyword.
 
@@ -188,6 +189,8 @@ class MaterialKeywordsMixin:
             Yield stress.
         etan : float
             Tangent modulus.
+        fail : float
+            Failure strain. Default is 0.0.
 
         Returns
         -------
@@ -203,6 +206,7 @@ class MaterialKeywordsMixin:
         kw.pr = pr
         kw.sigy = sigy
         kw.etan = etan
+        kw.fail = fail
 
         self._deck.append(kw)
         logger.debug(f"Created MAT_PIECEWISE_LINEAR_PLASTICITY with mid={mid}")

@@ -479,3 +479,171 @@ class ControlKeywordsMixin:
         self._deck.append(kw)
         logger.debug(f"Created CONTROL_DISCRETE_ELEMENT: ndamp={ndamp}, tdamp={tdamp}")
         return True
+
+    def create_control_output(
+        self,
+        npopt: int = 0,
+        neecho: int = 0,
+        ikedit: int = 0,
+        iflush: int = 0,
+    ) -> bool:
+        """Create a CONTROL_OUTPUT keyword.
+
+        Parameters
+        ----------
+        npopt : int, optional
+            Print suppression during input phase. Default is 0.
+        neecho : int, optional
+            Print echo of keyword data. Default is 0.
+        ikedit : int, optional
+            Edit frequency for the d3hsp file. Default is 0.
+        iflush : int, optional
+            Flush frequency for output files. Default is 0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlOutput()
+        kw.npopt = npopt
+        kw.neecho = neecho
+        kw.ikedit = ikedit
+        kw.iflush = iflush
+
+        self._deck.append(kw)
+        logger.debug(f"Created CONTROL_OUTPUT: npopt={npopt}, neecho={neecho}")
+        return True
+
+    def create_control_implicit_general(
+        self,
+        imflag: int = 1,
+        dt0: float = 0.0,
+        imform: int = 2,
+        nsbs: int = 1,
+    ) -> bool:
+        """Create a CONTROL_IMPLICIT_GENERAL keyword.
+
+        Parameters
+        ----------
+        imflag : int, optional
+            Implicit analysis flag. Default is 1.
+        dt0 : float, optional
+            Initial time step size. Default is 0.0.
+        imform : int, optional
+            Implicit formulation. Default is 2.
+        nsbs : int, optional
+            Number of stiffness matrix reformations. Default is 1.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlImplicitGeneral()
+        kw.imflag = imflag
+        kw.dt0 = dt0
+        kw.imform = imform
+        kw.nsbs = nsbs
+
+        self._deck.append(kw)
+        logger.debug(f"Created CONTROL_IMPLICIT_GENERAL: imflag={imflag}, dt0={dt0}")
+        return True
+
+    def create_control_implicit_solution(
+        self,
+        nsolvr: int = 1,
+        ilimit: int = 11,
+        maxref: int = 15,
+        dctol: float = 0.001,
+        ectol: float = 0.01,
+        rctol: float = 1.0e10,
+        lstol: float = 0.9,
+        nlprint: int = 0,
+        nlnorm: float = 0.0,
+    ) -> bool:
+        """Create a CONTROL_IMPLICIT_SOLUTION keyword.
+
+        Parameters
+        ----------
+        nsolvr : int, optional
+            Solver type. Default is 1.
+        ilimit : int, optional
+            Iteration limit. Default is 11.
+        maxref : int, optional
+            Maximum number of reformations. Default is 15.
+        dctol : float, optional
+            Displacement convergence tolerance. Default is 0.001.
+        ectol : float, optional
+            Energy convergence tolerance. Default is 0.01.
+        rctol : float, optional
+            Residual convergence tolerance. Default is 1.0e10.
+        lstol : float, optional
+            Line search tolerance. Default is 0.9.
+        nlprint : int, optional
+            Nonlinear solver print flag. Default is 0.
+        nlnorm : float, optional
+            Nonlinear residual norm type. Default is 0.0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlImplicitSolution()
+        kw.nsolvr = nsolvr
+        kw.ilimit = ilimit
+        kw.maxref = maxref
+        kw.dctol = dctol
+        kw.ectol = ectol
+        kw.rctol = rctol
+        kw.lstol = lstol
+        kw.nlprint = nlprint
+        kw.nlnorm = nlnorm
+
+        self._deck.append(kw)
+        logger.debug(f"Created CONTROL_IMPLICIT_SOLUTION: nsolvr={nsolvr}, ilimit={ilimit}")
+        return True
+
+    def create_control_implicit_eigenvalue(
+        self,
+        neig: int = 0,
+        center: float = 0.0,
+        eigmth: int = 2,
+        shfscl: float = 0.0,
+    ) -> bool:
+        """Create a CONTROL_IMPLICIT_EIGENVALUE keyword.
+
+        Parameters
+        ----------
+        neig : int, optional
+            Number of eigenvalues to extract. Default is 0.
+        center : float, optional
+            Center frequency for eigenvalue extraction. Default is 0.0.
+        eigmth : int, optional
+            Eigenvalue extraction method. Default is 2.
+        shfscl : float, optional
+            Shift scale factor. Default is 0.0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlImplicitEigenvalue()
+        kw.neig = neig
+        kw.center = center
+        kw.eigmth = eigmth
+        kw.shfscl = shfscl
+
+        self._deck.append(kw)
+        logger.debug(f"Created CONTROL_IMPLICIT_EIGENVALUE: neig={neig}, eigmth={eigmth}")
+        return True

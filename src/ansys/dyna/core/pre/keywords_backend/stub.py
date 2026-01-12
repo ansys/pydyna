@@ -154,11 +154,11 @@ class KeywordsStub:
     def CreateControlEnergy(self, request):
         """Create control energy keyword."""
         self._backend.create_control_energy(
-            hgen=request.hgen,
-            rwen=request.rwen,
-            slnten=request.slnten,
-            rylen=request.rylen,
-            irgen=request.irgen,
+            hgen=getattr(request, "hgen", 2),
+            rwen=getattr(request, "rwen", 2),
+            slnten=getattr(request, "slnten", 2),
+            rylen=getattr(request, "rylen", 1),
+            irgen=getattr(request, "irgen", 2),
         )
         return type("Response", (), {"success": True})()
 
@@ -316,13 +316,26 @@ class KeywordsStub:
         )
         return type("Response", (), {"mid": mid})()
 
+    def CreateMatPiecewiseLinearPlasticity(self, request):
+        """Create MAT_PIECEWISE_LINEAR_PLASTICITY keyword."""
+        mid = request.mid if hasattr(request, "mid") else self._backend.next_id("material")
+        self._backend.create_mat_piecewise_linear_plasticity(
+            mid=mid,
+            ro=request.ro,
+            e=request.e,
+            pr=getattr(request, "pr", 0.3),
+            sigy=getattr(request, "sigy", 0.0),
+            etan=getattr(request, "etan", 0.0),
+        )
+        return type("Response", (), {"mid": mid})()
+
     # =========================================================================
     # Section Methods
     # =========================================================================
 
     def CreateSectionSolid(self, request):
         """Create SECTION_SOLID keyword."""
-        secid = self._backend.next_id("section")
+        secid = request.secid if hasattr(request, "secid") else self._backend.next_id("section")
         self._backend.create_section_solid(secid=secid, elform=request.elform)
         return type("Response", (), {"id": secid})()
 
@@ -787,6 +800,100 @@ class KeywordsStub:
             fricr=getattr(request, "fricr", 0.0),
             normk=getattr(request, "normk", 0.01),
             sheark=getattr(request, "sheark", 0.2857),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateControlOutput(self, request):
+        """Create CONTROL_OUTPUT keyword."""
+        self._backend.create_control_output(
+            npopt=getattr(request, "npopt", 0),
+            neecho=getattr(request, "neecho", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateControlImplicitGeneral(self, request):
+        """Create CONTROL_IMPLICIT_GENERAL keyword."""
+        self._backend.create_control_implicit_general(
+            imflag=getattr(request, "imflag", 1),
+            dt0=getattr(request, "dt0", 0.0),
+            imform=getattr(request, "imform", 2),
+            nsbs=getattr(request, "nsbs", 1),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateControlImplicitSolution(self, request):
+        """Create CONTROL_IMPLICIT_SOLUTION keyword."""
+        self._backend.create_control_implicit_solution(
+            nsolvr=getattr(request, "nsolvr", 1),
+            ilimit=getattr(request, "ilimit", 11),
+            maxref=getattr(request, "maxref", 15),
+            dctol=getattr(request, "dctol", 0.001),
+            ectol=getattr(request, "ectol", 0.01),
+            rctol=getattr(request, "rctol", 1.0e10),
+            lstol=getattr(request, "lstol", 0.9),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateControlImplicitEigenvalue(self, request):
+        """Create CONTROL_IMPLICIT_EIGENVALUE keyword."""
+        self._backend.create_control_implicit_eigenvalue(
+            neig=getattr(request, "neig", 0),
+            center=getattr(request, "center", 0.0),
+            eigmth=getattr(request, "eigmth", 2),
+            shfscl=getattr(request, "shfscl", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateDatabaseGlstat(self, request):
+        """Create DATABASE_GLSTAT keyword."""
+        self._backend.create_database_glstat(
+            dt=getattr(request, "dt", 0.0),
+            binary=getattr(request, "binary", 1),
+            lcur=getattr(request, "lcur", 0),
+            ioopt=getattr(request, "ioopt", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateDatabaseMatsum(self, request):
+        """Create DATABASE_MATSUM keyword."""
+        self._backend.create_database_matsum(
+            dt=getattr(request, "dt", 0.0),
+            binary=getattr(request, "binary", 1),
+            lcur=getattr(request, "lcur", 0),
+            ioopt=getattr(request, "ioopt", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateBoundarySpcSet(self, request):
+        """Create BOUNDARY_SPC_SET keyword."""
+        self._backend.create_boundary_spc_set(
+            nsid=request.nsid,
+            cid=getattr(request, "cid", 0),
+            dofx=getattr(request, "dofx", 0),
+            dofy=getattr(request, "dofy", 0),
+            dofz=getattr(request, "dofz", 0),
+            dofrx=getattr(request, "dofrx", 0),
+            dofry=getattr(request, "dofry", 0),
+            dofrz=getattr(request, "dofrz", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateFrequencyDomainFrf(self, request):
+        """Create FREQUENCY_DOMAIN_FRF keyword."""
+        self._backend.create_frequency_domain_frf(
+            n1=getattr(request, "n1", 0),
+            n1typ=getattr(request, "n1typ", 0),
+            dof1=getattr(request, "dof1", 1),
+            vad1=getattr(request, "vad1", 1),
+            fnmax=getattr(request, "fnmax", 0.0),
+            dampf=getattr(request, "dampf", 0.0),
+            n2=getattr(request, "n2", 0),
+            n2typ=getattr(request, "n2typ", 1),
+            dof2=getattr(request, "dof2", 1),
+            vad2=getattr(request, "vad2", 1),
+            fmin=getattr(request, "fmin", 0.0),
+            fmax=getattr(request, "fmax", 0.0),
+            nfreq=getattr(request, "nfreq", 100),
         )
         return type("Response", (), {"success": True})()
 

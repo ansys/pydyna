@@ -2152,10 +2152,37 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    @pytest.mark.xfail(reason="DynaDEM not implemented in keywords backend")
     def test_dem(self, initial_files_dir, pre_reference_dir):
-        """test_dem.k - DEM particle simulation."""
-        pytest.fail("Not implemented")
+        """test_dem.k - DEM particle simulation with CONTROL_DISCRETE_ELEMENT."""
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+
+        initial_file = os.path.join(initial_files_dir, "dem", "test_dem.k")
+        reference_file = os.path.join(pre_reference_dir, "test_dem.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            # Add CONTROL_DISCRETE_ELEMENT
+            solution.stub.CreateControlDiscreteElement(
+                type("Request", (), {
+                    "ndamp": 0.99,
+                    "tdamp": 0.99,
+                    "frics": 0.9,
+                    "fricr": 0.9,
+                    "normk": 0.01,
+                    "sheark": 0.2857
+                })()
+            )
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_dem.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_dem_coupling(self, initial_files_dir, pre_reference_dir):
         """test_dem_coupling.k - ICFD-DEM coupling simulation.
@@ -2301,8 +2328,153 @@ class TestReferenceFileComparison:
         """test_frf_plate_damping.k - NVH FRF plate with damping."""
         pytest.fail("Not implemented")
 
-    @pytest.mark.xfail(reason="DynaNVH not implemented in keywords backend")
     def test_frf_solid(self, initial_files_dir, pre_reference_dir):
-        """test_frf_solid.k - NVH FRF solid."""
-        pytest.fail("Not implemented")
+        """test_frf_solid.k - NVH FRF analysis with implicit eigenvalue solver."""
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+
+        initial_file = os.path.join(initial_files_dir, "nvh", "test_frf_solid.k")
+        reference_file = os.path.join(pre_reference_dir, "test_frf_solid.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            # Control keywords
+            solution.stub.CreateControlEnergy(
+                type("Request", (), {"hgen": 2, "rwen": 2, "slnten": 1, "rylen": 1})()
+            )
+
+            solution.stub.CreateControlImplicitEigenvalue(
+                type("Request", (), {
+                    "neig": 100,
+                    "center": 0.0,
+                    "eigmth": 2,
+                    "shfscl": 0.0
+                })()
+            )
+
+            solution.stub.CreateControlImplicitGeneral(
+                type("Request", (), {
+                    "imflag": 1,
+                    "dt0": 1.0,
+                    "imform": 2,
+                    "nsbs": 1
+                })()
+            )
+
+            # Use backend directly to set nlprint and nlnorm
+            solution._backend.create_control_implicit_solution(
+                nsolvr=1,
+                ilimit=11,
+                maxref=55,
+                dctol=1.0,
+                ectol=0.01,
+                rctol=1.0e10,
+                lstol=0.9,
+                nlprint=3,
+                nlnorm=0.0,
+            )
+
+            # Use backend directly to set ikedit and iflush
+            solution._backend.create_control_output(npopt=1, neecho=3, ikedit=0, iflush=0)
+
+            solution.set_termination(termination_time=1.0)
+
+            # Database keywords
+            solution.stub.CreateDatabaseGlstat(
+                type("Request", (), {"dt": 0.1, "binary": 1, "lcur": 0, "ioopt": 1})()
+            )
+
+            solution.stub.CreateDatabaseMatsum(
+                type("Request", (), {"dt": 0.1, "binary": 1, "lcur": 0, "ioopt": 1})()
+            )
+
+            solution.create_database_binary(dt=0.1)
+
+            # SET_NODE_LIST for boundary condition - use backend directly
+            nodes_set1 = [163, 166, 169, 172, 175, 178, 181, 184, 187, 307, 310, 313,
+                         316, 319, 322, 391, 394, 397, 400, 403, 406, 493, 496, 499,
+                         589, 592, 645, 648]
+            solution._backend.create_set_node_list_with_solver(sid=1, nodes=nodes_set1, solver="MECH")
+
+            nodes_set2 = [290, 292, 294, 296, 298, 300, 302, 304, 306, 380, 382, 384,
+                         386, 388, 390, 482, 484, 486, 488, 490, 492, 578, 580, 582,
+                         638, 640, 706, 708]
+            solution._backend.create_set_node_list_with_solver(sid=2, nodes=nodes_set2, solver="MECH")
+
+            # Boundary condition
+            solution.stub.CreateBoundarySpcSet(
+                type("Request", (), {
+                    "nsid": 1,
+                    "cid": 0,
+                    "dofx": 1,
+                    "dofy": 1,
+                    "dofz": 1,
+                    "dofrx": 1,
+                    "dofry": 1,
+                    "dofrz": 1
+                })()
+            )
+
+            # Section and Material for lower_post (Part 4)
+            solution.stub.CreateSectionSolid(
+                type("Request", (), {"secid": 1, "elform": 18})()
+            )
+
+            # Use backend directly to set fail=0.0
+            solution._backend.create_mat_piecewise_linear_plasticity(
+                mid=1, ro=4.99e-7, e=11.37, pr=0.32, sigy=0.0468, etan=0.0, fail=0.0
+            )
+
+            # Section and Material for upper_post (Part 5)
+            solution.stub.CreateSectionSolid(
+                type("Request", (), {"secid": 2, "elform": 18})()
+            )
+
+            # Use backend directly to set fail=0.0
+            solution._backend.create_mat_piecewise_linear_plasticity(
+                mid=2, ro=4.99e-7, e=110.37, pr=0.32, sigy=0.0468, etan=0.0, fail=0.0
+            )
+
+            # Update PARTs to reference sections and materials by directly modifying the deck
+            from ansys.dyna.core.keywords import keywords
+            for kw in solution._backend._deck:
+                if isinstance(kw, keywords.Part):
+                    # Part uses a DataFrame 'parts' with columns: pid, secid, mid, etc.
+                    for idx in range(len(kw.parts)):
+                        pid = kw.parts.iloc[idx]["pid"]
+                        if pid == 4:
+                            kw.parts.at[idx, "secid"] = 1
+                            kw.parts.at[idx, "mid"] = 1
+                        elif pid == 5:
+                            kw.parts.at[idx, "secid"] = 2
+                            kw.parts.at[idx, "mid"] = 2
+
+            # Frequency domain FRF
+            solution.stub.CreateFrequencyDomainFrf(
+                type("Request", (), {
+                    "n1": 0,
+                    "n1typ": 0,
+                    "dof1": 1,
+                    "vad1": 1,
+                    "fnmax": 20.0,
+                    "dampf": 0.01,
+                    "n2": 2,
+                    "n2typ": 1,
+                    "dof2": 1,
+                    "vad2": 1,
+                    "fmin": 0.01,
+                    "fmax": 10.0,
+                    "nfreq": 1000
+                })()
+            )
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_frf_solid.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\\n" + "\\n".join(diffs)
 

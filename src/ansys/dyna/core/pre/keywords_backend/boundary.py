@@ -119,3 +119,56 @@ class BoundaryKeywordsMixin:
         self._deck.append(kw)
         logger.debug(f"Created BOUNDARY_PRESCRIBED_MOTION_RIGID with pid={pid}, dof={dof}")
         return True
+
+    def create_boundary_spc_set(
+        self,
+        nsid: int,
+        cid: int = 0,
+        dofx: int = 0,
+        dofy: int = 0,
+        dofz: int = 0,
+        dofrx: int = 0,
+        dofry: int = 0,
+        dofrz: int = 0,
+    ) -> bool:
+        """Create a BOUNDARY_SPC_SET keyword.
+
+        Parameters
+        ----------
+        nsid : int
+            Node set ID.
+        cid : int, optional
+            Coordinate system ID. Default is 0.
+        dofx : int, optional
+            Constrain X translation. Default is 0.
+        dofy : int, optional
+            Constrain Y translation. Default is 0.
+        dofz : int, optional
+            Constrain Z translation. Default is 0.
+        dofrx : int, optional
+            Constrain X rotation. Default is 0.
+        dofry : int, optional
+            Constrain Y rotation. Default is 0.
+        dofrz : int, optional
+            Constrain Z rotation. Default is 0.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.BoundarySpcSet()
+        kw.nsid = nsid
+        kw.cid = cid
+        kw.dofx = dofx
+        kw.dofy = dofy
+        kw.dofz = dofz
+        kw.dofrx = dofrx
+        kw.dofry = dofry
+        kw.dofrz = dofrz
+
+        self._deck.append(kw)
+        logger.debug(f"Created BOUNDARY_SPC_SET with nsid={nsid}")
+        return True
