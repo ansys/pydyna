@@ -847,6 +847,27 @@ class KeywordsStub:
         )
         return type("Response", (), {"success": True})()
 
+    def ICFDCreateControlImposedMove(self, request):
+        """Create ICFD_CONTROL_IMPOSED_MOVE keyword."""
+        self._backend.create_icfd_control_imposed_move(
+            pid=getattr(request, "pid", 0),
+            lcvx=getattr(request, "lcvx", 0),
+            lcvy=getattr(request, "lcvy", 0),
+            lcvz=getattr(request, "lcvz", 0),
+            vadt=getattr(request, "vadt", 0),
+            idr=getattr(request, "idr", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def CreateDefineCurveFunction(self, request):
+        """Create DEFINE_CURVE_FUNCTION keyword."""
+        curve_id = self._backend.create_define_curve_function(
+            function=getattr(request, "function", ""),
+            sfo=getattr(request, "sfo", 1.0),
+            title=getattr(request, "title", ""),
+        )
+        return type("Response", (), {"id": curve_id})()
+
     def MESHCreateSizeShape(self, request):
         """Create MESH_SIZE_SHAPE keyword."""
         self._backend.create_mesh_size_shape(

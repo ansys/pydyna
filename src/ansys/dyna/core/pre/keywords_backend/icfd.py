@@ -914,6 +914,50 @@ class ICFDKeywordsMixin:
         self._deck.append(kw)
         logger.info(f"Created MESH_BL_SYM keyword for pid={pid}")
 
+    def create_icfd_control_imposed_move(
+        self,
+        pid: int,
+        lcvx: int = 0,
+        lcvy: int = 0,
+        lcvz: int = 0,
+        vadt: int = 0,
+        idr: int = 0,
+    ) -> None:
+        """Create ICFD_CONTROL_IMPOSED_MOVE keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part ID for imposed movement.
+        lcvx : int, optional
+            Load curve ID for X velocity. Default is 0.
+        lcvy : int, optional
+            Load curve ID for Y velocity. Default is 0.
+        lcvz : int, optional
+            Load curve ID for Z velocity. Default is 0.
+        vadt : int, optional
+            Velocity/acceleration/displacement type. Default is 0.
+        idr : int, optional
+            Inertial damping ratio. Default is 0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(
+            f"Creating ICFD_CONTROL_IMPOSED_MOVE: pid={pid}, lcvx={lcvx}, "
+            f"lcvy={lcvy}, lcvz={lcvz}, vadt={vadt}, idr={idr}"
+        )
+
+        kw = keywords.IcfdControlImposedMove()
+        kw.pid = pid
+        kw.lcvx = lcvx
+        kw.lcvy = lcvy
+        kw.lcvz = lcvz
+        kw.vadt = vadt
+        kw.idr = idr
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_CONTROL_IMPOSED_MOVE keyword for pid={pid}")
+
     def create_mesh_size_shape(
         self,
         sname: str = "BOX",

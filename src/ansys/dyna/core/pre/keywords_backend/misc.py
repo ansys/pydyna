@@ -81,6 +81,46 @@ class MiscKeywordsMixin:
         logger.debug(f"Created DEFINE_CURVE with id={curve_id}")
         return curve_id
 
+    def create_define_curve_function(
+        self,
+        function: str,
+        sfo: float = 1.0,
+        title: str = "",
+    ) -> int:
+        """Create a DEFINE_CURVE_FUNCTION keyword.
+
+        Parameters
+        ----------
+        function : str
+            Mathematical function expression (e.g., "sin(TIME)").
+        sfo : float
+            Scale factor for ordinate values.
+        title : str
+            Curve title.
+
+        Returns
+        -------
+        int
+            The curve ID.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        curve_id = self.next_id("curve")
+
+        logger.debug(f"Creating DEFINE_CURVE_FUNCTION: lcid={curve_id}, function={function}")
+
+        kw = keywords.DefineCurveFunction()
+        kw.lcid = curve_id
+        kw.sfo = sfo
+        kw.function = function
+        if title:
+            kw.title = title
+
+        self._deck.append(kw)
+        logger.info(f"Created DEFINE_CURVE_FUNCTION keyword with lcid={curve_id}")
+
+        return curve_id
+
     def create_part(
         self,
         pid: int,
