@@ -446,3 +446,159 @@ class EMKeywordsMixin:
         self._deck.append(kw)
         logger.debug(f"Created EM_SOLVER_FEM with stype={stype}, reltol={reltol}")
         return True
+
+    def create_em_solver_bem(
+        self,
+        reltol: float = 1e-6,
+        maxite: int = 1000,
+        stype: int = 2,
+        precon: int = 1,
+        uselast: int = 1,
+        ncyclbem: int = 3,
+    ) -> bool:
+        """Create an EM_SOLVER_BEM keyword.
+
+        Parameters
+        ----------
+        reltol : float
+            Relative tolerance.
+        maxite : int
+            Maximum iterations.
+        stype : int
+            Solver type (2=PCG).
+        precon : int
+            Preconditioner type.
+        uselast : int
+            Use last solution flag.
+        ncyclbem : int
+            Number of cycles.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmSolverBem()
+        kw.reltol = reltol
+        kw.maxite = maxite
+        kw.stype = stype
+        kw.precon = precon
+        kw.uselast = uselast
+        kw.ncyclbem = ncyclbem
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_SOLVER_BEM with stype={stype}, reltol={reltol}")
+        return True
+
+    def create_em_solver_bemmat(
+        self,
+        matid: int,
+        reltol: float = 1e-6,
+    ) -> bool:
+        """Create an EM_SOLVER_BEMMAT keyword.
+
+        Parameters
+        ----------
+        matid : int
+            Material ID.
+        reltol : float
+            Relative tolerance for this material.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmSolverBemmat()
+        kw.matid = matid
+        kw.reltol = reltol
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_SOLVER_BEMMAT with matid={matid}, reltol={reltol}")
+        return True
+
+    def create_em_control_contact(
+        self,
+        emct: int = 1,
+        cconly: int = 0,
+        ctype: int = 0,
+        cotype: int = 0,
+        eps1: float = 0.3,
+        eps2: float = 0.3,
+        eps3: float = 0.3,
+        d0: float = 0.0,
+    ) -> bool:
+        """Create an EM_CONTROL_CONTACT keyword.
+
+        Parameters
+        ----------
+        emct : int
+            EM contact flag.
+        cconly : int
+            Contact coupling only flag.
+        ctype : int
+            Contact type.
+        cotype : int
+            Contact output type.
+        eps1 : float
+            Penetration parameter 1.
+        eps2 : float
+            Penetration parameter 2.
+        eps3 : float
+            Penetration parameter 3.
+        d0 : float
+            Distance parameter.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmControlContact()
+        kw.emct = emct
+        kw.cconly = cconly
+        kw.ctype = ctype
+        kw.cotype = cotype
+        kw.eps1 = eps1
+        kw.eps2 = eps2
+        kw.eps3 = eps3
+        kw.d0 = d0
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_CONTROL_CONTACT with emct={emct}")
+        return True
+
+    def create_em_database_globalenergy(
+        self,
+        outlv: int = 0,
+        dtout: float = 0.0,
+    ) -> bool:
+        """Create an EM_DATABASE_GLOBALENERGY keyword.
+
+        Parameters
+        ----------
+        outlv : int
+            Output level.
+        dtout : float
+            Output time interval.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmDatabaseGlobalenergy()
+        kw.outlv = outlv
+        kw.dtout = dtout
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_DATABASE_GLOBALENERGY with outlv={outlv}")
+        return True
