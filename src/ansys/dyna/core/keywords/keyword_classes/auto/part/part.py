@@ -41,69 +41,18 @@ class Part(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card(
-                            [
-                                Field(
-                                    "heading",
-                                    str,
-                                    0,
-                                    70,
-                                ),
-                            ],
-                            _internal=True,
+                    (
+                        FieldSchema("heading", str, 0, 70, None),
                     ),
-                    Card(
-                            [
-                                Field(
-                                    "pid",
-                                    int,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "secid",
-                                    int,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "mid",
-                                    int,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "eosid",
-                                    int,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "hgid",
-                                    int,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "grav",
-                                    int,
-                                    50,
-                                    10,
-                                ),
-                                Field(
-                                    "adpopt",
-                                    int,
-                                    60,
-                                    10,
-                                ),
-                                Field(
-                                    "tmid",
-                                    int,
-                                    70,
-                                    10,
-                                ),
-                            ],
-                            _internal=True,
+                    (
+                        FieldSchema("pid", int, 0, 10, None),
+                        FieldSchema("secid", int, 10, 10, None),
+                        FieldSchema("mid", int, 20, 10, None),
+                        FieldSchema("eosid", int, 30, 10, 0),
+                        FieldSchema("hgid", int, 40, 10, 0),
+                        FieldSchema("grav", int, 50, 10, 0),
+                        FieldSchema("adpopt", int, 60, 10, None),
+                        FieldSchema("tmid", int, 70, 10, 0),
                     ),
                 ],
                 None,

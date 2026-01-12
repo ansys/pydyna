@@ -215,9 +215,8 @@ _MAT_295_LEGACYCARDSET_CARD18 = (
     FieldSchema("ref", float, 70, 10, None),
 )
 
-_MAT_295_LEGACYCARDSET_TITLE = (
-    FieldSchema("title", str, 0, 80, None),
-)
+_MAT_295_LEGACYCARDSET_TITLE = (FieldSchema("title", str, 0, 80, None),)
+
 
 class Mat295Legacy(KeywordBase):
     """Legacy DYNA MAT_295 keyword implementation from pydyna v0.9.1.
@@ -303,22 +302,18 @@ class Mat295Legacy(KeywordBase):
             ),
             TableCardGroup(
                 [
-                    Card.from_field_schemas(
-                        _MAT_295_LEGACYCARDSET_CARD7A,
-                        active_func=lambda: self.atype and abs(self.atype) == 1,
-                    ),
-                    Card.from_field_schemas(
-                        _MAT_295_LEGACYCARDSET_CARD7B,
-                        active_func=lambda: self.atype and abs(self.atype) == 1 and self.ftype == 1,
-                    ),
-                    Card.from_field_schemas(
-                        _MAT_295_LEGACYCARDSET_CARD7C,
-                        active_func=lambda: self.atype and abs(self.atype) == 1 and self.ftype == 2,
-                    ),
+                    _MAT_295_LEGACYCARDSET_CARD7A,
+                    _MAT_295_LEGACYCARDSET_CARD7B,
+                    _MAT_295_LEGACYCARDSET_CARD7C,
                 ],
                 lambda: self.nf or 0,
                 lambda: self.atype and abs(self.atype) == 1,
                 "anisotropic_settings",
+                card_active_funcs=[
+                    lambda: self.atype and abs(self.atype) == 1,
+                    lambda: self.atype and abs(self.atype) == 1 and self.ftype == 1,
+                    lambda: self.atype and abs(self.atype) == 1 and self.ftype == 2,
+                ],
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(

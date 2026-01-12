@@ -25,11 +25,8 @@ import pytest
 from ansys.dyna.core.lib.card import (
     Card,
     Field,
-    _field_signature,
     _format_spec_cache,
     _get_cached_format_spec,
-    _get_cached_schema,
-    _schema_cache,
 )
 from ansys.dyna.core.lib.field import Flag
 from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
@@ -40,12 +37,12 @@ from ansys.dyna.core.lib.parameters import ParameterSet
 @pytest.mark.keywords
 def test_load_card_errors(string_utils):
     """Error test for loading a card."""
-    fields = [
-        Field("foo", int, 0, 10, None),
-        Field("bar", int, 10, 10, None),
-    ]
+    field_schemas = (
+        FieldSchema("foo", int, 0, 10, None),
+        FieldSchema("bar", int, 10, 10, None),
+    )
 
-    card = Card(fields)
+    card = Card.from_field_schemas(field_schemas)
     with pytest.raises(Exception):
         # cards can only load a readable buffer
         card.read("")
@@ -59,18 +56,18 @@ def test_load_card_errors(string_utils):
 @pytest.mark.keywords
 def test_load_card_parameters(string_utils):
     """Error test for loading a card."""
-    fields = [
-        Field("a", float, 0, 10, None),
-        Field("b", float, 10, 10, None),
-        Field("c", float, 20, 10, None),
-        Field("d", float, 30, 10, None),
-        Field("e", float, 40, 10, None),
-        Field("f", float, 50, 10, None),
-        Field("g", float, 60, 10, None),
-        Field("h", float, 70, 10, None),
-    ]
+    field_schemas = (
+        FieldSchema("a", float, 0, 10, None),
+        FieldSchema("b", float, 10, 10, None),
+        FieldSchema("c", float, 20, 10, None),
+        FieldSchema("d", float, 30, 10, None),
+        FieldSchema("e", float, 40, 10, None),
+        FieldSchema("f", float, 50, 10, None),
+        FieldSchema("g", float, 60, 10, None),
+        FieldSchema("h", float, 70, 10, None),
+    )
 
-    card = Card(fields)
+    card = Card.from_field_schemas(field_schemas)
     parameter_set = ParameterSet()
     parameter_set.add("vdct", 1.12)
     buf = "                                             &vdct"
@@ -80,15 +77,15 @@ def test_load_card_parameters(string_utils):
 
 @pytest.mark.keywords
 def test_load_card_basic(string_utils):
-    fields = [
-        Field("foo", int, 0, 10, None),
-        Field("bar", int, 10, 10, None),
-    ]
-    card = Card(fields)
+    field_schemas = (
+        FieldSchema("foo", int, 0, 10, None),
+        FieldSchema("bar", int, 10, 10, None),
+    )
+    card = Card.from_field_schemas(field_schemas)
     card.read(string_utils.as_buffer("                    "))
     assert card.get_value("foo") == None
     assert card.get_value("bar") == None
-    card = Card(fields)
+    card = Card.from_field_schemas(field_schemas)
     card.read(string_utils.as_buffer("         8         4"))
     assert card.get_value("foo") == 8
     assert card.get_value("bar") == 4
@@ -96,11 +93,11 @@ def test_load_card_basic(string_utils):
 
 @pytest.mark.keywords
 def test_load_card_long(string_utils):
-    fields = [
-        Field("foo", int, 0, 10, None),
-        Field("bar", int, 10, 10, None),
-    ]
-    card = Card(fields, format=format_type.long)
+    field_schemas = (
+        FieldSchema("foo", int, 0, 10, None),
+        FieldSchema("bar", int, 10, 10, None),
+    )
+    card = Card.from_field_schemas(field_schemas, format=format_type.long)
     buf = string_utils.as_buffer("                                       4")
     card.read(buf)
     assert card.get_value("foo") == None
@@ -109,11 +106,11 @@ def test_load_card_long(string_utils):
 
 @pytest.mark.keywords
 def test_write_inactive_card():
-    fields = [
-        Field("foo", int, 0, 10, None),
-        Field("bar", int, 10, 10, None),
-    ]
-    card = Card(fields, lambda: False, format=format_type.long)
+    field_schemas = (
+        FieldSchema("foo", int, 0, 10, None),
+        FieldSchema("bar", int, 10, 10, None),
+    )
+    card = Card.from_field_schemas(field_schemas, active_func=lambda: False, format=format_type.long)
     assert card.write() == ""
 
 
@@ -212,91 +209,17 @@ class TestCardSchema:
         assert reconstructed[1].value == 3.14
 
 
-class TestFieldSignature:
-    """Tests for _field_signature function."""
-
-    @pytest.mark.keywords
-    def test_field_signature_basic(self):
-        """Test signature for basic field."""
-        field = Field("test", int, 0, 10, None)
-        sig = _field_signature(field)
-
-        assert sig == ("test", int, 0, 10)
-
-    @pytest.mark.keywords
-    def test_field_signature_with_flag(self):
-        """Test signature for flag field includes flag info."""
-        flag = Flag(value=True, true_value="Y", false_value="N")
-        field = Field("flag_field", str, 0, 10, flag)
-        sig = _field_signature(field)
-
-        assert sig == ("flag_field", str, 0, 10, "FLAG", "Y", "N")
-
-    @pytest.mark.keywords
-    def test_field_signature_different_values_same_signature(self):
-        """Two fields with same schema but different values have same signature."""
-        field1 = Field("num", int, 0, 10, 100)
-        field2 = Field("num", int, 0, 10, 200)
-
-        assert _field_signature(field1) == _field_signature(field2)
-
-    @pytest.mark.keywords
-    def test_field_signature_different_schema_different_signature(self):
-        """Fields with different schemas have different signatures."""
-        field1 = Field("a", int, 0, 10, None)
-        field2 = Field("b", int, 0, 10, None)  # different name
-        field3 = Field("a", float, 0, 10, None)  # different type
-
-        assert _field_signature(field1) != _field_signature(field2)
-        assert _field_signature(field1) != _field_signature(field3)
-
-
-class TestSchemaCaching:
-    """Tests for schema caching functionality."""
-
-    @pytest.mark.keywords
-    def test_schema_cache_hit(self):
-        """Test that identical field lists use cached schema."""
-        fields1 = [
-            Field("x", int, 0, 10, None),
-            Field("y", int, 10, 10, None),
-        ]
-        fields2 = [
-            Field("x", int, 0, 10, 999),  # different value
-            Field("y", int, 10, 10, 888),  # different value
-        ]
-
-        schema1, sig1 = _get_cached_schema(fields1)
-        schema2, sig2 = _get_cached_schema(fields2)
-
-        # Same signature means same schema object
-        assert sig1 == sig2
-        assert schema1 is schema2
-
-    @pytest.mark.keywords
-    def test_schema_cache_miss(self):
-        """Test that different field structures create different schemas."""
-        fields1 = [Field("a", int, 0, 10, None)]
-        fields2 = [Field("b", int, 0, 10, None)]  # different name
-
-        schema1, sig1 = _get_cached_schema(fields1)
-        schema2, sig2 = _get_cached_schema(fields2)
-
-        assert sig1 != sig2
-        assert schema1 is not schema2
-
-
 class TestCardSchemaIntegration:
     """Integration tests for Card with schema architecture."""
 
     @pytest.mark.keywords
     def test_card_stores_schema_and_values_separately(self):
         """Test that Card stores schema reference and values list."""
-        fields = [
-            Field("a", int, 0, 10, 1),
-            Field("b", int, 10, 10, 2),
-        ]
-        card = Card(fields)
+        field_schemas = (
+            FieldSchema("a", int, 0, 10, 1),
+            FieldSchema("b", int, 10, 10, 2),
+        )
+        card = Card.from_field_schemas(field_schemas)
 
         # Card should have _schema and _values attributes
         assert hasattr(card, "_schema")
@@ -309,11 +232,10 @@ class TestCardSchemaIntegration:
     @pytest.mark.keywords
     def test_multiple_cards_share_schema(self):
         """Test that multiple cards with same structure share schema."""
-        fields1 = [Field("x", int, 0, 10, 100)]
-        fields2 = [Field("x", int, 0, 10, 200)]
+        field_schemas = (FieldSchema("x", int, 0, 10, None),)
 
-        card1 = Card(fields1)
-        card2 = Card(fields2)
+        card1 = Card.from_field_schemas(field_schemas, values=[100])
+        card2 = Card.from_field_schemas(field_schemas, values=[200])
 
         # Same schema, different values
         assert card1._schema is card2._schema
@@ -322,12 +244,12 @@ class TestCardSchemaIntegration:
     @pytest.mark.keywords
     def test_card_get_value_uses_index_lookup(self):
         """Test that get_value uses efficient index-based lookup."""
-        fields = [
-            Field("first", int, 0, 10, 10),
-            Field("second", float, 10, 10, 2.5),
-            Field("third", str, 20, 10, "hello"),
-        ]
-        card = Card(fields)
+        field_schemas = (
+            FieldSchema("first", int, 0, 10, 10),
+            FieldSchema("second", float, 10, 10, 2.5),
+            FieldSchema("third", str, 20, 10, "hello"),
+        )
+        card = Card.from_field_schemas(field_schemas)
 
         assert card.get_value("first") == 10
         assert card.get_value("second") == 2.5
@@ -336,10 +258,8 @@ class TestCardSchemaIntegration:
     @pytest.mark.keywords
     def test_card_set_value_updates_values_list(self):
         """Test that set_value updates the internal values list."""
-        fields = [
-            Field("count", int, 0, 10, 0),
-        ]
-        card = Card(fields)
+        field_schemas = (FieldSchema("count", int, 0, 10, 0),)
+        card = Card.from_field_schemas(field_schemas)
 
         card.set_value("count", 42)
 
@@ -349,11 +269,11 @@ class TestCardSchemaIntegration:
     @pytest.mark.keywords
     def test_card_fields_property_creates_fields_lazily(self):
         """Test that _fields property creates Field objects from schema+values."""
-        fields = [
-            Field("a", int, 0, 10, 1),
-            Field("b", int, 10, 10, 2),
-        ]
-        card = Card(fields)
+        field_schemas = (
+            FieldSchema("a", int, 0, 10, 1),
+            FieldSchema("b", int, 10, 10, 2),
+        )
+        card = Card.from_field_schemas(field_schemas)
 
         # Modify values
         card.set_value("a", 100)
@@ -367,11 +287,11 @@ class TestCardSchemaIntegration:
     @pytest.mark.keywords
     def test_card_load_updates_values_not_schema(self, string_utils):
         """Test that loading data updates values but reuses schema."""
-        fields = [
-            Field("x", int, 0, 10, None),
-            Field("y", int, 10, 10, None),
-        ]
-        card = Card(fields)
+        field_schemas = (
+            FieldSchema("x", int, 0, 10, None),
+            FieldSchema("y", int, 10, 10, None),
+        )
+        card = Card.from_field_schemas(field_schemas)
         original_schema = card._schema
 
         card.read(string_utils.as_buffer("         5        10"))
@@ -384,11 +304,11 @@ class TestCardSchemaIntegration:
     @pytest.mark.keywords
     def test_card_write_uses_lazy_fields(self):
         """Test that write creates proper output from schema+values."""
-        fields = [
-            Field("a", int, 0, 10, 42),
-            Field("b", int, 10, 10, 99),
-        ]
-        card = Card(fields)
+        field_schemas = (
+            FieldSchema("a", int, 0, 10, 42),
+            FieldSchema("b", int, 10, 10, 99),
+        )
+        card = Card.from_field_schemas(field_schemas)
 
         output = card.write(comment=False)
 
@@ -399,11 +319,11 @@ class TestCardSchemaIntegration:
     def test_card_with_flag_field(self, string_utils):
         """Test Card handles Flag fields correctly through schema."""
         flag = Flag(value=None, true_value="YES", false_value="NO")
-        fields = [
-            Field("enabled", str, 0, 10, flag),
-            Field("count", int, 10, 10, None),
-        ]
-        card = Card(fields)
+        field_schemas = (
+            FieldSchema("enabled", str, 0, 10, flag),
+            FieldSchema("count", int, 10, 10, None),
+        )
+        card = Card.from_field_schemas(field_schemas)
 
         # Load some data
         card.read(string_utils.as_buffer("       YES         5"))
@@ -521,8 +441,10 @@ class TestFormatSpecCaching:
     @pytest.mark.keywords
     def test_format_spec_cached_per_format_type(self):
         """Test that FormatSpec is cached separately for each format type."""
-        fields = [Field("x", int, 0, 10, None)]
-        schema, signature = _get_cached_schema(fields)
+        field_schemas = (FieldSchema("x", int, 0, 10, None),)
+        card = Card.from_field_schemas(field_schemas)
+        schema = card._schema
+        signature = card._signature
 
         spec_default = _get_cached_format_spec(signature, schema, format_type.default)
         spec_long = _get_cached_format_spec(signature, schema, format_type.long)

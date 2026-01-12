@@ -1,4 +1,5 @@
 {# Legacy Card creation with Field objects - used for top-level keyword cards #}
+{# NOTE: This template generates code with deprecation warning. Consider using card_from_schema.j2 #}
             Card(
                 [
 {% for field in card.fields %}
@@ -23,5 +24,4 @@
 {% if card.func %}
                 lambda: {{card.func}},
 {% endif %}
-                _internal=True,
             ),

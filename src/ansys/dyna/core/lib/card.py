@@ -22,6 +22,7 @@
 
 import io
 import typing
+import warnings
 
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.field import Field, Flag, to_long  # noqa: F401
@@ -32,47 +33,11 @@ from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import FormatSpec, load_dataline_with_format, read_line
 from ansys.dyna.core.lib.parameters import ParameterSet
 
-# Module-level cache for CardSchema objects, keyed by field signature tuple
-_schema_cache: typing.Dict[tuple, CardSchema] = {}
-
 # Module-level cache for FormatSpec objects, keyed by (signature, format_type)
 _format_spec_cache: typing.Dict[typing.Tuple, FormatSpec] = {}
 
 # Module-level cache for from_field_schemas: id(tuple) -> (CardSchema, signature)
 _field_schemas_cache: typing.Dict[int, typing.Tuple[CardSchema, tuple]] = {}
-
-
-def _field_signature(field: Field) -> tuple:
-    """Create a hashable signature for a Field's schema (not its value)."""
-    if field._is_flag():
-        flag = field._value
-        return (field.name, field.type, field.offset, field.width, "FLAG", flag.true_value, flag.false_value)
-    return (field.name, field.type, field.offset, field.width)
-
-
-def _get_cached_schema(fields: typing.List[Field]) -> typing.Tuple[CardSchema, tuple]:
-    """Get or create a cached CardSchema from fields.
-
-    Uses a fast signature-based cache key to avoid creating FieldSchema
-    objects just for cache lookup.
-
-    Returns
-    -------
-    tuple
-        (CardSchema, signature) where signature is the cache key.
-    """
-    # Create a fast hashable key from field signatures
-    signature = tuple(_field_signature(f) for f in fields)
-    cached = _schema_cache.get(signature)
-    if cached is not None:
-        return cached, signature
-
-    # Cache miss - create FieldSchema objects and CardSchema
-    field_schemas = tuple(FieldSchema.from_field(f) for f in fields)
-    name_to_index = {fs.name: i for i, fs in enumerate(field_schemas)}
-    schema = CardSchema(fields=field_schemas, name_to_index=name_to_index)
-    _schema_cache[signature] = schema
-    return schema, signature
 
 
 def _get_cached_format_spec(signature: tuple, schema: CardSchema, fmt: format_type) -> FormatSpec:
@@ -132,26 +97,42 @@ class Card(CardInterface):
     for memory efficiency and faster loading of keywords with many cards.
     """
 
-    def __init__(self, fields: typing.List[Field], active_func=None, format=format_type.default):
-        """Initialize a Card from a list of Field objects.
+    def __init__(
+        self,
+        fields: typing.List[Field],
+        active_func: typing.Callable = None,
+        format: format_type = format_type.default,
+    ):
+        """Initialize a Card from Field objects.
+
+        .. deprecated::
+            This constructor is deprecated. Prefer using
+            `Card.from_field_schemas()` or `Card.from_field_schemas_with_defaults()`
+            which provide better performance by avoiding Field object creation.
 
         Parameters
         ----------
         fields : List[Field]
-            The fields defining this card's structure and initial values.
+            List of Field objects defining the card structure and values.
         active_func : callable, optional
             A function returning bool to determine if card is active.
         format : format_type, optional
             The format type (default, standard, or long).
         """
-        # Get or create cached schema (and keep signature for format spec lookups)
-        self._schema, self._signature = _get_cached_schema(fields)
-
-        # Store values per-instance (extracted from fields)
-        self._values: typing.List[typing.Any] = [None] * len(fields)
-        for i, field in enumerate(fields):
-            self._values[i] = field.value
-
+        warnings.warn(
+            "Card(fields=[...]) is deprecated. Use Card.from_field_schemas() or "
+            "Card.from_field_schemas_with_defaults() for better performance. "
+            "This constructor is maintained for backward compatibility.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        # Build schema from fields
+        field_schemas = tuple(FieldSchema.from_field(f) for f in fields)
+        name_to_index = {f.name: i for i, f in enumerate(fields)}
+        self._schema = CardSchema(field_schemas, name_to_index)
+        # Use object id as signature - no cross-instance caching for legacy path
+        self._signature = id(self._schema)
+        self._values = [f.value for f in fields]
         self._active_func = active_func
         self._format_type = format
         self._card_format = card_format.fixed
@@ -197,9 +178,11 @@ class Card(CardInterface):
             name_to_index = {fs.name: i for i, fs in enumerate(field_schemas)}
             schema = CardSchema(field_schemas, name_to_index)
             signature = tuple(
-                (fs.name, fs.type, fs.offset, fs.width, fs.default.true_value, fs.default.false_value)
-                if fs.is_flag()
-                else (fs.name, fs.type, fs.offset, fs.width)
+                (
+                    (fs.name, fs.type, fs.offset, fs.width, fs.default.true_value, fs.default.false_value)
+                    if fs.is_flag()
+                    else (fs.name, fs.type, fs.offset, fs.width)
+                )
                 for fs in field_schemas
             )
             _field_schemas_cache[cache_key] = (schema, signature)

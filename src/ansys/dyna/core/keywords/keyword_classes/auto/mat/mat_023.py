@@ -86,93 +86,22 @@ class Mat023(KeywordBase):
                 **kwargs,
             ),            TableCardGroup(
                 [
-                    Card(
-                            [
-                                Field(
-                                    "eai",
-                                    float,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "ebi",
-                                    float,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "eci",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "prabi",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "prcai",
-                                    float,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "prcbi",
-                                    float,
-                                    50,
-                                    10,
-                                ),
-                            ],
-                            _internal=True,
+                    (
+                        FieldSchema("eai", float, 0, 10, None),
+                        FieldSchema("ebi", float, 10, 10, None),
+                        FieldSchema("eci", float, 20, 10, None),
+                        FieldSchema("prabi", float, 30, 10, None),
+                        FieldSchema("prcai", float, 40, 10, None),
+                        FieldSchema("prcbi", float, 50, 10, None),
                     ),
-                    Card(
-                            [
-                                Field(
-                                    "aai",
-                                    float,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "abi",
-                                    float,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "aci",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "gabi",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "gbci",
-                                    float,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "gcai",
-                                    float,
-                                    50,
-                                    10,
-                                ),
-                                Field(
-                                    "ti",
-                                    float,
-                                    60,
-                                    10,
-                                ),
-                            ],
-                            _internal=True,
+                    (
+                        FieldSchema("aai", float, 0, 10, None),
+                        FieldSchema("abi", float, 10, 10, None),
+                        FieldSchema("aci", float, 20, 10, None),
+                        FieldSchema("gabi", float, 30, 10, None),
+                        FieldSchema("gbci", float, 40, 10, None),
+                        FieldSchema("gcai", float, 50, 10, None),
+                        FieldSchema("ti", float, 60, 10, None),
                     ),
                 ],
                 None,

@@ -73,7 +73,9 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
 
     @property
     def t(self) -> typing.Optional[float]:
-        """Get or set the Parametric coordinate of through thickness integration point. Between -1 and 1 inclusive."""  # nopep8
+        """Get or set the Parametric coordinate of through thickness integration point.
+
+        Between -1 and 1 inclusive."""  # nopep8
         return self._cards[0].get_value("t")
 
     @t.setter

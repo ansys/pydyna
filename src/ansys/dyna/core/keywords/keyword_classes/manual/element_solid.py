@@ -24,7 +24,6 @@
 
 import typing
 
-from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.field import Field
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -64,8 +63,8 @@ class ElementSolid(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card.from_field_schemas(_ELEMENTSOLID_CARD0),
-                    Card.from_field_schemas(_ELEMENTSOLID_CARD1),
+                    _ELEMENTSOLID_CARD0,
+                    _ELEMENTSOLID_CARD1,
                 ],
                 None,
                 data=kwargs.get("elements"),

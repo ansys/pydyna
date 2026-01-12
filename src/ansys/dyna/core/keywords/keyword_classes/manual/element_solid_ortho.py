@@ -22,7 +22,6 @@
 
 import typing
 
-from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.kwd_line_formatter import buffer_to_lines
@@ -85,10 +84,10 @@ class ElementSolidOrtho(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card.from_field_schemas(_ELEMENTSOLIDORTHO_CARD0),
-                    Card.from_field_schemas(_ELEMENTSOLIDORTHO_CARD1),
-                    Card.from_field_schemas(_ELEMENTSOLIDORTHO_CARD2),
-                    Card.from_field_schemas(_ELEMENTSOLIDORTHO_CARD3),
+                    _ELEMENTSOLIDORTHO_CARD0,
+                    _ELEMENTSOLIDORTHO_CARD1,
+                    _ELEMENTSOLIDORTHO_CARD2,
+                    _ELEMENTSOLIDORTHO_CARD3,
                 ],
                 None,
                 data=kwargs.get("elements"),
@@ -110,9 +109,9 @@ class ElementSolidOrtho(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card.from_field_schemas(_ELEMENTSOLIDORTHO_LEGACY_CARD0),
-                    Card.from_field_schemas(_ELEMENTSOLIDORTHO_CARD2),
-                    Card.from_field_schemas(_ELEMENTSOLIDORTHO_CARD3),
+                    _ELEMENTSOLIDORTHO_LEGACY_CARD0,
+                    _ELEMENTSOLIDORTHO_CARD2,
+                    _ELEMENTSOLIDORTHO_CARD3,
                 ],
                 None,
                 data=self.elements,

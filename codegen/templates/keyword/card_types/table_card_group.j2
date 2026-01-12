@@ -1,21 +1,10 @@
             TableCardGroup(
                 [
 {% for sub_card in card.sub_cards %}
-                    Card(
-                            [
+                    (
 {% for field in sub_card.fields %}
-                                Field(
-                                    "{{field.name}}",
-                                    {{field.type}},
-                                    {{field.position}},
-                                    {{field.width}},
-                                ),
+                        FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
 {% endfor %}
-                            ],
-{% if sub_card.func %}
-                            lambda: {{sub_card.func}},
-{% endif %}
-                            _internal=True,
                     ),
 {% endfor %}
                 ],
@@ -30,5 +19,17 @@
                 None,
 {% endif %}
                 "{{card.overall_name}}",
+{% set has_sub_card_active_funcs = card.sub_cards | selectattr('func', 'defined') | selectattr('func') | list | length > 0 %}
+{% if has_sub_card_active_funcs %}
+                card_active_funcs=[
+{% for sub_card in card.sub_cards %}
+{% if sub_card.func %}
+                    lambda: {{sub_card.func}},
+{% else %}
+                    None,
+{% endif %}
+{% endfor %}
+                ],
+{% endif %}
                 **kwargs,
             ),

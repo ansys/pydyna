@@ -335,28 +335,30 @@ class TestTableCardGroupParameters:
     @pytest.mark.keywords
     def test_table_card_group_with_parameters(self):
         """Test TableCardGroup with parameters across sub-cards."""
+        from ansys.dyna.core.lib.field_schema import FieldSchema
+
         parameter_set = ParameterSet()
         parameter_set.add("id1", 100)
         parameter_set.add("val1", 10.5)
         parameter_set.add("val2", 20.5)
-        
-        cards = [
-            Card([Field("id", int, 0, 8), Field("value1", float, 8, 16)]),
-            Card([Field("value2", float, 0, 16), Field("value3", float, 16, 16)]),
+
+        card_schemas = [
+            (FieldSchema("id", int, 0, 8, None), FieldSchema("value1", float, 8, 16, None)),
+            (FieldSchema("value2", float, 0, 16, None), FieldSchema("value3", float, 16, 16, None)),
         ]
-        
+
         group = TableCardGroup(
-            cards,
+            card_schemas,
             lambda: 2,  # 2 rows
         )
-        
+
         card_text = """    &id1      &val1
      &val2            5.0
      200       11.5
       21.5            6.0"""
         buf = io.StringIO(card_text)
         group.read(buf, parameter_set)
-        
+
         assert len(group.table) == 2
         assert group.table["id"][0] == 100
         assert group.table["value1"][0] == 10.5
@@ -368,16 +370,18 @@ class TestTableCardGroupParameters:
     @pytest.mark.keywords
     def test_table_card_group_unbounded_with_parameters(self):
         """Test unbounded TableCardGroup with parameters."""
+        from ansys.dyna.core.lib.field_schema import FieldSchema
+
         parameter_set = ParameterSet()
         parameter_set.add("x", 1.0)
         parameter_set.add("y", 2.0)
-        
-        cards = [
-            Card([Field("a", float, 0, 10), Field("b", float, 10, 10)]),
-            Card([Field("c", float, 0, 10), Field("d", float, 10, 10)]),
+
+        card_schemas = [
+            (FieldSchema("a", float, 0, 10, None), FieldSchema("b", float, 10, 10, None)),
+            (FieldSchema("c", float, 0, 10, None), FieldSchema("d", float, 10, 10, None)),
         ]
-        
-        group = TableCardGroup(cards, None)  # Unbounded
+
+        group = TableCardGroup(card_schemas, None)  # Unbounded
         
         card_text = """       &x       &y
        3.0       4.0

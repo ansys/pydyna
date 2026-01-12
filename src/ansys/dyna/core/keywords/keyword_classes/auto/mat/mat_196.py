@@ -64,87 +64,21 @@ class Mat196(KeywordBase):
                 **kwargs,
             ),            TableCardGroup(
                 [
-                    Card(
-                            [
-                                Field(
-                                    "dof",
-                                    int,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "type",
-                                    int,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "k",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "d",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "cdf",
-                                    float,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "tdf",
-                                    float,
-                                    50,
-                                    10,
-                                ),
-                            ],
-                            _internal=True,
+                    (
+                        FieldSchema("dof", int, 0, 10, None),
+                        FieldSchema("type", int, 10, 10, None),
+                        FieldSchema("k", float, 20, 10, None),
+                        FieldSchema("d", float, 30, 10, None),
+                        FieldSchema("cdf", float, 40, 10, None),
+                        FieldSchema("tdf", float, 50, 10, None),
                     ),
-                    Card(
-                            [
-                                Field(
-                                    "flcid",
-                                    int,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "hlcid",
-                                    int,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "c1",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "c2",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "dle",
-                                    float,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "glcid",
-                                    int,
-                                    50,
-                                    10,
-                                ),
-                            ],
-                            _internal=True,
+                    (
+                        FieldSchema("flcid", int, 0, 10, None),
+                        FieldSchema("hlcid", int, 10, 10, None),
+                        FieldSchema("c1", float, 20, 10, None),
+                        FieldSchema("c2", float, 30, 10, None),
+                        FieldSchema("dle", float, 40, 10, None),
+                        FieldSchema("glcid", int, 50, 10, None),
                     ),
                 ],
                 None,
