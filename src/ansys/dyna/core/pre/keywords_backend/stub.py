@@ -675,6 +675,10 @@ class KeywordsStub:
             flg=getattr(request, "flg", 1),
             ro=getattr(request, "ro", 0.0),
             vis=getattr(request, "vis", 0.0),
+            hc=getattr(request, "hc", 0.0),
+            tc=getattr(request, "tc", 0.0),
+            beta=getattr(request, "beta", 0.0),
+            prt=getattr(request, "prt", 0.0),
         )
         return type("Response", (), {"id": mid})()
 
@@ -750,6 +754,22 @@ class KeywordsStub:
         self._backend.create_icfd_database_drag(pid=request.pid)
         return type("Response", (), {"success": True})()
 
+    def ICFDCreateDBTemp(self, request):
+        """Create ICFD_DATABASE_TEMP keyword."""
+        self._backend.create_icfd_database_temp(pid=request.pid)
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateBdyPrescribedTemp(self, request):
+        """Create ICFD_BOUNDARY_PRESCRIBED_TEMP keyword."""
+        self._backend.create_icfd_boundary_prescribed_temp(
+            pid=request.pid,
+            lcid=getattr(request, "lcid", 0),
+            sf=getattr(request, "sf", 0.0),
+            death=getattr(request, "death", 0.0),
+            birth=getattr(request, "birth", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
     def MESHCreateBl(self, request):
         """Create MESH_BL keyword."""
         self._backend.create_mesh_bl(
@@ -810,5 +830,18 @@ class KeywordsStub:
             volid=request.volid,
             pids=list(request.pids) if hasattr(request, "pids") and request.pids else None,
         )
+        return type("Response", (), {"success": True})()
+
+    def CreateLoadBody(self, request):
+        """Create LOAD_BODY_* keyword."""
+        option = getattr(request, "option", "Y")
+        lcid = getattr(request, "lcid", 0)
+
+        # Map option to specific load body method
+        if option == "Y":
+            self._backend.create_load_body_y(lcid=lcid)
+        else:
+            logger.warning(f"LOAD_BODY_{option} not yet implemented")
+
         return type("Response", (), {"success": True})()
 

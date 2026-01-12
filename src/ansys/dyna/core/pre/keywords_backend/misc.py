@@ -261,3 +261,25 @@ class MiscKeywordsMixin:
         else:
             logger.warning(f"Unknown contact type: {contact_type}")
             return 0
+
+    def create_load_body_y(self, lcid: int = 0, sf: float = 1.0) -> None:
+        """Create LOAD_BODY_Y keyword for body load in Y direction.
+
+        Parameters
+        ----------
+        lcid : int, optional
+            Load curve ID for the body load versus time. Default is 0.
+        sf : float, optional
+            Scale factor for the load curve. Default is 1.0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating LOAD_BODY_Y: lcid={lcid}, sf={sf}")
+
+        kw = keywords.LoadBodyY()
+        kw.lcid = lcid
+        kw.sf = sf
+
+        self._deck.append(kw)
+        logger.info(f"Created LOAD_BODY_Y keyword with lcid={lcid}")
+

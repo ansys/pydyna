@@ -283,6 +283,10 @@ class ICFDKeywordsMixin:
         flg: int = 1,
         ro: float = 0.0,
         vis: float = 0.0,
+        hc: float = 0.0,
+        tc: float = 0.0,
+        beta: float = 0.0,
+        prt: float = 0.0,
     ) -> int:
         """Create ICFD_MAT keyword.
 
@@ -296,6 +300,14 @@ class ICFDKeywordsMixin:
             Flow density. Default is 0.0.
         vis : float, optional
             Dynamic viscosity. Default is 0.0.
+        hc : float, optional
+            Heat capacity. Default is 0.0.
+        tc : float, optional
+            Thermal conductivity. Default is 0.0.
+        beta : float, optional
+            Thermal expansion coefficient. Default is 0.0.
+        prt : float, optional
+            Prandtl number. Default is 0.0.
 
         Returns
         -------
@@ -304,13 +316,17 @@ class ICFDKeywordsMixin:
         """
         from ansys.dyna.core.keywords import keywords
 
-        logger.debug(f"Creating ICFD_MAT: mid={mid}, flg={flg}, ro={ro}, vis={vis}")
+        logger.debug(f"Creating ICFD_MAT: mid={mid}, flg={flg}, ro={ro}, vis={vis}, hc={hc}, tc={tc}, beta={beta}, prt={prt}")
 
         kw = keywords.IcfdMat()
         kw.mid = mid
         kw.flg = flg
         kw.ro = ro
         kw.vis = vis
+        kw.hc = hc
+        kw.tc = tc
+        kw.beta = beta
+        kw.prt = prt
 
         self._deck.append(kw)
         logger.info(f"Created ICFD_MAT keyword with mid={mid}")
@@ -568,6 +584,64 @@ class ICFDKeywordsMixin:
 
         self._deck.append(kw)
         logger.info(f"Created ICFD_DATABASE_DRAG keyword with pid={pid}")
+
+    def create_icfd_database_temp(self, pid: int) -> None:
+        """Create ICFD_DATABASE_TEMP keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part identification for temperature database output.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_DATABASE_TEMP: pid={pid}")
+
+        kw = keywords.IcfdDatabaseTemp()
+        kw.pid = pid
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_DATABASE_TEMP keyword with pid={pid}")
+
+    def create_icfd_boundary_prescribed_temp(
+        self,
+        pid: int,
+        lcid: int = 0,
+        sf: float = 0.0,
+        death: float = 0.0,
+        birth: float = 0.0,
+    ) -> None:
+        """Create ICFD_BOUNDARY_PRESCRIBED_TEMP keyword.
+
+        Parameters
+        ----------
+        pid : int
+            Part identification for the prescribed temperature boundary.
+        lcid : int, optional
+            Load curve ID for temperature. Default is 0.
+        sf : float, optional
+            Scale factor for temperature. Default is 0.0.
+        death : float, optional
+            Death time. Default is 0.0.
+        birth : float, optional
+            Birth time. Default is 0.0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(
+            f"Creating ICFD_BOUNDARY_PRESCRIBED_TEMP: pid={pid}, lcid={lcid}, "
+            f"sf={sf}, death={death}, birth={birth}"
+        )
+
+        kw = keywords.IcfdBoundaryPrescribedTemp()
+        kw.pid = pid
+        kw.lcid = lcid
+        kw.sf = sf
+        kw.death = death
+        kw.birth = birth
+
+        self._deck.append(kw)
+        logger.info(f"Created ICFD_BOUNDARY_PRESCRIBED_TEMP keyword with pid={pid}")
 
     def create_mesh_bl(
         self,

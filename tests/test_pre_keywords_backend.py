@@ -533,6 +533,8 @@ class TestReferenceFileComparison:
             # ControlShell defaults
             ("ControlShell", "theory"): 2,
             ("ControlShell", "cstyp6"): 1,
+            # IcfdMat Prandtl number default (gRPC backend sets 0.85 when not specified)
+            ("IcfdMat", "prt"): 0.85,
         }
 
         def values_equivalent(val1, val2, kw_type=None, field=None):
@@ -904,10 +906,102 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_free_convection_flow(self, initial_files_dir, pre_reference_dir):
-        """test_free_convection_flow.k - ICFD free convection."""
-        pytest.fail("Not implemented")
+        """test_free_convection_flow.k - ICFD free convection with thermal effects."""
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaicfd import (
+            DynaICFD,
+            ICFDAnalysis,
+            ICFDPart,
+            ICFDVolumePart,
+            MatICFD,
+            Curve,
+            MeshedVolume,
+            Gravity,
+            GravityOption,
+        )
+
+        initial_file = os.path.join(initial_files_dir, "icfd", "test_free_convection_flow.k")
+        reference_file = os.path.join(pre_reference_dir, "test_free_convection_flow.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            icfd = DynaICFD()
+            solution.add(icfd)
+
+            # Set termination time
+            solution.set_termination(termination_time=30.0)
+
+            # Set ICFD analysis with timestep
+            icfdanalysis = ICFDAnalysis()
+            icfdanalysis.set_timestep(timestep=0.01)
+            icfd.add(icfdanalysis)
+
+            # Set initial conditions (all zero except for default)
+            icfd.set_initial()
+
+            # Material with thermal properties (ro=37.8, vis=1.0, hc=0.7, tc=1.0, beta=1.0)
+            mat = MatICFD(
+                flow_density=37.8,
+                dynamic_viscosity=1.0,
+                heat_capacity=0.7,
+                thermal_conductivity=1.0,
+                thermal_expansion_coefficient=1.0,
+            )
+
+            # Part 1: Non-slip with prescribed temperature (hot wall, lcid=1: constant 1)
+            part1 = ICFDPart(1)
+            part1.set_material(mat)
+            part1.set_non_slip()
+            part1.set_prescribed_temperature(temperature=Curve(x=[0, 10000], y=[1, 1]))
+            icfd.parts.add(part1)
+
+            # Part 2: Non-slip with prescribed temperature (cold wall, lcid=2: constant 0)
+            part2 = ICFDPart(2)
+            part2.set_material(mat)
+            part2.set_non_slip()
+            part2.set_prescribed_temperature(temperature=Curve(x=[0, 10000], y=[0, 0]))
+            icfd.parts.add(part2)
+
+            # Part 3: Non-slip with temperature output
+            part3 = ICFDPart(3)
+            part3.set_material(mat)
+            part3.set_non_slip()
+            part3.compute_temperature()
+            icfd.parts.add(part3)
+
+            # Part 4: Non-slip with temperature output
+            part4 = ICFDPart(4)
+            part4.set_material(mat)
+            part4.set_non_slip()
+            part4.compute_temperature()
+            icfd.parts.add(part4)
+
+            # Part 5: Volume part enclosing surfaces 1,2,3,4
+            partvol = ICFDVolumePart(surfaces=[1, 2, 3, 4])
+            partvol.set_material(mat)
+            icfd.parts.add(partvol)
+
+            # Create mesh volume
+            meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
+            icfd.add(meshvol)
+
+            # Add gravity/body load in Y direction (buoyancy force)
+            gravity = Gravity(dir=GravityOption.DIR_Y, load=Curve(x=[0, 10000], y=[1, 1]))
+            icfd.add(gravity)
+
+            solution.create_database_binary(dt=1.0)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_free_convection_flow.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_internal_3d_flow(self, initial_files_dir, pre_reference_dir):
