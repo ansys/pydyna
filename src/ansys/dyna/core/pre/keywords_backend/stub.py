@@ -903,6 +903,8 @@ class KeywordsStub:
         # Map option to specific load body method
         if option == "Y":
             self._backend.create_load_body_y(lcid=lcid)
+        elif option == "Z":
+            self._backend.create_load_body_z(lcid=lcid)
         else:
             logger.warning(f"LOAD_BODY_{option} not yet implemented")
 

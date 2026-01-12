@@ -323,3 +323,24 @@ class MiscKeywordsMixin:
         self._deck.append(kw)
         logger.info(f"Created LOAD_BODY_Y keyword with lcid={lcid}")
 
+    def create_load_body_z(self, lcid: int = 0, sf: float = 1.0) -> None:
+        """Create LOAD_BODY_Z keyword for body load in Z direction.
+
+        Parameters
+        ----------
+        lcid : int, optional
+            Load curve ID for the body load versus time. Default is 0.
+        sf : float, optional
+            Scale factor for the load curve. Default is 1.0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating LOAD_BODY_Z: lcid={lcid}, sf={sf}")
+
+        kw = keywords.LoadBodyZ()
+        kw.lcid = lcid
+        kw.sf = sf
+
+        self._deck.append(kw)
+        logger.info(f"Created LOAD_BODY_Z keyword with lcid={lcid}")
+

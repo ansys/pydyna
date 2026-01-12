@@ -1630,10 +1630,116 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_sloshing(self, initial_files_dir, pre_reference_dir):
-        """test_sloshing.k - ICFD sloshing simulation."""
-        pytest.fail("Not implemented")
+        """test_sloshing.k - ICFD sloshing with global imposed movement."""
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaicfd import (
+            DynaICFD,
+            ICFDAnalysis,
+            ICFDPart,
+            ICFDVolumePart,
+            MatICFD,
+            MeshedVolume,
+            Compressible,
+        )
+
+        initial_file = os.path.join(initial_files_dir, "icfd", "test_sloshing.k")
+        reference_file = os.path.join(pre_reference_dir, "test_sloshing.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            icfd = DynaICFD()
+            solution.add(icfd)
+
+            # Set termination time
+            solution.set_termination(termination_time=1.0)
+
+            # Database output
+            solution.create_database_binary(dt=0.02)
+
+            # Define curves
+            # Curve 1: Oscillating motion curve for imposed X movement
+            curve1_id = solution.stub.CreateDefineCurve(
+                type("Request", (), {
+                    "sfo": 1.0,
+                    "abscissa": [0.0, 0.5, 0.52, 0.8, 0.82, 2.0],
+                    "ordinate": [1.0, 1.0, -1.0, -1.0, 0.0, 0.0],
+                    "title": ""
+                })()
+            ).id
+            # Curve 2: Constant gravity in Z direction
+            curve2_id = solution.stub.CreateDefineCurve(
+                type("Request", (), {
+                    "sfo": 1.0,
+                    "abscissa": [0, 10000],
+                    "ordinate": [9.81, 9.81],
+                    "title": ""
+                })()
+            ).id
+
+            # Set ICFD analysis
+            icfdanalysis = ICFDAnalysis()
+            icfdanalysis.set_timestep(timestep=0.02)
+            icfd.add(icfdanalysis)
+
+            # Create body load in Z direction (gravity)
+            solution.stub.CreateLoadBody(
+                type("Request", (), {"option": "Z", "lcid": curve2_id})()
+            )
+
+            # Part 1: No-slip wall (bottom/sides)
+            mat1 = MatICFD(flow_density=1000, dynamic_viscosity=0.001)
+            part1 = ICFDPart(1)
+            part1.set_material(mat1)
+            part1.set_non_slip()
+            icfd.parts.add(part1)
+
+            # Part 2: No-slip wall (top - air)
+            mat2 = MatICFD(flag=Compressible.VACUUM, flow_density=0, dynamic_viscosity=0)
+            part2 = ICFDPart(2)
+            part2.set_material(mat2)
+            part2.set_non_slip()
+            icfd.parts.add(part2)
+
+            # Part 3: Interface surface
+            mat3 = MatICFD(flow_density=1000, dynamic_viscosity=0.001)
+            part3 = ICFDPart(3)
+            part3.set_material(mat3)
+            icfd.parts.add(part3)
+
+            # Volume part 4 containing parts 1 and 3 (water region)
+            volpart4 = ICFDVolumePart([1, 3])
+            volpart4.set_material(mat3)
+            icfd.parts.add(volpart4)
+
+            # Volume part 5 containing parts 2 and 3 (air region)
+            volpart5 = ICFDVolumePart([2, 3])
+            volpart5.set_material(mat2)
+            icfd.parts.add(volpart5)
+
+            # Create meshed volume
+            meshvol = MeshedVolume(surfaces=[1, 2, 3])
+            icfd.add(meshvol)
+
+            # MESH_INTERF for volume 1 with interface part 3
+            solution.stub.MESHCreateInterf(type("Request", (), {"volid": 1, "pids": [3]})()
+            )
+
+            # ICFD_CONTROL_IMPOSED_MOVE for global imposed movement (pid=0) in X direction
+            solution.stub.ICFDCreateControlImposedMove(
+                type("Request", (), {"pid": 0, "lcvx": curve1_id, "lcvy": 0, "lcvz": 0, "vadt": 0, "idr": 0})()
+            )
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_sloshing.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_thermal_flow(self, initial_files_dir, pre_reference_dir):
         """test_thermal_flow.k - ICFD thermal flow."""
