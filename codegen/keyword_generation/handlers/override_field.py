@@ -49,7 +49,8 @@ logger = logging.getLogger(__name__)
 class OverrideFieldSettings(LabelRefSettings):
     """Configuration for field property overrides.
 
-    Attributes:
+    Attributes
+    ----------
         ref: Label-based reference to the card (resolved via LabelRegistry)
         field_name: Name of the field to modify (case-insensitive match)
         properties: Dict of properties to override
@@ -65,10 +66,12 @@ class OverrideFieldSettings(LabelRefSettings):
         Args:
             data: Dict with 'ref', 'name', and any override properties
 
-        Returns:
+        Returns
+        -------
             OverrideFieldSettings instance
 
-        Raises:
+        Raises
+        ------
             KeyError: If 'ref' or 'name' is missing
         """
         # Extract properties (everything except 'ref' and 'name')
@@ -142,7 +145,8 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
             kwd_data: KeywordData instance containing cards and label_registry
             settings: List of dicts with 'ref', 'name', and override properties
 
-        Raises:
+        Raises
+        ------
             ValueError: If label_registry is not available on kwd_data
             UndefinedLabelError: If a referenced label is not defined
         """

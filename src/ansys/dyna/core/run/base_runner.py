@@ -26,7 +26,24 @@ from ansys.dyna.core.run.options import MemoryUnit, MpiOption, Precision
 
 
 class BaseRunner:
+    """Base class to Run LS-DYNA."""
+
     def __init__(self, **kwargs):
+        """Initialize BaseRunner.
+
+        Parameters
+        ----------
+        mpi_option : MpiOption
+            MPI option to use for running LS-DYNA.
+        ncpu : int
+            Number of CPUs to use for running LS-DYNA.
+        memory : int
+            Memory amount to allocate for running LS-DYNA.
+        memory_unit : MemoryUnit
+            Memory unit to use for running LS-DYNA.
+        precision : Precision
+            Precision to use for running LS-DYNA.
+        """
         # TODO - split mpi option into precision?
         self.mpi_option = kwargs.get("mpi_option", MpiOption.SMP)
         self.ncpu = kwargs.get("ncpu", 1)

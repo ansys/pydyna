@@ -859,7 +859,6 @@ class _DisplayMesh(object):  # pragma: no cover
         plotter : Plotter
             Elements of another plotter to add.
         """
-
         if self._poly_data == None:
             if self._type is DisplayMeshType.FACE:
                 surf = pv.PolyData(self._vertices, self._facet_list)

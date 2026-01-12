@@ -94,7 +94,8 @@ class LabelRegistry:
             label: Human-readable label (e.g., "stress_card", "hisv_card")
             card: The card object to label
 
-        Raises:
+        Raises
+        ------
             DuplicateLabelError: If label already registered
             ValueError: If label format is invalid
         """
@@ -113,10 +114,12 @@ class LabelRegistry:
         Args:
             label: The label to resolve
 
-        Returns:
+        Returns
+        -------
             The card object
 
-        Raises:
+        Raises
+        ------
             UndefinedLabelError: If label not found
         """
         if label not in self._labels:
@@ -138,10 +141,12 @@ class LabelRegistry:
             label: The label to resolve
             cards: The current cards list to search
 
-        Returns:
+        Returns
+        -------
             Integer index of the card in the list
 
-        Raises:
+        Raises
+        ------
             UndefinedLabelError: If label not found
             CardNotFoundError: If labeled card not in the cards list
         """
@@ -164,7 +169,8 @@ class LabelRegistry:
             label: The label to update (must already exist)
             card: The new card object to associate with the label
 
-        Raises:
+        Raises
+        ------
             UndefinedLabelError: If label not found
         """
         if label not in self._labels:
@@ -194,7 +200,8 @@ class LabelRegistry:
         Args:
             label: Label to validate
 
-        Raises:
+        Raises
+        ------
             ValueError: If label format is invalid
         """
         if not label:
@@ -226,7 +233,8 @@ class LabelRegistry:
             keyword: Keyword name (for error messages)
             initial_labels: Optional dict mapping label names to card indices
 
-        Returns:
+        Returns
+        -------
             Initialized LabelRegistry
         """
         registry = cls(_keyword=keyword)

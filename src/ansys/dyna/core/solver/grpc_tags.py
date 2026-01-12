@@ -38,6 +38,8 @@
 # At least it lets me line up my comments, provided they have at least TWO
 # spaces before the #.
 #
+"""Module defining gRPC tags for communication with DYNA solver."""
+
 SWITCH = 1  # sense switch
 RUN = 2  # send command line arguments & begin execution
 CWD = 3  # server sends to DYNA to find its working directory

@@ -849,7 +849,6 @@ class DynaBase:
 
     def add(self, obj):
         """Add entities to an object."""
-
         if obj.type == "rigidwall_cylinder" or obj.type == "rigidwall_sphere" or obj.type == "rigidwall_planar":
             data = obj.get_data()
             if data != None:
@@ -998,7 +997,7 @@ class NodeSetBox(BaseSet):
     """include the nodes inside boxes.
 
     Parameters
-        ----------
+    ----------
         boxes : list
             A list of BOX.
     """

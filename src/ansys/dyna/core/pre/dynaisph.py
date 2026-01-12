@@ -375,6 +375,7 @@ class ISPHStructPart(Part):
 
         Parameters
         ----------
+
         Parameters
         ----------
         initial : float

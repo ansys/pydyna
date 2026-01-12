@@ -349,7 +349,8 @@ class SeriesCard(CardInterface):
     def _write_row(self, format: format_type, start_index: int, end_index: int) -> str:
         """Fields aren't really the right abstraction for a series card,
         but its an easy way to reuse the code in write_fields so we create fields
-        on the fly here. TODO - reuse less of the code without creating fields on the fly"""
+        on the fly here. TODO - reuse less of the code without creating fields on the fly
+        """
         row_values = self[start_index:end_index]
         field_width = self._get_element_width()
         element_width = self._element_width

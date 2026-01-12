@@ -193,7 +193,6 @@ class PymapdlCustomAdapter(logging.LoggerAdapter):
             Level of logging. The default is ``LOG_LEVEL``, which causes all messages
             to be recorded. For example, you can set the level of logging to ``DEBUG``.
         """
-
         self.logger = addfile_handler(self.logger, filename=filename, level=level, write_headers=True)
         self.file_handler = self.logger.file_handler
 
@@ -337,7 +336,6 @@ class Logger:
             is ``FILE_NAME``, in which case they are recorded in the
             ``'pymapdl.log'`` file.
         """
-
         # create default main logger
         self.logger = logging.getLogger("pydyna_global")
         self.logger.addFilter(InstanceFilter())
@@ -386,7 +384,6 @@ class Logger:
         >>> LOG.log_to_file(file_path)
 
         """
-
         self = addfile_handler(self, filename=filename, level=level, write_headers=True)
 
     def log_to_stdout(self, level=LOG_LEVEL):
@@ -404,7 +401,6 @@ class Logger:
         write_headers : bool, optional
             Whether to write the headers to the file. The default is ``True``.
         """
-
         self = add_stdout_handler(self, level=level)
 
     def setLevel(self, level="DEBUG"):
@@ -567,7 +563,6 @@ def addfile_handler(logger, filename=FILE_NAME, level=LOG_LEVEL, write_headers=F
     logger
         Logger or Logger object.
     """
-
     file_handler = logging.FileHandler(filename)
     file_handler.setLevel(level)
     file_handler.setFormatter(logging.Formatter(FILE_MSG_FORMAT))
@@ -605,7 +600,6 @@ def add_stdout_handler(logger, level=LOG_LEVEL, write_headers=False):
     logger
         Logger or Logger object.
     """
-
     std_out_handler = logging.StreamHandler()
     std_out_handler.setLevel(level)
     std_out_handler.setFormatter(PymapdlFormatter(STDOUT_MSG_FORMAT))

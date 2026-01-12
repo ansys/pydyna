@@ -55,7 +55,8 @@ class Field:
     """
     Represents a single field within a card.
 
-    Attributes:
+    Attributes
+    ----------
         name: Field name as it appears in the keyword file
         type: Field type (int, float, str)
         position: Column position in the card
@@ -220,7 +221,8 @@ class Card:
     """
     Represents a card within a keyword.
 
-    Attributes:
+    Attributes
+    ----------
         index: Position in the cards list
         fields: List of Field objects
         mark_for_removal: Card removal marker (used by handlers)
@@ -317,7 +319,8 @@ class Card:
         For regular cards, returns self.fields directly.
         For table_group cards, aggregates fields from all sub_cards.
 
-        Returns:
+        Returns
+        -------
             List of Field instances
         """
         if self.table_group and self.sub_cards:
@@ -357,7 +360,8 @@ class KeywordData:
     - Options may be List[OptionGroup] or List[Dict] during transition period
     - The from_dict/to_dict methods enable conversion at pipeline boundaries
 
-    Attributes:
+    Attributes
+    ----------
         keyword: Base keyword name (e.g., "SECTION")
         subkeyword: Subkeyword variant (e.g., "SHELL")
         title: Full keyword title
@@ -410,7 +414,8 @@ class KeywordData:
         Args:
             data: Dictionary containing keyword data
 
-        Returns:
+        Returns
+        -------
             KeywordData instance
         """
         logger.debug(f"Creating KeywordData for {data.get('keyword')}.{data.get('subkeyword')}")
@@ -478,7 +483,8 @@ class KeywordData:
         - Card sets (source_cards and their options)
         - Top-level options (option cards)
 
-        Returns:
+        Returns
+        -------
             Flat list of all Card instances or dicts requiring field transformation.
             During the transition period, may contain both Card instances and dicts.
         """

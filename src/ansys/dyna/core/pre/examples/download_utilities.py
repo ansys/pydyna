@@ -41,7 +41,8 @@ class DownloadManagerMeta(type):
     _lock: Lock = Lock()
 
     def __call__(cls, *args, **kwargs):
-        """
+        """Create or return the singleton instance.
+
         Possible changes to the value of the ``__init__`` argument do not affect
         the returned instance.
         """
@@ -85,7 +86,7 @@ class DownloadManager(metaclass=DownloadManagerMeta):
     def download_file(
         self, filename: str, *directory: str, destination: Optional[str] = None, force: bool = False
     ) -> str:
-        """Download an example file from the PyPrimeMesh repository.
+        """Download an example file from the PyAnsys Github examples repository.
 
         Parameters
         ----------

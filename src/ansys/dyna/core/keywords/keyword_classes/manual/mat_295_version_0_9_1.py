@@ -1326,7 +1326,7 @@ class Mat295Legacy(KeywordBase):
 
     @anisotropic_settings.setter
     def anisotropic_settings(self, df: pd.DataFrame):
-        """sets anisotropic_settings from the dataframe df."""
+        """Sets anisotropic_settings from the dataframe df."""
         self._cards[7].table = df
 
     @property

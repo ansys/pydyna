@@ -163,7 +163,8 @@ class HandlerRegistry:
         """
         Get list of all registered handler names.
 
-        Returns:
+        Returns
+        -------
             List of handler configuration key names in registration order
         """
         return list(self._handlers.keys())
@@ -176,7 +177,8 @@ def discover_handlers() -> Dict[str, HandlerMetadata]:
     Scans the handlers package for modules, imports them, and collects
     metadata from handlers decorated with @handler.
 
-    Returns:
+    Returns
+    -------
         Dictionary mapping handler names to their metadata
     """
     import importlib
@@ -216,7 +218,8 @@ def create_default_registry() -> HandlerRegistry:
     Handlers are auto-discovered by scanning the handlers package for
     classes decorated with @handler.
 
-    Returns:
+    Returns
+    -------
         Configured HandlerRegistry with all standard handlers
     """
     logger.debug("Creating default handler registry")

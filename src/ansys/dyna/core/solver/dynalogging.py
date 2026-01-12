@@ -20,7 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Logging module supplying a general framework for logging in the PyDYNA
+"""Logging module supplying a general framework for logging in the PyDYNA.
+
+This module provides logging capabilities for the PyDyna
 ``pre`` service.
 
 This module is built upon the `Python logging <https://docs.python.org/3/library/logging.html>`_
@@ -193,7 +195,6 @@ class PymapdlCustomAdapter(logging.LoggerAdapter):
             Level of logging. The default is ``LOG_LEVEL``, which causes all messages
             to be recorded. For example, you can set the level of logging to ``DEBUG``.
         """
-
         self.logger = addfile_handler(self.logger, filename=filename, level=level, write_headers=True)
         self.file_handler = self.logger.file_handler
 
@@ -227,7 +228,9 @@ class PymapdlCustomAdapter(logging.LoggerAdapter):
         self.level = level
 
 
-class PymapdlPercentStyle(logging.PercentStyle):
+class PydynaPercentStyle(logging.PercentStyle):
+    """Provides a customized ``PercentStyle`` class for overwriting the default format styles."""
+
     def __init__(self, fmt, *, defaults=None):
         self._fmt = fmt or self.default_format
         self._defaults = defaults
@@ -321,7 +324,7 @@ class Logger:
     _instances = {}
 
     def __init__(self, level=logging.DEBUG, to_file=False, to_stdout=True, filename=FILE_NAME):
-        """Customized the logger for the PyDYNA ``pre`` service.
+        """Customize the logger for the PyDYNA ``pre`` service.
 
         Parameters
         ----------
@@ -337,7 +340,6 @@ class Logger:
             is ``FILE_NAME``, in which case they are recorded in the
             ``'pymapdl.log'`` file.
         """
-
         # create default main logger
         self.logger = logging.getLogger("pydyna_global")
         self.logger.addFilter(InstanceFilter())
@@ -386,7 +388,6 @@ class Logger:
         >>> LOG.log_to_file(file_path)
 
         """
-
         self = addfile_handler(self, filename=filename, level=level, write_headers=True)
 
     def log_to_stdout(self, level=LOG_LEVEL):
@@ -404,7 +405,6 @@ class Logger:
         write_headers : bool, optional
             Whether to write the headers to the file. The default is ``True``.
         """
-
         self = add_stdout_handler(self, level=level)
 
     def setLevel(self, level="DEBUG"):
@@ -531,6 +531,7 @@ class Logger:
         return self._instances[new_name]
 
     def __getitem__(self, key):
+        """Get an instance logger by name."""
         if key in self._instances.keys():
             return self._instances[key]
         else:
@@ -567,7 +568,6 @@ def addfile_handler(logger, filename=FILE_NAME, level=LOG_LEVEL, write_headers=F
     logger
         Logger or Logger object.
     """
-
     file_handler = logging.FileHandler(filename)
     file_handler.setLevel(level)
     file_handler.setFormatter(logging.Formatter(FILE_MSG_FORMAT))
@@ -605,7 +605,6 @@ def add_stdout_handler(logger, level=LOG_LEVEL, write_headers=False):
     logger
         Logger or Logger object.
     """
-
     std_out_handler = logging.StreamHandler()
     std_out_handler.setLevel(level)
     std_out_handler.setFormatter(PymapdlFormatter(STDOUT_MSG_FORMAT))

@@ -35,7 +35,6 @@ def write_cards(
     comment: typing.Optional[bool] = True,
 ):
     """Write the cards."""
-
     # this code tries its best to avoid adding superfluous trailing newlines, but
     # is not always successful. If one or more empty cards exist at the end of the
     # keyword, a single newline will be added before them. Streams are typically

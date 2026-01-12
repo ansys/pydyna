@@ -589,7 +589,8 @@ class MatElasticPlasticThermal(MatAdditional):
 class MatRigid(MatAdditional):
     """Defines a rigid material.
 
-    Parts made from a rigid material are considered to belong to a rigid body."""
+    Parts made from a rigid material are considered to belong to a rigid body.
+    """
 
     def __init__(
         self,
@@ -630,7 +631,8 @@ class MatRigid(MatAdditional):
 class MatShapeMemory:
     """Describe the superelastic response present in shape-memory alloys,
     the peculiar material ability to undergo large deformations
-    with a full recovery in loading-unloading cycles."""
+    with a full recovery in loading-unloading cycles.
+    """
 
     def __init__(
         self,

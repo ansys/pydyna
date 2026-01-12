@@ -44,7 +44,7 @@ def _check_type(value):
 
 
 def try_initialize_table(card, name: str, **kwargs):
-    """card is a TableCard or a TableCardGroup"""
+    """Card is a TableCard or a TableCardGroup"""
     if name is not None:
         data = kwargs.get(name, None)
         if data is not None:

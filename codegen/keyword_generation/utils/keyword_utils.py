@@ -41,7 +41,8 @@ class KeywordNames:
     Consolidates the common pattern of transforming a keyword name into
     its various representations (classname, filename, domain, etc.).
 
-    Attributes:
+    Attributes
+    ----------
         keyword: Original keyword string (e.g., "SECTION_SHELL_TITLE")
         classname: Python class name (e.g., "SectionShellTitle")
         filename: Output filename stem (e.g., "section_shell_title")
@@ -64,7 +65,8 @@ class KeywordNames:
             keyword: Raw keyword string
             keyword_options: Optional options dict that may contain custom classname
 
-        Returns:
+        Returns
+        -------
             KeywordNames instance with all name variants
         """
         fixed_kwd = fix_keyword(keyword)
@@ -99,7 +101,8 @@ def filter_keywords_by_domain(keywords: List[Dict], subset_domains: Optional[Lis
         subset_domains: Optional list of domain names to include (e.g., ["contact", "section"])
                        If None, all keywords are returned.
 
-    Returns:
+    Returns
+    -------
         Filtered list of keywords
 
     Example:

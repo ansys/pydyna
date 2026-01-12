@@ -63,7 +63,8 @@ class InsertCardError(Exception):
 class InsertCardSettings:
     """Configuration for inserting additional cards.
 
-    Attributes:
+    Attributes
+    ----------
         after: Label of card to insert after, or "END" for end boundary (mutually exclusive with before)
         before: Label of card to insert before (mutually exclusive with after)
         card: Dict with 'source' and 'card-name' for loading the card
@@ -170,7 +171,8 @@ class InsertCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             kwd_data: KeywordData instance with cards list and label_registry
             settings: List of {"after", "card", "label"} dicts
 
-        Raises:
+        Raises
+        ------
             InsertCardError: If label_registry is not initialized or label not found
         """
         if kwd_data.label_registry is None:

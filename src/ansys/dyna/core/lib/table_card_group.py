@@ -173,7 +173,7 @@ class TableCardGroup(CardInterface):
         return write_or_return(buf, _write)
 
     def _divide_data_lines(self, data_lines: typing.List[str]) -> typing.List:
-        """divides the data lines into a set of lines, one for each sub-card"""
+        """Divides the data lines into a set of lines, one for each sub-card"""
         card_lines = [[] for i in range(len(self._cards))]
         for index, line in enumerate(data_lines):
             card_index = self._get_index_of_which_card(index)
@@ -181,13 +181,15 @@ class TableCardGroup(CardInterface):
         return card_lines
 
     def _get_index_of_which_card(self, overall_index: int) -> int:
-        """given the overall index, returns the index into self._cards
-        to identify which sub-card the overall index indexes into"""
+        """Given the overall index, returns the index into self._cards
+        to identify which sub-card the overall index indexes into
+        """
         return overall_index % len(self._get_active_cards())
 
     def _get_index_of_given_card(self, overall_index: int) -> int:
-        """given the overall index, returns the index to be used to
-        index into the card given by _get_index_of_which_card"""
+        """Given the overall index, returns the index to be used to
+        index into the card given by _get_index_of_which_card
+        """
         return math.floor(overall_index / len(self._get_active_cards()))
 
     @property
@@ -205,7 +207,7 @@ class TableCardGroup(CardInterface):
         return [card for card in self._cards if self._is_card_active(card)]
 
     def _get_unbounded_length(self) -> int:
-        """the unbounded length is the minimum of all sub-card's unbounded length"""
+        """The unbounded length is the minimum of all sub-card's unbounded length"""
         self._initialize()  # Need to initialize first, so that the sub card can calculate num_rows
         lens = [card._num_rows() for card in self._get_active_cards()]
         return min(lens)

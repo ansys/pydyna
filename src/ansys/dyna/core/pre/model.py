@@ -144,7 +144,6 @@ class Model:
 
     def get_rigidwall(self, id):
         """Get rigidwall data."""
-
         data = self._rigidwall(id - 1)
         return data
         data = self.stub.GetRigidWall(GetRigidWallRequest(id=id))

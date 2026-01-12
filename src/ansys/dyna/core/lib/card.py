@@ -76,7 +76,7 @@ class Card(CardInterface):
         return format_spec
 
     def _load(self, data_line: str, parameter_set: ParameterSet) -> None:
-        """loads the card data from a list of strings"""
+        """Loads the card data from a list of strings"""
         fields = self._fields
         if self.format == format_type.long:
             fields = self._convert_fields_to_long_format()
@@ -149,12 +149,12 @@ class Card(CardInterface):
 
     # not needed by subclasses - only used by methods on keyword classes
     def get_value(self, prop: str) -> typing.Any:
-        """gets the value of the field in the card"""
+        """Gets the value of the field in the card"""
         field = self._get_field_by_name(prop)
         return field.value
 
     def set_value(self, prop: str, value: typing.Any) -> None:
-        """sets the value of the field in the card"""
+        """Sets the value of the field in the card"""
         self._get_field_by_name(prop).value = value
 
     def __repr__(self) -> str:

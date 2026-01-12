@@ -124,7 +124,6 @@ def solid_array(solids: pd.DataFrame):
     [1,2,3,0]=>[3,1,2,3]
     [1,2,3,NA]=>[3,1,2,3]
     """
-
     # FACES CREATED BY THE SOLIDS BASED ON MANUAL
     # A DUMMY ZERO IS PUT AS A PLACEHOLDER FOR THE LEN PREFIX
     four_node_faces = [[0, 1, 2, 3], [0, 1, 2, 4], [0, 1, 3, 4], [0, 2, 3, 4]]
@@ -239,7 +238,6 @@ def extract_shell_facets(shells: pd.DataFrame, mapping: np.ndarray):
     tuple
         (triangles, tri_eids, tri_pids, quads, quad_eids, quad_pids)
     """
-
     empty_return = (
         np.empty((0), dtype=np.int32),
         np.empty((0), dtype=np.int32),
@@ -474,7 +472,6 @@ def get_polydata(deck: Deck, cwd=None, extract_surface=True):
     pyvista.UnstructuredGrid
         UnstructuredGrid containing the mesh for visualization
     """
-
     # import this lazily (otherwise this adds over a second to the import time of pyDyna)
     pv = get_pyvista()
 
@@ -598,7 +595,6 @@ def plot_deck(deck, **args):
     pyvista plot or camera position
         Depends on the plotting backend used
     """
-
     # import this lazily (otherwise this adds over a second to the import time of pyDyna)
     pv = get_pyvista()
 

@@ -121,7 +121,7 @@ extend-exclude = [
 ]
 
 lint.select = [
-  #"D",   # pydocstyle, see https://beta.ruff.rs/docs/rules/#pydocstyle-d
+  "D",   # pydocstyle, see https://beta.ruff.rs/docs/rules/#pydocstyle-d
   "E",   # pycodestyle, see https://beta.ruff.rs/docs/rules/#pycodestyle-e-w
   #"F",   # pyflakes, see https://beta.ruff.rs/docs/rules/#pyflakes-f
   "I",   # isort, see https://beta.ruff.rs/docs/rules/#isort-i

@@ -32,11 +32,12 @@ def handle_single_word_keyword(keyword: str) -> str:
 
 
 def fix_keyword(keyword: str) -> str:
-    """returns a "fixed" keyword in two ways:
+    """Returns a "fixed" keyword in two ways:
     - a single word keyword will be defined from the kwdm as NAME_NAME,
       and the fixed keyword is just NAME
     - some keywords are not python and filesystem friendly, for example:
-      MAT_BILKHU/DUBOIS_FOAM becomes MAT_BILKHU_DUBOIS_FOAM"""
+      MAT_BILKHU/DUBOIS_FOAM becomes MAT_BILKHU_DUBOIS_FOAM
+    """
     keyword = handle_single_word_keyword(keyword)
     for bad_char in ["/", "-", " ", "(", ")"]:
         keyword = keyword.replace(bad_char, "_")
@@ -44,7 +45,7 @@ def fix_keyword(keyword: str) -> str:
 
 
 def get_classname(keyword: str):
-    """convert CLASS_NAME_FOO to ClassNameFoo"""
+    """Convert CLASS_NAME_FOO to ClassNameFoo"""
     tokens = keyword.split("_")
     return "".join([word.title() for word in tokens])
 

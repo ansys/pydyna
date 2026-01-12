@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module for defining the PyDyna Docker runner."""
+
 import os
 import sys
 
@@ -29,8 +31,10 @@ import docker
 
 
 class DockerRunner(BaseRunner):
-    """Docker implementation to Run LS-DYNA. Tested with a custom exutable
-    and when LS-DYNA is installed as part of the unified Ansys installation
+    """Docker implementation to Run LS-DYNA.
+
+    Tested with a custom executable and when LS-DYNA is
+    installed as part of the unified Ansys installation.
     """
 
     def __init__(self, **kwargs):

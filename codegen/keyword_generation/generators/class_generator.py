@@ -67,7 +67,8 @@ def _create_template_context(
         keyword_options: Keyword configuration from manifest.json
         license: License header text
 
-    Returns:
+    Returns
+    -------
         KeywordTemplateContext instance ready for template rendering
     """
     source_keyword = _get_source_keyword(keyword, keyword_options)
@@ -380,7 +381,8 @@ def generate_class(env: Environment, output_manager: OutputManager, item: typing
         output_manager: Handles writing output files to appropriate directories
         item: Keyword configuration dict with 'name' and 'options' keys
 
-    Returns:
+    Returns
+    -------
         Tuple of (classname, filename_stem) for the generated class
     """
     keyword = item["name"]

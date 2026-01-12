@@ -101,7 +101,6 @@ def port_in_use(port, host=LOCALHOST):
 
 def get_virtualenv_path():
     """Get the virtual environment path."""
-
     python_executable_path = sys.executable
     if hasattr(sys, "real_prefix"):
         virtual_env_path = sys.prefix
@@ -282,7 +281,6 @@ def launch_dynapre(
         is used.
 
     """
-
     check_valid_ip(ip)  # double check
 
     if port is None:

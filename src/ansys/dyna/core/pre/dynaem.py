@@ -803,7 +803,7 @@ class RandlesCell:
         temperature_from_thermal_solver=False,
         add_heating_to_thermal_solver=False,
     ):
-        """define the distributed Randles circuit parameters for a Randles cell when using the batmac model."""
+        """Define the distributed Randles circuit parameters for a Randles cell when using the batmac model."""
         self.define_batmac = True
         self.rdltype = cell_type.value
         self.rdlarea = area

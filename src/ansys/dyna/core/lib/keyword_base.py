@@ -136,7 +136,6 @@ class KeywordBase(Cards):
 
     def __repr__(self) -> str:
         """Returns a console-friendly representation of the keyword data as it would appear in the .k file"""
-
         max_rows = 60  # TODO - make these configurable somewhere
 
         class TruncatedStringException(Exception):
@@ -237,6 +236,7 @@ class KeywordBase(Cards):
             Optional - buffer to write to.
 
         Returns
+        -------
         _______
         If `buf` is None, the output is returned as a string
         """

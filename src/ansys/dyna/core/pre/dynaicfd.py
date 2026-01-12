@@ -625,7 +625,8 @@ class ICFDPart:
 
     def set_fsi(self):
         """Define the fluid surface to consider in contact with the solid surfaces
-        for fluid-structure interaction (FSI) analysis."""
+        for fluid-structure interaction (FSI) analysis.
+        """
         ret = self.stub.ICFDCreateBdyFSI(ICFDBdyFSIRequest(pid=self.id))
         logging.info("ICFD boundary FSI Created...")
         return ret

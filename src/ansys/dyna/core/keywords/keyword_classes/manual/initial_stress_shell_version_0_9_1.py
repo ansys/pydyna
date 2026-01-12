@@ -194,7 +194,7 @@ class InitialStressShellLegacyThicknessLargeCardSet(Cards):
 
     @property
     def hisv(self) -> SeriesCard:
-        """dynamic array of history variables."""
+        """Dynamic array of history variables."""
         return self._cards[1]
 
     @hisv.setter

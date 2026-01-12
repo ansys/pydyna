@@ -50,7 +50,8 @@ logger = logging.getLogger(__name__)
 class SeriesCardSettings(LabelRefSettings):
     """Configuration for variable-length card arrays.
 
-    Attributes:
+    Attributes
+    ----------
         ref: Label-based reference (resolved via LabelRegistry)
         name: Property name for the array
         card_size: Number of cards per element
@@ -78,10 +79,12 @@ class SeriesCardSettings(LabelRefSettings):
         Args:
             data: Dict with 'ref', 'name', 'card-size', 'element-width', 'type', 'help', etc.
 
-        Returns:
+        Returns
+        -------
             SeriesCardSettings instance
 
-        Raises:
+        Raises
+        ------
             KeyError: If required keys are missing
         """
         return cls(
@@ -179,7 +182,8 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
             kwd_data: KeywordData instance containing cards and label_registry
             settings: List of dicts with 'ref', 'name', 'card-size', etc.
 
-        Raises:
+        Raises
+        ------
             ValueError: If label_registry is not available on kwd_data
             UndefinedLabelError: If a referenced label is not defined
         """

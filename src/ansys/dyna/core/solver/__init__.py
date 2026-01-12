@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for defining the PyDyna ``solver`` service."""
 
 from ansys.dyna.core.solver.dynasolver import DynaSolver, NotFound, RunningError, UnexpectedResponse
 from ansys.dyna.core.solver.launcher import launch_dyna
