@@ -868,6 +868,14 @@ class KeywordsStub:
         )
         return type("Response", (), {"id": curve_id})()
 
+    def MESHCreateInterf(self, request):
+        """Create MESH_INTERF keyword."""
+        self._backend.create_mesh_interf(
+            volid=getattr(request, "volid", 0),
+            pids=list(request.pids) if hasattr(request, "pids") and request.pids else None,
+        )
+        return type("Response", (), {"success": True})()
+
     def MESHCreateSizeShape(self, request):
         """Create MESH_SIZE_SHAPE keyword."""
         self._backend.create_mesh_size_shape(

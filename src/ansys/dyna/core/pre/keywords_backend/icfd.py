@@ -958,6 +958,34 @@ class ICFDKeywordsMixin:
         self._deck.append(kw)
         logger.info(f"Created ICFD_CONTROL_IMPOSED_MOVE keyword for pid={pid}")
 
+    def create_mesh_interf(
+        self,
+        volid: int,
+        pids: Optional[List[int]] = None,
+    ) -> None:
+        """Create MESH_INTERF keyword.
+
+        Parameters
+        ----------
+        volid : int
+            Volume ID for interface.
+        pids : list of int, optional
+            Part IDs for interface surfaces. Default is None.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating MESH_INTERF: volid={volid}, pids={pids}")
+
+        kw = keywords.MeshInterf()
+        kw.volid = volid
+        if pids:
+            # Set up to 8 PIDs
+            for i, pid in enumerate(pids[:8], 1):
+                setattr(kw, f"pid{i}", pid)
+
+        self._deck.append(kw)
+        logger.info(f"Created MESH_INTERF keyword for volid={volid}")
+
     def create_mesh_size_shape(
         self,
         sname: str = "BOX",
