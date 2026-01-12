@@ -1380,10 +1380,109 @@ class TestReferenceFileComparison:
         """test_sloshing.k - ICFD sloshing simulation."""
         pytest.fail("Not implemented")
 
-    @pytest.mark.xfail(reason="DynaICFD not implemented in keywords backend")
     def test_thermal_flow(self, initial_files_dir, pre_reference_dir):
         """test_thermal_flow.k - ICFD thermal flow."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaicfd import (
+            DynaICFD,
+            ICFDAnalysis,
+            ICFDPart,
+            ICFDVolumePart,
+            MatICFD,
+            Curve,
+            ICFDDOF,
+            MeshedVolume,
+        )
+
+        initial_file = os.path.join(initial_files_dir, "icfd", "test_thermal_flow.k")
+        reference_file = os.path.join(pre_reference_dir, "test_thermal_flow.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            icfd = DynaICFD()
+            solution.add(icfd)
+
+            # Set termination time
+            solution.set_termination(termination_time=100.0)
+
+            # Database output
+            solution.create_database_binary(dt=1.0)
+
+            # Define curves for boundary conditions
+            curve1 = Curve(x=[0, 10000], y=[1, 1])
+            curve2 = Curve(x=[0, 10000], y=[0, 0])
+            curve3 = Curve(x=[0, 10000], y=[20, 20])
+            curve4 = Curve(x=[0, 10000], y=[0, 0])
+            curve5 = Curve(x=[0, 10000], y=[80, 80])
+
+            # Set ICFD analysis (dt=0 uses CFL control)
+            icfdanalysis = ICFDAnalysis()
+            icfdanalysis.set_timestep(timestep=0)
+            icfd.add(icfdanalysis)
+
+            # Part 1: Inlet with prescribed velocity (X and Y components) and temperature
+            mat1 = MatICFD(flow_density=1, dynamic_viscosity=0.005, heat_capacity=1000.0, thermal_conductivity=200.0)
+            part1 = ICFDPart(1)
+            part1.set_material(mat1)
+            part1.set_prescribed_velocity(dof=ICFDDOF.X, motion=curve1)
+            part1.set_prescribed_velocity(dof=ICFDDOF.Y, motion=curve2)
+            part1.set_prescribed_temperature(temperature=curve3)
+            icfd.parts.add(part1)
+
+            # Part 2: Outlet with prescribed pressure
+            mat2 = MatICFD(flow_density=1, dynamic_viscosity=0.005, heat_capacity=1000.0, thermal_conductivity=200.0)
+            part2 = ICFDPart(2)
+            part2.set_material(mat2)
+            part2.set_prescribed_pressure(pressure=curve4)
+            icfd.parts.add(part2)
+
+            # Part 3: Free slip boundary (top/bottom walls)
+            mat3 = MatICFD(flow_density=1, dynamic_viscosity=0.005, heat_capacity=1000.0, thermal_conductivity=200.0)
+            part3 = ICFDPart(3)
+            part3.set_material(mat3)
+            part3.set_free_slip()
+            icfd.parts.add(part3)
+
+            # Part 4: No-slip wall with prescribed temperature
+            mat4 = MatICFD(flow_density=1, dynamic_viscosity=0.005, heat_capacity=1000.0, thermal_conductivity=200.0)
+            part4 = ICFDPart(4)
+            part4.set_material(mat4)
+            part4.set_non_slip()
+            part4.set_prescribed_temperature(temperature=curve5)
+            icfd.parts.add(part4)
+
+            # Volume part 5 containing parts 1, 2, 3, and 4 (use part IDs)
+            volpart = ICFDVolumePart([1, 2, 3, 4])
+            volpart.set_material(mat4)
+            icfd.parts.add(volpart)
+
+            # Create meshed volume (use part IDs)
+            meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
+            icfd.add(meshvol)
+
+            # MESH_BL for part 4 (boundary layer)
+            solution.stub.MESHCreateBl(
+                type("Request", (), {"pid": 4, "nelth": 2, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
+            )
+
+            # ICFD_DATABASE_DRAG for part 4
+            solution.stub.ICFDCreateDBDrag(type("Request", (), {"pid": 4})())
+
+            # ICFD_INITIAL - set initial conditions for whole domain (pid=0)
+            solution.stub.ICFDCreateInit(
+                type("Request", (), {"pid": 0, "vx": 0.0, "vy": 0.0, "vz": 0.0, "t": 10.0, "p": 0.0})()
+            )
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_thermal_flow.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     @pytest.mark.xfail(reason="DynaICFD FSI not implemented in keywords backend")
     def test_strong_fsi(self, initial_files_dir, pre_reference_dir):
