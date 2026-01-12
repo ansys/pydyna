@@ -300,7 +300,8 @@ class ParameterType(Enum):
     """Contains the parameter types."""
 
     R = 1
-    I = 2
+    # ignore E741 for ambiguous variable I
+    I = 2  # noqa: E741
     C = 3
 
 

@@ -23,6 +23,7 @@
 import typing
 
 from jinja2 import Environment
+
 from keyword_generation.generators.template_context import EntrypointTemplateContext
 from keyword_generation.utils import get_license_header
 from keyword_generation.utils.domain_mapper import get_keyword_domain

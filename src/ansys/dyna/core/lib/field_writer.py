@@ -26,12 +26,12 @@ import io
 import logging
 import typing
 
-import hollerith as holler
 import pandas as pd
 import pandas._libs.missing as libmissing
 
 from ansys.dyna.core.lib.field import Field, to_long
 from ansys.dyna.core.lib.format_type import format_type
+import hollerith as holler
 
 logger = logging.getLogger(__name__)
 

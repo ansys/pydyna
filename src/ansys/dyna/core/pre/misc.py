@@ -185,9 +185,7 @@ def create_temp_dir(tmpdir=None):
     try:
         os.mkdir(path)
     except:
-        raise RuntimeError(
-            "Unable to create temporary working " "directory %s\n" % path + "Please specify run_location="
-        )
+        raise RuntimeError("Unable to create temporary working directory %s\n" % path + "Please specify run_location=")
 
     return path
 

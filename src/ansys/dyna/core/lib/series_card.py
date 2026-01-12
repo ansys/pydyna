@@ -78,7 +78,7 @@ class SeriesCard(CardInterface):
             dataclass_spec.append((type_name, type_type))
         return dataclasses.make_dataclass(self._name, dataclass_spec)
 
-    def __iter__(self) -> typing.Iterable:
+    def __iter__(self) -> typing.Iterator:
         return iter(self._data)
 
     @property
@@ -188,7 +188,9 @@ class SeriesCard(CardInterface):
         return math.ceil(self._length_func() / fields_per_card)
 
     def __getitem__(self, index):
-        err_string = f"get indexer for SeriesCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
+        err_string = (
+            f"get indexer for SeriesCard must be of the form [index] or [start:end].  End must be greater than start"  # noqa : E501
+        )
         if not isinstance(index, (slice, int)):
             raise TypeError(err_string)
         if type(index) == int:

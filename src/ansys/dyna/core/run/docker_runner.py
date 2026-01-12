@@ -23,10 +23,9 @@
 import os
 import sys
 
-import docker
-
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
+import docker
 
 
 class DockerRunner(BaseRunner):

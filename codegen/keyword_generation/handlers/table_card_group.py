@@ -93,8 +93,7 @@ class TableCardGroupSettings:
         },
     },
     output_description=(
-        "Sets kwd_data['table_group']=True, adds card insertion with table card group, "
-        "marks source cards for removal"
+        "Sets kwd_data['table_group']=True, adds card insertion with table card group, marks source cards for removal"
     ),
 )
 class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHandler):

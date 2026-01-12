@@ -35,7 +35,6 @@ class Flag:
 
 
 class Field:
-
     @dataclasses.dataclass
     class ReadOnlyValue:
         value: typing.Any = None

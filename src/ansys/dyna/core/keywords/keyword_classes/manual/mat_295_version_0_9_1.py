@@ -31,6 +31,7 @@ This legacy class is preserved for backward compatibility. Users who depend on t
 old DataFrame-based API (mat.anisotropic_settings) can register this class with
 their Deck instance using ImportContext.keyword_overrides.
 """
+
 # flake8: noqa: E501
 # This file is a snapshot of the auto-generated Mat295 class from pydyna v0.9.1
 # Line length violations are inherited from the original auto-generated file.

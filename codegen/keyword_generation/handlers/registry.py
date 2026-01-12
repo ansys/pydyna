@@ -17,6 +17,7 @@ reorder, insert, or remove cards without invalidating previously registered labe
 
 See agents/codegen.md for detailed documentation on handler ordering and semantics.
 """
+
 import collections
 import logging
 import typing

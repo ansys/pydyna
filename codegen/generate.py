@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """This script generates the keyword classes for the LSPP.  It uses the kwd.json file to get the keyword"""
+
 import argparse
 import copy
 import logging
@@ -103,7 +104,6 @@ def skip_generate_keyword_class(keyword: str) -> bool:
 def get_undefined_alias_keywords(
     keywords_list: typing.List[typing.Dict], subset_domains: typing.Optional[typing.List[str]] = None
 ) -> typing.List[typing.Dict]:
-
     config = data_model.get_config()
     undefined_aliases: typing.List[typing.Dict] = []
     for alias, kwd in config.get_aliases().items():

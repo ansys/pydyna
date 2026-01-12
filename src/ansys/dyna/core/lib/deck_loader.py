@@ -296,7 +296,6 @@ def _try_load_deck_from_buffer(
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> None:
-
     iterstate = IterState.USERCOMMENT
     block = []
     encrypted_section = None

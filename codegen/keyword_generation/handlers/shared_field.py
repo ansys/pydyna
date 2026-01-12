@@ -166,7 +166,7 @@ def handle_shared_field(kwd_data, settings):
         },
     },
     output_description=(
-        "Adds 'card_indices' to first field, marks duplicates as 'redundant', " "may add 'negative_shared_fields'"
+        "Adds 'card_indices' to first field, marks duplicates as 'redundant', may add 'negative_shared_fields'"
     ),
 )
 class SharedFieldHandler(keyword_generation.handlers.handler_base.KeywordHandler):

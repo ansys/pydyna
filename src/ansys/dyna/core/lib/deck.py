@@ -539,9 +539,7 @@ class Deck(ValidationMixin):
             keyword.included_from = path
         return loader_result
 
-    def import_file(
-        self, path: str, encoding: str = "utf-8"
-    ) -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821
+    def import_file(self, path: str, encoding: str = "utf-8") -> "ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult":  # noqa: F821, E501
         """Import a keyword file.
 
         Parameters

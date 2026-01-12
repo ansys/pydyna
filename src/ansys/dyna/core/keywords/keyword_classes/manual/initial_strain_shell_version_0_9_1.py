@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Legacy INITIAL_STRAIN_SHELL implementation (version 0.9.1)."""
+
 # flake8: noqa: E501
 import typing
 import warnings

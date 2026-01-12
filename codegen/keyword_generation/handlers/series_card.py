@@ -195,9 +195,7 @@ class SeriesCardHandler(keyword_generation.handlers.handler_base.KeywordHandler)
         dataclasses = []
         for card_settings in typed_settings:
             card_index = card_settings.resolve_index(registry, kwd_data.cards)
-            logger.debug(
-                f"Creating series '{card_settings.name}' at index {card_index} " f"(ref='{card_settings.ref}')"
-            )
+            logger.debug(f"Creating series '{card_settings.name}' at index {card_index} (ref='{card_settings.ref}')")
             type_name = card_settings.type
             variable_card = kwd_data.cards[card_index]
             if type_name == "struct":

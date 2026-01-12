@@ -377,9 +377,11 @@ class DynaEM(DynaBase):
         """
         contype = contype.value
         if contype == 6:
-            l, c, v0 = inductance, capacity, initial_voltage
+            # ignore pylint E741 warning for l (ell) variable
+            l, c, v0 = inductance, capacity, initial_voltage  # noqa: E741
         else:
-            l, c, v0 = 0, 0, 0
+            # ignore pylint E741 warning for l (ell) variable
+            l, c, v0 = 0, 0, 0  # noqa: E741
         if func is not None:
             lcid = -func.create(self.stub)
         elif curve is not None:

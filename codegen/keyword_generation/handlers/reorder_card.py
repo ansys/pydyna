@@ -100,8 +100,8 @@ class ReorderCardHandler(keyword_generation.handlers.handler_base.KeywordHandler
         # Parse settings into typed instances
         typed_settings = parse_settings_list(ReorderCardSettings, settings)
 
-        assert (
-            len(typed_settings) == 1
-        ), f"reorder-card handler expects exactly 1 settings dict, got {len(typed_settings)}"
+        assert len(typed_settings) == 1, (
+            f"reorder-card handler expects exactly 1 settings dict, got {len(typed_settings)}"
+        )
         # TODO - mark the reorders and let that get settled after the handlers run
         kwd_data.cards = [kwd_data.cards[i] for i in typed_settings[0].order]

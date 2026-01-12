@@ -150,8 +150,7 @@ class LabelRegistry:
             return cards.index(card)
         except ValueError:
             raise CardNotFoundError(
-                f"Card labeled '{label}' not found in cards list for '{self._keyword}'. "
-                "The card may have been removed."
+                f"Card labeled '{label}' not found in cards list for '{self._keyword}'. The card may have been removed."
             )
 
     def update_reference(self, label: str, card: Any) -> None:
@@ -238,7 +237,7 @@ class LabelRegistry:
                 if index < 0 or index >= len(cards):
                     raise ValueError(
                         f"Invalid index {index} for label '{label}' in {keyword}. "
-                        f"Cards list has {len(cards)} cards (indices 0-{len(cards)-1})."
+                        f"Cards list has {len(cards)} cards (indices 0-{len(cards) - 1})."
                     )
                 card = cards[index]
                 registry.register(label, card)

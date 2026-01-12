@@ -176,7 +176,7 @@ class DynaSolver:
         when using the generic ``send`` method."""
         if ngiven < nrequired:
             s = "Bad input for command %s:" % cmd
-            s = s + ("At least %d arguments are required, but only %d " "were given" % (nrequired, ngiven))
+            s = s + ("At least %d arguments are required, but only %d were given" % (nrequired, ngiven))
             self.logger.warning(s)
             return 0
         return 1
