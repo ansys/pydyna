@@ -628,6 +628,35 @@ class ICFDKeywordsMixin:
         logger.info(f"Created MESH_VOLUME keyword with volid={volid}")
         return volid
 
+    def create_mesh_size(
+        self,
+        volid: int,
+        pids: Optional[List[int]] = None,
+    ) -> None:
+        """Create MESH_SIZE keyword.
+
+        Parameters
+        ----------
+        volid : int
+            ID of the volume (from MESH_VOLUME) to apply the size meshes to.
+        pids : list of int, optional
+            Part IDs for the surface mesh that define local mesh sizes.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating MESH_SIZE: volid={volid}, pids={pids}")
+
+        kw = keywords.MeshSize()
+        kw.volid = volid
+
+        # Set up to 8 PIDs
+        if pids:
+            for i, pid in enumerate(pids[:8]):
+                setattr(kw, f"pid{i+1}", pid)
+
+        self._deck.append(kw)
+        logger.info(f"Created MESH_SIZE keyword with volid={volid}")
+
     def create_icfd_control_dem_coupling(
         self,
         ctype: int = 0,

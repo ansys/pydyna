@@ -629,6 +629,14 @@ class KeywordsStub:
         )
         return type("Response", (), {"id": volid})()
 
+    def MESHCreateSize(self, request):
+        """Create MESH_SIZE keyword."""
+        self._backend.create_mesh_size(
+            volid=request.volid,
+            pids=list(request.pids) if request.pids else None,
+        )
+        return type("Response", (), {"success": True})()
+
     def ICFDCreateControlGeneral(self, request):
         """Create ICFD_CONTROL_GENERAL keyword."""
         self._backend.create_icfd_control_general(
