@@ -23,8 +23,25 @@
 """Module providing the SetSolidGeneral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETSOLIDGENERAL_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("solver", str, 10, 10, "MECH"),
+)
+
+_SETSOLIDGENERAL_CARD1 = (
+    FieldSchema("option", str, 0, 10, "ALL"),
+    FieldSchema("e1", int, 10, 10, None),
+    FieldSchema("e2", int, 20, 10, None),
+    FieldSchema("e3", int, 30, 10, None),
+    FieldSchema("e4", int, 40, 10, None),
+    FieldSchema("e5", int, 50, 10, None),
+    FieldSchema("e6", int, 60, 10, None),
+    FieldSchema("e7", int, 70, 10, None),
+)
 
 class SetSolidGeneral(KeywordBase):
     """DYNA SET_SOLID_GENERAL keyword"""
@@ -40,87 +57,13 @@ class SetSolidGeneral(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        str,
-                        10,
-                        10,
-                        "MECH",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "option",
-                        str,
-                        0,
-                        10,
-                        "ALL",
-                        **kwargs,
-                    ),
-                    Field(
-                        "e1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e5",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e6",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e7",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETSOLIDGENERAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETSOLIDGENERAL_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetSolidGeneral.option_specs[0],
                 cards = [
                     Card(
@@ -138,7 +81,6 @@ class SetSolidGeneral(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Solid element set ID.

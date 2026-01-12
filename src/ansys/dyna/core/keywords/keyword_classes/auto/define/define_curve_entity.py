@@ -23,8 +23,26 @@
 """Module providing the DefineCurveEntity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECURVEENTITY_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("sfa", float, 10, 10, 1.0),
+    FieldSchema("sfo", float, 20, 10, 1.0),
+    FieldSchema("sfr", float, 30, 10, 1.0),
+    FieldSchema("offa", float, 40, 10, 0.0),
+    FieldSchema("offo", float, 50, 10, 0.0),
+    FieldSchema("offr", float, 60, 10, 0.0),
+)
+
+_DEFINECURVEENTITY_CARD1 = (
+    FieldSchema("ai", float, 0, 20, 0.0),
+    FieldSchema("oi", float, 20, 20, 0.0),
+    FieldSchema("ri", float, 40, 20, 0.0),
+    FieldSchema("iflag", int, 60, 20, 0),
+)
 
 class DefineCurveEntity(KeywordBase):
     """DYNA DEFINE_CURVE_ENTITY keyword"""
@@ -40,102 +58,13 @@ class DefineCurveEntity(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfa",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfo",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfr",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offa",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offo",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offr",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ai",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "oi",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ri",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflag",
-                        int,
-                        60,
-                        20,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEENTITY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEENTITY_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCurveEntity.option_specs[0],
                 cards = [
                     Card(
@@ -153,7 +82,6 @@ class DefineCurveEntity(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID. Tables (see *DEFINE_TABLE) and load curves may not share common ID's. LS-DYNA3D allows load curve ID's and table ID's to be used interchangeably. A unique number has to be defined. Note: The magnitude of LCID is restricted to 5 significant digits. This limitation will be removed in a future release of LS-DYNA3D.

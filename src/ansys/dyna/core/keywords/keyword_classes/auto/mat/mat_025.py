@@ -23,8 +23,36 @@
 """Module providing the Mat025 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT025_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("bulk", float, 20, 10, None),
+    FieldSchema("g", float, 30, 10, None),
+    FieldSchema("alpha", float, 40, 10, None),
+    FieldSchema("theta", float, 50, 10, None),
+    FieldSchema("gamma", float, 60, 10, None),
+    FieldSchema("beta", float, 70, 10, None),
+)
+
+_MAT025_CARD1 = (
+    FieldSchema("r", float, 0, 10, None),
+    FieldSchema("d", float, 10, 10, None),
+    FieldSchema("w", float, 20, 10, None),
+    FieldSchema("x0", float, 30, 10, None),
+    FieldSchema("c", float, 40, 10, None),
+    FieldSchema("n", float, 50, 10, None),
+)
+
+_MAT025_CARD2 = (
+    FieldSchema("plot", float, 0, 10, 1.0),
+    FieldSchema("ftype", float, 10, 10, 1.0),
+    FieldSchema("vec", float, 20, 10, 0.0),
+    FieldSchema("toff", float, 30, 10, None),
+)
 
 class Mat025(KeywordBase):
     """DYNA MAT_025 keyword"""
@@ -40,148 +68,16 @@ class Mat025(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulk",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theta",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "plot",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftype",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vec",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "toff",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT025_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT025_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT025_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat025.option_specs[0],
                 cards = [
                     Card(
@@ -199,7 +95,6 @@ class Mat025(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

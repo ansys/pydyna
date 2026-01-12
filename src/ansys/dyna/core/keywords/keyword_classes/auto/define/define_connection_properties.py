@@ -23,8 +23,40 @@
 """Module providing the DefineConnectionProperties class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECONNECTIONPROPERTIES_CARD0 = (
+    FieldSchema("con_id", int, 0, 10, 0),
+    FieldSchema("proprul", int, 10, 10, 0),
+    FieldSchema("areaeq", int, 20, 10, 0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("dgtyp", int, 40, 10, 0),
+    FieldSchema("moarfl", int, 50, 10, 0),
+)
+
+_DEFINECONNECTIONPROPERTIES_CARD1 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("dsigy", float, 10, 10, None),
+    FieldSchema("detan", float, 20, 10, None),
+    FieldSchema("ddg_pr", float, 30, 10, 10000000000.0),
+    FieldSchema("drank", float, 40, 10, None),
+    FieldSchema("dsn", float, 50, 10, None),
+    FieldSchema("dsb", float, 60, 10, None),
+    FieldSchema("dss", float, 70, 10, None),
+)
+
+_DEFINECONNECTIONPROPERTIES_CARD2 = (
+    FieldSchema("dexsn", float, 0, 10, 1.0),
+    FieldSchema("dexsb", float, 10, 10, 1.0),
+    FieldSchema("dexss", float, 20, 10, 1.0),
+    FieldSchema("dcsn", int, 30, 10, None),
+    FieldSchema("dlcsb", int, 40, 10, None),
+    FieldSchema("dlcss", int, 50, 10, None),
+    FieldSchema("dgfad", int, 60, 10, None),
+    FieldSchema("dsclmrr", float, 70, 10, 1.0),
+)
 
 class DefineConnectionProperties(KeywordBase):
     """DYNA DEFINE_CONNECTION_PROPERTIES keyword"""
@@ -40,183 +72,16 @@ class DefineConnectionProperties(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "con_id",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "proprul",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "areaeq",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dgtyp",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "moarfl",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsigy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "detan",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ddg_pr",
-                        float,
-                        30,
-                        10,
-                        1.0E+10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drank",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsn",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsb",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dss",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dexsn",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dexsb",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dexss",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dcsn",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcsb",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcss",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dgfad",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsclmrr",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECONNECTIONPROPERTIES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECONNECTIONPROPERTIES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECONNECTIONPROPERTIES_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineConnectionProperties.option_specs[0],
                 cards = [
                     Card(
@@ -234,7 +99,6 @@ class DefineConnectionProperties(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def con_id(self) -> int:
         """Get or set the Connection ID, referenced on *MAT_SPOTWELD_DAIMLERCHRYSLER.  Multiple sets of connection data may be used by assigning different connection IDs

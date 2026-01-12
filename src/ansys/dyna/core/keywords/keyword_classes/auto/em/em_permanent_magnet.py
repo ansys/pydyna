@@ -23,7 +23,23 @@
 """Module providing the EmPermanentMagnet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMPERMANENTMAGNET_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("partid", int, 10, 10, None),
+    FieldSchema("mtype", int, 20, 10, 0),
+    FieldSchema("north", int, 30, 10, None),
+    FieldSchema("south", int, 40, 10, None),
+    FieldSchema("hc", float, 50, 10, None),
+)
+
+_EMPERMANENTMAGNET_CARD1 = (
+    FieldSchema("x/nid1", float, 0, 10, None),
+    FieldSchema("y/nid2", float, 10, 10, None),
+    FieldSchema("z", float, 20, 10, None),
+)
 
 class EmPermanentMagnet(KeywordBase):
     """DYNA EM_PERMANENT_MAGNET keyword"""
@@ -35,80 +51,13 @@ class EmPermanentMagnet(KeywordBase):
         """Initialize the EmPermanentMagnet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "partid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "north",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "south",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x/nid1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y/nid2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMPERMANENTMAGNET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMPERMANENTMAGNET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the MID

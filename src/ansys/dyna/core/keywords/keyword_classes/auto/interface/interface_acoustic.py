@@ -23,7 +23,12 @@
 """Module providing the InterfaceAcoustic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACEACOUSTIC_CARD0 = (
+    FieldSchema("ifid", int, 0, 10, None),
+)
 
 class InterfaceAcoustic(KeywordBase):
     """DYNA INTERFACE_ACOUSTIC keyword"""
@@ -35,19 +40,10 @@ class InterfaceAcoustic(KeywordBase):
         """Initialize the InterfaceAcoustic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ifid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACEACOUSTIC_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ifid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID of structural faces for this interface.  This structural IFID can be used by *BOUNDARY_ACOUSTIC_INTERFACE.

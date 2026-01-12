@@ -23,7 +23,19 @@
 """Module providing the ParameterNoecho class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARAMETERNOECHO_CARD0 = (
+    FieldSchema("prmr1", str, 0, 10, None),
+    FieldSchema("val1", str, 10, 10, None),
+    FieldSchema("prmr2", str, 20, 10, None),
+    FieldSchema("val2", str, 30, 10, None),
+    FieldSchema("prmr3", str, 40, 10, None),
+    FieldSchema("val3", str, 50, 10, None),
+    FieldSchema("prmr4", str, 60, 10, None),
+    FieldSchema("val4", str, 70, 10, None),
+)
 
 class ParameterNoecho(KeywordBase):
     """DYNA PARAMETER_NOECHO keyword"""
@@ -35,68 +47,10 @@ class ParameterNoecho(KeywordBase):
         """Initialize the ParameterNoecho class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "prmr1",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "val1",
-                        str,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prmr2",
-                        str,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "val2",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prmr3",
-                        str,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "val3",
-                        str,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prmr4",
-                        str,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "val4",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARAMETERNOECHO_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def prmr1(self) -> typing.Optional[str]:
         """Get or set the Define the nth parameter in a field of 10, Within this field the first character must be either an 'R' for a real number or an 'I' for an integer. Lower or upper case for 'I' or 'R' is okay. Following the type designation, define the name of the parameter using up to, but not exceeding 7 characters. For example, when defining a shell thickness named, 'SHLTHK', both inputs 'RSHLTHK' or 'R  SHLTHK' can be used and placed anywhere in the field of 10. When referencing SHLTHK in the input field, place a '&' at the first column of its field followed by the name of the parameter without blanks

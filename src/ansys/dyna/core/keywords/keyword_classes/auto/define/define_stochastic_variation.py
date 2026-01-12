@@ -23,8 +23,39 @@
 """Module providing the DefineStochasticVariation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESTOCHASTICVARIATION_CARD0 = (
+    FieldSchema("id_sv", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("pid_typ", int, 20, 10, 0),
+    FieldSchema("icor", int, 30, 10, 0),
+    FieldSchema("var_s", int, 40, 10, 0),
+    FieldSchema("var_f", int, 50, 10, 0),
+    FieldSchema("irng", int, 60, 10, 0),
+)
+
+_DEFINESTOCHASTICVARIATION_CARD1 = (
+    FieldSchema("r1", float, 0, 10, None),
+    FieldSchema("r2", float, 10, 10, None),
+    FieldSchema("r3", float, 20, 10, None),
+)
+
+_DEFINESTOCHASTICVARIATION_CARD2 = (
+    FieldSchema("lcid", int, 0, 10, None),
+)
+
+_DEFINESTOCHASTICVARIATION_CARD3 = (
+    FieldSchema("r1", float, 0, 10, None),
+    FieldSchema("r2", float, 10, 10, None),
+    FieldSchema("r3", float, 20, 10, None),
+)
+
+_DEFINESTOCHASTICVARIATION_CARD4 = (
+    FieldSchema("lcid", int, 0, 10, None),
+)
 
 class DefineStochasticVariation(KeywordBase):
     """DYNA DEFINE_STOCHASTIC_VARIATION keyword"""
@@ -40,137 +71,22 @@ class DefineStochasticVariation(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id_sv",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid_typ",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icor",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var_s",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var_f",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irng",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESTOCHASTICVARIATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESTOCHASTICVARIATION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESTOCHASTICVARIATION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESTOCHASTICVARIATION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESTOCHASTICVARIATION_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineStochasticVariation.option_specs[0],
                 cards = [
                     Card(
@@ -188,7 +104,6 @@ class DefineStochasticVariation(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def id_sv(self) -> typing.Optional[int]:
         """Get or set the Stochastic variation ID. A unique ID number must be used

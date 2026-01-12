@@ -24,9 +24,19 @@
 import dataclasses
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETPARTLISTGENERATE_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("da1", float, 10, 10, 0.0),
+    FieldSchema("da2", float, 20, 10, 0.0),
+    FieldSchema("da3", float, 30, 10, 0.0),
+    FieldSchema("da4", float, 40, 10, 0.0),
+    FieldSchema("solver", str, 50, 10, "MECH"),
+)
 
 class SetPartListGenerate(KeywordBase):
     """DYNA SET_PART_LIST_GENERATE keyword"""
@@ -48,65 +58,16 @@ class SetPartListGenerate(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        str,
-                        50,
-                        10,
-                        "MECH",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETPARTLISTGENERATE_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "block_ranges",
                 8,
                 10,
                 self.BlockRange,
                 None,
-                data = kwargs.get("block_ranges")),
-            OptionCardSet(
+                data = kwargs.get("block_ranges")),            OptionCardSet(
                 option_spec = SetPartListGenerate.option_specs[0],
                 cards = [
                     Card(
@@ -124,7 +85,6 @@ class SetPartListGenerate(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Part set ID. All part sets should have a unique set ID.

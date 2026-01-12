@@ -23,8 +23,42 @@
 """Module providing the ContactAutomaticSingleSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTAUTOMATICSINGLESURFACE_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("msid", int, 10, 10, None),
+    FieldSchema("sstyp", int, 20, 10, None),
+    FieldSchema("mstyp", int, 30, 10, None),
+    FieldSchema("sboxid", int, 40, 10, None),
+    FieldSchema("mboxid", int, 50, 10, None),
+    FieldSchema("spr", int, 60, 10, None),
+    FieldSchema("mpr", int, 70, 10, None),
+)
+
+_CONTACTAUTOMATICSINGLESURFACE_CARD1 = (
+    FieldSchema("fs", float, 0, 10, 0.0),
+    FieldSchema("fd", float, 10, 10, 0.0),
+    FieldSchema("dc", float, 20, 10, 0.0),
+    FieldSchema("vc", float, 30, 10, 0.0),
+    FieldSchema("vdc", float, 40, 10, 0.0),
+    FieldSchema("penchk", int, 50, 10, 0),
+    FieldSchema("bt", float, 60, 10, 0.0),
+    FieldSchema("dt", float, 70, 10, 0.0),
+)
+
+_CONTACTAUTOMATICSINGLESURFACE_CARD2 = (
+    FieldSchema("sfs", float, 0, 10, 1.0),
+    FieldSchema("sfm", float, 10, 10, 1.0),
+    FieldSchema("sst", float, 20, 10, None),
+    FieldSchema("mst", float, 30, 10, None),
+    FieldSchema("sfst", float, 40, 10, 1.0),
+    FieldSchema("sfmt", float, 50, 10, 1.0),
+    FieldSchema("fsf", float, 60, 10, 1.0),
+    FieldSchema("vsf", float, 70, 10, 1.0),
+)
 
 class ContactAutomaticSingleSurface(KeywordBase):
     """DYNA CONTACT_AUTOMATIC_SINGLE_SURFACE keyword"""
@@ -48,201 +82,16 @@ class ContactAutomaticSingleSurface(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sstyp",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mstyp",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sboxid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mboxid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spr",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mpr",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fs",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vdc",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "penchk",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sfs",
-                        float,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfm",
-                        float,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sst",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mst",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfst",
-                        float,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfmt",
-                        float,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsf",
-                        float,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vsf",
-                        float,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _CONTACTAUTOMATICSINGLESURFACE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTAUTOMATICSINGLESURFACE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTAUTOMATICSINGLESURFACE_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = ContactAutomaticSingleSurface.option_specs[0],
                 cards = [
                     Card(
@@ -525,21 +374,21 @@ class ContactAutomaticSingleSurface(KeywordBase):
                                 float,
                                 20,
                                 10,
-                                kwargs.get("dprfac", 0)
+                                kwargs.get("dprfac", 0.0)
                             ),
                             Field(
                                 "dtstif",
                                 float,
                                 30,
                                 10,
-                                kwargs.get("dtstif", 0)
+                                kwargs.get("dtstif", 0.0)
                             ),
                             Field(
                                 "edgek",
                                 float,
                                 40,
                                 10,
-                                kwargs.get("edgek", 0)
+                                kwargs.get("edgek", 0.0)
                             ),
                             Field(
                                 "flangl",
@@ -577,28 +426,28 @@ class ContactAutomaticSingleSurface(KeywordBase):
                                 float,
                                 10,
                                 10,
-                                kwargs.get("dtpchk", 0)
+                                kwargs.get("dtpchk", 0.0)
                             ),
                             Field(
                                 "sfnbr",
                                 float,
                                 20,
                                 10,
-                                kwargs.get("sfnbr", 0)
+                                kwargs.get("sfnbr", 0.0)
                             ),
                             Field(
                                 "fnlscl",
                                 float,
                                 30,
                                 10,
-                                kwargs.get("fnlscl", 0)
+                                kwargs.get("fnlscl", 0.0)
                             ),
                             Field(
                                 "dnlscl",
                                 float,
                                 40,
                                 10,
-                                kwargs.get("dnlscl", 0)
+                                kwargs.get("dnlscl", 0.0)
                             ),
                             Field(
                                 "tcso",
@@ -769,7 +618,6 @@ class ContactAutomaticSingleSurface(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Slave segment set ID, node set ID, part set ID, part ID, or shell element set ID; see *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set which includes all nodes that may be exposed to contact as element erosion occurs.

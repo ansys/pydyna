@@ -25,12 +25,46 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONSHELLCARDSET_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, 2),
+    FieldSchema("shrf", float, 20, 10, 1.0),
+    FieldSchema("nip", int, 30, 10, 2),
+    FieldSchema("propt", float, 40, 10, 1.0),
+    FieldSchema("qr/irid", int, 50, 10, 0),
+    FieldSchema("icomp", int, 60, 10, 0),
+    FieldSchema("setyp", int, 70, 10, 1),
+)
+
+_SECTIONSHELLCARDSET_CARD1 = (
+    FieldSchema("t1", float, 0, 10, 0.0),
+    FieldSchema("t2", float, 10, 10, 0.0),
+    FieldSchema("t3", float, 20, 10, 0.0),
+    FieldSchema("t4", float, 30, 10, 0.0),
+    FieldSchema("nloc", float, 40, 10, 0.0),
+    FieldSchema("marea", float, 50, 10, 0.0),
+    FieldSchema("idof", float, 60, 10, 0.0),
+    FieldSchema("edgset", int, 70, 10, 0),
+)
+
+_SECTIONSHELLCARDSET_CARD3 = (
+    FieldSchema("nipp", int, 0, 10, 0),
+    FieldSchema("nxdof", int, 10, 10, 0),
+    FieldSchema("iunf", int, 20, 10, 0),
+    FieldSchema("ihgf", int, 30, 10, 0),
+    FieldSchema("itaj", int, 40, 10, 0),
+    FieldSchema("lmc", int, 50, 10, 0),
+    FieldSchema("nhsv", int, 60, 10, 0),
+    FieldSchema("iloc", int, 70, 10, 0),
+)
 
 class SectionShellCardSet(Cards):
     """ CardSet."""
@@ -41,219 +75,24 @@ class SectionShellCardSet(Cards):
         self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nip",
-                        int,
-                        30,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "propt",
-                        float,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr/irid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icomp",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setyp",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nloc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "marea",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idof",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edgset",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONSHELLCARDSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSHELLCARDSET_CARD1,
+                **kwargs,
+            ),            SeriesCard(
                 "angle",
                 8,
                 10,
                 float,
                 lambda: self.nip,
                 lambda: self.icomp == 1,
-                data = kwargs.get("angle")),
-            Card(
-                [
-                    Field(
-                        "nipp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nxdof",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iunf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihgf",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itaj",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmc",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhsv",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iloc",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.elform in [101, 102, 103, 104, 105],
-            ),
-            TableCard(
+                data = kwargs.get("angle")),            Card.from_field_schemas_with_defaults(
+                _SECTIONSHELLCARDSET_CARD3,
+                active_func=lambda: self.elform in [101, 102, 103, 104, 105],
+                **kwargs,
+            ),            TableCard(
                 [
                     Field("xi", float, 0, 10, None),
                     Field("eta", float, 10, 10, None),
@@ -263,16 +102,14 @@ class SectionShellCardSet(Cards):
                 lambda: self.elform in [101, 102, 103, 104, 105],
                 name="integration_points",
                 **kwargs,
-            ),
-            SeriesCard(
+            ),            SeriesCard(
                 "pi",
                 8,
                 10,
                 float,
                 lambda: self.lmc,
                 lambda: self.elform in [101, 102, 103, 104, 105],
-                data = kwargs.get("pi")),
-        ]
+                data = kwargs.get("pi")),        ]
 
     @property
     def secid(self) -> typing.Optional[int]:
@@ -684,8 +521,7 @@ class SectionShell(KeywordBase):
             CardSet(
                 SectionShellCardSet,
                 **kwargs
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = SectionShell.option_specs[0],
                 cards = [
                     Card(
@@ -703,7 +539,6 @@ class SectionShell(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the secid

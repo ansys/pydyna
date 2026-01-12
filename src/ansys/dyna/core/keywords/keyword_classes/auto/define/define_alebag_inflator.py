@@ -23,8 +23,37 @@
 """Module providing the DefineAlebagInflator class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEALEBAGINFLATOR_CARD0 = (
+    FieldSchema("infid", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("ngas", int, 40, 10, 0),
+    FieldSchema("norif", int, 50, 10, 0),
+    FieldSchema("lcvel", int, 60, 10, None),
+    FieldSchema("lct", int, 70, 10, None),
+)
+
+_DEFINEALEBAGINFLATOR_CARD1 = (
+    FieldSchema("lcidm", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("mwgas", float, 30, 10, 0.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("gasa", float, 50, 10, 0.0),
+    FieldSchema("gasb", float, 60, 10, 0.0),
+    FieldSchema("gasc", float, 70, 10, 0.0),
+)
+
+_DEFINEALEBAGINFLATOR_CARD2 = (
+    FieldSchema("nodeid", int, 0, 10, 0),
+    FieldSchema("vecid", int, 10, 10, 0),
+    FieldSchema("orifare", float, 20, 10, 0.0),
+)
 
 class DefineAlebagInflator(KeywordBase):
     """DYNA DEFINE_ALEBAG_INFLATOR keyword"""
@@ -40,161 +69,16 @@ class DefineAlebagInflator(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "infid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ngas",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "norif",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvel",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidm",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mwgas",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gasa",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gasb",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gasc",
-                        float,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nodeid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orifare",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEALEBAGINFLATOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEALEBAGINFLATOR_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEALEBAGINFLATOR_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineAlebagInflator.option_specs[0],
                 cards = [
                     Card(
@@ -212,7 +96,6 @@ class DefineAlebagInflator(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def infid(self) -> typing.Optional[int]:
         """Get or set the Inflator ID.

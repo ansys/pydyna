@@ -23,7 +23,32 @@
 """Module providing the IcfdDefinePoint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDEFINEPOINT_CARD0 = (
+    FieldSchema("poid", int, 0, 10, None),
+    FieldSchema("x", float, 10, 10, None),
+    FieldSchema("y", float, 20, 10, None),
+    FieldSchema("z", float, 30, 10, None),
+    FieldSchema("constpid", int, 40, 10, None),
+)
+
+_ICFDDEFINEPOINT_CARD1 = (
+    FieldSchema("lcidx", int, 0, 10, None),
+    FieldSchema("lcidy", int, 10, 10, None),
+    FieldSchema("lcidz", int, 20, 10, None),
+)
+
+_ICFDDEFINEPOINT_CARD2 = (
+    FieldSchema("lcidw", int, 0, 10, None),
+    FieldSchema("xt", float, 10, 10, None),
+    FieldSchema("yt", float, 20, 10, None),
+    FieldSchema("zt", float, 30, 10, None),
+    FieldSchema("xh", float, 40, 10, None),
+    FieldSchema("yh", float, 50, 10, None),
+    FieldSchema("zh", float, 60, 10, None),
+)
 
 class IcfdDefinePoint(KeywordBase):
     """DYNA ICFD_DEFINE_POINT keyword"""
@@ -35,125 +60,16 @@ class IcfdDefinePoint(KeywordBase):
         """Initialize the IcfdDefinePoint class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "poid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "constpid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidx",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidw",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xh",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yh",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zh",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINEPOINT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINEPOINT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINEPOINT_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def poid(self) -> typing.Optional[int]:
         """Get or set the Point ID.

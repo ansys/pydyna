@@ -23,8 +23,17 @@
 """Module providing the DefineHazTailorWeldedBlank class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEHAZTAILORWELDEDBLANK_CARD0 = (
+    FieldSchema("idtwb", int, 0, 10, 0),
+    FieldSchema("idns", int, 10, 10, 0),
+    FieldSchema("idp", int, 20, 10, 0),
+    FieldSchema("ipflag", int, 30, 10, 0),
+    FieldSchema("imonflag", int, 40, 10, 0),
+)
 
 class DefineHazTailorWeldedBlank(KeywordBase):
     """DYNA DEFINE_HAZ_TAILOR_WELDED_BLANK keyword"""
@@ -40,51 +49,10 @@ class DefineHazTailorWeldedBlank(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idtwb",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idns",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipflag",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imonflag",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEHAZTAILORWELDEDBLANK_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineHazTailorWeldedBlank.option_specs[0],
                 cards = [
                     Card(
@@ -102,7 +70,6 @@ class DefineHazTailorWeldedBlank(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def idtwb(self) -> int:
         """Get or set the Tailor Welded Blank ID.

@@ -23,7 +23,19 @@
 """Module providing the InitialContactWear class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALCONTACTWEAR_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("wdepth", float, 20, 10, None),
+    FieldSchema("nx", float, 30, 10, None),
+    FieldSchema("ny", float, 40, 10, None),
+    FieldSchema("nz", float, 50, 10, None),
+    FieldSchema("iseq", int, 60, 10, None),
+    FieldSchema("ncyc", int, 70, 10, None),
+)
 
 class InitialContactWear(KeywordBase):
     """DYNA INITIAL_CONTACT_WEAR keyword"""
@@ -35,68 +47,10 @@ class InitialContactWear(KeywordBase):
         """Initialize the InitialContactWear class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wdepth",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nx",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ny",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iseq",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncyc",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALCONTACTWEAR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the contact Interface ID.

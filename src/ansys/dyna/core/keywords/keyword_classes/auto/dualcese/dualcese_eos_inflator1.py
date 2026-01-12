@@ -23,7 +23,28 @@
 """Module providing the DualceseEosInflator1 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEEOSINFLATOR1_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+)
+
+_DUALCESEEOSINFLATOR1_CARD1 = (
+    FieldSchema("cp0", float, 0, 10, 0.0),
+    FieldSchema("cp1", float, 10, 10, 0.0),
+    FieldSchema("cp2", float, 20, 10, 0.0),
+    FieldSchema("cp3", float, 30, 10, 0.0),
+    FieldSchema("cp4", float, 40, 10, 0.0),
+)
+
+_DUALCESEEOSINFLATOR1_CARD2 = (
+    FieldSchema("cv0", float, 0, 10, 0.0),
+    FieldSchema("cv1", float, 10, 10, 0.0),
+    FieldSchema("cv2", float, 20, 10, 0.0),
+    FieldSchema("cv3", float, 30, 10, 0.0),
+    FieldSchema("cv4", float, 40, 10, 0.0),
+)
 
 class DualceseEosInflator1(KeywordBase):
     """DYNA DUALCESE_EOS_INFLATOR1 keyword"""
@@ -35,107 +56,16 @@ class DualceseEosInflator1(KeywordBase):
         """Initialize the DualceseEosInflator1 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cp0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cv0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSINFLATOR1_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSINFLATOR1_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSINFLATOR1_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state identifier

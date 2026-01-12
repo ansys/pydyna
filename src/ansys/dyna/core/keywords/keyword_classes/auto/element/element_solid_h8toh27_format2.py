@@ -23,7 +23,26 @@
 """Module providing the ElementSolidH8Toh27Format2 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTSOLIDH8TOH27FORMAT2_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("pid", int, 8, 8, None),
+)
+
+_ELEMENTSOLIDH8TOH27FORMAT2_CARD1 = (
+    FieldSchema("n1", int, 0, 8, None),
+    FieldSchema("n2", int, 8, 8, None),
+    FieldSchema("n3", int, 16, 8, None),
+    FieldSchema("n4", int, 24, 8, None),
+    FieldSchema("n5", int, 32, 8, None),
+    FieldSchema("n6", int, 40, 8, None),
+    FieldSchema("n7", int, 48, 8, None),
+    FieldSchema("n8", int, 56, 8, None),
+    FieldSchema("n9", int, 64, 8, None),
+    FieldSchema("n10", int, 72, 8, None),
+)
 
 class ElementSolidH8Toh27Format2(KeywordBase):
     """DYNA ELEMENT_SOLID_H8TOH27_FORMAT2 keyword"""
@@ -35,100 +54,13 @@ class ElementSolidH8Toh27Format2(KeywordBase):
         """Initialize the ElementSolidH8Toh27Format2 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        int,
-                        24,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        int,
-                        32,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        int,
-                        40,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n7",
-                        int,
-                        48,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n8",
-                        int,
-                        56,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n9",
-                        int,
-                        64,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n10",
-                        int,
-                        72,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDH8TOH27FORMAT2_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSOLIDH8TOH27FORMAT2_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.

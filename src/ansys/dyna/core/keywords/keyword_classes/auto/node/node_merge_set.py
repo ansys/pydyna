@@ -23,7 +23,12 @@
 """Module providing the NodeMergeSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_NODEMERGESET_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+)
 
 class NodeMergeSet(KeywordBase):
     """DYNA NODE_MERGE_SET keyword"""
@@ -35,19 +40,10 @@ class NodeMergeSet(KeywordBase):
         """Initialize the NodeMergeSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _NODEMERGESET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing list of nodes to be considered for merging.

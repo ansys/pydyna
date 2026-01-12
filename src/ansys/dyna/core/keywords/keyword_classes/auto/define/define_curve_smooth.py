@@ -23,8 +23,19 @@
 """Module providing the DefineCurveSmooth class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECURVESMOOTH_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("sidr", int, 10, 10, 0),
+    FieldSchema("dist", float, 20, 10, None),
+    FieldSchema("tstart", float, 30, 10, None),
+    FieldSchema("tend", float, 40, 10, None),
+    FieldSchema("trise", float, 50, 10, None),
+    FieldSchema("vmax", float, 60, 10, None),
+)
 
 class DefineCurveSmooth(KeywordBase):
     """DYNA DEFINE_CURVE_SMOOTH keyword"""
@@ -40,61 +51,10 @@ class DefineCurveSmooth(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidr",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tstart",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "trise",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vmax",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECURVESMOOTH_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCurveSmooth.option_specs[0],
                 cards = [
                     Card(
@@ -112,7 +72,6 @@ class DefineCurveSmooth(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID. A unique number must be defined.

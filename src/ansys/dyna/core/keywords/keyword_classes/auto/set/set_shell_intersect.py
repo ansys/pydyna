@@ -23,9 +23,14 @@
 """Module providing the SetShellIntersect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETSHELLINTERSECT_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
 
 class SetShellIntersect(KeywordBase):
     """DYNA SET_SHELL_INTERSECT keyword"""
@@ -41,25 +46,16 @@ class SetShellIntersect(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETSHELLINTERSECT_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "shells",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("shells")),
-            OptionCardSet(
+                data = kwargs.get("shells")),            OptionCardSet(
                 option_spec = SetShellIntersect.option_specs[0],
                 cards = [
                     Card(
@@ -77,7 +73,6 @@ class SetShellIntersect(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Shell element set ID. All shell sets should have a unique set ID.

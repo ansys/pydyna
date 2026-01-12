@@ -23,7 +23,12 @@
 """Module providing the FrequencyDomainAcousticFringePlotPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINACOUSTICFRINGEPLOTPART_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+)
 
 class FrequencyDomainAcousticFringePlotPart(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_ACOUSTIC_FRINGE_PLOT_PART keyword"""
@@ -35,19 +40,10 @@ class FrequencyDomainAcousticFringePlotPart(KeywordBase):
         """Initialize the FrequencyDomainAcousticFringePlotPart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICFRINGEPLOTPART_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID.

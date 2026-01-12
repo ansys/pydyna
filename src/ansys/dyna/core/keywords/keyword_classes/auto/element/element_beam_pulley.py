@@ -23,7 +23,19 @@
 """Module providing the ElementBeamPulley class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTBEAMPULLEY_CARD0 = (
+    FieldSchema("puid", int, 0, 10, 0),
+    FieldSchema("bid1", int, 10, 10, 0),
+    FieldSchema("bid2", int, 20, 10, 0),
+    FieldSchema("pnid", int, 30, 10, 0),
+    FieldSchema("fd", float, 40, 10, 0.0),
+    FieldSchema("fs", float, 50, 10, 0.0),
+    FieldSchema("lmin", float, 60, 10, 0.0),
+    FieldSchema("dc", float, 70, 10, 0.0),
+)
 
 class ElementBeamPulley(KeywordBase):
     """DYNA ELEMENT_BEAM_PULLEY keyword"""
@@ -35,76 +47,10 @@ class ElementBeamPulley(KeywordBase):
         """Initialize the ElementBeamPulley class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "puid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bid1",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bid2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pnid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmin",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTBEAMPULLEY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def puid(self) -> int:
         """Get or set the Pulley ID. A unique number has to be used.

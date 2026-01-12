@@ -23,7 +23,48 @@
 """Module providing the ContactSpg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTSPG_CARD0 = (
+    FieldSchema("pid1", int, 0, 10, None),
+    FieldSchema("pid2", int, 10, 10, None),
+    FieldSchema("pid3", int, 20, 10, None),
+    FieldSchema("pid4", int, 30, 10, None),
+    FieldSchema("pid5", int, 40, 10, None),
+    FieldSchema("pid6", int, 50, 10, None),
+    FieldSchema("pid7", int, 60, 10, None),
+    FieldSchema("pid8", int, 70, 10, None),
+)
+
+_CONTACTSPG_CARD1 = (
+    FieldSchema("iself1", int, 0, 10, None),
+    FieldSchema("iself2", int, 10, 10, None),
+    FieldSchema("iself3", int, 20, 10, None),
+    FieldSchema("iself4", int, 30, 10, None),
+    FieldSchema("iself5", int, 40, 10, None),
+    FieldSchema("iself6", int, 50, 10, None),
+    FieldSchema("iself7", int, 60, 10, None),
+    FieldSchema("iself8", int, 70, 10, None),
+)
+
+_CONTACTSPG_CARD2 = (
+    FieldSchema("pfac1", float, 0, 10, None),
+    FieldSchema("pfac2", float, 10, 10, None),
+    FieldSchema("pfac3", float, 20, 10, None),
+    FieldSchema("pfac4", float, 30, 10, None),
+    FieldSchema("pfac5", float, 40, 10, None),
+    FieldSchema("pfac6", float, 50, 10, None),
+    FieldSchema("pfac7", float, 60, 10, None),
+    FieldSchema("pfac8", float, 70, 10, None),
+)
+
+_CONTACTSPG_CARD3 = (
+    FieldSchema("fs", float, 0, 10, None),
+    FieldSchema("fd", float, 10, 10, None),
+    FieldSchema("dc", float, 20, 10, None),
+    FieldSchema("nfreq", float, 30, 10, None),
+)
 
 class ContactSpg(KeywordBase):
     """DYNA CONTACT_SPG keyword"""
@@ -35,220 +76,19 @@ class ContactSpg(KeywordBase):
         """Initialize the ContactSpg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iself1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iself2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iself3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iself4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iself5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iself6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iself7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iself8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pfac1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fs",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACTSPG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTSPG_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTSPG_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTSPG_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def pid1(self) -> typing.Optional[int]:
         """Get or set the Part IDs of SPG parts involved in particle contact

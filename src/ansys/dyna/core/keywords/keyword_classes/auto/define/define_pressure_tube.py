@@ -23,8 +23,44 @@
 """Module providing the DefinePressureTube class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEPRESSURETUBE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, 0),
+    FieldSchema("ws", float, 10, 10, 0.0),
+    FieldSchema("pr", float, 20, 10, 0.0),
+    FieldSchema("mtd", int, 30, 10, 0),
+    FieldSchema("type", int, 40, 10, 0),
+)
+
+_DEFINEPRESSURETUBE_CARD1 = (
+    FieldSchema("visc", float, 0, 10, 1.0),
+    FieldSchema("cfl", float, 10, 10, 0.9),
+    FieldSchema("damp", float, 20, 10, 0.0),
+    FieldSchema("bndl", float, 30, 10, 0.0),
+    FieldSchema("bndr", float, 40, 10, 0.0),
+    FieldSchema("cavl", float, 50, 10, 0.0),
+    FieldSchema("cavr", float, 60, 10, 0.0),
+    FieldSchema("snode", int, 70, 10, 0),
+)
+
+_DEFINEPRESSURETUBE_CARD2 = (
+    FieldSchema("nshl", int, 0, 10, 12),
+    FieldSchema("elform", int, 10, 10, 16),
+    FieldSchema("nip", int, 20, 10, 3),
+    FieldSchema("shrf", float, 30, 10, 1.0),
+    FieldSchema("bpid", int, 40, 10, None),
+)
+
+_DEFINEPRESSURETUBE_CARD3 = (
+    FieldSchema("nsld", int, 0, 10, 12),
+    FieldSchema("elform", int, 10, 10, 1),
+    FieldSchema("nthk", int, 20, 10, 3),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("bpid", int, 40, 10, None),
+)
 
 class DefinePressureTube(KeywordBase):
     """DYNA DEFINE_PRESSURE_TUBE keyword"""
@@ -40,204 +76,19 @@ class DefinePressureTube(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ws",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtd",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "visc",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfl",
-                        float,
-                        10,
-                        10,
-                        0.9,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bndl",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bndr",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cavl",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cavr",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "snode",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nshl",
-                        int,
-                        0,
-                        10,
-                        12,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nip",
-                        int,
-                        20,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bpid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsld",
-                        int,
-                        0,
-                        10,
-                        12,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthk",
-                        int,
-                        20,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bpid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEPRESSURETUBE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPRESSURETUBE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPRESSURETUBE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPRESSURETUBE_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefinePressureTube.option_specs[0],
                 cards = [
                     Card(
@@ -255,7 +106,6 @@ class DefinePressureTube(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> int:
         """Get or set the Part ID of tube. The tube(s) consists of all the beam elements in the

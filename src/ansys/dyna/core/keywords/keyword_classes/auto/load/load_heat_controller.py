@@ -23,7 +23,18 @@
 """Module providing the LoadHeatController class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADHEATCONTROLLER_CARD0 = (
+    FieldSchema("node", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("load", float, 20, 10, None),
+    FieldSchema("tset", float, 30, 10, None),
+    FieldSchema("type", int, 40, 10, None),
+    FieldSchema("gp", float, 50, 10, None),
+    FieldSchema("gi", float, 60, 10, None),
+)
 
 class LoadHeatController(KeywordBase):
     """DYNA LOAD_HEAT_CONTROLLER keyword"""
@@ -35,61 +46,10 @@ class LoadHeatController(KeywordBase):
         """Initialize the LoadHeatController class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "node",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "load",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tset",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gp",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gi",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADHEATCONTROLLER_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def node(self) -> typing.Optional[int]:
         """Get or set the Sensor is located at this node number.

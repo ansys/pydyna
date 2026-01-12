@@ -23,8 +23,26 @@
 """Module providing the SetNodeListGenerateIncrementCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETNODELISTGENERATEINCREMENTCOLLECT_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("da1", float, 10, 10, 0.0),
+    FieldSchema("da2", float, 20, 10, 0.0),
+    FieldSchema("da3", float, 30, 10, 0.0),
+    FieldSchema("da4", float, 40, 10, 0.0),
+    FieldSchema("solver", str, 50, 10, "MECH"),
+    FieldSchema("its", str, 60, 10, "1"),
+    FieldSchema("unused", str, 70, 10, None),
+)
+
+_SETNODELISTGENERATEINCREMENTCOLLECT_CARD1 = (
+    FieldSchema("bbeg", int, 0, 10, None),
+    FieldSchema("bend", int, 10, 10, None),
+    FieldSchema("incr", int, 20, 10, None),
+)
 
 class SetNodeListGenerateIncrementCollect(KeywordBase):
     """DYNA SET_NODE_LIST_GENERATE_INCREMENT_COLLECT keyword"""
@@ -40,98 +58,13 @@ class SetNodeListGenerateIncrementCollect(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        str,
-                        50,
-                        10,
-                        "MECH",
-                        **kwargs,
-                    ),
-                    Field(
-                        "its",
-                        str,
-                        60,
-                        10,
-                        "1",
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bbeg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bend",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "incr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETNODELISTGENERATEINCREMENTCOLLECT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETNODELISTGENERATEINCREMENTCOLLECT_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetNodeListGenerateIncrementCollect.option_specs[0],
                 cards = [
                     Card(
@@ -149,7 +82,6 @@ class SetNodeListGenerateIncrementCollect(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Node set ID. All node sets should have a unique set ID.

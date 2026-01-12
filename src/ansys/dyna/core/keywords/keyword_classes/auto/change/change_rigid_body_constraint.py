@@ -23,7 +23,14 @@
 """Module providing the ChangeRigidBodyConstraint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHANGERIGIDBODYCONSTRAINT_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("tc", int, 10, 10, 0),
+    FieldSchema("rc", int, 20, 10, 0),
+)
 
 class ChangeRigidBodyConstraint(KeywordBase):
     """DYNA CHANGE_RIGID_BODY_CONSTRAINT keyword"""
@@ -35,35 +42,10 @@ class ChangeRigidBodyConstraint(KeywordBase):
         """Initialize the ChangeRigidBodyConstraint class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tc",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rc",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGERIGIDBODYCONSTRAINT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID, see *PART.

@@ -23,8 +23,18 @@
 """Module providing the DefineControlVolumeFlowArea class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECONTROLVOLUMEFLOWAREA_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("sid", int, 10, 10, None),
+    FieldSchema("stype", int, 20, 10, 1),
+    FieldSchema("pid ", int, 30, 10, 0),
+    FieldSchema("area ", float, 40, 10, None),
+    FieldSchema("cviid ", float, 50, 10, None),
+)
 
 class DefineControlVolumeFlowArea(KeywordBase):
     """DYNA DEFINE_CONTROL_VOLUME_FLOW_AREA keyword"""
@@ -40,55 +50,10 @@ class DefineControlVolumeFlowArea(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid ",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area ",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cviid ",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECONTROLVOLUMEFLOWAREA_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineControlVolumeFlowArea.option_specs[0],
                 cards = [
                     Card(
@@ -106,7 +71,6 @@ class DefineControlVolumeFlowArea(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Flow area ID.

@@ -23,7 +23,16 @@
 """Module providing the ConstrainedFemPeriTieBreak class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDFEMPERITIEBREAK_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("msid", int, 10, 10, None),
+    FieldSchema("ssid", int, 20, 10, None),
+    FieldSchema("ft", int, 30, 10, 100000000000000000000),
+    FieldSchema("fs", int, 40, 10, 100000000000000000000),
+)
 
 class ConstrainedFemPeriTieBreak(KeywordBase):
     """DYNA CONSTRAINED_FEM_PERI_TIE_BREAK keyword"""
@@ -35,49 +44,10 @@ class ConstrainedFemPeriTieBreak(KeywordBase):
         """Initialize the ConstrainedFemPeriTieBreak class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ft",
-                        int,
-                        30,
-                        10,
-                        100000000000000000000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        int,
-                        40,
-                        10,
-                        100000000000000000000,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDFEMPERITIEBREAK_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact ID.

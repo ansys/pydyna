@@ -23,7 +23,24 @@
 """Module providing the ElementInertia class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTINERTIA_CARD0 = (
+    FieldSchema("eid", int, 0, 8, None),
+    FieldSchema("nid", int, 8, 8, None),
+    FieldSchema("csid", int, 16, 8, None),
+)
+
+_ELEMENTINERTIA_CARD1 = (
+    FieldSchema("ixx", float, 0, 10, 0.0),
+    FieldSchema("ixy", float, 10, 10, 0.0),
+    FieldSchema("ixz", float, 20, 10, 0.0),
+    FieldSchema("iyy", float, 30, 10, 0.0),
+    FieldSchema("iyz", float, 40, 10, 0.0),
+    FieldSchema("izz", float, 50, 10, 0.0),
+    FieldSchema("mass", float, 60, 10, 0.0),
+)
 
 class ElementInertia(KeywordBase):
     """DYNA ELEMENT_INERTIA keyword"""
@@ -35,93 +52,13 @@ class ElementInertia(KeywordBase):
         """Initialize the ElementInertia class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        8,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csid",
-                        int,
-                        16,
-                        8,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ixx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iyy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iyz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "izz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mass",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTINERTIA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTINERTIA_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.

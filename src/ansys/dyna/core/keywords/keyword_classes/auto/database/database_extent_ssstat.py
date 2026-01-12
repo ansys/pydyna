@@ -23,7 +23,19 @@
 """Module providing the DatabaseExtentSsstat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEEXTENTSSSTAT_CARD0 = (
+    FieldSchema("psid1", int, 0, 10, None),
+    FieldSchema("psid2", int, 10, 10, None),
+    FieldSchema("psid3", int, 20, 10, None),
+    FieldSchema("psid4", int, 30, 10, None),
+    FieldSchema("psid5", int, 40, 10, None),
+    FieldSchema("psid6", int, 50, 10, None),
+    FieldSchema("psid7", int, 60, 10, None),
+    FieldSchema("psid8", int, 70, 10, None),
+)
 
 class DatabaseExtentSsstat(KeywordBase):
     """DYNA DATABASE_EXTENT_SSSTAT keyword"""
@@ -35,68 +47,10 @@ class DatabaseExtentSsstat(KeywordBase):
         """Initialize the DatabaseExtentSsstat class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTSSSTAT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid1(self) -> typing.Optional[int]:
         """Get or set the Part set ID for subsystem 1, see *SET_PART.

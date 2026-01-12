@@ -23,8 +23,25 @@
 """Module providing the MatAleHerschel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATALEHERSCHEL_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("pc", float, 20, 10, None),
+    FieldSchema("mulo", float, 30, 10, None),
+    FieldSchema("muhi", float, 40, 10, None),
+    FieldSchema("rk", float, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("rn", float, 70, 10, None),
+)
+
+_MATALEHERSCHEL_CARD1 = (
+    FieldSchema("gdotc", float, 0, 10, None),
+    FieldSchema("tao0", float, 10, 10, None),
+)
 
 class MatAleHerschel(KeywordBase):
     """DYNA MAT_ALE_HERSCHEL keyword"""
@@ -40,85 +57,13 @@ class MatAleHerschel(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mulo",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "muhi",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rk",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rn",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gdotc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tao0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATALEHERSCHEL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATALEHERSCHEL_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAleHerschel.option_specs[0],
                 cards = [
                     Card(
@@ -136,7 +81,6 @@ class MatAleHerschel(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

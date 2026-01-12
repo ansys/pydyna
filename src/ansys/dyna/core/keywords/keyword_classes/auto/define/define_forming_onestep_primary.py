@@ -23,8 +23,13 @@
 """Module providing the DefineFormingOnestepPrimary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEFORMINGONESTEPPRIMARY_CARD0 = (
+    FieldSchema("slpid", int, 0, 10, None),
+)
 
 class DefineFormingOnestepPrimary(KeywordBase):
     """DYNA DEFINE_FORMING_ONESTEP_PRIMARY keyword"""
@@ -40,18 +45,10 @@ class DefineFormingOnestepPrimary(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "slpid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFORMINGONESTEPPRIMARY_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFormingOnestepPrimary.option_specs[0],
                 cards = [
                     Card(
@@ -69,7 +66,6 @@ class DefineFormingOnestepPrimary(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def slpid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the primary blank to which a constrained blank is welded using* CONSTRAINED_SPOTWELD

@@ -23,7 +23,19 @@
 """Module providing the IcfdDefineNoninertial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDEFINENONINERTIAL_CARD0 = (
+    FieldSchema("w1", float, 0, 10, None),
+    FieldSchema("w2", float, 10, 10, None),
+    FieldSchema("w3", float, 20, 10, None),
+    FieldSchema("r", float, 30, 10, None),
+    FieldSchema("ptid", int, 40, 10, None),
+    FieldSchema("l", float, 50, 10, None),
+    FieldSchema("lcid", int, 60, 10, None),
+    FieldSchema("relv", int, 70, 10, 0),
+)
 
 class IcfdDefineNoninertial(KeywordBase):
     """DYNA ICFD_DEFINE_NONINERTIAL keyword"""
@@ -35,69 +47,10 @@ class IcfdDefineNoninertial(KeywordBase):
         """Initialize the IcfdDefineNoninertial class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "w1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "relv",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINENONINERTIAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def w1(self) -> typing.Optional[float]:
         """Get or set the Rotational Velocity along the X,Y,Z axes

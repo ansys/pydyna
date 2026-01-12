@@ -23,7 +23,22 @@
 """Module providing the ContactGuidedCableSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTGUIDEDCABLESET_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_CONTACTGUIDEDCABLESET_CARD1 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("psid", int, 10, 10, None),
+    FieldSchema("soft", int, 20, 10, 0),
+    FieldSchema("ssfac", float, 30, 10, 1.0),
+    FieldSchema("fric", float, 40, 10, None),
+    FieldSchema("endtol", float, 50, 10, None),
+)
 
 class ContactGuidedCableSet(KeywordBase):
     """DYNA CONTACT_GUIDED_CABLE_SET keyword"""
@@ -35,74 +50,13 @@ class ContactGuidedCableSet(KeywordBase):
         """Initialize the ContactGuidedCableSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soft",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssfac",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endtol",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACTGUIDEDCABLESET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTGUIDEDCABLESET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact interface ID. This must be a unique number.

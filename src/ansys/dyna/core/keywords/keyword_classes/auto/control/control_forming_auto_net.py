@@ -23,7 +23,24 @@
 """Module providing the ControlFormingAutoNet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGAUTONET_CARD0 = (
+    FieldSchema("idnet", int, 0, 10, None),
+    FieldSchema("itype", str, 10, 10, None),
+    FieldSchema("idv", int, 20, 10, 0),
+    FieldSchema("idp", int, 30, 10, 0),
+    FieldSchema("x", float, 40, 10, 0.0),
+    FieldSchema("y", float, 50, 10, 0.0),
+    FieldSchema("z", float, 60, 10, 0.0),
+)
+
+_CONTROLFORMINGAUTONET_CARD1 = (
+    FieldSchema("sx", float, 0, 10, 0.0),
+    FieldSchema("sy", float, 10, 10, 0.0),
+    FieldSchema("offset", float, 20, 10, 0.0),
+)
 
 class ControlFormingAutoNet(KeywordBase):
     """DYNA CONTROL_FORMING_AUTO_NET keyword"""
@@ -35,94 +52,13 @@ class ControlFormingAutoNet(KeywordBase):
         """Initialize the ControlFormingAutoNet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idnet",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        str,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idv",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGAUTONET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGAUTONET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def idnet(self) -> typing.Optional[int]:
         """Get or set the ID of the net; must be unique.

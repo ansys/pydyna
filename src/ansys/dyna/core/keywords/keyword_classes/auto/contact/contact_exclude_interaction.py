@@ -23,7 +23,20 @@
 """Module providing the ContactExcludeInteraction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTEXCLUDEINTERACTION_CARD0 = (
+    FieldSchema("ceid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+)
+
+_CONTACTEXCLUDEINTERACTION_CARD1 = (
+    FieldSchema("sid2", int, 0, 10, None),
+    FieldSchema("sid1", int, 10, 10, None),
+    FieldSchema("type2", int, 20, 10, 0),
+    FieldSchema("type1", int, 30, 10, 0),
+)
 
 class ContactExcludeInteraction(KeywordBase):
     """DYNA CONTACT_EXCLUDE_INTERACTION keyword"""
@@ -35,60 +48,13 @@ class ContactExcludeInteraction(KeywordBase):
         """Initialize the ContactExcludeInteraction class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ceid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid2",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type2",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACTEXCLUDEINTERACTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTEXCLUDEINTERACTION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ceid(self) -> typing.Optional[int]:
         """Get or set the Contact exclusion ID for output only

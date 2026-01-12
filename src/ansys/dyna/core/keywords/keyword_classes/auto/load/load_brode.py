@@ -23,7 +23,25 @@
 """Module providing the LoadBrode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADBRODE_CARD0 = (
+    FieldSchema("yld", float, 0, 10, 0.0),
+    FieldSchema("bht", float, 10, 10, 0.0),
+    FieldSchema("xbo", float, 20, 10, 0.0),
+    FieldSchema("ybo", float, 30, 10, 0.0),
+    FieldSchema("zbo", float, 40, 10, 0.0),
+    FieldSchema("tbo", float, 50, 10, 0.0),
+    FieldSchema("talc", int, 60, 10, 0),
+    FieldSchema("sflc", int, 70, 10, 0),
+)
+
+_LOADBRODE_CARD1 = (
+    FieldSchema("cfl", float, 0, 10, 0.0),
+    FieldSchema("cft", float, 10, 10, 0.0),
+    FieldSchema("cfp", float, 20, 10, 0.0),
+)
 
 class LoadBrode(KeywordBase):
     """DYNA LOAD_BRODE keyword"""
@@ -35,104 +53,13 @@ class LoadBrode(KeywordBase):
         """Initialize the LoadBrode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "yld",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bht",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xbo",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ybo",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zbo",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbo",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "talc",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sflc",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cfl",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cft",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfp",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADBRODE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADBRODE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def yld(self) -> float:
         """Get or set the Yield (Kt, equivalent tons of TNT).

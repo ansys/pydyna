@@ -23,8 +23,20 @@
 """Module providing the SensorSwitchCalcLogic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SENSORSWITCHCALCLOGIC_CARD0 = (
+    FieldSchema("switid", int, 0, 10, None),
+    FieldSchema("swit1", int, 10, 10, None),
+    FieldSchema("swit2", int, 20, 10, None),
+    FieldSchema("swit3", int, 30, 10, None),
+    FieldSchema("swit4", int, 40, 10, None),
+    FieldSchema("swit5", int, 50, 10, None),
+    FieldSchema("swit6", int, 60, 10, None),
+    FieldSchema("swit7", int, 70, 10, None),
+)
 
 class SensorSwitchCalcLogic(KeywordBase):
     """DYNA SENSOR_SWITCH_CALC_LOGIC keyword"""
@@ -40,67 +52,10 @@ class SensorSwitchCalcLogic(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "switid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit5",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit6",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit7",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORSWITCHCALCLOGIC_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorSwitchCalcLogic.option_specs[0],
                 cards = [
                     Card(
@@ -118,7 +73,6 @@ class SensorSwitchCalcLogic(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def switid(self) -> typing.Optional[int]:
         """Get or set the Switch ID can be referred directly by *SENSOR_CONTROL to control the status of entities like CONTACT and AIRBAG, or can be referred to by *SENSOR_SWITCH_CALC-LOGIC for logic computation.

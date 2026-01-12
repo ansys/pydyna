@@ -23,7 +23,19 @@
 """Module providing the FrequencyDomainAcousticFringePlotPlate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINACOUSTICFRINGEPLOTPLATE_CARD0 = (
+    FieldSchema("norm", int, 0, 10, 1),
+    FieldSchema("len_x", float, 10, 10, None),
+    FieldSchema("len_y", float, 20, 10, None),
+    FieldSchema("x", float, 30, 10, None),
+    FieldSchema("y", float, 40, 10, None),
+    FieldSchema("z", float, 50, 10, None),
+    FieldSchema("nelm_x", int, 60, 10, 10),
+    FieldSchema("nelm_y", int, 70, 10, 10),
+)
 
 class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_ACOUSTIC_FRINGE_PLOT_PLATE keyword"""
@@ -35,71 +47,10 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
         """Initialize the FrequencyDomainAcousticFringePlotPlate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "norm",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "len_x",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "len_y",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nelm_x",
-                        int,
-                        60,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nelm_y",
-                        int,
-                        70,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICFRINGEPLOTPLATE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def norm(self) -> int:
         """Get or set the Norm direction of the plate.

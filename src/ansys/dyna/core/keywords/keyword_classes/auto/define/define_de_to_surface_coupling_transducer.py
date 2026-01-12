@@ -23,8 +23,49 @@
 """Module providing the DefineDeToSurfaceCouplingTransducer class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD0 = (
+    FieldSchema("slave", int, 0, 10, None),
+    FieldSchema("master", int, 10, 10, None),
+    FieldSchema("stype", int, 20, 10, 0),
+    FieldSchema("mtype", int, 30, 10, 0),
+)
+
+_DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD1 = (
+    FieldSchema("frics", float, 0, 10, None),
+    FieldSchema("fricd", float, 10, 10, None),
+    FieldSchema("damp", float, 20, 10, None),
+    FieldSchema("bsort", int, 30, 10, 100),
+    FieldSchema("lcvx", int, 40, 10, 0),
+    FieldSchema("lcvy", int, 50, 10, 0),
+    FieldSchema("lcvz", int, 60, 10, 0),
+    FieldSchema("wearc", float, 70, 10, 0.0),
+)
+
+_DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD2 = (
+    FieldSchema("w1", float, 0, 10, None),
+    FieldSchema("w2", float, 10, 10, None),
+    FieldSchema("w3", float, 20, 10, None),
+    FieldSchema("w4", float, 30, 10, None),
+    FieldSchema("w5", float, 40, 10, None),
+    FieldSchema("w6", float, 50, 10, None),
+    FieldSchema("w7", float, 60, 10, None),
+    FieldSchema("w8", float, 70, 10, None),
+)
+
+_DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD3 = (
+    FieldSchema("sfp", float, 0, 10, 1.0),
+    FieldSchema("sft", float, 10, 10, 1.0),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("cid_rcf", int, 50, 10, 0),
+    FieldSchema("bt", float, 60, 10, 0.0),
+    FieldSchema("dt", float, 70, 10, 1e+20),
+)
 
 class DefineDeToSurfaceCouplingTransducer(KeywordBase):
     """DYNA DEFINE_DE_TO_SURFACE_COUPLING_TRANSDUCER keyword"""
@@ -40,231 +81,19 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "slave",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "master",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "frics",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fricd",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsort",
-                        int,
-                        30,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvx",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvy",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcvz",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wearc",
-                        float,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "w1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sfp",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid_rcf",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        70,
-                        10,
-                        1.E20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeToSurfaceCouplingTransducer.option_specs[0],
                 cards = [
                     Card(
@@ -282,7 +111,6 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def slave(self) -> typing.Optional[int]:
         """Get or set the Slave Set ID

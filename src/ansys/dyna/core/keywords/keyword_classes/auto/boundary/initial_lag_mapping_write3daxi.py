@@ -23,7 +23,21 @@
 """Module providing the InitialLagMappingWrite3Daxi class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALLAGMAPPINGWRITE3DAXI_CARD0 = (
+    FieldSchema("setid", int, 0, 10, None),
+)
+
+_INITIALLAGMAPPINGWRITE3DAXI_CARD1 = (
+    FieldSchema("xp", float, 0, 10, 0.0),
+    FieldSchema("yp", float, 10, 10, 0.0),
+    FieldSchema("zp", float, 20, 10, 0.0),
+    FieldSchema("vecid", int, 30, 10, None),
+    FieldSchema("angle", float, 40, 10, None),
+    FieldSchema("nelangl", int, 50, 10, None),
+)
 
 class InitialLagMappingWrite3Daxi(KeywordBase):
     """DYNA INITIAL_LAG_MAPPING_WRITE3DAXI keyword"""
@@ -35,68 +49,13 @@ class InitialLagMappingWrite3Daxi(KeywordBase):
         """Initialize the InitialLagMappingWrite3Daxi class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "setid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angle",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nelangl",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALLAGMAPPINGWRITE3DAXI_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALLAGMAPPINGWRITE3DAXI_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the part set ID

@@ -23,8 +23,14 @@
 """Module providing the MatAle01 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATALE01_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("rho", float, 10, 10, None),
+)
 
 class MatAle01(KeywordBase):
     """DYNA MAT_ALE_01 keyword"""
@@ -40,25 +46,10 @@ class MatAle01(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATALE01_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAle01.option_specs[0],
                 cards = [
                     Card(
@@ -76,7 +67,6 @@ class MatAle01(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

@@ -23,8 +23,19 @@
 """Module providing the DefineSphMeshSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESPHMESHSURFACE_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("sphpid", int, 20, 10, None),
+    FieldSchema("sphxid", int, 30, 10, None),
+    FieldSchema("nsid", int, 40, 10, None),
+    FieldSchema("space", float, 50, 10, 0.0),
+    FieldSchema("iout", int, 60, 10, 0),
+)
 
 class DefineSphMeshSurface(KeywordBase):
     """DYNA DEFINE_SPH_MESH_SURFACE keyword"""
@@ -40,63 +51,10 @@ class DefineSphMeshSurface(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphpid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphxid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "space",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iout",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPHMESHSURFACE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSphMeshSurface.option_specs[0],
                 cards = [
                     Card(
@@ -114,7 +72,6 @@ class DefineSphMeshSurface(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID for the region of the mesh upon which the SPH elements will be placed.

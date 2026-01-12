@@ -23,7 +23,15 @@
 """Module providing the IcfdControlGeneral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLGENERAL_CARD0 = (
+    FieldSchema("atype", int, 0, 10, 0),
+    FieldSchema("mtype", int, 10, 10, 0),
+    FieldSchema("dvcl", int, 20, 10, 0),
+    FieldSchema("rdvcl", int, 30, 10, 0),
+)
 
 class IcfdControlGeneral(KeywordBase):
     """DYNA ICFD_CONTROL_GENERAL keyword"""
@@ -35,44 +43,10 @@ class IcfdControlGeneral(KeywordBase):
         """Initialize the IcfdControlGeneral class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "atype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dvcl",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdvcl",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLGENERAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def atype(self) -> int:
         """Get or set the Analysis type:

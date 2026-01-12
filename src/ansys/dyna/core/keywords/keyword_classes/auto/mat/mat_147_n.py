@@ -23,8 +23,16 @@
 """Module providing the Mat147N class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT147N_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("fctim", float, 10, 10, None),
+    FieldSchema("fctmas", float, 20, 10, None),
+    FieldSchema("fctlen", float, 30, 10, None),
+)
 
 class Mat147N(KeywordBase):
     """DYNA MAT_147_N keyword"""
@@ -40,39 +48,10 @@ class Mat147N(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fctim",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fctmas",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fctlen",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT147N_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat147N.option_specs[0],
                 cards = [
                     Card(
@@ -90,7 +69,6 @@ class Mat147N(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be chosen.

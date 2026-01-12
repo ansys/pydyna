@@ -23,8 +23,42 @@
 """Module providing the MatTrip class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATTRIP_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("cp", float, 40, 10, None),
+    FieldSchema("t0", float, 50, 10, None),
+    FieldSchema("tref", float, 60, 10, None),
+    FieldSchema("ta0", float, 70, 10, None),
+)
+
+_MATTRIP_CARD1 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("b", float, 10, 10, None),
+    FieldSchema("c", float, 20, 10, None),
+    FieldSchema("d", float, 30, 10, None),
+    FieldSchema("p", float, 40, 10, None),
+    FieldSchema("q", float, 50, 10, None),
+    FieldSchema("e0mart", float, 60, 10, None),
+    FieldSchema("vm0", float, 70, 10, None),
+)
+
+_MATTRIP_CARD2 = (
+    FieldSchema("ahs", float, 0, 10, None),
+    FieldSchema("bhs", float, 10, 10, None),
+    FieldSchema("m", float, 20, 10, None),
+    FieldSchema("n", float, 30, 10, None),
+    FieldSchema("eps0", float, 40, 10, None),
+    FieldSchema("hmart", float, 50, 10, None),
+    FieldSchema("k1", float, 60, 10, None),
+    FieldSchema("k2", float, 70, 10, None),
+)
 
 class MatTrip(KeywordBase):
     """DYNA MAT_TRIP keyword"""
@@ -40,187 +74,16 @@ class MatTrip(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tref",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ta0",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e0mart",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vm0",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ahs",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bhs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps0",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmart",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTRIP_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTRIP_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTRIP_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatTrip.option_specs[0],
                 cards = [
                     Card(
@@ -238,7 +101,6 @@ class MatTrip(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

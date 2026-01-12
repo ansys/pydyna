@@ -23,8 +23,101 @@
 """Module providing the MatOrthotropicSimplifiedDamage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("ea", float, 20, 10, None),
+    FieldSchema("eb", float, 30, 10, None),
+    FieldSchema("ec", float, 40, 10, None),
+    FieldSchema("prba", float, 50, 10, None),
+    FieldSchema("prca", float, 60, 10, None),
+    FieldSchema("prcb", float, 70, 10, None),
+)
+
+_MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD1 = (
+    FieldSchema("gab", float, 0, 10, None),
+    FieldSchema("gbc", float, 10, 10, None),
+    FieldSchema("gca", float, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("aopt", float, 40, 10, None),
+    FieldSchema("macf", int, 50, 10, 1),
+)
+
+_MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD2 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD3 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("beta", float, 60, 10, None),
+)
+
+_MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD4 = (
+    FieldSchema("nerode", int, 0, 10, 0),
+    FieldSchema("ndam", int, 10, 10, 0),
+    FieldSchema("eps1tf", float, 20, 10, 1e+20),
+    FieldSchema("eps2tf", float, 30, 10, 1e+20),
+    FieldSchema("eps3tf", float, 40, 10, 1e+20),
+    FieldSchema("eps1cf", float, 50, 10, -1e+20),
+    FieldSchema("eps2cf", float, 60, 10, -1e+20),
+    FieldSchema("eps3cf", float, 70, 10, -1e+20),
+)
+
+_MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD5 = (
+    FieldSchema("eps12f", float, 0, 10, 1e+20),
+    FieldSchema("eps23f", float, 10, 10, 1e+20),
+    FieldSchema("eps13f", float, 20, 10, 1e+20),
+    FieldSchema("epsd1t", float, 30, 10, None),
+    FieldSchema("epsc1t", float, 40, 10, None),
+    FieldSchema("cdam1t", float, 50, 10, None),
+    FieldSchema("epsd2t", float, 60, 10, None),
+    FieldSchema("epsc2t", float, 70, 10, None),
+)
+
+_MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD6 = (
+    FieldSchema("cdam2t", float, 0, 10, 0.0),
+    FieldSchema("epsd3t", float, 10, 10, 0.0),
+    FieldSchema("epsc3t", float, 20, 10, None),
+    FieldSchema("cdam3t", float, 30, 10, None),
+    FieldSchema("epsd1c", float, 40, 10, None),
+    FieldSchema("epsc1c", float, 50, 10, None),
+    FieldSchema("cdam1c", float, 60, 10, None),
+    FieldSchema("epsd2c", float, 70, 10, None),
+)
+
+_MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD7 = (
+    FieldSchema("epsc2c", float, 0, 10, None),
+    FieldSchema("cdam2c", float, 10, 10, None),
+    FieldSchema("epsd3c", float, 20, 10, None),
+    FieldSchema("epsc3c", float, 30, 10, None),
+    FieldSchema("cdam3c", float, 40, 10, None),
+    FieldSchema("epsd12", float, 50, 10, None),
+    FieldSchema("epsc12", float, 60, 10, None),
+    FieldSchema("cdam12", float, 70, 10, None),
+)
+
+_MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD8 = (
+    FieldSchema("epsd23", float, 0, 10, None),
+    FieldSchema("epsc23", float, 10, 10, None),
+    FieldSchema("cdam23", float, 20, 10, None),
+    FieldSchema("epsd31", float, 30, 10, None),
+    FieldSchema("epsc31", float, 40, 10, None),
+    FieldSchema("cdam31", float, 50, 10, None),
+)
 
 class MatOrthotropicSimplifiedDamage(KeywordBase):
     """DYNA MAT_ORTHOTROPIC_SIMPLIFIED_DAMAGE keyword"""
@@ -40,512 +133,34 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ea",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eb",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ec",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prba",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prca",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prcb",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gab",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gbc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gca",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aopt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nerode",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndam",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps1tf",
-                        float,
-                        20,
-                        10,
-                        1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps2tf",
-                        float,
-                        30,
-                        10,
-                        1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps3tf",
-                        float,
-                        40,
-                        10,
-                        1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps1cf",
-                        float,
-                        50,
-                        10,
-                        -1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps2cf",
-                        float,
-                        60,
-                        10,
-                        -1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps3cf",
-                        float,
-                        70,
-                        10,
-                        -1.E20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eps12f",
-                        float,
-                        0,
-                        10,
-                        1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps23f",
-                        float,
-                        10,
-                        10,
-                        1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps13f",
-                        float,
-                        20,
-                        10,
-                        1.E20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsd1t",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsc1t",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdam1t",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsd2t",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsc2t",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cdam2t",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsd3t",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsc3t",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdam3t",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsd1c",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsc1c",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdam1c",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsd2c",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "epsc2c",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdam2c",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsd3c",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsc3c",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdam3c",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsd12",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsc12",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdam12",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "epsd23",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsc23",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdam23",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsd31",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsc31",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdam31",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD8,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatOrthotropicSimplifiedDamage.option_specs[0],
                 cards = [
                     Card(
@@ -563,7 +178,6 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

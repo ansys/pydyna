@@ -23,7 +23,29 @@
 """Module providing the IncludeStampedPartSolidToSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD0 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
+
+_INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("thick", int, 10, 10, 0),
+    FieldSchema("pstrn", int, 20, 10, 0),
+    FieldSchema("strain", int, 30, 10, 0),
+    FieldSchema("stress", int, 40, 10, 0),
+)
+
+_INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD2 = (
+    FieldSchema("n1sorc", int, 0, 10, 0),
+    FieldSchema("n2sorc", int, 10, 10, 0),
+    FieldSchema("n3sorc", int, 20, 10, 0),
+    FieldSchema("n1trgt", int, 30, 10, 0),
+    FieldSchema("n2trgt", int, 40, 10, 0),
+    FieldSchema("n3trgt", int, 50, 10, 0),
+)
 
 class IncludeStampedPartSolidToSolid(KeywordBase):
     """DYNA INCLUDE_STAMPED_PART_SOLID_TO_SOLID keyword"""
@@ -35,114 +57,16 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
         """Initialize the IncludeStampedPartSolidToSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pstrn",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "strain",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stress",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1sorc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2sorc",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3sorc",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1trgt",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2trgt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3trgt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of the dynain file to be included to map the results from, with maximum of 80 characters.

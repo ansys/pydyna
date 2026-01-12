@@ -23,8 +23,19 @@
 """Module providing the DefineElementDeathThickShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEELEMENTDEATHTHICKSHELL_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("time", float, 10, 10, 0.0),
+    FieldSchema("boxid", int, 20, 10, None),
+    FieldSchema("inout", int, 30, 10, 0),
+    FieldSchema("idgrp", int, 40, 10, 0),
+    FieldSchema("cid", int, 50, 10, 0),
+    FieldSchema("percent", float, 60, 10, 0.0),
+)
 
 class DefineElementDeathThickShell(KeywordBase):
     """DYNA DEFINE_ELEMENT_DEATH_THICK_SHELL keyword"""
@@ -40,65 +51,10 @@ class DefineElementDeathThickShell(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inout",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idgrp",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "percent",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEELEMENTDEATHTHICKSHELL_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineElementDeathThickShell.option_specs[0],
                 cards = [
                     Card(
@@ -116,7 +72,6 @@ class DefineElementDeathThickShell(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID

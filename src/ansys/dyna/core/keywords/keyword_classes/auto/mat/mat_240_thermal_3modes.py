@@ -23,8 +23,61 @@
 """Module providing the Mat240Thermal3Modes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT240THERMAL3MODES_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("roflg", int, 20, 10, 0),
+    FieldSchema("intfail", float, 30, 10, None),
+    FieldSchema("emod", float, 40, 10, None),
+    FieldSchema("gmod", float, 50, 10, None),
+    FieldSchema("thick", float, 60, 10, None),
+    FieldSchema("inicrt", float, 70, 10, 0.0),
+)
+
+_MAT240THERMAL3MODES_CARD1 = (
+    FieldSchema("g1c_0", float, 0, 10, None),
+    FieldSchema("g1c_inf", float, 10, 10, None),
+    FieldSchema("edot_g1", float, 20, 10, None),
+    FieldSchema("t0", float, 30, 10, None),
+    FieldSchema("t1", float, 40, 10, None),
+    FieldSchema("edot_t", float, 50, 10, None),
+    FieldSchema("fg1", float, 60, 10, None),
+    FieldSchema("lcg1c", int, 70, 10, None),
+)
+
+_MAT240THERMAL3MODES_CARD2 = (
+    FieldSchema("g2c_0", float, 0, 10, None),
+    FieldSchema("g2c_inf", float, 10, 10, None),
+    FieldSchema("edot_g2", float, 20, 10, None),
+    FieldSchema("s0", float, 30, 10, None),
+    FieldSchema("s1", float, 40, 10, None),
+    FieldSchema("edot_s", float, 50, 10, None),
+    FieldSchema("fg2", float, 60, 10, None),
+    FieldSchema("lcg2c", int, 70, 10, None),
+)
+
+_MAT240THERMAL3MODES_CARD3 = (
+    FieldSchema("g3c_0", float, 0, 10, None),
+    FieldSchema("g3c_inf", float, 10, 10, None),
+    FieldSchema("edot_g3", float, 20, 10, None),
+    FieldSchema("r0", float, 30, 10, None),
+    FieldSchema("r1", float, 40, 10, None),
+    FieldSchema("edot_r", float, 50, 10, None),
+    FieldSchema("fg3", float, 60, 10, None),
+    FieldSchema("lcg3c", int, 70, 10, None),
+)
+
+_MAT240THERMAL3MODES_CARD4 = (
+    FieldSchema("gmod3", float, 0, 10, None),
+)
+
+_MAT240THERMAL3MODES_CARD5 = (
+    FieldSchema("rfiltf", float, 0, 10, None),
+)
 
 class Mat240Thermal3Modes(KeywordBase):
     """DYNA MAT_240_THERMAL_3MODES keyword"""
@@ -40,271 +93,25 @@ class Mat240Thermal3Modes(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "roflg",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intfail",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "emod",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmod",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inicrt",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g1c_0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g1c_inf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot_g1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot_t",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fg1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcg1c",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g2c_0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g2c_inf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot_g2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot_s",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fg2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcg2c",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g3c_0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g3c_inf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot_g3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edot_r",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fg3",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcg3c",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gmod3",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rfiltf",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT240THERMAL3MODES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT240THERMAL3MODES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT240THERMAL3MODES_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT240THERMAL3MODES_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT240THERMAL3MODES_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT240THERMAL3MODES_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat240Thermal3Modes.option_specs[0],
                 cards = [
                     Card(
@@ -322,7 +129,6 @@ class Mat240Thermal3Modes(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

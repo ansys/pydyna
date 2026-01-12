@@ -23,8 +23,28 @@
 """Module providing the MatSimplifiedJohnsonCook class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSIMPLIFIEDJOHNSONCOOK_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("vp", float, 40, 10, None),
+)
+
+_MATSIMPLIFIEDJOHNSONCOOK_CARD1 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("b", float, 10, 10, None),
+    FieldSchema("n", float, 20, 10, None),
+    FieldSchema("c", float, 30, 10, None),
+    FieldSchema("psfail", float, 40, 10, 1e+17),
+    FieldSchema("sigmax", float, 50, 10, 1e+28),
+    FieldSchema("sigsat", float, 60, 10, 1e+28),
+    FieldSchema("epso", float, 70, 10, 1.0),
+)
 
 class MatSimplifiedJohnsonCook(KeywordBase):
     """DYNA MAT_SIMPLIFIED_JOHNSON_COOK keyword"""
@@ -40,110 +60,13 @@ class MatSimplifiedJohnsonCook(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psfail",
-                        float,
-                        40,
-                        10,
-                        1.0E+17,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigmax",
-                        float,
-                        50,
-                        10,
-                        1.0E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigsat",
-                        float,
-                        60,
-                        10,
-                        1.0E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epso",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSIMPLIFIEDJOHNSONCOOK_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSIMPLIFIEDJOHNSONCOOK_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSimplifiedJohnsonCook.option_specs[0],
                 cards = [
                     Card(
@@ -161,7 +84,6 @@ class MatSimplifiedJohnsonCook(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

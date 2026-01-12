@@ -23,7 +23,20 @@
 """Module providing the DatabaseFrequencyBinaryD3SsdSubcase class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEFREQUENCYBINARYD3SSDSUBCASE_CARD0 = (
+    FieldSchema("binary", int, 0, 10, None),
+)
+
+_DATABASEFREQUENCYBINARYD3SSDSUBCASE_CARD1 = (
+    FieldSchema("fmin", float, 0, 10, 0.0),
+    FieldSchema("fmax", float, 10, 10, 0.0),
+    FieldSchema("nfreq", int, 20, 10, 0),
+    FieldSchema("fspace", int, 30, 10, 0),
+    FieldSchema("lcfreq", int, 40, 10, 0),
+)
 
 class DatabaseFrequencyBinaryD3SsdSubcase(KeywordBase):
     """DYNA DATABASE_FREQUENCY_BINARY_D3SSD_SUBCASE keyword"""
@@ -35,63 +48,13 @@ class DatabaseFrequencyBinaryD3SsdSubcase(KeywordBase):
         """Initialize the DatabaseFrequencyBinaryD3SsdSubcase class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "binary",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fmin",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fspace",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfreq",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFREQUENCYBINARYD3SSDSUBCASE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEFREQUENCYBINARYD3SSDSUBCASE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def binary(self) -> typing.Optional[int]:
         """Get or set the Flag for writing the binary plot file.  See Remark 1.

@@ -23,8 +23,18 @@
 """Module providing the MatBiotHysteretic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATBIOTHYSTERETIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("zt", float, 40, 10, None),
+    FieldSchema("fd", float, 50, 10, 3.25),
+)
 
 class MatBiotHysteretic(KeywordBase):
     """DYNA MAT_BIOT_HYSTERETIC keyword"""
@@ -40,54 +50,10 @@ class MatBiotHysteretic(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        50,
-                        10,
-                        3.25,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATBIOTHYSTERETIC_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatBiotHysteretic.option_specs[0],
                 cards = [
                     Card(
@@ -105,7 +71,6 @@ class MatBiotHysteretic(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.  A unique number or label must be specified.

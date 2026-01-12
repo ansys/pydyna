@@ -23,8 +23,45 @@
 """Module providing the MatSeatbelt2D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSEATBELT2D_CARD0 = (
+    FieldSchema("mid", int, 0, 10, 0),
+    FieldSchema("mpul", float, 10, 10, None),
+    FieldSchema("llcid", int, 20, 10, 0),
+    FieldSchema("ulcid", int, 30, 10, 0),
+    FieldSchema("lmin", float, 40, 10, None),
+    FieldSchema("cse", float, 50, 10, 0.0),
+    FieldSchema("damp", float, 60, 10, None),
+    FieldSchema("e", float, 70, 10, None),
+)
+
+_MATSEATBELT2D_CARD1 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("i", float, 10, 10, None),
+    FieldSchema("j", float, 20, 10, None),
+    FieldSchema("as", float, 30, 10, None),
+    FieldSchema("f", float, 40, 10, 1e+20),
+    FieldSchema("m", float, 50, 10, 1e+20),
+    FieldSchema("r", float, 60, 10, 0.05),
+)
+
+_MATSEATBELT2D_CARD2 = (
+    FieldSchema("p1doff", int, 0, 10, None),
+    FieldSchema("form", int, 10, 10, 0),
+    FieldSchema("ecoat", float, 20, 10, None),
+    FieldSchema("tcoat", float, 30, 10, None),
+    FieldSchema("scoat", float, 40, 10, None),
+    FieldSchema("eb", float, 50, 10, -0.1),
+    FieldSchema("prba", float, 60, 10, 0.3),
+    FieldSchema("prba", float, 70, 10, 0.3),
+)
+
+_MATSEATBELT2D_CARD3 = (
+    FieldSchema("gab", float, 0, 10, None),
+)
 
 class MatSeatbelt2D(KeywordBase):
     """DYNA MAT_SEATBELT_2D keyword"""
@@ -40,202 +77,19 @@ class MatSeatbelt2D(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mpul",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "llcid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ulcid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmin",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cse",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "j",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "as",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f",
-                        float,
-                        40,
-                        10,
-                        1.0e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        50,
-                        10,
-                        1.0e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        60,
-                        10,
-                        0.05,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p1doff",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "form",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ecoat",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tcoat",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scoat",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eb",
-                        float,
-                        50,
-                        10,
-                        -0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prba",
-                        float,
-                        60,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prba",
-                        float,
-                        70,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gab",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSEATBELT2D_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSEATBELT2D_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSEATBELT2D_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSEATBELT2D_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSeatbelt2D.option_specs[0],
                 cards = [
                     Card(
@@ -253,7 +107,6 @@ class MatSeatbelt2D(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> int:
         """Get or set the Belt material number. A unique number has to be used.

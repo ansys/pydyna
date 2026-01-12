@@ -23,7 +23,12 @@
 """Module providing the EmEpCellmodelUsermat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMEPCELLMODELUSERMAT_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+)
 
 class EmEpCellmodelUsermat(KeywordBase):
     """DYNA EM_EP_CELLMODEL_USERMAT keyword"""
@@ -35,19 +40,10 @@ class EmEpCellmodelUsermat(KeywordBase):
         """Initialize the EmEpCellmodelUsermat class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEPCELLMODELUSERMAT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID: refers to MID in the *PART card.

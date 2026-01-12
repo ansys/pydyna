@@ -23,8 +23,16 @@
 """Module providing the MatS08 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATS08_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("lcfd", int, 10, 10, None),
+    FieldSchema("ku", float, 20, 10, None),
+    FieldSchema("ctf", float, 30, 10, 1.0),
+)
 
 class MatS08(KeywordBase):
     """DYNA MAT_S08 keyword"""
@@ -40,40 +48,10 @@ class MatS08(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfd",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ku",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATS08_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatS08.option_specs[0],
                 cards = [
                     Card(
@@ -91,7 +69,6 @@ class MatS08(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A uniques number has to be used.

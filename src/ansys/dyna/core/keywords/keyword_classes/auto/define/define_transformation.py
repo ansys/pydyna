@@ -25,9 +25,14 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINETRANSFORMATION_CARD0 = (
+    FieldSchema("tranid", int, 0, 10, None),
+)
 
 class DefineTransformation(KeywordBase):
     """DYNA DEFINE_TRANSFORMATION keyword"""
@@ -43,18 +48,10 @@ class DefineTransformation(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tranid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            TableCard(
+            Card.from_field_schemas_with_defaults(
+                _DEFINETRANSFORMATION_CARD0,
+                **kwargs,
+            ),            TableCard(
                 [
                     Field("option", str, 0, 10, "MIRROR"),
                     Field("a1", float, 10, 10, None),
@@ -68,8 +65,7 @@ class DefineTransformation(KeywordBase):
                 None,
                 name="transforms",
                 **kwargs,
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = DefineTransformation.option_specs[0],
                 cards = [
                     Card(
@@ -87,7 +83,6 @@ class DefineTransformation(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def tranid(self) -> typing.Optional[int]:
         """Get or set the Transform ID.

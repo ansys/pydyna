@@ -23,8 +23,22 @@
 """Module providing the ContactNurbsTiedNodesToSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTNURBSTIEDNODESTOSURFACE_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_CONTACTNURBSTIEDNODESTOSURFACE_CARD1 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("msid", int, 10, 10, None),
+    FieldSchema("sstyp", int, 20, 10, 0),
+    FieldSchema("mstyp", int, 30, 10, 0),
+    FieldSchema("cform", int, 40, 10, 0),
+)
 
 class ContactNurbsTiedNodesToSurface(KeywordBase):
     """DYNA CONTACT_NURBS_TIED_NODES_TO_SURFACE keyword"""
@@ -48,67 +62,13 @@ class ContactNurbsTiedNodesToSurface(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sstyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mstyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cform",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _CONTACTNURBSTIEDNODESTOSURFACE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTNURBSTIEDNODESTOSURFACE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = ContactNurbsTiedNodesToSurface.option_specs[0],
                 cards = [
                     Card(
@@ -391,21 +351,21 @@ class ContactNurbsTiedNodesToSurface(KeywordBase):
                                 float,
                                 20,
                                 10,
-                                kwargs.get("dprfac", 0)
+                                kwargs.get("dprfac", 0.0)
                             ),
                             Field(
                                 "dtstif",
                                 float,
                                 30,
                                 10,
-                                kwargs.get("dtstif", 0)
+                                kwargs.get("dtstif", 0.0)
                             ),
                             Field(
                                 "edgek",
                                 float,
                                 40,
                                 10,
-                                kwargs.get("edgek", 0)
+                                kwargs.get("edgek", 0.0)
                             ),
                             Field(
                                 "flangl",
@@ -443,28 +403,28 @@ class ContactNurbsTiedNodesToSurface(KeywordBase):
                                 float,
                                 10,
                                 10,
-                                kwargs.get("dtpchk", 0)
+                                kwargs.get("dtpchk", 0.0)
                             ),
                             Field(
                                 "sfnbr",
                                 float,
                                 20,
                                 10,
-                                kwargs.get("sfnbr", 0)
+                                kwargs.get("sfnbr", 0.0)
                             ),
                             Field(
                                 "fnlscl",
                                 float,
                                 30,
                                 10,
-                                kwargs.get("fnlscl", 0)
+                                kwargs.get("fnlscl", 0.0)
                             ),
                             Field(
                                 "dnlscl",
                                 float,
                                 40,
                                 10,
-                                kwargs.get("dnlscl", 0)
+                                kwargs.get("dnlscl", 0.0)
                             ),
                             Field(
                                 "tcso",
@@ -635,7 +595,6 @@ class ContactNurbsTiedNodesToSurface(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact interface ID. This must be a unique number.

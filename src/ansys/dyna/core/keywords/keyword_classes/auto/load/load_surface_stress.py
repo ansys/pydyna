@@ -23,7 +23,34 @@
 """Module providing the LoadSurfaceStress class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSURFACESTRESS_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+)
+
+_LOADSURFACESTRESS_CARD1 = (
+    FieldSchema("lscid1", int, 0, 10, None),
+    FieldSchema("lscid2", int, 10, 10, None),
+    FieldSchema("lscid3", int, 20, 10, None),
+    FieldSchema("lscid4", int, 30, 10, None),
+    FieldSchema("lscid5", int, 40, 10, None),
+    FieldSchema("lscid6", int, 50, 10, None),
+    FieldSchema("lscid7", int, 60, 10, None),
+    FieldSchema("lscid8", int, 70, 10, None),
+)
+
+_LOADSURFACESTRESS_CARD2 = (
+    FieldSchema("uscid1", int, 0, 10, None),
+    FieldSchema("uscid2", int, 10, 10, None),
+    FieldSchema("uscid3", int, 20, 10, None),
+    FieldSchema("uscid4", int, 30, 10, None),
+    FieldSchema("uscid5", int, 40, 10, None),
+    FieldSchema("uscid6", int, 50, 10, None),
+    FieldSchema("uscid7", int, 60, 10, None),
+    FieldSchema("uscid8", int, 70, 10, None),
+)
 
 class LoadSurfaceStress(KeywordBase):
     """DYNA LOAD_SURFACE_STRESS keyword"""
@@ -35,139 +62,16 @@ class LoadSurfaceStress(KeywordBase):
         """Initialize the LoadSurfaceStress class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lscid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lscid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "uscid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uscid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSURFACESTRESS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSURFACESTRESS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSURFACESTRESS_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the part id

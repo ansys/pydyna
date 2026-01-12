@@ -23,8 +23,39 @@
 """Module providing the Mat224Gys class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT224GYS_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("cp", float, 40, 10, None),
+    FieldSchema("tr", float, 50, 10, 0.0),
+    FieldSchema("beta", float, 60, 10, 1.0),
+    FieldSchema("numint", float, 70, 10, 1.0),
+)
+
+_MAT224GYS_CARD1 = (
+    FieldSchema("lck1", int, 0, 10, 0),
+    FieldSchema("lckt", int, 10, 10, 0),
+    FieldSchema("lcf", int, 20, 10, 0),
+    FieldSchema("lcg", int, 30, 10, 0),
+    FieldSchema("lch", int, 40, 10, 0),
+    FieldSchema("lci", int, 50, 10, 0),
+)
+
+_MAT224GYS_CARD2 = (
+    FieldSchema("lccr", int, 0, 10, None),
+    FieldSchema("lcct", int, 10, 10, None),
+    FieldSchema("lcsr", int, 20, 10, None),
+    FieldSchema("lcst", int, 30, 10, None),
+    FieldSchema("iflag", int, 40, 10, 0),
+    FieldSchema("sfiepm", float, 50, 10, 1.0),
+    FieldSchema("niter", int, 60, 10, 100),
+)
 
 class Mat224Gys(KeywordBase):
     """DYNA MAT_224_GYS keyword"""
@@ -40,178 +71,16 @@ class Mat224Gys(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tr",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numint",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lck1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lckt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lch",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lci",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lccr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcct",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcst",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflag",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfiepm",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "niter",
-                        int,
-                        60,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT224GYS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT224GYS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT224GYS_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat224Gys.option_specs[0],
                 cards = [
                     Card(
@@ -229,7 +98,6 @@ class Mat224Gys(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

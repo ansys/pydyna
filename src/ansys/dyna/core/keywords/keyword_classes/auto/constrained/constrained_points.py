@@ -23,7 +23,33 @@
 """Module providing the ConstrainedPoints class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDPOINTS_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+)
+
+_CONSTRAINEDPOINTS_CARD1 = (
+    FieldSchema("eid1", int, 0, 8, None),
+    FieldSchema("x1", float, 8, 16, 0.0),
+    FieldSchema("y1", float, 24, 16, 0.0),
+    FieldSchema("z1", float, 40, 16, 0.0),
+)
+
+_CONSTRAINEDPOINTS_CARD2 = (
+    FieldSchema("eid2", int, 0, 8, None),
+    FieldSchema("x2", float, 8, 16, 0.0),
+    FieldSchema("y2", float, 24, 16, 0.0),
+    FieldSchema("z2", float, 40, 16, 0.0),
+)
+
+_CONSTRAINEDPOINTS_CARD3 = (
+    FieldSchema("psf", float, 0, 10, 1.0),
+    FieldSchema("faila", float, 10, 10, 0.0),
+    FieldSchema("fails", float, 20, 10, 0.0),
+    FieldSchema("failm", float, 30, 10, 0.0),
+)
 
 class ConstrainedPoints(KeywordBase):
     """DYNA CONSTRAINED_POINTS keyword"""
@@ -35,125 +61,19 @@ class ConstrainedPoints(KeywordBase):
         """Initialize the ConstrainedPoints class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eid1",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        40,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eid2",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z2",
-                        float,
-                        40,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "psf",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "faila",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fails",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "failm",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDPOINTS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDPOINTS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDPOINTS_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDPOINTS_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Constrained points ID.

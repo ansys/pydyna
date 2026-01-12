@@ -23,8 +23,60 @@
 """Module providing the Mat173 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT173_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("gmod", float, 20, 10, None),
+    FieldSchema("rnu", float, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("phi", float, 50, 10, None),
+    FieldSchema("cval", float, 60, 10, None),
+    FieldSchema("psi", float, 70, 10, None),
+)
+
+_MAT173_CARD1 = (
+    FieldSchema("novoid ", int, 0, 10, None),
+    FieldSchema("nplanes", int, 10, 10, None),
+    FieldSchema("extra", int, 20, 10, None),
+    FieldSchema("lccpdr", int, 30, 10, None),
+    FieldSchema("lccpt", int, 40, 10, None),
+    FieldSchema("lccjdr", int, 50, 10, None),
+    FieldSchema("lccjt", int, 60, 10, None),
+    FieldSchema("lcsfac", int, 70, 10, None),
+)
+
+_MAT173_CARD2 = (
+    FieldSchema("gmoddp", float, 0, 10, None),
+    FieldSchema("gmodgr", float, 10, 10, None),
+    FieldSchema("lcgmep", int, 20, 10, None),
+    FieldSchema("lcphiep", int, 30, 10, None),
+    FieldSchema("lcpsiep", int, 40, 10, None),
+    FieldSchema("lcgmst", int, 50, 10, None),
+    FieldSchema("cvalgr", float, 60, 10, None),
+    FieldSchema("aniso", float, 70, 10, 1.0),
+)
+
+_MAT173_CARD3 = (
+    FieldSchema("lcgmt", float, 0, 10, None),
+    FieldSchema("lccvt", float, 10, 10, None),
+    FieldSchema("lcpht", float, 20, 10, None),
+    FieldSchema("epdam1", float, 30, 10, 1e+20),
+    FieldSchema("epdam2", float, 40, 10, None),
+)
+
+_MAT173_CARD4 = (
+    FieldSchema("dip", float, 0, 10, None),
+    FieldSchema("dipang", float, 10, 10, None),
+    FieldSchema("cplane", float, 20, 10, None),
+    FieldSchema("frplane", float, 30, 10, None),
+    FieldSchema("tplane", float, 40, 10, None),
+    FieldSchema("shrmax", float, 50, 10, 1e+20),
+    FieldSchema("local", int, 60, 10, None),
+)
 
 class Mat173(KeywordBase):
     """DYNA MAT_173 keyword"""
@@ -40,282 +92,22 @@ class Mat173(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmod",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rnu",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phi",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cval",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psi",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "novoid ",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplanes",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "extra",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lccpdr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lccpt",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lccjdr",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lccjt",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsfac",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gmoddp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmodgr",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcgmep",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcphiep",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpsiep",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcgmst",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvalgr",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aniso",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcgmt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lccvt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpht",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epdam1",
-                        float,
-                        30,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epdam2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dip",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dipang",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cplane",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frplane",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tplane",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrmax",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT173_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT173_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT173_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT173_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT173_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat173.option_specs[0],
                 cards = [
                     Card(
@@ -333,7 +125,6 @@ class Mat173(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.  A unique number.

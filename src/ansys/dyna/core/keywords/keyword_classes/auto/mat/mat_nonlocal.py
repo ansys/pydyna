@@ -23,8 +23,39 @@
 """Module providing the MatNonlocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATNONLOCAL_CARD0 = (
+    FieldSchema("idnl", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("p", int, 20, 10, None),
+    FieldSchema("q", int, 30, 10, None),
+    FieldSchema("l", float, 40, 10, None),
+    FieldSchema("nfreq", int, 50, 10, None),
+    FieldSchema("nhv", int, 60, 10, None),
+)
+
+_MATNONLOCAL_CARD1 = (
+    FieldSchema("nl1", int, 0, 10, None),
+    FieldSchema("nl2", int, 10, 10, None),
+    FieldSchema("nl3", int, 20, 10, None),
+    FieldSchema("nl4", int, 30, 10, None),
+    FieldSchema("nl5", int, 40, 10, None),
+    FieldSchema("nl6", int, 50, 10, None),
+    FieldSchema("nl7", int, 60, 10, None),
+    FieldSchema("nl8", int, 70, 10, None),
+)
+
+_MATNONLOCAL_CARD2 = (
+    FieldSchema("xc1", float, 0, 10, None),
+    FieldSchema("yc1", float, 10, 10, None),
+    FieldSchema("zc1", float, 20, 10, None),
+    FieldSchema("xc2", float, 30, 10, None),
+    FieldSchema("yc2", float, 40, 10, None),
+    FieldSchema("zc2", float, 50, 10, None),
+)
 
 class MatNonlocal(KeywordBase):
     """DYNA MAT_NONLOCAL keyword"""
@@ -40,166 +71,16 @@ class MatNonlocal(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idnl",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhv",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nl1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nl2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nl3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nl4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nl5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nl6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nl7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nl8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xc1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATNONLOCAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLOCAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLOCAL_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatNonlocal.option_specs[0],
                 cards = [
                     Card(
@@ -217,7 +98,6 @@ class MatNonlocal(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def idnl(self) -> typing.Optional[int]:
         """Get or set the Nonlocal material input ID

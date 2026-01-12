@@ -23,7 +23,24 @@
 """Module providing the ChemistryControl1D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHEMISTRYCONTROL1D_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("xyzd", float, 10, 10, None),
+    FieldSchema("detdir", int, 20, 10, None),
+    FieldSchema("csp_sel", int, 30, 10, 0),
+)
+
+_CHEMISTRYCONTROL1D_CARD1 = (
+    FieldSchema("file", str, 0, 256, None),
+)
+
+_CHEMISTRYCONTROL1D_CARD2 = (
+    FieldSchema("ampl", float, 0, 10, None),
+    FieldSchema("ycut", float, 10, 10, None),
+)
 
 class ChemistryControl1D(KeywordBase):
     """DYNA CHEMISTRY_CONTROL_1D keyword"""
@@ -35,70 +52,16 @@ class ChemistryControl1D(KeywordBase):
         """Initialize the ChemistryControl1D class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xyzd",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "detdir",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csp_sel",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "file",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ampl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ycut",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROL1D_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROL1D_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROL1D_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identifier for this one-dimensional detonation solution.

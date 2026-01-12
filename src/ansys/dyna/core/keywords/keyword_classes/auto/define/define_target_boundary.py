@@ -23,8 +23,15 @@
 """Module providing the DefineTargetBoundary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINETARGETBOUNDARY_CARD0 = (
+    FieldSchema("x", float, 0, 16, 0.0),
+    FieldSchema("y", float, 16, 16, 0.0),
+    FieldSchema("z", float, 32, 16, 0.0),
+)
 
 class DefineTargetBoundary(KeywordBase):
     """DYNA DEFINE_TARGET_BOUNDARY keyword"""
@@ -40,35 +47,10 @@ class DefineTargetBoundary(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        32,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINETARGETBOUNDARY_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineTargetBoundary.option_specs[0],
                 cards = [
                     Card(
@@ -86,7 +68,6 @@ class DefineTargetBoundary(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def x(self) -> float:
         """Get or set the Location coordinates of a target node.

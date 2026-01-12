@@ -23,8 +23,31 @@
 """Module providing the Mat192 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT192_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("rlamda", float, 20, 10, None),
+    FieldSchema("rkappa", float, 30, 10, None),
+    FieldSchema("riota", float, 40, 10, None),
+    FieldSchema("rbeta1", float, 50, 10, None),
+    FieldSchema("rbeta2", float, 60, 10, None),
+    FieldSchema("rmu", float, 70, 10, 1.0),
+)
+
+_MAT192_CARD1 = (
+    FieldSchema("rnu", float, 0, 10, None),
+    FieldSchema("rlcid", float, 10, 10, None),
+    FieldSchema("tol", float, 20, 10, 0.0005),
+    FieldSchema("pgcl", float, 30, 10, None),
+    FieldSchema("sub-inc", float, 40, 10, None),
+    FieldSchema("blk", float, 50, 10, None),
+    FieldSchema("grav", float, 60, 10, 9.807),
+    FieldSchema("theory", int, 70, 10, 0),
+)
 
 class Mat192(KeywordBase):
     """DYNA MAT_192 keyword"""
@@ -40,131 +63,13 @@ class Mat192(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rlamda",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rkappa",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "riota",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rbeta1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rbeta2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmu",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rnu",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rlcid",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol",
-                        float,
-                        20,
-                        10,
-                        0.0005,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pgcl",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sub-inc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blk",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grav",
-                        float,
-                        60,
-                        10,
-                        9.807,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theory",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT192_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT192_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat192.option_specs[0],
                 cards = [
                     Card(
@@ -182,7 +87,6 @@ class Mat192(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

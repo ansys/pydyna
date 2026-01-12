@@ -23,8 +23,54 @@
 """Module providing the DefineDeInjectBonded class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEDEINJECTBONDED_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("sid", int, 10, 10, None),
+    FieldSchema("xc", float, 20, 10, 0.0),
+    FieldSchema("yc", float, 30, 10, 0.0),
+    FieldSchema("zc", float, 40, 10, 0.0),
+    FieldSchema("xl", float, 50, 10, 0.0),
+    FieldSchema("yl", float, 60, 10, 0.0),
+    FieldSchema("cid", int, 70, 10, None),
+)
+
+_DEFINEDEINJECTBONDED_CARD1 = (
+    FieldSchema("rmass", float, 0, 10, 0.0),
+    FieldSchema("vx", float, 10, 10, 0.0),
+    FieldSchema("xy", float, 20, 10, 0.0),
+    FieldSchema("vz", float, 30, 10, 0.0),
+    FieldSchema("tbeg", float, 40, 10, 0.0),
+    FieldSchema("tend", float, 50, 10, 0.0),
+)
+
+_DEFINEDEINJECTBONDED_CARD2 = (
+    FieldSchema("pbn", float, 0, 10, None),
+    FieldSchema("pbs", float, 10, 10, None),
+    FieldSchema("pbn_s", float, 20, 10, 0.0),
+    FieldSchema("pbs_s", float, 30, 10, 0.0),
+    FieldSchema("sfa", float, 40, 10, 0.0),
+    FieldSchema("alpha", float, 50, 10, 0.0),
+    FieldSchema("maxgap", float, 60, 10, 0.0001),
+)
+
+_DEFINEDEINJECTBONDED_CARD3 = (
+    FieldSchema("nshape", int, 0, 10, 0),
+)
+
+_DEFINEDEINJECTBONDED_CARD4 = (
+    FieldSchema("ishape", int, 0, 10, None),
+    FieldSchema("ishape", int, 10, 10, None),
+    FieldSchema("ishape", int, 20, 10, None),
+    FieldSchema("ishape", int, 30, 10, None),
+    FieldSchema("ishape", int, 40, 10, None),
+    FieldSchema("ishape", int, 50, 10, None),
+    FieldSchema("ishape", int, 60, 10, None),
+    FieldSchema("ishape", int, 70, 10, None),
+)
 
 class DefineDeInjectBonded(KeywordBase):
     """DYNA DEFINE_DE_INJECT_BONDED keyword"""
@@ -40,254 +86,22 @@ class DefineDeInjectBonded(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xl",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yl",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rmass",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbeg",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pbn",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbn_s",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pbs_s",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfa",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxgap",
-                        float,
-                        60,
-                        10,
-                        1.0E-4,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nshape",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ishape",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishape",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishape",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishape",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishape",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishape",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishape",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ishape",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTBONDED_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTBONDED_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTBONDED_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTBONDED_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTBONDED_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeInjectBonded.option_specs[0],
                 cards = [
                     Card(
@@ -305,7 +119,6 @@ class DefineDeInjectBonded(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of new generated DES nodes

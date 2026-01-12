@@ -23,7 +23,18 @@
 """Module providing the ControlPzelectric class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLPZELECTRIC_CARD0 = (
+    FieldSchema("solver", int, 0, 10, 11),
+    FieldSchema("msgitr", int, 10, 10, 0),
+    FieldSchema("maxitr", int, 20, 10, 500),
+    FieldSchema("abstol", float, 30, 10, 1e-20),
+    FieldSchema("reltol", int, 40, 10, 0),
+    FieldSchema("ndtrfk", int, 50, 10, 1),
+    FieldSchema("epzmsg", int, 60, 10, 0),
+)
 
 class ControlPzelectric(KeywordBase):
     """DYNA CONTROL_PZELECTRIC keyword"""
@@ -35,68 +46,10 @@ class ControlPzelectric(KeywordBase):
         """Initialize the ControlPzelectric class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "solver",
-                        int,
-                        0,
-                        10,
-                        11,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msgitr",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxitr",
-                        int,
-                        20,
-                        10,
-                        500,
-                        **kwargs,
-                    ),
-                    Field(
-                        "abstol",
-                        float,
-                        30,
-                        10,
-                        1.0E-20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reltol",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndtrfk",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epzmsg",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLPZELECTRIC_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def solver(self) -> int:
         """Get or set the Piezoelectric solver type:

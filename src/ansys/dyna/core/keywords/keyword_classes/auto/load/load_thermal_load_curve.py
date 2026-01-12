@@ -23,7 +23,13 @@
 """Module providing the LoadThermalLoadCurve class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADTHERMALLOADCURVE_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("lciddr", int, 10, 10, 0),
+)
 
 class LoadThermalLoadCurve(KeywordBase):
     """DYNA LOAD_THERMAL_LOAD_CURVE keyword"""
@@ -35,27 +41,10 @@ class LoadThermalLoadCurve(KeywordBase):
         """Initialize the LoadThermalLoadCurve class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lciddr",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALLOADCURVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID, see *DEFINE_CURVE to define temperature versus time.

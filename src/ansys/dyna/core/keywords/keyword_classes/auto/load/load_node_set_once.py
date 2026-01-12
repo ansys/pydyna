@@ -23,7 +23,24 @@
 """Module providing the LoadNodeSetOnce class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADNODESETONCE_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, 0),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("sf", float, 30, 10, 1.0),
+    FieldSchema("cid", int, 40, 10, 0),
+    FieldSchema("m1", int, 50, 10, 0),
+    FieldSchema("m2", int, 60, 10, 0),
+    FieldSchema("m3", int, 70, 10, 0),
+)
+
+_LOADNODESETONCE_CARD1 = (
+    FieldSchema("once", int, 0, 10, 0),
+    FieldSchema("lcid1", int, 10, 10, None),
+)
 
 class LoadNodeSetOnce(KeywordBase):
     """DYNA LOAD_NODE_SET_ONCE keyword"""
@@ -35,93 +52,13 @@ class LoadNodeSetOnce(KeywordBase):
         """Initialize the LoadNodeSetOnce class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m1",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m2",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m3",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "once",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADNODESETONCE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADNODESETONCE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see also *SET_NODE.

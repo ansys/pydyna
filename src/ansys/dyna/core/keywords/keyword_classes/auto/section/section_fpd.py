@@ -23,8 +23,31 @@
 """Module providing the SectionFpd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONFPD_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, None),
+)
+
+_SECTIONFPD_CARD1 = (
+    FieldSchema("dx", float, 0, 10, None),
+    FieldSchema("dy", float, 10, 10, None),
+    FieldSchema("dz", float, 20, 10, None),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("kernel", int, 40, 10, None),
+)
+
+_SECTIONFPD_CARD2 = (
+    FieldSchema("unused", float, 0, 10, None),
+    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("tstart", float, 30, 10, 0.0),
+    FieldSchema("dt_imp", float, 40, 10, None),
+    FieldSchema("dtscl", float, 50, 10, 0.1),
+)
 
 class SectionFpd(KeywordBase):
     """DYNA SECTION_FPD keyword"""
@@ -40,112 +63,16 @@ class SectionFpd(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kernel",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tstart",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt_imp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtscl",
-                        float,
-                        50,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONFPD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONFPD_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONFPD_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionFpd.option_specs[0],
                 cards = [
                     Card(
@@ -163,7 +90,6 @@ class SectionFpd(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.

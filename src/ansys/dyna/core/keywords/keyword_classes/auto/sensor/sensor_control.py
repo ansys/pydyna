@@ -23,8 +23,29 @@
 """Module providing the SensorControl class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SENSORCONTROL_CARD0 = (
+    FieldSchema("cntlid", int, 0, 10, None),
+    FieldSchema("type", str, 10, 10, "AIRBAG"),
+    FieldSchema("typeid", int, 20, 10, None),
+    FieldSchema("timeoff", int, 30, 10, 0),
+    FieldSchema("nrep", int, 40, 10, 0),
+    FieldSchema("estyp", str, 50, 10, "BEAM"),
+)
+
+_SENSORCONTROL_CARD1 = (
+    FieldSchema("initstt", str, 0, 10, "ON"),
+    FieldSchema("swit1", int, 10, 10, None),
+    FieldSchema("swit2", int, 20, 10, None),
+    FieldSchema("swit3", int, 30, 10, None),
+    FieldSchema("swit4", int, 40, 10, None),
+    FieldSchema("swit5", int, 50, 10, None),
+    FieldSchema("swit6", int, 60, 10, None),
+    FieldSchema("swit7", int, 70, 10, None),
+)
 
 class SensorControl(KeywordBase):
     """DYNA SENSOR_CONTROL keyword"""
@@ -40,118 +61,13 @@ class SensorControl(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cntlid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        str,
-                        10,
-                        10,
-                        "AIRBAG",
-                        **kwargs,
-                    ),
-                    Field(
-                        "typeid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "timeoff",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nrep",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "estyp",
-                        str,
-                        50,
-                        10,
-                        "BEAM",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "initstt",
-                        str,
-                        0,
-                        10,
-                        "ON",
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit5",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit6",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swit7",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORCONTROL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SENSORCONTROL_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorControl.option_specs[0],
                 cards = [
                     Card(
@@ -169,7 +85,6 @@ class SensorControl(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def cntlid(self) -> typing.Optional[int]:
         """Get or set the Control ID

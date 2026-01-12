@@ -23,7 +23,13 @@
 """Module providing the ControlImplicitOrdering class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITORDERING_CARD0 = (
+    FieldSchema("order", int, 0, 10, 0),
+    FieldSchema("nmetis", int, 10, 10, 0),
+)
 
 class ControlImplicitOrdering(KeywordBase):
     """DYNA CONTROL_IMPLICIT_ORDERING keyword"""
@@ -35,28 +41,10 @@ class ControlImplicitOrdering(KeywordBase):
         """Initialize the ControlImplicitOrdering class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "order",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmetis",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITORDERING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def order(self) -> int:
         """Get or set the Ordering option (see Remark 1):

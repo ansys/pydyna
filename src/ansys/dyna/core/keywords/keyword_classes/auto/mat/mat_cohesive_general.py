@@ -23,8 +23,28 @@
 """Module providing the MatCohesiveGeneral class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATCOHESIVEGENERAL_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("roflg", int, 20, 10, 0),
+    FieldSchema("intfail", float, 30, 10, None),
+    FieldSchema("tes", float, 40, 10, None),
+    FieldSchema("tslc", int, 50, 10, None),
+    FieldSchema("gic", float, 60, 10, None),
+    FieldSchema("giic", float, 70, 10, None),
+)
+
+_MATCOHESIVEGENERAL_CARD1 = (
+    FieldSchema("xmu", float, 0, 10, None),
+    FieldSchema("t", float, 10, 10, None),
+    FieldSchema("s", float, 20, 10, None),
+    FieldSchema("stfsf", float, 30, 10, None),
+    FieldSchema("tslc2", float, 40, 10, None),
+)
 
 class MatCohesiveGeneral(KeywordBase):
     """DYNA MAT_COHESIVE_GENERAL keyword"""
@@ -40,107 +60,13 @@ class MatCohesiveGeneral(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "roflg",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intfail",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tes",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tslc",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gic",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "giic",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xmu",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stfsf",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tslc2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATCOHESIVEGENERAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATCOHESIVEGENERAL_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatCohesiveGeneral.option_specs[0],
                 cards = [
                     Card(
@@ -158,7 +84,6 @@ class MatCohesiveGeneral(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

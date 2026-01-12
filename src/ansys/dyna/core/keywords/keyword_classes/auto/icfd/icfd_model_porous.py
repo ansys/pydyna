@@ -23,7 +23,38 @@
 """Module providing the IcfdModelPorous class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDMODELPOROUS_CARD0 = (
+    FieldSchema("pmmoid", int, 0, 10, None),
+    FieldSchema("pmid", int, 10, 10, 1),
+)
+
+_ICFDMODELPOROUS_CARD1 = (
+    FieldSchema("por", float, 0, 10, 0.0),
+    FieldSchema("per/thx", float, 10, 10, 0.0),
+    FieldSchema("ff/thy", float, 20, 10, 0.0),
+    FieldSchema("thz", float, 30, 10, 0.0),
+    FieldSchema("pvlcidx", int, 40, 10, None),
+    FieldSchema("pvlcidy", int, 50, 10, None),
+    FieldSchema("pvlcidz", int, 60, 10, None),
+)
+
+_ICFDMODELPOROUS_CARD2 = (
+    FieldSchema("kxp'", float, 0, 10, 0.0),
+    FieldSchema("kyp'", float, 10, 10, 0.0),
+    FieldSchema("kzp'", float, 20, 10, 0.0),
+)
+
+_ICFDMODELPOROUS_CARD3 = (
+    FieldSchema("p-x/pid1r", float, 0, 10, 0.0),
+    FieldSchema("p-y/pid2r", float, 10, 10, 0.0),
+    FieldSchema("projxp-z", float, 20, 10, 0.0),
+    FieldSchema("projyp-x", float, 30, 10, 0.0),
+    FieldSchema("projyp-y", float, 40, 10, 0.0),
+    FieldSchema("projyp-z", float, 50, 10, 0.0),
+)
 
 class IcfdModelPorous(KeywordBase):
     """DYNA ICFD_MODEL_POROUS keyword"""
@@ -35,164 +66,19 @@ class IcfdModelPorous(KeywordBase):
         """Initialize the IcfdModelPorous class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pmmoid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmid",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "por",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "per/thx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ff/thy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pvlcidx",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pvlcidy",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pvlcidz",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "kxp'",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kyp'",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kzp'",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p-x/pid1r",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p-y/pid2r",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "projxp-z",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "projyp-x",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "projyp-y",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "projyp-z",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDMODELPOROUS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDMODELPOROUS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDMODELPOROUS_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDMODELPOROUS_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def pmmoid(self) -> typing.Optional[int]:
         """Get or set the Porous media model ID.

@@ -23,8 +23,20 @@
 """Module providing the MatSpringSquatShearwall class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSPRINGSQUATSHEARWALL_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("a14", float, 10, 10, None),
+    FieldSchema("b14", float, 20, 10, None),
+    FieldSchema("c14", float, 30, 10, None),
+    FieldSchema("d14", float, 40, 10, None),
+    FieldSchema("e14", float, 50, 10, None),
+    FieldSchema("lcid", int, 60, 10, None),
+    FieldSchema("psd", float, 70, 10, None),
+)
 
 class MatSpringSquatShearwall(KeywordBase):
     """DYNA MAT_SPRING_SQUAT_SHEARWALL keyword"""
@@ -40,67 +52,10 @@ class MatSpringSquatShearwall(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a14",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b14",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c14",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d14",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e14",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psd",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSPRINGSQUATSHEARWALL_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSpringSquatShearwall.option_specs[0],
                 cards = [
                     Card(
@@ -118,7 +73,6 @@ class MatSpringSquatShearwall(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material number. A unique number has to be used.

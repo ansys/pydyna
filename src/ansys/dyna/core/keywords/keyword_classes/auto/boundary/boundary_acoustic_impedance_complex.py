@@ -23,7 +23,16 @@
 """Module providing the BoundaryAcousticImpedanceComplex class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYACOUSTICIMPEDANCECOMPLEX_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("zr", float, 10, 10, 0.0),
+    FieldSchema("zi", float, 20, 10, 0.0),
+    FieldSchema("lcidr", int, 30, 10, 0),
+    FieldSchema("lcidi", int, 40, 10, 0),
+)
 
 class BoundaryAcousticImpedanceComplex(KeywordBase):
     """DYNA BOUNDARY_ACOUSTIC_IMPEDANCE_COMPLEX keyword"""
@@ -35,51 +44,10 @@ class BoundaryAcousticImpedanceComplex(KeywordBase):
         """Initialize the BoundaryAcousticImpedanceComplex class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zr",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zi",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidi",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYACOUSTICIMPEDANCECOMPLEX_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID of an acoustic surface.

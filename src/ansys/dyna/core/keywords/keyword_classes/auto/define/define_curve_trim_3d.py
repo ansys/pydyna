@@ -23,8 +23,30 @@
 """Module providing the DefineCurveTrim3D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECURVETRIM3D_CARD0 = (
+    FieldSchema("tcid", int, 0, 10, None),
+    FieldSchema("tctype", int, 10, 10, 1),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("tdir", int, 30, 10, None),
+    FieldSchema("tctol", float, 40, 10, 0.25),
+    FieldSchema("toln", float, 50, 10, None),
+    FieldSchema("nseed1", int, 60, 10, None),
+    FieldSchema("nseed2", int, 70, 10, None),
+)
+
+_DEFINECURVETRIM3D_CARD1 = (
+    FieldSchema("cx", float, 0, 20, 0.0),
+    FieldSchema("cy", float, 20, 20, 0.0),
+    FieldSchema("cz", float, 40, 20, 0.0),
+)
+
+_DEFINECURVETRIM3D_CARD2 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
 
 class DefineCurveTrim3D(KeywordBase):
     """DYNA DEFINE_CURVE_TRIM_3D keyword"""
@@ -40,108 +62,16 @@ class DefineCurveTrim3D(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tctype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdir",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tctol",
-                        float,
-                        40,
-                        10,
-                        0.25,
-                        **kwargs,
-                    ),
-                    Field(
-                        "toln",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nseed1",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nseed2",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cx",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cy",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cz",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECURVETRIM3D_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVETRIM3D_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVETRIM3D_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCurveTrim3D.option_specs[0],
                 cards = [
                     Card(
@@ -159,7 +89,6 @@ class DefineCurveTrim3D(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def tcid(self) -> typing.Optional[int]:
         """Get or set the ID number for trim curve. A unique number has to be defined.

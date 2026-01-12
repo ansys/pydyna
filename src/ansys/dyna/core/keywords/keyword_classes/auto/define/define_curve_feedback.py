@@ -23,8 +23,24 @@
 """Module providing the DefineCurveFeedback class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECURVEFEEDBACK_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+    FieldSchema("boxid", int, 20, 10, 0),
+    FieldSchema("fldid", int, 30, 10, None),
+)
+
+_DEFINECURVEFEEDBACK_CARD1 = (
+    FieldSchema("fsl", float, 0, 10, None),
+    FieldSchema("tsl", float, 10, 10, None),
+    FieldSchema("sff", float, 20, 10, 1.0),
+    FieldSchema("sft", float, 30, 10, 1.0),
+    FieldSchema("bias", float, 40, 10, 0.0),
+)
 
 class DefineCurveFeedback(KeywordBase):
     """DYNA DEFINE_CURVE_FEEDBACK keyword"""
@@ -40,82 +56,13 @@ class DefineCurveFeedback(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fldid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fsl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsl",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sff",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bias",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEFEEDBACK_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEFEEDBACK_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCurveFeedback.option_specs[0],
                 cards = [
                     Card(
@@ -133,7 +80,6 @@ class DefineCurveFeedback(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the ID number for load curve to be scaled.

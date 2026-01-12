@@ -23,7 +23,15 @@
 """Module providing the LoadThermalVariableNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADTHERMALVARIABLENODE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("ts", float, 10, 10, 0.0),
+    FieldSchema("tb", float, 20, 10, 0.0),
+    FieldSchema("lcid", int, 30, 10, None),
+)
 
 class LoadThermalVariableNode(KeywordBase):
     """DYNA LOAD_THERMAL_VARIABLE_NODE keyword"""
@@ -35,42 +43,10 @@ class LoadThermalVariableNode(KeywordBase):
         """Initialize the LoadThermalVariableNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ts",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tb",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALVARIABLENODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.

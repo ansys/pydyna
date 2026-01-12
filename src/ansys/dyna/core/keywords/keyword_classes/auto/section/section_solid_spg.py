@@ -23,8 +23,69 @@
 """Module providing the SectionSolidSpg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONSOLIDSPG_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, 1),
+    FieldSchema("aet", int, 20, 10, 0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("cohoff", float, 60, 10, None),
+    FieldSchema("gaskeit", float, 70, 10, None),
+)
+
+_SECTIONSOLIDSPG_CARD1 = (
+    FieldSchema("dx", float, 0, 10, None),
+    FieldSchema("dy", float, 10, 10, None),
+    FieldSchema("dz", float, 20, 10, None),
+    FieldSchema("ispline", int, 30, 10, 0),
+    FieldSchema("kernel", int, 40, 10, 0),
+    FieldSchema("unused", float, 50, 10, None),
+    FieldSchema("smstep", int, 60, 10, None),
+    FieldSchema("msc", float, 70, 10, None),
+)
+
+_SECTIONSOLIDSPG_CARD2 = (
+    FieldSchema("idam", int, 0, 10, 1),
+    FieldSchema("fs", float, 10, 10, None),
+    FieldSchema("stretch", float, 20, 10, 10000000000.0),
+    FieldSchema("itb", int, 30, 10, None),
+    FieldSchema("msfac", float, 40, 10, None),
+    FieldSchema("isc", float, 50, 10, None),
+    FieldSchema("boxid", int, 60, 10, None),
+    FieldSchema("pdamp", float, 70, 10, -0.001),
+)
+
+_SECTIONSOLIDSPG_CARD3 = (
+    FieldSchema("nip", int, 0, 10, None),
+    FieldSchema("nxdof", int, 10, 10, None),
+    FieldSchema("ihgf", int, 20, 10, 0),
+    FieldSchema("itaj", int, 30, 10, 0),
+    FieldSchema("lmc", int, 40, 10, None),
+    FieldSchema("nhsv", int, 50, 10, None),
+)
+
+_SECTIONSOLIDSPG_CARD4 = (
+    FieldSchema("xi", float, 0, 10, None),
+    FieldSchema("eta", float, 10, 10, None),
+    FieldSchema("zeta", float, 20, 10, None),
+    FieldSchema("wgt", float, 30, 10, None),
+)
+
+_SECTIONSOLIDSPG_CARD5 = (
+    FieldSchema("p1", float, 0, 10, None),
+    FieldSchema("p2", float, 10, 10, None),
+    FieldSchema("p3", float, 20, 10, None),
+    FieldSchema("p4", float, 30, 10, None),
+    FieldSchema("p5", float, 40, 10, None),
+    FieldSchema("p6", float, 50, 10, None),
+    FieldSchema("p7", float, 60, 10, None),
+    FieldSchema("p8", float, 70, 10, None),
+)
 
 class SectionSolidSpg(KeywordBase):
     """DYNA SECTION_SOLID_SPG keyword"""
@@ -40,334 +101,25 @@ class SectionSolidSpg(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aet",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cohoff",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gaskeit",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ispline",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kernel",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smstep",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msc",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "idam",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stretch",
-                        float,
-                        20,
-                        10,
-                        1.0E10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itb",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msfac",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pdamp",
-                        float,
-                        70,
-                        10,
-                        -0.001,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nip",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nxdof",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihgf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itaj",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmc",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhsv",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zeta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wgt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "p1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONSOLIDSPG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSOLIDSPG_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSOLIDSPG_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSOLIDSPG_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSOLIDSPG_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSOLIDSPG_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionSolidSpg.option_specs[0],
                 cards = [
                     Card(
@@ -385,7 +137,6 @@ class SectionSolidSpg(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.

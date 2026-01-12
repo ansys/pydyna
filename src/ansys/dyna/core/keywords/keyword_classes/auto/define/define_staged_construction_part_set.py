@@ -23,8 +23,15 @@
 """Module providing the DefineStagedConstructionPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESTAGEDCONSTRUCTIONPARTSET_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("stga", int, 10, 10, None),
+    FieldSchema("stgr", int, 20, 10, None),
+)
 
 class DefineStagedConstructionPartSet(KeywordBase):
     """DYNA DEFINE_STAGED_CONSTRUCTION_PART_SET keyword"""
@@ -40,32 +47,10 @@ class DefineStagedConstructionPartSet(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stga",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stgr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESTAGEDCONSTRUCTIONPARTSET_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineStagedConstructionPartSet.option_specs[0],
                 cards = [
                     Card(
@@ -83,7 +68,6 @@ class DefineStagedConstructionPartSet(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID.

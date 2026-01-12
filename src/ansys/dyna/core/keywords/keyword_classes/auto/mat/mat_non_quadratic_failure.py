@@ -23,8 +23,44 @@
 """Module providing the MatNonQuadraticFailure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATNONQUADRATICFAILURE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("sigy", float, 40, 10, None),
+    FieldSchema("a", float, 50, 10, None),
+    FieldSchema("ksi", float, 60, 10, None),
+)
+
+_MATNONQUADRATICFAILURE_CARD1 = (
+    FieldSchema("theta1", float, 0, 10, None),
+    FieldSchema("q1", float, 10, 10, None),
+    FieldSchema("theta2", float, 20, 10, None),
+    FieldSchema("q2", float, 30, 10, None),
+    FieldSchema("theta3", float, 40, 10, None),
+    FieldSchema("q3", float, 50, 10, None),
+)
+
+_MATNONQUADRATICFAILURE_CARD2 = (
+    FieldSchema("cs", float, 0, 10, None),
+    FieldSchema("pdots", float, 10, 10, None),
+)
+
+_MATNONQUADRATICFAILURE_CARD3 = (
+    FieldSchema("dcrit", float, 0, 10, None),
+    FieldSchema("wcb", float, 10, 10, None),
+    FieldSchema("wcl", float, 20, 10, None),
+    FieldSchema("wcs", float, 30, 10, None),
+    FieldSchema("cc", float, 40, 10, None),
+    FieldSchema("phi", float, 50, 10, None),
+    FieldSchema("gamma", float, 60, 10, None),
+    FieldSchema("thick", float, 70, 10, None),
+)
 
 class MatNonQuadraticFailure(KeywordBase):
     """DYNA MAT_NON_QUADRATIC_FAILURE keyword"""
@@ -40,184 +76,19 @@ class MatNonQuadraticFailure(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ksi",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "theta1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theta2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theta3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cs",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pdots",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dcrit",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wcb",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wcl",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wcs",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phi",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATNONQUADRATICFAILURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONQUADRATICFAILURE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONQUADRATICFAILURE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONQUADRATICFAILURE_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatNonQuadraticFailure.option_specs[0],
                 cards = [
                     Card(
@@ -235,7 +106,6 @@ class MatNonQuadraticFailure(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

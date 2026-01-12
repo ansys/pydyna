@@ -23,7 +23,12 @@
 """Module providing the IcfdControlLoad class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLLOAD_CARD0 = (
+    FieldSchema("abl", int, 0, 10, 1),
+)
 
 class IcfdControlLoad(KeywordBase):
     """DYNA ICFD_CONTROL_LOAD keyword"""
@@ -35,20 +40,10 @@ class IcfdControlLoad(KeywordBase):
         """Initialize the IcfdControlLoad class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "abl",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLLOAD_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def abl(self) -> int:
         """Get or set the EQ.0: the body load provided in *LOAD_BODY is reset to zero only for the fluid analysis.

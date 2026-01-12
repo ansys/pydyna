@@ -23,7 +23,27 @@
 """Module providing the InitialDetonationGeometry class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALDETONATIONGEOMETRY_CARD0 = (
+    FieldSchema("heid", int, 0, 10, None),
+    FieldSchema("hetyp", float, 10, 10, 0.0),
+    FieldSchema("mmgse", float, 20, 10, 0.0),
+)
+
+_INITIALDETONATIONGEOMETRY_CARD1 = (
+    FieldSchema("geotyp", int, 0, 10, 0),
+    FieldSchema("lt", float, 10, 10, 0.0),
+    FieldSchema("dgeo", float, 20, 10, 0.0),
+)
+
+_INITIALDETONATIONGEOMETRY_CARD2 = (
+    FieldSchema("v1", int, 0, 10, None),
+    FieldSchema("v2", int, 10, 10, None),
+    FieldSchema("v3", int, 20, 10, None),
+    FieldSchema("v4", int, 30, 10, None),
+)
 
 class InitialDetonationGeometry(KeywordBase):
     """DYNA INITIAL_DETONATION_GEOMETRY keyword"""
@@ -35,95 +55,16 @@ class InitialDetonationGeometry(KeywordBase):
         """Initialize the InitialDetonationGeometry class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "heid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hetyp",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgse",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "geotyp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dgeo",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALDETONATIONGEOMETRY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALDETONATIONGEOMETRY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALDETONATIONGEOMETRY_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def heid(self) -> typing.Optional[int]:
         """Get or set the ID specifying the high explosives to be lit

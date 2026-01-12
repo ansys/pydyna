@@ -23,8 +23,64 @@
 """Module providing the ContactSurfaceToSurfaceThermalFriction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTSURFACETOSURFACETHERMALFRICTION_CARD0 = (
+    FieldSchema("surfa", int, 0, 10, None),
+    FieldSchema("surfb", int, 10, 10, None),
+    FieldSchema("surfatyp", int, 20, 10, 0),
+    FieldSchema("surfbtyp", int, 30, 10, 0),
+    FieldSchema("saboxid", int, 40, 10, None),
+    FieldSchema("sbboxid", int, 50, 10, None),
+    FieldSchema("sapr", int, 60, 10, 0),
+    FieldSchema("sbpr", int, 70, 10, 0),
+)
+
+_CONTACTSURFACETOSURFACETHERMALFRICTION_CARD1 = (
+    FieldSchema("fs", float, 0, 10, 0.0),
+    FieldSchema("fd", float, 10, 10, 0.0),
+    FieldSchema("dc", float, 20, 10, 0.0),
+    FieldSchema("vc", float, 30, 10, 0.0),
+    FieldSchema("vdc", float, 40, 10, 0.0),
+    FieldSchema("penchk", int, 50, 10, None),
+    FieldSchema("bt", float, 60, 10, 0.0),
+    FieldSchema("dt", float, 70, 10, 1e+20),
+)
+
+_CONTACTSURFACETOSURFACETHERMALFRICTION_CARD2 = (
+    FieldSchema("sfsa", float, 0, 10, 1.0),
+    FieldSchema("sfsb", float, 10, 10, 1.0),
+    FieldSchema("sast", float, 20, 10, None),
+    FieldSchema("sbst", float, 30, 10, None),
+    FieldSchema("sfsat", float, 40, 10, 1.0),
+    FieldSchema("sfsbt", float, 50, 10, 1.0),
+    FieldSchema("fsf", float, 60, 10, 1.0),
+    FieldSchema("vsf", float, 70, 10, 1.0),
+)
+
+_CONTACTSURFACETOSURFACETHERMALFRICTION_CARD3 = (
+    FieldSchema("k", float, 0, 10, None),
+    FieldSchema("frad", float, 10, 10, None),
+    FieldSchema("h0", float, 20, 10, None),
+    FieldSchema("lmin", float, 30, 10, None),
+    FieldSchema("lmax", float, 40, 10, None),
+    FieldSchema("ftosa", float, 50, 10, 0.5),
+    FieldSchema("bc_flg", int, 60, 10, None),
+    FieldSchema("algo", int, 70, 10, None),
+)
+
+_CONTACTSURFACETOSURFACETHERMALFRICTION_CARD4 = (
+    FieldSchema("lcfst", int, 0, 10, None),
+    FieldSchema("lcfdt", int, 10, 10, None),
+    FieldSchema("formula", int, 20, 10, None),
+    FieldSchema("a", int, 30, 10, None),
+    FieldSchema("b", int, 40, 10, None),
+    FieldSchema("c", int, 50, 10, None),
+    FieldSchema("d", int, 60, 10, None),
+    FieldSchema("lch", int, 70, 10, None),
+)
 
 class ContactSurfaceToSurfaceThermalFriction(KeywordBase):
     """DYNA CONTACT_SURFACE_TO_SURFACE_THERMAL_FRICTION keyword"""
@@ -48,325 +104,22 @@ class ContactSurfaceToSurfaceThermalFriction(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfa",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfb",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfatyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfbtyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "saboxid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbboxid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sapr",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbpr",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fs",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vdc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "penchk",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        70,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sfsa",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsb",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sast",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbst",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsat",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsbt",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsf",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vsf",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frad",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmin",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmax",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftosa",
-                        float,
-                        50,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bc_flg",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "algo",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcfst",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcfdt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "formula",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lch",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _CONTACTSURFACETOSURFACETHERMALFRICTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTSURFACETOSURFACETHERMALFRICTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTSURFACETOSURFACETHERMALFRICTION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTSURFACETOSURFACETHERMALFRICTION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTSURFACETOSURFACETHERMALFRICTION_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = ContactSurfaceToSurfaceThermalFriction.option_specs[0],
                 cards = [
                     Card(
@@ -649,21 +402,21 @@ class ContactSurfaceToSurfaceThermalFriction(KeywordBase):
                                 float,
                                 20,
                                 10,
-                                kwargs.get("dprfac", 0)
+                                kwargs.get("dprfac", 0.0)
                             ),
                             Field(
                                 "dtstif",
                                 float,
                                 30,
                                 10,
-                                kwargs.get("dtstif", 0)
+                                kwargs.get("dtstif", 0.0)
                             ),
                             Field(
                                 "edgek",
                                 float,
                                 40,
                                 10,
-                                kwargs.get("edgek", 0)
+                                kwargs.get("edgek", 0.0)
                             ),
                             Field(
                                 "flangl",
@@ -701,28 +454,28 @@ class ContactSurfaceToSurfaceThermalFriction(KeywordBase):
                                 float,
                                 10,
                                 10,
-                                kwargs.get("dtpchk", 0)
+                                kwargs.get("dtpchk", 0.0)
                             ),
                             Field(
                                 "sfnbr",
                                 float,
                                 20,
                                 10,
-                                kwargs.get("sfnbr", 0)
+                                kwargs.get("sfnbr", 0.0)
                             ),
                             Field(
                                 "fnlscl",
                                 float,
                                 30,
                                 10,
-                                kwargs.get("fnlscl", 0)
+                                kwargs.get("fnlscl", 0.0)
                             ),
                             Field(
                                 "dnlscl",
                                 float,
                                 40,
                                 10,
-                                kwargs.get("dnlscl", 0)
+                                kwargs.get("dnlscl", 0.0)
                             ),
                             Field(
                                 "tcso",
@@ -893,7 +646,6 @@ class ContactSurfaceToSurfaceThermalFriction(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def surfa(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, node set ID, part set ID, part ID, or shell element set ID for specifying the SURFA side of the contact interface (see Setting the Contact Interface). See *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set which includes all nodes that may be exposed to contact as element erosion occurs.

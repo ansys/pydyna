@@ -23,7 +23,25 @@
 """Module providing the EosMieGruneisen class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOSMIEGRUNEISEN_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("gamma", float, 10, 10, None),
+    FieldSchema("a1", float, 20, 10, None),
+    FieldSchema("a2", float, 30, 10, None),
+    FieldSchema("a3", float, 40, 10, None),
+    FieldSchema("pel", float, 50, 10, None),
+    FieldSchema("pco", float, 60, 10, None),
+    FieldSchema("n", float, 70, 10, None),
+)
+
+_EOSMIEGRUNEISEN_CARD1 = (
+    FieldSchema("alpha0", float, 0, 10, None),
+    FieldSchema("e0", float, 10, 10, None),
+    FieldSchema("v0", float, 20, 10, None),
+)
 
 class EosMieGruneisen(KeywordBase):
     """DYNA EOS_MIE_GRUNEISEN keyword"""
@@ -35,93 +53,13 @@ class EosMieGruneisen(KeywordBase):
         """Initialize the EosMieGruneisen class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pel",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pco",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alpha0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSMIEGRUNEISEN_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSMIEGRUNEISEN_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID, a unique number or label must be specified.

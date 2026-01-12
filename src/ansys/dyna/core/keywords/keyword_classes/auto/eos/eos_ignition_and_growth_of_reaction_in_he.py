@@ -23,7 +23,50 @@
 """Module providing the EosIgnitionAndGrowthOfReactionInHe class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("a", float, 10, 10, None),
+    FieldSchema("b", float, 20, 10, None),
+    FieldSchema("xp1", float, 30, 10, None),
+    FieldSchema("xp2", float, 40, 10, None),
+    FieldSchema("frer", float, 50, 10, None),
+    FieldSchema("g", float, 60, 10, None),
+    FieldSchema("r1", float, 70, 10, None),
+)
+
+_EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD1 = (
+    FieldSchema("r2", float, 0, 10, None),
+    FieldSchema("r3", float, 10, 10, None),
+    FieldSchema("r5", float, 20, 10, None),
+    FieldSchema("r6", float, 30, 10, None),
+    FieldSchema("fmxig", float, 40, 10, None),
+    FieldSchema("freq", float, 50, 10, None),
+    FieldSchema("grow1", float, 60, 10, None),
+    FieldSchema("em", float, 70, 10, None),
+)
+
+_EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD2 = (
+    FieldSchema("ar1", float, 0, 10, None),
+    FieldSchema("es1", float, 10, 10, None),
+    FieldSchema("cvp", float, 20, 10, None),
+    FieldSchema("cvr", float, 30, 10, None),
+    FieldSchema("eetal", float, 40, 10, None),
+    FieldSchema("ccrit", float, 50, 10, None),
+    FieldSchema("enq", float, 60, 10, None),
+    FieldSchema("tmp0", float, 70, 10, None),
+)
+
+_EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD3 = (
+    FieldSchema("grow2", float, 0, 10, None),
+    FieldSchema("ar2", float, 10, 10, None),
+    FieldSchema("es2", float, 20, 10, None),
+    FieldSchema("en", float, 30, 10, None),
+    FieldSchema("fmxgr", float, 40, 10, None),
+    FieldSchema("fmngr", float, 50, 10, None),
+)
 
 class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
     """DYNA EOS_IGNITION_AND_GROWTH_OF_REACTION_IN_HE keyword"""
@@ -35,234 +78,19 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
         """Initialize the EosIgnitionAndGrowthOfReactionInHe class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xp1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xp2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frer",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r1",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r2",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r3",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r5",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r6",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmxig",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "freq",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grow1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "em",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ar1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eetal",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ccrit",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "enq",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmp0",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "grow2",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ar2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "es2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "en",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmxgr",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmngr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label.

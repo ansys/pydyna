@@ -23,7 +23,12 @@
 """Module providing the FrequencyDomainAcousticFringePlotNodeSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINACOUSTICFRINGEPLOTNODESET_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+)
 
 class FrequencyDomainAcousticFringePlotNodeSet(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_ACOUSTIC_FRINGE_PLOT_NODE_SET keyword"""
@@ -35,19 +40,10 @@ class FrequencyDomainAcousticFringePlotNodeSet(KeywordBase):
         """Initialize the FrequencyDomainAcousticFringePlotNodeSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICFRINGEPLOTNODESET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID.

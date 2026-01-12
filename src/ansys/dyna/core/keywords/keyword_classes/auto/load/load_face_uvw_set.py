@@ -23,7 +23,15 @@
 """Module providing the LoadFaceUvwSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADFACEUVWSET_CARD0 = (
+    FieldSchema("fid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("at", float, 30, 10, 0.0),
+)
 
 class LoadFaceUvwSet(KeywordBase):
     """DYNA LOAD_FACE_UVW_SET keyword"""
@@ -35,42 +43,10 @@ class LoadFaceUvwSet(KeywordBase):
         """Initialize the LoadFaceUvwSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADFACEUVWSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def fid(self) -> typing.Optional[int]:
         """Get or set the Parametric face set ID for the SET keyword option; see *SET_IGA_FACE_UVW (see Remark 1)

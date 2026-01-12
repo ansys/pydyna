@@ -23,7 +23,17 @@
 """Module providing the ConstrainedNodeToNurbsPatchSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDNODETONURBSPATCHSET_CARD0 = (
+    FieldSchema("patchid", int, 0, 10, None),
+    FieldSchema("nsid", int, 10, 10, None),
+    FieldSchema("con", str, 20, 10, "000000"),
+    FieldSchema("cid", int, 30, 10, None),
+    FieldSchema("sf", float, 40, 10, 1.0),
+    FieldSchema("dbflg", int, 50, 10, 0),
+)
 
 class ConstrainedNodeToNurbsPatchSet(KeywordBase):
     """DYNA CONSTRAINED_NODE_TO_NURBS_PATCH_SET keyword"""
@@ -35,57 +45,10 @@ class ConstrainedNodeToNurbsPatchSet(KeywordBase):
         """Initialize the ConstrainedNodeToNurbsPatchSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "patchid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "con",
-                        str,
-                        20,
-                        10,
-                        "000000",
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dbflg",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDNODETONURBSPATCHSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def patchid(self) -> typing.Optional[int]:
         """Get or set the Patch ID.

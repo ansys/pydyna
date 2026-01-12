@@ -23,7 +23,18 @@
 """Module providing the ControlFormingTravel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGTRAVEL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("vid", int, 10, 10, None),
+    FieldSchema("travel", float, 20, 10, None),
+    FieldSchema("target", int, 30, 10, None),
+    FieldSchema("gap", float, 40, 10, None),
+    FieldSchema("phase", int, 50, 10, None),
+    FieldSchema("follow", int, 60, 10, None),
+)
 
 class ControlFormingTravel(KeywordBase):
     """DYNA CONTROL_FORMING_TRAVEL keyword"""
@@ -35,61 +46,10 @@ class ControlFormingTravel(KeywordBase):
         """Initialize the ControlFormingTravel class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "travel",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "target",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phase",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "follow",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTRAVEL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID

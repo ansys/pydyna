@@ -23,8 +23,79 @@
 """Module providing the SectionShellXfem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONSHELLXFEM_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, 2),
+    FieldSchema("shrf", float, 20, 10, 1.0),
+    FieldSchema("nip", int, 30, 10, 2),
+    FieldSchema("propt", float, 40, 10, 1.0),
+    FieldSchema("qr/irid", int, 50, 10, 0),
+    FieldSchema("icomp", int, 60, 10, 0),
+    FieldSchema("setyp", int, 70, 10, 1),
+)
+
+_SECTIONSHELLXFEM_CARD1 = (
+    FieldSchema("t1", float, 0, 10, 0.0),
+    FieldSchema("t2", float, 10, 10, 0.0),
+    FieldSchema("t3", float, 20, 10, 0.0),
+    FieldSchema("t4", float, 30, 10, 0.0),
+    FieldSchema("nloc", float, 40, 10, 0.0),
+    FieldSchema("marea", float, 50, 10, 0.0),
+)
+
+_SECTIONSHELLXFEM_CARD2 = (
+    FieldSchema("cmid", int, 0, 10, None),
+    FieldSchema("baselm", int, 10, 10, None),
+    FieldSchema("domint", int, 20, 10, 0),
+    FieldSchema("failcr", int, 30, 10, 1),
+    FieldSchema("propcr", int, 40, 10, None),
+    FieldSchema("fs", float, 50, 10, 0.0),
+    FieldSchema("ls/fs1", float, 60, 10, 0.0),
+    FieldSchema("nc/cl", float, 70, 10, None),
+)
+
+_SECTIONSHELLXFEM_CARD3 = (
+    FieldSchema("nipp", int, 0, 10, 0),
+    FieldSchema("nxdof", int, 10, 10, 0),
+    FieldSchema("iunf", int, 20, 10, 0),
+    FieldSchema("ihgf", int, 30, 10, 0),
+    FieldSchema("itaj", int, 40, 10, 0),
+    FieldSchema("lmc", int, 50, 10, 0),
+    FieldSchema("nhsv", int, 60, 10, 0),
+    FieldSchema("iloc", int, 70, 10, 0),
+)
+
+_SECTIONSHELLXFEM_CARD4 = (
+    FieldSchema("xi", float, 0, 10, None),
+    FieldSchema("eta", float, 10, 10, None),
+    FieldSchema("wgt", float, 20, 10, None),
+)
+
+_SECTIONSHELLXFEM_CARD5 = (
+    FieldSchema("bi", float, 0, 10, None),
+    FieldSchema("bi", float, 10, 10, None),
+    FieldSchema("bi", float, 20, 10, None),
+    FieldSchema("bi", float, 30, 10, None),
+    FieldSchema("bi", float, 40, 10, None),
+    FieldSchema("bi", float, 50, 10, None),
+    FieldSchema("bi", float, 60, 10, None),
+    FieldSchema("bi", float, 70, 10, None),
+)
+
+_SECTIONSHELLXFEM_CARD6 = (
+    FieldSchema("pi", float, 0, 10, 0.0),
+    FieldSchema("pi", float, 10, 10, 0.0),
+    FieldSchema("pi", float, 20, 10, 0.0),
+    FieldSchema("pi", float, 30, 10, 0.0),
+    FieldSchema("pi", float, 40, 10, 0.0),
+    FieldSchema("pi", float, 50, 10, 0.0),
+    FieldSchema("pi", float, 60, 10, 0.0),
+    FieldSchema("pi", float, 70, 10, 0.0),
+)
 
 class SectionShellXfem(KeywordBase):
     """DYNA SECTION_SHELL_XFEM keyword"""
@@ -40,411 +111,28 @@ class SectionShellXfem(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nip",
-                        int,
-                        30,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "propt",
-                        float,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qr/irid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icomp",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setyp",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nloc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "marea",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cmid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "baselm",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "domint",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "failcr",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "propcr",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ls/fs1",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nc/cl",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nipp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nxdof",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iunf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihgf",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itaj",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmc",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhsv",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iloc",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eta",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wgt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bi",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bi",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bi",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bi",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bi",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bi",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bi",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pi",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pi",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pi",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pi",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pi",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pi",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pi",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pi",
-                        float,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONSHELLXFEM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSHELLXFEM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSHELLXFEM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSHELLXFEM_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSHELLXFEM_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSHELLXFEM_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSHELLXFEM_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionShellXfem.option_specs[0],
                 cards = [
                     Card(
@@ -462,7 +150,6 @@ class SectionShellXfem(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.

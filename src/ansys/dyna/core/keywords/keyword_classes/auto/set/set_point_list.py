@@ -23,8 +23,19 @@
 """Module providing the SetPointList class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETPOINTLIST_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETPOINTLIST_CARD1 = (
+    FieldSchema("x", float, 0, 10, None),
+    FieldSchema("y", float, 10, 10, None),
+    FieldSchema("z", float, 20, 10, None),
+)
 
 class SetPointList(KeywordBase):
     """DYNA SET_POINT_LIST keyword"""
@@ -40,43 +51,13 @@ class SetPointList(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETPOINTLIST_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETPOINTLIST_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetPointList.option_specs[0],
                 cards = [
                     Card(
@@ -94,7 +75,6 @@ class SetPointList(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set Identification. All point sets should have a unique set ID.

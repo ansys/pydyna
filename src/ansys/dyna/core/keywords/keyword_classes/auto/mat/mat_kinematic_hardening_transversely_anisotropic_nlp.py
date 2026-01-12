@@ -23,8 +23,39 @@
 """Module providing the MatKinematicHardeningTransverselyAnisotropicNlp class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATKINEMATICHARDENINGTRANSVERSELYANISOTROPICNLP_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("r", float, 40, 10, None),
+    FieldSchema("hclid", int, 50, 10, None),
+    FieldSchema("opt", int, 60, 10, None),
+)
+
+_MATKINEMATICHARDENINGTRANSVERSELYANISOTROPICNLP_CARD1 = (
+    FieldSchema("cb", float, 0, 10, None),
+    FieldSchema("y", float, 10, 10, None),
+    FieldSchema("sc", float, 20, 10, None),
+    FieldSchema("k", float, 30, 10, None),
+    FieldSchema("rsat", float, 40, 10, None),
+    FieldSchema("sb", float, 50, 10, None),
+    FieldSchema("h", float, 60, 10, None),
+    FieldSchema("sc2", float, 70, 10, None),
+)
+
+_MATKINEMATICHARDENINGTRANSVERSELYANISOTROPICNLP_CARD2 = (
+    FieldSchema("ea", float, 0, 10, None),
+    FieldSchema("coe", float, 10, 10, None),
+    FieldSchema("iopt", int, 20, 10, 0),
+    FieldSchema("c1", float, 30, 10, None),
+    FieldSchema("c2", float, 40, 10, None),
+    FieldSchema("ifld", int, 50, 10, None),
+)
 
 class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
     """DYNA MAT_KINEMATIC_HARDENING_TRANSVERSELY_ANISOTROPIC_NLP keyword"""
@@ -40,167 +71,16 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hclid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "opt",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cb",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rsat",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sb",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sc2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ea",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coe",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iopt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifld",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATKINEMATICHARDENINGTRANSVERSELYANISOTROPICNLP_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATKINEMATICHARDENINGTRANSVERSELYANISOTROPICNLP_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATKINEMATICHARDENINGTRANSVERSELYANISOTROPICNLP_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatKinematicHardeningTransverselyAnisotropicNlp.option_specs[0],
                 cards = [
                     Card(
@@ -218,7 +98,6 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.  A unique number or label must be specified.

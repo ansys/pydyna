@@ -23,8 +23,75 @@
 """Module providing the Mat166 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT166_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("elaf", int, 30, 10, None),
+    FieldSchema("epflg", int, 40, 10, 0),
+    FieldSchema("cta", float, 50, 10, None),
+    FieldSchema("ctb", float, 60, 10, None),
+    FieldSchema("ctt", float, 70, 10, None),
+)
+
+_MAT166_CARD1 = (
+    FieldSchema("n1", float, 0, 10, None),
+    FieldSchema("n2", float, 10, 10, None),
+    FieldSchema("n3", float, 20, 10, None),
+    FieldSchema("n4", float, 30, 10, None),
+    FieldSchema("n5", float, 40, 10, None),
+    FieldSchema("n6", float, 50, 10, None),
+    FieldSchema("n7", float, 60, 10, None),
+    FieldSchema("n8", float, 70, 10, None),
+)
+
+_MAT166_CARD2 = (
+    FieldSchema("lcms1", int, 0, 10, None),
+    FieldSchema("lcms2", int, 10, 10, None),
+    FieldSchema("lcms3", int, 20, 10, None),
+    FieldSchema("lcms4", int, 30, 10, None),
+    FieldSchema("lcms5", int, 40, 10, None),
+    FieldSchema("lcms6", int, 50, 10, None),
+    FieldSchema("lcms7", int, 60, 10, None),
+    FieldSchema("lcms8", int, 70, 10, None),
+)
+
+_MAT166_CARD3 = (
+    FieldSchema("lcmt1", int, 0, 10, None),
+    FieldSchema("lcmt2", int, 10, 10, None),
+    FieldSchema("lcmt3", int, 20, 10, None),
+    FieldSchema("lcmt4", int, 30, 10, None),
+    FieldSchema("lcmt5", int, 40, 10, None),
+    FieldSchema("lcmt6", int, 50, 10, None),
+    FieldSchema("lcmt7", int, 60, 10, None),
+    FieldSchema("lcmt8", int, 70, 10, None),
+)
+
+_MAT166_CARD4 = (
+    FieldSchema("lct1", int, 0, 10, None),
+    FieldSchema("lct2", int, 10, 10, None),
+    FieldSchema("lct3", int, 20, 10, None),
+    FieldSchema("lct4", int, 30, 10, None),
+    FieldSchema("lct5", int, 40, 10, None),
+    FieldSchema("lct6", int, 50, 10, None),
+    FieldSchema("lct7", int, 60, 10, None),
+    FieldSchema("lct8", int, 70, 10, None),
+)
+
+_MAT166_CARD5 = (
+    FieldSchema("cfa", float, 0, 10, 1.0),
+    FieldSchema("cfb", float, 10, 10, 1.0),
+    FieldSchema("cft", float, 20, 10, 1.0),
+    FieldSchema("hrule", float, 30, 10, None),
+    FieldSchema("reps", float, 40, 10, 1e+20),
+    FieldSchema("rbeta", float, 50, 10, 1e+20),
+    FieldSchema("rcapay", float, 60, 10, 1e+20),
+    FieldSchema("rcapaz", float, 70, 10, 1e+20),
+)
 
 class Mat166(KeywordBase):
     """DYNA MAT_166 keyword"""
@@ -40,375 +107,25 @@ class Mat166(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elaf",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epflg",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cta",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctb",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctt",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcms1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcms2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcms3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcms4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcms5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcms6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcms7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcms8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcmt1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmt2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmt3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmt4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmt5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmt6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmt7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcmt8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lct1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lct8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cfa",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfb",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cft",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hrule",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reps",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rbeta",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rcapay",
-                        float,
-                        60,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rcapaz",
-                        float,
-                        70,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT166_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT166_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT166_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT166_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT166_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT166_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat166.option_specs[0],
                 cards = [
                     Card(
@@ -426,7 +143,6 @@ class Mat166(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

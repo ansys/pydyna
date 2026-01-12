@@ -23,7 +23,16 @@
 """Module providing the ControlFormingHomeGap class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGHOMEGAP_CARD0 = (
+    FieldSchema("psidu", int, 0, 10, None),
+    FieldSchema("psidl", int, 10, 10, None),
+    FieldSchema("gap", float, 20, 10, None),
+    FieldSchema("mvinc", float, 30, 10, None),
+    FieldSchema("istop", int, 40, 10, 0),
+)
 
 class ControlFormingHomeGap(KeywordBase):
     """DYNA CONTROL_FORMING_HOME_GAP keyword"""
@@ -35,48 +44,10 @@ class ControlFormingHomeGap(KeywordBase):
         """Initialize the ControlFormingHomeGap class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psidu",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psidl",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gap",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mvinc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "istop",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGHOMEGAP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psidu(self) -> typing.Optional[int]:
         """Get or set the Part set ID of the tools above the blank (upper tools)

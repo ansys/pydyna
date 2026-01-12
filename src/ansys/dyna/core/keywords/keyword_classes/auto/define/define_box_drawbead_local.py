@@ -23,8 +23,34 @@
 """Module providing the DefineBoxDrawbeadLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEBOXDRAWBEADLOCAL_CARD0 = (
+    FieldSchema("boxid", int, 0, 10, 0),
+    FieldSchema("pid", int, 10, 10, 0),
+    FieldSchema("sid", int, 20, 10, 0),
+    FieldSchema("idir", int, 30, 10, 1),
+    FieldSchema("stype", int, 40, 10, 4),
+    FieldSchema("radius", float, 50, 10, 0.0),
+    FieldSchema("cid", int, 60, 10, 0),
+)
+
+_DEFINEBOXDRAWBEADLOCAL_CARD1 = (
+    FieldSchema("xx", float, 0, 10, 0.0),
+    FieldSchema("yx", float, 10, 10, 0.0),
+    FieldSchema("zx", float, 20, 10, 0.0),
+    FieldSchema("xv", float, 30, 10, 0.0),
+    FieldSchema("yv", float, 40, 10, 0.0),
+    FieldSchema("zv", float, 50, 10, 0.0),
+)
+
+_DEFINEBOXDRAWBEADLOCAL_CARD2 = (
+    FieldSchema("cx", float, 0, 10, 0.0),
+    FieldSchema("cy", float, 10, 10, 0.0),
+    FieldSchema("cz", float, 20, 10, 0.0),
+)
 
 class DefineBoxDrawbeadLocal(KeywordBase):
     """DYNA DEFINE_BOX_DRAWBEAD_LOCAL keyword"""
@@ -40,147 +66,16 @@ class DefineBoxDrawbeadLocal(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "boxid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idir",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        40,
-                        10,
-                        4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xx",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xv",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yv",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zv",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXDRAWBEADLOCAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXDRAWBEADLOCAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXDRAWBEADLOCAL_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineBoxDrawbeadLocal.option_specs[0],
                 cards = [
                     Card(
@@ -198,7 +93,6 @@ class DefineBoxDrawbeadLocal(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def boxid(self) -> int:
         """Get or set the Box ID. Define unique numbers.

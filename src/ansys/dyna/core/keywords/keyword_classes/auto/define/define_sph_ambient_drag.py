@@ -23,8 +23,19 @@
 """Module providing the DefineSphAmbientDrag class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESPHAMBIENTDRAG_CARD0 = (
+    FieldSchema("icid", int, 0, 10, 0),
+    FieldSchema("vx", float, 10, 10, 0.0),
+    FieldSchema("vy", float, 20, 10, 0.0),
+    FieldSchema("vz", float, 30, 10, 0.0),
+    FieldSchema("rhoa", float, 40, 10, None),
+    FieldSchema("mua", float, 50, 10, None),
+    FieldSchema("sftens", float, 60, 10, None),
+)
 
 class DefineSphAmbientDrag(KeywordBase):
     """DYNA DEFINE_SPH_AMBIENT_DRAG keyword"""
@@ -40,64 +51,10 @@ class DefineSphAmbientDrag(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "icid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhoa",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mua",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sftens",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPHAMBIENTDRAG_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSphAmbientDrag.option_specs[0],
                 cards = [
                     Card(
@@ -115,7 +72,6 @@ class DefineSphAmbientDrag(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def icid(self) -> int:
         """Get or set the Coupling with ICFD:

@@ -23,8 +23,46 @@
 """Module providing the MatFhwaSoil class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATFHWASOIL_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("nplot", int, 20, 10, 1),
+    FieldSchema("spgrav", float, 30, 10, None),
+    FieldSchema("rhowat", float, 40, 10, 1.0),
+    FieldSchema("vn", float, 50, 10, None),
+    FieldSchema("gammar", float, 60, 10, None),
+    FieldSchema("intrmx", int, 70, 10, 1),
+)
+
+_MATFHWASOIL_CARD1 = (
+    FieldSchema("k", float, 0, 10, None),
+    FieldSchema("g", float, 10, 10, None),
+    FieldSchema("phimax", float, 20, 10, None),
+    FieldSchema("ahyp", float, 30, 10, None),
+    FieldSchema("coh", float, 40, 10, None),
+    FieldSchema("eccen", float, 50, 10, None),
+    FieldSchema("an", float, 60, 10, None),
+    FieldSchema("et", float, 70, 10, None),
+)
+
+_MATFHWASOIL_CARD2 = (
+    FieldSchema("mcont", float, 0, 10, None),
+    FieldSchema("pwd1", float, 10, 10, None),
+    FieldSchema("pwksk", float, 20, 10, None),
+    FieldSchema("pwd2", float, 30, 10, None),
+    FieldSchema("phires", float, 40, 10, None),
+    FieldSchema("dint", float, 50, 10, None),
+    FieldSchema("vdfm", float, 60, 10, None),
+    FieldSchema("damlev", float, 70, 10, None),
+)
+
+_MATFHWASOIL_CARD3 = (
+    FieldSchema("epsmax", float, 0, 10, None),
+)
 
 class MatFhwaSoil(KeywordBase):
     """DYNA MAT_FHWA_SOIL keyword"""
@@ -40,201 +78,19 @@ class MatFhwaSoil(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplot",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spgrav",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhowat",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vn",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gammar",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intrmx",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phimax",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ahyp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "coh",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eccen",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "an",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "et",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mcont",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pwd1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pwksk",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pwd2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phires",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dint",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vdfm",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damlev",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "epsmax",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATFHWASOIL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATFHWASOIL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATFHWASOIL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATFHWASOIL_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatFhwaSoil.option_specs[0],
                 cards = [
                     Card(
@@ -252,7 +108,6 @@ class MatFhwaSoil(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique unmber has to be chosen.

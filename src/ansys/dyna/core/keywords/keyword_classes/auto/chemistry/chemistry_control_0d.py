@@ -23,7 +23,30 @@
 """Module providing the ChemistryControl0D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHEMISTRYCONTROL0D_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("compid", int, 10, 10, None),
+    FieldSchema("soltyp", int, 20, 10, 1),
+    FieldSchema("plotdt", float, 30, 10, 1e-06),
+    FieldSchema("csp_sel", int, 40, 10, 0),
+)
+
+_CHEMISTRYCONTROL0D_CARD1 = (
+    FieldSchema("dt", float, 0, 10, None),
+    FieldSchema("tlimit", float, 10, 10, None),
+    FieldSchema("tic", float, 20, 10, None),
+    FieldSchema("pic", float, 30, 10, None),
+    FieldSchema("ric", float, 40, 10, None),
+    FieldSchema("eic", float, 50, 10, None),
+)
+
+_CHEMISTRYCONTROL0D_CARD2 = (
+    FieldSchema("ampl", float, 0, 10, None),
+    FieldSchema("ycut", float, 10, 10, None),
+)
 
 class ChemistryControl0D(KeywordBase):
     """DYNA CHEMISTRY_CONTROL_0D keyword"""
@@ -35,114 +58,16 @@ class ChemistryControl0D(KeywordBase):
         """Initialize the ChemistryControl0D class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "compid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soltyp",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "plotdt",
-                        float,
-                        30,
-                        10,
-                        1.0e-6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csp_sel",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlimit",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tic",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pic",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ric",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eic",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ampl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ycut",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROL0D_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROL0D_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROL0D_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identifier for this 0D computation.

@@ -23,7 +23,30 @@
 """Module providing the ControlTimeStep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLTIMESTEP_CARD0 = (
+    FieldSchema("dtinit", float, 0, 10, 0.0),
+    FieldSchema("tssfac", float, 10, 10, 0.0),
+    FieldSchema("isdo", int, 20, 10, 0),
+    FieldSchema("tslimt", float, 30, 10, 0.0),
+    FieldSchema("dt2ms", float, 40, 10, 0.0),
+    FieldSchema("lctm", int, 50, 10, 0),
+    FieldSchema("erode", int, 60, 10, 0),
+    FieldSchema("ms1st", int, 70, 10, 0),
+)
+
+_CONTROLTIMESTEP_CARD1 = (
+    FieldSchema("dt2msf", float, 0, 10, None),
+    FieldSchema("dt2mslc", int, 10, 10, None),
+    FieldSchema("imscl", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("rmscl", float, 50, 10, 0.0),
+    FieldSchema("emscl", float, 60, 10, 0.0),
+    FieldSchema("ihdo", int, 70, 10, 0),
+)
 
 class ControlTimeStep(KeywordBase):
     """DYNA CONTROL_TIME_STEP keyword"""
@@ -35,139 +58,13 @@ class ControlTimeStep(KeywordBase):
         """Initialize the ControlTimeStep class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dtinit",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tssfac",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isdo",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tslimt",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt2ms",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctm",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "erode",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ms1st",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dt2msf",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt2mslc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imscl",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmscl",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "emscl",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihdo",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLTIMESTEP_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLTIMESTEP_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def dtinit(self) -> float:
         """Get or set the Initial time step size:

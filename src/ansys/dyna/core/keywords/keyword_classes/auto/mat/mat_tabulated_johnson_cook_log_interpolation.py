@@ -23,8 +23,37 @@
 """Module providing the MatTabulatedJohnsonCookLogInterpolation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("cp", float, 40, 10, None),
+    FieldSchema("tr", float, 50, 10, None),
+    FieldSchema("beta", float, 60, 10, 1.0),
+    FieldSchema("numint", float, 70, 10, 1.0),
+)
+
+_MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD1 = (
+    FieldSchema("tabk1", int, 0, 10, 0),
+    FieldSchema("tabkt", int, 10, 10, 0),
+    FieldSchema("lcf", int, 20, 10, 0),
+    FieldSchema("lcg", int, 30, 10, 0),
+    FieldSchema("lch", int, 40, 10, 0),
+    FieldSchema("lci", int, 50, 10, 0),
+)
+
+_MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD2 = (
+    FieldSchema("failopt", int, 0, 10, 0),
+    FieldSchema("numavg", int, 10, 10, 1),
+    FieldSchema("ncyfail", int, 20, 10, 1),
+    FieldSchema("erode", int, 30, 10, 0),
+    FieldSchema("lcps", int, 40, 10, None),
+)
 
 class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
     """DYNA MAT_TABULATED_JOHNSON_COOK_LOG_INTERPOLATION keyword"""
@@ -40,164 +69,16 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numint",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tabk1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tabkt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lch",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lci",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "failopt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numavg",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncyfail",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "erode",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcps",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatTabulatedJohnsonCookLogInterpolation.option_specs[0],
                 cards = [
                     Card(
@@ -215,7 +96,6 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

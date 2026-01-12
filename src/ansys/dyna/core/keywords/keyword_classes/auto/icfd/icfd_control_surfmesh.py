@@ -23,7 +23,13 @@
 """Module providing the IcfdControlSurfmesh class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLSURFMESH_CARD0 = (
+    FieldSchema("rsrf", int, 0, 10, 0),
+    FieldSchema("sadapt", int, 10, 10, 0),
+)
 
 class IcfdControlSurfmesh(KeywordBase):
     """DYNA ICFD_CONTROL_SURFMESH keyword"""
@@ -35,28 +41,10 @@ class IcfdControlSurfmesh(KeywordBase):
         """Initialize the IcfdControlSurfmesh class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "rsrf",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sadapt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLSURFMESH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def rsrf(self) -> int:
         """Get or set the Indicates whether or not to perform a surface re-meshing.

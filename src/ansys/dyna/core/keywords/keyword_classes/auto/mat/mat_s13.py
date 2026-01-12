@@ -23,8 +23,20 @@
 """Module providing the MatS13 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATS13_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("defl1", float, 10, 10, None),
+    FieldSchema("f1", float, 20, 10, None),
+    FieldSchema("defl2", float, 30, 10, None),
+    FieldSchema("f2", float, 40, 10, None),
+    FieldSchema("defl3", float, 50, 10, None),
+    FieldSchema("f3", float, 60, 10, None),
+    FieldSchema("fflag", float, 70, 10, None),
+)
 
 class MatS13(KeywordBase):
     """DYNA MAT_S13 keyword"""
@@ -40,67 +52,10 @@ class MatS13(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "defl1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "defl2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "defl3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f3",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fflag",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATS13_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatS13.option_specs[0],
                 cards = [
                     Card(
@@ -118,7 +73,6 @@ class MatS13(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material number. A unique number has to be used.

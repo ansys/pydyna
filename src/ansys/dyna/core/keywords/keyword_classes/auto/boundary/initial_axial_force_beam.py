@@ -23,7 +23,15 @@
 """Module providing the InitialAxialForceBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALAXIALFORCEBEAM_CARD0 = (
+    FieldSchema("bsid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("scale", float, 20, 10, 1.0),
+    FieldSchema("kbend", int, 30, 10, 0),
+)
 
 class InitialAxialForceBeam(KeywordBase):
     """DYNA INITIAL_AXIAL_FORCE_BEAM keyword"""
@@ -35,42 +43,10 @@ class InitialAxialForceBeam(KeywordBase):
         """Initialize the InitialAxialForceBeam class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scale",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kbend",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALAXIALFORCEBEAM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def bsid(self) -> typing.Optional[int]:
         """Get or set the Beam set ID

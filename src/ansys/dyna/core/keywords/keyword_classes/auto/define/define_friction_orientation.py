@@ -23,8 +23,18 @@
 """Module providing the DefineFrictionOrientation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEFRICTIONORIENTATION_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, 0),
+    FieldSchema("lcidp", int, 20, 10, 0),
+    FieldSchema("v1", float, 30, 10, 0.0),
+    FieldSchema("v2", float, 40, 10, 0.0),
+    FieldSchema("v3", float, 50, 10, 0.0),
+)
 
 class DefineFrictionOrientation(KeywordBase):
     """DYNA DEFINE_FRICTION_ORIENTATION keyword"""
@@ -40,58 +50,10 @@ class DefineFrictionOrientation(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFRICTIONORIENTATION_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFrictionOrientation.option_specs[0],
                 cards = [
                     Card(
@@ -109,7 +71,6 @@ class DefineFrictionOrientation(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID to which directional and pressure-sensitive COF is to be applied. See *PART.

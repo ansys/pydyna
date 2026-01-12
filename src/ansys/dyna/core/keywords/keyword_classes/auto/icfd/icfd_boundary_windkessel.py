@@ -23,7 +23,17 @@
 """Module providing the IcfdBoundaryWindkessel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDBOUNDARYWINDKESSEL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("wtype", int, 10, 10, None),
+    FieldSchema("r1", float, 20, 10, 0.0),
+    FieldSchema("c1", float, 30, 10, 0.0),
+    FieldSchema("r2", float, 40, 10, 0.0),
+    FieldSchema("l1", float, 50, 10, 0.0),
+)
 
 class IcfdBoundaryWindkessel(KeywordBase):
     """DYNA ICFD_BOUNDARY_WINDKESSEL keyword"""
@@ -35,58 +45,10 @@ class IcfdBoundaryWindkessel(KeywordBase):
         """Initialize the IcfdBoundaryWindkessel class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wtype",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l1",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDBOUNDARYWINDKESSEL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID for a fluid surface.

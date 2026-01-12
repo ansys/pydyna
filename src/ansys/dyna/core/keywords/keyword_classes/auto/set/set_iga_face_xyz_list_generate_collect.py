@@ -23,8 +23,29 @@
 """Module providing the SetIgaFaceXyzListGenerateCollect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETIGAFACEXYZLISTGENERATECOLLECT_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("da1", float, 10, 10, 0.0),
+    FieldSchema("da2", float, 20, 10, 0.0),
+    FieldSchema("da3", float, 30, 10, 0.0),
+    FieldSchema("da4", float, 40, 10, 0.0),
+    FieldSchema("solver", str, 50, 10, "MECH"),
+)
+
+_SETIGAFACEXYZLISTGENERATECOLLECT_CARD1 = (
+    FieldSchema("b1beg", int, 0, 10, None),
+    FieldSchema("b1end", int, 10, 10, None),
+    FieldSchema("b2beg", int, 20, 10, None),
+    FieldSchema("b2end", int, 30, 10, None),
+    FieldSchema("b3beg", int, 40, 10, None),
+    FieldSchema("b3end", int, 50, 10, None),
+    FieldSchema("b4beg", int, 60, 10, None),
+    FieldSchema("b4end", int, 70, 10, None),
+)
 
 class SetIgaFaceXyzListGenerateCollect(KeywordBase):
     """DYNA SET_IGA_FACE_XYZ_LIST_GENERATE_COLLECT keyword"""
@@ -40,118 +61,13 @@ class SetIgaFaceXyzListGenerateCollect(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        str,
-                        50,
-                        10,
-                        "MECH",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "b1beg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1end",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b2beg",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b2end",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b3beg",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b3end",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b4beg",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b4end",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SETIGAFACEXYZLISTGENERATECOLLECT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SETIGAFACEXYZLISTGENERATECOLLECT_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SetIgaFaceXyzListGenerateCollect.option_specs[0],
                 cards = [
                     Card(
@@ -169,7 +85,6 @@ class SetIgaFaceXyzListGenerateCollect(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID. A unique number must be chosen.

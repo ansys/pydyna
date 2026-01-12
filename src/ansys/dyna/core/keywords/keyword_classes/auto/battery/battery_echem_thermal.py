@@ -23,7 +23,22 @@
 """Module providing the BatteryEchemThermal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BATTERYECHEMTHERMAL_CARD0 = (
+    FieldSchema("thame", str, 0, 10, None),
+    FieldSchema("tid", int, 10, 10, None),
+    FieldSchema("iprt", int, 20, 10, None),
+    FieldSchema("cp", float, 30, 10, None),
+    FieldSchema("hconv", float, 40, 10, None),
+    FieldSchema("temp", float, 50, 10, None),
+    FieldSchema("dudt", float, 60, 10, None),
+)
+
+_BATTERYECHEMTHERMAL_CARD1 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class BatteryEchemThermal(KeywordBase):
     """DYNA BATTERY_ECHEM_THERMAL keyword"""
@@ -35,72 +50,13 @@ class BatteryEchemThermal(KeywordBase):
         """Initialize the BatteryEchemThermal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "thame",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iprt",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hconv",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temp",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dudt",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMTHERMAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMTHERMAL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def thame(self) -> typing.Optional[str]:
         """Get or set the Thermal material identifier

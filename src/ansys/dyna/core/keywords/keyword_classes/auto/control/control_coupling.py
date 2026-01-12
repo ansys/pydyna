@@ -23,7 +23,19 @@
 """Module providing the ControlCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLCOUPLING_CARD0 = (
+    FieldSchema("unleng", float, 0, 10, 1.0),
+    FieldSchema("untime", float, 10, 10, 1.0),
+    FieldSchema("unforc", float, 20, 10, 1.0),
+    FieldSchema("timidl", float, 30, 10, 0.0),
+    FieldSchema("flipx", int, 40, 10, 0),
+    FieldSchema("flipy", int, 50, 10, 0),
+    FieldSchema("flipz", int, 60, 10, 0),
+    FieldSchema("subcyl", int, 70, 10, 1),
+)
 
 class ControlCoupling(KeywordBase):
     """DYNA CONTROL_COUPLING keyword"""
@@ -35,76 +47,10 @@ class ControlCoupling(KeywordBase):
         """Initialize the ControlCoupling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "unleng",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "untime",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unforc",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "timidl",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flipx",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flipy",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flipz",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "subcyl",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCOUPLING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def unleng(self) -> float:
         """Get or set the Unit conversion factor for length.

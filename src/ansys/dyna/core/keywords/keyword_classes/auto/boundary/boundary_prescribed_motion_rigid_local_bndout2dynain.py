@@ -23,8 +23,32 @@
 """Module providing the BoundaryPrescribedMotionRigidLocalBndout2Dynain class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYPRESCRIBEDMOTIONRIGIDLOCALBNDOUT2DYNAIN_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, 0),
+    FieldSchema("vad", int, 20, 10, 0),
+    FieldSchema("lcid", int, 30, 10, None),
+    FieldSchema("sf", float, 40, 10, 1.0),
+    FieldSchema("vid", int, 50, 10, None),
+    FieldSchema("death", float, 60, 10, 1e+28),
+    FieldSchema("birth", float, 70, 10, 0.0),
+)
+
+_BOUNDARYPRESCRIBEDMOTIONRIGIDLOCALBNDOUT2DYNAIN_CARD1 = (
+    FieldSchema("offset1", float, 0, 10, 0.0),
+    FieldSchema("offset2", float, 10, 10, 0.0),
+    FieldSchema("lrb", int, 20, 10, 0),
+    FieldSchema("node1", int, 30, 10, 0),
+    FieldSchema("node2", int, 40, 10, 0),
+)
+
+_BOUNDARYPRESCRIBEDMOTIONRIGIDLOCALBNDOUT2DYNAIN_CARD2 = (
+    FieldSchema("prmr", str, 0, 10, None),
+)
 
 class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_MOTION_RIGID_LOCAL_BNDOUT2DYNAIN keyword"""
@@ -40,128 +64,17 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        60,
-                        10,
-                        1.0E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "offset1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lrb",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
-            ),
-            Card(
-                [
-                    Field(
-                        "prmr",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDMOTIONRIGIDLOCALBNDOUT2DYNAIN_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDMOTIONRIGIDLOCALBNDOUT2DYNAIN_CARD1,
+                active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDMOTIONRIGIDLOCALBNDOUT2DYNAIN_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = BoundaryPrescribedMotionRigidLocalBndout2Dynain.option_specs[0],
                 cards = [
                     Card(
@@ -186,7 +99,6 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID, see *PART.

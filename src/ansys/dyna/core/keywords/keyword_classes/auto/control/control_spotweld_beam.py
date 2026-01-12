@@ -23,7 +23,19 @@
 """Module providing the ControlSpotweldBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLSPOTWELDBEAM_CARD0 = (
+    FieldSchema("lct", int, 0, 10, 0),
+    FieldSchema("lcs", int, 10, 10, None),
+    FieldSchema("t_ort", int, 20, 10, 0),
+    FieldSchema("prtflg", int, 30, 10, 0),
+    FieldSchema("t_ors", int, 40, 10, 0),
+    FieldSchema("rpbhx", int, 50, 10, 0),
+    FieldSchema("bmsid", int, 60, 10, 0),
+    FieldSchema("id_off", int, 70, 10, 0),
+)
 
 class ControlSpotweldBeam(KeywordBase):
     """DYNA CONTROL_SPOTWELD_BEAM keyword"""
@@ -35,75 +47,10 @@ class ControlSpotweldBeam(KeywordBase):
         """Initialize the ControlSpotweldBeam class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lct",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcs",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t_ort",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prtflg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t_ors",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rpbhx",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bmsid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id_off",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSPOTWELDBEAM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def lct(self) -> int:
         """Get or set the Load curve ID for scaling the response in tension based on the shell element size

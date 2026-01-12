@@ -23,8 +23,45 @@
 """Module providing the Mat318 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT318_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("roflg", int, 20, 10, None),
+)
+
+_MAT318_CARD1 = (
+    FieldSchema("mua", float, 0, 10, None),
+    FieldSchema("thetah", float, 10, 10, None),
+    FieldSchema("lambl", float, 20, 10, None),
+    FieldSchema("kappa", float, 30, 10, None),
+    FieldSchema("tauha", float, 40, 10, None),
+    FieldSchema("a", float, 50, 10, None),
+    FieldSchema("ma", float, 60, 10, None),
+    FieldSchema("n", float, 70, 10, None),
+)
+
+_MAT318_CARD2 = (
+    FieldSchema("mubi", float, 0, 10, None),
+    FieldSchema("mubf", float, 10, 10, None),
+    FieldSchema("beta", float, 20, 10, None),
+    FieldSchema("tauhb", float, 30, 10, None),
+    FieldSchema("mb", float, 40, 10, None),
+    FieldSchema("muc", float, 50, 10, None),
+    FieldSchema("q", float, 60, 10, None),
+    FieldSchema("alpha", float, 70, 10, None),
+)
+
+_MAT318_CARD3 = (
+    FieldSchema("theata0", float, 0, 10, None),
+    FieldSchema("ibulk", float, 10, 10, None),
+    FieldSchema("ig", float, 20, 10, None),
+    FieldSchema("tsstif", float, 30, 10, None),
+    FieldSchema("gamma0", float, 40, 10, None),
+)
 
 class Mat318(KeywordBase):
     """DYNA MAT_318 keyword"""
@@ -40,191 +77,19 @@ class Mat318(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "roflg",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mua",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thetah",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lambl",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kappa",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tauha",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ma",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mubi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mubf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tauhb",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mb",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "muc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "theata0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibulk",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ig",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsstif",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma0",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT318_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT318_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT318_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT318_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat318.option_specs[0],
                 cards = [
                     Card(
@@ -242,7 +107,6 @@ class Mat318(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label be specified (see *PART).

@@ -23,7 +23,26 @@
 """Module providing the ElementSeatbeltRetractor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTSEATBELTRETRACTOR_CARD0 = (
+    FieldSchema("sbrid", int, 0, 10, None),
+    FieldSchema("sbrnid", int, 10, 10, None),
+    FieldSchema("sbid", int, 20, 10, None),
+    FieldSchema("sid1", int, 30, 10, 0),
+    FieldSchema("sid2", int, 40, 10, 0),
+    FieldSchema("sid3", int, 50, 10, 0),
+    FieldSchema("sid4", int, 60, 10, 0),
+)
+
+_ELEMENTSEATBELTRETRACTOR_CARD1 = (
+    FieldSchema("tdel", float, 0, 10, 0.0),
+    FieldSchema("pull", float, 10, 10, 0.0),
+    FieldSchema("llcid", int, 20, 10, 0),
+    FieldSchema("ulcid", int, 30, 10, 0),
+    FieldSchema("lfed", float, 40, 10, 0.0),
+)
 
 class ElementSeatbeltRetractor(KeywordBase):
     """DYNA ELEMENT_SEATBELT_RETRACTOR keyword"""
@@ -35,109 +54,13 @@ class ElementSeatbeltRetractor(KeywordBase):
         """Initialize the ElementSeatbeltRetractor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sbrid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbrnid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid3",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid4",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tdel",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pull",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "llcid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ulcid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lfed",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTRETRACTOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTSEATBELTRETRACTOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sbrid(self) -> typing.Optional[int]:
         """Get or set the Retractor ID. A unique number has to be used.

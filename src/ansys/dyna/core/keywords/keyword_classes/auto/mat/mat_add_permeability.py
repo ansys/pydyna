@@ -23,8 +23,19 @@
 """Module providing the MatAddPermeability class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATADDPERMEABILITY_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("perm", float, 10, 10, None),
+    FieldSchema("permy", int, 20, 10, None),
+    FieldSchema("permz", int, 30, 10, None),
+    FieldSchema("thexp", float, 40, 10, None),
+    FieldSchema("lckz", int, 50, 10, None),
+    FieldSchema("pmtyp", int, 60, 10, 0),
+)
 
 class MatAddPermeability(KeywordBase):
     """DYNA MAT_ADD_PERMEABILITY keyword"""
@@ -40,61 +51,10 @@ class MatAddPermeability(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "perm",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "permy",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "permz",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thexp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lckz",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmtyp",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDPERMEABILITY_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddPermeability.option_specs[0],
                 cards = [
                     Card(
@@ -112,7 +72,6 @@ class MatAddPermeability(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification - must be same as the structural material.

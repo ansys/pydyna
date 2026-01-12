@@ -23,7 +23,26 @@
 """Module providing the EmContactSubdom class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTACTSUBDOM_CARD0 = (
+    FieldSchema("sdtype", int, 0, 10, 1),
+    FieldSchema("mvtype", int, 10, 10, 0),
+    FieldSchema("lcidx/nid", int, 20, 10, None),
+    FieldSchema("lcidy", int, 30, 10, None),
+    FieldSchema("lcidz", int, 40, 10, None),
+)
+
+_EMCONTACTSUBDOM_CARD1 = (
+    FieldSchema("r", float, 0, 10, None),
+    FieldSchema("pminx", float, 10, 10, None),
+    FieldSchema("pminy", float, 20, 10, None),
+    FieldSchema("pminz", float, 30, 10, None),
+    FieldSchema("pmaxx", float, 40, 10, None),
+    FieldSchema("pmaxy", float, 50, 10, None),
+    FieldSchema("pmaxz", float, 60, 10, None),
+)
 
 class EmContactSubdom(KeywordBase):
     """DYNA EM_CONTACT_SUBDOM keyword"""
@@ -35,102 +54,13 @@ class EmContactSubdom(KeywordBase):
         """Initialize the EmContactSubdom class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sdtype",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mvtype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidx/nid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidz",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxx",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxy",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxz",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTACTSUBDOM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMCONTACTSUBDOM_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sdtype(self) -> int:
         """Get or set the Subdomain definition type:

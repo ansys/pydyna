@@ -23,7 +23,19 @@
 """Module providing the BoundaryPoreFluidPart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYPOREFLUIDPART_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("wtable", float, 10, 10, None),
+    FieldSchema("pf_rho", float, 20, 10, None),
+    FieldSchema("atype", int, 30, 10, 0),
+    FieldSchema("pf_bulk", float, 40, 10, None),
+    FieldSchema("acurve", int, 50, 10, None),
+    FieldSchema("wtcur", int, 60, 10, None),
+    FieldSchema("suclim", float, 70, 10, None),
+)
 
 class BoundaryPoreFluidPart(KeywordBase):
     """DYNA BOUNDARY_PORE_FLUID_PART keyword"""
@@ -35,69 +47,10 @@ class BoundaryPoreFluidPart(KeywordBase):
         """Initialize the BoundaryPoreFluidPart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wtable",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pf_rho",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "atype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pf_bulk",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acurve",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wtcur",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "suclim",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPOREFLUIDPART_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID (PID),see *PART.  All elements within the part must lie below the water table..

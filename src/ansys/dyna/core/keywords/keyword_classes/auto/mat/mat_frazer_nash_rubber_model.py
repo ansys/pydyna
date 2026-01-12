@@ -23,8 +23,37 @@
 """Module providing the MatFrazerNashRubberModel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATFRAZERNASHRUBBERMODEL_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("pr", float, 20, 10, None),
+    FieldSchema("c100", float, 30, 10, None),
+    FieldSchema("c200", float, 40, 10, None),
+    FieldSchema("c300", float, 50, 10, None),
+    FieldSchema("c400", float, 60, 10, None),
+)
+
+_MATFRAZERNASHRUBBERMODEL_CARD1 = (
+    FieldSchema("c110", float, 0, 10, None),
+    FieldSchema("c210", float, 10, 10, None),
+    FieldSchema("c010", float, 20, 10, None),
+    FieldSchema("c020", float, 30, 10, None),
+    FieldSchema("exit", float, 40, 10, None),
+    FieldSchema("emax", float, 50, 10, None),
+    FieldSchema("emin", float, 60, 10, None),
+    FieldSchema("ref", float, 70, 10, 0.0),
+)
+
+_MATFRAZERNASHRUBBERMODEL_CARD2 = (
+    FieldSchema("sgl", float, 0, 10, None),
+    FieldSchema("sw", float, 10, 10, None),
+    FieldSchema("st", float, 20, 10, None),
+    FieldSchema("lcid", int, 30, 10, 0),
+)
 
 class MatFrazerNashRubberModel(KeywordBase):
     """DYNA MAT_FRAZER_NASH_RUBBER_MODEL keyword"""
@@ -40,154 +69,16 @@ class MatFrazerNashRubberModel(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c100",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c200",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c300",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c400",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c110",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c210",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c010",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c020",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exit",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "emax",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "emin",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sgl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sw",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "st",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATFRAZERNASHRUBBERMODEL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATFRAZERNASHRUBBERMODEL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATFRAZERNASHRUBBERMODEL_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatFrazerNashRubberModel.option_specs[0],
                 cards = [
                     Card(
@@ -205,7 +96,6 @@ class MatFrazerNashRubberModel(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

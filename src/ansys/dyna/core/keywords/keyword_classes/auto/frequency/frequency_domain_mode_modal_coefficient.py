@@ -23,7 +23,12 @@
 """Module providing the FrequencyDomainModeModalCoefficient class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINMODEMODALCOEFFICIENT_CARD0 = (
+    FieldSchema("dskip", float, 0, 10, None),
+)
 
 class FrequencyDomainModeModalCoefficient(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_MODE_MODAL_COEFFICIENT keyword"""
@@ -35,19 +40,10 @@ class FrequencyDomainModeModalCoefficient(KeywordBase):
         """Initialize the FrequencyDomainModeModalCoefficient class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dskip",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINMODEMODALCOEFFICIENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dskip(self) -> typing.Optional[float]:
         """Get or set the The threshold modal coefficient ratio. All modes with the ratio of its modal coefficient over the largest modal coefficient less than this value will be skipped.

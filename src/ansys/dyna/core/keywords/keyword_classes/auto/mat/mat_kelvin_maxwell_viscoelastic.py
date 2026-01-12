@@ -23,8 +23,20 @@
 """Module providing the MatKelvinMaxwellViscoelastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATKELVINMAXWELLVISCOELASTIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("bulk", float, 20, 10, None),
+    FieldSchema("g0", float, 30, 10, None),
+    FieldSchema("gi", float, 40, 10, None),
+    FieldSchema("dc", float, 50, 10, None),
+    FieldSchema("fo", float, 60, 10, 0.0),
+    FieldSchema("so", float, 70, 10, 0.0),
+)
 
 class MatKelvinMaxwellViscoelastic(KeywordBase):
     """DYNA MAT_KELVIN-MAXWELL_VISCOELASTIC keyword"""
@@ -40,69 +52,10 @@ class MatKelvinMaxwellViscoelastic(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulk",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gi",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fo",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "so",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATKELVINMAXWELLVISCOELASTIC_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatKelvinMaxwellViscoelastic.option_specs[0],
                 cards = [
                     Card(
@@ -120,7 +73,6 @@ class MatKelvinMaxwellViscoelastic(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

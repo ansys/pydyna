@@ -23,8 +23,23 @@
 """Module providing the Mat160 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT160_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("pc", float, 20, 10, None),
+    FieldSchema("mu", float, 30, 10, None),
+)
+
+_MAT160_CARD1 = (
+    FieldSchema("tol", float, 0, 10, 1e-08),
+    FieldSchema("dtout", float, 10, 10, 10000000000.0),
+    FieldSchema("ncg", int, 20, 10, 50),
+    FieldSchema("meth", int, 30, 10, -7),
+)
 
 class Mat160(KeywordBase):
     """DYNA MAT_160 keyword"""
@@ -40,75 +55,13 @@ class Mat160(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tol",
-                        float,
-                        0,
-                        10,
-                        1e-8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        10,
-                        10,
-                        1e10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncg",
-                        int,
-                        20,
-                        10,
-                        50,
-                        **kwargs,
-                    ),
-                    Field(
-                        "meth",
-                        int,
-                        30,
-                        10,
-                        -7,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT160_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT160_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat160.option_specs[0],
                 cards = [
                     Card(
@@ -126,7 +79,6 @@ class Mat160(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID. A unique number or label not exceeding 8 charaters

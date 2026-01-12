@@ -23,8 +23,64 @@
 """Module providing the DefineSphActiveRegion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESPHACTIVEREGION_CARD0 = (
+    FieldSchema("id", int, 0, 10, 0),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("stype", int, 20, 10, 0),
+    FieldSchema("cycle", int, 30, 10, 1),
+    FieldSchema("nid", int, 40, 10, None),
+    FieldSchema("icid", int, 50, 10, None),
+    FieldSchema("ibuff", int, 60, 10, 0),
+)
+
+_DEFINESPHACTIVEREGION_CARD1 = (
+    FieldSchema("ximin", float, 0, 10, 0.0),
+    FieldSchema("yimin", float, 10, 10, 0.0),
+    FieldSchema("zimin", float, 20, 10, 0.0),
+    FieldSchema("ximax", float, 30, 10, 0.0),
+    FieldSchema("yimax", float, 40, 10, 0.0),
+    FieldSchema("zimax", float, 50, 10, 0.0),
+)
+
+_DEFINESPHACTIVEREGION_CARD2 = (
+    FieldSchema("xomin", float, 0, 10, 0.0),
+    FieldSchema("yomin", float, 10, 10, 0.0),
+    FieldSchema("zomin", float, 20, 10, 0.0),
+    FieldSchema("xomax", float, 30, 10, 0.0),
+    FieldSchema("yomax", float, 40, 10, 0.0),
+    FieldSchema("zomax", float, 50, 10, 0.0),
+)
+
+_DEFINESPHACTIVEREGION_CARD3 = (
+    FieldSchema("x0", float, 0, 10, 0.0),
+    FieldSchema("y0", float, 10, 10, 0.0),
+    FieldSchema("z0", float, 20, 10, 0.0),
+    FieldSchema("xh", float, 30, 10, 0.0),
+    FieldSchema("yh", float, 40, 10, 0.0),
+    FieldSchema("zh", float, 50, 10, 0.0),
+)
+
+_DEFINESPHACTIVEREGION_CARD4 = (
+    FieldSchema("rmin", float, 0, 10, 0.0),
+    FieldSchema("zmin", float, 10, 10, 0.0),
+    FieldSchema("rmax", float, 20, 10, 0.0),
+    FieldSchema("zmax", float, 30, 10, 0.0),
+)
+
+_DEFINESPHACTIVEREGION_CARD5 = (
+    FieldSchema("x0", float, 0, 10, 0.0),
+    FieldSchema("y0", float, 10, 10, 0.0),
+    FieldSchema("z0", float, 20, 10, 0.0),
+)
+
+_DEFINESPHACTIVEREGION_CARD6 = (
+    FieldSchema("rmin", float, 0, 10, 0.0),
+    FieldSchema("rmax", float, 10, 10, 0.0),
+)
 
 class DefineSphActiveRegion(KeywordBase):
     """DYNA DEFINE_SPH_ACTIVE_REGION keyword"""
@@ -40,305 +96,28 @@ class DefineSphActiveRegion(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cycle",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibuff",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ximin",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yimin",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zimin",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ximax",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yimax",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zimax",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xomin",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yomin",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zomin",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xomax",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yomax",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zomax",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y0",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z0",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xh",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yh",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zh",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rmin",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmin",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmax",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmax",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y0",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z0",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rmin",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmax",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPHACTIVEREGION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPHACTIVEREGION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPHACTIVEREGION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPHACTIVEREGION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPHACTIVEREGION_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPHACTIVEREGION_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPHACTIVEREGION_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSphActiveRegion.option_specs[0],
                 cards = [
                     Card(
@@ -356,7 +135,6 @@ class DefineSphActiveRegion(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> int:
         """Get or set the Part Set ID/Part ID.

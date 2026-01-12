@@ -23,7 +23,13 @@
 """Module providing the LoadThermalConstantElementSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADTHERMALCONSTANTELEMENTSOLID_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("t", float, 10, 10, 0.0),
+)
 
 class LoadThermalConstantElementSolid(KeywordBase):
     """DYNA LOAD_THERMAL_CONSTANT_ELEMENT_SOLID keyword"""
@@ -35,27 +41,10 @@ class LoadThermalConstantElementSolid(KeywordBase):
         """Initialize the LoadThermalConstantElementSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALCONSTANTELEMENTSOLID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the solid ID.

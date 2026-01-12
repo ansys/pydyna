@@ -23,8 +23,32 @@
 """Module providing the MatShapeMemory class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSHAPEMEMORY_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("lcss", float, 40, 10, 0.0),
+)
+
+_MATSHAPEMEMORY_CARD1 = (
+    FieldSchema("sig_ass", float, 0, 10, None),
+    FieldSchema("sig_asf", float, 10, 10, None),
+    FieldSchema("sig_sas", float, 20, 10, None),
+    FieldSchema("sig_saf", float, 30, 10, None),
+    FieldSchema("epsl", float, 40, 10, None),
+    FieldSchema("alpha", float, 50, 10, None),
+    FieldSchema("ymrt", float, 60, 10, None),
+)
+
+_MATSHAPEMEMORY_CARD2 = (
+    FieldSchema("lcid_as", int, 0, 10, None),
+    FieldSchema("lcid_sa", int, 10, 10, None),
+)
 
 class MatShapeMemory(KeywordBase):
     """DYNA MAT_SHAPE_MEMORY keyword"""
@@ -40,118 +64,16 @@ class MatShapeMemory(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sig_ass",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig_asf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig_sas",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sig_saf",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsl",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymrt",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid_as",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid_sa",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSHAPEMEMORY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSHAPEMEMORY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSHAPEMEMORY_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatShapeMemory.option_specs[0],
                 cards = [
                     Card(
@@ -169,7 +91,6 @@ class MatShapeMemory(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique has to be used.

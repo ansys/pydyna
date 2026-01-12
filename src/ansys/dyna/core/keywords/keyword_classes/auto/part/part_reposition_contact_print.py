@@ -23,7 +23,44 @@
 """Module providing the PartRepositionContactPrint class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARTREPOSITIONCONTACTPRINT_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
+_PARTREPOSITIONCONTACTPRINT_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("secid", int, 10, 10, None),
+    FieldSchema("mid", int, 20, 10, None),
+    FieldSchema("eosid", int, 30, 10, 0),
+    FieldSchema("hgid", int, 40, 10, 0),
+    FieldSchema("grav", int, 50, 10, 0),
+    FieldSchema("adpopt", int, 60, 10, None),
+    FieldSchema("tmid", int, 70, 10, 0),
+)
+
+_PARTREPOSITIONCONTACTPRINT_CARD2 = (
+    FieldSchema("cmsn", int, 0, 10, None),
+    FieldSchema("mdep", int, 10, 10, 0),
+    FieldSchema("movopt", int, 20, 10, 0),
+)
+
+_PARTREPOSITIONCONTACTPRINT_CARD3 = (
+    FieldSchema("fs", float, 0, 10, None),
+    FieldSchema("fd", float, 10, 10, None),
+    FieldSchema("dc", float, 20, 10, None),
+    FieldSchema("vc", float, 30, 10, None),
+    FieldSchema("optt", float, 40, 10, None),
+    FieldSchema("sft", float, 50, 10, None),
+    FieldSchema("ssf", float, 60, 10, None),
+    FieldSchema("cparm8", float, 70, 10, None),
+)
+
+_PARTREPOSITIONCONTACTPRINT_CARD4 = (
+    FieldSchema("prbf", int, 0, 10, 0),
+)
 
 class PartRepositionContactPrint(KeywordBase):
     """DYNA PART_REPOSITION_CONTACT_PRINT keyword"""
@@ -35,182 +72,22 @@ class PartRepositionContactPrint(KeywordBase):
         """Initialize the PartRepositionContactPrint class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "title",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "secid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eosid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hgid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grav",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpopt",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cmsn",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mdep",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "movopt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fs",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "optt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssf",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cparm8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "prbf",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTREPOSITIONCONTACTPRINT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTREPOSITIONCONTACTPRINT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTREPOSITIONCONTACTPRINT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTREPOSITIONCONTACTPRINT_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTREPOSITIONCONTACTPRINT_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.

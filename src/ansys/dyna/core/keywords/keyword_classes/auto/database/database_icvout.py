@@ -23,7 +23,15 @@
 """Module providing the DatabaseIcvout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEICVOUT_CARD0 = (
+    FieldSchema("dt", float, 0, 10, 0.0),
+    FieldSchema("binary", int, 10, 10, 0),
+    FieldSchema("lcur", int, 20, 10, 0),
+    FieldSchema("ioopt", int, 30, 10, 1),
+)
 
 class DatabaseIcvout(KeywordBase):
     """DYNA DATABASE_ICVOUT keyword"""
@@ -35,44 +43,10 @@ class DatabaseIcvout(KeywordBase):
         """Initialize the DatabaseIcvout class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "binary",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcur",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ioopt",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEICVOUT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> float:
         """Get or set the Time interval between outputs. If DT is zero, no output is printed, This field will be used for all selected ASCII_options that have no unique DT value specified

@@ -23,7 +23,19 @@
 """Module providing the BoundarySymmetryFailure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYSYMMETRYFAILURE_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("fs", float, 10, 10, 0.0),
+    FieldSchema("vtx", float, 20, 10, 0.0),
+    FieldSchema("vty", float, 30, 10, 0.0),
+    FieldSchema("vtz", float, 40, 10, 0.0),
+    FieldSchema("vhx", float, 50, 10, 0.0),
+    FieldSchema("vhy", float, 60, 10, 0.0),
+    FieldSchema("vhz", float, 70, 10, 0.0),
+)
 
 class BoundarySymmetryFailure(KeywordBase):
     """DYNA BOUNDARY_SYMMETRY_FAILURE keyword"""
@@ -35,75 +47,10 @@ class BoundarySymmetryFailure(KeywordBase):
         """Initialize the BoundarySymmetryFailure class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vtx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vty",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vtz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vhx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vhy",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vhz",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSYMMETRYFAILURE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see *SET_SEGMENT.

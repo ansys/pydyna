@@ -23,7 +23,27 @@
 """Module providing the IcfdControlTime class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLTIME_CARD0 = (
+    FieldSchema("ttm", float, 0, 10, 1e+28),
+    FieldSchema("dt", float, 10, 10, 0.0),
+    FieldSchema("cfl", float, 20, 10, 1.0),
+    FieldSchema("lcidsf", int, 30, 10, None),
+    FieldSchema("dtmin", float, 40, 10, None),
+    FieldSchema("dtmax", float, 50, 10, None),
+    FieldSchema("dtinit", float, 60, 10, None),
+    FieldSchema("tdeath", float, 70, 10, 1e+28),
+)
+
+_ICFDCONTROLTIME_CARD1 = (
+    FieldSchema("dtt", float, 0, 10, None),
+)
+
+_ICFDCONTROLTIME_CARD2 = (
+    FieldSchema("btbl", int, 0, 10, 0),
+)
 
 class IcfdControlTime(KeywordBase):
     """DYNA ICFD_CONTROL_TIME keyword"""
@@ -35,95 +55,16 @@ class IcfdControlTime(KeywordBase):
         """Initialize the IcfdControlTime class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ttm",
-                        float,
-                        0,
-                        10,
-                        1.E28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfl",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidsf",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtmin",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtmax",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtinit",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        70,
-                        10,
-                        1e28,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dtt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "btbl",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTIME_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTIME_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTIME_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def ttm(self) -> float:
         """Get or set the Total time of simulation for the fluid problem.

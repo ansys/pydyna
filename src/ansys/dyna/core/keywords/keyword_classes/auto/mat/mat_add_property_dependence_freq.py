@@ -23,8 +23,15 @@
 """Module providing the MatAddPropertyDependenceFreq class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATADDPROPERTYDEPENDENCEFREQ_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("prop", str, 10, 10, None),
+    FieldSchema("lcid", int, 20, 10, None),
+)
 
 class MatAddPropertyDependenceFreq(KeywordBase):
     """DYNA MAT_ADD_PROPERTY_DEPENDENCE_FREQ keyword"""
@@ -40,32 +47,10 @@ class MatAddPropertyDependenceFreq(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prop",
-                        str,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDPROPERTYDEPENDENCEFREQ_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddPropertyDependenceFreq.option_specs[0],
                 cards = [
                     Card(
@@ -83,7 +68,6 @@ class MatAddPropertyDependenceFreq(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification for which the property dependence applies

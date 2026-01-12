@@ -23,7 +23,12 @@
 """Module providing the FrequencyDomainPath class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINPATH_CARD0 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class FrequencyDomainPath(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_PATH keyword"""
@@ -35,19 +40,10 @@ class FrequencyDomainPath(KeywordBase):
         """Initialize the FrequencyDomainPath class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINPATH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Path and name of the file which contains modal information.

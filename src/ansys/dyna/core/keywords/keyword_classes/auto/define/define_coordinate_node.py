@@ -23,8 +23,18 @@
 """Module providing the DefineCoordinateNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECOORDINATENODE_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("n1", int, 10, 10, None),
+    FieldSchema("n2", int, 20, 10, None),
+    FieldSchema("n3", int, 30, 10, None),
+    FieldSchema("flag", int, 40, 10, None),
+    FieldSchema("dir", str, 50, 10, "X"),
+)
 
 class DefineCoordinateNode(KeywordBase):
     """DYNA DEFINE_COORDINATE_NODE keyword"""
@@ -40,54 +50,10 @@ class DefineCoordinateNode(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "flag",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        str,
-                        50,
-                        10,
-                        "X",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECOORDINATENODE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCoordinateNode.option_specs[0],
                 cards = [
                     Card(
@@ -105,7 +71,6 @@ class DefineCoordinateNode(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Coordinate system ID. A unique number has to be defined.

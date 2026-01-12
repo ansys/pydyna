@@ -23,7 +23,44 @@
 """Module providing the ControlExplicitThermalProperties class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLEXPLICITTHERMALPROPERTIES_CARD0 = (
+    FieldSchema("partset", int, 0, 10, None),
+    FieldSchema("cp", float, 10, 10, None),
+    FieldSchema("cptyp", int, 20, 10, 0),
+    FieldSchema("vecid1", int, 30, 10, 0),
+    FieldSchema("vecid2", int, 40, 10, 0),
+    FieldSchema("local", int, 50, 10, 0),
+)
+
+_CONTROLEXPLICITTHERMALPROPERTIES_CARD1 = (
+    FieldSchema("kxx", float, 0, 10, 0.0),
+    FieldSchema("kxy", float, 10, 10, 0.0),
+    FieldSchema("kxz", float, 20, 10, 0.0),
+    FieldSchema("kxxtyp", int, 30, 10, 0),
+    FieldSchema("kxytyp", int, 40, 10, 0),
+    FieldSchema("kxztyp", int, 50, 10, 0),
+)
+
+_CONTROLEXPLICITTHERMALPROPERTIES_CARD2 = (
+    FieldSchema("kyx", float, 0, 10, 0.0),
+    FieldSchema("kyy", float, 10, 10, 0.0),
+    FieldSchema("kyz", float, 20, 10, 0.0),
+    FieldSchema("kyxtyp", int, 30, 10, 0),
+    FieldSchema("kyytyp", int, 40, 10, 0),
+    FieldSchema("kyztyp", int, 50, 10, 0),
+)
+
+_CONTROLEXPLICITTHERMALPROPERTIES_CARD3 = (
+    FieldSchema("kzx", float, 0, 10, 0.0),
+    FieldSchema("kzy", float, 10, 10, 0.0),
+    FieldSchema("kzz", float, 20, 10, 0.0),
+    FieldSchema("kzxtyp", int, 30, 10, 0),
+    FieldSchema("kzytyp", int, 40, 10, 0),
+    FieldSchema("kzztyp", int, 50, 10, 0),
+)
 
 class ControlExplicitThermalProperties(KeywordBase):
     """DYNA CONTROL_EXPLICIT_THERMAL_PROPERTIES keyword"""
@@ -35,214 +72,19 @@ class ControlExplicitThermalProperties(KeywordBase):
         """Initialize the ControlExplicitThermalProperties class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "partset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cptyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "local",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "kxx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kxy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kxz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kxxtyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kxytyp",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kxztyp",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "kyx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kyy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kyz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kyxtyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kyytyp",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kyztyp",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "kzx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kzy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kzz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kzxtyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kzytyp",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kzztyp",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLEXPLICITTHERMALPROPERTIES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLEXPLICITTHERMALPROPERTIES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLEXPLICITTHERMALPROPERTIES_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLEXPLICITTHERMALPROPERTIES_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def partset(self) -> typing.Optional[int]:
         """Get or set the Part set ID (See *SET_PART).

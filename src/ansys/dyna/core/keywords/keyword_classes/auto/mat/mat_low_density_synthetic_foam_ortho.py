@@ -23,8 +23,31 @@
 """Module providing the MatLowDensitySyntheticFoamOrtho class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATLOWDENSITYSYNTHETICFOAMORTHO_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("lcid1", int, 30, 10, None),
+    FieldSchema("lcid2", int, 40, 10, None),
+    FieldSchema("hu", float, 50, 10, 1.0),
+    FieldSchema("beta", float, 60, 10, None),
+    FieldSchema("damp", float, 70, 10, 0.05),
+)
+
+_MATLOWDENSITYSYNTHETICFOAMORTHO_CARD1 = (
+    FieldSchema("shape", float, 0, 10, None),
+    FieldSchema("fail", float, 10, 10, 0.0),
+    FieldSchema("bvflag", float, 20, 10, 0.0),
+    FieldSchema("ed", float, 30, 10, None),
+    FieldSchema("beta1", float, 40, 10, None),
+    FieldSchema("kcon", float, 50, 10, None),
+    FieldSchema("ref", float, 60, 10, 0.0),
+    FieldSchema("tc", float, 70, 10, None),
+)
 
 class MatLowDensitySyntheticFoamOrtho(KeywordBase):
     """DYNA MAT_LOW_DENSITY_SYNTHETIC_FOAM_ORTHO keyword"""
@@ -40,132 +63,13 @@ class MatLowDensitySyntheticFoamOrtho(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hu",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        70,
-                        10,
-                        .05,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "shape",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fail",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bvflag",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ed",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kcon",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tc",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATLOWDENSITYSYNTHETICFOAMORTHO_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATLOWDENSITYSYNTHETICFOAMORTHO_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatLowDensitySyntheticFoamOrtho.option_specs[0],
                 cards = [
                     Card(
@@ -183,7 +87,6 @@ class MatLowDensitySyntheticFoamOrtho(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be chosen.

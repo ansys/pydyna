@@ -23,8 +23,52 @@
 """Module providing the MatJohnsonCookStochastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATJOHNSONCOOKSTOCHASTIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("g", float, 20, 10, None),
+    FieldSchema("e", float, 30, 10, None),
+    FieldSchema("pr", float, 40, 10, None),
+    FieldSchema("dtf", float, 50, 10, None),
+    FieldSchema("vp", float, 60, 10, 0.0),
+    FieldSchema("rateop", float, 70, 10, 0.0),
+)
+
+_MATJOHNSONCOOKSTOCHASTIC_CARD1 = (
+    FieldSchema("a", float, 0, 10, None),
+    FieldSchema("b", float, 10, 10, None),
+    FieldSchema("n", float, 20, 10, None),
+    FieldSchema("c", float, 30, 10, None),
+    FieldSchema("m", float, 40, 10, None),
+    FieldSchema("tm", float, 50, 10, None),
+    FieldSchema("tr", float, 60, 10, None),
+    FieldSchema("epso", float, 70, 10, None),
+)
+
+_MATJOHNSONCOOKSTOCHASTIC_CARD2 = (
+    FieldSchema("cp", float, 0, 10, None),
+    FieldSchema("pc", float, 10, 10, None),
+    FieldSchema("spall", float, 20, 10, 2.0),
+    FieldSchema("it", float, 30, 10, 0.0),
+    FieldSchema("d1", float, 40, 10, None),
+    FieldSchema("d2", float, 50, 10, None),
+    FieldSchema("d3", float, 60, 10, None),
+    FieldSchema("d4", float, 70, 10, None),
+)
+
+_MATJOHNSONCOOKSTOCHASTIC_CARD3 = (
+    FieldSchema("d5", float, 0, 10, None),
+    FieldSchema("c2/p/xnp/d", float, 10, 10, None),
+    FieldSchema("erod", float, 20, 10, None),
+    FieldSchema("efmin", float, 30, 10, 1e-06),
+    FieldSchema("numint", float, 40, 10, None),
+    FieldSchema("k", float, 50, 10, None),
+    FieldSchema("eps1", float, 60, 10, None),
+)
 
 class MatJohnsonCookStochastic(KeywordBase):
     """DYNA MAT_JOHNSON_COOK_STOCHASTIC keyword"""
@@ -40,245 +84,19 @@ class MatJohnsonCookStochastic(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtf",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vp",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rateop",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tm",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tr",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epso",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pc",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spall",
-                        float,
-                        20,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "it",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d4",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d5",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2/p/xnp/d",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "erod",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "efmin",
-                        float,
-                        30,
-                        10,
-                        0.000001,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numint",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATJOHNSONCOOKSTOCHASTIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATJOHNSONCOOKSTOCHASTIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATJOHNSONCOOKSTOCHASTIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATJOHNSONCOOKSTOCHASTIC_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatJohnsonCookStochastic.option_specs[0],
                 cards = [
                     Card(
@@ -296,7 +114,6 @@ class MatJohnsonCookStochastic(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

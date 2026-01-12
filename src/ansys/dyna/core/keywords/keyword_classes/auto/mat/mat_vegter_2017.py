@@ -23,8 +23,74 @@
 """Module providing the MatVegter2017 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATVEGTER2017_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("fbi", float, 50, 10, None),
+    FieldSchema("rbi0", float, 60, 10, None),
+    FieldSchema("lcid", float, 70, 10, None),
+)
+
+_MATVEGTER2017_CARD1 = (
+    FieldSchema("sys", float, 0, 10, None),
+    FieldSchema("sip", float, 10, 10, None),
+    FieldSchema("shs", float, 20, 10, None),
+    FieldSchema("shl", float, 30, 10, None),
+    FieldSchema("esh", float, 40, 10, None),
+    FieldSchema("e0", float, 50, 10, None),
+    FieldSchema("alpha", float, 60, 10, None),
+    FieldSchema("lcid2", float, 70, 10, None),
+)
+
+_MATVEGTER2017_CARD2 = (
+    FieldSchema("aopt", float, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("dys", float, 20, 10, None),
+    FieldSchema("raten", float, 30, 10, None),
+    FieldSchema("srn0", float, 40, 10, None),
+    FieldSchema("exsr", float, 50, 10, None),
+)
+
+_MATVEGTER2017_CARD3 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATVEGTER2017_CARD4 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("beta", float, 60, 10, None),
+)
+
+_MATVEGTER2017_CARD5 = (
+    FieldSchema("rm-0", float, 0, 10, None),
+    FieldSchema("rm-45", float, 10, 10, None),
+    FieldSchema("rm-90", float, 20, 10, None),
+    FieldSchema("ag-0", float, 30, 10, None),
+    FieldSchema("ag-45", float, 40, 10, None),
+    FieldSchema("ag-90", float, 50, 10, None),
+)
+
+_MATVEGTER2017_CARD6 = (
+    FieldSchema("r00", float, 0, 10, None),
+    FieldSchema("r45", float, 10, 10, None),
+    FieldSchema("r90", float, 20, 10, None),
+)
 
 class MatVegter2017(KeywordBase):
     """DYNA MAT_VEGTER_2017 keyword"""
@@ -40,343 +106,28 @@ class MatVegter2017(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fbi",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rbi0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sys",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sip",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shs",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shl",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esh",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aopt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dys",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "raten",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srn0",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exsr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rm-0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rm-45",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rm-90",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ag-0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ag-45",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ag-90",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r00",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r45",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r90",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATVEGTER2017_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVEGTER2017_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVEGTER2017_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVEGTER2017_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVEGTER2017_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVEGTER2017_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVEGTER2017_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatVegter2017.option_specs[0],
                 cards = [
                     Card(
@@ -394,7 +145,6 @@ class MatVegter2017(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.  A unique number or label must be specified

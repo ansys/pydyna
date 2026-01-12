@@ -23,7 +23,17 @@
 """Module providing the DampingRelative class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DAMPINGRELATIVE_CARD0 = (
+    FieldSchema("cdamp", float, 0, 10, 0.0),
+    FieldSchema("freq", float, 10, 10, 0.0),
+    FieldSchema("pidrb", int, 20, 10, 0),
+    FieldSchema("psid", int, 30, 10, 0),
+    FieldSchema("dv2", float, 40, 10, 0.0),
+    FieldSchema("lcid", int, 50, 10, 0),
+)
 
 class DampingRelative(KeywordBase):
     """DYNA DAMPING_RELATIVE keyword"""
@@ -35,60 +45,10 @@ class DampingRelative(KeywordBase):
         """Initialize the DampingRelative class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cdamp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "freq",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidrb",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dv2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DAMPINGRELATIVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def cdamp(self) -> float:
         """Get or set the Fraction of critical damping.

@@ -23,7 +23,16 @@
 """Module providing the FrequencyDomainAcousticIncidentWave class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINACOUSTICINCIDENTWAVE_CARD0 = (
+    FieldSchema("type", int, 0, 10, 1),
+    FieldSchema("mag", float, 10, 10, None),
+    FieldSchema("xc", float, 20, 10, None),
+    FieldSchema("yc", float, 30, 10, None),
+    FieldSchema("zc", float, 40, 10, None),
+)
 
 class FrequencyDomainAcousticIncidentWave(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_ACOUSTIC_INCIDENT_WAVE keyword"""
@@ -35,48 +44,10 @@ class FrequencyDomainAcousticIncidentWave(KeywordBase):
         """Initialize the FrequencyDomainAcousticIncidentWave class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "type",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mag",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICINCIDENTWAVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def type(self) -> int:
         """Get or set the Type of incident sound wave:

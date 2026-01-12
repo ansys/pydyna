@@ -23,7 +23,15 @@
 """Module providing the AleStructuredMeshRefine class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALESTRUCTUREDMESHREFINE_CARD0 = (
+    FieldSchema("mshid", int, 0, 10, 0),
+    FieldSchema("ifx,", int, 10, 10, 1),
+    FieldSchema("ify,", int, 20, 10, 1),
+    FieldSchema("ifz,", int, 30, 10, 1),
+)
 
 class AleStructuredMeshRefine(KeywordBase):
     """DYNA ALE_STRUCTURED_MESH_REFINE keyword"""
@@ -35,44 +43,10 @@ class AleStructuredMeshRefine(KeywordBase):
         """Initialize the AleStructuredMeshRefine class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mshid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifx,",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ify,",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifz,",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESHREFINE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mshid(self) -> int:
         """Get or set the S-ALE Mesh ID. The ID of the Structured ALE mesh to be refined.

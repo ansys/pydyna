@@ -23,7 +23,28 @@
 """Module providing the InterfaceSsiOffset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACESSIOFFSET_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_INTERFACESSIOFFSET_CARD1 = (
+    FieldSchema("strid", int, 0, 10, None),
+    FieldSchema("soilid", int, 10, 10, None),
+    FieldSchema("spr", int, 20, 10, None),
+    FieldSchema("mpr", int, 30, 10, None),
+)
+
+_INTERFACESSIOFFSET_CARD2 = (
+    FieldSchema("gmset", int, 0, 10, None),
+    FieldSchema("sf", float, 10, 10, 1.0),
+    FieldSchema("birth", float, 20, 10, 0.0),
+    FieldSchema("death", float, 30, 10, 1e+28),
+    FieldSchema("memgm", int, 40, 10, 2500000),
+)
 
 class InterfaceSsiOffset(KeywordBase):
     """DYNA INTERFACE_SSI_OFFSET keyword"""
@@ -35,101 +56,16 @@ class InterfaceSsiOffset(KeywordBase):
         """Initialize the InterfaceSsiOffset class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "strid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soilid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mpr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gmset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        30,
-                        10,
-                        1.E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "memgm",
-                        int,
-                        40,
-                        10,
-                        2500000,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACESSIOFFSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACESSIOFFSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACESSIOFFSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Soil-structure interface ID. This is required and must be unique amongst all the contact interface IDs in the model.

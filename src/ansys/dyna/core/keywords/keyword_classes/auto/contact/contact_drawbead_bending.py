@@ -23,8 +23,67 @@
 """Module providing the ContactDrawbeadBending class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTDRAWBEADBENDING_CARD0 = (
+    FieldSchema("surfa", int, 0, 10, None),
+    FieldSchema("surfb", int, 10, 10, None),
+    FieldSchema("surfatyp", int, 20, 10, 0),
+    FieldSchema("surfbtyp", int, 30, 10, 0),
+    FieldSchema("saboxid", int, 40, 10, None),
+    FieldSchema("sbboxid", int, 50, 10, None),
+    FieldSchema("sapr", int, 60, 10, 0),
+    FieldSchema("sbpr", int, 70, 10, 0),
+)
+
+_CONTACTDRAWBEADBENDING_CARD1 = (
+    FieldSchema("fs", float, 0, 10, 0.0),
+    FieldSchema("fd", float, 10, 10, 0.0),
+    FieldSchema("dc", float, 20, 10, 0.0),
+    FieldSchema("vc", float, 30, 10, 0.0),
+    FieldSchema("vdc", float, 40, 10, 0.0),
+    FieldSchema("penchk", int, 50, 10, None),
+    FieldSchema("bt", float, 60, 10, 0.0),
+    FieldSchema("dt", float, 70, 10, 1e+20),
+)
+
+_CONTACTDRAWBEADBENDING_CARD2 = (
+    FieldSchema("sfsa", float, 0, 10, 1.0),
+    FieldSchema("sfsb", float, 10, 10, 1.0),
+    FieldSchema("sast", float, 20, 10, None),
+    FieldSchema("sbst", float, 30, 10, None),
+    FieldSchema("sfsat", float, 40, 10, 1.0),
+    FieldSchema("sfsbt", float, 50, 10, 1.0),
+    FieldSchema("fsf", float, 60, 10, 1.0),
+    FieldSchema("vsf", float, 70, 10, 1.0),
+)
+
+_CONTACTDRAWBEADBENDING_CARD3 = (
+    FieldSchema("lcidrf", int, 0, 10, None),
+    FieldSchema("lcidnf", int, 10, 10, None),
+    FieldSchema("dbdth", float, 20, 10, 0.0),
+    FieldSchema("dfscl", float, 30, 10, 1.0),
+    FieldSchema("numint", int, 40, 10, 0),
+    FieldSchema("dbpid", int, 50, 10, 0),
+    FieldSchema("eloff", int, 60, 10, None),
+    FieldSchema("nbead", int, 70, 10, None),
+)
+
+_CONTACTDRAWBEADBENDING_CARD4 = (
+    FieldSchema("point1", int, 0, 10, None),
+    FieldSchema("point2", int, 10, 10, None),
+    FieldSchema("width", float, 20, 10, None),
+    FieldSchema("effhgt", float, 30, 10, None),
+)
+
+_CONTACTDRAWBEADBENDING_CARD5 = (
+    FieldSchema("epm", float, 0, 10, None),
+    FieldSchema("epscal", float, 10, 10, None),
+    FieldSchema("ending", float, 20, 10, 10.0),
+    FieldSchema("unused", int, 30, 10, None),
+)
 
 class ContactDrawbeadBending(KeywordBase):
     """DYNA CONTACT_DRAWBEAD_BENDING keyword"""
@@ -48,333 +107,25 @@ class ContactDrawbeadBending(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfa",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfb",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfatyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfbtyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "saboxid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbboxid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sapr",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbpr",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fs",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vdc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "penchk",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        70,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sfsa",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsb",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sast",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbst",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsat",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsbt",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsf",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vsf",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidrf",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidnf",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dbdth",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfscl",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numint",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dbpid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eloff",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nbead",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "point1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "point2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "width",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "effhgt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "epm",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epscal",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ending",
-                        float,
-                        20,
-                        10,
-                        10.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTDRAWBEADBENDING_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = ContactDrawbeadBending.option_specs[0],
                 cards = [
                     Card(
@@ -657,21 +408,21 @@ class ContactDrawbeadBending(KeywordBase):
                                 float,
                                 20,
                                 10,
-                                kwargs.get("dprfac", 0)
+                                kwargs.get("dprfac", 0.0)
                             ),
                             Field(
                                 "dtstif",
                                 float,
                                 30,
                                 10,
-                                kwargs.get("dtstif", 0)
+                                kwargs.get("dtstif", 0.0)
                             ),
                             Field(
                                 "edgek",
                                 float,
                                 40,
                                 10,
-                                kwargs.get("edgek", 0)
+                                kwargs.get("edgek", 0.0)
                             ),
                             Field(
                                 "flangl",
@@ -709,28 +460,28 @@ class ContactDrawbeadBending(KeywordBase):
                                 float,
                                 10,
                                 10,
-                                kwargs.get("dtpchk", 0)
+                                kwargs.get("dtpchk", 0.0)
                             ),
                             Field(
                                 "sfnbr",
                                 float,
                                 20,
                                 10,
-                                kwargs.get("sfnbr", 0)
+                                kwargs.get("sfnbr", 0.0)
                             ),
                             Field(
                                 "fnlscl",
                                 float,
                                 30,
                                 10,
-                                kwargs.get("fnlscl", 0)
+                                kwargs.get("fnlscl", 0.0)
                             ),
                             Field(
                                 "dnlscl",
                                 float,
                                 40,
                                 10,
-                                kwargs.get("dnlscl", 0)
+                                kwargs.get("dnlscl", 0.0)
                             ),
                             Field(
                                 "tcso",
@@ -901,7 +652,6 @@ class ContactDrawbeadBending(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def surfa(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, node set ID, part set ID, part ID, or shell element set ID for specifying the SURFA side of the contact interface (see Setting the Contact Interface). See *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set which includes all nodes that may be exposed to contact as element erosion occurs.

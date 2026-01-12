@@ -23,7 +23,21 @@
 """Module providing the ConstrainedGeneralizedWeldCombined class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD0 = (
+    FieldSchema("wid", int, 0, 10, None),
+)
+
+_CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD1 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("filter", int, 20, 10, None),
+    FieldSchema("window", float, 30, 10, 0.0),
+    FieldSchema("npr", int, 40, 10, None),
+    FieldSchema("nprt", int, 50, 10, 0),
+)
 
 class ConstrainedGeneralizedWeldCombined(KeywordBase):
     """DYNA CONSTRAINED_GENERALIZED_WELD_COMBINED keyword"""
@@ -35,67 +49,13 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
         """Initialize the ConstrainedGeneralizedWeldCombined class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "wid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "filter",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "window",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npr",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nprt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def wid(self) -> typing.Optional[int]:
         """Get or set the Optional weld ID

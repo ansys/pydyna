@@ -23,8 +23,20 @@
 """Module providing the DefineDeMeshSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEDEMESHSURFACE_CARD0 = (
+    FieldSchema("sid", int, 0, 10, 0),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("nquad", int, 20, 10, 1),
+    FieldSchema("despid", int, 30, 10, 0),
+    FieldSchema("descid", int, 40, 10, 0),
+    FieldSchema("nsid", int, 50, 10, 0),
+    FieldSchema("rsf", float, 60, 10, 1.0),
+    FieldSchema("iactive", int, 70, 10, 0),
+)
 
 class DefineDeMeshSurface(KeywordBase):
     """DYNA DEFINE_DE_MESH_SURFACE keyword"""
@@ -40,75 +52,10 @@ class DefineDeMeshSurface(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nquad",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "despid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "descid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rsf",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iactive",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEMESHSURFACE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeMeshSurface.option_specs[0],
                 cards = [
                     Card(
@@ -126,7 +73,6 @@ class DefineDeMeshSurface(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> int:
         """Get or set the Part or part set ID for the region of the mesh upon which the DES elements will be placed

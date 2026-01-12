@@ -23,8 +23,15 @@
 """Module providing the SectionSeatbelt class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONSEATBELT_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("area", float, 10, 10, None),
+    FieldSchema("thick", float, 20, 10, None),
+)
 
 class SectionSeatbelt(KeywordBase):
     """DYNA SECTION_SEATBELT keyword"""
@@ -40,32 +47,10 @@ class SectionSeatbelt(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONSEATBELT_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionSeatbelt.option_specs[0],
                 cards = [
                     Card(
@@ -83,7 +68,6 @@ class SectionSeatbelt(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID.

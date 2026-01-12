@@ -23,7 +23,21 @@
 """Module providing the IntegrationShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTEGRATIONSHELL_CARD0 = (
+    FieldSchema("irid", int, 0, 10, None),
+    FieldSchema("nip", int, 10, 10, None),
+    FieldSchema("esop", int, 20, 10, 0),
+    FieldSchema("failopt", int, 30, 10, 0),
+)
+
+_INTEGRATIONSHELL_CARD1 = (
+    FieldSchema("s", float, 0, 10, None),
+    FieldSchema("wf", float, 10, 10, None),
+    FieldSchema("pid", int, 20, 10, None),
+)
 
 class IntegrationShell(KeywordBase):
     """DYNA INTEGRATION_SHELL keyword"""
@@ -35,67 +49,13 @@ class IntegrationShell(KeywordBase):
         """Initialize the IntegrationShell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "irid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nip",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esop",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "failopt",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "s",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTEGRATIONSHELL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTEGRATIONSHELL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def irid(self) -> typing.Optional[int]:
         """Get or set the Integration rule ID (IRID refers to IRID on *SECTION_SHELL card).

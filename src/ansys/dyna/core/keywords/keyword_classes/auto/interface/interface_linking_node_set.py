@@ -23,7 +23,16 @@
 """Module providing the InterfaceLinkingNodeSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACELINKINGNODESET_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("ifid", int, 10, 10, None),
+    FieldSchema("fx", int, 20, 10, None),
+    FieldSchema("fy", int, 30, 10, None),
+    FieldSchema("fz", int, 40, 10, None),
+)
 
 class InterfaceLinkingNodeSet(KeywordBase):
     """DYNA INTERFACE_LINKING_NODE_SET keyword"""
@@ -35,47 +44,10 @@ class InterfaceLinkingNodeSet(KeywordBase):
         """Initialize the InterfaceLinkingNodeSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fz",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACELINKINGNODESET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID to be moved by interface file, see *SET_NODE.

@@ -23,8 +23,14 @@
 """Module providing the MatAddChemShrinkage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATADDCHEMSHRINKAGE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+)
 
 class MatAddChemShrinkage(KeywordBase):
     """DYNA MAT_ADD_CHEM_SHRINKAGE keyword"""
@@ -40,25 +46,10 @@ class MatAddChemShrinkage(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDCHEMSHRINKAGE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddChemShrinkage.option_specs[0],
                 cards = [
                     Card(
@@ -76,7 +67,6 @@ class MatAddChemShrinkage(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID for which the chemical shrinkage effect applies

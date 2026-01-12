@@ -23,7 +23,16 @@
 """Module providing the IcfdControlTurbSynthesis class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLTURBSYNTHESIS_CARD0 = (
+    FieldSchema("pid", int, 0, 10, 0),
+    FieldSchema("iu", float, 10, 10, 0.001),
+    FieldSchema("iv", float, 20, 10, 0.001),
+    FieldSchema("iw", float, 30, 10, 0.001),
+    FieldSchema("ls", float, 40, 10, None),
+)
 
 class IcfdControlTurbSynthesis(KeywordBase):
     """DYNA ICFD_CONTROL_TURB_SYNTHESIS keyword"""
@@ -35,51 +44,10 @@ class IcfdControlTurbSynthesis(KeywordBase):
         """Initialize the IcfdControlTurbSynthesis class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iu",
-                        float,
-                        10,
-                        10,
-                        1e-3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iv",
-                        float,
-                        20,
-                        10,
-                        1e-3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iw",
-                        float,
-                        30,
-                        10,
-                        1e-3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ls",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTURBSYNTHESIS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> int:
         """Get or set the Part ID of the surface with the turbulent velocity inlet condition.

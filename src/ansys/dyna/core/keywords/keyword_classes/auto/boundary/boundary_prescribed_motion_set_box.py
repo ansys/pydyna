@@ -23,7 +23,33 @@
 """Module providing the BoundaryPrescribedMotionSetBox class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYPRESCRIBEDMOTIONSETBOX_CARD0 = (
+    FieldSchema("typeid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, 0),
+    FieldSchema("vad", int, 20, 10, 0),
+    FieldSchema("lcid", int, 30, 10, None),
+    FieldSchema("sf", float, 40, 10, 1.0),
+    FieldSchema("vid", int, 50, 10, None),
+    FieldSchema("death", float, 60, 10, 1e+28),
+    FieldSchema("birth", float, 70, 10, 0.0),
+)
+
+_BOUNDARYPRESCRIBEDMOTIONSETBOX_CARD1 = (
+    FieldSchema("boxid", int, 0, 10, None),
+    FieldSchema("toffset", int, 10, 10, 0),
+    FieldSchema("lcbchk", int, 20, 10, 0),
+)
+
+_BOUNDARYPRESCRIBEDMOTIONSETBOX_CARD2 = (
+    FieldSchema("offset1", float, 0, 10, 0.0),
+    FieldSchema("offset2", float, 10, 10, 0.0),
+    FieldSchema("lrb", int, 20, 10, 0),
+    FieldSchema("node1", int, 30, 10, 0),
+    FieldSchema("node2", int, 40, 10, 0),
+)
 
 class BoundaryPrescribedMotionSetBox(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_MOTION_SET_BOX keyword"""
@@ -35,145 +61,17 @@ class BoundaryPrescribedMotionSetBox(KeywordBase):
         """Initialize the BoundaryPrescribedMotionSetBox class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "typeid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        60,
-                        10,
-                        1.0E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "boxid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "toffset",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcbchk",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
-            ),
-            Card(
-                [
-                    Field(
-                        "offset1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lrb",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDMOTIONSETBOX_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDMOTIONSETBOX_CARD1,
+                active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDMOTIONSETBOX_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def typeid(self) -> typing.Optional[int]:
         """Get or set the nodal set ID (SID in *SET_NODE)

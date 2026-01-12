@@ -23,7 +23,18 @@
 """Module providing the ControlImplicitSsdDirect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITSSDDIRECT_CARD0 = (
+    FieldSchema("issflg", int, 0, 10, 0),
+    FieldSchema("fmin", float, 10, 10, None),
+    FieldSchema("fmax", float, 20, 10, None),
+    FieldSchema("nfreq", int, 30, 10, 1),
+    FieldSchema("loss", float, 40, 10, 0.0),
+    FieldSchema("fspace", float, 50, 10, 0.0),
+    FieldSchema("fractn", int, 60, 10, 1),
+)
 
 class ControlImplicitSsdDirect(KeywordBase):
     """DYNA CONTROL_IMPLICIT_SSD_DIRECT keyword"""
@@ -35,66 +46,10 @@ class ControlImplicitSsdDirect(KeywordBase):
         """Initialize the ControlImplicitSsdDirect class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "issflg",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmin",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "loss",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fspace",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fractn",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITSSDDIRECT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def issflg(self) -> int:
         """Get or set the Complex steady state vibration flag:

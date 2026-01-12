@@ -23,8 +23,20 @@
 """Module providing the DefineCurveCompensationConstraintEnd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD0 = (
+    FieldSchema("crvid", int, 0, 10, None),
+    FieldSchema("in/out", int, 10, 10, None),
+)
+
+_DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD1 = (
+    FieldSchema("x", float, 0, 16, 0.0),
+    FieldSchema("y", float, 16, 16, 0.0),
+    FieldSchema("z", float, 32, 16, 0.0),
+)
 
 class DefineCurveCompensationConstraintEnd(KeywordBase):
     """DYNA DEFINE_CURVE_COMPENSATION_CONSTRAINT_END keyword"""
@@ -40,53 +52,13 @@ class DefineCurveCompensationConstraintEnd(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "crvid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "in/out",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        16,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        32,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCurveCompensationConstraintEnd.option_specs[0],
                 cards = [
                     Card(
@@ -104,7 +76,6 @@ class DefineCurveCompensationConstraintEnd(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def crvid(self) -> typing.Optional[int]:
         """Get or set the Curve ID; must be unique, with the same begin and end point coordinates.

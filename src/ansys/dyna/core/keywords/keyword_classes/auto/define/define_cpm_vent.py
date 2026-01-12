@@ -23,8 +23,45 @@
 """Module providing the DefineCpmVent class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECPMVENT_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("c23", float, 10, 10, 1.0),
+    FieldSchema("lctc23", int, 20, 10, None),
+    FieldSchema("lcpc23", int, 30, 10, None),
+    FieldSchema("enh_v", int, 40, 10, 0),
+    FieldSchema("ppop", float, 50, 10, None),
+    FieldSchema("c23up", float, 60, 10, None),
+    FieldSchema("iopt", int, 70, 10, None),
+)
+
+_DEFINECPMVENT_CARD1 = (
+    FieldSchema("jt", int, 0, 10, 0),
+    FieldSchema("ids1", int, 10, 10, None),
+    FieldSchema("ids2", int, 20, 10, None),
+    FieldSchema("iopt1", int, 30, 10, None),
+    FieldSchema("pid1", int, 40, 10, None),
+    FieldSchema("pid2", int, 50, 10, None),
+    FieldSchema("vang", float, 60, 10, 0.0),
+    FieldSchema("lcred", int, 70, 10, None),
+)
+
+_DEFINECPMVENT_CARD2 = (
+    FieldSchema("nid1", int, 0, 10, None),
+    FieldSchema("nid2", int, 10, 10, None),
+    FieldSchema("nid2", int, 20, 10, None),
+    FieldSchema("lcac23", int, 30, 10, None),
+    FieldSchema("psetpv", int, 40, 10, None),
+    FieldSchema("sfpv", int, 50, 10, None),
+    FieldSchema("lpatm", int, 60, 10, None),
+)
+
+_DEFINECPMVENT_CARD3 = (
+    FieldSchema("jtnd", int, 0, 10, None),
+)
 
 class DefineCpmVent(KeywordBase):
     """DYNA DEFINE_CPM_VENT keyword"""
@@ -40,195 +77,19 @@ class DefineCpmVent(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c23",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lctc23",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpc23",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "enh_v",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ppop",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c23up",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iopt",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "jt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ids1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ids2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iopt1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vang",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcred",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcac23",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psetpv",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfpv",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lpatm",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "jtnd",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECPMVENT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECPMVENT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECPMVENT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECPMVENT_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCpmVent.option_specs[0],
                 cards = [
                     Card(
@@ -246,7 +107,6 @@ class DefineCpmVent(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Unique ID for this card

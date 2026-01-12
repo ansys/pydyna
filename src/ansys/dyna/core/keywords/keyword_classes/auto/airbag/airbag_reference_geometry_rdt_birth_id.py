@@ -23,7 +23,27 @@
 """Module providing the AirbagReferenceGeometryRdtBirthId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_AIRBAGREFERENCEGEOMETRYRDTBIRTHID_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("sx", float, 10, 10, None),
+    FieldSchema("sy", float, 20, 10, None),
+    FieldSchema("sz", float, 30, 10, None),
+    FieldSchema("nido", int, 40, 10, None),
+)
+
+_AIRBAGREFERENCEGEOMETRYRDTBIRTHID_CARD1 = (
+    FieldSchema("birth", float, 0, 10, 0.0),
+)
+
+_AIRBAGREFERENCEGEOMETRYRDTBIRTHID_CARD2 = (
+    FieldSchema("nid", int, 0, 8, None),
+    FieldSchema("x", float, 8, 16, 0.0),
+    FieldSchema("y", float, 24, 16, 0.0),
+    FieldSchema("z", float, 40, 16, 0.0),
+)
 
 class AirbagReferenceGeometryRdtBirthId(KeywordBase):
     """DYNA AIRBAG_REFERENCE_GEOMETRY_RDT_BIRTH_ID keyword"""
@@ -35,94 +55,16 @@ class AirbagReferenceGeometryRdtBirthId(KeywordBase):
         """Initialize the AirbagReferenceGeometryRdtBirthId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nido",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "birth",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        40,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _AIRBAGREFERENCEGEOMETRYRDTBIRTHID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGREFERENCEGEOMETRYRDTBIRTHID_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _AIRBAGREFERENCEGEOMETRYRDTBIRTHID_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Card ID.

@@ -23,7 +23,18 @@
 """Module providing the IncludeNastran class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INCLUDENASTRAN_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_INCLUDENASTRAN_CARD1 = (
+    FieldSchema("beamdf", int, 0, 10, 2),
+    FieldSchema("shelldf", int, 10, 10, 21),
+    FieldSchema("soliddf", int, 20, 10, 18),
+)
 
 class IncludeNastran(KeywordBase):
     """DYNA INCLUDE_NASTRAN keyword"""
@@ -35,47 +46,13 @@ class IncludeNastran(KeywordBase):
         """Initialize the IncludeNastran class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "beamdf",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shelldf",
-                        int,
-                        10,
-                        10,
-                        21,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soliddf",
-                        int,
-                        20,
-                        10,
-                        18,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDENASTRAN_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDENASTRAN_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of file to be included in this keyword file.

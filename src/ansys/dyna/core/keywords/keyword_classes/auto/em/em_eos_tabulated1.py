@@ -23,7 +23,13 @@
 """Module providing the EmEosTabulated1 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMEOSTABULATED1_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+)
 
 class EmEosTabulated1(KeywordBase):
     """DYNA EM_EOS_TABULATED1 keyword"""
@@ -35,26 +41,10 @@ class EmEosTabulated1(KeywordBase):
         """Initialize the EmEosTabulated1 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEOSTABULATED1_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Id of the EM_EOS.

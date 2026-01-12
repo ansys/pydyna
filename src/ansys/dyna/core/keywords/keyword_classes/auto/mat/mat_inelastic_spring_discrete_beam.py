@@ -23,8 +23,28 @@
 """Module providing the MatInelasticSpringDiscreteBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATINELASTICSPRINGDISCRETEBEAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+    FieldSchema("f0", float, 30, 10, None),
+    FieldSchema("d", float, 40, 10, None),
+    FieldSchema("cdf", float, 50, 10, None),
+    FieldSchema("tdf", float, 60, 10, None),
+)
+
+_MATINELASTICSPRINGDISCRETEBEAM_CARD1 = (
+    FieldSchema("flcid", int, 0, 10, None),
+    FieldSchema("hlcid", int, 10, 10, None),
+    FieldSchema("c1", float, 20, 10, None),
+    FieldSchema("c2", float, 30, 10, None),
+    FieldSchema("dle", float, 40, 10, None),
+    FieldSchema("glcid", int, 50, 10, None),
+)
 
 class MatInelasticSpringDiscreteBeam(KeywordBase):
     """DYNA MAT_INELASTIC_SPRING_DISCRETE_BEAM keyword"""
@@ -40,106 +60,13 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cdf",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdf",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "flcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dle",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "glcid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATINELASTICSPRINGDISCRETEBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATINELASTICSPRINGDISCRETEBEAM_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatInelasticSpringDiscreteBeam.option_specs[0],
                 cards = [
                     Card(
@@ -157,7 +84,6 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

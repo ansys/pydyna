@@ -23,7 +23,22 @@
 """Module providing the EmBoundaryPrescribed class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMBOUNDARYPRESCRIBED_CARD0 = (
+    FieldSchema("bpid", int, 0, 10, None),
+    FieldSchema("bptype", int, 10, 10, 1),
+    FieldSchema("settype", int, 20, 10, 1),
+    FieldSchema("setid", int, 30, 10, None),
+    FieldSchema("val", float, 40, 10, 0.0),
+    FieldSchema("lcid", int, 50, 10, None),
+)
+
+_EMBOUNDARYPRESCRIBED_CARD1 = (
+    FieldSchema("birtht", float, 0, 10, 0.0),
+    FieldSchema("deatht", float, 10, 10, 1e+28),
+)
 
 class EmBoundaryPrescribed(KeywordBase):
     """DYNA EM_BOUNDARY_PRESCRIBED keyword"""
@@ -35,77 +50,13 @@ class EmBoundaryPrescribed(KeywordBase):
         """Initialize the EmBoundaryPrescribed class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bpid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bptype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "settype",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "val",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "birtht",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deatht",
-                        float,
-                        10,
-                        10,
-                        1e28,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMBOUNDARYPRESCRIBED_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMBOUNDARYPRESCRIBED_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def bpid(self) -> typing.Optional[int]:
         """Get or set the ID of the Prescribed boundary.

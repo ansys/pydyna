@@ -23,7 +23,19 @@
 """Module providing the LoadMotionNode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADMOTIONNODE_CARD0 = (
+    FieldSchema("node1", int, 0, 10, None),
+    FieldSchema("dof1", int, 10, 10, 0),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("sf", float, 30, 10, 1.0),
+    FieldSchema("cid1", int, 40, 10, 0),
+    FieldSchema("node2", int, 50, 10, 0),
+    FieldSchema("dof2", int, 60, 10, 0),
+    FieldSchema("cid2", int, 70, 10, 0),
+)
 
 class LoadMotionNode(KeywordBase):
     """DYNA LOAD_MOTION_NODE keyword"""
@@ -35,74 +47,10 @@ class LoadMotionNode(KeywordBase):
         """Initialize the LoadMotionNode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "node1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof1",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid1",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof2",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid2",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADMOTIONNODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def node1(self) -> typing.Optional[int]:
         """Get or set the Node ID for the concentrated force

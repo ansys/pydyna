@@ -23,7 +23,73 @@
 """Module providing the EosRatioOfPolynomials class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOSRATIOOFPOLYNOMIALS_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+)
+
+_EOSRATIOOFPOLYNOMIALS_CARD1 = (
+    FieldSchema("a10", float, 0, 20, 0.0),
+    FieldSchema("a11", float, 20, 20, 0.0),
+    FieldSchema("a12", float, 40, 20, 0.0),
+    FieldSchema("a13", float, 60, 20, 0.0),
+)
+
+_EOSRATIOOFPOLYNOMIALS_CARD2 = (
+    FieldSchema("a20", float, 0, 20, 0.0),
+    FieldSchema("a21", float, 20, 20, 0.0),
+    FieldSchema("a22", float, 40, 20, 0.0),
+    FieldSchema("a23", float, 60, 20, 0.0),
+)
+
+_EOSRATIOOFPOLYNOMIALS_CARD3 = (
+    FieldSchema("a30", float, 0, 20, 0.0),
+    FieldSchema("a31", float, 20, 20, 0.0),
+    FieldSchema("a32", float, 40, 20, 0.0),
+    FieldSchema("a33", float, 60, 20, 0.0),
+)
+
+_EOSRATIOOFPOLYNOMIALS_CARD4 = (
+    FieldSchema("a40", float, 0, 20, 0.0),
+    FieldSchema("a41", float, 20, 20, 0.0),
+    FieldSchema("a42", float, 40, 20, 0.0),
+    FieldSchema("a43", float, 60, 20, 0.0),
+)
+
+_EOSRATIOOFPOLYNOMIALS_CARD5 = (
+    FieldSchema("a50", float, 0, 20, 0.0),
+    FieldSchema("a51", float, 20, 20, 0.0),
+    FieldSchema("a52", float, 40, 20, 0.0),
+    FieldSchema("a53", float, 60, 20, 0.0),
+)
+
+_EOSRATIOOFPOLYNOMIALS_CARD6 = (
+    FieldSchema("a60", float, 0, 20, 0.0),
+    FieldSchema("a61", float, 20, 20, 0.0),
+    FieldSchema("a62", float, 40, 20, 0.0),
+    FieldSchema("a63", float, 60, 20, 0.0),
+)
+
+_EOSRATIOOFPOLYNOMIALS_CARD7 = (
+    FieldSchema("a70", float, 0, 20, 0.0),
+    FieldSchema("a71", float, 20, 20, 0.0),
+    FieldSchema("a72", float, 40, 20, 0.0),
+    FieldSchema("a73", float, 60, 20, 0.0),
+)
+
+_EOSRATIOOFPOLYNOMIALS_CARD8 = (
+    FieldSchema("a14", float, 0, 20, None),
+    FieldSchema("a24", float, 20, 20, None),
+)
+
+_EOSRATIOOFPOLYNOMIALS_CARD9 = (
+    FieldSchema("alph", float, 0, 20, None),
+    FieldSchema("beta", float, 20, 20, None),
+    FieldSchema("e0", float, 40, 20, None),
+    FieldSchema("v0", float, 60, 20, None),
+)
 
 class EosRatioOfPolynomials(KeywordBase):
     """DYNA EOS_RATIO_OF_POLYNOMIALS keyword"""
@@ -35,321 +101,37 @@ class EosRatioOfPolynomials(KeywordBase):
         """Initialize the EosRatioOfPolynomials class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a10",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a11",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a12",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a13",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a20",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a21",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a22",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a23",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a30",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a31",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a32",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a33",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a40",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a41",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a42",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a43",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a50",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a51",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a52",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a53",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a60",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a61",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a62",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a63",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a70",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a71",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a72",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a73",
-                        float,
-                        60,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a14",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a24",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alph",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e0",
-                        float,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        60,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSRATIOOFPOLYNOMIALS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSRATIOOFPOLYNOMIALS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSRATIOOFPOLYNOMIALS_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSRATIOOFPOLYNOMIALS_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSRATIOOFPOLYNOMIALS_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSRATIOOFPOLYNOMIALS_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSRATIOOFPOLYNOMIALS_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSRATIOOFPOLYNOMIALS_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSRATIOOFPOLYNOMIALS_CARD8,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSRATIOOFPOLYNOMIALS_CARD9,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID.

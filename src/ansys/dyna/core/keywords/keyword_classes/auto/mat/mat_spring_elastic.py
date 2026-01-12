@@ -23,8 +23,14 @@
 """Module providing the MatSpringElastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSPRINGELASTIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("k", float, 10, 10, None),
+)
 
 class MatSpringElastic(KeywordBase):
     """DYNA MAT_SPRING_ELASTIC keyword"""
@@ -40,25 +46,10 @@ class MatSpringElastic(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSPRINGELASTIC_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSpringElastic.option_specs[0],
                 cards = [
                     Card(
@@ -76,7 +67,6 @@ class MatSpringElastic(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID. A unique number has to be used.

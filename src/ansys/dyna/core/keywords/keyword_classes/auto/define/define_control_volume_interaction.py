@@ -23,8 +23,17 @@
 """Module providing the DefineControlVolumeInteraction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECONTROLVOLUMEINTERACTION_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("cvid1", int, 10, 10, None),
+    FieldSchema("cvid2", int, 20, 10, None),
+    FieldSchema("lcid ", int, 30, 10, None),
+    FieldSchema("area ", float, 40, 10, None),
+)
 
 class DefineControlVolumeInteraction(KeywordBase):
     """DYNA DEFINE_CONTROL_VOLUME_INTERACTION keyword"""
@@ -40,46 +49,10 @@ class DefineControlVolumeInteraction(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvid1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvid2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid ",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area ",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECONTROLVOLUMEINTERACTION_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineControlVolumeInteraction.option_specs[0],
                 cards = [
                     Card(
@@ -97,7 +70,6 @@ class DefineControlVolumeInteraction(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Fluid cavity interaction ID.

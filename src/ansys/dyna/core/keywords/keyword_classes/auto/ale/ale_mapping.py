@@ -23,7 +23,44 @@
 """Module providing the AleMapping class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEMAPPING_CARD0 = (
+    FieldSchema("ammsid", int, 0, 10, None),
+    FieldSchema("rw", int, 10, 10, -1),
+)
+
+_ALEMAPPING_CARD1 = (
+    FieldSchema("ntim", int, 0, 10, 1),
+    FieldSchema("tbeg", float, 10, 10, 0.0),
+    FieldSchema("tend", float, 20, 10, None),
+)
+
+_ALEMAPPING_CARD2 = (
+    FieldSchema("vecid", int, 0, 10, None),
+    FieldSchema("angle", float, 10, 10, 0.0),
+    FieldSchema("xp", float, 20, 10, 0.0),
+    FieldSchema("yp", float, 30, 10, 0.0),
+    FieldSchema("zp", float, 40, 10, 0.0),
+)
+
+_ALEMAPPING_CARD3 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("nvol", int, 20, 10, 0),
+)
+
+_ALEMAPPING_CARD4 = (
+    FieldSchema("voltyp", int, 0, 10, None),
+    FieldSchema("vecid1", int, 10, 10, 0),
+    FieldSchema("dw1", float, 20, 10, 0.0),
+    FieldSchema("xl", float, 30, 10, 0.0),
+    FieldSchema("yl", float, 40, 10, 0.0),
+    FieldSchema("zl", float, 50, 10, 0.0),
+    FieldSchema("dw2", float, 60, 10, 0.0),
+    FieldSchema("dv2", float, 70, 10, 0.0),
+)
 
 class AleMapping(KeywordBase):
     """DYNA ALE_MAPPING keyword"""
@@ -35,191 +72,22 @@ class AleMapping(KeywordBase):
         """Initialize the AleMapping class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ammsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rw",
-                        int,
-                        10,
-                        10,
-                        -1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ntim",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbeg",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tend",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vecid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angle",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xp",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nvol",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "voltyp",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vecid1",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dw1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xl",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yl",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zl",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dw2",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dv2",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEMAPPING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEMAPPING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEMAPPING_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEMAPPING_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEMAPPING_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def ammsid(self) -> typing.Optional[int]:
         """Get or set the Set ID of ALE multi-material groups defined in *SET_‌MULTI-MATERIAL_‌GROUP. See Remark 3.

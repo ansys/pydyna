@@ -23,8 +23,56 @@
 """Module providing the MatTransverselyAnisotropicCrushableFoam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATTRANSVERSELYANISOTROPICCRUSHABLEFOAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e11", float, 20, 10, None),
+    FieldSchema("e22", float, 30, 10, None),
+    FieldSchema("e12", float, 40, 10, None),
+    FieldSchema("e23", float, 50, 10, None),
+    FieldSchema("g", float, 60, 10, None),
+    FieldSchema("k", float, 70, 10, None),
+)
+
+_MATTRANSVERSELYANISOTROPICCRUSHABLEFOAM_CARD1 = (
+    FieldSchema("i11", int, 0, 10, None),
+    FieldSchema("i22", int, 10, 10, None),
+    FieldSchema("i12", int, 20, 10, None),
+    FieldSchema("i23", int, 30, 10, None),
+    FieldSchema("iaa", int, 40, 10, None),
+    FieldSchema("nsym", int, 50, 10, None),
+    FieldSchema("ang", float, 60, 10, None),
+    FieldSchema("mu", float, 70, 10, None),
+)
+
+_MATTRANSVERSELYANISOTROPICCRUSHABLEFOAM_CARD2 = (
+    FieldSchema("aopt", float, 0, 10, None),
+    FieldSchema("iscl", int, 10, 10, None),
+    FieldSchema("beta", float, 20, 10, None),
+    FieldSchema("macf", int, 30, 10, 1),
+)
+
+_MATTRANSVERSELYANISOTROPICCRUSHABLEFOAM_CARD3 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("a1", float, 30, 10, None),
+    FieldSchema("a2", float, 40, 10, None),
+    FieldSchema("a3", float, 50, 10, None),
+)
+
+_MATTRANSVERSELYANISOTROPICCRUSHABLEFOAM_CARD4 = (
+    FieldSchema("d1", float, 0, 10, None),
+    FieldSchema("d2", float, 10, 10, None),
+    FieldSchema("d3", float, 20, 10, None),
+    FieldSchema("v1", float, 30, 10, None),
+    FieldSchema("v2", float, 40, 10, None),
+    FieldSchema("v3", float, 50, 10, None),
+)
 
 class MatTransverselyAnisotropicCrushableFoam(KeywordBase):
     """DYNA MAT_TRANSVERSELY_ANISOTROPIC_CRUSHABLE_FOAM keyword"""
@@ -40,252 +88,22 @@ class MatTransverselyAnisotropicCrushableFoam(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e11",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e22",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e12",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e23",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "i11",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i22",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i12",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i23",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaa",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsym",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aopt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iscl",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYANISOTROPICCRUSHABLEFOAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYANISOTROPICCRUSHABLEFOAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYANISOTROPICCRUSHABLEFOAM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYANISOTROPICCRUSHABLEFOAM_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYANISOTROPICCRUSHABLEFOAM_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatTransverselyAnisotropicCrushableFoam.option_specs[0],
                 cards = [
                     Card(
@@ -303,7 +121,6 @@ class MatTransverselyAnisotropicCrushableFoam(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

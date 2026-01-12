@@ -23,7 +23,17 @@
 """Module providing the IcfdDefineHeatsource class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDEFINEHEATSOURCE_CARD0 = (
+    FieldSchema("hsid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("shape", int, 20, 10, None),
+    FieldSchema("r", float, 30, 10, None),
+    FieldSchema("ptid1", int, 40, 10, None),
+    FieldSchema("ptid2", int, 50, 10, None),
+)
 
 class IcfdDefineHeatsource(KeywordBase):
     """DYNA ICFD_DEFINE_HEATSOURCE keyword"""
@@ -35,54 +45,10 @@ class IcfdDefineHeatsource(KeywordBase):
         """Initialize the IcfdDefineHeatsource class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "hsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shape",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptid1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptid2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDEFINEHEATSOURCE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def hsid(self) -> typing.Optional[int]:
         """Get or set the Heat source ID

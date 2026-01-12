@@ -23,7 +23,17 @@
 """Module providing the IcfdControlDemCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLDEMCOUPLING_CARD0 = (
+    FieldSchema("ctype", int, 0, 10, 0),
+    FieldSchema("bt", float, 10, 10, 0.0),
+    FieldSchema("dt", float, 20, 10, 1e+28),
+    FieldSchema("sf", float, 30, 10, 1.0),
+    FieldSchema("maxvel", float, 40, 10, None),
+    FieldSchema("dtype", int, 50, 10, None),
+)
 
 class IcfdControlDemCoupling(KeywordBase):
     """DYNA ICFD_CONTROL_DEM_COUPLING keyword"""
@@ -35,58 +45,10 @@ class IcfdControlDemCoupling(KeywordBase):
         """Initialize the IcfdControlDemCoupling class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ctype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        20,
-                        10,
-                        1E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxvel",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtype",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLDEMCOUPLING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ctype(self) -> int:
         """Get or set the Indicates the coupling direction to the solver.

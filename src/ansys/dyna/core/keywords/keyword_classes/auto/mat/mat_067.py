@@ -23,8 +23,56 @@
 """Module providing the Mat067 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT067_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("lcidtr", int, 20, 10, None),
+    FieldSchema("lcidts", int, 30, 10, None),
+    FieldSchema("lcidtt", int, 40, 10, None),
+    FieldSchema("lcidrr", int, 50, 10, None),
+    FieldSchema("lcidrs", int, 60, 10, None),
+    FieldSchema("lcidrt", int, 70, 10, None),
+)
+
+_MAT067_CARD1 = (
+    FieldSchema("lcidtdr", int, 0, 10, None),
+    FieldSchema("lcidtds", int, 10, 10, None),
+    FieldSchema("lcidtdt", int, 20, 10, None),
+    FieldSchema("lcidrdr", int, 30, 10, None),
+    FieldSchema("lcidrds", int, 40, 10, None),
+    FieldSchema("lcidrdt", int, 50, 10, None),
+)
+
+_MAT067_CARD2 = (
+    FieldSchema("for", float, 0, 10, None),
+    FieldSchema("fos", float, 10, 10, None),
+    FieldSchema("fot", float, 20, 10, None),
+    FieldSchema("mor", float, 30, 10, None),
+    FieldSchema("mos", float, 40, 10, None),
+    FieldSchema("mot", float, 50, 10, None),
+)
+
+_MAT067_CARD3 = (
+    FieldSchema("ffailr", float, 0, 10, None),
+    FieldSchema("ffails", float, 10, 10, None),
+    FieldSchema("ffailt", float, 20, 10, None),
+    FieldSchema("mfailr", float, 30, 10, None),
+    FieldSchema("mfails", float, 40, 10, None),
+    FieldSchema("mfailt", float, 50, 10, None),
+)
+
+_MAT067_CARD4 = (
+    FieldSchema("ufailr", float, 0, 10, None),
+    FieldSchema("ufails", float, 10, 10, None),
+    FieldSchema("ufailt", float, 20, 10, None),
+    FieldSchema("tfailr", float, 30, 10, None),
+    FieldSchema("tfails", float, 40, 10, None),
+    FieldSchema("tfailt", float, 50, 10, None),
+)
 
 class Mat067(KeywordBase):
     """DYNA MAT_067 keyword"""
@@ -40,251 +88,22 @@ class Mat067(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtr",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidts",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtt",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrr",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrs",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrt",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidtdr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtds",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidtdt",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrdr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrds",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidrdt",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "for",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fos",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fot",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mor",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mos",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mot",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ffailr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffails",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffailt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfailr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfails",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfailt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ufailr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ufails",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ufailt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfailr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfails",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfailt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT067_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT067_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT067_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT067_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT067_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat067.option_specs[0],
                 cards = [
                     Card(
@@ -302,7 +121,6 @@ class Mat067(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

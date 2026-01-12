@@ -23,8 +23,44 @@
 """Module providing the DefineBoxAdaptiveLocal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEBOXADAPTIVELOCAL_CARD0 = (
+    FieldSchema("boxid", int, 0, 10, None),
+    FieldSchema("xmn", float, 10, 10, 0.0),
+    FieldSchema("xmx", float, 20, 10, 0.0),
+    FieldSchema("ymn", float, 30, 10, 0.0),
+    FieldSchema("ymx", float, 40, 10, 0.0),
+    FieldSchema("zmn", float, 50, 10, 0.0),
+    FieldSchema("zmx", float, 60, 10, 0.0),
+)
+
+_DEFINEBOXADAPTIVELOCAL_CARD1 = (
+    FieldSchema("pid", int, 0, 10, 0),
+    FieldSchema("level", int, 10, 10, 1),
+    FieldSchema("lidx/ndid", int, 20, 10, 0),
+    FieldSchema("lidy", int, 30, 10, 0),
+    FieldSchema("lidz", int, 40, 10, 0),
+    FieldSchema("brmin", float, 50, 10, 0.0),
+    FieldSchema("brmax", float, 60, 10, 0.0),
+)
+
+_DEFINEBOXADAPTIVELOCAL_CARD2 = (
+    FieldSchema("xx", float, 0, 10, 0.0),
+    FieldSchema("yx", float, 10, 10, 0.0),
+    FieldSchema("zx", float, 20, 10, 0.0),
+    FieldSchema("xv", float, 30, 10, 0.0),
+    FieldSchema("yv", float, 40, 10, 0.0),
+    FieldSchema("zv", float, 50, 10, 0.0),
+)
+
+_DEFINEBOXADAPTIVELOCAL_CARD3 = (
+    FieldSchema("cx", float, 0, 10, 0.0),
+    FieldSchema("cy", float, 10, 10, 0.0),
+    FieldSchema("cz", float, 20, 10, 0.0),
+)
 
 class DefineBoxAdaptiveLocal(KeywordBase):
     """DYNA DEFINE_BOX_ADAPTIVE_LOCAL keyword"""
@@ -40,206 +76,19 @@ class DefineBoxAdaptiveLocal(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "boxid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xmn",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xmx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymn",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymx",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmn",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmx",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "level",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lidx/ndid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lidy",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lidz",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "brmin",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "brmax",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xx",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xv",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yv",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zv",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXADAPTIVELOCAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXADAPTIVELOCAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXADAPTIVELOCAL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXADAPTIVELOCAL_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineBoxAdaptiveLocal.option_specs[0],
                 cards = [
                     Card(
@@ -257,7 +106,6 @@ class DefineBoxAdaptiveLocal(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def boxid(self) -> typing.Optional[int]:
         """Get or set the Box ID. Define unique numbers.

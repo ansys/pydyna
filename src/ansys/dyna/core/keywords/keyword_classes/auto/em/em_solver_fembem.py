@@ -23,7 +23,14 @@
 """Module providing the EmSolverFembem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMSOLVERFEMBEM_CARD0 = (
+    FieldSchema("reltol", float, 0, 10, 0.01),
+    FieldSchema("maxite", int, 10, 10, 50),
+    FieldSchema("forcon", int, 20, 10, 0),
+)
 
 class EmSolverFembem(KeywordBase):
     """DYNA EM_SOLVER_FEMBEM keyword"""
@@ -35,36 +42,10 @@ class EmSolverFembem(KeywordBase):
         """Initialize the EmSolverFembem class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "reltol",
-                        float,
-                        0,
-                        10,
-                        1.e-2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxite",
-                        int,
-                        10,
-                        10,
-                        50,
-                        **kwargs,
-                    ),
-                    Field(
-                        "forcon",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMSOLVERFEMBEM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def reltol(self) -> float:
         """Get or set the Relative tolerance for the FEM/BEM system solve. If the results are not accurate enough, try decreasing this tolerance. A smaller tolerance will, however, require more iterations.

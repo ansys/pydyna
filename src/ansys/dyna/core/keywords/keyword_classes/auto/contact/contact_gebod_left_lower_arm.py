@@ -23,8 +23,25 @@
 """Module providing the ContactGebodLeftLowerArm class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTGEBODLEFTLOWERARM_CARD0 = (
+    FieldSchema("did", int, 0, 10, None),
+    FieldSchema("ssid", int, 10, 10, None),
+    FieldSchema("sstyp", int, 20, 10, 0),
+    FieldSchema("sf", float, 30, 10, 1.0),
+    FieldSchema("df", float, 40, 10, 20.0),
+    FieldSchema("cf", float, 50, 10, 0.5),
+    FieldSchema("intord", int, 60, 10, 0),
+)
+
+_CONTACTGEBODLEFTLOWERARM_CARD1 = (
+    FieldSchema("bt", float, 0, 10, 0.0),
+    FieldSchema("dt", float, 10, 10, 1e+20),
+    FieldSchema("so", int, 20, 10, 0),
+)
 
 class ContactGebodLeftLowerArm(KeywordBase):
     """DYNA CONTACT_GEBOD_LEFT_LOWER_ARM keyword"""
@@ -48,93 +65,13 @@ class ContactGebodLeftLowerArm(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "did",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sstyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "df",
-                        float,
-                        40,
-                        10,
-                        20.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cf",
-                        float,
-                        50,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intord",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        10,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "so",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _CONTACTGEBODLEFTLOWERARM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTGEBODLEFTLOWERARM_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = ContactGebodLeftLowerArm.option_specs[0],
                 cards = [
                     Card(
@@ -417,21 +354,21 @@ class ContactGebodLeftLowerArm(KeywordBase):
                                 float,
                                 20,
                                 10,
-                                kwargs.get("dprfac", 0)
+                                kwargs.get("dprfac", 0.0)
                             ),
                             Field(
                                 "dtstif",
                                 float,
                                 30,
                                 10,
-                                kwargs.get("dtstif", 0)
+                                kwargs.get("dtstif", 0.0)
                             ),
                             Field(
                                 "edgek",
                                 float,
                                 40,
                                 10,
-                                kwargs.get("edgek", 0)
+                                kwargs.get("edgek", 0.0)
                             ),
                             Field(
                                 "flangl",
@@ -469,28 +406,28 @@ class ContactGebodLeftLowerArm(KeywordBase):
                                 float,
                                 10,
                                 10,
-                                kwargs.get("dtpchk", 0)
+                                kwargs.get("dtpchk", 0.0)
                             ),
                             Field(
                                 "sfnbr",
                                 float,
                                 20,
                                 10,
-                                kwargs.get("sfnbr", 0)
+                                kwargs.get("sfnbr", 0.0)
                             ),
                             Field(
                                 "fnlscl",
                                 float,
                                 30,
                                 10,
-                                kwargs.get("fnlscl", 0)
+                                kwargs.get("fnlscl", 0.0)
                             ),
                             Field(
                                 "dnlscl",
                                 float,
                                 40,
                                 10,
-                                kwargs.get("dnlscl", 0)
+                                kwargs.get("dnlscl", 0.0)
                             ),
                             Field(
                                 "tcso",
@@ -661,7 +598,6 @@ class ContactGebodLeftLowerArm(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def did(self) -> typing.Optional[int]:
         """Get or set the Dummy ID, see *COMPONENT_GEBOD.

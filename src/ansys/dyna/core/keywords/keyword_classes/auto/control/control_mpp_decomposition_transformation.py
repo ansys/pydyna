@@ -25,6 +25,7 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -114,9 +115,7 @@ class ControlMppDecompositionTransformation(KeywordBase):
                 None,
                 "transformation",
                 **kwargs,
-            ),
-        ]
-
+            ),        ]
     @property
     def transformation(self) -> pd.DataFrame:
         """Gets the full table of transformation."""

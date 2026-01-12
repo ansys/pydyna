@@ -25,6 +25,7 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
@@ -52,8 +53,7 @@ class IcfdPart(KeywordBase):
                 None,
                 name="nodes",
                 **kwargs,
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = IcfdPart.option_specs[0],
                 cards = [
                     Card(
@@ -71,7 +71,6 @@ class IcfdPart(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def nodes(self) -> pd.DataFrame:
         """Get the table of nodes."""

@@ -23,8 +23,14 @@
 """Module providing the DefineTracerParticles2D class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINETRACERPARTICLES2D_CARD0 = (
+    FieldSchema("nset", int, 0, 10, None),
+    FieldSchema("pset", int, 10, 10, None),
+)
 
 class DefineTracerParticles2D(KeywordBase):
     """DYNA DEFINE_TRACER_PARTICLES_2D keyword"""
@@ -40,25 +46,10 @@ class DefineTracerParticles2D(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pset",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINETRACERPARTICLES2D_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineTracerParticles2D.option_specs[0],
                 cards = [
                     Card(
@@ -76,7 +67,6 @@ class DefineTracerParticles2D(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def nset(self) -> typing.Optional[int]:
         """Get or set the The node set ID for the nodes used as tracer particles.

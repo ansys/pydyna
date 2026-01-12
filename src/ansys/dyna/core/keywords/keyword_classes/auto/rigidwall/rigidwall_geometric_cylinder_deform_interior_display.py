@@ -23,8 +23,61 @@
 """Module providing the RigidwallGeometricCylinderDeformInteriorDisplay class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("nsidex", int, 10, 10, 0),
+    FieldSchema("boxid", int, 20, 10, 0),
+    FieldSchema("birth", float, 30, 10, 0.0),
+    FieldSchema("death", float, 40, 10, 1e+20),
+)
+
+_RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD1 = (
+    FieldSchema("xt", float, 0, 10, 0.0),
+    FieldSchema("yt", float, 10, 10, 0.0),
+    FieldSchema("zt", float, 20, 10, 0.0),
+    FieldSchema("xh", float, 30, 10, 0.0),
+    FieldSchema("yh", float, 40, 10, 0.0),
+    FieldSchema("zh", float, 50, 10, 0.0),
+    FieldSchema("fric", float, 60, 10, 0.0),
+)
+
+_RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD2 = (
+    FieldSchema("radcyl", float, 0, 10, None),
+    FieldSchema("lencyl", float, 10, 10, None),
+    FieldSchema("nsegs", int, 20, 10, None),
+)
+
+_RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD3 = (
+    FieldSchema("vl", float, 0, 10, None),
+    FieldSchema("height", float, 10, 10, None),
+)
+
+_RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD4 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("nl", int, 30, 10, None),
+    FieldSchema("narc", int, 40, 10, None),
+    FieldSchema("nr", int, 50, 10, None),
+)
+
+_RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD5 = (
+    FieldSchema("lcidr", int, 0, 10, None),
+    FieldSchema("lcida", int, 10, 10, None),
+    FieldSchema("lcidb", int, 20, 10, None),
+    FieldSchema("lcidg", int, 30, 10, None),
+)
+
+_RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD6 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, 1e-09),
+    FieldSchema("e", float, 20, 10, 0.0001),
+    FieldSchema("pr", float, 30, 10, 0.3),
+)
 
 class RigidwallGeometricCylinderDeformInteriorDisplay(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_CYLINDER_DEFORM_INTERIOR_DISPLAY keyword"""
@@ -40,266 +93,28 @@ class RigidwallGeometricCylinderDeformInteriorDisplay(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsidex",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yt",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zt",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xh",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yh",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zh",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "radcyl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lencyl",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsegs",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "height",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nl",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "narc",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nr",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcida",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidb",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidg",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        1.0E-09,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        1.0E-04,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        0.30,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORDISPLAY_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = RigidwallGeometricCylinderDeformInteriorDisplay.option_specs[0],
                 cards = [
                     Card(
@@ -324,7 +139,6 @@ class RigidwallGeometricCylinderDeformInteriorDisplay(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing tracked nodes, see *SET_NODE_OPTION.

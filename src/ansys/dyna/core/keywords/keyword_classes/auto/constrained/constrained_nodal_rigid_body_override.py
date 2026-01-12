@@ -23,8 +23,25 @@
 """Module providing the ConstrainedNodalRigidBodyOverride class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDNODALRIGIDBODYOVERRIDE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("nsid", int, 20, 10, None),
+    FieldSchema("pnode", int, 30, 10, 0),
+    FieldSchema("iprt", int, 40, 10, 0),
+    FieldSchema("drflag", int, 50, 10, 0),
+    FieldSchema("rrflag", int, 60, 10, 0),
+)
+
+_CONSTRAINEDNODALRIGIDBODYOVERRIDE_CARD1 = (
+    FieldSchema("icnt", int, 0, 10, 0),
+    FieldSchema("ibag", int, 10, 10, 0),
+    FieldSchema("ipsm", int, 20, 10, 0),
+)
 
 class ConstrainedNodalRigidBodyOverride(KeywordBase):
     """DYNA CONSTRAINED_NODAL_RIGID_BODY_OVERRIDE keyword"""
@@ -40,92 +57,13 @@ class ConstrainedNodalRigidBodyOverride(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pnode",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iprt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drflag",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rrflag",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "icnt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibag",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ipsm",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDNODALRIGIDBODYOVERRIDE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDNODALRIGIDBODYOVERRIDE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = ConstrainedNodalRigidBodyOverride.option_specs[0],
                 cards = [
                     Card(
@@ -143,7 +81,6 @@ class ConstrainedNodalRigidBodyOverride(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the nodal rigid body.

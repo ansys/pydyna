@@ -23,8 +23,58 @@
 """Module providing the Mat0832 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT0832_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("kcon", float, 30, 10, None),
+    FieldSchema("tc", float, 40, 10, 1e+20),
+    FieldSchema("fail", float, 50, 10, 0.0),
+    FieldSchema("damp", float, 60, 10, None),
+    FieldSchema("tbid", int, 70, 10, None),
+)
+
+_MAT0832_CARD1 = (
+    FieldSchema("bvflag", float, 0, 10, 0.0),
+    FieldSchema("sflag", float, 10, 10, 0.0),
+    FieldSchema("rflag", float, 20, 10, 0.0),
+    FieldSchema("tflag", float, 30, 10, 0.0),
+    FieldSchema("pvid", int, 40, 10, 0),
+    FieldSchema("sraf", float, 50, 10, 0.0),
+    FieldSchema("ref", float, 60, 10, 0.0),
+    FieldSchema("hu", float, 70, 10, 0.0),
+)
+
+_MAT0832_CARD2 = (
+    FieldSchema("d0", float, 0, 10, None),
+    FieldSchema("n0", float, 10, 10, None),
+    FieldSchema("n1", float, 20, 10, None),
+    FieldSchema("n2", float, 30, 10, None),
+    FieldSchema("n3", float, 40, 10, None),
+    FieldSchema("c0", float, 50, 10, None),
+    FieldSchema("c1", float, 60, 10, None),
+    FieldSchema("c2", float, 70, 10, None),
+)
+
+_MAT0832_CARD3 = (
+    FieldSchema("c3", float, 0, 10, None),
+    FieldSchema("c4", float, 10, 10, None),
+    FieldSchema("c5", float, 20, 10, None),
+    FieldSchema("aij", float, 30, 10, None),
+    FieldSchema("sij", float, 40, 10, None),
+    FieldSchema("minr", float, 50, 10, None),
+    FieldSchema("maxr", float, 60, 10, None),
+    FieldSchema("shape", float, 70, 10, None),
+)
+
+_MAT0832_CARD4 = (
+    FieldSchema("expon", float, 0, 10, 1.0),
+    FieldSchema("riuld", float, 10, 10, 0.0),
+)
 
 class Mat0832(KeywordBase):
     """DYNA MAT_083_2 keyword"""
@@ -40,277 +90,22 @@ class Mat0832(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kcon",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tc",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fail",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbid",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bvflag",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sflag",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rflag",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tflag",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pvid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sraf",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hu",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c3",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c4",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c5",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aij",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sij",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "minr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxr",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shape",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "expon",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "riuld",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT0832_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT0832_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT0832_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT0832_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT0832_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat0832.option_specs[0],
                 cards = [
                     Card(
@@ -328,7 +123,6 @@ class Mat0832(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

@@ -23,7 +23,30 @@
 """Module providing the ControlImplicitAutoSpr class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITAUTOSPR_CARD0 = (
+    FieldSchema("iauto", int, 0, 10, 0),
+    FieldSchema("iteopt", int, 10, 10, 11),
+    FieldSchema("itewin", int, 20, 10, 5),
+    FieldSchema("dtmin", float, 30, 10, None),
+    FieldSchema("dtmax", float, 40, 10, None),
+    FieldSchema("dtexp", float, 50, 10, None),
+    FieldSchema("kfail", int, 60, 10, None),
+    FieldSchema("kcycle", int, 70, 10, None),
+)
+
+_CONTROLIMPLICITAUTOSPR_CARD1 = (
+    FieldSchema("hcmin", float, 0, 10, None),
+    FieldSchema("hcmax", float, 10, 10, None),
+    FieldSchema("hmmin", float, 20, 10, None),
+    FieldSchema("hmmax", float, 30, 10, None),
+    FieldSchema("hntmax", float, 40, 10, None),
+    FieldSchema("hnrmax", float, 50, 10, None),
+    FieldSchema("hrtmax", float, 60, 10, None),
+    FieldSchema("hrrmax", float, 70, 10, None),
+)
 
 class ControlImplicitAutoSpr(KeywordBase):
     """DYNA CONTROL_IMPLICIT_AUTO_SPR keyword"""
@@ -35,131 +58,13 @@ class ControlImplicitAutoSpr(KeywordBase):
         """Initialize the ControlImplicitAutoSpr class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "iauto",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iteopt",
-                        int,
-                        10,
-                        10,
-                        11,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itewin",
-                        int,
-                        20,
-                        10,
-                        5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtmin",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtmax",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtexp",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kfail",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kcycle",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hcmin",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hcmax",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmmin",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmmax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hntmax",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hnrmax",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hrtmax",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hrrmax",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITAUTOSPR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITAUTOSPR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def iauto(self) -> int:
         """Get or set the Automatic time step control flag

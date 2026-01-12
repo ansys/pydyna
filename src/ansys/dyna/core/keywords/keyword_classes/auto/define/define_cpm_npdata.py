@@ -23,8 +23,24 @@
 """Module providing the DefineCpmNpdata class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECPMNPDATA_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("hconv", float, 10, 10, None),
+    FieldSchema("pfric", float, 20, 10, None),
+    FieldSchema("sdfblk", float, 30, 10, None),
+    FieldSchema("kp", float, 40, 10, None),
+    FieldSchema("inip", int, 50, 10, None),
+    FieldSchema("cp", float, 60, 10, None),
+    FieldSchema("psfdcf", float, 70, 10, None),
+)
+
+_DEFINECPMNPDATA_CARD1 = (
+    FieldSchema("id", int, 0, 10, None),
+)
 
 class DefineCpmNpdata(KeywordBase):
     """DYNA DEFINE_CPM_NPDATA keyword"""
@@ -40,78 +56,13 @@ class DefineCpmNpdata(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hconv",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfric",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sdfblk",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inip",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psfdcf",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECPMNPDATA_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECPMNPDATA_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCpmNpdata.option_specs[0],
                 cards = [
                     Card(
@@ -129,7 +80,6 @@ class DefineCpmNpdata(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Unique ID for this card

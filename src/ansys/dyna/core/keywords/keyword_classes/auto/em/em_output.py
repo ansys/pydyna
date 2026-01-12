@@ -23,7 +23,18 @@
 """Module providing the EmOutput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMOUTPUT_CARD0 = (
+    FieldSchema("mats", int, 0, 10, 0),
+    FieldSchema("matf", int, 10, 10, 0),
+    FieldSchema("sols", int, 20, 10, 0),
+    FieldSchema("solf", int, 30, 10, 0),
+    FieldSchema("mesh", int, 40, 10, 0),
+    FieldSchema("mem", int, 50, 10, 0),
+    FieldSchema("timing", int, 60, 10, 0),
+)
 
 class EmOutput(KeywordBase):
     """DYNA EM_OUTPUT keyword"""
@@ -35,68 +46,10 @@ class EmOutput(KeywordBase):
         """Initialize the EmOutput class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mats",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "matf",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sols",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solf",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mesh",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mem",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "timing",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMOUTPUT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mats(self) -> int:
         """Get or set the Level of matrix assembly output to the screen:

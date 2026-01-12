@@ -23,7 +23,31 @@
 """Module providing the PartPrintAttachmentNodes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARTPRINTATTACHMENTNODES_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
+_PARTPRINTATTACHMENTNODES_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("secid", int, 10, 10, None),
+    FieldSchema("mid", int, 20, 10, None),
+    FieldSchema("eosid", int, 30, 10, 0),
+    FieldSchema("hgid", int, 40, 10, 0),
+    FieldSchema("grav", int, 50, 10, 0),
+    FieldSchema("adpopt", int, 60, 10, None),
+    FieldSchema("tmid", int, 70, 10, 0),
+)
+
+_PARTPRINTATTACHMENTNODES_CARD2 = (
+    FieldSchema("prbf", int, 0, 10, 0),
+)
+
+_PARTPRINTATTACHMENTNODES_CARD3 = (
+    FieldSchema("ansid", int, 0, 10, 0),
+)
 
 class PartPrintAttachmentNodes(KeywordBase):
     """DYNA PART_PRINT_ATTACHMENT_NODES keyword"""
@@ -35,107 +59,19 @@ class PartPrintAttachmentNodes(KeywordBase):
         """Initialize the PartPrintAttachmentNodes class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "title",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "secid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eosid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hgid",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grav",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpopt",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "prbf",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ansid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTPRINTATTACHMENTNODES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTPRINTATTACHMENTNODES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTPRINTATTACHMENTNODES_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTPRINTATTACHMENTNODES_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.

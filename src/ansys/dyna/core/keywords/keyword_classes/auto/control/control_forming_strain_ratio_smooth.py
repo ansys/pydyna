@@ -23,7 +23,13 @@
 """Module providing the ControlFormingStrainRatioSmooth class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGSTRAINRATIOSMOOTH_CARD0 = (
+    FieldSchema("dt/cycle", float, 0, 10, None),
+    FieldSchema("weight", float, 10, 10, None),
+)
 
 class ControlFormingStrainRatioSmooth(KeywordBase):
     """DYNA CONTROL_FORMING_STRAIN_RATIO_SMOOTH keyword"""
@@ -35,26 +41,10 @@ class ControlFormingStrainRatioSmooth(KeywordBase):
         """Initialize the ControlFormingStrainRatioSmooth class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt/cycle",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "weight",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGSTRAINRATIOSMOOTH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dt_cycle(self) -> typing.Optional[float]:
         """Get or set the Flag for output option (time interval or cycle number).

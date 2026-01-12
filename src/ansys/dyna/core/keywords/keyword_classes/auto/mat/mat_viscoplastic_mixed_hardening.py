@@ -23,8 +23,22 @@
 """Module providing the MatViscoplasticMixedHardening class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATVISCOPLASTICMIXEDHARDENING_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("lcss", int, 40, 10, None),
+    FieldSchema("beta", float, 50, 10, None),
+)
+
+_MATVISCOPLASTICMIXEDHARDENING_CARD1 = (
+    FieldSchema("fail", float, 0, 10, 1e+20),
+)
 
 class MatViscoplasticMixedHardening(KeywordBase):
     """DYNA MAT_VISCOPLASTIC_MIXED_HARDENING keyword"""
@@ -40,65 +54,13 @@ class MatViscoplasticMixedHardening(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fail",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATVISCOPLASTICMIXEDHARDENING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATVISCOPLASTICMIXEDHARDENING_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatViscoplasticMixedHardening.option_specs[0],
                 cards = [
                     Card(
@@ -116,7 +78,6 @@ class MatViscoplasticMixedHardening(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

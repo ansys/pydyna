@@ -23,8 +23,65 @@
 """Module providing the MatNonlinearPlasticDiscreteBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATNONLINEARPLASTICDISCRETEBEAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("tkr", float, 20, 10, None),
+    FieldSchema("tks", float, 30, 10, None),
+    FieldSchema("tkt", float, 40, 10, None),
+    FieldSchema("rkr", float, 50, 10, None),
+    FieldSchema("rks", float, 60, 10, None),
+    FieldSchema("rkt", float, 70, 10, None),
+)
+
+_MATNONLINEARPLASTICDISCRETEBEAM_CARD1 = (
+    FieldSchema("tdr", float, 0, 10, None),
+    FieldSchema("tds", float, 10, 10, None),
+    FieldSchema("tdt", float, 20, 10, None),
+    FieldSchema("rdr", float, 30, 10, None),
+    FieldSchema("rds", float, 40, 10, None),
+    FieldSchema("rdt", float, 50, 10, None),
+)
+
+_MATNONLINEARPLASTICDISCRETEBEAM_CARD2 = (
+    FieldSchema("lcpdr", int, 0, 10, 0),
+    FieldSchema("lcpds", int, 10, 10, 0),
+    FieldSchema("lcpdt", int, 20, 10, 0),
+    FieldSchema("lcpmr", int, 30, 10, 0),
+    FieldSchema("lcpms", int, 40, 10, 0),
+    FieldSchema("lcpmt", int, 50, 10, 0),
+)
+
+_MATNONLINEARPLASTICDISCRETEBEAM_CARD3 = (
+    FieldSchema("ffailr", float, 0, 10, None),
+    FieldSchema("ffails", float, 10, 10, None),
+    FieldSchema("ffailt", float, 20, 10, None),
+    FieldSchema("mfailr", float, 30, 10, None),
+    FieldSchema("mfails", float, 40, 10, None),
+    FieldSchema("mfailt", float, 50, 10, None),
+)
+
+_MATNONLINEARPLASTICDISCRETEBEAM_CARD4 = (
+    FieldSchema("ufailr", float, 0, 10, None),
+    FieldSchema("ufails", float, 10, 10, None),
+    FieldSchema("ufailt", float, 20, 10, None),
+    FieldSchema("tfailr", float, 30, 10, None),
+    FieldSchema("tfails", float, 40, 10, None),
+    FieldSchema("tfailt", float, 50, 10, None),
+)
+
+_MATNONLINEARPLASTICDISCRETEBEAM_CARD5 = (
+    FieldSchema("for", float, 0, 10, None),
+    FieldSchema("fos", float, 10, 10, None),
+    FieldSchema("fot", float, 20, 10, None),
+    FieldSchema("mor", float, 30, 10, None),
+    FieldSchema("mos", float, 40, 10, None),
+    FieldSchema("mot", float, 50, 10, None),
+)
 
 class MatNonlinearPlasticDiscreteBeam(KeywordBase):
     """DYNA MAT_NONLINEAR_PLASTIC_DISCRETE_BEAM keyword"""
@@ -40,303 +97,25 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tkr",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tks",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tkt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rkr",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rks",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rkt",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tdr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tds",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rds",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcpdr",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpds",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpdt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpmr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpms",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpmt",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ffailr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffails",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffailt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfailr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfails",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfailt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ufailr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ufails",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ufailt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfailr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfails",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfailt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "for",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fos",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fot",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mor",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mos",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mot",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARPLASTICDISCRETEBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARPLASTICDISCRETEBEAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARPLASTICDISCRETEBEAM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARPLASTICDISCRETEBEAM_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARPLASTICDISCRETEBEAM_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATNONLINEARPLASTICDISCRETEBEAM_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatNonlinearPlasticDiscreteBeam.option_specs[0],
                 cards = [
                     Card(
@@ -354,7 +133,6 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

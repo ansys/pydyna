@@ -23,8 +23,47 @@
 """Module providing the MatPlasticityCompressionTensionEos class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("c", float, 40, 10, None),
+    FieldSchema("p", float, 50, 10, None),
+    FieldSchema("fail", float, 60, 10, 1e+20),
+    FieldSchema("tdel", float, 70, 10, None),
+)
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD1 = (
+    FieldSchema("lcidc", int, 0, 10, 0),
+    FieldSchema("lcidt", int, 10, 10, 0),
+    FieldSchema("lcsrc", int, 20, 10, None),
+    FieldSchema("lcsrt", int, 30, 10, None),
+    FieldSchema("srflag", float, 40, 10, None),
+)
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD2 = (
+    FieldSchema("pc", float, 0, 10, None),
+    FieldSchema("pt", float, 10, 10, None),
+    FieldSchema("pcutc", float, 20, 10, None),
+    FieldSchema("pcutt", float, 30, 10, None),
+    FieldSchema("pcutf", float, 40, 10, None),
+    FieldSchema("scalep", float, 50, 10, None),
+    FieldSchema("scalee", float, 60, 10, None),
+)
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD3 = (
+    FieldSchema("k", float, 0, 10, None),
+)
+
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD4 = (
+    FieldSchema("gi", float, 0, 10, None),
+    FieldSchema("betai", float, 10, 10, None),
+)
 
 class MatPlasticityCompressionTensionEos(KeywordBase):
     """DYNA MAT_PLASTICITY_COMPRESSION_TENSION_EOS keyword"""
@@ -40,191 +79,22 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fail",
-                        float,
-                        60,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdel",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsrc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsrt",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srflag",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pc",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pcutc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pcutt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pcutf",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scalep",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scalee",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatPlasticityCompressionTensionEos.option_specs[0],
                 cards = [
                     Card(
@@ -242,7 +112,6 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

@@ -23,8 +23,20 @@
 """Module providing the DefineBoxCoarsen class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEBOXCOARSEN_CARD0 = (
+    FieldSchema("boxid", int, 0, 10, None),
+    FieldSchema("xmn", float, 10, 10, 0.0),
+    FieldSchema("xmx", float, 20, 10, 0.0),
+    FieldSchema("ymn", float, 30, 10, 0.0),
+    FieldSchema("ymx", float, 40, 10, 0.0),
+    FieldSchema("zmn", float, 50, 10, 0.0),
+    FieldSchema("zmx", float, 60, 10, 0.0),
+    FieldSchema("iflag", int, 70, 10, 0),
+)
 
 class DefineBoxCoarsen(KeywordBase):
     """DYNA DEFINE_BOX_COARSEN keyword"""
@@ -40,74 +52,10 @@ class DefineBoxCoarsen(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "boxid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xmn",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xmx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymn",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymx",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmn",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmx",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflag",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXCOARSEN_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineBoxCoarsen.option_specs[0],
                 cards = [
                     Card(
@@ -125,7 +73,6 @@ class DefineBoxCoarsen(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def boxid(self) -> typing.Optional[int]:
         """Get or set the Box ID. A unique number must be defined.

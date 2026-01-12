@@ -23,7 +23,24 @@
 """Module providing the ControlImplicitDynamicsDyn class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITDYNAMICSDYN_CARD0 = (
+    FieldSchema("imass", int, 0, 10, 0),
+    FieldSchema("gamma", float, 10, 10, 0.5),
+    FieldSchema("beta", float, 20, 10, 0.25),
+    FieldSchema("tdybir", float, 30, 10, 0.0),
+    FieldSchema("tdydth", float, 40, 10, 1e+28),
+    FieldSchema("tdybur", float, 50, 10, 1e+28),
+    FieldSchema("irate", int, 60, 10, 0),
+    FieldSchema("alpha", float, 70, 10, 0.0),
+)
+
+_CONTROLIMPLICITDYNAMICSDYN_CARD1 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("angle", float, 10, 10, 90.0),
+)
 
 class ControlImplicitDynamicsDyn(KeywordBase):
     """DYNA CONTROL_IMPLICIT_DYNAMICS_DYN keyword"""
@@ -35,95 +52,13 @@ class ControlImplicitDynamicsDyn(KeywordBase):
         """Initialize the ControlImplicitDynamicsDyn class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "imass",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        10,
-                        10,
-                        0.50,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        20,
-                        10,
-                        0.25,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdybir",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdydth",
-                        float,
-                        40,
-                        10,
-                        1.0E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdybur",
-                        float,
-                        50,
-                        10,
-                        1.0E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irate",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "angle",
-                        float,
-                        10,
-                        10,
-                        90,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITDYNAMICSDYN_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITDYNAMICSDYN_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def imass(self) -> int:
         """Get or set the Implicit analysis type:

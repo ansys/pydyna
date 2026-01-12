@@ -23,7 +23,23 @@
 """Module providing the AleStructuredMeshControlPoints class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALESTRUCTUREDMESHCONTROLPOINTS_CARD0 = (
+    FieldSchema("cpid", int, 0, 10, 0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("icase", int, 20, 10, 0),
+    FieldSchema("sfo", float, 30, 10, 1.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("offo", float, 50, 10, 0.0),
+)
+
+_ALESTRUCTUREDMESHCONTROLPOINTS_CARD1 = (
+    FieldSchema("n", int, 0, 20, 0),
+    FieldSchema("x", float, 20, 20, None),
+    FieldSchema("ratio", float, 40, 20, 0.0),
+)
 
 class AleStructuredMeshControlPoints(KeywordBase):
     """DYNA ALE_STRUCTURED_MESH_CONTROL_POINTS keyword"""
@@ -35,85 +51,13 @@ class AleStructuredMeshControlPoints(KeywordBase):
         """Initialize the AleStructuredMeshControlPoints class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cpid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icase",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfo",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offo",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n",
-                        int,
-                        0,
-                        20,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ratio",
-                        float,
-                        40,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESHCONTROLPOINTS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESHCONTROLPOINTS_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def cpid(self) -> int:
         """Get or set the Control Points ID. A unique number must be specified. This ID is to be

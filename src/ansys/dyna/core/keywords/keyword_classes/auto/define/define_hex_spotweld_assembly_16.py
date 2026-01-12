@@ -23,8 +23,35 @@
 """Module providing the DefineHexSpotweldAssembly16 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEHEXSPOTWELDASSEMBLY16_CARD0 = (
+    FieldSchema("id_sw", int, 0, 10, None),
+)
+
+_DEFINEHEXSPOTWELDASSEMBLY16_CARD1 = (
+    FieldSchema("eid1", int, 0, 10, None),
+    FieldSchema("eid2", int, 10, 10, None),
+    FieldSchema("eid3", int, 20, 10, None),
+    FieldSchema("eid4", int, 30, 10, None),
+    FieldSchema("eid5", int, 40, 10, None),
+    FieldSchema("eid6", int, 50, 10, None),
+    FieldSchema("eid7", int, 60, 10, None),
+    FieldSchema("eid8", int, 70, 10, None),
+)
+
+_DEFINEHEXSPOTWELDASSEMBLY16_CARD2 = (
+    FieldSchema("eid9", int, 0, 10, None),
+    FieldSchema("eid10", int, 10, 10, None),
+    FieldSchema("eid11", int, 20, 10, None),
+    FieldSchema("eid12", int, 30, 10, None),
+    FieldSchema("eid13", int, 40, 10, None),
+    FieldSchema("eid14", int, 50, 10, None),
+    FieldSchema("eid15", int, 60, 10, None),
+    FieldSchema("eid16", int, 70, 10, None),
+)
 
 class DefineHexSpotweldAssembly16(KeywordBase):
     """DYNA DEFINE_HEX_SPOTWELD_ASSEMBLY_16 keyword"""
@@ -40,138 +67,16 @@ class DefineHexSpotweldAssembly16(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id_sw",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eid9",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid10",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid11",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid12",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid13",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid14",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid15",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid16",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEHEXSPOTWELDASSEMBLY16_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEHEXSPOTWELDASSEMBLY16_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEHEXSPOTWELDASSEMBLY16_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineHexSpotweldAssembly16.option_specs[0],
                 cards = [
                     Card(
@@ -189,7 +94,6 @@ class DefineHexSpotweldAssembly16(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def id_sw(self) -> typing.Optional[int]:
         """Get or set the spot weld ID. A uniquie ID number must be used.

@@ -23,7 +23,15 @@
 """Module providing the LoadFaceUvw class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADFACEUVW_CARD0 = (
+    FieldSchema("luid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("at", float, 30, 10, 0.0),
+)
 
 class LoadFaceUvw(KeywordBase):
     """DYNA LOAD_FACE_UVW keyword"""
@@ -35,42 +43,10 @@ class LoadFaceUvw(KeywordBase):
         """Initialize the LoadFaceUvw class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "luid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADFACEUVW_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def luid(self) -> typing.Optional[int]:
         """Get or set the Parametric face ID; see *IGA_FACE_UVW

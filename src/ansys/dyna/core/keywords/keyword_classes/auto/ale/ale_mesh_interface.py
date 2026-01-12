@@ -23,7 +23,20 @@
 """Module providing the AleMeshInterface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEMESHINTERFACE_CARD0 = (
+    FieldSchema("mmgset", int, 0, 10, None),
+    FieldSchema("nowrt", int, 10, 10, 0),
+    FieldSchema("volrat", float, 20, 10, 0.0),
+    FieldSchema("interp", int, 30, 10, 0),
+)
+
+_ALEMESHINTERFACE_CARD1 = (
+    FieldSchema("edgmin", float, 0, 10, 0.0),
+    FieldSchema("edgmax", float, 10, 10, 0.0),
+)
 
 class AleMeshInterface(KeywordBase):
     """DYNA ALE_MESH_INTERFACE keyword"""
@@ -35,63 +48,13 @@ class AleMeshInterface(KeywordBase):
         """Initialize the AleMeshInterface class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mmgset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nowrt",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "volrat",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "interp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "edgmin",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "edgmax",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEMESHINTERFACE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEMESHINTERFACE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def mmgset(self) -> typing.Optional[int]:
         """Get or set the Multi-Material Set ID (see *SET_MULTI-MATERIAL_GROUP_LIST).

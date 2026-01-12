@@ -23,8 +23,35 @@
 """Module providing the DefinePblastGeometry class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEPBLASTGEOMETRY_CARD0 = (
+    FieldSchema("gid", int, 0, 10, 0),
+    FieldSchema("gtype1", int, 10, 10, 1),
+)
+
+_DEFINEPBLASTGEOMETRY_CARD1 = (
+    FieldSchema("xa", float, 0, 10, 0.0),
+    FieldSchema("ya", float, 10, 10, 0.0),
+    FieldSchema("za", float, 20, 10, 0.0),
+    FieldSchema("xb", float, 30, 10, 0.0),
+    FieldSchema("yb", float, 40, 10, 0.0),
+    FieldSchema("zb", float, 50, 10, 0.0),
+)
+
+_DEFINEPBLASTGEOMETRY_CARD2 = (
+    FieldSchema("xc", float, 0, 10, 0.0),
+    FieldSchema("yc", float, 10, 10, 0.0),
+    FieldSchema("zc", float, 20, 10, 0.0),
+)
+
+_DEFINEPBLASTGEOMETRY_CARD3 = (
+    FieldSchema("g1", float, 0, 10, 0.0),
+    FieldSchema("g2", float, 10, 10, 0.0),
+    FieldSchema("g3", float, 20, 10, 0.0),
+)
 
 class DefinePblastGeometry(KeywordBase):
     """DYNA DEFINE_PBLAST_GEOMETRY keyword"""
@@ -40,135 +67,19 @@ class DefinePblastGeometry(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "gid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gtype1",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xa",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ya",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "za",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xb",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yb",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zb",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xc",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEPBLASTGEOMETRY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPBLASTGEOMETRY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPBLASTGEOMETRY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPBLASTGEOMETRY_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefinePblastGeometry.option_specs[0],
                 cards = [
                     Card(
@@ -186,7 +97,6 @@ class DefinePblastGeometry(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def gid(self) -> int:
         """Get or set the ID of a GEOMETRY defining high explosive particle domain.

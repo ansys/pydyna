@@ -25,9 +25,16 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDPARTVOL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("secid", int, 10, 10, None),
+    FieldSchema("mid", int, 20, 10, None),
+)
 
 class IcfdPartVol(KeywordBase):
     """DYNA ICFD_PART_VOL keyword"""
@@ -43,32 +50,10 @@ class IcfdPartVol(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "secid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            TableCard(
+            Card.from_field_schemas_with_defaults(
+                _ICFDPARTVOL_CARD0,
+                **kwargs,
+            ),            TableCard(
                 [
                     Field("spid1", int, 0, 10, None),
                     Field("spid2", int, 10, 10, None),
@@ -82,8 +67,7 @@ class IcfdPartVol(KeywordBase):
                 None,
                 name="nodes",
                 **kwargs,
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = IcfdPartVol.option_specs[0],
                 cards = [
                     Card(
@@ -101,7 +85,6 @@ class IcfdPartVol(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part identification for vol.

@@ -23,8 +23,19 @@
 """Module providing the DefineLanceSeedPointCoordinates class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINELANCESEEDPOINTCOORDINATES_CARD0 = (
+    FieldSchema("nseed", int, 0, 10, None),
+    FieldSchema("x1", float, 10, 10, 0.0),
+    FieldSchema("y1", float, 20, 10, 0.0),
+    FieldSchema("z1", float, 30, 10, 0.0),
+    FieldSchema("x2", float, 40, 10, 0.0),
+    FieldSchema("y2", float, 50, 10, 0.0),
+    FieldSchema("z2", float, 60, 10, 0.0),
+)
 
 class DefineLanceSeedPointCoordinates(KeywordBase):
     """DYNA DEFINE_LANCE_SEED_POINT_COORDINATES keyword"""
@@ -40,66 +51,10 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nseed",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z2",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINELANCESEEDPOINTCOORDINATES_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineLanceSeedPointCoordinates.option_specs[0],
                 cards = [
                     Card(
@@ -117,7 +72,6 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def nseed(self) -> typing.Optional[int]:
         """Get or set the Number of seed points. Maximum value of 2 is allowed.

@@ -23,8 +23,23 @@
 """Module providing the SectionDiscrete class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONDISCRETE_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("dro", int, 10, 10, 0),
+    FieldSchema("kd", float, 20, 10, 0.0),
+    FieldSchema("v0", float, 30, 10, 0.0),
+    FieldSchema("cl", float, 40, 10, 0.0),
+    FieldSchema("fd", float, 50, 10, 0.0),
+)
+
+_SECTIONDISCRETE_CARD1 = (
+    FieldSchema("cdl", float, 0, 10, None),
+    FieldSchema("tdl", float, 10, 10, None),
+)
 
 class SectionDiscrete(KeywordBase):
     """DYNA SECTION_DISCRETE keyword"""
@@ -40,76 +55,13 @@ class SectionDiscrete(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dro",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kd",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cl",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cdl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdl",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONDISCRETE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONDISCRETE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionDiscrete.option_specs[0],
                 cards = [
                     Card(
@@ -127,7 +79,6 @@ class SectionDiscrete(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.

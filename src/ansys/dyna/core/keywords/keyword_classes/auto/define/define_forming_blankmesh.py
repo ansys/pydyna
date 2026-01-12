@@ -23,8 +23,30 @@
 """Module providing the DefineFormingBlankmesh class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEFORMINGBLANKMESH_CARD0 = (
+    FieldSchema("idmsh", int, 0, 10, None),
+    FieldSchema("eleng", float, 10, 10, 0.0),
+    FieldSchema("xleng", float, 20, 10, 0.0),
+    FieldSchema("yleng", float, 30, 10, 0.0),
+    FieldSchema("anglex", float, 40, 10, 0.0),
+    FieldSchema("nplane", int, 50, 10, 1),
+    FieldSchema("cid", int, 60, 10, None),
+)
+
+_DEFINEFORMINGBLANKMESH_CARD1 = (
+    FieldSchema("pidbk", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("eid", int, 20, 10, None),
+    FieldSchema("xcent", float, 30, 10, 0.0),
+    FieldSchema("ycent", float, 40, 10, 0.0),
+    FieldSchema("zcent", float, 50, 10, 0.0),
+    FieldSchema("xshift", float, 60, 10, 0.0),
+    FieldSchema("yshift", float, 70, 10, 0.0),
+)
 
 class DefineFormingBlankmesh(KeywordBase):
     """DYNA DEFINE_FORMING_BLANKMESH keyword"""
@@ -40,130 +62,13 @@ class DefineFormingBlankmesh(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idmsh",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eleng",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xleng",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yleng",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "anglex",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pidbk",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xcent",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ycent",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zcent",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xshift",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yshift",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFORMINGBLANKMESH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEFORMINGBLANKMESH_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFormingBlankmesh.option_specs[0],
                 cards = [
                     Card(
@@ -181,7 +86,6 @@ class DefineFormingBlankmesh(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def idmsh(self) -> typing.Optional[int]:
         """Get or set the ID of the blankmesh (not the blank PID); must be unique.

@@ -23,7 +23,20 @@
 """Module providing the BoundaryPrecrack class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYPRECRACK_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ctype", int, 10, 10, 1),
+    FieldSchema("np", int, 20, 10, None),
+)
+
+_BOUNDARYPRECRACK_CARD1 = (
+    FieldSchema("x", float, 0, 10, None),
+    FieldSchema("y", float, 10, 10, None),
+    FieldSchema("z", float, 20, 10, None),
+)
 
 class BoundaryPrecrack(KeywordBase):
     """DYNA BOUNDARY_PRECRACK keyword"""
@@ -35,59 +48,13 @@ class BoundaryPrecrack(KeywordBase):
         """Initialize the BoundaryPrecrack class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "np",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRECRACK_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRECRACK_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID where the pre-crack is located

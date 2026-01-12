@@ -23,8 +23,19 @@
 """Module providing the DefineTrimSeedPointCoordinates class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINETRIMSEEDPOINTCOORDINATES_CARD0 = (
+    FieldSchema("nseed", int, 0, 10, 0),
+    FieldSchema("x1", float, 10, 10, 0.0),
+    FieldSchema("y1", float, 20, 10, 0.0),
+    FieldSchema("z1", float, 30, 10, 0.0),
+    FieldSchema("x2", float, 40, 10, 0.0),
+    FieldSchema("y2", float, 50, 10, 0.0),
+    FieldSchema("z2", float, 60, 10, 0.0),
+)
 
 class DefineTrimSeedPointCoordinates(KeywordBase):
     """DYNA DEFINE_TRIM_SEED_POINT_COORDINATES keyword"""
@@ -40,67 +51,10 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nseed",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z2",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINETRIMSEEDPOINTCOORDINATES_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineTrimSeedPointCoordinates.option_specs[0],
                 cards = [
                     Card(
@@ -118,7 +72,6 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def nseed(self) -> int:
         """Get or set the Number of seed points. Maximum value of two is allowed.

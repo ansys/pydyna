@@ -23,7 +23,14 @@
 """Module providing the EmControlEp class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTROLEP_CARD0 = (
+    FieldSchema("solvetype", int, 0, 10, None),
+    FieldSchema("numspliti", int, 10, 10, None),
+    FieldSchema("actusigma", int, 20, 10, None),
+)
 
 class EmControlEp(KeywordBase):
     """DYNA EM_CONTROL_EP keyword"""
@@ -35,33 +42,10 @@ class EmControlEp(KeywordBase):
         """Initialize the EmControlEp class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "solvetype",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numspliti",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "actusigma",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTROLEP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def solvetype(self) -> typing.Optional[int]:
         """Get or set the ElectroPhysiology solver sector: eq. 11: monodomain, eq. 12: bidomain, eq.13 mono+bidomain

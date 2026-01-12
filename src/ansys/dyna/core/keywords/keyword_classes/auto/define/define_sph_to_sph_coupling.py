@@ -23,8 +23,25 @@
 """Module providing the DefineSphToSphCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESPHTOSPHCOUPLING_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("msid", int, 10, 10, None),
+    FieldSchema("sstyp", int, 20, 10, 0),
+    FieldSchema("mstyp", int, 30, 10, 0),
+    FieldSchema("ibox1", int, 40, 10, None),
+    FieldSchema("ibox2", int, 50, 10, None),
+    FieldSchema("pfact", float, 60, 10, 1.0),
+    FieldSchema("srad", float, 70, 10, 1.0),
+)
+
+_DEFINESPHTOSPHCOUPLING_CARD1 = (
+    FieldSchema("dfact", float, 0, 10, 0.0),
+    FieldSchema("isoft", int, 10, 10, 0),
+)
 
 class DefineSphToSphCoupling(KeywordBase):
     """DYNA DEFINE_SPH_TO_SPH_COUPLING keyword"""
@@ -40,91 +57,13 @@ class DefineSphToSphCoupling(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sstyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mstyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibox1",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibox2",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfact",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srad",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dfact",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isoft",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPHTOSPHCOUPLING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPHTOSPHCOUPLING_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSphToSphCoupling.option_specs[0],
                 cards = [
                     Card(
@@ -142,7 +81,6 @@ class DefineSphToSphCoupling(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Slave part or part set ID.

@@ -23,8 +23,15 @@
 """Module providing the DefineVectorNodes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEVECTORNODES_CARD0 = (
+    FieldSchema("vid", int, 0, 10, 0),
+    FieldSchema("nodet", int, 10, 10, 0),
+    FieldSchema("nodeh", int, 20, 10, 0),
+)
 
 class DefineVectorNodes(KeywordBase):
     """DYNA DEFINE_VECTOR_NODES keyword"""
@@ -40,35 +47,10 @@ class DefineVectorNodes(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "vid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodet",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nodeh",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEVECTORNODES_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineVectorNodes.option_specs[0],
                 cards = [
                     Card(
@@ -86,7 +68,6 @@ class DefineVectorNodes(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def vid(self) -> int:
         """Get or set the Vector ID. A unique number has to be used.

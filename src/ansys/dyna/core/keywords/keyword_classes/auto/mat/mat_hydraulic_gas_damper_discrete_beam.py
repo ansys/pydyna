@@ -23,8 +23,27 @@
 """Module providing the MatHydraulicGasDamperDiscreteBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATHYDRAULICGASDAMPERDISCRETEBEAM_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("co", float, 20, 10, None),
+    FieldSchema("n", float, 30, 10, None),
+    FieldSchema("p0", float, 40, 10, None),
+    FieldSchema("pa", float, 50, 10, None),
+    FieldSchema("ap", float, 60, 10, None),
+    FieldSchema("kh", float, 70, 10, None),
+)
+
+_MATHYDRAULICGASDAMPERDISCRETEBEAM_CARD1 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("fr", float, 10, 10, None),
+    FieldSchema("sclf", float, 20, 10, 1.0),
+    FieldSchema("clear", float, 30, 10, None),
+)
 
 class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
     """DYNA MAT_HYDRAULIC_GAS_DAMPER_DISCRETE_BEAM keyword"""
@@ -40,100 +59,13 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "co",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p0",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pa",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ap",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kh",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fr",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sclf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "clear",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATHYDRAULICGASDAMPERDISCRETEBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATHYDRAULICGASDAMPERDISCRETEBEAM_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatHydraulicGasDamperDiscreteBeam.option_specs[0],
                 cards = [
                     Card(
@@ -151,7 +83,6 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

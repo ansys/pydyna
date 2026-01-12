@@ -23,7 +23,32 @@
 """Module providing the BoundaryPrescribedOrientationRigidDircos class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYPRESCRIBEDORIENTATIONRIGIDDIRCOS_CARD0 = (
+    FieldSchema("pidb", int, 0, 10, None),
+    FieldSchema("pida", int, 10, 10, None),
+    FieldSchema("intrp", int, 20, 10, 1),
+    FieldSchema("birth", float, 30, 10, 0.0),
+    FieldSchema("death", float, 40, 10, 1e+20),
+    FieldSchema("toffset", int, 50, 10, 0),
+)
+
+_BOUNDARYPRESCRIBEDORIENTATIONRIGIDDIRCOS_CARD1 = (
+    FieldSchema("lcidc11", int, 0, 10, None),
+    FieldSchema("lcidc12", int, 10, 10, None),
+    FieldSchema("lcidc13", int, 20, 10, None),
+    FieldSchema("lcidc21", int, 30, 10, None),
+    FieldSchema("lcidc22", int, 40, 10, None),
+    FieldSchema("lcidc23", int, 50, 10, None),
+    FieldSchema("lcidc31", int, 60, 10, None),
+    FieldSchema("lcidc32", int, 70, 10, None),
+)
+
+_BOUNDARYPRESCRIBEDORIENTATIONRIGIDDIRCOS_CARD2 = (
+    FieldSchema("lcidc33", int, 0, 10, None),
+)
 
 class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_ORIENTATION_RIGID_DIRCOS keyword"""
@@ -35,129 +60,16 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
         """Initialize the BoundaryPrescribedOrientationRigidDircos class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pidb",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pida",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intrp",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        40,
-                        10,
-                        1.e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "toffset",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidc11",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidc12",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidc13",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidc21",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidc22",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidc23",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidc31",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidc32",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcidc33",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDORIENTATIONRIGIDDIRCOS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDORIENTATIONRIGIDDIRCOS_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYPRESCRIBEDORIENTATIONRIGIDDIRCOS_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for rigid body B whose orientation is prescribed

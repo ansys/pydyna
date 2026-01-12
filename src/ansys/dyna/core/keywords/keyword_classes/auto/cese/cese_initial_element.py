@@ -23,7 +23,18 @@
 """Module providing the CeseInitialElement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEINITIALELEMENT_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("u", float, 10, 10, 0.0),
+    FieldSchema("v", float, 20, 10, 0.0),
+    FieldSchema("w", float, 30, 10, 0.0),
+    FieldSchema("rho", float, 40, 10, 1.225),
+    FieldSchema("p", float, 50, 10, 0.0),
+    FieldSchema("t", float, 60, 10, 0.0),
+)
 
 class CeseInitialElement(KeywordBase):
     """DYNA CESE_INITIAL_ELEMENT keyword"""
@@ -35,67 +46,10 @@ class CeseInitialElement(KeywordBase):
         """Initialize the CeseInitialElement class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho",
-                        float,
-                        40,
-                        10,
-                        1.225,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEINITIALELEMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Solid element ID.

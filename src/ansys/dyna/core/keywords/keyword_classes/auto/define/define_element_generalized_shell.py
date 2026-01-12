@@ -23,8 +23,38 @@
 """Module providing the DefineElementGeneralizedShell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEELEMENTGENERALIZEDSHELL_CARD0 = (
+    FieldSchema("elform", int, 0, 10, None),
+    FieldSchema("nip", int, 10, 10, None),
+    FieldSchema("nmnp", int, 20, 10, None),
+    FieldSchema("imass", int, 30, 10, 0),
+    FieldSchema("form", int, 40, 10, 0),
+)
+
+_DEFINEELEMENTGENERALIZEDSHELL_CARD1 = (
+    FieldSchema("wi", float, 0, 20, None),
+)
+
+_DEFINEELEMENTGENERALIZEDSHELL_CARD2 = (
+    FieldSchema("nki", float, 0, 20, None),
+    FieldSchema("dnkidr", float, 20, 20, None),
+    FieldSchema("dnkids", float, 40, 20, None),
+)
+
+_DEFINEELEMENTGENERALIZEDSHELL_CARD3 = (
+    FieldSchema("dnkldr", float, 0, 20, None),
+    FieldSchema("dnklds", float, 20, 20, None),
+)
+
+_DEFINEELEMENTGENERALIZEDSHELL_CARD4 = (
+    FieldSchema("d2nkidr2", float, 0, 20, None),
+    FieldSchema("d2nkidrds", float, 20, 20, None),
+    FieldSchema("d2nkids2", float, 40, 20, None),
+)
 
 class DefineElementGeneralizedShell(KeywordBase):
     """DYNA DEFINE_ELEMENT_GENERALIZED_SHELL keyword"""
@@ -40,127 +70,22 @@ class DefineElementGeneralizedShell(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "elform",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nip",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmnp",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imass",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "form",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "wi",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nki",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dnkidr",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dnkids",
-                        float,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dnkldr",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dnklds",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d2nkidr2",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2nkidrds",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2nkids2",
-                        float,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEELEMENTGENERALIZEDSHELL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEELEMENTGENERALIZEDSHELL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEELEMENTGENERALIZEDSHELL_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEELEMENTGENERALIZEDSHELL_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEELEMENTGENERALIZEDSHELL_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineElementGeneralizedShell.option_specs[0],
                 cards = [
                     Card(
@@ -178,7 +103,6 @@ class DefineElementGeneralizedShell(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def elform(self) -> typing.Optional[int]:
         """Get or set the Element Formulation ID referenced via *SECTION_SHELL to connect

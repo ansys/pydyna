@@ -23,8 +23,119 @@
 """Module providing the Mat209 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT209_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("iax", int, 40, 10, 1),
+    FieldSchema("isurf", int, 50, 10, 1),
+    FieldSchema("ihard", int, 60, 10, 2),
+    FieldSchema("ifema", int, 70, 10, 0),
+)
+
+_MAT209_CARD1 = (
+    FieldSchema("lcpms", int, 0, 10, None),
+    FieldSchema("sfs", float, 10, 10, 1.0),
+    FieldSchema("lcpmt", int, 20, 10, None),
+    FieldSchema("sft", float, 30, 10, 1.0),
+    FieldSchema("lcat", int, 40, 10, None),
+    FieldSchema("sfat", float, 50, 10, 1.0),
+    FieldSchema("lcac", int, 60, 10, None),
+    FieldSchema("sfac", float, 70, 10, 1.0),
+)
+
+_MAT209_CARD2 = (
+    FieldSchema("alpha", float, 0, 10, 2.0),
+    FieldSchema("beta", float, 10, 10, 2.0),
+    FieldSchema("gamma", float, 20, 10, 2.0),
+    FieldSchema("f0", float, 30, 10, None),
+    FieldSchema("pinm", float, 40, 10, 1.0),
+    FieldSchema("pins", float, 50, 10, 1.0),
+    FieldSchema("hloc1", float, 60, 10, None),
+    FieldSchema("hloc2", float, 70, 10, None),
+)
+
+_MAT209_CARD3 = (
+    FieldSchema("deltas", float, 0, 10, None),
+    FieldSchema("kappas", float, 10, 10, None),
+    FieldSchema("deltat", float, 20, 10, None),
+    FieldSchema("kappat", float, 30, 10, None),
+    FieldSchema("lcshs", int, 40, 10, None),
+    FieldSchema("sfshs", float, 50, 10, 1.0),
+    FieldSchema("lcsht", int, 60, 10, None),
+    FieldSchema("sfsht", float, 70, 10, 1.0),
+)
+
+_MAT209_CARD4 = (
+    FieldSchema("hardms", float, 0, 10, None),
+    FieldSchema("gamms", float, 10, 10, None),
+    FieldSchema("hardmt", float, 20, 10, None),
+    FieldSchema("gammt", float, 30, 10, None),
+    FieldSchema("hardat", float, 40, 10, None),
+    FieldSchema("gamat", float, 50, 10, None),
+    FieldSchema("hardac", float, 60, 10, None),
+    FieldSchema("gamac", float, 70, 10, None),
+)
+
+_MAT209_CARD5 = (
+    FieldSchema("omgms1", float, 0, 10, None),
+    FieldSchema("omgms2", float, 10, 10, None),
+    FieldSchema("omgmt1", float, 20, 10, 1.0),
+    FieldSchema("omgmt2", float, 30, 10, 2.0),
+    FieldSchema("omgat1", float, 40, 10, None),
+    FieldSchema("omgat2", float, 50, 10, None),
+    FieldSchema("omgac1", float, 60, 10, 1.0),
+    FieldSchema("omgac2", float, 70, 10, 2.0),
+)
+
+_MAT209_CARD6 = (
+    FieldSchema("rums", float, 0, 10, 1e+20),
+    FieldSchema("rumt", float, 10, 10, 1e+20),
+    FieldSchema("duat", float, 20, 10, 1e+20),
+    FieldSchema("duac", float, 30, 10, 1e+20),
+    FieldSchema("lam1", float, 40, 10, None),
+    FieldSchema("lam2", float, 50, 10, None),
+    FieldSchema("soft1", float, 60, 10, 3.0),
+    FieldSchema("soft2", float, 70, 10, 4.0),
+)
+
+_MAT209_CARD7 = (
+    FieldSchema("prs1", float, 0, 10, 1e+20),
+    FieldSchema("prs2", float, 10, 10, 2e+20),
+    FieldSchema("prs3", float, 20, 10, 3e+20),
+    FieldSchema("prs4", float, 30, 10, 4e+20),
+    FieldSchema("prt1", float, 40, 10, 1e+20),
+    FieldSchema("prt2", float, 50, 10, 2e+20),
+    FieldSchema("prt3", float, 60, 10, 3e+20),
+    FieldSchema("prt4", float, 70, 10, 4e+20),
+)
+
+_MAT209_CARD8 = (
+    FieldSchema("ts1", float, 0, 10, 1e+20),
+    FieldSchema("ts2", float, 10, 10, 2e+20),
+    FieldSchema("ts3", float, 20, 10, 3e+20),
+    FieldSchema("ts4", float, 30, 10, 4e+20),
+    FieldSchema("cs1", float, 40, 10, 1e+20),
+    FieldSchema("cs2", float, 50, 10, 2e+20),
+    FieldSchema("cs3", float, 60, 10, 3e+20),
+    FieldSchema("cs4", float, 70, 10, 4e+20),
+)
+
+_MAT209_CARD9 = (
+    FieldSchema("ss1", float, 0, 10, 1e+20),
+    FieldSchema("ss2", float, 10, 10, 2e+20),
+    FieldSchema("ss3", float, 20, 10, 3e+20),
+    FieldSchema("ss4", float, 30, 10, 4e+20),
+    FieldSchema("st1", float, 40, 10, 1e+20),
+    FieldSchema("st2", float, 50, 10, 2e+20),
+    FieldSchema("st3", float, 60, 10, 3e+20),
+    FieldSchema("st4", float, 70, 10, 4e+20),
+)
 
 class Mat209(KeywordBase):
     """DYNA MAT_209 keyword"""
@@ -40,656 +151,37 @@ class Mat209(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iax",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isurf",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihard",
-                        int,
-                        60,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifema",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcpms",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfs",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcpmt",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcat",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfat",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcac",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfac",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alpha",
-                        float,
-                        0,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        10,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        20,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "f0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pinm",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pins",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hloc1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hloc2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "deltas",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kappas",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "deltat",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kappat",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcshs",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfshs",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsht",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfsht",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hardms",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamms",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hardmt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gammt",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hardat",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamat",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hardac",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamac",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "omgms1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omgms2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omgmt1",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omgmt2",
-                        float,
-                        30,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omgat1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omgat2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omgac1",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omgac2",
-                        float,
-                        70,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rums",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rumt",
-                        float,
-                        10,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "duat",
-                        float,
-                        20,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "duac",
-                        float,
-                        30,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lam1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lam2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soft1",
-                        float,
-                        60,
-                        10,
-                        3.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soft2",
-                        float,
-                        70,
-                        10,
-                        4.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "prs1",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prs2",
-                        float,
-                        10,
-                        10,
-                        2.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prs3",
-                        float,
-                        20,
-                        10,
-                        3.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prs4",
-                        float,
-                        30,
-                        10,
-                        4.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prt1",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prt2",
-                        float,
-                        50,
-                        10,
-                        2.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prt3",
-                        float,
-                        60,
-                        10,
-                        3.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prt4",
-                        float,
-                        70,
-                        10,
-                        4.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ts1",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ts2",
-                        float,
-                        10,
-                        10,
-                        2.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ts3",
-                        float,
-                        20,
-                        10,
-                        3.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ts4",
-                        float,
-                        30,
-                        10,
-                        4.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cs1",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cs2",
-                        float,
-                        50,
-                        10,
-                        2.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cs3",
-                        float,
-                        60,
-                        10,
-                        3.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cs4",
-                        float,
-                        70,
-                        10,
-                        4.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ss1",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ss2",
-                        float,
-                        10,
-                        10,
-                        2.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ss3",
-                        float,
-                        20,
-                        10,
-                        3.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ss4",
-                        float,
-                        30,
-                        10,
-                        4.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "st1",
-                        float,
-                        40,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "st2",
-                        float,
-                        50,
-                        10,
-                        2.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "st3",
-                        float,
-                        60,
-                        10,
-                        3.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "st4",
-                        float,
-                        70,
-                        10,
-                        4.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT209_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT209_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT209_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT209_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT209_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT209_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT209_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT209_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT209_CARD8,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT209_CARD9,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat209.option_specs[0],
                 cards = [
                     Card(
@@ -707,7 +199,6 @@ class Mat209(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

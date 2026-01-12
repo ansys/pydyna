@@ -23,8 +23,38 @@
 """Module providing the MatAddDamageGissmo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATADDDAMAGEGISSMO_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("dtyp", float, 20, 10, 0.0),
+    FieldSchema("refsz", float, 30, 10, None),
+    FieldSchema("numfip", float, 40, 10, 1.0),
+)
+
+_MATADDDAMAGEGISSMO_CARD1 = (
+    FieldSchema("lcsdg", int, 0, 10, 0),
+    FieldSchema("ecrit", float, 10, 10, None),
+    FieldSchema("dmgexp", float, 20, 10, 1.0),
+    FieldSchema("dcrit", float, 30, 10, None),
+    FieldSchema("fadexp", float, 40, 10, 1.0),
+    FieldSchema("lcregd", int, 50, 10, 0),
+    FieldSchema("instf", int, 60, 10, None),
+)
+
+_MATADDDAMAGEGISSMO_CARD2 = (
+    FieldSchema("lcsrs", int, 0, 10, None),
+    FieldSchema("shrf", float, 10, 10, None),
+    FieldSchema("biaxf", float, 20, 10, None),
+    FieldSchema("lcdlim", int, 30, 10, 0),
+    FieldSchema("midfail", float, 40, 10, None),
+    FieldSchema("hisvn", float, 50, 10, None),
+    FieldSchema("soft", float, 60, 10, None),
+    FieldSchema("lp2bi", float, 70, 10, None),
+)
 
 class MatAddDamageGissmo(KeywordBase):
     """DYNA MAT_ADD_DAMAGE_GISSMO keyword"""
@@ -40,166 +70,16 @@ class MatAddDamageGissmo(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtyp",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "refsz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numfip",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcsdg",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ecrit",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmgexp",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dcrit",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fadexp",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcregd",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "instf",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcsrs",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shrf",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "biaxf",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdlim",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "midfail",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisvn",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soft",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lp2bi",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATADDDAMAGEGISSMO_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDDAMAGEGISSMO_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATADDDAMAGEGISSMO_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatAddDamageGissmo.option_specs[0],
                 cards = [
                     Card(
@@ -217,7 +97,6 @@ class MatAddDamageGissmo(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification for which this erosion definition applies. A unique number or label must be specified.

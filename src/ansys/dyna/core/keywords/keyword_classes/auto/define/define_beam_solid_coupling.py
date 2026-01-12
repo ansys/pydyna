@@ -23,8 +23,18 @@
 """Module providing the DefineBeamSolidCoupling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEBEAMSOLIDCOUPLING_CARD0 = (
+    FieldSchema("lstrid", int, 0, 10, None),
+    FieldSchema("msolidm", int, 10, 10, None),
+    FieldSchema("lstrtype", int, 20, 10, 0),
+    FieldSchema("soltype", int, 30, 10, 0),
+    FieldSchema("form", int, 40, 10, 0),
+    FieldSchema("psf", float, 50, 10, 1.0),
+)
 
 class DefineBeamSolidCoupling(KeywordBase):
     """DYNA DEFINE_BEAM_SOLID_COUPLING keyword"""
@@ -40,57 +50,10 @@ class DefineBeamSolidCoupling(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lstrid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msolidm",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lstrtype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "soltype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "form",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psf",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEBEAMSOLIDCOUPLING_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineBeamSolidCoupling.option_specs[0],
                 cards = [
                     Card(
@@ -108,7 +71,6 @@ class DefineBeamSolidCoupling(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def lstrid(self) -> typing.Optional[int]:
         """Get or set the Part set ID or part ID of the Lagrangian structure.  LSTRTYPE below indicates the ID type specified by LSTRTYPE.

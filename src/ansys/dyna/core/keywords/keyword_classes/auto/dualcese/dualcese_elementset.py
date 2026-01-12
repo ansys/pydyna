@@ -23,7 +23,23 @@
 """Module providing the DualceseElementset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEELEMENTSET_CARD0 = (
+    FieldSchema("esid", int, 0, 10, None),
+)
+
+_DUALCESEELEMENTSET_CARD1 = (
+    FieldSchema("eid1", int, 0, 10, None),
+    FieldSchema("eid2", int, 10, 10, None),
+    FieldSchema("eid3", int, 20, 10, None),
+    FieldSchema("eid4", int, 30, 10, None),
+    FieldSchema("eid5", int, 40, 10, None),
+    FieldSchema("eid6", int, 50, 10, None),
+    FieldSchema("eid7", int, 60, 10, None),
+    FieldSchema("eid8", int, 70, 10, None),
+)
 
 class DualceseElementset(KeywordBase):
     """DYNA DUALCESE_ELEMENTSET keyword"""
@@ -35,79 +51,13 @@ class DualceseElementset(KeywordBase):
         """Initialize the DualceseElementset class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "esid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "eid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEELEMENTSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEELEMENTSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Set ID.  All dual CESE element sets should have a unique set ID

@@ -23,7 +23,22 @@
 """Module providing the LoadExpansionPressure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADEXPANSIONPRESSURE_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, None),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("at", float, 30, 10, 0.0),
+)
+
+_LOADEXPANSIONPRESSURE_CARD1 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("xn", float, 10, 10, None),
+    FieldSchema("yn", float, 20, 10, None),
+    FieldSchema("zn", float, 30, 10, None),
+)
 
 class LoadExpansionPressure(KeywordBase):
     """DYNA LOAD_EXPANSION_PRESSURE keyword"""
@@ -35,74 +50,13 @@ class LoadExpansionPressure(KeywordBase):
         """Initialize the LoadExpansionPressure class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "at",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xn",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yn",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zn",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADEXPANSIONPRESSURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADEXPANSIONPRESSURE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID which specifies the interior of the chamber. As the edge moves, the pressure is applied or could be applied to these segments.

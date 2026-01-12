@@ -23,8 +23,16 @@
 """Module providing the MatPmlElasticFluid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATPMLELASTICFLUID_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+    FieldSchema("vc", float, 30, 10, None),
+)
 
 class MatPmlElasticFluid(KeywordBase):
     """DYNA MAT_PML_ELASTIC_FLUID keyword"""
@@ -40,39 +48,10 @@ class MatPmlElasticFluid(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATPMLELASTICFLUID_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatPmlElasticFluid.option_specs[0],
                 cards = [
                     Card(
@@ -90,7 +69,6 @@ class MatPmlElasticFluid(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification.  A unique number or label must be specified.(see *PART)

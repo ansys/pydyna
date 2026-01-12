@@ -23,8 +23,26 @@
 """Module providing the DefinePlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEPLANE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, 0),
+    FieldSchema("x1", float, 10, 10, 0.0),
+    FieldSchema("y1", float, 20, 10, 0.0),
+    FieldSchema("z1", float, 30, 10, 0.0),
+    FieldSchema("x2", float, 40, 10, 0.0),
+    FieldSchema("y2", float, 50, 10, 0.0),
+    FieldSchema("z2", float, 60, 10, 0.0),
+    FieldSchema("cid", int, 70, 10, 0),
+)
+
+_DEFINEPLANE_CARD1 = (
+    FieldSchema("x3", float, 0, 10, 0.0),
+    FieldSchema("y3", float, 10, 10, 0.0),
+    FieldSchema("z3", float, 20, 10, 0.0),
+)
 
 class DefinePlane(KeywordBase):
     """DYNA DEFINE_PLANE keyword"""
@@ -40,103 +58,13 @@ class DefinePlane(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y2",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z2",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x3",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y3",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEPLANE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPLANE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefinePlane.option_specs[0],
                 cards = [
                     Card(
@@ -154,7 +82,6 @@ class DefinePlane(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> int:
         """Get or set the Plane ID. A unique number has to be defined.

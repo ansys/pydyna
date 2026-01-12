@@ -23,7 +23,17 @@
 """Module providing the DatabaseTracerAle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASETRACERALE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, 0),
+    FieldSchema("track", int, 10, 10, 0),
+    FieldSchema("ammgid", int, 20, 10, 0),
+    FieldSchema("hvbeg", int, 30, 10, 0),
+    FieldSchema("hvend", int, 40, 10, 0),
+    FieldSchema("time", float, 50, 10, 0.0),
+)
 
 class DatabaseTracerAle(KeywordBase):
     """DYNA DATABASE_TRACER_ALE keyword"""
@@ -35,60 +45,10 @@ class DatabaseTracerAle(KeywordBase):
         """Initialize the DatabaseTracerAle class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "track",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hvbeg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hvend",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASETRACERALE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> int:
         """Get or set the Node ID defining the initial position of a tracer particle. See Remark 1

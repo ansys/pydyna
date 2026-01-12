@@ -23,7 +23,24 @@
 """Module providing the IcfdDatabaseNodout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDATABASENODOUT_CARD0 = (
+    FieldSchema("outlv", int, 0, 10, 0),
+    FieldSchema("dtout", float, 10, 10, 0.0),
+)
+
+_ICFDDATABASENODOUT_CARD1 = (
+    FieldSchema("nid1", int, 0, 10, None),
+    FieldSchema("nid2", int, 10, 10, None),
+    FieldSchema("nid3", int, 20, 10, None),
+    FieldSchema("nid4", int, 30, 10, None),
+    FieldSchema("nid5", int, 40, 10, None),
+    FieldSchema("nid6", int, 50, 10, None),
+    FieldSchema("nid7", int, 60, 10, None),
+    FieldSchema("nid8", int, 70, 10, None),
+)
 
 class IcfdDatabaseNodout(KeywordBase):
     """DYNA ICFD_DATABASE_NODOUT keyword"""
@@ -35,88 +52,13 @@ class IcfdDatabaseNodout(KeywordBase):
         """Initialize the IcfdDatabaseNodout class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "outlv",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASENODOUT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASENODOUT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.

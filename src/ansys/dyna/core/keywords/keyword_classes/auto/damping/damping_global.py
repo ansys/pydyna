@@ -23,7 +23,19 @@
 """Module providing the DampingGlobal class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DAMPINGGLOBAL_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, 0),
+    FieldSchema("valdmp", float, 10, 10, 0.0),
+    FieldSchema("stx", float, 20, 10, 0.0),
+    FieldSchema("sty", float, 30, 10, 0.0),
+    FieldSchema("stz", float, 40, 10, 0.0),
+    FieldSchema("srx", float, 50, 10, 0.0),
+    FieldSchema("sry", float, 60, 10, 0.0),
+    FieldSchema("srz", float, 70, 10, 0.0),
+)
 
 class DampingGlobal(KeywordBase):
     """DYNA DAMPING_GLOBAL keyword"""
@@ -35,76 +47,10 @@ class DampingGlobal(KeywordBase):
         """Initialize the DampingGlobal class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valdmp",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stx",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sty",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sry",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srz",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DAMPINGGLOBAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def lcid(self) -> int:
         """Get or set the Load curve ID which specifies node system damping:

@@ -23,7 +23,59 @@
 """Module providing the FrequencyDomainResponseSpectrumDdam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD0 = (
+    FieldSchema("mdmin", int, 0, 10, 1),
+    FieldSchema("mdmax", int, 10, 10, None),
+    FieldSchema("fnmin", float, 20, 10, 0.0),
+    FieldSchema("fnmax", float, 30, 10, None),
+    FieldSchema("restrt", int, 40, 10, 0),
+    FieldSchema("mcomb", int, 50, 10, 0),
+    FieldSchema("relatv", int, 60, 10, 0),
+    FieldSchema("mprs", int, 70, 10, 0),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD1 = (
+    FieldSchema("mcomb1", int, 0, 10, 0),
+    FieldSchema("mcomb2", int, 10, 10, 0),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD2 = (
+    FieldSchema("w1", float, 0, 10, 0.5),
+    FieldSchema("w1", float, 10, 10, 0.5),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD3 = (
+    FieldSchema("r40", float, 0, 10, 0.4),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD4 = (
+    FieldSchema("dampf", float, 0, 10, None),
+    FieldSchema("lcdamp", int, 10, 10, None),
+    FieldSchema("ldtyp", int, 20, 10, 0),
+    FieldSchema("dmpmas", float, 30, 10, 0.0),
+    FieldSchema("dmpstf", float, 40, 10, 0.0),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD5 = (
+    FieldSchema("std", int, 0, 10, 1),
+    FieldSchema("unit", int, 10, 10, 1),
+    FieldSchema("amin", float, 20, 10, 6.0),
+    FieldSchema("vid", int, 30, 10, 0),
+    FieldSchema("xc", float, 40, 10, 0.0),
+    FieldSchema("yc", float, 50, 10, 0.0),
+    FieldSchema("zc", float, 60, 10, 0.0),
+    FieldSchema("effmas", float, 70, 10, 80.0),
+)
+
+_FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD6 = (
+    FieldSchema("shptyp", int, 0, 10, 1),
+    FieldSchema("mount", int, 10, 10, 1),
+    FieldSchema("movemt", int, 20, 10, 1),
+    FieldSchema("mattyp", int, 30, 10, 1),
+)
 
 class FrequencyDomainResponseSpectrumDdam(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_RESPONSE_SPECTRUM_DDAM keyword"""
@@ -35,272 +87,28 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
         """Initialize the FrequencyDomainResponseSpectrumDdam class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mdmin",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mdmax",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fnmin",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fnmax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "restrt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mcomb",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "relatv",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mprs",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mcomb1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mcomb2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "w1",
-                        float,
-                        0,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w1",
-                        float,
-                        10,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r40",
-                        float,
-                        0,
-                        10,
-                        0.4,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dampf",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcdamp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ldtyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpmas",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmpstf",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "std",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unit",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "amin",
-                        float,
-                        20,
-                        10,
-                        6.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xc",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "effmas",
-                        float,
-                        70,
-                        10,
-                        80.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "shptyp",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mount",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "movemt",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mattyp",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRESPONSESPECTRUMDDAM_CARD6,
+                **kwargs,
+            ),        ]
     @property
     def mdmin(self) -> int:
         """Get or set the The first mode in modal superposition method (optional).

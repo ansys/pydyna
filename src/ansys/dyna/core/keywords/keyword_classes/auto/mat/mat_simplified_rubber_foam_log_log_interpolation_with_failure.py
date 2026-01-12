@@ -25,9 +25,48 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("km", float, 20, 10, None),
+    FieldSchema("mu", float, 30, 10, 0.1),
+    FieldSchema("g", float, 40, 10, None),
+    FieldSchema("sigf", float, 50, 10, None),
+    FieldSchema("ref", float, 60, 10, 0.0),
+    FieldSchema("prten", float, 70, 10, None),
+)
+
+_MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD1 = (
+    FieldSchema("sgl", float, 0, 10, None),
+    FieldSchema("sw", float, 10, 10, None),
+    FieldSchema("st", float, 20, 10, None),
+    FieldSchema("lc/tbid", int, 30, 10, None),
+    FieldSchema("tension", float, 40, 10, -1.0),
+    FieldSchema("rtype", float, 50, 10, 0.0),
+    FieldSchema("avgopt", float, 60, 10, None),
+    FieldSchema("pra", float, 70, 10, None),
+)
+
+_MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD2 = (
+    FieldSchema("k", float, 0, 10, None),
+    FieldSchema("gama1", float, 10, 10, None),
+    FieldSchema("gama2", float, 20, 10, None),
+    FieldSchema("eh", float, 30, 10, None),
+)
+
+_MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD3 = (
+    FieldSchema("lcunld", int, 0, 10, None),
+    FieldSchema("hu", float, 10, 10, 1.0),
+    FieldSchema("shape", float, 20, 10, None),
+    FieldSchema("stol", float, 30, 10, None),
+    FieldSchema("visco", float, 40, 10, 0.0),
+    FieldSchema("hisout", float, 50, 10, 0.0),
+)
 
 class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
     """DYNA MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION_WITH_FAILURE keyword"""
@@ -43,212 +82,19 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "km",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu",
-                        float,
-                        30,
-                        10,
-                        0.10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigf",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prten",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sgl",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sw",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "st",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc/tbid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tension",
-                        float,
-                        40,
-                        10,
-                        -1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rtype",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "avgopt",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pra",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gama1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gama2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eh",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcunld",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hu",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shape",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stol",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "visco",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisout",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            TableCard(
+            Card.from_field_schemas_with_defaults(
+                _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD3,
+                **kwargs,
+            ),            TableCard(
                 [
                     Field("gi", float, 0, 10, None),
                     Field("betai", float, 10, 10, None),
@@ -257,8 +103,7 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
                 None,
                 name="constants",
                 **kwargs,
-            ),
-            OptionCardSet(
+            ),            OptionCardSet(
                 option_spec = MatSimplifiedRubberFoamLogLogInterpolationWithFailure.option_specs[0],
                 cards = [
                     Card(
@@ -276,7 +121,6 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

@@ -23,7 +23,23 @@
 """Module providing the InterfaceDeHbond class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACEDEHBOND_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_INTERFACEDEHBOND_CARD1 = (
+    FieldSchema("pid1", int, 0, 10, None),
+    FieldSchema("pid2", int, 10, 10, None),
+    FieldSchema("ptype1", int, 20, 10, 0),
+    FieldSchema("ptype2", int, 30, 10, 0),
+    FieldSchema("frmdl", int, 40, 10, 1),
+    FieldSchema("frgk", float, 50, 10, None),
+    FieldSchema("frgs", float, 60, 10, None),
+    FieldSchema("dmg", float, 70, 10, 1.0),
+)
 
 class InterfaceDeHbond(KeywordBase):
     """DYNA INTERFACE_DE_HBOND keyword"""
@@ -35,83 +51,13 @@ class InterfaceDeHbond(KeywordBase):
         """Initialize the InterfaceDeHbond class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype1",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype2",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frmdl",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frgk",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frgs",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmg",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACEDEHBOND_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACEDEHBOND_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Interface ID. All interfaces should have a unique ID.

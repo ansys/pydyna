@@ -23,8 +23,26 @@
 """Module providing the DefineSpotweldFailureResultants class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESPOTWELDFAILURERESULTANTS_CARD0 = (
+    FieldSchema("id", int, 0, 10, 0),
+    FieldSchema("dsn", float, 10, 10, 0.0),
+    FieldSchema("dss", float, 20, 10, 0.0),
+    FieldSchema("dlcidsn", int, 30, 10, 0),
+    FieldSchema("dlcidss", int, 40, 10, 0),
+)
+
+_DEFINESPOTWELDFAILURERESULTANTS_CARD1 = (
+    FieldSchema("pid_i", int, 0, 10, None),
+    FieldSchema("pid_j", int, 10, 10, None),
+    FieldSchema("snij", float, 20, 10, 0.0),
+    FieldSchema("ssij", float, 30, 10, 0.0),
+    FieldSchema("lcidsnij", int, 40, 10, 0),
+    FieldSchema("lcidssij", int, 50, 10, 0),
+)
 
 class DefineSpotweldFailureResultants(KeywordBase):
     """DYNA DEFINE_SPOTWELD_FAILURE_RESULTANTS keyword"""
@@ -40,101 +58,13 @@ class DefineSpotweldFailureResultants(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dsn",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dss",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidsn",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dlcidss",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid_i",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid_j",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "snij",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssij",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidsnij",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidssij",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDFAILURERESULTANTS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINESPOTWELDFAILURERESULTANTS_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSpotweldFailureResultants.option_specs[0],
                 cards = [
                     Card(
@@ -152,7 +82,6 @@ class DefineSpotweldFailureResultants(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> int:
         """Get or set the Identification number. Only one table is allowed

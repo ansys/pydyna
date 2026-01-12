@@ -23,7 +23,40 @@
 """Module providing the PartModes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARTMODES_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("nmfb", int, 10, 10, None),
+    FieldSchema("form", int, 20, 10, 0),
+    FieldSchema("ansid", int, 30, 10, None),
+    FieldSchema("format", int, 40, 10, 0),
+    FieldSchema("kmflag", int, 50, 10, 0),
+    FieldSchema("nupdf", int, 60, 10, 0),
+    FieldSchema("sigrec", int, 70, 10, 0),
+)
+
+_PARTMODES_CARD1 = (
+    FieldSchema("filename", str, 0, 70, None),
+)
+
+_PARTMODES_CARD2 = (
+    FieldSchema("mode1", int, 0, 10, None),
+    FieldSchema("mode2", int, 10, 10, None),
+    FieldSchema("mode3", int, 20, 10, None),
+    FieldSchema("mode4", int, 30, 10, None),
+    FieldSchema("mode5", int, 40, 10, None),
+    FieldSchema("mode6", int, 50, 10, None),
+    FieldSchema("mode7", int, 60, 10, None),
+    FieldSchema("mode8", int, 70, 10, None),
+)
+
+_PARTMODES_CARD3 = (
+    FieldSchema("mstart", int, 0, 10, None),
+    FieldSchema("mstop", int, 10, 10, None),
+    FieldSchema("dampf", float, 20, 10, None),
+)
 
 class PartModes(KeywordBase):
     """DYNA PART_MODES keyword"""
@@ -35,169 +68,19 @@ class PartModes(KeywordBase):
         """Initialize the PartModes class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nmfb",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "form",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ansid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "format",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kmflag",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nupdf",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigrec",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mode1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mstart",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mstop",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dampf",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTMODES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTMODES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTMODES_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _PARTMODES_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part identification. This part must be a rigid body.

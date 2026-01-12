@@ -23,7 +23,12 @@
 """Module providing the BoundaryAcousticCouplingMismatch class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYACOUSTICCOUPLINGMISMATCH_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+)
 
 class BoundaryAcousticCouplingMismatch(KeywordBase):
     """DYNA BOUNDARY_ACOUSTIC_COUPLING_MISMATCH keyword"""
@@ -35,19 +40,10 @@ class BoundaryAcousticCouplingMismatch(KeywordBase):
         """Initialize the BoundaryAcousticCouplingMismatch class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYACOUSTICCOUPLINGMISMATCH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see *SET_SEGMENT.

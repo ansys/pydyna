@@ -23,8 +23,23 @@
 """Module providing the DefineCurveFunction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECURVEFUNCTION_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, 0),
+    FieldSchema("sidr", int, 10, 10, 0),
+    FieldSchema("sfa", float, 20, 10, 1.0),
+    FieldSchema("sfo", float, 30, 10, 1.0),
+    FieldSchema("offa", float, 40, 10, 0.0),
+    FieldSchema("offo", float, 50, 10, 0.0),
+    FieldSchema("dattyp", int, 60, 10, 0),
+)
+
+_DEFINECURVEFUNCTION_CARD1 = (
+    FieldSchema("function", str, 0, 80, None),
+)
 
 class DefineCurveFunction(KeywordBase):
     """DYNA DEFINE_CURVE_FUNCTION keyword"""
@@ -40,78 +55,13 @@ class DefineCurveFunction(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidr",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfa",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfo",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offa",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offo",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dattyp",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "function",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEFUNCTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVEFUNCTION_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCurveFunction.option_specs[0],
                 cards = [
                     Card(
@@ -129,7 +79,6 @@ class DefineCurveFunction(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def lcid(self) -> int:
         """Get or set the Load Curve ID.

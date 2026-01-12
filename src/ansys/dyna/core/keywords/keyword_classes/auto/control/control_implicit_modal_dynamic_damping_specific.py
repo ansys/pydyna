@@ -23,7 +23,19 @@
 """Module providing the ControlImplicitModalDynamicDampingSpecific class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITMODALDYNAMICDAMPINGSPECIFIC_CARD0 = (
+    FieldSchema("mid1", int, 0, 10, None),
+    FieldSchema("zeta1", float, 10, 10, None),
+    FieldSchema("mid2", int, 20, 10, None),
+    FieldSchema("zeta2", float, 30, 10, None),
+    FieldSchema("mid3", int, 40, 10, None),
+    FieldSchema("zeta3", float, 50, 10, None),
+    FieldSchema("mid4", int, 60, 10, None),
+    FieldSchema("zeta4", float, 70, 10, None),
+)
 
 class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
     """DYNA CONTROL_IMPLICIT_MODAL_DYNAMIC_DAMPING_SPECIFIC keyword"""
@@ -35,68 +47,10 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
         """Initialize the ControlImplicitModalDynamicDampingSpecific class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zeta1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zeta2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid3",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zeta3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid4",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zeta4",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODALDYNAMICDAMPINGSPECIFIC_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mid1(self) -> typing.Optional[int]:
         """Get or set the Mode ID.

@@ -23,8 +23,17 @@
 """Module providing the DefineFrictionScaling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEFRICTIONSCALING_CARD0 = (
+    FieldSchema("fsid", int, 0, 10, None),
+    FieldSchema("cid", int, 10, 10, 0),
+    FieldSchema("psid", int, 20, 10, 0),
+    FieldSchema("scale1", float, 30, 10, 1.0),
+    FieldSchema("scaleo", float, 40, 10, 1.0),
+)
 
 class DefineFrictionScaling(KeywordBase):
     """DYNA DEFINE_FRICTION_SCALING keyword"""
@@ -40,50 +49,10 @@ class DefineFrictionScaling(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scale1",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scaleo",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFRICTIONSCALING_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFrictionScaling.option_specs[0],
                 cards = [
                     Card(
@@ -101,7 +70,6 @@ class DefineFrictionScaling(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def fsid(self) -> typing.Optional[int]:
         """Get or set the Friction scaling ID number.  Each friction scaling definition should have a unique ID which is used for output messages only.

@@ -23,7 +23,33 @@
 """Module providing the BatteryEchemMatAnode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BATTERYECHEMMATANODE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("iocpa", int, 10, 10, None),
+    FieldSchema("capta", float, 20, 10, None),
+    FieldSchema("s_xa", float, 30, 10, None),
+    FieldSchema("rada", float, 40, 10, None),
+    FieldSchema("ratea", float, 50, 10, None),
+    FieldSchema("ranode", float, 60, 10, None),
+)
+
+_BATTERYECHEMMATANODE_CARD1 = (
+    FieldSchema("rhoea", float, 0, 10, None),
+    FieldSchema("rhofa", float, 10, 10, None),
+    FieldSchema("rhocca", float, 20, 10, None),
+    FieldSchema("diffa", float, 30, 10, None),
+    FieldSchema("conda", float, 40, 10, None),
+)
+
+_BATTERYECHEMMATANODE_CARD2 = (
+    FieldSchema("vfea", float, 0, 10, None),
+    FieldSchema("vfpa", float, 10, 10, None),
+    FieldSchema("vffa", float, 20, 10, None),
+    FieldSchema("vfga", float, 30, 10, None),
+)
 
 class BatteryEchemMatAnode(KeywordBase):
     """DYNA BATTERY_ECHEM_MAT_ANODE keyword"""
@@ -35,132 +61,16 @@ class BatteryEchemMatAnode(KeywordBase):
         """Initialize the BatteryEchemMatAnode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iocpa",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "capta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s_xa",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rada",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ratea",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ranode",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rhoea",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhofa",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhocca",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diffa",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "conda",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vfea",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vfpa",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vffa",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vfga",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMMATANODE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMMATANODE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMMATANODE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part IDr

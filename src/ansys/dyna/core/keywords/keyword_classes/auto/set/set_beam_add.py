@@ -23,9 +23,14 @@
 """Module providing the SetBeamAdd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SETBEAMADD_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
 
 class SetBeamAdd(KeywordBase):
     """DYNA SET_BEAM_ADD keyword"""
@@ -41,25 +46,16 @@ class SetBeamAdd(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETBEAMADD_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "beams",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("beams")),
-            OptionCardSet(
+                data = kwargs.get("beams")),            OptionCardSet(
                 option_spec = SetBeamAdd.option_specs[0],
                 cards = [
                     Card(
@@ -77,7 +73,6 @@ class SetBeamAdd(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID of new beam set. All beam sets should have a unique set ID.

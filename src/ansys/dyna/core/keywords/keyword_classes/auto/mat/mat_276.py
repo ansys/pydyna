@@ -23,8 +23,38 @@
 """Module providing the Mat276 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT276_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("bulk", float, 20, 10, None),
+    FieldSchema("pcf", float, 30, 10, None),
+    FieldSchema("ef", float, 40, 10, None),
+    FieldSchema("tref", float, 50, 10, None),
+    FieldSchema("a", float, 60, 10, None),
+    FieldSchema("b", float, 70, 10, None),
+)
+
+_MAT276_CARD1 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("nt", int, 10, 10, None),
+    FieldSchema("bstart", float, 20, 10, None),
+    FieldSchema("tramp", float, 30, 10, None),
+    FieldSchema("lcidk", int, 40, 10, None),
+    FieldSchema("ntk", int, 50, 10, None),
+    FieldSchema("bstartk", float, 60, 10, None),
+    FieldSchema("trampk", float, 70, 10, None),
+)
+
+_MAT276_CARD2 = (
+    FieldSchema("gi", float, 0, 10, None),
+    FieldSchema("betai", float, 10, 10, None),
+    FieldSchema("ki", float, 20, 10, None),
+    FieldSchema("betaki", float, 30, 10, None),
+)
 
 class Mat276(KeywordBase):
     """DYNA MAT_276 keyword"""
@@ -40,159 +70,16 @@ class Mat276(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulk",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pcf",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ef",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tref",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bstart",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tramp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidk",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntk",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bstartk",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "trampk",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ki",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betaki",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT276_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT276_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT276_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat276.option_specs[0],
                 cards = [
                     Card(
@@ -210,7 +97,6 @@ class Mat276(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.

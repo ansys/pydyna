@@ -23,7 +23,13 @@
 """Module providing the ControlFormingTrimSolidRefinement class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGTRIMSOLIDREFINEMENT_CARD0 = (
+    FieldSchema("irefine", int, 0, 10, 1),
+    FieldSchema("ilevel", int, 10, 10, 0),
+)
 
 class ControlFormingTrimSolidRefinement(KeywordBase):
     """DYNA CONTROL_FORMING_TRIM_SOLID_REFINEMENT keyword"""
@@ -35,28 +41,10 @@ class ControlFormingTrimSolidRefinement(KeywordBase):
         """Initialize the ControlFormingTrimSolidRefinement class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "irefine",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ilevel",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTRIMSOLIDREFINEMENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def irefine(self) -> int:
         """Get or set the A flag to activate the adaptive trimming of a multi-layer sandwiched part. Currently setting this to either 0 or 1 will turn on the adaptive trimming.

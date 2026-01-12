@@ -23,8 +23,69 @@
 """Module providing the Mat145 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT145_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("shear", float, 20, 10, None),
+    FieldSchema("bulk", float, 30, 10, None),
+    FieldSchema("grun", float, 40, 10, None),
+    FieldSchema("shock", float, 50, 10, None),
+    FieldSchema("pore", float, 60, 10, 1.0),
+)
+
+_MAT145_CARD1 = (
+    FieldSchema("alpha", float, 0, 10, None),
+    FieldSchema("theta", float, 10, 10, None),
+    FieldSchema("gamma", float, 20, 10, None),
+    FieldSchema("beta", float, 30, 10, None),
+    FieldSchema("efit", float, 40, 10, None),
+    FieldSchema("ffit", float, 50, 10, None),
+    FieldSchema("alphan", float, 60, 10, None),
+    FieldSchema("calpha", float, 70, 10, None),
+)
+
+_MAT145_CARD2 = (
+    FieldSchema("ro", float, 0, 10, None),
+    FieldSchema("xo", float, 10, 10, None),
+    FieldSchema("irock", float, 20, 10, 0.0),
+    FieldSchema("secp", float, 30, 10, None),
+    FieldSchema("afit", float, 40, 10, None),
+    FieldSchema("bfit", float, 50, 10, None),
+    FieldSchema("rdamo", float, 60, 10, None),
+)
+
+_MAT145_CARD3 = (
+    FieldSchema("w", float, 0, 10, None),
+    FieldSchema("d1", float, 10, 10, None),
+    FieldSchema("d2", float, 20, 10, None),
+    FieldSchema("nplot", float, 30, 10, None),
+    FieldSchema("epsmax", float, 40, 10, 0.0),
+    FieldSchema("cfit", float, 50, 10, None),
+    FieldSchema("dfit", float, 60, 10, None),
+    FieldSchema("tfail", float, 70, 10, None),
+)
+
+_MAT145_CARD4 = (
+    FieldSchema("failfg", float, 0, 10, 1.0),
+    FieldSchema("dbeta", float, 10, 10, None),
+    FieldSchema("ddelta", float, 20, 10, None),
+    FieldSchema("vptau", float, 30, 10, None),
+)
+
+_MAT145_CARD5 = (
+    FieldSchema("alpha1", float, 0, 10, None),
+    FieldSchema("theta1", float, 10, 10, None),
+    FieldSchema("gamma1", float, 20, 10, None),
+    FieldSchema("beta1", float, 30, 10, None),
+    FieldSchema("alpha2", float, 40, 10, None),
+    FieldSchema("theta2", float, 50, 10, None),
+    FieldSchema("gamma2", float, 60, 10, None),
+    FieldSchema("beta2", float, 70, 10, None),
+)
 
 class Mat145(KeywordBase):
     """DYNA MAT_145 keyword"""
@@ -40,329 +101,25 @@ class Mat145(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shear",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulk",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "grun",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "shock",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pore",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alpha",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theta",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "efit",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ffit",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alphan",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "calpha",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ro",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xo",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irock",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "secp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "afit",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bfit",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdamo",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "w",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplot",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsmax",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cfit",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfit",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tfail",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "failfg",
-                        float,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dbeta",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ddelta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vptau",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "alpha1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theta1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "theta2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT145_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT145_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT145_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT145_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT145_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT145_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat145.option_specs[0],
                 cards = [
                     Card(
@@ -380,7 +137,6 @@ class Mat145(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be chosen.

@@ -23,8 +23,25 @@
 """Module providing the DefineBoxNodesAdaptive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEBOXNODESADAPTIVE_CARD0 = (
+    FieldSchema("boxid", int, 0, 10, 0),
+    FieldSchema("node", int, 10, 10, 0),
+    FieldSchema("lcx", int, 20, 10, None),
+    FieldSchema("lcy", int, 30, 10, None),
+    FieldSchema("lcz", int, 40, 10, None),
+    FieldSchema("itype", int, 50, 10, 0),
+    FieldSchema("radius", float, 60, 10, 0.0),
+    FieldSchema("npiece", int, 70, 10, 0),
+)
+
+_DEFINEBOXNODESADAPTIVE_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("level", int, 10, 10, None),
+)
 
 class DefineBoxNodesAdaptive(KeywordBase):
     """DYNA DEFINE_BOX_NODES_ADAPTIVE keyword"""
@@ -40,90 +57,13 @@ class DefineBoxNodesAdaptive(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "boxid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcx",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcy",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcz",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npiece",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "level",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXNODESADAPTIVE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXNODESADAPTIVE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineBoxNodesAdaptive.option_specs[0],
                 cards = [
                     Card(
@@ -141,7 +81,6 @@ class DefineBoxNodesAdaptive(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def boxid(self) -> int:
         """Get or set the Box ID. Define unique numbers.

@@ -23,7 +23,14 @@
 """Module providing the ControlFormingOnestepFriction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGONESTEPFRICTION_CARD0 = (
+    FieldSchema("ndset", int, 0, 10, None),
+    FieldSchema("bdton", float, 10, 10, 0.0),
+    FieldSchema("frict", float, 20, 10, 0.12),
+)
 
 class ControlFormingOnestepFriction(KeywordBase):
     """DYNA CONTROL_FORMING_ONESTEP_FRICTION keyword"""
@@ -35,35 +42,10 @@ class ControlFormingOnestepFriction(KeywordBase):
         """Initialize the ControlFormingOnestepFriction class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ndset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bdton",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frict",
-                        float,
-                        20,
-                        10,
-                        0.12,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGONESTEPFRICTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ndset(self) -> typing.Optional[int]:
         """Get or set the Node set ID along the periphery of the part, as defined by keyword *SET_NODE_LIST.

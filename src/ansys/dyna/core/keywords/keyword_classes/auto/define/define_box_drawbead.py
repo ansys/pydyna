@@ -23,8 +23,19 @@
 """Module providing the DefineBoxDrawbead class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEBOXDRAWBEAD_CARD0 = (
+    FieldSchema("boxid", int, 0, 10, 0),
+    FieldSchema("pid", int, 10, 10, 0),
+    FieldSchema("sid", int, 20, 10, 0),
+    FieldSchema("idir", int, 30, 10, 1),
+    FieldSchema("stype", int, 40, 10, 4),
+    FieldSchema("radius", float, 50, 10, 0.0),
+    FieldSchema("cid", int, 60, 10, 0),
+)
 
 class DefineBoxDrawbead(KeywordBase):
     """DYNA DEFINE_BOX_DRAWBEAD keyword"""
@@ -40,67 +51,10 @@ class DefineBoxDrawbead(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "boxid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idir",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        40,
-                        10,
-                        4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEBOXDRAWBEAD_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineBoxDrawbead.option_specs[0],
                 cards = [
                     Card(
@@ -118,7 +72,6 @@ class DefineBoxDrawbead(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def boxid(self) -> int:
         """Get or set the Box ID. Define unique numbers.

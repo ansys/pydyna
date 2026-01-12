@@ -23,7 +23,26 @@
 """Module providing the LoadPyroActuator class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADPYROACTUATOR_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("id1", int, 10, 10, None),
+    FieldSchema("id2", int, 20, 10, None),
+    FieldSchema("csa", float, 30, 10, None),
+    FieldSchema("vol", float, 40, 10, None),
+    FieldSchema("prs", float, 50, 10, None),
+    FieldSchema("dens", float, 60, 10, None),
+    FieldSchema("atime", float, 70, 10, None),
+)
+
+_LOADPYROACTUATOR_CARD1 = (
+    FieldSchema("mcid", int, 0, 10, None),
+    FieldSchema("cv", float, 10, 10, None),
+    FieldSchema("cp", float, 20, 10, None),
+    FieldSchema("temp", float, 30, 10, None),
+)
 
 class LoadPyroActuator(KeywordBase):
     """DYNA LOAD_PYRO_ACTUATOR keyword"""
@@ -35,100 +54,13 @@ class LoadPyroActuator(KeywordBase):
         """Initialize the LoadPyroActuator class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "csa",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "prs",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dens",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "atime",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADPYROACTUATOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADPYROACTUATOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Unique ID for actuator.

@@ -23,8 +23,18 @@
 """Module providing the MatIsotropicElasticPlastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATISOTROPICELASTICPLASTIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("g", float, 20, 10, None),
+    FieldSchema("sigy", float, 30, 10, None),
+    FieldSchema("etan", float, 40, 10, None),
+    FieldSchema("bulk", float, 50, 10, None),
+)
 
 class MatIsotropicElasticPlastic(KeywordBase):
     """DYNA MAT_ISOTROPIC_ELASTIC_PLASTIC keyword"""
@@ -40,53 +50,10 @@ class MatIsotropicElasticPlastic(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etan",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulk",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATISOTROPICELASTICPLASTIC_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatIsotropicElasticPlastic.option_specs[0],
                 cards = [
                     Card(
@@ -104,7 +71,6 @@ class MatIsotropicElasticPlastic(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

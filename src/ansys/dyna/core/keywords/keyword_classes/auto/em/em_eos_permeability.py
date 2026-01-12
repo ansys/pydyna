@@ -23,7 +23,14 @@
 """Module providing the EmEosPermeability class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMEOSPERMEABILITY_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("eostype", int, 10, 10, 1),
+    FieldSchema("lcid", int, 20, 10, None),
+)
 
 class EmEosPermeability(KeywordBase):
     """DYNA EM_EOS_PERMEABILITY keyword"""
@@ -35,34 +42,10 @@ class EmEosPermeability(KeywordBase):
         """Initialize the EmEosPermeability class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eostype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEOSPERMEABILITY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Id of the EM_EOS.

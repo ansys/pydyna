@@ -23,7 +23,29 @@
 """Module providing the Fatigue class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FATIGUE_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("ptype", int, 10, 10, 0),
+)
+
+_FATIGUE_CARD1 = (
+    FieldSchema("dt", float, 0, 10, None),
+)
+
+_FATIGUE_CARD2 = (
+    FieldSchema("strsn", int, 0, 10, 0),
+    FieldSchema("index", int, 10, 10, 0),
+    FieldSchema("restrt", int, 20, 10, 0),
+    FieldSchema("texpos", float, 30, 10, 0.0),
+    FieldSchema("dmgmin", float, 40, 10, 0.0),
+)
+
+_FATIGUE_CARD3 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class Fatigue(KeywordBase):
     """DYNA FATIGUE keyword"""
@@ -35,93 +57,19 @@ class Fatigue(KeywordBase):
         """Initialize the Fatigue class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "strsn",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "index",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "restrt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "texpos",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmgmin",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FATIGUE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FATIGUE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FATIGUE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FATIGUE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID, Part Set ID, or Element (solid, shell, beam, thick shell) Set ID.

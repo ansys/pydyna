@@ -23,7 +23,19 @@
 """Module providing the EmControlTimestep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTROLTIMESTEP_CARD0 = (
+    FieldSchema("tstype", int, 0, 10, 1),
+    FieldSchema("dtcons", float, 10, 10, None),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("factor", float, 30, 10, 1.0),
+    FieldSchema("tsmin", float, 40, 10, None),
+    FieldSchema("tsmas", float, 50, 10, None),
+    FieldSchema("rlcsf", int, 60, 10, 25),
+    FieldSchema("mecats", int, 70, 10, 0),
+)
 
 class EmControlTimestep(KeywordBase):
     """DYNA EM_CONTROL_TIMESTEP keyword"""
@@ -35,72 +47,10 @@ class EmControlTimestep(KeywordBase):
         """Initialize the EmControlTimestep class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tstype",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtcons",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "factor",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsmin",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsmas",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rlcsf",
-                        int,
-                        60,
-                        10,
-                        25,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mecats",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTROLTIMESTEP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def tstype(self) -> int:
         """Get or set the Time Step type

@@ -23,8 +23,23 @@
 """Module providing the DefineFunctionTabulated class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEFUNCTIONTABULATED_CARD0 = (
+    FieldSchema("fid", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_DEFINEFUNCTIONTABULATED_CARD1 = (
+    FieldSchema("function", str, 0, 80, None),
+)
+
+_DEFINEFUNCTIONTABULATED_CARD2 = (
+    FieldSchema("a1", float, 0, 20, None),
+    FieldSchema("o1", float, 20, 20, None),
+)
 
 class DefineFunctionTabulated(KeywordBase):
     """DYNA DEFINE_FUNCTION_TABULATED keyword"""
@@ -40,54 +55,16 @@ class DefineFunctionTabulated(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "function",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a1",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "o1",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFUNCTIONTABULATED_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEFUNCTIONTABULATED_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEFUNCTIONTABULATED_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFunctionTabulated.option_specs[0],
                 cards = [
                     Card(
@@ -105,7 +82,6 @@ class DefineFunctionTabulated(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def fid(self) -> typing.Optional[int]:
         """Get or set the Function ID.  Functions, tables (see *DEFINE_TABLE), and load curves may not share common ID's.  A unique number has to be defined.

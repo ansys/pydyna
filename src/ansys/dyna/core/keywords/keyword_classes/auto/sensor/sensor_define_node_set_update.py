@@ -23,8 +23,25 @@
 """Module providing the SensorDefineNodeSetUpdate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SENSORDEFINENODESETUPDATE_CARD0 = (
+    FieldSchema("sensid", int, 0, 10, None),
+    FieldSchema("node1", int, 10, 10, None),
+    FieldSchema("node2", int, 20, 10, None),
+    FieldSchema("vid", str, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("ctype", str, 50, 10, "ACC"),
+    FieldSchema("setopt", str, 60, 10, "AVG"),
+)
+
+_SENSORDEFINENODESETUPDATE_CARD1 = (
+    FieldSchema("birth", float, 0, 10, None),
+    FieldSchema("death", float, 10, 10, None),
+    FieldSchema("dtupd", float, 20, 10, None),
+)
 
 class SensorDefineNodeSetUpdate(KeywordBase):
     """DYNA SENSOR_DEFINE_NODE_SET_UPDATE keyword"""
@@ -40,87 +57,13 @@ class SensorDefineNodeSetUpdate(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sensid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        str,
-                        50,
-                        10,
-                        "ACC",
-                        **kwargs,
-                    ),
-                    Field(
-                        "setopt",
-                        str,
-                        60,
-                        10,
-                        "AVG",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "birth",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtupd",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINENODESETUPDATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINENODESETUPDATE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorDefineNodeSetUpdate.option_specs[0],
                 cards = [
                     Card(
@@ -138,7 +81,6 @@ class SensorDefineNodeSetUpdate(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def sensid(self) -> typing.Optional[int]:
         """Get or set the Sensor ID.

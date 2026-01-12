@@ -23,8 +23,46 @@
 """Module providing the MatGeneralViscoelasticMoisture class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATGENERALVISCOELASTICMOISTURE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("bulk", float, 20, 10, None),
+    FieldSchema("pcf", float, 30, 10, None),
+    FieldSchema("ef", float, 40, 10, 0.0),
+    FieldSchema("tref", float, 50, 10, None),
+    FieldSchema("a", float, 60, 10, None),
+    FieldSchema("b", float, 70, 10, None),
+)
+
+_MATGENERALVISCOELASTICMOISTURE_CARD1 = (
+    FieldSchema("lcid", int, 0, 10, None),
+    FieldSchema("nt", int, 10, 10, 6),
+    FieldSchema("bstart", float, 20, 10, 0.01),
+    FieldSchema("tramp", float, 30, 10, None),
+    FieldSchema("lcidk", int, 40, 10, None),
+    FieldSchema("ntk", int, 50, 10, 6),
+    FieldSchema("bstartk", float, 60, 10, 0.01),
+    FieldSchema("trampk", float, 70, 10, None),
+)
+
+_MATGENERALVISCOELASTICMOISTURE_CARD2 = (
+    FieldSchema("mo", float, 0, 10, None),
+    FieldSchema("alpha", float, 10, 10, None),
+    FieldSchema("beta", float, 20, 10, None),
+    FieldSchema("gamma", float, 30, 10, None),
+    FieldSchema("mst", float, 30, 10, None),
+)
+
+_MATGENERALVISCOELASTICMOISTURE_CARD3 = (
+    FieldSchema("gi", float, 0, 10, None),
+    FieldSchema("betai", float, 10, 10, None),
+    FieldSchema("ki", float, 20, 10, None),
+    FieldSchema("betaki", float, 30, 10, None),
+)
 
 class MatGeneralViscoelasticMoisture(KeywordBase):
     """DYNA MAT_GENERAL_VISCOELASTIC_MOISTURE keyword"""
@@ -40,203 +78,19 @@ class MatGeneralViscoelasticMoisture(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bulk",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pcf",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ef",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tref",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nt",
-                        int,
-                        10,
-                        10,
-                        6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bstart",
-                        float,
-                        20,
-                        10,
-                        0.01,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tramp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidk",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntk",
-                        int,
-                        50,
-                        10,
-                        6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bstartk",
-                        float,
-                        60,
-                        10,
-                        0.01,
-                        **kwargs,
-                    ),
-                    Field(
-                        "trampk",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mo",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mst",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "gi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ki",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betaki",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATGENERALVISCOELASTICMOISTURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALVISCOELASTICMOISTURE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALVISCOELASTICMOISTURE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGENERALVISCOELASTICMOISTURE_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatGeneralViscoelasticMoisture.option_specs[0],
                 cards = [
                     Card(
@@ -254,7 +108,6 @@ class MatGeneralViscoelasticMoisture(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

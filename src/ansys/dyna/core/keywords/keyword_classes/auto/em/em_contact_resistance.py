@@ -23,7 +23,20 @@
 """Module providing the EmContactResistance class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTACTRESISTANCE_CARD0 = (
+    FieldSchema("crid", int, 0, 10, None),
+    FieldSchema("contid", int, 10, 10, None),
+    FieldSchema("ctype", int, 20, 10, 1),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("jhrtype", int, 40, 10, 0),
+)
+
+_EMCONTACTRESISTANCE_CARD1 = (
+    FieldSchema("dfid", int, 0, 10, None),
+)
 
 class EmContactResistance(KeywordBase):
     """DYNA EM_CONTACT_RESISTANCE keyword"""
@@ -35,60 +48,13 @@ class EmContactResistance(KeywordBase):
         """Initialize the EmContactResistance class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "crid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "contid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "jhrtype",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dfid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTACTRESISTANCE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMCONTACTRESISTANCE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def crid(self) -> typing.Optional[int]:
         """Get or set the Resistive contact ID.

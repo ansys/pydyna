@@ -23,7 +23,29 @@
 """Module providing the LoadMovingPressure class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADMOVINGPRESSURE_CARD0 = (
+    FieldSchema("loadid", int, 0, 10, None),
+)
+
+_LOADMOVINGPRESSURE_CARD1 = (
+    FieldSchema("node1", int, 0, 10, None),
+    FieldSchema("node2", int, 10, 10, None),
+    FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("cutoff", float, 30, 10, None),
+    FieldSchema("lcidt", int, 40, 10, None),
+    FieldSchema("lcidd", int, 50, 10, None),
+    FieldSchema("idir", int, 60, 10, 0),
+    FieldSchema("lsflg", int, 70, 10, 0),
+)
+
+_LOADMOVINGPRESSURE_CARD2 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("idtype", int, 10, 10, 0),
+    FieldSchema("nip", int, 20, 10, None),
+)
 
 class LoadMovingPressure(KeywordBase):
     """DYNA LOAD_MOVING_PRESSURE keyword"""
@@ -35,107 +57,16 @@ class LoadMovingPressure(KeywordBase):
         """Initialize the LoadMovingPressure class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "loadid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "node1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "node2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cutoff",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidt",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcidd",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idir",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lsflg",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idtype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nip",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADMOVINGPRESSURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADMOVINGPRESSURE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADMOVINGPRESSURE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def loadid(self) -> typing.Optional[int]:
         """Get or set the Loading ID

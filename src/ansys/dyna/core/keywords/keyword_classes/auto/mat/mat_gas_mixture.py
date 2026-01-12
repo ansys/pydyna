@@ -23,8 +23,81 @@
 """Module providing the MatGasMixture class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATGASMIXTURE_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("iadiab", int, 10, 10, 0),
+    FieldSchema("runiv", float, 20, 10, None),
+)
+
+_MATGASMIXTURE_CARD1 = (
+    FieldSchema("cvmass1", float, 0, 10, None),
+    FieldSchema("cvmass2", float, 10, 10, None),
+    FieldSchema("cvmass3", float, 20, 10, None),
+    FieldSchema("cvmass4", float, 30, 10, None),
+    FieldSchema("cvmass5", float, 40, 10, None),
+    FieldSchema("cvmass6", float, 50, 10, None),
+    FieldSchema("cvmass7", float, 60, 10, None),
+    FieldSchema("cvmass8", float, 70, 10, None),
+)
+
+_MATGASMIXTURE_CARD2 = (
+    FieldSchema("cpmass1", float, 0, 10, None),
+    FieldSchema("cpmass2", float, 10, 10, None),
+    FieldSchema("cpmass3", float, 20, 10, None),
+    FieldSchema("cpmass4", float, 30, 10, None),
+    FieldSchema("cpmass5", float, 40, 10, None),
+    FieldSchema("cpmass6", float, 50, 10, None),
+    FieldSchema("cpmass7", float, 60, 10, None),
+    FieldSchema("cpmass8", float, 70, 10, None),
+)
+
+_MATGASMIXTURE_CARD3 = (
+    FieldSchema("molwt1", float, 0, 10, None),
+    FieldSchema("molwt2", float, 10, 10, None),
+    FieldSchema("molwt3", float, 20, 10, None),
+    FieldSchema("molwt4", float, 30, 10, None),
+    FieldSchema("molwt5", float, 40, 10, None),
+    FieldSchema("molwt6", float, 50, 10, None),
+    FieldSchema("molwt7", float, 60, 10, None),
+    FieldSchema("molwt8", float, 70, 10, None),
+)
+
+_MATGASMIXTURE_CARD4 = (
+    FieldSchema("cpmole1", float, 0, 10, None),
+    FieldSchema("cpmole2", float, 10, 10, None),
+    FieldSchema("cpmole3", float, 20, 10, None),
+    FieldSchema("cpmole4", float, 30, 10, None),
+    FieldSchema("cpmole5", float, 40, 10, None),
+    FieldSchema("cpmole6", float, 50, 10, None),
+    FieldSchema("cpmole7", float, 60, 10, None),
+    FieldSchema("cpmole8", float, 70, 10, None),
+)
+
+_MATGASMIXTURE_CARD5 = (
+    FieldSchema("b1", float, 0, 10, None),
+    FieldSchema("b2", float, 10, 10, None),
+    FieldSchema("b3", float, 20, 10, None),
+    FieldSchema("b4", float, 30, 10, None),
+    FieldSchema("b5", float, 40, 10, None),
+    FieldSchema("b6", float, 50, 10, None),
+    FieldSchema("b7", float, 60, 10, None),
+    FieldSchema("b8", float, 70, 10, None),
+)
+
+_MATGASMIXTURE_CARD6 = (
+    FieldSchema("c1", float, 0, 10, None),
+    FieldSchema("c2", float, 10, 10, None),
+    FieldSchema("c3", float, 20, 10, None),
+    FieldSchema("c4", float, 30, 10, None),
+    FieldSchema("c5", float, 40, 10, None),
+    FieldSchema("c6", float, 50, 10, None),
+    FieldSchema("c7", float, 60, 10, None),
+    FieldSchema("c8", float, 70, 10, None),
+)
 
 class MatGasMixture(KeywordBase):
     """DYNA MAT_GAS_MIXTURE keyword"""
@@ -40,393 +113,28 @@ class MatGasMixture(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iadiab",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "runiv",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cvmass1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvmass2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvmass3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvmass4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvmass5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvmass6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvmass7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvmass8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cpmass1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmass2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmass3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmass4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmass5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmass6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmass7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmass8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "molwt1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "molwt2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "molwt3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "molwt4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "molwt5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "molwt6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "molwt7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "molwt8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cpmole1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmole2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmole3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmole4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmole5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmole6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmole7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmole8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "b1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATGASMIXTURE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGASMIXTURE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGASMIXTURE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGASMIXTURE_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGASMIXTURE_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGASMIXTURE_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATGASMIXTURE_CARD6,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatGasMixture.option_specs[0],
                 cards = [
                     Card(
@@ -444,7 +152,6 @@ class MatGasMixture(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

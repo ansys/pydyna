@@ -23,8 +23,26 @@
 """Module providing the MatThermalIsotropicTdLc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATTHERMALISOTROPICTDLC_CARD0 = (
+    FieldSchema("tmid", int, 0, 10, None),
+    FieldSchema("tro", float, 10, 10, None),
+    FieldSchema("tgrlc", int, 20, 10, None),
+    FieldSchema("tgmult", float, 30, 10, None),
+    FieldSchema("tlat", float, 40, 10, None),
+    FieldSchema("hlat", float, 50, 10, None),
+)
+
+_MATTHERMALISOTROPICTDLC_CARD1 = (
+    FieldSchema("hclc", int, 0, 10, None),
+    FieldSchema("tclc", int, 10, 10, None),
+    FieldSchema("hchsv", float, 20, 10, None),
+    FieldSchema("tchsv", float, 30, 10, None),
+    FieldSchema("tghsv", float, 40, 10, None),
+)
 
 class MatThermalIsotropicTdLc(KeywordBase):
     """DYNA MAT_THERMAL_ISOTROPIC_TD_LC keyword"""
@@ -40,92 +58,13 @@ class MatThermalIsotropicTdLc(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tmid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tgrlc",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tgmult",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tlat",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hlat",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hclc",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tclc",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hchsv",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tchsv",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tghsv",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATTHERMALISOTROPICTDLC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATTHERMALISOTROPICTDLC_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatThermalIsotropicTdLc.option_specs[0],
                 cards = [
                     Card(
@@ -143,7 +82,6 @@ class MatThermalIsotropicTdLc(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def tmid(self) -> typing.Optional[int]:
         """Get or set the Thermal conductivity at T1al material identification, a unique number has to be used.

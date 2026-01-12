@@ -23,7 +23,12 @@
 """Module providing the ControlConstranined class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLCONSTRANINED_CARD0 = (
+    FieldSchema("sprchk", int, 0, 10, 0),
+)
 
 class ControlConstranined(KeywordBase):
     """DYNA CONTROL_CONSTRANINED keyword"""
@@ -35,20 +40,10 @@ class ControlConstranined(KeywordBase):
         """Initialize the ControlConstranined class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sprchk",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCONSTRANINED_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sprchk(self) -> int:
         """Get or set the SPR2/SPR3 initialization check:

@@ -23,7 +23,24 @@
 """Module providing the InterfaceBlanksizeInitialAdaptive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACEBLANKSIZEINITIALADAPTIVE_CARD0 = (
+    FieldSchema("filename9", str, 0, 80, None),
+)
+
+_INTERFACEBLANKSIZEINITIALADAPTIVE_CARD1 = (
+    FieldSchema("filename10", str, 0, 80, None),
+)
+
+_INTERFACEBLANKSIZEINITIALADAPTIVE_CARD2 = (
+    FieldSchema("filename11", str, 0, 80, None),
+)
+
+_INTERFACEBLANKSIZEINITIALADAPTIVE_CARD3 = (
+    FieldSchema("filename12", str, 0, 80, None),
+)
 
 class InterfaceBlanksizeInitialAdaptive(KeywordBase):
     """DYNA INTERFACE_BLANKSIZE_INITIAL_ADAPTIVE keyword"""
@@ -35,52 +52,19 @@ class InterfaceBlanksizeInitialAdaptive(KeywordBase):
         """Initialize the InterfaceBlanksizeInitialAdaptive class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename9",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename10",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename11",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename12",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZEINITIALADAPTIVE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZEINITIALADAPTIVE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZEINITIALADAPTIVE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZEINITIALADAPTIVE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def filename9(self) -> typing.Optional[str]:
         """Get or set the The following file names, FILENAME8~11 are for the option INITIAL_ADAPTIVE:

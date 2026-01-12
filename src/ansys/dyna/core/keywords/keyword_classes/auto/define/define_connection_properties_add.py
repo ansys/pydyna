@@ -23,8 +23,40 @@
 """Module providing the DefineConnectionPropertiesAdd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECONNECTIONPROPERTIESADD_CARD0 = (
+    FieldSchema("con_id", int, 0, 10, None),
+    FieldSchema("proprul", int, 10, 10, 0),
+    FieldSchema("areaeq", int, 20, 10, 0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("dg_typ", int, 40, 10, 0),
+    FieldSchema("moarfl", int, 50, 10, 0),
+)
+
+_DEFINECONNECTIONPROPERTIESADD_CARD1 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("sgiy", float, 10, 10, None),
+    FieldSchema("etan", float, 20, 10, None),
+    FieldSchema("dgpr", float, 30, 10, 10000000000.0),
+    FieldSchema("rank", float, 40, 10, None),
+    FieldSchema("sn", float, 50, 10, None),
+    FieldSchema("sb", float, 60, 10, None),
+    FieldSchema("ss", float, 70, 10, None),
+)
+
+_DEFINECONNECTIONPROPERTIESADD_CARD2 = (
+    FieldSchema("exsn", float, 0, 10, None),
+    FieldSchema("exsb", float, 10, 10, None),
+    FieldSchema("exss", float, 20, 10, None),
+    FieldSchema("lcsn", int, 30, 10, None),
+    FieldSchema("lcsb", int, 40, 10, None),
+    FieldSchema("lcss", int, 50, 10, None),
+    FieldSchema("gfad", int, 60, 10, None),
+    FieldSchema("sclmrr", float, 70, 10, 1.0),
+)
 
 class DefineConnectionPropertiesAdd(KeywordBase):
     """DYNA DEFINE_CONNECTION_PROPERTIES_ADD keyword"""
@@ -40,179 +72,16 @@ class DefineConnectionPropertiesAdd(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "con_id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "proprul",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "areaeq",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dg_typ",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "moarfl",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sgiy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etan",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dgpr",
-                        float,
-                        30,
-                        10,
-                        1.0E+10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rank",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sn",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sb",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ss",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "exsn",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exsb",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exss",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsn",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcsb",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcss",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gfad",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sclmrr",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECONNECTIONPROPERTIESADD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECONNECTIONPROPERTIESADD_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECONNECTIONPROPERTIESADD_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineConnectionPropertiesAdd.option_specs[0],
                 cards = [
                     Card(
@@ -230,7 +99,6 @@ class DefineConnectionPropertiesAdd(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def con_id(self) -> typing.Optional[int]:
         """Get or set the Connection ID of an existing *DEFINE_CONNECTION_PROPERTIES table

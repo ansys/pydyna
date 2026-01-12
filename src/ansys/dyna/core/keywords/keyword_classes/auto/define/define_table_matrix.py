@@ -23,8 +23,25 @@
 """Module providing the DefineTableMatrix class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINETABLEMATRIX_CARD0 = (
+    FieldSchema("tbid", int, 0, 10, None),
+    FieldSchema("filename", str, 10, 70, None),
+)
+
+_DEFINETABLEMATRIX_CARD1 = (
+    FieldSchema("nrow", int, 0, 10, None),
+    FieldSchema("ncol", int, 10, 10, None),
+    FieldSchema("srow", float, 20, 10, 1.0),
+    FieldSchema("scol", float, 30, 10, 1.0),
+    FieldSchema("sval", float, 40, 10, 1.0),
+    FieldSchema("orow", float, 50, 10, None),
+    FieldSchema("ocol", float, 60, 10, None),
+    FieldSchema("oval", float, 70, 10, None),
+)
 
 class DefineTableMatrix(KeywordBase):
     """DYNA DEFINE_TABLE_MATRIX keyword"""
@@ -40,88 +57,13 @@ class DefineTableMatrix(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tbid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "filename",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nrow",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncol",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "srow",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scol",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sval",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orow",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ocol",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "oval",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINETABLEMATRIX_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINETABLEMATRIX_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineTableMatrix.option_specs[0],
                 cards = [
                     Card(
@@ -139,7 +81,6 @@ class DefineTableMatrix(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def tbid(self) -> typing.Optional[int]:
         """Get or set the Table ID. Tables and Load curves may not share common ID's.  LS-DYNA3D allows load curve ID's and table ID's to be used interchangeably. A negative value of TBID switches the interpretation of rows and columns in the read matrix.

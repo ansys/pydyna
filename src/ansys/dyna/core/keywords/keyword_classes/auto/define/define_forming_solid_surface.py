@@ -23,8 +23,15 @@
 """Module providing the DefineFormingSolidSurface class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEFORMINGSOLIDSURFACE_CARD0 = (
+    FieldSchema("spid", int, 0, 10, None),
+    FieldSchema("ssetlow", int, 10, 10, None),
+    FieldSchema("ssetupp", int, 20, 10, None),
+)
 
 class DefineFormingSolidSurface(KeywordBase):
     """DYNA DEFINE_FORMING_SOLID_SURFACE keyword"""
@@ -40,32 +47,10 @@ class DefineFormingSolidSurface(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "spid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssetlow",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssetupp",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFORMINGSOLIDSURFACE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFormingSolidSurface.option_specs[0],
                 cards = [
                     Card(
@@ -83,7 +68,6 @@ class DefineFormingSolidSurface(KeywordBase):
                 **kwargs
             ),
         ]
-
     @property
     def spid(self) -> typing.Optional[int]:
         """Get or set the Surface pair ID. A unique ID must be used.

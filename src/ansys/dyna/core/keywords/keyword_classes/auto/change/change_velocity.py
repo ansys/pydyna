@@ -23,7 +23,21 @@
 """Module providing the ChangeVelocity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHANGEVELOCITY_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+)
+
+_CHANGEVELOCITY_CARD1 = (
+    FieldSchema("vx", float, 0, 10, 0.0),
+    FieldSchema("vy", float, 10, 10, 0.0),
+    FieldSchema("vz", float, 20, 10, 0.0),
+    FieldSchema("vxr", float, 30, 10, 0.0),
+    FieldSchema("vyr", float, 40, 10, 0.0),
+    FieldSchema("vzr", float, 50, 10, 0.0),
+)
 
 class ChangeVelocity(KeywordBase):
     """DYNA CHANGE_VELOCITY keyword"""
@@ -35,71 +49,13 @@ class ChangeVelocity(KeywordBase):
         """Initialize the ChangeVelocity class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vxr",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vyr",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vzr",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGEVELOCITY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHANGEVELOCITY_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID containing nodes for initial velocity.
