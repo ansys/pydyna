@@ -158,6 +158,7 @@ class EMKeywordsMixin:
         mid: int,
         mtype: int = 0,
         sigma: float = 0.0,
+        eosid: int = 0,
     ) -> bool:
         """Create an EM_MAT_001 keyword.
 
@@ -169,6 +170,8 @@ class EMKeywordsMixin:
             Material type.
         sigma : float
             Electrical conductivity.
+        eosid : int
+            EOS ID for temperature-dependent conductivity.
 
         Returns
         -------
@@ -181,6 +184,8 @@ class EMKeywordsMixin:
         kw.mid = mid
         kw.mtype = mtype
         kw.sigma = sigma
+        if eosid:
+            kw.eosid = eosid
 
         self._deck.append(kw)
         logger.debug(f"Created EM_MAT_001 with mid={mid}, mtype={mtype}")
@@ -601,4 +606,33 @@ class EMKeywordsMixin:
 
         self._deck.append(kw)
         logger.debug(f"Created EM_DATABASE_GLOBALENERGY with outlv={outlv}")
+        return True
+
+    def create_em_eos_tabulated1(
+        self,
+        eosid: int,
+        lcid: int,
+    ) -> bool:
+        """Create an EM_EOS_TABULATED1 keyword.
+
+        Parameters
+        ----------
+        eosid : int
+            EOS ID.
+        lcid : int
+            Load curve ID for conductivity vs temperature.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.EmEosTabulated1()
+        kw.eosid = eosid
+        kw.lcid = lcid
+
+        self._deck.append(kw)
+        logger.debug(f"Created EM_EOS_TABULATED1 with eosid={eosid}, lcid={lcid}")
         return True

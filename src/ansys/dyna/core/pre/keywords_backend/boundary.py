@@ -172,3 +172,48 @@ class BoundaryKeywordsMixin:
         self._deck.append(kw)
         logger.debug(f"Created BOUNDARY_SPC_SET with nsid={nsid}")
         return True
+
+    def create_boundary_temperature_set(
+        self,
+        nsid: int,
+        lcid: int = 0,
+        cmult: float = 1.0,
+        loc: int = 0,
+        tdeath: float = 0.0,
+        tbirth: float = 0.0,
+    ) -> bool:
+        """Create a BOUNDARY_TEMPERATURE_SET keyword.
+
+        Parameters
+        ----------
+        nsid : int
+            Node set ID.
+        lcid : int
+            Load curve ID for temperature vs time. Use 0 for constant.
+        cmult : float
+            Curve multiplier (temperature value when lcid=0).
+        loc : int
+            Location flag.
+        tdeath : float
+            Death time.
+        tbirth : float
+            Birth time.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.BoundaryTemperatureSet()
+        kw.nsid = nsid
+        kw.lcid = lcid
+        kw.cmult = cmult
+        kw.loc = loc
+        kw.tdeath = tdeath
+        kw.tbirth = tbirth
+
+        self._deck.append(kw)
+        logger.debug(f"Created BOUNDARY_TEMPERATURE_SET with nsid={nsid}, cmult={cmult}")
+        return True

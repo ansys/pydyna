@@ -1997,10 +1997,128 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    @pytest.mark.xfail(reason="DynaEM not implemented in keywords backend")
     def test_resistive_heating(self, initial_files_dir, pre_reference_dir):
         """test_resistive_heating.k - EM resistive heating 3D."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.keywords import keywords
+
+        initial_file = os.path.join(initial_files_dir, "em", "test_resistive_heating.k")
+        reference_file = os.path.join(pre_reference_dir, "test_resistive_heating.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            # CONTROL_SOLUTION with soln=2 (thermal)
+            kw_solution = keywords.ControlSolution()
+            kw_solution.soln = 2
+            solution._backend._deck.append(kw_solution)
+
+            # CONTROL_TERMINATION
+            solution.set_termination(20.0)
+
+            # CONTROL_THERMAL_SOLVER with atype=1 (transient)
+            solution._backend.create_control_thermal_solver(atype=1)
+
+            # CONTROL_THERMAL_TIMESTEP with its=0.05
+            solution._backend.create_control_thermal_timestep(its=0.05)
+
+            # CONTROL_TIMESTEP with dt2ms=0.01, lctm=1
+            kw_timestep = keywords.ControlTimestep()
+            kw_timestep.tssfac = 0.9
+            kw_timestep.dt2ms = 0.01
+            kw_timestep.lctm = 1
+            solution._backend._deck.append(kw_timestep)
+
+            # DATABASE_BINARY_D3PLOT
+            solution.create_database_binary(dt=0.1)
+
+            # SET_NODE_LIST for boundary temperature (nodes 4507, 4508)
+            solution._backend.create_set_node_list(
+                sid=1,
+                nodes=[4507, 4508],
+            )
+
+            # BOUNDARY_TEMPERATURE_SET with cmult=50 (temperature value)
+            solution._backend.create_boundary_temperature_set(
+                nsid=1, lcid=0, cmult=50.0, loc=0
+            )
+
+            # PART 1 with SECTION_SOLID and MAT_ELASTIC (material 3, thermal 3)
+            solution._backend.create_section_solid(secid=3, elform=1)
+            solution._backend.create_mat_elastic(mid=3, ro=7000.0, e=1e11, pr=0.33)
+
+            # PART 2 with SECTION_SOLID and MAT_ELASTIC (material 1, thermal 1)
+            solution._backend.create_section_solid(secid=1, elform=1)
+            solution._backend.create_mat_elastic(mid=1, ro=8000.0, e=1e11, pr=0.33)
+
+            # PART 3 with SECTION_SOLID and MAT_ELASTIC (material 2, thermal 2)
+            solution._backend.create_section_solid(secid=2, elform=1)
+            solution._backend.create_mat_elastic(mid=2, ro=8000.0, e=1e11, pr=0.33)
+
+            # MAT_THERMAL_ISOTROPIC materials
+            solution._backend.create_mat_thermal_isotropic(
+                tmid=1, ro=8000.0, hc=400.0, tc=400.0
+            )
+            solution._backend.create_mat_thermal_isotropic(
+                tmid=2, ro=8000.0, hc=400.0, tc=400.0
+            )
+            solution._backend.create_mat_thermal_isotropic(
+                tmid=3, ro=7000.0, hc=450.0, tc=40.0
+            )
+
+            # INITIAL_TEMPERATURE_SET with temp=25
+            solution._backend.create_initial_temperature_set(nsid=0, temp=25.0)
+
+            # DEFINE_CURVE 1 for max timestep
+            solution._backend.create_define_curve(
+                lcid=1,
+                abscissa=[0.0, 9.9999997474e-5],
+                ordinate=[0.01, 0.01],
+            )
+
+            # DEFINE_CURVE 2 for EOS (conductivity vs temperature)
+            solution._backend.create_define_curve(
+                lcid=2,
+                abscissa=[0.0, 25.0, 50.0, 100.0],
+                ordinate=[4000000.0, 4000000.0, 400000.0, 400000.0],
+            )
+
+            # EM_OUTPUT
+            solution._backend.create_em_output(mats=2, matf=2, sols=2, solf=2)
+
+            # EM_CONTROL with emsol=3 (resistive heating)
+            solution._backend.create_em_control(
+                emsol=3, numls=100, macrodt=0.0, dimtype=0, nperio=2,
+                ncylfem=5000, ncylbem=5000
+            )
+
+            # EM_CONTROL_TIMESTEP with dtconst=0.01
+            solution._backend.create_em_timestep(tstype=1, dtconst=0.01, factor=1.0, rlcsf=25)
+
+            # EM_SOLVER_FEM
+            solution._backend.create_em_solver_fem(
+                reltol=0.001, maxite=1000, stype=1, precon=1, uselast=1, ncyclfem=3
+            )
+
+            # EM_EOS_TABULATED1 - conductivity vs temperature curve
+            solution._backend.create_em_eos_tabulated1(eosid=1, lcid=2)
+
+            # EM_MAT_001 for each part (materials 1, 2, 3)
+            # Material 1 and 2: mtype=2 (conductor), sigma=6e7, no eos
+            solution._backend.create_em_mat_001(mid=1, mtype=2, sigma=6e7)
+            solution._backend.create_em_mat_001(mid=2, mtype=2, sigma=6e7)
+            # Material 3: mtype=2 (conductor), sigma=4e6, eosid=1
+            solution._backend.create_em_mat_001(mid=3, mtype=2, sigma=4e6, eosid=1)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_resistive_heating.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_resistive_heating_2d(self, initial_files_dir, pre_reference_dir):
         """test_resistive_heating_2d.k - EM resistive heating 2D."""

@@ -37,6 +37,7 @@ class MiscKeywordsMixin:
         abscissa: List[float] = None,
         ordinate: List[float] = None,
         title: str = "",
+        lcid: int = None,
     ) -> int:
         """Create a DEFINE_CURVE keyword.
 
@@ -50,6 +51,8 @@ class MiscKeywordsMixin:
             Y values (dependent variable).
         title : str
             Curve title.
+        lcid : int, optional
+            Curve ID. If not provided, auto-generates one.
 
         Returns
         -------
@@ -65,7 +68,7 @@ class MiscKeywordsMixin:
         if ordinate is None:
             ordinate = []
 
-        curve_id = self.next_id("curve")
+        curve_id = lcid if lcid is not None else self.next_id("curve")
 
         kw = keywords.DefineCurve()
         kw.lcid = curve_id
@@ -382,4 +385,3 @@ class MiscKeywordsMixin:
 
         self._deck.append(kw)
         logger.info(f"Created LOAD_BODY_Z keyword with lcid={lcid}")
-
