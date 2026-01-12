@@ -2259,10 +2259,134 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    @pytest.mark.xfail(reason="DynaEM not implemented in keywords backend")
     def test_rlc_define_func(self, initial_files_dir, pre_reference_dir):
         """test_rlc_define_func.k - EM RLC circuit with defined function."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaem import (
+            DynaEM,
+            EMType,
+        )
+        from ansys.dyna.core.pre.dynamech import SolidPart, SolidFormulation
+        from ansys.dyna.core.pre.dynamaterial import MatRigid, EMMATTYPE
+
+        initial_file = os.path.join(initial_files_dir, "em", "test_rlc_define_func.k")
+        reference_file = os.path.join(pre_reference_dir, "test_rlc_define_func.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+            solution.set_termination(termination_time=0.01)
+            solution.create_database_binary(dt=1e-4)
+
+            emobj = DynaEM()
+            solution.add(emobj)
+
+            emobj.set_timestep(tssfac=1, timestep_size_for_mass_scaled=1e-4)
+
+            emobj.analysis.set_timestep(timestep=1e-4)
+            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING)
+
+            # Update EM_CONTROL to set nperio=2
+            from ansys.dyna.core.keywords import keywords
+            for kw in solution._backend._deck:
+                if isinstance(kw, keywords.EmControl):
+                    kw.nperio = 2
+                    break
+
+            matrigid = MatRigid(
+                mass_density=7000,
+                young_modulus=2e11,
+                center_of_mass_constraint=1,
+                translational_constraint=7,
+                rotational_constraint=7,
+            )
+            matrigid.set_em_permeability_equal(
+                material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=1e4
+            )
+
+            part1 = SolidPart(1)
+            part1.set_material(matrigid)
+            part1.set_element_formulation(SolidFormulation.CONSTANT_STRESS_SOLID_ELEMENT)
+            emobj.parts.add(part1)
+
+            # Create DEFINE_FUNCTION for RLC circuit
+            rlc_function = """float rlc(float time,float emdt,float curr,float curr1,
+            float curr2,float pot1,float pot2, float rmesh)
+            {
+            float fac,R,C,Vc,L,xi ;
+            R = 0.5e-3; L = 78.e-6;
+            fac =1.e-6; C=363.e-4;
+            float q= 181.5;
+            if(time<emdt) return fac;
+            q=q+emdt*curr;
+            Vc=q/C;
+            xi=(Vc*emdt-L*curr)/((R+rmesh)*emdt+L);
+            return xi*rmesh;
+            }"""
+            solution._backend.create_define_function(function=rlc_function, fid=1)
+
+            # Create SET_NODE_LIST entries
+            nset1_nodes = [
+                429, 433, 437, 441, 445, 449, 453, 457, 461, 465,
+                469, 473, 477, 481, 485, 489, 493, 497, 501, 505,
+                509, 513, 517, 521, 525,
+            ]
+            nset2_nodes = [
+                26, 31, 36, 41, 46, 51, 56, 61, 66, 71,
+                76, 81, 86, 91, 96, 101, 106, 111, 116, 121,
+                126, 131, 136, 141, 146,
+            ]
+            solution._backend.create_set_node_list_with_solver(sid=1, nodes=nset1_nodes, solver="MECH")
+            solution._backend.create_set_node_list_with_solver(sid=2, nodes=nset2_nodes, solver="MECH")
+
+            # Create EM_ISOPOTENTIAL entries
+            kw_iso1 = keywords.EmIsopotential()
+            kw_iso1.isoid = 1
+            kw_iso1.settype = 2  # node set
+            kw_iso1.setid = 1
+            kw_iso1.rdltype = 0
+            solution._backend._deck.append(kw_iso1)
+
+            kw_iso2 = keywords.EmIsopotential()
+            kw_iso2.isoid = 2
+            kw_iso2.settype = 2
+            kw_iso2.setid = 2
+            kw_iso2.rdltype = 0
+            solution._backend._deck.append(kw_iso2)
+
+            # Create EM_ISOPOTENTIAL_CONNECT entries
+            # conid=1: contype=3 (RLC), isoid1=1, isoid2=0, lcid_rdlid=-1 (negative = function ID)
+            kw_conn1 = keywords.EmIsopotentialConnect()
+            kw_conn1.conid = 1
+            kw_conn1.contype = 3  # RLC circuit
+            kw_conn1.isoid1 = 1
+            kw_conn1.isoid2 = 0
+            kw_conn1.val = 0.0
+            kw_conn1.lcid_rdlid = -1  # negative value references DEFINE_FUNCTION
+            kw_conn1.psid = 0
+            solution._backend._deck.append(kw_conn1)
+
+            # conid=2: contype=3 (RLC), isoid1=2, isoid2=0, lcid_rdlid=0
+            kw_conn2 = keywords.EmIsopotentialConnect()
+            kw_conn2.conid = 2
+            kw_conn2.contype = 3
+            kw_conn2.isoid1 = 2
+            kw_conn2.isoid2 = 0
+            kw_conn2.val = 0.0
+            kw_conn2.lcid_rdlid = 0
+            kw_conn2.psid = 0
+            solution._backend._deck.append(kw_conn2)
+
+            emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_rlc_define_func.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_rlc_isopotential(self, initial_files_dir, pre_reference_dir):
         """test_rlc_isopotential.k - EM RLC circuit with isopotential."""

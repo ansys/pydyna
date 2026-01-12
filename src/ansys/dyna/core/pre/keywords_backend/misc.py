@@ -121,6 +121,45 @@ class MiscKeywordsMixin:
 
         return curve_id
 
+    def create_define_function(
+        self,
+        function: str,
+        fid: int = None,
+        heading: str = "",
+    ) -> int:
+        """Create a DEFINE_FUNCTION keyword.
+
+        Parameters
+        ----------
+        function : str
+            C-like function code (multi-line supported).
+        fid : int, optional
+            Function ID. If None, auto-generated.
+        heading : str, optional
+            Function heading/title.
+
+        Returns
+        -------
+        int
+            The function ID.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        if fid is None:
+            fid = self.next_id("function")
+
+        logger.debug(f"Creating DEFINE_FUNCTION: fid={fid}")
+
+        kw = keywords.DefineFunction()
+        kw.fid = fid
+        kw.heading = heading
+        kw.function = function
+
+        self._deck.append(kw)
+        logger.info(f"Created DEFINE_FUNCTION keyword with fid={fid}")
+
+        return fid
+
     def create_part(
         self,
         pid: int,
