@@ -2113,10 +2113,151 @@ class TestReferenceFileComparison:
             diffs = self.compare_decks(output_file, reference_file)
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
-    @pytest.mark.xfail(reason="DynaEM not implemented in keywords backend")
     def test_resistive_heating_2d_multi_isopots(self, initial_files_dir, pre_reference_dir):
         """test_resistive_heating_2d_multi_isopots.k - EM resistive heating 2D multi isopotentials."""
-        pytest.fail("Not implemented")
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaem import (
+            DynaEM,
+            EMType,
+            EMDimension,
+            FEMSOLVER,
+            RogoCoil,
+        )
+        from ansys.dyna.core.pre.dynamaterial import MatRigid, MatThermalIsotropic, EMMATTYPE
+        from ansys.dyna.core.pre.dynamech import (
+            ShellPart,
+            ShellFormulation,
+            ThermalAnalysis,
+            ThermalAnalysisType,
+        )
+        from ansys.dyna.core.pre.dynabase import Curve, PartSet, SegmentSet
+
+        initial_file = os.path.join(initial_files_dir, "em", "test_resistive_heating_2d_multi_isopots.k")
+        reference_file = os.path.join(pre_reference_dir, "test_resistive_heating_2d_multi_isopots.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        # Segment set for Rogowski coil
+        rogoseg = [
+            [544, 575, 575, 575],
+            [545, 544, 544, 544],
+            [575, 595, 595, 595],
+            [595, 615, 615, 615],
+        ]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+            solution.set_termination(termination_time=0.0101)
+            solution.create_database_binary(dt=1e-4)
+
+            emobj = DynaEM()
+            solution.add(emobj)
+
+            emobj.set_timestep(tssfac=1, timestep_size_for_mass_scaled=1e-4)
+
+            emobj.analysis.set_timestep(timestep=1e-4)
+            emobj.analysis.set_em_solver(type=EMType.RESISTIVE_HEATING, dimtype=EMDimension.PLANAR_2D)
+            emobj.analysis.set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-3)
+
+            # Manually update EM_CONTROL to set nperio=2
+            from ansys.dyna.core.keywords import keywords
+            for kw in solution._backend._deck:
+                if isinstance(kw, keywords.EmControl):
+                    kw.nperio = 2
+                    break
+
+            tanalysis = ThermalAnalysis()
+            tanalysis.set_timestep(initial_timestep=1e-4)
+            tanalysis.set_solver(analysis_type=ThermalAnalysisType.TRANSIENT)
+            emobj.add(tanalysis)
+
+            matrigid = MatRigid(mass_density=1, young_modulus=2e11)
+            matrigid.set_em_resistive_heating_2d(
+                material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=1e4
+            )
+
+            matthermaliso = MatThermalIsotropic(density=100, specific_heat=10, conductivity=7)
+
+            part = ShellPart(1)
+            part.set_material(matrigid, matthermaliso)
+            part.set_element_formulation(ShellFormulation.PLANE_STRESS)
+            emobj.parts.add(part)
+
+            emobj.boundaryconditions.create_imposed_motion(
+                PartSet([1]), Curve(x=[0, 10], y=[10, 10])
+            )
+            emobj.set_init_temperature(temp=25)
+
+            # DEFINE_CURVE_FUNCTION for voltage source (lcid=1)
+            voltage_function = "-5./0.01*EXP(-TIME/((5.e-4+0.05+0.01)*0.04))"
+            solution._backend.create_define_curve_function(function=voltage_function)
+
+            # Create 6 SET_NODE_LIST entries
+            node_sets = [
+                [642, 652, 661, 670, 643],  # sid=1
+                [549, 548, 577, 597, 617],  # sid=2
+                [642, 652, 661, 670, 643],  # sid=3
+                [549, 548, 577, 597, 617],  # sid=4
+                [653, 644, 626, 627, 662],  # sid=5
+                [521, 517, 513, 509, 525],  # sid=6
+            ]
+            for idx, nodes in enumerate(node_sets, start=1):
+                solution._backend.create_set_node_list_with_solver(sid=idx, nodes=nodes, solver="MECH")
+
+            # Create 6 EM_ISOPOTENTIAL entries (isoid 1-6, referencing SET_NODE_LIST 1-6)
+            from ansys.dyna.core.keywords import keywords
+            for isoid in range(1, 7):
+                kw = keywords.EmIsopotential()
+                kw.isoid = isoid
+                kw.settype = 2  # node set
+                kw.setid = isoid
+                kw.rdltype = 0
+                solution._backend._deck.append(kw)
+
+            # Create 3 EM_ISOPOTENTIAL_CONNECT entries
+            # conid=1: contype=4 (voltage source with load curve), isoid1=1, isoid2=2, lcid=1
+            kw1 = keywords.EmIsopotentialConnect()
+            kw1.conid = 1
+            kw1.contype = 4
+            kw1.isoid1 = 1
+            kw1.isoid2 = 2
+            kw1.val = 0.0
+            kw1.lcid_rdlid = 1  # Field name is lcid_rdlid, not lcid
+            kw1.psid = 0
+            solution._backend._deck.append(kw1)
+
+            # conid=2: contype=2 (resistor), isoid1=3, isoid2=4, value=0.01
+            kw2 = keywords.EmIsopotentialConnect()
+            kw2.conid = 2
+            kw2.contype = 2
+            kw2.isoid1 = 3
+            kw2.isoid2 = 4
+            kw2.val = 0.01
+            kw2.psid = 0
+            solution._backend._deck.append(kw2)
+
+            # conid=3: contype=2 (resistor), isoid1=5, isoid2=6, value=0.05
+            kw3 = keywords.EmIsopotentialConnect()
+            kw3.conid = 3
+            kw3.contype = 2
+            kw3.isoid1 = 5
+            kw3.isoid2 = 6
+            kw3.val = 0.05
+            kw3.psid = 0
+            solution._backend._deck.append(kw3)
+
+            # Add RogoCoil - it creates SET_SEGMENT and EM_ISOPOTENTIAL_ROGO with isoid=1
+            emobj.add(RogoCoil(SegmentSet(rogoseg)))
+
+            emobj.create_em_output(mats=2, matf=2, sols=2, solf=2)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_resistive_heating_2d_multi_isopots.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     @pytest.mark.xfail(reason="DynaEM not implemented in keywords backend")
     def test_rlc_define_func(self, initial_files_dir, pre_reference_dir):
