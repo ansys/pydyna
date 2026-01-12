@@ -86,6 +86,10 @@ _MATANISOTROPICVISCOPLASTIC_CARD5 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MATANISOTROPICVISCOPLASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAnisotropicViscoplastic(KeywordBase):
     """DYNA MAT_ANISOTROPIC_VISCOPLASTIC keyword"""
 
@@ -121,16 +125,9 @@ class MatAnisotropicViscoplastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAnisotropicViscoplastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATANISOTROPICVISCOPLASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

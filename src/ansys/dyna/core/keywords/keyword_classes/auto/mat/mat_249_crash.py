@@ -128,6 +128,10 @@ _MAT249CRASH_CARD9 = (
     FieldSchema("ihis", float, 20, 10, None),
 )
 
+_MAT249CRASH_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat249Crash(KeywordBase):
     """DYNA MAT_249_CRASH keyword"""
 
@@ -175,16 +179,9 @@ class Mat249Crash(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat249Crash.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT249CRASH_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

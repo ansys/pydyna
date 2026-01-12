@@ -34,6 +34,10 @@ _MAT147N_CARD0 = (
     FieldSchema("fctlen", float, 30, 10, None),
 )
 
+_MAT147N_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat147N(KeywordBase):
     """DYNA MAT_147_N keyword"""
 
@@ -54,16 +58,9 @@ class Mat147N(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat147N.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT147N_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -56,6 +56,10 @@ _MATADDDAMAGEGISSMOSTOCHASTIC_CARD2 = (
     FieldSchema("lp2bi", float, 70, 10, None),
 )
 
+_MATADDDAMAGEGISSMOSTOCHASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddDamageGissmoStochastic(KeywordBase):
     """DYNA MAT_ADD_DAMAGE_GISSMO_STOCHASTIC keyword"""
 
@@ -82,16 +86,9 @@ class MatAddDamageGissmoStochastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddDamageGissmoStochastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDDAMAGEGISSMOSTOCHASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

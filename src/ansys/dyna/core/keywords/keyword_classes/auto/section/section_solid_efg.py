@@ -87,6 +87,10 @@ _SECTIONSOLIDEFG_CARD5 = (
     FieldSchema("p8", float, 70, 10, None),
 )
 
+_SECTIONSOLIDEFG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionSolidEfg(KeywordBase):
     """DYNA SECTION_SOLID_EFG keyword"""
 
@@ -122,16 +126,9 @@ class SectionSolidEfg(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionSolidEfg.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSOLIDEFG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

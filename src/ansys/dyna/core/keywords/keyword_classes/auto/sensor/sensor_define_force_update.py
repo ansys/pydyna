@@ -41,6 +41,10 @@ _SENSORDEFINEFORCEUPDATE_CARD1 = (
     FieldSchema("dtupd", float, 20, 10, None),
 )
 
+_SENSORDEFINEFORCEUPDATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SensorDefineForceUpdate(KeywordBase):
     """DYNA SENSOR_DEFINE_FORCE_UPDATE keyword"""
 
@@ -64,16 +68,9 @@ class SensorDefineForceUpdate(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SensorDefineForceUpdate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEFORCEUPDATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -74,6 +74,10 @@ _MATEXTENDED3PARAMETERBARLAT_CARD5 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MATEXTENDED3PARAMETERBARLAT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatExtended3ParameterBarlat(KeywordBase):
     """DYNA MAT_EXTENDED_3-PARAMETER_BARLAT keyword"""
 
@@ -109,16 +113,9 @@ class MatExtended3ParameterBarlat(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatExtended3ParameterBarlat.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATEXTENDED3PARAMETERBARLAT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

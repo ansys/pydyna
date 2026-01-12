@@ -35,6 +35,10 @@ _DEFINESTOCHASTICELEMENTSHELLVARIATON_CARD0 = (
     FieldSchema("vare", float, 40, 10, 0.0),
 )
 
+_DEFINESTOCHASTICELEMENTSHELLVARIATON_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineStochasticElementShellVariaton(KeywordBase):
     """DYNA DEFINE_STOCHASTIC_ELEMENT_SHELL_VARIATON keyword"""
 
@@ -55,16 +59,9 @@ class DefineStochasticElementShellVariaton(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineStochasticElementShellVariaton.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESTOCHASTICELEMENTSHELLVARIATON_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

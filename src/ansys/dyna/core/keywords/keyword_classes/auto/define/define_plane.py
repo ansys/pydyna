@@ -44,6 +44,10 @@ _DEFINEPLANE_CARD1 = (
     FieldSchema("z3", float, 20, 10, 0.0),
 )
 
+_DEFINEPLANE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefinePlane(KeywordBase):
     """DYNA DEFINE_PLANE keyword"""
 
@@ -67,16 +71,9 @@ class DefinePlane(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefinePlane.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEPLANE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

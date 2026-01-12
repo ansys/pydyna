@@ -66,6 +66,10 @@ _MAT077H_CARD3 = (
     FieldSchema("therml", float, 60, 10, None),
 )
 
+_MAT077H_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat077H(KeywordBase):
     """DYNA MAT_077_H keyword"""
 
@@ -109,16 +113,9 @@ class Mat077H(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat077H.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT077H_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

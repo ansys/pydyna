@@ -43,6 +43,10 @@ _SETSOLIDADD_CARD1 = (
     FieldSchema("dsid8", int, 70, 10, None),
 )
 
+_SETSOLIDADD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetSolidAdd(KeywordBase):
     """DYNA SET_SOLID_ADD keyword"""
 
@@ -66,16 +70,9 @@ class SetSolidAdd(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetSolidAdd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSOLIDADD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

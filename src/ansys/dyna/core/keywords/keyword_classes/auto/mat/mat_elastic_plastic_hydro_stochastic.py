@@ -82,6 +82,10 @@ _MATELASTICPLASTICHYDROSTOCHASTIC_CARD4 = (
     FieldSchema("es16", float, 70, 10, None),
 )
 
+_MATELASTICPLASTICHYDROSTOCHASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatElasticPlasticHydroStochastic(KeywordBase):
     """DYNA MAT_ELASTIC_PLASTIC_HYDRO_STOCHASTIC keyword"""
 
@@ -114,16 +118,9 @@ class MatElasticPlasticHydroStochastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatElasticPlasticHydroStochastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTICPLASTICHYDROSTOCHASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

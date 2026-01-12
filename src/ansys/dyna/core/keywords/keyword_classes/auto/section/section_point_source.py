@@ -43,6 +43,10 @@ _SECTIONPOINTSOURCE_CARD1 = (
     FieldSchema("orifarea", float, 20, 10, None),
 )
 
+_SECTIONPOINTSOURCE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionPointSource(KeywordBase):
     """DYNA SECTION_POINT_SOURCE keyword"""
 
@@ -66,16 +70,9 @@ class SectionPointSource(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionPointSource.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONPOINTSOURCE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -82,6 +82,10 @@ _MATELASTICVISCOPLASTICTHERMAL_CARD4 = (
     FieldSchema("fushi8", int, 70, 10, None),
 )
 
+_MATELASTICVISCOPLASTICTHERMAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatElasticViscoplasticThermal(KeywordBase):
     """DYNA MAT_ELASTIC_VISCOPLASTIC_THERMAL keyword"""
 
@@ -114,16 +118,9 @@ class MatElasticViscoplasticThermal(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatElasticViscoplasticThermal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTICVISCOPLASTICTHERMAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

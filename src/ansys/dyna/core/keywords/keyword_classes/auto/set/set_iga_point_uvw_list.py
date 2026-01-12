@@ -47,6 +47,10 @@ _SETIGAPOINTUVWLIST_CARD1 = (
     FieldSchema("pid8", int, 70, 10, None),
 )
 
+_SETIGAPOINTUVWLIST_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetIgaPointUvwList(KeywordBase):
     """DYNA SET_IGA_POINT_UVW_LIST keyword"""
 
@@ -70,16 +74,9 @@ class SetIgaPointUvwList(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetIgaPointUvwList.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETIGAPOINTUVWLIST_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

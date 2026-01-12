@@ -47,6 +47,10 @@ _SENSORCONTROL_CARD1 = (
     FieldSchema("swit7", int, 70, 10, None),
 )
 
+_SENSORCONTROL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SensorControl(KeywordBase):
     """DYNA SENSOR_CONTROL keyword"""
 
@@ -70,16 +74,9 @@ class SensorControl(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SensorControl.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORCONTROL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -49,6 +49,10 @@ _SETSEGMENTCOLLECT_CARD1 = (
     FieldSchema("a4", float, 70, 10, 0.0),
 )
 
+_SETSEGMENTCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetSegmentCollect(KeywordBase):
     """DYNA SET_SEGMENT_COLLECT keyword"""
 
@@ -72,16 +76,9 @@ class SetSegmentCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetSegmentCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSEGMENTCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

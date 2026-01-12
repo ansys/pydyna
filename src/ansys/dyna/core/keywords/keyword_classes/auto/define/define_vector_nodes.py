@@ -33,6 +33,10 @@ _DEFINEVECTORNODES_CARD0 = (
     FieldSchema("nodeh", int, 20, 10, 0),
 )
 
+_DEFINEVECTORNODES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineVectorNodes(KeywordBase):
     """DYNA DEFINE_VECTOR_NODES keyword"""
 
@@ -53,16 +57,9 @@ class DefineVectorNodes(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineVectorNodes.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEVECTORNODES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

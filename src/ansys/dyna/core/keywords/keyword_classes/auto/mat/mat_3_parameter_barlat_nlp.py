@@ -99,6 +99,10 @@ _MAT3PARAMETERBARLATNLP_CARD6 = (
     FieldSchema("lcsh", float, 20, 10, None),
 )
 
+_MAT3PARAMETERBARLATNLP_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat3ParameterBarlatNlp(KeywordBase):
     """DYNA MAT_3-PARAMETER_BARLAT_NLP keyword"""
 
@@ -137,16 +141,9 @@ class Mat3ParameterBarlatNlp(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat3ParameterBarlatNlp.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT3PARAMETERBARLATNLP_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

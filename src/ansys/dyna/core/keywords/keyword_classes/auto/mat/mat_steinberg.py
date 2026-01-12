@@ -71,6 +71,10 @@ _MATSTEINBERG_CARD3 = (
     FieldSchema("ec9", float, 70, 10, None),
 )
 
+_MATSTEINBERG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSteinberg(KeywordBase):
     """DYNA MAT_STEINBERG keyword"""
 
@@ -100,16 +104,9 @@ class MatSteinberg(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSteinberg.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSTEINBERG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

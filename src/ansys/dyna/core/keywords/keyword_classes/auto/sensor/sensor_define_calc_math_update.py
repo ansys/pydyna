@@ -44,6 +44,10 @@ _SENSORDEFINECALCMATHUPDATE_CARD1 = (
     FieldSchema("dtupd", float, 20, 10, None),
 )
 
+_SENSORDEFINECALCMATHUPDATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SensorDefineCalcMathUpdate(KeywordBase):
     """DYNA SENSOR_DEFINE_CALC_MATH_UPDATE keyword"""
 
@@ -67,16 +71,9 @@ class SensorDefineCalcMathUpdate(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SensorDefineCalcMathUpdate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINECALCMATHUPDATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -71,6 +71,10 @@ _MATPLASTICITYWITHDAMAGE_CARD3 = (
     FieldSchema("es8", float, 70, 10, None),
 )
 
+_MATPLASTICITYWITHDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPlasticityWithDamage(KeywordBase):
     """DYNA MAT_PLASTICITY_WITH_DAMAGE keyword"""
 
@@ -100,16 +104,9 @@ class MatPlasticityWithDamage(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPlasticityWithDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPLASTICITYWITHDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

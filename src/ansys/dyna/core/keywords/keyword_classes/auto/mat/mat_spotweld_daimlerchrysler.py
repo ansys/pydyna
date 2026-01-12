@@ -59,6 +59,10 @@ _MATSPOTWELDDAIMLERCHRYSLER_CARD2 = (
     FieldSchema("jtol", float, 60, 10, None),
 )
 
+_MATSPOTWELDDAIMLERCHRYSLER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSpotweldDaimlerchrysler(KeywordBase):
     """DYNA MAT_SPOTWELD_DAIMLERCHRYSLER keyword"""
 
@@ -85,16 +89,9 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSpotweldDaimlerchrysler.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPOTWELDDAIMLERCHRYSLER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

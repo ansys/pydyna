@@ -54,6 +54,10 @@ _DEFINENURBSCURVE_CARD2 = (
     FieldSchema("w", float, 30, 10, None),
 )
 
+_DEFINENURBSCURVE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineNurbsCurve(KeywordBase):
     """DYNA DEFINE_NURBS_CURVE keyword"""
 
@@ -80,16 +84,9 @@ class DefineNurbsCurve(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineNurbsCurve.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINENURBSCURVE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

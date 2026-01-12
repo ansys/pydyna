@@ -47,6 +47,10 @@ _DEFINECURVETRIM2D_CARD2 = (
     FieldSchema("filename", str, 0, 80, None),
 )
 
+_DEFINECURVETRIM2D_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineCurveTrim2D(KeywordBase):
     """DYNA DEFINE_CURVE_TRIM_2D keyword"""
 
@@ -73,16 +77,9 @@ class DefineCurveTrim2D(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineCurveTrim2D.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECURVETRIM2D_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

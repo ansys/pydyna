@@ -37,6 +37,10 @@ _DEFINELANCESEEDPOINTCOORDINATES_CARD0 = (
     FieldSchema("z2", float, 60, 10, 0.0),
 )
 
+_DEFINELANCESEEDPOINTCOORDINATES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineLanceSeedPointCoordinates(KeywordBase):
     """DYNA DEFINE_LANCE_SEED_POINT_COORDINATES keyword"""
 
@@ -57,16 +61,9 @@ class DefineLanceSeedPointCoordinates(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineLanceSeedPointCoordinates.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINELANCESEEDPOINTCOORDINATES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

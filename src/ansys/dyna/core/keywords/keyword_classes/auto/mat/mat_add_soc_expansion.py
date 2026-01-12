@@ -37,6 +37,10 @@ _MATADDSOCEXPANSION_CARD0 = (
     FieldSchema("multz", float, 60, 10, None),
 )
 
+_MATADDSOCEXPANSION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddSocExpansion(KeywordBase):
     """DYNA MAT_ADD_SOC_EXPANSION keyword"""
 
@@ -57,16 +61,9 @@ class MatAddSocExpansion(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddSocExpansion.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDSOCEXPANSION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

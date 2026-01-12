@@ -61,6 +61,10 @@ _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATION_CARD2 = (
     FieldSchema("hisout", float, 50, 10, 0.0),
 )
 
+_MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSimplifiedRubberFoamLogLogInterpolation(KeywordBase):
     """DYNA MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION keyword"""
 
@@ -96,16 +100,9 @@ class MatSimplifiedRubberFoamLogLogInterpolation(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSimplifiedRubberFoamLogLogInterpolation.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -43,6 +43,10 @@ _MATISOTROPICELASTICFAILURE_CARD1 = (
     FieldSchema("trem", float, 30, 10, None),
 )
 
+_MATISOTROPICELASTICFAILURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatIsotropicElasticFailure(KeywordBase):
     """DYNA MAT_ISOTROPIC_ELASTIC_FAILURE keyword"""
 
@@ -66,16 +70,9 @@ class MatIsotropicElasticFailure(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatIsotropicElasticFailure.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATISOTROPICELASTICFAILURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

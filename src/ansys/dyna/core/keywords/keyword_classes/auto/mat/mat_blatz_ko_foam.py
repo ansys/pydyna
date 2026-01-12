@@ -34,6 +34,10 @@ _MATBLATZKOFOAM_CARD0 = (
     FieldSchema("ref", float, 30, 10, 0.0),
 )
 
+_MATBLATZKOFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatBlatzKoFoam(KeywordBase):
     """DYNA MAT_BLATZ-KO_FOAM keyword"""
 
@@ -54,16 +58,9 @@ class MatBlatzKoFoam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatBlatzKoFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBLATZKOFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

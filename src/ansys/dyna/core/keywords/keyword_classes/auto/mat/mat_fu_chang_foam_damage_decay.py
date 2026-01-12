@@ -62,6 +62,10 @@ _MATFUCHANGFOAMDAMAGEDECAY_CARD3 = (
     FieldSchema("riuld", float, 10, 10, 0.0),
 )
 
+_MATFUCHANGFOAMDAMAGEDECAY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatFuChangFoamDamageDecay(KeywordBase):
     """DYNA MAT_FU_CHANG_FOAM_DAMAGE_DECAY keyword"""
 
@@ -91,16 +95,9 @@ class MatFuChangFoamDamageDecay(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatFuChangFoamDamageDecay.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATFUCHANGFOAMDAMAGEDECAY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

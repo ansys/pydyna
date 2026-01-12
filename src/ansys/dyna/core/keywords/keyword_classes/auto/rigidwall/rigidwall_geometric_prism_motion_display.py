@@ -62,6 +62,11 @@ _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD3 = (
     FieldSchema("vz", float, 40, 10, None),
 )
 
+_RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallGeometricPrismMotionDisplay(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_PRISM_MOTION_DISPLAY keyword"""
 
@@ -91,23 +96,9 @@ class RigidwallGeometricPrismMotionDisplay(KeywordBase):
             ),            OptionCardSet(
                 option_spec = RigidwallGeometricPrismMotionDisplay.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

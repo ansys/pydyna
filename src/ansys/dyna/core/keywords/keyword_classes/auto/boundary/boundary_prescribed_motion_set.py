@@ -46,6 +46,11 @@ _BOUNDARYPRESCRIBEDMOTIONSET_CARD1 = (
     FieldSchema("node2", int, 40, 10, 0),
 )
 
+_BOUNDARYPRESCRIBEDMOTIONSET_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
 class BoundaryPrescribedMotionSet(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_MOTION_SET keyword"""
 
@@ -70,23 +75,9 @@ class BoundaryPrescribedMotionSet(KeywordBase):
             ),            OptionCardSet(
                 option_spec = BoundaryPrescribedMotionSet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _BOUNDARYPRESCRIBEDMOTIONSET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -55,6 +55,10 @@ _SECTIONPOINTSOURCEMIXTURE_CARD2 = (
     FieldSchema("orifarea", float, 20, 10, 0.0),
 )
 
+_SECTIONPOINTSOURCEMIXTURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionPointSourceMixture(KeywordBase):
     """DYNA SECTION_POINT_SOURCE_MIXTURE keyword"""
 
@@ -81,16 +85,9 @@ class SectionPointSourceMixture(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionPointSourceMixture.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONPOINTSOURCEMIXTURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -101,6 +101,10 @@ _MAT158_CARD8 = (
     FieldSchema("betai", float, 10, 10, None),
 )
 
+_MAT158_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat158(KeywordBase):
     """DYNA MAT_158 keyword"""
 
@@ -145,16 +149,9 @@ class Mat158(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat158.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT158_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

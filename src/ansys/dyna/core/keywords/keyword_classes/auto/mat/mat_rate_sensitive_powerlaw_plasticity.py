@@ -44,6 +44,10 @@ _MATRATESENSITIVEPOWERLAWPLASTICITY_CARD1 = (
     FieldSchema("rfiltf", float, 20, 10, 0.0),
 )
 
+_MATRATESENSITIVEPOWERLAWPLASTICITY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatRateSensitivePowerlawPlasticity(KeywordBase):
     """DYNA MAT_RATE_SENSITIVE_POWERLAW_PLASTICITY keyword"""
 
@@ -67,16 +71,9 @@ class MatRateSensitivePowerlawPlasticity(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatRateSensitivePowerlawPlasticity.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATRATESENSITIVEPOWERLAWPLASTICITY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

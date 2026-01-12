@@ -135,6 +135,10 @@ _MATEIGHTCHAINRUBBER_CARD13 = (
     FieldSchema("betai/gammai", float, 10, 10, None),
 )
 
+_MATEIGHTCHAINRUBBER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatEightChainRubber(KeywordBase):
     """DYNA MAT_EIGHT_CHAIN_RUBBER keyword"""
 
@@ -194,16 +198,9 @@ class MatEightChainRubber(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatEightChainRubber.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATEIGHTCHAINRUBBER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -42,6 +42,10 @@ _MATADDFATIGUEEN_CARD1 = (
     FieldSchema("pr", float, 10, 10, None),
 )
 
+_MATADDFATIGUEEN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddFatigueEn(KeywordBase):
     """DYNA MAT_ADD_FATIGUE_EN keyword"""
 
@@ -65,16 +69,9 @@ class MatAddFatigueEn(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddFatigueEn.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDFATIGUEEN_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

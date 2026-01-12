@@ -46,6 +46,10 @@ _MATPLASTICNONLINEARKINEMATICB_CARD1 = (
     FieldSchema("gamma3", float, 40, 10, None),
 )
 
+_MATPLASTICNONLINEARKINEMATICB_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPlasticNonlinearKinematicB(KeywordBase):
     """DYNA MAT_PLASTIC_NONLINEAR_KINEMATIC_B keyword"""
 
@@ -69,16 +73,9 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPlasticNonlinearKinematicB.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPLASTICNONLINEARKINEMATICB_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

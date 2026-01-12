@@ -89,6 +89,10 @@ _DEFINETABLECOMPACT_CARD6 = (
     FieldSchema("a1.9", float, 20, 10, None),
 )
 
+_DEFINETABLECOMPACT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineTableCompact(KeywordBase):
     """DYNA DEFINE_TABLE_COMPACT keyword"""
 
@@ -127,16 +131,9 @@ class DefineTableCompact(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineTableCompact.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINETABLECOMPACT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

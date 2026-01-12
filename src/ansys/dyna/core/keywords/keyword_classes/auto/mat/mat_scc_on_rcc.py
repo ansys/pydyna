@@ -46,6 +46,10 @@ _MATSCCONRCC_CARD1 = (
     FieldSchema("eps_tan", float, 40, 10, None),
 )
 
+_MATSCCONRCC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSccOnRcc(KeywordBase):
     """DYNA MAT_SCC_ON_RCC keyword"""
 
@@ -69,16 +73,9 @@ class MatSccOnRcc(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSccOnRcc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSCCONRCC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

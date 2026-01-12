@@ -55,6 +55,10 @@ _DEFINEALEBAGINFLATOR_CARD2 = (
     FieldSchema("orifare", float, 20, 10, 0.0),
 )
 
+_DEFINEALEBAGINFLATOR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineAlebagInflator(KeywordBase):
     """DYNA DEFINE_ALEBAG_INFLATOR keyword"""
 
@@ -81,16 +85,9 @@ class DefineAlebagInflator(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineAlebagInflator.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEALEBAGINFLATOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

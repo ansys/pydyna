@@ -46,6 +46,10 @@ _MAT071_CARD1 = (
     FieldSchema("mxfrc", float, 40, 10, 1e+20),
 )
 
+_MAT071_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat071(KeywordBase):
     """DYNA MAT_071 keyword"""
 
@@ -69,16 +73,9 @@ class Mat071(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat071.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT071_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

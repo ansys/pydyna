@@ -39,6 +39,10 @@ _SECTIONALE1D_CARD1 = (
     FieldSchema("thick", float, 10, 10, None),
 )
 
+_SECTIONALE1D_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionAle1D(KeywordBase):
     """DYNA SECTION_ALE1D keyword"""
 
@@ -62,16 +66,9 @@ class SectionAle1D(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionAle1D.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONALE1D_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

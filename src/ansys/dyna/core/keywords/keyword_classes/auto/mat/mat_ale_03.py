@@ -99,6 +99,10 @@ _MATALE03_CARD6 = (
     FieldSchema("c8", float, 70, 10, None),
 )
 
+_MATALE03_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAle03(KeywordBase):
     """DYNA MAT_ALE_03 keyword"""
 
@@ -137,16 +141,9 @@ class MatAle03(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAle03.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATALE03_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -37,6 +37,10 @@ _DEFINEELEMENTDEATHSOLIDSET_CARD0 = (
     FieldSchema("percent", float, 60, 10, 0.0),
 )
 
+_DEFINEELEMENTDEATHSOLIDSET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineElementDeathSolidSet(KeywordBase):
     """DYNA DEFINE_ELEMENT_DEATH_SOLID_SET keyword"""
 
@@ -57,16 +61,9 @@ class DefineElementDeathSolidSet(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineElementDeathSolidSet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEELEMENTDEATHSOLIDSET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -82,6 +82,10 @@ _DEFINESPHACTIVEREGION_CARD6 = (
     FieldSchema("rmax", float, 10, 10, 0.0),
 )
 
+_DEFINESPHACTIVEREGION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineSphActiveRegion(KeywordBase):
     """DYNA DEFINE_SPH_ACTIVE_REGION keyword"""
 
@@ -120,16 +124,9 @@ class DefineSphActiveRegion(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineSphActiveRegion.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPHACTIVEREGION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -43,6 +43,10 @@ _DEFINEADAPTIVESOLIDTOSPHID_CARD1 = (
     FieldSchema("cpcd", float, 70, 10, None),
 )
 
+_DEFINEADAPTIVESOLIDTOSPHID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineAdaptiveSolidToSphId(KeywordBase):
     """DYNA DEFINE_ADAPTIVE_SOLID_TO_SPH_ID keyword"""
 
@@ -66,16 +70,9 @@ class DefineAdaptiveSolidToSphId(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineAdaptiveSolidToSphId.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEADAPTIVESOLIDTOSPHID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

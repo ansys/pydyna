@@ -59,6 +59,10 @@ _MATSPOTWELDDAIMLERCHRYSLERUNIAXIAL_CARD2 = (
     FieldSchema("jtol", float, 60, 10, None),
 )
 
+_MATSPOTWELDDAIMLERCHRYSLERUNIAXIAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSpotweldDaimlerchryslerUniaxial(KeywordBase):
     """DYNA MAT_SPOTWELD_DAIMLERCHRYSLER_UNIAXIAL keyword"""
 
@@ -85,16 +89,9 @@ class MatSpotweldDaimlerchryslerUniaxial(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSpotweldDaimlerchryslerUniaxial.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPOTWELDDAIMLERCHRYSLERUNIAXIAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

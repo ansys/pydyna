@@ -37,6 +37,10 @@ _MATELASTIC_CARD0 = (
     FieldSchema("unused", float, 60, 10, None),
 )
 
+_MATELASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatElastic(KeywordBase):
     """DYNA MAT_ELASTIC keyword"""
 
@@ -57,16 +61,9 @@ class MatElastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatElastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -38,6 +38,10 @@ _MATS14_CARD0 = (
     FieldSchema("psd", float, 70, 10, None),
 )
 
+_MATS14_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatS14(KeywordBase):
     """DYNA MAT_S14 keyword"""
 
@@ -58,16 +62,9 @@ class MatS14(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatS14.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATS14_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

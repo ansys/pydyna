@@ -33,6 +33,10 @@ _DEFINETARGETBOUNDARY_CARD0 = (
     FieldSchema("z", float, 32, 16, 0.0),
 )
 
+_DEFINETARGETBOUNDARY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineTargetBoundary(KeywordBase):
     """DYNA DEFINE_TARGET_BOUNDARY keyword"""
 
@@ -53,16 +57,9 @@ class DefineTargetBoundary(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineTargetBoundary.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINETARGETBOUNDARY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

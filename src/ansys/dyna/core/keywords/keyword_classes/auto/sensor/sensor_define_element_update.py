@@ -44,6 +44,10 @@ _SENSORDEFINEELEMENTUPDATE_CARD1 = (
     FieldSchema("dtupd", float, 20, 10, None),
 )
 
+_SENSORDEFINEELEMENTUPDATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SensorDefineElementUpdate(KeywordBase):
     """DYNA SENSOR_DEFINE_ELEMENT_UPDATE keyword"""
 
@@ -67,16 +71,9 @@ class SensorDefineElementUpdate(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SensorDefineElementUpdate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEELEMENTUPDATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

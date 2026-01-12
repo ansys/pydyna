@@ -41,6 +41,10 @@ _DEFINEDEINJECTSHAPE_CARD1 = (
     FieldSchema("r", float, 30, 10, None),
 )
 
+_DEFINEDEINJECTSHAPE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeInjectShape(KeywordBase):
     """DYNA DEFINE_DE_INJECT_SHAPE keyword"""
 
@@ -64,16 +68,9 @@ class DefineDeInjectShape(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeInjectShape.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEINJECTSHAPE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

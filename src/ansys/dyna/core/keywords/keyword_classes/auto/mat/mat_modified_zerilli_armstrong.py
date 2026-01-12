@@ -64,6 +64,10 @@ _MATMODIFIEDZERILLIARMSTRONG_CARD3 = (
     FieldSchema("m", float, 0, 10, 0.5),
 )
 
+_MATMODIFIEDZERILLIARMSTRONG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatModifiedZerilliArmstrong(KeywordBase):
     """DYNA MAT_MODIFIED_ZERILLI_ARMSTRONG keyword"""
 
@@ -93,16 +97,9 @@ class MatModifiedZerilliArmstrong(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatModifiedZerilliArmstrong.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMODIFIEDZERILLIARMSTRONG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

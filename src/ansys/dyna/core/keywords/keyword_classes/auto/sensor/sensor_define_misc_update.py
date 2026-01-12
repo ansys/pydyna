@@ -44,6 +44,10 @@ _SENSORDEFINEMISCUPDATE_CARD1 = (
     FieldSchema("dtupd", float, 20, 10, None),
 )
 
+_SENSORDEFINEMISCUPDATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SensorDefineMiscUpdate(KeywordBase):
     """DYNA SENSOR_DEFINE_MISC_UPDATE keyword"""
 
@@ -67,16 +71,9 @@ class SensorDefineMiscUpdate(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SensorDefineMiscUpdate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEMISCUPDATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

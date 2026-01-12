@@ -38,6 +38,10 @@ _MATTRANSVERSELYANISOTROPICELASTICPLASTICNLP2_CARD0 = (
     FieldSchema("hlcid", int, 70, 10, 0),
 )
 
+_MATTRANSVERSELYANISOTROPICELASTICPLASTICNLP2_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatTransverselyAnisotropicElasticPlasticNlp2(KeywordBase):
     """DYNA MAT_TRANSVERSELY_ANISOTROPIC_ELASTIC_PLASTIC_NLP2 keyword"""
 
@@ -58,16 +62,9 @@ class MatTransverselyAnisotropicElasticPlasticNlp2(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatTransverselyAnisotropicElasticPlasticNlp2.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTRANSVERSELYANISOTROPICELASTICPLASTICNLP2_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

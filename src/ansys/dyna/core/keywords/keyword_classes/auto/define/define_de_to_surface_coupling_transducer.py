@@ -67,6 +67,10 @@ _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD3 = (
     FieldSchema("dt", float, 70, 10, 1e+20),
 )
 
+_DEFINEDETOSURFACECOUPLINGTRANSDUCER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeToSurfaceCouplingTransducer(KeywordBase):
     """DYNA DEFINE_DE_TO_SURFACE_COUPLING_TRANSDUCER keyword"""
 
@@ -96,16 +100,9 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeToSurfaceCouplingTransducer.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDETOSURFACECOUPLINGTRANSDUCER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

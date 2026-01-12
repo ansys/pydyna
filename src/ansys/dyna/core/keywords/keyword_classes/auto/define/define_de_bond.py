@@ -44,6 +44,10 @@ _DEFINEDEBOND_CARD1 = (
     FieldSchema("maxgap", float, 70, 10, 0.0001),
 )
 
+_DEFINEDEBOND_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeBond(KeywordBase):
     """DYNA DEFINE_DE_BOND keyword"""
 
@@ -67,16 +71,9 @@ class DefineDeBond(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeBond.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEBOND_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -76,6 +76,10 @@ _MATSOILANDFOAM_CARD5 = (
     FieldSchema("p10", float, 10, 10, None),
 )
 
+_MATSOILANDFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSoilAndFoam(KeywordBase):
     """DYNA MAT_SOIL_AND_FOAM keyword"""
 
@@ -111,16 +115,9 @@ class MatSoilAndFoam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSoilAndFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSOILANDFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

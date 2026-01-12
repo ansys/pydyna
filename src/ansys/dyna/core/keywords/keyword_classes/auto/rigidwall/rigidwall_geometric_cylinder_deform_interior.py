@@ -72,6 +72,11 @@ _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIOR_CARD5 = (
     FieldSchema("lcidg", int, 30, 10, None),
 )
 
+_RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIOR_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallGeometricCylinderDeformInterior(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_CYLINDER_DEFORM_INTERIOR keyword"""
 
@@ -107,23 +112,9 @@ class RigidwallGeometricCylinderDeformInterior(KeywordBase):
             ),            OptionCardSet(
                 option_spec = RigidwallGeometricCylinderDeformInterior.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

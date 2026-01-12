@@ -66,6 +66,10 @@ _MATGLASS_CARD3 = (
     FieldSchema("rfiltf", float, 40, 10, None),
 )
 
+_MATGLASS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatGlass(KeywordBase):
     """DYNA MAT_GLASS keyword"""
 
@@ -95,16 +99,9 @@ class MatGlass(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatGlass.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATGLASS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -44,6 +44,10 @@ _SETNODELISTGENERATEINCREMENT_CARD1 = (
     FieldSchema("incr", int, 20, 10, None),
 )
 
+_SETNODELISTGENERATEINCREMENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetNodeListGenerateIncrement(KeywordBase):
     """DYNA SET_NODE_LIST_GENERATE_INCREMENT keyword"""
 
@@ -67,16 +71,9 @@ class SetNodeListGenerateIncrement(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetNodeListGenerateIncrement.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETNODELISTGENERATEINCREMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

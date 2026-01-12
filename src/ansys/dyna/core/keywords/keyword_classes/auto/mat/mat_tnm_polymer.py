@@ -63,6 +63,10 @@ _MATTNMPOLYMER_CARD3 = (
     FieldSchema("gamma0", float, 40, 10, None),
 )
 
+_MATTNMPOLYMER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatTnmPolymer(KeywordBase):
     """DYNA MAT_TNM_POLYMER keyword"""
 
@@ -92,16 +96,9 @@ class MatTnmPolymer(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatTnmPolymer.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTNMPOLYMER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -74,6 +74,10 @@ _MATNONLINEARELASTICDISCRETEBEAM_CARD4 = (
     FieldSchema("tfailt", float, 50, 10, None),
 )
 
+_MATNONLINEARELASTICDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatNonlinearElasticDiscreteBeam(KeywordBase):
     """DYNA MAT_NONLINEAR_ELASTIC_DISCRETE_BEAM keyword"""
 
@@ -106,16 +110,9 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatNonlinearElasticDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATNONLINEARELASTICDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -37,6 +37,10 @@ _DEFINEELEMENTDEATHSHELLSET_CARD0 = (
     FieldSchema("percent", float, 60, 10, 0.0),
 )
 
+_DEFINEELEMENTDEATHSHELLSET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineElementDeathShellSet(KeywordBase):
     """DYNA DEFINE_ELEMENT_DEATH_SHELL_SET keyword"""
 
@@ -57,16 +61,9 @@ class DefineElementDeathShellSet(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineElementDeathShellSet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEELEMENTDEATHSHELLSET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -53,6 +53,10 @@ _DEFINEBOXCOARSENLOCAL_CARD2 = (
     FieldSchema("cz", float, 20, 10, 0.0),
 )
 
+_DEFINEBOXCOARSENLOCAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineBoxCoarsenLocal(KeywordBase):
     """DYNA DEFINE_BOX_COARSEN_LOCAL keyword"""
 
@@ -79,16 +83,9 @@ class DefineBoxCoarsenLocal(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineBoxCoarsenLocal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEBOXCOARSENLOCAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

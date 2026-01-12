@@ -38,6 +38,10 @@ _MATADDAIRBAGPOROSITYLEAKAGE_CARD0 = (
     FieldSchema("unused", int, 70, 10, None),
 )
 
+_MATADDAIRBAGPOROSITYLEAKAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddAirbagPorosityLeakage(KeywordBase):
     """DYNA MAT_ADD_AIRBAG_POROSITY_LEAKAGE keyword"""
 
@@ -58,16 +62,9 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddAirbagPorosityLeakage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDAIRBAGPOROSITYLEAKAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

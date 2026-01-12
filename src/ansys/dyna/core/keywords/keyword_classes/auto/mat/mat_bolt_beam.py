@@ -58,6 +58,10 @@ _MATBOLTBEAM_CARD2 = (
 _MATBOLTBEAM_CARD3 = (
 )
 
+_MATBOLTBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatBoltBeam(KeywordBase):
     """DYNA MAT_BOLT_BEAM keyword"""
 
@@ -87,16 +91,9 @@ class MatBoltBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatBoltBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBOLTBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

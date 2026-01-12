@@ -53,6 +53,10 @@ _MATADDDAMAGEDIEM_CARD2 = (
     FieldSchema("q4", float, 50, 10, None),
 )
 
+_MATADDDAMAGEDIEM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddDamageDiem(KeywordBase):
     """DYNA MAT_ADD_DAMAGE_DIEM keyword"""
 
@@ -79,16 +83,9 @@ class MatAddDamageDiem(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddDamageDiem.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDDAMAGEDIEM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

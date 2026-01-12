@@ -35,6 +35,10 @@ _DEFINEHAZTAILORWELDEDBLANK_CARD0 = (
     FieldSchema("imonflag", int, 40, 10, 0),
 )
 
+_DEFINEHAZTAILORWELDEDBLANK_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineHazTailorWeldedBlank(KeywordBase):
     """DYNA DEFINE_HAZ_TAILOR_WELDED_BLANK keyword"""
 
@@ -55,16 +59,9 @@ class DefineHazTailorWeldedBlank(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineHazTailorWeldedBlank.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEHAZTAILORWELDEDBLANK_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

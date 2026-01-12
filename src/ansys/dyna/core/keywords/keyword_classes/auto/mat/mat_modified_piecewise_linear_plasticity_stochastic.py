@@ -71,6 +71,10 @@ _MATMODIFIEDPIECEWISELINEARPLASTICITYSTOCHASTIC_CARD3 = (
     FieldSchema("es8", float, 70, 10, None),
 )
 
+_MATMODIFIEDPIECEWISELINEARPLASTICITYSTOCHASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatModifiedPiecewiseLinearPlasticityStochastic(KeywordBase):
     """DYNA MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_STOCHASTIC keyword"""
 
@@ -100,16 +104,9 @@ class MatModifiedPiecewiseLinearPlasticityStochastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatModifiedPiecewiseLinearPlasticityStochastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMODIFIEDPIECEWISELINEARPLASTICITYSTOCHASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

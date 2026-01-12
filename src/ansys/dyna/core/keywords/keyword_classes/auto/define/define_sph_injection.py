@@ -44,6 +44,10 @@ _DEFINESPHINJECTION_CARD1 = (
     FieldSchema("nid", int, 20, 10, 0),
 )
 
+_DEFINESPHINJECTION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineSphInjection(KeywordBase):
     """DYNA DEFINE_SPH_INJECTION keyword"""
 
@@ -67,16 +71,9 @@ class DefineSphInjection(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineSphInjection.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPHINJECTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

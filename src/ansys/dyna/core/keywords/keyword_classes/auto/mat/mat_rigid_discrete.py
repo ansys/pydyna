@@ -34,6 +34,10 @@ _MATRIGIDDISCRETE_CARD0 = (
     FieldSchema("pr", float, 30, 10, None),
 )
 
+_MATRIGIDDISCRETE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatRigidDiscrete(KeywordBase):
     """DYNA MAT_RIGID_DISCRETE keyword"""
 
@@ -54,16 +58,9 @@ class MatRigidDiscrete(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatRigidDiscrete.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATRIGIDDISCRETE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

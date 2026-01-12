@@ -64,6 +64,10 @@ _MATGENERALVISCOELASTICMOISTURE_CARD3 = (
     FieldSchema("betaki", float, 30, 10, None),
 )
 
+_MATGENERALVISCOELASTICMOISTURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatGeneralViscoelasticMoisture(KeywordBase):
     """DYNA MAT_GENERAL_VISCOELASTIC_MOISTURE keyword"""
 
@@ -93,16 +97,9 @@ class MatGeneralViscoelasticMoisture(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatGeneralViscoelasticMoisture.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATGENERALVISCOELASTICMOISTURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

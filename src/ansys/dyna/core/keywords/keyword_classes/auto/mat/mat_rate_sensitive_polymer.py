@@ -42,6 +42,10 @@ _MATRATESENSITIVEPOLYMER_CARD1 = (
     FieldSchema("omega", float, 0, 10, None),
 )
 
+_MATRATESENSITIVEPOLYMER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatRateSensitivePolymer(KeywordBase):
     """DYNA MAT_RATE_SENSITIVE_POLYMER keyword"""
 
@@ -65,16 +69,9 @@ class MatRateSensitivePolymer(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatRateSensitivePolymer.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATRATESENSITIVEPOLYMER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

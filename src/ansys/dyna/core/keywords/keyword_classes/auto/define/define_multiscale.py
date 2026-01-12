@@ -38,6 +38,10 @@ _DEFINEMULTISCALE_CARD0 = (
     FieldSchema("bset", int, 70, 10, None),
 )
 
+_DEFINEMULTISCALE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineMultiscale(KeywordBase):
     """DYNA DEFINE_MULTISCALE keyword"""
 
@@ -58,16 +62,9 @@ class DefineMultiscale(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineMultiscale.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEMULTISCALE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

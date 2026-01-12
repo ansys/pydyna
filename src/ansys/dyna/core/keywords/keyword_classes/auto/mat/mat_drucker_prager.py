@@ -53,6 +53,10 @@ _MATDRUCKERPRAGER_CARD2 = (
     FieldSchema("psigr", float, 70, 10, None),
 )
 
+_MATDRUCKERPRAGER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatDruckerPrager(KeywordBase):
     """DYNA MAT_DRUCKER_PRAGER keyword"""
 
@@ -79,16 +83,9 @@ class MatDruckerPrager(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatDruckerPrager.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATDRUCKERPRAGER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

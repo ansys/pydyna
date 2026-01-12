@@ -36,6 +36,10 @@ _SETSHELLLIST_CARD0 = (
     FieldSchema("da4", float, 40, 10, 0.0),
 )
 
+_SETSHELLLIST_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetShellList(KeywordBase):
     """DYNA SET_SHELL_LIST keyword"""
 
@@ -62,16 +66,9 @@ class SetShellList(KeywordBase):
                 data = kwargs.get("shells")),            OptionCardSet(
                 option_spec = SetShellList.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSHELLLIST_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

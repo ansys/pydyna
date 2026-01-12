@@ -48,6 +48,10 @@ _DEFINEFORMINGBLANKMESH_CARD1 = (
     FieldSchema("yshift", float, 70, 10, 0.0),
 )
 
+_DEFINEFORMINGBLANKMESH_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFormingBlankmesh(KeywordBase):
     """DYNA DEFINE_FORMING_BLANKMESH keyword"""
 
@@ -71,16 +75,9 @@ class DefineFormingBlankmesh(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFormingBlankmesh.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFORMINGBLANKMESH_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

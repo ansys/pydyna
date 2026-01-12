@@ -36,6 +36,10 @@ _MATWINFRITHCONCRETEREINFORCEMENT_CARD0 = (
     FieldSchema("zr/rqb", float, 50, 10, None),
 )
 
+_MATWINFRITHCONCRETEREINFORCEMENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatWinfrithConcreteReinforcement(KeywordBase):
     """DYNA MAT_WINFRITH_CONCRETE_REINFORCEMENT keyword"""
 
@@ -56,16 +60,9 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatWinfrithConcreteReinforcement.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATWINFRITHCONCRETEREINFORCEMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

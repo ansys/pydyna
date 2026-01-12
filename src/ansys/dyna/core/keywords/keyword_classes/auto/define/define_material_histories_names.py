@@ -39,6 +39,10 @@ _DEFINEMATERIALHISTORIESNAMES_CARD1 = (
     FieldSchema("name", str, 0, 80, None),
 )
 
+_DEFINEMATERIALHISTORIESNAMES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineMaterialHistoriesNames(KeywordBase):
     """DYNA DEFINE_MATERIAL_HISTORIES_NAMES keyword"""
 
@@ -62,16 +66,9 @@ class DefineMaterialHistoriesNames(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineMaterialHistoriesNames.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEMATERIALHISTORIESNAMES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

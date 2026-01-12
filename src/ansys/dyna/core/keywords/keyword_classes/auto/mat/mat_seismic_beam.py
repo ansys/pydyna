@@ -82,6 +82,10 @@ _MATSEISMICBEAM_CARD4 = (
     FieldSchema("unused", float, 70, 10, None),
 )
 
+_MATSEISMICBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSeismicBeam(KeywordBase):
     """DYNA MAT_SEISMIC_BEAM keyword"""
 
@@ -114,16 +118,9 @@ class MatSeismicBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSeismicBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSEISMICBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

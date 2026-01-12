@@ -67,6 +67,10 @@ _DEFINEDETOSURFACECOUPLING_CARD3 = (
     FieldSchema("dt", float, 70, 10, 1e+20),
 )
 
+_DEFINEDETOSURFACECOUPLING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeToSurfaceCoupling(KeywordBase):
     """DYNA DEFINE_DE_TO_SURFACE_COUPLING keyword"""
 
@@ -96,16 +100,9 @@ class DefineDeToSurfaceCoupling(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeToSurfaceCoupling.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDETOSURFACECOUPLING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

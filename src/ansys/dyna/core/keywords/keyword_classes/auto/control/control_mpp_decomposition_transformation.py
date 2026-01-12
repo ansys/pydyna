@@ -86,6 +86,7 @@ class ControlMppDecompositionTransformation(KeywordBase):
                                     10,
                                 ),
                             ],
+                            _internal=True,
                     ),
                     Card(
                             [
@@ -109,6 +110,7 @@ class ControlMppDecompositionTransformation(KeywordBase):
                                 ),
                             ],
                             lambda: not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT'],
+                            _internal=True,
                     ),
                 ],
                 None,

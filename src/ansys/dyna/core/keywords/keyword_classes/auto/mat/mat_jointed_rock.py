@@ -70,6 +70,10 @@ _MATJOINTEDROCK_CARD3 = (
     FieldSchema("local", float, 60, 10, None),
 )
 
+_MATJOINTEDROCK_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatJointedRock(KeywordBase):
     """DYNA MAT_JOINTED_ROCK keyword"""
 
@@ -99,16 +103,9 @@ class MatJointedRock(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatJointedRock.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATJOINTEDROCK_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

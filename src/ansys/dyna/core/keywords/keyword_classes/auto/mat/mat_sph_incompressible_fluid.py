@@ -41,6 +41,10 @@ _MATSPHINCOMPRESSIBLEFLUID_CARD1 = (
     FieldSchema("lambda", float, 10, 10, None),
 )
 
+_MATSPHINCOMPRESSIBLEFLUID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSphIncompressibleFluid(KeywordBase):
     """DYNA MAT_SPH_INCOMPRESSIBLE_FLUID keyword"""
 
@@ -64,16 +68,9 @@ class MatSphIncompressibleFluid(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSphIncompressibleFluid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPHINCOMPRESSIBLEFLUID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

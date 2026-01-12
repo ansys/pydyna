@@ -37,6 +37,10 @@ _MATADDPERMEABILITY_CARD0 = (
     FieldSchema("pmtyp", int, 60, 10, 0),
 )
 
+_MATADDPERMEABILITY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddPermeability(KeywordBase):
     """DYNA MAT_ADD_PERMEABILITY keyword"""
 
@@ -57,16 +61,9 @@ class MatAddPermeability(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddPermeability.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDPERMEABILITY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

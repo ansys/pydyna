@@ -118,6 +118,10 @@ _MATCFMICROMECHANICS_CARD9 = (
     FieldSchema("betaki", float, 30, 10, None),
 )
 
+_MATCFMICROMECHANICS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCfMicromechanics(KeywordBase):
     """DYNA MAT_CF_MICROMECHANICS keyword"""
 
@@ -165,16 +169,9 @@ class MatCfMicromechanics(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCfMicromechanics.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCFMICROMECHANICS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

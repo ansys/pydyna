@@ -63,6 +63,10 @@ _MATSEATBELT2D_CARD3 = (
     FieldSchema("gab", float, 0, 10, None),
 )
 
+_MATSEATBELT2D_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSeatbelt2D(KeywordBase):
     """DYNA MAT_SEATBELT_2D keyword"""
 
@@ -92,16 +96,9 @@ class MatSeatbelt2D(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSeatbelt2D.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSEATBELT2D_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

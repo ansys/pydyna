@@ -108,6 +108,10 @@ _MAT172_CARD7 = (
     FieldSchema("phief9", float, 30, 10, None),
 )
 
+_MAT172_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat172(KeywordBase):
     """DYNA MAT_172 keyword"""
 
@@ -149,16 +153,9 @@ class Mat172(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat172.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT172_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

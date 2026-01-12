@@ -60,6 +60,10 @@ _MATSPOTWELDDAMAGEFAILURE_CARD2 = (
     FieldSchema("nf", float, 70, 10, None),
 )
 
+_MATSPOTWELDDAMAGEFAILURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSpotweldDamageFailure(KeywordBase):
     """DYNA MAT_SPOTWELD_DAMAGE_FAILURE keyword"""
 
@@ -86,16 +90,9 @@ class MatSpotweldDamageFailure(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSpotweldDamageFailure.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPOTWELDDAMAGEFAILURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

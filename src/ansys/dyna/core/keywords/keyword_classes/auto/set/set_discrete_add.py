@@ -42,6 +42,10 @@ _SETDISCRETEADD_CARD1 = (
     FieldSchema("dsid8", int, 70, 10, None),
 )
 
+_SETDISCRETEADD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetDiscreteAdd(KeywordBase):
     """DYNA SET_DISCRETE_ADD keyword"""
 
@@ -65,16 +69,9 @@ class SetDiscreteAdd(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetDiscreteAdd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETDISCRETEADD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

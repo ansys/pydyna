@@ -37,6 +37,10 @@ _DEFINETRIMSEEDPOINTCOORDINATES_CARD0 = (
     FieldSchema("z2", float, 60, 10, 0.0),
 )
 
+_DEFINETRIMSEEDPOINTCOORDINATES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineTrimSeedPointCoordinates(KeywordBase):
     """DYNA DEFINE_TRIM_SEED_POINT_COORDINATES keyword"""
 
@@ -57,16 +61,9 @@ class DefineTrimSeedPointCoordinates(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineTrimSeedPointCoordinates.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINETRIMSEEDPOINTCOORDINATES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

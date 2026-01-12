@@ -75,6 +75,10 @@ _MATTHERMOELASTOVISCOPLASTICCREEP_CARD4 = (
     FieldSchema("crplaw", float, 0, 10, 0.0),
 )
 
+_MATTHERMOELASTOVISCOPLASTICCREEP_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatThermoElastoViscoplasticCreep(KeywordBase):
     """DYNA MAT_THERMO_ELASTO_VISCOPLASTIC_CREEP keyword"""
 
@@ -107,16 +111,9 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatThermoElastoViscoplasticCreep.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMOELASTOVISCOPLASTICCREEP_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

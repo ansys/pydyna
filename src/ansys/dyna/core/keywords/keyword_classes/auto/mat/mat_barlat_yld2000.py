@@ -147,6 +147,10 @@ _MATBARLATYLD2000_CARD11 = (
     FieldSchema("k2", float, 70, 10, None),
 )
 
+_MATBARLATYLD2000_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatBarlatYld2000(KeywordBase):
     """DYNA MAT_BARLAT_YLD2000 keyword"""
 
@@ -200,16 +204,9 @@ class MatBarlatYld2000(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatBarlatYld2000.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBARLATYLD2000_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

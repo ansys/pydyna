@@ -56,6 +56,10 @@ _MATJOHNSONHOLMQUISTCERAMICS_CARD2 = (
     FieldSchema("fs", float, 50, 10, None),
 )
 
+_MATJOHNSONHOLMQUISTCERAMICS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatJohnsonHolmquistCeramics(KeywordBase):
     """DYNA MAT_JOHNSON_HOLMQUIST_CERAMICS keyword"""
 
@@ -82,16 +86,9 @@ class MatJohnsonHolmquistCeramics(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatJohnsonHolmquistCeramics.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATJOHNSONHOLMQUISTCERAMICS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

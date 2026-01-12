@@ -210,6 +210,10 @@ _MATMODIFIEDFORCELIMITED_CARD17 = (
     FieldSchema("lpmr_8", int, 70, 10, 0),
 )
 
+_MATMODIFIEDFORCELIMITED_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatModifiedForceLimited(KeywordBase):
     """DYNA MAT_MODIFIED_FORCE_LIMITED keyword"""
 
@@ -281,16 +285,9 @@ class MatModifiedForceLimited(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatModifiedForceLimited.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMODIFIEDFORCELIMITED_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

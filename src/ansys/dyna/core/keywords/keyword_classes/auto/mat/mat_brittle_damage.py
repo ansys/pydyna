@@ -48,6 +48,10 @@ _MATBRITTLEDAMAGE_CARD1 = (
     FieldSchema("sigy", float, 60, 10, None),
 )
 
+_MATBRITTLEDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatBrittleDamage(KeywordBase):
     """DYNA MAT_BRITTLE_DAMAGE keyword"""
 
@@ -71,16 +75,9 @@ class MatBrittleDamage(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatBrittleDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBRITTLEDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

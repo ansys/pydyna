@@ -33,6 +33,10 @@ _DEFINESTAGEDCONSTRUCTIONPARTSET_CARD0 = (
     FieldSchema("stgr", int, 20, 10, None),
 )
 
+_DEFINESTAGEDCONSTRUCTIONPARTSET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineStagedConstructionPartSet(KeywordBase):
     """DYNA DEFINE_STAGED_CONSTRUCTION_PART_SET keyword"""
 
@@ -53,16 +57,9 @@ class DefineStagedConstructionPartSet(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineStagedConstructionPartSet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESTAGEDCONSTRUCTIONPARTSET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

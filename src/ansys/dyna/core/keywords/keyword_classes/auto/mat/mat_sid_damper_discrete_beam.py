@@ -56,6 +56,10 @@ _MATSIDDAMPERDISCRETEBEAM_CARD2 = (
     FieldSchema("dc", float, 30, 10, None),
 )
 
+_MATSIDDAMPERDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSidDamperDiscreteBeam(KeywordBase):
     """DYNA MAT_SID_DAMPER_DISCRETE_BEAM keyword"""
 
@@ -82,16 +86,9 @@ class MatSidDamperDiscreteBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSidDamperDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSIDDAMPERDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

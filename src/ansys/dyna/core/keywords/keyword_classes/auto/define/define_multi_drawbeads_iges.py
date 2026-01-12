@@ -44,6 +44,10 @@ _DEFINEMULTIDRAWBEADSIGES_CARD2 = (
     FieldSchema("bforce", float, 10, 10, 0.0),
 )
 
+_DEFINEMULTIDRAWBEADSIGES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineMultiDrawbeadsIges(KeywordBase):
     """DYNA DEFINE_MULTI_DRAWBEADS_IGES keyword"""
 
@@ -70,16 +74,9 @@ class DefineMultiDrawbeadsIges(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineMultiDrawbeadsIges.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEMULTIDRAWBEADSIGES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

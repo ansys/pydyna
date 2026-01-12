@@ -43,6 +43,10 @@ _MAT163_CARD1 = (
     FieldSchema("srflag", int, 10, 10, None),
 )
 
+_MAT163_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat163(KeywordBase):
     """DYNA MAT_163 keyword"""
 
@@ -66,16 +70,9 @@ class Mat163(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat163.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT163_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

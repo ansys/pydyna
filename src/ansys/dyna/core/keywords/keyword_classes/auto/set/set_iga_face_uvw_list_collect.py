@@ -47,6 +47,10 @@ _SETIGAFACEUVWLISTCOLLECT_CARD1 = (
     FieldSchema("fid8", int, 70, 10, None),
 )
 
+_SETIGAFACEUVWLISTCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetIgaFaceUvwListCollect(KeywordBase):
     """DYNA SET_IGA_FACE_UVW_LIST_COLLECT keyword"""
 
@@ -70,16 +74,9 @@ class SetIgaFaceUvwListCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetIgaFaceUvwListCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETIGAFACEUVWLISTCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

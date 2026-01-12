@@ -62,6 +62,10 @@ _MATNONQUADRATICFAILURE_CARD3 = (
     FieldSchema("thick", float, 70, 10, None),
 )
 
+_MATNONQUADRATICFAILURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatNonQuadraticFailure(KeywordBase):
     """DYNA MAT_NON_QUADRATIC_FAILURE keyword"""
 
@@ -91,16 +95,9 @@ class MatNonQuadraticFailure(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatNonQuadraticFailure.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATNONQUADRATICFAILURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

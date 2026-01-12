@@ -55,6 +55,10 @@ _MATVISCOELASTICFABRIC_CARD2 = (
     FieldSchema("betaki", float, 30, 10, None),
 )
 
+_MATVISCOELASTICFABRIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatViscoelasticFabric(KeywordBase):
     """DYNA MAT_VISCOELASTIC_FABRIC keyword"""
 
@@ -81,16 +85,9 @@ class MatViscoelasticFabric(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatViscoelasticFabric.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATVISCOELASTICFABRIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

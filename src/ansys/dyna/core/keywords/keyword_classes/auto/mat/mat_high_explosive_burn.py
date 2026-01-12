@@ -38,6 +38,10 @@ _MATHIGHEXPLOSIVEBURN_CARD0 = (
     FieldSchema("sigy", float, 70, 10, None),
 )
 
+_MATHIGHEXPLOSIVEBURN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatHighExplosiveBurn(KeywordBase):
     """DYNA MAT_HIGH_EXPLOSIVE_BURN keyword"""
 
@@ -58,16 +62,9 @@ class MatHighExplosiveBurn(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatHighExplosiveBurn.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATHIGHEXPLOSIVEBURN_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

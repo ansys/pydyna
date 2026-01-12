@@ -53,6 +53,10 @@ _MATCOHESIVETH_CARD2 = (
     FieldSchema("alpha3", float, 10, 10, None),
 )
 
+_MATCOHESIVETH_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCohesiveTh(KeywordBase):
     """DYNA MAT_COHESIVE_TH keyword"""
 
@@ -79,16 +83,9 @@ class MatCohesiveTh(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCohesiveTh.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOHESIVETH_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

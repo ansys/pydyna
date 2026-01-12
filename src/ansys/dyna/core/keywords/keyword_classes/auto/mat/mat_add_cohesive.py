@@ -34,6 +34,10 @@ _MATADDCOHESIVE_CARD0 = (
     FieldSchema("thick", float, 30, 10, None),
 )
 
+_MATADDCOHESIVE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddCohesive(KeywordBase):
     """DYNA MAT_ADD_COHESIVE keyword"""
 
@@ -54,16 +58,9 @@ class MatAddCohesive(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddCohesive.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDCOHESIVE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

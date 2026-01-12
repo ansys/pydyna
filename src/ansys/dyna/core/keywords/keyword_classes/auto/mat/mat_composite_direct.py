@@ -62,6 +62,10 @@ _MATCOMPOSITEDIRECT_CARD3 = (
     FieldSchema("c66", float, 40, 10, None),
 )
 
+_MATCOMPOSITEDIRECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCompositeDirect(KeywordBase):
     """DYNA MAT_COMPOSITE_DIRECT keyword"""
 
@@ -91,16 +95,9 @@ class MatCompositeDirect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCompositeDirect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOMPOSITEDIRECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

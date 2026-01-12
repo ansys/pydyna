@@ -69,6 +69,10 @@ _MATSTOUGHTONNONASSOCIATEDFLOW_CARD4 = (
     FieldSchema("d3", float, 50, 10, None),
 )
 
+_MATSTOUGHTONNONASSOCIATEDFLOW_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatStoughtonNonAssociatedFlow(KeywordBase):
     """DYNA MAT_STOUGHTON_NON_ASSOCIATED_FLOW keyword"""
 
@@ -101,16 +105,9 @@ class MatStoughtonNonAssociatedFlow(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatStoughtonNonAssociatedFlow.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSTOUGHTONNONASSOCIATEDFLOW_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

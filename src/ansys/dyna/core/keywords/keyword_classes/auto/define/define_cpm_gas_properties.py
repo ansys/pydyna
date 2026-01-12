@@ -47,6 +47,10 @@ _DEFINECPMGASPROPERTIES_CARD1 = (
     FieldSchema("vini", float, 60, 10, 0.0),
 )
 
+_DEFINECPMGASPROPERTIES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineCpmGasProperties(KeywordBase):
     """DYNA DEFINE_CPM_GAS_PROPERTIES keyword"""
 
@@ -70,16 +74,9 @@ class DefineCpmGasProperties(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineCpmGasProperties.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECPMGASPROPERTIES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

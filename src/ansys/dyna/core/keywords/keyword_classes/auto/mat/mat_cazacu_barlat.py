@@ -80,6 +80,10 @@ _MATCAZACUBARLAT_CARD4 = (
     FieldSchema("fit", int, 70, 10, 0),
 )
 
+_MATCAZACUBARLAT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCazacuBarlat(KeywordBase):
     """DYNA MAT_CAZACU_BARLAT keyword"""
 
@@ -112,16 +116,9 @@ class MatCazacuBarlat(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCazacuBarlat.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCAZACUBARLAT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -40,6 +40,10 @@ _HOURGLASSCARDSET_CARD0 = (
     FieldSchema("qw", float, 70, 10, 0.1),
 )
 
+_HOURGLASSCARDSET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class HourglassCardSet(Cards):
     """ CardSet."""
 
@@ -59,16 +63,9 @@ class HourglassCardSet(Cards):
             ),            OptionCardSet(
                 option_spec = HourglassCardSet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _HOURGLASSCARDSET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

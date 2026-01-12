@@ -34,6 +34,10 @@ _MATFHWASOILNEBRASKA_CARD0 = (
     FieldSchema("fctlen", float, 30, 10, None),
 )
 
+_MATFHWASOILNEBRASKA_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatFhwaSoilNebraska(KeywordBase):
     """DYNA MAT_FHWA_SOIL_NEBRASKA keyword"""
 
@@ -54,16 +58,9 @@ class MatFhwaSoilNebraska(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatFhwaSoilNebraska.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATFHWASOILNEBRASKA_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

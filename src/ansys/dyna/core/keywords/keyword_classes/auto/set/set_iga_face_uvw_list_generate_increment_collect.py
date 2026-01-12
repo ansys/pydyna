@@ -42,6 +42,10 @@ _SETIGAFACEUVWLISTGENERATEINCREMENTCOLLECT_CARD1 = (
     FieldSchema("incr", int, 20, 10, None),
 )
 
+_SETIGAFACEUVWLISTGENERATEINCREMENTCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetIgaFaceUvwListGenerateIncrementCollect(KeywordBase):
     """DYNA SET_IGA_FACE_UVW_LIST_GENERATE_INCREMENT_COLLECT keyword"""
 
@@ -65,16 +69,9 @@ class SetIgaFaceUvwListGenerateIncrementCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetIgaFaceUvwListGenerateIncrementCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETIGAFACEUVWLISTGENERATEINCREMENTCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

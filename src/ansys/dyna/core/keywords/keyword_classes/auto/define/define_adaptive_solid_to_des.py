@@ -52,6 +52,10 @@ _DEFINEADAPTIVESOLIDTODES_CARD2 = (
     FieldSchema("alpha", float, 50, 10, 0.0),
 )
 
+_DEFINEADAPTIVESOLIDTODES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineAdaptiveSolidToDes(KeywordBase):
     """DYNA DEFINE_ADAPTIVE_SOLID_TO_DES keyword"""
 
@@ -78,16 +82,9 @@ class DefineAdaptiveSolidToDes(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineAdaptiveSolidToDes.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEADAPTIVESOLIDTODES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

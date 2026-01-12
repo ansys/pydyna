@@ -46,6 +46,10 @@ _MATARRUDABOYCERUBBER_CARD2 = (
     FieldSchema("betai", float, 10, 10, None),
 )
 
+_MATARRUDABOYCERUBBER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatArrudaBoyceRubber(KeywordBase):
     """DYNA MAT_ARRUDA_BOYCE_RUBBER keyword"""
 
@@ -72,16 +76,9 @@ class MatArrudaBoyceRubber(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatArrudaBoyceRubber.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATARRUDABOYCERUBBER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -54,6 +54,10 @@ _MAT025_CARD2 = (
     FieldSchema("toff", float, 30, 10, None),
 )
 
+_MAT025_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat025(KeywordBase):
     """DYNA MAT_025 keyword"""
 
@@ -80,16 +84,9 @@ class Mat025(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat025.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT025_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -41,6 +41,10 @@ _DEFINEFUNCTIONTABULATED_CARD2 = (
     FieldSchema("o1", float, 20, 20, None),
 )
 
+_DEFINEFUNCTIONTABULATED_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFunctionTabulated(KeywordBase):
     """DYNA DEFINE_FUNCTION_TABULATED keyword"""
 
@@ -67,16 +71,9 @@ class DefineFunctionTabulated(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFunctionTabulated.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFUNCTIONTABULATED_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -82,6 +82,10 @@ _MATANISOTROPICELASTIC_CARD4 = (
     FieldSchema("ref", float, 70, 10, 0.0),
 )
 
+_MATANISOTROPICELASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAnisotropicElastic(KeywordBase):
     """DYNA MAT_ANISOTROPIC_ELASTIC keyword"""
 
@@ -114,16 +118,9 @@ class MatAnisotropicElastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAnisotropicElastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATANISOTROPICELASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

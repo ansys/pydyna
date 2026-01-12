@@ -42,6 +42,10 @@ _SETMODELISTGENERATE_CARD1 = (
     FieldSchema("m4end", int, 70, 10, None),
 )
 
+_SETMODELISTGENERATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetModeListGenerate(KeywordBase):
     """DYNA SET_MODE_LIST_GENERATE keyword"""
 
@@ -65,16 +69,9 @@ class SetModeListGenerate(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetModeListGenerate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETMODELISTGENERATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

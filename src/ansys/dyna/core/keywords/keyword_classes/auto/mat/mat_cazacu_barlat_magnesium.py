@@ -91,6 +91,10 @@ _MATCAZACUBARLATMAGNESIUM_CARD5 = (
     FieldSchema("epsfg", float, 70, 10, None),
 )
 
+_MATCAZACUBARLATMAGNESIUM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCazacuBarlatMagnesium(KeywordBase):
     """DYNA MAT_CAZACU_BARLAT_MAGNESIUM keyword"""
 
@@ -126,16 +130,9 @@ class MatCazacuBarlatMagnesium(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCazacuBarlatMagnesium.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCAZACUBARLATMAGNESIUM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

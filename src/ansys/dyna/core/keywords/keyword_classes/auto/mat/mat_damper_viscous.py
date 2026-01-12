@@ -32,6 +32,10 @@ _MATDAMPERVISCOUS_CARD0 = (
     FieldSchema("dc", float, 10, 10, None),
 )
 
+_MATDAMPERVISCOUS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatDamperViscous(KeywordBase):
     """DYNA MAT_DAMPER_VISCOUS keyword"""
 
@@ -52,16 +56,9 @@ class MatDamperViscous(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatDamperViscous.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATDAMPERVISCOUS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

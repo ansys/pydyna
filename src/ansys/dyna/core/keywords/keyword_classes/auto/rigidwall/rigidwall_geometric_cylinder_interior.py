@@ -56,6 +56,11 @@ _RIGIDWALLGEOMETRICCYLINDERINTERIOR_CARD3 = (
     FieldSchema("height", float, 10, 10, None),
 )
 
+_RIGIDWALLGEOMETRICCYLINDERINTERIOR_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallGeometricCylinderInterior(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_CYLINDER_INTERIOR keyword"""
 
@@ -85,23 +90,9 @@ class RigidwallGeometricCylinderInterior(KeywordBase):
             ),            OptionCardSet(
                 option_spec = RigidwallGeometricCylinderInterior.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICCYLINDERINTERIOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

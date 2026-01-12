@@ -49,6 +49,10 @@ _SETNODELISTSMOOTH_CARD1 = (
     FieldSchema("nid8", int, 70, 10, None),
 )
 
+_SETNODELISTSMOOTH_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetNodeListSmooth(KeywordBase):
     """DYNA SET_NODE_LIST_SMOOTH keyword"""
 
@@ -72,16 +76,9 @@ class SetNodeListSmooth(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetNodeListSmooth.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETNODELISTSMOOTH_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

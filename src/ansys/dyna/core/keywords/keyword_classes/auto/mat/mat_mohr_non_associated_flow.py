@@ -89,6 +89,10 @@ _MATMOHRNONASSOCIATEDFLOW_CARD6 = (
     FieldSchema("v3", float, 20, 10, None),
 )
 
+_MATMOHRNONASSOCIATEDFLOW_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatMohrNonAssociatedFlow(KeywordBase):
     """DYNA MAT_MOHR_NON_ASSOCIATED_FLOW keyword"""
 
@@ -127,16 +131,9 @@ class MatMohrNonAssociatedFlow(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatMohrNonAssociatedFlow.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMOHRNONASSOCIATEDFLOW_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

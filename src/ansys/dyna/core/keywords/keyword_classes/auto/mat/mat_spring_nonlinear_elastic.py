@@ -33,6 +33,10 @@ _MATSPRINGNONLINEARELASTIC_CARD0 = (
     FieldSchema("lcr", int, 20, 10, 0),
 )
 
+_MATSPRINGNONLINEARELASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSpringNonlinearElastic(KeywordBase):
     """DYNA MAT_SPRING_NONLINEAR_ELASTIC keyword"""
 
@@ -53,16 +57,9 @@ class MatSpringNonlinearElastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSpringNonlinearElastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPRINGNONLINEARELASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

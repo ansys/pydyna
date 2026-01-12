@@ -49,6 +49,11 @@ _RIGIDWALLGEOMETRICSPHERE_CARD2 = (
     FieldSchema("radsph", float, 0, 10, 0.0),
 )
 
+_RIGIDWALLGEOMETRICSPHERE_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallGeometricSphere(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_SPHERE keyword"""
 
@@ -75,23 +80,9 @@ class RigidwallGeometricSphere(KeywordBase):
             ),            OptionCardSet(
                 option_spec = RigidwallGeometricSphere.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICSPHERE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

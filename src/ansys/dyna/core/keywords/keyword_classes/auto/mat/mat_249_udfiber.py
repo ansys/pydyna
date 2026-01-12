@@ -78,6 +78,10 @@ _MAT249UDFIBER_CARD5 = (
     FieldSchema("kap3", float, 30, 10, None),
 )
 
+_MAT249UDFIBER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat249Udfiber(KeywordBase):
     """DYNA MAT_249_UDfiber keyword"""
 
@@ -113,16 +117,9 @@ class Mat249Udfiber(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat249Udfiber.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT249UDFIBER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

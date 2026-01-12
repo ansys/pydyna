@@ -42,6 +42,10 @@ _SETIGAEDGEUVWLISTGENERATEINCREMENTCOLLECT_CARD1 = (
     FieldSchema("incr", int, 20, 10, None),
 )
 
+_SETIGAEDGEUVWLISTGENERATEINCREMENTCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetIgaEdgeUvwListGenerateIncrementCollect(KeywordBase):
     """DYNA SET_IGA_EDGE_UVW_LIST_GENERATE_INCREMENT_COLLECT keyword"""
 
@@ -65,16 +69,9 @@ class SetIgaEdgeUvwListGenerateIncrementCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetIgaEdgeUvwListGenerateIncrementCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETIGAEDGEUVWLISTGENERATEINCREMENTCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

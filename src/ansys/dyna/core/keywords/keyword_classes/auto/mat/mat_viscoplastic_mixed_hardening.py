@@ -40,6 +40,10 @@ _MATVISCOPLASTICMIXEDHARDENING_CARD1 = (
     FieldSchema("fail", float, 0, 10, 1e+20),
 )
 
+_MATVISCOPLASTICMIXEDHARDENING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatViscoplasticMixedHardening(KeywordBase):
     """DYNA MAT_VISCOPLASTIC_MIXED_HARDENING keyword"""
 
@@ -63,16 +67,9 @@ class MatViscoplasticMixedHardening(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatViscoplasticMixedHardening.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATVISCOPLASTICMIXEDHARDENING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

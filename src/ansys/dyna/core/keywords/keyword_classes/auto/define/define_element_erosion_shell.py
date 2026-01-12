@@ -34,6 +34,10 @@ _DEFINEELEMENTEROSIONSHELL_CARD0 = (
     FieldSchema("nifp", int, 30, 10, 1),
 )
 
+_DEFINEELEMENTEROSIONSHELL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineElementErosionShell(KeywordBase):
     """DYNA DEFINE_ELEMENT_EROSION_SHELL keyword"""
 
@@ -54,16 +58,9 @@ class DefineElementErosionShell(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineElementErosionShell.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEELEMENTEROSIONSHELL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

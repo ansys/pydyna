@@ -33,6 +33,10 @@ _MATPMLACOUSTIC_CARD0 = (
     FieldSchema("c", float, 20, 10, None),
 )
 
+_MATPMLACOUSTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPmlAcoustic(KeywordBase):
     """DYNA MAT_PML_ACOUSTIC keyword"""
 
@@ -53,16 +57,9 @@ class MatPmlAcoustic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPmlAcoustic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPMLACOUSTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

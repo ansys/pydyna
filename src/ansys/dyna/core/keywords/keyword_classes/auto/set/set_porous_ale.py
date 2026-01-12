@@ -63,6 +63,10 @@ _SETPOROUSALE_CARD3 = (
     FieldSchema("bzz", float, 50, 10, 0.0),
 )
 
+_SETPOROUSALE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetPorousAle(KeywordBase):
     """DYNA SET_POROUS_ALE keyword"""
 
@@ -92,16 +96,9 @@ class SetPorousAle(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetPorousAle.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETPOROUSALE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

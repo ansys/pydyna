@@ -46,6 +46,10 @@ _MATSTEELEC3_CARD1 = (
 _MATSTEELEC3_CARD2 = (
 )
 
+_MATSTEELEC3_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSteelEc3(KeywordBase):
     """DYNA MAT_STEEL_EC3 keyword"""
 
@@ -72,16 +76,9 @@ class MatSteelEc3(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSteelEc3.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSTEELEC3_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

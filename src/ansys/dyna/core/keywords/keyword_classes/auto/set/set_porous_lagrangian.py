@@ -63,6 +63,10 @@ _SETPOROUSLAGRANGIAN_CARD3 = (
     FieldSchema("bzz", float, 50, 10, 0.0),
 )
 
+_SETPOROUSLAGRANGIAN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetPorousLagrangian(KeywordBase):
     """DYNA SET_POROUS_LAGRANGIAN keyword"""
 
@@ -92,16 +96,9 @@ class SetPorousLagrangian(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetPorousLagrangian.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETPOROUSLAGRANGIAN_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

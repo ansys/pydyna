@@ -38,6 +38,10 @@ _DEFINETABLE3D_CARD1 = (
     FieldSchema("tbid", int, 20, 20, None),
 )
 
+_DEFINETABLE3D_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineTable3D(KeywordBase):
     """DYNA DEFINE_TABLE_3D keyword"""
 
@@ -61,16 +65,9 @@ class DefineTable3D(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineTable3D.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINETABLE3D_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

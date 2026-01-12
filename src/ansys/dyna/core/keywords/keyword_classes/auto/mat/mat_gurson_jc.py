@@ -98,6 +98,10 @@ _MATGURSONJC_CARD6 = (
     FieldSchema("m", int, 20, 10, None),
 )
 
+_MATGURSONJC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatGursonJc(KeywordBase):
     """DYNA MAT_GURSON_JC keyword"""
 
@@ -136,16 +140,9 @@ class MatGursonJc(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatGursonJc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATGURSONJC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

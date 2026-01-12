@@ -38,6 +38,11 @@ _BOUNDARYPRESCRIBEDMOTIONSETSEGMENT_CARD0 = (
     FieldSchema("birth", float, 70, 10, 0.0),
 )
 
+_BOUNDARYPRESCRIBEDMOTIONSETSEGMENT_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
 class BoundaryPrescribedMotionSetSegment(KeywordBase):
     """DYNA BOUNDARY_PRESCRIBED_MOTION_SET_SEGMENT keyword"""
 
@@ -58,23 +63,9 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
             ),            OptionCardSet(
                 option_spec = BoundaryPrescribedMotionSetSegment.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _BOUNDARYPRESCRIBEDMOTIONSETSEGMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

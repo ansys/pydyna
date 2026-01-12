@@ -46,6 +46,10 @@ _DEFINESTOCHASTICVARIATIONPROPERTIES_CARD1 = (
     FieldSchema("r3", float, 40, 10, None),
 )
 
+_DEFINESTOCHASTICVARIATIONPROPERTIES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineStochasticVariationProperties(KeywordBase):
     """DYNA DEFINE_STOCHASTIC_VARIATION_PROPERTIES keyword"""
 
@@ -69,16 +73,9 @@ class DefineStochasticVariationProperties(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineStochasticVariationProperties.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESTOCHASTICVARIATIONPROPERTIES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

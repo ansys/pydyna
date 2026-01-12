@@ -47,6 +47,10 @@ _SETIGAFACEUVWLISTGENERATE_CARD1 = (
     FieldSchema("b4end", int, 70, 10, None),
 )
 
+_SETIGAFACEUVWLISTGENERATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetIgaFaceUvwListGenerate(KeywordBase):
     """DYNA SET_IGA_FACE_UVW_LIST_GENERATE keyword"""
 
@@ -70,16 +74,9 @@ class SetIgaFaceUvwListGenerate(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetIgaFaceUvwListGenerate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETIGAFACEUVWLISTGENERATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

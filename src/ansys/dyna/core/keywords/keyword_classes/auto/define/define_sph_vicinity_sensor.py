@@ -35,6 +35,10 @@ _DEFINESPHVICINITYSENSOR_CARD0 = (
     FieldSchema("dist", int, 40, 10, 0),
 )
 
+_DEFINESPHVICINITYSENSOR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineSphVicinitySensor(KeywordBase):
     """DYNA DEFINE_SPH_VICINITY_SENSOR keyword"""
 
@@ -55,16 +59,9 @@ class DefineSphVicinitySensor(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineSphVicinitySensor.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPHVICINITYSENSOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

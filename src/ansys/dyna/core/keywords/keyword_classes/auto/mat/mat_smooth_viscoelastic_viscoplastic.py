@@ -99,6 +99,10 @@ _MATSMOOTHVISCOELASTICVISCOPLASTIC_CARD6 = (
     FieldSchema("shear", float, 70, 10, None),
 )
 
+_MATSMOOTHVISCOELASTICVISCOPLASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSmoothViscoelasticViscoplastic(KeywordBase):
     """DYNA MAT_SMOOTH_VISCOELASTIC_VISCOPLASTIC keyword"""
 
@@ -137,16 +141,9 @@ class MatSmoothViscoelasticViscoplastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSmoothViscoelasticViscoplastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSMOOTHVISCOELASTICVISCOPLASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

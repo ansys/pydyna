@@ -36,6 +36,10 @@ _SENSORDEFINENODE_CARD0 = (
     FieldSchema("ctype", str, 50, 10, "ACC"),
 )
 
+_SENSORDEFINENODE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SensorDefineNode(KeywordBase):
     """DYNA SENSOR_DEFINE_NODE keyword"""
 
@@ -56,16 +60,9 @@ class SensorDefineNode(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SensorDefineNode.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINENODE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

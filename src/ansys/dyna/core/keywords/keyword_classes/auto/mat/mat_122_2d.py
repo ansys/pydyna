@@ -79,6 +79,10 @@ _MAT1222D_CARD5 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MAT1222D_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat1222D(KeywordBase):
     """DYNA MAT_122_2D keyword"""
 
@@ -114,16 +118,9 @@ class Mat1222D(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat1222D.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT1222D_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

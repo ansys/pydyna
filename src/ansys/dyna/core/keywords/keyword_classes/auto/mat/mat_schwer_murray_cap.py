@@ -87,6 +87,10 @@ _MATSCHWERMURRAYCAP_CARD5 = (
     FieldSchema("beta2", float, 70, 10, None),
 )
 
+_MATSCHWERMURRAYCAP_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSchwerMurrayCap(KeywordBase):
     """DYNA MAT_SCHWER_MURRAY_CAP keyword"""
 
@@ -122,16 +126,9 @@ class MatSchwerMurrayCap(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSchwerMurrayCap.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSCHWERMURRAYCAP_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

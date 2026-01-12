@@ -98,6 +98,10 @@ _MAT120JC_CARD6 = (
     FieldSchema("m", int, 20, 10, None),
 )
 
+_MAT120JC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat120Jc(KeywordBase):
     """DYNA MAT_120_JC keyword"""
 
@@ -136,16 +140,9 @@ class Mat120Jc(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat120Jc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT120JC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -185,6 +185,10 @@ _MAT248_CARD14 = (
     FieldSchema("expon", float, 10, 10, 0.0),
 )
 
+_MAT248_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat248(KeywordBase):
     """DYNA MAT_248 keyword"""
 
@@ -247,16 +251,9 @@ class Mat248(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat248.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT248_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -75,6 +75,10 @@ _MAT188_CARD4 = (
     FieldSchema("crplaw", float, 0, 10, 0.0),
 )
 
+_MAT188_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat188(KeywordBase):
     """DYNA MAT_188 keyword"""
 
@@ -107,16 +111,9 @@ class Mat188(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat188.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT188_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

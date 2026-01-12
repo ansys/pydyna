@@ -128,6 +128,10 @@ _MATTHERMALCHEMICALREACTIONORTHOTROPIC_CARD9 = (
     FieldSchema("lczi8", float, 70, 10, None),
 )
 
+_MATTHERMALCHEMICALREACTIONORTHOTROPIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatThermalChemicalReactionOrthotropic(KeywordBase):
     """DYNA MAT_THERMAL_CHEMICAL_REACTION_ORTHOTROPIC keyword"""
 
@@ -175,16 +179,9 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatThermalChemicalReactionOrthotropic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMALCHEMICALREACTIONORTHOTROPIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

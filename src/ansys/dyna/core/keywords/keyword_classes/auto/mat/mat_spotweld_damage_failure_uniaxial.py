@@ -60,6 +60,10 @@ _MATSPOTWELDDAMAGEFAILUREUNIAXIAL_CARD2 = (
     FieldSchema("nf", float, 70, 10, None),
 )
 
+_MATSPOTWELDDAMAGEFAILUREUNIAXIAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSpotweldDamageFailureUniaxial(KeywordBase):
     """DYNA MAT_SPOTWELD_DAMAGE-FAILURE_UNIAXIAL keyword"""
 
@@ -86,16 +90,9 @@ class MatSpotweldDamageFailureUniaxial(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSpotweldDamageFailureUniaxial.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPOTWELDDAMAGEFAILUREUNIAXIAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

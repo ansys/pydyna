@@ -80,6 +80,10 @@ _CONSTRAINEDNODALRIGIDBODYSPCINERTIAMASTER_CARD5 = (
     FieldSchema("cid2", int, 60, 10, None),
 )
 
+_CONSTRAINEDNODALRIGIDBODYSPCINERTIAMASTER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
     """DYNA CONSTRAINED_NODAL_RIGID_BODY_SPC_INERTIA_MASTER keyword"""
 
@@ -115,16 +119,9 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
             ),            OptionCardSet(
                 option_spec = ConstrainedNodalRigidBodySpcInertiaMaster.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDNODALRIGIDBODYSPCINERTIAMASTER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

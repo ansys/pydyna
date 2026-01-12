@@ -57,6 +57,10 @@ _MATTABULATEDJOHNSONCOOKGYSLOGINTERPOLATION_CARD2 = (
     FieldSchema("niter", int, 60, 10, 100),
 )
 
+_MATTABULATEDJOHNSONCOOKGYSLOGINTERPOLATION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatTabulatedJohnsonCookGysLogInterpolation(KeywordBase):
     """DYNA MAT_TABULATED_JOHNSON_COOK_GYS_LOG_INTERPOLATION keyword"""
 
@@ -83,16 +87,9 @@ class MatTabulatedJohnsonCookGysLogInterpolation(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatTabulatedJohnsonCookGysLogInterpolation.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTABULATEDJOHNSONCOOKGYSLOGINTERPOLATION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -60,6 +60,10 @@ _MATRCBEAM_CARD2 = (
     FieldSchema("rreinf", float, 70, 10, 4.0),
 )
 
+_MATRCBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatRcBeam(KeywordBase):
     """DYNA MAT_RC_BEAM keyword"""
 
@@ -86,16 +90,9 @@ class MatRcBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatRcBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATRCBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

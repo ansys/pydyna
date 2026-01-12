@@ -43,6 +43,10 @@ _MATCLOSEDCELLFOAM_CARD1 = (
     FieldSchema("lcid", int, 10, 10, 0),
 )
 
+_MATCLOSEDCELLFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatClosedCellFoam(KeywordBase):
     """DYNA MAT_CLOSED_CELL_FOAM keyword"""
 
@@ -66,16 +70,9 @@ class MatClosedCellFoam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatClosedCellFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCLOSEDCELLFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

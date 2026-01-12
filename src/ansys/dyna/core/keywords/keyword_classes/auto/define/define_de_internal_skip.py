@@ -32,6 +32,10 @@ _DEFINEDEINTERNALSKIP_CARD0 = (
     FieldSchema("type", int, 10, 10, 0),
 )
 
+_DEFINEDEINTERNALSKIP_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeInternalSkip(KeywordBase):
     """DYNA DEFINE_DE_INTERNAL_SKIP keyword"""
 
@@ -52,16 +56,9 @@ class DefineDeInternalSkip(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeInternalSkip.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEINTERNALSKIP_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

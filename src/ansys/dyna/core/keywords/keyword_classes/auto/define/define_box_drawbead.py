@@ -37,6 +37,10 @@ _DEFINEBOXDRAWBEAD_CARD0 = (
     FieldSchema("cid", int, 60, 10, 0),
 )
 
+_DEFINEBOXDRAWBEAD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineBoxDrawbead(KeywordBase):
     """DYNA DEFINE_BOX_DRAWBEAD keyword"""
 
@@ -57,16 +61,9 @@ class DefineBoxDrawbead(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineBoxDrawbead.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEBOXDRAWBEAD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

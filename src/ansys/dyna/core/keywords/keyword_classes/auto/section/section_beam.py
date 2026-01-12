@@ -90,6 +90,10 @@ _SECTIONBEAM_CARD6 = (
     FieldSchema("itoff", float, 60, 10, None),
 )
 
+_SECTIONBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionBeam(KeywordBase):
     """DYNA SECTION_BEAM keyword"""
 
@@ -134,16 +138,9 @@ class SectionBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

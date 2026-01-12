@@ -69,6 +69,10 @@ _MATBAMMAN_CARD3 = (
     FieldSchema("a6", float, 70, 10, None),
 )
 
+_MATBAMMAN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatBamman(KeywordBase):
     """DYNA MAT_BAMMAN keyword"""
 
@@ -98,16 +102,9 @@ class MatBamman(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatBamman.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBAMMAN_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

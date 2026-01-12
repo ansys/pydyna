@@ -65,6 +65,10 @@ _MATHILLFOAM_CARD3 = (
     FieldSchema("m", float, 10, 10, None),
 )
 
+_MATHILLFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatHillFoam(KeywordBase):
     """DYNA MAT_HILL_FOAM keyword"""
 
@@ -94,16 +98,9 @@ class MatHillFoam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatHillFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATHILLFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -55,6 +55,10 @@ _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD2 = (
     FieldSchema("lcps", int, 40, 10, None),
 )
 
+_MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
     """DYNA MAT_TABULATED_JOHNSON_COOK_LOG_INTERPOLATION keyword"""
 
@@ -81,16 +85,9 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatTabulatedJohnsonCookLogInterpolation.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

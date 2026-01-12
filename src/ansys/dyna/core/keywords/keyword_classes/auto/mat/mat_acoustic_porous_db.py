@@ -45,6 +45,10 @@ _MATACOUSTICPOROUSDB_CARD1 = (
     FieldSchema("c8", float, 70, 10, None),
 )
 
+_MATACOUSTICPOROUSDB_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAcousticPorousDb(KeywordBase):
     """DYNA MAT_ACOUSTIC_POROUS_DB keyword"""
 
@@ -68,16 +72,9 @@ class MatAcousticPorousDb(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAcousticPorousDb.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATACOUSTICPOROUSDB_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

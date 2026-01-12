@@ -94,6 +94,10 @@ _MATRCSHEARWALL_CARD7 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MATRCSHEARWALL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatRcShearWall(KeywordBase):
     """DYNA MAT_RC_SHEAR_WALL keyword"""
 
@@ -135,16 +139,9 @@ class MatRcShearWall(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatRcShearWall.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATRCSHEARWALL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

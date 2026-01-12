@@ -52,6 +52,10 @@ _DEFINEBOXDRAWBEADLOCAL_CARD2 = (
     FieldSchema("cz", float, 20, 10, 0.0),
 )
 
+_DEFINEBOXDRAWBEADLOCAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineBoxDrawbeadLocal(KeywordBase):
     """DYNA DEFINE_BOX_DRAWBEAD_LOCAL keyword"""
 
@@ -78,16 +82,9 @@ class DefineBoxDrawbeadLocal(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineBoxDrawbeadLocal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEBOXDRAWBEADLOCAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -38,6 +38,10 @@ _SENSORDEFINEELEMENT_CARD0 = (
     FieldSchema("pwr", float, 70, 10, None),
 )
 
+_SENSORDEFINEELEMENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SensorDefineElement(KeywordBase):
     """DYNA SENSOR_DEFINE_ELEMENT keyword"""
 
@@ -58,16 +62,9 @@ class SensorDefineElement(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SensorDefineElement.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEELEMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

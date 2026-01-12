@@ -43,6 +43,10 @@ _SETSHELLCOLUMN_CARD1 = (
     FieldSchema("a4", float, 40, 10, 0.0),
 )
 
+_SETSHELLCOLUMN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetShellColumn(KeywordBase):
     """DYNA SET_SHELL_COLUMN keyword"""
 
@@ -66,16 +70,9 @@ class SetShellColumn(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetShellColumn.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSHELLCOLUMN_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

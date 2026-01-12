@@ -63,6 +63,10 @@ _DEFINECPMVENT_CARD3 = (
     FieldSchema("jtnd", int, 0, 10, None),
 )
 
+_DEFINECPMVENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineCpmVent(KeywordBase):
     """DYNA DEFINE_CPM_VENT keyword"""
 
@@ -92,16 +96,9 @@ class DefineCpmVent(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineCpmVent.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECPMVENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

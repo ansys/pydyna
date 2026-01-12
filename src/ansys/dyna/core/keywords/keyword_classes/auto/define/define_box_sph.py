@@ -48,6 +48,10 @@ _DEFINEBOXSPH_CARD1 = (
     FieldSchema("pid", int, 60, 10, 0),
 )
 
+_DEFINEBOXSPH_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineBoxSph(KeywordBase):
     """DYNA DEFINE_BOX_SPH keyword"""
 
@@ -71,16 +75,9 @@ class DefineBoxSph(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineBoxSph.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEBOXSPH_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

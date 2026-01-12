@@ -54,6 +54,10 @@ _MATSTEELCONCENTRICBRACE_CARD2 = (
     FieldSchema("cs4", float, 70, 10, 0.0),
 )
 
+_MATSTEELCONCENTRICBRACE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSteelConcentricBrace(KeywordBase):
     """DYNA MAT_STEEL_CONCENTRIC_BRACE keyword"""
 
@@ -80,16 +84,9 @@ class MatSteelConcentricBrace(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSteelConcentricBrace.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSTEELCONCENTRICBRACE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

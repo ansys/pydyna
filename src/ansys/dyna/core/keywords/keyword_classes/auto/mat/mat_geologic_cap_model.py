@@ -54,6 +54,10 @@ _MATGEOLOGICCAPMODEL_CARD2 = (
     FieldSchema("toff", float, 30, 10, None),
 )
 
+_MATGEOLOGICCAPMODEL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatGeologicCapModel(KeywordBase):
     """DYNA MAT_GEOLOGIC_CAP_MODEL keyword"""
 
@@ -80,16 +84,9 @@ class MatGeologicCapModel(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatGeologicCapModel.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATGEOLOGICCAPMODEL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

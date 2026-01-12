@@ -38,6 +38,10 @@ _SENSORSWITCHCALCLOGIC_CARD0 = (
     FieldSchema("swit7", int, 70, 10, None),
 )
 
+_SENSORSWITCHCALCLOGIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SensorSwitchCalcLogic(KeywordBase):
     """DYNA SENSOR_SWITCH_CALC_LOGIC keyword"""
 
@@ -58,16 +62,9 @@ class SensorSwitchCalcLogic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SensorSwitchCalcLogic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORSWITCHCALCLOGIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

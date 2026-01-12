@@ -101,6 +101,10 @@ _MATSEISMICISOLATOR_CARD7 = (
     FieldSchema("kthz", float, 20, 10, None),
 )
 
+_MATSEISMICISOLATOR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSeismicIsolator(KeywordBase):
     """DYNA MAT_SEISMIC_ISOLATOR keyword"""
 
@@ -142,16 +146,9 @@ class MatSeismicIsolator(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSeismicIsolator.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSEISMICISOLATOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -48,6 +48,10 @@ _MAT270_CARD1 = (
     FieldSchema("aghost", float, 60, 10, None),
 )
 
+_MAT270_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat270(KeywordBase):
     """DYNA MAT_270 keyword"""
 
@@ -71,16 +75,9 @@ class Mat270(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat270.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT270_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

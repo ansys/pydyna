@@ -75,6 +75,10 @@ _MATBAMMANDAMAGE_CARD4 = (
     FieldSchema("fs", float, 20, 10, None),
 )
 
+_MATBAMMANDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatBammanDamage(KeywordBase):
     """DYNA MAT_BAMMAN_DAMAGE keyword"""
 
@@ -107,16 +111,9 @@ class MatBammanDamage(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatBammanDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBAMMANDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -36,6 +36,10 @@ _MATVISCOELASTIC_CARD0 = (
     FieldSchema("beta", float, 50, 10, None),
 )
 
+_MATVISCOELASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatViscoelastic(KeywordBase):
     """DYNA MAT_VISCOELASTIC keyword"""
 
@@ -56,16 +60,9 @@ class MatViscoelastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatViscoelastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATVISCOELASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

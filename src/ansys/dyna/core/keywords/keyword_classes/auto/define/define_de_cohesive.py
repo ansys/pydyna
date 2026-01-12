@@ -39,6 +39,10 @@ _DEFINEDECOHESIVE_CARD1 = (
     FieldSchema("gap", float, 30, 10, 0.0),
 )
 
+_DEFINEDECOHESIVE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeCohesive(KeywordBase):
     """DYNA DEFINE_DE_COHESIVE keyword"""
 
@@ -62,16 +66,9 @@ class DefineDeCohesive(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeCohesive.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDECOHESIVE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

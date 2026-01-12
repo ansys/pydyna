@@ -33,6 +33,10 @@ _CONSTRAINEDRIVET_CARD0 = (
     FieldSchema("tf", float, 20, 10, 1e+20),
 )
 
+_CONSTRAINEDRIVET_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
 class ConstrainedRivet(KeywordBase):
     """DYNA CONSTRAINED_RIVET keyword"""
 
@@ -53,16 +57,9 @@ class ConstrainedRivet(KeywordBase):
             ),            OptionCardSet(
                 option_spec = ConstrainedRivet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDRIVET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

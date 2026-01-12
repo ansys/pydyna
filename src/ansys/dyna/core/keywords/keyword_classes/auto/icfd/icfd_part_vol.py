@@ -36,6 +36,10 @@ _ICFDPARTVOL_CARD0 = (
     FieldSchema("mid", int, 20, 10, None),
 )
 
+_ICFDPARTVOL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class IcfdPartVol(KeywordBase):
     """DYNA ICFD_PART_VOL keyword"""
 
@@ -70,16 +74,9 @@ class IcfdPartVol(KeywordBase):
             ),            OptionCardSet(
                 option_spec = IcfdPartVol.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _ICFDPARTVOL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

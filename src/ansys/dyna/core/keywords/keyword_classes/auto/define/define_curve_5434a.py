@@ -43,6 +43,10 @@ _DEFINECURVE5434A_CARD1 = (
     FieldSchema("o1", float, 20, 20, 0.0),
 )
 
+_DEFINECURVE5434A_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineCurve5434A(KeywordBase):
     """DYNA DEFINE_CURVE_5434A keyword"""
 
@@ -66,16 +70,9 @@ class DefineCurve5434A(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineCurve5434A.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECURVE5434A_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

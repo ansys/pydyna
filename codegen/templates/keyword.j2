@@ -4,7 +4,7 @@
   Generates:
   1. License and imports
   2. CardSet classes (if any)
-  3. Schema definitions for regular Cards
+  3. Schema definitions for regular Cards and option Cards
   4. Main keyword class with __init__ and properties
 #}
 {% include 'keyword/imports.j2' %}
@@ -27,6 +27,24 @@ _{{keyword_data.classname | upper}}_CARD{{loop.index0}} = (
 
 {% endif %}
 {% endfor %}
+{# Generate schema definitions for option Cards #}
+{% if keyword_data.options %}
+{% for option in keyword_data.options %}
+{% set option_loop = loop %}
+{% for card in option.cards %}
+_{{keyword_data.classname | upper}}_OPTION{{option_loop.index0}}_CARD{{loop.index0}} = (
+{% for field in card.fields %}
+{% if field.flag %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, Flag({% if field.default is not none %}{{field.default}}{% else %}None{% endif %}, "{{field.on}}", "{{field.off}}")),
+{% else %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endif %}
+{% endfor %}
+)
+
+{% endfor %}
+{% endfor %}
+{% endif %}
 {% include 'keyword/class_header.j2' %}
 
 {% include 'keyword/init_method.j2' %}

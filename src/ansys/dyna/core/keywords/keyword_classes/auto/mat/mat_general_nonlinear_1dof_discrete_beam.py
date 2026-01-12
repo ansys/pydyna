@@ -49,6 +49,10 @@ _MATGENERALNONLINEAR1DOFDISCRETEBEAM_CARD2 = (
     FieldSchema("iu", float, 20, 10, None),
 )
 
+_MATGENERALNONLINEAR1DOFDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
     """DYNA MAT_GENERAL_NONLINEAR_1DOF_DISCRETE_BEAM keyword"""
 
@@ -75,16 +79,9 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatGeneralNonlinear1DofDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATGENERALNONLINEAR1DOFDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

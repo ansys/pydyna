@@ -96,6 +96,10 @@ _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD6 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
     """DYNA MAT_TABULATED_JOHNSON_COOK_ORTHO_PLASTICITY keyword"""
 
@@ -134,16 +138,9 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatTabulatedJohnsonCookOrthoPlasticity.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

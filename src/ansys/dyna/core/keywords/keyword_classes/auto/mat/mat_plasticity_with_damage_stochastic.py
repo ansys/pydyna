@@ -71,6 +71,10 @@ _MATPLASTICITYWITHDAMAGESTOCHASTIC_CARD3 = (
     FieldSchema("es8", float, 70, 10, None),
 )
 
+_MATPLASTICITYWITHDAMAGESTOCHASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPlasticityWithDamageStochastic(KeywordBase):
     """DYNA MAT_PLASTICITY_WITH_DAMAGE_STOCHASTIC keyword"""
 
@@ -100,16 +104,9 @@ class MatPlasticityWithDamageStochastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPlasticityWithDamageStochastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPLASTICITYWITHDAMAGESTOCHASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

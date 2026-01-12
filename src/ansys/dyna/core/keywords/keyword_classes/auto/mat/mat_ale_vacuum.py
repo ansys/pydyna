@@ -32,6 +32,10 @@ _MATALEVACUUM_CARD0 = (
     FieldSchema("rho", float, 10, 10, None),
 )
 
+_MATALEVACUUM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAleVacuum(KeywordBase):
     """DYNA MAT_ALE_VACUUM keyword"""
 
@@ -52,16 +56,9 @@ class MatAleVacuum(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAleVacuum.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATALEVACUUM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

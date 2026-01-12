@@ -45,6 +45,10 @@ _MATPITZERCRUSHABLEFOAM_CARD1 = (
     FieldSchema("dflg", float, 40, 10, None),
 )
 
+_MATPITZERCRUSHABLEFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPitzerCrushableFoam(KeywordBase):
     """DYNA MAT_PITZER_CRUSHABLE_FOAM keyword"""
 
@@ -68,16 +72,9 @@ class MatPitzerCrushableFoam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPitzerCrushableFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPITZERCRUSHABLEFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

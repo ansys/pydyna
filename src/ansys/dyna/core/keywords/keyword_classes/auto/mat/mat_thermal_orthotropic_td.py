@@ -107,6 +107,10 @@ _MATTHERMALORTHOTROPICTD_CARD7 = (
     FieldSchema("d3", float, 20, 10, None),
 )
 
+_MATTHERMALORTHOTROPICTD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatThermalOrthotropicTd(KeywordBase):
     """DYNA MAT_THERMAL_ORTHOTROPIC_TD keyword"""
 
@@ -148,16 +152,9 @@ class MatThermalOrthotropicTd(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatThermalOrthotropicTd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMALORTHOTROPICTD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

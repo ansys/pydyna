@@ -82,6 +82,10 @@ _MATSOFTTISSUEVISCO_CARD5 = (
     FieldSchema("t6", float, 50, 10, None),
 )
 
+_MATSOFTTISSUEVISCO_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSoftTissueVisco(KeywordBase):
     """DYNA MAT_SOFT_TISSUE_VISCO keyword"""
 
@@ -117,16 +121,9 @@ class MatSoftTissueVisco(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSoftTissueVisco.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSOFTTISSUEVISCO_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -39,6 +39,10 @@ _SECTIONTSHELL_CARD0 = (
     FieldSchema("tshear", int, 70, 10, 0),
 )
 
+_SECTIONTSHELL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionTShell(KeywordBase):
     """DYNA SECTION_TSHELL keyword"""
 
@@ -66,16 +70,9 @@ class SectionTShell(KeywordBase):
                 data = kwargs.get("bi")),            OptionCardSet(
                 option_spec = SectionTShell.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONTSHELL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

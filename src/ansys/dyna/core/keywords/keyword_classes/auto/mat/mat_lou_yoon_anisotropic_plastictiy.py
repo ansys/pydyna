@@ -104,6 +104,10 @@ _MATLOUYOONANISOTROPICPLASTICTIY_CARD6 = (
     FieldSchema("unused", int, 70, 10, None),
 )
 
+_MATLOUYOONANISOTROPICPLASTICTIY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatLouYoonAnisotropicPlastictiy(KeywordBase):
     """DYNA MAT_LOU-YOON_ANISOTROPIC_PLASTICTIY keyword"""
 
@@ -142,16 +146,9 @@ class MatLouYoonAnisotropicPlastictiy(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatLouYoonAnisotropicPlastictiy.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATLOUYOONANISOTROPICPLASTICTIY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

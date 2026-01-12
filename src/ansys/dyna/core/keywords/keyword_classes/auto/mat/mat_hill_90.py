@@ -92,6 +92,10 @@ _MATHILL90_CARD6 = (
     FieldSchema("usrfail", float, 0, 10, 0.0),
 )
 
+_MATHILL90_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatHill90(KeywordBase):
     """DYNA MAT_HILL_90 keyword"""
 
@@ -130,16 +134,9 @@ class MatHill90(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatHill90.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATHILL90_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

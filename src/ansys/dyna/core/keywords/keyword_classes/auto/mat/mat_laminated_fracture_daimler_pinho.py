@@ -94,6 +94,10 @@ _MATLAMINATEDFRACTUREDAIMLERPINHO_CARD6 = (
     FieldSchema("soft", float, 60, 10, 1.0),
 )
 
+_MATLAMINATEDFRACTUREDAIMLERPINHO_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatLaminatedFractureDaimlerPinho(KeywordBase):
     """DYNA MAT_LAMINATED_FRACTURE_DAIMLER_PINHO keyword"""
 
@@ -132,16 +136,9 @@ class MatLaminatedFractureDaimlerPinho(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatLaminatedFractureDaimlerPinho.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATLAMINATEDFRACTUREDAIMLERPINHO_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

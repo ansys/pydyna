@@ -68,6 +68,10 @@ _MATPIECEWISELINEARPLASTICITYHAZ_CARD3 = (
     FieldSchema("es8", float, 70, 10, None),
 )
 
+_MATPIECEWISELINEARPLASTICITYHAZ_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPiecewiseLinearPlasticityHaz(KeywordBase):
     """DYNA MAT_PIECEWISE_LINEAR_PLASTICITY_HAZ keyword"""
 
@@ -97,16 +101,9 @@ class MatPiecewiseLinearPlasticityHaz(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPiecewiseLinearPlasticityHaz.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPIECEWISELINEARPLASTICITYHAZ_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

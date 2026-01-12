@@ -502,6 +502,10 @@ class SectionShellCardSet(Cards):
         """Get the parent keyword."""
         return self._parent
 
+_SECTIONSHELL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionShell(KeywordBase):
     """DYNA SECTION_SHELL keyword"""
 
@@ -524,16 +528,9 @@ class SectionShell(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionShell.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSHELL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

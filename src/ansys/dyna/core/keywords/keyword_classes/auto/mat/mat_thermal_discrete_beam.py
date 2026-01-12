@@ -37,6 +37,10 @@ _MATTHERMALDISCRETEBEAM_CARD1 = (
     FieldSchema("tc", float, 10, 10, None),
 )
 
+_MATTHERMALDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatThermalDiscreteBeam(KeywordBase):
     """DYNA MAT_THERMAL_DISCRETE_BEAM keyword"""
 
@@ -60,16 +64,9 @@ class MatThermalDiscreteBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatThermalDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMALDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

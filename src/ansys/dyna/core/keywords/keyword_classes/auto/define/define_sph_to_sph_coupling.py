@@ -43,6 +43,10 @@ _DEFINESPHTOSPHCOUPLING_CARD1 = (
     FieldSchema("isoft", int, 10, 10, 0),
 )
 
+_DEFINESPHTOSPHCOUPLING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineSphToSphCoupling(KeywordBase):
     """DYNA DEFINE_SPH_TO_SPH_COUPLING keyword"""
 
@@ -66,16 +70,9 @@ class DefineSphToSphCoupling(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineSphToSphCoupling.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPHTOSPHCOUPLING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

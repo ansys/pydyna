@@ -41,6 +41,10 @@ _SECTIONSPRINGDAMPER_CARD1 = (
     FieldSchema("tdl", int, 10, 10, None),
 )
 
+_SECTIONSPRINGDAMPER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionSpringDamper(KeywordBase):
     """DYNA SECTION_SPRING_DAMPER keyword"""
 
@@ -64,16 +68,9 @@ class SectionSpringDamper(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionSpringDamper.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSPRINGDAMPER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

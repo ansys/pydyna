@@ -51,6 +51,10 @@ _SECTIONSOLID_CARD1 = (
     FieldSchema("nhsv", int, 50, 10, 0),
 )
 
+_SECTIONSOLID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionSolid(KeywordBase):
     """DYNA SECTION_SOLID keyword"""
 
@@ -93,16 +97,9 @@ class SectionSolid(KeywordBase):
                 data = kwargs.get("pi")),            OptionCardSet(
                 option_spec = SectionSolid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSOLID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

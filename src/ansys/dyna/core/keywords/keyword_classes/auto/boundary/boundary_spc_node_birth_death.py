@@ -43,6 +43,11 @@ _BOUNDARYSPCNODEBIRTHDEATH_CARD1 = (
     FieldSchema("death", float, 10, 10, 1e+20),
 )
 
+_BOUNDARYSPCNODEBIRTHDEATH_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
 class BoundarySpcNodeBirthDeath(KeywordBase):
     """DYNA BOUNDARY_SPC_NODE_BIRTH_DEATH keyword"""
 
@@ -66,23 +71,9 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
             ),            OptionCardSet(
                 option_spec = BoundarySpcNodeBirthDeath.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _BOUNDARYSPCNODEBIRTHDEATH_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

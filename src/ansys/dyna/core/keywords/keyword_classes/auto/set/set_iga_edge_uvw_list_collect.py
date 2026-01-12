@@ -47,6 +47,10 @@ _SETIGAEDGEUVWLISTCOLLECT_CARD1 = (
     FieldSchema("eid8", int, 70, 10, None),
 )
 
+_SETIGAEDGEUVWLISTCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetIgaEdgeUvwListCollect(KeywordBase):
     """DYNA SET_IGA_EDGE_UVW_LIST_COLLECT keyword"""
 
@@ -70,16 +74,9 @@ class SetIgaEdgeUvwListCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetIgaEdgeUvwListCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETIGAEDGEUVWLISTCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

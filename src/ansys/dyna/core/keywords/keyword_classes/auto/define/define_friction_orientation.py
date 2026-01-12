@@ -36,6 +36,10 @@ _DEFINEFRICTIONORIENTATION_CARD0 = (
     FieldSchema("v3", float, 50, 10, 0.0),
 )
 
+_DEFINEFRICTIONORIENTATION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFrictionOrientation(KeywordBase):
     """DYNA DEFINE_FRICTION_ORIENTATION keyword"""
 
@@ -56,16 +60,9 @@ class DefineFrictionOrientation(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFrictionOrientation.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFRICTIONORIENTATION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

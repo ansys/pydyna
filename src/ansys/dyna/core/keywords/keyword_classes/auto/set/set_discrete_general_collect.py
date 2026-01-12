@@ -42,6 +42,10 @@ _SETDISCRETEGENERALCOLLECT_CARD1 = (
     FieldSchema("e7", int, 70, 10, None),
 )
 
+_SETDISCRETEGENERALCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetDiscreteGeneralCollect(KeywordBase):
     """DYNA SET_DISCRETE_GENERAL_COLLECT keyword"""
 
@@ -65,16 +69,9 @@ class SetDiscreteGeneralCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetDiscreteGeneralCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETDISCRETEGENERALCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

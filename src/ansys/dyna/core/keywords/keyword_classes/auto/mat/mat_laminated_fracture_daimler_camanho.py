@@ -110,6 +110,10 @@ _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD7 = (
     FieldSchema("tsmd31", float, 50, 10, None),
 )
 
+_MATLAMINATEDFRACTUREDAIMLERCAMANHO_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     """DYNA MAT_LAMINATED_FRACTURE_DAIMLER_CAMANHO keyword"""
 
@@ -151,16 +155,9 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatLaminatedFractureDaimlerCamanho.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATLAMINATEDFRACTUREDAIMLERCAMANHO_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

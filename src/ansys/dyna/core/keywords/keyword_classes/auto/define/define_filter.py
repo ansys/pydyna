@@ -43,6 +43,10 @@ _DEFINEFILTER_CARD1 = (
     FieldSchema("data7", str, 70, 10, None),
 )
 
+_DEFINEFILTER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFilter(KeywordBase):
     """DYNA DEFINE_FILTER keyword"""
 
@@ -66,16 +70,9 @@ class DefineFilter(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFilter.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFILTER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

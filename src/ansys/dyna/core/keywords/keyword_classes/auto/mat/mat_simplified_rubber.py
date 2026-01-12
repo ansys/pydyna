@@ -64,6 +64,10 @@ _MATSIMPLIFIEDRUBBER_CARD3 = (
     FieldSchema("vflag", int, 20, 10, 0),
 )
 
+_MATSIMPLIFIEDRUBBER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSimplifiedRubber(KeywordBase):
     """DYNA MAT_SIMPLIFIED_RUBBER keyword"""
 
@@ -93,16 +97,9 @@ class MatSimplifiedRubber(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSimplifiedRubber.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSIMPLIFIEDRUBBER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

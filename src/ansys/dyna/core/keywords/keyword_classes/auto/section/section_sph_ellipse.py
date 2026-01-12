@@ -47,6 +47,10 @@ _SECTIONSPHELLIPSE_CARD1 = (
     FieldSchema("hzini", float, 50, 10, None),
 )
 
+_SECTIONSPHELLIPSE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionSphEllipse(KeywordBase):
     """DYNA SECTION_SPH_ELLIPSE keyword"""
 
@@ -70,16 +74,9 @@ class SectionSphEllipse(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionSphEllipse.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSPHELLIPSE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

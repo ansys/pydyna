@@ -45,6 +45,10 @@ _MATELASTICWITHVISCOSITYCURVE_CARD1 = (
     FieldSchema("v_log", float, 40, 10, 0.0),
 )
 
+_MATELASTICWITHVISCOSITYCURVE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatElasticWithViscosityCurve(KeywordBase):
     """DYNA MAT_ELASTIC_WITH_VISCOSITY_CURVE keyword"""
 
@@ -68,16 +72,9 @@ class MatElasticWithViscosityCurve(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatElasticWithViscosityCurve.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTICWITHVISCOSITYCURVE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

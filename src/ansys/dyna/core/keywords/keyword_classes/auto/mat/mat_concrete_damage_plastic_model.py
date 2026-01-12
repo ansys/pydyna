@@ -60,6 +60,10 @@ _MATCONCRETEDAMAGEPLASTICMODEL_CARD2 = (
     FieldSchema("efc", float, 70, 10, 0.0001),
 )
 
+_MATCONCRETEDAMAGEPLASTICMODEL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatConcreteDamagePlasticModel(KeywordBase):
     """DYNA MAT_CONCRETE_DAMAGE_PLASTIC_MODEL keyword"""
 
@@ -86,16 +90,9 @@ class MatConcreteDamagePlasticModel(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatConcreteDamagePlasticModel.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCONCRETEDAMAGEPLASTICMODEL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -78,6 +78,10 @@ _MATREINFORCEDTHERMOPLASTICUDFIBER_CARD5 = (
     FieldSchema("kap3", float, 30, 10, None),
 )
 
+_MATREINFORCEDTHERMOPLASTICUDFIBER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatReinforcedThermoplasticUdfiber(KeywordBase):
     """DYNA MAT_REINFORCED_THERMOPLASTIC_UDFIBER keyword"""
 
@@ -113,16 +117,9 @@ class MatReinforcedThermoplasticUdfiber(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatReinforcedThermoplasticUdfiber.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATREINFORCEDTHERMOPLASTICUDFIBER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -59,6 +59,10 @@ _MAT100DA_CARD2 = (
     FieldSchema("jtol", float, 60, 10, None),
 )
 
+_MAT100DA_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat100Da(KeywordBase):
     """DYNA MAT_100_DA keyword"""
 
@@ -85,16 +89,9 @@ class Mat100Da(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat100Da.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT100DA_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -50,6 +50,10 @@ _MATCOHESIVEGASKET_CARD3 = (
     FieldSchema("ps", int, 20, 10, 0),
 )
 
+_MATCOHESIVEGASKET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCohesiveGasket(KeywordBase):
     """DYNA MAT_COHESIVE_GASKET keyword"""
 
@@ -79,16 +83,9 @@ class MatCohesiveGasket(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCohesiveGasket.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOHESIVEGASKET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

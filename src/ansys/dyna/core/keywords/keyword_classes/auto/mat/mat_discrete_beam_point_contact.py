@@ -69,6 +69,10 @@ _MATDISCRETEBEAMPOINTCONTACT_CARD3 = (
     FieldSchema("afac", float, 60, 10, 1.0),
 )
 
+_MATDISCRETEBEAMPOINTCONTACT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatDiscreteBeamPointContact(KeywordBase):
     """DYNA MAT_DISCRETE_BEAM_POINT_CONTACT keyword"""
 
@@ -98,16 +102,9 @@ class MatDiscreteBeamPointContact(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatDiscreteBeamPointContact.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATDISCRETEBEAMPOINTCONTACT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

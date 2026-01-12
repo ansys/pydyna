@@ -55,6 +55,10 @@ _MATLAMINATEDGLASS_CARD2 = (
     FieldSchema("f8", float, 70, 10, 0.0),
 )
 
+_MATLAMINATEDGLASS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatLaminatedGlass(KeywordBase):
     """DYNA MAT_LAMINATED_GLASS keyword"""
 
@@ -81,16 +85,9 @@ class MatLaminatedGlass(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatLaminatedGlass.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATLAMINATEDGLASS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

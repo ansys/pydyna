@@ -42,6 +42,10 @@ _SETBEAMGENERALCOLLECT_CARD1 = (
     FieldSchema("e7", int, 70, 10, None),
 )
 
+_SETBEAMGENERALCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetBeamGeneralCollect(KeywordBase):
     """DYNA SET_BEAM_GENERAL_COLLECT keyword"""
 
@@ -65,16 +69,9 @@ class SetBeamGeneralCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetBeamGeneralCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETBEAMGENERALCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

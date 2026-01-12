@@ -53,6 +53,10 @@ _DEFINESPOTWELDFAILUREPID_CARD2 = (
     FieldSchema("ss", float, 30, 10, None),
 )
 
+_DEFINESPOTWELDFAILUREPID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineSpotweldFailurePid(KeywordBase):
     """DYNA DEFINE_SPOTWELD_FAILURE_PID keyword"""
 
@@ -79,16 +83,9 @@ class DefineSpotweldFailurePid(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineSpotweldFailurePid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPOTWELDFAILUREPID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

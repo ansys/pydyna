@@ -46,6 +46,10 @@ _MATSIMPLIFIEDJOHNSONCOOKSTOCHASTIC_CARD1 = (
     FieldSchema("epso", float, 70, 10, 1.0),
 )
 
+_MATSIMPLIFIEDJOHNSONCOOKSTOCHASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSimplifiedJohnsonCookStochastic(KeywordBase):
     """DYNA MAT_SIMPLIFIED_JOHNSON_COOK_STOCHASTIC keyword"""
 
@@ -69,16 +73,9 @@ class MatSimplifiedJohnsonCookStochastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSimplifiedJohnsonCookStochastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSIMPLIFIEDJOHNSONCOOKSTOCHASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

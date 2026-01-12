@@ -78,6 +78,10 @@ _MAT226NLP_CARD4 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MAT226NLP_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat226Nlp(KeywordBase):
     """DYNA MAT_226_NLP keyword"""
 
@@ -110,16 +114,9 @@ class Mat226Nlp(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat226Nlp.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT226NLP_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

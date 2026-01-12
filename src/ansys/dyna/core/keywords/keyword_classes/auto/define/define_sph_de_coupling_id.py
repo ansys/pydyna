@@ -42,6 +42,10 @@ _DEFINESPHDECOUPLINGID_CARD1 = (
     FieldSchema("sphbox", int, 60, 10, None),
 )
 
+_DEFINESPHDECOUPLINGID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineSphDeCouplingId(KeywordBase):
     """DYNA DEFINE_SPH_DE_COUPLING_ID keyword"""
 
@@ -65,16 +69,9 @@ class DefineSphDeCouplingId(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineSphDeCouplingId.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPHDECOUPLINGID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

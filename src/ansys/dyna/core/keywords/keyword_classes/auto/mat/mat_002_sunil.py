@@ -85,6 +85,10 @@ _MAT002SUNIL_CARD5 = (
     FieldSchema("s31fail", float, 20, 10, None),
 )
 
+_MAT002SUNIL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat002Sunil(KeywordBase):
     """DYNA MAT_002_SUNIL keyword"""
 
@@ -120,16 +124,9 @@ class Mat002Sunil(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat002Sunil.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT002SUNIL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

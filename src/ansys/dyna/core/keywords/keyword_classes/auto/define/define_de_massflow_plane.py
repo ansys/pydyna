@@ -34,6 +34,10 @@ _DEFINEDEMASSFLOWPLANE_CARD0 = (
     FieldSchema("stype", int, 30, 10, 0),
 )
 
+_DEFINEDEMASSFLOWPLANE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeMassflowPlane(KeywordBase):
     """DYNA DEFINE_DE_MASSFLOW_PLANE keyword"""
 
@@ -54,16 +58,9 @@ class DefineDeMassflowPlane(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeMassflowPlane.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEMASSFLOWPLANE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

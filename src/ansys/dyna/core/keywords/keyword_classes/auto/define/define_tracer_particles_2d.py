@@ -32,6 +32,10 @@ _DEFINETRACERPARTICLES2D_CARD0 = (
     FieldSchema("pset", int, 10, 10, None),
 )
 
+_DEFINETRACERPARTICLES2D_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineTracerParticles2D(KeywordBase):
     """DYNA DEFINE_TRACER_PARTICLES_2D keyword"""
 
@@ -52,16 +56,9 @@ class DefineTracerParticles2D(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineTracerParticles2D.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINETRACERPARTICLES2D_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

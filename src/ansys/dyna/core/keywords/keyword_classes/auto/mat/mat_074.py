@@ -46,6 +46,10 @@ _MAT074_CARD1 = (
     FieldSchema("glcid", int, 50, 10, None),
 )
 
+_MAT074_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat074(KeywordBase):
     """DYNA MAT_074 keyword"""
 
@@ -69,16 +73,9 @@ class Mat074(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat074.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT074_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -64,6 +64,10 @@ _SECTIONBEAMAISC_CARD4 = (
     FieldSchema("k", int, 40, 10, None),
 )
 
+_SECTIONBEAMAISC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionBeamAisc(KeywordBase):
     """DYNA SECTION_BEAM_AISC keyword"""
 
@@ -96,16 +100,9 @@ class SectionBeamAisc(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionBeamAisc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONBEAMAISC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

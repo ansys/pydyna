@@ -60,6 +60,10 @@ _MATCONSTRAINEDSPR3_CARD3 = (
     FieldSchema("mrs", float, 10, 10, None),
 )
 
+_MATCONSTRAINEDSPR3_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatConstrainedSpr3(KeywordBase):
     """DYNA MAT_CONSTRAINED_SPR3 keyword"""
 
@@ -89,16 +93,9 @@ class MatConstrainedSpr3(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatConstrainedSpr3.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCONSTRAINEDSPR3_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

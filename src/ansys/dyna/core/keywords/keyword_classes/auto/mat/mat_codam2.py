@@ -109,6 +109,10 @@ _MATCODAM2_CARD7 = (
     FieldSchema("resids", float, 30, 10, None),
 )
 
+_MATCODAM2_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCodam2(KeywordBase):
     """DYNA MAT_CODAM2 keyword"""
 
@@ -150,16 +154,9 @@ class MatCodam2(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCodam2.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCODAM2_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

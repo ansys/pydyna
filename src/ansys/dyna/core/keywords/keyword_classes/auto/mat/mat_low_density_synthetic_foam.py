@@ -54,6 +54,10 @@ _MATLOWDENSITYSYNTHETICFOAM_CARD2 = (
     FieldSchema("dtrt", float, 10, 10, None),
 )
 
+_MATLOWDENSITYSYNTHETICFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatLowDensitySyntheticFoam(KeywordBase):
     """DYNA MAT_LOW_DENSITY_SYNTHETIC_FOAM keyword"""
 
@@ -80,16 +84,9 @@ class MatLowDensitySyntheticFoam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatLowDensitySyntheticFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATLOWDENSITYSYNTHETICFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

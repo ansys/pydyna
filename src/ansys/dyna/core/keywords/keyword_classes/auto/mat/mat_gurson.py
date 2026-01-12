@@ -92,6 +92,10 @@ _MATGURSON_CARD5 = (
     FieldSchema("vgtyp", float, 60, 10, None),
 )
 
+_MATGURSON_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatGurson(KeywordBase):
     """DYNA MAT_GURSON keyword"""
 
@@ -127,16 +131,9 @@ class MatGurson(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatGurson.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATGURSON_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

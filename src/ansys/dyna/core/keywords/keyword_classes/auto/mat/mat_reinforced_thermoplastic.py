@@ -108,6 +108,10 @@ _MATREINFORCEDTHERMOPLASTIC_CARD8 = (
     FieldSchema("ihis", float, 10, 10, None),
 )
 
+_MATREINFORCEDTHERMOPLASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatReinforcedThermoplastic(KeywordBase):
     """DYNA MAT_REINFORCED_THERMOPLASTIC keyword"""
 
@@ -152,16 +156,9 @@ class MatReinforcedThermoplastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatReinforcedThermoplastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATREINFORCEDTHERMOPLASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

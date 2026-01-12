@@ -42,6 +42,10 @@ _MAT090COMPLEX_CARD1 = (
     FieldSchema("lcidki", int, 30, 10, None),
 )
 
+_MAT090COMPLEX_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat090Complex(KeywordBase):
     """DYNA MAT_090_COMPLEX keyword"""
 
@@ -65,16 +69,9 @@ class Mat090Complex(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat090Complex.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT090COMPLEX_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

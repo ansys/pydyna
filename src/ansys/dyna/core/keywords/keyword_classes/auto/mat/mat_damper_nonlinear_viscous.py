@@ -32,6 +32,10 @@ _MATDAMPERNONLINEARVISCOUS_CARD0 = (
     FieldSchema("lcdr", int, 10, 10, None),
 )
 
+_MATDAMPERNONLINEARVISCOUS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatDamperNonlinearViscous(KeywordBase):
     """DYNA MAT_DAMPER_NONLINEAR_VISCOUS keyword"""
 
@@ -52,16 +56,9 @@ class MatDamperNonlinearViscous(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatDamperNonlinearViscous.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATDAMPERNONLINEARVISCOUS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

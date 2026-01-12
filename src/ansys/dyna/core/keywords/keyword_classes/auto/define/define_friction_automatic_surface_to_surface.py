@@ -47,6 +47,10 @@ _DEFINEFRICTIONAUTOMATICSURFACETOSURFACE_CARD1 = (
     FieldSchema("ptypej", str, 70, 10, None),
 )
 
+_DEFINEFRICTIONAUTOMATICSURFACETOSURFACE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFrictionAutomaticSurfaceToSurface(KeywordBase):
     """DYNA DEFINE_FRICTION_AUTOMATIC_SURFACE_TO_SURFACE keyword"""
 
@@ -70,16 +74,9 @@ class DefineFrictionAutomaticSurfaceToSurface(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFrictionAutomaticSurfaceToSurface.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFRICTIONAUTOMATICSURFACETOSURFACE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

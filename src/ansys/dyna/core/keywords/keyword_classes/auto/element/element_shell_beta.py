@@ -104,6 +104,7 @@ class ElementShellBeta(KeywordBase):
                                     8,
                                 ),
                             ],
+                            _internal=True,
                     ),
                     Card(
                             [
@@ -138,6 +139,7 @@ class ElementShellBeta(KeywordBase):
                                     16,
                                 ),
                             ],
+                            _internal=True,
                     ),
                     Card(
                             [
@@ -167,6 +169,7 @@ class ElementShellBeta(KeywordBase):
                                 ),
                             ],
                             lambda: self.elements['n5'].any(),
+                            _internal=True,
                     ),
                 ],
                 None,

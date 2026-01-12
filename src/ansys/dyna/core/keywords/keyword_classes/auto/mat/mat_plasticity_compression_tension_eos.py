@@ -65,6 +65,10 @@ _MATPLASTICITYCOMPRESSIONTENSIONEOS_CARD4 = (
     FieldSchema("betai", float, 10, 10, None),
 )
 
+_MATPLASTICITYCOMPRESSIONTENSIONEOS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPlasticityCompressionTensionEos(KeywordBase):
     """DYNA MAT_PLASTICITY_COMPRESSION_TENSION_EOS keyword"""
 
@@ -97,16 +101,9 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPlasticityCompressionTensionEos.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPLASTICITYCOMPRESSIONTENSIONEOS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

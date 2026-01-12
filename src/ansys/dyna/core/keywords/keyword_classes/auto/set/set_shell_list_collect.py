@@ -46,6 +46,10 @@ _SETSHELLLISTCOLLECT_CARD1 = (
     FieldSchema("eid8", int, 70, 10, None),
 )
 
+_SETSHELLLISTCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetShellListCollect(KeywordBase):
     """DYNA SET_SHELL_LIST_COLLECT keyword"""
 
@@ -69,16 +73,9 @@ class SetShellListCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetShellListCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSHELLLISTCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

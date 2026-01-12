@@ -33,6 +33,10 @@ _MATADDPROPERTYDEPENDENCEFREQ_CARD0 = (
     FieldSchema("lcid", int, 20, 10, None),
 )
 
+_MATADDPROPERTYDEPENDENCEFREQ_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddPropertyDependenceFreq(KeywordBase):
     """DYNA MAT_ADD_PROPERTY_DEPENDENCE_FREQ keyword"""
 
@@ -53,16 +57,9 @@ class MatAddPropertyDependenceFreq(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddPropertyDependenceFreq.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDPROPERTYDEPENDENCEFREQ_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

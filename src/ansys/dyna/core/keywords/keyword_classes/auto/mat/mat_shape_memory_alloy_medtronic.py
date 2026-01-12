@@ -142,6 +142,10 @@ _MATSHAPEMEMORYALLOYMEDTRONIC_CARD11 = (
     FieldSchema("nm", float, 60, 10, None),
 )
 
+_MATSHAPEMEMORYALLOYMEDTRONIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatShapeMemoryAlloyMedtronic(KeywordBase):
     """DYNA MAT_SHAPE_MEMORY_ALLOY_MEDTRONIC keyword"""
 
@@ -195,16 +199,9 @@ class MatShapeMemoryAlloyMedtronic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatShapeMemoryAlloyMedtronic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSHAPEMEMORYALLOYMEDTRONIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

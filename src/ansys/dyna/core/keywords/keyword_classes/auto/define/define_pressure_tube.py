@@ -62,6 +62,10 @@ _DEFINEPRESSURETUBE_CARD3 = (
     FieldSchema("bpid", int, 40, 10, None),
 )
 
+_DEFINEPRESSURETUBE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefinePressureTube(KeywordBase):
     """DYNA DEFINE_PRESSURE_TUBE keyword"""
 
@@ -91,16 +95,9 @@ class DefinePressureTube(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefinePressureTube.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEPRESSURETUBE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

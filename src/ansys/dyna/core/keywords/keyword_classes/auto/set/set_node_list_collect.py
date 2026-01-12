@@ -49,6 +49,10 @@ _SETNODELISTCOLLECT_CARD1 = (
     FieldSchema("nid8", int, 70, 10, None),
 )
 
+_SETNODELISTCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetNodeListCollect(KeywordBase):
     """DYNA SET_NODE_LIST_COLLECT keyword"""
 
@@ -72,16 +76,9 @@ class SetNodeListCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetNodeListCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETNODELISTCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

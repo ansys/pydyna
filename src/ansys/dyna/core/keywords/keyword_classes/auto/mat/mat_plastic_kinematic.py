@@ -44,6 +44,10 @@ _MATPLASTICKINEMATIC_CARD1 = (
     FieldSchema("vp", float, 30, 10, 0.0),
 )
 
+_MATPLASTICKINEMATIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPlasticKinematic(KeywordBase):
     """DYNA MAT_PLASTIC_KINEMATIC keyword"""
 
@@ -67,16 +71,9 @@ class MatPlasticKinematic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPlasticKinematic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPLASTICKINEMATIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

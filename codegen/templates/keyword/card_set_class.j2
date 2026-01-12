@@ -11,6 +11,24 @@ _{{card_set.name | upper}}_CARD{{loop.index0}} = (
 
 {% endif %}
 {% endfor %}
+{# Generate schema definitions for option Cards #}
+{% if card_set.options %}
+{% for option in card_set.options %}
+{% set option_loop = loop %}
+{% for card in option.cards %}
+_{{card_set.name | upper}}_OPTION{{option_loop.index0}}_CARD{{loop.index0}} = (
+{% for field in card.fields %}
+{% if field.flag %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, Flag({% if field.default is not none %}{{field.default}}{% else %}None{% endif %}, "{{field.on}}", "{{field.off}}")),
+{% else %}
+    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endif %}
+{% endfor %}
+)
+
+{% endfor %}
+{% endfor %}
+{% endif %}
 class {{card_set.name}}(Cards):
     """{{card_set.title}} CardSet."""
 {% if card_set.options %}

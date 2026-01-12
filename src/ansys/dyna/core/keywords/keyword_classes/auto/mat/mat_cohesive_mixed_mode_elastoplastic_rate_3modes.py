@@ -79,6 +79,10 @@ _MATCOHESIVEMIXEDMODEELASTOPLASTICRATE3MODES_CARD5 = (
     FieldSchema("rfiltf", float, 0, 10, None),
 )
 
+_MATCOHESIVEMIXEDMODEELASTOPLASTICRATE3MODES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCohesiveMixedModeElastoplasticRate3Modes(KeywordBase):
     """DYNA MAT_COHESIVE_MIXED_MODE_ELASTOPLASTIC_RATE_3MODES keyword"""
 
@@ -114,16 +118,9 @@ class MatCohesiveMixedModeElastoplasticRate3Modes(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCohesiveMixedModeElastoplasticRate3Modes.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOHESIVEMIXEDMODEELASTOPLASTICRATE3MODES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

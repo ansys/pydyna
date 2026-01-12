@@ -49,6 +49,10 @@ _SENSORDEFINEFUNCTION_CARD1 = (
     FieldSchema("sensi+7", int, 70, 10, None),
 )
 
+_SENSORDEFINEFUNCTION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SensorDefineFunction(KeywordBase):
     """DYNA SENSOR_DEFINE_FUNCTION keyword"""
 
@@ -72,16 +76,9 @@ class SensorDefineFunction(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SensorDefineFunction.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEFUNCTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

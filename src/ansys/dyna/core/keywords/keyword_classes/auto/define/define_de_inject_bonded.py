@@ -72,6 +72,10 @@ _DEFINEDEINJECTBONDED_CARD4 = (
     FieldSchema("ishape", int, 70, 10, None),
 )
 
+_DEFINEDEINJECTBONDED_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeInjectBonded(KeywordBase):
     """DYNA DEFINE_DE_INJECT_BONDED keyword"""
 
@@ -104,16 +108,9 @@ class DefineDeInjectBonded(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeInjectBonded.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEINJECTBONDED_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

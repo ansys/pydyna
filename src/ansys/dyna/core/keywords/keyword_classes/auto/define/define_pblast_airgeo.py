@@ -60,6 +60,10 @@ _DEFINEPBLASTAIRGEO_CARD3 = (
     FieldSchema("g6", float, 50, 10, 0.0),
 )
 
+_DEFINEPBLASTAIRGEO_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefinePblastAirgeo(KeywordBase):
     """DYNA DEFINE_PBLAST_AIRGEO keyword"""
 
@@ -89,16 +93,9 @@ class DefinePblastAirgeo(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefinePblastAirgeo.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEPBLASTAIRGEO_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

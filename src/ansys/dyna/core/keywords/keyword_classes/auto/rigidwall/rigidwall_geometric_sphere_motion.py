@@ -57,6 +57,11 @@ _RIGIDWALLGEOMETRICSPHEREMOTION_CARD3 = (
     FieldSchema("vz", float, 40, 10, None),
 )
 
+_RIGIDWALLGEOMETRICSPHEREMOTION_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallGeometricSphereMotion(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_SPHERE_MOTION keyword"""
 
@@ -86,23 +91,9 @@ class RigidwallGeometricSphereMotion(KeywordBase):
             ),            OptionCardSet(
                 option_spec = RigidwallGeometricSphereMotion.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICSPHEREMOTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

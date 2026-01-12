@@ -37,6 +37,10 @@ _DEFINECURVEDUPLICATE_CARD0 = (
     FieldSchema("dattyp", int, 60, 10, 0),
 )
 
+_DEFINECURVEDUPLICATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineCurveDuplicate(KeywordBase):
     """DYNA DEFINE_CURVE_DUPLICATE keyword"""
 
@@ -57,16 +61,9 @@ class DefineCurveDuplicate(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineCurveDuplicate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECURVEDUPLICATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

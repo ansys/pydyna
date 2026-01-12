@@ -49,6 +49,10 @@ _MATPIECEWISELINEARPLASTICTHERMAL_CARD2 = (
     FieldSchema("tref", float, 10, 10, None),
 )
 
+_MATPIECEWISELINEARPLASTICTHERMAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPiecewiseLinearPlasticThermal(KeywordBase):
     """DYNA MAT_PIECEWISE_LINEAR_PLASTIC_THERMAL keyword"""
 
@@ -75,16 +79,9 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPiecewiseLinearPlasticThermal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPIECEWISELINEARPLASTICTHERMAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

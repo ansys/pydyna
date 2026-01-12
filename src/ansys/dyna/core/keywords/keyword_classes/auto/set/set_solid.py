@@ -43,6 +43,10 @@ _SETSOLID_CARD1 = (
     FieldSchema("k8", int, 70, 10, None),
 )
 
+_SETSOLID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetSolid(KeywordBase):
     """DYNA SET_SOLID keyword"""
 
@@ -66,16 +70,9 @@ class SetSolid(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetSolid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSOLID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

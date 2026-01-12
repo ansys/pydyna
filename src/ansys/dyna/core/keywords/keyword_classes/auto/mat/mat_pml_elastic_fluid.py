@@ -34,6 +34,10 @@ _MATPMLELASTICFLUID_CARD0 = (
     FieldSchema("vc", float, 30, 10, None),
 )
 
+_MATPMLELASTICFLUID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPmlElasticFluid(KeywordBase):
     """DYNA MAT_PML_ELASTIC_FLUID keyword"""
 
@@ -54,16 +58,9 @@ class MatPmlElasticFluid(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPmlElasticFluid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPMLELASTICFLUID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

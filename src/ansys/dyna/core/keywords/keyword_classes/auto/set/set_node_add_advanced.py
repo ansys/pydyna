@@ -46,6 +46,10 @@ _SETNODEADDADVANCED_CARD1 = (
     FieldSchema("type4", int, 70, 10, 1),
 )
 
+_SETNODEADDADVANCED_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetNodeAddAdvanced(KeywordBase):
     """DYNA SET_NODE_ADD_ADVANCED keyword"""
 
@@ -69,16 +73,9 @@ class SetNodeAddAdvanced(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetNodeAddAdvanced.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETNODEADDADVANCED_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

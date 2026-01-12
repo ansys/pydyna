@@ -30,6 +30,10 @@ from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
+_DEFINESDORIENTATION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineSdOrientation(KeywordBase):
     """DYNA DEFINE_SD_ORIENTATION keyword"""
 
@@ -60,16 +64,9 @@ class DefineSdOrientation(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineSdOrientation.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESDORIENTATION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

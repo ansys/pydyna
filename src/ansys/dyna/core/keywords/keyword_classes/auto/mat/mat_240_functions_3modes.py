@@ -79,6 +79,10 @@ _MAT240FUNCTIONS3MODES_CARD5 = (
     FieldSchema("rfiltf", float, 0, 10, None),
 )
 
+_MAT240FUNCTIONS3MODES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat240Functions3Modes(KeywordBase):
     """DYNA MAT_240_FUNCTIONS_3MODES keyword"""
 
@@ -114,16 +118,9 @@ class Mat240Functions3Modes(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat240Functions3Modes.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT240FUNCTIONS3MODES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

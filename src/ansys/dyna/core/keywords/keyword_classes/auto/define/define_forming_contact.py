@@ -34,6 +34,10 @@ _DEFINEFORMINGCONTACT_CARD0 = (
     FieldSchema("oneway", int, 30, 10, 0),
 )
 
+_DEFINEFORMINGCONTACT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFormingContact(KeywordBase):
     """DYNA DEFINE_FORMING_CONTACT keyword"""
 
@@ -54,16 +58,9 @@ class DefineFormingContact(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFormingContact.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFORMINGCONTACT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

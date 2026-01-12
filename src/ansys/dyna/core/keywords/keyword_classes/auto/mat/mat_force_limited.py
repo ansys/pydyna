@@ -84,6 +84,10 @@ _MATFORCELIMITED_CARD5 = (
     FieldSchema("ymr", float, 20, 10, 1e+20),
 )
 
+_MATFORCELIMITED_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatForceLimited(KeywordBase):
     """DYNA MAT_FORCE_LIMITED keyword"""
 
@@ -119,16 +123,9 @@ class MatForceLimited(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatForceLimited.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATFORCELIMITED_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

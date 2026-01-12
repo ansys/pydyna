@@ -44,6 +44,10 @@ _MATTHERMALISOTROPICTDLC_CARD1 = (
     FieldSchema("tghsv", float, 40, 10, None),
 )
 
+_MATTHERMALISOTROPICTDLC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatThermalIsotropicTdLc(KeywordBase):
     """DYNA MAT_THERMAL_ISOTROPIC_TD_LC keyword"""
 
@@ -67,16 +71,9 @@ class MatThermalIsotropicTdLc(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatThermalIsotropicTdLc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMALISOTROPICTDLC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

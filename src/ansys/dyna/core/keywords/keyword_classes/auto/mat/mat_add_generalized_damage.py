@@ -83,6 +83,10 @@ _MATADDGENERALIZEDDAMAGE_CARD5 = (
     FieldSchema("nfloc", float, 50, 10, None),
 )
 
+_MATADDGENERALIZEDDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddGeneralizedDamage(KeywordBase):
     """DYNA MAT_ADD_GENERALIZED_DAMAGE keyword"""
 
@@ -118,16 +122,9 @@ class MatAddGeneralizedDamage(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddGeneralizedDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDGENERALIZEDDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -116,6 +116,10 @@ _MATCONCRETEEC2_CARD8 = (
     FieldSchema("zsurf", float, 40, 10, None),
 )
 
+_MATCONCRETEEC2_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatConcreteEc2(KeywordBase):
     """DYNA MAT_CONCRETE_EC2 keyword"""
 
@@ -160,16 +164,9 @@ class MatConcreteEc2(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatConcreteEc2.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCONCRETEEC2_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

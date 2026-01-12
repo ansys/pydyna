@@ -42,6 +42,10 @@ _SETMULTIMATERIALGROUPLIST_CARD1 = (
     FieldSchema("ammgid8", int, 70, 10, 0),
 )
 
+_SETMULTIMATERIALGROUPLIST_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetMultiMaterialGroupList(KeywordBase):
     """DYNA SET_MULTI-MATERIAL_GROUP_LIST keyword"""
 
@@ -65,16 +69,9 @@ class SetMultiMaterialGroupList(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetMultiMaterialGroupList.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETMULTIMATERIALGROUPLIST_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

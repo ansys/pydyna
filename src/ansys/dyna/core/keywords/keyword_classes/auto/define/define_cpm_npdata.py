@@ -42,6 +42,10 @@ _DEFINECPMNPDATA_CARD1 = (
     FieldSchema("id", int, 0, 10, None),
 )
 
+_DEFINECPMNPDATA_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineCpmNpdata(KeywordBase):
     """DYNA DEFINE_CPM_NPDATA keyword"""
 
@@ -65,16 +69,9 @@ class DefineCpmNpdata(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineCpmNpdata.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECPMNPDATA_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

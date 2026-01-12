@@ -36,6 +36,10 @@ _DEFINEBEAMSOLIDCOUPLING_CARD0 = (
     FieldSchema("psf", float, 50, 10, 1.0),
 )
 
+_DEFINEBEAMSOLIDCOUPLING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineBeamSolidCoupling(KeywordBase):
     """DYNA DEFINE_BEAM_SOLID_COUPLING keyword"""
 
@@ -56,16 +60,9 @@ class DefineBeamSolidCoupling(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineBeamSolidCoupling.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEBEAMSOLIDCOUPLING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

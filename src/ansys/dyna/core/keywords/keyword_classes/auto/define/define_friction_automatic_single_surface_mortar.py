@@ -47,6 +47,10 @@ _DEFINEFRICTIONAUTOMATICSINGLESURFACEMORTAR_CARD1 = (
     FieldSchema("ptypej", str, 70, 10, None),
 )
 
+_DEFINEFRICTIONAUTOMATICSINGLESURFACEMORTAR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFrictionAutomaticSingleSurfaceMortar(KeywordBase):
     """DYNA DEFINE_FRICTION_AUTOMATIC_SINGLE_SURFACE_MORTAR keyword"""
 
@@ -70,16 +74,9 @@ class DefineFrictionAutomaticSingleSurfaceMortar(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFrictionAutomaticSingleSurfaceMortar.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFRICTIONAUTOMATICSINGLESURFACEMORTAR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

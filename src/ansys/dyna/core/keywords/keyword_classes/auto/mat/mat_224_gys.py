@@ -57,6 +57,10 @@ _MAT224GYS_CARD2 = (
     FieldSchema("niter", int, 60, 10, 100),
 )
 
+_MAT224GYS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat224Gys(KeywordBase):
     """DYNA MAT_224_GYS keyword"""
 
@@ -83,16 +87,9 @@ class Mat224Gys(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat224Gys.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT224GYS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

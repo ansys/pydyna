@@ -58,6 +58,10 @@ _DEFINECONNECTIONPROPERTIES_CARD2 = (
     FieldSchema("dsclmrr", float, 70, 10, 1.0),
 )
 
+_DEFINECONNECTIONPROPERTIES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineConnectionProperties(KeywordBase):
     """DYNA DEFINE_CONNECTION_PROPERTIES keyword"""
 
@@ -84,16 +88,9 @@ class DefineConnectionProperties(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineConnectionProperties.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECONNECTIONPROPERTIES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

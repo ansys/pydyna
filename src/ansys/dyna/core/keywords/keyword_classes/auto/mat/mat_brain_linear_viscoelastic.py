@@ -38,6 +38,10 @@ _MATBRAINLINEARVISCOELASTIC_CARD0 = (
     FieldSchema("so", float, 70, 10, None),
 )
 
+_MATBRAINLINEARVISCOELASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatBrainLinearViscoelastic(KeywordBase):
     """DYNA MAT_BRAIN_LINEAR_VISCOELASTIC keyword"""
 
@@ -58,16 +62,9 @@ class MatBrainLinearViscoelastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatBrainLinearViscoelastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBRAINLINEARVISCOELASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

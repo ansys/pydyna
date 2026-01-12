@@ -37,6 +37,10 @@ _SETPARTLIST_CARD0 = (
     FieldSchema("solver", str, 50, 10, "MECH"),
 )
 
+_SETPARTLIST_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetPartList(KeywordBase):
     """DYNA SET_PART_LIST keyword"""
 
@@ -63,16 +67,9 @@ class SetPartList(KeywordBase):
                 data = kwargs.get("parts")),            OptionCardSet(
                 option_spec = SetPartList.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETPARTLIST_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

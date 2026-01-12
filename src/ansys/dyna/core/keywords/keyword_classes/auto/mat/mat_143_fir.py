@@ -69,6 +69,10 @@ _MAT143FIR_CARD4 = (
     FieldSchema("v3", float, 50, 10, None),
 )
 
+_MAT143FIR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat143Fir(KeywordBase):
     """DYNA MAT_143_FIR keyword"""
 
@@ -101,16 +105,9 @@ class Mat143Fir(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat143Fir.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT143FIR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

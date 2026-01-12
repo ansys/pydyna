@@ -56,6 +56,10 @@ _MATKINEMATICHARDENINGTRANSVERSELYANISOTROPIC_CARD2 = (
     FieldSchema("c2", float, 40, 10, None),
 )
 
+_MATKINEMATICHARDENINGTRANSVERSELYANISOTROPIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatKinematicHardeningTransverselyAnisotropic(KeywordBase):
     """DYNA MAT_KINEMATIC_HARDENING_TRANSVERSELY_ANISOTROPIC keyword"""
 
@@ -82,16 +86,9 @@ class MatKinematicHardeningTransverselyAnisotropic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatKinematicHardeningTransverselyAnisotropic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATKINEMATICHARDENINGTRANSVERSELYANISOTROPIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

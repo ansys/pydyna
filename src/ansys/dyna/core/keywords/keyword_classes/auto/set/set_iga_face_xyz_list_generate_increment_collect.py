@@ -42,6 +42,10 @@ _SETIGAFACEXYZLISTGENERATEINCREMENTCOLLECT_CARD1 = (
     FieldSchema("incr", int, 20, 10, None),
 )
 
+_SETIGAFACEXYZLISTGENERATEINCREMENTCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetIgaFaceXyzListGenerateIncrementCollect(KeywordBase):
     """DYNA SET_IGA_FACE_XYZ_LIST_GENERATE_INCREMENT_COLLECT keyword"""
 
@@ -65,16 +69,9 @@ class SetIgaFaceXyzListGenerateIncrementCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetIgaFaceXyzListGenerateIncrementCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETIGAFACEXYZLISTGENERATEINCREMENTCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

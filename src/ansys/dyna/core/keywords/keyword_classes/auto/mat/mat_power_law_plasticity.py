@@ -44,6 +44,10 @@ _MATPOWERLAWPLASTICITY_CARD1 = (
     FieldSchema("epsf", float, 20, 10, None),
 )
 
+_MATPOWERLAWPLASTICITY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPowerLawPlasticity(KeywordBase):
     """DYNA MAT_POWER_LAW_PLASTICITY keyword"""
 
@@ -67,16 +71,9 @@ class MatPowerLawPlasticity(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPowerLawPlasticity.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPOWERLAWPLASTICITY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

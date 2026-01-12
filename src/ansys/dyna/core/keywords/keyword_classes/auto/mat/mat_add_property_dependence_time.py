@@ -33,6 +33,10 @@ _MATADDPROPERTYDEPENDENCETIME_CARD0 = (
     FieldSchema("lcid", int, 20, 10, None),
 )
 
+_MATADDPROPERTYDEPENDENCETIME_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddPropertyDependenceTime(KeywordBase):
     """DYNA MAT_ADD_PROPERTY_DEPENDENCE_TIME keyword"""
 
@@ -53,16 +57,9 @@ class MatAddPropertyDependenceTime(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddPropertyDependenceTime.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDPROPERTYDEPENDENCETIME_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

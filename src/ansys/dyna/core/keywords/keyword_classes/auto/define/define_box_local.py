@@ -52,6 +52,10 @@ _DEFINEBOXLOCAL_CARD2 = (
     FieldSchema("cz", float, 20, 10, 0.0),
 )
 
+_DEFINEBOXLOCAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineBoxLocal(KeywordBase):
     """DYNA DEFINE_BOX_LOCAL keyword"""
 
@@ -78,16 +82,9 @@ class DefineBoxLocal(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineBoxLocal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEBOXLOCAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

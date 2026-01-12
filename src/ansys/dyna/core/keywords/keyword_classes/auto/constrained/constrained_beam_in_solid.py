@@ -49,6 +49,16 @@ _CONSTRAINEDBEAMINSOLID_CARD1 = (
     FieldSchema("xint", int, 70, 10, None),
 )
 
+_CONSTRAINEDBEAMINSOLID_OPTION0_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_CONSTRAINEDBEAMINSOLID_OPTION1_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class ConstrainedBeamInSolid(KeywordBase):
     """DYNA CONSTRAINED_BEAM_IN_SOLID keyword"""
 
@@ -73,23 +83,9 @@ class ConstrainedBeamInSolid(KeywordBase):
             ),            OptionCardSet(
                 option_spec = ConstrainedBeamInSolid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "coupid",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("coupid")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDBEAMINSOLID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
@@ -97,23 +93,9 @@ class ConstrainedBeamInSolid(KeywordBase):
             OptionCardSet(
                 option_spec = ConstrainedBeamInSolid.option_specs[1],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "coupid",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("coupid")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDBEAMINSOLID_OPTION1_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

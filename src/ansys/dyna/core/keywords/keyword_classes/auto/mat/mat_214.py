@@ -93,6 +93,10 @@ _MAT214_CARD6 = (
     FieldSchema("ebfail", float, 70, 10, None),
 )
 
+_MAT214_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat214(KeywordBase):
     """DYNA MAT_214 keyword"""
 
@@ -131,16 +135,9 @@ class Mat214(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat214.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT214_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

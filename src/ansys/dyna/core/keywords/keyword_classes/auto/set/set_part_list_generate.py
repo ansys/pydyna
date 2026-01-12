@@ -38,6 +38,10 @@ _SETPARTLISTGENERATE_CARD0 = (
     FieldSchema("solver", str, 50, 10, "MECH"),
 )
 
+_SETPARTLISTGENERATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetPartListGenerate(KeywordBase):
     """DYNA SET_PART_LIST_GENERATE keyword"""
 
@@ -70,16 +74,9 @@ class SetPartListGenerate(KeywordBase):
                 data = kwargs.get("block_ranges")),            OptionCardSet(
                 option_spec = SetPartListGenerate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETPARTLISTGENERATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

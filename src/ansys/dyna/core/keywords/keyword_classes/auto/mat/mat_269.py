@@ -44,6 +44,10 @@ _MAT269_CARD1 = (
     FieldSchema("tauh", float, 30, 10, None),
 )
 
+_MAT269_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat269(KeywordBase):
     """DYNA MAT_269 keyword"""
 
@@ -67,16 +71,9 @@ class Mat269(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat269.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT269_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

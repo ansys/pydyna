@@ -56,6 +56,10 @@ _DEFINEELEMENTGENERALIZEDSHELL_CARD4 = (
     FieldSchema("d2nkids2", float, 40, 20, None),
 )
 
+_DEFINEELEMENTGENERALIZEDSHELL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineElementGeneralizedShell(KeywordBase):
     """DYNA DEFINE_ELEMENT_GENERALIZED_SHELL keyword"""
 
@@ -88,16 +92,9 @@ class DefineElementGeneralizedShell(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineElementGeneralizedShell.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEELEMENTGENERALIZEDSHELL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

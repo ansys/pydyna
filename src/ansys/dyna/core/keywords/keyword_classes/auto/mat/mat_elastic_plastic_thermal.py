@@ -98,6 +98,10 @@ _MATELASTICPLASTICTHERMAL_CARD6 = (
     FieldSchema("etan8", float, 70, 10, None),
 )
 
+_MATELASTICPLASTICTHERMAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatElasticPlasticThermal(KeywordBase):
     """DYNA MAT_ELASTIC_PLASTIC_THERMAL keyword"""
 
@@ -136,16 +140,9 @@ class MatElasticPlasticThermal(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatElasticPlasticThermal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTICPLASTICTHERMAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

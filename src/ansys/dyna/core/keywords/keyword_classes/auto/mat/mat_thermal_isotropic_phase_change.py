@@ -73,6 +73,10 @@ _MATTHERMALISOTROPICPHASECHANGE_CARD4 = (
     FieldSchema("lh", float, 20, 10, None),
 )
 
+_MATTHERMALISOTROPICPHASECHANGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatThermalIsotropicPhaseChange(KeywordBase):
     """DYNA MAT_THERMAL_ISOTROPIC_PHASE_CHANGE keyword"""
 
@@ -105,16 +109,9 @@ class MatThermalIsotropicPhaseChange(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatThermalIsotropicPhaseChange.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMALISOTROPICPHASECHANGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

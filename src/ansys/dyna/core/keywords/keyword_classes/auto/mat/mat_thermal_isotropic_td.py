@@ -69,6 +69,10 @@ _MATTHERMALISOTROPICTD_CARD3 = (
     FieldSchema("k8", float, 70, 10, None),
 )
 
+_MATTHERMALISOTROPICTD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatThermalIsotropicTd(KeywordBase):
     """DYNA MAT_THERMAL_ISOTROPIC_TD keyword"""
 
@@ -98,16 +102,9 @@ class MatThermalIsotropicTd(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatThermalIsotropicTd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTHERMALISOTROPICTD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

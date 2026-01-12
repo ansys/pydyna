@@ -110,6 +110,10 @@ _MATORTHOTROPICELASTICPHASECHANGE_CARD8 = (
     FieldSchema("thkfac", float, 60, 10, 1.0),
 )
 
+_MATORTHOTROPICELASTICPHASECHANGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatOrthotropicElasticPhaseChange(KeywordBase):
     """DYNA MAT_ORTHOTROPIC_ELASTIC_PHASE_CHANGE keyword"""
 
@@ -154,16 +158,9 @@ class MatOrthotropicElasticPhaseChange(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatOrthotropicElasticPhaseChange.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATORTHOTROPICELASTICPHASECHANGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

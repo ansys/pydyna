@@ -34,6 +34,10 @@ _MATBLATZKORUBBER_CARD0 = (
     FieldSchema("ref", float, 30, 10, 0.0),
 )
 
+_MATBLATZKORUBBER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatBlatzKoRubber(KeywordBase):
     """DYNA MAT_BLATZ-KO_RUBBER keyword"""
 
@@ -54,16 +58,9 @@ class MatBlatzKoRubber(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatBlatzKoRubber.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBLATZKORUBBER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

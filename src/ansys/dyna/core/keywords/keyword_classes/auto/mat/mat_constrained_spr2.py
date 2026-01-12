@@ -46,6 +46,10 @@ _MATCONSTRAINEDSPR2_CARD1 = (
     FieldSchema("expt", float, 40, 10, 8.0),
 )
 
+_MATCONSTRAINEDSPR2_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatConstrainedSpr2(KeywordBase):
     """DYNA MAT_CONSTRAINED_SPR2 keyword"""
 
@@ -69,16 +73,9 @@ class MatConstrainedSpr2(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatConstrainedSpr2.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCONSTRAINEDSPR2_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

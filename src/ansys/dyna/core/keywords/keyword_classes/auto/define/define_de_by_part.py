@@ -51,6 +51,10 @@ _DEFINEDEBYPART_CARD2 = (
     FieldSchema("dc", float, 40, 10, 0.0),
 )
 
+_DEFINEDEBYPART_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeByPart(KeywordBase):
     """DYNA DEFINE_DE_BY_PART keyword"""
 
@@ -77,16 +81,9 @@ class DefineDeByPart(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeByPart.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEBYPART_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

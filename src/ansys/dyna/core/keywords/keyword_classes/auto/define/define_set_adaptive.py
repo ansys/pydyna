@@ -34,6 +34,10 @@ _DEFINESETADAPTIVE_CARD0 = (
     FieldSchema("adpsize", float, 30, 10, None),
 )
 
+_DEFINESETADAPTIVE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineSetAdaptive(KeywordBase):
     """DYNA DEFINE_SET_ADAPTIVE keyword"""
 
@@ -54,16 +58,9 @@ class DefineSetAdaptive(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineSetAdaptive.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESETADAPTIVE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

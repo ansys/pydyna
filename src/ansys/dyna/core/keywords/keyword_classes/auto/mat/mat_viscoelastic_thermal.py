@@ -56,6 +56,10 @@ _MATVISCOELASTICTHERMAL_CARD2 = (
     FieldSchema("betaki", float, 30, 10, None),
 )
 
+_MATVISCOELASTICTHERMAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatViscoelasticThermal(KeywordBase):
     """DYNA MAT_VISCOELASTIC_THERMAL keyword"""
 
@@ -82,16 +86,9 @@ class MatViscoelasticThermal(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatViscoelasticThermal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATVISCOELASTICTHERMAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -38,6 +38,10 @@ _DEFINEDEMESHSURFACE_CARD0 = (
     FieldSchema("iactive", int, 70, 10, 0),
 )
 
+_DEFINEDEMESHSURFACE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeMeshSurface(KeywordBase):
     """DYNA DEFINE_DE_MESH_SURFACE keyword"""
 
@@ -58,16 +62,9 @@ class DefineDeMeshSurface(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeMeshSurface.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEMESHSURFACE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

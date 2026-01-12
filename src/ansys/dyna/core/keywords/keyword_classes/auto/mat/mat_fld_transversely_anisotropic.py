@@ -42,6 +42,10 @@ _MATFLDTRANSVERSELYANISOTROPIC_CARD1 = (
     FieldSchema("lcfld", int, 0, 10, 0),
 )
 
+_MATFLDTRANSVERSELYANISOTROPIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatFldTransverselyAnisotropic(KeywordBase):
     """DYNA MAT_FLD_TRANSVERSELY_ANISOTROPIC keyword"""
 
@@ -65,16 +69,9 @@ class MatFldTransverselyAnisotropic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatFldTransverselyAnisotropic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATFLDTRANSVERSELYANISOTROPIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

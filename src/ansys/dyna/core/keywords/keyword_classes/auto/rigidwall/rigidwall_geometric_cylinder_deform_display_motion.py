@@ -87,6 +87,11 @@ _RIGIDWALLGEOMETRICCYLINDERDEFORMDISPLAYMOTION_CARD7 = (
     FieldSchema("pr", float, 30, 10, 0.3),
 )
 
+_RIGIDWALLGEOMETRICCYLINDERDEFORMDISPLAYMOTION_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallGeometricCylinderDeformDisplayMotion(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_CYLINDER_DEFORM_DISPLAY_MOTION keyword"""
 
@@ -128,23 +133,9 @@ class RigidwallGeometricCylinderDeformDisplayMotion(KeywordBase):
             ),            OptionCardSet(
                 option_spec = RigidwallGeometricCylinderDeformDisplayMotion.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICCYLINDERDEFORMDISPLAYMOTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

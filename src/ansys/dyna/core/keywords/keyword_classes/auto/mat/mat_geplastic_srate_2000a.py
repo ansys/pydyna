@@ -44,6 +44,10 @@ _MATGEPLASTICSRATE2000A_CARD1 = (
     FieldSchema("lce", int, 30, 10, None),
 )
 
+_MATGEPLASTICSRATE2000A_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatGeplasticSrate2000A(KeywordBase):
     """DYNA MAT_GEPLASTIC_SRATE_2000A keyword"""
 
@@ -67,16 +71,9 @@ class MatGeplasticSrate2000A(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatGeplasticSrate2000A.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATGEPLASTICSRATE2000A_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

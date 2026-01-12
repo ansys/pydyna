@@ -44,6 +44,10 @@ _SETPARTCOLUMNCOLLECT_CARD1 = (
     FieldSchema("a4", float, 40, 10, None),
 )
 
+_SETPARTCOLUMNCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetPartColumnCollect(KeywordBase):
     """DYNA SET_PART_COLUMN_COLLECT keyword"""
 
@@ -67,16 +71,9 @@ class SetPartColumnCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetPartColumnCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETPARTCOLUMNCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

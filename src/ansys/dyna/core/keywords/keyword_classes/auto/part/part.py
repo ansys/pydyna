@@ -50,6 +50,7 @@ class Part(KeywordBase):
                                     70,
                                 ),
                             ],
+                            _internal=True,
                     ),
                     Card(
                             [
@@ -102,6 +103,7 @@ class Part(KeywordBase):
                                     10,
                                 ),
                             ],
+                            _internal=True,
                     ),
                 ],
                 None,

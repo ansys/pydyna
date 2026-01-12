@@ -47,6 +47,10 @@ _DEFINEFRICTIONAIRBAGSINGLESURFACE_CARD1 = (
     FieldSchema("ptypej", str, 70, 10, None),
 )
 
+_DEFINEFRICTIONAIRBAGSINGLESURFACE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFrictionAirbagSingleSurface(KeywordBase):
     """DYNA DEFINE_FRICTION_AIRBAG_SINGLE_SURFACE keyword"""
 
@@ -70,16 +74,9 @@ class DefineFrictionAirbagSingleSurface(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFrictionAirbagSingleSurface.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFRICTIONAIRBAGSINGLESURFACE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

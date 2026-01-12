@@ -32,6 +32,10 @@ _MATADDCHEMSHRINKAGE_CARD0 = (
     FieldSchema("lcid", int, 10, 10, None),
 )
 
+_MATADDCHEMSHRINKAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddChemShrinkage(KeywordBase):
     """DYNA MAT_ADD_CHEM_SHRINKAGE keyword"""
 
@@ -52,16 +56,9 @@ class MatAddChemShrinkage(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddChemShrinkage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDCHEMSHRINKAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

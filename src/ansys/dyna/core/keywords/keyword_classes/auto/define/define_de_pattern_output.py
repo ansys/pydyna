@@ -53,6 +53,10 @@ _DEFINEDEPATTERNOUTPUT_CARD2 = (
     FieldSchema("dist8", float, 70, 10, 0.0),
 )
 
+_DEFINEDEPATTERNOUTPUT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDePatternOutput(KeywordBase):
     """DYNA DEFINE_DE_PATTERN_OUTPUT keyword"""
 
@@ -79,16 +83,9 @@ class DefineDePatternOutput(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDePatternOutput.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEPATTERNOUTPUT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

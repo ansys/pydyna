@@ -45,6 +45,10 @@ _MATSOILCONCRETE_CARD1 = (
     FieldSchema("fail", float, 30, 10, 0.0),
 )
 
+_MATSOILCONCRETE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSoilConcrete(KeywordBase):
     """DYNA MAT_SOIL_CONCRETE keyword"""
 
@@ -68,16 +72,9 @@ class MatSoilConcrete(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSoilConcrete.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSOILCONCRETE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

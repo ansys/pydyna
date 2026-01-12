@@ -49,6 +49,10 @@ _MATLOWDENSITYSYNTHETICFOAMORTHO_CARD1 = (
     FieldSchema("tc", float, 70, 10, None),
 )
 
+_MATLOWDENSITYSYNTHETICFOAMORTHO_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatLowDensitySyntheticFoamOrtho(KeywordBase):
     """DYNA MAT_LOW_DENSITY_SYNTHETIC_FOAM_ORTHO keyword"""
 
@@ -72,16 +76,9 @@ class MatLowDensitySyntheticFoamOrtho(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatLowDensitySyntheticFoamOrtho.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATLOWDENSITYSYNTHETICFOAMORTHO_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

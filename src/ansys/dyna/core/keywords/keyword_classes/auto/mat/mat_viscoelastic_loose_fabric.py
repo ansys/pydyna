@@ -75,6 +75,10 @@ _MATVISCOELASTICLOOSEFABRIC_CARD4 = (
     FieldSchema("d3", float, 50, 10, None),
 )
 
+_MATVISCOELASTICLOOSEFABRIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatViscoelasticLooseFabric(KeywordBase):
     """DYNA MAT_VISCOELASTIC_LOOSE_FABRIC keyword"""
 
@@ -107,16 +111,9 @@ class MatViscoelasticLooseFabric(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatViscoelasticLooseFabric.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATVISCOELASTICLOOSEFABRIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

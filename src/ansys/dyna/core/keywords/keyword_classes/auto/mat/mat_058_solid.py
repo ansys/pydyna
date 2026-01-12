@@ -161,6 +161,10 @@ _MAT058SOLID_CARD13 = (
     FieldSchema("lcgms31", int, 30, 10, None),
 )
 
+_MAT058SOLID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat058Solid(KeywordBase):
     """DYNA MAT_058_SOLID keyword"""
 
@@ -220,16 +224,9 @@ class Mat058Solid(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat058Solid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT058SOLID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

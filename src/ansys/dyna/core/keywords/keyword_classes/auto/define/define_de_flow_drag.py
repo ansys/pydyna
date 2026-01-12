@@ -45,6 +45,10 @@ _DEFINEDEFLOWDRAG_CARD1 = (
     FieldSchema("sfs", float, 30, 10, 1.0),
 )
 
+_DEFINEDEFLOWDRAG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeFlowDrag(KeywordBase):
     """DYNA DEFINE_DE_FLOW_DRAG keyword"""
 
@@ -68,16 +72,9 @@ class DefineDeFlowDrag(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeFlowDrag.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEFLOWDRAG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

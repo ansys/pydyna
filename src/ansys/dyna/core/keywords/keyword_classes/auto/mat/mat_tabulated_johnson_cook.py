@@ -55,6 +55,10 @@ _MATTABULATEDJOHNSONCOOK_CARD2 = (
     FieldSchema("lcps", int, 40, 10, None),
 )
 
+_MATTABULATEDJOHNSONCOOK_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatTabulatedJohnsonCook(KeywordBase):
     """DYNA MAT_TABULATED_JOHNSON_COOK keyword"""
 
@@ -81,16 +85,9 @@ class MatTabulatedJohnsonCook(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatTabulatedJohnsonCook.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTABULATEDJOHNSONCOOK_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

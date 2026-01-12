@@ -137,6 +137,10 @@ _MATHYSTERETICBEAM_CARD9 = (
     FieldSchema("st4", float, 70, 10, 4e+20),
 )
 
+_MATHYSTERETICBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatHystereticBeam(KeywordBase):
     """DYNA MAT_HYSTERETIC_BEAM keyword"""
 
@@ -184,16 +188,9 @@ class MatHystereticBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatHystereticBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATHYSTERETICBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

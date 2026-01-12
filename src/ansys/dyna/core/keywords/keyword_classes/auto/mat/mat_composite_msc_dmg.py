@@ -103,6 +103,10 @@ _MATCOMPOSITEMSCDMG_CARD7 = (
     FieldSchema("cerate4", float, 50, 10, None),
 )
 
+_MATCOMPOSITEMSCDMG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCompositeMscDmg(KeywordBase):
     """DYNA MAT_COMPOSITE_MSC_DMG keyword"""
 
@@ -144,16 +148,9 @@ class MatCompositeMscDmg(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCompositeMscDmg.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOMPOSITEMSCDMG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

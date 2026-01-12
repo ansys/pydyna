@@ -41,6 +41,10 @@ _DEFINEDEBONDOVERRIDE_CARD1 = (
     FieldSchema("alpha", float, 50, 10, 0.0),
 )
 
+_DEFINEDEBONDOVERRIDE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeBondOverride(KeywordBase):
     """DYNA DEFINE_DE_BOND_OVERRIDE keyword"""
 
@@ -64,16 +68,9 @@ class DefineDeBondOverride(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeBondOverride.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEBONDOVERRIDE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -43,6 +43,10 @@ _DEFINEBOXNODESADAPTIVE_CARD1 = (
     FieldSchema("level", int, 10, 10, None),
 )
 
+_DEFINEBOXNODESADAPTIVE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineBoxNodesAdaptive(KeywordBase):
     """DYNA DEFINE_BOX_NODES_ADAPTIVE keyword"""
 
@@ -66,16 +70,9 @@ class DefineBoxNodesAdaptive(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineBoxNodesAdaptive.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEBOXNODESADAPTIVE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

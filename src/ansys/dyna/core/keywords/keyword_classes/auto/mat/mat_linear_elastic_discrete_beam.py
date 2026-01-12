@@ -56,6 +56,10 @@ _MATLINEARELASTICDISCRETEBEAM_CARD2 = (
     FieldSchema("mot", float, 50, 10, None),
 )
 
+_MATLINEARELASTICDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatLinearElasticDiscreteBeam(KeywordBase):
     """DYNA MAT_LINEAR_ELASTIC_DISCRETE_BEAM keyword"""
 
@@ -82,16 +86,9 @@ class MatLinearElasticDiscreteBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatLinearElasticDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATLINEARELASTICDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

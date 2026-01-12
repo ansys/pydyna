@@ -30,6 +30,11 @@ from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
+_BOUNDARYSPCNODE_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
 class BoundarySpcNode(KeywordBase):
     """DYNA BOUNDARY_SPC_NODE keyword"""
 
@@ -61,23 +66,9 @@ class BoundarySpcNode(KeywordBase):
             ),            OptionCardSet(
                 option_spec = BoundarySpcNode.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _BOUNDARYSPCNODE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

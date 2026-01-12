@@ -79,6 +79,10 @@ _MATORTHOTROPICTHERMALFAILURE_CARD4 = (
     FieldSchema("nip", int, 60, 10, None),
 )
 
+_MATORTHOTROPICTHERMALFAILURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatOrthotropicThermalFailure(KeywordBase):
     """DYNA MAT_ORTHOTROPIC_THERMAL_FAILURE keyword"""
 
@@ -111,16 +115,9 @@ class MatOrthotropicThermalFailure(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatOrthotropicThermalFailure.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATORTHOTROPICTHERMALFAILURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

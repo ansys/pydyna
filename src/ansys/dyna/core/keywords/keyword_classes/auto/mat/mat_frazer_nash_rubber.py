@@ -55,6 +55,10 @@ _MATFRAZERNASHRUBBER_CARD2 = (
     FieldSchema("lcid", int, 30, 10, 0),
 )
 
+_MATFRAZERNASHRUBBER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatFrazerNashRubber(KeywordBase):
     """DYNA MAT_FRAZER-NASH_RUBBER keyword"""
 
@@ -81,16 +85,9 @@ class MatFrazerNashRubber(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatFrazerNashRubber.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATFRAZERNASHRUBBER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

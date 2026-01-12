@@ -73,6 +73,10 @@ _MATDAMAGE2_CARD4 = (
     FieldSchema("es8", float, 70, 10, None),
 )
 
+_MATDAMAGE2_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatDamage2(KeywordBase):
     """DYNA MAT_DAMAGE_2 keyword"""
 
@@ -105,16 +109,9 @@ class MatDamage2(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatDamage2.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATDAMAGE2_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -44,6 +44,10 @@ _DEFINEDETOSURFACETIED_CARD1 = (
     FieldSchema("maxgap", float, 60, 10, None),
 )
 
+_DEFINEDETOSURFACETIED_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeToSurfaceTied(KeywordBase):
     """DYNA DEFINE_DE_TO_SURFACE_TIED keyword"""
 
@@ -67,16 +71,9 @@ class DefineDeToSurfaceTied(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeToSurfaceTied.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDETOSURFACETIED_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

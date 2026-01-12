@@ -64,6 +64,10 @@ _MATFHWASOIL_CARD3 = (
     FieldSchema("epsmax", float, 0, 10, None),
 )
 
+_MATFHWASOIL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatFhwaSoil(KeywordBase):
     """DYNA MAT_FHWA_SOIL keyword"""
 
@@ -93,16 +97,9 @@ class MatFhwaSoil(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatFhwaSoil.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATFHWASOIL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

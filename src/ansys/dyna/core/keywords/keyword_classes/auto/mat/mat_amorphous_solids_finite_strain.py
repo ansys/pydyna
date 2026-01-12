@@ -48,6 +48,10 @@ _MATAMORPHOUSSOLIDSFINITESTRAIN_CARD1 = (
     FieldSchema("s0", float, 60, 10, None),
 )
 
+_MATAMORPHOUSSOLIDSFINITESTRAIN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAmorphousSolidsFiniteStrain(KeywordBase):
     """DYNA MAT_AMORPHOUS_SOLIDS_FINITE_STRAIN keyword"""
 
@@ -71,16 +75,9 @@ class MatAmorphousSolidsFiniteStrain(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAmorphousSolidsFiniteStrain.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATAMORPHOUSSOLIDSFINITESTRAIN_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

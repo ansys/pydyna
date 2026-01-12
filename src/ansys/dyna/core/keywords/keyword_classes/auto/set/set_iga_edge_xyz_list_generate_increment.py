@@ -42,6 +42,10 @@ _SETIGAEDGEXYZLISTGENERATEINCREMENT_CARD1 = (
     FieldSchema("incr", int, 20, 10, None),
 )
 
+_SETIGAEDGEXYZLISTGENERATEINCREMENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetIgaEdgeXyzListGenerateIncrement(KeywordBase):
     """DYNA SET_IGA_EDGE_XYZ_LIST_GENERATE_INCREMENT keyword"""
 
@@ -65,16 +69,9 @@ class SetIgaEdgeXyzListGenerateIncrement(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetIgaEdgeXyzListGenerateIncrement.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETIGAEDGEXYZLISTGENERATEINCREMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

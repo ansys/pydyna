@@ -79,6 +79,10 @@ _MATHILL3R3D_CARD5 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MATHILL3R3D_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatHill3R3D(KeywordBase):
     """DYNA MAT_HILL_3R_3D keyword"""
 
@@ -114,16 +118,9 @@ class MatHill3R3D(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatHill3R3D.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATHILL3R3D_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

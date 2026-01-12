@@ -64,6 +64,10 @@ _MATSOFTTISSUE_CARD3 = (
     FieldSchema("macf", int, 30, 10, 1),
 )
 
+_MATSOFTTISSUE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSoftTissue(KeywordBase):
     """DYNA MAT_SOFT_TISSUE keyword"""
 
@@ -93,16 +97,9 @@ class MatSoftTissue(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSoftTissue.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSOFTTISSUE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

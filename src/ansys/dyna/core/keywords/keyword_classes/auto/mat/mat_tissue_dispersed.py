@@ -83,6 +83,10 @@ _MATTISSUEDISPERSED_CARD5 = (
     FieldSchema("d3", float, 50, 10, None),
 )
 
+_MATTISSUEDISPERSED_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatTissueDispersed(KeywordBase):
     """DYNA MAT_TISSUE_DISPERSED keyword"""
 
@@ -118,16 +122,9 @@ class MatTissueDispersed(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatTissueDispersed.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTISSUEDISPERSED_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

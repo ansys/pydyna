@@ -77,6 +77,10 @@ _MATORTHOELASTICPLASTIC_CARD5 = (
     FieldSchema("d3", float, 50, 10, None),
 )
 
+_MATORTHOELASTICPLASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatOrthoElasticPlastic(KeywordBase):
     """DYNA MAT_ORTHO_ELASTIC_PLASTIC keyword"""
 
@@ -112,16 +116,9 @@ class MatOrthoElasticPlastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatOrthoElasticPlastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATORTHOELASTICPLASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

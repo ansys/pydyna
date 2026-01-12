@@ -95,6 +95,10 @@ _MATMODIFIEDHONEYCOMB_CARD6 = (
     FieldSchema("lcsrca", float, 50, 10, None),
 )
 
+_MATMODIFIEDHONEYCOMB_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatModifiedHoneycomb(KeywordBase):
     """DYNA MAT_MODIFIED_HONEYCOMB keyword"""
 
@@ -133,16 +137,9 @@ class MatModifiedHoneycomb(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatModifiedHoneycomb.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMODIFIEDHONEYCOMB_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -60,6 +60,11 @@ _CONTACTFORCETRANSDUCER_CARD2 = (
     FieldSchema("unused", int, 70, 10, None),
 )
 
+_CONTACTFORCETRANSDUCER_OPTION0_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
 class ContactForceTransducer(KeywordBase):
     """DYNA CONTACT_FORCE_TRANSDUCER keyword"""
 
@@ -86,23 +91,9 @@ class ContactForceTransducer(KeywordBase):
             ),            OptionCardSet(
                 option_spec = ContactForceTransducer.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "cid",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("cid")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTFORCETRANSDUCER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

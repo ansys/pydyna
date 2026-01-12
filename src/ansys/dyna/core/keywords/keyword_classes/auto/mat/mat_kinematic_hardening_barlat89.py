@@ -78,6 +78,10 @@ _MATKINEMATICHARDENINGBARLAT89_CARD4 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MATKINEMATICHARDENINGBARLAT89_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatKinematicHardeningBarlat89(KeywordBase):
     """DYNA MAT_KINEMATIC_HARDENING_BARLAT89 keyword"""
 
@@ -110,16 +114,9 @@ class MatKinematicHardeningBarlat89(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatKinematicHardeningBarlat89.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATKINEMATICHARDENINGBARLAT89_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -48,6 +48,10 @@ _MATBILKHUDUBOISFOAM_CARD1 = (
     FieldSchema("ncycle", float, 60, 10, None),
 )
 
+_MATBILKHUDUBOISFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatBilkhuDuboisFoam(KeywordBase):
     """DYNA MAT_BILKHU/DUBOIS_FOAM keyword"""
 
@@ -71,16 +75,9 @@ class MatBilkhuDuboisFoam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatBilkhuDuboisFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBILKHUDUBOISFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

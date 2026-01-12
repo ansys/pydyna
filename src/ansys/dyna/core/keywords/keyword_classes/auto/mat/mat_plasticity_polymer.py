@@ -49,6 +49,10 @@ _MATPLASTICITYPOLYMER_CARD2 = (
     FieldSchema("numint", float, 40, 10, 0.0),
 )
 
+_MATPLASTICITYPOLYMER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPlasticityPolymer(KeywordBase):
     """DYNA MAT_PLASTICITY_POLYMER keyword"""
 
@@ -75,16 +79,9 @@ class MatPlasticityPolymer(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPlasticityPolymer.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPLASTICITYPOLYMER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

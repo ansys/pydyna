@@ -125,6 +125,10 @@ _MATSHAPEMEMORYALLOY_CARD9 = (
     FieldSchema("n16", float, 40, 10, None),
 )
 
+_MATSHAPEMEMORYALLOY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatShapeMemoryAlloy(KeywordBase):
     """DYNA MAT_SHAPE_MEMORY_ALLOY keyword"""
 
@@ -172,16 +176,9 @@ class MatShapeMemoryAlloy(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatShapeMemoryAlloy.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSHAPEMEMORYALLOY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

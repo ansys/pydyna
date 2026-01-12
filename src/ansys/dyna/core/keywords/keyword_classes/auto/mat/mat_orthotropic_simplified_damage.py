@@ -119,6 +119,10 @@ _MATORTHOTROPICSIMPLIFIEDDAMAGE_CARD8 = (
     FieldSchema("cdam31", float, 50, 10, None),
 )
 
+_MATORTHOTROPICSIMPLIFIEDDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatOrthotropicSimplifiedDamage(KeywordBase):
     """DYNA MAT_ORTHOTROPIC_SIMPLIFIED_DAMAGE keyword"""
 
@@ -163,16 +167,9 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatOrthotropicSimplifiedDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATORTHOTROPICSIMPLIFIEDDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

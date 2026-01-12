@@ -43,6 +43,10 @@ _MATMOONEYRIVLINRUBBER_CARD1 = (
     FieldSchema("lcid", int, 30, 10, None),
 )
 
+_MATMOONEYRIVLINRUBBER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatMooneyRivlinRubber(KeywordBase):
     """DYNA MAT_MOONEY-RIVLIN_RUBBER keyword"""
 
@@ -66,16 +70,9 @@ class MatMooneyRivlinRubber(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatMooneyRivlinRubber.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMOONEYRIVLINRUBBER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

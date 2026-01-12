@@ -92,6 +92,10 @@ _MATANISOTROPICTHERMOELASTIC_CARD5 = (
     FieldSchema("ref", float, 70, 10, None),
 )
 
+_MATANISOTROPICTHERMOELASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAnisotropicThermoelastic(KeywordBase):
     """DYNA MAT_ANISOTROPIC_THERMOELASTIC keyword"""
 
@@ -127,16 +131,9 @@ class MatAnisotropicThermoelastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAnisotropicThermoelastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATANISOTROPICTHERMOELASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

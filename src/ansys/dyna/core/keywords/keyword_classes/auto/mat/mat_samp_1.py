@@ -74,6 +74,10 @@ _MATSAMP1_CARD4 = (
     FieldSchema("filt", float, 20, 10, None),
 )
 
+_MATSAMP1_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSamp1(KeywordBase):
     """DYNA MAT_SAMP_1 keyword"""
 
@@ -106,16 +110,9 @@ class MatSamp1(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSamp1.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSAMP1_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

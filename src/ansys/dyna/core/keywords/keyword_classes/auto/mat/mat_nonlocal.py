@@ -57,6 +57,10 @@ _MATNONLOCAL_CARD2 = (
     FieldSchema("zc2", float, 50, 10, None),
 )
 
+_MATNONLOCAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatNonlocal(KeywordBase):
     """DYNA MAT_NONLOCAL keyword"""
 
@@ -83,16 +87,9 @@ class MatNonlocal(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatNonlocal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATNONLOCAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

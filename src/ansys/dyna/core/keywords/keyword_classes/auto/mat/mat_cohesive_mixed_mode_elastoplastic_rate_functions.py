@@ -64,6 +64,10 @@ _MATCOHESIVEMIXEDMODEELASTOPLASTICRATEFUNCTIONS_CARD3 = (
     FieldSchema("rfiltf", float, 0, 10, None),
 )
 
+_MATCOHESIVEMIXEDMODEELASTOPLASTICRATEFUNCTIONS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCohesiveMixedModeElastoplasticRateFunctions(KeywordBase):
     """DYNA MAT_COHESIVE_MIXED_MODE_ELASTOPLASTIC_RATE_FUNCTIONS keyword"""
 
@@ -93,16 +97,9 @@ class MatCohesiveMixedModeElastoplasticRateFunctions(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCohesiveMixedModeElastoplasticRateFunctions.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOHESIVEMIXEDMODEELASTOPLASTICRATEFUNCTIONS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

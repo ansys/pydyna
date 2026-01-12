@@ -38,6 +38,10 @@ _MATINELASTIC6DOFSPRINGDISCRETEBEAM_CARD0 = (
     FieldSchema("rpidt", int, 70, 10, None),
 )
 
+_MATINELASTIC6DOFSPRINGDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatInelastic6DofSpringDiscreteBeam(KeywordBase):
     """DYNA MAT_INELASTIC_6DOF_SPRING_DISCRETE_BEAM keyword"""
 
@@ -58,16 +62,9 @@ class MatInelastic6DofSpringDiscreteBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatInelastic6DofSpringDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATINELASTIC6DOFSPRINGDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

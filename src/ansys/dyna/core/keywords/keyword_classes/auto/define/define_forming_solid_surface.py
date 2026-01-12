@@ -33,6 +33,10 @@ _DEFINEFORMINGSOLIDSURFACE_CARD0 = (
     FieldSchema("ssetupp", int, 20, 10, None),
 )
 
+_DEFINEFORMINGSOLIDSURFACE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFormingSolidSurface(KeywordBase):
     """DYNA DEFINE_FORMING_SOLID_SURFACE keyword"""
 
@@ -53,16 +57,9 @@ class DefineFormingSolidSurface(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFormingSolidSurface.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFORMINGSOLIDSURFACE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -42,6 +42,10 @@ _DEFINECURVEFEEDBACK_CARD1 = (
     FieldSchema("bias", float, 40, 10, 0.0),
 )
 
+_DEFINECURVEFEEDBACK_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineCurveFeedback(KeywordBase):
     """DYNA DEFINE_CURVE_FEEDBACK keyword"""
 
@@ -65,16 +69,9 @@ class DefineCurveFeedback(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineCurveFeedback.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECURVEFEEDBACK_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

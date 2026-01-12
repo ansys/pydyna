@@ -70,6 +70,10 @@ _MATTOUGHENEDADHESIVEPOLYMER_CARD3 = (
     FieldSchema("d2c", float, 70, 10, None),
 )
 
+_MATTOUGHENEDADHESIVEPOLYMER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatToughenedAdhesivePolymer(KeywordBase):
     """DYNA MAT_TOUGHENED_ADHESIVE_POLYMER keyword"""
 
@@ -99,16 +103,9 @@ class MatToughenedAdhesivePolymer(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatToughenedAdhesivePolymer.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATTOUGHENEDADHESIVEPOLYMER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

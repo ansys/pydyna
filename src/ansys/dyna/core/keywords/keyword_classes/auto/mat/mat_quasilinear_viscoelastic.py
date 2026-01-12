@@ -91,6 +91,10 @@ _MATQUASILINEARVISCOELASTIC_CARD5 = (
     FieldSchema("c6", float, 50, 10, None),
 )
 
+_MATQUASILINEARVISCOELASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatQuasilinearViscoelastic(KeywordBase):
     """DYNA MAT_QUASILINEAR_VISCOELASTIC keyword"""
 
@@ -126,16 +130,9 @@ class MatQuasilinearViscoelastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatQuasilinearViscoelastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATQUASILINEARVISCOELASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -64,6 +64,10 @@ _MAT240THERMAL_CARD3 = (
     FieldSchema("rfiltf", float, 0, 10, None),
 )
 
+_MAT240THERMAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat240Thermal(KeywordBase):
     """DYNA MAT_240_THERMAL keyword"""
 
@@ -93,16 +97,9 @@ class Mat240Thermal(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat240Thermal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT240THERMAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

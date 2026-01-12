@@ -46,6 +46,10 @@ _MATINELASTICSPRINGDISCRETEBEAM_CARD1 = (
     FieldSchema("glcid", int, 50, 10, None),
 )
 
+_MATINELASTICSPRINGDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatInelasticSpringDiscreteBeam(KeywordBase):
     """DYNA MAT_INELASTIC_SPRING_DISCRETE_BEAM keyword"""
 
@@ -69,16 +73,9 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatInelasticSpringDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATINELASTICSPRINGDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -33,6 +33,10 @@ _DEFINEGROUNDMOTION_CARD0 = (
     FieldSchema("vlcid", int, 20, 10, None),
 )
 
+_DEFINEGROUNDMOTION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineGroundMotion(KeywordBase):
     """DYNA DEFINE_GROUND_MOTION keyword"""
 
@@ -53,16 +57,9 @@ class DefineGroundMotion(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineGroundMotion.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEGROUNDMOTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

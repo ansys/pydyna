@@ -42,6 +42,10 @@ _MATELASTICFLUID_CARD1 = (
     FieldSchema("cp", float, 10, 10, 1e+20),
 )
 
+_MATELASTICFLUID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatElasticFluid(KeywordBase):
     """DYNA MAT_ELASTIC_FLUID keyword"""
 
@@ -65,16 +69,9 @@ class MatElasticFluid(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatElasticFluid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTICFLUID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

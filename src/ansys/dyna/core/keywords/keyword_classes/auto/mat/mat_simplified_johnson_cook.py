@@ -46,6 +46,10 @@ _MATSIMPLIFIEDJOHNSONCOOK_CARD1 = (
     FieldSchema("epso", float, 70, 10, 1.0),
 )
 
+_MATSIMPLIFIEDJOHNSONCOOK_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSimplifiedJohnsonCook(KeywordBase):
     """DYNA MAT_SIMPLIFIED_JOHNSON_COOK keyword"""
 
@@ -69,16 +73,9 @@ class MatSimplifiedJohnsonCook(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSimplifiedJohnsonCook.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSIMPLIFIEDJOHNSONCOOK_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

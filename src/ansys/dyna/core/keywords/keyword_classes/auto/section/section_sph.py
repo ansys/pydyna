@@ -38,6 +38,10 @@ _SECTIONSPH_CARD0 = (
     FieldSchema("sphkern", int, 70, 10, 0),
 )
 
+_SECTIONSPH_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionSph(KeywordBase):
     """DYNA SECTION_SPH keyword"""
 
@@ -58,16 +62,9 @@ class SectionSph(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionSph.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSPH_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

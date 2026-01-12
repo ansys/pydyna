@@ -88,6 +88,10 @@ _MAT010SPALL_CARD5 = (
     FieldSchema("es16", float, 70, 10, None),
 )
 
+_MAT010SPALL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat010Spall(KeywordBase):
     """DYNA MAT_010_SPALL keyword"""
 
@@ -123,16 +127,9 @@ class Mat010Spall(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat010Spall.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT010SPALL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

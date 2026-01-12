@@ -38,6 +38,10 @@ _MATCRUSHABLEFOAM_CARD0 = (
     FieldSchema("model", int, 70, 10, 0),
 )
 
+_MATCRUSHABLEFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCrushableFoam(KeywordBase):
     """DYNA MAT_CRUSHABLE_FOAM keyword"""
 
@@ -58,16 +62,9 @@ class MatCrushableFoam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCrushableFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCRUSHABLEFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

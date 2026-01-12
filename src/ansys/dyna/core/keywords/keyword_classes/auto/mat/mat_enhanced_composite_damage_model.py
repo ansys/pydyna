@@ -90,6 +90,10 @@ _MATENHANCEDCOMPOSITEDAMAGEMODEL_CARD5 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MATENHANCEDCOMPOSITEDAMAGEMODEL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatEnhancedCompositeDamageModel(KeywordBase):
     """DYNA MAT_ENHANCED_COMPOSITE_DAMAGE_MODEL keyword"""
 
@@ -125,16 +129,9 @@ class MatEnhancedCompositeDamageModel(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatEnhancedCompositeDamageModel.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATENHANCEDCOMPOSITEDAMAGEMODEL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

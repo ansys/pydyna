@@ -90,6 +90,10 @@ _MATWTMSTMPLC_CARD6 = (
     FieldSchema("d3", float, 50, 10, None),
 )
 
+_MATWTMSTMPLC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatWtmStmPlc(KeywordBase):
     """DYNA MAT_WTM_STM_PLC keyword"""
 
@@ -128,16 +132,9 @@ class MatWtmStmPlc(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatWtmStmPlc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATWTMSTMPLC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

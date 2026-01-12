@@ -32,6 +32,10 @@ _SETBEAMADD_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
 )
 
+_SETBEAMADD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetBeamAdd(KeywordBase):
     """DYNA SET_BEAM_ADD keyword"""
 
@@ -58,16 +62,9 @@ class SetBeamAdd(KeywordBase):
                 data = kwargs.get("beams")),            OptionCardSet(
                 option_spec = SetBeamAdd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETBEAMADD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

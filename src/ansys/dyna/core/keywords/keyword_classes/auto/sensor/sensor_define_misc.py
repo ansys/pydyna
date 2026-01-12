@@ -38,6 +38,10 @@ _SENSORDEFINEMISC_CARD0 = (
     FieldSchema("i5", str, 70, 10, None),
 )
 
+_SENSORDEFINEMISC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SensorDefineMisc(KeywordBase):
     """DYNA SENSOR_DEFINE_MISC keyword"""
 
@@ -58,16 +62,9 @@ class SensorDefineMisc(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SensorDefineMisc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEMISC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

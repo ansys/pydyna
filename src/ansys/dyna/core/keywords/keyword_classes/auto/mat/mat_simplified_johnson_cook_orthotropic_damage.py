@@ -49,6 +49,10 @@ _MATSIMPLIFIEDJOHNSONCOOKORTHOTROPICDAMAGE_CARD1 = (
     FieldSchema("epso", float, 70, 10, 1.0),
 )
 
+_MATSIMPLIFIEDJOHNSONCOOKORTHOTROPICDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSimplifiedJohnsonCookOrthotropicDamage(KeywordBase):
     """DYNA MAT_SIMPLIFIED_JOHNSON_COOK_ORTHOTROPIC_DAMAGE keyword"""
 
@@ -72,16 +76,9 @@ class MatSimplifiedJohnsonCookOrthotropicDamage(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSimplifiedJohnsonCookOrthotropicDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSIMPLIFIEDJOHNSONCOOKORTHOTROPICDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

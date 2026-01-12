@@ -48,6 +48,10 @@ _MATCSCMCONCRETE_CARD2 = (
     FieldSchema("units", int, 20, 10, 0),
 )
 
+_MATCSCMCONCRETE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCscmConcrete(KeywordBase):
     """DYNA MAT_CSCM_CONCRETE keyword"""
 
@@ -74,16 +78,9 @@ class MatCscmConcrete(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCscmConcrete.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCSCMCONCRETE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

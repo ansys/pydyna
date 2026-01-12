@@ -115,6 +115,10 @@ _MAT4AMICROMEC_CARD8 = (
     FieldSchema("ncyred2", float, 70, 10, 1.0),
 )
 
+_MAT4AMICROMEC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat4AMicromec(KeywordBase):
     """DYNA MAT_4A_MICROMEC keyword"""
 
@@ -159,16 +163,9 @@ class Mat4AMicromec(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat4AMicromec.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT4AMICROMEC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

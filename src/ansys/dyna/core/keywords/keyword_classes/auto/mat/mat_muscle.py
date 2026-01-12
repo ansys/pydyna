@@ -46,6 +46,10 @@ _MATMUSCLE_CARD1 = (
     FieldSchema("ssp", float, 40, 10, None),
 )
 
+_MATMUSCLE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatMuscle(KeywordBase):
     """DYNA MAT_MUSCLE keyword"""
 
@@ -69,16 +73,9 @@ class MatMuscle(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatMuscle.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMUSCLE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

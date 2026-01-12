@@ -88,6 +88,10 @@ _MATORTHOTROPICTHERMALCURING_CARD5 = (
     FieldSchema("lcac", int, 50, 10, None),
 )
 
+_MATORTHOTROPICTHERMALCURING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatOrthotropicThermalCuring(KeywordBase):
     """DYNA MAT_ORTHOTROPIC_THERMAL_CURING keyword"""
 
@@ -123,16 +127,9 @@ class MatOrthotropicThermalCuring(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatOrthotropicThermalCuring.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATORTHOTROPICTHERMALCURING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -36,6 +36,10 @@ _DEFINECOORDINATENODES_CARD0 = (
     FieldSchema("dir", str, 50, 10, "X"),
 )
 
+_DEFINECOORDINATENODES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineCoordinateNodes(KeywordBase):
     """DYNA DEFINE_COORDINATE_NODES keyword"""
 
@@ -56,16 +60,9 @@ class DefineCoordinateNodes(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineCoordinateNodes.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECOORDINATENODES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

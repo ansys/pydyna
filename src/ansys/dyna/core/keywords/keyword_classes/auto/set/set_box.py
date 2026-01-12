@@ -32,6 +32,10 @@ _SETBOX_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
 )
 
+_SETBOX_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetBox(KeywordBase):
     """DYNA SET_BOX keyword"""
 
@@ -58,16 +62,9 @@ class SetBox(KeywordBase):
                 data = kwargs.get("box")),            OptionCardSet(
                 option_spec = SetBox.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETBOX_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -56,6 +56,10 @@ _MAT276_CARD2 = (
     FieldSchema("betaki", float, 30, 10, None),
 )
 
+_MAT276_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat276(KeywordBase):
     """DYNA MAT_276 keyword"""
 
@@ -82,16 +86,9 @@ class Mat276(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat276.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT276_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

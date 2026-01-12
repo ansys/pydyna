@@ -42,6 +42,10 @@ _DEFINETRANSFORM_CARD1 = (
     FieldSchema("a7", float, 70, 10, None),
 )
 
+_DEFINETRANSFORM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineTransform(KeywordBase):
     """DYNA DEFINE_TRANSFORM keyword"""
 
@@ -65,16 +69,9 @@ class DefineTransform(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineTransform.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINETRANSFORM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

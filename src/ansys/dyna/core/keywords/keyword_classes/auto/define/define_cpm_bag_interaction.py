@@ -33,6 +33,10 @@ _DEFINECPMBAGINTERACTION_CARD0 = (
     FieldSchema("nspec", int, 30, 10, None),
 )
 
+_DEFINECPMBAGINTERACTION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineCpmBagInteraction(KeywordBase):
     """DYNA DEFINE_CPM_BAG_INTERACTION keyword"""
 
@@ -53,16 +57,9 @@ class DefineCpmBagInteraction(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineCpmBagInteraction.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECPMBAGINTERACTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

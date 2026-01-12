@@ -44,6 +44,10 @@ _MATT10_CARD1 = (
     FieldSchema("tghsv", float, 40, 10, None),
 )
 
+_MATT10_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatT10(KeywordBase):
     """DYNA MAT_T10 keyword"""
 
@@ -67,16 +71,9 @@ class MatT10(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatT10.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATT10_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

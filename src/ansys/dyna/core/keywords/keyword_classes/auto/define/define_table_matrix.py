@@ -43,6 +43,10 @@ _DEFINETABLEMATRIX_CARD1 = (
     FieldSchema("oval", float, 70, 10, None),
 )
 
+_DEFINETABLEMATRIX_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineTableMatrix(KeywordBase):
     """DYNA DEFINE_TABLE_MATRIX keyword"""
 
@@ -66,16 +70,9 @@ class DefineTableMatrix(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineTableMatrix.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINETABLEMATRIX_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

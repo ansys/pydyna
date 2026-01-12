@@ -43,6 +43,10 @@ _SETSOLIDCOLLECT_CARD1 = (
     FieldSchema("k8", int, 70, 10, None),
 )
 
+_SETSOLIDCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetSolidCollect(KeywordBase):
     """DYNA SET_SOLID_COLLECT keyword"""
 
@@ -66,16 +70,9 @@ class SetSolidCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetSolidCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSOLIDCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

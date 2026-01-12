@@ -80,6 +80,10 @@ _DEFINEPARTICLEBLAST_CARD5 = (
     FieldSchema("bc_p", int, 60, 10, 0),
 )
 
+_DEFINEPARTICLEBLAST_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineParticleBlast(KeywordBase):
     """DYNA DEFINE_PARTICLE_BLAST keyword"""
 
@@ -115,16 +119,9 @@ class DefineParticleBlast(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineParticleBlast.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEPARTICLEBLAST_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

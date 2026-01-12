@@ -38,6 +38,10 @@ _DEFINECONSTRUCTIONSTAGES_CARD0 = (
     FieldSchema("idynain", int, 70, 10, 0),
 )
 
+_DEFINECONSTRUCTIONSTAGES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineConstructionStages(KeywordBase):
     """DYNA DEFINE_CONSTRUCTION_STAGES keyword"""
 
@@ -58,16 +62,9 @@ class DefineConstructionStages(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineConstructionStages.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECONSTRUCTIONSTAGES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -36,6 +36,10 @@ _DEFINECONTROLVOLUMEFLOWAREA_CARD0 = (
     FieldSchema("cviid ", float, 50, 10, None),
 )
 
+_DEFINECONTROLVOLUMEFLOWAREA_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineControlVolumeFlowArea(KeywordBase):
     """DYNA DEFINE_CONTROL_VOLUME_FLOW_AREA keyword"""
 
@@ -56,16 +60,9 @@ class DefineControlVolumeFlowArea(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineControlVolumeFlowArea.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECONTROLVOLUMEFLOWAREA_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

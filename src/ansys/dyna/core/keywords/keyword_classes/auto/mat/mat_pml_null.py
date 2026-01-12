@@ -33,6 +33,10 @@ _MATPMLNULL_CARD0 = (
     FieldSchema("mu", float, 20, 10, None),
 )
 
+_MATPMLNULL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPmlNull(KeywordBase):
     """DYNA MAT_PML_NULL keyword"""
 
@@ -53,16 +57,9 @@ class MatPmlNull(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPmlNull.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPMLNULL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

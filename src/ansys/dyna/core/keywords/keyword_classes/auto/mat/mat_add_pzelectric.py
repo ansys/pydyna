@@ -88,6 +88,10 @@ _MATADDPZELECTRIC_CARD6 = (
     FieldSchema("d3", float, 50, 10, None),
 )
 
+_MATADDPZELECTRIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddPzelectric(KeywordBase):
     """DYNA MAT_ADD_PZELECTRIC keyword"""
 
@@ -126,16 +130,9 @@ class MatAddPzelectric(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddPzelectric.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDPZELECTRIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

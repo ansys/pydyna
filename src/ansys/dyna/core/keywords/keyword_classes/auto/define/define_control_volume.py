@@ -33,6 +33,10 @@ _DEFINECONTROLVOLUME_CARD0 = (
     FieldSchema("p0", float, 20, 10, None),
 )
 
+_DEFINECONTROLVOLUME_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineControlVolume(KeywordBase):
     """DYNA DEFINE_CONTROL_VOLUME keyword"""
 
@@ -53,16 +57,9 @@ class DefineControlVolume(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineControlVolume.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECONTROLVOLUME_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

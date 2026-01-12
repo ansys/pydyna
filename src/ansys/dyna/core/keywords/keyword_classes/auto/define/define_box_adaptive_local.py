@@ -62,6 +62,10 @@ _DEFINEBOXADAPTIVELOCAL_CARD3 = (
     FieldSchema("cz", float, 20, 10, 0.0),
 )
 
+_DEFINEBOXADAPTIVELOCAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineBoxAdaptiveLocal(KeywordBase):
     """DYNA DEFINE_BOX_ADAPTIVE_LOCAL keyword"""
 
@@ -91,16 +95,9 @@ class DefineBoxAdaptiveLocal(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineBoxAdaptiveLocal.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEBOXADAPTIVELOCAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

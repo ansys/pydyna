@@ -36,6 +36,10 @@ _DEFINEPARTFROMLAYER_CARD0 = (
     FieldSchema("thick", float, 50, 10, None),
 )
 
+_DEFINEPARTFROMLAYER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefinePartFromLayer(KeywordBase):
     """DYNA DEFINE_PART_FROM_LAYER keyword"""
 
@@ -56,16 +60,9 @@ class DefinePartFromLayer(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefinePartFromLayer.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEPARTFROMLAYER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

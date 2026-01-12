@@ -41,6 +41,10 @@ _MAT196_CARD0 = (
     FieldSchema("dospot", int, 70, 10, 0),
 )
 
+_MAT196_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat196(KeywordBase):
     """DYNA MAT_196 keyword"""
 
@@ -99,6 +103,7 @@ class Mat196(KeywordBase):
                                     10,
                                 ),
                             ],
+                            _internal=True,
                     ),
                     Card(
                             [
@@ -139,6 +144,7 @@ class Mat196(KeywordBase):
                                     10,
                                 ),
                             ],
+                            _internal=True,
                     ),
                 ],
                 None,
@@ -148,16 +154,9 @@ class Mat196(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat196.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT196_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -72,6 +72,10 @@ _DEFINEDEINJECTBONDEDELLIPSE_CARD4 = (
     FieldSchema("ishape", int, 70, 10, None),
 )
 
+_DEFINEDEINJECTBONDEDELLIPSE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeInjectBondedEllipse(KeywordBase):
     """DYNA DEFINE_DE_INJECT_BONDED_ELLIPSE keyword"""
 
@@ -104,16 +108,9 @@ class DefineDeInjectBondedEllipse(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeInjectBondedEllipse.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEINJECTBONDEDELLIPSE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

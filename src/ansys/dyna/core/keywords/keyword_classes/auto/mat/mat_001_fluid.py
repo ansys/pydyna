@@ -42,6 +42,10 @@ _MAT001FLUID_CARD1 = (
     FieldSchema("cp", float, 10, 10, 1e+20),
 )
 
+_MAT001FLUID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat001Fluid(KeywordBase):
     """DYNA MAT_001_FLUID keyword"""
 
@@ -65,16 +69,9 @@ class Mat001Fluid(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat001Fluid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT001FLUID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -46,6 +46,10 @@ _MATCOHESIVEGENERAL_CARD1 = (
     FieldSchema("tslc2", float, 40, 10, None),
 )
 
+_MATCOHESIVEGENERAL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCohesiveGeneral(KeywordBase):
     """DYNA MAT_COHESIVE_GENERAL keyword"""
 
@@ -69,16 +73,9 @@ class MatCohesiveGeneral(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCohesiveGeneral.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOHESIVEGENERAL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

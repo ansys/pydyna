@@ -99,6 +99,10 @@ _MAT120RCDC_CARD6 = (
     FieldSchema("l", float, 70, 10, None),
 )
 
+_MAT120RCDC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat120Rcdc(KeywordBase):
     """DYNA MAT_120_RCDC keyword"""
 
@@ -137,16 +141,9 @@ class Mat120Rcdc(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat120Rcdc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT120RCDC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

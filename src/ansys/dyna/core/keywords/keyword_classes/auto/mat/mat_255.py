@@ -49,6 +49,10 @@ _MAT255_CARD2 = (
     FieldSchema("tref", float, 10, 10, None),
 )
 
+_MAT255_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat255(KeywordBase):
     """DYNA MAT_255 keyword"""
 
@@ -75,16 +79,9 @@ class Mat255(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat255.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT255_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

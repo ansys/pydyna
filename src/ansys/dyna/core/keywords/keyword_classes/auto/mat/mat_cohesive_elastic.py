@@ -38,6 +38,10 @@ _MATCOHESIVEELASTIC_CARD0 = (
     FieldSchema("ft_fail", float, 70, 10, None),
 )
 
+_MATCOHESIVEELASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCohesiveElastic(KeywordBase):
     """DYNA MAT_COHESIVE_ELASTIC keyword"""
 
@@ -58,16 +62,9 @@ class MatCohesiveElastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCohesiveElastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOHESIVEELASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

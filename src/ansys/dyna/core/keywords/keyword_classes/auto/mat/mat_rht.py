@@ -81,6 +81,10 @@ _MATRHT_CARD4 = (
     FieldSchema("alpha", float, 70, 10, None),
 )
 
+_MATRHT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatRht(KeywordBase):
     """DYNA MAT_RHT keyword"""
 
@@ -113,16 +117,9 @@ class MatRht(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatRht.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATRHT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

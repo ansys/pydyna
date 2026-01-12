@@ -36,6 +36,10 @@ _DEFINEFORMINGCLAMP_CARD0 = (
     FieldSchema("dt", float, 50, 10, 0.0),
 )
 
+_DEFINEFORMINGCLAMP_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFormingClamp(KeywordBase):
     """DYNA DEFINE_FORMING_CLAMP keyword"""
 
@@ -56,16 +60,9 @@ class DefineFormingClamp(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFormingClamp.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFORMINGCLAMP_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

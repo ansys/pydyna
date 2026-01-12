@@ -42,6 +42,10 @@ _SETPARTLISTGENERATEINCREMENT_CARD1 = (
     FieldSchema("incr", int, 20, 10, None),
 )
 
+_SETPARTLISTGENERATEINCREMENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetPartListGenerateIncrement(KeywordBase):
     """DYNA SET_PART_LIST_GENERATE_INCREMENT keyword"""
 
@@ -65,16 +69,9 @@ class SetPartListGenerateIncrement(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetPartListGenerateIncrement.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETPARTLISTGENERATEINCREMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

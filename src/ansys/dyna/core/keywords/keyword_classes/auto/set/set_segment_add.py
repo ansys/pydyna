@@ -32,6 +32,10 @@ _SETSEGMENTADD_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
 )
 
+_SETSEGMENTADD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetSegmentAdd(KeywordBase):
     """DYNA SET_SEGMENT_ADD keyword"""
 
@@ -58,16 +62,9 @@ class SetSegmentAdd(KeywordBase):
                 data = kwargs.get("sets")),            OptionCardSet(
                 option_spec = SetSegmentAdd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSEGMENTADD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

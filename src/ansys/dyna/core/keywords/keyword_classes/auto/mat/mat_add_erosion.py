@@ -78,6 +78,10 @@ _MATADDEROSION_CARD4 = (
     FieldSchema("dtmin", float, 30, 10, None),
 )
 
+_MATADDEROSION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddErosion(KeywordBase):
     """DYNA MAT_ADD_EROSION keyword"""
 
@@ -110,16 +114,9 @@ class MatAddErosion(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddErosion.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDEROSION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

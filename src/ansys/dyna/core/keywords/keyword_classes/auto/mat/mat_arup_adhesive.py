@@ -82,6 +82,10 @@ _MATARUPADHESIVE_CARD5 = (
     FieldSchema("ele2ns", float, 40, 10, 0.0),
 )
 
+_MATARUPADHESIVE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatArupAdhesive(KeywordBase):
     """DYNA MAT_ARUP_ADHESIVE keyword"""
 
@@ -117,16 +121,9 @@ class MatArupAdhesive(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatArupAdhesive.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATARUPADHESIVE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

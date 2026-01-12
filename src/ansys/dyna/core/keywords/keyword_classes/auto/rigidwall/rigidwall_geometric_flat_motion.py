@@ -61,6 +61,11 @@ _RIGIDWALLGEOMETRICFLATMOTION_CARD3 = (
     FieldSchema("vz", float, 40, 10, None),
 )
 
+_RIGIDWALLGEOMETRICFLATMOTION_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallGeometricFlatMotion(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_FLAT_MOTION keyword"""
 
@@ -90,23 +95,9 @@ class RigidwallGeometricFlatMotion(KeywordBase):
             ),            OptionCardSet(
                 option_spec = RigidwallGeometricFlatMotion.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICFLATMOTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -35,6 +35,10 @@ _MATSPHIMPLICITSTRUCTURE_CARD0 = (
     FieldSchema("adh", float, 40, 10, None),
 )
 
+_MATSPHIMPLICITSTRUCTURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSphImplicitStructure(KeywordBase):
     """DYNA MAT_SPH_IMPLICIT_STRUCTURE keyword"""
 
@@ -55,16 +59,9 @@ class MatSphImplicitStructure(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSphImplicitStructure.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPHIMPLICITSTRUCTURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -94,6 +94,10 @@ _MATCOMPOSITEMSC_CARD6 = (
     FieldSchema("am1", float, 40, 10, None),
 )
 
+_MATCOMPOSITEMSC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCompositeMsc(KeywordBase):
     """DYNA MAT_COMPOSITE_MSC keyword"""
 
@@ -132,16 +136,9 @@ class MatCompositeMsc(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCompositeMsc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOMPOSITEMSC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

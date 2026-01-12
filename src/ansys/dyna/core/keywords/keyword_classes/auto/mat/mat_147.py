@@ -64,6 +64,10 @@ _MAT147_CARD3 = (
     FieldSchema("epsmax", float, 0, 10, None),
 )
 
+_MAT147_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat147(KeywordBase):
     """DYNA MAT_147 keyword"""
 
@@ -93,16 +97,9 @@ class Mat147(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat147.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT147_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

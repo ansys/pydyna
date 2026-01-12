@@ -40,6 +40,10 @@ _SETPERILAMINATE_CARD1 = (
     FieldSchema("t2", float, 50, 10, None),
 )
 
+_SETPERILAMINATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetPeriLaminate(KeywordBase):
     """DYNA SET_PERI_LAMINATE keyword"""
 
@@ -63,16 +67,9 @@ class SetPeriLaminate(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetPeriLaminate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETPERILAMINATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -39,6 +39,10 @@ _SETNODELIST_CARD0 = (
     FieldSchema("unused", str, 70, 10, None),
 )
 
+_SETNODELIST_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetNodeList(KeywordBase):
     """DYNA SET_NODE_LIST keyword"""
 
@@ -65,16 +69,9 @@ class SetNodeList(KeywordBase):
                 data = kwargs.get("nodes")),            OptionCardSet(
                 option_spec = SetNodeList.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETNODELIST_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

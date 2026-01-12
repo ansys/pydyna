@@ -44,6 +44,10 @@ _DEFINEDEMESHBEAM_CARD1 = (
     FieldSchema("radius", float, 20, 10, None),
 )
 
+_DEFINEDEMESHBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeMeshBeam(KeywordBase):
     """DYNA DEFINE_DE_MESH_BEAM keyword"""
 
@@ -67,16 +71,9 @@ class DefineDeMeshBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeMeshBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEMESHBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

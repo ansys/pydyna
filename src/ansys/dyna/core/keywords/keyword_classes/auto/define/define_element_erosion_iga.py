@@ -34,6 +34,10 @@ _DEFINEELEMENTEROSIONIGA_CARD0 = (
     FieldSchema("nifp", int, 30, 10, 1),
 )
 
+_DEFINEELEMENTEROSIONIGA_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineElementErosionIga(KeywordBase):
     """DYNA DEFINE_ELEMENT_EROSION_IGA keyword"""
 
@@ -54,16 +58,9 @@ class DefineElementErosionIga(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineElementErosionIga.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEELEMENTEROSIONIGA_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

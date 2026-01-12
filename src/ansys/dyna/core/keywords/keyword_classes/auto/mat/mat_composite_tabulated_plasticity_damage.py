@@ -143,6 +143,10 @@ _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD10 = (
     FieldSchema("pmacc", float, 40, 10, None),
 )
 
+_MATCOMPOSITETABULATEDPLASTICITYDAMAGE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCompositeTabulatedPlasticityDamage(KeywordBase):
     """DYNA MAT_COMPOSITE_TABULATED_PLASTICITY_DAMAGE keyword"""
 
@@ -193,16 +197,9 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCompositeTabulatedPlasticityDamage.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

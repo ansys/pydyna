@@ -95,6 +95,10 @@ _SECTIONSHELLEFG_CARD6 = (
     FieldSchema("pi", float, 70, 10, 0.0),
 )
 
+_SECTIONSHELLEFG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionShellEfg(KeywordBase):
     """DYNA SECTION_SHELL_EFG keyword"""
 
@@ -133,16 +137,9 @@ class SectionShellEfg(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionShellEfg.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSHELLEFG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

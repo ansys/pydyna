@@ -50,6 +50,10 @@ _MAT183_CARD2 = (
     FieldSchema("lcunld", int, 0, 10, None),
 )
 
+_MAT183_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat183(KeywordBase):
     """DYNA MAT_183 keyword"""
 
@@ -76,16 +80,9 @@ class Mat183(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat183.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT183_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

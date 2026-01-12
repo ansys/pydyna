@@ -31,6 +31,10 @@ _DEFINEFORMINGONESTEPPRIMARY_CARD0 = (
     FieldSchema("slpid", int, 0, 10, None),
 )
 
+_DEFINEFORMINGONESTEPPRIMARY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFormingOnestepPrimary(KeywordBase):
     """DYNA DEFINE_FORMING_ONESTEP_PRIMARY keyword"""
 
@@ -51,16 +55,9 @@ class DefineFormingOnestepPrimary(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFormingOnestepPrimary.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFORMINGONESTEPPRIMARY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -65,6 +65,10 @@ _MAT155_CARD4 = (
     FieldSchema("betai", float, 10, 10, None),
 )
 
+_MAT155_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat155(KeywordBase):
     """DYNA MAT_155 keyword"""
 
@@ -97,16 +101,9 @@ class Mat155(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat155.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT155_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -97,6 +97,10 @@ _MATMOHRNONASSOCIATEDFLOWXUE_CARD7 = (
     FieldSchema("v3", float, 20, 10, None),
 )
 
+_MATMOHRNONASSOCIATEDFLOWXUE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatMohrNonAssociatedFlowXue(KeywordBase):
     """DYNA MAT_MOHR_NON_ASSOCIATED_FLOW_XUE keyword"""
 
@@ -138,16 +142,9 @@ class MatMohrNonAssociatedFlowXue(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatMohrNonAssociatedFlowXue.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMOHRNONASSOCIATEDFLOWXUE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -83,6 +83,10 @@ _MATCOMPOSITEFAILURESHELLMODEL_CARD5 = (
     FieldSchema("sc", float, 40, 10, None),
 )
 
+_MATCOMPOSITEFAILURESHELLMODEL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCompositeFailureShellModel(KeywordBase):
     """DYNA MAT_COMPOSITE_FAILURE_SHELL_MODEL keyword"""
 
@@ -118,16 +122,9 @@ class MatCompositeFailureShellModel(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCompositeFailureShellModel.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOMPOSITEFAILURESHELLMODEL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -210,6 +210,10 @@ _MAT139_CARD17 = (
     FieldSchema("lpmr_8", int, 70, 10, 0),
 )
 
+_MAT139_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat139(KeywordBase):
     """DYNA MAT_139 keyword"""
 
@@ -281,16 +285,9 @@ class Mat139(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat139.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT139_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

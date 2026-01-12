@@ -38,6 +38,10 @@ _DEFINEVECTOR_CARD0 = (
     FieldSchema("cid", int, 70, 10, 0),
 )
 
+_DEFINEVECTOR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineVector(KeywordBase):
     """DYNA DEFINE_VECTOR keyword"""
 
@@ -58,16 +62,9 @@ class DefineVector(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineVector.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEVECTOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

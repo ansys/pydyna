@@ -154,6 +154,10 @@ _MATUHSSTEEL_CARD11 = (
     FieldSchema("aghost", float, 60, 10, None),
 )
 
+_MATUHSSTEEL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatUhsSteel(KeywordBase):
     """DYNA MAT_UHS_STEEL keyword"""
 
@@ -207,16 +211,9 @@ class MatUhsSteel(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatUhsSteel.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATUHSSTEEL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

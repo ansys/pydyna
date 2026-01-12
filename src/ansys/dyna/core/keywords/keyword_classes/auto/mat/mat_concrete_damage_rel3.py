@@ -98,6 +98,10 @@ _MATCONCRETEDAMAGEREL3_CARD6 = (
     FieldSchema("a2y", float, 70, 10, None),
 )
 
+_MATCONCRETEDAMAGEREL3_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatConcreteDamageRel3(KeywordBase):
     """DYNA MAT_CONCRETE_DAMAGE_REL3 keyword"""
 
@@ -136,16 +140,9 @@ class MatConcreteDamageRel3(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatConcreteDamageRel3.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCONCRETEDAMAGEREL3_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

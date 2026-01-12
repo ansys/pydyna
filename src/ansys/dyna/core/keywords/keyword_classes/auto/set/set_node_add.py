@@ -37,6 +37,10 @@ _SETNODEADD_CARD0 = (
     FieldSchema("solver", str, 50, 10, "MECH"),
 )
 
+_SETNODEADD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetNodeAdd(KeywordBase):
     """DYNA SET_NODE_ADD keyword"""
 
@@ -63,16 +67,9 @@ class SetNodeAdd(KeywordBase):
                 data = kwargs.get("nodes")),            OptionCardSet(
                 option_spec = SetNodeAdd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETNODEADD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

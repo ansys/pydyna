@@ -57,6 +57,10 @@ _MATCOHESIVEPAPER_CARD2 = (
     FieldSchema("failt", float, 40, 10, None),
 )
 
+_MATCOHESIVEPAPER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCohesivePaper(KeywordBase):
     """DYNA MAT_COHESIVE_PAPER keyword"""
 
@@ -83,16 +87,9 @@ class MatCohesivePaper(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCohesivePaper.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOHESIVEPAPER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

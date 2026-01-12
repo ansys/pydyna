@@ -76,6 +76,10 @@ _MATFUCHANGFOAMLOGLOGINTERPOLATION_CARD4 = (
     FieldSchema("riuld", float, 10, 10, 0.0),
 )
 
+_MATFUCHANGFOAMLOGLOGINTERPOLATION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatFuChangFoamLogLogInterpolation(KeywordBase):
     """DYNA MAT_FU_CHANG_FOAM_LOG_LOG_INTERPOLATION keyword"""
 
@@ -108,16 +112,9 @@ class MatFuChangFoamLogLogInterpolation(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatFuChangFoamLogLogInterpolation.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATFUCHANGFOAMLOGLOGINTERPOLATION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -33,6 +33,10 @@ _DEFINESPOTWELDRUPTURESTRESS_CARD0 = (
     FieldSchema("sigtau", float, 20, 10, 0.0),
 )
 
+_DEFINESPOTWELDRUPTURESTRESS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineSpotweldRuptureStress(KeywordBase):
     """DYNA DEFINE_SPOTWELD_RUPTURE_STRESS keyword"""
 
@@ -53,16 +57,9 @@ class DefineSpotweldRuptureStress(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineSpotweldRuptureStress.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPOTWELDRUPTURESTRESS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

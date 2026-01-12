@@ -38,6 +38,10 @@ _MATVISCOUSFOAM_CARD0 = (
     FieldSchema("pr", float, 70, 10, None),
 )
 
+_MATVISCOUSFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatViscousFoam(KeywordBase):
     """DYNA MAT_VISCOUS_FOAM keyword"""
 
@@ -58,16 +62,9 @@ class MatViscousFoam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatViscousFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATVISCOUSFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

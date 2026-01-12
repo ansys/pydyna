@@ -88,6 +88,10 @@ _MATELASTICPLASTICHYDROSPALL_CARD5 = (
     FieldSchema("es16", float, 70, 10, None),
 )
 
+_MATELASTICPLASTICHYDROSPALL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatElasticPlasticHydroSpall(KeywordBase):
     """DYNA MAT_ELASTIC_PLASTIC_HYDRO_SPALL keyword"""
 
@@ -123,16 +127,9 @@ class MatElasticPlasticHydroSpall(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatElasticPlasticHydroSpall.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATELASTICPLASTICHYDROSPALL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

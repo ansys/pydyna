@@ -68,6 +68,10 @@ _MATSIMPLIFIEDRUBBERFOAMWITHFAILURE_CARD3 = (
     FieldSchema("hisout", float, 50, 10, 0.0),
 )
 
+_MATSIMPLIFIEDRUBBERFOAMWITHFAILURE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSimplifiedRubberFoamWithFailure(KeywordBase):
     """DYNA MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE keyword"""
 
@@ -106,16 +110,9 @@ class MatSimplifiedRubberFoamWithFailure(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSimplifiedRubberFoamWithFailure.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSIMPLIFIEDRUBBERFOAMWITHFAILURE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

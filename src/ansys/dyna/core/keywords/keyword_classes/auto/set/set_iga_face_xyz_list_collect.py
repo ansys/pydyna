@@ -47,6 +47,10 @@ _SETIGAFACEXYZLISTCOLLECT_CARD1 = (
     FieldSchema("eid8", int, 70, 10, None),
 )
 
+_SETIGAFACEXYZLISTCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetIgaFaceXyzListCollect(KeywordBase):
     """DYNA SET_IGA_FACE_XYZ_LIST_COLLECT keyword"""
 
@@ -70,16 +74,9 @@ class SetIgaFaceXyzListCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetIgaFaceXyzListCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETIGAFACEXYZLISTCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

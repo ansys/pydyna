@@ -38,6 +38,10 @@ _MATSPRINGTRILINEARDEGRADING_CARD0 = (
     FieldSchema("fflag", float, 70, 10, None),
 )
 
+_MATSPRINGTRILINEARDEGRADING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSpringTrilinearDegrading(KeywordBase):
     """DYNA MAT_SPRING_TRILINEAR_DEGRADING keyword"""
 
@@ -58,16 +62,9 @@ class MatSpringTrilinearDegrading(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSpringTrilinearDegrading.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPRINGTRILINEARDEGRADING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

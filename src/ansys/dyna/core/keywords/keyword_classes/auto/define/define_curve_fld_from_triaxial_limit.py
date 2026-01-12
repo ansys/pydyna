@@ -36,6 +36,10 @@ _DEFINECURVEFLDFROMTRIAXIALLIMIT_CARD1 = (
     FieldSchema("o1", float, 20, 20, 0.0),
 )
 
+_DEFINECURVEFLDFROMTRIAXIALLIMIT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineCurveFldFromTriaxialLimit(KeywordBase):
     """DYNA DEFINE_CURVE_FLD_FROM_TRIAXIAL_LIMIT keyword"""
 
@@ -59,16 +63,9 @@ class DefineCurveFldFromTriaxialLimit(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineCurveFldFromTriaxialLimit.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECURVEFLDFROMTRIAXIALLIMIT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

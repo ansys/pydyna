@@ -42,6 +42,10 @@ _MATPLASTICGREENNAGHDIRATE_CARD1 = (
     FieldSchema("beta", float, 40, 10, None),
 )
 
+_MATPLASTICGREENNAGHDIRATE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatPlasticGreenNaghdiRate(KeywordBase):
     """DYNA MAT_PLASTIC_GREEN-NAGHDI_RATE keyword"""
 
@@ -65,16 +69,9 @@ class MatPlasticGreenNaghdiRate(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatPlasticGreenNaghdiRate.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATPLASTICGREENNAGHDIRATE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -93,6 +93,10 @@ _MATMOMENTCURVATUREBEAM_CARD5 = (
     FieldSchema("rcapaz", float, 70, 10, 1e+20),
 )
 
+_MATMOMENTCURVATUREBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatMomentCurvatureBeam(KeywordBase):
     """DYNA MAT_MOMENT_CURVATURE_BEAM keyword"""
 
@@ -128,16 +132,9 @@ class MatMomentCurvatureBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatMomentCurvatureBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATMOMENTCURVATUREBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -61,6 +61,10 @@ _DEFINEQUASARCOUPLING_CARD4 = (
     FieldSchema("var8", float, 70, 10, None),
 )
 
+_DEFINEQUASARCOUPLING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineQuasarCoupling(KeywordBase):
     """DYNA DEFINE_QUASAR_COUPLING keyword"""
 
@@ -93,16 +97,9 @@ class DefineQuasarCoupling(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineQuasarCoupling.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEQUASARCOUPLING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

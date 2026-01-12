@@ -56,6 +56,10 @@ _DEFINEDEATHTIMESNODES_CARD2 = (
     FieldSchema("nid8", int, 70, 10, None),
 )
 
+_DEFINEDEATHTIMESNODES_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineDeathTimesNodes(KeywordBase):
     """DYNA DEFINE_DEATH_TIMES_NODES keyword"""
 
@@ -82,16 +86,9 @@ class DefineDeathTimesNodes(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineDeathTimesNodes.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEATHTIMESNODES_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

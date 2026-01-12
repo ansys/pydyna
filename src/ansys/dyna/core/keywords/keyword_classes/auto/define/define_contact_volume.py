@@ -58,6 +58,10 @@ _DEFINECONTACTVOLUME_CARD3 = (
     FieldSchema("d_angs", float, 20, 10, 0.0),
 )
 
+_DEFINECONTACTVOLUME_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineContactVolume(KeywordBase):
     """DYNA DEFINE_CONTACT_VOLUME keyword"""
 
@@ -90,16 +94,9 @@ class DefineContactVolume(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineContactVolume.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECONTACTVOLUME_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -38,6 +38,10 @@ _SECTIONSPHINTERACTION_CARD0 = (
     FieldSchema("sphkern", int, 70, 10, 0),
 )
 
+_SECTIONSPHINTERACTION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionSphInteraction(KeywordBase):
     """DYNA SECTION_SPH_INTERACTION keyword"""
 
@@ -58,16 +62,9 @@ class SectionSphInteraction(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionSphInteraction.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSPHINTERACTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

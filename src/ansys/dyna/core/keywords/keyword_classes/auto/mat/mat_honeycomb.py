@@ -80,6 +80,10 @@ _MATHONEYCOMB_CARD4 = (
     FieldSchema("v3", float, 70, 10, None),
 )
 
+_MATHONEYCOMB_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatHoneycomb(KeywordBase):
     """DYNA MAT_HONEYCOMB keyword"""
 
@@ -112,16 +116,9 @@ class MatHoneycomb(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatHoneycomb.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATHONEYCOMB_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

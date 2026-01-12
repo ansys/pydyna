@@ -36,6 +36,10 @@ _SETNODEINTERSECT_CARD0 = (
     FieldSchema("da4", float, 40, 10, 0.0),
 )
 
+_SETNODEINTERSECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetNodeIntersect(KeywordBase):
     """DYNA SET_NODE_INTERSECT keyword"""
 
@@ -62,16 +66,9 @@ class SetNodeIntersect(KeywordBase):
                 data = kwargs.get("nodes")),            OptionCardSet(
                 option_spec = SetNodeIntersect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETNODEINTERSECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -70,6 +70,10 @@ _MATJOHNSONCOOKSTOCHASTIC_CARD3 = (
     FieldSchema("eps1", float, 60, 10, None),
 )
 
+_MATJOHNSONCOOKSTOCHASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatJohnsonCookStochastic(KeywordBase):
     """DYNA MAT_JOHNSON_COOK_STOCHASTIC keyword"""
 
@@ -99,16 +103,9 @@ class MatJohnsonCookStochastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatJohnsonCookStochastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATJOHNSONCOOKSTOCHASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

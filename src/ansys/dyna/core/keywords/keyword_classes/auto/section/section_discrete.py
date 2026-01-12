@@ -41,6 +41,10 @@ _SECTIONDISCRETE_CARD1 = (
     FieldSchema("tdl", float, 10, 10, None),
 )
 
+_SECTIONDISCRETE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionDiscrete(KeywordBase):
     """DYNA SECTION_DISCRETE keyword"""
 
@@ -64,16 +68,9 @@ class SectionDiscrete(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionDiscrete.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONDISCRETE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

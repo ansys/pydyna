@@ -57,6 +57,10 @@ _MATCELLULARRUBBER_CARD3 = (
     FieldSchema("beta", float, 40, 10, None),
 )
 
+_MATCELLULARRUBBER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCellularRubber(KeywordBase):
     """DYNA MAT_CELLULAR_RUBBER keyword"""
 
@@ -86,16 +90,9 @@ class MatCellularRubber(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCellularRubber.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCELLULARRUBBER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

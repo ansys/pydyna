@@ -101,6 +101,10 @@ _MATRATESENSITIVECOMPOSITEFABRIC_CARD8 = (
     FieldSchema("betai", float, 10, 10, None),
 )
 
+_MATRATESENSITIVECOMPOSITEFABRIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatRateSensitiveCompositeFabric(KeywordBase):
     """DYNA MAT_RATE_SENSITIVE_COMPOSITE_FABRIC keyword"""
 
@@ -145,16 +149,9 @@ class MatRateSensitiveCompositeFabric(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatRateSensitiveCompositeFabric.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATRATESENSITIVECOMPOSITEFABRIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

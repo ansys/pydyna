@@ -71,6 +71,11 @@ _RIGIDWALLGEOMETRICCYLINDERINTERIORMOTIONDISPLAY_CARD5 = (
     FieldSchema("pr", float, 30, 10, 0.3),
 )
 
+_RIGIDWALLGEOMETRICCYLINDERINTERIORMOTIONDISPLAY_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallGeometricCylinderInteriorMotionDisplay(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_CYLINDER_INTERIOR_MOTION_DISPLAY keyword"""
 
@@ -106,23 +111,9 @@ class RigidwallGeometricCylinderInteriorMotionDisplay(KeywordBase):
             ),            OptionCardSet(
                 option_spec = RigidwallGeometricCylinderInteriorMotionDisplay.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICCYLINDERINTERIORMOTIONDISPLAY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

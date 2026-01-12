@@ -60,6 +60,11 @@ _CONTACTFORCETRANSDUCERCONSTRAINT_CARD2 = (
     FieldSchema("unused", int, 70, 10, None),
 )
 
+_CONTACTFORCETRANSDUCERCONSTRAINT_OPTION0_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
 class ContactForceTransducerConstraint(KeywordBase):
     """DYNA CONTACT_FORCE_TRANSDUCER_CONSTRAINT keyword"""
 
@@ -86,23 +91,9 @@ class ContactForceTransducerConstraint(KeywordBase):
             ),            OptionCardSet(
                 option_spec = ContactForceTransducerConstraint.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "cid",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("cid")
-                            ),
-                            Field(
-                                "heading",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("heading")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTFORCETRANSDUCERCONSTRAINT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

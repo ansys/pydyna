@@ -46,6 +46,10 @@ _MATCABLEDISCRETEBEAM_CARD1 = (
     FieldSchema("mxfrc", float, 40, 10, 1e+20),
 )
 
+_MATCABLEDISCRETEBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCableDiscreteBeam(KeywordBase):
     """DYNA MAT_CABLE_DISCRETE_BEAM keyword"""
 
@@ -69,16 +73,9 @@ class MatCableDiscreteBeam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCableDiscreteBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCABLEDISCRETEBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

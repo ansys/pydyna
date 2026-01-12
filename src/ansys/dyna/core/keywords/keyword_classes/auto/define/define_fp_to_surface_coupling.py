@@ -43,6 +43,10 @@ _DEFINEFPTOSURFACECOUPLING_CARD1 = (
     FieldSchema("sfp", int, 50, 10, 0),
 )
 
+_DEFINEFPTOSURFACECOUPLING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineFpToSurfaceCoupling(KeywordBase):
     """DYNA DEFINE_FP_TO_SURFACE_COUPLING keyword"""
 
@@ -66,16 +70,9 @@ class DefineFpToSurfaceCoupling(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineFpToSurfaceCoupling.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFPTOSURFACECOUPLING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

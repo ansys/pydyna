@@ -85,6 +85,10 @@ _MATCOMPOSITEFAILURESUNIL_CARD5 = (
     FieldSchema("s31fail", float, 20, 10, None),
 )
 
+_MATCOMPOSITEFAILURESUNIL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCompositeFailureSunil(KeywordBase):
     """DYNA MAT_COMPOSITE_FAILURE_SUNIL keyword"""
 
@@ -120,16 +124,9 @@ class MatCompositeFailureSunil(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCompositeFailureSunil.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOMPOSITEFAILURESUNIL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

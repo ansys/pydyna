@@ -43,6 +43,10 @@ _CONSTRAINEDNODALRIGIDBODYSPC_CARD1 = (
     FieldSchema("con2", float, 20, 10, 0.0),
 )
 
+_CONSTRAINEDNODALRIGIDBODYSPC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class ConstrainedNodalRigidBodySpc(KeywordBase):
     """DYNA CONSTRAINED_NODAL_RIGID_BODY_SPC keyword"""
 
@@ -66,16 +70,9 @@ class ConstrainedNodalRigidBodySpc(KeywordBase):
             ),            OptionCardSet(
                 option_spec = ConstrainedNodalRigidBodySpc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDNODALRIGIDBODYSPC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

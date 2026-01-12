@@ -49,6 +49,10 @@ _SETNODELISTGENERATECOLLECT_CARD1 = (
     FieldSchema("b4end", int, 70, 10, None),
 )
 
+_SETNODELISTGENERATECOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetNodeListGenerateCollect(KeywordBase):
     """DYNA SET_NODE_LIST_GENERATE_COLLECT keyword"""
 
@@ -72,16 +76,9 @@ class SetNodeListGenerateCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetNodeListGenerateCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETNODELISTGENERATECOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

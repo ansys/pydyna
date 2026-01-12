@@ -82,6 +82,10 @@ _MATCOMPOSITEMATRIX_CARD5 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MATCOMPOSITEMATRIX_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatCompositeMatrix(KeywordBase):
     """DYNA MAT_COMPOSITE_MATRIX keyword"""
 
@@ -117,16 +121,9 @@ class MatCompositeMatrix(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatCompositeMatrix.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOMPOSITEMATRIX_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

@@ -50,6 +50,10 @@ _MATSHAPEMEMORY_CARD2 = (
     FieldSchema("lcid_sa", int, 10, 10, None),
 )
 
+_MATSHAPEMEMORY_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatShapeMemory(KeywordBase):
     """DYNA MAT_SHAPE_MEMORY keyword"""
 
@@ -76,16 +80,9 @@ class MatShapeMemory(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatShapeMemory.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSHAPEMEMORY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

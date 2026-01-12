@@ -57,6 +57,10 @@ _MATCOMPRF_CARD2 = (
     FieldSchema("g", float, 40, 10, None),
 )
 
+_MATCOMPRF_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatComprf(KeywordBase):
     """DYNA MAT_COMPRF keyword"""
 
@@ -83,16 +87,9 @@ class MatComprf(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatComprf.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATCOMPRF_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

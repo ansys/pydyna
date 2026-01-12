@@ -38,6 +38,10 @@ _MATISOTROPICSMEAREDCRACK_CARD0 = (
     FieldSchema("sr", float, 70, 10, None),
 )
 
+_MATISOTROPICSMEAREDCRACK_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatIsotropicSmearedCrack(KeywordBase):
     """DYNA MAT_ISOTROPIC_SMEARED_CRACK keyword"""
 
@@ -58,16 +62,9 @@ class MatIsotropicSmearedCrack(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatIsotropicSmearedCrack.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATISOTROPICSMEAREDCRACK_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

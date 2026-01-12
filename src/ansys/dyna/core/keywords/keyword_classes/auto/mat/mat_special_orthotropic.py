@@ -72,6 +72,10 @@ _MATSPECIALORTHOTROPIC_CARD4 = (
     FieldSchema("beta", float, 60, 10, None),
 )
 
+_MATSPECIALORTHOTROPIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSpecialOrthotropic(KeywordBase):
     """DYNA MAT_SPECIAL_ORTHOTROPIC keyword"""
 
@@ -104,16 +108,9 @@ class MatSpecialOrthotropic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSpecialOrthotropic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPECIALORTHOTROPIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

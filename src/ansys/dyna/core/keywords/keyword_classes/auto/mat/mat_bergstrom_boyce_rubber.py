@@ -44,6 +44,10 @@ _MATBERGSTROMBOYCERUBBER_CARD1 = (
     FieldSchema("tauh", float, 30, 10, None),
 )
 
+_MATBERGSTROMBOYCERUBBER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatBergstromBoyceRubber(KeywordBase):
     """DYNA MAT_BERGSTROM_BOYCE_RUBBER keyword"""
 
@@ -67,16 +71,9 @@ class MatBergstromBoyceRubber(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatBergstromBoyceRubber.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATBERGSTROMBOYCERUBBER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

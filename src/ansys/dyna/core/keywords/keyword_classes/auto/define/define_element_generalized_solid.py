@@ -45,6 +45,10 @@ _DEFINEELEMENTGENERALIZEDSOLID_CARD2 = (
     FieldSchema("dnkidt", float, 60, 20, None),
 )
 
+_DEFINEELEMENTGENERALIZEDSOLID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineElementGeneralizedSolid(KeywordBase):
     """DYNA DEFINE_ELEMENT_GENERALIZED_SOLID keyword"""
 
@@ -71,16 +75,9 @@ class DefineElementGeneralizedSolid(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineElementGeneralizedSolid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEELEMENTGENERALIZEDSOLID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

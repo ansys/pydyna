@@ -42,6 +42,10 @@ _SETIGAPOINTUVWLISTGENERATEINCREMENT_CARD1 = (
     FieldSchema("incr", int, 20, 10, None),
 )
 
+_SETIGAPOINTUVWLISTGENERATEINCREMENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SetIgaPointUvwListGenerateIncrement(KeywordBase):
     """DYNA SET_IGA_POINT_UVW_LIST_GENERATE_INCREMENT keyword"""
 
@@ -65,16 +69,9 @@ class SetIgaPointUvwListGenerateIncrement(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SetIgaPointUvwListGenerateIncrement.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETIGAPOINTUVWLISTGENERATEINCREMENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

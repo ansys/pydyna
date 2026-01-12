@@ -39,6 +39,10 @@ _SET2DSEGMENTSETCOLLECT_CARD1 = (
     FieldSchema("psid", int, 0, 10, None),
 )
 
+_SET2DSEGMENTSETCOLLECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Set2DSegmentSetCollect(KeywordBase):
     """DYNA SET_2D_SEGMENT_SET_COLLECT keyword"""
 
@@ -62,16 +66,9 @@ class Set2DSegmentSetCollect(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Set2DSegmentSetCollect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SET2DSEGMENTSETCOLLECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

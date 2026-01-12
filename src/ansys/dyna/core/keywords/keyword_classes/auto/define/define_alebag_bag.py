@@ -55,6 +55,10 @@ _DEFINEALEBAGBAG_CARD2 = (
     FieldSchema("end", float, 20, 10, 10000000000.0),
 )
 
+_DEFINEALEBAGBAG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineAlebagBag(KeywordBase):
     """DYNA DEFINE_ALEBAG_BAG keyword"""
 
@@ -81,16 +85,9 @@ class DefineAlebagBag(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineAlebagBag.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEALEBAGBAG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

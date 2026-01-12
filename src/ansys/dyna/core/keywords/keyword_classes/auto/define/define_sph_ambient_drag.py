@@ -37,6 +37,10 @@ _DEFINESPHAMBIENTDRAG_CARD0 = (
     FieldSchema("sftens", float, 60, 10, None),
 )
 
+_DEFINESPHAMBIENTDRAG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineSphAmbientDrag(KeywordBase):
     """DYNA DEFINE_SPH_AMBIENT_DRAG keyword"""
 
@@ -57,16 +61,9 @@ class DefineSphAmbientDrag(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineSphAmbientDrag.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPHAMBIENTDRAG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

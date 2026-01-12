@@ -86,6 +86,10 @@ _CONSTRAINEDNODALRIGIDBODYSPCINERTIAOVERRIDE_CARD6 = (
     FieldSchema("ipsm", int, 20, 10, 0),
 )
 
+_CONSTRAINEDNODALRIGIDBODYSPCINERTIAOVERRIDE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class ConstrainedNodalRigidBodySpcInertiaOverride(KeywordBase):
     """DYNA CONSTRAINED_NODAL_RIGID_BODY_SPC_INERTIA_OVERRIDE keyword"""
 
@@ -124,16 +128,9 @@ class ConstrainedNodalRigidBodySpcInertiaOverride(KeywordBase):
             ),            OptionCardSet(
                 option_spec = ConstrainedNodalRigidBodySpcInertiaOverride.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDNODALRIGIDBODYSPCINERTIAOVERRIDE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

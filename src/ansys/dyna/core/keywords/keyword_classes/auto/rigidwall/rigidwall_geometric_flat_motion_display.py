@@ -68,6 +68,11 @@ _RIGIDWALLGEOMETRICFLATMOTIONDISPLAY_CARD4 = (
     FieldSchema("pr", float, 30, 10, 0.3),
 )
 
+_RIGIDWALLGEOMETRICFLATMOTIONDISPLAY_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallGeometricFlatMotionDisplay(KeywordBase):
     """DYNA RIGIDWALL_GEOMETRIC_FLAT_MOTION_DISPLAY keyword"""
 
@@ -100,23 +105,9 @@ class RigidwallGeometricFlatMotionDisplay(KeywordBase):
             ),            OptionCardSet(
                 option_spec = RigidwallGeometricFlatMotionDisplay.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "id",
-                                int,
-                                0,
-                                10,
-                                kwargs.get("id")
-                            ),
-                            Field(
-                                "title",
-                                str,
-                                10,
-                                70,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLGEOMETRICFLATMOTIONDISPLAY_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

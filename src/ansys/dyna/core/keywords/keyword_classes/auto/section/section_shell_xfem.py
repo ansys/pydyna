@@ -97,6 +97,10 @@ _SECTIONSHELLXFEM_CARD6 = (
     FieldSchema("pi", float, 70, 10, 0.0),
 )
 
+_SECTIONSHELLXFEM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionShellXfem(KeywordBase):
     """DYNA SECTION_SHELL_XFEM keyword"""
 
@@ -135,16 +139,9 @@ class SectionShellXfem(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionShellXfem.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSHELLXFEM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

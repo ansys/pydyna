@@ -49,6 +49,10 @@ _SECTIONFPD_CARD2 = (
     FieldSchema("dtscl", float, 50, 10, 0.1),
 )
 
+_SECTIONFPD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionFpd(KeywordBase):
     """DYNA SECTION_FPD keyword"""
 
@@ -75,16 +79,9 @@ class SectionFpd(KeywordBase):
             ),            OptionCardSet(
                 option_spec = SectionFpd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONFPD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

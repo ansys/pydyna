@@ -93,6 +93,10 @@ _MAT166_CARD5 = (
     FieldSchema("rcapaz", float, 70, 10, 1e+20),
 )
 
+_MAT166_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat166(KeywordBase):
     """DYNA MAT_166 keyword"""
 
@@ -128,16 +132,9 @@ class Mat166(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat166.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT166_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

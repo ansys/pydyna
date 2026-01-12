@@ -44,6 +44,10 @@ _MAT102T_CARD1 = (
     FieldSchema("lccte", float, 20, 10, None),
 )
 
+_MAT102T_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat102T(KeywordBase):
     """DYNA MAT_102_T keyword"""
 
@@ -67,16 +71,9 @@ class Mat102T(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat102T.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT102T_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

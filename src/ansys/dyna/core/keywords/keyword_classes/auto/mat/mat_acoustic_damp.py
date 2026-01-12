@@ -45,6 +45,10 @@ _MATACOUSTICDAMP_CARD1 = (
     FieldSchema("beta2", float, 70, 10, 0.0),
 )
 
+_MATACOUSTICDAMP_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAcousticDamp(KeywordBase):
     """DYNA MAT_ACOUSTIC_DAMP keyword"""
 
@@ -68,16 +72,9 @@ class MatAcousticDamp(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAcousticDamp.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATACOUSTICDAMP_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

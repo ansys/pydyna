@@ -34,6 +34,10 @@ _MATSPRINGELASTOPLASTIC_CARD0 = (
     FieldSchema("fy", float, 30, 10, None),
 )
 
+_MATSPRINGELASTOPLASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSpringElastoplastic(KeywordBase):
     """DYNA MAT_SPRING_ELASTOPLASTIC keyword"""
 
@@ -54,16 +58,9 @@ class MatSpringElastoplastic(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSpringElastoplastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPRINGELASTOPLASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

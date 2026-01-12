@@ -42,6 +42,10 @@ _DEFINEHEXSPOTWELDASSEMBLY4_CARD1 = (
     FieldSchema("eid8", int, 70, 10, None),
 )
 
+_DEFINEHEXSPOTWELDASSEMBLY4_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class DefineHexSpotweldAssembly4(KeywordBase):
     """DYNA DEFINE_HEX_SPOTWELD_ASSEMBLY_4 keyword"""
 
@@ -65,16 +69,9 @@ class DefineHexSpotweldAssembly4(KeywordBase):
             ),            OptionCardSet(
                 option_spec = DefineHexSpotweldAssembly4.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEHEXSPOTWELDASSEMBLY4_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

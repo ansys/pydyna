@@ -38,6 +38,10 @@ _MATSPRINGSQUATSHEARWALL_CARD0 = (
     FieldSchema("psd", float, 70, 10, None),
 )
 
+_MATSPRINGSQUATSHEARWALL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatSpringSquatShearwall(KeywordBase):
     """DYNA MAT_SPRING_SQUAT_SHEARWALL keyword"""
 
@@ -58,16 +62,9 @@ class MatSpringSquatShearwall(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatSpringSquatShearwall.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSPRINGSQUATSHEARWALL_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

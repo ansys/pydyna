@@ -33,6 +33,10 @@ _MATADDPROPERTYDEPENDENCE_CARD0 = (
     FieldSchema("lcid", int, 20, 10, None),
 )
 
+_MATADDPROPERTYDEPENDENCE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatAddPropertyDependence(KeywordBase):
     """DYNA MAT_ADD_PROPERTY_DEPENDENCE keyword"""
 
@@ -53,16 +57,9 @@ class MatAddPropertyDependence(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatAddPropertyDependence.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATADDPROPERTYDEPENDENCE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

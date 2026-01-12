@@ -82,6 +82,10 @@ _MAT002ANIS_CARD4 = (
     FieldSchema("ref", float, 70, 10, 0.0),
 )
 
+_MAT002ANIS_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat002Anis(KeywordBase):
     """DYNA MAT_002_ANIS keyword"""
 
@@ -114,16 +118,9 @@ class Mat002Anis(KeywordBase):
             ),            OptionCardSet(
                 option_spec = Mat002Anis.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT002ANIS_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs

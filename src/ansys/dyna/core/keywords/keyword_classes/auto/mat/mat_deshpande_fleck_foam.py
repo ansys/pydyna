@@ -47,6 +47,10 @@ _MATDESHPANDEFLECKFOAM_CARD1 = (
     FieldSchema("num", int, 50, 10, 1000),
 )
 
+_MATDESHPANDEFLECKFOAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatDeshpandeFleckFoam(KeywordBase):
     """DYNA MAT_DESHPANDE_FLECK_FOAM keyword"""
 
@@ -70,16 +74,9 @@ class MatDeshpandeFleckFoam(KeywordBase):
             ),            OptionCardSet(
                 option_spec = MatDeshpandeFleckFoam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATDESHPANDEFLECKFOAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
