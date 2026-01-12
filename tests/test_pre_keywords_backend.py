@@ -832,7 +832,7 @@ class TestReferenceFileComparison:
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_dam_break(self, initial_files_dir, pre_reference_dir):
-        """test_dam_break.k - ICFD dam break simulation."""
+        """test_dam_break.k - ICFD dam break with two-fluid interface."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
         from ansys.dyna.core.pre.dynaicfd import (
             DynaICFD,
@@ -840,9 +840,8 @@ class TestReferenceFileComparison:
             ICFDPart,
             ICFDVolumePart,
             MatICFD,
-            Curve,
-            ICFDDOF,
             MeshedVolume,
+            Compressible,
         )
 
         initial_file = os.path.join(initial_files_dir, "icfd", "test_dam_break.k")
@@ -859,26 +858,19 @@ class TestReferenceFileComparison:
             solution.add(icfd)
 
             # Set termination time
-            solution.set_termination(termination_time=40.0)
+            solution.set_termination(termination_time=50.0)
 
             # Database output
-            solution.create_database_binary(dt=0.5)
+            solution.create_database_binary(dt=0.2)
 
-            # Define curves for boundary conditions
-            # Curve 1: Constant 1.0 for gravity load
+            # Define gravity curve
             curve1_id = solution.stub.CreateDefineCurve(
-                type("Request", (), {"sfo": 1.0, "abscissa": [0, 1], "ordinate": [1, 1], "title": ""})()
+                type("Request", (), {"sfo": 1.0, "abscissa": [0, 10000], "ordinate": [9.81, 9.81], "title": ""})()
             ).id
-            # Curve 2: Ramped velocity profile
-            curve2 = Curve(x=[0, 5, 6, 10000], y=[0, 0, 1, 1])
-            # Curve 3: Zero velocity
-            curve3 = Curve(x=[0, 10000], y=[0, 0])
-            # Curve 4: Zero pressure
-            curve4 = Curve(x=[0, 10000], y=[0, 0])
 
             # Set ICFD analysis
             icfdanalysis = ICFDAnalysis()
-            icfdanalysis.set_timestep(timestep=0.05)
+            icfdanalysis.set_timestep()  # dt=0.0 means auto
             icfd.add(icfdanalysis)
 
             # Create body load in Y direction (gravity)
@@ -886,65 +878,42 @@ class TestReferenceFileComparison:
                 type("Request", (), {"option": "Y", "lcid": curve1_id})()
             )
 
-            # Part 1: Inlet with prescribed velocity (X and Y components)
-            mat1 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            # Part 1: Free slip wall
+            mat1 = MatICFD(flow_density=1000, dynamic_viscosity=0.001)
             part1 = ICFDPart(1)
             part1.set_material(mat1)
-            part1.set_prescribed_velocity(dof=ICFDDOF.X, motion=curve2)
-            part1.set_prescribed_velocity(dof=ICFDDOF.Y, motion=curve3)
+            part1.set_free_slip()
             icfd.parts.add(part1)
 
-            # Part 2: Outlet with prescribed pressure
-            mat2 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            # Part 2: Free slip wall (air/vacuum)
+            mat2 = MatICFD(flag=Compressible.VACUUM, flow_density=0, dynamic_viscosity=0)
             part2 = ICFDPart(2)
             part2.set_material(mat2)
-            part2.set_prescribed_pressure(pressure=curve4)
+            part2.set_free_slip()
             icfd.parts.add(part2)
 
-            # Part 3: Free slip boundary (walls)
-            mat3 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
+            # Part 3: Interface surface
+            mat3 = MatICFD(flow_density=1000, dynamic_viscosity=0.001)
             part3 = ICFDPart(3)
             part3.set_material(mat3)
-            part3.set_free_slip()
             icfd.parts.add(part3)
 
-            # Define curve function for imposed Y velocity
-            curve5_id = solution.stub.CreateDefineCurveFunction(
-                type("Request", (), {"function": "2*3.14/10*sin(2*3.14/10*TIME+3.14/2)", "sfo": 1.0, "title": ""})()
-            ).id
+            # Volume part 4 containing parts 1 and 3 (water region)
+            volpart4 = ICFDVolumePart([1, 3])
+            volpart4.set_material(mat3)
+            icfd.parts.add(volpart4)
 
-            # Part 4: No-slip wall with imposed movement
-            mat4 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
-            part4 = ICFDPart(4)
-            part4.set_material(mat4)
-            part4.set_non_slip()
-            icfd.parts.add(part4)
+            # Volume part 5 containing parts 2 and 3 (air region)
+            volpart5 = ICFDVolumePart([2, 3])
+            volpart5.set_material(mat2)
+            icfd.parts.add(volpart5)
 
-            # Volume part 5 containing parts 1, 2, 3, and 4 (use part IDs)
-            volpart = ICFDVolumePart([1, 2, 3, 4])
-            volpart.set_material(mat4)
-            icfd.parts.add(volpart)
-
-            # Create meshed volume (use part IDs)
-            meshvol = MeshedVolume(surfaces=[1, 2, 3, 4])
+            # Create meshed volume
+            meshvol = MeshedVolume(surfaces=[1, 2, 3])
             icfd.add(meshvol)
 
-            # MESH_BL for part 4 (boundary layer)
-            solution.stub.MESHCreateBl(
-                type("Request", (), {"pid": 4, "nelth": 2, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
-            )
-
-            # MESH_INTERF for volume 1 with interface part 4
-            solution.stub.MESHCreateInterf(type("Request", (), {"volid": 1, "pids": [4]})()
-            )
-
-            # ICFD_CONTROL_IMPOSED_MOVE for part 4 (Y direction movement)
-            solution.stub.ICFDCreateControlImposedMove(
-                type("Request", (), {"pid": 4, "lcvx": 0, "lcvy": curve5_id, "lcvz": 0, "vadt": 0, "idr": 0})()
-            )
-
-            # ICFD_DATABASE_DRAG for part 4
-            solution.stub.ICFDCreateDBDrag(type("Request", (), {"pid": 4})()
+            # MESH_INTERF for volume 1 with interface part 3
+            solution.stub.MESHCreateInterf(type("Request", (), {"volid": 1, "pids": [3]})()
             )
 
             output_path = solution.save_file()
@@ -1315,7 +1284,7 @@ class TestReferenceFileComparison:
             assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     def test_mesh_morphing(self, initial_files_dir, pre_reference_dir):
-        """test_mesh_morphing.k - ICFD mesh morphing."""
+        """test_mesh_morphing.k - ICFD mesh morphing with imposed movement."""
         from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
         from ansys.dyna.core.pre.dynaicfd import (
             DynaICFD,
@@ -1323,9 +1292,10 @@ class TestReferenceFileComparison:
             ICFDPart,
             ICFDVolumePart,
             MatICFD,
+            MeshedVolume,
+            Compressible,
             Curve,
             ICFDDOF,
-            MeshedVolume,
         )
 
         initial_file = os.path.join(initial_files_dir, "icfd", "test_mesh_morphing.k")
@@ -1347,39 +1317,31 @@ class TestReferenceFileComparison:
             # Database output
             solution.create_database_binary(dt=0.5)
 
-            # Define curves for boundary conditions
-            # Curve 1: Constant 1.0 for gravity load
-            curve1_id = solution.create_curve(x=[0, 1], y=[1, 1])
-            # Curve 2: Ramped velocity profile
-            curve2 = Curve(x=[0, 5, 6, 10000], y=[0, 0, 1, 1])
-            # Curve 3: Zero velocity
+            # Curve 1: Ramped velocity profile for prescribed velocity (X direction)
+            curve1 = Curve(x=[0, 5, 6, 10000], y=[0, 0, 1, 1])
+            # Curve 2: Zero velocity for prescribed velocity (Y direction)
+            curve2 = Curve(x=[0, 10000], y=[0, 0])
+            # Curve 3: Zero pressure for prescribed pressure
             curve3 = Curve(x=[0, 10000], y=[0, 0])
-            # Curve 4: Zero pressure
-            curve4 = Curve(x=[0, 10000], y=[0, 0])
 
             # Set ICFD analysis
             icfdanalysis = ICFDAnalysis()
             icfdanalysis.set_timestep(timestep=0.05)
             icfd.add(icfdanalysis)
 
-            # Create body load in Y direction (gravity)
-            solution.stub.CreateLoadBody(
-                type("Request", (), {"option": "Y", "lcid": curve1_id})()
-            )
-
             # Part 1: Inlet with prescribed velocity (X and Y components)
             mat1 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
             part1 = ICFDPart(1)
             part1.set_material(mat1)
-            part1.set_prescribed_velocity(dof=ICFDDOF.X, motion=curve2)
-            part1.set_prescribed_velocity(dof=ICFDDOF.Y, motion=curve3)
+            part1.set_prescribed_velocity(dof=ICFDDOF.X, motion=curve1)
+            part1.set_prescribed_velocity(dof=ICFDDOF.Y, motion=curve2)
             icfd.parts.add(part1)
 
             # Part 2: Outlet with prescribed pressure
             mat2 = MatICFD(flow_density=1, dynamic_viscosity=0.005)
             part2 = ICFDPart(2)
             part2.set_material(mat2)
-            part2.set_prescribed_pressure(pressure=curve4)
+            part2.set_prescribed_pressure(pressure=curve3)
             icfd.parts.add(part2)
 
             # Part 3: Free slip boundary (top/bottom walls)
@@ -1430,7 +1392,7 @@ class TestReferenceFileComparison:
 
             # MESH_BL for part 4 (boundary layer)
             solution.stub.MESHCreateBl(
-                type("Request", (), {"pid": 4, "nelth": 2, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
+                type("Request", (), {"pid": 4, "nelth": 1, "blth": 0.0, "blfe": 0.0, "blst": 0, "bldr": 0})()
             )
 
             # MESH_INTERF for volume 1 with interface part 5
