@@ -1248,10 +1248,118 @@ class TestReferenceFileComparison:
         """test_dem.k - DEM particle simulation."""
         pytest.fail("Not implemented")
 
-    @pytest.mark.xfail(reason="DynaDEM not implemented in keywords backend")
+    @pytest.mark.xfail(reason="DynaDEM/ICFD-DEM coupling requires full DEM implementation")
     def test_dem_coupling(self, initial_files_dir, pre_reference_dir):
-        """test_dem_coupling.k - DEM-FEM coupling."""
-        pytest.fail("Not implemented")
+        """test_dem_coupling.k - ICFD-DEM coupling simulation.
+
+        This test requires full DEM implementation including:
+        - SECTION_SOLID creation
+        - MAT_RIGID_DISCRETE creation
+        - CONTROL_TIMESTEP settings
+        - PART modifications for DEM particles
+        """
+        from ansys.dyna.core.pre.keywords_solution import KeywordsDynaSolution
+        from ansys.dyna.core.pre.dynaicfd import (
+            DynaICFD,
+            ICFDAnalysis,
+            ICFDPart,
+            ICFDVolumePart,
+            MatICFD,
+            Compressible,
+            Curve,
+            ICFDDOF,
+            MeshedVolume,
+            ICFD_CouplingForm,
+            Velocity,
+        )
+        from ansys.dyna.core.pre.dynadem import DynaDEM, DEMAnalysis
+
+        initial_file = os.path.join(initial_files_dir, "icfd", "test_dem_coupling.k")
+        reference_file = os.path.join(pre_reference_dir, "test_dem_coupling.k")
+
+        if not os.path.exists(initial_file) or not os.path.exists(reference_file):
+            pytest.skip("Required files not found")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            solution = KeywordsDynaSolution(working_dir=tmpdir)
+            solution.open_files([initial_file])
+
+            icfd = DynaICFD()
+            solution.add(icfd)
+
+            # Set termination time
+            solution.set_termination(termination_time=100.0)
+
+            # Set DEM control parameters
+            dem = DynaDEM()
+            dem.set_des(
+                ndamp=0.9,
+                tdamp=0.9,
+                frics=0.3,
+                fricr=0.001,
+                normk=0.01,
+                sheark=0.2857,
+            )
+            solution.add(dem)
+
+            # Set ICFD analysis with timestep and DEM coupling
+            icfdanalysis = ICFDAnalysis()
+            icfdanalysis.set_timestep(timestep=0.05)
+            icfdanalysis.set_coupling_dem(
+                coupling_type=0,
+                birth_time=0,
+                death_time=1e28,
+                scale_factor=1.0,
+                formulation=ICFD_CouplingForm.FORCE_BASED_ON_VELOCITY_DRAG_VALUE,
+            )
+            icfd.add(icfdanalysis)
+
+            # Set initial conditions (vx=1.0)
+            icfd.set_initial(velocity=Velocity(1.0, 0.0, 0.0))
+
+            # Part 1: Inlet with prescribed velocity (x-direction only)
+            mat1 = MatICFD(flow_density=2, dynamic_viscosity=0.01)
+            part1 = ICFDPart(1)
+            part1.set_material(mat1)
+            part1.set_prescribed_velocity(dof=ICFDDOF.X, motion=Curve(x=[0, 10000], y=[1, 1]))
+            icfd.parts.add(part1)
+
+            # Part 2: Outlet with prescribed pressure
+            mat2 = MatICFD(flow_density=2, dynamic_viscosity=0.01)
+            part2 = ICFDPart(2)
+            part2.set_material(mat2)
+            part2.set_prescribed_pressure(pressure=Curve(x=[0, 10000], y=[0, 0]))
+            icfd.parts.add(part2)
+
+            # Part 3: Free slip boundary (walls)
+            mat3 = MatICFD(flow_density=2, dynamic_viscosity=0.01)
+            part3 = ICFDPart(3)
+            part3.set_material(mat3)
+            part3.set_free_slip()
+            icfd.parts.add(part3)
+
+            # Volume part enclosing the surfaces (reuses mat3)
+            partvol = ICFDVolumePart(surfaces=[1, 2, 3])
+            partvol.set_material(mat3)  # mid=3
+            icfd.parts.add(partvol)
+
+            # Define mesh volume with size shape box
+            from ansys.dyna.core.pre.dynabase import Point
+            meshvol = MeshedVolume(surfaces=[1, 2, 3])
+            meshvol.meshsize_box(
+                size=0.05,
+                min_point=Point(-1.0, -1.0, -1.0),
+                max_point=Point(1.0, 1.0, 1.0),
+            )
+            icfd.add(meshvol)
+
+            solution.create_database_binary(dt=1.0)
+
+            output_path = solution.save_file()
+            output_file = os.path.join(output_path, "test_dem_coupling.k")
+
+            diffs = self.compare_decks(output_file, reference_file)
+            assert not diffs, "Differences:\n" + "\n".join(diffs)
 
     @pytest.mark.xfail(reason="DynaIGA not implemented in keywords backend")
     def test_iga(self, initial_files_dir, pre_reference_dir):

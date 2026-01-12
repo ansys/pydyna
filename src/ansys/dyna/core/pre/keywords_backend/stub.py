@@ -739,3 +739,57 @@ class KeywordsStub:
         )
         return type("Response", (), {"success": True})()
 
+    def CreateControlDiscreteElement(self, request):
+        """Create CONTROL_DISCRETE_ELEMENT keyword."""
+        self._backend.create_control_discrete_element(
+            ndamp=getattr(request, "ndamp", 0.0),
+            tdamp=getattr(request, "tdamp", 0.0),
+            frics=getattr(request, "frics", 0.0),
+            fricr=getattr(request, "fricr", 0.0),
+            normk=getattr(request, "normk", 0.01),
+            sheark=getattr(request, "sheark", 0.2857),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateControlDEMCoupling(self, request):
+        """Create ICFD_CONTROL_DEM_COUPLING keyword."""
+        self._backend.create_icfd_control_dem_coupling(
+            ctype=getattr(request, "ctype", 0),
+            bt=getattr(request, "bt", 0.0),
+            dt=getattr(request, "dt", 1e28),
+            sf=getattr(request, "sf", 1.0),
+            form=getattr(request, "form", 0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def ICFDCreateInit(self, request):
+        """Create ICFD_INITIAL keyword."""
+        self._backend.create_icfd_initial(
+            pid=getattr(request, "pid", 0),
+            vx=getattr(request, "vx", 0.0),
+            vy=getattr(request, "vy", 0.0),
+            vz=getattr(request, "vz", 0.0),
+            t=getattr(request, "t", 0.0),
+            p=getattr(request, "p", 0.0),
+        )
+        return type("Response", (), {"success": True})()
+
+    def MESHCreateSizeShape(self, request):
+        """Create MESH_SIZE_SHAPE keyword."""
+        self._backend.create_mesh_size_shape(
+            sname=getattr(request, "sname", "BOX"),
+            force=getattr(request, "force", 1),
+            method=getattr(request, "method", 0),
+            msize=getattr(request, "msize", 0.0),
+            parameter=list(request.parameter) if hasattr(request, "parameter") and request.parameter else None,
+        )
+        return type("Response", (), {"success": True})()
+
+    def MESHCreateEmbedShell(self, request):
+        """Create MESH_EMBEDSHELL keyword."""
+        self._backend.create_mesh_embed_shell(
+            volid=request.volid,
+            pids=list(request.pids) if hasattr(request, "pids") and request.pids else None,
+        )
+        return type("Response", (), {"success": True})()
+

@@ -627,3 +627,150 @@ class ICFDKeywordsMixin:
         self._deck.append(kw)
         logger.info(f"Created MESH_VOLUME keyword with volid={volid}")
         return volid
+
+    def create_icfd_control_dem_coupling(
+        self,
+        ctype: int = 0,
+        bt: float = 0.0,
+        dt: float = 1e28,
+        sf: float = 1.0,
+        form: int = 0,
+    ) -> None:
+        """Create ICFD_CONTROL_DEM_COUPLING keyword.
+
+        Parameters
+        ----------
+        ctype : int, optional
+            Coupling direction to the solver. Default is 0.
+        bt : float, optional
+            Birth time for DEM coupling. Default is 0.0.
+        dt : float, optional
+            Death time for DEM coupling. Default is 1e28.
+        sf : float, optional
+            Scale factor for force transmitted by fluid. Default is 1.0.
+        form : int, optional
+            Formulation type. Default is 0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_CONTROL_DEM_COUPLING: ctype={ctype}, bt={bt}, dt={dt}, sf={sf}, form={form}")
+
+        kw = keywords.IcfdControlDemCoupling()
+        kw.ctype = ctype
+        kw.bt = bt
+        kw.dt = dt
+        kw.sf = sf
+        # Note: 'form' field may not exist in keyword class, check if available
+        if hasattr(kw, 'form'):
+            kw.form = form
+
+        self._deck.append(kw)
+        logger.info("Created ICFD_CONTROL_DEM_COUPLING keyword")
+
+    def create_icfd_initial(
+        self,
+        pid: int = 0,
+        vx: float = 0.0,
+        vy: float = 0.0,
+        vz: float = 0.0,
+        t: float = 0.0,
+        p: float = 0.0,
+    ) -> None:
+        """Create ICFD_INITIAL keyword.
+
+        Parameters
+        ----------
+        pid : int, optional
+            Part ID to apply initial conditions. 0 for all parts. Default is 0.
+        vx : float, optional
+            Initial velocity in x direction. Default is 0.0.
+        vy : float, optional
+            Initial velocity in y direction. Default is 0.0.
+        vz : float, optional
+            Initial velocity in z direction. Default is 0.0.
+        t : float, optional
+            Initial temperature. Default is 0.0.
+        p : float, optional
+            Initial pressure. Default is 0.0.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating ICFD_INITIAL: pid={pid}, vx={vx}, vy={vy}, vz={vz}, t={t}, p={p}")
+
+        kw = keywords.IcfdInitial()
+        kw.pid = pid
+        kw.vx = vx
+        kw.vy = vy
+        kw.vz = vz
+        kw.t = t
+        kw.p = p
+
+        self._deck.append(kw)
+        logger.info("Created ICFD_INITIAL keyword")
+
+    def create_mesh_size_shape(
+        self,
+        sname: str = "BOX",
+        force: int = 1,
+        method: int = 0,
+        msize: float = 0.0,
+        parameter: Optional[List[float]] = None,
+    ) -> None:
+        """Create MESH_SIZE_SHAPE keyword.
+
+        Parameters
+        ----------
+        sname : str, optional
+            Shape name (BOX, SPHERE, CYLINDER). Default is "BOX".
+        force : int, optional
+            Flag to force mesh size. Default is 1.
+        method : int, optional
+            Meshing method. Default is 0.
+        msize : float, optional
+            Mesh size. Default is 0.0.
+        parameter : list of float, optional
+            Parameters defining the shape. Default is None.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating MESH_SIZE_SHAPE: sname={sname}, msize={msize}")
+
+        kw = keywords.MeshSizeShape()
+        kw.sname = sname
+        kw.force = force
+        kw.method = method
+        kw.msize = msize
+        # Set parameters if provided
+        if parameter and hasattr(kw, 'parameters'):
+            kw.parameters = parameter
+
+        self._deck.append(kw)
+        logger.info(f"Created MESH_SIZE_SHAPE keyword with sname={sname}")
+
+    def create_mesh_embed_shell(
+        self,
+        volid: int,
+        pids: Optional[List[int]] = None,
+    ) -> None:
+        """Create MESH_EMBEDSHELL keyword.
+
+        Parameters
+        ----------
+        volid : int
+            Volume ID to embed shells into.
+        pids : list of int, optional
+            Part IDs of shells to embed. Default is None.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        logger.debug(f"Creating MESH_EMBEDSHELL: volid={volid}, pids={pids}")
+
+        kw = keywords.MeshEmbedshell()
+        kw.volid = volid
+        if pids:
+            # Set pids using appropriate property
+            if hasattr(kw, 'pids'):
+                kw.pids = pids
+
+        self._deck.append(kw)
+        logger.info(f"Created MESH_EMBEDSHELL keyword with volid={volid}")

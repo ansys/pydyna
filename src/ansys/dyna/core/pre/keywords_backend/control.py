@@ -434,3 +434,48 @@ class ControlKeywordsMixin:
         self._deck.append(kw)
         logger.debug("Created CONTROL_CONTACT")
         return True
+
+    def create_control_discrete_element(
+        self,
+        ndamp: float = 0.0,
+        tdamp: float = 0.0,
+        frics: float = 0.0,
+        fricr: float = 0.0,
+        normk: float = 0.01,
+        sheark: float = 0.2857,
+    ) -> bool:
+        """Create a CONTROL_DISCRETE_ELEMENT keyword.
+
+        Parameters
+        ----------
+        ndamp : float, optional
+            Normal damping coefficient. Default is 0.0.
+        tdamp : float, optional
+            Tangential damping coefficient. Default is 0.0.
+        frics : float, optional
+            Static coefficient of friction. Default is 0.0.
+        fricr : float, optional
+            Rolling friction coefficient. Default is 0.0.
+        normk : float, optional
+            Scale factor of the normal spring constant. Default is 0.01.
+        sheark : float, optional
+            Ratio between sheark/normk. Default is 0.2857.
+
+        Returns
+        -------
+        bool
+            True if successful.
+        """
+        from ansys.dyna.core.keywords import keywords
+
+        kw = keywords.ControlDiscreteElement()
+        kw.ndamp = ndamp
+        kw.tdamp = tdamp
+        kw.frics = frics
+        kw.fricr = fricr
+        kw.normk = normk
+        kw.sheark = sheark
+
+        self._deck.append(kw)
+        logger.debug(f"Created CONTROL_DISCRETE_ELEMENT: ndamp={ndamp}, tdamp={tdamp}")
+        return True
